@@ -6,6 +6,7 @@ export enum Realm {
   Shared = 'shared',
   Client = 'client',
   Server = 'server',
+  Menu = 'menu',
 }
 
 export interface Variable {
@@ -30,7 +31,7 @@ export class WikiPage extends Page {
 }
 
 export const wikiPageSaveReplacer = (key: string, value: any) => {
-  if (key === 'childUrls' || key === 'url')
+  if (key === 'childUrls')
     return undefined;
   
   return value;
@@ -72,7 +73,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
         return [ page ];
       }
 
-      const realmDiv = pageContent.querySelector('div.realm-server, div.realm-client') as HTMLElement;
+      const realmDiv = pageContent.querySelector('div.realm-server, div.realm-client, div.realm-menu') as HTMLElement;
 
       if (!realmDiv) {
         // Skip scraping for more details it if it is not a function
@@ -81,9 +82,10 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
 
       const isServerRealm = realmDiv.classList.contains('realm-server');
       const isClientRealm = realmDiv.classList.contains('realm-client');
+      // const isMenuRealm = realmDiv.classList.contains('realm-menu');
       const isSharedRealm = isServerRealm && isClientRealm;
 
-      page.realm = isSharedRealm ? Realm.Shared : (isServerRealm ? Realm.Server : Realm.Client);
+      page.realm = isSharedRealm ? Realm.Shared : (isServerRealm ? Realm.Server : (isClientRealm ? Realm.Client : Realm.Menu));
 
       // Get the function name of the page, if it contains : it is a method of a class
       const pageTitle = dom.window.document.querySelector('#pagetitle') as HTMLElement;
@@ -103,7 +105,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
 
       // Function description
       const functionDescription = pageContent.querySelector('.function_description') as HTMLElement;
-      page.function.description = functionDescription.textContent!.trim();
+      page.function.description = functionDescription?.textContent?.trim() ?? '';
       
       // Function arguments
       const functionArguments = pageContent.querySelectorAll('.function_arguments > div') as NodeListOf<HTMLElement>;

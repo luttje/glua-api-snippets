@@ -11,6 +11,7 @@ async function main() {
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path where the output json file should be saved', './output/wiki.json')
     .option('-u, --url <url>', 'The base URL of the Garry\'s Mod wiki to scrape', 'https://wiki.facepunch.com/gmod')
+    .option('-f, --force', 'Force the scraper to overwrite existing files', false)
     .parse(process.argv);
 
   const options = program.opts();
@@ -25,7 +26,47 @@ async function main() {
   const writer = new GluaApiWriter();
   const fs = await import('fs');
   
-  scraper.setChildPageFilter(url => !uselessUrls.has(url));
+  let existingFiles = new Set<string>();
+
+  if (fs.existsSync(baseDirectory)) {
+    // recursively read the 'url' from all json objects in the files
+    const walk = (dir: string, filelist: string[] = []) => {
+      const files = fs.readdirSync(dir);
+
+      return files.reduce((filelist, file) => {
+        const stat = fs.statSync(`${dir}/${file}`);
+
+        if (stat && stat.isDirectory()) {
+          filelist = walk(`${dir}/${file}`, filelist);
+        } else {
+          filelist.push(`${dir}/${file}`);
+        }
+
+        return filelist;
+      }, filelist);
+    }
+
+    const files = walk(baseDirectory);
+
+    for (const file of files) {
+      if (!file.endsWith('.json'))
+        continue;
+      
+      const json = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+      for (const page of json) {
+        existingFiles.add(page.url);
+        console.debug(`Skipping ${page.url} (already exists)`);
+      }
+    }
+  }
+
+  scraper.setChildPageFilter(url => {
+    if (!options.force && existingFiles.has(url))
+      return false;
+
+    return !uselessUrls.has(url);
+  });
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
@@ -40,9 +81,9 @@ async function main() {
     let fileName = url.substring(options.url.length + 1);
     let subDirectory = '';
 
-    // Split at the dot and place in subdirectory
-    if (fileName.includes('.')) {
-      const parts = fileName.split('.');
+    // Split at the dot or colon and place in subdirectory
+    if (fileName.includes('.') || fileName.includes(':')) {
+      const parts = fileName.split(/\.|:/);
       subDirectory = `${parts[0]}/`;
       fileName = parts[1];
 

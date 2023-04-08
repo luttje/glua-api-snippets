@@ -19,7 +19,7 @@ export class GluaApiWriter {
     // If the function is part of a class, write the class first (if it hasn't already been written)
     if (func.className && !this.writtenClasses.includes(func.className)) {
       api += `---@class ${func.className}\n`;
-      api += `---\n`;
+      api += `local ${func.className} = {}\n\n`;
     }
 
     api += this.writeFunctionLuaDocComment(func, realm);

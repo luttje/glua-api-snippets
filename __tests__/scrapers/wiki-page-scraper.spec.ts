@@ -1,4 +1,5 @@
-import { html as accessorfuncHtml } from '../utils/offline-sites/gmod-wiki/accessorfunc';
+import { html as accessorFuncHtml } from '../utils/offline-sites/gmod-wiki/accessor-func';
+import { html as openFolderHtml } from '../utils/offline-sites/gmod-wiki/open-folder';
 import { html as baseHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input';
 import { html as editHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-edit';
 import { html as historyHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-history';
@@ -45,7 +46,7 @@ describe('GMod Wiki Parse', () => {
     const baseUrl = 'https://wiki.facepunch.com/gmod/Global.AccessorFunc';
 
     fetchMock.mockResponses(
-      [accessorfuncHtml, { url: baseUrl }],
+      [accessorFuncHtml, { url: baseUrl }],
       [editHtml, { url: `${baseUrl}~edit` }], // Should be ignored
       [historyHtml, { url: `${baseUrl}~history` }], // Should be ignored
     );
@@ -67,6 +68,35 @@ describe('GMod Wiki Parse', () => {
     expect(results[0].function!.className).toBeUndefined();
     expect(results[0].function!.description).toBeTruthy();
     expect(results[0].function!.arguments!.length).toEqual(4);
+    expect(results[0].function!.returns!.length).toEqual(0);
+  });
+
+  it('should be able to parse a global menu function', async () => {
+    const baseUrl = 'https://wiki.facepunch.com/gmod/Global.OpenFolder';
+    
+    fetchMock.mockResponses(
+      [openFolderHtml, { url: baseUrl }],
+      [editHtml, { url: `${baseUrl}~edit` }], // Should be ignored
+      [historyHtml, { url: `${baseUrl}~history` }], // Should be ignored
+    );
+    
+    const scraper = new WikiPageScraper(baseUrl);
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
+
+    expect(results.length).toEqual(1);
+    expect(results[0].url).toEqual(baseUrl);
+    expect(results[0].title).toEqual("OpenFolder - Garry's Mod Wiki");
+    expect(results[0].realm).toEqual(Realm.Menu);
+    expect(results[0].function!.name).toEqual('OpenFolder');
+    expect(results[0].function!.className).toBeUndefined();
+    expect(results[0].function!.description).toBeTruthy();
+    expect(results[0].function!.arguments!.length).toEqual(1);
     expect(results[0].function!.returns!.length).toEqual(0);
   });
 

@@ -5,7 +5,7 @@ import fetchMock from "jest-fetch-mock";
 import fs from 'fs';
 
 const apiDefinition = `---@class GM\n` +
-  `---\n` +
+  `local GM = {}\n\n` +
   `---[SERVER] Called when a map I/O event occurs.\n` +
   `--- See also Entity:Fire and Entity:Input for functions to fire Inputs on entities.\n` +
   `---@param ent Entity Entity that receives the input\n` +
