@@ -43,7 +43,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
   }
 
   /**
-   * Scrapes a page for its URL and title, and returns a list of child URLs
+   * Scrapes a page for its information on GLua functions
    * 
    * @param response The response from the page
    * @param dom The DOM of the page
