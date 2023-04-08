@@ -60,7 +60,7 @@ async function main() {
     fs.writeFileSync(`${baseDirectory}/${subDirectory}${fileName}.json`, json);
   });
 
-  await scraper.scrapeCheap();
+  await scraper.scrape();
 }
 
 main().catch((err) => {

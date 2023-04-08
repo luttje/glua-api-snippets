@@ -40,7 +40,13 @@ describe('Scraper', () => {
       return pages.map(page => new PageWithTables<Person>(baseUrl, page, tables));
     });
 
-    const results = await scraper.scrape();
+    const results: PageWithTables<Person>[] = [];
+
+    scraper.on('scraped', (url: string, pages: PageWithTables<Person>[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toBe(1);
     expect(results[0].tables).toEqual(expectedTables);

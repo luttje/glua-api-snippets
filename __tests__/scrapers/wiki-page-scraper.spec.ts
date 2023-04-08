@@ -3,7 +3,7 @@ import { html as baseHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-i
 import { html as editHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-edit';
 import { html as historyHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-history';
 import fetchMock from "jest-fetch-mock";
-import { Realm, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from '../../src/scrapers/wiki-page-scraper';
+import { Realm, WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from '../../src/scrapers/wiki-page-scraper';
 import { html } from '../utils/offline-sites/gmod-wiki/home';
 
 describe('GMod Wiki Parse', () => {
@@ -22,7 +22,13 @@ describe('GMod Wiki Parse', () => {
     )
 
     const scraper = new WikiPageScraper(baseUrl);
-    const results = await scraper.scrape();
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toEqual(1);
     expect(results[0].url).toEqual(baseUrl);
@@ -45,7 +51,13 @@ describe('GMod Wiki Parse', () => {
     );
 
     const scraper = new WikiPageScraper(baseUrl);
-    const results = await scraper.scrape();
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toEqual(1);
     expect(results[0].url).toEqual(baseUrl);
@@ -68,7 +80,13 @@ describe('GMod Wiki Parse', () => {
     );
 
     const scraper = new WikiPageScraper(baseUrl);
-    const results = await scraper.scrape();
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toEqual(1);
 
@@ -83,7 +101,13 @@ describe('GMod Wiki Parse', () => {
     fetchMock.mockResponseOnce(html, { url: baseUrl });
 
     const scraper = new WikiPageScraper(baseUrl);
-    const results = await scraper.scrape();
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toEqual(1);
     expect(results[0].function).toBeUndefined();
@@ -96,7 +120,13 @@ describe('GMod Wiki Parse', () => {
     fetchMock.mockResponseOnce(html, { url: baseUrl });
 
     const scraper = new WikiPageScraper(baseUrl);
-    const results = await scraper.scrape();
+    const results: WikiPage[] = [];
+
+    scraper.on('scraped', (url: string, pages: WikiPage[]) => {
+      results.push(pages[0]);
+    });
+    
+    await scraper.scrape();
 
     expect(results.length).toEqual(1);
     expect(results[0].function).toBeUndefined();

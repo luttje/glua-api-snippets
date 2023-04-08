@@ -1,4 +1,4 @@
-import { PageScraper } from '../../src/scrapers/page-scraper';
+import { Page, PageScraper } from '../../src/scrapers/page-scraper';
 import { html } from '../utils/offline-sites/lutt.online';
 import fetchMock from "jest-fetch-mock";
 
@@ -15,17 +15,20 @@ describe('PageScraper', () => {
     });
 
     const scraper = new PageScraper(baseUrl);
-    const results = await scraper.scrape();
     let hasExternalLink = false;
 
-    for (const page of results) {
+    scraper.on('scraped', (url: string, pages: Page[]) => {
+      const page = pages[0];
+
       expect(page.url).toMatch(baseUrl);
       
       for (const url of page.childUrls) {
         if (!url.startsWith(baseUrl))
           hasExternalLink = true;
       }
-    }
+    });
+    
+    await scraper.scrape();
 
     // Validate this test is useful by checking that there are indeed external links
     expect(hasExternalLink).toBe(true);
@@ -37,21 +40,27 @@ describe('PageScraper', () => {
     });
 
     const scraper = new PageScraper(baseUrl);
-    const results = await scraper.scrape();
 
-    for (const page of results) {
+    scraper.on('scraped', (url: string, pages: Page[]) => {
+      const page = pages[0];
+
       expect(page.title).toBe('Lutt.online');
-    }
+    });
+
+    await scraper.scrape();
   });
 
   it('should work with permanent redirects', async () => {
     fetchMock.dontMockOnce();
     
     const scraper = new PageScraper('https://www.lutt.online'); // Permanent redirect to https://lutt.online
-    const results = await scraper.scrape();
-
-    for (const page of results) {
+    
+    scraper.on('scraped', (url: string, pages: Page[]) => {
+      const page = pages[0];
+      
       expect(page.url).toMatch('https://lutt.online');
-    }
+    });
+
+    await scraper.scrape();
   });
 });

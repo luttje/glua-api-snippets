@@ -29,25 +29,13 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
   /**
    * Scrapes a page for its URL and title, and returns a list of child URLs
    */
-  public async scrape(): Promise<T[]> {
-    const callback = this.getScrapeCallback();
-
-    return await this.traverse(this.baseUrl, callback.bind(this));
-  }
-
-  /**
-   * Scrapes a page for its URL and title, without returning anythings. This is
-   * cheaper than scrape() because it doesn't have to return anything.
-   * 
-   * You can still listen to the 'scraped' event to get the results.
-   */
-  public async scrapeCheap(): Promise<void> {
+  public async scrape(): Promise<void> {
     const callback = this.getScrapeCallback();
 
     await this.traverse(this.baseUrl, callback.bind(this));
   }
 
-  private getTraverseUrl(url: string): string | false {
+  protected getTraverseUrl(url: string): string | false {
     if (!url.startsWith(this.baseUrl))
       return false;
     
@@ -73,8 +61,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
     return callback(response, dom);
   }
 
-  public async traverse(url: string, callback: ScrapeCallback<T>): Promise<T[]> {
-    const results: T[] = [];
+  public async traverse(url: string, callback: ScrapeCallback<T>): Promise<void> {
     const urlsToTraverse: string[] = [url];
 
     while (urlsToTraverse.length > 0) {
@@ -89,7 +76,6 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
       this.emit('beforescrape', url);
       
       const currentResults = await this.visitOne(url, callback);
-      results.push(...currentResults);
       
       this.traversedUrls.add(url);
 
@@ -99,7 +85,5 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
 
       this.emit('scraped', url, currentResults);
     }
-
-    return results;
   }
 }

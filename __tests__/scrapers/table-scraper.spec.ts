@@ -1,4 +1,4 @@
-import { TableScraper } from '../../src/scrapers/table-scraper';
+import { Table, TableScraper } from '../../src/scrapers/table-scraper';
 import { html } from '../utils/offline-sites/webscraper.io-tables';
 import { expectedTables } from '../utils/test-tables';
 import { Person } from '../utils/Person';
@@ -13,7 +13,13 @@ describe('TableScraper', () => {
     fetchMock.mockResponseOnce(html);
 
     const scraper = new TableScraper<Person>('https://webscraper.io/test-sites/tables', () => new Person());
-    const results = await scraper.scrape();
+    const results: Table<Person>[] = [];
+    
+    scraper.on('scraped', (url: string, tables: Table<Person>[]) => {
+      results.push(...tables);
+    });
+    
+    await scraper.scrape();
 
     expect(results).toEqual(expectedTables);
   });

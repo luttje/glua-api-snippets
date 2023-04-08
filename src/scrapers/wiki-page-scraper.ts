@@ -62,7 +62,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       const page = pages[0];
 
       // Do not scrape ~history and ~edit links
-      page.childUrls = page.childUrls.filter(url => !url.endsWith('~history') && !url.endsWith('~edit'));
+      page.childUrls = page.childUrls.filter(url => !url.endsWith('~history') && !url.endsWith('~edit') && this.getTraverseUrl(url) !== false);
 
       // Get the realm of the page
       const pageContent = dom.window.document.querySelector('#pagecontent') as HTMLElement;
