@@ -3,6 +3,7 @@ import { html } from '../utils/offline-sites/webscraper.io-tables';
 import { expectedTables } from '../utils/test-tables';
 import { Person } from '../utils/Person';
 import fetchMock from "jest-fetch-mock";
+import { scrapeAndCollect } from '../../src/scrapers/collector';
 
 describe('TableScraper', () => {
   beforeEach(() => {
@@ -13,13 +14,7 @@ describe('TableScraper', () => {
     fetchMock.mockResponseOnce(html);
 
     const scraper = new TableScraper<Person>('https://webscraper.io/test-sites/tables', () => new Person());
-    const results: Table<Person>[] = [];
-    
-    scraper.on('scraped', (url: string, tables: Table<Person>[]) => {
-      results.push(...tables);
-    });
-    
-    await scraper.scrape();
+    const results = await scrapeAndCollect(scraper);
 
     expect(results).toEqual(expectedTables);
   });

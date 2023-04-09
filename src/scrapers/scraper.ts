@@ -53,14 +53,20 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
     return url;
   }
 
-  public async visitOne(url: string, callback: ScrapeCallback<T>): Promise<T[]> {
+  public async visitOne(url: string, callback?: ScrapeCallback<T>): Promise<T[]> {
+    if (!callback)
+      callback = this.getScrapeCallback();
+    
     const response = await fetch(url);
     const html = await response.text();
 
     return callback(response, html);
   }
 
-  public async traverse(url: string, callback: ScrapeCallback<T>): Promise<void> {
+  public async traverse(url: string, callback?: ScrapeCallback<T>): Promise<void> {
+    if (!callback)
+      callback = this.getScrapeCallback();
+    
     const urlsToTraverse: string[] = [url];
 
     while (urlsToTraverse.length > 0) {

@@ -1,6 +1,7 @@
 import { html as html } from '../utils/offline-sites/gmod-wiki/recent-changes';
 import fetchMock from "jest-fetch-mock";
 import { WikiHistoryPage, WikiHistoryPageScraper } from '../../src/scrapers/wiki-history-scraper';
+import { scrapeAndCollect } from '../../src/scrapers/collector';
 
 describe('GMod Wiki History Page Parse', () => {
   beforeEach(() => {
@@ -13,13 +14,7 @@ describe('GMod Wiki History Page Parse', () => {
     fetchMock.mockResponseOnce(html, { url: baseUrl });
 
     const scraper = new WikiHistoryPageScraper(baseUrl);
-    const results: WikiHistoryPage[] = [];
-
-    scraper.on('scraped', (url: string, pages: WikiHistoryPage[]) => {
-      results.push(pages[0]);
-    });
-    
-    await scraper.scrape();
+    const results = await scrapeAndCollect(scraper);
 
     expect(results.length).toEqual(1);
     expect(results[0].url).toEqual(baseUrl);

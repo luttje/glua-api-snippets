@@ -2,6 +2,7 @@ import { Table, TableScraper } from '../../src/scrapers/table-scraper';
 import { Page, PageScraper } from '../../src/scrapers/page-scraper';
 import { Scrapeable, Scraper } from '../../src/scrapers/scraper';
 import { html } from '../utils/offline-sites/webscraper.io-tables';
+import { scrapeAndCollect } from '../../src/scrapers/collector';
 import { expectedTables } from '../utils/test-tables';
 import { Person } from '../utils/Person';
 import fetchMock from "jest-fetch-mock";
@@ -39,13 +40,7 @@ describe('Scraper', () => {
       return pages.map(page => new PageWithTables<Person>(baseUrl, page, tables));
     });
 
-    const results: PageWithTables<Person>[] = [];
-
-    scraper.on('scraped', (url: string, pages: PageWithTables<Person>[]) => {
-      results.push(pages[0]);
-    });
-    
-    await scraper.scrape();
+    const results = await scrapeAndCollect(scraper);
 
     expect(results.length).toBe(1);
     expect(results[0].tables).toEqual(expectedTables);
