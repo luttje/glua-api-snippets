@@ -54,7 +54,7 @@ This repository scrapes the Garry's Mod Lua API and generates snippets that will
 </div>
 
 ## 📅 **Automatically up-to-date**
-Using GitHub Actions, this repository is automatically updated every month.
+Using GitHub Actions, this repository is automatically updated every week on Tuesday at 00:00 UTC.
 
 It will automatically scrape the latest Garry's Mod Lua API from the Garry's Mod Wiki and package them into a release.
 
