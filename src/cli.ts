@@ -1,7 +1,8 @@
-import { Command } from 'commander';
-import packageJson from '../package.json' assert { type: "json" };
 import { WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from './scrapers/wiki-page-scraper.js';
+import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
+import { walk } from './file-walker.js';
+import { Command } from 'commander';
 
 async function main() {
   const program = new Command();
@@ -26,47 +27,29 @@ async function main() {
   const writer = new GluaApiWriter();
   const fs = await import('fs');
   
-  let existingFiles = new Set<string>();
+  let existingFiles = new Set<string>(uselessUrls);
+
+  existingFiles.forEach(url => console.debug(`Skipping ${url} (configured to be useless)`));
 
   if (fs.existsSync(baseDirectory)) {
-    // recursively read the 'url' from all json objects in the files
-    const walk = (dir: string, filelist: string[] = []) => {
-      const files = fs.readdirSync(dir);
+    if (!options.force) {
+      const files = walk(baseDirectory);
 
-      return files.reduce((filelist, file) => {
-        const stat = fs.statSync(`${dir}/${file}`);
+      for (const file of files) {
+        if (!file.endsWith('.json'))
+          continue;
+        
+        const json = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-        if (stat && stat.isDirectory()) {
-          filelist = walk(`${dir}/${file}`, filelist);
-        } else {
-          filelist.push(`${dir}/${file}`);
+        for (const page of json) {
+          existingFiles.add(page.url);
+          console.debug(`Skipping ${page.url} (already exists)`);
         }
-
-        return filelist;
-      }, filelist);
-    }
-
-    const files = walk(baseDirectory);
-
-    for (const file of files) {
-      if (!file.endsWith('.json'))
-        continue;
-      
-      const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-
-      for (const page of json) {
-        existingFiles.add(page.url);
-        console.debug(`Skipping ${page.url} (already exists)`);
       }
     }
   }
 
-  scraper.setChildPageFilter(url => {
-    if (!options.force && existingFiles.has(url))
-      return false;
-
-    return !uselessUrls.has(url);
-  });
+  scraper.setChildPageFilter(url => !existingFiles.has(url));
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
