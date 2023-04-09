@@ -1,7 +1,7 @@
 import { WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from './scrapers/wiki-page-scraper.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { walk } from './file-walker.js';
+import { walk } from './filesystem.js';
 import { Command } from 'commander';
 
 async function main() {
