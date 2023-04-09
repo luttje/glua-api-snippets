@@ -22,6 +22,8 @@ jobs:
       - name: Test release action
         run: |
           # Create some dummy files, zip them and create a release.json in dist/release
+          mkdir -p ./dist/a
+          mkdir -p ./dist/b
           mkdir -p ./dist/release
           echo "test" > ./dist/a/test.txt
           echo "test2" > ./dist/b/test2.txt
