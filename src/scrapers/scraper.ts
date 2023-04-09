@@ -76,7 +76,8 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
       if (!url)
         continue;
       
-      console.debug(`Scraping ${url}...`);
+      if (!!process.env.VERBOSE_LOGGING)
+        console.debug(`Scraping ${url}...`);
       
       this.emit('beforescrape', url);
       

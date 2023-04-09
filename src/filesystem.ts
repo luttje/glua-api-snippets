@@ -1,7 +1,8 @@
-import fs from 'fs';
+import archiver from 'archiver';
 import path from 'path';
+import fs from 'fs';
 
-export function walk(dir: string): string[] {
+export function walk(dir: string, filter?: (fileOrDirectory: string, isDirectory?: boolean) => boolean): string[] {
   const filelist: string[] = [];
 
   const traverse = (currentDir: string) => {
@@ -12,9 +13,11 @@ export function walk(dir: string): string[] {
       const stat = fs.statSync(filepath);
 
       if (stat.isDirectory()) {
-        traverse(filepath);
+        if (!filter || filter(filepath, true))
+          traverse(filepath);
       } else {
-        filelist.push(filepath);
+        if (!filter || filter(filepath, false))
+          filelist.push(filepath);
       }
     }
   };
@@ -47,4 +50,38 @@ export function convertWindowsToUnixPath(windowsPath: string) {
     unixPath = '/' + unixPath;
 
   return unixPath;
+}
+
+export async function zipFiles(outputFile: string, filePaths: string[], trimPath?: string) {
+  const outputDirectory = path.dirname(outputFile);
+
+  if (!fs.existsSync(outputDirectory))
+    fs.mkdirSync(outputDirectory, { recursive: true });
+
+  const outputStream = fs.createWriteStream(outputFile);  
+  const archive = archiver.create('zip', { zlib: { level: 9 } });
+  
+  outputStream.on('close', function () {
+    console.debug(archive.pointer() + ' total bytes written to zip');
+  });
+
+  archive.on('warning', function (err) {
+    if (err.code === 'ENOENT') {
+      console.warn(err);
+    } else {
+      throw err;
+    }
+  });
+
+  archive.on('error', function (err) {
+    throw err;
+  });
+
+  archive.pipe(outputStream);
+
+  for (const filePath of filePaths) {
+    archive.file(filePath, { name: trimPath ? path.relative(trimPath, filePath) : filePath });
+  }
+  
+  await archive.finalize();
 }
