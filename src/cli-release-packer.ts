@@ -29,7 +29,9 @@ async function main() {
     process.exit(1);
   }
 
-  const baseFileName = metadata.lastUpdate.toISOString().replace(/:/g, '-');
+  const baseFileName = metadata.lastUpdate.toISOString().replace(/:/g, '-')
+    .slice(0, -5) // without .000Z
+    .replace(/T/g, '_');
 
   console.log(`Building release for ${metadata.lastUpdate}...`);
 
@@ -51,6 +53,7 @@ async function main() {
   // Write the release file name to a file so the GitHub action can read it.
   fs.writeFileSync(path.join(options.output, 'release.json'), JSON.stringify({
     version: metadata.lastUpdate.toLocaleString(),
+    tag: baseFileName,
     releaseFiles,
   }));
 

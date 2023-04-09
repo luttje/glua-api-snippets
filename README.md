@@ -11,7 +11,7 @@ This repository scrapes the Garry's Mod Lua API and generates snippets that will
 
 1. Install the EmmyLua extension for your editor of choice <small>*([EmmyLua VSCode Extension](https://marketplace.visualstudio.com/items?itemName=tangzx.emmylua) | [EmmyLua IntelliJ Plugin](https://plugins.jetbrains.com/plugin/9768-emmylua))*</small>
 
-2. Download the latest Lua release named something like `YYYY-MM-DDTHH-MM-SS.000Z.lua.zip` from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases).
+2. Download the latest Lua release named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases).
 
 3. Extract the downloaded release to a directory on your computer. We'll use `~/glua-api-snippets` as an example.
 
@@ -76,4 +76,4 @@ This project uses [Jest](https://jestjs.io/) to automate testing. You can run th
 
 ### API as JSON
 
-The API is also available as JSON. You can find it with the Lua API package [on the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DDTHH-MM-SS.000Z.json.zip`.
+The API is also available as JSON. You can find it with the Lua API package [on the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DD_HH-MM-SS.json.zip`.
