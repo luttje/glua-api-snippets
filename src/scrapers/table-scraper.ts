@@ -63,10 +63,10 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
   }
 
   public getScrapeCallback(): ScrapeCallback<Table<T>> {
-    return (response: Response, dom: JSDOM): Table<T>[] => {
+    return (response: Response, html: string): Table<T>[] => {
       const results: Table<T>[] = [];
 
-      // Find all table elements and call fromTableElement on each one
+      const dom = new JSDOM(html);
       const tables = dom.window.document.querySelectorAll('table');
 
       for (const table of tables) {

@@ -1,5 +1,5 @@
+import { decodeEntities } from './decode-entities.js';
 import { ScrapeCallback, Scrapeable, Scraper } from './scraper.js';
-import { JSDOM } from 'jsdom';
 
 export class Page implements Scrapeable {
   public url: string;
@@ -25,32 +25,25 @@ export class PageScraper<T extends Page = Page> extends Scraper<T> {
    * Scrapes a page for its URL and title, and returns a list of child URLs
    * 
    * @param response The response from the page
-   * @param dom The DOM of the page
+   * @param html The HTML content of the request
    * 
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<T> {
-    return (response: Response, dom: JSDOM): T[] => {
+    return (response: Response, html: string): T[] => {
       const results: T[] = [];
 
       const url = response.url;
-      const title = dom.window.document.title;
-
+      const title = decodeEntities(html.match(/<title>(.*?)<\/title>/)?.[1] || '');
       const page = this.factory(url, title);
-      
-      const links = dom.window.document.querySelectorAll('a');
+      const links = html.match(/<a\s+(?:[^>]*?\s+)?href=(["'])([\s\S]*?)\1(?:[^>]*?\s+)?>(?:[\s\S]*?<\/a>)?/gi)
+        ?.map(link => link.replace(/\n/g, ''))
+        ?.map(link => link.match(/href=(["'])([\s\S]*?)\1/i)?.[2] || '') || [];
 
-      for (const link of links) {
-        const href = link.getAttribute('href');
+      for (let link of links) {
+        link = decodeEntities(link);
+        let absoluteUrl = link.startsWith('http') ? link : new URL(link, url).toString();
 
-        if (!href)
-          continue;
-        
-        let absoluteUrl = href;
-
-        if (!href.startsWith('http'))
-        absoluteUrl = new URL(href, url).toString();
-        
         if (page.childUrls.includes(absoluteUrl))
           continue;
         

@@ -5,7 +5,6 @@ import { html } from '../utils/offline-sites/webscraper.io-tables';
 import { expectedTables } from '../utils/test-tables';
 import { Person } from '../utils/Person';
 import fetchMock from "jest-fetch-mock";
-import { JSDOM } from 'jsdom';
 
 class PageWithTables<T> implements Scrapeable {
   public childUrls: string[] = [];
@@ -30,12 +29,12 @@ describe('Scraper', () => {
     });
     
     // Combines the functionality of TableScraper and PageScraper
-    const scraper = new Scraper<PageWithTables<Person>>(baseUrl, (response: Response, dom: JSDOM) => {
+    const scraper = new Scraper<PageWithTables<Person>>(baseUrl, (response: Response, html: string) => {
       const tableScraperCallback = new TableScraper<Person>(baseUrl, () => new Person()).getScrapeCallback();
       const pageScraperCallback = new PageScraper(baseUrl).getScrapeCallback();
 
-      const tables = tableScraperCallback(response, dom);
-      const pages = pageScraperCallback(response, dom);
+      const tables = tableScraperCallback(response, html);
+      const pages = pageScraperCallback(response, html);
 
       return pages.map(page => new PageWithTables<Person>(baseUrl, page, tables));
     });

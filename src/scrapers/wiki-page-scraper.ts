@@ -46,15 +46,15 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
    * Scrapes a page for its information on GLua functions
    * 
    * @param response The response from the page
-   * @param dom The DOM of the page
+   * @param html The HTML content of the request
    * 
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<WikiPage> {
     const baseScrapeCallback = super.getScrapeCallback();
 
-    return (response: Response, dom: JSDOM): WikiPage[] => {
-      const pages = baseScrapeCallback(response, dom);
+    return (response: Response, html: string): WikiPage[] => {
+      const pages = baseScrapeCallback(response, html);
 
       if (pages.length === 0)
         return [];
@@ -66,6 +66,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       page.childUrls = page.childUrls.filter(url => !url.endsWith('~history') && !url.endsWith('~edit') && this.getTraverseUrl(url) !== false);
 
       // Get the realm of the page
+      const dom = new JSDOM(html);
       const pageContent = dom.window.document.querySelector('#pagecontent') as HTMLElement;
 
       if (!pageContent) {

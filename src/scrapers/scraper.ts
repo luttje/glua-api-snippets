@@ -1,7 +1,6 @@
 import EventEmitter from 'events';
-import { JSDOM } from 'jsdom';
 
-export type ScrapeCallback<T> = (response: Response, dom: JSDOM) => T[];
+export type ScrapeCallback<T> = (response: Response, html: string) => T[];
 
 export interface Scrapeable {
   childUrls: string[];
@@ -19,7 +18,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
   }
 
   public getScrapeCallback(): ScrapeCallback<T> {
-    return this.scrapeCallback || ((_: Response, __: JSDOM): T[] => []);
+    return this.scrapeCallback || ((_: Response, __: string): T[] => []);
   }
 
   public setChildPageFilter(filter: (url: string) => boolean): void {
@@ -56,9 +55,9 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
 
   public async visitOne(url: string, callback: ScrapeCallback<T>): Promise<T[]> {
     const response = await fetch(url);
-    const dom = new JSDOM(await response.text());
+    const html = await response.text();
 
-    return callback(response, dom);
+    return callback(response, html);
   }
 
   public async traverse(url: string, callback: ScrapeCallback<T>): Promise<void> {
