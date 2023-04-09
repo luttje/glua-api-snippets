@@ -31,8 +31,8 @@ jobs:
           zip -r ./dist/release/release-a.lua.zip ./dist/a
           zip -r ./dist/release/release-b.json.zip ./dist/b
           echo "{\"version\": \"1.0.0\", \"releaseFiles\": [\"./dist/release/release-a.lua.zip\", \"./dist/release/release-b.json.zip\"]}" > ./dist/release/release.json
-      - name: Pack release
-        run: npm run cli:pack-release
+      # - name: Pack release
+      #   run: npm run cli:pack-release
       - name: Get release files and version
         id: release_json
         run: |
