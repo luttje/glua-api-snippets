@@ -56,11 +56,16 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
   public async visitOne(url: string, callback?: ScrapeCallback<T>): Promise<T[]> {
     if (!callback)
       callback = this.getScrapeCallback();
-    
-    const response = await fetch(url);
-    const html = await response.text();
 
-    return callback(response, html);
+    try {
+      const response = await fetch(url);
+      const html = await response.text();
+
+      return callback(response, html);
+    } catch (e) {
+      console.error(`Error fetching ${url}: ${e}`);
+      return [];
+    }
   }
 
   public async traverse(url: string, callback?: ScrapeCallback<T>): Promise<void> {
