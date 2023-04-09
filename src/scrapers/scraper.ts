@@ -1,4 +1,8 @@
+import fetchRetry from 'fetch-retry';
+import { RequestInitWithRetry } from 'fetch-retry';
 import EventEmitter from 'events';
+
+const fetch = fetchRetry(global.fetch);
 
 export type ScrapeCallback<T> = (response: Response, html: string) => T[];
 
@@ -9,7 +13,8 @@ export interface Scrapeable {
 export class Scraper<T extends Scrapeable> extends EventEmitter {
   protected readonly traversedUrls: Set<string> = new Set();
   protected childPageFilter?: (url: string) => boolean;
-
+  protected retryOptions: RequestInitWithRetry = {};
+    
   constructor(
     protected readonly baseUrl: string,
     protected readonly scrapeCallback?: ScrapeCallback<T>
@@ -23,6 +28,10 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
 
   public setChildPageFilter(filter: (url: string) => boolean): void {
     this.childPageFilter = filter;
+  }
+
+  public setRetryOptions(options: RequestInitWithRetry): void {
+    this.retryOptions = options;
   }
 
   /**
@@ -58,7 +67,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
       callback = this.getScrapeCallback();
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, this.retryOptions);
       const html = await response.text();
 
       return callback(response, html);

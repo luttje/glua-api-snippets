@@ -29,6 +29,13 @@ async function startScrape() {
   const baseUrl = options.url.replace(/\/$/, '');
   const scraper = new WikiPageScraper(baseUrl);
   const writer = new GluaApiWriter();
+  
+  scraper.setRetryOptions({
+    retries: 5,
+    retryDelay: function(attempt, error, response) {
+      return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
+    }
+  });
 
   writeMetadata(baseUrl, baseDirectory);
 
