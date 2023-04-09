@@ -15,15 +15,7 @@
   "license": "MIT",
   "version": "0.2.0",
   "type": "module",
-  "main": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
-  "bin": {
-    "glua-api-scraper": "./dist/esm/cli-scraper.js"
-  },
   "scripts": {
-    "dev": "npx tsc --watch",
-    "watch": "npx tsc --watch",
-    "build": "npx tsc",
     "cli:scrape-wiki": "npx ts-node-esm ./src/cli-scraper.ts -- --output ./output/",
     "cli:pack-release": "npx ts-node-esm ./src/cli-release-packer.ts -- --input ./output/ --output ./dist/release/",
     "test": "cross-env VERBOSE_LOGGING=1 npx jest",
