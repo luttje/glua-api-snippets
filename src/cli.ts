@@ -83,9 +83,9 @@ async function main() {
 
     // Split at the dot or colon and place in subdirectory
     if (fileName.includes('.') || fileName.includes(':')) {
-      const parts = fileName.split(/\.|:/);
+      const parts = fileName.split(/[:.]/, 2);
       subDirectory = `${parts[0]}/`;
-      fileName = parts[1];
+      fileName = fileName.substring(parts[0].length + 1);
 
       if (!fs.existsSync(`${baseDirectory}/${subDirectory}`))
         fs.mkdirSync(`${baseDirectory}/${subDirectory}`);
