@@ -46,7 +46,7 @@ export class Row<T> {
 
 export class Table<T> implements Scrapeable {
   public url: string;
-  public childUrls: string[] = [];
+  public childUrls: Set<string> = new Set();
 
   constructor(url: string, public rows: Row<T>[] = []) {
     this.url = url;

@@ -4,7 +4,7 @@ import { ScrapeCallback, Scrapeable, Scraper } from './scraper.js';
 export class Page implements Scrapeable {
   public url: string;
   public title: string;
-  public childUrls: string[] = [];
+  public childUrls: Set<string> = new Set();
 
   constructor(url: string, title: string) {
     this.url = url;
@@ -44,13 +44,13 @@ export class PageScraper<T extends Page = Page> extends Scraper<T> {
         link = decodeEntities(link);
         let absoluteUrl = link.startsWith('http') ? link : new URL(link, url).toString();
 
-        if (page.childUrls.includes(absoluteUrl))
+        if (page.childUrls.has(absoluteUrl))
           continue;
         
         if (this.childPageFilter && !this.childPageFilter(absoluteUrl))
           continue;
     
-        page.childUrls.push(absoluteUrl);
+        page.childUrls.add(absoluteUrl);
       }
 
       results.push(page);

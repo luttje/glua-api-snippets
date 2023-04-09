@@ -64,9 +64,8 @@ async function main() {
     let fileName = url.substring(options.url.length + 1);
     let subDirectory = '';
 
-    // Split at the dot or colon and place in subdirectory
-    if (fileName.includes('.') || fileName.includes(':')) {
-      const parts = fileName.split(/[:.]/, 2);
+    if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {
+      const parts = fileName.split(/[:.\/]/, 2);
       subDirectory = `${parts[0]}/`;
       fileName = fileName.substring(parts[0].length + 1);
 
@@ -85,6 +84,8 @@ async function main() {
   });
 
   await scraper.scrape();
+
+  console.log('Done!');
 }
 
 main().catch((err) => {

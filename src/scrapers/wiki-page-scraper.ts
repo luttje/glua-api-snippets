@@ -63,7 +63,12 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       const page = pages[0];
 
       // Do not scrape ~history and ~edit links
-      page.childUrls = page.childUrls.filter(url => !url.endsWith('~history') && !url.endsWith('~edit') && this.getTraverseUrl(url) !== false);
+      const childUrls = new Set(page.childUrls);
+
+      for (const url of childUrls) {
+        if (url.endsWith('~history') || url.endsWith('~edit') || this.getTraverseUrl(url) === false)
+          childUrls.delete(url);
+      }
 
       const $ = cheerio.load(html);
       const pageContent = $('#pagecontent');

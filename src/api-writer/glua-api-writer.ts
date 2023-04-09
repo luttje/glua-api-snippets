@@ -1,7 +1,7 @@
 import { Function, Realm, WikiPage } from '../scrapers/wiki-page-scraper.js';
 
 export class GluaApiWriter {
-  private readonly writtenClasses: string[] = [];
+  private readonly writtenClasses: Set<string> = new Set();
 
   constructor() { }
 
@@ -16,8 +16,7 @@ export class GluaApiWriter {
     if (!realm)
       throw new Error(`Page ${title} does not have a realm`);
 
-    // If the function is part of a class, write the class first (if it hasn't already been written)
-    if (func.className && !this.writtenClasses.includes(func.className)) {
+    if (func.className && !this.writtenClasses.has(func.className)) {
       api += `---@class ${func.className}\n`;
       api += `local ${func.className} = {}\n\n`;
     }

@@ -3,7 +3,7 @@ import EventEmitter from 'events';
 export type ScrapeCallback<T> = (response: Response, html: string) => T[];
 
 export interface Scrapeable {
-  childUrls: string[];
+  childUrls: Set<string>;
 }
 
 export class Scraper<T extends Scrapeable> extends EventEmitter {
@@ -79,7 +79,12 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
       this.traversedUrls.add(url);
 
       for (const result of currentResults) {
-        urlsToTraverse.push(...result.childUrls.filter(u => this.getTraverseUrl(u)));
+        for (const childUrl of result.childUrls) {
+          const traverseUrl = this.getTraverseUrl(childUrl);
+
+          if (traverseUrl)
+            urlsToTraverse.push(traverseUrl);
+        }
       }
 
       this.emit('scraped', url, currentResults);

@@ -7,7 +7,7 @@ import { Person } from '../utils/Person';
 import fetchMock from "jest-fetch-mock";
 
 class PageWithTables<T> implements Scrapeable {
-  public childUrls: string[] = [];
+  public childUrls: Set<string> = new Set();
 
   constructor(
     public url: string,
