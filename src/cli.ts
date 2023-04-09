@@ -22,8 +22,9 @@ async function main() {
     process.exit(1);
   }
 
+  const baseUrl = options.url.replace(/\/$/, '');
   const baseDirectory = options.output.replace(/[^\/\\]+$/, '');
-  const scraper = new WikiPageScraper(options.url);
+  const scraper = new WikiPageScraper(baseUrl);
   const writer = new GluaApiWriter();
   const fs = await import('fs');
   
@@ -49,7 +50,10 @@ async function main() {
     }
   }
 
-  scraper.setChildPageFilter(url => !existingFiles.has(url));
+  scraper.setChildPageFilter(url => {
+    // Ignore ~diff, ~user, ~history, ~edit, etc.
+    return !url.includes('~') && !existingFiles.has(url);
+  });
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
@@ -61,7 +65,7 @@ async function main() {
       return;
 
     const api = writer.writePages(pages);
-    let fileName = url.substring(options.url.length + 1);
+    let fileName = url.substring(baseUrl.length + 1);
     let subDirectory = '';
 
     if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {

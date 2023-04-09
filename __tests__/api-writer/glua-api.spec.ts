@@ -36,6 +36,7 @@ describe('GLua API Writer', () => {
     fetchMock.mockResponseOnce(html, { url: baseUrl });
     
     const scraper = new WikiPageScraper(baseUrl);
+    scraper.setChildPageFilter((url) => !url.includes('~'));
     const writer = new GluaApiWriter();
     let api = '';
 

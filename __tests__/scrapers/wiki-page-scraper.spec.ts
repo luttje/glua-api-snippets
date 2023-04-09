@@ -18,8 +18,8 @@ describe('GMod Wiki Parse', () => {
     
     fetchMock.mockResponses(
       [ baseHtml, { url: baseUrl } ],
-      [ editHtml, { url: `${baseUrl}~edit` } ], // Should be ignored
-      [ historyHtml, { url: `${baseUrl}~history` } ], // Should be ignored
+      [ editHtml, { url: `${baseUrl}~edit` } ],
+      [ historyHtml, { url: `${baseUrl}~history` } ],
     )
 
     const scraper = new WikiPageScraper(baseUrl);
@@ -31,7 +31,7 @@ describe('GMod Wiki Parse', () => {
     
     await scraper.scrape();
 
-    expect(results.length).toEqual(1);
+    expect(results.length).toEqual(3);
     expect(results[0].url).toEqual(baseUrl);
     expect(results[0].title).toEqual("GM:AcceptInput - Garry's Mod Wiki");
     expect(results[0].realm).toEqual(Realm.Server);
@@ -47,8 +47,8 @@ describe('GMod Wiki Parse', () => {
 
     fetchMock.mockResponses(
       [accessorFuncHtml, { url: baseUrl }],
-      [editHtml, { url: `${baseUrl}~edit` }], // Should be ignored
-      [historyHtml, { url: `${baseUrl}~history` }], // Should be ignored
+      [editHtml, { url: `${baseUrl}~edit` }],
+      [historyHtml, { url: `${baseUrl}~history` }],
     );
 
     const scraper = new WikiPageScraper(baseUrl);
@@ -60,7 +60,7 @@ describe('GMod Wiki Parse', () => {
     
     await scraper.scrape();
 
-    expect(results.length).toEqual(1);
+    expect(results.length).toEqual(3);
     expect(results[0].url).toEqual(baseUrl);
     expect(results[0].title).toEqual("AccessorFunc - Garry's Mod Wiki");
     expect(results[0].realm).toEqual(Realm.Shared);
@@ -76,8 +76,8 @@ describe('GMod Wiki Parse', () => {
     
     fetchMock.mockResponses(
       [openFolderHtml, { url: baseUrl }],
-      [editHtml, { url: `${baseUrl}~edit` }], // Should be ignored
-      [historyHtml, { url: `${baseUrl}~history` }], // Should be ignored
+      [editHtml, { url: `${baseUrl}~edit` }],
+      [historyHtml, { url: `${baseUrl}~history` }],
     );
     
     const scraper = new WikiPageScraper(baseUrl);
@@ -89,7 +89,7 @@ describe('GMod Wiki Parse', () => {
     
     await scraper.scrape();
 
-    expect(results.length).toEqual(1);
+    expect(results.length).toEqual(3);
     expect(results[0].url).toEqual(baseUrl);
     expect(results[0].title).toEqual("OpenFolder - Garry's Mod Wiki");
     expect(results[0].realm).toEqual(Realm.Menu);
@@ -105,8 +105,8 @@ describe('GMod Wiki Parse', () => {
     
     fetchMock.mockResponses(
       [baseHtml, { url: baseUrl }],
-      [editHtml, { url: `${baseUrl}~edit` }], // Should be ignored
-      [historyHtml, { url: `${baseUrl}~history` }], // Should be ignored
+      [editHtml, { url: `${baseUrl}~edit` }],
+      [historyHtml, { url: `${baseUrl}~history` }],
     );
 
     const scraper = new WikiPageScraper(baseUrl);
@@ -118,7 +118,7 @@ describe('GMod Wiki Parse', () => {
     
     await scraper.scrape();
 
-    expect(results.length).toEqual(1);
+    expect(results.length).toEqual(3);
 
     const json = JSON.stringify(results, wikiPageSaveReplacer, 2);
     expect(json).toBeTruthy();

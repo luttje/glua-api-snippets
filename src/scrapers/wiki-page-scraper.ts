@@ -62,11 +62,10 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       // There is only one page per response
       const page = pages[0];
 
-      // Do not scrape ~history and ~edit links
       const childUrls = new Set(page.childUrls);
 
       for (const url of childUrls) {
-        if (url.endsWith('~history') || url.endsWith('~edit') || this.getTraverseUrl(url) === false)
+        if (!this.getTraverseUrl(url))
           childUrls.delete(url);
       }
 
