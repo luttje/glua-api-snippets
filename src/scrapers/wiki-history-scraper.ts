@@ -1,6 +1,6 @@
 import { Page, PageScraper } from './page-scraper.js';
 import { ScrapeCallback } from './scraper.js';
-import { JSDOM } from 'jsdom';
+import * as cheerio from 'cheerio';
 
 export interface WikiHistory {
   dateTime: Date;
@@ -42,19 +42,19 @@ export class WikiHistoryPageScraper extends PageScraper<WikiHistoryPage> {
       // There is only one page per response
       const page = pages[0];
 
-      const dom = new JSDOM(html);
-      const changeElements = dom.window.document.querySelectorAll('table.changelist > tbody > .entry');
+      const $ = cheerio.load(html);
+      const changeElements = $('table.changelist > tbody > .entry');
 
       if (!changeElements)
         return [page];
       
       for (const changeElement of changeElements) {
-        const pageLinkElement = changeElement.querySelector('.address') as HTMLElement;
-        const pageLinkAnchorElement = pageLinkElement.querySelector('a') as HTMLAnchorElement;
-        const user = changeElement.querySelector('.user a')?.textContent || '';
-        const dateTime = new Date(pageLinkAnchorElement.title);
-        const url = pageLinkAnchorElement.href;
-        const change = pageLinkElement.textContent?.replace(pageLinkAnchorElement.textContent || '', '').replace(/\s+/g, ' ') || '';
+        const pageLinkElement = $(changeElement).find('.address');
+        const pageLinkAnchorElement = pageLinkElement.find('a');
+        const user = $(changeElement).find('.user a').text();
+        const dateTime = new Date(pageLinkAnchorElement.attr('title') || '');
+        const url = pageLinkAnchorElement.attr('href') || '';
+        const change = $(pageLinkElement).text().replace($(pageLinkAnchorElement).text(), '').replace(/\s+/g, ' ');
 
         page.history.push({
           dateTime,

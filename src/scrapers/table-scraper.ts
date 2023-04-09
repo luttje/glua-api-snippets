@@ -1,6 +1,6 @@
 import { ScrapeCallback, Scrapeable, Scraper } from './scraper.js';
-import { JSDOM } from 'jsdom';
 import "reflect-metadata";
+import * as cheerio from 'cheerio';
 
 const tableColumnMetadataKey = Symbol("tableColumn");
 
@@ -65,12 +65,11 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
   public getScrapeCallback(): ScrapeCallback<Table<T>> {
     return (response: Response, html: string): Table<T>[] => {
       const results: Table<T>[] = [];
-
-      const dom = new JSDOM(html);
-      const tables = dom.window.document.querySelectorAll('table');
+      const $ = cheerio.load(html);
+      const tables = $('table');
 
       for (const table of tables) {
-        const tableResult = this.fromTableElement(table);
+        const tableResult = this.fromTableElement($, table);
 
         if (tableResult)
           results.push(tableResult);
@@ -80,29 +79,28 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
     };
   }
 
-  private fromTableElement(tableElement: Element): Table<T> | null {
+  private fromTableElement($: cheerio.CheerioAPI, tableElement: cheerio.Element): Table<T> | null {
     const tableResult = new Table<T>(this.baseUrl);
-
-    let headingRows = tableElement.querySelectorAll('thead > tr');
+    let headingRows = $(tableElement).find('thead > tr');
     let shouldTrimHeadings = false;
 
     if (headingRows.length === 0) {
-      headingRows = tableElement.querySelectorAll('tbody > tr:first-child');
+      headingRows = $(tableElement).find('tbody > tr:first-child');
       shouldTrimHeadings = true;
     }
     
-    let headings : NodeListOf<HTMLTableCellElement> | undefined;
+    let headings : cheerio.Element[] | undefined;
     
     if (headingRows.length > 0)
-      headings = headingRows[0].querySelectorAll('th');
+      headings = $(headingRows[0]).find('th').toArray();
     
     if (!headings || headings.length === 0)
       throw new Error('No headings found in table');
 
-    let rows = Array.from(tableElement.querySelectorAll('tbody > tr'));
+    let rows = $(tableElement).find('tbody > tr').toArray();
 
     if (rows.length === 0)
-      rows = Array.from(tableElement.querySelectorAll('tr'))
+      rows = $(tableElement).find('tr').toArray();
     
     if (shouldTrimHeadings)
       rows = rows.slice(headingRows.length);
@@ -110,7 +108,7 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
     let isEmpty = true;
     
     for (const row of rows) {
-      const rowResult = this.fromRowElement(row, headings);
+      const rowResult = this.fromRowElement($, row, headings);
 
       if (rowResult === null)
         continue;
@@ -125,8 +123,8 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
     return tableResult;
   }
 
-  private fromRowElement(rowElement: Element, headings: NodeListOf<HTMLTableCellElement>): Row<T> | null {
-    const cells = rowElement.querySelectorAll('td');
+  private fromRowElement($: cheerio.CheerioAPI, rowElement: cheerio.Element, headings: cheerio.Element[]): Row<T> | null {
+    const cells = $(rowElement).find('td').toArray();
     const rowResult = this.factory();
     const allTableColumns = getTableColumns(rowResult);
     let isEmpty = true;
@@ -138,7 +136,7 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
       if (!heading)
         continue;
       
-      const headingText = heading.textContent;
+      const headingText = $(heading).text();
 
       if (!headingText)
         continue;
@@ -159,7 +157,7 @@ export class TableScraper<T extends object> extends Scraper<Table<T>> {
         };
       }
       
-      const cellText = cell.textContent;
+      const cellText = $(cell).text();
 
       if (!cellText)
         continue;

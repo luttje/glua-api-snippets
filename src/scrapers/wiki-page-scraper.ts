@@ -1,6 +1,6 @@
 import { Page, PageScraper } from './page-scraper.js';
 import { ScrapeCallback } from './scraper.js';
-import { JSDOM } from 'jsdom';
+import * as cheerio from 'cheerio';
 
 export enum Realm {
   Shared = 'shared',
@@ -65,32 +65,30 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       // Do not scrape ~history and ~edit links
       page.childUrls = page.childUrls.filter(url => !url.endsWith('~history') && !url.endsWith('~edit') && this.getTraverseUrl(url) !== false);
 
-      // Get the realm of the page
-      const dom = new JSDOM(html);
-      const pageContent = dom.window.document.querySelector('#pagecontent') as HTMLElement;
+      const $ = cheerio.load(html);
+      const pageContent = $('#pagecontent');
 
-      if (!pageContent) {
-        // Skip scraping for more details it if it doesn't have page content
+      if (!pageContent.length) {
         return [ page ];
       }
 
-      const realmDiv = pageContent.querySelector('div.realm-server, div.realm-client, div.realm-menu') as HTMLElement;
+      const realmDiv = pageContent.find('div.realm-server, div.realm-client, div.realm-menu');
 
-      if (!realmDiv) {
+      if (!realmDiv.length) {
         // Skip scraping for more details it if it is not a function
         return [ page ];
       }
 
-      const isServerRealm = realmDiv.classList.contains('realm-server');
-      const isClientRealm = realmDiv.classList.contains('realm-client');
-      // const isMenuRealm = realmDiv.classList.contains('realm-menu');
+      const isServerRealm = realmDiv.hasClass('realm-server');
+      const isClientRealm = realmDiv.hasClass('realm-client');
+      // const isMenuRealm = realmDiv.hasClass('realm-menu');
       const isSharedRealm = isServerRealm && isClientRealm;
 
       page.realm = isSharedRealm ? Realm.Shared : (isServerRealm ? Realm.Server : (isClientRealm ? Realm.Client : Realm.Menu));
 
       // Get the function name of the page, if it contains : it is a method of a class
-      const pageTitle = dom.window.document.querySelector('#pagetitle') as HTMLElement;
-      const functionName = pageTitle.textContent!;
+      const pageTitle = $('#pagetitle');
+      const functionName = pageTitle.text();
       const functionNameParts = functionName.split(':');
 
       if (functionNameParts.length === 2) {
@@ -105,25 +103,25 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
       }
 
       // Function description
-      const functionDescription = pageContent.querySelector('.function_description') as HTMLElement;
-      page.function.description = functionDescription?.textContent?.trim() ?? '';
+      const functionDescription = pageContent.find('.function_description');
+      page.function.description = functionDescription.text().trim();
       
       // Function arguments
-      const functionArguments = pageContent.querySelectorAll('.function_arguments > div') as NodeListOf<HTMLElement>;
+      const functionArguments = pageContent.find('.function_arguments > div');
       const argumentsArray: Variable[] = [];
 
       for (const argument of functionArguments) {
-        argumentsArray.push(WikiPageScraper.parseVariable(argument));
+        argumentsArray.push(WikiPageScraper.parseVariable($, argument));
       }
 
       page.function.arguments = argumentsArray;
 
       // Function returns
-      const functionReturns = pageContent.querySelectorAll('.function_returns > div') as NodeListOf<HTMLElement>;
+      const functionReturns = pageContent.find('.function_returns > div');
       const returnsArray: Variable[] = [];
 
       for (const _return of functionReturns) {
-        returnsArray.push(WikiPageScraper.parseVariable(_return));
+        returnsArray.push(WikiPageScraper.parseVariable($, _return));
       }
 
       page.function.returns = returnsArray;
@@ -132,10 +130,10 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
     };
   }
 
-  private static parseVariable(variable: HTMLElement): Variable {
-    const name = variable.querySelector('.name')?.textContent!.trim();
-    const type = variable.querySelector('a')!.textContent!.trim();
-    const description = variable.querySelector('div')!.textContent!.trim();
+  private static parseVariable($: cheerio.CheerioAPI, variable: cheerio.Element): Variable {
+    const name = $(variable).find('.name').text().trim();
+    const type = $(variable).find('a').first().text().trim();
+    const description = $(variable).find('div').text().trim();
 
     if (name)
       return {
