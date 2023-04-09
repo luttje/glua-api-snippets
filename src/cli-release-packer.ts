@@ -1,5 +1,5 @@
 import packageJson from '../package.json' assert { type: "json" };
-import { walk, zipFiles } from './filesystem.js';
+import { convertWindowsToUnixPath, walk, zipFiles } from './filesystem.js';
 import { readMetadata } from './metadata.js';
 import { Command } from 'commander';
 import path from 'path';
@@ -41,12 +41,11 @@ async function main() {
 
   for (const target of targets) {
     const files = walk(options.input, (file, isDirectory) => isDirectory || file.endsWith(`.${target}`) || file === '__metadata.json');
-    const targetFileName = `${baseFileName}.${target}.zip`;
-    const targetPath = path.join(options.output, targetFileName);
+    const targetPath = path.join(options.output, `${baseFileName}.${target}.zip`);
 
     await zipFiles(targetPath, files, options.input);
 
-    releaseFiles.push(targetFileName);
+    releaseFiles.push(convertWindowsToUnixPath(targetPath));
   }
 
   // Write the release file name to a file so the GitHub action can read it.
