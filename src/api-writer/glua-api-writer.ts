@@ -10,12 +10,9 @@ export class GluaApiWriter {
 
     let api: string = '';
 
-    if (!func)
-      throw new Error(`Page ${title} does not have a function`);
+    if (!func || !realm)
+      throw new Error(`Page ${title} does not have a function or realm`);
     
-    if (!realm)
-      throw new Error(`Page ${title} does not have a realm`);
-
     if (func.className && !this.writtenClasses.has(func.className)) {
       api += `---@class ${func.className}\n`;
       api += `local ${func.className} = {}\n\n`;
@@ -46,18 +43,39 @@ export class GluaApiWriter {
     }).join('\n');
   }
 
+  // Newlines dont work in EmmyLua, so we just replace them with a space.
+  private removeNewlines(text: string) {
+    return text.replace(/\n/g, ' ');
+  }
+
+  private transformType(type: string) {
+    if (type === 'vararg')
+      return '...';
+    
+    return type;
+  }
+
   private writeFunctionLuaDocComment(func: Function, realm: Realm) {
     let luaDocComment = `---[${realm.toUpperCase()}] ${this.putCommentBeforeEachLine(func.description!)}\n`;
 
     if (func.arguments) {
       func.arguments.forEach(arg => {
-        luaDocComment += `---@param ${arg.name} ${arg.type} ${this.putCommentBeforeEachLine(arg.description!)}\n`;
+        luaDocComment += `---@param ${arg.name} ${this.transformType(arg.type)} ${this.removeNewlines(arg.description!)}\n`;
       });
     }
 
     if (func.returns) {
+      const returns = `---@return ${func.returns.map(ret => this.transformType(ret.type)).join(', ')}`;
+
       func.returns.forEach(ret => {
-        luaDocComment += `---@return ${ret.type} ${this.putCommentBeforeEachLine(ret.description!)}\n`;
+        const description = this.removeNewlines(ret.description);
+
+        if (func.returns!.length === 1) {
+          luaDocComment += `${returns} ${description}\n`;
+          return;
+        }
+        
+        luaDocComment += `${returns} ${this.transformType(ret.type)} - ${description}\n`;
       });
     }
 
@@ -68,7 +86,12 @@ export class GluaApiWriter {
     let declaration = `function ${func.className ? `${func.className}:` : ''}${func.name}(`;
 
     if (func.arguments) {
-      declaration += func.arguments.map(arg => arg.name).join(', ');
+      declaration += func.arguments.map(arg => {
+        if (arg.type === 'vararg')
+          return '...';
+        
+        return arg.name;
+      }).join(', ');
     }
 
     declaration += ') end\n\n';
