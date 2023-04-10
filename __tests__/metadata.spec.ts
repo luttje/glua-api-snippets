@@ -1,12 +1,14 @@
-import path from 'path';
 import { writeMetadata, readMetadata } from '../src/metadata.js';
+import path from 'path';
 import fs from 'fs';
+import os from 'os';
 
 describe('Metadata', () => {
   let outputDirectory = '';
 
   beforeAll(() => {
-    outputDirectory = fs.mkdtempSync('glua-wiki-metadata');
+    outputDirectory = path.join(os.tmpdir(), 'glua-wiki-metadata');
+    fs.mkdirSync(outputDirectory, { recursive: true });
   });
 
   afterAll(() => {
@@ -25,7 +27,8 @@ describe('Metadata', () => {
     let nonExistingDirectory = '';
 
     beforeEach(() => {
-      nonExistingDirectory = fs.mkdtempSync('glua-wiki-metadata');
+      nonExistingDirectory = path.join(os.tmpdir(), 'glua-wiki-metadata', 'non-existing');
+      fs.mkdirSync(nonExistingDirectory, { recursive: true });
     });
 
     afterEach(() => {

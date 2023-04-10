@@ -53,35 +53,37 @@ export function convertWindowsToUnixPath(windowsPath: string) {
 }
 
 export async function zipFiles(outputFile: string, filePaths: string[], trimPath?: string) {
-  const outputDirectory = path.dirname(outputFile);
+  return new Promise<archiver.Archiver>(async (resolve, reject) => {
+    const outputDirectory = path.dirname(outputFile);
 
-  if (!fs.existsSync(outputDirectory))
-    fs.mkdirSync(outputDirectory, { recursive: true });
+    if (!fs.existsSync(outputDirectory))
+      fs.mkdirSync(outputDirectory, { recursive: true });
 
-  const outputStream = fs.createWriteStream(outputFile);  
-  const archive = archiver.create('zip', { zlib: { level: 9 } });
-  
-  outputStream.on('close', function () {
-    console.debug(archive.pointer() + ' total bytes written to zip');
-  });
+    const outputStream = fs.createWriteStream(outputFile);
+    const archive = archiver.create('zip', { zlib: { level: 9 } });
+    
+    outputStream.on('close', function () {
+      resolve(archive);
+    });
 
-  archive.on('warning', function (err) {
-    if (err.code === 'ENOENT') {
-      console.warn(err);
-    } else {
-      throw err;
+    archive.on('warning', function (err) {
+      if (err.code === 'ENOENT') {
+        console.warn(err);
+      } else {
+        throw err;
+      }
+    });
+
+    archive.on('error', function (err) {
+      reject(err);
+    });
+
+    archive.pipe(outputStream);
+
+    for (const filePath of filePaths) {
+      archive.file(filePath, { name: trimPath ? path.relative(trimPath, filePath) : filePath });
     }
+    
+    await archive.finalize();
   });
-
-  archive.on('error', function (err) {
-    throw err;
-  });
-
-  archive.pipe(outputStream);
-
-  for (const filePath of filePaths) {
-    archive.file(filePath, { name: trimPath ? path.relative(trimPath, filePath) : filePath });
-  }
-  
-  await archive.finalize();
 }
