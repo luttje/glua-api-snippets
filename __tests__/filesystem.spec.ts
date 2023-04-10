@@ -1,4 +1,5 @@
 import { convertWindowsToUnixPath, walk, zipFiles } from '../src/filesystem';
+import StreamZip from 'node-stream-zip';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -85,31 +86,46 @@ describe('zipFiles', () => {
   it('should be able to zip all files', async () => {
     const files = walk(testDirectory);
     const archivePath = path.join(outputDirectory, 'archive.zip');
-    const archive = await zipFiles(archivePath, files);
-    const size = archive.pointer();
+    await zipFiles(archivePath, files, testDirectory);
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    expect(size).toBeCloseTo(453, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+    
+    const zip = new StreamZip.async({ file: archivePath });
+    const entries = await zip.entries();
+    zip.close();
+
+    expect(Object.keys(entries).length).toBe(files.length);
+    expect(Object.keys(entries).sort()).toEqual(files.map(file => convertWindowsToUnixPath(path.relative(testDirectory, file))).sort());
   });
 
   it('should be able to zip all files not in a subdirectory', async () => {
     const files = walk(testDirectory, (_, isDirectory) => !isDirectory);
     const archivePath = path.join(outputDirectory, 'archive.zip');
-    const archive = await zipFiles(archivePath, files);
-    const size = archive.pointer();
+    await zipFiles(archivePath, files, testDirectory);
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    expect(size).toBeCloseTo(230, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+    
+    const zip = new StreamZip.async({ file: archivePath });
+    const entries = await zip.entries();
+    zip.close();
+
+    expect(Object.keys(entries).length).toBe(files.length);
+    expect(Object.keys(entries).sort()).toEqual(files.map(file => convertWindowsToUnixPath(path.relative(testDirectory, file))).sort());
   });
 
   it('should be able to zip all files with an extension and one specific file', async () => {
     const files = walk(testDirectory, (file, isDirectory) => isDirectory || file.endsWith(`.txt`) || file.endsWith('test.json'));
     const archivePath = path.join(outputDirectory, 'archive.zip');
-    const archive = await zipFiles(archivePath, files);
-    const size = archive.pointer();
+    await zipFiles(archivePath, files, testDirectory);
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    expect(size).toBeCloseTo(453, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+
+    const zip = new StreamZip.async({ file: archivePath });
+    const entries = await zip.entries();
+    zip.close();
+
+    expect(Object.keys(entries).length).toBe(files.length);
+    expect(Object.keys(entries).sort()).toEqual(files.map(file => convertWindowsToUnixPath(path.relative(testDirectory, file))).sort());
   });
   
   it('should throw an error if it fails to zip files', async () => {
