@@ -52,7 +52,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
     
     if (url.includes('#'))
       url = url.substring(0, url.indexOf('#'));
-
+    
     if (this.traversedUrls.has(url))
       return false;
     
@@ -103,7 +103,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
         for (const childUrl of result.childUrls) {
           const traverseUrl = this.getTraverseUrl(childUrl);
 
-          if (traverseUrl)
+          if (traverseUrl && !urlsToTraverse.includes(traverseUrl))
             urlsToTraverse.push(traverseUrl);
         }
       }

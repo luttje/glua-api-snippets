@@ -1,3 +1,4 @@
+import { scrapeAndCollect } from '../../src/scrapers/collector';
 import { Page, PageScraper } from '../../src/scrapers/page-scraper';
 import { html } from '../utils/offline-sites/lutt.online';
 import fetchMock from "jest-fetch-mock";
@@ -62,5 +63,35 @@ describe('PageScraper', () => {
     });
 
     await scraper.scrape();
+  });
+  
+  it('does not get stuck scraping an infinite loop', async () => {
+    const baseUrl = 'https://test.example/';
+    const htmlA = `<html><body><h1>Test A</h1><a href="${baseUrl}b">B</a></body></html>`;
+    const htmlB = `<html><body><h1>Test B</h1><a href="${baseUrl}">A</a></body></html>`;
+
+    let count = 0;
+
+    fetchMock.mockResponse((req) => {
+      count++;
+      if (req.url.endsWith('/'))
+        return Promise.resolve({
+          body: htmlA,
+          status: 200,
+        });
+      else if (req.url.endsWith('/b'))
+        return Promise.resolve({
+          body: htmlB,
+          status: 200,
+        });
+      else
+        return Promise.reject(new Error('Invalid URL'));
+    });
+
+    const scraper = new PageScraper<Page>(baseUrl);
+    await scraper.scrape();
+
+    // Check that the scraper doesn't get stuck in an infinite loop
+    expect(count).toBe(2);
   });
 });
