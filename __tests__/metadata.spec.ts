@@ -1,4 +1,4 @@
-import { writeMetadata, readMetadata } from '../src/metadata.js';
+import { writeMetadata, readMetadata, metadataFilename } from '../src/metadata.js';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -15,7 +15,20 @@ describe('Metadata', () => {
     fs.rmSync(outputDirectory, { recursive: true });
   });
 
-  it('should be able to write and read metadata', async () => {
+  it('should be able to write metadata', async () => {
+    await writeMetadata('https://wiki.facepunch.com/gmod', outputDirectory);
+
+    expect(fs.existsSync(path.join(outputDirectory, metadataFilename))).toBeTruthy();
+  });
+  
+  it('should be able to write metadata to a non-existing directory', async () => {
+    const nonExistingDirectory = path.join(outputDirectory, 'non-existing');
+    await writeMetadata('https://wiki.facepunch.com/gmod', nonExistingDirectory);
+
+    expect(fs.existsSync(path.join(nonExistingDirectory, metadataFilename))).toBeTruthy();
+  });
+
+  it('should be able to read metadata', async () => {
     await writeMetadata('https://wiki.facepunch.com/gmod', outputDirectory);
     const metadata = await readMetadata(outputDirectory);
 
@@ -27,7 +40,7 @@ describe('Metadata', () => {
     let nonExistingDirectory = '';
 
     beforeEach(() => {
-      nonExistingDirectory = path.join(os.tmpdir(), 'glua-wiki-metadata', 'non-existing');
+      nonExistingDirectory = path.join(outputDirectory, 'glua-wiki-metadata', 'non-existing');
       fs.mkdirSync(nonExistingDirectory, { recursive: true });
     });
 

@@ -17,7 +17,7 @@ export async function writeMetadata(url: string, outputDirectory: string): Promi
   const lastUpdate = results[0].history[0].dateTime;
 
   if (!(await exists(outputDirectory)))
-    fs.rmSync(outputDirectory, { recursive: true });
+    fs.mkdirSync(outputDirectory, { recursive: true });
   
   const write = await promisify(fs.writeFileSync);
 

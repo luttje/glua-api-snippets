@@ -70,7 +70,7 @@ describe('zipFiles', () => {
     testDirectory = path.join(os.tmpdir(), 'glua-wiki-filter');
     fs.mkdirSync(testDirectory, { recursive: true });
 
-    fs.writeFileSync(path.join(testDirectory, 'test.txt'), 'test');
+    fs.writeFileSync(path.join(testDirectory, 'test.json'), 'test');
 
     fs.mkdirSync(path.join(testDirectory, 'subdir'));
 
@@ -89,9 +89,8 @@ describe('zipFiles', () => {
     const size = archive.pointer();
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    expect(size).toBeCloseTo(451, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+    expect(size).toBeCloseTo(453, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
   });
-  
 
   it('should be able to zip all files not in a subdirectory', async () => {
     const files = walk(testDirectory, (_, isDirectory) => !isDirectory);
@@ -100,6 +99,16 @@ describe('zipFiles', () => {
     const size = archive.pointer();
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    expect(size).toBeCloseTo(228, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+    expect(size).toBeCloseTo(230, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
+  });
+
+  it('should be able to zip all files with an extension and one specific file', async () => {
+    const files = walk(testDirectory, (file, isDirectory) => isDirectory || file.endsWith(`.txt`) || file.endsWith('test.json'));
+    const archivePath = path.join(outputDirectory, 'archive.zip');
+    const archive = await zipFiles(archivePath, files);
+    const size = archive.pointer();
+
+    expect(fs.existsSync(archivePath)).toBe(true);
+    expect(size).toBeCloseTo(453, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
   });
 });
