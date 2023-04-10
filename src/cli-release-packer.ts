@@ -42,7 +42,7 @@ async function main() {
   ];
 
   for (const target of targets) {
-    const files = walk(options.input, (file, isDirectory) => isDirectory || file.endsWith(`.${target}`) || file === '__metadata.json');
+    const files = walk(options.input, (file, isDirectory) => isDirectory || file.endsWith(`.${target}`) || file.endsWith('__metadata.json'));
     const targetPath = path.join(options.output, `${baseFileName}.${target}.zip`);
 
     await zipFiles(targetPath, files, options.input);
