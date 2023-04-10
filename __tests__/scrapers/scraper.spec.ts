@@ -83,4 +83,24 @@ describe('Scraper', () => {
     expect(results.length).toBe(1);
     expect(results[0].content).toBe(html);
   });
+  
+  it('should simply get no results if we fail to fetch the page', async () => {
+    const baseUrl = 'https://test.example';
+    const error = new Error('Failed to fetch');
+    
+    fetchMock.mockReject(error);
+    
+    const scraper = new Scraper<Simple>(baseUrl, (response: Response, html: string) => [new Simple(html)]);
+
+    const disabledWarning = console.warn;
+    console.warn = jest.fn();
+
+    const results = await scrapeAndCollect(scraper);
+
+    expect(console.warn).toBeCalledWith(`Error fetching ${baseUrl}: ${error}`);
+
+    console.warn = disabledWarning;
+
+    expect(results.length).toBe(0);
+  });
 });

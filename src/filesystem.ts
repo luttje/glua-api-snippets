@@ -66,14 +66,6 @@ export async function zipFiles(outputFile: string, filePaths: string[], trimPath
       resolve(archive);
     });
 
-    archive.on('warning', function (err) {
-      if (err.code === 'ENOENT') {
-        console.warn(err);
-      } else {
-        throw err;
-      }
-    });
-
     archive.on('error', function (err) {
       reject(err);
     });
@@ -81,6 +73,9 @@ export async function zipFiles(outputFile: string, filePaths: string[], trimPath
     archive.pipe(outputStream);
 
     for (const filePath of filePaths) {
+      if (!fs.existsSync(filePath))
+        reject(new Error(`File ${filePath} does not exist.`));
+
       archive.file(filePath, { name: trimPath ? path.relative(trimPath, filePath) : filePath });
     }
     

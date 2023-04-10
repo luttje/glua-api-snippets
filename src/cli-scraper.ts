@@ -1,7 +1,7 @@
 import { WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from './scrapers/wiki-page-scraper.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { writeMetadata } from './metadata.js';
+import { metadataFilename, writeMetadata } from './metadata.js';
 import { walk } from './filesystem.js';
 import { Command } from 'commander';
 import path from 'path';
@@ -49,6 +49,9 @@ async function startScrape() {
 
       for (const file of files) {
         if (!file.endsWith('.json'))
+          continue;
+        
+        if (file.endsWith(metadataFilename))
           continue;
         
         const json = JSON.parse(fs.readFileSync(file, 'utf8'));

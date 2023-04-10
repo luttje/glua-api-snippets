@@ -72,7 +72,7 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
 
       return callback(response, html);
     } catch (e) {
-      console.error(`Error fetching ${url}: ${e}`);
+      console.warn(`Error fetching ${url}: ${e}`);
       return [];
     }
   }

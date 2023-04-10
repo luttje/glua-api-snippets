@@ -111,4 +111,13 @@ describe('zipFiles', () => {
     expect(fs.existsSync(archivePath)).toBe(true);
     expect(size).toBeCloseTo(453, -1); // allow a margin of error of 5 bytes (TODO: do we need this?)
   });
+  
+  it('should throw an error if it fails to zip files', async () => {
+    const files = [
+      path.join(testDirectory, 'non-existent-file.json'),
+    ];
+    const archivePath = path.join(outputDirectory, 'archive.zip');
+
+    await expect(zipFiles(archivePath, files)).rejects.toThrow();
+  });
 });
