@@ -3,19 +3,21 @@
 [![GitHub Tests Action](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml/badge.svg)](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml)
 [![Test Coverage Status](https://coveralls.io/repos/github/luttje/glua-api-snippets/badge.svg?branch=main)](https://coveralls.io/github/luttje/glua-api-snippets?branch=main)
 
-This repository scrapes the Garry's Mod Lua API and generates snippets that will help EmmyLua provide autocompletion in VSCode and IntelliJ.
+This repository scrapes the Garry's Mod Lua API and generates snippets that will help provide autocompletion for Lua in editors like VSCode, IntelliJ and more.
 
 ## 🔨 Usage
 
 *In the following instructions we'll use `myproject` as an example name of the project we're working on.*
 
-1. Install the EmmyLua extension for your editor of choice <small>*([EmmyLua VSCode Extension](https://marketplace.visualstudio.com/items?itemName=tangzx.emmylua) | [EmmyLua IntelliJ Plugin](https://plugins.jetbrains.com/plugin/9768-emmylua))*</small>
+1. Install one of these extensions for your editor of choice:
+    * **Lua Language Server:** [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) | [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
+    * **EmmyLua:** [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=tangzx.emmylua) | [IntelliJ Plugin](https://plugins.jetbrains.com/plugin/9768-emmylua)
 
 2. Download the latest Lua release named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases).
 
 3. Extract the downloaded release to a directory on your computer. We'll use `~/glua-api-snippets` as an example.
 
-4. EmmyLua needs to be able to find the snippets in your project workspace. You can either:
+4. The Language Server needs to be able to find the snippets in your project workspace. You can either:
 
     <details>
       <summary>Add the directory to your editor workspace.</summary>
