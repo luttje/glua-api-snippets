@@ -145,7 +145,7 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---[SHARED] If the result of the first argument is false or nil, an error is thrown with the second argument as the message.\n` +
       `---@param expression any The expression to assert.\n` +
       `---@param errorMessage string The error message to throw when assertion fails. This is only type-checked if the assertion fails.\n` +
-      `---@param returns ... Any arguments past the error message will be returned by a successful assert.\n` +
+      `---@param ... ... Any arguments past the error message will be returned by a successful assert.\n` +
       `---@return any, any, ... any - If successful, returns the first argument.\n` +
       `---@return any, any, ... any - If successful, returns the error message. This will be nil if the second argument wasn't specified.  Since the second argument is only type-checked if the assertion fails, this doesn't have to be a string.\n` +
       `---@return any, any, ... ... - Returns any arguments past the error message.\n` +
