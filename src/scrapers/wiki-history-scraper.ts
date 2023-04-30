@@ -33,8 +33,8 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
   public getScrapeCallback(): ScrapeCallback<WikiHistoryPage> {
     const baseScrapeCallback = super.getScrapeCallback();
 
-    return (response: Response, content: string): WikiHistoryPage[] => {
-      const pages = baseScrapeCallback(response, content);
+    return async (response: Response, content: string): Promise<WikiHistoryPage[]> => {
+      const pages = await baseScrapeCallback(response, content);
 
       if (pages.length === 0)
         return [];

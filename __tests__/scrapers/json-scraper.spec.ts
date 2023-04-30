@@ -31,7 +31,7 @@ describe('JsonScraper', () => {
 
     fetchMock.mockResponseOnce(json);
 
-    const scraper = new JsonScraper<TestObject>('https://www.whatever.example');
+    const scraper = new JsonScraper<TestObject>('https://www.irrelevant.example');
 
     scraper.on('scraped', (url: string, pages: TestObject[]) => {
       const page = pages[0];

@@ -1,8 +1,7 @@
-import { WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from './scrapers/wiki-page-scraper.js';
+import { WikiPage, WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
+import { metadataFilename, writeMetadata } from './utils/metadata.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { metadataFilename, writeMetadata } from './utils/metadata.js';
-import { walk } from './utils/filesystem.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
@@ -15,7 +14,7 @@ async function startScrape() {
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path to the directory where the output json and lua files should be saved', './output')
     .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/~pagelist?format=json')
-    .option('-f, --force', 'Force the scraper to overwrite existing files', false)
+    .option('-c, --clean', 'Clean the output directory before scraping', false)
     .parse(process.argv);
 
   const options = program.opts();
@@ -27,7 +26,7 @@ async function startScrape() {
 
   const baseDirectory = options.output.replace(/\/$/, '');
   const baseUrl = options.url.replace(/\/$/, '');
-  const scraper = new WikiPageScraper(baseUrl);
+  const scraper = new WikiPageMarkupScraper(baseUrl);
   const writer = new GluaApiWriter();
   
   scraper.setRetryOptions({
@@ -39,45 +38,13 @@ async function startScrape() {
 
   writeMetadata(baseUrl, baseDirectory);
 
-  let existingFiles = new Set<string>(uselessUrls);
-
-  existingFiles.forEach(url => console.debug(`Skipping ${url} (configured to be useless)`));
-
-  if (fs.existsSync(baseDirectory)) {
-    if (!options.force) {
-      const files = walk(baseDirectory);
-
-      for (const file of files) {
-        if (!file.endsWith('.json'))
-          continue;
-        
-        if (file.endsWith(metadataFilename))
-          continue;
-        
-        const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-
-        for (const page of json) {
-          existingFiles.add(page.url);
-          console.debug(`Skipping ${page.url} (already exists)`);
-        }
-      }
-    }
-  }
-
-  scraper.setChildPageFilter(url => {
-    // Ignore ~diff, ~user, ~history, ~edit, etc.
-    return !url.includes('~') && !existingFiles.has(url);
-  });
+  if (options.clean && fs.existsSync(baseDirectory))
+    fs.rmSync(baseDirectory, { recursive: true });
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
   
   scraper.on('scraped', (url, pages) => {
-    pages = pages.filter((page: WikiPage) => page.function !== undefined);
-
-    if (pages.length === 0)
-      return;
-
     const api = writer.writePages(pages);
     let fileName = url.substring(baseUrl.length + 1);
     let subDirectory = '';
@@ -96,7 +63,7 @@ async function startScrape() {
     fs.writeFileSync(path.join(baseDirectory, subDirectory, `${fileName}.lua`), api);
 
     // JSON data
-    const json = JSON.stringify(pages, wikiPageSaveReplacer, 2);
+    const json = JSON.stringify(pages, null, 2);
     fs.writeFileSync(path.join(baseDirectory, subDirectory, `${fileName}.json`), json);
   });
 

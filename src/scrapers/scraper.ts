@@ -4,7 +4,7 @@ import fetchRetry from 'fetch-retry';
 
 const fetch = fetchRetry(global.fetch);
 
-export type ScrapeCallback<T> = (response: Response, content: string) => T[];
+export type ScrapeCallback<T> = (response: Response, content: string) => T[] | Promise<T[]>;
 
 export type ScrapeResult = object;
 
@@ -60,7 +60,7 @@ export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEv
       return [];
     }
 
-    const scrapedResults = callback(response, content);
+    const scrapedResults = await callback(response, content);
 
     this.emit('scraped', url, scrapedResults);
 

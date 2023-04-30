@@ -1,4 +1,12 @@
-import { Function, Realm, WikiPage } from '../scrapers/wiki-page-scraper.js';
+import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, PanelFunction, Realm, Struct, WikiPage } from '../scrapers/wiki-page-markup-scraper.js';
+import {
+  isClassFunction,
+  isHookFunction,
+  isLibraryFunction,
+  isPanelFunction,
+  isStruct,
+  isEnum,
+} from '../scrapers/wiki-page-markup-scraper.js';
 import { toLowerCamelCase } from '../utils/string.js';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -29,7 +37,7 @@ export const RESERVERD_KEYWORDS = new Set([
 
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
-  private readonly writtenStaticGlobals: Set<string> = new Set();
+  private readonly writtenLibraryGlobals: Set<string> = new Set();
 
   constructor() { }
 
@@ -53,28 +61,92 @@ export class GluaApiWriter {
   }
 
   public writePage(page: WikiPage) {
-    const { title, realm, function: func } = page;
+    if (isClassFunction(page))
+      return this.writeClassFunction(page);
+    else if (isLibraryFunction(page))
+      return this.writeLibraryFunction(page);
+    else if (isHookFunction(page))
+      return this.writeHookFunction(page);
+    else if (isPanelFunction(page))
+      return this.writePanelFunction(page);
+    else if (isEnum(page))
+      return this.writeEnum(page);
+    else if (isStruct(page))
+      return this.writeStruct(page);
+    
+    throw new Error(`Unknown page type: ${page}`);
+  }
 
+  private writeClassFunction(func: ClassFunction) {
     let api: string = '';
 
-    if (!func || !realm)
-      throw new Error(`Page ${title} does not have a function or realm`);
+    if (!func.parent)
+      throw new Error(`Class function ${func.name} does not have a class name`);
     
-    const staticGlobalParts = func.name.split('.');
-    
-    if (func.className && !this.writtenClasses.has(func.className)) {
-      api += `---@class ${func.className}\n`;
-      api += `local ${func.className} = {}\n\n`;
+    if (!this.writtenClasses.has(func.parent)) {
+      api += `---@class ${func.parent}\n`;
+      api += `local ${func.parent} = {}\n\n`;
 
-      this.writtenClasses.add(func.className);
-    } else if (staticGlobalParts.length > 1 && !this.writtenStaticGlobals.has(staticGlobalParts[0])) {
-      api += `${staticGlobalParts[0]} = {}\n\n`;
-
-      this.writtenStaticGlobals.add(staticGlobalParts[0]);
+      this.writtenClasses.add(func.parent);
     }
 
-    api += this.writeFunctionLuaDocComment(func, realm);
-    api += this.writeFunctionDeclaration(func, realm);
+    api += this.writeFunctionLuaDocComment(func, func.realm);
+    api += this.writeFunctionDeclaration(func, func.realm);
+
+    return api;
+  }
+  
+  private writeLibraryFunction(func: LibraryFunction) {
+    let api: string = '';
+
+    if (!func.parent)
+      throw new Error(`Library function ${func.name} does not have a library name`);
+    
+    if (!this.writtenLibraryGlobals.has(func.parent)) {
+      api += `${func.parent} = {}\n\n`;
+
+      this.writtenLibraryGlobals.add(func.parent);
+    }
+
+    api += this.writeFunctionLuaDocComment(func, func.realm);
+    api += this.writeFunctionDeclaration(func, func.realm);
+
+    return api;
+  }
+
+  private writeHookFunction(func: HookFunction) {
+    return this.writeClassFunction(func);
+  }
+
+  private writePanelFunction(func: PanelFunction) {
+    return this.writeClassFunction(func);
+  }
+
+  private writeEnum(_enum: Enum) {
+    let api: string = '';
+
+    api += `---@enum ${_enum.name}\n`;
+    api += `local ${_enum.name} = {\n`;
+
+    for (const item of _enum.items) {
+      api += `  ${item.key} = ${item.value}, --[[${item.description}]]\n`;
+    }
+
+    api += '}\n\n';
+
+    return api;
+  }
+
+  private writeStruct(struct: Struct) {
+    let api: string = '';
+
+    api += `---@class ${struct.name}\n`;
+
+    for (const field of struct.fields) {
+      api += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${this.removeNewlines(field.description!)}\n`;
+    }
+    
+    api += `local ${struct.name} = {}\n\n`;
 
     return api;
   }
@@ -129,7 +201,7 @@ export class GluaApiWriter {
       const returns = `---@return ${func.returns.map(ret => this.transformType(ret.type)).join(', ')}`;
 
       func.returns.forEach(ret => {
-        const description = this.removeNewlines(ret.description);
+        const description = this.removeNewlines(ret.description ?? '');
 
         if (func.returns!.length === 1) {
           luaDocComment += `${returns} ${description}\n`;
@@ -144,7 +216,7 @@ export class GluaApiWriter {
   }
 
   private writeFunctionDeclaration(func: Function, realm: Realm) {
-    let declaration = `function ${func.className ? `${func.className}:` : ''}${GluaApiWriter.safeName(func.name)}(`;
+    let declaration = `function ${func.parent ? `${func.parent}:` : ''}${GluaApiWriter.safeName(func.name)}(`;
 
     if (func.arguments) {
       declaration += func.arguments.map(arg => {

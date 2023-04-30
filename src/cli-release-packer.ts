@@ -1,6 +1,6 @@
 import packageJson from '../package.json' assert { type: "json" };
 import { convertWindowsToUnixPath, walk, zipFiles } from './utils/filesystem.js';
-import { readMetadata } from './metadata.js';
+import { readMetadata } from './utils/metadata.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';

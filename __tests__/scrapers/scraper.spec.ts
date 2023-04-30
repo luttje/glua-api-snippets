@@ -39,12 +39,12 @@ describe('Scraper', () => {
     });
     
     // Combines the functionality of TableScraper and PageTraverseScraper
-    const scraper = new Scraper<PageWithTables<Person>>(baseUrl, (response: Response, html: string) => {
+    const scraper = new Scraper<PageWithTables<Person>>(baseUrl, async (response: Response, html: string) => {
       const tableScraperCallback = new TableScraper<Person>(baseUrl, () => new Person()).getScrapeCallback();
       const pageScraperCallback = new PageTraverseScraper(baseUrl).getScrapeCallback();
 
-      const tables = tableScraperCallback(response, html);
-      const pages = pageScraperCallback(response, html);
+      const tables = await tableScraperCallback(response, html);
+      const pages = await pageScraperCallback(response, html);
 
       return pages.map(page => new PageWithTables<Person>(baseUrl, page, tables));
     });
