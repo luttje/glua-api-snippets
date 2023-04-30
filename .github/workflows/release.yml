@@ -47,7 +47,7 @@ jobs:
           git config --global user.email 'action@github.com'
           # git fetch
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
-          find . ! -name '.git' -type d -exec rm -rf {} +
+          find -not -path "./.git/*" -not -name ".git" -delete
           git checkout ${GITHUB_REF_NAME} -- $addonFiles # copy the addon files from the source branch
           git add -A
           git diff-index --quiet HEAD || git commit -am "🚀 Update ${{ fromJson(steps.release_json.outputs.releaseJson).version }}"
