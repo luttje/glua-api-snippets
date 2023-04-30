@@ -4,6 +4,7 @@ import { toLowerCamelCase } from '../string-utils.js';
 export const RESERVERD_KEYWORDS = new Set([
   'and',
   'break',
+  'continue',
   'do',
   'else',
   'elseif',
@@ -41,6 +42,9 @@ export class GluaApiWriter {
       
     if (name.includes(' '))
       name = toLowerCamelCase(name);
+    
+    // Remove any remaining characters not valid in a Lua variable/function name.
+    name = name.replace(/[^A-Za-z\d_.]/g, '');
 
     if (RESERVERD_KEYWORDS.has(name))
       return `_${name}`;
@@ -111,7 +115,7 @@ export class GluaApiWriter {
 
     if (func.arguments) {
       func.arguments.forEach((arg, index) => {
-        if (!arg.name) // e.g: https://wiki.facepunch.com/gmod/CMoveData:SetConstraintSpeedScale
+        if (!arg.name)
           arg.name = arg.type;
         
         if (arg.type === 'vararg')
