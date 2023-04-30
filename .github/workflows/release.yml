@@ -21,8 +21,17 @@ jobs:
         run: npm ci
       - name: Install zip
         uses: montudor/action-zip@v1
-      - name: Scrape wiki
-        run: npm run cli:scrape-wiki
+      # - name: Scrape wiki
+      #   run: npm run cli:scrape-wiki
+      - name: Testing by just writing some files to the output folder directly (saves us scraping the wiki)
+        run: |
+          mkdir -p ./output/ai
+          echo "{\"lastUpdate\": \"$(date --iso-8601=seconds)\"}" > ./output/__metadata.json
+          echo "[{\"url\":\"https://wiki.facepunch.com/gmod/ai.GetScheduleID\",\"title\":\"ai.GetScheduleID - Garry's Mod Wiki\",\"realm\":\"server\",\"function\":{\"name\":\"ai.GetScheduleID\",\"description\":\"Translates a schedule name to its corresponding ID.\",\"arguments\":[{\"name\":\"sched\",\"type\":\"string\",\"description\":\"Then schedule name. In most cases, this will be the same as the Enums/SCHED name.\"}],\"returns\":[{\"type\":\"number\",\"description\":\"The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.\"}]}}]" > ./output/ai/getscheduleid.json
+          echo "---[SERVER] Translates a schedule name to its corresponding ID." > ./output/ai/getscheduleid.lua
+          echo "---@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name." >> ./output/ai/getscheduleid.lua
+          echo "---@return number The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid." >> ./output/ai/getscheduleid.lua
+          echo "function ai.GetScheduleID(sched) end" >> ./output/ai/getscheduleid.lua
       - name: Pack release
         run: npm run cli:pack-release
       - name: Get release files and version
@@ -42,13 +51,13 @@ jobs:
           LIBRARY_PATH: ./dist/libraries/garrysmod
           TARGET_BRANCH: lua-language-server-addon
         run: |
-          addonFiles=$(find $LIBRARY_PATH -type f)
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           # git fetch
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
-          find -not -path "./.git/*" -not -name ".git" -delete
-          git checkout ${GITHUB_REF_NAME} -- $addonFiles # copy the addon files from the source branch
+          find . -not -path "./.git/*" -not -name ".git" -not -path "./dist/*" -not -name "dist" -delete
+          mv $LIBRARY_PATH/* .
+          rm -rf ./dist
           git add -A
           git diff-index --quiet HEAD || git commit -am "🚀 Update ${{ fromJson(steps.release_json.outputs.releaseJson).version }}"
           git push origin $TARGET_BRANCH # push to remote branch
