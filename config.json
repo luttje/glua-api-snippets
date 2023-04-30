@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/LLS-Addons/main/schemas/addon_config.schema.json",
+  "name": "garrysmod",
+  "words": [
+    "include%s*%(?",
+    "AddCSLuaFile%s*%(?",
+    "hook%.Add%s*%("
+  ],
+  "settings": {
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.special": {
+      "include": "require"
+    },
+    "runtime.nonstandardSymbol": [
+      "!",
+      "!=",
+      "&&",
+      "||",
+      "//",
+      "/**/",
+      "continue"
+    ]
+  }
+}
