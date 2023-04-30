@@ -1,9 +1,52 @@
 import { Function, Realm, WikiPage } from '../scrapers/wiki-page-scraper.js';
+import { toLowerCamelCase } from '../string-utils.js';
+
+export const RESERVERD_KEYWORDS = new Set([
+  'and',
+  'break',
+  'do',
+  'else',
+  'elseif',
+  'end',
+  'false',
+  'for',
+  'function',
+  'goto',
+  'if',
+  'in',
+  'local',
+  'nil',
+  'not',
+  'or',
+  'repeat',
+  'return',
+  'then',
+  'true',
+  'until',
+  'while'
+]);
 
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
+  private readonly writtenStaticGlobals: Set<string> = new Set();
 
   constructor() { }
+
+  public static safeName(name: string) {
+    if (name.includes('/'))
+      name = name.replace(/\//g, ' or ');
+    
+    if (name.includes('='))
+      name = name.split('=')[0];
+      
+    if (name.includes(' '))
+      name = toLowerCamelCase(name);
+
+    if (RESERVERD_KEYWORDS.has(name))
+      return `_${name}`;
+    
+    return name;
+  }
 
   public writePage(page: WikiPage) {
     const { title, realm, function: func } = page;
@@ -13,9 +56,17 @@ export class GluaApiWriter {
     if (!func || !realm)
       throw new Error(`Page ${title} does not have a function or realm`);
     
+    const staticGlobalParts = func.name.split('.');
+    
     if (func.className && !this.writtenClasses.has(func.className)) {
       api += `---@class ${func.className}\n`;
       api += `local ${func.className} = {}\n\n`;
+
+      this.writtenClasses.add(func.className);
+    } else if (staticGlobalParts.length > 1 && !this.writtenStaticGlobals.has(staticGlobalParts[0])) {
+      api += `${staticGlobalParts[0]} = {}\n\n`;
+
+      this.writtenStaticGlobals.add(staticGlobalParts[0]);
     }
 
     api += this.writeFunctionLuaDocComment(func, realm);
@@ -59,8 +110,14 @@ export class GluaApiWriter {
     let luaDocComment = `---[${realm.toUpperCase()}] ${this.putCommentBeforeEachLine(func.description!)}\n`;
 
     if (func.arguments) {
-      func.arguments.forEach(arg => {
-        luaDocComment += `---@param ${arg.name} ${this.transformType(arg.type)} ${this.removeNewlines(arg.description!)}\n`;
+      func.arguments.forEach((arg, index) => {
+        if (!arg.name) // e.g: https://wiki.facepunch.com/gmod/CMoveData:SetConstraintSpeedScale
+          arg.name = arg.type;
+        
+        if (arg.type === 'vararg')
+          arg.name = '...';
+        
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)} ${this.transformType(arg.type)} ${this.removeNewlines(arg.description!)}\n`;
       });
     }
 
@@ -83,14 +140,14 @@ export class GluaApiWriter {
   }
 
   private writeFunctionDeclaration(func: Function, realm: Realm) {
-    let declaration = `function ${func.className ? `${func.className}:` : ''}${func.name}(`;
+    let declaration = `function ${func.className ? `${func.className}:` : ''}${GluaApiWriter.safeName(func.name)}(`;
 
     if (func.arguments) {
       declaration += func.arguments.map(arg => {
         if (arg.type === 'vararg')
           return '...';
         
-        return arg.name;
+        return GluaApiWriter.safeName(arg.name!);
       }).join(', ');
     }
 
