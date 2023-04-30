@@ -51,15 +51,12 @@ jobs:
           LIBRARY_PATH: dist/libraries/garrysmod
           TARGET_BRANCH: lua-language-server-addon
         run: |
-          libraryPathFirstPart=`echo $LIBRARY_PATH | cut -d'/' -f2`
+          libraryPathFirstPart=`echo $LIBRARY_PATH | cut -d'/' -f1`
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           # git fetch
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
-          ls -la
-          echo $libraryPathFirstPart
           rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
-          ls -la
           mv $LIBRARY_PATH/* .
           rm -rf $libraryPathFirstPart
           git add -A
