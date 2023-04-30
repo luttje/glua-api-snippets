@@ -18,7 +18,7 @@ async function main() {
   const options = program.opts();
 
   if (!options.input) {
-    console.error('No URL provided');
+    console.error('No input path provided');
     process.exit(1);
   }
 

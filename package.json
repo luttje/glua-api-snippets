@@ -18,6 +18,7 @@
   "scripts": {
     "cli:scrape-wiki": "npx ts-node-esm ./src/cli-scraper.ts -- --output ./output/",
     "cli:pack-release": "npx ts-node-esm ./src/cli-release-packer.ts -- --input ./output/ --output ./dist/release/",
+    "cli:publish-library": "npx ts-node-esm ./src/cli-library-publisher.ts -- --input ./dist/release/ --output ./dist/libraries/garrysmod",
     "test": "cross-env VERBOSE_LOGGING=1 npx jest",
     "ci:test": "npx jest --ci --coverage"
   },
