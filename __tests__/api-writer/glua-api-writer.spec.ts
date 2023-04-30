@@ -1,34 +1,72 @@
-import { html } from '../test-data/offline-sites/gmod-wiki/hook-accept-input';
+import { json, markup } from '../test-data/offline-sites/gmod-wiki/hook-player-initial-spawn';
+import { WikiPage } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
-import fs from 'fs';
 
-const apiDefinition = `---@class GM\n` +
-  `local GM = {}\n\n` +
-  `---[SERVER] Called when a map I/O event occurs.\n` +
-  `--- See also Entity:Fire and Entity:Input for functions to fire Inputs on entities.\n` +
-  `---@param ent Entity Entity that receives the input\n` +
-  `---@param input string The input name. Is not guaranteed to be a valid input on the entity.\n` +
-  `---@param activator Entity Activator of the input\n` +
-  `---@param caller Entity Caller of the input\n` +
-  `---@param value any Data provided with the input. Will be either a string, a number, a boolean or a nil.\n` +
-  `---@return boolean Return true to prevent this input from being processed. Do not return otherwise.\n` +
-  `function GM:AcceptInput(ent, input, activator, caller, value) end\n\n`;
+const apiDefinition = `---@class GM
+local GM = {}
+
+---[SERVER] Called when the player spawns for the first time.
+--- 
+--- See GM:PlayerSpawn for a hook called every player spawn.
+--- 
+--- This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the Entity:GetModel function will return the default model (\`models/player.mdl\`).
+--- 
+--- You can send net messages starting from the player_activate event (see Game_Events).
+--- 
+--- Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718). 
+--- 
+--- Workaround without networking:
+--- \`\`\`
+--- local load_queue = {}
+--- 
+--- hook.Add("PlayerInitialSpawn", "myAddonName/Load", function(ply)
+--- load_queue[ply] = true
+--- end)
+--- 
+--- hook.Add("SetupMove", "myAddonName/Load", function(ply, _, cmd)
+--- if load_queue[ply] and not cmd:IsForced() then
+--- load_queue[ply] = nil
+--- 
+--- myAddon:OnPlayerNetReady(ply) -- Send what you need here!
+--- end
+--- end)
+--- \`\`\`
+--- 
+--- 
+--- With networking:
+--- \`\`\`
+--- -- CLIENT
+--- hook.Add( "InitPostEntity", "Ready", function()
+--- net.Start( "cool_addon_client_ready" )
+--- net.SendToServer()
+--- end )
+--- \`\`\`
+--- \`\`\`
+--- -- SERVER
+--- util.AddNetworkString( "cool_addon_client_ready" )
+--- 
+--- net.Receive( "cool_addon_client_ready", function( len, ply )
+--- -- Send what you need here!
+--- end )
+--- \`\`\`
+---@param player Player The player who spawned.
+---@param transition boolean If \`true\`, the player just spawned from a map transition.
+function GM:PlayerInitialSpawn(player, transition) end\n\n`;
 
 describe('GLua API Writer', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
-  // it('should be able to write EmmyLua API files from wiki json data', async () => {
-  //   const json = fs.readFileSync('./__tests__/test-data/scraped-wiki-data.json', 'utf8');
-  //   const results = JSON.parse(json);
+  it('should be able to write EmmyLua API files from wiki json data', async () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePages([<WikiPage>json]);
 
-  //   const writer = new GluaApiWriter();
-  //   const api = await writer.writePages(results);
+    console.log(api);
 
-  //   expect(api).toEqual(apiDefinition);
-  // });
+    expect(api).toEqual(apiDefinition);
+  });
 
   // it('should be able to write EmmyLua API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';

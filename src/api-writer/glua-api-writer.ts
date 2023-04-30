@@ -183,7 +183,7 @@ export class GluaApiWriter {
   }
 
   private writeFunctionLuaDocComment(func: Function, realm: Realm) {
-    let luaDocComment = `---[${realm.toUpperCase()}] ${this.putCommentBeforeEachLine(func.description!)}\n`;
+    let luaDocComment = `---[${realm.toUpperCase()}] ${this.putCommentBeforeEachLine(func.description!.trim())}\n`;
 
     if (func.arguments) {
       func.arguments.forEach((arg, index) => {
