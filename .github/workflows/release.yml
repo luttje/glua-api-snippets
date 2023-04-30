@@ -57,6 +57,7 @@ jobs:
           # git fetch
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
           ls -la
+          echo $libraryPathFirstPart
           rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
           ls -la
           mv $LIBRARY_PATH/* .
