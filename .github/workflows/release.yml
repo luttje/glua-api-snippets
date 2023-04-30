@@ -44,26 +44,6 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
           echo "::set-output name=releaseJson::$content"
-      - name: Publish Lua Language Server Library
-        run: npm run cli:publish-library
-      - name: Copy library to it's own branch
-        env:
-          LIBRARY_PATH: dist/libraries/garrysmod
-          TARGET_BRANCH: lua-language-server-addon
-        run: |
-          libraryPathFirstPart=`echo $LIBRARY_PATH | cut -d'/' -f1`
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          # git fetch
-          git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
-          rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
-          mv $LIBRARY_PATH/* .
-          rm -rf $libraryPathFirstPart
-          git add -A
-          git diff-index --quiet HEAD || git commit -am "🚀 Update ${{ fromJson(steps.release_json.outputs.releaseJson).version }}"
-          git push origin $TARGET_BRANCH # push to remote branch
-      - name: Move back to original branch
-        uses: actions/checkout@v3
       - name: Create release
         id: create_release
         uses: ncipollo/release-action@v1
@@ -84,4 +64,22 @@ jobs:
             The source of this release can be found in [the lua-language-server-addon branch](https://github.com/luttje/glua-api-snippets/tree/lua-language-server-addon).
 
           artifacts: ${{ join(fromJson(steps.release_json.outputs.releaseJson).releaseFiles, ',') }}
-          
+      - name: Publish Lua Language Server Library
+        run: npm run cli:publish-library
+      - name: Copy library to it's own branch
+        env:
+          LIBRARY_PATH: dist/libraries/garrysmod
+          TARGET_BRANCH: lua-language-server-addon
+        run: |
+          libraryPathFirstPart=`echo $LIBRARY_PATH | cut -d'/' -f1`
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          # git fetch
+          git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
+          rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
+          mv $LIBRARY_PATH/* .
+          rm -rf $libraryPathFirstPart
+          git add -A
+          git diff-index --quiet HEAD || git commit -am "🚀 Update ${{ fromJson(steps.release_json.outputs.releaseJson).version }}"
+          git push origin $TARGET_BRANCH # push to remote branch
+        # From here on the workflow repo is tainted. If we wish to use it again we need to reset it (take note that the dist files will have been deleted)
