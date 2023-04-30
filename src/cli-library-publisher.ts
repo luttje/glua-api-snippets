@@ -51,8 +51,8 @@ async function main() {
     process.exit(1);
   }
 
-  if (!fs.existsSync(options.output)) {
-    fs.mkdirSync(options.output, { recursive: true });
+  if (!fs.existsSync(path.join(options.output, libraryDirectory))) {
+    fs.mkdirSync(path.join(options.output, libraryDirectory), { recursive: true });
   }
 
   console.log(`Building Lua Language Server Library for ${metadata.lastUpdate}...`);
