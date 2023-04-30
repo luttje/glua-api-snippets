@@ -56,7 +56,9 @@ jobs:
           git config --global user.email 'action@github.com'
           # git fetch
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
+          ls -la
           rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
+          ls -la
           mv $LIBRARY_PATH/* .
           rm -rf $libraryPathFirstPart
           git add -A
