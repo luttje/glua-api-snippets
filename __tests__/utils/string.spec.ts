@@ -1,4 +1,4 @@
-import { toLowerCamelCase } from '../src/string-utils';
+import { toLowerCamelCase } from '../../src/utils/string';
 
 describe('toLowerCamelCase', () => {
   it('should convert a string to lowerCamelCase', () => {

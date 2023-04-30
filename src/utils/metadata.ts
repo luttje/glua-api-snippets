@@ -1,5 +1,5 @@
-import { WikiHistoryPageScraper } from './scrapers/wiki-history-scraper.js';
-import { scrapeAndCollect } from './scrapers/collector.js';
+import { WikiHistoryPageScraper } from '../scrapers/wiki-history-scraper.js';
+import { scrapeAndCollect } from '../scrapers/collector.js';
 import { promisify } from 'util';
 import path from 'path';
 import fs from 'fs';

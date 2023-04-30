@@ -1,4 +1,4 @@
-import { html as html } from '../utils/offline-sites/gmod-wiki/recent-changes';
+import { html as html } from '../test-data/offline-sites/gmod-wiki/recent-changes';
 import fetchMock from "jest-fetch-mock";
 import { WikiHistoryPage, WikiHistoryPageScraper } from '../../src/scrapers/wiki-history-scraper';
 import { scrapeAndCollect } from '../../src/scrapers/collector';

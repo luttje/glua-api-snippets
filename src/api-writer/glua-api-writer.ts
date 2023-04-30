@@ -1,5 +1,5 @@
 import { Function, Realm, WikiPage } from '../scrapers/wiki-page-scraper.js';
-import { toLowerCamelCase } from '../string-utils.js';
+import { toLowerCamelCase } from '../utils/string.js';
 
 export const RESERVERD_KEYWORDS = new Set([
   'and',

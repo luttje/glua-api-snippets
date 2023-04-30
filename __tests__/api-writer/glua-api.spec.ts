@@ -1,4 +1,4 @@
-import { html } from '../utils/offline-sites/gmod-wiki/hook-accept-input';
+import { html } from '../test-data/offline-sites/gmod-wiki/hook-accept-input';
 import { Realm, WikiPage, WikiPageScraper, uselessUrls } from '../../src/scrapers/wiki-page-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
@@ -22,7 +22,7 @@ describe('GLua API Writer', () => {
   });
 
   it('should be able to write EmmyLua API files from wiki json data', async () => {
-    const json = fs.readFileSync('./__tests__/utils/scraped-wiki-data.json', 'utf8');
+    const json = fs.readFileSync('./__tests__/test-data/scraped-wiki-data.json', 'utf8');
     const results = JSON.parse(json);
 
     const writer = new GluaApiWriter();

@@ -1,9 +1,8 @@
-import { scrapeAndCollect } from '../../src/scrapers/collector';
-import { Page, PageScraper } from '../../src/scrapers/page-scraper';
-import { html } from '../utils/offline-sites/lutt.online';
+import { Page, PageTraverseScraper } from '../../src/scrapers/page-traverse-scraper';
+import { html } from '../test-data/offline-sites/lutt.online';
 import fetchMock from "jest-fetch-mock";
 
-describe('PageScraper', () => {
+describe('PageTraverseScraper', () => {
   const baseUrl = 'https://lutt.online';
 
   beforeEach(() => {
@@ -15,7 +14,7 @@ describe('PageScraper', () => {
       url: baseUrl,
     });
 
-    const scraper = new PageScraper(baseUrl);
+    const scraper = new PageTraverseScraper(baseUrl);
     let hasExternalLink = false;
 
     scraper.on('scraped', (url: string, pages: Page[]) => {
@@ -40,7 +39,7 @@ describe('PageScraper', () => {
       url: baseUrl,
     });
 
-    const scraper = new PageScraper(baseUrl);
+    const scraper = new PageTraverseScraper(baseUrl);
 
     scraper.on('scraped', (url: string, pages: Page[]) => {
       const page = pages[0];
@@ -54,7 +53,7 @@ describe('PageScraper', () => {
   it('should work with permanent redirects', async () => {
     fetchMock.dontMockOnce();
     
-    const scraper = new PageScraper('https://www.lutt.online'); // Permanent redirect to https://lutt.online
+    const scraper = new PageTraverseScraper('https://www.lutt.online'); // Permanent redirect to https://lutt.online
     
     scraper.on('scraped', (url: string, pages: Page[]) => {
       const page = pages[0];
@@ -88,7 +87,7 @@ describe('PageScraper', () => {
         return Promise.reject(new Error('Invalid URL'));
     });
 
-    const scraper = new PageScraper<Page>(baseUrl);
+    const scraper = new PageTraverseScraper<Page>(baseUrl);
     await scraper.scrape();
 
     // Check that the scraper doesn't get stuck in an infinite loop

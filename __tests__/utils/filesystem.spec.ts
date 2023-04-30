@@ -1,4 +1,4 @@
-import { convertWindowsToUnixPath, walk, zipFiles } from '../src/filesystem';
+import { convertWindowsToUnixPath, walk, zipFiles } from '../../src/utils/filesystem';
 import StreamZip from 'node-stream-zip';
 import path from 'path';
 import fs from 'fs';

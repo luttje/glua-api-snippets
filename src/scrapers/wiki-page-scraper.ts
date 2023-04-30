@@ -1,4 +1,4 @@
-import { Page, PageScraper } from './page-scraper.js';
+import { Page, PageTraverseScraper } from './page-traverse-scraper.js';
 import { ScrapeCallback } from './scraper.js';
 import * as cheerio from 'cheerio';
 
@@ -37,7 +37,7 @@ export const wikiPageSaveReplacer = (key: string, value: any) => {
   return value;
 };
 
-export class WikiPageScraper extends PageScraper<WikiPage> {
+export class WikiPageScraper extends PageTraverseScraper<WikiPage> {
   constructor(baseUrl: string) {
     super(baseUrl, (url: string, title: string) => new WikiPage(url, title));
   }
@@ -46,15 +46,15 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
    * Scrapes a page for its information on GLua functions
    * 
    * @param response The response from the page
-   * @param html The HTML content of the request
+   * @param content The content of the request
    * 
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<WikiPage> {
     const baseScrapeCallback = super.getScrapeCallback();
 
-    return (response: Response, html: string): WikiPage[] => {
-      const pages = baseScrapeCallback(response, html);
+    return (response: Response, content: string): WikiPage[] => {
+      const pages = baseScrapeCallback(response, content);
 
       if (pages.length === 0)
         return [];
@@ -69,7 +69,7 @@ export class WikiPageScraper extends PageScraper<WikiPage> {
           childUrls.delete(url);
       }
 
-      const $ = cheerio.load(html);
+      const $ = cheerio.load(content);
       const pageContent = $('#pagecontent');
 
       if (!pageContent.length) {

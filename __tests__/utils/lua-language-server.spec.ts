@@ -1,4 +1,4 @@
-import { makeConfigJson } from '../src/lua-language-server';
+import { makeConfigJson } from '../../src/utils/lua-language-server';
 
 describe('makeConfigJson', () => {
   it('should create a valid config json', () => {

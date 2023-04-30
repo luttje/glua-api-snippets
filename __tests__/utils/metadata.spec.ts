@@ -1,4 +1,4 @@
-import { writeMetadata, readMetadata, metadataFilename } from '../src/metadata.js';
+import { writeMetadata, readMetadata, metadataFilename } from '../../src/utils/metadata.js';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';

@@ -1,12 +1,12 @@
-import { html as accessorFuncHtml } from '../utils/offline-sites/gmod-wiki/accessor-func';
-import { html as openFolderHtml } from '../utils/offline-sites/gmod-wiki/open-folder';
-import { html as baseHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input';
-import { html as editHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-edit';
-import { html as historyHtml } from '../utils/offline-sites/gmod-wiki/hook-accept-input-history';
-import fetchMock from "jest-fetch-mock";
 import { Realm, WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from '../../src/scrapers/wiki-page-scraper';
-import { html } from '../utils/offline-sites/gmod-wiki/home';
+import { html as historyHtml } from '../test-data/offline-sites/gmod-wiki/hook-accept-input-history';
+import { html as editHtml } from '../test-data/offline-sites/gmod-wiki/hook-accept-input-edit';
+import { html as accessorFuncHtml } from '../test-data/offline-sites/gmod-wiki/accessor-func';
+import { html as openFolderHtml } from '../test-data/offline-sites/gmod-wiki/open-folder';
+import { html as baseHtml } from '../test-data/offline-sites/gmod-wiki/hook-accept-input';
+import { html } from '../test-data/offline-sites/gmod-wiki/home';
 import { scrapeAndCollect } from '../../src/scrapers/collector';
+import fetchMock from "jest-fetch-mock";
 
 describe('GMod Wiki Parse', () => {
 

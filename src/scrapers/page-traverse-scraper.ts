@@ -1,5 +1,6 @@
+import { Scrapeable, TraverseScraper } from './traverse-scraper.js';
 import { decodeEntities } from './decode-entities.js';
-import { ScrapeCallback, Scrapeable, Scraper } from './scraper.js';
+import { ScrapeCallback } from './scraper.js';
 
 export class Page implements Scrapeable {
   public url: string;
@@ -12,7 +13,7 @@ export class Page implements Scrapeable {
   }
 }
 
-export class PageScraper<T extends Page = Page> extends Scraper<T> {
+export class PageTraverseScraper<T extends Page = Page> extends TraverseScraper<T> {
   private readonly factory: (url: string, title: string) => T;
 
   constructor(baseUrl: string, factory?: (url: string, title: string) => T) {
@@ -25,18 +26,18 @@ export class PageScraper<T extends Page = Page> extends Scraper<T> {
    * Scrapes a page for its URL and title, and returns a list of child URLs
    * 
    * @param response The response from the page
-   * @param html The HTML content of the request
+   * @param content The content of the request
    * 
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<T> {
-    return (response: Response, html: string): T[] => {
+    return (response: Response, content: string): T[] => {
       const results: T[] = [];
 
       const url = response.url;
-      const title = decodeEntities(html.match(/<title>(.*?)<\/title>/)?.[1] || '');
+      const title = decodeEntities(content.match(/<title>(.*?)<\/title>/)?.[1] || '');
       const page = this.factory(url, title);
-      const links = html.match(/<a\s+(?:[^>]*?\s+)?href=(["'])([\s\S]*?)\1(?:[^>]*?\s+)?>(?:[\s\S]*?<\/a>)?/gi)
+      const links = content.match(/<a\s+(?:[^>]*?\s+)?href=(["'])([\s\S]*?)\1(?:[^>]*?\s+)?>(?:[\s\S]*?<\/a>)?/gi)
         ?.map(link => link.replace(/\n/g, ''))
         ?.map(link => link.match(/href=(["'])([\s\S]*?)\1/i)?.[2] || '') || [];
 

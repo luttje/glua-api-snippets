@@ -1,8 +1,8 @@
 import { WikiPage, WikiPageScraper, uselessUrls, wikiPageSaveReplacer } from './scrapers/wiki-page-scraper.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { metadataFilename, writeMetadata } from './metadata.js';
-import { walk } from './filesystem.js';
+import { metadataFilename, writeMetadata } from './utils/metadata.js';
+import { walk } from './utils/filesystem.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
@@ -14,7 +14,7 @@ async function startScrape() {
     .version(packageJson.version)
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path to the directory where the output json and lua files should be saved', './output')
-    .option('-u, --url <url>', 'The base URL of the Garry\'s Mod wiki to scrape', 'https://wiki.facepunch.com/gmod')
+    .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/~pagelist?format=json')
     .option('-f, --force', 'Force the scraper to overwrite existing files', false)
     .parse(process.argv);
 

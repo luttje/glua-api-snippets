@@ -1,10 +1,11 @@
+import { Page, PageTraverseScraper } from '../../src/scrapers/page-traverse-scraper';
 import { Table, TableScraper } from '../../src/scrapers/table-scraper';
-import { Page, PageScraper } from '../../src/scrapers/page-scraper';
-import { Scrapeable, Scraper } from '../../src/scrapers/scraper';
-import { html } from '../utils/offline-sites/webscraper.io-tables';
+import { html } from '../test-data/offline-sites/webscraper.io-tables';
+import { Scrapeable } from '../../src/scrapers/traverse-scraper';
 import { scrapeAndCollect } from '../../src/scrapers/collector';
-import { expectedTables } from '../utils/test-tables';
-import { Person } from '../utils/Person';
+import { Scraper } from '../../src/scrapers/scraper';
+import { expectedTables } from '../test-data/test-tables';
+import { Person } from '../test-data/Person';
 import fetchMock from "jest-fetch-mock";
 
 class PageWithTables<T> implements Scrapeable {
@@ -37,10 +38,10 @@ describe('Scraper', () => {
       url: baseUrl,
     });
     
-    // Combines the functionality of TableScraper and PageScraper
+    // Combines the functionality of TableScraper and PageTraverseScraper
     const scraper = new Scraper<PageWithTables<Person>>(baseUrl, (response: Response, html: string) => {
       const tableScraperCallback = new TableScraper<Person>(baseUrl, () => new Person()).getScrapeCallback();
-      const pageScraperCallback = new PageScraper(baseUrl).getScrapeCallback();
+      const pageScraperCallback = new PageTraverseScraper(baseUrl).getScrapeCallback();
 
       const tables = tableScraperCallback(response, html);
       const pages = pageScraperCallback(response, html);

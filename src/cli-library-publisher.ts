@@ -2,7 +2,7 @@ import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
 import { makeConfigJson } from './lua-language-server.js';
 import { readMetadata } from './metadata.js';
-import { walk } from './filesystem.js';
+import { walk } from './utils/filesystem.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';

@@ -1,18 +1,19 @@
-import fetchRetry from 'fetch-retry';
+import { TypedEventEmitter } from '../utils/typed-event-emitter.js';
 import { RequestInitWithRetry } from 'fetch-retry';
-import EventEmitter from 'events';
+import fetchRetry from 'fetch-retry';
 
 const fetch = fetchRetry(global.fetch);
 
-export type ScrapeCallback<T> = (response: Response, html: string) => T[];
+export type ScrapeCallback<T> = (response: Response, content: string) => T[];
 
-export interface Scrapeable {
-  childUrls: Set<string>;
+export type ScrapeResult = object;
+
+export type ScraperEvents<T> = {
+  beforescrape: [url: string];
+  scraped: [url: string, results: T[]];
 }
 
-export class Scraper<T extends Scrapeable> extends EventEmitter {
-  protected readonly traversedUrls: Set<string> = new Set();
-  protected childPageFilter?: (url: string) => boolean;
+export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEvents<T>> {
   protected retryOptions: RequestInitWithRetry = {};
     
   constructor(
@@ -26,89 +27,43 @@ export class Scraper<T extends Scrapeable> extends EventEmitter {
     return this.scrapeCallback || ((_: Response, __: string): T[] => []);
   }
 
-  public setChildPageFilter(filter: (url: string) => boolean): void {
-    this.childPageFilter = filter;
-  }
-
   public setRetryOptions(options: RequestInitWithRetry): void {
     this.retryOptions = options;
   }
 
   /**
-   * Scrapes a page for its URL and title, and returns a list of child URLs
+   * Scrapes the base url and has the callback process the response
    */
   public async scrape(): Promise<void> {
     const callback = this.getScrapeCallback();
 
-    await this.traverse(this.baseUrl, callback.bind(this));
-  }
-
-  protected getTraverseUrl(url: string): string | false {
-    if (!url.startsWith(this.baseUrl))
-      return false;
-    
-    if (url.endsWith('/'))
-      url = url.substring(0, url.length - 1);
-    
-    if (url.includes('#'))
-      url = url.substring(0, url.indexOf('#'));
-    
-    if (this.traversedUrls.has(url))
-      return false;
-    
-    if (this.childPageFilter && !this.childPageFilter(url))
-      return false;
-    
-    return url;
+    await this.visitOne(this.baseUrl, callback);
   }
 
   public async visitOne(url: string, callback?: ScrapeCallback<T>): Promise<T[]> {
     if (!callback)
       callback = this.getScrapeCallback();
 
-    try {
-      const response = await fetch(url, this.retryOptions);
-      const html = await response.text();
+    if (!!process.env.VERBOSE_LOGGING)
+      console.debug(`Scraping ${url}...`);
+  
+    this.emit('beforescrape', url);
 
-      return callback(response, html);
+    let response;
+    let content;
+
+    try {
+      response = await fetch(url, this.retryOptions);
+      content = await response.text();
     } catch (e) {
       console.warn(`Error fetching ${url}: ${e}`);
       return [];
     }
-  }
 
-  public async traverse(url: string, callback?: ScrapeCallback<T>): Promise<void> {
-    if (!callback)
-      callback = this.getScrapeCallback();
-    
-    const urlsToTraverse: string[] = [url];
+    const scrapedResults = callback(response, content);
 
-    while (urlsToTraverse.length > 0) {
-      let currentUrl = urlsToTraverse.shift()!;
-      let url = this.getTraverseUrl(currentUrl);
+    this.emit('scraped', url, scrapedResults);
 
-      if (!url)
-        continue;
-      
-      if (!!process.env.VERBOSE_LOGGING)
-        console.debug(`Scraping ${url}...`);
-      
-      this.emit('beforescrape', url);
-      
-      const currentResults = await this.visitOne(url, callback);
-      
-      this.traversedUrls.add(url);
-
-      for (const result of currentResults) {
-        for (const childUrl of result.childUrls) {
-          const traverseUrl = this.getTraverseUrl(childUrl);
-
-          if (traverseUrl && !urlsToTraverse.includes(traverseUrl))
-            urlsToTraverse.push(traverseUrl);
-        }
-      }
-
-      this.emit('scraped', url, currentResults);
-    }
+    return scrapedResults;
   }
 }

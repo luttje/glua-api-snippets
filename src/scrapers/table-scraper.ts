@@ -1,6 +1,7 @@
-import { ScrapeCallback, Scrapeable, Scraper } from './scraper.js';
-import "reflect-metadata";
+import { Scrapeable, TraverseScraper } from './traverse-scraper.js';
+import { ScrapeCallback } from './scraper.js';
 import * as cheerio from 'cheerio';
+import "reflect-metadata";
 
 const tableColumnMetadataKey = Symbol("tableColumn");
 
@@ -57,15 +58,15 @@ export class Table<T> implements Scrapeable {
   }
 }
 
-export class TableScraper<T extends object> extends Scraper<Table<T>> {
+export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
   constructor(baseUrl: string, private readonly factory: () => T) {
     super(baseUrl);
   }
 
   public getScrapeCallback(): ScrapeCallback<Table<T>> {
-    return (response: Response, html: string): Table<T>[] => {
+    return (response: Response, content: string): Table<T>[] => {
       const results: Table<T>[] = [];
-      const $ = cheerio.load(html);
+      const $ = cheerio.load(content);
       const tables = $('table');
 
       for (const table of tables) {
