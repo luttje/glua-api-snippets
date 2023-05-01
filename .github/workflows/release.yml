@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - feature/sensible-scraping
   schedule:
     - cron: '0 0 1 * *'
 jobs:
@@ -29,17 +28,6 @@ jobs:
       - name: Scrape wiki
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         run: npm run cli:scrape-wiki
-      # Testing code for when we want to test without scraping the wiki
-      # - name: Writing test files directly to the output folder
-      #   if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
-      #   run: |
-      #     mkdir -p ./output/ai
-      #     echo "{\"lastUpdate\": \"$(date --iso-8601=seconds)\"}" > ./output/__metadata.json
-      #     echo "[{\"url\":\"https://wiki.facepunch.com/gmod/ai.GetScheduleID\",\"title\":\"ai.GetScheduleID - Garry's Mod Wiki\",\"realm\":\"server\",\"function\":{\"name\":\"ai.GetScheduleID\",\"description\":\"Translates a schedule name to its corresponding ID.\",\"arguments\":[{\"name\":\"sched\",\"type\":\"string\",\"description\":\"Then schedule name. In most cases, this will be the same as the Enums/SCHED name.\"}],\"returns\":[{\"type\":\"number\",\"description\":\"The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.\"}]}}]" > ./output/ai/getscheduleid.json
-      #     echo "---[SERVER] Translates a schedule name to its corresponding ID." > ./output/ai/getscheduleid.lua
-      #     echo "---@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name." >> ./output/ai/getscheduleid.lua
-      #     echo "---@return number The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid." >> ./output/ai/getscheduleid.lua
-      #     echo "function ai.GetScheduleID(sched) end" >> ./output/ai/getscheduleid.lua
       - name: Pack release
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         run: npm run cli:pack-release
