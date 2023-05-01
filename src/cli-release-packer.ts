@@ -1,6 +1,6 @@
+import { convertWindowsToUnixPath, dateToFilename, walk, zipFiles } from './utils/filesystem.js';
 import packageJson from '../package.json' assert { type: "json" };
-import { convertWindowsToUnixPath, walk, zipFiles } from './filesystem.js';
-import { readMetadata } from './metadata.js';
+import { readMetadata } from './utils/metadata.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
@@ -29,10 +29,6 @@ async function main() {
     process.exit(1);
   }
 
-  const baseFileName = metadata.lastUpdate.toISOString().replace(/:/g, '-')
-    .slice(0, -5) // without .000Z
-    .replace(/T/g, '_');
-
   console.log(`Building release for ${metadata.lastUpdate}...`);
 
   let releaseFiles : string[] = [];
@@ -41,6 +37,8 @@ async function main() {
     'lua',
   ];
 
+  const baseFileName = dateToFilename(metadata.lastUpdate);
+  
   for (const target of targets) {
     const files = walk(options.input, (file, isDirectory) => isDirectory || file.endsWith(`.${target}`) || file.endsWith('__metadata.json'));
     const targetPath = path.join(options.output, `${baseFileName}.${target}.zip`);

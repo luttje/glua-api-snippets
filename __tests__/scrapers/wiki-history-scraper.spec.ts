@@ -1,7 +1,7 @@
-import { html as html } from '../utils/offline-sites/gmod-wiki/recent-changes';
-import fetchMock from "jest-fetch-mock";
-import { WikiHistoryPage, WikiHistoryPageScraper } from '../../src/scrapers/wiki-history-scraper';
+import { WikiHistoryPageScraper } from '../../src/scrapers/wiki-history-scraper';
+import { html } from '../test-data/offline-sites/gmod-wiki/recent-changes';
 import { scrapeAndCollect } from '../../src/scrapers/collector';
+import fetchMock from "jest-fetch-mock";
 
 describe('GMod Wiki History Page Parse', () => {
   beforeEach(() => {

@@ -1,6 +1,8 @@
-export default {
-  preset: "ts-jest",
-  resolver: "ts-jest-resolver",
+import type { JestConfigWithTsJest } from 'ts-jest'
+
+export default <JestConfigWithTsJest> {
+  // preset: "ts-jest",
+  // resolver: "ts-jest-resolver",
 
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
@@ -33,6 +35,20 @@ export default {
     global: {
       // lines: 90,
     },
+  },
+
+  extensionsToTreatAsEsm: ['.ts'],
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
+  transform: {
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.json",
+        useESM: true,
+      }
+    ],
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

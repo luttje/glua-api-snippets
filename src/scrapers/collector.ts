@@ -1,6 +1,6 @@
-import { Scrapeable, Scraper } from "./scraper.js";
+import { Scraper, ScrapeResult } from "./scraper.js";
 
-export async function scrapeAndCollect<T extends Scrapeable>(scraper: Scraper<T>) {
+export async function scrapeAndCollect<T extends ScrapeResult>(scraper: Scraper<T>) {
   const collected: T[] = [];
 
   scraper.on("scraped", (url: string, results: T[]) => {

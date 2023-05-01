@@ -1,9 +1,9 @@
-import { Table, TableScraper } from '../../src/scrapers/table-scraper';
-import { html } from '../utils/offline-sites/webscraper.io-tables';
-import { expectedTables } from '../utils/test-tables';
-import { Person } from '../utils/Person';
-import fetchMock from "jest-fetch-mock";
+import { html } from '../test-data/offline-sites/webscraper.io-tables';
+import { TableScraper } from '../../src/scrapers/table-scraper';
 import { scrapeAndCollect } from '../../src/scrapers/collector';
+import { expectedTables } from '../test-data/test-tables';
+import { Person } from '../test-data/Person';
+import fetchMock from "jest-fetch-mock";
 
 describe('TableScraper', () => {
   beforeEach(() => {

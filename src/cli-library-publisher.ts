@@ -1,8 +1,8 @@
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { makeConfigJson } from './lua-language-server.js';
-import { readMetadata } from './metadata.js';
-import { walk } from './filesystem.js';
+import { makeConfigJson } from './utils/lua-language-server.js';
+import { readMetadata } from './utils/metadata.js';
+import { walk } from './utils/filesystem.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
@@ -80,21 +80,14 @@ async function main() {
   
   fs.writeFileSync(path.join(options.output, 'config.json'), JSON.stringify(config, null, 2));
   
-  const writer = new GluaApiWriter();
-  const outputFile = fs.openSync(path.join(options.output, libraryDirectory, 'api.lua'), 'w');
-  const files = walk(options.input, (file, isDirectory) => isDirectory || (file.endsWith(`.json`) && !file.endsWith(`__metadata.json`)));
+  const files = walk(options.input, (file, isDirectory) => isDirectory || (file.endsWith(`.lua`)));
   
-  fs.writeSync(outputFile, libraryFileHeader + '\n\n');
-
   files.forEach((file) => {
-    const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-    const pages = json;
-    const api = writer.writePages(pages)
+    const relativePath = path.relative(options.input, file);
+    const outputPath = path.join(options.output, libraryDirectory, relativePath);
 
-    fs.writeSync(outputFile, api);
+    fs.copyFileSync(file, outputPath);
   });
-
-  fs.closeSync(outputFile);
 
   console.log(`Done building Library! It can be found @ ${options.output}`);
 }
