@@ -28,6 +28,10 @@ jobs:
       - name: Scrape wiki
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         run: npm run cli:scrape-wiki
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@v2
+      - name: Format Lua in output directory
+        run: stylua output/
       - name: Pack release
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         run: npm run cli:pack-release
