@@ -121,7 +121,16 @@ export class GluaApiWriter {
     api += `local ${_enum.name} = {\n`;
 
     for (const item of _enum.items) {
-      api += `  ${item.key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+      const key = item.key.split('.')[1] ?? item.key; // Fixes ENUMNAME.KEY (ENUMNAME is redundant here)
+      const keys = item.key.split(' or ');
+
+      if (keys.length > 1) {
+        for (const key of keys) {
+          api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+        }
+      } else {
+        api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+      }
     }
 
     api += '}\n\n';
