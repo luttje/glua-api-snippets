@@ -5,6 +5,9 @@ import { GluaApiWriter } from './api-writer/glua-api-writer.js';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
+import { WikiPageIndexObject, WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
+import { RequestInitWithRetry } from 'fetch-retry';
+import { scrapeAndCollect } from './scrapers/collector.js';
 
 async function startScrape() {
   const program = new Command();
@@ -13,7 +16,7 @@ async function startScrape() {
     .version(packageJson.version)
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path to the directory where the output json and lua files should be saved', './output')
-    .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/~pagelist?format=json')
+    .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/')
     .option('-c, --clean', 'Clean the output directory before scraping', false)
     .parse(process.argv);
 
@@ -26,15 +29,17 @@ async function startScrape() {
 
   const baseDirectory = options.output.replace(/\/$/, '');
   const baseUrl = options.url.replace(/\/$/, '');
-  const scraper = new WikiPageMarkupScraper(baseUrl);
+  const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
   const writer = new GluaApiWriter();
-  
-  scraper.setRetryOptions({
+
+  const retryOptions: RequestInitWithRetry = {
     retries: 5,
     retryDelay: function(attempt, error, response) {
       return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
     }
-  });
+  }
+  
+  pageListScraper.setRetryOptions(retryOptions);
 
   writeMetadata(baseUrl, baseDirectory);
 
@@ -44,30 +49,47 @@ async function startScrape() {
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
   
-  scraper.on('scraped', (url, pages) => {
-    const api = writer.writePages(pages);
-    let fileName = url.substring(baseUrl.length + 1);
-    let subDirectory = '';
+  const pageIndexes = await scrapeAndCollect(pageListScraper);
 
-    if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {
-      [subDirectory, fileName] = fileName.split(/[:.\/]/, 2);
-      const directory = path.join(baseDirectory, subDirectory);
+  for (const pageIndex of pageIndexes) {
+    const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageIndex.address}?format=text`);
+    
+    pageMarkupScraper.on('scraped', (url, pageMarkups) => {
+      if (pageMarkups.length === 0)
+        return;
+      
+      const api = writer.writePages(pageMarkups);
 
-      if (!fs.existsSync(directory))
-        fs.mkdirSync(directory);
-    }
+      let fileName = pageIndex.address;
+      let moduleName = fileName;
 
-    fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {
+        [moduleName, fileName] = fileName.split(/[:.\/]/, 2);
+      }
 
-    // Lua API
-    fs.writeFileSync(path.join(baseDirectory, subDirectory, `${fileName}.lua`), api);
+      // Make sure modules like Entity and ENTITY are placed in the same file.
+      moduleName = moduleName.toLowerCase();
 
-    // JSON data
-    const json = JSON.stringify(pages, null, 2);
-    fs.writeFileSync(path.join(baseDirectory, subDirectory, `${fileName}.json`), json);
-  });
+      const moduleFile = path.join(baseDirectory, moduleName);
 
-  await scraper.scrape();
+      if (!fs.existsSync(`${moduleFile}.lua`))
+        fs.writeFileSync(`${moduleFile}.lua`, '---@meta\n\n');
+      
+      if (!fs.existsSync(moduleFile))
+        fs.mkdirSync(moduleFile, { recursive: true });
+
+      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+      // Lua API
+      fs.appendFileSync(path.join(baseDirectory, `${moduleName}.lua`), api);
+
+      // JSON data
+      const json = JSON.stringify(pageMarkups, null, 2);
+      fs.writeFileSync(path.join(baseDirectory, moduleName, `${fileName}.json`), json);
+    });
+
+    await pageMarkupScraper.scrape();
+  }
 
   console.log(`Done with scraping! You can find the output in ${baseDirectory}`);
 }

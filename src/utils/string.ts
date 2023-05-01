@@ -10,3 +10,22 @@ export function toLowerCamelCase(str: string) {
     return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
   }).replace(/\s+/g, '');
 }
+
+/**
+ * Replaces all newlines in a string with spaces
+ */
+export function removeNewlines(text: string) {
+  return text.replace(/\r?\n/g, ' ');
+}
+
+/**
+ * Puts a comment before each line in a string
+ */
+export function putCommentBeforeEachLine(text: string, skipLineOne: boolean = true) {
+  return text.split(/\r?\n/g).map((line, index) => {
+    if (index === 0 && skipLineOne)
+      return line;
+
+    return `--- ${line}`;
+  }).join('\n');
+}

@@ -1,4 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, PanelFunction, Realm, Struct, WikiPage } from '../scrapers/wiki-page-markup-scraper.js';
+import { putCommentBeforeEachLine, removeNewlines, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -7,7 +8,6 @@ import {
   isStruct,
   isEnum,
 } from '../scrapers/wiki-page-markup-scraper.js';
-import { toLowerCamelCase } from '../utils/string.js';
 
 export const RESERVERD_KEYWORDS = new Set([
   'and',
@@ -129,7 +129,7 @@ export class GluaApiWriter {
     api += `local ${_enum.name} = {\n`;
 
     for (const item of _enum.items) {
-      api += `  ${item.key} = ${item.value}, --[[${item.description}]]\n`;
+      api += `  ${item.key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
     }
 
     api += '}\n\n';
@@ -143,7 +143,7 @@ export class GluaApiWriter {
     api += `---@class ${struct.name}\n`;
 
     for (const field of struct.fields) {
-      api += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${this.removeNewlines(field.description!)}\n`;
+      api += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
     }
     
     api += `local ${struct.name} = {}\n\n`;
@@ -161,20 +161,6 @@ export class GluaApiWriter {
     return api;
   }
 
-  private putCommentBeforeEachLine(text: string, skipLineOne: boolean = true) {
-    return text.split('\n').map((line, index) => {
-      if (index === 0 && skipLineOne)
-        return line;
-
-      return `--- ${line}`;
-    }).join('\n');
-  }
-
-  // Newlines dont work in EmmyLua, so we just replace them with a space.
-  private removeNewlines(text: string) {
-    return text.replace(/\n/g, ' ');
-  }
-
   private transformType(type: string) {
     if (type === 'vararg')
       return '...';
@@ -183,7 +169,8 @@ export class GluaApiWriter {
   }
 
   private writeFunctionLuaDocComment(func: Function, realm: Realm) {
-    let luaDocComment = `---[${realm.toUpperCase()}] ${this.putCommentBeforeEachLine(func.description!.trim())}\n`;
+    let luaDocComment = `---[${realm.toUpperCase()}] ${putCommentBeforeEachLine(func.description!.trim())}\n`;
+    luaDocComment += `---\n---[(View on wiki)](${func.url})\n`;
 
     if (func.arguments) {
       func.arguments.forEach((arg, index) => {
@@ -193,7 +180,7 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
         
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)} ${this.transformType(arg.type)} ${this.removeNewlines(arg.description!)}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
       });
     }
 
@@ -201,7 +188,7 @@ export class GluaApiWriter {
       const returns = `---@return ${func.returns.map(ret => this.transformType(ret.type)).join(', ')}`;
 
       func.returns.forEach(ret => {
-        const description = this.removeNewlines(ret.description ?? '');
+        const description = removeNewlines(ret.description ?? '');
 
         if (func.returns!.length === 1) {
           luaDocComment += `${returns} ${description}\n`;

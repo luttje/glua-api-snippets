@@ -2,7 +2,15 @@ import { ScrapeCallback, Scraper } from './scraper.js';
 import { deserializeXml } from '../utils/xml.js';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
-export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared';
+export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
+
+export type CommonWikiProperties = {
+  type: WikiFunctionType | 'enum' | 'struct';
+  name: string;
+  description: string;
+  realm: Realm;
+  url: string;
+}
 
 export type WikiIdentifier = {
   name: string;
@@ -16,12 +24,8 @@ export type FunctionArgument = WikiIdentifier & {
 
 export type FunctionReturn = WikiIdentifier & {};
 
-export type Function = {
-  type: WikiFunctionType;
+export type Function = CommonWikiProperties & {
   parent: string;
-  name: string;
-  description: string;
-  realm: Realm;
   arguments?: FunctionArgument[];
   returns?: FunctionReturn[];
 };
@@ -44,11 +48,8 @@ export type EnumValue = {
   description: string;
 };
 
-export type Enum = {
+export type Enum = CommonWikiProperties & {
   type: 'enum';
-  name: string;
-  description: string;
-  realm: Realm;
   items: EnumValue[];
 };
 
@@ -59,11 +60,8 @@ export type StructField = {
   description: string;
 };
 
-export type Struct = {
+export type Struct = CommonWikiProperties & {
   type: 'struct';
-  name: string;
-  description: string;
-  realm: Realm;
   fields: StructField[];
 };
 
@@ -108,7 +106,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
    */
   public getScrapeCallback(): ScrapeCallback<WikiPage> {
     return (response: Response, content: string): WikiPage[] => {
-      const page = deserializeXml<WikiPage>(content, ($) => {
+      const page = deserializeXml<WikiPage | null>(content, ($) => {
         const isEnum = $('enum').length > 0;
         const isStruct = $('structure').length > 0;
         const isFunction = $('function').length > 0;
@@ -126,6 +124,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
           }).get();
 
           return <Enum>{
+            type: 'enum',
             name,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
@@ -143,6 +142,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
           }).get();
 
           return <Struct>{
+            type: 'struct',
             name,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
@@ -212,8 +212,13 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
           }
         }
 
-        throw new Error(`Unknown page type: ${$.root().html()}`);
+        return null;
       });
+
+      if (!page)
+        return [];
+      
+      page.url = response.url.replace(/\?format=text$/, '');
 
       return [page];
     };

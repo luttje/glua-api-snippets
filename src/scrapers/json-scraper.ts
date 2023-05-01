@@ -8,6 +8,10 @@ export class JsonScraper<T extends object = object> extends Scraper<T> {
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<T> {
+    return JsonScraper.makeScrapeCallback<T>();
+  }
+
+  public static makeScrapeCallback<T extends object = object>(): ScrapeCallback<T> {
     return (response: Response, content: string): T[] => {
       return JSON.parse(content);
     };

@@ -1,71 +1,39 @@
-import { json, markup } from '../test-data/offline-sites/gmod-wiki/hook-player-initial-spawn';
-import { WikiPage } from '../../src/scrapers/wiki-page-markup-scraper';
+import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-data/offline-sites/gmod-wiki/hook-player-initial-spawn';
+// import { apiDefinition as classFunctionApiDefinition, json as classFunctionJson } from '../test-data/offline-sites/gmod-wiki/class-function-weapon-allowsautoswitchto';
+// import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
+// import { apiDefinition as structApiDefinition, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-ang-pos';
+import { apiDefinition as structApiDefinition, markup as structMarkup } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
+// import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
+import { WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
-
-const apiDefinition = `---@class GM
-local GM = {}
-
----[SERVER] Called when the player spawns for the first time.
---- 
---- See GM:PlayerSpawn for a hook called every player spawn.
---- 
---- This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the Entity:GetModel function will return the default model (\`models/player.mdl\`).
---- 
---- You can send net messages starting from the player_activate event (see Game_Events).
---- 
---- Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718). 
---- 
---- Workaround without networking:
---- \`\`\`
---- local load_queue = {}
---- 
---- hook.Add("PlayerInitialSpawn", "myAddonName/Load", function(ply)
---- load_queue[ply] = true
---- end)
---- 
---- hook.Add("SetupMove", "myAddonName/Load", function(ply, _, cmd)
---- if load_queue[ply] and not cmd:IsForced() then
---- load_queue[ply] = nil
---- 
---- myAddon:OnPlayerNetReady(ply) -- Send what you need here!
---- end
---- end)
---- \`\`\`
---- 
---- 
---- With networking:
---- \`\`\`
---- -- CLIENT
---- hook.Add( "InitPostEntity", "Ready", function()
---- net.Start( "cool_addon_client_ready" )
---- net.SendToServer()
---- end )
---- \`\`\`
---- \`\`\`
---- -- SERVER
---- util.AddNetworkString( "cool_addon_client_ready" )
---- 
---- net.Receive( "cool_addon_client_ready", function( len, ply )
---- -- Send what you need here!
---- end )
---- \`\`\`
----@param player Player The player who spawned.
----@param transition boolean If \`true\`, the player just spawned from a map transition.
-function GM:PlayerInitialSpawn(player, transition) end\n\n`;
 
 describe('GLua API Writer', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
-  it('should be able to write EmmyLua API files from wiki json data', async () => {
+  it('should be able to write Lua API definitions directly from wiki json data', async () => {
     const writer = new GluaApiWriter();
-    const api = writer.writePages([<WikiPage>json]);
+    const api = writer.writePages([<WikiPage>hookJson]);
 
-    console.log(api);
+    expect(api).toEqual(hookApiDefinition);
+  });
+  
+  it('should be able to write Lua API definitions directly from wiki json data for a struct', async () => {
+    const writer = new GluaApiWriter();
 
-    expect(api).toEqual(apiDefinition);
+    fetchMock.mockResponseOnce(structMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/Custom_Entity_Fields?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const structs = await scrapeCallback(responseMock, structMarkup);
+    expect(structs).toHaveLength(1);
+    const api = writer.writePages(structs);
+    expect(api).toEqual(structApiDefinition);
   });
 
   // it('should be able to write EmmyLua API files directly from wiki pages', async () => {
