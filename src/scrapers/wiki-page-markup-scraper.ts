@@ -31,7 +31,10 @@ export type Function = CommonWikiProperties & {
 };
 
 export type ClassFunction = Function & {};
-export type LibraryFunction = Function & {};
+export type LibraryFunction = Function & {
+  type: 'libraryfunc';
+  dontDefineParent?: boolean;
+};
 export type HookFunction = Function & {
   type: 'hook';
   isHook: 'yes';
@@ -193,6 +196,11 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               type: 'classfunc'
             };
           } else if (isLibraryFunction) {
+            if (base.parent === 'Global') {
+              base.parent = '_G';
+              (<LibraryFunction>base).dontDefineParent = true;
+            }
+            
             return <LibraryFunction> {
               ...base,
               type: 'libraryfunc'

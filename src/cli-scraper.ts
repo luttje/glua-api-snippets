@@ -1,13 +1,13 @@
-import { WikiPage, WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
-import { metadataFilename, writeMetadata } from './utils/metadata.js';
+import { WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
+import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
+import { scrapeAndCollect } from './scrapers/collector.js';
+import { writeMetadata } from './utils/metadata.js';
+import { RequestInitWithRetry } from 'fetch-retry';
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
-import { WikiPageIndexObject, WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
-import { RequestInitWithRetry } from 'fetch-retry';
-import { scrapeAndCollect } from './scrapers/collector.js';
 
 async function startScrape() {
   const program = new Command();

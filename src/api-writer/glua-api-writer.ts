@@ -73,16 +73,11 @@ export class GluaApiWriter {
       return this.writeEnum(page);
     else if (isStruct(page))
       return this.writeStruct(page);
-    
-    throw new Error(`Unknown page type: ${page}`);
   }
 
   private writeClassFunction(func: ClassFunction) {
     let api: string = '';
 
-    if (!func.parent)
-      throw new Error(`Class function ${func.name} does not have a class name`);
-    
     if (!this.writtenClasses.has(func.parent)) {
       api += `---@class ${func.parent}\n`;
       api += `local ${func.parent} = {}\n\n`;
@@ -91,7 +86,7 @@ export class GluaApiWriter {
     }
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
-    api += this.writeFunctionDeclaration(func, func.realm);
+    api += this.writeFunctionDeclaration(func, func.realm, ':');
 
     return api;
   }
@@ -99,10 +94,7 @@ export class GluaApiWriter {
   private writeLibraryFunction(func: LibraryFunction) {
     let api: string = '';
 
-    if (!func.parent)
-      throw new Error(`Library function ${func.name} does not have a library name`);
-    
-    if (!this.writtenLibraryGlobals.has(func.parent)) {
+    if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
       api += `${func.parent} = {}\n\n`;
 
       this.writtenLibraryGlobals.add(func.parent);
@@ -202,8 +194,8 @@ export class GluaApiWriter {
     return luaDocComment;
   }
 
-  private writeFunctionDeclaration(func: Function, realm: Realm) {
-    let declaration = `function ${func.parent ? `${func.parent}:` : ''}${GluaApiWriter.safeName(func.name)}(`;
+  private writeFunctionDeclaration(func: Function, realm: Realm, indexer: string = '.') {
+    let declaration = `function ${func.parent ? `${func.parent}${indexer}` : ''}${GluaApiWriter.safeName(func.name)}(`;
 
     if (func.arguments) {
       declaration += func.arguments.map(arg => {
