@@ -1,4 +1,6 @@
 import { writeMetadata, readMetadata, metadataFilename } from '../../src/utils/metadata.js';
+import { html } from '../test-data/offline-sites/gmod-wiki/recent-changes.js';
+import fetchMock from "jest-fetch-mock";
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -16,12 +18,14 @@ describe('Metadata', () => {
   });
 
   it('should be able to write metadata', async () => {
+    fetchMock.mockResponseOnce(html, { url: 'https://wiki.facepunch.com/gmod/~recentchanges' });
     await writeMetadata('https://wiki.facepunch.com/gmod', outputDirectory);
 
     expect(fs.existsSync(path.join(outputDirectory, metadataFilename))).toBeTruthy();
   });
   
   it('should be able to write metadata to a non-existing directory', async () => {
+    fetchMock.mockResponseOnce(html, { url: 'https://wiki.facepunch.com/gmod/~recentchanges' });
     const nonExistingDirectory = path.join(outputDirectory, 'non-existing');
     await writeMetadata('https://wiki.facepunch.com/gmod', nonExistingDirectory);
 
@@ -29,6 +33,7 @@ describe('Metadata', () => {
   });
 
   it('should be able to read metadata', async () => {
+    fetchMock.mockResponseOnce(html, { url: 'https://wiki.facepunch.com/gmod/~recentchanges' });
     await writeMetadata('https://wiki.facepunch.com/gmod', outputDirectory);
     const metadata = await readMetadata(outputDirectory);
 
