@@ -7,6 +7,7 @@ import { Scraper } from '../../src/scrapers/scraper';
 import { expectedTables } from '../test-data/test-tables';
 import { Person } from '../test-data/Person';
 import fetchMock from "jest-fetch-mock";
+import { jest } from '@jest/globals';
 
 class PageWithTables<T> implements Scrapeable {
   public childUrls: Set<string> = new Set();

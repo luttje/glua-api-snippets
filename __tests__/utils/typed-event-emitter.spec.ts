@@ -1,4 +1,5 @@
 import { TypedEventEmitter } from '../../src/utils/typed-event-emitter';
+import { jest } from '@jest/globals';
 
 describe('TypedEventEmitter', () => {
   it('should emit and receive events', () => {

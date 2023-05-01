@@ -52,7 +52,20 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
         const pageLinkElement = $(changeElement).find('.address');
         const pageLinkAnchorElement = pageLinkElement.find('a');
         const user = $(changeElement).find('.user a').text();
-        const dateTime = new Date(pageLinkAnchorElement.attr('title') || '');
+        const rawDateTime = pageLinkAnchorElement.attr('title') || ''; // Always in 4/30/2023 2:13:46 AM format
+        const dateTimeParts = rawDateTime.split(' ');
+        const dateParts = dateTimeParts[0].split('/');
+        const timeParts = dateTimeParts[1].split(':');
+        const dateTime = new Date(
+          Date.UTC(
+            parseInt(dateParts[2]), // Year
+            parseInt(dateParts[0]) - 1, // Month
+            parseInt(dateParts[1]), // Day
+            parseInt(timeParts[0]) + (dateTimeParts[2] === 'PM' ? 12 : 0), // Hour
+            parseInt(timeParts[1]), // Minute
+            parseInt(timeParts[2]), // Second
+          ),
+        );
         const url = pageLinkAnchorElement.attr('href') || '';
         const change = $(pageLinkElement).text().replace($(pageLinkAnchorElement).text(), '').replace(/\s+/g, ' ');
 

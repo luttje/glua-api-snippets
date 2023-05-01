@@ -18,12 +18,24 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: npm ci
+      - name: Check if there have been changes to the wiki
+        id: wiki_change_check
+        run: |
+          npm run cli:wiki-check-changed $(git tag -l --sort=-v:refname)
+          if [ $? -eq 1 ]; then
+            echo "::set-output name=has_changed::true"
+          else
+            echo "::set-output name=has_changed::false"
+          fi
       - name: Install zip
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         uses: montudor/action-zip@v1
       - name: Scrape wiki
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         run: npm run cli:scrape-wiki
       # Testing code for when we want to test without scraping the wiki
       # - name: Writing test files directly to the output folder
+      #   if: steps.wiki_change_check.outputs.has_changed == 'true'
       #   run: |
       #     mkdir -p ./output/ai
       #     echo "{\"lastUpdate\": \"$(date --iso-8601=seconds)\"}" > ./output/__metadata.json
@@ -33,8 +45,10 @@ jobs:
       #     echo "---@return number The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid." >> ./output/ai/getscheduleid.lua
       #     echo "function ai.GetScheduleID(sched) end" >> ./output/ai/getscheduleid.lua
       - name: Pack release
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         run: npm run cli:pack-release
       - name: Get release files and version
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         id: release_json
         run: |
           content=`cat ./dist/release/release.json`
@@ -45,6 +59,7 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=releaseJson::$content"
       - name: Create release
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         id: create_release
         uses: ncipollo/release-action@v1
         with:
@@ -66,8 +81,10 @@ jobs:
 
           artifacts: ${{ join(fromJson(steps.release_json.outputs.releaseJson).releaseFiles, ',') }}
       - name: Publish Lua Language Server Library
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         run: npm run cli:publish-library
       - name: Copy library to it's own branch
+        if: steps.wiki_change_check.outputs.has_changed == 'true'
         env:
           LIBRARY_PATH: dist/libraries/garrysmod
           TARGET_BRANCH: lua-language-server-addon

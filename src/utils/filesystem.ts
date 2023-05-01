@@ -2,6 +2,12 @@ import archiver from 'archiver';
 import path from 'path';
 import fs from 'fs';
 
+export function dateToFilename(date: Date) {
+  return date.toISOString().replace(/:/g, '-')
+    .slice(0, -5) // without .000Z
+    .replace(/T/g, '_');
+}
+
 export function walk(dir: string, filter?: (fileOrDirectory: string, isDirectory?: boolean) => boolean): string[] {
   const filelist: string[] = [];
 

@@ -1,4 +1,4 @@
-import { Scraper, ScrapeCallback } from './scraper';
+import { Scraper, ScrapeCallback } from './scraper.js';
 
 export interface Scrapeable {
   childUrls: Set<string>;
