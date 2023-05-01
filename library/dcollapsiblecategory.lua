@@ -13,9 +13,9 @@ function DCollapsibleCategory:Add(name) end
 ---[CLIENT] Internal function that handles the open/close animations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:AnimSlide)
----@param anim table 
----@param delta number 
----@param data table 
+---@param anim table
+---@param delta number
+---@param data table
 function DCollapsibleCategory:AnimSlide(anim, delta, data) end
 
 ---[CLIENT] Forces the category to open or collapse
@@ -37,7 +37,7 @@ function DCollapsibleCategory:GetAnimTime() end
 function DCollapsibleCategory:GetExpanded() end
 
 ---[CLIENT] Returns the header height of the DCollapsibleCategory.
---- 
+---
 --- See also DCollapsibleCategory:SetHeaderHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetHeaderHeight)
@@ -47,15 +47,15 @@ function DCollapsibleCategory:GetHeaderHeight() end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetList)
----@return Panel 
+---@return Panel
 function DCollapsibleCategory:GetList() end
 
 ---[CLIENT] Doesn't actually do anything.
---- 
+---
 --- Returns the number set by DCollapsibleCategory:SetPadding.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetPadding)
----@return number 
+---@return number
 function DCollapsibleCategory:GetPadding() end
 
 ---[CLIENT] Returns whether or not the background should be painted.
@@ -67,7 +67,7 @@ function DCollapsibleCategory:GetPaintBackground() end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetStartHeight)
----@return number 
+---@return number
 function DCollapsibleCategory:GetStartHeight() end
 
 ---[CLIENT] Called by DCollapsibleCategory:Toggle. This function does nothing by itself, as you're supposed to overwrite it.
@@ -89,7 +89,7 @@ function DCollapsibleCategory:SetAnimTime(time) end
 function DCollapsibleCategory:SetContents(pnl) end
 
 ---[CLIENT] Sets whether the DCollapsibleCategory is expanded or not upon opening the container.
---- 
+---
 --- You should use DCollapsibleCategory:Toggle or DCollapsibleCategory:DoExpansion instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetExpanded)
@@ -97,7 +97,7 @@ function DCollapsibleCategory:SetContents(pnl) end
 function DCollapsibleCategory:SetExpanded(expanded) end
 
 ---[CLIENT] Sets the header height of the DCollapsibleCategory.
---- 
+---
 --- See also DCollapsibleCategory:GetHeaderHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetHeaderHeight)
@@ -113,29 +113,29 @@ function DCollapsibleCategory:SetLabel(label) end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetList)
----@param pnl Panel 
+---@param pnl Panel
 function DCollapsibleCategory:SetList(pnl) end
 
 ---[CLIENT] Doesn't actually do anything.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetPadding)
----@param padding number 
+---@param padding number
 function DCollapsibleCategory:SetPadding(padding) end
 
 ---[CLIENT] Sets whether or not the background should be painted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetPaintBackground)
----@param paint boolean 
+---@param paint boolean
 function DCollapsibleCategory:SetPaintBackground(paint) end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetStartHeight)
----@param height number 
+---@param height number
 function DCollapsibleCategory:SetStartHeight(height) end
 
 ---[CLIENT] Toggles the expanded state of the DCollapsibleCategory.
---- 
+---
 --- See DCollapsibleCategory:GetExpanded for a function to retrieve the expanded state.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:Toggle)
@@ -150,4 +150,3 @@ function DCollapsibleCategory:UnselectAll() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:UpdateAltLines)
 function DCollapsibleCategory:UpdateAltLines() end
-

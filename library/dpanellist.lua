@@ -38,7 +38,7 @@ function DPanelList:GetPadding() end
 ---@return number Distance between panels
 function DPanelList:GetSpacing() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:InsertAtTop)
 ---@param insert Panel The panel to insert
@@ -56,4 +56,3 @@ function DPanelList:SetPadding(Offset) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:SetSpacing)
 ---@param Distance number Distance between panels
 function DPanelList:SetSpacing(Distance) end
-

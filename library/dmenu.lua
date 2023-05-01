@@ -11,7 +11,7 @@ local DMenu = {}
 ---@param on string The value of the console variable to set when the option is checked
 ---@param off string The value of the console variable to set when the option is unchecked
 ---@param funcFunction function If set, the function will be called every time the option is pressed/clicked/selected.
---- 
+---
 --- It will have only one argument:
 --- Panel pnl - The created DMenuOptionCVar
 ---@return Panel The created DMenuOptionCVar
@@ -26,7 +26,7 @@ function DMenu:AddCVar(strText, convar, on, off, funcFunction) end
 function DMenu:AddOption(name, func) end
 
 ---[CLIENT] Adds a panel to the DMenu as if it were an option.
---- 
+---
 --- This invokes DScrollPanel:AddItem and will not create a new panel if a class name is passed, unlike Panel:Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddPanel)
@@ -54,7 +54,7 @@ function DMenu:AddSubMenu(Name, func) end
 function DMenu:ChildCount() end
 
 ---[CLIENT] Clears all highlights made by DMenu:HighlightItem.
---- 
+---
 --- Doesn't appear to be used or do anything.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:ClearHighlights)
@@ -70,24 +70,24 @@ function DMenu:CloseSubMenu(menu) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetChild)
 ---@param childIndex number The index of the child to get.
---- 
+---
 --- Unlike Panel:GetChild, this index starts at 1.
 function DMenu:GetChild(childIndex) end
 
 ---[CLIENT] Set by DMenu:SetDeleteSelf
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDeleteSelf)
----@return boolean 
+---@return boolean
 function DMenu:GetDeleteSelf() end
 
 ---[CLIENT] Returns the value set by DMenu:SetDrawBorder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDrawBorder)
----@return boolean 
+---@return boolean
 function DMenu:GetDrawBorder() end
 
 ---[CLIENT] Returns whether the DMenu should draw the icon column with a different color or not.
---- 
+---
 --- See DMenu:SetDrawColumn
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDrawColumn)
@@ -107,7 +107,7 @@ function DMenu:GetMaxHeight() end
 function DMenu:GetMinimumWidth() end
 
 ---[CLIENT] Returns the currently opened submenu.
---- 
+---
 --- Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetOpenSubMenu)
@@ -120,7 +120,7 @@ function DMenu:GetOpenSubMenu() end
 function DMenu:Hide() end
 
 ---[CLIENT] Highlights selected item in the DMenu by setting the item's key "Highlight" to true.
---- 
+---
 --- Doesn't appear to be working or used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:HighlightItem)
@@ -157,7 +157,7 @@ function DMenu:OptionSelected(option, optionText) end
 function DMenu:OptionSelectedInternal(option) end
 
 ---[CLIENT] Set to true by default. IF set to true, the menu will be deleted when it is closed, not simply hidden.
---- 
+---
 --- This is used by DMenuBar
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:SetDeleteSelf)
@@ -167,7 +167,7 @@ function DMenu:SetDeleteSelf(newState) end
 ---[CLIENT] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:SetDrawBorder)
----@param bool boolean 
+---@param bool boolean
 function DMenu:SetDrawBorder(bool) end
 
 ---[CLIENT] Sets whether the DMenu should draw the icon column with a different color.
@@ -193,4 +193,3 @@ function DMenu:SetMinimumWidth(minWidth) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:SetOpenSubMenu)
 ---@param item Panel The menu to store
 function DMenu:SetOpenSubMenu(item) end
-

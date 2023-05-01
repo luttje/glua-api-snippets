@@ -4,7 +4,7 @@
 local CNavLadder = {}
 
 ---[SERVER] Connects this ladder to a CNavArea with a one way connection. ( From this ladder to the target area ).
---- 
+---
 --- See CNavArea:ConnectTo for making the connection from area to ladder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:ConnectTo)
@@ -26,7 +26,7 @@ function CNavLadder:GetBottom() end
 ---[SERVER] Returns the bottom area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:GetBottomArea)
----@return CNavArea 
+---@return CNavArea
 function CNavLadder:GetBottomArea() end
 
 ---[SERVER] Returns this CNavLadders unique ID.
@@ -112,30 +112,29 @@ function CNavLadder:Remove() end
 ---[SERVER] Sets the bottom area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:SetBottomArea)
----@param area CNavArea 
+---@param area CNavArea
 function CNavLadder:SetBottomArea(area) end
 
 ---[SERVER] Sets the top behind area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:SetTopBehindArea)
----@param area CNavArea 
+---@param area CNavArea
 function CNavLadder:SetTopBehindArea(area) end
 
 ---[SERVER] Sets the top forward area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:SetTopForwardArea)
----@param area CNavArea 
+---@param area CNavArea
 function CNavLadder:SetTopForwardArea(area) end
 
 ---[SERVER] Sets the top left area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:SetTopLeftArea)
----@param area CNavArea 
+---@param area CNavArea
 function CNavLadder:SetTopLeftArea(area) end
 
 ---[SERVER] Sets the top right area of the CNavLadder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavLadder:SetTopRightArea)
----@param area CNavArea 
+---@param area CNavArea
 function CNavLadder:SetTopRightArea(area) end
-

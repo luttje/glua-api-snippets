@@ -17,7 +17,7 @@ function weapons.Get(classname) end
 function weapons.GetList() end
 
 ---[SHARED] Gets the REAL weapon table, not a copy. The produced table does `not` inherit fields from the weapon's base class, unlike weapons.Get.
---- 
+---
 --- Modifying this table will modify what is stored by the weapons library. Take a copy or use weapons.Get to avoid this.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.GetStored)
@@ -34,22 +34,21 @@ function weapons.GetStored(weapon_class) end
 function weapons.IsBasedOn(name, base) end
 
 ---[SHARED] Called after all SWEPS have been loaded and runs baseclass.Set on each one.
---- 
+---
 --- You can retrieve all the currently registered SWEPS with weapons.GetList.
---- 
+---
 --- This is not called after a SWEP auto refresh, and thus the inherited baseclass functions retrieved with baseclass.Get will not be updated
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.OnLoaded)
 function weapons.OnLoaded() end
 
 ---[SHARED] Registers a Scripted Weapon (SWEP) class manually. When the engine spawns an entity, weapons registered with this function will be created if the class names match.
---- 
+---
 --- See also scripted_ents.Register for Scripted Entities (SENTs)
---- 
+---
 --- Sub-tables provided in the first argument will not carry over their metatable, and will receive a BaseClass key if the table was merged with the base's. Userdata references, which includes Vectors, Angles, Entities, etc. will not be copied.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.Register)
 ---@param swep_table table The SWEP table
 ---@param classname string Classname to assign to that swep
 function weapons.Register(swep_table, classname) end
-

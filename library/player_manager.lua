@@ -9,13 +9,13 @@ player_manager = {}
 ---@param model string Hands model
 ---@param skin number Skin to apply to the hands
 ---@param bodygroups string Bodygroups to apply to the hands. See Entity:SetBodyGroups for help with the format.
----@param matchBodySkin boolean If set to `true`, the skin of the hands will be set to the skin of the playermodel. 
+---@param matchBodySkin boolean If set to `true`, the skin of the hands will be set to the skin of the playermodel.
 ---  This is useful when player models have multiple user-selectable skins.
 function player_manager.AddValidHands(name, model, skin, bodygroups, matchBodySkin) end
 
 ---[SHARED] Associates a simplified name with a path to a valid player model.
---- 
---- 
+---
+---
 --- Only used internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.AddValidModel)
@@ -48,7 +48,7 @@ function player_manager.GetPlayerClass(ply) end
 function player_manager.GetPlayerClasses() end
 
 ---[SHARED] Applies basic class variables when the player spawns.
---- 
+---
 --- Called from GM:PlayerSpawn in the base gamemode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.OnPlayerSpawn)
@@ -94,11 +94,10 @@ function player_manager.TranslatePlayerHands(name) end
 function player_manager.TranslatePlayerModel(shortName) end
 
 ---[SHARED] Returns the simplified name for a valid model path of a player model.
---- 
+---
 --- Opposite of player_manager.TranslatePlayerModel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslateToPlayerModelName)
 ---@param model string The model path to a player model
 ---@return string The simplified name for that model
 function player_manager.TranslateToPlayerModelName(model) end
-

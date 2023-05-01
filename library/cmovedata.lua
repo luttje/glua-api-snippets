@@ -54,19 +54,19 @@ function CMoveData:GetConstraintWidth() end
 ---[SHARED] Returns an internal player movement variable `m_outWishVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalIdealVelocity)
----@return Vector 
+---@return Vector
 function CMoveData:GetFinalIdealVelocity() end
 
 ---[SHARED] Returns an internal player movement variable `m_outJumpVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalJumpVelocity)
----@return Vector 
+---@return Vector
 function CMoveData:GetFinalJumpVelocity() end
 
 ---[SHARED] Returns an internal player movement variable `m_outStepHeight`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalStepHeight)
----@return number 
+---@return number
 function CMoveData:GetFinalStepHeight() end
 
 ---[SHARED] Returns the players forward speed.
@@ -130,7 +130,7 @@ function CMoveData:GetSideSpeed() end
 function CMoveData:GetUpSpeed() end
 
 ---[SHARED] Gets the players velocity.
---- 
+---
 --- This will return Vector(0,0,0) sometimes when walking on props.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetVelocity)
@@ -159,10 +159,10 @@ function CMoveData:KeyPressed(key) end
 function CMoveData:KeyReleased(key) end
 
 ---[SHARED] Returns whether the key was down or not.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- Unlike CMoveData:KeyDown, it will return false if CMoveData:KeyPressed is true and it will return true if CMoveData:KeyReleased is true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyWasDown)
@@ -177,7 +177,7 @@ function CMoveData:KeyWasDown(key) end
 function CMoveData:SetAbsMoveAngles(ang) end
 
 ---[SHARED] Sets angles.
---- 
+---
 --- This function does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetAngles)
@@ -197,7 +197,7 @@ function CMoveData:SetButtons(buttons) end
 function CMoveData:SetConstraintCenter(pos) end
 
 ---[SHARED] Sets the radius that constrains the players movement.
---- 
+---
 --- Works with conjunction of:
 --- * CMoveData:SetConstraintWidth
 --- * CMoveData:SetConstraintSpeedScale
@@ -222,19 +222,19 @@ function CMoveData:SetConstraintWidth(number) end
 ---[SHARED] Sets an internal player movement variable `m_outWishVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetFinalIdealVelocity)
----@param idealVel Vector 
+---@param idealVel Vector
 function CMoveData:SetFinalIdealVelocity(idealVel) end
 
 ---[SHARED] Sets an internal player movement variable `m_outJumpVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetFinalJumpVelocity)
----@param jumpVel Vector 
+---@param jumpVel Vector
 function CMoveData:SetFinalJumpVelocity(jumpVel) end
 
 ---[SHARED] Sets an internal player movement variable `m_outStepHeight`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetFinalStepHeight)
----@param stepHeight number 
+---@param stepHeight number
 function CMoveData:SetFinalStepHeight(stepHeight) end
 
 ---[SHARED] Sets players forward speed.
@@ -250,14 +250,14 @@ function CMoveData:SetForwardSpeed(speed) end
 function CMoveData:SetImpulseCommand(impulse) end
 
 ---[SHARED] Sets the maximum player speed. Player won't be able to run or sprint faster then this value.
---- 
---- 
+---
+---
 --- This also automatically sets CMoveData:SetMaxSpeed when used in the GM:SetupMove hook. You must set it manually in the GM:Move hook.
---- 
---- 
+---
+---
 --- This must be called on both client and server to avoid prediction errors.
---- 
---- 
+---
+---
 --- This will **not** reduce speed in air.
 --- Setting this to 0 will not make the player stationary. It won't do anything.
 ---
@@ -266,8 +266,8 @@ function CMoveData:SetImpulseCommand(impulse) end
 function CMoveData:SetMaxClientSpeed(maxSpeed) end
 
 ---[SHARED] Sets the maximum speed of the player. This must match with CMoveData:SetMaxClientSpeed both, on server and client.
---- 
---- 
+---
+---
 --- Doesn't seem to be doing anything on it's own, use CMoveData:SetMaxClientSpeed instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetMaxSpeed)
@@ -275,7 +275,7 @@ function CMoveData:SetMaxClientSpeed(maxSpeed) end
 function CMoveData:SetMaxSpeed(maxSpeed) end
 
 ---[SHARED] Sets the serverside move angles, making the movement keys act as if player was facing that direction.
---- 
+---
 --- This does nothing clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetMoveAngles)
@@ -317,4 +317,3 @@ function CMoveData:SetUpSpeed(speed) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetVelocity)
 ---@param velocity Vector The velocity to set
 function CMoveData:SetVelocity(velocity) end
-

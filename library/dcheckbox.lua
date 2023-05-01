@@ -37,4 +37,3 @@ function DCheckBox:SetValue(checked) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:Toggle)
 function DCheckBox:Toggle() end
-

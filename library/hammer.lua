@@ -6,11 +6,11 @@ hammer = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hammer.SendCommand)
 ---@param cmd string Command to send including arguments
---- 
+---
 --- All commands are in the format "command var1 var2 etc"
---- 
---- All commands that pick an entity with x y z , must use the exact position including decimals. i.e. -354.4523 123.4 
---- 
+---
+--- All commands that pick an entity with x y z , must use the exact position including decimals. i.e. -354.4523 123.4
+---
 --- # List of commands
 --- | Command       | Description   |
 --- | ------------- | ------------- |
@@ -24,7 +24,6 @@ hammer = {}
 --- | "node_create nodeClass nodeID x y z" | Creates an AI node of nodeClass with nodeID at x y z you should keep nodeID unique or you will have issues |
 --- | "node_delete nodeID" | Deletes node(s) with nodeID, this will delete multiple nodes if they have the same nodeID |
 --- | "nodelink_create startNodeID endNodeID" | Creates a link between AI nodes startNodeID and endNodeID |
---- | "nodelink_delete startNodeID endNodeID" | Removes a link between AI nodes startNodeID and endNodeID | 
+--- | "nodelink_delete startNodeID endNodeID" | Removes a link between AI nodes startNodeID and endNodeID |
 ---@return string Returns "ok" if command succeeded otherwise returns "badcommand"  **All changes only happen in hammer, there is *NO* in game representation/feedback**
 function hammer.SendCommand(cmd) end
-

@@ -17,7 +17,7 @@ function DIconBrowser:FilterByText(text) end
 ---[CLIENT] Returns whether or not the browser should fill itself with icons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:GetManual)
----@return boolean 
+---@return boolean
 function DIconBrowser:GetManual() end
 
 ---[CLIENT] Returns the currently selected icon's file path.
@@ -50,12 +50,11 @@ function DIconBrowser:SelectIcon(icon) end
 ---[CLIENT] Sets whether or not the browser should automatically fill itself with icons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:SetManual)
----@param manual boolean 
+---@param manual boolean
 function DIconBrowser:SetManual(manual) end
 
 ---[CLIENT] Set the currently selected file path. Do not use. Use DIconBrowser:SelectIcon instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:SetSelectedIcon)
----@param str string 
+---@param str string
 function DIconBrowser:SetSelectedIcon(str) end
-

@@ -4,7 +4,7 @@
 local CSoundPatch = {}
 
 ---[SHARED] Adjust the pitch, alias the speed at which the sound is being played.
---- 
+---
 --- This invokes the GM:EntityEmitSound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:ChangePitch)
@@ -82,9 +82,8 @@ function CSoundPatch:SetDSP(dsp) end
 function CSoundPatch:SetSoundLevel(level) end
 
 ---[SHARED] Stops the sound from being played.
---- 
+---
 --- This will not work if the entity attached to this sound patch (specified by Global.CreateSound) is invalid.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:Stop)
 function CSoundPatch:Stop() end
-

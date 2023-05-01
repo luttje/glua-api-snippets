@@ -22,7 +22,7 @@ function DCheckBoxLabel:GetIndent() end
 function DCheckBoxLabel:OnChange(bVal) end
 
 ---[CLIENT] You really should be using DCheckBoxLabel:SetTextColor instead
---- 
+---
 --- Sets the color of the DCheckBoxLabel's text to the bright text color defined in the skin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetBright)
@@ -42,7 +42,7 @@ function DCheckBoxLabel:SetChecked(checked) end
 function DCheckBoxLabel:SetConVar(convar) end
 
 ---[CLIENT] You really should be using DCheckBoxLabel:SetTextColor instread
---- 
+---
 --- Sets the text of the DCheckBoxLabel to be dark colored.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetDark)
@@ -77,4 +77,3 @@ function DCheckBoxLabel:SetValue(checked) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:Toggle)
 function DCheckBoxLabel:Toggle() end
-

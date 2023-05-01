@@ -9,7 +9,7 @@ local DImage = {}
 function DImage:DoLoadMaterial() end
 
 ---[CLIENT] "Fixes" the current material of the DImage if it has VertexLit shader by creating a new one with the same name and a prefix of "_DImage" and automatically calling DImage:SetMaterial with the new material.
---- 
+---
 --- This fixes the problem where using materials using shaders that expect lighting information causing "weird" flickering when displayed in 2D/Unlit environment.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:FixVertexLitMaterial)
@@ -18,7 +18,7 @@ function DImage:FixVertexLitMaterial() end
 ---[CLIENT] Returns the texture path set by DImage:SetFailsafeMatName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetFailsafeMatName)
----@return string 
+---@return string
 function DImage:GetFailsafeMatName() end
 
 ---[CLIENT] Returns the image loaded in the image panel.
@@ -34,7 +34,7 @@ function DImage:GetImage() end
 function DImage:GetImageColor() end
 
 ---[CLIENT] Returns whether the DImage should keep the aspect ratio of its image when being resized.
---- 
+---
 --- See DImage:SetKeepAspect for more info on how it works.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetKeepAspect)
@@ -44,17 +44,17 @@ function DImage:GetKeepAspect() end
 ---[CLIENT] Returns the current Global.Material of the DImage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetMaterial)
----@return IMaterial 
+---@return IMaterial
 function DImage:GetMaterial() end
 
 ---[CLIENT] Returns the texture path set by DImage:SetMatName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetMatName)
----@return string 
+---@return string
 function DImage:GetMatName() end
 
 ---[CLIENT] Initializes the loading process of the material to render if it is not loaded yet.
---- 
+---
 --- You do not need to call this function. It is done for you automatically.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:LoadMaterial)
@@ -72,11 +72,11 @@ function DImage:PaintAt(posX, posY, width, height) end
 ---[CLIENT] Sets the backup material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetFailsafeMatName)
----@param backupMat string 
+---@param backupMat string
 function DImage:SetFailsafeMatName(backupMat) end
 
 ---[CLIENT] Sets the image to load into the frame. If the first image can't be loaded and `strBackup` is set, that image will be loaded instead.
---- 
+---
 --- This eventually calls DImage:SetMaterial.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetImage)
@@ -91,7 +91,7 @@ function DImage:SetImage(strImage, strBackup) end
 function DImage:SetImageColor(col) end
 
 ---[CLIENT] Sets whether the DImage should keep the aspect ratio of its image when being resized.
---- 
+---
 --- Note that this will not try to fit the image inside the button, but instead it will fill the button with the image.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetKeepAspect)
@@ -107,21 +107,20 @@ function DImage:SetMaterial(mat) end
 ---[CLIENT] Sets the material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetMatName)
----@param mat string 
+---@param mat string
 function DImage:SetMatName(mat) end
 
 ---[CLIENT] Similar to DImage:SetImage, but will only do the expensive part of actually loading the textures/material if the material is about to be rendered/viewed.
---- 
+---
 --- Useful for cases like DIconBrowser, where there are hundreds of small icons in 1 panel in a list that do not need all to be loaded at the same time.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetOnViewMaterial)
----@param mat string 
----@param backupMat string 
+---@param mat string
+---@param backupMat string
 function DImage:SetOnViewMaterial(mat, backupMat) end
 
 ---[CLIENT] Returns true if the image is **not** yet loaded.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:Unloaded)
----@return boolean 
+---@return boolean
 function DImage:Unloaded() end
-

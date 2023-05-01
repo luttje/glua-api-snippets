@@ -6,7 +6,7 @@
 ---@field maxsplash number The maximum water splash size.
 ---@field minsplash number The minimum water splash size.
 ---@field name string Name of the ammo.  Related functions are game.GetAmmoName and game.GetAmmoID.
----@field npcdmg number The damage dealt to NPCs.  Related function is game.GetAmmoNPCDamage.  Can also be a string pointing to a convar. The value will automatically update with the convar's. 
+---@field npcdmg number The damage dealt to NPCs.  Related function is game.GetAmmoNPCDamage.  Can also be a string pointing to a convar. The value will automatically update with the convar's.
 ---@field plydmg number The damage dealt to players.  Related function is game.GetAmmoPlayerDamage.  Can also be a string pointing to a convar. The value will automatically update with the convar's.
 ---@field tracer number Tracer type using Enums/TRACER.
 ---@field maxcarry number Maximum amount of ammo of this type the player should be able to carry in reserve. `-2` makes this ammo type infinite.  Related function is game.GetAmmoMax.  Can also be a string pointing to a convar. The value will automatically update with the convar's. `gmod_maxammo` convar will override this value if set to above 0, **which it is by default**.
@@ -59,7 +59,7 @@ local BoneManipulationData = {}
 ---@class Bullet
 ---@field Attacker Entity The entity that should be reported as attacker eg. a player  By default this would be set to the entity Entity:FireBullets is called on.
 ---@field Callback function Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo
----@field Damage number The damage dealt by the bullet.  If set to `0`, it means the damage should be calculated from the ammo type's ConVars if  the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set.   See Structures/AmmoData. 
+---@field Damage number The damage dealt by the bullet.  If set to `0`, it means the damage should be calculated from the ammo type's ConVars if  the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set.   See Structures/AmmoData.
 ---@field Force number The force of the bullets
 ---@field Distance number Maximum distance the bullet can travel
 ---@field HullSize number The hull size of the bullet
@@ -80,7 +80,7 @@ local Bullet = {}
 ---@field znear number Distance to near clipping plane
 ---@field zfar number Distance to far clipping plane
 ---@field drawviewer boolean Set true to draw local players player model.
----@field ortho table If set, enables orthographic mode. The table has following arguments: * number left * number right * number top * number bottom  Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position. 
+---@field ortho table If set, enables orthographic mode. The table has following arguments: * number left * number right * number top * number bottom  Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
 local CamData = {}
 
 ---@class CollisionData
@@ -252,11 +252,11 @@ local FontData = {}
 local GM = {}
 
 ---@class HTTPRequest
----@field failed function Function to be called on failure. Arguments are * string reason 		
----@field success function Function to be called on success. Arguments are * number code * string body * table headers 		
----@field method string Request method, case insensitive. Possible values are: * GET * POST * HEAD * PUT * DELETE * PATCH * OPTIONS 		
+---@field failed function Function to be called on failure. Arguments are * string reason
+---@field success function Function to be called on success. Arguments are * number code * string body * table headers
+---@field method string Request method, case insensitive. Possible values are: * GET * POST * HEAD * PUT * DELETE * PATCH * OPTIONS
 ---@field url string The target url
----@field parameters table KeyValue table for parameters. This is only applicable to the following request methods: * GET * POST * HEAD 		
+---@field parameters table KeyValue table for parameters. This is only applicable to the following request methods: * GET * POST * HEAD
 ---@field headers table KeyValue table for headers
 ---@field body string Body string for POST data. If set, will override parameters
 ---@field type string Content type for body.
@@ -325,8 +325,8 @@ local OperatingParams = {}
 ---@field how number The direction of travel to reach the end of this segment from the start, represented as a cardinal direction integer 0 to 3, or 9 for vertical movement.
 ---@field ladder CNavLadder The navmesh ladder this segment occupies, if any.
 ---@field length number Length of this segment.
----@field m_portalCenter Vector 
----@field m_portalHalfWidth number 
+---@field m_portalCenter Vector
+---@field m_portalHalfWidth number
 ---@field pos Vector The position of the end of this segment.
 ---@field type number The movement type of this segment, indicating how bots are expected to move along this segment. * 0 is ground movement * 1 is falling down * 2 is climbing up or jumping * 3 is jumping over a gap * 4 is climbing a ladder up (unused) * 5 is climbing a ladder down (unused)
 local PathSegment = {}
@@ -393,7 +393,7 @@ local Preset = {}
 ---@field id string The Problem ID.
 ---@field text string The Text to Display.
 ---@field severity number  The Problem severity.
----@field type string The Problem Type. Possible values are: * config * hardware * addons 		
+---@field type string The Problem Type. Possible values are: * config * hardware * addons
 ---@field fix function a Function that fixes the Problem.
 local Problem = {}
 
@@ -401,14 +401,14 @@ local Problem = {}
 ---@field Type string Can be set to "toggle" to make this property a toggle property.
 ---@field MenuLabel string Label to show on opened menu
 ---@field MenuIcon string Icon to show on opened menu for this item. Optional for simple properties and unused for toggle properties.
----@field structureFieldOrder number Where in the list should the property be positioned, relative to other properties.  For reference, here are the default properties and their Order values:  Property |  Order | ---------|-------| | Bone Manipulate | 500 | | Bodygroups | 600 | | Skin | 601 | | Keep Upright | 900 | | Ignite/Extinguish | 999 | | Remove | 1000 | | Gravity | 1001 | | Drive | 1100 | | Collision | 1500 | | Statue | 1501 | | NPC Biggify/Smallify | 1799, 1800 | | Motion Control (Kinect) | 2500 | | Editable_Entities | 90001 | 
+---@field structureFieldOrder number Where in the list should the property be positioned, relative to other properties.  For reference, here are the default properties and their Order values:  Property |  Order | ---------|-------| | Bone Manipulate | 500 | | Bodygroups | 600 | | Skin | 601 | | Keep Upright | 900 | | Ignite/Extinguish | 999 | | Remove | 1000 | | Gravity | 1001 | | Drive | 1100 | | Collision | 1500 | | Statue | 1501 | | NPC Biggify/Smallify | 1799, 1800 | | Motion Control (Kinect) | 2500 | | Editable_Entities | 90001 |
 ---@field PrependSpacer boolean Whether to add a spacer before this property. This should generally be true for the first property in a group of properties.
----@field Filter function Used **clientside** to decide whether this property should be shown for an entity. Gets these arguments: * table self - the property table * Entity ent - the entity the player clicked * Global.LocalPlayer player - the localplayer  Return true if the property should be shown for this entity. It's good practice to call SANDBOX:CanProperty in this hook via gamemode.Call or hook.Run. 
----@field Checked function  Required for toggle properties (clientside). Must return a boolean value to either check or uncheck the toggle property. * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace 
----@field Action function  Called **clientside** when the property is clicked with these arguments: * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace  When appropriate, within this function you can call self:MsgStart(), write data with the net 'Write' functions, and finish with self:MsgEnd(). This will activate the 'Receive' function on the server. In most cases, you will want to send the entity to the server, as it's not done by default. 
----@field Receive function  Called **serverside** if the client sends a message in the 'Action' function (see above). * table self - the property table * number len - the net message length, although this includes the property identifier used internally (the name of the property) * Player ply - the player who clicked the property  You can read data received from the client with the net 'Read' functions. It's good practice to check SANDBOX:CanProperty here via gamemode.Call or hook.Run. 
----@field MenuOpen function  Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties! * table self - the property table * DMenuOption option - the menu option * Entity ent - the entity the player right-clicked * table tr - the player's eye trace 
----@field OnCreate function  Same as MenuOpen, but also called for toggle properties and has different arguments. This is called immediately after MenuOpen, but nothing happens in between so you should only ever use one or the other. * table self - the property table * DMenu menu - the property menu * DMenuOption option - the menu option 
+---@field Filter function Used **clientside** to decide whether this property should be shown for an entity. Gets these arguments: * table self - the property table * Entity ent - the entity the player clicked * Global.LocalPlayer player - the localplayer  Return true if the property should be shown for this entity. It's good practice to call SANDBOX:CanProperty in this hook via gamemode.Call or hook.Run.
+---@field Checked function  Required for toggle properties (clientside). Must return a boolean value to either check or uncheck the toggle property. * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace
+---@field Action function  Called **clientside** when the property is clicked with these arguments: * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace  When appropriate, within this function you can call self:MsgStart(), write data with the net 'Write' functions, and finish with self:MsgEnd(). This will activate the 'Receive' function on the server. In most cases, you will want to send the entity to the server, as it's not done by default.
+---@field Receive function  Called **serverside** if the client sends a message in the 'Action' function (see above). * table self - the property table * number len - the net message length, although this includes the property identifier used internally (the name of the property) * Player ply - the player who clicked the property  You can read data received from the client with the net 'Read' functions. It's good practice to check SANDBOX:CanProperty here via gamemode.Call or hook.Run.
+---@field MenuOpen function  Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties! * table self - the property table * DMenuOption option - the menu option * Entity ent - the entity the player right-clicked * table tr - the player's eye trace
+---@field OnCreate function  Same as MenuOpen, but also called for toggle properties and has different arguments. This is called immediately after MenuOpen, but nothing happens in between so you should only ever use one or the other. * table self - the property table * DMenu menu - the property menu * DMenuOption option - the menu option
 local PropertyAdd = {}
 
 ---@class RenderCamData
@@ -446,7 +446,7 @@ local RenderCaptureData = {}
 ---@field actweight number How likely this sequence is to be picked when playing an activity its attached to. -1 means this is the only sequence for that activity. (needs validation)
 ---@field flags number The looping and other flags of this sequence.
 ---@field numevents number Number of animation events this sequence has.
----@field numblends number 
+---@field numblends number
 ---@field bbmin number Mins part of the bounding box for this sequence
 ---@field bbmax number Maxs part of the bounding box for this sequence
 ---@field fadeintime number ideal cross fade in time (0.2 default)
@@ -456,7 +456,7 @@ local RenderCaptureData = {}
 ---@field nodeflags number Transition rules
 ---@field lastframe number Frame that should generate EndOFSequence
 ---@field nextseq number If non 0, the next sequence for auto advancing sequences
----@field pose number 
+---@field pose number
 ---@field cycleposeindex number If non 0, index of pose parameter to be used as cycle index. This means that the sequence playback will be controlled by a pose parameter.
 ---@field anims table A 1-based array of all animationIDs associated with this sequence. For use with Entity:GetAnimInfo.
 local SequenceInfo = {}
@@ -465,16 +465,16 @@ local SequenceInfo = {}
 ---@field GameDir string The game directory to get the servers for
 ---@field Type string Type of servers to retrieve. Valid values are `internet`, `favorite`, `history` and `lan`
 ---@field AppID number Steam application ID to get the servers for
----@field Callback function Called when a new server is found and queried. Arguments:        number ping - Latency to the server.         string name - Name of the server         string desc - "Nice" gamemode name         string map - Current map         number players - Total player number ( bot + human )         number maxplayers - Maximum reported amount of players         number botplayers - Amount of bots on the server         boolean pass - Whether this server has password or not         number lastplayed - Time when you last played on this server, as UNIX timestamp or 0         string address - IP Address of the server         string gamemode - Gamemode folder name         number workshopid - Gamemode Steam Workshop ID         boolean isanon - Is the server signed into an anonymous account?         string version - Version number, same format as jit.version_num         string localization - Two digit country code, `us` if nil         string gmcategory - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay`         Return false to stop the query.     
----@field CallbackFailed function        Called if the query has failed, called with the servers IP Address     
+---@field Callback function Called when a new server is found and queried. Arguments:        number ping - Latency to the server.         string name - Name of the server         string desc - "Nice" gamemode name         string map - Current map         number players - Total player number ( bot + human )         number maxplayers - Maximum reported amount of players         number botplayers - Amount of bots on the server         boolean pass - Whether this server has password or not         number lastplayed - Time when you last played on this server, as UNIX timestamp or 0         string address - IP Address of the server         string gamemode - Gamemode folder name         number workshopid - Gamemode Steam Workshop ID         boolean isanon - Is the server signed into an anonymous account?         string version - Version number, same format as jit.version_num         string localization - Two digit country code, `us` if nil         string gmcategory - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay`         Return false to stop the query.
+---@field CallbackFailed function        Called if the query has failed, called with the servers IP Address
 ---@field Finished function Called when the query is finished. No arguments
 local ServerQueryData = {}
 
 ---@class SoundData
 ---@field channel number The sound channel to play in. See Enums/CHAN
 ---@field name string The name of the sound.
----@field pitchstart number The initial pitch. 	Deprecated, use pitch. 
----@field pitchend number The pitch end. Deprecated, use pitch. 
+---@field pitchstart number The initial pitch. 	Deprecated, use pitch.
+---@field pitchend number The pitch end. Deprecated, use pitch.
 ---@field level number The soundlevel of the sound in dB. See Enums/SNDLVL.
 ---@field sound string The sound file to be used in this sound effect. Can be a table of sound files. Relative to "sound" directory (must be in a subfolder, so sound/test.wav will not work).
 ---@field volume number The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.  **Warning:** Volume of `0` will act as volume of `1`
@@ -529,12 +529,12 @@ local SurfacePropertyData = {}
 ---@class SWEP
 ---@field ClassName string Entity class name of the SWEP (file or folder name of your SWEP). This is             set automatically
 ---@field Category string The spawn menu category that this weapon             resides in.
----@field Spawnable boolean Whether or not this weapon can be obtained through the             spawn menu.         
+---@field Spawnable boolean Whether or not this weapon can be obtained through the             spawn menu.
 ---@field AdminOnly boolean If spawnable, this variable determines whether only             administrators can use the button in the spawn menu.
 ---@field PrintName string The name of the SWEP displayed in the spawn menu.
 ---@field Base string The weapon's base script, relative to `lua/weapons`.
 ---@field m_WeaponDeploySpeed number The deploy speed multiplier. This does not change the             internal deployment speed.
----@field Owner Entity              Deprecated, use Entity:GetOwner() instead.         
+---@field Owner Entity              Deprecated, use Entity:GetOwner() instead.
 ---@field Author string The SWEP's author.
 ---@field Contact string The contact information regarding the SWEP's author.
 ---@field Purpose string The purpose of the SWEP.
@@ -552,18 +552,18 @@ local SurfacePropertyData = {}
 ---@field SwayScale number The scale of the viewmodel sway (viewmodel             position lerp when looking around).
 ---@field BounceWeaponIcon boolean Should the weapon icon bounce in weapon             selection?
 ---@field DrawWeaponInfoBox boolean Should draw the weapon selection info             box, containing SWEP.Instructions, etc.
----@field DrawAmmo boolean Should we draw the default HL2 ammo counter?         
----@field DrawCrosshair boolean Should we draw the default crosshair?         
----@field RenderGroup number The SWEP render group, see             Enums/RENDERGROUP         
+---@field DrawAmmo boolean Should we draw the default HL2 ammo counter?
+---@field DrawCrosshair boolean Should we draw the default crosshair?
+---@field RenderGroup number The SWEP render group, see             Enums/RENDERGROUP
 ---@field Slot number Slot in the weapon selection menu, starts with `0`
 ---@field SlotPos number Position in the slot, should be in the range `0-128`
 ---@field SpeechBubbleLid number (Clientside)             Internal variable for drawing the info box in weapon selection
----@field WepSelectIcon number Path to             an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,             see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.									    		
+---@field WepSelectIcon number Path to             an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,             see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
 ---@field CSMuzzleFlashes boolean Should we use Counter-Strike muzzle             flashes upon firing? This is required for DoD:S or CS:S view models to fix their muzzle flashes.
 ---@field CSMuzzleX boolean Use the X shape muzzle flash instead of the             default Counter-Strike muzzle flash. Requires CSMuzzleFlashes to be set to true
 ---@field Primary table Primary attack settings. The table contains these fields:              * string Ammo - Ammo type ("Pistol", "SMG1" etc)             * number ClipSize - The maximum amount of bullets one clip can hold. Setting it to `-1` means             weapon uses no clips, like a grenade or a rocket launch.             * number DefaultClip - Default ammo in the clip, making it higher than ClipSize will give             player additional ammo on spawn             * boolean Automatic - If true makes the weapon shoot automatically as long as the player has             primary attack button held down
 ---@field Secondary table Secondary attack settings, has same fields as Primary attack settings
----@field UseHands boolean Makes the player models hands bonemerged onto             the view model              The gamemode and view models **must** support this feature for it to work!                 You can find more information here: Using_Viewmodel_Hands                      
+---@field UseHands boolean Makes the player models hands bonemerged onto             the view model              The gamemode and view models **must** support this feature for it to work!                 You can find more information here: Using_Viewmodel_Hands
 ---@field Folder string The folder from where the weapon was loaded. This should always be             "weapons/weapon_myweapon", regardless whether your SWEP is stored as a file, or multiple files in a folder.             It is set automatically on load
 ---@field AccurateCrosshair boolean Makes the default SWEP crosshair be             positioned in 3D space where your aim actually is (like on Jeep), instead of simply sitting in the middle of             the screen at all times
 ---@field DisableDuplicator boolean Disable the ability for players to duplicate this             SWEP
@@ -645,7 +645,7 @@ local Trace = {}
 ---@field HitTexture string The surface material (not texture) of whatever the trace hit. Will be `**displacement**` if the trace hit a displacement, and `**studio**` if it hit a prop.
 ---@field HitWorld boolean Indicates whenever the trace hit the world.
 ---@field MatType number Enums/MAT of the material hit by the trace.
----@field Normal Vector The direction of the trace as a normal vector (vector with Vector:Length of 1).  Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()` 
+---@field Normal Vector The direction of the trace as a normal vector (vector with Vector:Length of 1).  Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()`
 ---@field PhysicsBone number The PhysObj ID that was hit.  Used for Entity:GetPhysicsObjectNum.
 ---@field StartPos Vector The origin of the trace. Will match the provided startpos.
 ---@field SurfaceProps number ID of hit surface property from `scripts/surfaceproperties.txt`. You can get the name using util.GetSurfacePropName.  Used for CEffectData:SetSurfaceProp.
@@ -696,47 +696,47 @@ local Undo = {}
 local VehicleParams = {}
 
 ---@class VehicleParamsAxle
----@field brakeFactor number 
----@field offset Vector 
----@field raytraceCenterOffset Vector 
----@field raytraceOffset Vector 
----@field suspension_maxBodyForce number 
----@field suspension_springConstant number 
----@field suspension_springDamping number 
----@field suspension_springDampingCompression number 
----@field suspension_stabilizerConstant number 
----@field torqueFactor number 
----@field wheelOffset Vector 
+---@field brakeFactor number
+---@field offset Vector
+---@field raytraceCenterOffset Vector
+---@field raytraceOffset Vector
+---@field suspension_maxBodyForce number
+---@field suspension_springConstant number
+---@field suspension_springDamping number
+---@field suspension_springDampingCompression number
+---@field suspension_stabilizerConstant number
+---@field torqueFactor number
+---@field wheelOffset Vector
 ---@field wheels_brakeMaterialIndex number Material index of braking material of the wheels. Upon braking, the wheels will be set to this material.
----@field wheels_damping number 
----@field wheels_frictionScale number 
----@field wheels_inertia number 
+---@field wheels_damping number
+---@field wheels_frictionScale number
+---@field wheels_inertia number
 ---@field wheels_mass number Mass of each wheel.
 ---@field wheels_materialIndex number Material index of the wheels by default.
 ---@field wheels_radius number Radius of the wheels.
----@field wheels_rotdamping number 
+---@field wheels_rotdamping number
 ---@field wheels_skidMaterialIndex number Material index of skid material of the wheels. Upon skidding ( pressing Space and sliding the vehicle ), the wheels will be set to this material.
----@field wheels_springAdditionalLength number 
+---@field wheels_springAdditionalLength number
 local VehicleParamsAxle = {}
 
 ---@class VehicleParamsBody
 ---@field addGravity number Additional gravity to be applied to the vehicle
----@field counterTorqueFactor number 
----@field keepUprightTorque number 
+---@field counterTorqueFactor number
+---@field keepUprightTorque number
 ---@field massCenterOverride Vector Mass center override
 ---@field massOverride number Mass override
 ---@field maxAngularVelocity number Maximum angular velocity
----@field tiltForce number 
----@field tiltForceHeight number 
+---@field tiltForce number
+---@field tiltForceHeight number
 local VehicleParamsBody = {}
 
 ---@class VehicleParamsEngine
----@field autobrakeSpeedFactor number 
----@field autobrakeSpeedGain number 
+---@field autobrakeSpeedFactor number
+---@field autobrakeSpeedGain number
 ---@field axleRatio number This acts as the final ratio of the gearbox.  It's like a master coefficient of the gearbox.
 ---@field boostDelay number Amount of seconds between being able to use the boost ( by pressing Shift key by default )
 ---@field boostDuration number Duration of the boost in seconds
----@field boostForce number 
+---@field boostForce number
 ---@field boostMaxSpeed number Maximum speed while boosting  The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**!  In this case HU = inches, so 1 MPH is 17.6 HU/s.
 ---@field gearCount number Amount of gears this vehicle has.
 ---@field gearRatio table A table of numbers, of gear rations.  Table length is equal to "gearCount" member of this table.
@@ -747,40 +747,40 @@ local VehicleParamsBody = {}
 ---@field maxSpeed number Maximum forward going speed of the vehicle without boosting  The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**!  In this case HU = inches, so 1 MPH is 17.6 HU/s.
 ---@field shiftDownRPM number Amount of RPM to automatically shift one gear down
 ---@field shiftUpRPM number Amount of RPM to automatically shift one gear up
----@field throttleTime number 
----@field torqueBoost boolean 
+---@field throttleTime number
+---@field torqueBoost boolean
 local VehicleParamsEngine = {}
 
 ---@class VehicleParamsSteering
----@field boostSteeringRateFactor number 
----@field boostSteeringRestRateFactor number 
----@field brakeSteeringRateFactor number 
+---@field boostSteeringRateFactor number
+---@field boostSteeringRestRateFactor number
+---@field brakeSteeringRateFactor number
 ---@field degreesBoost number The maximum angle at which the vehicle can turn while boosting
 ---@field degreesFast number The maximum angle at which the vehicle can turn while moving at max speed and not boosting
 ---@field degreesSlow number The maximum angle at which the vehicle can turn while moving slowest
 ---@field dustCloud boolean Disabled in Garry's Mod. In Half-Life 2: Episode 2 this dictates whether the vehicle should leave wheel dust effects when driving around
 ---@field isSkidAllowed boolean Whether the vehicle is allowed to skid/drift
 ---@field powerSlideAccel number In Hammer Units
----@field speedFast number 
----@field speedSlow number 
----@field steeringExponent number 
----@field steeringRateFast number 
----@field steeringRateSlow number 
----@field steeringRestRateFast number 
----@field steeringRestRateSlow number 
----@field throttleSteeringRestRateFactor number 
----@field turnThrottleReduceFast number 
----@field turnThrottleReduceSlow number 
+---@field speedFast number
+---@field speedSlow number
+---@field steeringExponent number
+---@field steeringRateFast number
+---@field steeringRateSlow number
+---@field steeringRestRateFast number
+---@field steeringRestRateSlow number
+---@field throttleSteeringRestRateFactor number
+---@field turnThrottleReduceFast number
+---@field turnThrottleReduceSlow number
 local VehicleParamsSteering = {}
 
 ---@class VehicleTable
----@field Author string 
----@field Model string 
----@field Class string 
----@field Category string 
----@field Information string 
----@field Name string 
----@field KeyValues table  	Do any other values belong in the KeyValues table? 
+---@field Author string
+---@field Model string
+---@field Class string
+---@field Category string
+---@field Information string
+---@field Name string
+---@field KeyValues table  	Do any other values belong in the KeyValues table?
 local VehicleTable = {}
 
 ---@class VideoData
@@ -842,6 +842,5 @@ local ViewData = {}
 ---@field zfarviewmodel number The distance of the view's origin to the far clipping plane for the viewmodel
 ---@field bloomtone boolean Whether default engine bloom and tonemapping are enabled at this instant for this view.
 ---@field subrect boolean Whether `m_bRenderToSubrectOfLargerScreen` if set for this view.
----@field offcenter table  It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport).  Note that top and bottom are reversed.  This will not be present if offscreen rendering is not enabled for this view.  See Structures/ViewData for more info. 
+---@field offcenter table  It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport).  Note that top and bottom are reversed.  This will not be present if offscreen rendering is not enabled for this view.  See Structures/ViewData for more info.
 local ViewSetup = {}
-

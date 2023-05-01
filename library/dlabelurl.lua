@@ -28,8 +28,8 @@ function DLabelURL:GetTextStyleColor() end
 function DLabelURL:SetColor(col) end
 
 ---[CLIENT] Sets the text color of the DLabelURL. Overrides DLabelURL:SetTextStyleColor.
---- 
---- 
+---
+---
 --- This should only be used immediately after it is created, and otherwise Panel:SetFGColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelURL:SetTextColor)
@@ -41,4 +41,3 @@ function DLabelURL:SetTextColor(col) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelURL:SetTextStyleColor)
 ---@param color table The Global.Color to set
 function DLabelURL:SetTextStyleColor(color) end
-

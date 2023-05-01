@@ -49,4 +49,3 @@ function killicon.Exists(class) end
 ---@return number, number number - Width of the kill icon
 ---@return number, number number - Height of the kill icon
 function killicon.GetSize(name) end
-

@@ -27,11 +27,10 @@ function DProperty_Combo:SetSelected(Id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:Setup)
 ---@param data table Data to use to set up the combo box control. See Editable Entities.
---- 
+---
 --- Structure:
 --- * string text - The default label for this combo box
 --- * table values - The values to add to the combo box. Keys are the "nice" text, values are the data value to send.
 --- * table icons - The icons for each value. They will be matched by key name.
 --- * boolean select - The "nice" name/key of the value that should be initially selected.
 function DProperty_Combo:Setup(data) end
-

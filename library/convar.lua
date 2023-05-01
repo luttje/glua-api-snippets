@@ -89,7 +89,7 @@ function ConVar:SetBool(value) end
 function ConVar:SetFloat(value) end
 
 ---[SHARED AND MENU] Sets a ConVar's value to the input number after converting it to an integer.
---- 
+---
 --- This can only be ran on ConVars created from within Lua.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ConVar:SetInt)
@@ -101,4 +101,3 @@ function ConVar:SetInt(value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ConVar:SetString)
 ---@param value string Value to set the ConVar to.
 function ConVar:SetString(value) end
-

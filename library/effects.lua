@@ -19,7 +19,7 @@ effects = {}
 --- * number flags- Beam flags.
 --- * number framerate - texture framerate.
 --- * string material - The material to use instead of the default one.
---- 
+---
 function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude, color, extra) end
 
 ---[SHARED] Creates a bunch of bubbles inside a defined box.
@@ -63,4 +63,3 @@ function effects.GetList() end
 ---@param effect_table table Effect table.
 ---@param name string Effect name.
 function effects.Register(effect_table, name) end
-

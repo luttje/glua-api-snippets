@@ -38,7 +38,7 @@ function DScrollPanel:GetVBar() end
 ---@return number The width of the DScrollPanel's canvas
 function DScrollPanel:InnerWidth() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:Rebuild)
 function DScrollPanel:Rebuild() end
@@ -60,4 +60,3 @@ function DScrollPanel:SetCanvas(canvas) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:SetPadding)
 ---@param padding number The padding of the DScrollPanel.
 function DScrollPanel:SetPadding(padding) end
-

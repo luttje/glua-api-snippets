@@ -10,7 +10,7 @@ local DColorButton = {}
 function DColorButton:GetColor() end
 
 ---[CLIENT] Returns the unique ID set by DColorButton:SetID.
---- 
+---
 --- Used internally by DColorPalette
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetID)
@@ -20,7 +20,7 @@ function DColorButton:GetID() end
 ---[CLIENT] Returns whether the DColorButton is currently being pressed (the user is holding it down).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:IsDown)
----@return boolean 
+---@return boolean
 function DColorButton:IsDown() end
 
 ---[CLIENT] Sets the color of the DColorButton.
@@ -35,4 +35,3 @@ function DColorButton:SetColor(color, noTooltip) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetID)
 ---@param id number A unique ID to give this button
 function DColorButton:SetID(id) end
-

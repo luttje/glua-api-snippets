@@ -23,7 +23,7 @@ function Vector:Angle() end
 function Vector:AngleEx(up) end
 
 ---[SHARED AND MENU] Calculates the cross product of this vector and the passed one.
---- 
+---
 --- The cross product of two vectors is a 3-dimensional vector with a direction perpendicular (at right angles) to both of them (according to the right-hand rule), and magnitude equal to the area of parallelogram they span. This is defined as the product of the magnitudes, the sine of the angle between them, and unit (normal) vector `n` defined by the right-hand rule:
 --- :**a** &times; **b** = |**a**| |**b**| sin(&theta;) **n̂**
 --- where **a** and **b** are vectors, and **n̂** is a unit vector (magnitude of 1) perpendicular to both.
@@ -34,7 +34,7 @@ function Vector:AngleEx(up) end
 function Vector:Cross(otherVector) end
 
 ---[SHARED AND MENU] Returns the euclidean distance between the vector and the other vector.
---- 
+---
 --- This function is more expensive than Vector:DistToSqr. However, please see the notes for Vector:DistToSqr before using it as squared distances are not the same as euclidean distances.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Distance)
@@ -43,9 +43,9 @@ function Vector:Cross(otherVector) end
 function Vector:Distance(otherVector) end
 
 ---[SHARED AND MENU] Returns the squared distance of 2 vectors, this is faster than Vector:Distance as calculating the square root is an expensive process.
---- 
+---
 --- 	Squared distances should not be summed. If you need to sum distances, use Vector:Distance.
---- 
+---
 --- When performing a distance check, ensure the distance being checked against is squared. See example code below.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:DistToSqr)
@@ -60,12 +60,12 @@ function Vector:DistToSqr(otherVec) end
 function Vector:Div(divisor) end
 
 ---[SHARED AND MENU] Returns the [dot product](https://en.wikipedia.org/wiki/Dot_product#Geometric_definition)  of this vector and the passed one.
---- 
+---
 --- The dot product of two vectors is the product of their magnitudes (lengths), and the cosine of the angle between them:
---- **a · b** = |**a**| |**b**| cos(θ) 
+--- **a · b** = |**a**| |**b**| cos(θ)
 --- where **a** and **b** are vectors.
 --- See Vector:Length for obtaining magnitudes.
---- 
+---
 --- A dot product returns just the cosine of the angle if both vectors are normalized, and zero if the vectors are at right angles to each other.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Dot)
@@ -81,7 +81,7 @@ function Vector:Dot(otherVector) end
 function Vector:DotProduct(Vector) end
 
 ---[SHARED AND MENU] Returns the negative version of this vector, i.e. a vector with every component to the negative value of itself.
---- 
+---
 --- See also Vector:Negate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNegated)
@@ -89,7 +89,7 @@ function Vector:DotProduct(Vector) end
 function Vector:GetNegated() end
 
 ---[SHARED AND MENU] Use Vector:GetNormalized instead.
---- 
+---
 --- Returns a normalized version of the vector. This is a alias of Vector:GetNormalized.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNormal)
@@ -97,7 +97,7 @@ function Vector:GetNegated() end
 function Vector:GetNormal() end
 
 ---[SHARED AND MENU] Returns a normalized version of the vector. Normalized means vector with same direction but with length of 1.
---- 
+---
 --- This does not affect the vector you call it on; to do this, use Vector:Normalize.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNormalized)
@@ -119,8 +119,8 @@ function Vector:IsEqualTol(compare, tolerance) end
 function Vector:IsZero() end
 
 ---[SHARED AND MENU] Returns the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_vector#Length) of the vector: &radic;(x&sup2; + y&sup2; + z&sup2;).
---- 
---- 		
+---
+---
 --- 			This is a relatively expensive process since it uses the square root. It is recommended that you use Vector:LengthSqr whenever possible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length)
@@ -128,8 +128,8 @@ function Vector:IsZero() end
 function Vector:Length() end
 
 ---[SHARED AND MENU] Returns the length of the vector in two dimensions, without the Z axis.
---- 
---- 		
+---
+---
 --- 			This is a relatively expensive process since it uses the square root. It is recommended that you use Vector:Length2DSqr whenever possible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length2D)
@@ -137,7 +137,7 @@ function Vector:Length() end
 function Vector:Length2D() end
 
 ---[SHARED AND MENU] Returns the squared length of the vectors x and y value, x&sup2; + y&sup2;.
---- 
+---
 --- This is faster than Vector:Length2D as calculating the square root is an expensive process.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length2DSqr)
@@ -145,7 +145,7 @@ function Vector:Length2D() end
 function Vector:Length2DSqr() end
 
 ---[SHARED AND MENU] Returns the squared length of the vector, x&sup2; + y&sup2; + z&sup2;.
---- 
+---
 --- This is faster than Vector:Length as calculating the square root is an expensive process.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:LengthSqr)
@@ -203,11 +203,11 @@ function Vector:SetUnpacked(x, y, z) end
 function Vector:Sub(vector) end
 
 ---[SHARED] Translates the Vector (values ranging from 0 to 1) into a Color. This will also range the values from 0 - 1 to 0 - 255.
---- 
+---
 --- x * 255 -> r
 --- y * 255 -> g
 --- z * 255 -> b
---- 
+---
 --- This is the opposite of Color:ToVector
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:ToColor)
@@ -215,11 +215,11 @@ function Vector:Sub(vector) end
 function Vector:ToColor() end
 
 ---[CLIENT] Returns where on the screen the specified position vector would appear. A related function is gui.ScreenToVector, which converts a 2D coordinate to a 3D direction.
---- 
+---
 --- Should be called from a 3D rendering environment or after cam.Start3D or it may not work correctly.
---- 
+---
 --- Errors in a render hook can make this value incorrect until the player restarts their game.
---- 
+---
 --- cam.Start3D or 3D context cam.Start with non-default parameters incorrectly sets the reference FOV for this function, causing incorrect return values. This can be fixed by creating and ending a default 3D context (cam.Start3D with no arguments).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:ToScreen)
@@ -252,4 +252,3 @@ function Vector:WithinAABox(boxStart, boxEnd) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Zero)
 function Vector:Zero() end
-

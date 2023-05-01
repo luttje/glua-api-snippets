@@ -67,4 +67,3 @@ function bf_read:ReadVectorNormal() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bf_read:Reset)
 function bf_read:Reset() end
-

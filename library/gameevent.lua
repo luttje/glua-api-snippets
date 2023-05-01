@@ -3,9 +3,9 @@
 gameevent = {}
 
 ---[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
---- 
+---
 --- 		List of valid events (with examples) can be found [here](gameevent).
---- 		
+---
 --- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
@@ -38,7 +38,7 @@ local break_prop = {}
 ---@field address string The Server address. Will be **localhost:27015** in hosted games.
 ---@field ip number The IP of the Server. Will be **16777343** in hosted games. Use the **address** instead of this.
 ---@field port number The port of the Server. Will be **27015** in hosted games.
----@field source string The Source why the client is trying to connect to the Server. 			If you use ```connect [IP:Port]``` to connect to a Server, this will be an empty string. 		
+---@field source string The Source why the client is trying to connect to the Server. 			If you use ```connect [IP:Port]``` to connect to a Server, this will be an empty string.
 local client_beginconnect = {}
 
 ---@class client_connected
@@ -84,11 +84,11 @@ local player_changename = {}
 
 ---@class player_connect
 ---@field bot number 0 if the player isn't a bot, 1 if they are.
----@field networkid string  			The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player. 		
+---@field networkid string  			The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
 ---@field name string The Player:Nick the player has.
 ---@field userid number The Player:UserID the player has.
 ---@field index number The Entity:EntIndex of the player, minus one.
----@field address string  			The Player:IPAddress of the connecting player.  			Will be `none` for bots and `loopback` for listen server and single-player hosts. 		
+---@field address string  			The Player:IPAddress of the connecting player.  			Will be `none` for bots and `loopback` for listen server and single-player hosts.
 local player_connect = {}
 
 ---@class player_connect_client
@@ -138,7 +138,7 @@ local player_spawn = {}
 local ragdoll_dissolved = {}
 
 ---@class server_addban
----@field networkid string  			The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player. 		
+---@field networkid string  			The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
 ---@field name string The Player:Nick the player has.
 ---@field userid number The Player:UserID the player has.
 ---@field ip string The Player:IPAddress of the player.
@@ -170,4 +170,3 @@ local server_removeban = {}
 ---@field dedicated boolean true if it's a dedicated server.
 ---@field password boolean true if the Server is password protected.
 local server_spawn = {}
-

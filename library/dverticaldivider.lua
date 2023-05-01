@@ -106,7 +106,7 @@ function DVerticalDivider:SetMiddle(pnl) end
 function DVerticalDivider:SetTop(pnl) end
 
 ---[CLIENT] Sets the height of the top content panel.
---- 
+---
 --- The height of the bottom content panel is automatically calculated by taking the total height of the DVerticalDivider and subtracting it with the height of the top content panel and the divider bar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:SetTopHeight)
@@ -129,4 +129,3 @@ function DVerticalDivider:SetTopMin(height) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:StartGrab)
 function DVerticalDivider:StartGrab() end
-

@@ -15,11 +15,11 @@ function DColorCombo:BuildControls() end
 function DColorCombo:GetColor() end
 
 ---[CLIENT] Returns true if the panel is currently being edited
---- 
+---
 --- More of a internal method, it technically should only ever work (i.e. return true) inside DColorCombo:OnValueChanged.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:IsEditing)
----@return boolean 
+---@return boolean
 function DColorCombo:IsEditing() end
 
 ---[CLIENT] Sets the color of this panel.
@@ -27,4 +27,3 @@ function DColorCombo:IsEditing() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:SetColor)
 ---@param clr table A Color.
 function DColorCombo:SetColor(clr) end
-

@@ -5,7 +5,7 @@ local DForm = {}
 
 ---[CLIENT] Adds one or two items to the DForm.
 --- If this method is called with only one argument, it is added to the bottom of the form. If two arguments are passed, they are placed side-by-side at the bottom of the form.
---- 
+---
 --- Internally, this function is used by the various DForm functions to, for example, add labels to the left of buttons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:AddItem)
@@ -104,8 +104,8 @@ function DForm:PanelSelect() end
 --- * number skin - Model's skin. Defaults to 0
 --- * string tooltip - Displayed when user hovers over the model. Defaults to the model path.
 --- * The key of the table is the value of the convar.
---- 
---- 
+---
+---
 ---@param height number The height of the prop select panel, in 64px icon increments.
 ---@return Panel The created PropSelect panel.
 function DForm:PropSelect(label, convar, models, height) end
@@ -129,4 +129,3 @@ function DForm:SetName(name) end
 ---@return Panel, Panel Panel - The created DTextEntry
 ---@return Panel, Panel Panel - The created DLabel
 function DForm:TextEntry(label, convar) end
-

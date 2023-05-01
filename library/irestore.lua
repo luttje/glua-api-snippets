@@ -4,7 +4,7 @@
 local IRestore = {}
 
 ---[SHARED] Ends current data block started with IRestore:StartBlock and returns to the parent block.
---- 
+---
 --- To avoid all sorts of errors, you **must** end all blocks you start.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:EndBlock)
@@ -57,4 +57,3 @@ function IRestore:ReadVector() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:StartBlock)
 ---@return string The name of the next data block to be read.
 function IRestore:StartBlock() end
-

@@ -60,15 +60,15 @@ function duplicator.CopyEntTable(ent) end
 ---@return Entity The newly created constraint entity
 function duplicator.CreateConstraintFromTable(constraint, entityList) end
 
----[SERVER] "Create an entity from a table." 
---- 
---- 
+---[SERVER] "Create an entity from a table."
+---
+---
 --- This creates an entity using the data in EntTable.
---- 
---- 
---- If an entity factory has been registered for the entity's Class, it will be called. 
---- 
---- 
+---
+---
+--- If an entity factory has been registered for the entity's Class, it will be called.
+---
+---
 --- Otherwise, duplicator.GenericDuplicatorFunction will be called instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable)
@@ -78,8 +78,8 @@ function duplicator.CreateConstraintFromTable(constraint, entityList) end
 function duplicator.CreateEntityFromTable(ply, entTable) end
 
 ---[SERVER] "Restores the bone's data."
---- 
---- 
+---
+---
 --- Loops through Bones and calls Entity:ManipulateBoneScale, Entity:ManipulateBoneAngles and Entity:ManipulateBonePosition on ent with the table keys and the subtable values s, a and p respectively.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.DoBoneManipulator)
@@ -96,11 +96,11 @@ function duplicator.DoBoneManipulator(ent, bones) end
 function duplicator.DoFlex(ent, flex, scale) end
 
 ---[SERVER] "Applies generic every-day entity stuff for ent from table data."
---- 
---- 
+---
+---
 --- Depending on the values of Model, Angle, Pos, Skin, Flex, Bonemanip, ModelScale, ColGroup, Name, and BodyG (table of multiple values) in the data table, this calls Entity:SetModel, Entity:SetAngles, Entity:SetPos, Entity:SetSkin, duplicator.DoFlex, duplicator.DoBoneManipulator, Entity:SetModelScale, Entity:SetCollisionGroup, Entity:SetName, Entity:SetBodygroup on ent.
---- 
---- 
+---
+---
 --- If ent has a RestoreNetworkVars function, it is called with data.DT.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.DoGeneric)
@@ -109,8 +109,8 @@ function duplicator.DoFlex(ent, flex, scale) end
 function duplicator.DoGeneric(ent, data) end
 
 ---[SERVER] "Applies bone data, generically."
---- 
---- 
+---
+---
 --- If data contains a PhysicsObjects table, it moves, re-angles and if relevent freezes all specified bones, first converting from local coordinates to world coordinates.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics)
@@ -126,9 +126,9 @@ function duplicator.DoGenericPhysics(ent, ply, data) end
 ---@return table Is compromised of the following members: * function Func - The function that creates the entity * table Args - Arguments to pass to the function
 function duplicator.FindEntityClass(name) end
 
----[SERVER] "Generic function for duplicating stuff" 
---- 
---- 
+---[SERVER] "Generic function for duplicating stuff"
+---
+---
 --- This is called when duplicator.CreateEntityFromTable can't find an entity factory to build with. It calls duplicator.DoGeneric and duplicator.DoGenericPhysics to apply standard duplicator stored things such as the model and position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction)
@@ -155,9 +155,9 @@ function duplicator.GetAllConstrainedEntitiesAndConstraints(ent, entStorageTable
 function duplicator.IsAllowed(classname) end
 
 ---[SERVER] "Given entity list and constraint list, create all entities and return their tables"
---- 
+---
 --- Calls duplicator.CreateEntityFromTable on each sub-table of EntityList. If an entity is actually created, it calls ENTITY:OnDuplicated with the entity's duplicator data, then duplicator.ApplyEntityModifiers, duplicator.ApplyBoneModifiers and finally  ENTITY:PostEntityPaste is called.
---- 
+---
 --- The constraints are then created with duplicator.CreateConstraintFromTable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.Paste)
@@ -169,7 +169,7 @@ function duplicator.IsAllowed(classname) end
 function duplicator.Paste(Player, EntityList, ConstraintList) end
 
 ---[SHARED] Registers a function to be called on each of an entity's bones when duplicator.ApplyBoneModifiers is called.
---- 
+---
 --- This function is available to call on the client, but registered functions aren't used anywhere!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterBoneModifier)
@@ -181,8 +181,8 @@ function duplicator.Paste(Player, EntityList, ConstraintList) end
 --- * number boneID
 --- * PhysObj bone
 --- * table data
---- 
---- 
+---
+---
 --- The data table that is passed to boneModifier is set with duplicator.StoreBoneModifier
 function duplicator.RegisterBoneModifier(key, boneModifier) end
 
@@ -195,7 +195,7 @@ function duplicator.RegisterBoneModifier(key, boneModifier) end
 function duplicator.RegisterConstraint(name, callback, ...) end
 
 ---[SHARED] This allows you to specify a specific function to be run when your SENT is pasted with the duplicator, instead of relying on the generic automatic functions.
---- 
+---
 --- Automatically calls duplicator.Allow for the entity class.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass)
@@ -205,9 +205,9 @@ function duplicator.RegisterConstraint(name, callback, ...) end
 function duplicator.RegisterEntityClass(name, _function, ...) end
 
 ---[SHARED] This allows you to register tweaks to entities. For instance, if you were making an "unbreakable" addon, you would use this to enable saving the "unbreakable" state of entities between duplications.
---- 
+---
 --- This function registers a piece of generic code that is run on all entities with this modifier. In order to have it actually run, use duplicator.StoreEntityModifier.
---- 
+---
 --- This function does nothing when run clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityModifier)
@@ -261,4 +261,3 @@ function duplicator.StoreEntityModifier(entity, name, data) end
 ---@return vector, vector vector - AABB mins vector
 ---@return vector, vector vector - AABB maxs vector
 function duplicator.WorkoutSize(Ents) end
-

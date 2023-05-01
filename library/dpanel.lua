@@ -4,7 +4,7 @@
 local DPanel = {}
 
 ---[CLIENT] Returns the panel's background color.
---- 
+---
 --- By default this returns **nil** even though the default background color is white
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetBackgroundColor)
@@ -52,4 +52,3 @@ function DPanel:SetDrawBackground(draw) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetPaintBackground)
 ---@param paint boolean True to show the panel's background, false to hide it.
 function DPanel:SetPaintBackground(paint) end
-

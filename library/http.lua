@@ -3,21 +3,21 @@
 http = {}
 
 ---[SHARED AND MENU] Launches an asynchronous **GET** request to a HTTP server.
---- 
+---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the Structures/HTTPRequest callback.
---- 
+---
 --- The Structures/HTTPRequest callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist).
---- 
+---
 --- A rough overview of possible Structures/HTTPRequest messages:
 --- * `invalid url` - Invalid/empty url ( no request was attempted )
 --- * `invalid request` - Steam HTTP lib failed to create a HTTP request
 --- * `error` - OnComplete callback's second argument, `bError`, is `true`
 --- * `unsuccessful` - OnComplete's first argument, `pResult->m_bRequestSuccessful`, returned `false`
---- 
+---
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
---- 
+---
 --- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
---- 	
+---
 --- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp` (serverside only).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
@@ -33,11 +33,11 @@ http = {}
 function http.Fetch(url, onSuccess, onFailure, headers) end
 
 ---[SHARED AND MENU] Sends an asynchronous **POST** request to a HTTP server.
---- 
+---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the Structures/HTTPRequest callback.
---- 
+---
 --- The Structures/HTTPRequest callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist).
---- 
+---
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 --- HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work. To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp` (serverside only).
 ---
@@ -53,4 +53,3 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 --- * string error - The error message.
 ---@param headers table KeyValue table for headers.
 function http.Post(url, parameters, onSuccess, onFailure, headers) end
-

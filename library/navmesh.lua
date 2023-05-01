@@ -10,7 +10,7 @@ navmesh = {}
 function navmesh.AddWalkableSeed(pos, dir) end
 
 ---[SERVER] Starts the generation of a new navmesh.
---- 
+---
 --- This process is highly resource intensive and it's not wise to use during normal gameplay
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration)
@@ -52,7 +52,7 @@ function navmesh.GetAllNavAreas() end
 function navmesh.GetEditCursorPosition() end
 
 ---[SERVER] Finds the closest standable ground at, above, or below the provided position.
---- 
+---
 --- The ground must have at least 32 units of empty space above it to be considered by this function, unless 16 layers are tested without finding valid ground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetGroundHeight)
@@ -74,7 +74,7 @@ function navmesh.GetMarkedArea() end
 function navmesh.GetMarkedLadder() end
 
 ---[SERVER] Returns the Nav Area contained in this position that also satisfies the elevation limit.
---- 
+---
 --- This function will properly see blocked CNavAreas. See navmesh.GetNearestNavArea.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavArea)
@@ -84,7 +84,7 @@ function navmesh.GetMarkedLadder() end
 function navmesh.GetNavArea(pos, beneathLimit) end
 
 ---[SERVER] Returns a CNavArea by the given ID.
---- 
+---
 --- Avoid calling this function every frame, as internally it does a lookup trough all the CNavAreas, call this once and store the result
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavAreaByID)
@@ -106,7 +106,7 @@ function navmesh.GetNavAreaCount() end
 function navmesh.GetNavLadderByID(id) end
 
 ---[SERVER] Returns the closest CNavArea to given position at the same height, or beneath it.
---- 
+---
 --- This function will ignore blocked CNavAreas. See navmesh.GetNavArea for a function that does see blocked areas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNearestNavArea)
@@ -114,7 +114,7 @@ function navmesh.GetNavLadderByID(id) end
 ---@param anyZ boolean This argument is ignored and has no effect
 ---@param maxDist number This is the maximum distance from the given position that the function will look for a CNavArea
 ---@param checkLOS boolean If this is set to true then the function will internally do a util.TraceLine from the starting position to each potential CNavArea with a [MASK_NPCSOLID_BRUSHONLY](https://wiki.facepunch.com/gmod/Enums/MASK). If the trace fails then the CNavArea is ignored.
---- 
+---
 --- If this is set to false then the function will find the closest CNavArea through anything, including the world.
 ---@param checkGround boolean If checkGround is true then this function will internally call navmesh.GetNavArea to check if there is a CNavArea directly below the position, and return it if so, before checking anywhere else.
 ---@param team number This will internally call CNavArea:IsBlocked to check if the target CNavArea is not to be navigated by the given team. Currently this appears to do nothing.
@@ -171,4 +171,3 @@ function navmesh.SetMarkedLadder(area) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.SetPlayerSpawnName)
 ---@param spawnPointClass string The classname of what the player uses to spawn, automatically adds it to the walkable positions during map generation.
 function navmesh.SetPlayerSpawnName(spawnPointClass) end
-

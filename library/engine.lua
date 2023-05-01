@@ -9,14 +9,14 @@ engine = {}
 function engine.ActiveGamemode() end
 
 ---[SERVER] Closes the server and completely exits.
---- 
+---
 --- This is only functional when running in server test mode (launch option -systemtest). Server test mode is used internally at Facepunch as part of the build process to make sure that the dedicated servers aren't crashing on startup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.CloseServer)
 function engine.CloseServer() end
 
 ---[SHARED AND MENU] Returns a list of addons the player have subscribed to on the workshop.
---- 
+---
 --- This list will also include "Floating" .gma addons that are mounted by the game, but not the folder addons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetAddons)
@@ -26,11 +26,11 @@ function engine.GetAddons() end
 ---[CLIENT AND MENU] When starting playing a demo, engine.GetDemoPlaybackTick will be reset and its old value will be added to this functions return value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackStartTick)
----@return number 
+---@return number
 function engine.GetDemoPlaybackStartTick() end
 
 ---[CLIENT AND MENU] Current tick of currently loaded demo.
---- 
+---
 --- If not playing a demo, it will return amount of ticks since last demo playback.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackTick)
@@ -38,7 +38,7 @@ function engine.GetDemoPlaybackStartTick() end
 function engine.GetDemoPlaybackTick() end
 
 ---[CLIENT AND MENU] Returns time scale of demo playback.
---- 
+---
 --- If not during demo playback, returns 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackTimeScale)
@@ -46,7 +46,7 @@ function engine.GetDemoPlaybackTick() end
 function engine.GetDemoPlaybackTimeScale() end
 
 ---[CLIENT AND MENU] Returns total amount of ticks of currently loaded demo.
---- 
+---
 --- If not playing a demo, returns 0 or the value of last played demo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackTotalTicks)
@@ -66,7 +66,7 @@ function engine.GetGamemodes() end
 function engine.GetGames() end
 
 ---[SHARED AND MENU] Used internally for in-game menus, may be merged in the future into engine.GetAddons.
---- 
+---
 --- Returns the UGC (demos, saves and dupes) the player have subscribed to on the workshop.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetUserContent)
@@ -74,7 +74,7 @@ function engine.GetGames() end
 function engine.GetUserContent() end
 
 ---[CLIENT AND MENU] Returns true if we're currently playing a demo.
---- 
+---
 --- You will notice that there's no server-side version of this. That's because there is no server when playing a demo. Demos are both recorded and played back purely clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.IsPlayingDemo)
@@ -88,7 +88,7 @@ function engine.IsPlayingDemo() end
 function engine.IsRecordingDemo() end
 
 ---[SERVER] This is a direct binding to the function `engine->LightStyle`. This function allows you to change the default light style of the map - so you can make lighting lighter or darker. You’ll need to call render.RedownloadAllLightmaps clientside to refresh the lightmaps to this new color.
---- 
+---
 --- Calling this function with arguments 0 and "a" will cause dynamic lights such as those produced by the Light tool to stop working.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.LightStyle)
@@ -150,4 +150,3 @@ function engine.WriteDupe(dupe, jpeg) end
 ---@param time number When the save was saved during the game (Put CurTime here)
 ---@param map string The map the save is used for.
 function engine.WriteSave(saveData, name, time, map) end
-

@@ -6,12 +6,12 @@ local DEntityProperties = {}
 ---[CLIENT] Called internally by DEntityProperties:RebuildControls.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EditVariable)
----@param varname string 
----@param editdata table 
+---@param varname string
+---@param editdata table
 function DEntityProperties:EditVariable(varname, editdata) end
 
 ---[CLIENT] Called internally when an entity being edited became invalid.
---- 
+---
 --- You should use DEntityProperties:OnEntityLost instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EntityLost)
@@ -32,4 +32,3 @@ function DEntityProperties:RebuildControls() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:SetEntity)
 ---@param ent Entity The entity to edit
 function DEntityProperties:SetEntity(ent) end
-

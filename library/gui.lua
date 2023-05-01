@@ -8,7 +8,7 @@ gui = {}
 function gui.ActivateGameUI() end
 
 ---[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu.
---- 
+---
 --- Some CUserCmd functions will return incorrect values when this function is active.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.EnableScreenClicker)
@@ -90,7 +90,7 @@ function gui.IsConsoleVisible() end
 function gui.IsGameUIVisible() end
 
 ---[CLIENT AND MENU] Use input.GetCursorPos instead.
---- 
+---
 --- Returns the cursor's position on the screen, or 0, 0 if cursor is not visible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MousePos)
@@ -111,7 +111,7 @@ function gui.MouseX() end
 function gui.MouseY() end
 
 ---[CLIENT AND MENU] Opens specified URL in the steam overlay browser.
---- 
+---
 --- When called clientside, user will be asked for confirmation before the website will open.
 --- Will silently fail if the URL is more than 512 characters long.
 ---
@@ -120,7 +120,7 @@ function gui.MouseY() end
 function gui.OpenURL(url) end
 
 ---[CLIENT] Converts the specified screen position to a **direction** vector local to the player's view. A related function is Vector:ToScreen, which translates a 3D position to a screen coordinate.
---- 
+---
 --- util.AimVector is a more generic version of this, using a custom view instead of the player's current view.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ScreenToVector)
@@ -141,4 +141,3 @@ function gui.SetMousePos(mouseX, mouseY) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ShowConsole)
 function gui.ShowConsole() end
-

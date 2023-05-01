@@ -26,7 +26,7 @@ function utf8.codepoint(string, startPos, endPos) end
 function utf8.codes(string) end
 
 ---[SHARED AND MENU] Forces a string to contain only valid UTF-8 data. Invalid sequences are replaced with U+FFFD (the Unicode replacement character).
---- 
+---
 --- This is a lazy way for users to ensure a string contains only valid UTF-8 data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/utf8.force)
@@ -70,4 +70,3 @@ function utf8.offset(string, n, startPos) end
 ---@param EndPos number The position of the last character to be included in the sub-string. It can be negative to count from the end.
 ---@return string The substring.
 function utf8.sub(string, StartPos, EndPos) end
-

@@ -6,4 +6,3 @@
 ---@return boolean, number boolean - Is timing out?
 ---@return boolean, number number - Get time since last pinged received.
 function _G.GetTimeoutInfo() end
-

@@ -28,7 +28,7 @@ function string.char(...) end
 function string.Comma(value, separator) end
 
 ---[SHARED AND MENU] Returns the binary bytecode of the given function.
---- 
+---
 --- This does not work with functions created in C/C++. An error will be thrown if it is
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.dump)
@@ -46,7 +46,7 @@ function string.dump(func, stripDebugInfo) end
 function string.EndsWith(str, _end) end
 
 ---[SHARED AND MENU] Splits a string up wherever it finds the given separator.
---- 
+---
 --- This is an alias of string.Split
 --- and the reverse operation of string.Implode.
 ---
@@ -58,7 +58,7 @@ function string.EndsWith(str, _end) end
 function string.Explode(separator, str, use_patterns) end
 
 ---[SHARED AND MENU] Attempts to find the specified substring in a string.
---- 
+---
 --- This function uses Patterns by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.find)
@@ -76,21 +76,21 @@ function string.find(haystack, needle, startPos, noPatterns) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.format)
 ---@param format string The string to be formatted.
 --- Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
---- 
+---
 --- The following features are not supported in Lua:
 --- * The `n` specifier
 --- * The `*` width modifier
 --- * The `.*` precision modifier
 --- * All length modifiers
---- 
+---
 --- The following specifiers are exclusive to Lua:
---- 
+---
 --- | Format | Description | Example of the output |
 --- |:------:|:-----------:|:---------------------:|
 --- | %p | Returns pointer to supplied structure (table/function) | `0xf20a8968` |
 --- | %q | Formats a string between double quotes, using escape sequences when necessary to ensure that it can safely be read back by the Lua interpreter | `"test\1\2test"` |
---- 
---- 
+---
+---
 ---@param ... ... Values to be formatted into the string.
 ---@return string The formatted string
 function string.format(format, ...) end
@@ -161,9 +161,9 @@ function string.gmatch(data, pattern) end
 ---@param string string String which should be modified.
 ---@param pattern string The pattern that defines what should be matched and eventually be replaced.
 ---@param replacement string In case of a string the matched sequence will be replaced with it.
---- 
+---
 --- In case of a table, the matched sequence will be used as key and the table will tested for the key, if a value exists it will be used as replacement.
---- 
+---
 --- In case of a function all matches will be passed as parameters to the function, the return value(s) of the function will then be used as replacement.
 ---@param maxReplaces number Maximum number of replacements to be made.
 ---@return string, number string - replaceResult
@@ -171,9 +171,9 @@ function string.gmatch(data, pattern) end
 function string.gsub(string, pattern, replacement, maxReplaces) end
 
 ---[SHARED AND MENU] You really should just use table.concat.
---- 
+---
 --- Joins the values of a table together to form a string.
---- 
+---
 --- This is the reverse of string.Explode and is functionally identical to table.concat, but with less features.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Implode)
@@ -293,7 +293,7 @@ function string.Right(str, num) end
 function string.SetChar(InputString, Index, ReplacementChar) end
 
 ---[SHARED AND MENU] Splits the string into a table of strings, separated by the second argument.
---- 
+---
 --- This is an alias of string.Explode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Split)
@@ -311,7 +311,7 @@ function string.Split(Inputstring, Separator) end
 function string.StartsWith(inputStr, start) end
 
 ---[SHARED AND MENU] Use string.StartsWith.
---- 
+---
 --- Returns whether or not the first string starts with the second. This is a alias of string.StartsWith.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.StartWith)
@@ -358,7 +358,7 @@ function string.ToMinutesSeconds(time) end
 function string.ToMinutesSecondsMilliseconds(time) end
 
 ---[SHARED AND MENU] Splits the string into characters and creates a sequential table of characters.
---- 
+---
 --- As a result of the  encoding, non-ASCII characters will be split into more than one character in the output table. Each character value in the output table will always be 1 byte.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.ToTable)
@@ -397,4 +397,3 @@ function string.TrimRight(str, char) end
 ---@param str string The string to convert.
 ---@return string A string representing the value of a string converted to upper-case.
 function string.upper(str) end
-

@@ -59,20 +59,19 @@ function scripted_ents.GetType(classname) end
 function scripted_ents.IsBasedOn(name, base) end
 
 ---[SHARED] Called after all ENTS have been loaded and runs baseclass.Set on each one.
---- 
+---
 --- You can retrieve all the currently registered ENTS with scripted_ents.GetList.
---- 
+---
 --- This is not called after an ENT auto refresh, and thus the inherited baseclass functions retrieved with baseclass.Get will not be updated
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.OnLoaded)
 function scripted_ents.OnLoaded() end
 
 ---[SHARED] Registers an ENT table with a classname. Reregistering an existing classname will automatically update the functions of all existing entities of that class.
---- 
+---
 --- Sub-tables provided in the first argument will not carry over their metatable, and will receive a BaseClass key if the table was merged with the base's. Userdata references, which includes Vectors, Angles, Entities, etc. will not be copied.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.Register)
 ---@param ENT table The ENT table to register.
 ---@param classname string The classname to register.
 function scripted_ents.Register(ENT, classname) end
-

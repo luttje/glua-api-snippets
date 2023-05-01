@@ -20,4 +20,3 @@ function ControlPresets:GetConVars() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:SetLabel)
 ---@param name string The text to put in the label
 function ControlPresets:SetLabel(name) end
-

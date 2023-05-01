@@ -34,4 +34,3 @@ function Stack:Size() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Stack:Top)
 ---@return any The item at the top of the stack
 function Stack:Top() end
-

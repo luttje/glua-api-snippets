@@ -28,13 +28,13 @@ function spawnmenu.ActiveControlPanel() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddContentType)
 ---@param name string An unique name of the content type.
 ---@param constructor function A function that is called whenever we need create a new panel for this content type.
---- 
+---
 --- It has two arguments:
---- 
---- 
+---
+---
 --- Panel container - The container/parent of the new panel
---- 
---- 
+---
+---
 --- table data - Data for the content type passed from spawnmenu.CreateContentIcon
 function spawnmenu.AddContentType(name, constructor) end
 
@@ -49,20 +49,20 @@ function spawnmenu.AddContentType(name, constructor) end
 function spawnmenu.AddCreationTab(name, _function, material, order, tooltip) end
 
 ---[CLIENT] Used to add addon spawnlists to the spawnmenu tree. This function should be called within SANDBOX:PopulatePropMenu.
---- 
+---
 --- Addon spawnlists will not save to disk if edited.
---- 
+---
 --- You should never try to modify player customized spawnlists!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddPropCategory)
 ---@param classname string A unique classname of the list.
 ---@param name string The name of the category displayed to the player, e.g. `Comic Props`.
 ---@param contents table A table of entries for the spawn menu. It must be numerically indexed.
---- 
+---
 --- Each member of the table is a sub-table containing a type member, and other members depending on the type.
---- 
+---
 --- New content types can be added via spawnmenu.AddContentType.
---- 
+---
 --- | string type | Description | Other members |
 --- | ------------- | ---------- | ----------------- |
 --- | "header" | a simple header for organization | string text - The text that the header will display |
@@ -70,8 +70,8 @@ function spawnmenu.AddCreationTab(name, _function, material, order, tooltip) end
 --- | "entity" | spawns an entity where the player is looking(appears in the Entities tab by default) | string spawnname - The filename of the entity, for example "sent_ball"  string nicename - The name of the entity to display  string material - The icon to display, this should be set to "entities/.png" 	boolean admin - Whether the entity is only spawnable by admins (optional) |
 --- | "vehicle" | spawns a vehicle where the player is looking  (appears in the Vehicles tab by default) | string spawnname - The filename of the vehicle  string nicename - The name of the vehicle to display  string material - The icon to display  boolean admin - Whether the vehicle is only spawnable by admins (optional) |
 --- | "npc" | spawns an NPC where the player is looking  (appears in the NPCs tab by default) | string spawnname - The spawn name of the NPC 	string nicename - The name to display  string material - The icon to display  table weapon - A table of potential weapons (each a string) to give to the NPC. When spawned, one of these will be chosen randomly each time.  boolean admin - Whether the NPC is only spawnable by admins (optional) |
---- | "weapon" | When clicked, gives the player a weapon;  When middle-clicked, spawns a weapon where the player is looking  (appears in the Weapons tab by default) |string spawnname - The spawn name of the weapon  string nicename - The name to display  string material - The icon to display  boolean admin - Whether the weapon is only spawnable by admins (optional) | 
---- 
+--- | "weapon" | When clicked, gives the player a weapon;  When middle-clicked, spawns a weapon where the player is looking  (appears in the Weapons tab by default) |string spawnname - The spawn name of the weapon  string nicename - The name to display  string material - The icon to display  boolean admin - Whether the weapon is only spawnable by admins (optional) |
+---
 ---@param icon string The icon to use in the tree.
 ---@param id number The unique ID number for the spawnlist category. Used to make sub categories. See "parentID" parameter below. If not set, it will be automatically set to ever increasing number, starting with 1000.
 ---@param parentID number The unique ID of the parent category. This will make the created category a subcategory of category with given unique ID. `0` makes this a base category (such as `Builder`).
@@ -79,12 +79,12 @@ function spawnmenu.AddCreationTab(name, _function, material, order, tooltip) end
 function spawnmenu.AddPropCategory(classname, name, contents, icon, id, parentID, needsApp) end
 
 ---[CLIENT] Used to create a new category in the list inside of a spawnmenu ToolTab.
---- 
+---
 --- You must call this function from SANDBOX:AddToolMenuCategories for it to work properly.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddToolCategory)
 ---@param tab string The ToolTab name, as created with spawnmenu.AddToolTab.
---- 
+---
 --- You can also use the default ToolTab names "Main" and "Utilities".
 ---@param RealName string The identifier name
 ---@param PrintName string The displayed name
@@ -99,7 +99,7 @@ function spawnmenu.AddToolCategory(tab, RealName, PrintName) end
 ---@param name string The nice name of item
 ---@param cmd string Command to execute when the item is selected
 ---@param config string Config name, used in older versions to load tool settings UI from a file. No longer works.
---- 
+---
 --- We advise against using this. It may be changed or removed in a future update.
 ---@param cpanel function A function to build the context panel. The function has one argument:
 --- * Panel pnl - A DForm that will be shown in the context menu
@@ -107,7 +107,7 @@ function spawnmenu.AddToolCategory(tab, RealName, PrintName) end
 function spawnmenu.AddToolMenuOption(tab, category, class, name, cmd, config, cpanel, table) end
 
 ---[CLIENT] Adds a new tool tab to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook.
---- 
+---
 --- This function is a inferior duplicate of spawnmenu.GetToolMenu, just without its return value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddToolTab)
@@ -117,7 +117,7 @@ function spawnmenu.AddToolMenuOption(tab, category, class, name, cmd, config, cp
 function spawnmenu.AddToolTab(name, label, icon) end
 
 ---[CLIENT] Clears all the tools from the different tool categories and the categories itself, if ran at the correct place.
---- 
+---
 --- Seems to only work when ran at initialization.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.ClearToolMenus)
@@ -141,7 +141,7 @@ function spawnmenu.DoSaveToTextFiles(spawnlists) end
 ---[CLIENT] Returns the function to create an vgui element for a specified content type
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetContentType)
----@param contentType string 
+---@param contentType string
 ---@return function The panel creation function
 function spawnmenu.GetContentType(contentType) end
 
@@ -152,7 +152,7 @@ function spawnmenu.GetContentType(contentType) end
 function spawnmenu.GetCreationTabs() end
 
 ---[CLIENT] Similar to spawnmenu.GetPropTable, but only returns spawnlists created by addons via spawnmenu.AddPropCategory.
---- 
+---
 --- These spawnlists are shown in a separate menu in-game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetCustomPropTable)
@@ -160,13 +160,13 @@ function spawnmenu.GetCreationTabs() end
 function spawnmenu.GetCustomPropTable() end
 
 ---[CLIENT] Returns a table of all prop categories and their props in the spawnmenu.
---- 
+---
 --- Note that if the spawnmenu has not been populated, this will return an empty table.
---- 
+---
 --- This will not return spawnlists created by addons, see  spawnmenu.GetCustomPropTable for that.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetPropTable)
----@return table Table of all the prop categories and props in the following format:  ``` { 	["settings/spawnlist/001-construction props.txt"] = { 		name = "Construction Props", 		icon = "icon16/page.png", 		id = 1, 		parentid = 0, 		needsapp = "", 		contents = { 			{ 				model = "models/Cranes/crane_frame.mdl", 				type = "model" 			} 			-- etc. 		}, 	} 	-- etc. } ``` 
+---@return table Table of all the prop categories and props in the following format:  ``` { 	["settings/spawnlist/001-construction props.txt"] = { 		name = "Construction Props", 		icon = "icon16/page.png", 		id = 1, 		parentid = 0, 		needsapp = "", 		contents = { 			{ 				model = "models/Cranes/crane_frame.mdl", 				type = "model" 			} 			-- etc. 		}, 	} 	-- etc. } ```
 function spawnmenu.GetPropTable() end
 
 ---[CLIENT] Adds a new tool tab (or returns an existing one by name) to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook.
@@ -218,4 +218,3 @@ function spawnmenu.SwitchCreationTab(id) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.SwitchToolTab)
 ---@param id number The tab ID to open
 function spawnmenu.SwitchToolTab(id) end
-

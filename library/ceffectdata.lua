@@ -106,7 +106,7 @@ function CEffectData:GetSurfaceProp() end
 function CEffectData:SetAngles(ang) end
 
 ---[SHARED] Sets the attachment id of the effect to be created with this effect data.
---- 
+---
 --- This is internally stored as an integer, but only the first 5 bits will be networked, effectively limiting this function to 0-31 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetAttachment)
@@ -114,9 +114,9 @@ function CEffectData:SetAngles(ang) end
 function CEffectData:SetAttachment(attachment) end
 
 ---[SHARED] Sets the "color" of the effect.
---- 
+---
 --- All this does is provide an addition 8 bits of data for the effect to use. What this will actually do will vary from effect to effect, depending on how a specific effect uses this given data, if at all.
---- 
+---
 --- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to 0-255 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetColor)
@@ -142,14 +142,14 @@ function CEffectData:SetEntIndex(entIndex) end
 function CEffectData:SetEntity(entity) end
 
 ---[SHARED] Sets the flags of the effect. Can be used to change the appearance of a MuzzleFlash effect.
---- 
+---
 --- ## Example values for MuzzleFlash effect
 --- Flags |  Description |
 --- ------|--------------|
 --- 1 | Regular muzzleflash|
 --- 5 | Combine muzzleflash|
 --- 7 | Regular muzzle but bigger|
---- 
+---
 --- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `0-255` range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetFlags)
@@ -157,7 +157,7 @@ function CEffectData:SetEntity(entity) end
 function CEffectData:SetFlags(flags) end
 
 ---[SHARED] Sets the hit box index of the effect.
---- 
+---
 --- Internally stored as an integer, but only first 11 bits are networked, effectively limiting this function to 0-2047 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetHitBox)
@@ -172,7 +172,7 @@ function CEffectData:SetHitBox(hitBoxIndex) end
 function CEffectData:SetMagnitude(magnitude) end
 
 ---[SHARED] Sets the material index of the effect.
---- 
+---
 --- Internally stored as an integer, but only first 12 bits are networked, effectively limiting this function to 0-4095 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetMaterialIndex)
@@ -193,7 +193,7 @@ function CEffectData:SetNormal(normal) end
 function CEffectData:SetOrigin(origin) end
 
 ---[SHARED] Sets the radius of the effect to be created with this effect data.
---- 
+---
 --- Internally stored as a float, but networked as a 10bit float, and is clamped to 0-1023 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetRadius)
@@ -219,4 +219,3 @@ function CEffectData:SetStart(start) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetSurfaceProp)
 ---@param surfaceProperties number The surface property index of the effect.
 function CEffectData:SetSurfaceProp(surfaceProperties) end
-

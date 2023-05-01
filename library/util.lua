@@ -4,14 +4,14 @@ util = {}
 
 ---[SERVER] Adds the specified string to a string table, which will cache it and network it to all clients automatically.
 --- Whenever you want to create a net message with net.Start, you must add the name of that message as a networked string via this function.
---- 
+---
 --- If the passed string already exists, nothing will happen and the ID of the existing item will be returned.
---- 
+---
 --- Each unique network name needs to be pooled once - do not put this function call into any other functions if you're using a constant string. Preferable place for this function is in a serverside lua file, or in a shared file with the net.Receive function.
---- 
---- The string table used for this function does not interfere with the engine string tables and has 4095 slots.  
+---
+--- The string table used for this function does not interfere with the engine string tables and has 4095 slots.
 --- This limit is shared among all entities, SetNW* and SetGlobal* functions. If you exceed the limit, you cannot create new variables, and you will get the following warning:
---- ```lua 
+--- ```lua
 --- Warning:  Table networkstring is full, can't add [key]
 --- ```
 --- Existing variables will still get updated without the warning. You can check the limit by counting up until util.NetworkIDToString returns nil
@@ -22,7 +22,7 @@ util = {}
 function util.AddNetworkString(str) end
 
 ---[SHARED AND MENU] Function used to calculate aim vector from 2D screen position. It is used in SuperDOF calculate Distance.
---- 
+---
 --- Essentially a generic version of gui.ScreenToVector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.AimVector)
@@ -43,7 +43,7 @@ function util.AimVector(ViewAngles, ViewFOV, x, y, scrWidth, scrHeight) end
 function util.Base64Decode(str) end
 
 ---[SHARED AND MENU] Encodes the specified string to base64.
---- 
+---
 --- Unless disabled with the `inline` argument, the Base64 returned is compliant to the RFC 2045 standard. **This means it will have a line break after every 76th character.**
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Base64Encode)
@@ -71,7 +71,7 @@ function util.BlastDamage(inflictor, attacker, damageOrigin, damageRadius, damag
 function util.BlastDamageInfo(dmg, damageOrigin, damageRadius) end
 
 ---[SHARED AND MENU] Compresses the given string using the [LZMA](https://en.wikipedia.org/wiki/LZMA) algorithm.
---- 
+---
 --- Use with net.WriteData and net.ReadData for networking and  util.Decompress to decompress the data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Compress)
@@ -80,8 +80,8 @@ function util.BlastDamageInfo(dmg, damageOrigin, damageRadius) end
 function util.Compress(str) end
 
 ---[SHARED] Generates the [CRC Checksum](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) of the specified string.
---- 		
---- 		
+---
+---
 --- 			This is NOT a hashing function. It is a checksum, typically used for error detection/data corruption detection. It is possible for this function to generate "collisions", where two different strings will produce the same CRC. If you need a hashing function, use util.SHA256.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.CRC)
@@ -105,7 +105,7 @@ function util.DateStamp() end
 function util.Decal(name, start, _end, filter) end
 
 ---[CLIENT] Performs a trace and paints a decal to the surface hit.
---- 
+---
 --- This function has trouble spanning across multiple brushes on the map.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.DecalEx)
@@ -114,7 +114,7 @@ function util.Decal(name, start, _end, filter) end
 ---@param position Vector The position of the decal.
 ---@param normal Vector The direction of the decal.
 ---@param color table The color of the decal. Uses the Color.
---- 
+---
 --- This only works when used on a brush model and only if the decal material has set **$vertexcolor** to 1.
 ---@param w number The width scale of the decal.
 ---@param h number The height scale of the decal.
@@ -147,28 +147,28 @@ function util.Decompress(compressedString, maxSize) end
 function util.DistanceToLine(lineStart, lineEnd, pointPos) end
 
 ---[SHARED] Creates an effect with the specified data.
---- 
+---
 --- For Orange Box `.pcf` particles, see Global.ParticleEffect, Global.ParticleEffectAttach and  Global.CreateParticleSystem.
---- 
---- 	
+---
+---
 --- When dispatching an effect from the server, some values may be clamped for networking optimizations. Visit the Set accessors on CEffectData to see which ones are affected.
---- 
+---
 --- You will need to couple this function with Global.IsFirstTimePredicted if you want to use it in Prediction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Effect)
 ---@param effectName string The name of the effect to create.
---- 
+---
 --- You can find a list of Effects. You can create your own, [example effects can be found here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
---- 
+---
 ---@param effectData CEffectData The effect data describing the effect.
 ---@param allowOverride boolean Whether Lua-defined effects should override engine-defined effects with the same name for this/single function call.
 ---@param ignorePredictionOrRecipientFilter any Can either be a boolean to ignore the prediction filter or a CRecipientFilter.
---- 
+---
 --- Set this to true if you wish to call this function in multiplayer from server.
 function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRecipientFilter) end
 
 ---[CLIENT] Filters given text using Steam's filtering system. The function will obey local client's Steam settings for chat filtering:
---- 
+---
 --- In some cases, especially in a chatbox, messages from some players may return an empty string if the context argument used for filtering is `TEXT_FILTER_CHAT` and [if the local player has blocked the sender of the message on Steam](https://github.com/Facepunch/garrysmod-issues/issues/5161#issuecomment-1035153941).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.FilterText)
@@ -178,7 +178,7 @@ function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRe
 ---@return string The filtered text based on given settings.
 function util.FilterText(str, context, player) end
 
----[MENU] Converts the Full path of the given GMA file to the Relative Path.  
+---[MENU] Converts the Full path of the given GMA file to the Relative Path.
 --- 		You can use util.RelativePathToFull_Menu to convert the Relative path back to the Full Path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu)
@@ -188,7 +188,7 @@ function util.FilterText(str, context, player) end
 function util.FullPathToRelative_Menu(gma, gamePath) end
 
 ---[SHARED] Returns a table containing the info about the model.
---- 
+---
 --- This function will silently fail if used on models with following strings in them:
 --- * _shared
 --- * _anims
@@ -213,10 +213,10 @@ function util.GetModelInfo(mdl) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
 ---@param model string The full path to a model to get the visual meshes of.
----@param lod number 
----@param bodygroupMask number 
----@return table, table table -  			A table of tables with the following format: * string material - The material of the specific mesh * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.  Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data: * number bone - The bone this vertex is attached to * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once. 		
----@return table, table table -  			A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents: * number parent - The ID of the parent bone. * VMatrix matrix - The bone's bind transform in model (not bone) space.   		
+---@param lod number
+---@param bodygroupMask number
+---@return table, table table -  			A table of tables with the following format: * string material - The material of the specific mesh * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.  Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data: * number bone - The bone this vertex is attached to * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
+---@return table, table table -  			A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents: * number parent - The ID of the parent bone. * VMatrix matrix - The bone's bind transform in model (not bone) space.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
 
 ---[SHARED AND MENU] Gets PData of an offline player using their SteamID
@@ -257,7 +257,7 @@ function util.GetSunInfo() end
 function util.GetSurfaceData(id) end
 
 ---[SHARED] Returns the matching surface property index for the given surface property name.
---- 
+---
 --- See also util.GetSurfaceData and util.GetSurfacePropName for opposite function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetSurfaceIndex)
@@ -266,7 +266,7 @@ function util.GetSurfaceData(id) end
 function util.GetSurfaceIndex(surfaceName) end
 
 ---[SHARED] Returns the name of a surface property at given ID.
---- 
+---
 --- See also util.GetSurfaceData and util.GetSurfaceIndex for opposite function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetSurfacePropName)
@@ -275,15 +275,15 @@ function util.GetSurfaceIndex(surfaceName) end
 function util.GetSurfacePropName(id) end
 
 ---[SERVER] Returns a table of all SteamIDs that have a usergroup.
---- 
+---
 --- This returns the original usergroups table, changes done to this table are not retroactive and will only affect newly connected users
---- 
---- This returns only groups that are registered in the **settings/users.txt** file of your server.  
---- 
+---
+--- This returns only groups that are registered in the **settings/users.txt** file of your server.
+---
 --- In order to get the usergroup of a connected player, please use Player:GetUserGroup instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetUserGroups)
----@return table A table of users where the key is the SteamID of the user and the value is a table with 2 fields:   		> string name - Player Steam name   		> string group - Player usergroup name 		
+---@return table A table of users where the key is the SteamID of the user and the value is a table with 2 fields:   		> string name - Player Steam name   		> string group - Player usergroup name
 function util.GetUserGroups() end
 
 ---[SHARED] Performs a "ray" box intersection and returns position, normal and the fraction.
@@ -291,7 +291,7 @@ function util.GetUserGroups() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IntersectRayWithOBB)
 ---@param rayStart Vector Origin/start position of the ray.
 ---@param rayDelta Vector The ray vector itself. This can be thought of as: the ray end point relative to the start point.
---- 
+---
 --- Note that in this implementation, the ray is not infinite - it's only a segment.
 ---@param boxOrigin Vector The center of the box.
 ---@param boxAngles Angle The angles of the box.
@@ -345,10 +345,20 @@ function util.IsModelLoaded(modelName) end
 ---@param box2Mins Vector The min position of the second box.
 ---@param box2Maxs Vector The max position of the second box.
 ---@return boolean Whether there is an intersection.
-function util.IsOBBIntersectingOBB(box1Origin, box1Angles, box1Mins, box1Maxs, box2Origin, box2Angles, box2Mins, box2Maxs) end
+function util.IsOBBIntersectingOBB(
+	box1Origin,
+	box1Angles,
+	box1Mins,
+	box1Maxs,
+	box2Origin,
+	box2Angles,
+	box2Mins,
+	box2Maxs
+)
+end
 
 ---[CLIENT] Check whether the skybox is visible from the point specified.
---- 
+---
 --- This will always return true in fullbright maps.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsSkyboxVisibleFromPoint)
@@ -357,8 +367,8 @@ function util.IsOBBIntersectingOBB(box1Origin, box1Angles, box1Mins, box1Maxs, b
 function util.IsSkyboxVisibleFromPoint(position) end
 
 ---[SHARED] Checks if the specified model is valid.
----  
---- 
+---
+---
 --- A model is considered invalid in following cases:
 --- * Starts with a space or **maps**
 --- * Doesn't start with **models**
@@ -376,7 +386,7 @@ function util.IsSkyboxVisibleFromPoint(position) end
 --- * If the model isn't precached on the server, AND if the model file doesn't exist on disk
 --- * If precache failed
 --- * Model is the error model
---- 
+---
 --- Running this function will also precache the model.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsValidModel)
@@ -407,9 +417,9 @@ function util.IsValidProp(modelName) end
 function util.IsValidRagdoll(ragdollName) end
 
 ---[SHARED AND MENU] Converts a JSON string to a Lua table.
---- 
+---
 --- Keys are converted to numbers wherever possible. This means using Player:SteamID64 as keys won't work.
---- 
+---
 --- There is a limit of 15,000 keys total.
 --- This will attempt cast the string keys "inf", "nan", "true", and "false" to their respective Lua values. This completely ignores nulls in arrays.
 --- Colors will not have the color metatable.
@@ -420,7 +430,7 @@ function util.IsValidRagdoll(ragdollName) end
 function util.JSONToTable(json) end
 
 ---[SHARED AND MENU] Converts a Valve KeyValue string (typically from util.TableToKeyValues) to a Lua table.
---- 
+---
 --- Due to how tables work in Lua, keys will not repeat within a table. See util.KeyValuesToTablePreserveOrder for alternative.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.KeyValuesToTable)
@@ -504,7 +514,7 @@ function util.ParticleTracerEx(name, startPos, endPos, doWhiz, entityIndex, atta
 ---@param radius number The radius of the sphere to check for visibility.
 ---@param PixVis pixelvis_handle_t The PixVis handle created with util.GetPixelVisibleHandle.
 --- 		Don't use the same handle twice per tick or it will give unpredictable results.
---- 		
+---
 ---@return number Visibility, ranges from `0-1`. `0` when none of the area is visible, `1` when all of it is visible.
 function util.PixelVisible(position, radius, PixVis) end
 
@@ -517,7 +527,7 @@ function util.PixelVisible(position, radius, PixVis) end
 function util.PointContents(position) end
 
 ---[SHARED] Precaches a model for later use. Model is cached after being loaded once.
---- 		
+---
 --- 		Modelprecache is limited to 4096 unique models. When it reaches the limit the game will crash.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.PrecacheModel)
@@ -526,7 +536,7 @@ function util.PrecacheModel(modelName) end
 
 ---[SHARED] Precaches a sound for later use. Sound is cached after being loaded once.
 --- Soundcache is limited to 16384 unique sounds on the server.
---- 
+---
 --- Broken on purpose because hitting the limit above causes the server to shutdown
 --- Ultimately does nothing on client, and only works with sound scripts, not direct paths.
 ---
@@ -543,7 +553,7 @@ function util.PrecacheSound(soundName) end
 ---@return table Trace result. See Structures/TraceResult.
 function util.QuickTrace(origin, dir, filter) end
 
----[MENU] Converts the relative path of the given GMA file to the Full Path.  
+---[MENU] Converts the relative path of the given GMA file to the Full Path.
 --- 		You can use util.FullPathToRelative_Menu to convert the Full path back to the Relative Path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu)
@@ -556,11 +566,11 @@ function util.RelativePathToFull_Menu(gma, gamePath) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RelativePathToGMA_Menu)
 ---@param gma string The **Full** path to the GMA file. **like: "[Steam folder]\common\garrysmod\garrysmod\addons\[Name].gma"**
----@return table The AddonInfo of the GMA file. Will return nil if the File doesn't belongs to an addon. Table Structure: ```lua Author	=	[Addon Author] File	=	[Steam folder]\workshop\content\4000\[Addon ID]/[GMA Name].gma ID	=	[Addon ID] Title	=	[Addon Title] ``` 		
+---@return table The AddonInfo of the GMA file. Will return nil if the File doesn't belongs to an addon. Table Structure: ```lua Author	=	[Addon Author] File	=	[Steam folder]\workshop\content\4000\[Addon ID]/[GMA Name].gma ID	=	[Addon ID] Title	=	[Addon Title] ```
 function util.RelativePathToGMA_Menu(gma) end
 
 ---[SHARED AND MENU] Removes PData of offline player using their SteamID.
---- 
+---
 --- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RemovePData)
@@ -569,19 +579,19 @@ function util.RelativePathToGMA_Menu(gma) end
 function util.RemovePData(steamID, name) end
 
 ---[SHARED] Makes the screen shake.
---- 
+---
 --- The screen shake effect is rendered by modifying the view origin on the client. If you override the view origin in GM:CalcView you may not be able to see the shake effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.ScreenShake)
 ---@param pos Vector The origin of the effect.
 --- 			Does nothing on client.
---- 		
+---
 ---@param amplitude number The strength of the effect.
 ---@param frequency number The frequency of the effect in hertz.
 ---@param duration number The duration of the effect in seconds.
 ---@param radius number The range from the origin within which views will be affected, in Hammer units.
 --- 			Does nothing on client.
---- 		
+---
 function util.ScreenShake(pos, amplitude, frequency, duration, radius) end
 
 ---[SHARED AND MENU] Sets PData for offline player using his SteamID.
@@ -609,7 +619,7 @@ function util.SHA1(stringToHash) end
 function util.SHA256(stringToHash) end
 
 ---[SHARED] Generates a random float value that should be the same on client and server.
---- 
+---
 --- This function is best used in a Predicted Hook
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.SharedRandom)
@@ -656,7 +666,7 @@ function util.SteamIDFrom64(id) end
 function util.SteamIDTo64(id) end
 
 ---[SHARED AND MENU] Converts a string to the specified type.
---- 
+---
 --- This can be useful when dealing with ConVars.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.StringToType)
@@ -679,9 +689,9 @@ function util.StringToType(str, typename) end
 function util.TableToJSON(table, prettyPrint) end
 
 ---[SHARED AND MENU] Converts the given table into a Valve key value string.
---- 
+---
 --- Use util.KeyValuesToTable to perform the opposite transformation.
---- 
+---
 --- You should consider using util.TableToJSON instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TableToKeyValues)
@@ -704,7 +714,7 @@ function util.Timer(startdelay) end
 function util.TimerCycle() end
 
 ---[SHARED AND MENU] You should use Global.tobool instead.
---- 
+---
 --- Converts string or a number to a bool, if possible. Alias of Global.tobool.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.tobool)
@@ -713,7 +723,7 @@ function util.TimerCycle() end
 function util.tobool(input) end
 
 ---[SHARED] Runs a trace using the entity's collisionmodel between two points. This does not take the entity's angles into account and will trace its unrotated collisionmodel.
---- 
+---
 --- Clientside entities will not be hit by traces.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceEntity)
@@ -732,9 +742,9 @@ function util.TraceEntity(tracedata, ent) end
 function util.TraceEntityHull(ent1, ent2) end
 
 ---[SHARED] Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
---- 
+---
 --- Clientside entities will not be hit by traces.
---- 
+---
 --- This function may not always give desired results clientside due to certain physics mechanisms not existing on the client. Use it serverside for accurate results.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceHull)
@@ -743,9 +753,9 @@ function util.TraceEntityHull(ent1, ent2) end
 function util.TraceHull(TraceData) end
 
 ---[SHARED] Performs a trace with the given trace data.
---- 
+---
 --- Clientside entities will not be hit by traces.
---- 
+---
 --- When server side trace starts inside a solid, it will hit the most inner solid the beam start position is located in. Traces are triggered by change of boundary.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceLine)
@@ -778,4 +788,3 @@ function util.worldpicker.Finish(tr) end
 ---@param callback function Function to call after an entity choice has been made. Argument is:
 --- table tr - Structures/TraceResult from the mouse press. tr.Entity will return the entity clicked
 function util.worldpicker.Start(callback) end
-

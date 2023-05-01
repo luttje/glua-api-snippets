@@ -20,10 +20,9 @@ function DRGBPicker:GetPosColor(x, y) end
 function DRGBPicker:GetRGB() end
 
 ---[CLIENT] Sets the color stored in the color picker.
---- 
+---
 --- This function is meant to be called internally and will not update the position of the color picker line or call DRGBPicker:OnChange
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:SetRGB)
 ---@param color table The color to set, see Color.
 function DRGBPicker:SetRGB(color) end
-

@@ -4,7 +4,7 @@
 local IMesh = {}
 
 ---[CLIENT] Builds the mesh from a table mesh vertexes.
---- 
+---
 --- See Global.Mesh and util.GetModelMeshes for examples.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles)
@@ -26,4 +26,3 @@ function IMesh:Draw() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:IsValid)
 ---@return boolean Whether this IMesh is valid or not.
 function IMesh:IsValid() end
-

@@ -14,4 +14,3 @@ function DTab:GetPanel() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:IsActive)
 ---@return Boolean Currently selected tab.
 function DTab:IsActive() end
-

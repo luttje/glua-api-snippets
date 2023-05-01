@@ -6,4 +6,3 @@ menu = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/menu.RecordFrame)
 function menu.RecordFrame() end
-

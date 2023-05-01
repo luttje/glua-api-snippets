@@ -17,7 +17,7 @@ function DTooltip:Close() end
 function DTooltip:DrawArrow(x, y) end
 
 ---[CLIENT AND MENU] Sets up the tooltip for display for given panel and starts the timer.
---- 
+---
 --- Normally you wouldn't call this and you'd use Panel:SetTooltip, Panel:SetTooltipPanel or Panel:SetTooltipPanelOverride.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTooltip:OpenForPanel)
@@ -30,11 +30,10 @@ function DTooltip:OpenForPanel(pnl) end
 function DTooltip:PositionTooltip() end
 
 ---[CLIENT AND MENU] What Panel you want put inside of the DTooltip
---- 
+---
 --- You can only have one Panel at a time; use Parenting to add more
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTooltip:SetContents)
 ---@param panel Panel Contents
 ---@param bDelete boolean If set to true, the panel in the first argument will be automatically removed when DTooltip is closed via DTooltip:Close.
 function DTooltip:SetContents(panel, bDelete) end
-

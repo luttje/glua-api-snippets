@@ -3,12 +3,12 @@
 concommand = {}
 
 ---[SHARED AND MENU] Creates a console command that runs a function in lua with optional autocompletion function and help text.
---- 
+---
 --- This will fail if the concommand was previously removed with concommand.Remove in a different realm (creating a command on the client that was removed from the server and vice-versa).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Add)
 ---@param name string The command name to be used in console.
---- 
+---
 --- This cannot be a name of existing console command or console variable. It will silently fail if it is.
 ---@param callback function The function to run when the concommand is executed. Arguments passed are:
 --- * Player ply - The player that ran the concommand. NULL entity if command was entered with the dedicated server console.
@@ -16,7 +16,7 @@ concommand = {}
 --- * table args - A table of all string arguments.
 --- * string argStr - The arguments as a string.
 ---@param autoComplete function The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
---- 
+---
 --- This only properly works on the client since it is **not** networked. Arguments passed are:
 --- * string cmd - The concommand this autocompletion is for.
 --- * string args - The arguments typed so far.
@@ -40,7 +40,7 @@ function concommand.AutoComplete(command, arguments) end
 function concommand.GetTable() end
 
 ---[SHARED AND MENU] Removes a console command.
---- 
+---
 --- This will not always remove the command from auto-complete.
 --- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
 ---
@@ -49,9 +49,9 @@ function concommand.GetTable() end
 function concommand.Remove(name) end
 
 ---[SHARED AND MENU] You might be looking for Global.RunConsoleCommand or Player:ConCommand.
---- 
+---
 --- Used by the engine to run a console command's callback function. This will only be called for commands that were added with Global.AddConsoleCommand, which concommand.Add calls internally. An error is sent to the player's chat if no callback is found.
---- 
+---
 --- This will still be called for concommands removed with concommand.Remove but will return false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Run)
@@ -62,4 +62,3 @@ function concommand.Remove(name) end
 ---@param argumentString string string of all arguments sent to the command
 ---@return boolean `true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end
-

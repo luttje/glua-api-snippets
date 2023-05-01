@@ -38,4 +38,3 @@ function DMenuOptionCVar:SetValueOff(value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOn)
 ---@param value string The value
 function DMenuOptionCVar:SetValueOn(value) end
-

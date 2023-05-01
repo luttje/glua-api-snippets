@@ -18,17 +18,17 @@ function DPanelOverlay:GetType() end
 ---[CLIENT] Used internally by the panel for type 3.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintDifferentColours)
----@param cola table 
----@param colb table 
----@param colc table 
----@param cold table 
----@param size number 
+---@param cola table
+---@param colb table
+---@param colc table
+---@param cold table
+---@param size number
 function DPanelOverlay:PaintDifferentColours(cola, colb, colc, cold, size) end
 
 ---[CLIENT] Used internally by the panel for types 1 and 2.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintInnerCorners)
----@param size number 
+---@param size number
 function DPanelOverlay:PaintInnerCorners(size) end
 
 ---[CLIENT] Sets the border color of the DPanelOverlay.
@@ -41,10 +41,9 @@ function DPanelOverlay:SetColor(color) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:SetType)
 ---@param type number The type to set.
---- 
+---
 --- Possible value are:
 --- * 1 - 8px corners of given color
 --- * 2 - 4px corners of given type
 --- * 3 - 2 top? corners of hardcoded color, 2 other corners of given color
 function DPanelOverlay:SetType(type) end
-

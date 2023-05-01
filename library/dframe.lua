@@ -9,7 +9,7 @@ local DFrame = {}
 function DFrame:Center() end
 
 ---[CLIENT] Hides or removes the DFrame, and calls DFrame:OnClose.
---- 
+---
 --- To set whether the frame is hidden or removed, use DFrame:SetDeleteOnClose.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:Close)
@@ -40,7 +40,7 @@ function DFrame:GetDraggable() end
 function DFrame:GetIsMenu() end
 
 ---[CLIENT] Gets the minimum height the DFrame can be resized to by the user.
---- 
+---
 --- You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetMinHeight)
@@ -48,7 +48,7 @@ function DFrame:GetIsMenu() end
 function DFrame:GetMinHeight() end
 
 ---[CLIENT] Gets the minimum width the DFrame can be resized to by the user.
---- 
+---
 --- You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetMinWidth)
@@ -68,7 +68,7 @@ function DFrame:GetPaintShadow() end
 function DFrame:GetScreenLock() end
 
 ---[CLIENT] Gets whether or not the DFrame can be resized by the user.
---- 
+---
 --- This is achieved by clicking and dragging in the bottom right corner of the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetSizable)
@@ -109,12 +109,12 @@ function DFrame:SetDraggable(draggable) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:SetIcon)
 ---@param path string Set to nil to remove the icon.
---- 
+---
 --- Otherwise, set to file path to create the icon.
 function DFrame:SetIcon(path) end
 
 ---[CLIENT] Sets whether the frame is part of a derma menu or not.
---- 
+---
 --- If this is set to `true`, Global.CloseDermaMenus will not be called when the frame is clicked, and thus any open menus will remain open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:SetIsMenu)
@@ -122,7 +122,7 @@ function DFrame:SetIcon(path) end
 function DFrame:SetIsMenu(isMenu) end
 
 ---[CLIENT] Sets the minimum height the DFrame can be resized to by the user.
---- 
+---
 --- This only applies to users attempting to resize the frame; Panel:SetTall and similar methods will not be affected. You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:SetMinHeight)
@@ -130,7 +130,7 @@ function DFrame:SetIsMenu(isMenu) end
 function DFrame:SetMinHeight(minH) end
 
 ---[CLIENT] Sets the minimum width the DFrame can be resized to by the user.
---- 
+---
 --- This only applies to users attempting to resize the frame; Panel:SetWide and similar methods will not be affected. You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:SetMinWidth)
@@ -150,9 +150,9 @@ function DFrame:SetPaintShadow(shouldPaint) end
 function DFrame:SetScreenLock(lock) end
 
 ---[CLIENT] Sets whether or not the DFrame can be resized by the user.
---- 
+---
 --- This is achieved by clicking and dragging in the bottom right corner of the frame.
---- 
+---
 --- You can set the minimum size using DFrame:SetMinWidth and DFrame:SetMinHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:SetSizable)
@@ -170,4 +170,3 @@ function DFrame:SetTitle(title) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:ShowCloseButton)
 ---@param show boolean `false` hides the control box; this is `true` by default.
 function DFrame:ShowCloseButton(show) end
-

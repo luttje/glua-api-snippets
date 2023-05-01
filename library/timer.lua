@@ -19,9 +19,9 @@ function timer.Check() end
 
 ---[SHARED AND MENU] Creates a new timer that will repeat its function given amount of times.
 --- This function also requires the timer to be named, which allows you to control it after it was created via the timer.
---- 
+---
 --- For a simple one-time timer with no identifiers, see timer.Simple.
---- 
+---
 --- Timers use Global.CurTime internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1`).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Create)
@@ -66,9 +66,9 @@ function timer.Remove(identifier) end
 function timer.RepsLeft(identifier) end
 
 ---[SHARED AND MENU] Creates a simple timer that runs the given function after a specified delay.
---- 
+---
 --- For a more advanced version that you can control after creation, see timer.Create.
---- 
+---
 --- Timers use Global.CurTime internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1`).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Simple)
@@ -77,7 +77,7 @@ function timer.RepsLeft(identifier) end
 function timer.Simple(delay, func) end
 
 ---[SHARED AND MENU] Restarts the given timer.
---- 
+---
 --- Timers use Global.CurTime for timing.
 --- Timers won't advance while the client is timing out from the server.
 ---
@@ -94,7 +94,7 @@ function timer.Start(identifier) end
 function timer.Stop(identifier) end
 
 ---[SHARED AND MENU] Returns amount of time left (in seconds) before the timer executes its function.
---- 
+---
 --- If the timer is paused, the amount will be negative.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.TimeLeft)
@@ -115,4 +115,3 @@ function timer.Toggle(identifier) end
 ---@param identifier any Identifier of the timer.
 ---@return boolean false if the timer didn't exist or was already running, true otherwise.
 function timer.UnPause(identifier) end
-

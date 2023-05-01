@@ -46,7 +46,7 @@ function CTakeDamageInfo:GetDamageBonus() end
 function CTakeDamageInfo:GetDamageCustom() end
 
 ---[SHARED] Returns a vector representing the damage force.
---- 
+---
 --- Can be set with CTakeDamageInfo:SetDamageForce.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageForce)
@@ -54,7 +54,7 @@ function CTakeDamageInfo:GetDamageCustom() end
 function CTakeDamageInfo:GetDamageForce() end
 
 ---[SHARED] Returns the position where the damage was or is going to be applied to.
---- 
+---
 --- Can be set using CTakeDamageInfo:SetDamagePosition.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamagePosition)
@@ -62,7 +62,7 @@ function CTakeDamageInfo:GetDamageForce() end
 function CTakeDamageInfo:GetDamagePosition() end
 
 ---[SHARED] Returns a bitflag which indicates the damage type(s) of the damage.
---- 
+---
 --- Consider using CTakeDamageInfo:IsDamageType instead. Value returned by this function can contain multiple damage types.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType)
@@ -70,16 +70,16 @@ function CTakeDamageInfo:GetDamagePosition() end
 function CTakeDamageInfo:GetDamageType() end
 
 ---[SHARED] Returns the inflictor of the damage. This is not necessarily a weapon.
---- 
+---
 --- For hitscan weapons this is the weapon.
---- 
---- 
+---
+---
 --- For projectile weapons this is the projectile.
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- For a more reliable method of getting the weapon that damaged an entity, use CTakeDamageInfo:GetAttacker with Player:GetActiveWeapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetInflictor)
@@ -166,7 +166,7 @@ function CTakeDamageInfo:SetDamageBonus(damage) end
 function CTakeDamageInfo:SetDamageCustom(DamageType) end
 
 ---[SHARED] Sets the directional force of the damage.
---- 	
+---
 --- 	This function seems to have no effect on player knockback. To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use workaround example below.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageForce)
@@ -186,10 +186,10 @@ function CTakeDamageInfo:SetDamagePosition(pos) end
 function CTakeDamageInfo:SetDamageType(type) end
 
 ---[SHARED] Sets the inflictor of the damage for example a weapon.
---- 
+---
 --- For hitscan/bullet weapons this should the weapon.
---- 
---- 
+---
+---
 --- For projectile ( rockets, etc ) weapons this should be the projectile.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetInflictor)
@@ -213,4 +213,3 @@ function CTakeDamageInfo:SetReportedPosition(pos) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SubtractDamage)
 ---@param damage number Value to subtract.
 function CTakeDamageInfo:SubtractDamage(damage) end
-

@@ -46,4 +46,3 @@ function GWEN.CreateTextureNormal(x, y, w, h, matOverride) end
 ---@param y number Y position of the pixel to get the color from.
 ---@return table The color of the point on the skin as a Color.
 function GWEN.TextureColor(x, y) end
-

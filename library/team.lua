@@ -106,7 +106,7 @@ function team.SetColor(teamIndex, color) end
 function team.SetScore(index, score) end
 
 ---[SHARED] Sets valid spawnpoint classes for use by a team.
---- 
+---
 --- GM.TeamBased must be set to true for this to work
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.SetSpawnPoint)
@@ -143,4 +143,3 @@ function team.TotalFrags(entityOrNumber) end
 ---@param index number Index of the team
 ---@return boolean Is valid
 function team.Valid(index) end
-

@@ -3,7 +3,7 @@
 debug = {}
 
 ---[SHARED AND MENU] Enters an interactive mode with the user, running each string that the user enters. Using simple commands and other debug facilities, the user can inspect global and local variables, change their values, evaluate expressions, and so on. A line containing only the word cont finishes this function, so that the caller continues its execution.
---- 
+---
 --- * Commands for debug.debug are not lexically nested within any function, and so have no direct access to local variables.
 --- * This only works on the source dedicated server.
 --- * To exit this interactive mode, you can press Ctrl + Z then Enter OR type the word 'cont' on a single line and press enter.
@@ -31,10 +31,10 @@ function debug.gethook(thread) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getinfo)
 ---@param funcOrStackLevel function Takes either a function or a number representing the stack level as an argument. Stack level 0 always corresponds to the debug.getinfo call, 1 would be the function calling debug.getinfo, and so on.
---- 
+---
 --- Returns useful information about that function in a table.
 ---@param fields string A string whose characters specify the information to be retrieved.
---- 
+---
 --- * f - Populates the func field.
 --- * l - Populates the currentline field.
 --- * L - Populates the activelines field.
@@ -49,17 +49,17 @@ function debug.getinfo(funcOrStackLevel, fields) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getlocal)
 ---@param thread thread The thread
----@param level number The level above the thread. 
+---@param level number The level above the thread.
 --- * 0 = the function that was called (most always this function)'s arguments
 --- * 1 = the thread that had called this function.
 --- * 2 = the thread that had called the function that started the thread that called this function.
---- 
+---
 --- A function defined in Lua can also be passed as the level. The index will specify the parameter's name to be returned (a parameter will have a value of nil).
 ---@param index number The variable's index you want to get.
 --- * 1 = the first local defined in the thread
 --- * 2 = the second local defined in the thread
 --- * etc...
---- 		
+---
 ---@return string, any string - The name of the variable.  Sometimes this will be `(*temporary)` if the local variable had no name.   Variables with names starting with **(** are **internal variables**.
 ---@return string, any any - The value of the local variable.
 function debug.getlocal(thread, level, index) end
@@ -72,9 +72,9 @@ function debug.getlocal(thread, level, index) end
 function debug.getmetatable(object) end
 
 ---[SHARED AND MENU] Returns the internal Lua registry table.
---- 
+---
 --- The Lua registry is used by the engine and binary modules to create references to Lua values. Avoid creating entries into the registry with a number as the key, as they are reserved for the reference system.
---- 
+---
 --- Improper editing of the registry can result in unintended side effects, including crashing of the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getregistry)
@@ -99,13 +99,13 @@ function debug.getupvalue(func, index) end
 function debug.setfenv(object, env) end
 
 ---[SHARED AND MENU] Sets the given function as a Lua hook. This is completely different to gamemode hooks. The thread argument can be completely omitted and calling this function with no arguments will remove the current hook. This is used by default for infinite loop detection. More information on hooks can be found at http://www.lua.org/pil/23.2.html and https://www.gammon.com.au/scripts/doc.php?lua=debug.sethook
---- 
+---
 --- Hooks are not always ran when code that has been compiled by LuaJIT's JIT compiler is being executed, this is due to Intermediate Representation internally storing constantly running bytecode for performance reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.sethook)
 ---@param thread thread Thread to set the hook on. This argument can be omited
 ---@param hook function Function for the hook to call. First argument in this function will be the mask event that called the hook as a full string (not as 'c' but instead as 'call').
----@param mask string The hook's mask. Can be one or more of the following events: 
+---@param mask string The hook's mask. Can be one or more of the following events:
 --- * c - Triggers the hook on each function call made from Lua.
 --- * r - Triggers the hook on each function return made from Lua.
 --- * l - Triggers the hook on each line compiled of code.
@@ -116,21 +116,21 @@ function debug.setfenv(object, env) end
 function debug.sethook(thread, hook, mask, count) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
---- 
+---
 --- Sets a local variable's value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setlocal)
 ---@param thread thread The thread
----@param level number The level above the thread. 
+---@param level number The level above the thread.
 --- 0 is the function that was called (most always this function)'s arguments
---- 
+---
 --- 1 is the thread that had called this function.
---- 
+---
 --- 2 is the thread that had called the function that started the thread that called this function.
 ---@param index number The variable's index you want to get.
---- 
+---
 --- 1 = the first local defined in the thread
---- 
+---
 --- 2 = the second local defined in the thread
 ---@param value any The value to set the local to
 ---@return string The name of the local variable if the local at the index exists, otherwise nil is returned.
@@ -146,7 +146,7 @@ function debug.setlocal(thread, level, index, value) end
 function debug.setmetatable(object, metatable) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
---- 
+---
 --- Sets the variable indexed from func
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setupvalue)
@@ -171,7 +171,7 @@ function debug.Trace() end
 function debug.traceback(thread, message, level) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
---- 
+---
 --- Returns an unique identifier for the upvalue indexed from func
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.upvalueid)
@@ -181,13 +181,12 @@ function debug.traceback(thread, message, level) end
 function debug.upvalueid(func, index) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
----  
+---
 --- Make the n1-th upvalue of the Lua closure f1 refer to the n2-th upvalue of the Lua closure f2.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.upvaluejoin)
----@param f1 function 
----@param n1 number 
----@param f2 function 
----@param n2 number 
+---@param f1 function
+---@param n1 number
+---@param f2 function
+---@param n2 number
 function debug.upvaluejoin(f1, n1, f2, n2) end
-

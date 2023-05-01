@@ -19,7 +19,7 @@ function DPropertySheet:AddSheet(name, pnl, icon, noStretchX, noStretchY, toolti
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:CloseTab)
 ---@param tab Panel The DTab of the sheet from DPropertySheet.
---- 
+---
 --- See DPropertySheet:GetItems.
 ---@param removePanel boolean Set to true to remove the associated panel object as well.
 ---@return Panel The panel of the tab.
@@ -28,9 +28,9 @@ function DPropertySheet:CloseTab(tab, removePanel) end
 ---[CLIENT] Internal function that handles the cross fade animation when the player switches tabs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:CrossFade)
----@param anim table 
----@param delta number 
----@param data table 
+---@param anim table
+---@param delta number
+---@param data table
 function DPropertySheet:CrossFade(anim, delta, data) end
 
 ---[CLIENT] Returns the active DTab of this DPropertySheet.
@@ -40,7 +40,7 @@ function DPropertySheet:CrossFade(anim, delta, data) end
 function DPropertySheet:GetActiveTab() end
 
 ---[CLIENT] Returns the amount of time (in seconds) it takes to fade between tabs.
---- 
+---
 --- Set by DPropertySheet:SetFadeTime
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetFadeTime)
@@ -50,7 +50,7 @@ function DPropertySheet:GetFadeTime() end
 ---[CLIENT] Returns a list of all tabs of this DPropertySheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetItems)
----@return table A table of tables. Each table contains 3 key-value pairs:  * string Name - The name of the tab. * Panel Tab - The DTab associated with the tab. * Panel Panel - The Panel associated with the tab. 		
+---@return table A table of tables. Each table contains 3 key-value pairs:  * string Name - The name of the tab. * Panel Tab - The DTab associated with the tab. * Panel Panel - The Panel associated with the tab.
 function DPropertySheet:GetItems() end
 
 ---[CLIENT] Gets the padding from the parent panel to child panels.
@@ -62,11 +62,11 @@ function DPropertySheet:GetPadding() end
 ---[CLIENT] Returns whatever value was set by DPropertySheet:SetShowIcons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetShowIcons)
----@return boolean 
+---@return boolean
 function DPropertySheet:GetShowIcons() end
 
 ---[CLIENT] Called when a player switches the tabs.
---- 
+---
 --- 		Source code states that this is meant to be overridden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:OnActiveTabChanged)
@@ -78,7 +78,7 @@ function DPropertySheet:OnActiveTabChanged(old, new) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:SetActiveTab)
 ---@param tab Panel The DTab to set active.
---- 
+---
 --- See DPropertySheet:GetItems
 function DPropertySheet:SetActiveTab(tab) end
 
@@ -97,7 +97,7 @@ function DPropertySheet:SetPadding(padding) end
 ---[CLIENT] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:SetShowIcons)
----@param show boolean 
+---@param show boolean
 function DPropertySheet:SetShowIcons(show) end
 
 ---[CLIENT] Creates a close button on the right side of the DPropertySheet that will run the given callback function when pressed.
@@ -116,4 +116,3 @@ function DPropertySheet:SizeToContentWidth() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:SwitchToName)
 ---@param name string Case sensitive name of the tab.
 function DPropertySheet:SwitchToName(name) end
-

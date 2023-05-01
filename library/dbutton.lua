@@ -16,7 +16,7 @@ function DButton:GetDrawBorder() end
 function DButton:IsDown() end
 
 ---[CLIENT] Sets a console command to be called when the button is clicked.
---- 
+---
 --- This overrides the button's `DoClick` method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetConsoleCommand)
@@ -25,7 +25,7 @@ function DButton:IsDown() end
 function DButton:SetConsoleCommand(command, args) end
 
 ---[CLIENT] Use Panel:SetEnabled instead.Sets whether or not the DButton is disabled.
---- 
+---
 --- When disabled, the button is `greyed out` and cannot be clicked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetDisabled)
@@ -45,9 +45,9 @@ function DButton:SetDrawBorder(draw) end
 function DButton:SetIcon(img) end
 
 ---[CLIENT] Sets an image to be displayed as the button's background.
---- 
+---
 --- See DButton:SetMaterial for equivalent function that uses IMaterial instead.
---- 
+---
 --- Also see: DImageButton
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetImage)
@@ -55,7 +55,7 @@ function DButton:SetIcon(img) end
 function DButton:SetImage(img) end
 
 ---[CLIENT] Sets an image to be displayed as the button's background.
---- 
+---
 --- See DButton:SetImage for equivalent function that uses file paths instead. Also see DImageButton.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetMaterial)
@@ -67,4 +67,3 @@ function DButton:SetMaterial(img) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:UpdateColours)
 ---@param skin table A table supposed to contain the color values listed above.
 function DButton:UpdateColours(skin) end
-

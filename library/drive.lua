@@ -90,4 +90,3 @@ function drive.Start(ply, ent) end
 ---@param cmd CUserCmd The user command
 ---@return boolean true if succeeded
 function drive.StartMove(ply, mv, cmd) end
-

@@ -27,4 +27,3 @@ function ContextBase:SetConVar(cvar) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContextBase:TestForChanges)
 function ContextBase:TestForChanges() end
-

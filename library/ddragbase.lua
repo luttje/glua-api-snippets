@@ -6,31 +6,31 @@ local DDragBase = {}
 ---[CLIENT] Internal function used in DDragBase:MakeDroppable
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Copy)
----@param drops table 
----@param bDoDrop boolean 
----@param command string 
----@param y number 
----@param x number 
+---@param drops table
+---@param bDoDrop boolean
+---@param command string
+---@param y number
+---@param x number
 function DDragBase:DropAction_Copy(drops, bDoDrop, command, y, x) end
 
 ---[CLIENT] Internal function used in DDragBase:DropAction_Copy
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Normal)
----@param drops table 
----@param bDoDrop boolean 
----@param command string 
----@param y number 
----@param x number 
+---@param drops table
+---@param bDoDrop boolean
+---@param command string
+---@param y number
+---@param x number
 function DDragBase:DropAction_Normal(drops, bDoDrop, command, y, x) end
 
 ---[CLIENT] Internal function used in DDragBase:DropAction_Normal
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Simple)
----@param drops table 
----@param bDoDrop boolean 
----@param command string 
----@param y number 
----@param x number 
+---@param drops table
+---@param bDoDrop boolean
+---@param command string
+---@param y number
+---@param x number
 function DDragBase:DropAction_Simple(drops, bDoDrop, command, y, x) end
 
 ---[CLIENT] No Description
@@ -42,7 +42,7 @@ function DDragBase:GetDnD() end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetUseLiveDrag)
----@return boolean 
+---@return boolean
 function DDragBase:GetUseLiveDrag() end
 
 ---[CLIENT] Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls Panel:Receiver.
@@ -77,13 +77,12 @@ function DDragBase:SetDropPos(pos) end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetUseLiveDrag)
----@param newState boolean 
+---@param newState boolean
 function DDragBase:SetUseLiveDrag(newState) end
 
 ---[CLIENT] Internal function used in DDragBase:DropAction_Normal
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:UpdateDropTarget)
----@param drop number 
----@param pnl Panel 
+---@param drop number
+---@param pnl Panel
 function DDragBase:UpdateDropTarget(drop, pnl) end
-

@@ -8,7 +8,7 @@ local DComboBox = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:AddChoice)
 ---@param value string The text show to the user.
 ---@param data any The data accompanying this string. If left empty, the value argument is used instead.
---- 
+---
 --- Can be accessed with the second argument of DComboBox:GetSelected, DComboBox:GetOptionData and as an argument of DComboBox:OnSelect.
 ---@param select boolean Should this be the default selected text show to the user or not.
 ---@param icon string Adds an icon for this choice.
@@ -61,7 +61,7 @@ function DComboBox:GetOptionText(index) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionTextByData)
 ---@param data string The data to look up the name of.
---- 
+---
 --- If given a number and no matching data was found, the function will test given data against each Global.tonumber'd data entry.
 ---@return string The option's text value.  If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
 function DComboBox:GetOptionTextByData(data) end
@@ -80,7 +80,7 @@ function DComboBox:GetSelected() end
 function DComboBox:GetSelectedID() end
 
 ---[CLIENT] Returns an whether the items in the dropdown will be alphabetically sorted or not.
---- 
+---
 --- See DComboBox:SetSortItems.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSortItems)
@@ -99,7 +99,7 @@ function DComboBox:IsMenuOpen() end
 function DComboBox:OpenMenu() end
 
 ---[CLIENT] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls.
---- 
+---
 --- This is enabled by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:SetSortItems)
@@ -111,4 +111,3 @@ function DComboBox:SetSortItems(sort) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:SetValue)
 ---@param value string The text in the DComboBox.
 function DComboBox:SetValue(value) end
-

@@ -10,20 +10,20 @@ file = {}
 function file.Append(name, content) end
 
 ---[SHARED AND MENU] Returns the content of a file asynchronously.
---- 
+---
 --- All limitations of file.Read also apply.
 --- This function is currently broken in the Menu State and won't be fixed. [Bug Report](https://github.com/Facepunch/garrysmod-issues/issues/5433)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.AsyncRead)
 ---@param fileName string The name of the file.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@param callback function 
+---@param callback function
 --- A callback function that will be called when the file read operation finishes. Arguments are:
 --- * string fileName - The `fileName` argument above.
 --- * string gamePath - The `gamePath` argument above.
 --- * number status - The status of the operation. The list can be found in Enums/FSASYNC.
 --- * string data - The entirety of the data of the file.
---- 		
+---
 ---@param sync boolean If `true` the file will be read synchronously.
 ---@return number Enums/FSASYNC on success, Enums/FSASYNC on failure.
 function file.AsyncRead(fileName, gamePath, callback, sync) end
@@ -55,12 +55,12 @@ function file.Exists(name, gamePath) end
 ---@param name string The wildcard to search for. `models/*.mdl` will list **.mdl** files in the `models/` folder.
 ---@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@param sorting string The sorting to be used, **optional**.
---- 
+---
 --- * `nameasc` sort the files ascending by name.
 --- * `namedesc` sort the files descending by name.
 --- * `dateasc` sort the files ascending by date.
 --- * `datedesc` sort the files descending by date.
---- 		
+---
 ---@return table, table table - A table of found files, or `nil` if the path is invalid
 ---@return table, table table - A table of found directories, or `nil` if the path is invalid
 function file.Find(name, path, sorting) end
@@ -90,7 +90,7 @@ function file.IsDir(fileName, gamePath) end
 function file.Open(fileName, fileMode, gamePath) end
 
 ---[SHARED AND MENU] Returns the content of a file.
---- 
+---
 --- Beware of casing -- some filesystems are case-sensitive. SRCDS on Linux seems to force file/directory creation to lowercase, but will not modify read operations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Read)
@@ -100,15 +100,15 @@ function file.Open(fileName, fileMode, gamePath) end
 function file.Read(fileName, gamePath) end
 
 ---[SHARED AND MENU] Attempts to rename a file with the given name to another given name.
---- 
+---
 --- This function is constrained to the `data/` folder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Rename)
 ---@param orignalFileName string The original file or folder name. See file.Write for details on filename restrictions when writing to files.
---- 
+---
 --- **This argument will be forced lowercase.**
 ---@param targetFileName string The target file or folder name. See file.Write for details on filename restrictions when writing to files.
---- 
+---
 --- **This argument will be forced lowercase.**
 ---@return boolean `true` on success, `false` otherwise.
 function file.Rename(orignalFileName, targetFileName) end
@@ -132,9 +132,9 @@ function file.Time(path, gamePath) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Write)
 ---@param fileName string The name of the file being written into. The path is relative to the **data/** folder.
---- 
+---
 --- This argument will be forced lowercase.
---- 
+---
 --- The filename **must** end with one of the following:
 --- * .txt
 --- * .dat
@@ -149,9 +149,9 @@ function file.Time(path, gamePath) end
 --- * .mp3
 --- * .wav
 --- * .ogg
---- 
+---
 --- Restricted symbols are: `" :`
---- 		
+---
 ---@param content string The content that will be written into the file.
 function file.Write(fileName, content) end
 
@@ -178,7 +178,7 @@ function File:Flush() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:Read)
 ---@param length number Reads the specified amount of chars. If not set, will read the entire file.
----@return string 
+---@return string
 function File:Read(length) end
 
 ---[SHARED AND MENU] Reads one byte of the file and returns whether that byte was not 0.
@@ -206,7 +206,7 @@ function File:ReadDouble() end
 function File:ReadFloat() end
 
 ---[SHARED AND MENU] Returns the contents of the file from the current position up until the end of the current line.
---- 
+---
 --- This function will look specifically for `Line Feed` characters `\n` and will **completely ignore `Carriage Return` characters** `\r`.
 --- This function will not return more than 8192 characters. The return value will include the `\n` character.
 ---
@@ -247,7 +247,7 @@ function File:Seek(pos) end
 ---[SHARED AND MENU] Returns the size of the file in bytes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:Size)
----@return number 
+---@return number
 function File:Size() end
 
 ---[SHARED AND MENU] Moves the file pointer by the specified amount of chars.
@@ -316,4 +316,3 @@ function File:WriteULong(uint32) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:WriteUShort)
 ---@param uint16 number The unsigned 16-bit integer to the file.
 function File:WriteUShort(uint16) end
-

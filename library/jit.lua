@@ -3,71 +3,71 @@
 jit = {}
 
 ---[SHARED AND MENU] You can attach callbacks to a number of compiler events with jit.attach. The callback can be called:
---- 
+---
 --- * when a function has been compiled to bytecode ("bc");
 --- * when trace recording starts or stops ("trace");
 --- * as a trace is being recorded ("record");
 --- * or when a trace exits through a side exit ("texit").
---- 
+---
 --- Set a callback with jit.attach(callback, "event") and clear the same callback with jit.attach(callback)
---- 
+---
 --- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 --- Using these constantly (especially bytecode) can be very performance heavy due to the constant stream of data being compiled at a time.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.attach)
 ---@param callback function The callback function.
---- 
+---
 --- The arguments passed to the callback depend on the event being reported:
---- 
+---
 --- * "bc":
 --- function func - The function that's just been recorded
---- 
---- 
---- 
+---
+---
+---
 --- * "trace":
 --- string what - description of the trace event: "flush", "start", "stop", "abort". Available for all events.
---- 
---- 
+---
+---
 --- number tr - The trace number. Not available for flush.
---- 
---- 
+---
+---
 --- function func - The function being traced. Available for start and abort.
---- 
---- 
+---
+---
 --- number pc - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
---- 
---- 
+---
+---
 --- number otr - start: the parent trace number if this is a side trace, abort: abort code
---- 
---- 
+---
+---
 --- string oex - start: the exit number for the parent trace, abort: abort reason (string)
---- 
---- 
---- 
+---
+---
+---
 --- * "record":
 --- number tr - The trace number. Not available for flush.
---- 
---- 
+---
+---
 --- function func - The function being traced. Available for start and abort.
---- 
---- 
+---
+---
 --- number pc - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
---- 
---- 
+---
+---
 --- number depth  - The depth of the inlining of the current bytecode.
---- 
---- 
---- 
+---
+---
+---
 --- * "texit":
 --- number tr - The trace number. Not available for flush.
---- 
---- 
+---
+---
 --- number ex - The exit number
---- 
---- 
+---
+---
 --- number ngpr - The number of general-purpose and floating point registers that are active at the exit.
---- 
---- 
+---
+---
 --- number nfpr - The number of general-purpose and floating point registers that are active at the exit.
 ---@param event string The event to hook into.
 function jit.attach(callback, event) end
@@ -89,17 +89,17 @@ function jit.on() end
 
 ---[SHARED AND MENU] JIT compiler optimization control. The opt sub-module provides the backend for the -O command line LuaJIT option.
 --- You can also use it programmatically, e.g.:
---- 
+---
 --- ```
 --- jit.opt.start(2) -- same as -O2
 --- jit.opt.start("-dce")
 --- jit.opt.start("hotloop=10", "hotexit=2")
 --- ```
---- 
+---
 --- 	A list of LuaJIT -O command line options can be found here(a table of various optimization levels are displayed towards the bottom of the page along with exactly which optimization options are enabled for each level): http://luajit.org/running.html
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.opt.start)
----@param ... ... 
+---@param ... ...
 function jit.opt.start(...) end
 
 ---[SHARED AND MENU] Returns the status of the JIT compiler and the current optimizations enabled.
@@ -137,7 +137,7 @@ function jit.util.funcbc(func, pos) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcinfo)
 ---@param func function Function or Proto to retrieve info about.
----@param pos number 
+---@param pos number
 ---@return table Information about the supplied function/proto.
 function jit.util.funcinfo(func, pos) end
 
@@ -166,10 +166,10 @@ function jit.util.funcuvname(func, index) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
 ---@param index number The index of the function address to get from the ircalladdr func array (starting from 0)
----@return number The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71. 			 		
+---@return number The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71.
 function jit.util.ircalladdr(index) end
 
----[SHARED AND MENU] 
+---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceexitstub)
 ---@param exitno number exit number to retrieve exit stub address from (gotten via jit.attach with the texit event)
@@ -188,11 +188,11 @@ function jit.util.traceexitstub(exitno) end
 ---@return table trace info
 function jit.util.traceinfo(trace) end
 
----[SHARED AND MENU] 
+---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceir)
----@param tr number 
----@param index number 
+---@param tr number
+---@param index number
 ---@return number, number, number, number, number number - m
 ---@return number, number, number, number, number number - ot
 ---@return number, number, number, number, number number - op1
@@ -200,20 +200,20 @@ function jit.util.traceinfo(trace) end
 ---@return number, number, number, number, number number - prev
 function jit.util.traceir(tr, index) end
 
----[SHARED AND MENU] 
+---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracek)
----@param tr number 
----@param index number 
+---@param tr number
+---@param index number
 ---@return any, number, number any - k
 ---@return any, number, number number - t
 ---@return any, number, number number - slot; optional
 function jit.util.tracek(tr, index) end
 
----[SHARED AND MENU] 
+---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracemc)
----@param tr number 
+---@param tr number
 ---@return string, number, number string - mcode
 ---@return string, number, number number - address
 ---@return string, number, number number - loop
@@ -221,7 +221,7 @@ function jit.util.tracemc(tr) end
 
 ---[SHARED AND MENU] Return table fields:
 --- * 0 (ref) (number): first IR ref for the snapshot
---- * 1 (nslots) (number): the number of valid slots 
+--- * 1 (nslots) (number): the number of valid slots
 --- * all indexes except first 2 and last (there might not be any of these): the snapshot map
 --- * last index in table (number): -16777216 (255 << 24)
 ---
@@ -230,4 +230,3 @@ function jit.util.tracemc(tr) end
 ---@param sn number snapshot index for trace (starting from 0 to nexit - 1, nexit gotten via jit.util.traceinfo)
 ---@return table snapshot
 function jit.util.tracesnap(tr, sn) end
-

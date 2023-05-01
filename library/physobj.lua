@@ -8,7 +8,7 @@ local PhysObj = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:AddAngleVelocity)
 ---@param angularVelocity Vector The additional velocity in `degrees/s`. (Local to the physics object.)
 --- 			Does nothing on frozen objects.
---- 		
+---
 function PhysObj:AddAngleVelocity(angularVelocity) end
 
 ---[SHARED] Adds one or more bit flags.
@@ -22,19 +22,19 @@ function PhysObj:AddGameFlag(flags) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:AddVelocity)
 ---@param velocity Vector Additional velocity in `source_unit/s`. (World frame)
 --- 			Does nothing on frozen objects.
---- 		
+---
 function PhysObj:AddVelocity(velocity) end
 
 ---[SHARED] Rotates the object so that it's angles are aligned to the ones inputted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:AlignAngles)
----@param from Angle 
----@param to Angle 
----@return Angle 
+---@param from Angle
+---@param to Angle
+---@return Angle
 function PhysObj:AlignAngles(from, to) end
 
 ---[SHARED] Applies the specified impulse in the mass center of the physics object.
---- 
+---
 --- This will not work on players, use Entity:SetVelocity instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:ApplyForceCenter)
@@ -52,10 +52,10 @@ function PhysObj:ApplyForceOffset(impulse, position) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:ApplyTorqueCenter)
 ---@param angularImpulse Vector The angular impulse to be applied in `kg * m^2 * degrees / s`. (The vector is in world frame)
---- 			
+---
 --- 				The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)`
---- 			
---- 		
+---
+---
 function PhysObj:ApplyTorqueCenter(angularImpulse) end
 
 ---[SHARED] Calculates the linear and angular impulse on the object's center of mass for an offset impulse.The outputs can be used with PhysObj:ApplyForceCenter and PhysObj:ApplyTorqueCenter, respectively. **Be careful to convert the angular impulse to world frame (PhysObj:LocalToWorldVector) if you are going to use it with ApplyTorqueCenter.**
@@ -68,7 +68,7 @@ function PhysObj:ApplyTorqueCenter(angularImpulse) end
 function PhysObj:CalculateForceOffset(impulse, position) end
 
 ---[SHARED] Calculates the linear and angular velocities on the center of mass for an offset impulse. The outputs can be directly passed to PhysObj:AddVelocity and PhysObj:AddAngleVelocity, respectively.
---- 
+---
 --- This will return zero length vectors if the physics object's motion is disabled. See PhysObj:IsMotionEnabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:CalculateVelocityOffset)
@@ -91,11 +91,11 @@ function PhysObj:ClearGameFlag(flags) end
 function PhysObj:ComputeShadowControl(shadowparams) end
 
 ---[SHARED] Sets whether the physics object should collide with anything or not, including world.
---- 
+---
 --- This function currently has major problems with player collisions, and as such should be avoided at all costs.
---- 
---- 
---- 
+---
+---
+---
 --- A better alternative to this function would be using Entity:SetCollisionGroup( COLLISION_GROUP_WORLD ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:EnableCollisions)
@@ -115,7 +115,7 @@ function PhysObj:EnableDrag(enable) end
 function PhysObj:EnableGravity(enable) end
 
 ---[SHARED] Sets whether the physobject should be able to move or not.
---- 
+---
 --- This is the exact method the Physics Gun uses to freeze props. If a motion-disabled physics object is grabbed with the physics gun, the object will be able to move again. To disallow this, use GM:PhysgunPickup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:EnableMotion)
@@ -169,25 +169,25 @@ function PhysObj:GetEntity() end
 ---[SERVER] Returns the friction snapshot of this physics object. This is useful for determining if an object touching ground for example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetFrictionSnapshot)
----@return table A table of tables containing the following data: * PhysObj Other - The other physics object we came in contact with * number EnergyAbsorbed -  * number FrictionCoefficient -  * number NormalForce -  * Vector Normal - Direction of the friction event * Vector ContactPoint - Contact point of the friction event * number Material - Surface Property ID of our physics obj * number MaterialOther - Surface Property ID of the physics obj we came in contact with 
+---@return table A table of tables containing the following data: * PhysObj Other - The other physics object we came in contact with * number EnergyAbsorbed -  * number FrictionCoefficient -  * number NormalForce -  * Vector Normal - Direction of the friction event * Vector ContactPoint - Contact point of the friction event * number Material - Surface Property ID of our physics obj * number MaterialOther - Surface Property ID of the physics obj we came in contact with
 function PhysObj:GetFrictionSnapshot() end
 
 ---[SHARED] Returns the principal moments of inertia `(Ixx, Iyy, Izz)` of the physics object, in the local frame, with respect to the center of mass.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInertia)
----@return Vector The moment of inertia in `kg * m^2` 			The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)` 			This value changes proportionally to the physics object's mass (e.g. making the object twice as heavy will result in it having twice the angular inertia) 		
+---@return Vector The moment of inertia in `kg * m^2` 			The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)` 			This value changes proportionally to the physics object's mass (e.g. making the object twice as heavy will result in it having twice the angular inertia)
 function PhysObj:GetInertia() end
 
 ---[SHARED] Returns 1 divided by the angular inertia. See PhysObj:GetInertia
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInvInertia)
----@return Vector The inverted angular inertia 			Returns `[0, 0, 0]` on frozen physics objects. 		
+---@return Vector The inverted angular inertia 			Returns `[0, 0, 0]` on frozen physics objects.
 function PhysObj:GetInvInertia() end
 
 ---[SHARED] Returns 1 divided by the physics object's mass (in kilograms).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInvMass)
----@return number The inverted mass. 			Returns 0 on frozen physics objects. 		
+---@return number The inverted mass. 			Returns 0 on frozen physics objects.
 function PhysObj:GetInvMass() end
 
 ---[SHARED] Returns the mass of the physics object.
@@ -302,7 +302,7 @@ function PhysObj:GetVolume() end
 function PhysObj:HasGameFlag(flags) end
 
 ---[SHARED] Returns whether the physics object is "sleeping".
---- 
+---
 --- See PhysObj:Sleep for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsAsleep)
@@ -340,7 +340,7 @@ function PhysObj:IsMotionEnabled() end
 function PhysObj:IsMoveable() end
 
 ---[SHARED] Returns whenever the physics object is penetrating another physics object.
---- 
+---
 --- This is internally implemented as `PhysObj:HasGameFlag( FVPHYSICS_PENETRATING )` and thus is only updated for non-static physics objects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsPenetrating)
@@ -354,7 +354,7 @@ function PhysObj:IsPenetrating() end
 function PhysObj:IsValid() end
 
 ---[SHARED] Mapping a vector in local frame of the physics object to world frame.
---- 
+---
 --- this function does translation and rotation, with translation done first.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld)
@@ -363,7 +363,7 @@ function PhysObj:IsValid() end
 function PhysObj:LocalToWorld(LocalVec) end
 
 ---[SHARED] Rotate a vector from the local frame of the physics object to world frame.
---- 
+---
 --- This function only rotates the vector, without any translation operation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)
@@ -399,8 +399,8 @@ function PhysObj:SetAngleDragCoefficient(coefficient) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:SetAngles)
 ---@param angles Angle The new angles of the physobject.
---- 			The new angle will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)	
---- 		
+--- 			The new angle will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)
+---
 function PhysObj:SetAngles(angles) end
 
 ---[SHARED] Sets the specified [angular velocity](https://en.wikipedia.org/wiki/Angular_velocity) on the PhysObj
@@ -442,12 +442,12 @@ function PhysObj:SetDamping(linearDamping, angularDamping) end
 function PhysObj:SetDragCoefficient(drag) end
 
 ---[SHARED] Sets the angular inertia. See PhysObj:GetInertia.
---- 
+---
 --- This does not affect linear inertia.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:SetInertia)
 ---@param angularInertia Vector The angular inertia of the object.
---- 		
+---
 function PhysObj:SetInertia(angularInertia) end
 
 ---[SHARED] Sets the mass of the physics object.
@@ -457,7 +457,7 @@ function PhysObj:SetInertia(angularInertia) end
 function PhysObj:SetMass(mass) end
 
 ---[SHARED] Sets the material of the physobject.
---- 
+---
 --- Impact sounds will only change if this is called on client
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:SetMaterial)
@@ -468,9 +468,9 @@ function PhysObj:SetMaterial(materialName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:SetPos)
 ---@param position Vector The new position of the physobject in world coordinates. (`source units`).
---- 			The new position will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)	
---- 		
----@param teleport boolean 
+--- 			The new position will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)
+---
+---@param teleport boolean
 function PhysObj:SetPos(position, teleport) end
 
 ---[SHARED] Sets the velocity of the physics object for the next iteration.
@@ -486,7 +486,7 @@ function PhysObj:SetVelocity(velocity) end
 function PhysObj:SetVelocityInstantaneous(velocity) end
 
 ---[SHARED] Makes the physics object "sleep".
---- 
+---
 --- The physics object will no longer be moving unless it is "woken up" by either a collision with another moving object, or by PhysObj:Wake. This is an optimization feature of the physics engine.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:Sleep)
@@ -494,19 +494,19 @@ function PhysObj:Sleep() end
 
 ---[SHARED] Unlike PhysObj:SetPos and PhysObj:SetAngles, this allows the movement of a physobj while leaving physics interactions intact.
 --- This is used internally by the motion controller of the Gravity Gun , the +use pickup and the Physics Gun, and entities such as the crane.
---- 
+---
 --- This is the ideal function to move a physics shadow created with Entity:PhysicsInitShadow or Entity:MakePhysicsObjectAShadow.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:UpdateShadow)
 ---@param targetPosition Vector The position we should move to.
 ---@param targetAngles Angle The angle we should rotate towards.
----@param frameTime number The frame time to use for this movement, can be generally filled with Global.FrameTime or ENTITY:PhysicsSimulate with the deltaTime. 
---- 
+---@param frameTime number The frame time to use for this movement, can be generally filled with Global.FrameTime or ENTITY:PhysicsSimulate with the deltaTime.
+---
 --- Can be set to 0 when you need to update the physics object just once.
 function PhysObj:UpdateShadow(targetPosition, targetAngles, frameTime) end
 
 ---[SHARED] Wakes the physics object.
---- 
+---
 --- See PhysObj:Sleep for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:Wake)
@@ -520,11 +520,10 @@ function PhysObj:Wake() end
 function PhysObj:WorldToLocal(vec) end
 
 ---[SHARED] Rotate a vector from the world frame to the local frame of the physics object.
---- 
+---
 --- This function only rotates the vector, without any translation operation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocalVector)
 ---@param WorldVec Vector A vector in the world frame
 ---@return Vector The corresponding vector relative to the PhysObj
 function PhysObj:WorldToLocalVector(WorldVec) end
-

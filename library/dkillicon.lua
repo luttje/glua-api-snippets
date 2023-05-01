@@ -10,10 +10,9 @@ local DKillIcon = {}
 function DKillIcon:GetName() end
 
 ---[CLIENT] Sets the killicon to be displayed. You should call Panel:SizeToContents following this.
---- 
+---
 --- Killicons can be added with killicon.Add and killicon.AddFont.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DKillIcon:SetName)
 ---@param iconName string The name of the killicon to be displayed.
 function DKillIcon:SetName(iconName) end
-

@@ -3,7 +3,7 @@
 table = {}
 
 ---[SHARED AND MENU] Adds the contents from one table into another. The target table will be modified.
---- 
+---
 --- See also table.insert, table.Inherit and table.Merge.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Add)
@@ -38,7 +38,7 @@ function table.CollapseKeyValue(input) end
 function table.concat(tbl, concatenator, startPos, endPos) end
 
 ---[SHARED AND MENU] Creates a deep copy and returns that copy.
---- 
+---
 --- This function does NOT copy userdata, such as Vectors and Angles!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Copy)
@@ -54,7 +54,7 @@ function table.Copy(originalTable) end
 function table.CopyFromTo(source, target) end
 
 ---[SHARED AND MENU] Counts the amount of keys in a table. This should only be used when a table is not numerically and sequentially indexed. For those tables, consider the length (**#**) operator.
---- 
+---
 --- If you only want to test if the table is empty or not, use table.IsEmpty instead as it is a lot faster.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Count)
@@ -102,7 +102,7 @@ function table.FindPrev(tbl, value) end
 function table.ForceInsert(tab, value) end
 
 ---[SHARED AND MENU] This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.pairs instead. Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
---- 
+---
 --- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use Global.pairs instead. The GLua interpretation of this is table.ForEach.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreach)
@@ -111,7 +111,7 @@ function table.ForceInsert(tab, value) end
 function table.foreach(tbl, callback) end
 
 ---[SHARED AND MENU] This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.ipairs() instead. Iterates for each numeric index in the table in order.
---- 
+---
 --- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use Global.ipairs() instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreachi)
@@ -120,7 +120,7 @@ function table.foreach(tbl, callback) end
 function table.foreachi(table, func) end
 
 ---[SHARED AND MENU] Instead, expect the first key to be 1.
---- 
+---
 --- Non-numerically indexed tables are not ordered and do not have a first key.
 --- Returns the first key found in the given table
 ---
@@ -130,7 +130,7 @@ function table.foreachi(table, func) end
 function table.GetFirstKey(tab) end
 
 ---[SHARED AND MENU] Instead, index the table with a key of 1.
---- 
+---
 --- Non-numerically indexed tables are not ordered and do not have a first key.
 --- Returns the first value found in the given table
 ---
@@ -187,12 +187,12 @@ function table.GetWinningKey(inputTable) end
 function table.HasValue(tbl, value) end
 
 ---[SHARED AND MENU] Copies any missing data from base to target, and sets the target's `BaseClass` member to the base table's pointer.
---- 
+---
 --- See table.Merge, which overrides existing values and doesn't add a BaseClass member.
---- 
---- 
+---
+---
 --- See also table.Add, which simply adds values of one table to another.
---- 
+---
 --- Sub-tables aren't inherited. The target's table value will take priority.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Inherit)
@@ -212,8 +212,8 @@ function table.Inherit(target, base) end
 function table.insert(tbl, position, value) end
 
 ---[SHARED AND MENU] Returns whether or not the given table is empty.
---- 
---- This works on both sequential and non-sequential tables, and is a lot faster to use than `table.Count(tbl) == 0`.  
+---
+--- This works on both sequential and non-sequential tables, and is a lot faster to use than `table.Count(tbl) == 0`.
 --- If you want to check if a table is not empty, use `next(tbl) ~= nil`, as it is slightly faster.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.IsEmpty)
@@ -259,7 +259,7 @@ function table.LowerKeyNames(tbl) end
 function table.maxn(tbl) end
 
 ---[SHARED AND MENU] Returns an array of values of given with given key from each table of given table.
---- 
+---
 --- See also table.KeysFromValue.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.MemberValuesFromKey)
@@ -269,10 +269,10 @@ function table.maxn(tbl) end
 function table.MemberValuesFromKey(inputTable, keyName) end
 
 ---[SHARED AND MENU] Merges the contents of the second table with the content in the first one. The destination table will be modified.
---- 
+---
 --- See table.Inherit, which doesn't override existing values.
---- 
---- 
+---
+---
 --- See also table.Add, which simply adds values of one table to another.
 --- This function will cause a stack overflow under certain circumstances.
 ---
@@ -295,9 +295,9 @@ function table.Merge(destination, source) end
 function table.move(sourceTbl, from, to, dest, destTbl) end
 
 ---[SHARED AND MENU] Returns a random value from the supplied table.
---- 
+---
 --- This function iterates over the given table **twice**, therefore with sequential tables you should instead use following:
---- 
+---
 --- ```
 --- mytable[ math.random( #mytable ) ]
 --- ```
@@ -318,7 +318,7 @@ function table.Random(haystack) end
 function table.remove(tbl, index) end
 
 ---[SHARED AND MENU] Removes the first instance of a given value from the specified table with table.remove, then returns the key that the value was found at.
---- 
+---
 --- Avoid usage of this function. It does not remove all instances of given value in the table, only the first found, and it does not work with non sequential tables!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.RemoveByValue)
@@ -335,7 +335,7 @@ function table.RemoveByValue(tbl, val) end
 function table.Reverse(tbl) end
 
 ---[SHARED AND MENU] Converts Vectors, Angles and booleans to be able to be converted to and from key-values via util.TableToKeyValues.
---- 
+---
 --- table.DeSanitise performs the opposite transformation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Sanitise)
@@ -359,7 +359,7 @@ function table.Shuffle(target) end
 function table.sort(tbl, sorter) end
 
 ---[SHARED AND MENU] Returns a list of keys sorted based on values of those keys.
---- 
+---
 --- For normal sorting see table.sort.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.SortByKey)
@@ -391,4 +391,3 @@ function table.SortDesc(tbl) end
 ---@param niceFormatting boolean Adds new lines and tabs to the string.
 ---@return string The table formatted as a string.
 function table.ToString(tbl, displayName, niceFormatting) end
-

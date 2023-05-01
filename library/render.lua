@@ -23,13 +23,13 @@ function render.BlurRenderTarget(rendertarget, blurx, blury, passes) end
 ---[CLIENT] This function overrides the brush material for next render operations. It can be used with Entity:DrawModel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.BrushMaterialOverride)
----@param mat IMaterial 
+---@param mat IMaterial
 function render.BrushMaterialOverride(mat) end
 
 ---[CLIENT] Captures a part of the current render target and returns the data as a binary string in the given format.
---- 
+---
 --- Since the pixel buffer clears itself every frame, this will return a black screen outside of render hooks. To capture the user's final view, use GM:PostRender. This will not capture the Steam overlay or third-party injections (such as the Discord overlay, Overwolf, and advanced cheats) on the user's screen.
---- 
+---
 --- In PNG mode, this function can produce unexpected result where foreground is rendered as transparent.
 --- This is caused by render.SetWriteDepthToDestAlpha set to `true` when doing most of render operations, including rendering in `_rt_fullframefb`. If you want to capture render target's content as PNG image only for output quality, set Structures/RenderCaptureData's `alpha` to `false` when capturing render targets with render.SetWriteDepthToDestAlpha set to `true`.
 ---
@@ -44,7 +44,7 @@ function render.Capture(captureData) end
 function render.CapturePixels() end
 
 ---[CLIENT AND MENU] Clears the current render target and the specified buffers.
---- 
+---
 --- This sets the alpha incorrectly for surface draw calls for render targets.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Clear)
@@ -67,18 +67,18 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 function render.ClearBuffersObeyStencil(r, g, b, a, depth) end
 
 ---[CLIENT AND MENU] Resets the depth buffer.
---- 
+---
 --- This function also clears the stencil buffer. Use render.Clear in the meantime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearDepth)
 function render.ClearDepth() end
 
 ---[CLIENT] Clears a render target
---- 
+---
 --- It uses render.Clear then render.SetRenderTarget on the modified render target.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearRenderTarget)
----@param texture ITexture 
+---@param texture ITexture
 ---@param color table The color, see Color
 function render.ClearRenderTarget(texture, color) end
 
@@ -88,7 +88,7 @@ function render.ClearRenderTarget(texture, color) end
 function render.ClearStencil() end
 
 ---[CLIENT AND MENU] Sets the stencil value in a specified rect.
---- 
+---
 --- This is **not** affected by render.SetStencilWriteMask
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearStencilBufferRectangle)
@@ -124,8 +124,8 @@ function render.CopyRenderTargetToTexture(Target) end
 ---[CLIENT] Copies the contents of one texture to another. Only works with rendertargets.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.CopyTexture)
----@param texture_from ITexture 
----@param texture_to ITexture 
+---@param texture_from ITexture
+---@param texture_to ITexture
 function render.CopyTexture(texture_from, texture_to) end
 
 ---[CLIENT AND MENU] Changes the cull mode.
@@ -169,7 +169,7 @@ function render.DrawBox(position, angles, mins, maxs, color) end
 ---@param endPos Vector Line end position in world coordinates.
 ---@param color table The color to be used. Uses the Color.
 ---@param writeZ boolean Whether or not to consider the Z buffer. If false, the line will be drawn over everything currently drawn, if true, the line will be drawn with depth considered, as if it were a regular object in 3D space.
---- 
+---
 --- Enabling this option will cause the line to ignore the color's alpha.
 function render.DrawLine(startPos, endPos, color, writeZ) end
 
@@ -195,7 +195,7 @@ function render.DrawQuad(vert1, vert2, vert3, vert4, color) end
 function render.DrawQuadEasy(position, normal, width, height, color, rotation) end
 
 ---[CLIENT] Draws the current material set by render.SetMaterial to the whole screen. The color cannot be customized.
---- 
+---
 --- See also render.DrawScreenQuadEx.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawScreenQuad)
@@ -203,7 +203,7 @@ function render.DrawQuadEasy(position, normal, width, height, color, rotation) e
 function render.DrawScreenQuad(applyPoster) end
 
 ---[CLIENT] Draws the the current material set by render.SetMaterial to the area specified. Color cannot be customized.
---- 
+---
 --- See also render.DrawScreenQuad.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawScreenQuadEx)
@@ -214,7 +214,7 @@ function render.DrawScreenQuad(applyPoster) end
 function render.DrawScreenQuadEx(startX, startY, width, height) end
 
 ---[CLIENT] Draws a sphere in 3D space. The material previously set with render.SetMaterial will be applied the sphere's surface.
---- 
+---
 --- See also render.DrawWireframeSphere for a wireframe equivalent.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawSphere)
@@ -266,18 +266,18 @@ function render.DrawWireframeBox(position, angle, mins, maxs, color, writeZ) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawWireframeSphere)
 ---@param position Vector Position of the sphere.
 ---@param radius number The size of the sphere.
----@param longitudeSteps number The amount of longitude steps. 
+---@param longitudeSteps number The amount of longitude steps.
 --- The larger this number is, the smoother the sphere is.
----@param latitudeSteps number The amount of latitude steps. 
+---@param latitudeSteps number The amount of latitude steps.
 --- The larger this number is, the smoother the sphere is.
 ---@param color table The color of the wireframe. Uses the Color.
 ---@param writeZ boolean Whether or not to consider the Z buffer. If false, the wireframe will be drawn over everything currently drawn. If true, it will be drawn with depth considered, as if it were a regular object in 3D space.
 function render.DrawWireframeSphere(position, radius, longitudeSteps, latitudeSteps, color, writeZ) end
 
 ---[CLIENT AND MENU] Sets the status of the clip renderer, returning previous state.
---- 
+---
 --- To prevent unintended rendering behavior of other mods/the game, you must reset the clipping state to its previous value.
---- 
+---
 --- Reloading the map does not reset the previous value of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.EnableClipping)
@@ -302,7 +302,7 @@ function render.FogColor(red, green, blue) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.FogEnd)
 ---@param distance number The distance at which the fog reaches its max density.
---- 
+---
 --- If used in GM:SetupSkyboxFog, this value **must** be scaled by the first argument of the hook
 function render.FogEnd(distance) end
 
@@ -337,16 +337,16 @@ function render.GetAmbientLightColor() end
 ---@return number Current alpha blending in range 0 to 1.
 function render.GetBlend() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetBloomTex0)
 ---@return ITexture The bloom texture
 function render.GetBloomTex0() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetBloomTex1)
----@return ITexture 
+---@return ITexture
 function render.GetBloomTex1() end
 
 ---[CLIENT] Returns the current color modulation values as normals.
@@ -388,7 +388,7 @@ function render.GetFogMode() end
 ---[CLIENT] Returns the _rt_FullFrameDepth texture. Alias of _rt_PowerOfTwoFB
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetFullScreenDepthTexture)
----@return ITexture 
+---@return ITexture
 function render.GetFullScreenDepthTexture() end
 
 ---[CLIENT AND MENU] Returns whether HDR is currently enabled or not. This takes into account hardware support, current map and current client settings.
@@ -404,28 +404,28 @@ function render.GetHDREnabled() end
 ---@return Vector lightColor
 function render.GetLightColor(position) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetMoBlurTex0)
----@return ITexture 
+---@return ITexture
 function render.GetMoBlurTex0() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetMoBlurTex1)
----@return ITexture 
+---@return ITexture
 function render.GetMoBlurTex1() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetMorphTex0)
----@return ITexture 
+---@return ITexture
 function render.GetMorphTex0() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetMorphTex1)
----@return ITexture 
+---@return ITexture
 function render.GetMorphTex1() end
 
 ---[CLIENT] Returns the render target's power of two texture.
@@ -437,11 +437,11 @@ function render.GetPowerOfTwoTexture() end
 ---[CLIENT] Alias of render.GetPowerOfTwoTexture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetRefractTexture)
----@return ITexture 
+---@return ITexture
 function render.GetRefractTexture() end
 
 ---[CLIENT] Returns the currently active render target.
---- 
+---
 --- Instead of saving the current render target using this function and restoring to it later, it is generally better practice to use render.PushRenderTarget and render.PopRenderTarget.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetRenderTarget)
@@ -455,28 +455,28 @@ function render.GetRenderTarget() end
 function render.GetResolvedFullFrameDepth() end
 
 ---[CLIENT] Obtain an ITexture of the screen. You must call render.UpdateScreenEffectTexture in order to update this texture with the currently rendered scene.
---- 
+---
 --- This texture is mainly used within GM:RenderScreenspaceEffects
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture)
 ---@param textureIndex number Max index is 3, but engine only creates the first two for you.
----@return ITexture 
+---@return ITexture
 function render.GetScreenEffectTexture(textureIndex) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSmallTex0)
----@return ITexture 
+---@return ITexture
 function render.GetSmallTex0() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSmallTex1)
----@return ITexture 
+---@return ITexture
 function render.GetSmallTex1() end
 
 ---[CLIENT] Returns a floating point texture the same resolution as the screen.
---- 
+---
 --- The gmodscreenspace doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSuperFPTex)
@@ -517,7 +517,7 @@ function render.GetViewSetup(noPlayer) end
 function render.MaterialOverride(material) end
 
 ---[CLIENT] Similar to render.MaterialOverride, but overrides the materials per index.
---- 
+---
 --- render.MaterialOverride overrides effects of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.MaterialOverrideByIndex)
@@ -538,9 +538,9 @@ function render.MaxTextureHeight() end
 function render.MaxTextureWidth() end
 
 ---[CLIENT] Creates a new Global.ClientsideModel, renders it at the specified pos/ang, and removes it. Can also be given an existing CSEnt to reuse instead.
---- 
+---
 --- This function is only meant to be used in a single render pass kind of scenario, if you need to render a model continuously, use a cached Global.ClientsideModel and provide it as a second argument.
---- 
+---
 --- Using this with a map model (game.GetWorld():Entity:GetModel()) crashes the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Model)
@@ -558,9 +558,9 @@ function render.Model(settings, ent) end
 function render.ModelMaterialOverride(material) end
 
 ---[CLIENT AND MENU] Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target.
---- 
+---
 --- See also render.OverrideBlend.
---- 
+---
 --- Doing surface draw calls with alpha set to 0 is a no-op and will never have any effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideAlphaWriteEnable)
@@ -569,9 +569,9 @@ function render.ModelMaterialOverride(material) end
 function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 
 ---[CLIENT AND MENU] Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
---- 
+---
 --- See also render.OverrideAlphaWriteEnable.
---- 
+---
 --- Doing surface draw calls with alpha set to 0 is a no-op and won't have an effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideBlend)
@@ -582,22 +582,31 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 ---@param srcBlendAlpha number The source alpha blend function Enums/BLEND. Determines how a rendered texture's final alpha should be calculated.
 ---@param destBlendAlpha number The destination alpha blend function Enums/BLEND.
 ---@param blendFuncAlpha number The blend mode used for drawing the alpha layer Enums/BLENDFUNC.
-function render.OverrideBlend(enabled, srcBlend, destBlend, blendFunc, srcBlendAlpha, destBlendAlpha, blendFuncAlpha) end
+function render.OverrideBlend(
+	enabled,
+	srcBlend,
+	destBlend,
+	blendFunc,
+	srcBlendAlpha,
+	destBlendAlpha,
+	blendFuncAlpha
+)
+end
 
 ---[CLIENT AND MENU] Use render.OverrideBlend instead.
---- 
+---
 --- Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
---- 
+---
 --- See also render.OverrideAlphaWriteEnable.
---- 
+---
 --- Doing surface draw calls with alpha set to 0 is a no-op and will never have any effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideBlendFunc)
 ---@param enabled boolean true to enable, false to disable. No other arguments are required when disabling.
 ---@param srcBlend number The source color blend function Enums/BLEND. Determines how a rendered texture's final color should be calculated.
----@param destBlend number 
+---@param destBlend number
 ---@param srcBlendAlpha number The source alpha blend function Enums/BLEND. Determines how a rendered texture's final alpha should be calculated.
----@param destBlendAlpha number 
+---@param destBlendAlpha number
 function render.OverrideBlendFunc(enabled, srcBlend, destBlend, srcBlendAlpha, destBlendAlpha) end
 
 ---[CLIENT AND MENU] Overrides the write behaviour of all next rendering operations towards the color channel of the current render target.
@@ -614,7 +623,7 @@ function render.OverrideColorWriteEnable(enable, shouldWrite) end
 ---@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the depth buffer or not. Has no effect if the previous argument is false.
 function render.OverrideDepthEnable(enable, shouldWrite) end
 
----[CLIENT AND MENU] 
+---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PerformFullScreenStencilOperation)
 function render.PerformFullScreenStencilOperation() end
@@ -625,14 +634,14 @@ function render.PerformFullScreenStencilOperation() end
 function render.PopCustomClipPlane() end
 
 ---[CLIENT AND MENU] Pops the current texture magnification filter from the filter stack.
---- 
+---
 --- See render.PushFilterMag
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopFilterMag)
 function render.PopFilterMag() end
 
 ---[CLIENT AND MENU] Pops the current texture minification filter from the filter stack.
---- 
+---
 --- See render.PushFilterMin
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopFilterMin)
@@ -644,14 +653,14 @@ function render.PopFilterMin() end
 function render.PopFlashlightMode() end
 
 ---[CLIENT] Pops the last render target and viewport from the RT stack and sets them as the current render target and viewport.
---- 
+---
 --- This is should be called to restore the previous render target and viewport after a call to render.PushRenderTarget.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopRenderTarget)
 function render.PopRenderTarget() end
 
 ---[CLIENT AND MENU] Pushes a new clipping plane of the clip plane stack and sets it as active.
---- 
+---
 --- A max of 2 clip planes are supported on Linux/POSIX, and 6 on Windows.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushCustomClipPlane)
@@ -660,7 +669,7 @@ function render.PopRenderTarget() end
 function render.PushCustomClipPlane(normal, distance) end
 
 ---[CLIENT AND MENU] Pushes a texture filter onto the magnification texture filter stack.
---- 
+---
 --- See also render.PushFilterMin and render.PopFilterMag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFilterMag)
@@ -674,7 +683,7 @@ function render.PushFilterMag(texFilterType) end
 function render.PushFilterMin(texFilterType) end
 
 ---[CLIENT] Enables the flashlight projection for the upcoming rendering.
---- 
+---
 --- This will leave models lit under specific conditions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFlashlightMode)
@@ -682,11 +691,11 @@ function render.PushFilterMin(texFilterType) end
 function render.PushFlashlightMode(enable) end
 
 ---[CLIENT] Pushes the current render target and viewport to the RT stack then sets a new current render target and viewport. If the viewport is not specified, the dimensions of the render target are used instead.
---- 
+---
 --- This is similar to a call to render.SetRenderTarget and render.SetViewPort where the current render target and viewport have been saved beforehand, except the viewport isn't clipped to screen bounds.
---- 
+---
 --- See also render.PopRenderTarget.
---- 
+---
 --- If you want to render to the render target in 2d mode and it is not the same size as the screen, use cam.Start2D and cam.End2D.
 --- If the render target is bigger than the screen, rendering done with the surface library will be clipped to the screen bounds unless you call Global.DisableClipping
 ---
@@ -726,7 +735,7 @@ function render.RedownloadAllLightmaps(DoStaticProps, UpdateStaticLighting) end
 function render.RenderHUD(x, y, w, h) end
 
 ---[CLIENT] Renders the scene with the specified viewData to the current active render target.
---- 
+---
 --- Static props and LODs are rendered improperly due to incorrectly perceived distance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.RenderView)
@@ -734,7 +743,7 @@ function render.RenderHUD(x, y, w, h) end
 function render.RenderView(view) end
 
 ---[CLIENT] Resets the model lighting to the specified color.
---- 
+---
 --- Calls render.SetModelLighting for every direction with given color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ResetModelLighting)
@@ -744,7 +753,7 @@ function render.RenderView(view) end
 function render.ResetModelLighting(r, g, b) end
 
 ---[CLIENT] Resets the HDR tone multiplier to the specified value.
---- 
+---
 --- This will only work on HDR maps, and the value will automatically fade to what it was ( or whatever render.SetGoalToneMappingScale is ) if called only once.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ResetToneMappingScale)
@@ -760,7 +769,7 @@ function render.ResetToneMappingScale(scale) end
 function render.SetAmbientLight(r, g, b) end
 
 ---[CLIENT] Sets the alpha blending for every upcoming render operation.
---- 
+---
 --- This does not affect non-model `render.Draw*` functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetBlend)
@@ -768,10 +777,10 @@ function render.SetAmbientLight(r, g, b) end
 function render.SetBlend(blending) end
 
 ---[CLIENT] Sets the current drawing material to "color".
---- 
+---
 --- The material is defined as:
 --- ```
---- 
+---
 ---  "UnlitGeneric"
 ---  {
 ---  	"$basetexture" "color/white"
@@ -786,10 +795,10 @@ function render.SetBlend(blending) end
 function render.SetColorMaterial() end
 
 ---[CLIENT] Sets the current drawing material to `color_ignorez`.
---- 
+---
 --- The material is defined as:
 --- ```
---- 
+---
 ---  "UnlitGeneric"
 ---  {
 ---  	"$basetexture" "color/white"
@@ -819,7 +828,7 @@ function render.SetColorModulation(r, g, b) end
 function render.SetFogZ(fogZ) end
 
 ---[CLIENT] Sets the goal HDR tone mapping scale.
---- 
+---
 --- Use this in a rendering/think hook as it is reset every frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetGoalToneMappingScale)
@@ -827,13 +836,13 @@ function render.SetFogZ(fogZ) end
 function render.SetGoalToneMappingScale(scale) end
 
 ---[CLIENT] Sets lighting mode when rendering something.
---- 
+---
 --- **Do not forget to restore the default value** to avoid unexpected behavior, like the world and the HUD/UI being affected
 --- Reloading the map does not reset the value of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetLightingMode)
 ---@param Mode number Lighting render mode
---- 
+---
 --- Possible values are:
 --- * 0 - Default
 --- * 1 - Total fullbright, similar to `mat_fullbright 1` but excluding some weapon view models
@@ -841,7 +850,7 @@ function render.SetGoalToneMappingScale(scale) end
 function render.SetLightingMode(Mode) end
 
 ---[CLIENT] Sets the lighting origin.
---- 
+---
 --- This does not work for prop_physics.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetLightingOrigin)
@@ -855,7 +864,7 @@ function render.SetLightingOrigin(lightingOrigin) end
 function render.SetLightmapTexture(tex) end
 
 ---[CLIENT] Sets up the local lighting for any upcoming render operation. Up to 4 local lights can be defined, with one of three different types (point, directional, spot).
---- 
+---
 --- Disables all local lights if called with no arguments.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetLocalModelLights)
@@ -863,7 +872,7 @@ function render.SetLightmapTexture(tex) end
 function render.SetLocalModelLights(lights) end
 
 ---[CLIENT] Sets the material to be used in any upcoming render operation using the render.
---- 
+---
 --- Not to be confused with surface.SetMaterial.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetMaterial)
@@ -871,7 +880,7 @@ function render.SetLocalModelLights(lights) end
 function render.SetMaterial(mat) end
 
 ---[CLIENT] Sets up the ambient lighting for any upcoming render operation. Ambient lighting can be seen as a cube enclosing the object to be drawn, each of its faces representing a directional light source that shines towards the object. Thus, there is a total of six different light sources that can be configured separately.
---- 
+---
 --- Light color components are not restricted to a specific range (i.e. 0-255), instead, higher values will result in a brighter light.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetModelLighting)
@@ -927,13 +936,13 @@ function render.SetShadowDistance(shadowDistance) end
 ---[CLIENT] Sets whether any future render operations will ignore shadow drawing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetShadowsDisabled)
----@param newState boolean 
+---@param newState boolean
 function render.SetShadowsDisabled(newState) end
 
 ---[CLIENT AND MENU] Sets the compare function of the stencil.
---- 
+---
 --- Pixels which fail the stencil comparison function are not written to the render target. The operation to be performed on the stencil buffer values for these pixels can be set using render.SetStencilFailOperation.
---- 
+---
 --- Pixels which pass the stencil comparison function are written to the render target unless they fail the depth buffer test (where applicable). The operation to perform on the stencil buffer values for these pixels can be set using render.SetStencilPassOperation and render.SetStencilZFailOperation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction)
@@ -941,7 +950,7 @@ function render.SetShadowsDisabled(newState) end
 function render.SetStencilCompareFunction(compareFunction) end
 
 ---[CLIENT AND MENU] Sets whether stencil tests are carried out for each rendered pixel.
---- 
+---
 --- Only pixels passing the stencil test are written to the render target.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilEnable)
@@ -985,16 +994,16 @@ function render.SetStencilWriteMask(mask) end
 ---@param zFailOperation number Z fail operation function, see Enums/STENCILOPERATION
 function render.SetStencilZFailOperation(zFailOperation) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetToneMappingScaleLinear)
----@param vec Vector 
+---@param vec Vector
 function render.SetToneMappingScaleLinear(vec) end
 
 ---[CLIENT AND MENU] Changes the view port position and size. The values will be clamped to the game's screen resolution.
---- 
+---
 --- If you are looking to render something to a texture (render target), you should use render.PushRenderTarget.
---- 
+---
 --- This function will override values of Global.ScrW and Global.ScrH with the ones you set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetViewPort)
@@ -1007,11 +1016,11 @@ function render.SetViewPort(x, y, w, h) end
 ---[CLIENT] Sets the internal parameter **INT_RENDERPARM_WRITE_DEPTH_TO_DESTALPHA**
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha)
----@param enable boolean 
+---@param enable boolean
 function render.SetWriteDepthToDestAlpha(enable) end
 
 ---[CLIENT] Swaps the frame buffers/cycles the frame. In other words, this updates the screen.
---- 
+---
 --- If you take a really long time during a single frame render, it is a good idea to use this and let the user know that the game isn't stuck.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Spin)
@@ -1048,7 +1057,7 @@ function render.SupportsPixelShaders_2_0() end
 function render.SupportsVertexShaders_2_0() end
 
 ---[CLIENT] Suppresses or enables any engine lighting for any upcoming render operation.
---- 
+---
 --- This does not affect IMeshes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SuppressEngineLighting)
@@ -1061,7 +1070,7 @@ function render.SuppressEngineLighting(suppressLighting) end
 function render.TurnOnToneMapping() end
 
 ---[CLIENT] Updates the texture returned by render.GetFullScreenDepthTexture.
---- 
+---
 --- Silently fails if render.SupportsPixelShaders_2_0 returns false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.UpdateFullScreenDepthTexture)
@@ -1086,6 +1095,5 @@ function render.UpdateScreenEffectTexture() end
 ---[CLIENT] This function overrides all map materials for one frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.WorldMaterialOverride)
----@param mat IMaterial 
+---@param mat IMaterial
 function render.WorldMaterialOverride(mat) end
-

@@ -37,4 +37,3 @@ function DBinder:SetValue(keyCode) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:UpdateText)
 function DBinder:UpdateText() end
-

@@ -3,7 +3,7 @@
 physenv = {}
 
 ---[SHARED] Adds surface properties to the game's physics environment.
---- 
+---
 --- The game has a limit of 128 surface properties - this includes properties loaded automatically from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt). Due to this, there's only a small amount of open slots that can be registered with GMod's provided surfaceproperties.txt.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData)
@@ -53,4 +53,3 @@ function physenv.SetGravity(gravAccel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings)
 ---@param performanceSettings table The new performance settings. See Structures/PhysEnvPerformanceSettings
 function physenv.SetPerformanceSettings(performanceSettings) end
-

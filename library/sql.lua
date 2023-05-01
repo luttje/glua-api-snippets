@@ -13,7 +13,7 @@ sql = {}
 function sql.Begin() end
 
 ---[SHARED AND MENU] Tells the engine to execute a series of queries queued for execution, must be preceded by sql.Begin.
---- 
+---
 --- This is equivalent to `sql.Query( "COMMIT;" )`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.Commit)
@@ -40,7 +40,7 @@ function sql.LastError() end
 function sql.Query(query) end
 
 ---[SHARED AND MENU] Performs the query like sql.Query, but returns the first row found.
---- 
+---
 --- Basically equivalent to :
 --- ```
 --- sql.Query( query .. " LIMIT 1;" )
@@ -60,7 +60,7 @@ function sql.QueryRow(query, row) end
 function sql.QueryValue(query) end
 
 ---[SHARED AND MENU] Escapes dangerous characters and symbols from user input used in an SQLite SQL Query.
---- 
+---
 --- this function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.SQLStr)
@@ -75,4 +75,3 @@ function sql.SQLStr(string, bNoQuotes) end
 ---@param tableName string The name of the table to check.
 ---@return boolean exists
 function sql.TableExists(tableName) end
-

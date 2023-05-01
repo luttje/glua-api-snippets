@@ -63,4 +63,3 @@ function dragndrop.Think() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.UpdateReceiver)
 function dragndrop.UpdateReceiver() end
-

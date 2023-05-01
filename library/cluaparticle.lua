@@ -66,15 +66,15 @@ function CLuaParticle:GetEndSize() end
 function CLuaParticle:GetGravity() end
 
 ---[CLIENT] Returns the 'life time' of the particle, how long the particle existed since its creation.
---- 
+---
 --- This value will always be between 0 and CLuaParticle:GetDieTime.
---- 
---- 
+---
+---
 --- It changes automatically as time goes.
---- 
+---
 --- It can be manipulated using CLuaParticle:SetLifeTime.
---- 
---- 
+---
+---
 --- If the life time of the particle will be more than CLuaParticle:GetDieTime, it will be removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetLifeTime)
@@ -151,13 +151,13 @@ function CLuaParticle:SetAngleVelocity(angVel) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetBounce)
 ---@param bounce number New 'bounciness' of the particle
---- 
+---
 --- 2 means it will gain 100% of its previous velocity,
---- 
---- 
+---
+---
 --- 1 means it will not lose velocity,
---- 
---- 
+---
+---
 --- 0.5 means it will lose half of its velocity with each bounce.
 function CLuaParticle:SetBounce(bounce) end
 
@@ -171,14 +171,14 @@ function CLuaParticle:SetCollide(shouldCollide) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetCollideCallback)
 ---@param collideFunc function Collide callback, the arguments are:
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- CLuaParticle particle - The particle itself
---- 
+---
 --- Vector hitPos - Position of the collision
---- 
+---
 --- Vector hitNormal - Direction of the collision, perpendicular to the hit surface
 function CLuaParticle:SetCollideCallback(collideFunc) end
 
@@ -221,13 +221,13 @@ function CLuaParticle:SetEndSize(endSize) end
 function CLuaParticle:SetGravity(gravity) end
 
 ---[CLIENT] Sets the 'life time' of the particle, how long the particle existed since its creation.
---- 
+---
 --- This value should always be between 0 and CLuaParticle:GetDieTime.
---- 
---- 
+---
+---
 --- It changes automatically as time goes.
---- 
---- 
+---
+---
 --- If the life time of the particle will be more than CLuaParticle:GetDieTime, it will be removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetLifeTime)
@@ -292,8 +292,8 @@ function CLuaParticle:SetStartSize(startSize) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetThinkFunction)
 ---@param thinkFunc function Think function. It has only one argument:
---- 
---- 
+---
+---
 --- CLuaParticle particle - The particle the think hook is set on
 function CLuaParticle:SetThinkFunction(thinkFunc) end
 
@@ -308,4 +308,3 @@ function CLuaParticle:SetVelocity(vel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetVelocityScale)
 ---@param doScale boolean Use velocity scaling.
 function CLuaParticle:SetVelocityScale(doScale) end
-

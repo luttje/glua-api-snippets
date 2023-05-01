@@ -3,8 +3,8 @@
 menubar = {}
 
 ---[CLIENT] Creates the menu bar ( The bar at the top of the screen when holding C or Q in sandbox ) and docks it to the top of the screen. It will not appear.
---- 
---- 
+---
+---
 --- Calling this multiple times will **NOT** remove previous panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.Init)
@@ -22,4 +22,3 @@ function menubar.IsParent(pnl) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.ParentTo)
 ---@param pnl Panel The panel to parent to
 function menubar.ParentTo(pnl) end
-

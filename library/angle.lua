@@ -3,8 +3,8 @@
 ---@class Angle
 local Angle = {}
 
----[SHARED AND MENU] Adds the values of the argument angle to the orignal angle. 
---- 
+---[SHARED AND MENU] Adds the values of the argument angle to the orignal angle.
+---
 --- This functions the same as angle1 + angle2 without creating a new angle object, skipping object construction and garbage collection.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Add)
@@ -75,7 +75,7 @@ function Angle:Set(originalAngle) end
 function Angle:SetUnpacked(p, y, r) end
 
 ---[SHARED] Snaps the angle to nearest interval of degrees.
---- 
+---
 --- This will modify the original angle too!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:SnapTo)
@@ -115,4 +115,3 @@ function Angle:Up() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Zero)
 function Angle:Zero() end
-

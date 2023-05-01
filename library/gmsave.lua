@@ -38,4 +38,3 @@ function gmsave.SaveMap(ply) end
 ---@param t table A table containing classname key with entities classname.
 ---@return boolean Should save entity or not
 function gmsave.ShouldSaveEntity(ent, t) end
-

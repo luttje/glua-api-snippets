@@ -12,7 +12,7 @@ function Task:Init() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:InitEngine)
 ---@param taskname string The name of the task.
----@param taskdata number 
+---@param taskdata number
 function Task:InitEngine(taskname, taskdata) end
 
 ---[SERVER] Initialises the AI task as NPC method-based.
@@ -20,7 +20,7 @@ function Task:InitEngine(taskname, taskdata) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:InitFunctionName)
 ---@param startname string The name of the NPC method to call on task start.
 ---@param runname string The name of the NPC method to call on task run.
----@param taskdata number 
+---@param taskdata number
 function Task:InitFunctionName(startname, runname, taskdata) end
 
 ---[SERVER] Determines if the task is an engine task (`TYPE_ENGINE`, 1).
@@ -56,4 +56,3 @@ function Task:Start(target) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start_FName)
 ---@param target NPC The NPC to start the task on.
 function Task:Start_FName(target) end
-

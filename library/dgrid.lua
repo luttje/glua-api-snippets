@@ -41,7 +41,7 @@ function DGrid:GetRowHeight() end
 function DGrid:RemoveItem(item, bDontDelete) end
 
 ---[CLIENT] Sets the number of columns this panel should have.
---- 
+---
 --- The DGrid will resize its width to match this value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetCols)
@@ -49,15 +49,15 @@ function DGrid:RemoveItem(item, bDontDelete) end
 function DGrid:SetCols(cols) end
 
 ---[CLIENT] Sets the width of each column.
---- 
+---
 --- The cell panels (grid items) will not be resized or centered.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetColWide)
 ---@param colWidth number The width of each column.
 function DGrid:SetColWide(colWidth) end
 
----[CLIENT] Sets the height of each row. 
---- 
+---[CLIENT] Sets the height of each row.
+---
 --- The cell panels (grid items) will not be resized or centered.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetRowHeight)
@@ -70,4 +70,3 @@ function DGrid:SetRowHeight(rowHeight) end
 ---@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
 ---@param desc boolean True for descending order, false for ascending.
 function DGrid:SortByMember(key, desc) end
-

@@ -14,17 +14,17 @@ function os.clock() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/os.date)
 ---@param format string The format string.
---- 
+---
 --- If this is equal to `*t` or `!*t` then this function will return a Structures/DateData, otherwise it will return a string.
---- 
+---
 --- If this starts with an `!`, the returned data will use the UTC timezone rather than the local timezone.
---- 
+---
 --- See http://www.mkssoftware.com/docs/man3/strftime.3.asp for available format flags.
---- 
+---
 --- **Not all flags are available on all operating systems** and the result of using an invalid flag is undefined. This currently crashes the game on Windows. Most or all flags are available on OS X and Linux but considerably fewer are available on Windows. See http://msdn.microsoft.com/en-us/library/fe06s4ak.aspx for a list of available flags on Windows. Note that the **#** flags also crashes the game on Windows.
---- 
+---
 --- Known formats that work on all platforms:
---- 
+---
 --- | Format | Description | Example of the output |
 --- |:------:|:-----------:|:---------------------:|
 --- | `%a` | Abbreviated weekday name | `Wed` |
@@ -48,9 +48,9 @@ function os.clock() end
 --- | `%Y` | Full year | `1998` |
 --- | `%z` | Timezone | `-0300` |
 --- | `%%` | A percent sign | `%` |
---- 
---- 
---- 
+---
+---
+---
 ---@param time number Time to use for the format.
 ---@return string Formatted date This will be a Structures/DateData if the first argument equals to `*t` or `!*t`
 function os.date(format, time) end
@@ -69,4 +69,3 @@ function os.difftime(timeA, timeB) end
 ---@param dateData table Table to generate the time from. This table's data is interpreted as being in the local timezone. See Structures/DateData
 ---@return number Seconds passed since Unix epoch
 function os.time(dateData) end
-

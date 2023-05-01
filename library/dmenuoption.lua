@@ -18,7 +18,7 @@ function DMenuOption:GetChecked() end
 ---[CLIENT] Returns whether the DMenuOption is a checkbox option or a normal button option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:GetIsCheckable)
----@return boolean 
+---@return boolean
 function DMenuOption:GetIsCheckable() end
 
 ---[CLIENT] No Description
@@ -36,29 +36,28 @@ function DMenuOption:OnChecked(checked) end
 ---[CLIENT] Sets the checked state of the DMenuOption. Does not invoke DMenuOption:OnChecked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetChecked)
----@param checked boolean 
+---@param checked boolean
 function DMenuOption:SetChecked(checked) end
 
 ---[CLIENT] Sets whether the DMenuOption is a checkbox option or a normal button option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetIsCheckable)
----@param checkable boolean 
+---@param checkable boolean
 function DMenuOption:SetIsCheckable(checkable) end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetMenu)
----@param pnl Panel 
+---@param pnl Panel
 function DMenuOption:SetMenu(pnl) end
 
 ---[CLIENT] Used internally by DMenuOption:AddSubMenu to create the submenu arrow and assign the created submenu to be opened this this option is hovered.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetSubMenu)
----@param menu Panel 
+---@param menu Panel
 function DMenuOption:SetSubMenu(menu) end
 
 ---[CLIENT] Toggles the checked state of DMenuOption. Does not respect DMenuOption:GetIsCheckable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:ToggleCheck)
 function DMenuOption:ToggleCheck() end
-

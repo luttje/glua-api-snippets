@@ -4,9 +4,9 @@
 local IMaterial = {}
 
 ---[SHARED AND MENU] Returns the color of the specified pixel of the $basetexture, only works for materials created from PNG files.
---- 
+---
 --- Basically identical to ITexture:GetColor used on IMaterial:GetTexture( "$basetexture" ).
---- 
+---
 --- The returned color will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetColor)
@@ -23,7 +23,7 @@ function IMaterial:GetColor(x, y) end
 function IMaterial:GetFloat(materialFloat) end
 
 ---[SHARED AND MENU] Returns the specified material value as a int, rounds the value if its a float, or nil if the value is not set.
---- 
+---
 --- Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly retrieved with this function. See the full list here: Material Flags
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetInt)
@@ -51,7 +51,7 @@ function IMaterial:GetMatrix(materialMatrix) end
 function IMaterial:GetName() end
 
 ---[SHARED AND MENU] Returns the name of the materials shader.
---- 
+---
 --- This function does not work serverside on Linux SRCDS.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetShader)
@@ -73,7 +73,7 @@ function IMaterial:GetString(materialString) end
 function IMaterial:GetTexture(param) end
 
 ---[SHARED AND MENU] Returns the specified material vector, or nil if the value is not set.
---- 
+---
 --- See also IMaterial:GetVectorLinear
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVector)
@@ -92,9 +92,9 @@ function IMaterial:GetVector(materialVector) end
 function IMaterial:GetVector4D(name) end
 
 ---[SHARED AND MENU] Returns the specified material linear color vector, or nil if the value is not set.
---- 
+---
 --- See https://en.wikipedia.org/wiki/Gamma_correction
---- 
+---
 --- See also IMaterial:GetVector
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVectorLinear)
@@ -114,8 +114,8 @@ function IMaterial:Height() end
 ---@return boolean Is this material the error material? (___error)
 function IMaterial:IsError() end
 
----[SHARED AND MENU] Recomputes the material's snapshot. This needs to be called if you have changed variables on your material and it isn't changing. 
---- 
+---[SHARED AND MENU] Recomputes the material's snapshot. This needs to be called if you have changed variables on your material and it isn't changing.
+---
 --- Be careful though - this function is slow - so try to call it only when needed!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Recompute)
@@ -136,7 +136,7 @@ function IMaterial:SetDynamicImage(path) end
 function IMaterial:SetFloat(materialFloat, float) end
 
 ---[SHARED AND MENU] Sets the specified material value to the specified int, does nothing on a type mismatch.
---- 
+---
 --- Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: Material Flags
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:SetInt)
@@ -199,4 +199,3 @@ function IMaterial:SetVector4D(name, x, y, z, w) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Width)
 ---@return number width
 function IMaterial:Width() end
-

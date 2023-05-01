@@ -4,7 +4,7 @@
 local DShape = {}
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.
---- 
+---
 --- See DShape:SetBorderColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetBorderColor)
@@ -18,20 +18,20 @@ function DShape:GetBorderColor() end
 function DShape:GetColor() end
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.
---- 
+---
 --- See DShape:SetType.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetType)
----@return string 
+---@return string
 function DShape:GetType() end
 
 ---[CLIENT] Sets the border color of the shape.
---- 
+---
 --- Currently does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:SetBorderColor)
 ---@param clr table The desired border color.
---- 
+---
 --- See Color
 function DShape:SetBorderColor(clr) end
 
@@ -46,4 +46,3 @@ function DShape:SetColor(clr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:SetType)
 ---@param type string The render type of the DShape. Only rectangles (`Rect`) work currently. If you don't define a type immediately, the PANEL:Paint method will generate errors until you do.
 function DShape:SetType(type) end
-

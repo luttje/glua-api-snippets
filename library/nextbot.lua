@@ -14,9 +14,9 @@ function NextBot:BecomeRagdoll(info) end
 local NEXTBOT = {}
 
 ---[SERVER] Called to initialize the behaviour.
---- 
+---
 --- 		This is called automatically when the NextBot is created, you should not call it manually.
---- 
+---
 --- 		You shouldn't override this unless you know what you are doing - it's used to kick off the coroutine that runs the bot's behaviour. See NEXTBOT:RunBehaviour instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NEXTBOT:BehaveStart)
@@ -29,7 +29,7 @@ function NEXTBOT:BehaveStart() end
 function NEXTBOT:BehaveUpdate(interval) end
 
 ---[SERVER] Should only be called in NEXTBOT:BodyUpdate. This sets the `move_x` and `move_y` pose parameters of the bot to fit how they're currently moving, sets the animation speed (Entity:GetPlaybackRate) to suit the ground speed, and calls Entity:FrameAdvance.
---- 
+---
 --- This function might cause crashes with some activities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:BodyMoveXY)
@@ -45,19 +45,19 @@ function NEXTBOT:BodyUpdate() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:FindSpot)
 ---@param type string Either "random", "near", "far"
 ---@param options table This table should contain the search info.
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- string type - The type (Only'hiding' for now)
---- 
+---
 --- Vector pos - the position to search.
---- 
+---
 --- number radius - the radius to search.
---- 
+---
 --- number stepup - the highest step to step up.
---- 
+---
 --- number stepdown - the highest we can step down without being hurt.
 ---@return Vector If it finds a spot it will return a vector. If not it will return nil.
 function NextBot:FindSpot(type, options) end
@@ -66,19 +66,19 @@ function NextBot:FindSpot(type, options) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:FindSpots)
 ---@param specs table This table should contain the search info.
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- string type - The type (optional, only 'hiding' supported)
---- 
+---
 --- Vector pos - the position to search.
---- 
+---
 --- number radius - the radius to search.
---- 
+---
 --- number stepup - the highest step to step up.
---- 
+---
 --- number stepdown - the highest we can step down without being hurt.
 ---@return table An unsorted table of tables containing:     Vector vector - The position of the hiding spot  number distance - the distance to that position
 function NextBot:FindSpots(specs) end
@@ -102,7 +102,7 @@ function NextBot:GetFOV() end
 function NextBot:GetMaxVisionRange() end
 
 ---[SERVER] Returns squared distance to an entity or a position.
---- 
+---
 --- See also NextBot:GetRangeTo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetRangeSquaredTo)
@@ -111,7 +111,7 @@ function NextBot:GetMaxVisionRange() end
 function NextBot:GetRangeSquaredTo(to) end
 
 ---[SERVER] Returns the distance to an entity or position.
---- 
+---
 --- See also NextBot:GetRangeSquaredTo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetRangeTo)
@@ -126,14 +126,14 @@ function NextBot:GetRangeTo(to) end
 function NextBot:GetSolidMask() end
 
 ---[SERVER] Called from Lua when the NPC is stuck. This should only be called from the behaviour coroutine - so if you want to override this function and do something special that yields - then go for it.
---- 
+---
 --- You should always call self.loco:ClearStuck() in this function to reset the stuck status - so it knows it's unstuck. See CLuaLocomotion:ClearStuck.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:HandleStuck)
 function NextBot:HandleStuck() end
 
 ---[SERVER] Returns if the Nextbot NPC can see the give entity or not.
---- 
+---
 --- Using this function creates the nextbot vision interface which will cause a significant performance hit!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:IsAbleToSee)
@@ -147,23 +147,23 @@ function NextBot:IsAbleToSee(ent, useFOV) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:MoveToPos)
 ---@param pos Vector The position we want to get to
 ---@param options table A table containing a bunch of tweakable options.
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- number lookahead - Minimum look ahead distance.
---- 
---- 
+---
+---
 --- number tolerance - How close we must be to the goal before it can be considered complete.
---- 
---- 
+---
+---
 --- boolean draw - Draw the path. Only visible on listen servers and single player.
---- 
---- 
+---
+---
 --- number maxage - Maximum age of the path before it times out.
---- 
---- 
+---
+---
 --- number repath - Rebuilds the path after this number of seconds.
 ---@return string Either "failed", "stuck", "timeout" or "ok" - depending on how the NPC got on
 function NextBot:MoveToPos(pos, options) end
@@ -239,7 +239,7 @@ function NEXTBOT:OnOtherKilled(victim, info) end
 function NEXTBOT:OnStuck() end
 
 ---[SERVER] Called when a trace attack is done against the nextbot, allowing override of the damage being dealt by altering the CTakeDamageInfo.
---- 
+---
 --- This is called before NEXTBOT:OnInjured.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NEXTBOT:OnTraceAttack)
@@ -261,7 +261,7 @@ function NEXTBOT:OnUnStuck() end
 function NextBot:PlaySequenceAndWait(name, speed) end
 
 ---[SERVER] A hook called to process nextbot logic.
---- 
+---
 --- This hook runs in a coroutine by default. It will only be called if NEXTBOT:BehaveStart is not overriden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NEXTBOT:RunBehaviour)
@@ -280,7 +280,7 @@ function NextBot:SetFOV(fov) end
 function NextBot:SetMaxVisionRange(range) end
 
 ---[SERVER] Sets the solid mask for given NextBot.
---- 
+---
 --- The default solid mask of a NextBot is Enums/MASK.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:SetSolidMask)
@@ -292,4 +292,3 @@ function NextBot:SetSolidMask(mask) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:StartActivity)
 ---@param activity number One of the Enums/ACT
 function NextBot:StartActivity(activity) end
-

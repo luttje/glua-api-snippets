@@ -79,10 +79,10 @@ function PathFollower:GetEnd() end
 ---@return number The distance we're setting it to
 function PathFollower:GetGoalTolerance() end
 
----[SERVER] 
+---[SERVER]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetHindrance)
----@return Entity 
+---@return Entity
 function PathFollower:GetHindrance() end
 
 ---[SERVER] Returns the total length of the path
@@ -128,7 +128,7 @@ function PathFollower:IsValid() end
 function PathFollower:LastSegment() end
 
 ---[SERVER] Moves the cursor by give distance.
---- 
+---
 --- For a function that sets the distance, see PathFollower:MoveCursorTo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor)
@@ -136,7 +136,7 @@ function PathFollower:LastSegment() end
 function PathFollower:MoveCursor(distance) end
 
 ---[SERVER] Sets the cursor position to given distance.
---- 
+---
 --- For relative distance, see PathFollower:MoveCursor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo)
@@ -146,18 +146,18 @@ function PathFollower:MoveCursorTo(distance) end
 ---[SERVER] Moves the cursor of the path to the closest position compared to given vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToClosestPosition)
----@param pos Vector 
+---@param pos Vector
 ---@param type number Seek type
---- 
---- 
+---
+---
 --- 0 = SEEK_ENTIRE_PATH - Search the entire path length
---- 
---- 
+---
+---
 --- 1 = SEEK_AHEAD - Search from current cursor position forward toward end of path
---- 
---- 
+---
+---
 --- 2 = SEEK_BEHIND - Search from current cursor position backward toward path start
----@param alongLimit number 
+---@param alongLimit number
 function PathFollower:MoveCursorToClosestPosition(pos, type, alongLimit) end
 
 ---[SERVER] Moves the cursor to the end of the path
@@ -192,4 +192,3 @@ function PathFollower:SetMinLookAheadDistance(mindist) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Update)
 ---@param bot NextBot The bot to update along the path
 function PathFollower:Update(bot) end
-

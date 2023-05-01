@@ -10,11 +10,11 @@ local DImageButton = {}
 function DImageButton:GetImage() end
 
 ---[CLIENT] Returns whether the image inside the button should be stretched to fit it or not
---- 
+---
 --- See DImageButton:SetStretchToFit
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:GetStretchToFit)
----@return boolean 
+---@return boolean
 function DImageButton:GetStretchToFit() end
 
 ---[CLIENT] Sets the color of the image. Equivalent of DImage:SetImageColor
@@ -42,7 +42,7 @@ function DImageButton:SetImage(strImage, strBackup) end
 function DImageButton:SetImageVisible(visible) end
 
 ---[CLIENT] Sets whether the DImageButton should keep the aspect ratio of its image. Equivalent of DImage:SetKeepAspect.
---- 
+---
 --- Note that this will not try to fit the image inside the button, but instead it will fill the button with the image.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:SetKeepAspect)
@@ -58,15 +58,14 @@ function DImageButton:SetMaterial(mat) end
 ---[CLIENT] See DImage:SetOnViewMaterial
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:SetOnViewMaterial)
----@param mat string 
----@param backup string 
+---@param mat string
+---@param backup string
 function DImageButton:SetOnViewMaterial(mat, backup) end
 
 ---[CLIENT] Sets whether the image inside the DImageButton should be stretched to fill the entire size of the button, without preserving aspect ratio.
---- 
+---
 --- If set to false, the image will not be resized at all.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:SetStretchToFit)
 ---@param stretch boolean True to stretch, false to not to stretch
 function DImageButton:SetStretchToFit(stretch) end
-

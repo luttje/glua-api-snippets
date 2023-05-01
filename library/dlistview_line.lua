@@ -16,7 +16,7 @@ function DListView_Line:DataLayout(pnl) end
 function DListView_Line:GetAltLine() end
 
 ---[CLIENT] Gets the string held in the specified column of a DListView_Line panel.
---- 
+---
 --- This is the same thing as doing Panel:GetValue( column_number ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:GetColumnText)
@@ -37,7 +37,7 @@ function DListView_Line:GetID() end
 function DListView_Line:GetListView() end
 
 ---[CLIENT] Returns the data stored on given cell of this line.
---- 
+---
 --- 	Used in the DListView:SortByColumn function in case you want to sort with something else than the text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:GetSortValue)
@@ -72,11 +72,10 @@ function DListView_Line:SetColumnText(column, value) end
 function DListView_Line:SetSelected(selected) end
 
 ---[CLIENT] Allows you to store data per column.
---- 
+---
 --- 	Used in the DListView:SortByColumn function in case you want to sort with something else than the text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:SetSortValue)
 ---@param column number The number of the column to write the text from, starts with 1.
 ---@param data any Data for given column on the line you wish to set.
 function DListView_Line:SetSortValue(column, data) end
-

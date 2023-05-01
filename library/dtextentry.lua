@@ -4,11 +4,11 @@
 local DTextEntry = {}
 
 ---[CLIENT] Called whenever the value of the panel has been updated (whether by user input or otherwise).
---- 
+---
 --- It allows you to determine whether a user can modify the TextEntry's text.
---- 
+---
 --- By default, this only checks whether the panel disallows numeric characters, preventing it from being edited if the value contains any.
---- 
+---
 --- This is actually an engine hook that only works on TextEntry derived elements.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AllowInput)
@@ -76,7 +76,7 @@ function DTextEntry:GetPlaceholderColor() end
 ---[CLIENT] Returns the placeholder text set with DTextEntry:SetPlaceholderText.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetPlaceholderText)
----@return string 
+---@return string
 function DTextEntry:GetPlaceholderText() end
 
 ---[CLIENT] Returns the text color of a DTextEntry.
@@ -88,7 +88,7 @@ function DTextEntry:GetTextColor() end
 ---[CLIENT] Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetUpdateOnType)
----@return boolean 
+---@return boolean
 function DTextEntry:GetUpdateOnType() end
 
 ---[CLIENT] Returns whether this DTextEntry is being edited or not. (i.e. has focus)
@@ -104,14 +104,14 @@ function DTextEntry:IsEditing() end
 function DTextEntry:IsMultiline() end
 
 ---[CLIENT] Called internally by DTextEntry:OnTextChanged when the user modifies the text in the DTextEntry.
---- 
+---
 --- You should override this function to define custom behavior when the DTextEntry text changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnChange)
 function DTextEntry:OnChange() end
 
 ---[CLIENT] Called whenever enter is pressed on a DTextEntry.
---- 
+---
 --- DTextEntry:IsEditing will still return true in this callback!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnEnter)
@@ -135,7 +135,7 @@ function DTextEntry:OnKeyCode(keyCode) end
 function DTextEntry:OnLoseFocus() end
 
 ---[CLIENT] Called internally when the text inside the DTextEntry changes.
---- 
+---
 --- You should not override this function. Use DTextEntry:OnValueChange instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnTextChanged)
@@ -143,11 +143,11 @@ function DTextEntry:OnLoseFocus() end
 function DTextEntry:OnTextChanged(noMenuRemoval) end
 
 ---[CLIENT] Called internally when the text changes of the DTextEntry are applied. (And set to the attached console variable, if one is given)
---- 
+---
 --- See also DTextEntry:OnChange for a function that is called on every text change, even if the console variable is not updated.
---- 
+---
 --- You should override this function to define custom behavior when the text changes.
---- 
+---
 --- This method is called:
 --- * When Enter is pressed after typing
 --- * When DTextEntry:SetValue is used
@@ -171,7 +171,7 @@ function DTextEntry:OpenAutoComplete(tab) end
 function DTextEntry:SetCursorColor(color) end
 
 ---[CLIENT] Use Panel:SetEnabled instead.
---- 
+---
 --- Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetDisabled)
@@ -209,7 +209,7 @@ function DTextEntry:SetHistoryEnabled(enable) end
 function DTextEntry:SetMultiline(multiline) end
 
 ---[CLIENT] Sets whether or not to decline non-numeric characters as input.
---- 
+---
 --- Numeric characters are 1234567890.-
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetNumeric)
@@ -231,7 +231,7 @@ function DTextEntry:SetPlaceholderColor(color) end
 ---[CLIENT] Sets the placeholder text that will be shown while the text entry has no user text. The player will not need to delete the placeholder text if they decide to start typing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderText)
----@param text string 
+---@param text string
 function DTextEntry:SetPlaceholderText(text) end
 
 ---[CLIENT] Sets whether or not the panel accepts tab key.
@@ -250,14 +250,13 @@ function DTextEntry:SetTextColor(color) end
 ---[CLIENT] Sets whether we should fire DTextEntry:OnValueChange every time we type or delete a character or only when Enter is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetUpdateOnType)
----@param updateOnType boolean 
+---@param updateOnType boolean
 function DTextEntry:SetUpdateOnType(updateOnType) end
 
 ---[CLIENT] Sets the text of the DTextEntry and calls DTextEntry:OnValueChange.
---- 
+---
 ---         The text of the DTextEntry only changes if it's not currently being typed in. If you would rather set the text regardless, use Panel:SetText.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetValue)
 ---@param text string The value to set.
 function DTextEntry:SetValue(text) end
-

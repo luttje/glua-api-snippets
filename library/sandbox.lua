@@ -4,14 +4,14 @@
 local SANDBOX = {}
 
 ---[CLIENT] This hook is used to add default categories to spawnmenu tool tabs.
---- 
+---
 --- Do not override or hook this function, use SANDBOX:AddToolMenuCategories!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:AddGamemodeToolMenuCategories)
 function SANDBOX:AddGamemodeToolMenuCategories() end
 
 ---[CLIENT] This hook is used to add default tool tabs to spawnmenu.
---- 
+---
 --- Do not override or hook this function, use SANDBOX:AddToolMenuTabs!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:AddGamemodeToolMenuTabs)
@@ -47,7 +47,7 @@ function SANDBOX:CanDrive(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:CanProperty)
 ---@param ply Player Player, that tried to use the property
 ---@param property string Class of the property that is tried to use, for example - bonemanipulate
---- 
+---
 --- This is not guaranteed to be the internal property name used in properties.Add!
 ---@param ent Entity The entity, on which property is tried to be used on
 ---@return boolean Return false to disallow using that property
@@ -72,9 +72,9 @@ function SANDBOX:CanTool(ply, tr, toolname, tool, button) end
 function SANDBOX:ContentSidebarSelection(parent, node) end
 
 ---[CLIENT] Called when the context menu is supposedly closed.
---- 
+---
 --- This is simply an alias of GM:OnContextMenuClose.
---- 
+---
 --- This hook **will** be called even if the Sandbox's context menu doesn't actually exist, i.e. SANDBOX:ContextMenuEnabled blocked its creation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuClosed)
@@ -99,9 +99,9 @@ function SANDBOX:ContextMenuEnabled() end
 function SANDBOX:ContextMenuOpen() end
 
 ---[CLIENT] Called when the context menu is supposedly opened.
---- 
+---
 --- This is simply an alias of GM:OnContextMenuOpen but will **not** be called if SANDBOX:ContextMenuOpen prevents the context menu from opening.
---- 
+---
 --- This hook **will** be called even if the context menu doesn't actually exist, i.e. SANDBOX:ContextMenuEnabled blocked its creation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuOpened)
@@ -123,7 +123,7 @@ function SANDBOX:OnSaveSpawnlist() end
 function SANDBOX:OpenToolbox() end
 
 ---[CLIENT] Called from GM:HUDPaint; does nothing by default.
---- 
+---
 --- This cannot be used with hook.Add
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PaintNotes)
@@ -131,7 +131,7 @@ function SANDBOX:PaintNotes() end
 
 ---[CLIENT] Called from GM:HUDPaint to draw world tips. By default, enabling cl_drawworldtooltips will stop world tips from being drawn here.
 --- See Global.AddWorldTip for more information.
---- 
+---
 --- This cannot be used with hook.Add
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PaintWorldTips)
@@ -197,7 +197,7 @@ function SANDBOX:PlayerSpawnedRagdoll(ply, model, ent) end
 function SANDBOX:PlayerSpawnedSENT(ply, ent) end
 
 ---[SERVER] Called after the player has spawned a scripted weapon from the spawnmenu with a middle mouse click.
---- 
+---
 --- For left mouse click spawns, see SANDBOX:PlayerGiveSWEP.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnedSWEP)
@@ -315,7 +315,7 @@ function SANDBOX:PopulateNPCs(pnlContent, tree, node) end
 function SANDBOX:PopulatePropMenu() end
 
 ---[CLIENT] Called to populate the Scripted Tool menu.
---- 
+---
 --- This hook is never called. Use SANDBOX:PopulateToolMenu instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateSTOOLMenu)
@@ -372,7 +372,7 @@ function SANDBOX:SpawnlistOpenGenericMenu(canvas) end
 function SANDBOX:SpawnMenuEnabled() end
 
 ---[CLIENT] Called when spawnmenu is trying to be opened.
---- 
+---
 --- Hiding the spawnmenu will not stop people from being able to use the various console commands to spawn in items, etc. See GM:PlayerSpawn* hooks for blocking actual spawning.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:SpawnMenuOpen)
@@ -380,11 +380,10 @@ function SANDBOX:SpawnMenuEnabled() end
 function SANDBOX:SpawnMenuOpen() end
 
 ---[CLIENT] Called when the spawnmenu is opened.
---- 
+---
 --- This is an alias of GM:OnSpawnMenuOpen but will **not** be called if SANDBOX:SpawnMenuOpen prevents the spawnmenu from opening.
---- 
+---
 --- This hook **will** be called even if the spawnmenu doesn't actually exist, i.e. SANDBOX:SpawnMenuEnabled blocked its creation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:SpawnMenuOpened)
 function SANDBOX:SpawnMenuOpened() end
-

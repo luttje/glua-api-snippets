@@ -12,9 +12,9 @@ function undo.AddEntity(ent) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.AddFunction)
 ---@param func function The function to call. First argument will be the Structures/Undo, all subsequent arguments will be what was passed after this function in the argument below.
---- 
+---
 --- Returning `false` will mark execution of this function as "failed", meaning that the undo might be skipped if no other entities are removed by it. This is useful when for example an entity you want to access is removed therefore there's nothing to do.
---- 
+---
 ---@param ... ... Arguments to pass to the function (after the undo info table)
 function undo.AddFunction(func, ...) end
 
@@ -25,7 +25,7 @@ function undo.AddFunction(func, ...) end
 function undo.Create(name) end
 
 ---[SERVER] Processes an undo block (in table form). This is used internally by the undo manager when a player presses Z.
---- 
+---
 --- You should use `gm_undo` or `gm_undonum *num*` console commands instead of calling this function directly.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.Do_Undo)
@@ -75,4 +75,3 @@ function undo.SetPlayer(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.SetupUI)
 function undo.SetupUI() end
-

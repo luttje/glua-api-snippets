@@ -22,7 +22,7 @@ function DVScrollBar:AnimateTo(scroll, length, delay, ease) end
 ---[CLIENT AND MENU] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:BarScale)
----@return number 
+---@return number
 function DVScrollBar:BarScale() end
 
 ---[CLIENT AND MENU] Returns whether or not the manual up/down scroll buttons are visible or not. Set by DVScrollBar:SetHideButtons.
@@ -34,7 +34,7 @@ function DVScrollBar:GetHideButtons() end
 ---[CLIENT AND MENU] Returns the negative of DVScrollBar:GetScroll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:GetOffset)
----@return number 
+---@return number
 function DVScrollBar:GetOffset() end
 
 ---[CLIENT AND MENU] Returns the amount of scroll level from the top in pixels
@@ -57,11 +57,11 @@ function DVScrollBar:SetHideButtons(hide) end
 ---[CLIENT AND MENU] Sets the scroll level in pixels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:SetScroll)
----@param scroll number 
+---@param scroll number
 function DVScrollBar:SetScroll(scroll) end
 
 ---[CLIENT AND MENU] Sets up the scrollbar for use.
---- 
+---
 --- The scrollbar will automatically disable itself if the total height of the canvas is lower than the height of the panel that holds the canvas during this function call.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:SetUp)
@@ -72,6 +72,5 @@ function DVScrollBar:SetUp(barSize, canvasSize) end
 ---[CLIENT AND MENU] Should return nil in all cases. See DVScrollBar:GetScroll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:Value)
----@return any 
+---@return any
 function DVScrollBar:Value() end
-

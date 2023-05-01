@@ -4,7 +4,7 @@
 local TOOL = {}
 
 ---[CLIENT] Called when the tool's control panel needs to be rebuilt.
---- 
+---
 --- Due to historical reasons, this hook does not provide the tool object as `self`! See examples.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL.BuildCPanel)
@@ -15,7 +15,7 @@ function TOOL:BuildCPanel(cpanel) end
 local Tool = {}
 
 ---[SHARED] Returns whether the tool is allowed to be used or not. This function ignores the SANDBOX:CanTool hook.
---- 
+---
 --- By default this will always return true clientside and uses `TOOL.AllowedCVar`which is a ConVar object pointing to  `toolmode_allow_*toolname*` convar on the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:Allowed)
@@ -29,7 +29,7 @@ function Tool:Allowed() end
 function Tool:BuildConVarList() end
 
 ---[SHARED] This is called automatically for most toolgun actions so you shouldn't need to use it.
---- 
+---
 --- Checks all added objects to see if they're still valid, if not, clears the list of objects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:CheckObjects)
@@ -48,14 +48,14 @@ function Tool:ClearObjects() end
 function Tool:Create() end
 
 ---[SHARED] This is called automatically for all tools.
---- 
+---
 --- Creates clientside ConVars based on the ClientConVar table specified in the tool structure. Also creates the 'toolmode_allow_X' ConVar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:CreateConVars)
 function Tool:CreateConVars() end
 
 ---[SHARED] Called when WEAPON:Deploy of the toolgun is called.
---- 
+---
 --- This is also called when switching from another tool on the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Deploy)
@@ -67,7 +67,7 @@ function TOOL:Deploy() end
 function TOOL:DrawHUD() end
 
 ---[CLIENT] Called after the default tool screen has been drawn from WEAPON:RenderScreen.
---- 
+---
 --- If this method exists on the TOOL object table, the default scrolling text will not be drawn
 --- Materials rendered in this hook require $ignorez parameter to draw properly.
 ---
@@ -200,7 +200,7 @@ function TOOL:Holster() end
 function TOOL:LeftClick(tr) end
 
 ---[SHARED] Initializes the ghost entity with the given model. Removes any old ghost entity if called multiple times.
---- 
+---
 --- The ghost is a regular prop_physics entity in singleplayer games, and a clientside prop in multiplayer games.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:MakeGhostEntity)
@@ -242,7 +242,7 @@ function TOOL:Reload(tr) end
 function TOOL:RightClick(tr) end
 
 ---[SHARED] Stores an Entity for later use in the tool.
---- 
+---
 --- The stored values can be retrieved by Tool:GetEnt, Tool:GetPos, Tool:GetLocalPos, Tool:GetPhys, Tool:GetBone and Tool:GetNormal
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetObject)
@@ -256,7 +256,7 @@ function TOOL:RightClick(tr) end
 function Tool:SetObject(id, ent, pos, phys, bone, normal) end
 
 ---[SHARED] Sets the current operation of the tool. Does nothing clientside. See also Tool:SetStage.
---- 
+---
 --- Operations and stages work as follows:
 --- * Operation 1
 --- * * Stage 1
@@ -272,7 +272,7 @@ function Tool:SetObject(id, ent, pos, phys, bone, normal) end
 function Tool:SetOperation(operation) end
 
 ---[SHARED] Sets the current stage of the tool. Does nothing clientside.
---- 
+---
 --- See also Tool:SetOperation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetStage)
@@ -291,18 +291,17 @@ function Tool:StartGhostEntity(ent) end
 function TOOL:Think() end
 
 ---[SHARED] Called on deploy automatically
---- 
+---
 --- Sets the tool's stage to how many stored objects the tool has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:UpdateData)
 function Tool:UpdateData() end
 
 ---[SHARED] Updates the position and orientation of the ghost entity based on where the toolgun owner is looking along with data from object with id 1 set by Tool:SetObject.
---- 
+---
 --- This should be called in the tool's TOOL:Think hook.
---- 
+---
 --- This command is only used for tools that move props, such as easy weld, axis and motor. If you want to update a ghost like the thruster tool does it for example, check its [source code](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/entities/weapons/gmod_tool/stools/thruster.lua#L179).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:UpdateGhostEntity)
 function Tool:UpdateGhostEntity() end
-

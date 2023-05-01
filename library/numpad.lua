@@ -19,7 +19,7 @@ function numpad.Activate(ply, key, isButton) end
 function numpad.Deactivate(ply, key, isButton) end
 
 ---[SERVER] Returns true during a function added with numpad.Register when the third argument to numpad.Activate is true.
---- 
+---
 --- This is caused when a numpad function is triggered by a button SENT being used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.FromButton)
@@ -27,7 +27,7 @@ function numpad.Deactivate(ply, key, isButton) end
 function numpad.FromButton() end
 
 ---[SERVER] Calls a function registered with numpad.Register when a player presses specified key.
---- 
+---
 --- See for key released action: numpad.OnUp
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.OnDown)
@@ -39,7 +39,7 @@ function numpad.FromButton() end
 function numpad.OnDown(ply, key, name, ...) end
 
 ---[SERVER] Calls a function registered with numpad.Register when a player releases specified key.
---- 
+---
 --- See for key pressed action: numpad.OnDown
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.OnUp)
@@ -55,13 +55,13 @@ function numpad.OnUp(ply, key, name, ...) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.Register)
 ---@param id string The unique id of your action.
 ---@param func function The function to be executed.
---- 
+---
 --- Arguments are:
---- 
+---
 --- Player ply - The player who pressed the button
---- 
+---
 --- vararg ... - The 4th and all subsequent arguments passed from numpad.OnDown and/or numpad.OnUp
---- 
+---
 --- Returning **false** in this function will remove the listener which triggered this function (example: return false if one of your varargs is an entity which is no longer valid)
 function numpad.Register(id, func) end
 
@@ -77,4 +77,3 @@ function numpad.Remove(ID) end
 ---@param ply Player The player whose numpad should be simulated
 ---@param key number The key to press, corresponding to Enums/KEY
 function numpad.Toggle(ply, key) end
-

@@ -18,20 +18,20 @@ function DHorizontalScroller:GetCanvas() end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetOverlap)
----@return number 
+---@return number
 function DHorizontalScroller:GetOverlap() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetShowDropTargets)
----@return boolean 
+---@return boolean
 function DHorizontalScroller:GetShowDropTargets() end
 
 ---[CLIENT] Same as DDragBase:MakeDroppable.
 --- TODO: Transclude or whatever to here?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:MakeDroppable)
----@param name string 
+---@param name string
 function DHorizontalScroller:MakeDroppable(name) end
 
 ---[CLIENT] Called when the panel is scrolled.
@@ -60,12 +60,11 @@ function DHorizontalScroller:SetScroll(scroll) end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:SetShowDropTargets)
----@param newState boolean 
+---@param newState boolean
 function DHorizontalScroller:SetShowDropTargets(newState) end
 
 ---[CLIENT] Same as DDragBase:SetUseLiveDrag
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:SetUseLiveDrag)
----@param newState boolean 
+---@param newState boolean
 function DHorizontalScroller:SetUseLiveDrag(newState) end
-

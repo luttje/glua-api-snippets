@@ -18,7 +18,7 @@ function DHorizontalDivider:GetDragging() end
 ---[CLIENT] Returns the local X coordinate of where the player started dragging the thing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetHoldPos)
----@return number 
+---@return number
 function DHorizontalDivider:GetHoldPos() end
 
 ---[CLIENT] Returns the left side content of the DHorizontalDivider
@@ -66,13 +66,13 @@ function DHorizontalDivider:SetDividerWidth(width) end
 ---[CLIENT] Sets whether the player is dragging the divider or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:SetDragging)
----@param dragonot boolean 
+---@param dragonot boolean
 function DHorizontalDivider:SetDragging(dragonot) end
 
 ---[CLIENT] Sets the local X coordinate of where the player started dragging the thing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:SetHoldPos)
----@param x number 
+---@param x number
 function DHorizontalDivider:SetHoldPos(x) end
 
 ---[CLIENT] Sets the left side content of the DHorizontalDivider.
@@ -88,7 +88,7 @@ function DHorizontalDivider:SetLeft(pnl) end
 function DHorizontalDivider:SetLeftMin(minWidth) end
 
 ---[CLIENT] Sets the current/starting width of the left side.
---- 
+---
 --- The width of the right side is automatically calculated by subtracting this from the total width of the DHorizontalDivider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:SetLeftWidth)
@@ -113,8 +113,7 @@ function DHorizontalDivider:SetRight(pnl) end
 ---@param minWidth number The minimum width of the right side
 function DHorizontalDivider:SetRightMin(minWidth) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:StartGrab)
 function DHorizontalDivider:StartGrab() end
-

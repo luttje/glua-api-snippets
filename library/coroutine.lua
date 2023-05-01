@@ -9,7 +9,7 @@ coroutine = {}
 ---@return thread coroutine
 function coroutine.create(func) end
 
----[SHARED AND MENU] Returns whether the running coroutine can yield.  
+---[SHARED AND MENU] Returns whether the running coroutine can yield.
 --- 		A running coroutine is yieldable if it is not in the main thread, and it is not inside a non-yieldable C function.
 --- 		This is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](jit.version)
 ---
@@ -39,10 +39,10 @@ function coroutine.running() end
 ---@return string status
 function coroutine.status(coroutine) end
 
----[SHARED] Repeatedly yields the coroutine for the given duration before continuing. 
---- 
---- Only works inside a coroutine. Only useful in nextbot coroutine think function. 
---- 
+---[SHARED] Repeatedly yields the coroutine for the given duration before continuing.
+---
+--- Only works inside a coroutine. Only useful in nextbot coroutine think function.
+---
 --- This function uses Global.CurTime instead of Global.RealTime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.wait)
@@ -50,7 +50,7 @@ function coroutine.status(coroutine) end
 function coroutine.wait(duration) end
 
 ---[SHARED AND MENU] Returns a function which calling is equivalent with calling coroutine.resume with the coroutine and all extra parameters.
---- 
+---
 --- The values returned by the returned function only contain the values passed to the inner coroutine.yield call and do not include the *no error* status that coroutine.resume provides. In case of failure, an error is thrown instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.wrap)
@@ -64,4 +64,3 @@ function coroutine.wrap(coroutine) end
 ---@param ... ... Arguments to be returned by the last call of coroutine.resume.
 ---@return ... Arguments that were set previously by coroutine.resume.
 function coroutine.yield(...) end
-

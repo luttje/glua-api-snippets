@@ -3,7 +3,7 @@
 debugoverlay = {}
 
 ---[SHARED] Displays an axis indicator at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Axis)
@@ -15,7 +15,7 @@ debugoverlay = {}
 function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
 
 ---[SHARED] Displays a solid coloured box at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Box)
@@ -27,7 +27,7 @@ function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
 function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 
 ---[SHARED] Displays a solid colored rotated box at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.BoxAngles)
@@ -40,7 +40,7 @@ function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 
 ---[SHARED] Creates a coloured cross at the specified position for the specified time.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Cross)
@@ -52,7 +52,7 @@ function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays 2D text at the specified coordinates.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.EntityTextAtPosition)
@@ -64,15 +64,15 @@ function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
 function debugoverlay.EntityTextAtPosition(pos, line, text, lifetime, color) end
 
 ---[SHARED] Draws a 3D grid of limited size in given position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Grid)
----@param position Vector 
+---@param position Vector
 function debugoverlay.Grid(position) end
 
 ---[SHARED] Displays a coloured line at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Line)
@@ -84,7 +84,7 @@ function debugoverlay.Grid(position) end
 function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays text triangle at the specified coordinates.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.ScreenText)
@@ -96,7 +96,7 @@ function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 
 ---[SHARED] Displays a coloured sphere at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Sphere)
@@ -108,7 +108,7 @@ function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays "swept" box, two boxes connected with lines by their verices.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.SweptBox)
@@ -116,13 +116,13 @@ function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 ---@param vEnd Vector The end position of the box.
 ---@param vMins Vector The "minimum" edge of the box.
 ---@param vMaxs Vector The "maximum" edge of the box.
----@param ang Angle 
+---@param ang Angle
 ---@param lifetime number Number of seconds to appear
 ---@param color table The color of the box. Uses the Color
 function debugoverlay.SweptBox(vStart, vEnd, vMins, vMaxs, ang, lifetime, color) end
 
 ---[SHARED] Displays text at the specified position.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Text)
@@ -133,7 +133,7 @@ function debugoverlay.SweptBox(vStart, vEnd, vMins, vMaxs, ang, lifetime, color)
 function debugoverlay.Text(origin, text, lifetime, viewCheck) end
 
 ---[SHARED] Displays a colored triangle at the specified coordinates.
---- 
+---
 --- This function will silently fail if the **developer** ConVar is set to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Triangle)
@@ -144,4 +144,3 @@ function debugoverlay.Text(origin, text, lifetime, viewCheck) end
 ---@param color table The color of the box. Uses the Color
 ---@param ignoreZ boolean If true, will draw on top of everything; ignoring the Z buffer
 function debugoverlay.Triangle(pos1, pos2, pos3, lifetime, color, ignoreZ) end
-

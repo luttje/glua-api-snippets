@@ -4,7 +4,7 @@
 local Schedule = {}
 
 ---[SERVER] Adds a task to the schedule. See also Schedule:AddTaskEx if you wish to customize task start and run function names.
---- 
+---
 --- See also ENTITY:StartSchedule, NPC:StartEngineTask, and NPC:RunEngineTask.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTask)
@@ -13,7 +13,7 @@ local Schedule = {}
 function Schedule:AddTask(taskname, taskdata) end
 
 ---[SERVER] Adds a task to the schedule with completely custom function names.
---- 
+---
 --- See also Schedule:AddTask.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTaskEx)
@@ -46,4 +46,3 @@ function Schedule:Init(debugName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:NumTasks)
 ---@return number The number of tasks in this schedule.
 function Schedule:NumTasks() end
-

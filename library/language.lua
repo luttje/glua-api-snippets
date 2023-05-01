@@ -15,4 +15,3 @@ function language.Add(placeholder, fulltext) end
 ---@param phrase string The phrase to translate
 ---@return string The translated phrase, or the input string if no translation was found
 function language.GetPhrase(phrase) end
-

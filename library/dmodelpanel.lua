@@ -69,7 +69,7 @@ function DModelPanel:GetLookAt() end
 function DModelPanel:GetModel() end
 
 ---[CLIENT] By default, this function slowly rotates and animates the entity being rendered.
---- 
+---
 --- If you want to change this behavior, you should override it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:LayoutEntity)
@@ -94,7 +94,7 @@ function DModelPanel:SetAmbientLight(color) end
 function DModelPanel:SetAnimated(animated) end
 
 ---[CLIENT] Sets the speed used by DModelPanel:RunAnimation to advance frame on an entity sequence.
---- 
+---
 --- Entity:FrameAdvance doesn't seem to have any functioning arguments and therefore changing this will not have any affect on the panel entity's sequence speed without reimplementation. It only affects the value returned by DModelPanel:GetAnimSpeed
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:SetAnimSpeed)
@@ -108,7 +108,7 @@ function DModelPanel:SetAnimSpeed(animSpeed) end
 function DModelPanel:SetCamPos(pos) end
 
 ---[CLIENT] Sets the color of the rendered entity.
---- 
+---
 --- This does not work on Garry's Mod player models since they use a different color system. To modify a player model color, see Example 2 on the DModelPanel page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:SetColor)
@@ -123,7 +123,7 @@ function DModelPanel:SetColor(color) end
 function DModelPanel:SetDirectionalLight(direction, color) end
 
 ---[CLIENT] Sets the entity to be rendered by the model panel.
---- 
+---
 --- If you set `ent` to a shared entity you must set `ent` to nil before removing this panel or else a "Trying to remove server entity on client!" error is thrown
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:SetEntity)
@@ -149,7 +149,7 @@ function DModelPanel:SetLookAng(ang) end
 function DModelPanel:SetLookAt(pos) end
 
 ---[CLIENT] Sets the model of the rendered entity.
---- 
+---
 --- 	This function may give a different model than expected. This is not a bug, however this problem may appear with some player models which are renamed several times in a wrong way. To solve that, you can use Entity:SetModel and Entity:SetModelName on the internal panel entity. More information : https://github.com/Facepunch/garrysmod-issues/issues/4534.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:SetModel)
@@ -161,4 +161,3 @@ function DModelPanel:SetModel(model) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:StartScene)
 ---@param path string The path to the scene file. (.vcd)
 function DModelPanel:StartScene(path) end
-

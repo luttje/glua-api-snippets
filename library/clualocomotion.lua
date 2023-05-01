@@ -4,9 +4,9 @@
 local CLuaLocomotion = {}
 
 ---[SERVER] Sets the location we want to get to.
---- 
+---
 --- Each call of CLuaLocomotion:Approach moves the NextBot 1 unit towards the specified goal. The size of this unit is determined by CLuaLocomotion:SetDesiredSpeed; the default is `0` (each call of CLuaLocomotion:Approach moves the NextBot 0).
---- 
+---
 --- To achieve smooth movement with CLuaLocomotion:Approach, it should be called in a hook like ENTITY:Think, as shown in the example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach)
@@ -172,8 +172,8 @@ function CLuaLocomotion:Jump() end
 ---[SERVER] Makes the bot jump across a gap. The bot must be on ground (Entity:IsOnGround) and its model must have `ACT_JUMP` activity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:JumpAcrossGap)
----@param landingGoal Vector 
----@param landingForward Vector 
+---@param landingGoal Vector
+---@param landingForward Vector
 function CLuaLocomotion:JumpAcrossGap(landingGoal, landingForward) end
 
 ---[SERVER] Sets the acceleration speed
@@ -213,7 +213,7 @@ function CLuaLocomotion:SetDeceleration(deceleration) end
 function CLuaLocomotion:SetDesiredSpeed(speed) end
 
 ---[SERVER] Sets the locomotion's gravity.
---- 
+---
 --- With values 0 or below, or even lower positive values, the nextbot will start to drift sideways, use CLuaLocomotion:SetVelocity to counteract this.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetGravity)
@@ -247,6 +247,5 @@ function CLuaLocomotion:SetStepHeight(height) end
 ---[SERVER] Sets the current movement velocity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetVelocity)
----@param velocity Vector 
+---@param velocity Vector
 function CLuaLocomotion:SetVelocity(velocity) end
-

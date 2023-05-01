@@ -2,18 +2,18 @@
 
 motionsensor = {}
 
----[SHARED] 
+---[SHARED]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
----@param translator table 
----@param player Player 
----@param rotation Angle 
+---@param translator table
+---@param player Player
+---@param rotation Angle
 ---@return Vector, Angle, table Vector - Pos
 ---@return Vector, Angle, table Angle - ang
 ---@return Vector, Angle, table table - sensor
 function motionsensor.BuildSkeleton(translator, player, rotation) end
 
----[SHARED] 
+---[SHARED]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ChooseBuilderFromEntity)
 ---@param ent Entity Entity to choose builder for
@@ -26,7 +26,7 @@ function motionsensor.ChooseBuilderFromEntity(ent) end
 ---@return IMaterial The material
 function motionsensor.GetColourMaterial() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.GetSkeleton)
 function motionsensor.GetSkeleton() end
@@ -43,34 +43,34 @@ function motionsensor.IsActive() end
 ---@return boolean Connected or not
 function motionsensor.IsAvailable() end
 
----[SHARED] 
+---[SHARED]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAngle)
----@param translator table 
----@param sensor table 
----@param pos Vector 
----@param ang Angle 
----@param special_vectors table 
----@param boneid number 
----@param v table 
+---@param translator table
+---@param sensor table
+---@param pos Vector
+---@param ang Angle
+---@param special_vectors table
+---@param boneid number
+---@param v table
 ---@return boolean Return nil on failure
 function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors, boneid, v) end
 
----[SHARED] 
+---[SHARED]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable)
----@param translator table 
----@param sensor table 
----@param pos Vector 
----@param rotation Angle 
+---@param translator table
+---@param sensor table
+---@param pos Vector
+---@param rotation Angle
 ---@return Angle Ang. If !translator.AnglesTable then return - {}
 function motionsensor.ProcessAnglesTable(translator, sensor, pos, rotation) end
 
----[SHARED] 
+---[SHARED]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
----@param translator table 
----@param sensor table 
+---@param translator table
+---@param sensor table
 ---@return Vector Pos. if !translator.PositionTable then return - {}
 function motionsensor.ProcessPositionTable(translator, sensor) end
 
@@ -84,4 +84,3 @@ function motionsensor.Start() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Stop)
 function motionsensor.Stop() end
-

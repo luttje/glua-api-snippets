@@ -24,7 +24,7 @@ function VMatrix:GetAngles() end
 function VMatrix:GetField(row, column) end
 
 ---[SHARED] Gets the forward direction of the matrix.
---- 
+---
 --- ie. The first column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetForward)
@@ -32,9 +32,9 @@ function VMatrix:GetField(row, column) end
 function VMatrix:GetForward() end
 
 ---[SHARED] Returns an inverted matrix without modifying the original matrix.
---- 
+---
 --- Inverting the matrix will fail if its [determinant](https://en.wikipedia.org/wiki/Determinant) is 0 or close to 0. (ie. its "scale" in any direction is 0.)
---- 
+---
 --- See also VMatrix:GetInverseTR.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverse)
@@ -42,9 +42,9 @@ function VMatrix:GetForward() end
 function VMatrix:GetInverse() end
 
 ---[SHARED] Returns an inverted matrix without modifying the original matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
---- 
+---
 --- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
---- 
+---
 --- To get the inverse of a matrix that contains other modifications, see VMatrix:GetInverse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverseTR)
@@ -52,7 +52,7 @@ function VMatrix:GetInverse() end
 function VMatrix:GetInverseTR() end
 
 ---[SHARED] Gets the right direction of the matrix.
---- 
+---
 --- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetRight)
@@ -78,7 +78,7 @@ function VMatrix:GetTranslation() end
 function VMatrix:GetTransposed() end
 
 ---[SHARED] Gets the up direction of the matrix.
---- 
+---
 --- ie. The third column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetUp)
@@ -91,11 +91,11 @@ function VMatrix:GetUp() end
 function VMatrix:Identity() end
 
 ---[SHARED] Inverts the matrix.
---- 
+---
 --- Inverting the matrix will fail if its [determinant](https://en.wikipedia.org/wiki/Determinant) is 0 or close to 0. (ie. its "scale" in any direction is 0.)
---- 
+---
 --- If the matrix cannot be inverted, it does not get modified.
---- 
+---
 --- See also VMatrix:InvertTR.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Invert)
@@ -103,9 +103,9 @@ function VMatrix:Identity() end
 function VMatrix:Invert() end
 
 ---[SHARED] Inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
---- 
+---
 --- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
---- 
+---
 --- To invert a matrix that contains other modifications, see VMatrix:Invert.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:InvertTR)
@@ -118,7 +118,7 @@ function VMatrix:InvertTR() end
 function VMatrix:IsIdentity() end
 
 ---[SHARED] Returns whether the matrix is a rotation matrix or not.
---- 
+---
 --- Technically it checks if the forward, right and up vectors are orthogonal and normalized.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsRotationMatrix)
@@ -138,7 +138,7 @@ function VMatrix:IsZero() end
 function VMatrix:Mul(input) end
 
 ---[SHARED] Rotates the matrix by the given angle.
---- 
+---
 --- Postmultiplies the matrix by a rotation matrix (A = AR).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Rotate)
@@ -146,7 +146,7 @@ function VMatrix:Mul(input) end
 function VMatrix:Rotate(rotation) end
 
 ---[SHARED] Scales the matrix by the given vector.
---- 
+---
 --- Postmultiplies the matrix by a scaling matrix (A = AS).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Scale)
@@ -180,7 +180,7 @@ function VMatrix:SetAngles(angle) end
 function VMatrix:SetField(row, column, value) end
 
 ---[SHARED] Sets the forward direction of the matrix.
---- 
+---
 --- ie. The first column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetForward)
@@ -188,7 +188,7 @@ function VMatrix:SetField(row, column, value) end
 function VMatrix:SetForward(forward) end
 
 ---[SHARED] Sets the right direction of the matrix.
---- 
+---
 --- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetRight)
@@ -210,26 +210,26 @@ function VMatrix:SetTranslation(translation) end
 ---[SHARED] Sets each component of the matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetUnpacked)
----@param e11 number 
----@param e12 number 
----@param e13 number 
----@param e14 number 
----@param e21 number 
----@param e22 number 
----@param e23 number 
----@param e24 number 
----@param e31 number 
----@param e32 number 
----@param e33 number 
----@param e34 number 
----@param e41 number 
----@param e42 number 
----@param e43 number 
----@param e44 number 
+---@param e11 number
+---@param e12 number
+---@param e13 number
+---@param e14 number
+---@param e21 number
+---@param e22 number
+---@param e23 number
+---@param e24 number
+---@param e31 number
+---@param e32 number
+---@param e33 number
+---@param e34 number
+---@param e41 number
+---@param e42 number
+---@param e43 number
+---@param e44 number
 function VMatrix:SetUnpacked(e11, e12, e13, e14, e21, e22, e23, e24, e31, e32, e33, e34, e41, e42, e43, e44) end
 
 ---[SHARED] Sets the up direction of the matrix.
---- 
+---
 --- ie. The third column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetUp)
@@ -249,7 +249,7 @@ function VMatrix:Sub(input) end
 function VMatrix:ToTable() end
 
 ---[SHARED] Translates the matrix by the given vector aka. adds the vector to the translation.
---- 
+---
 --- Postmultiplies the matrix by a translation matrix (A = AT).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Translate)
@@ -278,9 +278,8 @@ function VMatrix:Translate(translation) end
 function VMatrix:Unpack() end
 
 ---[SHARED] Sets all components of the matrix to 0, also known as a [null matrix](https://en.wikipedia.org/wiki/Zero_matrix).
---- 
+---
 --- This function is more efficient than setting each element manually.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Zero)
 function VMatrix:Zero() end
-

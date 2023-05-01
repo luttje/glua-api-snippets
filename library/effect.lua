@@ -3,20 +3,20 @@
 ---@class EFFECT
 local EFFECT = {}
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:EndTouch)
 function EFFECT:EndTouch() end
 
 ---[CLIENT] Used to get the "real" start position of a trace, for weapon tracer effects.
---- 
+---
 --- "real" meaning in 3rd person, the 3rd person position will be used, in first person the first person position will be used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:GetTracerShootPos)
 ---@param pos Vector Default position if we fail
 ---@param ent Weapon The weapon to use.
 ---@param attachment number Attachment ID of on the weapon "muzzle", to use as the start position.
---- 
+---
 --- Please note that it is expected that the same attachment ID is used on both, the world and the view model.
 ---@return Vector The "real" start position.
 function EFFECT:GetTracerShootPos(pos, ent, attachment) end
@@ -39,7 +39,7 @@ function EFFECT:PhysicsCollide(colData, collider) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:Render)
 function EFFECT:Render() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:StartTouch)
 function EFFECT:StartTouch() end
@@ -50,8 +50,7 @@ function EFFECT:StartTouch() end
 ---@return boolean Return false to remove this effect.
 function EFFECT:Think() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:Touch)
 function EFFECT:Touch() end
-

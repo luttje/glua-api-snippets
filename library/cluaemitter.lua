@@ -46,7 +46,7 @@ function CLuaEmitter:Is3D() end
 function CLuaEmitter:IsValid() end
 
 ---[CLIENT] Sets the bounding box for this emitter.
---- 
+---
 --- Usually the bounding box is automatically determined by the particles, but this function overrides it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:SetBBox)
@@ -78,4 +78,3 @@ function CLuaEmitter:SetParticleCullRadius(radius) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:SetPos)
 ---@param position Vector New position.
 function CLuaEmitter:SetPos(position) end
-

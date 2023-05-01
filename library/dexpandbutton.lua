@@ -14,4 +14,3 @@ function DExpandButton:GetExpanded() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DExpandButton:SetExpanded)
 ---@param expanded boolean True to expand ( visually will show a "-" )
 function DExpandButton:SetExpanded(expanded) end
-

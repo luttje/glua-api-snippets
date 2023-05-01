@@ -19,4 +19,3 @@
 ---@field m_RenderOrigin Vector (Clientside) Do not use.
 ---@field m_RenderAngles Angle (Clientside) Do not use.
 local Custom_Entity_Fields = {}
-

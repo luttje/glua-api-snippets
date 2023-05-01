@@ -14,4 +14,3 @@ function widgets.PlayerTick(ply, mv) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/widgets.RenderMe)
 ---@param ent Entity Widget entity to render
 function widgets.RenderMe(ent) end
-

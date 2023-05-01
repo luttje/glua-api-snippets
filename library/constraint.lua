@@ -23,7 +23,7 @@ function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) end
 
 ---[SERVER] Creates an advanced ballsocket (ragdoll) constraint.
---- 
+---
 --- Uses a https://developer.valvesoftware.com/wiki/Phys_ragdollconstraint
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket)
@@ -47,7 +47,28 @@ function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) 
 ---@param onlyrotation number Only limit rotation, free movement.
 ---@param nocollide number Whether the entities should be no-collided.
 ---@return Entity A phys_ragdollconstraint entity. Will return false if the constraint could not be created.
-function constraint.AdvBallsocket(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, forcelimit, torquelimit, xmin, ymin, zmin, xmax, ymax, zmax, xfric, yfric, zfric, onlyrotation, nocollide) end
+function constraint.AdvBallsocket(
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	forcelimit,
+	torquelimit,
+	xmin,
+	ymin,
+	zmin,
+	xmax,
+	ymax,
+	zmax,
+	xfric,
+	yfric,
+	zfric,
+	onlyrotation,
+	nocollide
+)
+end
 
 ---[SERVER] Creates an axis constraint.
 ---
@@ -65,7 +86,21 @@ function constraint.AdvBallsocket(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, forcel
 ---@param LocalAxis Vector If you include the LocalAxis then LPos2 will not be used in the final constraint. However, LPos2 is still a required argument.
 ---@param DontAddTable boolean Whether or not to add the constraint info on the entity table. See constraint.AddConstraintTable.
 ---@return Entity Constraint. Will return false if the constraint could not be created.
-function constraint.Axis(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, forcelimit, torquelimit, friction, nocollide, LocalAxis, DontAddTable) end
+function constraint.Axis(
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	forcelimit,
+	torquelimit,
+	friction,
+	nocollide,
+	LocalAxis,
+	DontAddTable
+)
+end
 
 ---[SERVER] Creates a ballsocket joint.
 ---
@@ -107,8 +142,8 @@ function constraint.CanConstrain(ent, bone) end
 function constraint.CreateKeyframeRope(pos, width, material, Constraint, Ent1, LPos1, Bone1, Ent2, LPos2, Bone2, kv) end
 
 ---[SERVER] Creates an invisible, non-moveable anchor point in the world to which things can be attached.
---- 		The entity used internally by this function (`gmod_anchor`) only exists in Sandbox derived gamemodes, meaning this function will only work in these gamemodes.  
---- 
+--- 		The entity used internally by this function (`gmod_anchor`) only exists in Sandbox derived gamemodes, meaning this function will only work in these gamemodes.
+---
 --- 		To use this in other gamemodes, you may need to create your own [gmod_anchor](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/entities/entities/gmod_anchor.lua) entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CreateStaticAnchorPoint)
@@ -128,16 +163,31 @@ function constraint.CreateStaticAnchorPoint(pos) end
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls)
 ---@param LPos1 Vector Position of first end of the rope. Local to Ent1.
 ---@param LPos2 Vector Position of second end of the rope. Local to Ent2.
----@param constant number 
----@param damping number 
----@param rdamping number 
+---@param constant number
+---@param damping number
+---@param rdamping number
 ---@param material string The material of the rope.
 ---@param width number Width of rope.
----@param stretchonly boolean 
+---@param stretchonly boolean
 ---@param color table The color of the rope. See Global.Color.
 ---@return Entity, Entity Entity - Constraint. Will return false if the constraint could not be created.
 ---@return Entity, Entity Entity - rope.  Will return nil if the constraint could not be created.
-function constraint.Elastic(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, constant, damping, rdamping, material, width, stretchonly, color) end
+function constraint.Elastic(
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	constant,
+	damping,
+	rdamping,
+	material,
+	width,
+	stretchonly,
+	color
+)
+end
 
 ---[SERVER] Returns the constraint of a specified type between two entities, if it exists
 ---
@@ -266,24 +316,41 @@ function constraint.HasConstraints(ent) end
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls),
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls).
----@param LPos1 Vector 
----@param LPos2 Vector 
----@param Length1 number 
----@param Length2 number 
+---@param LPos1 Vector
+---@param LPos2 Vector
+---@param Length1 number
+---@param Length2 number
 ---@param width number The width of the rope.
 ---@param key number The key binding, corresponding to an Enums/KEY
 ---@param fixed number Whether the hydraulic is fixed.
----@param speed number 
+---@param speed number
 ---@param material string The material of the rope.
 ---@param color table The color of the rope. See Global.Color.
 ---@return Entity, Entity, Entity, Entity Entity - Constraint. Will return false if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - rope. Will return nil if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - controller. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - slider. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
-function constraint.Hydraulic(pl, Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, Length1, Length2, width, key, fixed, speed, material, color) end
+function constraint.Hydraulic(
+	pl,
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	Length1,
+	Length2,
+	width,
+	key,
+	fixed,
+	speed,
+	material,
+	color
+)
+end
 
 ---[SERVER] Creates a keep upright constraint.
---- 
+---
 --- This function only works on prop_physics or prop_ragdoll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Keepupright)
@@ -301,22 +368,41 @@ function constraint.Keepupright(ent, ang, bone, angularLimit) end
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls)
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls)
----@param LPos1 Vector 
----@param LPos2 Vector 
----@param friction number 
----@param torque number 
----@param forcetime number 
+---@param LPos1 Vector
+---@param LPos2 Vector
+---@param friction number
+---@param torque number
+---@param forcetime number
 ---@param nocollide number Whether the entities should be no-collided.
 ---@param toggle number Whether the constraint is on toggle.
 ---@param pl Player The player that will be used to call numpad.OnDown and numpad.OnUp.
 ---@param forcelimit number Amount of force until it breaks (0 = unbreakable)
 ---@param numpadkey_fwd number The key binding for "forward", corresponding to an Enums/KEY
 ---@param numpadkey_bwd number The key binding for "backwards", corresponding to an Enums/KEY
----@param direction number 
----@param LocalAxis Vector 
+---@param direction number
+---@param LocalAxis Vector
 ---@return Entity, Entity Entity - Constraint. Will return false if the constraint could not be created.
 ---@return Entity, Entity Entity - axis. Will return nil if the constraint could not be created.
-function constraint.Motor(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, friction, torque, forcetime, nocollide, toggle, pl, forcelimit, numpadkey_fwd, numpadkey_bwd, direction, LocalAxis) end
+function constraint.Motor(
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	friction,
+	torque,
+	forcetime,
+	nocollide,
+	toggle,
+	pl,
+	forcelimit,
+	numpadkey_fwd,
+	numpadkey_bwd,
+	direction,
+	LocalAxis
+)
+end
 
 ---[SERVER] Creates a muscle constraint.
 ---
@@ -326,23 +412,42 @@ function constraint.Motor(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, friction, torq
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls)
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls)
----@param LPos1 Vector 
----@param LPos2 Vector 
----@param Length1 number 
----@param Length2 number 
+---@param LPos1 Vector
+---@param LPos2 Vector
+---@param Length1 number
+---@param Length2 number
 ---@param width number Width of the rope.
 ---@param key number The key binding, corresponding to an Enums/KEY
 ---@param fixed number Whether the constraint is fixed.
----@param period number 
----@param amplitude number 
----@param starton boolean 
+---@param period number
+---@param amplitude number
+---@param starton boolean
 ---@param material string Material of the rope.
 ---@param color table The color of the rope. See Global.Color.
 ---@return Entity, Entity, Entity, Entity Entity - Constraint. Will return false if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - rope. Will return nil if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - controller. Will return nil if the constraint could not be created.
 ---@return Entity, Entity, Entity, Entity Entity - slider. Will return nil if the fixed argument is not 1 or if the constraint could not be created.
-function constraint.Muscle(pl, Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, Length1, Length2, width, key, fixed, period, amplitude, starton, material, color) end
+function constraint.Muscle(
+	pl,
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	Length1,
+	Length2,
+	width,
+	key,
+	fixed,
+	period,
+	amplitude,
+	starton,
+	material,
+	color
+)
+end
 
 ---[SERVER] Creates an no-collide "constraint". Disables collision between two entities.
 --- Does not work with players.
@@ -358,21 +463,36 @@ function constraint.NoCollide(Ent1, Ent2, Bone1, Bone2) end
 ---[SERVER] Creates a pulley constraint.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Pulley)
----@param Ent1 Entity 
----@param Ent4 Entity 
----@param Bone1 number 
----@param Bone4 number 
----@param LPos1 Vector 
----@param LPos4 Vector 
----@param WPos2 Vector 
----@param WPos3 Vector 
+---@param Ent1 Entity
+---@param Ent4 Entity
+---@param Bone1 number
+---@param Bone4 number
+---@param LPos1 Vector
+---@param LPos4 Vector
+---@param WPos2 Vector
+---@param WPos3 Vector
 ---@param forcelimit number Amount of force until it breaks (0 = unbreakable)
 ---@param rigid boolean Whether the constraint is rigid.
 ---@param width number Width of the rope.
 ---@param material string Material of the rope.
 ---@param color table The color of the rope. See Global.Color.
 ---@return Entity Constraint. Will return false if the constraint could not be created.
-function constraint.Pulley(Ent1, Ent4, Bone1, Bone4, LPos1, LPos4, WPos2, WPos3, forcelimit, rigid, width, material, color) end
+function constraint.Pulley(
+	Ent1,
+	Ent4,
+	Bone1,
+	Bone4,
+	LPos1,
+	LPos4,
+	WPos2,
+	WPos3,
+	forcelimit,
+	rigid,
+	width,
+	material,
+	color
+)
+end
 
 ---[SERVER] Attempts to remove all constraints associated with an entity
 ---
@@ -409,7 +529,22 @@ function constraint.RemoveConstraints(ent, type) end
 ---@param color table The color of the rope. See Global.Color.
 ---@return Entity, Entity Entity - Constraint. Will be a keyframe_rope if you roping to the same bone on the same entity. Will return false if the constraint could not be created.
 ---@return Entity, Entity Entity - rope. Will return nil if "Constraint" is a keyframe_rope or if the constraint could not be created.
-function constraint.Rope(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, length, addlength, forcelimit, width, material, rigid, color) end
+function constraint.Rope(
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	length,
+	addlength,
+	forcelimit,
+	width,
+	material,
+	rigid,
+	color
+)
+end
 
 ---[SERVER] Creates a slider constraint.
 ---
@@ -418,8 +553,8 @@ function constraint.Rope(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, length, addleng
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls),
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls).
----@param LPos1 Vector 
----@param LPos2 Vector 
+---@param LPos1 Vector
+---@param LPos2 Vector
 ---@param width number The width of the rope.
 ---@param material string The material of the rope.
 ---@param color table The color of the rope. See Global.Color.
@@ -432,8 +567,8 @@ function constraint.Slider(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, width, materi
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Weld)
 ---@param ent1 Entity The first entity
 ---@param ent2 Entity The second entity
----@param bone1 number The bonenumber of the first entity (0 for monoboned entities) 
---- 
+---@param bone1 number The bonenumber of the first entity (0 for monoboned entities)
+---
 --- PhysObj number for ragdolls, see: Entity:TranslateBoneToPhysBone.
 ---@param bone2 number The bonenumber of the second entity
 ---@param forcelimit number The amount of force appliable to the constraint before it will break (0 is never)
@@ -450,8 +585,8 @@ function constraint.Weld(ent1, ent2, bone1, bone2, forcelimit, nocollide, delete
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls),
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls).
----@param LPos1 Vector 
----@param LPos2 Vector 
+---@param LPos1 Vector
+---@param LPos2 Vector
 ---@param width number The width of the rope.
 ---@param fwd_bind number The key binding for "forward", corresponding to an Enums/KEY
 ---@param bwd_bind number The key binding for "backwards", corresponding to an Enums/KEY
@@ -463,5 +598,21 @@ function constraint.Weld(ent1, ent2, bone1, bone2, forcelimit, nocollide, delete
 ---@return Entity, Entity, Entity Entity - Constraint. Can return nil. Will return false if the constraint could not be created.
 ---@return Entity, Entity, Entity Entity - rope. Will return nil if the constraint could not be created.
 ---@return Entity, Entity, Entity Entity - controller. Can return nil.
-function constraint.Winch(pl, Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, width, fwd_bind, bwd_bind, fwd_speed, bwd_speed, material, toggle, color) end
-
+function constraint.Winch(
+	pl,
+	Ent1,
+	Ent2,
+	Bone1,
+	Bone2,
+	LPos1,
+	LPos2,
+	width,
+	fwd_bind,
+	bwd_bind,
+	fwd_speed,
+	bwd_speed,
+	material,
+	toggle,
+	color
+)
+end

@@ -26,4 +26,3 @@ function DAlphaBar:SetBarColor(clr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAlphaBar:SetValue)
 ---@param alpha number The new alpha value to set
 function DAlphaBar:SetValue(alpha) end
-

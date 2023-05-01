@@ -18,7 +18,7 @@ function DIconLayout:CopyContents(from) end
 ---[CLIENT] Returns the size of the border.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetBorder)
----@return number 
+---@return number
 function DIconLayout:GetBorder() end
 
 ---[CLIENT] Returns the direction that it will be layed out, using the DOCK enumerations.
@@ -40,19 +40,19 @@ function DIconLayout:GetSpaceX() end
 function DIconLayout:GetSpaceY() end
 
 ---[CLIENT] Returns whether the icon layout will stretch its height to fit all the children.
---- 
+---
 --- See also DIconLayout:GetStretchWidth
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchHeight)
----@return boolean 
+---@return boolean
 function DIconLayout:GetStretchHeight() end
 
 ---[CLIENT] Returns whether the icon layout will stretch its width to fit all the children.
---- 
+---
 --- See also DIconLayout:GetStretchHeight
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchWidth)
----@return boolean 
+---@return boolean
 function DIconLayout:GetStretchWidth() end
 
 ---[CLIENT] Resets layout vars before calling Panel:InvalidateLayout. This is called when children are added or removed, and must be called when the spacing, border or layout direction is changed.
@@ -77,7 +77,7 @@ function DIconLayout:LayoutIcons_TOP() end
 function DIconLayout:SetBorder(width) end
 
 ---[CLIENT] Sets the direction that it will be layed out, using the Enums/DOCK.
---- 
+---
 --- Currently only TOP and LEFT are supported.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetLayoutDir)
@@ -97,18 +97,17 @@ function DIconLayout:SetSpaceX(xSpacing) end
 function DIconLayout:SetSpaceY(ySpacing) end
 
 ---[CLIENT] If set to true, the icon layout will stretch its height to fit all the children.
---- 
+---
 --- See also DIconLayout:SetStretchWidth
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchHeight)
----@param do_stretch boolean 
+---@param do_stretch boolean
 function DIconLayout:SetStretchHeight(do_stretch) end
 
 ---[CLIENT] If set to true, the icon layout will stretch its width to fit all the children.
---- 
+---
 --- See also DIconLayout:SetStretchHeight
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchWidth)
----@param stretchW boolean 
+---@param stretchW boolean
 function DIconLayout:SetStretchWidth(stretchW) end
-

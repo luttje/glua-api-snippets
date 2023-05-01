@@ -12,7 +12,7 @@ function DSprite:GetColor() end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetHandle)
----@return Vector 
+---@return Vector
 function DSprite:GetHandle() end
 
 ---[CLIENT] Gets the material the sprite is using.
@@ -36,7 +36,7 @@ function DSprite:SetColor(color) end
 ---[CLIENT] Seems to be an unused feature. Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:SetHandle)
----@param vec Vector 
+---@param vec Vector
 function DSprite:SetHandle(vec) end
 
 ---[CLIENT] Sets the source material for the sprite.
@@ -50,4 +50,3 @@ function DSprite:SetMaterial(material) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:SetRotation)
 ---@param ang number The anti-clockwise rotation in degrees.
 function DSprite:SetRotation(ang) end
-

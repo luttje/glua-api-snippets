@@ -14,4 +14,3 @@ function DProperty_VectorColor:Setup(settings) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_VectorColor:SetValue)
 ---@param color Vector Sets the color to use in a DProperty_VectorColor.
 function DProperty_VectorColor:SetValue(color) end
-

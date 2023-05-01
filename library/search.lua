@@ -22,4 +22,3 @@ function search.AddProvider(provider, id) end
 ---@param maxResults number How many results to stop at
 ---@return table A table of results
 function search.GetResults(query, types, maxResults) end
-

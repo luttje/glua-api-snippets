@@ -3,7 +3,7 @@
 cvars = {}
 
 ---[SHARED AND MENU] Adds a callback to be called when the named convar changes.
---- 
+---
 --- This does not callback convars in the menu state.
 --- This does not callback convars on the client with FCVAR_GAMEDLL and convars on the server without FCVAR_GAMEDLL.
 --- This does not callback convars on the client with FCVAR_REPLICATED.
@@ -30,8 +30,8 @@ function cvars.Bool(cvar, default) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.GetConVarCallbacks)
 ---@param name string The name of the ConVar.
 ---@param createIfNotFound boolean Whether or not to create the internal callback table for given ConVar if there isn't one yet.
---- 
---- 
+---
+---
 --- This argument is internal and should not be used.
 ---@return table A table of the convar's callbacks, or nil if the convar doesn't exist.
 function cvars.GetConVarCallbacks(name, createIfNotFound) end
@@ -45,7 +45,7 @@ function cvars.GetConVarCallbacks(name, createIfNotFound) end
 function cvars.Number(cvar, default) end
 
 ---[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.
---- 
+---
 --- Called by the engine when a convar value changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.OnConVarChanged)
@@ -68,4 +68,3 @@ function cvars.RemoveChangeCallback(name, indentifier) end
 ---@param default any The value to return if the console variable does not exist
 ---@return string Retrieved value
 function cvars.String(cvar, default) end
-

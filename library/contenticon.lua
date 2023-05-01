@@ -73,4 +73,3 @@ function ContentIcon:SetNPCWeapon(weapons) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetSpawnName)
 ---@param name string Internal "name" to be used when user left clicks the icon.
 function ContentIcon:SetSpawnName(name) end
-

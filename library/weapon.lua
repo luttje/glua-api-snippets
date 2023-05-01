@@ -47,9 +47,9 @@ function WEAPON:Ammo1() end
 function WEAPON:Ammo2() end
 
 ---[CLIENT] Allows you to adjust player view while this weapon in use.
---- 
+---
 --- This hook is called from the default implementation of GM:CalcView which is [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/base/gamemode/cl_init.lua#L387-L395). Therefore, it will not be called if any other hook added to CalcView returns any value, or if the current gamemode overrides the default hook and does not call the SWEP function.
---- 
+---
 --- SWEPs that define this function will not work with the Global.TauntCamera
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CalcView)
@@ -75,7 +75,7 @@ function WEAPON:CalcView(ply, pos, ang, fov) end
 function WEAPON:CalcViewModelView(ViewModel, OldEyePos, OldEyeAng, EyePos, EyeAng) end
 
 ---[SHARED] Calls a SWEP function on client.
---- 
+---
 --- This uses the usermessage internally, because of that, the combined length of the arguments of this function may not exceed 254 bytes/characters or the function will cease to function!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:CallOnClient)
@@ -117,7 +117,7 @@ function Weapon:Clip1() end
 function Weapon:Clip2() end
 
 ---[CLIENT] Allows you to use any numbers you want for the ammo display on the HUD.
---- 
+---
 --- Can be useful for weapons that don't use standard ammo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CustomAmmoDisplay)
@@ -125,7 +125,7 @@ function Weapon:Clip2() end
 function WEAPON:CustomAmmoDisplay() end
 
 ---[SHARED] Forces the weapon to reload while playing given animation.
---- 	
+---
 --- 		This will stop the Weapon:Think function from getting called while the weapon is reloading!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:DefaultReload)
@@ -134,7 +134,7 @@ function WEAPON:CustomAmmoDisplay() end
 function Weapon:DefaultReload(act) end
 
 ---[SHARED] Called when player has just switched to this weapon.
---- 
+---
 --- Due to this hook being predicted, it is not called clientside in singleplayer at all, and in multiplayer it will not be called clientside if the weapon is switched with Player:SelectWeapon or the "use" console command, however it will be called clientside with the default weapon selection menu and when using CUserCmd:SelectWeapon
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Deploy)
@@ -142,7 +142,7 @@ function Weapon:DefaultReload(act) end
 function WEAPON:Deploy() end
 
 ---[CLIENT] Called when the crosshair is about to get drawn, and allows you to override it.
---- 
+---
 --- This function will **not** be called if `SWEP.DrawCrosshair` is set to false or if player is affected by Player:CrosshairDisable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:DoDrawCrosshair)
@@ -160,7 +160,7 @@ function WEAPON:DoDrawCrosshair(x, y) end
 function WEAPON:DoImpactEffect(tr, damageType) end
 
 ---[CLIENT] This hook allows you to draw on screen while this weapon is in use.
---- 
+---
 --- If you want to draw a custom crosshair, consider using WEAPON:DoDrawCrosshair instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:DrawHUD)
@@ -207,7 +207,7 @@ function WEAPON:Equip(NewOwner) end
 function WEAPON:EquipAmmo(ply) end
 
 ---[SHARED] Called before firing animation events, such as muzzle flashes or shell ejections.
---- 
+---
 --- This will only be called serverside for 3000-range events, and clientside for 5000-range  and other events.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:FireAnimationEvent)
@@ -227,7 +227,7 @@ function WEAPON:FireAnimationEvent(pos, ang, event, options, source) end
 function WEAPON:FreezeMovement() end
 
 ---[SHARED] Returns the sequence enumeration number that the weapon is playing.
---- 
+---
 --- This can return inconsistent results between the server and client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetActivity)
@@ -271,7 +271,7 @@ function Weapon:GetNextPrimaryFire() end
 function Weapon:GetNextSecondaryFire() end
 
 ---[SERVER] Called when the weapon is used by NPCs to determine how accurate the bullets fired should be.
---- 
+---
 --- The inaccuracy is simulated by changing the NPC:GetAimVector based on the value returned from this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetNPCBulletSpread)
@@ -301,7 +301,7 @@ function WEAPON:GetNPCRestTimes() end
 function Weapon:GetPrimaryAmmoType() end
 
 ---[SHARED] Returns the non-internal name of the weapon, that should be for displaying.
---- 
+---
 --- If that returns an untranslated message (#HL2_XX), use language.GetPhrase to see the "nice" name.
 --- If SWEP.PrintName is not set in the Weapon or the Weapon Base then "<MISSING SWEP PRINT NAME>" will be returned.
 ---
@@ -362,7 +362,7 @@ function Weapon:GetWeaponWorldModel() end
 function Weapon:GetWeight() end
 
 ---[SHARED] Returns whether the weapon has ammo left or not. It will return false when there's no ammo left in the magazine **and** when there's no reserve ammo left.
---- 
+---
 --- This will return true for weapons like crowbar, gravity gun, etc.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:HasAmmo)
@@ -370,11 +370,11 @@ function Weapon:GetWeight() end
 function Weapon:HasAmmo() end
 
 ---[SHARED] Called when weapon tries to holster.
---- 
+---
 --- This will only be called serverside when using Player:SelectWeapon as that function immediately switches the weapon out of prediction.
---- 
+---
 --- This is called twice for every holster clientside, one in Prediction and one not.
---- 
+---
 --- Before WEAPON:OnRemove is called, this function is only called serverside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Holster)
@@ -390,11 +390,11 @@ function WEAPON:Holster(weapon) end
 function WEAPON:HUDShouldDraw(element) end
 
 ---[SHARED] Called when the weapon entity is created.
---- 
+---
 --- Entity:GetOwner will return NULL at this point because the weapon is not equpped by a player or NPC yet. Use WEAPON:Equip or WEAPON:Deploy if you need the owner to be valid.
---- 
+---
 --- This is sometimes not called clientside. You can work around this by setting a variable in Initialize and check if it exists in WEAPON:Think. See the example below.
---- 
+---
 --- This is not called serverside after a quicksave.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Initialize)
@@ -419,10 +419,10 @@ function Weapon:IsScripted() end
 function Weapon:IsWeaponVisible() end
 
 ---[SERVER] Called when the engine sets a value for this scripted weapon.
---- 
+---
 --- See GM:EntityKeyValue for a hook that works for all entities.
---- 
---- 
+---
+---
 --- See ENTITY:KeyValue for an  hook that works for scripted entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:KeyValue)
@@ -438,7 +438,7 @@ function WEAPON:KeyValue(key, value) end
 function Weapon:LastShootTime() end
 
 ---[SERVER] Called when weapon is dropped by Player:DropWeapon.
---- 
+---
 --- See also WEAPON:OwnerChanged.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:OnDrop)
@@ -455,23 +455,23 @@ function WEAPON:OnReloaded() end
 function WEAPON:OnRemove() end
 
 ---[SHARED] Called when the weapon entity is reloaded from a Source Engine save (not the Sandbox saves or dupes) or on a changelevel (for example Half-Life 2 campaign level transitions).
---- 
+---
 --- For the duplicator callbacks, see ENTITY:OnDuplicated.
---- 
+---
 --- See also saverestore for relevant functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:OnRestore)
 function WEAPON:OnRestore() end
 
 ---[SHARED] Called when weapon is dropped or picked up by a new player. This can be called clientside for all players on the server if the weapon has no owner and is picked up.
---- 
+---
 --- See also WEAPON:OnDrop.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:OwnerChanged)
 function WEAPON:OwnerChanged() end
 
 ---[CLIENT] Called after the view model has been drawn while the weapon in use. This hook is called from the default implementation of GM:PostDrawViewModel, and as such, will not occur if it has been overridden.
---- 
+---
 --- WEAPON:ViewModelDrawn is an alternative hook which is always called before GM:PostDrawViewModel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel)
@@ -489,16 +489,16 @@ function WEAPON:PostDrawViewModel(vm, weapon, ply) end
 function WEAPON:PreDrawViewModel(vm, weapon, ply) end
 
 ---[SHARED] Called when primary attack button ( +attack ) is pressed.
---- 
+---
 --- When in singleplayer, this function is only called in the server realm. When in multiplayer, the hook will be called on both the server and the client in order to allow for Prediction.
---- 
+---
 --- You can force the hook to always be called on client like this:
---- 
+---
 --- ```
 --- if ( game.SinglePlayer() ) then self:CallOnClient( "PrimaryAttack" ) end
 --- ```
---- 
---- 
+---
+---
 --- Note that due to prediction, in multiplayer SWEP:PrimaryAttack is called multiple times per one "shot" with the gun. To work around that, use Global.IsFirstTimePredicted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:PrimaryAttack)
@@ -518,17 +518,17 @@ function WEAPON:PrintWeaponInfo(x, y, alpha) end
 function WEAPON:Reload() end
 
 ---[CLIENT] Called every frame just before GM:RenderScene.
---- 
+---
 --- Used by the Tool Gun to render view model screens (TOOL:DrawToolScreen).
---- 
---- 
+---
+---
 --- Materials rendered in this hook require $ignorez parameter to draw properly.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:RenderScreen)
 function WEAPON:RenderScreen() end
 
 ---[SHARED] Called when secondary attack button ( +attack2 ) is pressed.
---- 
+---
 --- For issues with this hook being called rapidly on the client side, see the global function Global.IsFirstTimePredicted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:SecondaryAttack)
@@ -541,7 +541,7 @@ function WEAPON:SecondaryAttack() end
 function Weapon:SendWeaponAnim(act) end
 
 ---[SHARED] Sets the activity the weapon is playing.
---- 
+---
 --- See also Weapon:GetActivity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:SetActivity)
@@ -567,9 +567,9 @@ function Weapon:SetClip2(ammo) end
 function WEAPON:SetDeploySpeed(speed) end
 
 ---[SHARED] Sets the hold type of the weapon. This function also calls WEAPON:SetWeaponHoldType and properly networks it to all clients.
---- 
+---
 --- This only works on scripted weapons.
---- 
+---
 --- Using this function on weapons held by bots will not network holdtype changes to clients if the world model is set to an empty string (SWEP.WorldModel = "").
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:SetHoldType)
@@ -583,7 +583,7 @@ function Weapon:SetHoldType(name) end
 function Weapon:SetLastShootTime(time) end
 
 ---[SHARED] Sets when the weapon can fire again. Time should be based on Global.CurTime.
---- 
+---
 --- The standard HL2 "weapon_pistol" bypasses this function due to an [internal implementation](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/weapon_pistol.cpp#L313-L317).
 --- This will fire extra bullets if the time is set to less than Global.CurTime.
 ---
@@ -603,7 +603,7 @@ function Weapon:SetNextSecondaryFire(time) end
 function WEAPON:SetupDataTables() end
 
 ---[SHARED] Sets the hold type of the weapon. This must be called on **both** the server and the client to work properly.
---- 
+---
 --- **NOTE:** You should avoid calling this function and call Weapon:SetHoldType now.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:SetWeaponHoldType)
@@ -633,7 +633,7 @@ function WEAPON:ShootEffects() end
 function WEAPON:ShouldDrawViewModel() end
 
 ---[SERVER] Should this weapon be dropped when its owner dies?
---- 
+---
 --- This only works if the player has Player:ShouldDropWeapon set to true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:ShouldDropOnDie)
@@ -653,21 +653,21 @@ function WEAPON:TakePrimaryAmmo(amount) end
 function WEAPON:TakeSecondaryAmmo(amount) end
 
 ---[SHARED] Called when the swep thinks.
---- 
+---
 --- This hook won't be called during the deploy animation and when using Weapon:DefaultReload.
---- 
+---
 --- Works only in players hands. Doesn't work in NPCs hands.
 --- Despite being a predicted hook, this hook is called clientside in single player, however it will not be recognized as a predicted hook to Player:GetCurrentCommand.
---- 
+---
 --- This hook will be called before Player movement is processed on the client, and after on the server.
---- 
+---
 --- This will not be run during deploy animations after a serverside-only deploy. This usually happens after picking up and dropping an object with +use.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Think)
 function WEAPON:Think() end
 
 ---[SHARED] Translate a player's Activity into a weapon's activity, depending on how you want the player to be holding the weapon.
---- 
+---
 --- For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity)
@@ -676,7 +676,7 @@ function WEAPON:Think() end
 function WEAPON:TranslateActivity(act) end
 
 ---[SHARED] Allows to change players field of view while player holds the weapon.
---- 
+---
 --- This hook must be defined shared and return same value on both to properly affect Area Portals.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:TranslateFOV)
@@ -689,4 +689,3 @@ function WEAPON:TranslateFOV(fov) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn)
 ---@param ViewModel Entity Players view model
 function WEAPON:ViewModelDrawn(ViewModel) end
-

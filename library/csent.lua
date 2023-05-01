@@ -7,4 +7,3 @@ local CSEnt = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSEnt:Remove)
 function CSEnt:Remove() end
-

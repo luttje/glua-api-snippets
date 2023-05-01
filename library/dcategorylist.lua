@@ -20,4 +20,3 @@ function DCategoryList:AddItem(element) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:UnselectAll)
 function DCategoryList:UnselectAll() end
-

@@ -16,7 +16,7 @@ function SurfaceInfo:GetMaterial() end
 function SurfaceInfo:GetVertices() end
 
 ---[SHARED] Checks if the brush surface is a nodraw surface, meaning it will not be drawn by the engine.
---- 
+---
 --- This internally checks the SURFDRAW_NODRAW flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsNoDraw)
@@ -24,7 +24,7 @@ function SurfaceInfo:GetVertices() end
 function SurfaceInfo:IsNoDraw() end
 
 ---[SHARED] Checks if the brush surface is displaying the skybox.
---- 
+---
 --- This internally checks the SURFDRAW_SKY flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsSky)
@@ -32,10 +32,9 @@ function SurfaceInfo:IsNoDraw() end
 function SurfaceInfo:IsSky() end
 
 ---[SHARED] Checks if the brush surface is water.
---- 
+---
 --- This internally checks the SURFDRAW_WATER flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsWater)
 ---@return boolean Returns true if the surface is water.
 function SurfaceInfo:IsWater() end
-

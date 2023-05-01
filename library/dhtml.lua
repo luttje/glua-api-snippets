@@ -33,7 +33,7 @@ function DHTML:ConsoleMessage(msg) end
 function DHTML:GetAllowLua() end
 
 ---[CLIENT] Runs/Executes a string as JavaScript code in a panel.
---- 		
+---
 --- 		This function does **NOT** evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context).Because a return value is nil/no value (a.k.a. void).If you wish to pass/return values from JS to Lua, you may want to use DHTML:AddFunction function to accomplish that job.
 --- 		If Panel:IsVisible is `false`, PANEL:Think will **NOT** run, meaning the Javascript Queue will not be processed.Consider overriding PANEL:Paint to stop the panel from drawing instead.
 ---
@@ -57,4 +57,3 @@ function DHTML:SetScrollbars(show) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:StopLoading)
 function DHTML:StopLoading() end
-

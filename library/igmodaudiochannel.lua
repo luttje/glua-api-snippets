@@ -10,15 +10,15 @@ local IGModAudioChannel = {}
 function IGModAudioChannel:EnableLooping(enable) end
 
 ---[CLIENT] Computes the [DFT (discrete Fourier transform)](https://en.wikipedia.org/wiki/Discrete_Fourier_transform) of the sound channel.
---- 
+---
 --- The size parameter specifies the number of consecutive audio samples to use as the input to the DFT and is restricted to a power of two. A [Hann window](https://en.wikipedia.org/wiki/Hann_function) is applied to the input data.
---- 
+---
 --- The computed DFT has the same number of frequency bins as the number of samples. Only half of this DFT is returned, since [the DFT magnitudes are symmetric for real input data](https://en.wikipedia.org/wiki/Discrete_Fourier_transform#The_real-input_DFT). The magnitudes of the DFT (values from 0 to 1) are used to fill the output table, starting at index 1.
---- 
+---
 --- **Visualization protip:** For a size N DFT, bin k (1-indexed) corresponds to a frequency of (k - 1) / N * sampleRate.
---- 
+---
 --- **Visualization protip:** Sound energy is proportional to the square of the magnitudes. Adding magnitudes together makes no sense physically, but adding energies does.
---- 
+---
 --- **Visualization protip:** The human ear works on a logarithmic amplitude scale. You can convert to [decibels](https://en.wikipedia.org/wiki/Decibel) by taking 20 * math.log10 of frequency magnitudes, or 10 * math.log10 of energy. The decibel values will range from -infinity to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT)
@@ -55,7 +55,7 @@ function IGModAudioChannel:Get3DFadeDistance() end
 function IGModAudioChannel:GetAverageBitRate() end
 
 ---[CLIENT] Retrieves the number of bits per sample of the sound channel.
---- 
+---
 --- Doesn't work for mp3 and ogg files.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetBitsPerSample)
@@ -118,7 +118,7 @@ function IGModAudioChannel:GetState() end
 function IGModAudioChannel:GetTagsHTTP() end
 
 ---[CLIENT] Retrieves the ID3 version 1 info from a bass channel created by sound.PlayFile or sound.PlayURL, if available.
---- 
+---
 --- ID3v2 is not supported.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsID3)
@@ -199,27 +199,27 @@ function IGModAudioChannel:Play() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DCone)
 ---@param innerAngle number The angle of the inside projection cone in degrees.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- Range is from 0 (no cone) to 360 (sphere), -1 = leave current.
 ---@param outerAngle number The angle of the outside projection cone in degrees.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- Range is from 0 (no cone) to 360 (sphere), -1 = leave current.
 ---@param outerVolume number The delta-volume outside the outer projection cone.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- Range is from 0 (silent) to 1 (same as inside the cone), less than 0 = leave current.
 function IGModAudioChannel:Set3DCone(innerAngle, outerAngle, outerVolume) end
 
 ---[CLIENT] Sets the 3D mode of the channel. This will affect IGModAudioChannel:Get3DEnabled but not IGModAudioChannel:Is3D.
---- 
+---
 --- This feature **requires** the channel to be initially created in 3D mode, i.e. IGModAudioChannel:Is3D should return true or this function will do nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DEnabled)
@@ -230,16 +230,16 @@ function IGModAudioChannel:Set3DEnabled(enable) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DFadeDistance)
 ---@param min number The minimum distance. The channel's volume is at maximum when the listener is within this distance.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- 0 or less = leave current.
 ---@param max number The maximum distance. The channel's volume stops decreasing when the listener is beyond this distance.
---- 
---- 
---- 
---- 
+---
+---
+---
+---
 --- 0 or less = leave current.
 function IGModAudioChannel:Set3DFadeDistance(min, max) end
 
@@ -263,7 +263,7 @@ function IGModAudioChannel:SetPlaybackRate(rate) end
 function IGModAudioChannel:SetPos(pos, dir) end
 
 ---[CLIENT] Sets the sound channel to specified time ( Rewind to that position of the song ). Does not work on online radio streams.
---- 
+---
 --- Streamed sounds must have "noblock" parameter for this to work and IGModAudioChannel:IsBlockStreamed must return false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:SetTime)
@@ -278,9 +278,8 @@ function IGModAudioChannel:SetTime(secs, dont_decode) end
 function IGModAudioChannel:SetVolume(volume) end
 
 ---[CLIENT] Stop the stream. It can be started again using IGModAudioChannel:Play.
---- 
+---
 --- Calling this invalidates the IGModAudioChannel object rendering it unusable for further functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Stop)
 function IGModAudioChannel:Stop() end
-

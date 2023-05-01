@@ -59,7 +59,7 @@ function DTileLayout:GetBaseSize() end
 ---[CLIENT] Returns the border spacing set by DTileLayout:SetBorder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetBorder)
----@return number 
+---@return number
 function DTileLayout:GetBorder() end
 
 ---[CLIENT] Returns the minimum height the DTileLayout can resize to.
@@ -71,13 +71,13 @@ function DTileLayout:GetMinHeight() end
 ---[CLIENT] Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetSpaceX)
----@return number 
+---@return number
 function DTileLayout:GetSpaceX() end
 
 ---[CLIENT] Returns the Y axis spacing between 2 elements set by DTileLayout:SetSpaceY.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetSpaceY)
----@return number 
+---@return number
 function DTileLayout:GetSpaceY() end
 
 ---[CLIENT] Gets the occupied state of a tile.
@@ -104,7 +104,7 @@ function DTileLayout:LayoutTiles() end
 function DTileLayout:OnModified() end
 
 ---[CLIENT] Sets the size of a single tile. If a child panel is larger than this size, it will occupy several tiles.
---- 
+---
 --- If you are setting the size of the children properly then you probably don't need to change this.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetBaseSize)
@@ -114,7 +114,7 @@ function DTileLayout:SetBaseSize(size) end
 ---[CLIENT] Sets the spacing between the border/edge of the DTileLayout and all the elements inside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetBorder)
----@param border number 
+---@param border number
 function DTileLayout:SetBorder(border) end
 
 ---[CLIENT] Determines the minimum height the DTileLayout will resize to. This is useful if child panels will be added/removed often.
@@ -126,13 +126,13 @@ function DTileLayout:SetMinHeight(minH) end
 ---[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceX)
----@param spacingX number 
+---@param spacingX number
 function DTileLayout:SetSpaceX(spacingX) end
 
 ---[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceY)
----@param spaceY number 
+---@param spaceY number
 function DTileLayout:SetSpaceY(spaceY) end
 
 ---[CLIENT] Called to set the occupied state of a tile.
@@ -142,4 +142,3 @@ function DTileLayout:SetSpaceY(spaceY) end
 ---@param y number The y coordinate of the tile.
 ---@param state any The new state of the tile, normally `1` or `nil`.
 function DTileLayout:SetTile(x, y, state) end
-

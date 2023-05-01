@@ -3,9 +3,9 @@
 gamemode = {}
 
 ---[SHARED] Called by the engine to call a hook within the loaded gamemode.
---- 
+---
 --- The supplied event 'name' must be defined in the active gamemode. Otherwise, nothing will happen - not even hooks added with hook.Add will be called.
---- 
+---
 --- This is similar to hook.Run and hook.Call, except the hook library will call hooks created with hook.Add even if there is no corresponding gamemode function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gamemode.Call)
@@ -28,4 +28,3 @@ function gamemode.Get(name) end
 ---@param name string Name of your gamemode, lowercase, no spaces.
 ---@param derived string The gamemode name that your gamemode is derived from
 function gamemode.Register(gm, name, derived) end
-

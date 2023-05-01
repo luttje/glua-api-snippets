@@ -3,7 +3,7 @@
 ---@class DHTMLControls
 local DHTMLControls = {}
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:FinishedLoading)
 function DHTMLControls:FinishedLoading() end
@@ -20,7 +20,7 @@ function DHTMLControls:SetButtonColor(clr) end
 ---@param dhtml Panel The HTML panel
 function DHTMLControls:SetHTML(dhtml) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:StartedLoading)
 function DHTMLControls:StartedLoading() end
@@ -28,11 +28,10 @@ function DHTMLControls:StartedLoading() end
 ---[CLIENT] Basically adds an URL to the history.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateHistory)
----@param url string 
+---@param url string
 function DHTMLControls:UpdateHistory(url) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateNavButtonStatus)
 function DHTMLControls:UpdateNavButtonStatus() end
-

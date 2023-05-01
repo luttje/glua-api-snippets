@@ -7,23 +7,23 @@ saverestore = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddRestoreHook)
 ---@param identifier string The unique identifier for this hook.
 ---@param callback function The function to be called when an engine save is being loaded. It has one argument:
---- 
---- 
+---
+---
 --- IRestore save - The restore object to be used to read data from save file that is being loaded
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- You can also use those functions to read data:
---- 
---- 
+---
+---
 --- saverestore.ReadVar
---- 
---- 
+---
+---
 --- saverestore.ReadTable
---- 
---- 
+---
+---
 --- saverestore.LoadEntity
 function saverestore.AddRestoreHook(identifier, callback) end
 
@@ -32,23 +32,23 @@ function saverestore.AddRestoreHook(identifier, callback) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddSaveHook)
 ---@param identifier string The unique identifier for this hook.
 ---@param callback function The function to be called when an engine save is being saved. It has one argument:
---- 
---- 
+---
+---
 --- ISave save - The save object to be used to write data to the save file that is being saved
---- 
---- 
---- 
---- 
---- 
+---
+---
+---
+---
+---
 --- You can also use those functions to save data:
---- 
---- 
+---
+---
 --- saverestore.WriteVar
---- 
---- 
+---
+---
 --- saverestore.WriteTable
---- 
---- 
+---
+---
 --- saverestore.SaveEntity
 function saverestore.AddSaveHook(identifier, callback) end
 
@@ -60,7 +60,7 @@ function saverestore.AddSaveHook(identifier, callback) end
 function saverestore.LoadEntity(ent, save) end
 
 ---[SHARED] Called by engine when a save is being loaded.
---- 
+---
 --- This handles loading gamemode and calls all of the hooks added with saverestore.AddRestoreHook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.LoadGlobal)
@@ -85,7 +85,7 @@ function saverestore.PreSave() end
 function saverestore.ReadTable(save) end
 
 ---[SHARED] Loads a variable from the save game file that is being loaded.
---- 
+---
 --- Variables will be read in the save order you have saved them.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.ReadVar)
@@ -101,7 +101,7 @@ function saverestore.ReadVar(save) end
 function saverestore.SaveEntity(ent, save) end
 
 ---[SHARED] Called by engine when a save is being saved.
---- 
+---
 --- This handles saving gamemode and calls all of the hooks added with saverestore.AddSaveHook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.SaveGlobal)
@@ -126,8 +126,7 @@ function saverestore.WriteTable(table, save) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.WriteVar)
 ---@param value any The value to save.
---- 
+---
 --- It can be one of the following types: number, boolean, string, Entity, Angle, Vector or table.
 ---@param save ISave The save object to write the variable to.
 function saverestore.WriteVar(value, save) end
-

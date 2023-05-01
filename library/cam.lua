@@ -11,30 +11,30 @@ cam = {}
 function cam.ApplyShake(pos, angles, factor) end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 3D context.
---- 
+---
 --- This function is an alias of cam.End3D.
---- 
+---
 --- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End)
 function cam.End() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 2D context.
---- 
+---
 --- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End2D)
 function cam.End2D() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 3D context.
---- 
+---
 --- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End3D)
 function cam.End3D() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 3D2D context.
---- 
+---
 --- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End3D2D)
@@ -54,7 +54,7 @@ function cam.EndOrthoView() end
 function cam.GetModelMatrix() end
 
 ---[CLIENT] Tells the renderer to ignore the depth buffer and draw any upcoming operation "ontop" of everything that was drawn yet.
---- 
+---
 --- This is identical to calling `render.DepthRange( 0, 0.01 )` for `true` and  `render.DepthRange( 0, 1 )` for `false`. See render.DepthRange.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.IgnoreZ)
@@ -67,7 +67,7 @@ function cam.IgnoreZ(ignoreZ) end
 function cam.PopModelMatrix() end
 
 ---[CLIENT] Pushes the specified matrix onto the render matrix stack. Unlike opengl, this will replace the current model matrix.
---- 
+---
 --- This does not work with cam.Start3D2D if `multiply` is false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)
@@ -76,7 +76,7 @@ function cam.PopModelMatrix() end
 function cam.PushModelMatrix(matrix, multiply) end
 
 ---[CLIENT] Sets up a new rendering context. This is an extended version of cam.Start3D and cam.Start2D. Must be finished by cam.End3D or cam.End2D.
---- 
+---
 --- This will not update current view properties for 3D contexts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start)
@@ -84,25 +84,25 @@ function cam.PushModelMatrix(matrix, multiply) end
 function cam.Start(dataTbl) end
 
 ---[CLIENT] Sets up a new 2D rendering context. Must be finished by cam.End2D.
---- 
+---
 --- This is almost always used with a render target from the render. To set its position use render.SetViewPort with a target already stored.
---- 
+---
 --- This will put an identity matrix at the top of the model matrix stack. If you are trying to use cam.PushModelMatrix, call it after this function and not before.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start2D)
 function cam.Start2D() end
 
 ---[CLIENT] Sets up a new 3D rendering context. Must be finished by cam.End3D.
---- 
+---
 --- For more advanced settings such as an orthographic view, use cam.Start instead.
---- 
---- 
+---
+---
 --- Both zNear and zFar need a value before any of them work.
---- 
+---
 --- zNear also requires a value higher than 0.
---- 
+---
 --- Negative x/y values won't work.
---- 
+---
 --- This will not update current view properties.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start3D)
@@ -118,7 +118,7 @@ function cam.Start2D() end
 function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 
 ---[CLIENT] Sets up a new 2D rendering context. Must be finished by cam.End3D2D. This function pushes a new matrix onto the stack. (cam.PushModelMatrix)
---- 
+---
 --- Matrix formula:
 --- ```
 --- local m = Matrix()
@@ -126,9 +126,9 @@ function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 --- m:SetTranslation(pos)
 --- m:SetScale(Vector(scale, -scale, 1))
 --- ```
---- 
---- 
---- 
+---
+---
+---
 --- This should be closed by cam.End3D2D otherwise the game crashes
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start3D2D)
@@ -136,7 +136,7 @@ function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 ---@param angles Angle Angles of the 3D2D context.
 --- +x in the 2d context corresponds to +x of the angle (its forward direction).
 --- +y in the 2d context corresponds to -y of the angle (its right direction).
---- 
+---
 --- If (dx, dy) are your desired (+x, +y) unit vectors, the angle you want is dx:AngleEx(dx:Cross(-dy)).
 ---@param scale number The scale of the render context.
 --- If scale is 1 then 1 pixel in 2D context will equal to 1 unit in 3D context.
@@ -150,4 +150,3 @@ function cam.Start3D2D(pos, angles, scale) end
 ---@param rightOffset number The right plane offset.
 ---@param bottomOffset number The bottom plane offset.
 function cam.StartOrthoView(leftOffset, topOffset, rightOffset, bottomOffset) end
-

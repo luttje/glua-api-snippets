@@ -4,7 +4,7 @@
 local CNavArea = {}
 
 ---[SERVER] Adds a hiding spot onto this nav area.
---- 
+---
 --- There's a limit of 255 hiding spots per area.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:AddHidingSpot)
@@ -15,35 +15,35 @@ local CNavArea = {}
 --- * 2 = good sniper spot, had at least one decent sniping corridor
 --- * 4 = perfect sniper spot, can see either very far, or a large area, or both
 --- * 8 = exposed, spot in the open, usually on a ledge or cliff
---- 
+---
 --- Values over 255 will be clamped.
 function CNavArea:AddHidingSpot(pos, flags) end
 
 ---[SERVER] Adds this CNavArea to the closed list, a list of areas that have been checked by A* pathfinding algorithm.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:AddToClosedList)
 function CNavArea:AddToClosedList() end
 
 ---[SERVER] Adds this CNavArea to the Open List.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:AddToOpenList)
 function CNavArea:AddToOpenList() end
 
 ---[SERVER] Clears the open and closed lists for a new search.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:ClearSearchLists)
@@ -52,7 +52,7 @@ function CNavArea:ClearSearchLists() end
 ---[SERVER] Returns the height difference between the edges of two connected navareas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:ComputeAdjacentConnectionHeightChange)
----@param navarea CNavArea 
+---@param navarea CNavArea
 ---@return number The height change
 function CNavArea:ComputeAdjacentConnectionHeightChange(navarea) end
 
@@ -71,7 +71,7 @@ function CNavArea:ComputeDirection(pos) end
 function CNavArea:ComputeGroundHeightChange(navArea) end
 
 ---[SERVER] Connects this CNavArea to another CNavArea or CNavLadder with a one way connection. ( From this area to the target )
---- 
+---
 --- See CNavLadder:ConnectTo for making the connection from ladder to area.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:ConnectTo)
@@ -102,9 +102,9 @@ function CNavArea:Draw() end
 function CNavArea:DrawSpots() end
 
 ---[SERVER] Returns a table of all the CNavAreas that have a  ( one and two way ) connection **from** this CNavArea.
---- 
+---
 --- If an area has a one-way incoming connection to this CNavArea, then it will **not** be returned from this function, use CNavArea:GetIncomingConnections to get all one-way incoming connections.
---- 
+---
 --- See CNavArea:GetAdjacentAreasAtSide for a function that only returns areas from one side/direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentAreas)
@@ -112,9 +112,9 @@ function CNavArea:DrawSpots() end
 function CNavArea:GetAdjacentAreas() end
 
 ---[SERVER] Returns a table of all the CNavAreas that have a ( one and two way ) connection **from** this CNavArea in given direction.
---- 
+---
 --- If an area has a one-way incoming connection to this CNavArea, then it will **not** be returned from this function, use CNavArea:GetIncomingConnections to get all incoming connections.
---- 
+---
 --- See CNavArea:GetAdjacentAreas for a function that returns all areas from all sides/directions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentAreasAtSide)
@@ -123,7 +123,7 @@ function CNavArea:GetAdjacentAreas() end
 function CNavArea:GetAdjacentAreasAtSide(navDir) end
 
 ---[SERVER] Returns the amount of CNavAreas that have a connection ( one and two way ) **from** this CNavArea.
---- 
+---
 --- See CNavArea:GetAdjacentCountAtSide for a function that only returns area count from one side/direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentCount)
@@ -131,7 +131,7 @@ function CNavArea:GetAdjacentAreasAtSide(navDir) end
 function CNavArea:GetAdjacentCount() end
 
 ---[SERVER] Returns the amount of CNavAreas that have a connection ( one or two way ) **from** this CNavArea in given direction.
---- 
+---
 --- See CNavArea:GetAdjacentCount for a function that returns CNavArea count from/in all sides/directions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentCountAtSide)
@@ -166,10 +166,10 @@ function CNavArea:GetClosestPointOnArea(pos) end
 function CNavArea:GetCorner(cornerid) end
 
 ---[SERVER] Returns the cost from starting area this area when pathfinding. Set by CNavArea:SetCostSoFar.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetCostSoFar)
@@ -177,7 +177,7 @@ function CNavArea:GetCorner(cornerid) end
 function CNavArea:GetCostSoFar() end
 
 ---[SERVER] Returns a table of very bad hiding spots in this area.
---- 
+---
 --- See also CNavArea:GetHidingSpots.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetExposedSpots)
@@ -191,12 +191,12 @@ function CNavArea:GetExposedSpots() end
 function CNavArea:GetExtentInfo() end
 
 ---[SERVER] Returns a table of good hiding spots in this area.
---- 
+---
 --- See also CNavArea:GetExposedSpots.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetHidingSpots)
 ---@param type number The type of spots to include.
---- 
+---
 --- * 0 = None (Not recommended)
 --- * 1 = In Cover/basically a hiding spot, in a corner with good hard cover nearby
 --- * 2 = good sniper spot, had at least one decent sniping corridor
@@ -213,9 +213,9 @@ function CNavArea:GetHidingSpots(type) end
 function CNavArea:GetID() end
 
 ---[SERVER] Returns a table of all the CNavAreas that have a one-way connection **to** this CNavArea.
---- 
+---
 --- If a CNavArea has a two-way connection **to or from** this CNavArea then it will not be returned from this function, use CNavArea:GetAdjacentAreas to get outgoing ( one and two way ) connections.
---- 
+---
 --- See CNavArea:GetIncomingConnectionsAtSide for a function that returns one-way incoming connections from  only one side/direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnections)
@@ -223,9 +223,9 @@ function CNavArea:GetID() end
 function CNavArea:GetIncomingConnections() end
 
 ---[SERVER] Returns a table of all the CNavAreas that have a one-way connection **to** this CNavArea from given direction.
---- 
+---
 --- If a CNavArea has a two-way connection **to or from** this CNavArea then it will not be returned from this function, use CNavArea:GetAdjacentAreas to get outgoing ( one and two way ) connections.
---- 
+---
 --- See CNavArea:GetIncomingConnections for a function that returns one-way incoming connections from  all sides/directions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionsAtSide)
@@ -234,7 +234,7 @@ function CNavArea:GetIncomingConnections() end
 function CNavArea:GetIncomingConnectionsAtSide(navDir) end
 
 ---[SERVER] Returns all CNavLadders that have a ( one or two way ) connection **from** this CNavArea.
---- 
+---
 --- See CNavArea:GetLaddersAtSide for a function that only returns CNavLadders in given direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetLadders)
@@ -242,12 +242,12 @@ function CNavArea:GetIncomingConnectionsAtSide(navDir) end
 function CNavArea:GetLadders() end
 
 ---[SERVER] Returns all CNavLadders that have a ( one or two way ) connection **from** ( one and two way ) this CNavArea in given direction.
---- 
+---
 --- See CNavArea:GetLadders for a function that returns CNavLadder from/in all sides/directions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetLaddersAtSide)
 ---@param navDir number The direction, in which to look for CNavLadders.
---- 
+---
 --- 0 = Up ( LadderDirectionType::LADDER_UP )
 --- 1 = Down ( LadderDirectionType::LADDER_DOWN )
 ---@return table The CNavLadders that have a ( one or two way ) connection **from** this CNavArea in given direction.
@@ -287,20 +287,20 @@ function CNavArea:GetRandomPoint() end
 ---[SERVER] Returns the width this Nav Area.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetSizeX)
----@return number 
+---@return number
 function CNavArea:GetSizeX() end
 
 ---[SERVER] Returns the height of this Nav Area.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetSizeY)
----@return number 
+---@return number
 function CNavArea:GetSizeY() end
 
 ---[SERVER] Returns the total cost when passing from starting area to the goal area through this node. Set by CNavArea:SetTotalCost.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetTotalCost)
@@ -325,17 +325,17 @@ function CNavArea:HasAttributes(attribs) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsBlocked)
 ---@param teamID number The team ID to test, -2 = any team.
---- 
+---
 --- Only 2 actual teams are available, 0 and 1.
 ---@param ignoreNavBlockers boolean Whether to ignore [func_nav_blocker](https://developer.valvesoftware.com/wiki/Func_nav_blocker) entities.
 ---@return boolean Whether the area is blocked or not
 function CNavArea:IsBlocked(teamID, ignoreNavBlockers) end
 
 ---[SERVER] Returns whether this node is in the Closed List.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsClosed)
@@ -350,7 +350,7 @@ function CNavArea:IsClosed() end
 function CNavArea:IsCompletelyVisible(area) end
 
 ---[SERVER] Returns whether this CNavArea has an outgoing ( one or two way ) connection **to** given CNavArea.
---- 
+---
 --- See CNavArea:IsConnectedAtSide for a function that only checks for outgoing connections in one direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsConnected)
@@ -359,7 +359,7 @@ function CNavArea:IsCompletelyVisible(area) end
 function CNavArea:IsConnected(navArea) end
 
 ---[SERVER] Returns whether this CNavArea has an outgoing ( one or two way ) connection **to** given CNavArea in given direction.
---- 
+---
 --- See CNavArea:IsConnected for a function that checks all sides.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsConnectedAtSide)
@@ -382,10 +382,10 @@ function CNavArea:IsCoplanar(navArea) end
 function CNavArea:IsFlat() end
 
 ---[SERVER] Returns whether this area is in the Open List.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsOpen)
@@ -393,10 +393,10 @@ function CNavArea:IsFlat() end
 function CNavArea:IsOpen() end
 
 ---[SERVER] Returns whether the Open List is empty or not.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:IsOpenListEmpty)
@@ -466,10 +466,10 @@ function CNavArea:IsVisible(pos) end
 function CNavArea:PlaceOnGround(corner) end
 
 ---[SERVER] Removes a CNavArea from the Open List with the lowest cost to traverse to from the starting node, and returns it.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:PopOpenList)
@@ -482,10 +482,10 @@ function CNavArea:PopOpenList() end
 function CNavArea:Remove() end
 
 ---[SERVER] Removes this node from the Closed List.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:RemoveFromClosedList)
@@ -505,10 +505,10 @@ function CNavArea:SetAttributes(attribs) end
 function CNavArea:SetCorner(corner, position) end
 
 ---[SERVER] Sets the cost from starting area this area when pathfinding.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:SetCostSoFar)
@@ -523,7 +523,7 @@ function CNavArea:SetCostSoFar(cost) end
 function CNavArea:SetParent(parent, how) end
 
 ---[SERVER] Sets the Place of the nav area.
---- 
+---
 --- There is a limit of 256 Places per nav file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:SetPlace)
@@ -532,25 +532,24 @@ function CNavArea:SetParent(parent, how) end
 function CNavArea:SetPlace(place) end
 
 ---[SERVER] Sets the total cost when passing from starting area to the goal area through this node.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:SetTotalCost)
 ---@param cost number The total cost of the path to set.
---- 
+---
 --- Must be above or equal 0.
 function CNavArea:SetTotalCost(cost) end
 
 ---[SERVER] Moves this open list to appropriate position based on its CNavArea:GetTotalCost compared to the total cost of other areas in the open list.
---- 
+---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
---- 
---- 
+---
+---
 --- More information can be found on the Simple Pathfinding page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:UpdateOnOpenList)
 function CNavArea:UpdateOnOpenList() end
-

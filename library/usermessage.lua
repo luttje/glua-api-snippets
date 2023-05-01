@@ -9,9 +9,9 @@ usermessage = {}
 function usermessage.GetTable() end
 
 ---[SHARED] You should be using net instead
---- 
+---
 --- Sets a hook for the specified to be called when a usermessage with the specified name arrives.
---- 
+---
 --- Usermessages have a limit of only 256 bytes!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/usermessage.Hook)
@@ -28,4 +28,3 @@ function usermessage.Hook(name, callback, ...) end
 ---@param name string The message name.
 ---@param msg bf_read The message.
 function usermessage.IncomingMessage(name, msg) end
-

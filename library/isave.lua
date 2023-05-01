@@ -4,7 +4,7 @@
 local ISave = {}
 
 ---[SHARED] Ends current data block started with ISave:StartBlock and returns to the parent block.
---- 
+---
 --- To avoid all sorts of errors, you **must** end all blocks you start.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ISave:EndBlock)
@@ -57,4 +57,3 @@ function ISave:WriteString(str) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ISave:WriteVector)
 ---@param vec Vector The vector to write.
 function ISave:WriteVector(vec) end
-

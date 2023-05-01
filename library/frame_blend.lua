@@ -45,4 +45,3 @@ function frame_blend.RenderableFrames() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.ShouldSkipFrame)
 ---@return boolean Should the frame be skipped or not
 function frame_blend.ShouldSkipFrame() end
-

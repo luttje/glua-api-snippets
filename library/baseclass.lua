@@ -3,11 +3,11 @@
 baseclass = {}
 
 ---[SHARED AND MENU] Gets the base class of an an object.
---- 
+---
 --- This is used not just by entities, but also by widgets, panels, drive modes, weapons and gamemodes (with "gamemode_" prefix).
---- 
+---
 --- The keyword **DEFINE_BASECLASS** translates into a call to this function. In the engine, it is replaced with:
---- 
+---
 --- ```
 --- local BaseClass = baseclass.Get
 --- ```
@@ -29,4 +29,3 @@ function baseclass.Get(name) end
 ---@param name string The name of this base class. Must be completely unique.
 ---@param tab table The base class.
 function baseclass.Set(name, tab) end
-

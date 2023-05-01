@@ -25,11 +25,10 @@ function cookie.GetNumber(name, default) end
 function cookie.GetString(name, default) end
 
 ---[SHARED AND MENU] Sets the value of a cookie, which is saved automatically by the sql.
---- 
+---
 --- These are stored in the *.db files - cl.db for clients, mn.db for menu state and sv.db for servers.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cookie.Set)
 ---@param key string The name of the cookie that you want to set.
 ---@param value string Value to store in the cookie.
 function cookie.Set(key, value) end
-

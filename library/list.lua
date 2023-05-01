@@ -11,7 +11,7 @@ list = {}
 function list.Add(identifier, item) end
 
 ---[SHARED AND MENU] Returns true if the list contains the value. (as a value - not a key)
---- 
+---
 --- For a function that looks for a key and not a value see list.HasEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/list.Contains)
@@ -41,7 +41,7 @@ function list.GetForEdit(identifier) end
 function list.GetTable() end
 
 ---[SHARED AND MENU] Returns true if the list contains the given key.
---- 
+---
 --- For a function that looks for values and not keys see list.Contains.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/list.HasEntry)
@@ -57,4 +57,3 @@ function list.HasEntry(list, key) end
 ---@param key any The key in the list to set
 ---@param item any The item to set to the list as key
 function list.Set(identifier, key, item) end
-

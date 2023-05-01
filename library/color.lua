@@ -36,11 +36,11 @@ function Color:ToTable() end
 
 ---[SHARED] Translates the Color into a Vector, losing the alpha channel.
 --- This will also range the values from 0 - 255 to 0 - 1
---- 
+---
 --- r / 255 -> x
 --- g / 255 -> y
 --- b / 255 -> z
---- 
+---
 --- This is the opposite of Vector:ToColor
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToVector)
@@ -55,4 +55,3 @@ function Color:ToVector() end
 ---@return number, number, number, number number - Blue
 ---@return number, number, number, number number - Alpha
 function Color:Unpack() end
-

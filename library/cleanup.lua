@@ -55,4 +55,3 @@ function cleanup.ReplaceEntity(from, to) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.UpdateUI)
 function cleanup.UpdateUI() end
-

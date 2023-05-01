@@ -91,4 +91,3 @@ function achievements.SpawnedRagdoll() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.SpawnMenuOpen)
 function achievements.SpawnMenuOpen() end
-

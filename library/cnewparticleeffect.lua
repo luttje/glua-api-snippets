@@ -4,7 +4,7 @@
 local CNewParticleEffect = {}
 
 ---[CLIENT] Adds a control point to the particle system.
---- 
+---
 --- This function will not work if the CNewParticleEffect:GetOwner entity is not valid
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:AddControlPoint)
@@ -15,10 +15,10 @@ local CNewParticleEffect = {}
 ---@param offset Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 function CNewParticleEffect:AddControlPoint(cpID, ent, partAttachment, entAttachment, offset) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetAutoUpdateBBox)
----@return boolean 
+---@return boolean
 function CNewParticleEffect:GetAutoUpdateBBox() end
 
 ---[CLIENT] Returns the name of the particle effect this system is set to emit.
@@ -54,13 +54,13 @@ function CNewParticleEffect:IsValid() end
 ---[CLIENT] Returns whether the particle system is intended to be used on a view model?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsViewModelEffect)
----@return boolean 
+---@return boolean
 function CNewParticleEffect:IsViewModelEffect() end
 
 ---[CLIENT] Forces the particle system to render using current rendering context.
---- 
+---
 --- Can be used to render the particle system in vgui panels, etc.
---- 
+---
 --- Used in conjunction with CNewParticleEffect:SetShouldDraw.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:Render)
@@ -122,14 +122,14 @@ function CNewParticleEffect:SetControlPointRightVector(cpID, right) end
 ---@param upward Vector The upward direction for given control point
 function CNewParticleEffect:SetControlPointUpVector(cpID, upward) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetIsViewModelEffect)
----@param isViewModel boolean 
+---@param isViewModel boolean
 function CNewParticleEffect:SetIsViewModelEffect(isViewModel) end
 
 ---[CLIENT] Forces the particle system to stop automatically rendering.
---- 
+---
 --- Used in conjunction with CNewParticleEffect:Render.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetShouldDraw)
@@ -145,23 +145,22 @@ function CNewParticleEffect:SetSortOrigin(origin) end
 ---[CLIENT] Starts the particle emission.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StartEmission)
----@param infiniteOnly boolean 
+---@param infiniteOnly boolean
 function CNewParticleEffect:StartEmission(infiniteOnly) end
 
 ---[CLIENT] Stops the particle emission.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmission)
----@param infiniteOnly boolean 
----@param removeAllParticles boolean 
----@param wakeOnStop boolean 
+---@param infiniteOnly boolean
+---@param removeAllParticles boolean
+---@param wakeOnStop boolean
 function CNewParticleEffect:StopEmission(infiniteOnly, removeAllParticles, wakeOnStop) end
 
 ---[CLIENT] Stops particle emission and destroys all particles instantly. Also detaches the particle effect from the entity it was attached to.
---- 
+---
 --- This function will work identically to CNewParticleEffect:StopEmission( false, true ) if  CNewParticleEffect:GetOwner entity is not valid.
---- 
+---
 --- Consider using CNewParticleEffect:StopEmission( false, true ) instead, which has same effect, but doesn't require owner entity, and does't detach the particle system from its entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmissionAndDestroyImmediately)
 function CNewParticleEffect:StopEmissionAndDestroyImmediately() end
-

@@ -10,7 +10,7 @@ properties = {}
 function properties.Add(name, propertyData) end
 
 ---[SHARED] Returns true if given entity can be targeted by the player via the properties system.
---- 
+---
 --- This should be used serverside in your properties to prevent abuse by clientside scripting.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.CanBeTargeted)
@@ -40,4 +40,3 @@ function properties.OnScreenClick(eyepos, eyevec) end
 ---@param ent Entity The entity to open menu for
 ---@param tr table The trace that is passed as second argument to Action callback of a property
 function properties.OpenEntityMenu(ent, tr) end
-

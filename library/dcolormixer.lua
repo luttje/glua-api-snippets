@@ -3,15 +3,15 @@
 ---@class DColorMixer
 local DColorMixer = {}
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:ConVarThink)
 function DColorMixer:ConVarThink() end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:DoConVarThink)
----@param cvar string 
+---@param cvar string
 function DColorMixer:DoConVarThink(cvar) end
 
 ---[CLIENT] Return true if alpha bar is shown, false if not.
@@ -27,7 +27,7 @@ function DColorMixer:GetAlphaBar() end
 function DColorMixer:GetColor() end
 
 ---[CLIENT] Returns the ConVar name for the alpha channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
 --- * DColorMixer:GetConVarG - For the green channel
@@ -38,7 +38,7 @@ function DColorMixer:GetColor() end
 function DColorMixer:GetConVarA() end
 
 ---[CLIENT] Returns the ConVar name for the blue channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
 --- * DColorMixer:GetConVarG - For the green channel
@@ -49,7 +49,7 @@ function DColorMixer:GetConVarA() end
 function DColorMixer:GetConVarB() end
 
 ---[CLIENT] Returns the ConVar name for the green channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
 --- * DColorMixer:GetConVarB - For the blue channel
@@ -60,7 +60,7 @@ function DColorMixer:GetConVarB() end
 function DColorMixer:GetConVarG() end
 
 ---[CLIENT] Returns the ConVar name for the red channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:GetConVarG - For the green channel
 --- * DColorMixer:GetConVarB - For the blue channel
@@ -95,7 +95,7 @@ function DColorMixer:GetWangs() end
 function DColorMixer:SetAlphaBar(show) end
 
 ---[CLIENT] Sets the base color of the DColorCube part of the DColorMixer.
---- 
+---
 --- See also DColorCube:SetBaseRGB
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetBaseColor)
@@ -109,7 +109,7 @@ function DColorMixer:SetBaseColor(clr) end
 function DColorMixer:SetColor(color) end
 
 ---[CLIENT] Sets the ConVar name for the alpha channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
 --- * DColorMixer:SetConVarG - For the green channel
@@ -120,7 +120,7 @@ function DColorMixer:SetColor(color) end
 function DColorMixer:SetConVarA(convar) end
 
 ---[CLIENT] Sets the ConVar name for the blue channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
 --- * DColorMixer:SetConVarG - For the green channel
@@ -131,7 +131,7 @@ function DColorMixer:SetConVarA(convar) end
 function DColorMixer:SetConVarB(convar) end
 
 ---[CLIENT] Sets the ConVar name for the green channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
 --- * DColorMixer:SetConVarB - For the blue channel
@@ -142,7 +142,7 @@ function DColorMixer:SetConVarB(convar) end
 function DColorMixer:SetConVarG(convar) end
 
 ---[CLIENT] Sets the ConVar name for the red channel of the color.
---- 
+---
 --- See also:
 --- * DColorMixer:SetConVarG - For the green channel
 --- * DColorMixer:SetConVarB - For the blue channel
@@ -156,7 +156,7 @@ function DColorMixer:SetConVarR(convar) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetLabel)
 ---@param text string Set to non empty string to show the label and its text.
---- 
+---
 --- Give it an empty string or nothing and the label will be hidden.
 function DColorMixer:SetLabel(text) end
 
@@ -186,10 +186,10 @@ function DColorMixer:TranslateValues() end
 ---[CLIENT] Use DColorMixer:SetColor instead!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateColor)
----@param clr table 
+---@param clr table
 function DColorMixer:UpdateColor(clr) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVar)
 ---@param cvar string The ConVar name
@@ -197,9 +197,8 @@ function DColorMixer:UpdateColor(clr) end
 ---@param clr table The Color
 function DColorMixer:UpdateConVar(cvar, part, clr) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVars)
 ---@param clr table The Color
 function DColorMixer:UpdateConVars(clr) end
-

@@ -27,7 +27,7 @@ function SpawnIcon:GetSkinID() end
 function SpawnIcon:OpenMenu() end
 
 ---[CLIENT] This is done automatically by SpawnIcon. You do not need to call this. Doing so may cause unforeseen consequences.
---- 
+---
 --- Sets the bodygroups, so it can be retrieved with SpawnIcon:GetBodyGroup. Use Panel:SetModel instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup)
@@ -36,7 +36,7 @@ function SpawnIcon:OpenMenu() end
 function SpawnIcon:SetBodyGroup(bodygroup, value) end
 
 ---[CLIENT] This is done automatically by SpawnIcon. You do not need to call this. Doing so may cause unforeseen consequences.
---- 
+---
 --- Sets the model name, so it can be retrieved with SpawnIcon:GetModelName. Use Panel:SetModel instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:SetModelName)
@@ -44,10 +44,9 @@ function SpawnIcon:SetBodyGroup(bodygroup, value) end
 function SpawnIcon:SetModelName(mdl) end
 
 ---[CLIENT] This is done automatically by SpawnIcon. You do not need to call this. Doing so may cause unforeseen consequences.
---- 
+---
 --- Sets the skin id of the spawn icon, so it can be retrieved with SpawnIcon:GetSkinID. Use Panel:SetModel instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:SetSkinID)
 ---@param skin number Skin ID to set
 function SpawnIcon:SetSkinID(skin) end
-

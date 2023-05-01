@@ -11,4 +11,3 @@ local DBubbleContainer = {}
 ---@param w number The width of the bubble container.
 ---@param h number The height of the bubble container.
 function DBubbleContainer:OpenForPos(x, y, w, h) end
-

@@ -12,11 +12,11 @@ function DListView_Column:GetColumnID() end
 ---[CLIENT] Resizes the column, additionally adjusting the size of the column to the right, if any.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:ResizeColumn)
----@param size number 
+---@param size number
 --- 			The amount to add to the current column's width.
---- 
+---
 --- 			Positive values will make it wider, and negative values will make it thinner.
---- 		
+---
 function DListView_Column:ResizeColumn(size) end
 
 ---[CLIENT] Sets the fixed width of the column.
@@ -47,13 +47,13 @@ function DListView_Column:SetName(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetTextAlign)
 ---@param alignment number The direction of the content, based on the number pad.
---- 
+---
 --- |   |   |   |
 --- | --- | --- | --- |
 --- | 7: **top-left** | 8: **top-center**	| 9: **top-right** |
 --- | 4: **middle-left** | 5: **center** | 6: **middle-right** |
 --- | 1: **bottom-left** | 2: **bottom-center** | 3: **bottom-right** |
---- 
+---
 function DListView_Column:SetTextAlign(alignment) end
 
 ---[CLIENT] Sets the width of the panel.
@@ -61,4 +61,3 @@ function DListView_Column:SetTextAlign(alignment) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetWidth)
 ---@param width number The number value which will determine panel width.
 function DListView_Column:SetWidth(width) end
-

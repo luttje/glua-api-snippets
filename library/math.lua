@@ -34,7 +34,7 @@ function math.AngleDifference(a, b) end
 function math.Approach(current, target, change) end
 
 ---[SHARED AND MENU] Increments an angle towards another by specified rate.
---- 
+---
 --- This function is for numbers representing angles (0-360), NOT Angle objects!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ApproachAngle)
@@ -59,7 +59,7 @@ function math.asin(normal) end
 function math.atan(normal) end
 
 ---[SHARED AND MENU] functions like math.atan(y / x), except it also takes into account the quadrant of the angle and so doesn't have a limited range of output.
---- 
+---
 --- The Y argument comes first!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.atan2)
@@ -85,15 +85,15 @@ function math.BinToInt(string) end
 function math.BSplinePoint(tDiff, tPoints, tMax) end
 
 ---[SHARED AND MENU] Use math.BSplinePoint instead.
---- 
+---
 --- Basic code for Bezier-Spline algorithm, helper function for math.BSplinePoint.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.calcBSplineN)
----@param i number 
+---@param i number
 ---@param k number Sending in a value < 1 will result in an infinite loop.
----@param t number 
----@param tinc number 
----@return number 
+---@param t number
+---@param tinc number
+---@return number
 function math.calcBSplineN(i, k, t, tinc) end
 
 ---[SHARED AND MENU] Ceils or rounds a number up.
@@ -134,7 +134,7 @@ function math.cosh(number) end
 function math.deg(radians) end
 
 ---[SHARED AND MENU] You should use math.Distance instead
---- 
+---
 --- Returns the difference between two points in 2D space. Alias of math.Distance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Dist)
@@ -410,7 +410,7 @@ function math.exp(exponent) end
 function math.floor(number) end
 
 ---[SHARED AND MENU] Returns the modulus of the specified values.
---- 
+---
 --- While this is similar to the % operator, **it will return a negative value if the first argument is negative**, whereas the % operator will return a `positive` value **even if the first operand is negative**.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.fmod)
@@ -420,9 +420,9 @@ function math.floor(number) end
 function math.fmod(base, modulator) end
 
 ---[SHARED AND MENU] **Lua reference description**: Returns `m` and `e` such that `x = m2e`, `e` is an integer and the absolute value of `m` is in the range ((0.5, 1) (or zero when x is zero).
---- 
+---
 --- Used to split the number value into a normalized fraction and an exponent. Two values are returned: the first is a multiplier in the range `1/2` (**inclusive**) to `1` (**exclusive**) and the second is an integer exponent.
---- 
+---
 --- The result is such that `x = m*2^e`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.frexp)
@@ -447,7 +447,7 @@ function math.IntToBin(int) end
 function math.ldexp(normalizedFraction, exponent) end
 
 ---[SHARED AND MENU] With one argument, return the natural logarithm of x (to base e).
---- 
+---
 --- With two arguments, return the logarithm of x to the given base, calculated as log(x)/log(base).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.log)
@@ -478,7 +478,7 @@ function math.max(...) end
 function math.min(...) end
 
 ---[SHARED AND MENU] This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math.fmod instead.
---- 
+---
 --- Returns the modulus of the specified values. Same as math.fmod.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.mod)
@@ -519,7 +519,7 @@ function math.pow(x, y) end
 function math.rad(degrees) end
 
 ---[SHARED AND MENU] Returns a random float between min and max.
---- 
+---
 --- See also math.random
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Rand)
@@ -529,30 +529,30 @@ function math.rad(degrees) end
 function math.Rand(min, max) end
 
 ---[SHARED AND MENU] When called without arguments, returns a uniform pseudo-random real number in the range 0 to 1 which includes 0 but excludes 1.
---- 
+---
 --- When called with an integer number m, returns a uniform pseudo-random integer in the range 1 to m inclusive.
---- 
+---
 --- When called with two integer numbers m and n, returns a uniform pseudo-random integer in the range m to n inclusive.
---- 
+---
 --- See also math.Rand
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.random)
----@param m number 
+---@param m number
 --- If m is the only parameter: upper limit.
---- 
+---
 --- If n is also provided: lower limit.
---- 
+---
 --- If provided, this must be an integer.
 ---@param n number Upper limit.
---- 
+---
 --- If provided, this must be an integer.
 ---@return number Random value
 function math.random(m, n) end
 
 ---[SHARED AND MENU] Seeds the random number generator. The same seed will guarantee the same sequence of numbers each time with math.random.
---- 
+---
 --- For shared random values across predicted realms, use util.SharedRandom.
---- 
+---
 --- Incorrect usage of this function will affect `all` random numbers in the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.randomseed)
@@ -637,4 +637,3 @@ function math.TimeFraction(start, _end, current) end
 ---@param digits number The amount of digits to keep after the point.
 ---@return number The result.
 function math.Truncate(num, digits) end
-

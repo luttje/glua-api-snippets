@@ -9,7 +9,7 @@ local ITexture = {}
 function ITexture:Download() end
 
 ---[SHARED AND MENU] Returns the color of the specified pixel, only works for textures created from PNG files.
---- 
+---
 --- The returned color will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ITexture:GetColor)
@@ -49,7 +49,7 @@ function ITexture:GetNumAnimationFrames() end
 function ITexture:Height() end
 
 ---[SHARED AND MENU] Returns whenever the texture is valid. (i.e. was loaded successfully or not)
---- 
+---
 --- The "error" texture is a valid texture, and therefore this function will return false when used on it. Use ITexture:IsErrorTexture, instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ITexture:IsError)
@@ -67,4 +67,3 @@ function ITexture:IsErrorTexture() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ITexture:Width)
 ---@return number width
 function ITexture:Width() end
-

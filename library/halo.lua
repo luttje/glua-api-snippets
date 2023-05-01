@@ -23,10 +23,9 @@ function halo.Add(entities, color, blurX, blurY, passes, additive, ignoreZ) end
 function halo.Render(entry) end
 
 ---[CLIENT] Returns the entity the halo library is currently rendering the halo for.
---- 
+---
 --- The main purpose of this function is to be used in ENTITY:Draw in order not to draw certain parts of the entity when the halo is being rendered, so there's no halo around unwanted entity parts, such as lasers, 3D2D displays, etc.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/halo.RenderedEntity)
 ---@return Entity If set, the currently rendered entity by the halo library.
 function halo.RenderedEntity() end
-

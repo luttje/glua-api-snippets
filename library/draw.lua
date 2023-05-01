@@ -3,9 +3,9 @@
 draw = {}
 
 ---[CLIENT AND MENU] Simple draw text at position, but this will expand newlines and tabs.
---- 
---- 
---- 
+---
+---
+---
 --- See also MarkupObject for limited width and markup support.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.DrawText)
@@ -54,7 +54,19 @@ function draw.RoundedBox(cornerRadius, x, y, width, height, color) end
 ---@param roundTopRight boolean Whether the top right corner should be rounded.
 ---@param roundBottomLeft boolean Whether the bottom left corner should be rounded.
 ---@param roundBottomRight boolean Whether the bottom right corner should be rounded.
-function draw.RoundedBoxEx(cornerRadius, x, y, width, height, color, roundTopLeft, roundTopRight, roundBottomLeft, roundBottomRight) end
+function draw.RoundedBoxEx(
+	cornerRadius,
+	x,
+	y,
+	width,
+	height,
+	color,
+	roundTopLeft,
+	roundTopRight,
+	roundBottomLeft,
+	roundBottomRight
+)
+end
 
 ---[CLIENT AND MENU] Draws text on the screen.
 --- This function does not handle newlines properly. See draw.DrawText for a function that does.
@@ -124,4 +136,3 @@ function draw.TexturedQuad(texturedata) end
 ---@return number, number number - The width of the word box.
 ---@return number, number number - The height of the word box.
 function draw.WordBox(bordersize, x, y, text, font, boxcolor, textcolor, xalign, yalign) end
-

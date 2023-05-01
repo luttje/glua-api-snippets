@@ -60,7 +60,7 @@ function mesh.Quad(vertex1, vertex2, vertex3, vertex4) end
 function mesh.QuadEasy(position, normal, sizeX, sizeY) end
 
 ---[CLIENT] Sets the specular map values.
---- 
+---
 --- This function actually does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Specular)
@@ -71,7 +71,7 @@ function mesh.QuadEasy(position, normal, sizeX, sizeY) end
 function mesh.Specular(r, g, b, a) end
 
 ---[CLIENT] Sets the s tangent to be used.
---- 
+---
 --- This function actually does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentS)
@@ -79,7 +79,7 @@ function mesh.Specular(r, g, b, a) end
 function mesh.TangentS(sTanger) end
 
 ---[CLIENT] Sets the T tangent to be used.
---- 
+---
 --- This function actually does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentT)
@@ -87,7 +87,7 @@ function mesh.TangentS(sTanger) end
 function mesh.TangentT(tTanger) end
 
 ---[CLIENT] Sets the texture coordinates for the next vertex.
---- 
+---
 --- Non-zero values of stage require the currently bound material to support it. For example, any LightmappedGeneric material supports stages 1 and 2 (lightmap texture coordinates).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TexCoord)
@@ -97,14 +97,14 @@ function mesh.TangentT(tTanger) end
 function mesh.TexCoord(stage, u, v) end
 
 ---[CLIENT] It is recommended to use IMesh:BuildFromTriangles instead of the mesh library.
---- 
+---
 --- A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.UserData)
----@param tangentX number 
----@param tangentY number 
----@param tangentZ number 
----@param tangentHandedness number 
+---@param tangentX number
+---@param tangentY number
+---@param tangentZ number
+---@param tangentHandedness number
 function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 
 ---[CLIENT] Returns the amount of vertex that have yet been pushed.
@@ -112,4 +112,3 @@ function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.VertexCount)
 ---@return number vertexCount
 function mesh.VertexCount() end
-

@@ -28,4 +28,3 @@ function DColumnSheet:SetActiveButton(active) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:UseButtonOnlyStyle)
 function DColumnSheet:UseButtonOnlyStyle() end
-

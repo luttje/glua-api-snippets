@@ -96,4 +96,3 @@ function bit.tobit(value) end
 ---@param digits number The number of digits. Optional
 ---@return string hexString
 function bit.tohex(value, digits) end
-

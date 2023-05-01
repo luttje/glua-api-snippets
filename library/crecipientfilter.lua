@@ -78,4 +78,3 @@ function CRecipientFilter:RemoveRecipientsByTeam(teamid) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CRecipientFilter:RemoveRecipientsNotOnTeam)
 ---@param teamid number Team index.
 function CRecipientFilter:RemoveRecipientsNotOnTeam(teamid) end
-

@@ -5,13 +5,13 @@ derma = {}
 ---[CLIENT AND MENU] Gets the color from a Derma skin of a panel and returns default color if not found
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.Color)
----@param name string 
----@param pnl Panel 
+---@param name string
+---@param pnl Panel
 ---@param default table The default color in case of failure.
 function derma.Color(name, pnl, default) end
 
 ---[CLIENT AND MENU] Defines a new Derma control with an optional base.
---- 
+---
 --- This calls vgui.Register internally, but also does the following:
 --- * Adds the control to derma.GetControlList
 --- * Adds a key "Derma" - This is returned by derma.GetControlList
@@ -89,4 +89,3 @@ function derma.SkinHook(type, name, panel, w, h) end
 ---@param fallback any What to return if we failed to retrieve the texture
 ---@return function A function that is created with the GWEN to draw a texture.
 function derma.SkinTexture(name, pnl, fallback) end
-

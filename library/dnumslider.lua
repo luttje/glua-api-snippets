@@ -52,7 +52,7 @@ function DNumSlider:GetValue() end
 function DNumSlider:IsEditing() end
 
 ---[CLIENT] Resets the slider to the default value, if one was set by DNumSlider:SetDefaultValue.
---- 
+---
 --- This function is called by the DNumSlider when user middle mouse clicks on the draggable knob of the slider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:ResetToDefaultValue)
@@ -67,15 +67,15 @@ function DNumSlider:SetConVar(cvar) end
 ---[CLIENT] Calls DLabel:SetDark on the DLabel part of the DNumSlider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:SetDark)
----@param dark boolean 
+---@param dark boolean
 function DNumSlider:SetDark(dark) end
 
 ---[CLIENT] Sets the desired amount of numbers after the decimal point.
---- 		
+---
 --- 			This doesn't affect values passed to DNumSlider:OnValueChanged.
---- 		
---- 
---- 		
+---
+---
+---
 --- 			To get right values passed to DNumSlider:OnValueChanged use math.Round.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:SetDecimals)
@@ -113,25 +113,24 @@ function DNumSlider:SetMinMax(min, max) end
 ---@param val number The value to set.
 function DNumSlider:SetValue(val) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:TranslateSliderValues)
----@param x number 
----@param y number 
----@return number, number number - 
+---@param x number
+---@param y number
+---@return number, number number -
 ---@return number, number number - The second passed argument.
 function DNumSlider:TranslateSliderValues(x, y) end
 
----[CLIENT] 
+---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:UpdateNotches)
 function DNumSlider:UpdateNotches() end
 
 ---[CLIENT] Called when the value has been changed. This will also be called when the user manually changes the value through the text panel.
---- 
+---
 --- This is an internal function. Override DNumSlider:OnValueChanged instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:ValueChanged)
 ---@param value number The value the slider has been changed to.
 function DNumSlider:ValueChanged(value) end
-

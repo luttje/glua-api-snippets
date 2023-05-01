@@ -41,4 +41,3 @@ function chat.Open(mode) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.PlaySound)
 function chat.PlaySound() end
-

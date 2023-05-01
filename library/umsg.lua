@@ -44,7 +44,7 @@ function umsg.Float(float) end
 function umsg.Long(int) end
 
 ---[SERVER] Inferior version of util.AddNetworkString
---- 
+---
 --- The string specified will be networked to the client and receive a identifying number, which will be sent instead of the string to optimize networking.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.PoolString)
@@ -58,9 +58,9 @@ function umsg.PoolString(string) end
 function umsg.Short(short) end
 
 ---[SERVER] You should be using net instead
---- 
+---
 --- Starts a new usermessage.
---- 
+---
 --- Usermessages have a limit of only 256 bytes!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Start)
@@ -85,4 +85,3 @@ function umsg.Vector(vector) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.VectorNormal)
 ---@param normal Vector The vector normal to be sent.
 function umsg.VectorNormal(normal) end
-

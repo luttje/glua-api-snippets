@@ -41,4 +41,3 @@ function DDrawer:SetOpenTime(value) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Toggle)
 function DDrawer:Toggle() end
-

@@ -8,9 +8,9 @@ steamworks = {}
 function steamworks.ApplyAddons() end
 
 ---[CLIENT AND MENU] Downloads a file from the supplied addon and saves it as a .cache file in garrysmod/cache folder.
---- 
+---
 --- This is mostly used to download the preview image of the addon, but the game seems to also use it to download replays and saves.
---- 
+---
 --- In case the retrieved file is an image and you need the IMaterial, use Global.AddonMaterial with the path supplied from the callback.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Download)
@@ -48,7 +48,7 @@ function steamworks.FileInfo(workshopItemID, resultCallback) end
 --- * followed - Items of people the player is following on Steam
 --- * friend_favs - Favorites of player's friends
 --- * favorite - Player's favorites
---- 
+---
 ---@param tags table A table of tags to match.
 ---@param offset number How much of results to skip from first one. Mainly used for pages.
 ---@param numRetrieve number How much items to retrieve, up to 50 at a time.
@@ -58,9 +58,9 @@ function steamworks.FileInfo(workshopItemID, resultCallback) end
 function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback) end
 
 ---[CLIENT AND MENU] You should use the callback of steamworks.RequestPlayerInfo instead.
---- 
+---
 --- Retrieves players name by their 64bit SteamID.
---- 
+---
 --- You must call steamworks.RequestPlayerInfo a decent amount of time before calling this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.GetPlayerName)
@@ -97,7 +97,7 @@ function steamworks.Publish(tags, filename, image, name, desc) end
 ---@param callback function A callback function with only 1 argument - string name.
 function steamworks.RequestPlayerInfo(steamID64, callback) end
 
----[MENU] 
+---[MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFileCompleted)
 ---@param workshopid string The Steam Workshop item id
@@ -132,7 +132,7 @@ function steamworks.ShouldMountAddon(workshopItemID) end
 function steamworks.Subscribe(workshopItemID) end
 
 ---[MENU] Unsubscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.
---- 
+---
 --- This function should `never` be called without a user's consent and should not be called if the addon is currently in use (aka: the user is not in the main menu) as it may result in unexpected behaviour.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Unsubscribe)
@@ -153,11 +153,10 @@ function steamworks.ViewFile(workshopItemID) end
 function steamworks.Vote(workshopItemID, upOrDown) end
 
 ---[CLIENT AND MENU] Use data steamworks.FileInfo instead.
---- 
+---
 --- Retrieves vote info of supplied addon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.VoteInfo)
 ---@param workshopItemID string The ID of workshop item.
 ---@param resultCallback function The function to process retrieved data. The first and only argument is a table, containing all the info.
 function steamworks.VoteInfo(workshopItemID, resultCallback) end
-
