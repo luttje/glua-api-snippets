@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - feature/sensible-scraping
   schedule:
     - cron: '0 0 1 * *'
 jobs:
