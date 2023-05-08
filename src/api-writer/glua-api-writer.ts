@@ -82,7 +82,7 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClass(className: string, classFields: string = '') {
+  private writeClass(className: string, parent?: string, classFields: string = '') {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
@@ -91,7 +91,12 @@ export class GluaApiWriter {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
         api = api.replace('---{{CLASS_FIELDS}}\n', classFields);
       } else {
-        api += `---@class ${className}\n`;
+        api += `---@class ${className}`;
+
+        if (parent)
+          api += ` : ${parent}`;
+        
+        api += '\n';
         api += classFields;
         api += `local ${className} = {}\n\n`;
       }
@@ -131,7 +136,12 @@ export class GluaApiWriter {
   }
 
   private writePanelFunction(func: PanelFunction) {
-    return this.writeClassFunction(func);
+    let api: string = this.writeClass(func.parent, 'Panel');
+
+    api += this.writeFunctionLuaDocComment(func, func.realm);
+    api += this.writeFunctionDeclaration(func, func.realm, ':');
+
+    return api;
   }
 
   private writeEnum(_enum: Enum) {
@@ -165,7 +175,7 @@ export class GluaApiWriter {
       fields += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
     }
 
-    return this.writeClass(struct.name, fields);
+    return this.writeClass(struct.name, undefined, fields);
   }
 
   public writePages(pages: WikiPage[]) {
