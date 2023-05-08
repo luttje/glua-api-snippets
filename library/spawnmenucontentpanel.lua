@@ -1,6 +1,6 @@
 ---@meta
 
----@class SpawnmenuContentPanel : Panel
+---@class SpawnmenuContentPanel : DPanel
 local SpawnmenuContentPanel = {}
 
 ---[CLIENT] Changes the Spawnmenu category to search in

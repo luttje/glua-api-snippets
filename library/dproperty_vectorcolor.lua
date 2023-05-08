@@ -1,6 +1,6 @@
 ---@meta
 
----@class DProperty_VectorColor : Panel
+---@class DProperty_VectorColor : DProperty_Generic
 local DProperty_VectorColor = {}
 
 ---[CLIENT] Called by a property row to setup a color selection control.

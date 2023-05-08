@@ -1,6 +1,6 @@
 ---@meta
 
----@class ContentHeader : Panel
+---@class ContentHeader : DLabelEditable
 local ContentHeader = {}
 
 ---[CLIENT] Creates a Global.DermaMenu and adds a delete option before opening the menu

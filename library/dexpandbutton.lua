@@ -1,6 +1,6 @@
 ---@meta
 
----@class DExpandButton : Panel
+---@class DExpandButton : DButton
 local DExpandButton = {}
 
 ---[CLIENT] Returns whether this DExpandButton is expanded or not.

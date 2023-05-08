@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorMixer : Panel
+---@class DColorMixer : DPanel
 local DColorMixer = {}
 
 ---[CLIENT]

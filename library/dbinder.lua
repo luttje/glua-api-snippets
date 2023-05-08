@@ -1,6 +1,6 @@
 ---@meta
 
----@class DBinder : Panel
+---@class DBinder : DButton
 local DBinder = {}
 
 ---[CLIENT] Gets the code of the key currently bound by the DBinder. Same as DBinder:GetValue.

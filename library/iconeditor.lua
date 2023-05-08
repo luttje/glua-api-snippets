@@ -1,6 +1,6 @@
 ---@meta
 
----@class IconEditor : Panel
+---@class IconEditor : DFrame
 local IconEditor = {}
 
 ---[CLIENT] Applies the top-down view camera settings for the model in the DAdjustableModelPanel.

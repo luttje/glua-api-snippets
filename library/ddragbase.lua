@@ -1,6 +1,6 @@
 ---@meta
 
----@class DDragBase : Panel
+---@class DDragBase : DPanel
 local DDragBase = {}
 
 ---[CLIENT] Internal function used in DDragBase:MakeDroppable

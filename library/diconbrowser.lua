@@ -1,6 +1,6 @@
 ---@meta
 
----@class DIconBrowser : Panel
+---@class DIconBrowser : DScrollPanel
 local DIconBrowser = {}
 
 ---[CLIENT] Automatically called to fill the browser with icons. Will not work if DIconBrowser:SetManual is set to true.

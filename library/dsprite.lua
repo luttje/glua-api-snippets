@@ -1,6 +1,6 @@
 ---@meta
 
----@class DSprite : Panel
+---@class DSprite : DPanel
 local DSprite = {}
 
 ---[CLIENT] Gets the color the sprite is using as a modifier.

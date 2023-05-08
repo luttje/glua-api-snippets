@@ -1,6 +1,6 @@
 ---@meta
 
----@class DCheckBoxLabel : Panel
+---@class DCheckBoxLabel : DPanel
 local DCheckBoxLabel = {}
 
 ---[CLIENT] Gets the checked state of the checkbox. This calls the checkbox's DCheckBox:GetChecked function.

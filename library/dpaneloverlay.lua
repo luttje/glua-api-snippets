@@ -1,6 +1,6 @@
 ---@meta
 
----@class DPanelOverlay : Panel
+---@class DPanelOverlay : DPanel
 local DPanelOverlay = {}
 
 ---[CLIENT] Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.

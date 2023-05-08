@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorButton : Panel
+---@class DColorButton : DLabel
 local DColorButton = {}
 
 ---[CLIENT] Returns the color of the button

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DPanelList : Panel
+---@class DPanelList : DPanel
 local DPanelList = {}
 
 ---[CLIENT] Adds a existing panel to the end of DPanelList.

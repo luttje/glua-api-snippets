@@ -1,6 +1,6 @@
 ---@meta
 
----@class DModelPanel : Panel
+---@class DModelPanel : DButton
 local DModelPanel = {}
 
 ---[CLIENT] Used by the DModelPanel's paint hook to draw the model and background.

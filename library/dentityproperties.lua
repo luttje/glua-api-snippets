@@ -1,6 +1,6 @@
 ---@meta
 
----@class DEntityProperties : Panel
+---@class DEntityProperties : DProperties
 local DEntityProperties = {}
 
 ---[CLIENT] Called internally by DEntityProperties:RebuildControls.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTab : Panel
+---@class DTab : DButton
 local DTab = {}
 
 ---[CLIENT] Returns the panel that the tab represents.

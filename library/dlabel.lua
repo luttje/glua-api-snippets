@@ -1,6 +1,6 @@
 ---@meta
 
----@class DLabel : Panel
+---@class DLabel : Label
 local DLabel = {}
 
 ---[CLIENT] Called just before DLabel:DoClick.

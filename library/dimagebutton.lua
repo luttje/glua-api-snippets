@@ -1,6 +1,6 @@
 ---@meta
 
----@class DImageButton : Panel
+---@class DImageButton : DButton
 local DImageButton = {}
 
 ---[CLIENT] Returns the "image" of the DImageButton. Equivalent of DImage:GetImage.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorPalette : Panel
+---@class DColorPalette : DIconLayout
 local DColorPalette = {}
 
 ---[CLIENT] Basically the same functionality as DColorPalette:OnValueChanged, you should use that instead!

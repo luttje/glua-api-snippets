@@ -1,6 +1,6 @@
 ---@meta
 
----@class ImageCheckBox : Panel
+---@class ImageCheckBox : Button
 local ImageCheckBox = {}
 
 ---[CLIENT] Returns the checked state of the ImageCheckBox

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DShape : Panel
+---@class DShape : DPanel
 local DShape = {}
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.

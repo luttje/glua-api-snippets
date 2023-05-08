@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorCombo : Panel
+---@class DColorCombo : DPropertySheet
 local DColorCombo = {}
 
 ---[CLIENT] Called internally to create panels necessary for this panel to work.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DHorizontalDivider : Panel
+---@class DHorizontalDivider : DPanel
 local DHorizontalDivider = {}
 
 ---[CLIENT] Returns the width of the horizontal divider bar, set by DHorizontalDivider:SetDividerWidth.

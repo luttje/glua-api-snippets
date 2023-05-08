@@ -1,6 +1,6 @@
 ---@meta
 
----@class ContentIcon : Panel
+---@class ContentIcon : DButton
 local ContentIcon = {}
 
 ---[CLIENT] Returns the color set by ContentIcon:SetColor

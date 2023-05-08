@@ -1,6 +1,6 @@
 ---@meta
 
----@class ContentSidebar : Panel
+---@class ContentSidebar : DPanel
 local ContentSidebar = {}
 
 ---[CLIENT] Creates a Save Notification which will be shown when SANDBOX:SpawnlistContentChanged has been called.

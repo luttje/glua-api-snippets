@@ -1,6 +1,6 @@
 ---@meta
 
----@class DMenuOptionCVar : Panel
+---@class DMenuOptionCVar : DMenuOption
 local DMenuOptionCVar = {}
 
 ---[CLIENT] Returns the ConVars used by the DMenuOptionCVar.

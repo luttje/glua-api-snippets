@@ -1,6 +1,6 @@
 ---@meta
 
----@class DIconLayout : Panel
+---@class DIconLayout : DDragBase
 local DIconLayout = {}
 
 ---[CLIENT] Creates a replica of the DIconLayout it is called on.

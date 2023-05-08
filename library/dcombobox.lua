@@ -1,6 +1,6 @@
 ---@meta
 
----@class DComboBox : Panel
+---@class DComboBox : DButton
 local DComboBox = {}
 
 ---[CLIENT] Adds a choice to the combo box.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTree_Node : Panel
+---@class DTree_Node : DPanel
 local DTree_Node = {}
 
 ---[CLIENT AND MENU] A helper function that adds a new node and calls to DTree_Node:MakeFolder on it.

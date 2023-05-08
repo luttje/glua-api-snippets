@@ -1,6 +1,6 @@
 ---@meta
 
----@class DMenu : Panel
+---@class DMenu : DScrollPanel
 local DMenu = {}
 
 ---[CLIENT] Creates a DMenuOptionCVar and adds it as an option into the menu. Checking and unchecking the option will alter the given console variable's value.
@@ -22,7 +22,7 @@ function DMenu:AddCVar(strText, convar, on, off, funcFunction) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddOption)
 ---@param name string Name of the option.
 ---@param func? function Function to execute when this option is clicked.
----@return Panel #Returns the created DMenuOption panel.
+---@return DMenuOption #Returns the created DMenuOption panel.
 function DMenu:AddOption(name, func) end
 
 ---[CLIENT] Adds a panel to the DMenu as if it were an option.
@@ -30,7 +30,8 @@ function DMenu:AddOption(name, func) end
 --- This invokes DScrollPanel:AddItem and will not create a new panel if a class name is passed, unlike Panel:Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddPanel)
----@param pnl Panel The panel that you want to add.
+---@generic T : Panel
+---@param pnl `T` The panel that you want to add.
 function DMenu:AddPanel(pnl) end
 
 ---[CLIENT] Adds a horizontal line spacer.
@@ -43,8 +44,8 @@ function DMenu:AddSpacer() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddSubMenu)
 ---@param Name string Name of the sub menu.
 ---@param func? function Function to execute when this sub menu is clicked.
----@return Panel, Panel #Panel - The created sub DMenu
----@return Panel, Panel #Panel - The created DMenuOption
+---@return DMenu, DMenuOption #DMenu - The created sub DMenu
+---@return DMenu, DMenuOption #DMenuOption - The created DMenuOption
 function DMenu:AddSubMenu(Name, func) end
 
 ---[CLIENT] Returns the number of child elements of DMenu's DScrollPanel:GetCanvas.

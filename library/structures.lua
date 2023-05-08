@@ -486,7 +486,7 @@ local SunInfo = {}
 ---@field strainSound string Unused sound.
 local SurfacePropertyData = {}
 
----@class SWEP : Entity
+---@class SWEP : WEAPON
 ---@field ClassName string Entity class name of the SWEP (file or folder name of your SWEP). This is             set automatically
 ---@field Category string The spawn menu category that this weapon             resides in.
 ---@field Spawnable boolean Whether or not this weapon can be obtained through the             spawn menu.

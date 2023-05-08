@@ -1,6 +1,6 @@
 ---@meta
 
----@class DMenuBar : Panel
+---@class DMenuBar : DPanel
 local DMenuBar = {}
 
 ---[CLIENT] Creates a new DMenu object tied to a DButton with the given label on the menu bar.

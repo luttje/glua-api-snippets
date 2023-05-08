@@ -1,6 +1,6 @@
 ---@meta
 
----@class DScrollPanel : Panel
+---@class DScrollPanel : DPanel
 local DScrollPanel = {}
 
 ---[CLIENT] Parents the passed panel to the DScrollPanel's canvas.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class Material : Panel
+---@class Material : Button
 local Material = {}
 
 ---[CLIENT] Sets the alpha value of the Material panel.

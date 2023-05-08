@@ -47,15 +47,16 @@ function string.EndsWith(str, _end) end
 
 ---[SHARED AND MENU] Splits a string up wherever it finds the given separator.
 ---
---- This is an alias of string.Split
---- and the reverse operation of string.Implode.
+--- The function string.Split is an alias of this function, except that function doesn't support using patterns.
+---
+--- See string.Implode for the reverse operation of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Explode)
 ---@param separator string The string will be separated wherever this sequence is found.
 ---@param str string The string to split up.
----@param use_patterns boolean Set this to true if your separator is a Patterns.
+---@param withpattern? boolean Set this to true if your separator is a Patterns.
 ---@return table #Exploded string as a numerical sequential table.
-function string.Explode(separator, str, use_patterns) end
+function string.Explode(separator, str, withpattern) end
 
 ---[SHARED AND MENU] Attempts to find the specified substring in a string.
 ---

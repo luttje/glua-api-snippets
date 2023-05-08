@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTree : Panel
+---@class DTree : DScrollPanel
 local DTree = {}
 
 ---[CLIENT AND MENU] Add a node to the DTree

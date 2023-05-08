@@ -1,6 +1,6 @@
 ---@meta
 
----@class DForm : Panel
+---@class DForm : DCollapsibleCategory
 local DForm = {}
 
 ---[CLIENT] Adds one or two items to the DForm.

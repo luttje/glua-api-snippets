@@ -1,6 +1,6 @@
 ---@meta
 
----@class DFrame : Panel
+---@class DFrame : EditablePanel
 local DFrame = {}
 
 ---[CLIENT] Centers the frame relative to the whole screen and invalidates its layout. This overrides Panel:Center.

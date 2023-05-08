@@ -1,6 +1,6 @@
 ---@meta
 
----@class DVerticalDivider : Panel
+---@class DVerticalDivider : DPanel
 local DVerticalDivider = {}
 
 ---[CLIENT] Returns the bottom content panel of the DVerticalDivider.

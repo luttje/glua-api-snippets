@@ -1,6 +1,6 @@
 ---@meta
 
----@class DProperty_Combo : Panel
+---@class DProperty_Combo : DProperty_Generic
 local DProperty_Combo = {}
 
 ---[CLIENT] Add a choice to your combo control.

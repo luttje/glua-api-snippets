@@ -1,6 +1,6 @@
 ---@meta
 
----@class DButton : Panel
+---@class DButton : DLabel
 local DButton = {}
 
 ---[CLIENT] Returns value set by DButton:SetDrawBorder. See that page for more info.

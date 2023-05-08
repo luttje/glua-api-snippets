@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTextEntry : Panel
+---@class DTextEntry : TextEntry
 local DTextEntry = {}
 
 ---[CLIENT] Called whenever the value of the panel has been updated (whether by user input or otherwise).

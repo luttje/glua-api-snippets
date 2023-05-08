@@ -1,6 +1,6 @@
 ---@meta
 
----@class DLabelEditable : Panel
+---@class DLabelEditable : DLabel
 local DLabelEditable = {}
 
 ---[CLIENT] Returns whether the editable label will stretch to the text entered or not.

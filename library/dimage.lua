@@ -1,6 +1,6 @@
 ---@meta
 
----@class DImage : Panel
+---@class DImage : DPanel
 local DImage = {}
 
 ---[CLIENT] Actually loads the IMaterial to render it. Called from DImage:LoadMaterial.

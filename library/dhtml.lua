@@ -1,6 +1,6 @@
 ---@meta
 
----@class DHTML : Panel
+---@class DHTML : Awesomium
 local DHTML = {}
 
 ---[CLIENT] Defines a Javascript function that when called will call a Lua callback.

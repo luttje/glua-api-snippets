@@ -1,6 +1,6 @@
 ---@meta
 
----@class DCategoryList : Panel
+---@class DCategoryList : DScrollPanel
 local DCategoryList = {}
 
 ---[CLIENT] Adds a DCollapsibleCategory to the list.

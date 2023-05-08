@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTileLayout : Panel
+---@class DTileLayout : DDragBase
 local DTileLayout = {}
 
 ---[CLIENT] Clears the panel's tile table. Used by DTileLayout:LayoutTiles.

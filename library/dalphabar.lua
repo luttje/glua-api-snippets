@@ -1,6 +1,6 @@
 ---@meta
 
----@class DAlphaBar : Panel
+---@class DAlphaBar : DPanel
 local DAlphaBar = {}
 
 ---[CLIENT] Returns the base color of the alpha bar. This is the color for which the alpha channel is being modified.

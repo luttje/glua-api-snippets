@@ -20,6 +20,9 @@
       "//",
       "/**/",
       "continue"
+    ],
+    "Lua.diagnostics.disable": [
+      "duplicate-set-field"
     ]
   }
 }

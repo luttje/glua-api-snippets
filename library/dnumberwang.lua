@@ -1,6 +1,6 @@
 ---@meta
 
----@class DNumberWang : Panel
+---@class DNumberWang : DTextEntry
 local DNumberWang = {}
 
 ---[CLIENT] Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals

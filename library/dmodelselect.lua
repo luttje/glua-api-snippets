@@ -1,6 +1,6 @@
 ---@meta
 
----@class DModelSelect : Panel
+---@class DModelSelect : DPanelSelect
 local DModelSelect = {}
 
 ---[CLIENT] Sets the height of the panel **in the amount of 64px spawnicons**.

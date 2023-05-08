@@ -1,6 +1,6 @@
 ---@meta
 
----@class DMenuOption : Panel
+---@class DMenuOption : DButton
 local DMenuOption = {}
 
 ---[CLIENT] Creates a sub DMenu and returns it. Has no duplicate call protection.

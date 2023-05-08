@@ -1,6 +1,6 @@
 ---@meta
 
----@class DLabelURL : Panel
+---@class DLabelURL : URLLabel
 local DLabelURL = {}
 
 ---[CLIENT] Gets the current text color of the DLabelURL. Alias as DLabelURL:GetTextColor.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DAdjustableModelPanel : Panel
+---@class DAdjustableModelPanel : DModelPanel
 local DAdjustableModelPanel = {}
 
 ---[CLIENT] Used by the panel to perform mouse capture operations when adjusting the model.

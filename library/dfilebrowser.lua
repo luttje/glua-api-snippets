@@ -1,6 +1,6 @@
 ---@meta
 
----@class DFileBrowser : Panel
+---@class DFileBrowser : DPanel
 local DFileBrowser = {}
 
 ---[CLIENT] Clears the file tree and list, and resets all values.

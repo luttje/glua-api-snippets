@@ -1,6 +1,6 @@
 ---@meta
 
----@class DRGBPicker : Panel
+---@class DRGBPicker : DPanel
 local DRGBPicker = {}
 
 ---[CLIENT] Returns the color at given position on the internal texture.

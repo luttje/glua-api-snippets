@@ -247,7 +247,7 @@ function _G.collectgarbage(action, arg) end
 ---@param g number An integer from `0-255` describing the green value of the color.
 ---@param b number An integer from `0-255` describing the blue value of the color.
 ---@param a? number An integer from `0-255` describing the alpha (transparency) of the color.
----@return table #The created Color.
+---@return Color #The created Color. Is returned as a table without the Color metatable, [(See GitHub issue)](https://github.com/Facepunch/garrysmod-issues/issues/2407).
 function _G.Color(r, g, b, a) end
 
 ---[SHARED AND MENU] Returns a new Color with the RGB components of the given Color and the alpha value specified.
@@ -589,7 +589,7 @@ function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confi
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DermaMenu)
 ---@param keepOpen? boolean If we should keep other DMenus open (`true`) or not (`false`).
 ---@param parent? Panel The panel to parent the created menu to.
----@return Panel #The created DMenu.
+---@return DMenu #The created DMenu.
 function _G.DermaMenu(keepOpen, parent) end
 
 ---[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not.

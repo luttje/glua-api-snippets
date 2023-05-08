@@ -1,6 +1,6 @@
 ---@meta
 
----@class DNumberScratch : Panel
+---@class DNumberScratch : DImageButton
 local DNumberScratch = {}
 
 ---[CLIENT] Used by DNumberScratch:DrawScreen.

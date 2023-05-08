@@ -1,5 +1,8 @@
 ---@meta
 
+---@class ControlPanel : DForm
+local ControlPanel = {}
+
 controlpanel = {}
 
 ---[CLIENT] Clears ALL the control panels ( for tools )
@@ -15,9 +18,6 @@ function controlpanel.Clear() end
 --- When you create a tool/option via spawnmenu.AddToolMenuOption, the internal control panel name is `TOOL.Mode .. "_" .. tool_tab:lower() .. "_" .. tool_category:lower()`.
 ---@return Panel #The ControlPanel panel.
 function controlpanel.Get(name) end
-
----@class ControlPanel : Panel
-local ControlPanel = {}
 
 ---[CLIENT] It is recommended to use DForm's members instead.
 ---

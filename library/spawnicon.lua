@@ -1,6 +1,6 @@
 ---@meta
 
----@class SpawnIcon : Panel
+---@class SpawnIcon : DButton
 local SpawnIcon = {}
 
 ---[CLIENT] Returns the currently set body groups of the spawn icon. This is set by SpawnIcon:SetBodyGroup.

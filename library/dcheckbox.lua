@@ -1,6 +1,6 @@
 ---@meta
 
----@class DCheckBox : Panel
+---@class DCheckBox : DButton
 local DCheckBox = {}
 
 ---[CLIENT] Gets the checked state of the checkbox.

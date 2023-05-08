@@ -1,6 +1,6 @@
 ---@meta
 
----@class WEAPON
+---@class WEAPON : Entity
 local WEAPON = {}
 
 ---[SERVER] Called when another entity fires an event to this entity.

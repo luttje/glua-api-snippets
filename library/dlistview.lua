@@ -1,13 +1,15 @@
 ---@meta
 
----@class DListView : Panel
+---@class DListView : DPanel
 local DListView = {}
 
 ---[CLIENT] Adds a column to the listview.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:AddColumn)
 ---@param column string The name of the column to add.
----@param position number Sets the ordering of this column compared to other columns. Starting index is 1.
+---@param position? number At which position to insert the new column compared to the other columns. Set to 1 to add the new column before all other columns.
+---
+--- By default the column will be placed after all columns.
 ---@return Panel #The newly created DListView_Column.
 function DListView:AddColumn(column, position) end
 

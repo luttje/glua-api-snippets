@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorCube : Panel
+---@class DColorCube : DSlider
 local DColorCube = {}
 
 ---[CLIENT] Returns the base Color set by DColorCube:SetBaseRGB.

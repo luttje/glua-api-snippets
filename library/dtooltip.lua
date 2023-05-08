@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTooltip : Panel
+---@class DTooltip : DLabel
 local DTooltip = {}
 
 ---[CLIENT AND MENU] Forces the tooltip to close. This will remove the panel.
