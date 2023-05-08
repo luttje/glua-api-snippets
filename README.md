@@ -35,6 +35,10 @@ Using GitHub Actions, this repository is automatically updated every first day o
 
 A workflow will automatically scrape the latest Garry's Mod Lua API from [the Garry's Mod Wiki](https://wiki.facepunch.com/gmod/) and package them into [🔗 a release](https://github.com/luttje/glua-api-snippets/releases).
 
+> **Note**
+> 
+> The Lua Language Server addon may not be 100% up-to-date with the definitions in this repository. You can help us out by updating it for everyone. There are instructions on how to do this in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
+
 ## 🤖 Advanced Usage
 
 ### Running the Scraper Locally
