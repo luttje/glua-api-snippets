@@ -146,24 +146,40 @@ export class GluaApiWriter {
 
   private writeEnum(_enum: Enum) {
     let api: string = '';
+    const isContainedInTable = _enum.items[0]?.key.includes('.') ?? false;
 
     api += `---@enum ${_enum.name}\n`;
-    api += `local ${_enum.name} = {\n`;
+
+    if (isContainedInTable)
+      api += `local ${_enum.name} = {\n`;
+
+    const writeItem = (key: string, item: typeof _enum.items[0]) => {
+      if (isContainedInTable) {
+        key = key.split('.')[1];
+        api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+      } else {
+        const comment = item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : '';
+        api += `${comment}${key} = ${item.value}\n`;
+      }
+    };
 
     for (const item of _enum.items) {
-      const key = item.key.split('.')[1] ?? item.key; // Fixes ENUMNAME.KEY (ENUMNAME is redundant here)
       const keys = item.key.split(' or ');
 
       if (keys.length > 1) {
+        console.warn(`Enum item ${item.key} has multiple keys. This is not supported by the Glua API.`);
         for (const key of keys) {
-          api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+          writeItem(key, item);
         }
       } else {
-        api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+        writeItem(item.key, item);
       }
     }
 
-    api += '}\n\n';
+    if (isContainedInTable)
+      api += '}';
+
+    api += `\n\n`;
 
     return api;
   }
