@@ -38,6 +38,7 @@ export const RESERVERD_KEYWORDS = new Set([
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
+  private readonly pageOverrides: Map<string, string> = new Map();
 
   constructor() { }
 
@@ -60,8 +61,14 @@ export class GluaApiWriter {
     return name;
   }
 
+  public addOverride(pageAddress: string, override: string) {
+    this.pageOverrides.set(pageAddress.toLowerCase(), override);
+  }
+
   public writePage(page: WikiPage) {
-    if (isClassFunction(page))
+    if (this.pageOverrides.has(page.address.toLowerCase()))
+      return this.pageOverrides.get(page.address.toLowerCase());
+    else if (isClassFunction(page))
       return this.writeClassFunction(page);
     else if (isLibraryFunction(page))
       return this.writeLibraryFunction(page);
