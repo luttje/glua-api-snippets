@@ -38,6 +38,7 @@ export const RESERVERD_KEYWORDS = new Set([
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
+  private readonly pageOverrides: Map<string, string> = new Map();
 
   constructor() { }
 
@@ -60,8 +61,14 @@ export class GluaApiWriter {
     return name;
   }
 
+  public addOverride(pageAddress: string, override: string) {
+    this.pageOverrides.set(pageAddress, override);
+  }
+
   public writePage(page: WikiPage) {
-    if (isClassFunction(page))
+    if (this.pageOverrides.has(page.address))
+      return this.pageOverrides.get(page.address);
+    else if (isClassFunction(page))
       return this.writeClassFunction(page);
     else if (isLibraryFunction(page))
       return this.writeLibraryFunction(page);
@@ -75,15 +82,33 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClassFunction(func: ClassFunction) {
+  private writeClass(className: string, parent?: string, classFields: string = '') {
     let api: string = '';
 
-    if (!this.writtenClasses.has(func.parent)) {
-      api += `---@class ${func.parent}\n`;
-      api += `local ${func.parent} = {}\n\n`;
+    if (!this.writtenClasses.has(className)) {
+      const classOverride = `class.${className}`;
+      if (this.pageOverrides.has(classOverride)) {
+        api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
+        api = api.replace('---{{CLASS_FIELDS}}\n', classFields);
+      } else {
+        api += `---@class ${className}`;
 
-      this.writtenClasses.add(func.parent);
+        if (parent)
+          api += ` : ${parent}`;
+        
+        api += '\n';
+        api += classFields;
+        api += `local ${className} = {}\n\n`;
+      }
+
+      this.writtenClasses.add(className);
     }
+
+    return api;
+  }
+
+  private writeClassFunction(func: ClassFunction) {
+    let api: string = this.writeClass(func.parent);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm, ':');
@@ -111,7 +136,12 @@ export class GluaApiWriter {
   }
 
   private writePanelFunction(func: PanelFunction) {
-    return this.writeClassFunction(func);
+    let api: string = this.writeClass(func.parent, 'Panel');
+
+    api += this.writeFunctionLuaDocComment(func, func.realm);
+    api += this.writeFunctionDeclaration(func, func.realm, ':');
+
+    return api;
   }
 
   private writeEnum(_enum: Enum) {
@@ -139,17 +169,13 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let api: string = '';
-
-    api += `---@class ${struct.name}\n`;
+    let fields: string = '';
 
     for (const field of struct.fields) {
-      api += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
+      fields += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
     }
-    
-    api += `local ${struct.name} = {}\n\n`;
 
-    return api;
+    return this.writeClass(struct.name, undefined, fields);
   }
 
   public writePages(pages: WikiPage[]) {
@@ -192,11 +218,11 @@ export class GluaApiWriter {
         const description = removeNewlines(ret.description ?? '');
 
         if (func.returns!.length === 1) {
-          luaDocComment += `${returns} ${description}\n`;
+          luaDocComment += `${returns} #${description}\n`;
           return;
         }
         
-        luaDocComment += `${returns} ${this.transformType(ret.type)} - ${description}\n`;
+        luaDocComment += `${returns} #${this.transformType(ret.type)} - ${description}\n`;
       });
     }
 

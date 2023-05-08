@@ -13,6 +13,7 @@ export const json = {
   url: 'https://wiki.facepunch.com/gmod/Enums/USE',
   type: 'enum',
   name: 'USE',
+  address: 'USE',
   description: `\nEnumerations used by ENTITY:Use.\n\nNot to be confused with Enums/_USE used by Entity:SetUseType.\n`,
   realm: 'Shared',
   items: [

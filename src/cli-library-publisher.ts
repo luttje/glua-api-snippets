@@ -18,8 +18,6 @@ const libraryWordMatchers = [
 
 // Same as above, but for files:
 const libraryFileMatchers: string[] = [];
-
-const libraryFileHeader = '---@meta';
 const libraryDirectory = 'library';
 
 async function main() {
@@ -65,6 +63,7 @@ async function main() {
       "Lua.runtime.version": "Lua 5.1",
       "Lua.runtime.special": {
         "include": "require",
+        "IncludeCS": "require",
       },
       "runtime.nonstandardSymbol": [
         "!",

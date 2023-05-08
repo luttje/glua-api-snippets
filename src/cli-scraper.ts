@@ -17,7 +17,8 @@ async function startScrape() {
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path to the directory where the output json and lua files should be saved', './output')
     .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/')
-    .option('-c, --clean', 'Clean the output directory before scraping', false)
+    .option('-c, --customOverrides [path]', 'The path to a directory containing custom overrides for the API')
+    .option('-w, --wipe', 'Clean the output directory before scraping', false)
     .parse(process.argv);
 
   const options = program.opts();
@@ -28,6 +29,7 @@ async function startScrape() {
   }
 
   const baseDirectory = options.output.replace(/\/$/, '');
+  const customDirectory = options.customOverrides?.replace(/\/$/, '') ?? null;
   const baseUrl = options.url.replace(/\/$/, '');
   const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
   const writer = new GluaApiWriter();
@@ -43,11 +45,40 @@ async function startScrape() {
 
   writeMetadata(baseUrl, baseDirectory);
 
-  if (options.clean && fs.existsSync(baseDirectory))
+  if (options.wipe && fs.existsSync(baseDirectory))
     fs.rmSync(baseDirectory, { recursive: true });
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
+  
+  if (customDirectory !== null) {
+    if (!fs.existsSync(customDirectory)) {
+      console.error(`Custom overrides directory ${customDirectory} does not exist`);
+      process.exit(1);
+    }
+
+    const files = fs.readdirSync(customDirectory);
+
+    for (const file of files) {
+      const filePath = path.join(customDirectory, file);
+      const fileStat = fs.statSync(filePath);
+
+      if (fileStat.isDirectory()) {
+        console.warn(`Skipping directory ${file} in custom (not supported)`);
+        continue;
+      }
+
+      // Besides the prefix helping us discern between overrides and files to copy, it also prevents conflicts with the wiki pages (since none of them start with _)
+      if (file.startsWith('_')) {
+        fs.copyFileSync(filePath, path.join(baseDirectory, file));
+        continue;
+      }
+
+      const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
+      const pageName = file.replace(/\.lua$/, '');
+      writer.addOverride(pageName, fileContent);
+    }
+  }
   
   const pageIndexes = await scrapeAndCollect(pageListScraper);
 

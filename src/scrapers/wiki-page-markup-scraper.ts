@@ -6,6 +6,7 @@ export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
 
 export type CommonWikiProperties = {
   type: WikiFunctionType | 'enum' | 'struct';
+  address: string;
   name: string;
   description: string;
   realm: Realm;
@@ -114,7 +115,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         const isStruct = $('structure').length > 0;
         const isFunction = $('function').length > 0;
         const mainElement = $(isEnum ? 'enum' : isStruct ? 'struct' : 'function').first();
-        const name = response.url.split('/').pop()!.split('?')[0];
+        const address = response.url.split('/').pop()!.split('?')[0];
 
         if (isEnum) {
           const items = $('items item').map(function() {
@@ -128,7 +129,8 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
           return <Enum>{
             type: 'enum',
-            name,
+            name: address,
+            address: address,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
             items
@@ -146,7 +148,8 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
           return <Struct>{
             type: 'struct',
-            name,
+            name: address,
+            address: address,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
             fields
@@ -184,6 +187,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             type: mainElement.attr('type')!,
             parent: mainElement.attr('parent')!,
             name: mainElement.attr('name')!,
+            address: address,
             description: $('description:first').text(),
             realm: $('realm:first').text() as Realm,
             arguments: arguments_,

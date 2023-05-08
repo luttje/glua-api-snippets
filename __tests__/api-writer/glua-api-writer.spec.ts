@@ -1,8 +1,7 @@
 import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-data/offline-sites/gmod-wiki/hook-player-initial-spawn';
 // import { apiDefinition as classFunctionApiDefinition, json as classFunctionJson } from '../test-data/offline-sites/gmod-wiki/class-function-weapon-allowsautoswitchto';
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
-// import { apiDefinition as structApiDefinition, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-ang-pos';
-import { apiDefinition as structApiDefinition, markup as structMarkup } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
+import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
 import { WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
@@ -35,6 +34,28 @@ describe('GLua API Writer', () => {
     const api = writer.writePages(structs);
     expect(api).toEqual(structApiDefinition);
   });
+
+  it('should allow overriding specific page addresses', () => {
+    const writer = new GluaApiWriter();
+    const override = Math.random().toString(36).substring(7);
+    writer.addOverride(hookJson.address, override);
+
+    const api = writer.writePages([<WikiPage>hookJson]);
+
+    expect(api).toEqual(override);
+  });
+  
+  it('should allow overriding specific class declarations', () => {
+    const writer = new GluaApiWriter();
+    const overrideStart = `---@class Custom_Entity_Fields : Parent`;
+    const override = `${overrideStart}\n---{{CLASS_FIELDS}}\nlocal Custom_Entity_Fields = {}`;
+    writer.addOverride('class.Custom_Entity_Fields', override);
+
+    const api = writer.writePages([<WikiPage>structJson]);
+
+    expect(api).toMatch(new RegExp(`^${overrideStart}`));
+  });
+
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';

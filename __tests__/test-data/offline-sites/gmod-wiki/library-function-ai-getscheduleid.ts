@@ -14,6 +14,7 @@ export const json = {
   type: 'libraryfunc',
   parent: 'ai',
   name: 'GetScheduleID',
+  address: 'ai.GetScheduleID',
   description: 'Translates a schedule name to its corresponding ID.',
   realm: 'Server',
   arguments: [
