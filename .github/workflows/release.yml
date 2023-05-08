@@ -62,7 +62,7 @@ jobs:
 
             ## 📝 Attached Archives
             With this release the following archives are attached:
-            - `*.lua.zip`: EmmyLua definitions
+            - `*.lua.zip`: Annotations for Lua definitions to include in your workspace (e.g: for EmmyLua)
             - `*.json.zip`: JSON definitions based on the Wiki contents (can be used for further processing)
               
             ## 📚 Lua Language Server Addon

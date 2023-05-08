@@ -1,53 +1,25 @@
-# Garry's Mod Lua API Scraper 
+# Garry's Mod Lua API Definitions 
 
+[![GitHub Release](https://img.shields.io/github/v/release/luttje/glua-api-snippets)](https://github.com/luttje/glua-api-snippets/releases)
+[![GitHub License](https://img.shields.io/github/license/luttje/glua-api-snippets)](https://github.com/luttje/glua-api-snippets/blob/main/LICENSE)
 [![GitHub Tests Action](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml/badge.svg)](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml)
 [![Test Coverage Status](https://coveralls.io/repos/github/luttje/glua-api-snippets/badge.svg?branch=main)](https://coveralls.io/github/luttje/glua-api-snippets?branch=main)
 
-This repository scrapes the Garry's Mod Lua API and generates snippets that will help provide autocompletion for Lua in editors like VSCode, IntelliJ and more.
+This repository scrapes the Garry's Mod Lua API and generates snippets that will help provide autocompletion for Lua in editors like VSCode, NeoVim and more.
 
 ## 🔨 Usage
 
-*In the following instructions we'll use `myproject` as an example name of the project we're working on.*
+1. Install **Lua Language Server:** for your editor of choice: 
+    * [Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
+    * [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
+  
+2. Open the **Lua Language Server Addon Manager** with the key combination `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) and search for *Addon*, then select **Lua: Open Addon Manager ...**:
+![VSCode editor command suggestion showing: Lua: Open Addon Manager ...](docs/lls-addon-manager-command.jpg)
 
-1. Install one of these extensions for your editor of choice:
-    * **Lua Language Server:** [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) | [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
-    * **EmmyLua:** [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=tangzx.emmylua) | [IntelliJ Plugin](https://plugins.jetbrains.com/plugin/9768-emmylua)
+3. Search for the **Garry's Mod** addon and **Enable** it:
+![Lua Language Server Addon Manager showing the Garry's Mod addon](docs/lls-addon-manager-gmod.jpg)
 
-2. Download the latest Lua release named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases).
-
-3. Extract the downloaded release to a directory on your computer. We'll use `~/glua-api-snippets` as an example.
-
-4. The Language Server needs to be able to find the snippets in your project workspace. You can either:
-
-    <details>
-      <summary>Add the directory to your editor workspace.</summary>
-      
-      #### In VSCode
-      Open the `myproject` project and add the directory to the workspace by clicking the `+` button in the bottom left corner of the editor.
-      [*Learn more*](https://code.visualstudio.com/docs/editor/workspaces)
-      
-      #### In IntelliJ
-      [*Learn more*](https://www.jetbrains.com/help/idea/add-items-to-project.html#import-items)
-    </details>
-
-    <details>
-      <summary>Symlink the the directory into your project directory.</summary> 
-      
-      In these example we'll link the directory into the `myproject` project as `.glua`, but you can use any name you want.
-      
-      > **Note**
-      > You should include `.glua` in your project `.gitignore` file. > That way you don't commit the API files to your project > version-control.
-
-      #### On Windows
-      `mklink /d "C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\lua\myproject\.glua" "C:\Users\YOUR_USERNAME\glua-api-snippets"`
-
-      #### On Linux
-      `ln -s ~/glua-api-snippets ~/.steam/steam/SteamApps/common/GarrysMod/garrysmod/lua/myproject/.glua`
-
-      #### On macOS
-      `ln -s ~/glua-api-snippets ~/Library/Application\ Support/Steam/steamapps/common/GarrysMod/garrysmod/lua/myproject/.glua`
-
-5. Restart your editor and enjoy autocompletion:
+4. You will now get autocompletion for the Garry's Mod Lua API in your Garry's Mod projects.
 
 <div align="center">
 
@@ -55,11 +27,17 @@ This repository scrapes the Garry's Mod Lua API and generates snippets that will
 
 </div>
 
+*Alternatively download the latest release and include or symlink it into your workspace. Get the release from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases) it's named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` .*
+
 ## 📅 **Automatically up-to-date**
 
 Using GitHub Actions, this repository is automatically updated every first day of the month at around 00:00 UTC.
 
 A workflow will automatically scrape the latest Garry's Mod Lua API from [the Garry's Mod Wiki](https://wiki.facepunch.com/gmod/) and package them into [🔗 a release](https://github.com/luttje/glua-api-snippets/releases).
+
+> **Note**
+> 
+> The Lua Language Server addon may not be 100% up-to-date with the definitions in this repository. You can help us out by updating it for everyone. There are instructions on how to do this in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
 
 ## 🤖 Advanced Usage
 

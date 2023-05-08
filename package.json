@@ -1,10 +1,12 @@
 {
   "name": "glua-api-scraper",
-  "description": "Scrapes the Garry's Mod Wiki in order to build EmmyLua comments that will provide intellisense help.",
+  "description": "Scrapes the Garry's Mod Wiki in order to build annotations for Lua Language Server to provide intellisense.",
   "keywords": [
     "Garry's Mod",
     "api",
-    "EmmyLua"
+    "EmmyLua",
+    "Lua",
+    "Language Server"
   ],
   "homepage": "https://github.com/luttje/glua-api-snippets",
   "repository": {
