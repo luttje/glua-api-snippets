@@ -36,7 +36,7 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(structApiDefinition);
   });
 
-  // it('should be able to write EmmyLua API files directly from wiki pages', async () => {
+  // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
   //   fetchMock.mockResponseOnce(html, { url: baseUrl });
     
