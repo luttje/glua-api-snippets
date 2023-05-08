@@ -105,8 +105,8 @@ function jit.opt.start(...) end
 ---[SHARED AND MENU] Returns the status of the JIT compiler and the current optimizations enabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.status)
----@return boolean, any boolean - Is JIT enabled
----@return boolean, any any - Strings for CPU-specific features and enabled optimizations
+---@return boolean, any #boolean - Is JIT enabled
+---@return boolean, any #any - Strings for CPU-specific features and enabled optimizations
 function jit.status() end
 
 ---[SHARED AND MENU] Returns bytecode of a function at a position.
@@ -114,8 +114,8 @@ function jit.status() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcbc)
 ---@param func function Function to retrieve bytecode from.
 ---@param pos number Position of the bytecode to retrieve.
----@return number, number number - bytecode instruction
----@return number, number number - bytecode opcode
+---@return number, number #number - bytecode instruction
+---@return number, number #number - bytecode opcode
 function jit.util.funcbc(func, pos) end
 
 ---[SHARED AND MENU] Retrieves LuaJIT information about a given function, similarly to debug.getinfo. Possible table fields:
@@ -137,8 +137,8 @@ function jit.util.funcbc(func, pos) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcinfo)
 ---@param func function Function or Proto to retrieve info about.
----@param pos number
----@return table Information about the supplied function/proto.
+---@param pos? number
+---@return table #Information about the supplied function/proto.
 function jit.util.funcinfo(func, pos) end
 
 ---[SHARED AND MENU] Gets a constant at a certain index in a function.
@@ -149,7 +149,7 @@ function jit.util.funcinfo(func, pos) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funck)
 ---@param func function Function to get constant from
 ---@param index number Constant index (counting down from the top of the function at -1)
----@return any The constant found.  This will return a proto for functions that are created inside the target function - see Example 2.
+---@return any #The constant found.  This will return a proto for functions that are created inside the target function - see Example 2.
 function jit.util.funck(func, index) end
 
 ---[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
@@ -158,7 +158,7 @@ function jit.util.funck(func, index) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcuvname)
 ---@param func function Function to get the upvalue indexed from
 ---@param index number The upvalue index, starting from 0
----@return string The function returns nil if there is no upvalue with the given index, otherwise the name of the upvalue is returned
+---@return string #The function returns nil if there is no upvalue with the given index, otherwise the name of the upvalue is returned
 function jit.util.funcuvname(func, index) end
 
 ---[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see Ircalladdr Functions
@@ -166,14 +166,14 @@ function jit.util.funcuvname(func, index) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
 ---@param index number The index of the function address to get from the ircalladdr func array (starting from 0)
----@return number The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71.
+---@return number #The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71.
 function jit.util.ircalladdr(index) end
 
 ---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceexitstub)
 ---@param exitno number exit number to retrieve exit stub address from (gotten via jit.attach with the texit event)
----@return number exitstub trace address
+---@return number #exitstub trace address
 function jit.util.traceexitstub(exitno) end
 
 ---[SHARED AND MENU] Return table fields:
@@ -185,7 +185,7 @@ function jit.util.traceexitstub(exitno) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceinfo)
 ---@param trace number trace index to retrieve info for (gotten via jit.attach)
----@return table trace info
+---@return table #trace info
 function jit.util.traceinfo(trace) end
 
 ---[SHARED AND MENU]
@@ -193,11 +193,11 @@ function jit.util.traceinfo(trace) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceir)
 ---@param tr number
 ---@param index number
----@return number, number, number, number, number number - m
----@return number, number, number, number, number number - ot
----@return number, number, number, number, number number - op1
----@return number, number, number, number, number number - op2
----@return number, number, number, number, number number - prev
+---@return number, number, number, number, number #number - m
+---@return number, number, number, number, number #number - ot
+---@return number, number, number, number, number #number - op1
+---@return number, number, number, number, number #number - op2
+---@return number, number, number, number, number #number - prev
 function jit.util.traceir(tr, index) end
 
 ---[SHARED AND MENU]
@@ -205,18 +205,18 @@ function jit.util.traceir(tr, index) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracek)
 ---@param tr number
 ---@param index number
----@return any, number, number any - k
----@return any, number, number number - t
----@return any, number, number number - slot; optional
+---@return any, number, number #any - k
+---@return any, number, number #number - t
+---@return any, number, number #number - slot; optional
 function jit.util.tracek(tr, index) end
 
 ---[SHARED AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracemc)
 ---@param tr number
----@return string, number, number string - mcode
----@return string, number, number number - address
----@return string, number, number number - loop
+---@return string, number, number #string - mcode
+---@return string, number, number #number - address
+---@return string, number, number #number - loop
 function jit.util.tracemc(tr) end
 
 ---[SHARED AND MENU] Return table fields:
@@ -228,5 +228,5 @@ function jit.util.tracemc(tr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracesnap)
 ---@param tr number trace index to retrieve snapshot for (gotten via jit.attach)
 ---@param sn number snapshot index for trace (starting from 0 to nexit - 1, nexit gotten via jit.util.traceinfo)
----@return table snapshot
+---@return table #snapshot
 function jit.util.tracesnap(tr, sn) end

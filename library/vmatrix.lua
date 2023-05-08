@@ -12,7 +12,7 @@ function VMatrix:Add(input) end
 ---[SHARED] Returns the absolute rotation of the matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetAngles)
----@return Angle Absolute rotation of the matrix
+---@return Angle #Absolute rotation of the matrix
 function VMatrix:GetAngles() end
 
 ---[SHARED] Returns a specific field in the matrix.
@@ -20,7 +20,7 @@ function VMatrix:GetAngles() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetField)
 ---@param row number Row of the field whose value is to be retrieved, from 1 to 4
 ---@param column number Column of the field whose value is to be retrieved, from 1 to 4
----@return number The value of the specified field
+---@return number #The value of the specified field
 function VMatrix:GetField(row, column) end
 
 ---[SHARED] Gets the forward direction of the matrix.
@@ -28,7 +28,7 @@ function VMatrix:GetField(row, column) end
 --- ie. The first column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetForward)
----@return Vector The forward direction of the matrix.
+---@return Vector #The forward direction of the matrix.
 function VMatrix:GetForward() end
 
 ---[SHARED] Returns an inverted matrix without modifying the original matrix.
@@ -38,7 +38,7 @@ function VMatrix:GetForward() end
 --- See also VMatrix:GetInverseTR.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverse)
----@return VMatrix The inverted matrix if possible, nil otherwise
+---@return VMatrix #The inverted matrix if possible, nil otherwise
 function VMatrix:GetInverse() end
 
 ---[SHARED] Returns an inverted matrix without modifying the original matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
@@ -48,7 +48,7 @@ function VMatrix:GetInverse() end
 --- To get the inverse of a matrix that contains other modifications, see VMatrix:GetInverse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverseTR)
----@return VMatrix The inverted matrix.
+---@return VMatrix #The inverted matrix.
 function VMatrix:GetInverseTR() end
 
 ---[SHARED] Gets the right direction of the matrix.
@@ -56,25 +56,25 @@ function VMatrix:GetInverseTR() end
 --- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetRight)
----@return Vector The right direction of the matrix.
+---@return Vector #The right direction of the matrix.
 function VMatrix:GetRight() end
 
 ---[SHARED] Returns the absolute scale of the matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetScale)
----@return Vector Absolute scale of the matrix
+---@return Vector #Absolute scale of the matrix
 function VMatrix:GetScale() end
 
 ---[SHARED] Returns the absolute translation of the matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTranslation)
----@return Vector Absolute translation of the matrix
+---@return Vector #Absolute translation of the matrix
 function VMatrix:GetTranslation() end
 
 ---[SHARED] Returns the transpose (each row becomes a column) of this matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTransposed)
----@return VMatrix The transposed matrix.
+---@return VMatrix #The transposed matrix.
 function VMatrix:GetTransposed() end
 
 ---[SHARED] Gets the up direction of the matrix.
@@ -82,7 +82,7 @@ function VMatrix:GetTransposed() end
 --- ie. The third column of the matrix, excluding the w coordinate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetUp)
----@return Vector The up direction of the matrix.
+---@return Vector #The up direction of the matrix.
 function VMatrix:GetUp() end
 
 ---[SHARED] Initializes the matrix as Identity matrix.
@@ -99,7 +99,7 @@ function VMatrix:Identity() end
 --- See also VMatrix:InvertTR.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Invert)
----@return boolean Whether the matrix was inverted or not
+---@return boolean #Whether the matrix was inverted or not
 function VMatrix:Invert() end
 
 ---[SHARED] Inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
@@ -114,7 +114,7 @@ function VMatrix:InvertTR() end
 ---[SHARED] Returns whether the matrix is equal to Identity matrix or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsIdentity)
----@return boolean Is the matrix an Identity matrix or not
+---@return boolean #Is the matrix an Identity matrix or not
 function VMatrix:IsIdentity() end
 
 ---[SHARED] Returns whether the matrix is a rotation matrix or not.
@@ -122,13 +122,13 @@ function VMatrix:IsIdentity() end
 --- Technically it checks if the forward, right and up vectors are orthogonal and normalized.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsRotationMatrix)
----@return boolean Is the matrix a rotation matrix or not
+---@return boolean #Is the matrix a rotation matrix or not
 function VMatrix:IsRotationMatrix() end
 
 ---[SHARED] Checks whenever all fields of the matrix are 0, aka if this is a [null matrix](https://en.wikipedia.org/wiki/Zero_matrix).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsZero)
----@return boolean If the matrix is a null matrix.
+---@return boolean #If the matrix is a null matrix.
 function VMatrix:IsZero() end
 
 ---[SHARED] Multiplies this matrix by given matrix.
@@ -245,7 +245,7 @@ function VMatrix:Sub(input) end
 ---[SHARED] Converts the matrix to a 4x4 table. See Global.Matrix function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:ToTable)
----@return table The 4x4 table.
+---@return table #The 4x4 table.
 function VMatrix:ToTable() end
 
 ---[SHARED] Translates the matrix by the given vector aka. adds the vector to the translation.
@@ -259,22 +259,22 @@ function VMatrix:Translate(translation) end
 ---[SHARED] Returns each component of the matrix, expanding rows before columns.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Unpack)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(1, 1)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(1, 2)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(1, 3)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(1, 4)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(2, 1)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(2, 2)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(2, 3)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(2, 4)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(3, 1)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(3, 2)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(3, 3)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(3, 4)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(4, 1)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(4, 2)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(4, 3)
----@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number number - VMatrix:GetField(4, 4)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(1, 1)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(1, 2)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(1, 3)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(1, 4)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(2, 1)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(2, 2)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(2, 3)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(2, 4)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(3, 1)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(3, 2)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(3, 3)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(3, 4)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(4, 1)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(4, 2)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(4, 3)
+---@return number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number #number - VMatrix:GetField(4, 4)
 function VMatrix:Unpack() end
 
 ---[SHARED] Sets all components of the matrix to 0, also known as a [null matrix](https://en.wikipedia.org/wiki/Zero_matrix).

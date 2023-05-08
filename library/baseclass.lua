@@ -14,7 +14,7 @@ baseclass = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/baseclass.Get)
 ---@param name string The child class.
----@return table The base class's meta table.
+---@return table #The base class's meta table.
 function baseclass.Get(name) end
 
 ---[SHARED AND MENU] Add a new base class that can be derived by others. This is done automatically for:

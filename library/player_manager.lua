@@ -7,9 +7,9 @@ player_manager = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.AddValidHands)
 ---@param name string Player model name
 ---@param model string Hands model
----@param skin number Skin to apply to the hands
----@param bodygroups string Bodygroups to apply to the hands. See Entity:SetBodyGroups for help with the format.
----@param matchBodySkin boolean If set to `true`, the skin of the hands will be set to the skin of the playermodel.
+---@param skin? number Skin to apply to the hands
+---@param bodygroups? string Bodygroups to apply to the hands. See Entity:SetBodyGroups for help with the format.
+---@param matchBodySkin? boolean If set to `true`, the skin of the hands will be set to the skin of the playermodel.
 ---  This is useful when player models have multiple user-selectable skins.
 function player_manager.AddValidHands(name, model, skin, bodygroups, matchBodySkin) end
 
@@ -38,13 +38,13 @@ function player_manager.ClearPlayerClass(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.GetPlayerClass)
 ---@param ply Player Player to get class
----@return string The players class
+---@return string #The players class
 function player_manager.GetPlayerClass(ply) end
 
 ---[SHARED] Retrieves a copy of all registered player classes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.GetPlayerClasses)
----@return table A copy of all registered player classes.
+---@return table #A copy of all registered player classes.
 function player_manager.GetPlayerClasses() end
 
 ---[SHARED] Applies basic class variables when the player spawns.
@@ -69,7 +69,7 @@ function player_manager.RegisterClass(name, table, base) end
 ---@param ply Player Player to execute function on.
 ---@param funcName string Name of function.
 ---@param ... ... Optional arguments. Can be of any type.
----@return ... The values returned by the called function.
+---@return ... #The values returned by the called function.
 function player_manager.RunClass(ply, funcName, ...) end
 
 ---[SHARED] Sets a player's class
@@ -83,14 +83,14 @@ function player_manager.SetPlayerClass(ply, classname) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerHands)
 ---@param name string Player model name
----@return table A table with following contents: * string model - Model of hands * number skin - Skin of hands * string body - Bodygroups of hands
+---@return table #A table with following contents: * string model - Model of hands * number skin - Skin of hands * string body - Bodygroups of hands
 function player_manager.TranslatePlayerHands(name) end
 
 ---[SHARED] Returns the valid model path for a simplified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel)
 ---@param shortName string The short name of the model.
----@return string The valid model path for the short name.
+---@return string #The valid model path for the short name.
 function player_manager.TranslatePlayerModel(shortName) end
 
 ---[SHARED] Returns the simplified name for a valid model path of a player model.
@@ -99,5 +99,5 @@ function player_manager.TranslatePlayerModel(shortName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslateToPlayerModelName)
 ---@param model string The model path to a player model
----@return string The simplified name for that model
+---@return string #The simplified name for that model
 function player_manager.TranslateToPlayerModelName(model) end

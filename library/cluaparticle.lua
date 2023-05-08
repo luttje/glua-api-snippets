@@ -6,63 +6,63 @@ local CLuaParticle = {}
 ---[CLIENT] Returns the air resistance of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetAirResistance)
----@return number The air resistance of the particle
+---@return number #The air resistance of the particle
 function CLuaParticle:GetAirResistance() end
 
 ---[CLIENT] Returns the current orientation of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetAngles)
----@return Angle The angles of the particle
+---@return Angle #The angles of the particle
 function CLuaParticle:GetAngles() end
 
 ---[CLIENT] Returns the angular velocity of the particle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetAngleVelocity)
----@return Angle The angular velocity of the particle
+---@return Angle #The angular velocity of the particle
 function CLuaParticle:GetAngleVelocity() end
 
 ---[CLIENT] Returns the 'bounciness' of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetBounce)
----@return number The 'bounciness' of the particle  2 means it will gain 100% of its previous velocity,   1 means it will not lose velocity,   0.5 means it will lose half of its velocity with each bounce.
+---@return number #The 'bounciness' of the particle  2 means it will gain 100% of its previous velocity,   1 means it will not lose velocity,   0.5 means it will lose half of its velocity with each bounce.
 function CLuaParticle:GetBounce() end
 
 ---[CLIENT] Returns the color of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetColor)
----@return number, number, number number - Red part of the color
----@return number, number, number number - Green part of the color
----@return number, number, number number - Blue part of the color
+---@return number, number, number #number - Red part of the color
+---@return number, number, number #number - Green part of the color
+---@return number, number, number #number - Blue part of the color
 function CLuaParticle:GetColor() end
 
 ---[CLIENT] Returns the amount of time in seconds after which the particle will be destroyed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetDieTime)
----@return number The amount of time in seconds after which the particle will be destroyed
+---@return number #The amount of time in seconds after which the particle will be destroyed
 function CLuaParticle:GetDieTime() end
 
 ---[CLIENT] Returns the alpha value that the particle will reach on its death.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetEndAlpha)
----@return number The alpha value the particle will fade to
+---@return number #The alpha value the particle will fade to
 function CLuaParticle:GetEndAlpha() end
 
 ---[CLIENT] Returns the length that the particle will reach on its death.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetEndLength)
----@return number The length the particle will reach
+---@return number #The length the particle will reach
 function CLuaParticle:GetEndLength() end
 
 ---[CLIENT] Returns the size that the particle will reach on its death.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetEndSize)
----@return number The size the particle will reach
+---@return number #The size the particle will reach
 function CLuaParticle:GetEndSize() end
 
 ---[CLIENT] Returns the gravity of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetGravity)
----@return Vector The gravity of the particle.
+---@return Vector #The gravity of the particle.
 function CLuaParticle:GetGravity() end
 
 ---[CLIENT] Returns the 'life time' of the particle, how long the particle existed since its creation.
@@ -78,55 +78,55 @@ function CLuaParticle:GetGravity() end
 --- If the life time of the particle will be more than CLuaParticle:GetDieTime, it will be removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetLifeTime)
----@return number How long the particle existed, in seconds.
+---@return number #How long the particle existed, in seconds.
 function CLuaParticle:GetLifeTime() end
 
 ---[CLIENT] Returns the current material of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetMaterial)
----@return IMaterial The material.
+---@return IMaterial #The material.
 function CLuaParticle:GetMaterial() end
 
 ---[CLIENT] Returns the absolute position of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetPos)
----@return Vector The absolute position of the particle.
+---@return Vector #The absolute position of the particle.
 function CLuaParticle:GetPos() end
 
 ---[CLIENT] Returns the current rotation of the particle in radians, this should only be used for 2D particles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetRoll)
----@return number The current rotation of the particle in radians
+---@return number #The current rotation of the particle in radians
 function CLuaParticle:GetRoll() end
 
 ---[CLIENT] Returns the current rotation speed of the particle in radians, this should only be used for 2D particles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetRollDelta)
----@return number The current rotation speed of the particle in radians
+---@return number #The current rotation speed of the particle in radians
 function CLuaParticle:GetRollDelta() end
 
 ---[CLIENT] Returns the alpha value which the particle has when it's created.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetStartAlpha)
----@return number The alpha value which the particle has when it's created.
+---@return number #The alpha value which the particle has when it's created.
 function CLuaParticle:GetStartAlpha() end
 
 ---[CLIENT] Returns the length which the particle has when it's created.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetStartLength)
----@return number The length which the particle has when it's created.
+---@return number #The length which the particle has when it's created.
 function CLuaParticle:GetStartLength() end
 
 ---[CLIENT] Returns the size which the particle has when it's created.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetStartSize)
----@return number The size which the particle has when it's created.
+---@return number #The size which the particle has when it's created.
 function CLuaParticle:GetStartSize() end
 
 ---[CLIENT] Returns the current velocity of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetVelocity)
----@return Vector The current velocity of the particle.
+---@return Vector #The current velocity of the particle.
 function CLuaParticle:GetVelocity() end
 
 ---[CLIENT] Sets the air resistance of the the particle.
@@ -306,5 +306,5 @@ function CLuaParticle:SetVelocity(vel) end
 ---[CLIENT] Scales the velocity based on the particle speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetVelocityScale)
----@param doScale boolean Use velocity scaling.
+---@param doScale? boolean Use velocity scaling.
 function CLuaParticle:SetVelocityScale(doScale) end

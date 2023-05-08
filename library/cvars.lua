@@ -14,34 +14,34 @@ cvars = {}
 --- * string convar - The name of the convar.
 --- * string oldValue - The old value of the convar.
 --- * string newValue - The new value of the convar.
----@param identifier string If set, you will be able to remove the callback using cvars.RemoveChangeCallback. The identifier is not required to be globally unique, as it's paired with the actual name of the convar.
+---@param identifier? string If set, you will be able to remove the callback using cvars.RemoveChangeCallback. The identifier is not required to be globally unique, as it's paired with the actual name of the convar.
 function cvars.AddChangeCallback(name, callback, identifier) end
 
 ---[SHARED AND MENU] Retrieves console variable as a boolean.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.Bool)
 ---@param cvar string Name of console variable
----@param default boolean The value to return if the console variable does not exist
----@return boolean Retrieved value
+---@param default? boolean The value to return if the console variable does not exist
+---@return boolean #Retrieved value
 function cvars.Bool(cvar, default) end
 
 ---[SHARED AND MENU] Returns a table of the given ConVars callbacks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.GetConVarCallbacks)
 ---@param name string The name of the ConVar.
----@param createIfNotFound boolean Whether or not to create the internal callback table for given ConVar if there isn't one yet.
+---@param createIfNotFound? boolean Whether or not to create the internal callback table for given ConVar if there isn't one yet.
 ---
 ---
 --- This argument is internal and should not be used.
----@return table A table of the convar's callbacks, or nil if the convar doesn't exist.
+---@return table #A table of the convar's callbacks, or nil if the convar doesn't exist.
 function cvars.GetConVarCallbacks(name, createIfNotFound) end
 
 ---[SHARED AND MENU] Retrieves console variable as a number.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.Number)
 ---@param cvar string Name of console variable
----@param default any The value to return if the console variable does not exist
----@return number Retrieved value
+---@param default? any The value to return if the console variable does not exist
+---@return number #Retrieved value
 function cvars.Number(cvar, default) end
 
 ---[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.
@@ -65,6 +65,6 @@ function cvars.RemoveChangeCallback(name, indentifier) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.String)
 ---@param cvar string Name of console variable
----@param default any The value to return if the console variable does not exist
----@return string Retrieved value
+---@param default? any The value to return if the console variable does not exist
+---@return string #Retrieved value
 function cvars.String(cvar, default) end

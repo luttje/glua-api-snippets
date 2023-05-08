@@ -50,7 +50,7 @@ function cam.EndOrthoView() end
 --- 	This function essentially returns the copy of the last pushed model matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.GetModelMatrix)
----@return VMatrix The currently active matrix.
+---@return VMatrix #The currently active matrix.
 function cam.GetModelMatrix() end
 
 ---[CLIENT] Tells the renderer to ignore the depth buffer and draw any upcoming operation "ontop" of everything that was drawn yet.
@@ -72,7 +72,7 @@ function cam.PopModelMatrix() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)
 ---@param matrix VMatrix The matrix to push.
----@param multiply boolean If set, multiplies given matrix with currently active matrix (cam.GetModelMatrix) before pushing.
+---@param multiply? boolean If set, multiplies given matrix with currently active matrix (cam.GetModelMatrix) before pushing.
 function cam.PushModelMatrix(matrix, multiply) end
 
 ---[CLIENT] Sets up a new rendering context. This is an extended version of cam.Start3D and cam.Start2D. Must be finished by cam.End3D or cam.End2D.
@@ -106,15 +106,15 @@ function cam.Start2D() end
 --- This will not update current view properties.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start3D)
----@param pos Vector Render cam position.
----@param angles Angle Render cam angles.
----@param fov number Field of view.
----@param x number X coordinate of where to start the new view port.
----@param y number Y coordinate of where to start the new view port.
----@param w number Width of the new viewport.
----@param h number Height of the new viewport.
----@param zNear number Distance to near clipping plane.
----@param zFar number Distance to far clipping plane.
+---@param pos? Vector Render cam position.
+---@param angles? Angle Render cam angles.
+---@param fov? number Field of view.
+---@param x? number X coordinate of where to start the new view port.
+---@param y? number Y coordinate of where to start the new view port.
+---@param w? number Width of the new viewport.
+---@param h? number Height of the new viewport.
+---@param zNear? number Distance to near clipping plane.
+---@param zFar? number Distance to far clipping plane.
 function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 
 ---[CLIENT] Sets up a new 2D rendering context. Must be finished by cam.End3D2D. This function pushes a new matrix onto the stack. (cam.PushModelMatrix)

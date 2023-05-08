@@ -1,6 +1,6 @@
 ---@meta
 
----@class DIconBrowser
+---@class DIconBrowser : Panel
 local DIconBrowser = {}
 
 ---[CLIENT] Automatically called to fill the browser with icons. Will not work if DIconBrowser:SetManual is set to true.
@@ -17,13 +17,13 @@ function DIconBrowser:FilterByText(text) end
 ---[CLIENT] Returns whether or not the browser should fill itself with icons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:GetManual)
----@return boolean
+---@return boolean #
 function DIconBrowser:GetManual() end
 
 ---[CLIENT] Returns the currently selected icon's file path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:GetSelectedIcon)
----@return string The currently selected icon's file path.
+---@return string #The currently selected icon's file path.
 function DIconBrowser:GetSelectedIcon() end
 
 ---[CLIENT] Called when the selected icon was changed. Use DIconBrowser:GetSelectedIcon to get the selected icon's filepath.

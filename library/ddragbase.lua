@@ -1,6 +1,6 @@
 ---@meta
 
----@class DDragBase
+---@class DDragBase : Panel
 local DDragBase = {}
 
 ---[CLIENT] Internal function used in DDragBase:MakeDroppable
@@ -36,13 +36,13 @@ function DDragBase:DropAction_Simple(drops, bDoDrop, command, y, x) end
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetDnD)
----@return string Name of the DnD family.
+---@return string #Name of the DnD family.
 function DDragBase:GetDnD() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetUseLiveDrag)
----@return boolean
+---@return boolean #
 function DDragBase:GetUseLiveDrag() end
 
 ---[CLIENT] Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls Panel:Receiver.
@@ -71,7 +71,7 @@ function DDragBase:SetDnD(name) end
 --- "2" for bottom
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetDropPos)
----@param pos string Where you're allowed to drop things.
+---@param pos? string Where you're allowed to drop things.
 function DDragBase:SetDropPos(pos) end
 
 ---[CLIENT] No Description

@@ -38,7 +38,7 @@ function surface.DisableClipping(disable) end
 ---@param r number The red value of the color to draw the circle with, or a Color.
 ---@param g number The green value of the color to draw the circle with. Unused if a Color was given.
 ---@param b number The blue value of the color to draw the circle with. Unused if a Color was given.
----@param a number The alpha value of the color to draw the circle with. Unused if a Color was given.
+---@param a? number The alpha value of the color to draw the circle with. Unused if a Color was given.
 function surface.DrawCircle(originX, originY, radius, r, g, b, a) end
 
 ---[CLIENT AND MENU] Draws a line from one point to another.
@@ -89,7 +89,7 @@ function surface.DrawRect(x, y, width, height) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawText)
 ---@param text string The text to be rendered.
----@param forceAdditive boolean `true` to force text to render additive, `false` to force not additive, `nil` to use font's value.
+---@param forceAdditive? boolean `true` to force text to render additive, `false` to force not additive, `nil` to use font's value.
 function surface.DrawText(text, forceAdditive) end
 
 ---[CLIENT AND MENU] Draw a textured rectangle with the given position and dimensions on the screen, using the current active texture set with surface.SetMaterial. It is also affected by surface.SetDrawColor.
@@ -161,7 +161,7 @@ function surface.DrawTexturedRectUV(x, y, width, height, startU, startV, endU, e
 ---[CLIENT AND MENU] Returns the current alpha multiplier affecting drawing operations. This is set by surface.SetAlphaMultiplier or by the game engine in certain other cases.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetAlphaMultiplier)
----@return number The multiplier ranging from 0 to 1.
+---@return number #The multiplier ranging from 0 to 1.
 function surface.GetAlphaMultiplier() end
 
 ---[CLIENT AND MENU] Returns the current color affecting draw operations.
@@ -169,14 +169,14 @@ function surface.GetAlphaMultiplier() end
 --- The returned color will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetDrawColor)
----@return table The color that drawing operations will use as a Color.
+---@return table #The color that drawing operations will use as a Color.
 function surface.GetDrawColor() end
 
 ---[CLIENT] Gets the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID with the specified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetHUDTexture)
 ---@param name string The name of the texture.
----@return number
+---@return number #
 function surface.GetHUDTexture(name) end
 
 ---[CLIENT AND MENU] Returns the current color affecting text draw operations.
@@ -184,15 +184,15 @@ function surface.GetHUDTexture(name) end
 --- The returned color will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextColor)
----@return table The color that text drawing operations will use as a Color.
+---@return table #The color that text drawing operations will use as a Color.
 function surface.GetTextColor() end
 
 ---[CLIENT AND MENU] Returns the width and height (in pixels) of the given text, but only if the font has been set with surface.SetFont.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextSize)
 ---@param text string The string to check the size of.
----@return number, number number - Width of the provided text.
----@return number, number number - Height of the provided text.
+---@return number, number #number - Width of the provided text.
+---@return number, number #number - Height of the provided text.
 function surface.GetTextSize(text) end
 
 ---[CLIENT AND MENU] Returns the texture id of the material with the given name/path, for use with surface.SetTexture.
@@ -203,14 +203,14 @@ function surface.GetTextSize(text) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureID)
 ---@param nameOrPath string Name or path of the texture.
----@return number The texture ID
+---@return number #The texture ID
 function surface.GetTextureID(nameOrPath) end
 
 ---[CLIENT AND MENU] Returns name/path of texture by ID. Opposite version of this function is surface.GetTextureID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureNameByID)
 ---@param id number ID of texture.
----@return string Returns name/path of texture.
+---@return string #Returns name/path of texture.
 function surface.GetTextureNameByID(id) end
 
 ---[CLIENT AND MENU] Returns the size of the texture with the associated texture ID.
@@ -219,8 +219,8 @@ function surface.GetTextureNameByID(id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureSize)
 ---@param textureID number The texture ID, returned by surface.GetTextureID.
----@return number, number number - The texture width.
----@return number, number number - The texture height.
+---@return number, number #number - The texture width.
+---@return number, number #number - The texture height.
 function surface.GetTextureSize(textureID) end
 
 ---[CLIENT AND MENU] Play a sound file directly on the client (such as UI sounds, etc).
@@ -238,14 +238,14 @@ function surface.PlaySound(soundfile) end
 --- Returns the height of the current client's screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenHeight)
----@return number screenHeight
+---@return number #screenHeight
 function surface.ScreenHeight() end
 
 ---[CLIENT AND MENU] You should use Global.ScrW instead.
 --- Returns the width of the current client's screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenWidth)
----@return number screenWidth
+---@return number #screenWidth
 function surface.ScreenWidth() end
 
 ---[CLIENT AND MENU] Sets the alpha multiplier that will influence all upcoming drawing operations.
@@ -264,7 +264,7 @@ function surface.SetAlphaMultiplier(multiplier) end
 ---@param r number The red value of color, or a Color.
 ---@param g number The green value of color. Unused if a Color was given.
 ---@param b number The blue value of color. Unused if a Color was given.
----@param a number The alpha value of color. Unused if a Color was given.
+---@param a? number The alpha value of color. Unused if a Color was given.
 function surface.SetDrawColor(r, g, b, a) end
 
 ---[CLIENT AND MENU] Set the current font to be used for text operations later.
@@ -300,7 +300,7 @@ function surface.SetMaterial(material) end
 ---@param r number The red value of color, or a Color.
 ---@param g number The green value of color
 ---@param b number The blue value of color
----@param a number The alpha value of color
+---@param a? number The alpha value of color
 function surface.SetTextColor(r, g, b, a) end
 
 ---[CLIENT AND MENU] Set the top-left position to draw any future text at.

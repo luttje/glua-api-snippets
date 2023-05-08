@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTextEntry
+---@class DTextEntry : Panel
 local DTextEntry = {}
 
 ---[CLIENT] Called whenever the value of the panel has been updated (whether by user input or otherwise).
@@ -13,7 +13,7 @@ local DTextEntry = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AllowInput)
 ---@param char string The last character entered into the panel.
----@return boolean Return `true` to prevent the value from changing, `false` to allow it.
+---@return boolean #Return `true` to prevent the value from changing, `false` to allow it.
 function DTextEntry:AllowInput(char) end
 
 ---[CLIENT] Returns whether a string is numeric or not.
@@ -21,86 +21,86 @@ function DTextEntry:AllowInput(char) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:CheckNumeric)
 ---@param strValue string The string to check.
----@return boolean Whether the string is numeric or not.
+---@return boolean #Whether the string is numeric or not.
 function DTextEntry:CheckNumeric(strValue) end
 
 ---[CLIENT] Called by the DTextEntry when a list of autocompletion options is requested. Meant to be overridden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetAutoComplete)
 ---@param inputText string Player's current input.
----@return table If a table is returned, the values of the table will show up as autocomplete suggestions for the user.
+---@return table #If a table is returned, the values of the table will show up as autocomplete suggestions for the user.
 function DTextEntry:GetAutoComplete(inputText) end
 
 ---[CLIENT] Returns the cursor color of a DTextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetCursorColor)
----@return table The color of the cursor as a Color.
+---@return table #The color of the cursor as a Color.
 function DTextEntry:GetCursorColor() end
 
 ---[CLIENT] Returns whether pressing Enter can cause the panel to lose focus. Note that a multiline DTextEntry cannot be escaped using the Enter key even when this function returns true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetEnterAllowed)
----@return boolean Whether pressing the Enter key can cause the panel to lose focus.
+---@return boolean #Whether pressing the Enter key can cause the panel to lose focus.
 function DTextEntry:GetEnterAllowed() end
 
 ---[CLIENT] Returns the contents of the DTextEntry as a number.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetFloat)
----@return number Text of the DTextEntry as a float, or nil if it cannot be converted to a number using Global.tonumber.
+---@return number #Text of the DTextEntry as a float, or nil if it cannot be converted to a number using Global.tonumber.
 function DTextEntry:GetFloat() end
 
 ---[CLIENT] Similar to DTextEntry:GetFloat, but rounds the value to the nearest integer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetInt)
----@return number Text of the DTextEntry as a round number, or nil if it cannot be converted to a number.
+---@return number #Text of the DTextEntry as a round number, or nil if it cannot be converted to a number.
 function DTextEntry:GetInt() end
 
 ---[CLIENT] Returns whether only numeric characters (123456789.-) can be entered into the DTextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetNumeric)
----@return boolean Whether the DTextEntry is numeric or not.
+---@return boolean #Whether the DTextEntry is numeric or not.
 function DTextEntry:GetNumeric() end
 
 ---[CLIENT] Whether the background is displayed or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetPaintBackground)
----@return boolean `false` hides the background; this is `true` by default.
+---@return boolean #`false` hides the background; this is `true` by default.
 function DTextEntry:GetPaintBackground() end
 
 ---[CLIENT] Return current color of panel placeholder
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetPlaceholderColor)
----@return table Current placeholder color
+---@return table #Current placeholder color
 function DTextEntry:GetPlaceholderColor() end
 
 ---[CLIENT] Returns the placeholder text set with DTextEntry:SetPlaceholderText.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetPlaceholderText)
----@return string
+---@return string #
 function DTextEntry:GetPlaceholderText() end
 
 ---[CLIENT] Returns the text color of a DTextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetTextColor)
----@return table The color of the text as a Color.
+---@return table #The color of the text as a Color.
 function DTextEntry:GetTextColor() end
 
 ---[CLIENT] Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetUpdateOnType)
----@return boolean
+---@return boolean #
 function DTextEntry:GetUpdateOnType() end
 
 ---[CLIENT] Returns whether this DTextEntry is being edited or not. (i.e. has focus)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:IsEditing)
----@return boolean Whether this DTextEntry is being edited or not
+---@return boolean #Whether this DTextEntry is being edited or not
 function DTextEntry:IsEditing() end
 
 ---[CLIENT] Determines whether or not DTextEntry is in multi-line mode. This is set with DTextEntry:SetMultiline.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:IsMultiline)
----@return boolean Whether the object is in multi-line mode or not.
+---@return boolean #Whether the object is in multi-line mode or not.
 function DTextEntry:IsMultiline() end
 
 ---[CLIENT] Called internally by DTextEntry:OnTextChanged when the user modifies the text in the DTextEntry.
@@ -225,13 +225,13 @@ function DTextEntry:SetPaintBackground(show) end
 ---[CLIENT] Allow you to set placeholder color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderColor)
----@param color table The color of the placeholder.
+---@param color? table The color of the placeholder.
 function DTextEntry:SetPlaceholderColor(color) end
 
 ---[CLIENT] Sets the placeholder text that will be shown while the text entry has no user text. The player will not need to delete the placeholder text if they decide to start typing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderText)
----@param text string
+---@param text? string
 function DTextEntry:SetPlaceholderText(text) end
 
 ---[CLIENT] Sets whether or not the panel accepts tab key.

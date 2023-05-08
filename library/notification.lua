@@ -15,7 +15,7 @@ function notification.AddLegacy(text, type, length) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/notification.AddProgress)
 ---@param id any Can be any type. It's used as an index.
 ---@param strText string The text to show
----@param frac number If set, overrides the progress bar animation with given percentage. Range is 0 to 1.
+---@param frac? number If set, overrides the progress bar animation with given percentage. Range is 0 to 1.
 function notification.AddProgress(id, strText, frac) end
 
 ---[CLIENT AND MENU] Removes the notification after 0.8 seconds.

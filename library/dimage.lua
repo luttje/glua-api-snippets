@@ -1,6 +1,6 @@
 ---@meta
 
----@class DImage
+---@class DImage : Panel
 local DImage = {}
 
 ---[CLIENT] Actually loads the IMaterial to render it. Called from DImage:LoadMaterial.
@@ -18,19 +18,19 @@ function DImage:FixVertexLitMaterial() end
 ---[CLIENT] Returns the texture path set by DImage:SetFailsafeMatName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetFailsafeMatName)
----@return string
+---@return string #
 function DImage:GetFailsafeMatName() end
 
 ---[CLIENT] Returns the image loaded in the image panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetImage)
----@return string The path to the image that is loaded.
+---@return string #The path to the image that is loaded.
 function DImage:GetImage() end
 
 ---[CLIENT] Returns the color override of the image panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetImageColor)
----@return table The color override of the image. Uses the Color.
+---@return table #The color override of the image. Uses the Color.
 function DImage:GetImageColor() end
 
 ---[CLIENT] Returns whether the DImage should keep the aspect ratio of its image when being resized.
@@ -38,19 +38,19 @@ function DImage:GetImageColor() end
 --- See DImage:SetKeepAspect for more info on how it works.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetKeepAspect)
----@return boolean Whether the DImage should keep the aspect ratio of its image when being resized.
+---@return boolean #Whether the DImage should keep the aspect ratio of its image when being resized.
 function DImage:GetKeepAspect() end
 
 ---[CLIENT] Returns the current Global.Material of the DImage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetMaterial)
----@return IMaterial
+---@return IMaterial #
 function DImage:GetMaterial() end
 
 ---[CLIENT] Returns the texture path set by DImage:SetMatName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetMatName)
----@return string
+---@return string #
 function DImage:GetMatName() end
 
 ---[CLIENT] Initializes the loading process of the material to render if it is not loaded yet.
@@ -81,7 +81,7 @@ function DImage:SetFailsafeMatName(backupMat) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:SetImage)
 ---@param strImage string The path of the image to load. When no file extension is supplied the VMT file extension is used.
----@param strBackup string The path of the backup image.
+---@param strBackup? string The path of the backup image.
 function DImage:SetImage(strImage, strBackup) end
 
 ---[CLIENT] Sets the image's color override.
@@ -122,5 +122,5 @@ function DImage:SetOnViewMaterial(mat, backupMat) end
 ---[CLIENT] Returns true if the image is **not** yet loaded.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:Unloaded)
----@return boolean
+---@return boolean #
 function DImage:Unloaded() end

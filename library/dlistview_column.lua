@@ -1,12 +1,12 @@
 ---@meta
 
----@class DListView_Column
+---@class DListView_Column : Panel
 local DListView_Column = {}
 
 ---[CLIENT] Gets the index used for this column.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetColumnID)
----@return number The column index of the DListView_Column.
+---@return number #The column index of the DListView_Column.
 function DListView_Column:GetColumnID() end
 
 ---[CLIENT] Resizes the column, additionally adjusting the size of the column to the right, if any.

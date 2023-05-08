@@ -1,24 +1,24 @@
 ---@meta
 
----@class DColorCube
+---@class DColorCube : Panel
 local DColorCube = {}
 
 ---[CLIENT] Returns the base Color set by DColorCube:SetBaseRGB.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetBaseRGB)
----@return table A Color
+---@return table #A Color
 function DColorCube:GetBaseRGB() end
 
 ---[CLIENT] Returns the value set by DColorCube:SetHue.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetHue)
----@return number
+---@return number #
 function DColorCube:GetHue() end
 
 ---[CLIENT] Returns the color cube's current set color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetRGB)
----@return table The set color, uses Color.
+---@return table #The set color, uses Color.
 function DColorCube:GetRGB() end
 
 ---[CLIENT] Function which is called when the color cube slider is moved (through user input). Meant to be overridden.
@@ -58,13 +58,13 @@ function DColorCube:SetRGB(clr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:TranslateValues)
 ---@param x number The x position to sample color from/the percentage of saturation to remove from the color (ranges from 0.0 to 1.0).
 ---@param y number The y position to sample color from/the percentage of brightness or value to remove from the color (ranges from 0.0 to 1.0).
----@return number, number number - The given x position.
----@return number, number number - The given y position.
+---@return number, number #number - The given x position.
+---@return number, number #number - The given y position.
 function DColorCube:TranslateValues(x, y) end
 
 ---[CLIENT] Updates the color cube RGB based on the given x and y position. Similar to DColorCube:TranslateValues.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:UpdateColor)
----@param x number The x position to set color to/the percentage of saturation to remove from the color (ranges from 0.0 to 1.0).
----@param y number The y position to set color to/the percentage of brightness or value to remove from the color (ranges from 0.0 to 1.0).
+---@param x? number The x position to set color to/the percentage of saturation to remove from the color (ranges from 0.0 to 1.0).
+---@param y? number The y position to set color to/the percentage of brightness or value to remove from the color (ranges from 0.0 to 1.0).
 function DColorCube:UpdateColor(x, y) end

@@ -1,18 +1,18 @@
 ---@meta
 
----@class DButton
+---@class DButton : Panel
 local DButton = {}
 
 ---[CLIENT] Returns value set by DButton:SetDrawBorder. See that page for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:GetDrawBorder)
----@return boolean value set by DButton:SetDrawBorder.
+---@return boolean #value set by DButton:SetDrawBorder.
 function DButton:GetDrawBorder() end
 
 ---[CLIENT] Returns true if the DButton is currently depressed (a user is clicking on it).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:IsDown)
----@return boolean Whether or not the button is depressed.
+---@return boolean #Whether or not the button is depressed.
 function DButton:IsDown() end
 
 ---[CLIENT] Sets a console command to be called when the button is clicked.
@@ -41,7 +41,7 @@ function DButton:SetDrawBorder(draw) end
 ---[CLIENT] Sets an image to be displayed as the button's background. Alias of DButton:SetImage
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetIcon)
----@param img string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
+---@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
 function DButton:SetIcon(img) end
 
 ---[CLIENT] Sets an image to be displayed as the button's background.
@@ -51,7 +51,7 @@ function DButton:SetIcon(img) end
 --- Also see: DImageButton
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetImage)
----@param img string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
+---@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
 function DButton:SetImage(img) end
 
 ---[CLIENT] Sets an image to be displayed as the button's background.
@@ -59,7 +59,7 @@ function DButton:SetImage(img) end
 --- See DButton:SetImage for equivalent function that uses file paths instead. Also see DImageButton.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetMaterial)
----@param img IMaterial The material to use. If this is nil, the image background is removed.
+---@param img? IMaterial The material to use. If this is nil, the image background is removed.
 function DButton:SetMaterial(img) end
 
 ---[CLIENT] A hook called from within DLabel's PANEL:ApplySchemeSettings to determine the color of the text on display.

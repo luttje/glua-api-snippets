@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTree_Node
+---@class DTree_Node : Panel
 local DTree_Node = {}
 
 ---[CLIENT AND MENU] A helper function that adds a new node and calls to DTree_Node:MakeFolder on it.
@@ -9,18 +9,18 @@ local DTree_Node = {}
 ---@param name string The name of the new node
 ---@param folder string The folder in the filesystem to use, relative to the garrysmod/ folder.
 ---@param path string The path to search in. See File Search Paths
----@param showFiles boolean Should files be added as nodes (true) or folders only (false)
----@param wildcard string The wildcard to use when searching for files.
----@param bDontForceExpandable boolean
----@return Panel The created DTree_Node
+---@param showFiles? boolean Should files be added as nodes (true) or folders only (false)
+---@param wildcard? string The wildcard to use when searching for files.
+---@param bDontForceExpandable? boolean
+---@return Panel #The created DTree_Node
 function DTree_Node:AddFolder(name, folder, path, showFiles, wildcard, bDontForceExpandable) end
 
 ---[CLIENT AND MENU] Add a child node to the DTree_Node
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:AddNode)
 ---@param name string Name of the node.
----@param icon string The icon that will show next to the node in the DTree.
----@return Panel Returns the created DTree_Node panel.
+---@param icon? string The icon that will show next to the node in the DTree.
+---@return Panel #Returns the created DTree_Node panel.
 function DTree_Node:AddNode(name, icon) end
 
 ---[CLIENT AND MENU] Adds the given panel to the child nodes list, a DListLayout.
@@ -53,7 +53,7 @@ function DTree_Node:CleanList() end
 ---[CLIENT AND MENU] Create and returns a copy of this node, including all the sub-nodes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:Copy)
----@return Panel The copied DTree_Node.
+---@return Panel #The copied DTree_Node.
 function DTree_Node:Copy() end
 
 ---[CLIENT AND MENU] Creates the container DListLayout for the DTree_Nodes.
@@ -103,61 +103,61 @@ function DTree_Node:FilePopulateCallback(files, folders, foldername, path, bAndC
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetChildNode)
 ---@param num number The number of the child to get, starting with 0
----@return Panel The child panel, if valid ID is given
+---@return Panel #The child panel, if valid ID is given
 function DTree_Node:GetChildNode(num) end
 
 ---[CLIENT AND MENU] Returns the number of child nodes this node has. For use with DTree_Node:GetChildNode
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetChildNodeCount)
----@return number Number of child nodes.
+---@return number #Number of child nodes.
 function DTree_Node:GetChildNodeCount() end
 
 ---[CLIENT AND MENU] Returns a table containing all child nodes of this node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetChildNodes)
----@return table A list of all child nodes.
+---@return table #A list of all child nodes.
 function DTree_Node:GetChildNodes() end
 
 ---[CLIENT AND MENU] Returns value set by DTree_Node:SetDirty.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetDirty)
----@return boolean
+---@return boolean #
 function DTree_Node:GetDirty() end
 
 ---[CLIENT AND MENU] Returns whether the double clock to collapse/expand functionality is enabled on this node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetDoubleClickToOpen)
----@return boolean
+---@return boolean #
 function DTree_Node:GetDoubleClickToOpen() end
 
 ---[CLIENT AND MENU] Returns what is set by DTree_Node:SetDraggableName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetDraggableName)
----@return string
+---@return string #
 function DTree_Node:GetDraggableName() end
 
 ---[CLIENT AND MENU] Returns whether or not this node is drawing lines
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetDrawLines)
----@return boolean
+---@return boolean #
 function DTree_Node:GetDrawLines() end
 
 ---[CLIENT AND MENU] Returns whether the node is expanded or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetExpanded)
----@return boolean Expanded or not.
+---@return boolean #Expanded or not.
 function DTree_Node:GetExpanded() end
 
 ---[CLIENT AND MENU] Returns the filepath of the file attached to this node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetFileName)
----@return string
+---@return string #
 function DTree_Node:GetFileName() end
 
 ---[CLIENT AND MENU] Returns the folder path to search in, set by DTree_Node:MakeFolder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetFolder)
----@return string The folder path.
+---@return string #The folder path.
 function DTree_Node:GetFolder() end
 
 ---[CLIENT AND MENU] Returns whether the expand/collapse button is shown on this node regardless of whether or not it has sub-nodes.
@@ -165,19 +165,19 @@ function DTree_Node:GetFolder() end
 --- See also DTree_Node:SetForceShowExpander.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetForceShowExpander)
----@return boolean
+---@return boolean #
 function DTree_Node:GetForceShowExpander() end
 
 ---[CLIENT AND MENU] Returns whether the expand button (little + button) should be shown or hidden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetHideExpander)
----@return boolean
+---@return boolean #
 function DTree_Node:GetHideExpander() end
 
 ---[CLIENT AND MENU] Returns the image path to the icon of this node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetIcon)
----@return string The path to the image
+---@return string #The path to the image
 function DTree_Node:GetIcon() end
 
 ---[CLIENT AND MENU] Returns the indentation level of the DTree this node belongs to.
@@ -185,13 +185,13 @@ function DTree_Node:GetIcon() end
 --- Alias of DTree:GetIndentSize, see it for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetIndentSize)
----@return number The indentation level.
+---@return number #The indentation level.
 function DTree_Node:GetIndentSize() end
 
 ---[CLIENT AND MENU] Returns whether this node is the last child on this level or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetLastChild)
----@return boolean
+---@return boolean #
 function DTree_Node:GetLastChild() end
 
 ---[CLIENT AND MENU] The height of a single DTree_Node of the DTree this node belongs to.
@@ -199,25 +199,25 @@ function DTree_Node:GetLastChild() end
 --- Alias of DTree:GetLineHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetLineHeight)
----@return number The height of a single DTree_Node.
+---@return number #The height of a single DTree_Node.
 function DTree_Node:GetLineHeight() end
 
 ---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetNeedsChildSearch)
----@return boolean
+---@return boolean #
 function DTree_Node:GetNeedsChildSearch() end
 
 ---[CLIENT AND MENU] Returns whether or not the node is set to be populated from the filesystem.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetNeedsPopulating)
----@return boolean
+---@return boolean #
 function DTree_Node:GetNeedsPopulating() end
 
 ---[CLIENT AND MENU] Returns the parent DTree_Node. Note that Panel:GetParent will not be the same!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetParentNode)
----@return Panel The parent node.
+---@return Panel #The parent node.
 function DTree_Node:GetParentNode() end
 
 ---[CLIENT AND MENU] Returns the path ID (File Search Paths) used in populating the DTree from the filesystem.
@@ -225,7 +225,7 @@ function DTree_Node:GetParentNode() end
 --- See DTree_Node:SetPathID and DTree_Node:MakeFolder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetPathID)
----@return string The Path ID
+---@return string #The Path ID
 function DTree_Node:GetPathID() end
 
 ---[CLIENT AND MENU] Returns the root node, the DTree this node is under.
@@ -233,19 +233,19 @@ function DTree_Node:GetPathID() end
 --- See also DTree_Node:GetParentNode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetRoot)
----@return Panel The root node
+---@return Panel #The root node
 function DTree_Node:GetRoot() end
 
 ---[CLIENT AND MENU] Returns whether or not nodes for files should/will be added when populating the node from filesystem.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetShowFiles)
----@return boolean
+---@return boolean #
 function DTree_Node:GetShowFiles() end
 
 ---[CLIENT AND MENU] Returns the wildcard set by DTree_Node:MakeFolder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:GetWildCard)
----@return string The search wildcard
+---@return string #The search wildcard
 function DTree_Node:GetWildCard() end
 
 ---[CLIENT AND MENU] Inserts a sub-node into this node before or after the given node.
@@ -284,7 +284,7 @@ function DTree_Node:InternalDoRightClick() end
 ---[CLIENT AND MENU] Returns true if DTree_Node:GetRoot is the same as DTree_Node:GetParentNode of this node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:IsRootNode)
----@return boolean If this is a root node.
+---@return boolean #If this is a root node.
 function DTree_Node:IsRootNode() end
 
 ---[CLIENT AND MENU] Removes given node as a sub-node of this node.
@@ -302,9 +302,9 @@ function DTree_Node:LeaveTree(pnl) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:MakeFolder)
 ---@param folder string The folder in the filesystem to use, relative to the garrysmod/ folder.
 ---@param path string The path to search in. See File Search Paths
----@param showFiles boolean Should files be added as nodes (true) or folders only (false)
----@param wildcard string The wildcard to use when searching for files.
----@param dontForceExpandable boolean If set to true, don't show the expand buttons on empty nodes.
+---@param showFiles? boolean Should files be added as nodes (true) or folders only (false)
+---@param wildcard? string The wildcard to use when searching for files.
+---@param dontForceExpandable? boolean If set to true, don't show the expand buttons on empty nodes.
 function DTree_Node:MakeFolder(folder, path, showFiles, wildcard, dontForceExpandable) end
 
 ---[CLIENT AND MENU] Moves given panel to the top of the children of this node.
@@ -364,7 +364,7 @@ function DTree_Node:SetDrawLines(draw) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:SetExpanded)
 ---@param expand boolean Whether to expand (true) or collapse (false)
----@param surpressAnimation boolean Whether to play animation (false) or not (true)
+---@param surpressAnimation? boolean Whether to play animation (false) or not (true)
 function DTree_Node:SetExpanded(expand, surpressAnimation) end
 
 ---[CLIENT AND MENU] Sets the file full filepath to the file attached to this node
@@ -471,5 +471,5 @@ function DTree_Node:SetWildCard(wildcard) end
 --- See DTree:ShowIcons for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree_Node:ShowIcons)
----@return number Whether the icons are shown or not
+---@return number #Whether the icons are shown or not
 function DTree_Node:ShowIcons() end

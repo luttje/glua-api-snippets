@@ -13,7 +13,7 @@ local GM = {}
 ---@param activator Entity Activator of the input
 ---@param caller Entity Caller of the input
 ---@param value any Data provided with the input. Will be either a string, a number, a boolean or a nil.
----@return boolean Return true to prevent this input from being processed. Do not return otherwise.
+---@return boolean #Return true to prevent this input from being processed. Do not return otherwise.
 function GM:AcceptInput(ent, input, activator, caller, value) end
 
 ---[CLIENT] Adds a death notice entry.
@@ -34,7 +34,7 @@ function GM:AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam
 ---@param defaultSensitivity number The old sensitivity
 ---
 --- In general it will be 0, which is equivalent to a sensitivity of 1.
----@return number A fraction of the normal sensitivity (0.5 would be half as sensitive).  Return -1 to not override and prevent subsequent hooks and WEAPON:AdjustMouseSensitivity from running.   Return nil to not override and allow subsequent hooks and WEAPON:AdjustMouseSensitivity to run.
+---@return number #A fraction of the normal sensitivity (0.5 would be half as sensitive).  Return -1 to not override and prevent subsequent hooks and WEAPON:AdjustMouseSensitivity from running.   Return nil to not override and allow subsequent hooks and WEAPON:AdjustMouseSensitivity to run.
 function GM:AdjustMouseSensitivity(defaultSensitivity) end
 
 ---[SERVER] Called when a player tries to pick up something using the "use" key, return to override.
@@ -47,7 +47,7 @@ function GM:AdjustMouseSensitivity(defaultSensitivity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:AllowPlayerPickup)
 ---@param ply Player The player trying to pick up something.
 ---@param ent Entity The Entity the player attempted to pick up.
----@return boolean Allow the player to pick up the entity or not.
+---@return boolean #Allow the player to pick up the entity or not.
 function GM:AllowPlayerPickup(ply, ent) end
 
 ---[SHARED] This hook is used to calculate animations for a player.
@@ -57,8 +57,8 @@ function GM:AllowPlayerPickup(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CalcMainActivity)
 ---@param ply Player The player to apply the animation.
 ---@param vel Vector The velocity of the player.
----@return number, number number - Enums/ACT for the activity the player should use. A nil return will be treated as ACT_INVALID.
----@return number, number number - Sequence for the player to use. This takes precedence over the activity (the activity is still used for layering). Return -1 or nil to let the activity determine the sequence.
+---@return number, number #number - Enums/ACT for the activity the player should use. A nil return will be treated as ACT_INVALID.
+---@return number, number #number - Sequence for the player to use. This takes precedence over the activity (the activity is still used for layering). Return -1 or nil to let the activity determine the sequence.
 function GM:CalcMainActivity(ply, vel) end
 
 ---[CLIENT] Called from GM:CalcView when player is in driving a vehicle.
@@ -69,7 +69,7 @@ function GM:CalcMainActivity(ply, vel) end
 ---@param veh Vehicle The vehicle the player is driving
 ---@param ply Player The vehicle driver
 ---@param view table The view data containing players FOV, view position and angles, see Structures/CamData
----@return table The modified view table containing new values, see Structures/CamData
+---@return table #The modified view table containing new values, see Structures/CamData
 function GM:CalcVehicleView(veh, ply, view) end
 
 ---[CLIENT] Allows override of the default view.
@@ -81,7 +81,7 @@ function GM:CalcVehicleView(veh, ply, view) end
 ---@param fov number Field of view.
 ---@param znear number Distance to near clipping plane.
 ---@param zfar number Distance to far clipping plane.
----@return table View data table. See Structures/CamData
+---@return table #View data table. See Structures/CamData
 function GM:CalcView(ply, origin, angles, fov, znear, zfar) end
 
 ---[CLIENT] Allows overriding the position and angle of the viewmodel.
@@ -93,8 +93,8 @@ function GM:CalcView(ply, origin, angles, fov, znear, zfar) end
 ---@param oldAng Angle Original angle (before viewmodel bobbing and swaying)
 ---@param pos Vector Current position
 ---@param ang Angle Current angle
----@return Vector, Angle Vector - New position
----@return Vector, Angle Angle - New angle
+---@return Vector, Angle #Vector - New position
+---@return Vector, Angle #Angle - New angle
 function GM:CalcViewModelView(wep, vm, oldPos, oldAng, pos, ang) end
 
 ---[SERVER] Called when a variable is edited on an Entity (called by `Edit Properties...` menu), to determine if the edit should be permitted.
@@ -107,7 +107,7 @@ function GM:CalcViewModelView(wep, vm, oldPos, oldAng, pos, ang) end
 ---@param key string The name of the variable.
 ---@param val string The new value, as a string which will later be converted to its appropriate type.
 ---@param editor table The edit table defined in Entity:NetworkVar.
----@return boolean Return true to allow editing.
+---@return boolean #Return true to allow editing.
 function GM:CanEditVariable(ent, ply, key, val, editor) end
 
 ---[SERVER] Determines if the player can exit the vehicle.
@@ -115,7 +115,7 @@ function GM:CanEditVariable(ent, ply, key, val, editor) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanExitVehicle)
 ---@param veh Vehicle The vehicle entity
 ---@param ply Player The player
----@return boolean True if the player can exit the vehicle.
+---@return boolean #True if the player can exit the vehicle.
 function GM:CanExitVehicle(veh, ply) end
 
 ---[SERVER] Determines whether or not the player can enter the vehicle.
@@ -126,14 +126,14 @@ function GM:CanExitVehicle(veh, ply) end
 ---@param player Player The player.
 ---@param vehicle Vehicle The vehicle.
 ---@param role number The seat number.
----@return boolean `false` if the player is not allowed to enter the vehicle.
+---@return boolean #`false` if the player is not allowed to enter the vehicle.
 function GM:CanPlayerEnterVehicle(player, vehicle, role) end
 
 ---[SERVER] Determines if the player can kill themselves using the concommands `kill` or `explode`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanPlayerSuicide)
 ---@param player Player The player
----@return boolean True if they can suicide.
+---@return boolean #True if they can suicide.
 function GM:CanPlayerSuicide(player) end
 
 ---[SERVER] Determines if the player can unfreeze the entity.
@@ -142,7 +142,7 @@ function GM:CanPlayerSuicide(player) end
 ---@param player Player The player
 ---@param entity Entity The entity
 ---@param phys PhysObj The physics object of the entity
----@return boolean True if they can unfreeze.
+---@return boolean #True if they can unfreeze.
 function GM:CanPlayerUnfreeze(player, entity, phys) end
 
 ---[SERVER] Called whenever a players tries to undo.
@@ -150,7 +150,7 @@ function GM:CanPlayerUnfreeze(player, entity, phys) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanUndo)
 ---@param ply Player The player who tried to undo something.
 ---@param undo table The undo table as a Structures/Undo.
----@return boolean Return false to disallow the undo.
+---@return boolean #Return false to disallow the undo.
 function GM:CanUndo(ply, undo) end
 
 ---[MENU] Called each frame to record demos to video using IVideoWriter.
@@ -175,7 +175,7 @@ function GM:CaptureVideo() end
 --- * `teamchange` - Team changes?
 --- * `chat` - (Obsolete?) Player chat? Seems to trigger when server console uses the `say` command
 --- * `none` - A fallback value
----@return boolean Return true to suppress the chat message.
+---@return boolean #Return true to suppress the chat message.
 function GM:ChatText(index, name, text, type) end
 
 ---[CLIENT] Called whenever the content of the user's chat input box is changed.
@@ -194,8 +194,8 @@ function GM:ChatTextChanged(text) end
 ---@param svPassword string The current value of sv_password (the password set by the server)
 ---@param clPassword string The password provided by the client
 ---@param name string The name of the joining player
----@return boolean, string boolean - If the hook returns false then the player is disconnected
----@return boolean, string string - If returning false in the first argument, then this should be the disconnect message. This will default to `#GameUI_ServerRejectBadPassword`, which is `Bad Password.` translated to the client's language.
+---@return boolean, string #boolean - If the hook returns false then the player is disconnected
+---@return boolean, string #string - If returning false in the first argument, then this should be the disconnect message. This will default to `#GameUI_ServerRejectBadPassword`, which is `Bad Password.` translated to the client's language.
 function GM:CheckPassword(steamID64, ipAddress, svPassword, clPassword, name) end
 
 ---[SHARED] Called when a player's sign on state changes.
@@ -238,7 +238,7 @@ function GM:CreateEntityRagdoll(owner, ragdoll) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CreateMove)
 ---@param cmd CUserCmd The User Command data
----@return boolean Return true to: * Disable Sandbox C menu "screen clicking" * Disable Teammate nocollide (verification required) * Prevent calling of C_BaseHLPlayer::CreateMove & subsequently C_BasePlayer::CreateMove
+---@return boolean #Return true to: * Disable Sandbox C menu "screen clicking" * Disable Teammate nocollide (verification required) * Prevent calling of C_BaseHLPlayer::CreateMove & subsequently C_BasePlayer::CreateMove
 function GM:CreateMove(cmd) end
 
 ---[SHARED] Teams are created within this hook using team.SetUp.
@@ -253,8 +253,8 @@ function GM:CreateTeams() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent)
 ---@param ply Player Player who is being animated
 ---@param event number Animation event. See Enums/PLAYERANIMEVENT
----@param data number The data for the event. This is interpreted as an Enums/ACT by `PLAYERANIMEVENT_CUSTOM` and `PLAYERANIMEVENT_CUSTOM_GESTURE`, or a sequence by `PLAYERANIMEVENT_CUSTOM_SEQUENCE`.
----@return number The translated activity to send to the weapon. See Enums/ACT. Return `ACT_INVALID` if you don't want to send an activity.
+---@param data? number The data for the event. This is interpreted as an Enums/ACT by `PLAYERANIMEVENT_CUSTOM` and `PLAYERANIMEVENT_CUSTOM_GESTURE`, or a sequence by `PLAYERANIMEVENT_CUSTOM_SEQUENCE`.
+---@return number #The translated activity to send to the weapon. See Enums/ACT. Return `ACT_INVALID` if you don't want to send an activity.
 function GM:DoAnimationEvent(ply, event, data) end
 
 ---[SERVER] Handles the player's death.
@@ -302,7 +302,7 @@ function GM:DrawOverlay() end
 ---@param target Entity Entity we are grabbing. This will be NULL if nothing is being held
 ---@param physBone number ID of the physics bone (PhysObj) we are grabbing at. Use Entity:TranslatePhysBoneToBone to translate to an actual bone.
 ---@param hitPos Vector Beam hit position relative to the physics bone (PhysObj) we are grabbing.
----@return boolean Return false to hide default beam
+---@return boolean #Return false to hide default beam
 function GM:DrawPhysgunBeam(ply, physgun, enabled, target, physBone, hitPos) end
 
 ---[SHARED] Called right before an entity stops driving. Overriding this hook will cause it to not call drive.End and the player will not stop driving.
@@ -320,7 +320,7 @@ function GM:EndEntityDriving(ent, ply) end
 ---@param data table Information about the played sound. Changes done to this table can be applied by returning `true` from this hook.
 ---
 --- See Structures/EmitSoundInfo.
----@return boolean  * Return `true` to apply all changes done to the data table. * Return `false` to prevent the sound from playing. * Return `nil` or nothing to play the sound without altering it.
+---@return boolean # * Return `true` to apply all changes done to the data table. * Return `false` to prevent the sound from playing. * Return `nil` or nothing to play the sound without altering it.
 function GM:EntityEmitSound(data) end
 
 ---[SHARED] Called every time a bullet is fired from an entity.
@@ -330,7 +330,7 @@ function GM:EntityEmitSound(data) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:EntityFireBullets)
 ---@param entity Entity The entity that fired the bullet
 ---@param data table The bullet data. See Structures/Bullet.
----@return boolean  * Return `true` to apply all changes done to the bullet table. * Return `false` to suppress the bullet.
+---@return boolean # * Return `true` to apply all changes done to the bullet table. * Return `false` to suppress the bullet.
 function GM:EntityFireBullets(entity, data) end
 
 ---[SHARED] Called when a key-value pair is set on an entity, either by the engine (for example when map spawns) or Entity:SetKeyValue.
@@ -344,7 +344,7 @@ function GM:EntityFireBullets(entity, data) end
 ---@param ent Entity Entity that the keyvalue is being set on
 ---@param key string Key of the key/value pair
 ---@param value string Value of the key/value pair
----@return string If set, the value of the key-value pair will be overridden by this string.
+---@return string #If set, the value of the key-value pair will be overridden by this string.
 function GM:EntityKeyValue(ent, key, value) end
 
 ---[SHARED] Called when an NW2Var is changed.
@@ -372,7 +372,7 @@ function GM:EntityRemoved(ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage)
 ---@param target Entity The entity taking damage
 ---@param dmg CTakeDamageInfo Damage info
----@return boolean Return true to completely block the damage event
+---@return boolean #Return true to completely block the damage event
 function GM:EntityTakeDamage(target, dmg) end
 
 ---[SHARED] This hook polls the entity the player use action should be applied to.
@@ -382,7 +382,7 @@ function GM:EntityTakeDamage(target, dmg) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:FindUseEntity)
 ---@param ply Player The player who initiated the use action.
 ---@param defaultEnt Entity The entity that was chosen by the engine.
----@return Entity The entity to use instead of default entity
+---@return Entity #The entity to use instead of default entity
 function GM:FindUseEntity(ply, defaultEnt) end
 
 ---[CLIENT] Runs when user cancels/finishes typing.
@@ -397,7 +397,7 @@ function GM:FinishChat() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:FinishMove)
 ---@param ply Player Player
 ---@param mv CMoveData Movement data
----@return boolean Return true to suppress default engine behavior, i.e. declare that you have already moved the player according to the move data in a custom way.
+---@return boolean #Return true to suppress default engine behavior, i.e. declare that you have already moved the player according to the move data in a custom way.
 function GM:FinishMove(ply, mv) end
 
 ---[CLIENT] Called to allow override of the default Derma skin for all panels.
@@ -405,7 +405,7 @@ function GM:FinishMove(ply, mv) end
 --- This hook is only called on Lua start up, changing its value (or adding new hooks) after it has been already called will not have any effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ForceDermaSkin)
----@return string A **case sensitive** Derma skin name to be used as default, registered previously via derma.DefineSkin.   Returning nothing, nil or invalid name will make it fallback to the "Default" skin.
+---@return string #A **case sensitive** Derma skin name to be used as default, registered previously via derma.DefineSkin.   Returning nothing, nil or invalid name will make it fallback to the "Default" skin.
 function GM:ForceDermaSkin() end
 
 ---[SHARED AND MENU] Called when game content has been changed, for example an addon or a mountable game was (un)mounted.
@@ -418,7 +418,7 @@ function GM:GameContentChanged() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GetFallDamage)
 ---@param ply Player The player
 ---@param speed number The fall speed
----@return number New fall damage
+---@return number #New fall damage
 function GM:GetFallDamage(ply, speed) end
 
 ---[SHARED] Called when the game(server) needs to update the text shown in the server browser as the gamemode.
@@ -428,7 +428,7 @@ function GM:GetFallDamage(ply, speed) end
 --- Also, it **only** works on dedicated servers and is called at regular intervals (about one second) **even** if the server has no players and the hibernation function is enabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GetGameDescription)
----@return string The text to be shown in the server browser as the gamemode.
+---@return string #The text to be shown in the server browser as the gamemode.
 function GM:GetGameDescription() end
 
 ---[CLIENT] Allows you to modify the Source Engine's motion blur shaders.
@@ -438,10 +438,10 @@ function GM:GetGameDescription() end
 ---@param vertical number The amount of vertical  blur.
 ---@param forward number The amount of forward/radial blur.
 ---@param rotational number The amount of rotational blur.
----@return number, number, number, number number - New amount of horizontal blur.
----@return number, number, number, number number - New amount of vertical blur.
----@return number, number, number, number number - New amount of forward/radial blur.
----@return number, number, number, number number - New amount of rotational blur.
+---@return number, number, number, number #number - New amount of horizontal blur.
+---@return number, number, number, number #number - New amount of vertical blur.
+---@return number, number, number, number #number - New amount of forward/radial blur.
+---@return number, number, number, number #number - New amount of rotational blur.
 function GM:GetMotionBlurValues(horizontal, vertical, forward, rotational) end
 
 ---[SERVER] Called to determine preferred carry angles for the entity. It works for both, +use pickup and gravity gun pickup.
@@ -453,21 +453,21 @@ function GM:GetMotionBlurValues(horizontal, vertical, forward, rotational) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GetPreferredCarryAngles)
 ---@param ent Entity The entity to generate carry angles for
 ---@param ply Player The player who is holding the object
----@return Angle The preferred carry angles for the entity.
+---@return Angle #The preferred carry angles for the entity.
 function GM:GetPreferredCarryAngles(ent, ply) end
 
 ---[CLIENT] Returns the color for the given entity's team. This is used in chat and deathnotice text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GetTeamColor)
 ---@param ent Entity Entity
----@return table Team Global.Color
+---@return table #Team Global.Color
 function GM:GetTeamColor(ent) end
 
 ---[CLIENT] Returns the team color for the given team index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GetTeamNumColor)
 ---@param team number Team index
----@return table Team Global.Color
+---@return table #Team Global.Color
 function GM:GetTeamNumColor(team) end
 
 ---[SHARED] Override this hook to disable/change ear-grabbing in your gamemode.
@@ -505,7 +505,7 @@ function GM:GravGunOnPickedUp(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GravGunPickupAllowed)
 ---@param ply Player The player wielding the gravity gun
 ---@param ent Entity The entity the player is attempting to pick up
----@return boolean Return true to allow entity pick up
+---@return boolean #Return true to allow entity pick up
 function GM:GravGunPickupAllowed(ply, ent) end
 
 ---[SHARED] Called when an entity is about to be punted with the gravity gun (primary fire).
@@ -515,7 +515,7 @@ function GM:GravGunPickupAllowed(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:GravGunPunt)
 ---@param ply Player The player wielding the gravity gun
 ---@param ent Entity The entity the player is attempting to punt
----@return boolean Return true to allow and false to disallow.
+---@return boolean #Return true to allow and false to disallow.
 function GM:GravGunPunt(ply, ent) end
 
 ---[CLIENT] Called when the mouse has been double clicked on any panel derived from CGModBase, such as the panel used by gui.EnableScreenClicker and the panel used by Panel:ParentToHUD.
@@ -547,7 +547,7 @@ function GM:GUIMouseReleased(mouseCode, aimVector) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerDriving)
 ---@param ply Player Player to process
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerDriving(ply) end
 
 ---[SHARED] Allows to override player crouch animations.
@@ -555,7 +555,7 @@ function GM:HandlePlayerDriving(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerDucking)
 ---@param ply Player The player
 ---@param velocity number Players velocity
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerDucking(ply, velocity) end
 
 ---[SHARED] Called every frame by the player model animation system. Allows to override player jumping animations.
@@ -563,7 +563,7 @@ function GM:HandlePlayerDucking(ply, velocity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerJumping)
 ---@param ply Player The player
 ---@param velocity number Players velocity
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerJumping(ply, velocity) end
 
 ---[SHARED] Allows to override player landing animations.
@@ -572,7 +572,7 @@ function GM:HandlePlayerJumping(ply, velocity) end
 ---@param ply Player The player
 ---@param velocity number Players velocity
 ---@param onGround boolean Was the player on ground?
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerLanding(ply, velocity, onGround) end
 
 ---[SHARED] Allows to override player noclip animations.
@@ -580,7 +580,7 @@ function GM:HandlePlayerLanding(ply, velocity, onGround) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerNoClipping)
 ---@param ply Player The player
 ---@param velocity number Players velocity
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerNoClipping(ply, velocity) end
 
 ---[SHARED] Allows to override player swimming animations.
@@ -588,7 +588,7 @@ function GM:HandlePlayerNoClipping(ply, velocity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerSwimming)
 ---@param ply Player The player
 ---@param velocity number Players velocity
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerSwimming(ply, velocity) end
 
 ---[SHARED] Allows to override player flying ( in mid-air, not noclipping ) animations.
@@ -596,7 +596,7 @@ function GM:HandlePlayerSwimming(ply, velocity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerVaulting)
 ---@param ply Player The player
 ---@param velocity number Players velocity
----@return boolean Return true if we've changed/set the animation, false otherwise
+---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerVaulting(ply, velocity) end
 
 ---[CLIENT] Hides the team selection panel.
@@ -627,7 +627,7 @@ function GM:HUDDrawScoreBoard() end
 ---[CLIENT] Called from GM:HUDPaint to draw player info when you hover over a player with your crosshair or mouse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HUDDrawTargetID)
----@return boolean Should the player info be drawn.
+---@return boolean #Should the player info be drawn.
 function GM:HUDDrawTargetID() end
 
 ---[CLIENT] Called when an item has been picked up. Override to disable the default HUD notification.
@@ -664,7 +664,7 @@ function GM:HUDPaintBackground() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw)
 ---@param name string The name of the HUD element. You can find a full list of HUD elements for this hook HUD_Element_List.
----@return boolean Return false to prevent the given element from being drawn on the client's screen.
+---@return boolean #Return false to prevent the given element from being drawn on the client's screen.
 function GM:HUDShouldDraw(name) end
 
 ---[CLIENT] Called when a weapon has been picked up. Override to disable the default HUD notification.
@@ -692,7 +692,7 @@ function GM:InitPostEntity() end
 ---@param x number The amount of mouse movement across the X axis this frame.
 ---@param y number The amount of mouse movement across the Y axis this frame.
 ---@param ang Angle The current view angle.
----@return boolean Return true if we modified something.
+---@return boolean #Return true if we modified something.
 function GM:InputMouseApply(cmd, x, y, ang) end
 
 ---[SERVER] Check if a player can spawn at a certain spawnpoint.
@@ -701,7 +701,7 @@ function GM:InputMouseApply(cmd, x, y, ang) end
 ---@param ply Player The player who is spawned
 ---@param spawnpoint Entity The spawnpoint entity (on the map).
 ---@param makeSuitable boolean If this is true, it'll kill any players blocking the spawnpoint.
----@return boolean Return true to indicate that the spawnpoint is suitable (Allow for the player to spawn here), false to prevent spawning.
+---@return boolean #Return true to indicate that the spawnpoint is suitable (Allow for the player to spawn here), false to prevent spawning.
 function GM:IsSpawnpointSuitable(ply, spawnpoint, makeSuitable) end
 
 ---[SHARED] Called whenever a player pressed a key included within the IN keys.
@@ -735,8 +735,8 @@ function GM:LoadGModSave(data, map, timestamp) end
 ---[MENU] Called while an addon from the Steam workshop is downloading. Used by default to update details on the fancy workshop download panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:LoadGModSaveFailed)
----@return string, string string - Failure Reason.
----@return string, string string - the workshop ID of the missing map (if found). Can be an empty string
+---@return string, string #string - Failure Reason.
+---@return string, string #string - the workshop ID of the missing map (if found). Can be an empty string
 function GM:LoadGModSaveFailed() end
 
 ---[MENU] Called when `menu.lua` has finished loading.
@@ -763,13 +763,13 @@ function GM:MouthMoveAnimation(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:Move)
 ---@param ply Player Player
 ---@param mv CMoveData Movement information
----@return boolean Return true to suppress default engine action.
+---@return boolean #Return true to suppress default engine action.
 function GM:Move(ply, mv) end
 
 ---[CLIENT] Returning true in this hook will cause it to render depth buffers defined with render.GetResolvedFullFrameDepth.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:NeedsDepthPass)
----@return boolean Render depth buffer
+---@return boolean #Render depth buffer
 function GM:NeedsDepthPass() end
 
 ---[CLIENT] Called when an entity has been created over the network.
@@ -812,14 +812,14 @@ function GM:OnAchievementAchieved(ply, achievement) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnChatTab)
 ---@param text string The currently typed into chatbox text
----@return string What should be placed into the chatbox instead of what currently is when player presses tab
+---@return string #What should be placed into the chatbox instead of what currently is when player presses tab
 function GM:OnChatTab(text) end
 
 ---[CLIENT] Called when the player cleans up something.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnCleanup)
 ---@param name string The name of the cleanup type
----@return boolean Return false to suppress the cleanup notification.
+---@return boolean #Return false to suppress the cleanup notification.
 function GM:OnCleanup(name) end
 
 ---[CLIENT] Called when the context menu keybind (+menu_context) is released, which by default is C.
@@ -920,7 +920,7 @@ function GM:OnPermissionsChanged() end
 ---@param physobj PhysObj Physics object of the entity.
 ---@param ent Entity The target entity.
 ---@param ply Player The player who tried to freeze the entity.
----@return boolean Allows you to override whether the player can freeze the entity
+---@return boolean #Allows you to override whether the player can freeze the entity
 function GM:OnPhysgunFreeze(weapon, physobj, ent, ply) end
 
 ---[SERVER] Called to when a player has successfully picked up an entity with their Physics Gun.
@@ -941,7 +941,7 @@ function GM:OnPhysgunPickup(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnPhysgunReload)
 ---@param physgun Weapon The physgun in question
 ---@param ply Player The player wielding the physgun
----@return boolean Whether the player can reload with the physgun or not
+---@return boolean #Whether the player can reload with the physgun or not
 function GM:OnPhysgunReload(physgun, ply) end
 
 ---[SERVER] Use GM:PlayerChangedTeam instead, which works for every Player:SetTeam call.
@@ -963,7 +963,7 @@ function GM:OnPlayerChangedTeam(ply, oldTeam, newTeam) end
 ---@param text string The message's text
 ---@param teamChat boolean Is the player typing in team chat?
 ---@param isDead boolean Is the player dead?
----@return boolean Should the message be suppressed?
+---@return boolean #Should the message be suppressed?
 function GM:OnPlayerChat(ply, text, teamChat, isDead) end
 
 ---[SHARED] Called when a player makes contact with the ground after a jump or a fall.
@@ -973,7 +973,7 @@ function GM:OnPlayerChat(ply, text, teamChat, isDead) end
 ---@param inWater boolean Did the player land in water?
 ---@param onFloater boolean Did the player land on an object floating in the water?
 ---@param speed number The speed at which the player hit the ground
----@return boolean Return true to suppress default action
+---@return boolean #Return true to suppress default action
 function GM:OnPlayerHitGround(player, inWater, onFloater, speed) end
 
 ---[SERVER] Called when a player +use drops an entity.
@@ -1038,7 +1038,7 @@ function GM:OnTextEntryLoseFocus(panel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnUndo)
 ---@param name string The name of the undo action
 ---@param customText string The custom text for the undo, set by undo.SetCustomUndoText
----@return boolean Return false to suppress the undo notification.
+---@return boolean #Return false to suppress the undo notification.
 function GM:OnUndo(name, customText) end
 
 ---[SHARED] Called when the player changes their weapon to another one - and their viewmodel model changes.
@@ -1070,7 +1070,7 @@ function GM:PhysgunDrop(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PhysgunPickup)
 ---@param player Player The player that is picking up using the Physics Gun.
 ---@param entity Entity The entity that is being picked up.
----@return boolean Returns whether the player can pick up the entity or not.
+---@return boolean #Returns whether the player can pick up the entity or not.
 function GM:PhysgunPickup(player, entity) end
 
 ---[SHARED] Called after player's reserve ammo count changes.
@@ -1107,7 +1107,7 @@ function GM:PlayerAuthed(ply, steamid, uniqueid) end
 ---@param bind string The bind command.
 ---@param pressed boolean If the bind was activated or deactivated.
 ---@param code number The button code. See Enums/BUTTON_CODE Enums.
----@return boolean Return `true` to prevent the bind.
+---@return boolean #Return `true` to prevent the bind.
 function GM:PlayerBindPress(ply, bind, pressed, code) end
 
 ---[SHARED] Called when a player presses a button.
@@ -1135,8 +1135,8 @@ function GM:PlayerButtonUp(ply, button) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice)
 ---@param listener Player The listening player.
 ---@param talker Player The talking player.
----@return boolean, boolean boolean - Return `true` if the listener should hear the talker, `false` if they shouldn't.
----@return boolean, boolean boolean - 3D sound. If set to `true`, will fade out the sound the further away listener is from the  talker, the voice will also be in stereo, and not mono.
+---@return boolean, boolean #boolean - Return `true` if the listener should hear the talker, `false` if they shouldn't.
+---@return boolean, boolean #boolean - 3D sound. If set to `true`, will fade out the sound the further away listener is from the  talker, the voice will also be in stereo, and not mono.
 function GM:PlayerCanHearPlayersVoice(listener, talker) end
 
 ---[SERVER] Returns whether or not a player is allowed to join a team
@@ -1144,7 +1144,7 @@ function GM:PlayerCanHearPlayersVoice(listener, talker) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerCanJoinTeam)
 ---@param ply Player Player attempting to switch teams
 ---@param team number Index of the team
----@return boolean Allowed to switch
+---@return boolean #Allowed to switch
 function GM:PlayerCanJoinTeam(ply, team) end
 
 ---[SERVER] Returns whether or not a player is allowed to pick an item up. (ammo, health, armor)
@@ -1152,7 +1152,7 @@ function GM:PlayerCanJoinTeam(ply, team) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupItem)
 ---@param ply Player Player attempting to pick up
 ---@param item Entity The item the player is attempting to pick up
----@return boolean Allow pick up
+---@return boolean #Allow pick up
 function GM:PlayerCanPickupItem(ply, item) end
 
 ---[SERVER] Returns whether or not a player is allowed to pick up a weapon.
@@ -1160,7 +1160,7 @@ function GM:PlayerCanPickupItem(ply, item) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon)
 ---@param ply Player The player attempting to pick up the weapon.
 ---@param weapon Weapon The weapon entity in question.
----@return boolean Allowed pick up or not.
+---@return boolean #Allowed pick up or not.
 function GM:PlayerCanPickupWeapon(ply, weapon) end
 
 ---[SERVER] Returns whether or not the player can see the other player's chat.
@@ -1171,7 +1171,7 @@ function GM:PlayerCanPickupWeapon(ply, weapon) end
 ---@param teamOnly boolean If the message is team-only
 ---@param listener Player The player receiving the message
 ---@param speaker Player The player sending the message.
----@return boolean Can see other player's chat
+---@return boolean #Can see other player's chat
 function GM:PlayerCanSeePlayersChat(text, teamOnly, listener, speaker) end
 
 ---[SERVER] Called when a player has changed team using Player:SetTeam.
@@ -1191,7 +1191,7 @@ function GM:PlayerChangedTeam(ply, oldTeam, newTeam) end
 ---@param limitName string The limit's name.
 ---@param current number The amount of whatever player is trying to spawn that the player already has spawned.
 ---@param defaultMax number The default maximum count, as dictated by the `sbox_max` convar on the server. This is the amount that will be used if nothing is returned from this hook.
----@return boolean Return `false` to indicate the limit was hit, or nothing otherwise
+---@return boolean #Return `false` to indicate the limit was hit, or nothing otherwise
 function GM:PlayerCheckLimit(ply, limitName, current, defaultMax) end
 
 ---[CLIENT] Called whenever a player's class is changed on the server-side with player_manager.SetPlayerClass.
@@ -1236,7 +1236,7 @@ function GM:PlayerDeath(victim, inflictor, attacker) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerDeathSound)
 ---@param ply Player The player
----@return boolean Mute death sound
+---@return boolean #Mute death sound
 function GM:PlayerDeathSound(ply) end
 
 ---[SERVER] Called every think while the player is dead. The return value will determine if the player respawns.
@@ -1247,7 +1247,7 @@ function GM:PlayerDeathSound(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerDeathThink)
 ---@param ply Player The player affected in the hook.
----@return boolean Allow spawn
+---@return boolean #Allow spawn
 function GM:PlayerDeathThink(ply) end
 
 ---[SERVER] Called when a player leaves the server. See the gameevent/player_disconnect for a shared version of this hook.
@@ -1309,7 +1309,7 @@ function GM:PlayerEnteredVehicle(ply, veh, role) end
 ---@param ang Angle Angle of the effect
 ---@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
 ---@param name string Name of the event
----@return boolean Return true to disable the effect
+---@return boolean #Return true to disable the effect
 function GM:PlayerFireAnimationEvent(ply, pos, ang, event, name) end
 
 ---[SHARED] Called whenever a player steps. Return true to mute the normal sound.
@@ -1322,7 +1322,7 @@ function GM:PlayerFireAnimationEvent(ply, pos, ang, event, name) end
 ---@param sound string Sound that is going to play
 ---@param volume number Volume of the footstep
 ---@param filter CRecipientFilter The Recipient filter of players who can hear the footstep
----@return boolean Prevent default step sound
+---@return boolean #Prevent default step sound
 function GM:PlayerFootstep(ply, pos, foot, sound, volume, filter) end
 
 ---[SERVER] Called when a player freezes an object.
@@ -1435,7 +1435,7 @@ function GM:PlayerLoadout(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerNoClip)
 ---@param ply Player The person who entered/exited noclip
 ---@param desiredState boolean Represents the noclip state (on/off) the user will enter if this hook allows them to.
----@return boolean Return false to disallow the switch.
+---@return boolean #Return false to disallow the switch.
 function GM:PlayerNoClip(ply, desiredState) end
 
 ---[SHARED] Called after the player's think.
@@ -1461,7 +1461,7 @@ function GM:PlayerRequestTeam(ply, team) end
 ---@param sender Player The player which sent the message.
 ---@param text string The message's content.
 ---@param teamChat boolean Return false when the message is for everyone, true when the message is for the sender's team.
----@return string What to show instead of original text. Set to `""` to stop the message from displaying.
+---@return string #What to show instead of original text. Set to `""` to stop the message from displaying.
 function GM:PlayerSay(sender, text, teamChat) end
 
 ---[SERVER] Called to determine a spawn point for a player to spawn at.
@@ -1470,7 +1470,7 @@ function GM:PlayerSay(sender, text, teamChat) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSelectSpawn)
 ---@param ply Player The player who needs a spawn point
 ---@param transition boolean If true, the player just spawned from a map transition (`trigger_changelevel`). You probably want to not return an entity for that case to not override player's position.
----@return Entity The spawn point entity to spawn the player at
+---@return Entity #The spawn point entity to spawn the player at
 function GM:PlayerSelectSpawn(ply, transition) end
 
 ---[SERVER] Find a team spawn point entity for this player.
@@ -1478,7 +1478,7 @@ function GM:PlayerSelectSpawn(ply, transition) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSelectTeamSpawn)
 ---@param team number Players team
 ---@param ply Player The player
----@return Entity The entity to use as a spawn point.
+---@return Entity #The entity to use as a spawn point.
 function GM:PlayerSelectTeamSpawn(team, ply) end
 
 ---[SERVER] Called whenever view model hands needs setting a model. By default this calls PLAYER:GetHandsModel and if that fails, sets the hands model according to his player model.
@@ -1502,7 +1502,7 @@ function GM:PlayerSetModel(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerShouldTakeDamage)
 ---@param ply Player The player
 ---@param attacker Entity The attacker
----@return boolean Allow damage
+---@return boolean #Allow damage
 function GM:PlayerShouldTakeDamage(ply, attacker) end
 
 ---[SERVER] Allows to suppress player taunts.
@@ -1510,7 +1510,7 @@ function GM:PlayerShouldTakeDamage(ply, attacker) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerShouldTaunt)
 ---@param ply Player Player who tried to taunt
 ---@param act number Act ID of the taunt player tries to do, see Enums/ACT
----@return boolean Return false to disallow player taunting
+---@return boolean #Return false to disallow player taunting
 function GM:PlayerShouldTaunt(ply, act) end
 
 ---[SERVER] Called when the player is killed by Player:KillSilent.
@@ -1549,7 +1549,7 @@ function GM:PlayerSpawnAsSpectator(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSpray)
 ---@param sprayer Player The player.
----@return boolean Return `false` to allow spraying, return `true` to prevent spraying.
+---@return boolean #Return `false` to allow spraying, return `true` to prevent spraying.
 function GM:PlayerSpray(sprayer) end
 
 ---[SERVER] Called when player starts taunting.
@@ -1564,7 +1564,7 @@ function GM:PlayerStartTaunt(ply, act, length) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice)
 ---@param ply Player Player who started using voice chat.
----@return boolean Set true to hide player's `CHudVoiceStatus`.
+---@return boolean #Set true to hide player's `CHudVoiceStatus`.
 function GM:PlayerStartVoice(ply) end
 
 ---[SHARED] Allows you to override the time between footsteps.
@@ -1574,7 +1574,7 @@ function GM:PlayerStartVoice(ply) end
 ---@param ply Player Player who is walking
 ---@param type number The type of footsteps, see Enums/STEPSOUNDTIME
 ---@param walking boolean Is the player walking or not ( +walk? )
----@return number Time between footsteps, in ms
+---@return number #Time between footsteps, in ms
 function GM:PlayerStepSoundTime(ply, type, walking) end
 
 ---[SERVER] Called whenever a player attempts to either turn on or off their flashlight, returning false will deny the change.
@@ -1583,7 +1583,7 @@ function GM:PlayerStepSoundTime(ply, type, walking) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight)
 ---@param ply Player The player who attempts to change their flashlight state.
 ---@param enabled boolean The new state the player requested, true for on, false for off.
----@return boolean Can toggle the flashlight or not
+---@return boolean #Can toggle the flashlight or not
 function GM:PlayerSwitchFlashlight(ply, enabled) end
 
 ---[SHARED] Called when a player attempts to switch their weapon.
@@ -1596,7 +1596,7 @@ function GM:PlayerSwitchFlashlight(ply, enabled) end
 ---@param newWeapon Weapon The weapon the player switched to. Will be `NULL` if the player is switching to nothing.
 ---
 --- This can be `NULL` on the client if the weapon hasn't been created over the network yet.
----@return boolean Return `true` to prevent weapon switch.
+---@return boolean #Return `true` to prevent weapon switch.
 function GM:PlayerSwitchWeapon(player, oldWeapon, newWeapon) end
 
 ---[SHARED] The Move hook is called for you to manipulate the player's CMoveData. This hook is called moments before GM:Move and GM:PlayerNoClip.
@@ -1615,7 +1615,7 @@ function GM:PlayerTick(player, mv) end
 ---@param dmginfo CTakeDamageInfo The damage info of the bullet
 ---@param dir Vector Normalized vector direction of the bullet's path
 ---@param trace table The trace of the bullet's path, see Structures/TraceResult
----@return boolean Override engine handling
+---@return boolean #Override engine handling
 function GM:PlayerTraceAttack(ply, dmginfo, dir, trace) end
 
 ---[SERVER] Called when a player unfreezes an object.
@@ -1631,7 +1631,7 @@ function GM:PlayerUnfrozeObject(ply, ent, physobj) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerUse)
 ---@param ply Player The player pressing the "use" key.
 ---@param ent Entity The entity which the player is looking at / activating USE on.
----@return boolean Return `false` if the player is not allowed to USE the entity.  Do not return `true` if using a hook, otherwise other mods may not get a chance to block a player's use.
+---@return boolean #Return `false` if the player is not allowed to USE the entity.  Do not return `true` if using a hook, otherwise other mods may not get a chance to block a player's use.
 function GM:PlayerUse(ply, ent) end
 
 ---[CLIENT] Called when it's time to populate the context menu menu bar at the top.
@@ -1757,7 +1757,7 @@ function GM:PostPlayerDraw(ply, flags) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PostProcessPermitted)
 ---@param ppeffect string The classname of Post Processing effect
----@return boolean Return true/false depending on whether this post process should be allowed
+---@return boolean #Return true/false depending on whether this post process should be allowed
 function GM:PostProcessPermitted(ppeffect) end
 
 ---[CLIENT] Called after the frame has been rendered.
@@ -1809,7 +1809,7 @@ function GM:PreDrawHUD() end
 ---
 --- In case of 2D skyboxes it is possible for this hook to always be called with this parameter set to `true`.
 ---@param isDraw3DSkybox boolean Whether the current draw is drawing the 3D.
----@return boolean Return true to prevent opaque renderables from drawing.
+---@return boolean #Return true to prevent opaque renderables from drawing.
 function GM:PreDrawOpaqueRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybox) end
 
 ---[CLIENT] Called before the player hands are drawn.
@@ -1819,7 +1819,7 @@ function GM:PreDrawOpaqueRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybo
 ---@param vm Entity This is the view model entity before it is drawn.
 ---@param ply Player The the owner of the view model.
 ---@param weapon Weapon This is the weapon that is from the view model.
----@return boolean Return true to prevent the viewmodel hands from rendering
+---@return boolean #Return true to prevent the viewmodel hands from rendering
 function GM:PreDrawPlayerHands(hands, vm, ply, weapon) end
 
 ---[CLIENT] Called before the 3D sky box is drawn. This will not be called for maps with no 3D skybox, or when the 3d skybox is disabled. (`r_3dsky 0`)
@@ -1827,7 +1827,7 @@ function GM:PreDrawPlayerHands(hands, vm, ply, weapon) end
 --- See also GM:PostDrawSkyBox
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PreDrawSkyBox)
----@return boolean Return true to disable skybox drawing (both 2D and 3D skybox)
+---@return boolean #Return true to disable skybox drawing (both 2D and 3D skybox)
 function GM:PreDrawSkyBox() end
 
 ---[CLIENT] Called before all the translucent entities are drawn.
@@ -1845,7 +1845,7 @@ function GM:PreDrawSkyBox() end
 ---
 --- In case of 2D skyboxes it is possible for this hook to always be called with this parameter set to `true`.
 ---@param isDraw3DSkybox boolean Whether the current draw is drawing the 3D.
----@return boolean Return true to prevent translucent renderables from drawing.
+---@return boolean #Return true to prevent translucent renderables from drawing.
 function GM:PreDrawTranslucentRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybox) end
 
 ---[CLIENT] Called before the view model has been drawn. This hook by default also calls this on weapons, so you can use WEAPON:PreDrawViewModel.
@@ -1856,7 +1856,7 @@ function GM:PreDrawTranslucentRenderables(isDrawingDepth, isDrawSkybox, isDraw3D
 ---@param vm Entity This is the view model entity before it is drawn. On server-side, this entity is the predicted view model.
 ---@param ply Player The owner of the view model.
 ---@param weapon Weapon This is the weapon that is from the view model.
----@return boolean Return true to prevent the default view model rendering. This also affects GM:PostDrawViewModel.
+---@return boolean #Return true to prevent the default view model rendering. This also affects GM:PostDrawViewModel.
 function GM:PreDrawViewModel(vm, ply, weapon) end
 
 ---[CLIENT] Called before view models and entities with `RENDERGROUP_VIEWMODEL` are drawn.
@@ -1876,7 +1876,7 @@ function GM:PreGamemodeLoaded() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw)
 ---@param player Player The player that is about to be drawn.
 ---@param flags number The Enums/STUDIO flags for this render operation.
----@return boolean Prevent default player rendering. Return `true` to hide the player.
+---@return boolean #Prevent default player rendering. Return `true` to hide the player.
 function GM:PrePlayerDraw(player, flags) end
 
 ---[SHARED] Called by scripted_ents.Register.
@@ -1884,7 +1884,7 @@ function GM:PrePlayerDraw(player, flags) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PreRegisterSENT)
 ---@param ent table The entity table to be registered.
 ---@param class string The class name to be assigned.
----@return boolean Return `false` to prevent the entity from being registered. Returning any other value has no effect.
+---@return boolean #Return `false` to prevent the entity from being registered. Returning any other value has no effect.
 function GM:PreRegisterSENT(ent, class) end
 
 ---[SHARED] Called when a Scripted Weapon (SWEP) is about to be registered, allowing addons to alter the weapon's SWEP table with custom data for later usage. Called internally from weapons.Register.
@@ -1892,13 +1892,13 @@ function GM:PreRegisterSENT(ent, class) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PreRegisterSWEP)
 ---@param swep table The SWEP table to be registered.
 ---@param class string The class name to be assigned.
----@return boolean Return `false` to prevent the weapon from being registered. Returning any other value has no effect.
+---@return boolean #Return `false` to prevent the weapon from being registered. Returning any other value has no effect.
 function GM:PreRegisterSWEP(swep, class) end
 
 ---[CLIENT] Called before the renderer is about to start rendering the next frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PreRender)
----@return boolean Return true to prevent all rendering. This can make the whole game stop rendering anything.
+---@return boolean #Return true to prevent all rendering. This can make the whole game stop rendering anything.
 function GM:PreRender() end
 
 ---[SERVER] Called just before performing an undo.
@@ -1910,7 +1910,7 @@ function GM:PreUndo(undo) end
 ---[CLIENT] This will prevent IN_ATTACK from sending to server when player tries to shoot from C menu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PreventScreenClicks)
----@return boolean Return true to prevent screen clicks.
+---@return boolean #Return true to prevent screen clicks.
 function GM:PreventScreenClicks() end
 
 ---[SHARED] Called when a prop has been destroyed.
@@ -1928,7 +1928,7 @@ function GM:PropBreak(attacker, prop) end
 ---@param origin Vector View origin
 ---@param angles Angle View angles
 ---@param fov number View FOV
----@return boolean Return `true` to override drawing the scene.
+---@return boolean #Return `true` to override drawing the scene.
 function GM:RenderScene(origin, angles, fov) end
 
 ---[CLIENT] Used to render post processing effects.
@@ -1970,7 +1970,7 @@ function GM:ScaleNPCDamage(npc, hitgroup, dmginfo) end
 ---@param ply Player The player taking damage.
 ---@param hitgroup number The hitgroup where the player took damage. See Enums/HITGROUP
 ---@param dmginfo CTakeDamageInfo The damage info.
----@return boolean Return true to prevent damage that this hook is called for, stop blood particle effects and blood decals.  It is possible to return true only on client ( This will work **only in multiplayer** ) to stop the effects but still take damage.
+---@return boolean #Return true to prevent damage that this hook is called for, stop blood particle effects and blood decals.  It is possible to return true only on client ( This will work **only in multiplayer** ) to stop the effects but still take damage.
 function GM:ScalePlayerDamage(ply, hitgroup, dmginfo) end
 
 ---[CLIENT] Called when player released the scoreboard button (TAB by default).
@@ -1981,7 +1981,7 @@ function GM:ScoreboardHide() end
 ---[CLIENT] Called when player presses the scoreboard button (TAB by default).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ScoreboardShow)
----@return boolean Return true to prevent default scoreboard from showing.
+---@return boolean #Return true to prevent default scoreboard from showing.
 function GM:ScoreboardShow() end
 
 ---[SHARED] Sets player run and sprint speeds.
@@ -2016,13 +2016,13 @@ function GM:SetupPlayerVisibility(ply, viewEntity) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:SetupSkyboxFog)
 ---@param scale number The scale of 3D skybox
----@return boolean Return true to tell the engine that fog is set up
+---@return boolean #Return true to tell the engine that fog is set up
 function GM:SetupSkyboxFog(scale) end
 
 ---[CLIENT] Allows you to use render.Fog* functions to manipulate world fog.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:SetupWorldFog)
----@return boolean Return true to tell the engine that fog is set up
+---@return boolean #Return true to tell the engine that fog is set up
 function GM:SetupWorldFog() end
 
 ---[SHARED] Called to decide whether a pair of entities should collide with each other. This is only called if Entity:SetCustomCollisionCheck was used on one or both entities.
@@ -2036,7 +2036,7 @@ function GM:SetupWorldFog() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ShouldCollide)
 ---@param ent1 Entity The first entity in the collision poll.
 ---@param ent2 Entity The second entity in the collision poll.
----@return boolean Whether the entities should collide.
+---@return boolean #Whether the entities should collide.
 function GM:ShouldCollide(ent1, ent2) end
 
 ---[CLIENT] Called to determine if the Global.LocalPlayer should be drawn.
@@ -2048,7 +2048,7 @@ function GM:ShouldCollide(ent1, ent2) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ShouldDrawLocalPlayer)
 ---@param ply Player The player.
----@return boolean `true` to draw the player, `false` to hide.
+---@return boolean #`true` to draw the player, `false` to hide.
 function GM:ShouldDrawLocalPlayer(ply) end
 
 ---[SERVER] Called when a player executes `gm_showhelp` console command. ( Default bind is F1 )
@@ -2100,7 +2100,7 @@ function GM:SpawnMenuCreated() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:StartChat)
 ---@param isTeamChat boolean Whether the message was sent through team chat.
----@return boolean Return true to hide the default chat box.
+---@return boolean #Return true to hide the default chat box.
 function GM:StartChat(isTeamChat) end
 
 ---[SHARED] Allows you to change the players inputs before they are processed by the server.
@@ -2152,7 +2152,7 @@ function GM:Tick() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:TranslateActivity)
 ---@param ply Player The player
 ---@param act number The activity. See Enums/ACT
----@return number The new, translated activity
+---@return number #The new, translated activity
 function GM:TranslateActivity(ply, act) end
 
 ---[SHARED] Animation updates (pose params etc) should be done here.
@@ -2187,7 +2187,7 @@ function GM:VehicleMove(ply, veh, mv) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:VGUIMousePressAllowed)
 ---@param button number The button that was pressed, see Enums/MOUSE
----@return boolean Return true if the mouse click should be ignored or not.
+---@return boolean #Return true if the mouse click should be ignored or not.
 function GM:VGUIMousePressAllowed(button) end
 
 ---[CLIENT] Called when a mouse button is pressed on a VGUI element or menu.

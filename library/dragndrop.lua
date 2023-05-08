@@ -24,8 +24,8 @@ function dragndrop.Drop() end
 ---[CLIENT AND MENU] Returns a table of currently dragged panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.GetDroppable)
----@param name string If set, the function will return only the panels with this Panel:Droppable name.
----@return table A table of all panels that are being currently dragged, if any.
+---@param name? string If set, the function will return only the panels with this Panel:Droppable name.
+---@return table #A table of all panels that are being currently dragged, if any.
 function dragndrop.GetDroppable(name) end
 
 ---[CLIENT AND MENU] If returns true, calls dragndrop.StopDragging in dragndrop.Drop. Seems to be broken and does nothing. Is it for override?
@@ -41,7 +41,7 @@ function dragndrop.HoverThink() end
 ---[CLIENT AND MENU] Returns whether the user is dragging something with the drag'n'drop system.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.IsDragging)
----@return boolean True if the user is dragging something with the drag'n'drop system.
+---@return boolean #True if the user is dragging something with the drag'n'drop system.
 function dragndrop.IsDragging() end
 
 ---[CLIENT AND MENU] Starts the drag'n'drop.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DHTMLControls
+---@class DHTMLControls : Panel
 local DHTMLControls = {}
 
 ---[CLIENT]

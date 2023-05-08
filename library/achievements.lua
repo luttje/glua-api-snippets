@@ -10,7 +10,7 @@ function achievements.BalloonPopped() end
 ---[CLIENT AND MENU] Returns the amount of achievements in Garry's Mod.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.Count)
----@return number The amount of achievements available.
+---@return number #The amount of achievements available.
 function achievements.Count() end
 
 ---[CLIENT] Adds one to the count of balls eaten. Once this count reaches 200, the 'Ball Eater' achievement is unlocked.
@@ -28,21 +28,21 @@ function achievements.GetCount(achievementID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.GetDesc)
 ---@param achievementID number The ID of achievement to retrieve description of. Note: IDs start from 0, not 1.
----@return string Description of an achievement
+---@return string #Description of an achievement
 function achievements.GetDesc(achievementID) end
 
 ---[CLIENT AND MENU] Retrieves progress goal of given achievement
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.GetGoal)
 ---@param achievementID number The ID of achievement to retrieve goal of. Note: IDs start from 0, not 1.
----@return number Progress goal of an achievement
+---@return number #Progress goal of an achievement
 function achievements.GetGoal(achievementID) end
 
 ---[CLIENT AND MENU] Retrieves name of given achievement
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.GetName)
 ---@param achievementID number The ID of achievement to retrieve name of. Note: IDs start from 0, not 1.
----@return string Name of an achievement
+---@return string #Name of an achievement
 function achievements.GetName(achievementID) end
 
 ---[CLIENT] Adds one to the count of baddies killed. Once this count reaches 1000, the 'War Zone' achievement is unlocked.
@@ -64,7 +64,7 @@ function achievements.IncGoodies() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/achievements.IsAchieved)
 ---@param AchievementID number Internal Achievement ID number
----@return boolean Returns true if the given achievementID is achieved.
+---@return boolean #Returns true if the given achievementID is achieved.
 function achievements.IsAchieved(AchievementID) end
 
 ---[CLIENT] Adds one to the count of things removed. Once this count reaches 5000, the 'Destroyer' achievement is unlocked.

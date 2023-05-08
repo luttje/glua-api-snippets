@@ -9,22 +9,22 @@ table = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Add)
 ---@param target table The table to insert the new values into.
 ---@param source table The table to retrieve the values from.
----@return table The target table.
+---@return table #The target table.
 function table.Add(target, source) end
 
 ---[SHARED AND MENU] Changes all keys to sequential integers. This creates a new table object and does not affect the original.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.ClearKeys)
 ---@param table table The original table to modify.
----@param saveKeys boolean Save the keys within each member table. This will insert a new field `__key` into each value, and should not be used if the table contains non-table values.
----@return table Table with integer keys.
+---@param saveKeys? boolean Save the keys within each member table. This will insert a new field `__key` into each value, and should not be used if the table contains non-table values.
+---@return table #Table with integer keys.
 function table.ClearKeys(table, saveKeys) end
 
 ---[SHARED AND MENU] Collapses a table with keyvalue structure
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.CollapseKeyValue)
 ---@param input table Input table
----@return table Output table
+---@return table #Output table
 function table.CollapseKeyValue(input) end
 
 ---[SHARED AND MENU] Concatenates the contents of a table to a string.
@@ -32,9 +32,9 @@ function table.CollapseKeyValue(input) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.concat)
 ---@param tbl table The table to concatenate.
 ---@param concatenator string A separator to insert between strings
----@param startPos number The key to start at
----@param endPos number The key to end at
----@return string Concatenated values
+---@param startPos? number The key to start at
+---@param endPos? number The key to end at
+---@return string #Concatenated values
 function table.concat(tbl, concatenator, startPos, endPos) end
 
 ---[SHARED AND MENU] Creates a deep copy and returns that copy.
@@ -43,7 +43,7 @@ function table.concat(tbl, concatenator, startPos, endPos) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Copy)
 ---@param originalTable table The table to be copied.
----@return table A deep copy of the original table
+---@return table #A deep copy of the original table
 function table.Copy(originalTable) end
 
 ---[SHARED AND MENU] Empties the target table, and merges all values from the source table into it.
@@ -59,14 +59,14 @@ function table.CopyFromTo(source, target) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Count)
 ---@param tbl table The table to count the keys of.
----@return number The number of keyvalue pairs. This includes non-numeric and non-sequential keys, unlike the length (**#**) operator.
+---@return number #The number of keyvalue pairs. This includes non-numeric and non-sequential keys, unlike the length (**#**) operator.
 function table.Count(tbl) end
 
 ---[SHARED AND MENU] Converts a table that has been sanitised with table.Sanitise back to its original form
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.DeSanitise)
 ---@param tbl table Table to be de-sanitised
----@return table De-sanitised table
+---@return table #De-sanitised table
 function table.DeSanitise(tbl) end
 
 ---[SHARED AND MENU] Removes all values from a table.
@@ -81,7 +81,7 @@ function table.Empty(tbl) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.FindNext)
 ---@param tbl table Table to search
 ---@param value any Value to return element after
----@return any Found element
+---@return any #Found element
 function table.FindNext(tbl, value) end
 
 ---[SHARED AND MENU] Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
@@ -90,15 +90,15 @@ function table.FindNext(tbl, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.FindPrev)
 ---@param tbl table Table to search
 ---@param value any Value to return element before
----@return any Found element
+---@return any #Found element
 function table.FindPrev(tbl, value) end
 
 ---[SHARED AND MENU] Inserts a value in to the given table even if the table is non-existent
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.ForceInsert)
----@param tab table Table to insert value in to
+---@param tab? table Table to insert value in to
 ---@param value any Value to insert
----@return table The supplied or created table
+---@return table #The supplied or created table
 function table.ForceInsert(tab, value) end
 
 ---[SHARED AND MENU] This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.pairs instead. Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
@@ -126,7 +126,7 @@ function table.foreachi(table, func) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetFirstKey)
 ---@param tab table Table to retrieve key from
----@return any Key
+---@return any #Key
 function table.GetFirstKey(tab) end
 
 ---[SHARED AND MENU] Instead, index the table with a key of 1.
@@ -136,14 +136,14 @@ function table.GetFirstKey(tab) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetFirstValue)
 ---@param tab table Table to retrieve value from
----@return any Value
+---@return any #Value
 function table.GetFirstValue(tab) end
 
 ---[SHARED AND MENU] Returns all keys of a table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetKeys)
 ---@param tabl table The table to get keys of
----@return table Table of keys
+---@return table #Table of keys
 function table.GetKeys(tabl) end
 
 ---[SHARED AND MENU] Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
@@ -151,7 +151,7 @@ function table.GetKeys(tabl) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetLastKey)
 ---@param tab table Table to retrieve key from
----@return any Key
+---@return any #Key
 function table.GetLastKey(tab) end
 
 ---[SHARED AND MENU] Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
@@ -159,21 +159,21 @@ function table.GetLastKey(tab) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetLastValue)
 ---@param tab table Table to retrieve value from
----@return any Value
+---@return any #Value
 function table.GetLastValue(tab) end
 
 ---[SHARED AND MENU] This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead. Returns the length of the table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.getn)
 ---@param tbl table The table to check.
----@return number Sequential length.
+---@return number #Sequential length.
 function table.getn(tbl) end
 
 ---[SHARED AND MENU] Returns a key of the supplied table with the highest number value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetWinningKey)
 ---@param inputTable table The table to search in.
----@return any winningKey
+---@return any #winningKey
 function table.GetWinningKey(inputTable) end
 
 ---[SHARED AND MENU] Checks if a table has a value.
@@ -183,7 +183,7 @@ function table.GetWinningKey(inputTable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.HasValue)
 ---@param tbl table Table to check
 ---@param value any Value to search for
----@return boolean Returns true if the table has that value, false otherwise
+---@return boolean #Returns true if the table has that value, false otherwise
 function table.HasValue(tbl, value) end
 
 ---[SHARED AND MENU] Copies any missing data from base to target, and sets the target's `BaseClass` member to the base table's pointer.
@@ -198,7 +198,7 @@ function table.HasValue(tbl, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Inherit)
 ---@param target table Table to copy data to
 ---@param base table Table to copy data from
----@return table Target
+---@return table #Target
 function table.Inherit(target, base) end
 
 ---[SHARED AND MENU] Inserts a value into a table at the end of the table or at the given position.
@@ -208,7 +208,7 @@ function table.Inherit(target, base) end
 ---@param tbl table The table to insert the variable into.
 ---@param position number The position in the table to insert the variable. If the third argument is nil this argument becomes the value to insert at the end of given table.
 ---@param value any The variable to insert into the table.
----@return number The index the object was placed at.
+---@return number #The index the object was placed at.
 function table.insert(tbl, position, value) end
 
 ---[SHARED AND MENU] Returns whether or not the given table is empty.
@@ -218,14 +218,14 @@ function table.insert(tbl, position, value) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.IsEmpty)
 ---@param tab table Table to check.
----@return boolean Is empty?
+---@return boolean #Is empty?
 function table.IsEmpty(tab) end
 
 ---[SHARED AND MENU] Returns whether or not the table's keys are sequential
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.IsSequential)
 ---@param tab table Table to check
----@return boolean Is sequential
+---@return boolean #Is sequential
 function table.IsSequential(tab) end
 
 ---[SHARED AND MENU] Returns the first key found to be containing the supplied value
@@ -233,7 +233,7 @@ function table.IsSequential(tab) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.KeyFromValue)
 ---@param tab table Table to search
 ---@param value any Value to search for
----@return any Key
+---@return any #Key
 function table.KeyFromValue(tab, value) end
 
 ---[SHARED AND MENU] Returns a table of keys containing the supplied value
@@ -241,21 +241,21 @@ function table.KeyFromValue(tab, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.KeysFromValue)
 ---@param tab table Table to search
 ---@param value any Value to search for
----@return table Keys
+---@return table #Keys
 function table.KeysFromValue(tab, value) end
 
 ---[SHARED AND MENU] Returns a copy of the input table with all string keys converted to be lowercase recursively
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.LowerKeyNames)
 ---@param tbl table Table to convert
----@return table New table
+---@return table #New table
 function table.LowerKeyNames(tbl) end
 
 ---[SHARED AND MENU] Returns the highest numerical key.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.maxn)
 ---@param tbl table The table to search.
----@return number The highest numerical key.
+---@return number #The highest numerical key.
 function table.maxn(tbl) end
 
 ---[SHARED AND MENU] Returns an array of values of given with given key from each table of given table.
@@ -265,7 +265,7 @@ function table.maxn(tbl) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.MemberValuesFromKey)
 ---@param inputTable table The table to search in.
 ---@param keyName any The key to lookup.
----@return table A list of found values, or an empty table.
+---@return table #A list of found values, or an empty table.
 function table.MemberValuesFromKey(inputTable, keyName) end
 
 ---[SHARED AND MENU] Merges the contents of the second table with the content in the first one. The destination table will be modified.
@@ -279,7 +279,7 @@ function table.MemberValuesFromKey(inputTable, keyName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Merge)
 ---@param destination table The table you want the source table to merge with
 ---@param source table The table you want to merge with the destination table
----@return table Destination table
+---@return table #Destination table
 function table.Merge(destination, source) end
 
 ---[SHARED AND MENU] Moves elements from one part of a table to another part a given table. This is similar to assigning elements from the source table to the destination table in multiple assignments.
@@ -291,7 +291,7 @@ function table.Merge(destination, source) end
 ---@param to number The end index of the source range until which the elements are to be moved.
 ---@param dest number The index within the destination table where the moved elements should be inserted. If this is not specified, the moved elements will be inserted at the end of the table.
 ---@param destTbl table The destination table to which the elements are to be moved. By default, this is the same as the source table.
----@return table The modified destination table.
+---@return table #The modified destination table.
 function table.move(sourceTbl, from, to, dest, destTbl) end
 
 ---[SHARED AND MENU] Returns a random value from the supplied table.
@@ -304,8 +304,8 @@ function table.move(sourceTbl, from, to, dest, destTbl) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Random)
 ---@param haystack table The table to choose from.
----@return any, any any - A random value from the table.
----@return any, any any - The key associated with the random value.
+---@return any, any #any - A random value from the table.
+---@return any, any #any - The key associated with the random value.
 function table.Random(haystack) end
 
 ---[SHARED AND MENU] Removes a value from a table and shifts any other values down to fill the gap.
@@ -313,8 +313,8 @@ function table.Random(haystack) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.remove)
 ---@param tbl table The table to remove the value from.
----@param index number The index of the value to remove.
----@return any The value that was removed.
+---@param index? number The index of the value to remove.
+---@return any #The value that was removed.
 function table.remove(tbl, index) end
 
 ---[SHARED AND MENU] Removes the first instance of a given value from the specified table with table.remove, then returns the key that the value was found at.
@@ -324,14 +324,14 @@ function table.remove(tbl, index) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.RemoveByValue)
 ---@param tbl table The table that will be searched.
 ---@param val any The value to find within the table.
----@return any The key at which the value was found, or false if the value was not found.
+---@return any #The key at which the value was found, or false if the value was not found.
 function table.RemoveByValue(tbl, val) end
 
 ---[SHARED AND MENU] Returns a reversed copy of a sequential table. Any non-sequential and non-numeric keyvalue pairs will not be copied.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Reverse)
 ---@param tbl table Table to reverse.
----@return table A reversed copy of the table.
+---@return table #A reversed copy of the table.
 function table.Reverse(tbl) end
 
 ---[SHARED AND MENU] Converts Vectors, Angles and booleans to be able to be converted to and from key-values via util.TableToKeyValues.
@@ -340,7 +340,7 @@ function table.Reverse(tbl) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Sanitise)
 ---@param tab table Table to sanitise
----@return table Sanitised table
+---@return table #Sanitised table
 function table.Sanitise(tab) end
 
 ---[SHARED AND MENU] Performs an inline [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) on the table in `O(n)` time
@@ -364,8 +364,8 @@ function table.sort(tbl, sorter) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.SortByKey)
 ---@param tab table Table to sort. All values of this table must be of same type.
----@param descending boolean Should the order be descending?
----@return table A table of keys sorted by values from supplied table.
+---@param descending? boolean Should the order be descending?
+---@return table #A table of keys sorted by values from supplied table.
 function table.SortByKey(tab, descending) end
 
 ---[SHARED AND MENU] Sorts a table by a named member.
@@ -373,7 +373,7 @@ function table.SortByKey(tab, descending) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.SortByMember)
 ---@param tab table Table to sort.
 ---@param memberKey any The key used to identify the member.
----@param ascending boolean Whether or not the order should be ascending.
+---@param ascending? boolean Whether or not the order should be ascending.
 function table.SortByMember(tab, memberKey, ascending) end
 
 ---[SHARED AND MENU] Sorts a table in reverse order from table.sort.
@@ -389,5 +389,5 @@ function table.SortDesc(tbl) end
 ---@param tbl table The table to iterate over.
 ---@param displayName string Optional. A name for the table.
 ---@param niceFormatting boolean Adds new lines and tabs to the string.
----@return string The table formatted as a string.
+---@return string #The table formatted as a string.
 function table.ToString(tbl, displayName, niceFormatting) end

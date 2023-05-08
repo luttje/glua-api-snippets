@@ -1,6 +1,6 @@
 ---@meta
 
----@class DColorMixer
+---@class DColorMixer : Panel
 local DColorMixer = {}
 
 ---[CLIENT]
@@ -17,13 +17,13 @@ function DColorMixer:DoConVarThink(cvar) end
 ---[CLIENT] Return true if alpha bar is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetAlphaBar)
----@return boolean Return true if shown, false if not.
+---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetAlphaBar() end
 
 ---[CLIENT] Returns the current selected color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
----@return table The current selected color as a Color.
+---@return table #The current selected color as a Color.
 function DColorMixer:GetColor() end
 
 ---[CLIENT] Returns the ConVar name for the alpha channel of the color.
@@ -34,7 +34,7 @@ function DColorMixer:GetColor() end
 --- * DColorMixer:GetConVarB - For the blue channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarA)
----@return string The ConVar name for the alpha channel of the color
+---@return string #The ConVar name for the alpha channel of the color
 function DColorMixer:GetConVarA() end
 
 ---[CLIENT] Returns the ConVar name for the blue channel of the color.
@@ -45,7 +45,7 @@ function DColorMixer:GetConVarA() end
 --- * DColorMixer:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarB)
----@return string The ConVar name for the blue channel of the color
+---@return string #The ConVar name for the blue channel of the color
 function DColorMixer:GetConVarB() end
 
 ---[CLIENT] Returns the ConVar name for the green channel of the color.
@@ -56,7 +56,7 @@ function DColorMixer:GetConVarB() end
 --- * DColorMixer:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarG)
----@return string The ConVar name for the green channel of the color
+---@return string #The ConVar name for the green channel of the color
 function DColorMixer:GetConVarG() end
 
 ---[CLIENT] Returns the ConVar name for the red channel of the color.
@@ -67,25 +67,25 @@ function DColorMixer:GetConVarG() end
 --- * DColorMixer:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarR)
----@return string The ConVar name for the red channel of the color
+---@return string #The ConVar name for the red channel of the color
 function DColorMixer:GetConVarR() end
 
 ---[CLIENT] Return true if palette is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetPalette)
----@return boolean Return true if shown, false if not.
+---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetPalette() end
 
 ---[CLIENT] Returns the color as a normalized Vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetVector)
----@return Vector A vector representing the color of the DColorMixer, each value being in range of 0 to 1. Alpha is not included.
+---@return Vector #A vector representing the color of the DColorMixer, each value being in range of 0 to 1. Alpha is not included.
 function DColorMixer:GetVector() end
 
 ---[CLIENT] Return true if the wangs are shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetWangs)
----@return boolean Return true if shown, false if not.
+---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetWangs() end
 
 ---[CLIENT] Show/Hide the alpha bar in DColorMixer
@@ -155,7 +155,7 @@ function DColorMixer:SetConVarR(convar) end
 ---[CLIENT] Sets the label's text to show.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetLabel)
----@param text string Set to non empty string to show the label and its text.
+---@param text? string Set to non empty string to show the label and its text.
 ---
 --- Give it an empty string or nothing and the label will be hidden.
 function DColorMixer:SetLabel(text) end

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DRGBPicker
+---@class DRGBPicker : Panel
 local DRGBPicker = {}
 
 ---[CLIENT] Returns the color at given position on the internal texture.
@@ -8,15 +8,15 @@ local DRGBPicker = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:GetPosColor)
 ---@param x number The X coordinate on the texture to get the color from
 ---@param y number The Y coordinate on the texture to get the color from
----@return table, number, number table - Color
----@return table, number, number number - The X-coordinate clamped to the texture's width.
----@return table, number, number number - The Y-coordinate clamped to the texture's height.
+---@return table, number, number #table - Color
+---@return table, number, number #number - The X-coordinate clamped to the texture's width.
+---@return table, number, number #number - The Y-coordinate clamped to the texture's height.
 function DRGBPicker:GetPosColor(x, y) end
 
 ---[CLIENT] Returns the color currently set on the color picker.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:GetRGB)
----@return table The color set on the color picker, see Color.
+---@return table #The color set on the color picker, see Color.
 function DRGBPicker:GetRGB() end
 
 ---[CLIENT] Sets the color stored in the color picker.

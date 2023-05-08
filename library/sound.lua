@@ -21,7 +21,7 @@ function sound.AddSoundOverrides(filepath) end
 ---@param pos Vector The position to emit the hint at
 ---@param volume number The volume or radius of the hint
 ---@param duration number The duration of the hint in seconds
----@param owner Entity
+---@param owner? Entity
 function sound.EmitHint(hint, pos, volume, duration, owner) end
 
 ---[CLIENT] Creates a sound from a function.
@@ -41,20 +41,20 @@ function sound.Generate(indentifier, samplerate, length, callback) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
 ---@param types number The types of sounds to choose from. See Enums/SOUND.
 ---@param pos Vector The position to sense sounds at.
----@return table A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
+---@return table #A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
 
 ---[SHARED] Returns properties of the soundscript.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
 ---@param name string The name of the sound script
----@return table The properties of the soundscript. See Structures/SoundData
+---@return table #The properties of the soundscript. See Structures/SoundData
 function sound.GetProperties(name) end
 
 ---[SHARED] Returns a list of all registered sound scripts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
----@return table The list/array of all registered sound scripts ( No other information is provided )
+---@return table #The list/array of all registered sound scripts ( No other information is provided )
 function sound.GetTable() end
 
 ---[SHARED] Plays a sound from the specified position in the world.

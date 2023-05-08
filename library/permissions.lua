@@ -24,7 +24,7 @@ function permissions.EnableVoiceChat(enable) end
 ---[MENU] Returns all permissions per server. Permanent permissions are stored in `settings/permissions.bin`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/permissions.GetAll)
----@return table A table of permanent and temporary permissions granted for servers.  		Example structure: ```lua permanent = { 	["123.123.123.123"] = "connect" -- this server has a permission to connect player to any server even after restarting the game }, temporary = { 	["111.111.111.111"] = "voicerecord" -- this server can enable voice activity on player during this game session } ```
+---@return table #A table of permanent and temporary permissions granted for servers.  		Example structure: ```lua permanent = { 	["123.123.123.123"] = "connect" -- this server has a permission to connect player to any server even after restarting the game }, temporary = { 	["111.111.111.111"] = "voicerecord" -- this server can enable voice activity on player during this game session } ```
 function permissions.GetAll() end
 
 ---[MENU] Grants permission to the current connected server.
@@ -40,7 +40,7 @@ function permissions.Grant(permission, temporary) end
 ---@param permission string The permission to poll. Currently only 2 permission is valid:
 --- * "connect"
 --- * "voicerecord"
----@return boolean Whether the permission is granted or not.
+---@return boolean #Whether the permission is granted or not.
 function permissions.IsGranted(permission) end
 
 ---[MENU] Revokes permission from the server.

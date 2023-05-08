@@ -1,12 +1,12 @@
 ---@meta
 
----@class DSlider
+---@class DSlider : Panel
 local DSlider = {}
 
 ---[CLIENT] Identical to DSlider:IsEditing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetDragging)
----@return boolean
+---@return boolean #
 function DSlider:GetDragging() end
 
 ---[CLIENT] Returns the draggable panel's lock on the X axis.
@@ -14,7 +14,7 @@ function DSlider:GetDragging() end
 --- See DSlider:SetLockX for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockX)
----@return number
+---@return number #
 function DSlider:GetLockX() end
 
 ---[CLIENT] Returns the draggable panel's lock on the Y axis.
@@ -22,26 +22,26 @@ function DSlider:GetLockX() end
 --- See DSlider:SetLockY for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockY)
----@return number
+---@return number #
 function DSlider:GetLockY() end
 
 ---[CLIENT] Does not affect anything by default.
 --- Returns the current notch color, set by DSlider:SetNotchColor
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
----@return Color The current color
+---@return Color #The current color
 function DSlider:GetNotchColor() end
 
 ---[CLIENT] Appears to be non functioning, however is still used by panels such as DNumSlider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotches)
----@return number
+---@return number #
 function DSlider:GetNotches() end
 
 ---[CLIENT] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNumSlider)
----@return any
+---@return any #
 function DSlider:GetNumSlider() end
 
 ---[CLIENT] Returns the target position of the draggable "knob" panel of the slider on the X axis.
@@ -49,7 +49,7 @@ function DSlider:GetNumSlider() end
 --- Set by DSlider:SetSlideX.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideX)
----@return number The value range seems to be from 0 to 1
+---@return number #The value range seems to be from 0 to 1
 function DSlider:GetSlideX() end
 
 ---[CLIENT] Returns the target position of the draggable "knob" panel of the slider on the Y axis.
@@ -57,19 +57,19 @@ function DSlider:GetSlideX() end
 --- Set by DSlider:SetSlideY.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideY)
----@return number The value range seems to be from 0 to 1
+---@return number #The value range seems to be from 0 to 1
 function DSlider:GetSlideY() end
 
 ---[CLIENT] Returns the value set by DSlider:SetTrapInside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetTrapInside)
----@return boolean
+---@return boolean #
 function DSlider:GetTrapInside() end
 
 ---[CLIENT] Returns true if this element is being edited by the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
----@return boolean
+---@return boolean #
 function DSlider:IsEditing() end
 
 ---[CLIENT] Sets the background for the slider.
@@ -99,7 +99,7 @@ function DSlider:SetImageColor() end
 --- For example the value 0.5 will lock the draggable panel to half the width of the slider's panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetLockX)
----@param lockX number Set to nil to reset lock.
+---@param lockX? number Set to nil to reset lock.
 ---
 --- The value range is from 0 to 1.
 function DSlider:SetLockX(lockX) end
@@ -109,7 +109,7 @@ function DSlider:SetLockX(lockX) end
 --- For example the value 0.5 will lock the draggable panel to half the height of the slider's panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetLockY)
----@param lockY number Set to nil to reset lock.
+---@param lockY? number Set to nil to reset lock.
 ---
 --- The value range is from 0 to 1.
 function DSlider:SetLockY(lockY) end

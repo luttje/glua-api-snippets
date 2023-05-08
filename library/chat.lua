@@ -20,15 +20,15 @@ function chat.Close() end
 ---[CLIENT] Returns the chatbox position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.GetChatBoxPos)
----@return number, number number - The X coordinate of the chatbox's position.
----@return number, number number - The Y coordinate of the chatbox's position.
+---@return number, number #number - The X coordinate of the chatbox's position.
+---@return number, number #number - The Y coordinate of the chatbox's position.
 function chat.GetChatBoxPos() end
 
 ---[CLIENT] Returns the chatbox size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.GetChatBoxSize)
----@return number, number number - The width of the chatbox.
----@return number, number number - The height of the chatbox.
+---@return number, number #number - The width of the chatbox.
+---@return number, number #number - The height of the chatbox.
 function chat.GetChatBoxSize() end
 
 ---[CLIENT] Opens the chat window.

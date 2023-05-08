@@ -1,6 +1,6 @@
 ---@meta
 
----@class DDrawer
+---@class DDrawer : Panel
 local DDrawer = {}
 
 ---[CLIENT] Closes the DDrawer.
@@ -11,13 +11,13 @@ function DDrawer:Close() end
 ---[CLIENT] Return the Open Size of DDrawer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:GetOpenSize)
----@return number Open size.
+---@return number #Open size.
 function DDrawer:GetOpenSize() end
 
 ---[CLIENT] Return the Open Time of DDrawer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:GetOpenTime)
----@return number Time in seconds.
+---@return number #Time in seconds.
 function DDrawer:GetOpenTime() end
 
 ---[CLIENT] Opens the DDrawer.

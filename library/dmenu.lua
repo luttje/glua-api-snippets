@@ -1,6 +1,6 @@
 ---@meta
 
----@class DMenu
+---@class DMenu : Panel
 local DMenu = {}
 
 ---[CLIENT] Creates a DMenuOptionCVar and adds it as an option into the menu. Checking and unchecking the option will alter the given console variable's value.
@@ -10,19 +10,19 @@ local DMenu = {}
 ---@param convar string The console variable to change
 ---@param on string The value of the console variable to set when the option is checked
 ---@param off string The value of the console variable to set when the option is unchecked
----@param funcFunction function If set, the function will be called every time the option is pressed/clicked/selected.
+---@param funcFunction? function If set, the function will be called every time the option is pressed/clicked/selected.
 ---
 --- It will have only one argument:
 --- Panel pnl - The created DMenuOptionCVar
----@return Panel The created DMenuOptionCVar
+---@return Panel #The created DMenuOptionCVar
 function DMenu:AddCVar(strText, convar, on, off, funcFunction) end
 
 ---[CLIENT] Add an option to the DMenu
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddOption)
 ---@param name string Name of the option.
----@param func function Function to execute when this option is clicked.
----@return Panel Returns the created DMenuOption panel.
+---@param func? function Function to execute when this option is clicked.
+---@return Panel #Returns the created DMenuOption panel.
 function DMenu:AddOption(name, func) end
 
 ---[CLIENT] Adds a panel to the DMenu as if it were an option.
@@ -42,15 +42,15 @@ function DMenu:AddSpacer() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:AddSubMenu)
 ---@param Name string Name of the sub menu.
----@param func function Function to execute when this sub menu is clicked.
----@return Panel, Panel Panel - The created sub DMenu
----@return Panel, Panel Panel - The created DMenuOption
+---@param func? function Function to execute when this sub menu is clicked.
+---@return Panel, Panel #Panel - The created sub DMenu
+---@return Panel, Panel #Panel - The created DMenuOption
 function DMenu:AddSubMenu(Name, func) end
 
 ---[CLIENT] Returns the number of child elements of DMenu's DScrollPanel:GetCanvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:ChildCount)
----@return number The number of child elements
+---@return number #The number of child elements
 function DMenu:ChildCount() end
 
 ---[CLIENT] Clears all highlights made by DMenu:HighlightItem.
@@ -77,13 +77,13 @@ function DMenu:GetChild(childIndex) end
 ---[CLIENT] Set by DMenu:SetDeleteSelf
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDeleteSelf)
----@return boolean
+---@return boolean #
 function DMenu:GetDeleteSelf() end
 
 ---[CLIENT] Returns the value set by DMenu:SetDrawBorder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDrawBorder)
----@return boolean
+---@return boolean #
 function DMenu:GetDrawBorder() end
 
 ---[CLIENT] Returns whether the DMenu should draw the icon column with a different color or not.
@@ -91,19 +91,19 @@ function DMenu:GetDrawBorder() end
 --- See DMenu:SetDrawColumn
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDrawColumn)
----@return boolean Whether to draw the column or not
+---@return boolean #Whether to draw the column or not
 function DMenu:GetDrawColumn() end
 
 ---[CLIENT] Returns the maximum height of the DMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetMaxHeight)
----@return number The maximum height in pixels
+---@return number #The maximum height in pixels
 function DMenu:GetMaxHeight() end
 
 ---[CLIENT] Returns the minimum width of the DMenu in pixels
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetMinimumWidth)
----@return number the minimum width of the DMenu
+---@return number #the minimum width of the DMenu
 function DMenu:GetMinimumWidth() end
 
 ---[CLIENT] Returns the currently opened submenu.
@@ -111,7 +111,7 @@ function DMenu:GetMinimumWidth() end
 --- Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetOpenSubMenu)
----@return Panel The currently opened submenu, if any.
+---@return Panel #The currently opened submenu, if any.
 function DMenu:GetOpenSubMenu() end
 
 ---[CLIENT] Used to safely hide (not remove) the menu. This will also hide any opened submenues recursively.
@@ -130,17 +130,17 @@ function DMenu:HighlightItem(item) end
 ---[CLIENT] Opens the DMenu at the current mouse position
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:Open)
----@param x number Position (X coordinate) to open the menu at.
----@param y number Position (Y coordinate) to open the menu at.
----@param skipanimation any This argument does nothing.
----@param ownerpanel Panel If `x` and `y` are not set manually, setting this argument will offset the `y` position of the opened menu by the height of given panel.
+---@param x? number Position (X coordinate) to open the menu at.
+---@param y? number Position (Y coordinate) to open the menu at.
+---@param skipanimation? any This argument does nothing.
+---@param ownerpanel? Panel If `x` and `y` are not set manually, setting this argument will offset the `y` position of the opened menu by the height of given panel.
 function DMenu:Open(x, y, skipanimation, ownerpanel) end
 
 ---[CLIENT] Closes any active sub menus, and opens a new one.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:OpenSubMenu)
 ---@param item Panel The DMenuOption to open the submenu at
----@param menu Panel The submenu to open. If set to nil, the function just closes existing submenus.
+---@param menu? Panel The submenu to open. If set to nil, the function just closes existing submenus.
 function DMenu:OpenSubMenu(item, menu) end
 
 ---[CLIENT] Called when a option has been selected

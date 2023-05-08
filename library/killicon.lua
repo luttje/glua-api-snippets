@@ -39,13 +39,13 @@ function killicon.Draw(x, y, name, alpha) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.Exists)
 ---@param class string The class to test
----@return boolean Returns true if kill icon exists
+---@return boolean #Returns true if kill icon exists
 function killicon.Exists(class) end
 
 ---[CLIENT] Returns the size of a kill icon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.GetSize)
 ---@param name string Classname of the kill icon
----@return number, number number - Width of the kill icon
----@return number, number number - Height of the kill icon
+---@return number, number #number - Width of the kill icon
+---@return number, number #number - Height of the kill icon
 function killicon.GetSize(name) end

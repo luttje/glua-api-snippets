@@ -18,7 +18,7 @@ function EFFECT:EndTouch() end
 ---@param attachment number Attachment ID of on the weapon "muzzle", to use as the start position.
 ---
 --- Please note that it is expected that the same attachment ID is used on both, the world and the view model.
----@return Vector The "real" start position.
+---@return Vector #The "real" start position.
 function EFFECT:GetTracerShootPos(pos, ent, attachment) end
 
 ---[CLIENT] Called when the effect is created.
@@ -47,7 +47,7 @@ function EFFECT:StartTouch() end
 ---[CLIENT] Called when the effect should think, return false to kill the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:Think)
----@return boolean Return false to remove this effect.
+---@return boolean #Return false to remove this effect.
 function EFFECT:Think() end
 
 ---[CLIENT]

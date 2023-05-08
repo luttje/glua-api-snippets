@@ -9,7 +9,8 @@
   "settings": {
     "Lua.runtime.version": "Lua 5.1",
     "Lua.runtime.special": {
-      "include": "require"
+      "include": "require",
+      "IncludeCS": "require"
     },
     "runtime.nonstandardSymbol": [
       "!",

@@ -1,18 +1,18 @@
 ---@meta
 
----@class DNumberWang
+---@class DNumberWang : Panel
 local DNumberWang = {}
 
 ---[CLIENT] Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetDecimals)
----@return number The amount of decimal places allowed in the number selector.
+---@return number #The amount of decimal places allowed in the number selector.
 function DNumberWang:GetDecimals() end
 
 ---[CLIENT] Returns whatever is set by DNumberWang:SetFloatValue or 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetFloatValue)
----@return number
+---@return number #
 function DNumberWang:GetFloatValue() end
 
 ---[CLIENT] Returns a fraction representing the current number selector value to number selector min/max range ratio. If argument `val` is supplied, that number will be computed instead.
@@ -24,31 +24,31 @@ function DNumberWang:GetFraction(val) end
 ---[CLIENT] Returns interval at which the up and down buttons change the current value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetInterval)
----@return number The current interval.
+---@return number #The current interval.
 function DNumberWang:GetInterval() end
 
 ---[CLIENT] Returns the maximum numeric value allowed by the number selector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetMax)
----@return number The maximum value.
+---@return number #The maximum value.
 function DNumberWang:GetMax() end
 
 ---[CLIENT] Returns the minimum numeric value allowed by the number selector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetMin)
----@return number The minimum number.
+---@return number #The minimum number.
 function DNumberWang:GetMin() end
 
 ---[CLIENT] This function returns the panel it is used on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetTextArea)
----@return Panel self
+---@return Panel #self
 function DNumberWang:GetTextArea() end
 
 ---[CLIENT] Returns the numeric value inside the number selector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetValue)
----@return number The numeric value.
+---@return number #The numeric value.
 function DNumberWang:GetValue() end
 
 ---[CLIENT] Hides the number selector arrows.

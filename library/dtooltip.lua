@@ -1,6 +1,6 @@
 ---@meta
 
----@class DTooltip
+---@class DTooltip : Panel
 local DTooltip = {}
 
 ---[CLIENT AND MENU] Forces the tooltip to close. This will remove the panel.
@@ -35,5 +35,5 @@ function DTooltip:PositionTooltip() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTooltip:SetContents)
 ---@param panel Panel Contents
----@param bDelete boolean If set to true, the panel in the first argument will be automatically removed when DTooltip is closed via DTooltip:Close.
+---@param bDelete? boolean If set to true, the panel in the first argument will be automatically removed when DTooltip is closed via DTooltip:Close.
 function DTooltip:SetContents(panel, bDelete) end

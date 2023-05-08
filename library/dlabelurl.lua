@@ -1,24 +1,24 @@
 ---@meta
 
----@class DLabelURL
+---@class DLabelURL : Panel
 local DLabelURL = {}
 
 ---[CLIENT] Gets the current text color of the DLabelURL. Alias as DLabelURL:GetTextColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelURL:GetColor)
----@return table The current text Global.Color.
+---@return table #The current text Global.Color.
 function DLabelURL:GetColor() end
 
 ---[CLIENT] Gets the current text color of the DLabelURL set by DLabelURL:SetTextColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelURL:GetTextColor)
----@return table The current text Global.Color.
+---@return table #The current text Global.Color.
 function DLabelURL:GetTextColor() end
 
 ---[CLIENT] Returns the color set by DLabelURL:SetTextStyleColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelURL:GetTextStyleColor)
----@return table The Color
+---@return table #The Color
 function DLabelURL:GetTextStyleColor() end
 
 ---[CLIENT] Alias of DLabelURL:SetTextColor.

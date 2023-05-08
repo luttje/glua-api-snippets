@@ -1,6 +1,6 @@
 ---@meta
 
----@class IconEditor
+---@class IconEditor : Panel
 local IconEditor = {}
 
 ---[CLIENT] Applies the top-down view camera settings for the model in the DAdjustableModelPanel.

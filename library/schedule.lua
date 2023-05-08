@@ -44,5 +44,5 @@ function Schedule:Init(debugName) end
 ---[SERVER] Returns the number of tasks in the schedule.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:NumTasks)
----@return number The number of tasks in this schedule.
+---@return number #The number of tasks in this schedule.
 function Schedule:NumTasks() end

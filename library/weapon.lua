@@ -10,13 +10,13 @@ local WEAPON = {}
 ---@param activator Entity The initial cause for the input getting triggered.
 ---@param called Entity The entity that directly trigger the input.
 ---@param data string The data passed.
----@return boolean Should we suppress the default action for this input?
+---@return boolean #Should we suppress the default action for this input?
 function WEAPON:AcceptInput(inputName, activator, called, data) end
 
 ---[CLIENT] Allows you to adjust the mouse sensitivity. This hook only works if you haven't overridden GM:AdjustMouseSensitivity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:AdjustMouseSensitivity)
----@return number Sensitivity scale
+---@return number #Sensitivity scale
 function WEAPON:AdjustMouseSensitivity() end
 
 ---@class Weapon
@@ -25,25 +25,25 @@ local Weapon = {}
 ---[SHARED] Returns whether the weapon allows to being switched from when a better ( Weapon:GetWeight ) weapon is being picked up.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:AllowsAutoSwitchFrom)
----@return boolean Whether the weapon allows to being switched from.
+---@return boolean #Whether the weapon allows to being switched from.
 function Weapon:AllowsAutoSwitchFrom() end
 
 ---[SHARED] Returns whether the weapon allows to being switched to when a better ( Weapon:GetWeight ) weapon is being picked up.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:AllowsAutoSwitchTo)
----@return boolean Whether the weapon allows to being switched to.
+---@return boolean #Whether the weapon allows to being switched to.
 function Weapon:AllowsAutoSwitchTo() end
 
 ---[SHARED] Returns how much of primary ammo the player has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Ammo1)
----@return number The amount of primary ammo player has
+---@return number #The amount of primary ammo player has
 function WEAPON:Ammo1() end
 
 ---[SHARED] Returns how much of secondary ammo the player has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Ammo2)
----@return number The amount of secondary ammo player has
+---@return number #The amount of secondary ammo player has
 function WEAPON:Ammo2() end
 
 ---[CLIENT] Allows you to adjust player view while this weapon in use.
@@ -57,9 +57,9 @@ function WEAPON:Ammo2() end
 ---@param pos Vector Current position of players view
 ---@param ang Angle Current angles of players view
 ---@param fov number Current FOV of players view
----@return Vector, Angle, number Vector - New position of players view
----@return Vector, Angle, number Angle - New angle of players view
----@return Vector, Angle, number number - New FOV of players view
+---@return Vector, Angle, number #Vector - New position of players view
+---@return Vector, Angle, number #Angle - New angle of players view
+---@return Vector, Angle, number #number - New FOV of players view
 function WEAPON:CalcView(ply, pos, ang, fov) end
 
 ---[CLIENT] Allows overriding the position and angle of the viewmodel. This hook only works if you haven't overridden GM:CalcViewModelView.
@@ -70,8 +70,8 @@ function WEAPON:CalcView(ply, pos, ang, fov) end
 ---@param OldEyeAng Angle Original angle (before viewmodel bobbing and swaying)
 ---@param EyePos Vector Current position
 ---@param EyeAng Angle Current angle
----@return Vector, Angle Vector - New position
----@return Vector, Angle Angle - New angle
+---@return Vector, Angle #Vector - New position
+---@return Vector, Angle #Angle - New angle
 function WEAPON:CalcViewModelView(ViewModel, OldEyePos, OldEyeAng, EyePos, EyeAng) end
 
 ---[SHARED] Calls a SWEP function on client.
@@ -87,33 +87,33 @@ function Weapon:CallOnClient(functionName, arguments) end
 ---[SERVER] Called when a Citizen NPC is looking around to a (better) weapon to pickup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CanBePickedUpByNPCs)
----@return boolean Return true to allow this weapon to be picked up by NPCs.
+---@return boolean #Return true to allow this weapon to be picked up by NPCs.
 function WEAPON:CanBePickedUpByNPCs() end
 
 ---[SHARED] Helper function for checking for no ammo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CanPrimaryAttack)
----@return boolean Can use primary attack
+---@return boolean #Can use primary attack
 function WEAPON:CanPrimaryAttack() end
 
 ---[SHARED] Helper function for checking for no ammo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CanSecondaryAttack)
----@return boolean Can use secondary attack
+---@return boolean #Can use secondary attack
 function WEAPON:CanSecondaryAttack() end
 
 ---[SHARED] Returns how much primary ammo is in the magazine.
 --- 	This is not shared between clients and will instead return the maximum primary clip size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:Clip1)
----@return number The amount of primary ammo in the magazine.
+---@return number #The amount of primary ammo in the magazine.
 function Weapon:Clip1() end
 
 ---[SHARED] Returns how much secondary ammo is in the magazine.
 --- 	This is not shared between clients and will instead return the maximum secondary clip size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:Clip2)
----@return number The amount of secondary ammo in the magazine.
+---@return number #The amount of secondary ammo in the magazine.
 function Weapon:Clip2() end
 
 ---[CLIENT] Allows you to use any numbers you want for the ammo display on the HUD.
@@ -121,7 +121,7 @@ function Weapon:Clip2() end
 --- Can be useful for weapons that don't use standard ammo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CustomAmmoDisplay)
----@return table The new ammo display settings. A table with 4 possible keys: * boolean Draw - Whether to draw the ammo display or not * number PrimaryClip - Amount of primary ammo in the clip * number PrimaryAmmo - Amount of primary ammo in the reserves * number SecondaryAmmo - Amount of secondary ammo. It is shown like alt-fire for SMG1 and AR2 are shown.  There is **no** SecondaryClip!
+---@return table #The new ammo display settings. A table with 4 possible keys: * boolean Draw - Whether to draw the ammo display or not * number PrimaryClip - Amount of primary ammo in the clip * number PrimaryAmmo - Amount of primary ammo in the reserves * number SecondaryAmmo - Amount of secondary ammo. It is shown like alt-fire for SMG1 and AR2 are shown.  There is **no** SecondaryClip!
 function WEAPON:CustomAmmoDisplay() end
 
 ---[SHARED] Forces the weapon to reload while playing given animation.
@@ -130,7 +130,7 @@ function WEAPON:CustomAmmoDisplay() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:DefaultReload)
 ---@param act number Sequence to use as reload animation. Uses the Enums/ACT.
----@return boolean Did reloading actually take place
+---@return boolean #Did reloading actually take place
 function Weapon:DefaultReload(act) end
 
 ---[SHARED] Called when player has just switched to this weapon.
@@ -138,7 +138,7 @@ function Weapon:DefaultReload(act) end
 --- Due to this hook being predicted, it is not called clientside in singleplayer at all, and in multiplayer it will not be called clientside if the weapon is switched with Player:SelectWeapon or the "use" console command, however it will be called clientside with the default weapon selection menu and when using CUserCmd:SelectWeapon
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Deploy)
----@return boolean Return true to allow switching away from this weapon using lastinv command
+---@return boolean #Return true to allow switching away from this weapon using lastinv command
 function WEAPON:Deploy() end
 
 ---[CLIENT] Called when the crosshair is about to get drawn, and allows you to override it.
@@ -148,7 +148,7 @@ function WEAPON:Deploy() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:DoDrawCrosshair)
 ---@param x number X coordinate of the crosshair.
 ---@param y number Y coordinate of the crosshair.
----@return boolean Return true to override the default crosshair.
+---@return boolean #Return true to override the default crosshair.
 function WEAPON:DoDrawCrosshair(x, y) end
 
 ---[SHARED] Called so the weapon can override the impact effects it makes.
@@ -156,7 +156,7 @@ function WEAPON:DoDrawCrosshair(x, y) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:DoImpactEffect)
 ---@param tr table A Structures/TraceResult from player's eyes to the impact point
 ---@param damageType number The damage type of bullet. See Enums/DMG
----@return boolean Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
+---@return boolean #Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
 function WEAPON:DoImpactEffect(tr, damageType) end
 
 ---[CLIENT] This hook allows you to draw on screen while this weapon is in use.
@@ -216,14 +216,14 @@ function WEAPON:EquipAmmo(ply) end
 ---@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
 ---@param options string Name or options of the event.
 ---@param source Entity The source entity. This will be a viewmodel on the client and the weapon itself on the server
----@return boolean Return true to disable the effect.
+---@return boolean #Return true to disable the effect.
 function WEAPON:FireAnimationEvent(pos, ang, event, options, source) end
 
 ---[CLIENT] This hook allows you to freeze players screen.
 --- Player will still be able to move or shoot
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:FreezeMovement)
----@return boolean Return true to freeze moving the view
+---@return boolean #Return true to freeze moving the view
 function WEAPON:FreezeMovement() end
 
 ---[SHARED] Returns the sequence enumeration number that the weapon is playing.
@@ -231,43 +231,43 @@ function WEAPON:FreezeMovement() end
 --- This can return inconsistent results between the server and client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetActivity)
----@return number Current activity, see Enums/ACT. Returns 0 if the weapon doesn't have active sequence.
+---@return number #Current activity, see Enums/ACT. Returns 0 if the weapon doesn't have active sequence.
 function Weapon:GetActivity() end
 
 ---[SERVER] This hook is for NPCs, you return what they should try to do with it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetCapabilities)
----@return number A number defining what NPC should do with the weapon. Use the Enums/CAP.
+---@return number #A number defining what NPC should do with the weapon. Use the Enums/CAP.
 function WEAPON:GetCapabilities() end
 
 ---[SHARED] Returns the hold type of the weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetHoldType)
----@return string The hold type of the weapon. You can find a list of default hold types Hold_Types.
+---@return string #The hold type of the weapon. You can find a list of default hold types Hold_Types.
 function Weapon:GetHoldType() end
 
 ---[SHARED] Returns maximum primary clip size
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetMaxClip1)
----@return number Maximum primary clip size
+---@return number #Maximum primary clip size
 function Weapon:GetMaxClip1() end
 
 ---[SHARED] Returns maximum secondary clip size
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetMaxClip2)
----@return number Maximum secondary clip size
+---@return number #Maximum secondary clip size
 function Weapon:GetMaxClip2() end
 
 ---[SHARED] Gets the next time the weapon can primary fire. ( Can call WEAPON:PrimaryAttack )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetNextPrimaryFire)
----@return number The time, relative to Global.CurTime
+---@return number #The time, relative to Global.CurTime
 function Weapon:GetNextPrimaryFire() end
 
 ---[SHARED] Gets the next time the weapon can secondary fire. ( Can call WEAPON:SecondaryAttack )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetNextSecondaryFire)
----@return number The time, relative to Global.CurTime
+---@return number #The time, relative to Global.CurTime
 function Weapon:GetNextSecondaryFire() end
 
 ---[SERVER] Called when the weapon is used by NPCs to determine how accurate the bullets fired should be.
@@ -276,28 +276,28 @@ function Weapon:GetNextSecondaryFire() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetNPCBulletSpread)
 ---@param proficiency number How proficient the NPC is with this gun. See Enums/WEAPON_PROFICIENCY
----@return number An amount of degrees the bullets should deviate from the NPC's NPC:GetAimVector. Default is 15.
+---@return number #An amount of degrees the bullets should deviate from the NPC's NPC:GetAimVector. Default is 15.
 function WEAPON:GetNPCBulletSpread(proficiency) end
 
 ---[SERVER] Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls how long the NPC can or should shoot continuously.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetNPCBurstSettings)
----@return number, number, number number - Minimum amount of bullets per burst. Default is 1.
----@return number, number, number number - Maximum amount of bullets per burst. Default is 1.
----@return number, number, number number - Delay between each shot, aka firerate. Default is 1.
+---@return number, number, number #number - Minimum amount of bullets per burst. Default is 1.
+---@return number, number, number #number - Maximum amount of bullets per burst. Default is 1.
+---@return number, number, number #number - Delay between each shot, aka firerate. Default is 1.
 function WEAPON:GetNPCBurstSettings() end
 
 ---[SERVER] Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls amount of time the NPC can rest (not shoot) between bursts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetNPCRestTimes)
----@return number, number number - Minimum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.3` seconds.
----@return number, number number - Maximum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.66` seconds.
+---@return number, number #number - Minimum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.3` seconds.
+---@return number, number #number - Maximum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.66` seconds.
 function WEAPON:GetNPCRestTimes() end
 
 ---[SHARED] Gets the primary ammo type of the given weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetPrimaryAmmoType)
----@return number The ammo type ID, or -1 if not found.
+---@return number #The ammo type ID, or -1 if not found.
 function Weapon:GetPrimaryAmmoType() end
 
 ---[SHARED] Returns the non-internal name of the weapon, that should be for displaying.
@@ -306,32 +306,32 @@ function Weapon:GetPrimaryAmmoType() end
 --- If SWEP.PrintName is not set in the Weapon or the Weapon Base then "<MISSING SWEP PRINT NAME>" will be returned.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetPrintName)
----@return string The "nice" name of the weapon.
+---@return string #The "nice" name of the weapon.
 function Weapon:GetPrintName() end
 
 ---[SHARED] Gets the ammo type of the given weapons secondary fire.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetSecondaryAmmoType)
----@return number The secondary ammo type ID, or -1 if not found.
+---@return number #The secondary ammo type ID, or -1 if not found.
 function Weapon:GetSecondaryAmmoType() end
 
 ---[SHARED] Returns the slot of the weapon.
 --- 	The slot numbers start from 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetSlot)
----@return number The slot of the weapon.
+---@return number #The slot of the weapon.
 function Weapon:GetSlot() end
 
 ---[SHARED] Returns slot position of the weapon
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetSlotPos)
----@return number The slot position of the weapon
+---@return number #The slot position of the weapon
 function Weapon:GetSlotPos() end
 
 ---[CLIENT] Allows you to override where the tracer effect comes from. ( Visual bullets )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetTracerOrigin)
----@return Vector The new position to start tracer effect from
+---@return Vector #The new position to start tracer effect from
 function WEAPON:GetTracerOrigin() end
 
 ---[CLIENT] This hook allows you to adjust view model position and angles.
@@ -339,26 +339,26 @@ function WEAPON:GetTracerOrigin() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetViewModelPosition)
 ---@param EyePos Vector Current position
 ---@param EyeAng Angle Current angle
----@return Vector, Angle Vector - New position
----@return Vector, Angle Angle - New angle
+---@return Vector, Angle #Vector - New position
+---@return Vector, Angle #Angle - New angle
 function WEAPON:GetViewModelPosition(EyePos, EyeAng) end
 
 ---[SHARED] Returns the view model of the weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetWeaponViewModel)
----@return string The view model of the weapon.
+---@return string #The view model of the weapon.
 function Weapon:GetWeaponViewModel() end
 
 ---[SHARED] Returns the world model of the weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetWeaponWorldModel)
----@return string The world model of the weapon.
+---@return string #The world model of the weapon.
 function Weapon:GetWeaponWorldModel() end
 
 ---[SHARED] Returns the "weight" of the weapon, which is used when deciding which Weapon is better by the engine.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetWeight)
----@return number The weapon "weight".
+---@return number #The weapon "weight".
 function Weapon:GetWeight() end
 
 ---[SHARED] Returns whether the weapon has ammo left or not. It will return false when there's no ammo left in the magazine **and** when there's no reserve ammo left.
@@ -366,7 +366,7 @@ function Weapon:GetWeight() end
 --- This will return true for weapons like crowbar, gravity gun, etc.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:HasAmmo)
----@return boolean Whether the weapon has ammo or not.
+---@return boolean #Whether the weapon has ammo or not.
 function Weapon:HasAmmo() end
 
 ---[SHARED] Called when weapon tries to holster.
@@ -379,14 +379,14 @@ function Weapon:HasAmmo() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Holster)
 ---@param weapon Entity The weapon we are trying switch to.
----@return boolean Return true to allow weapon to holster.  This will not have an effect if weapon was switched away from using Player:SetActiveWeapon
+---@return boolean #Return true to allow weapon to holster.  This will not have an effect if weapon was switched away from using Player:SetActiveWeapon
 function WEAPON:Holster(weapon) end
 
 ---[CLIENT] This hook determines which parts of the HUD to draw.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:HUDShouldDraw)
 ---@param element string The HUD element in question
----@return boolean Return false to hide this HUD element
+---@return boolean #Return false to hide this HUD element
 function WEAPON:HUDShouldDraw(element) end
 
 ---[SHARED] Called when the weapon entity is created.
@@ -403,19 +403,19 @@ function WEAPON:Initialize() end
 ---[CLIENT] Returns whenever the weapon is carried by the local player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:IsCarriedByLocalPlayer)
----@return boolean Is the weapon is carried by the local player or not
+---@return boolean #Is the weapon is carried by the local player or not
 function Weapon:IsCarriedByLocalPlayer() end
 
 ---[SHARED] Checks if the weapon is a SWEP or a built-in weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:IsScripted)
----@return boolean Returns true if weapon is scripted ( SWEP ), false if not ( A built-in HL2/HL:S weapon )
+---@return boolean #Returns true if weapon is scripted ( SWEP ), false if not ( A built-in HL2/HL:S weapon )
 function Weapon:IsScripted() end
 
 ---[SHARED] Returns whether the weapon is visible. The term visibility is not exactly what gets checked here, first it checks if the owner is a player, then checks if the active view model has EF_NODRAW flag NOT set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:IsWeaponVisible)
----@return boolean Is visible or not
+---@return boolean #Is visible or not
 function Weapon:IsWeaponVisible() end
 
 ---[SERVER] Called when the engine sets a value for this scripted weapon.
@@ -428,13 +428,13 @@ function Weapon:IsWeaponVisible() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:KeyValue)
 ---@param key string The key that was affected.
 ---@param value string The new value.
----@return boolean Return true to suppress this KeyValue or return false or nothing to apply this key value.
+---@return boolean #Return true to suppress this KeyValue or return false or nothing to apply this key value.
 function WEAPON:KeyValue(key, value) end
 
 ---[SHARED] Returns the time since this weapon last fired a bullet with Entity:FireBullets in seconds. It is not networked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:LastShootTime)
----@return number The time in seconds when the last bullet was fired.
+---@return number #The time in seconds when the last bullet was fired.
 function Weapon:LastShootTime() end
 
 ---[SERVER] Called when weapon is dropped by Player:DropWeapon.
@@ -579,7 +579,7 @@ function Weapon:SetHoldType(name) end
 ---[SHARED] Sets the time since this weapon last fired in seconds. Used in conjunction with Weapon:LastShootTime
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:SetLastShootTime)
----@param time number The time in seconds when the last time the weapon was fired.
+---@param time? number The time in seconds when the last time the weapon was fired.
 function Weapon:SetLastShootTime(time) end
 
 ---[SHARED] Sets when the weapon can fire again. Time should be based on Global.CurTime.
@@ -616,9 +616,9 @@ function WEAPON:SetWeaponHoldType(name) end
 ---@param damage number The damage of the bullet
 ---@param num_bullets number Amount of bullets to shoot
 ---@param aimcone number Spread of bullets
----@param ammo_type string Ammo type of the bullets
----@param force number Force of the bullets
----@param tracer number Show a tracer on every x bullets
+---@param ammo_type? string Ammo type of the bullets
+---@param force? number Force of the bullets
+---@param tracer? number Show a tracer on every x bullets
 function WEAPON:ShootBullet(damage, num_bullets, aimcone, ammo_type, force, tracer) end
 
 ---[SHARED] A convenience function to create shoot effects.
@@ -629,7 +629,7 @@ function WEAPON:ShootEffects() end
 ---[CLIENT] Called to determine if the view model should be drawn or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:ShouldDrawViewModel)
----@return boolean Return true to draw the view model, false otherwise.
+---@return boolean #Return true to draw the view model, false otherwise.
 function WEAPON:ShouldDrawViewModel() end
 
 ---[SERVER] Should this weapon be dropped when its owner dies?
@@ -637,7 +637,7 @@ function WEAPON:ShouldDrawViewModel() end
 --- This only works if the player has Player:ShouldDropWeapon set to true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:ShouldDropOnDie)
----@return boolean Return true to drop the weapon, false otherwise. Default ( if you don't return anything ) is false.
+---@return boolean #Return true to drop the weapon, false otherwise. Default ( if you don't return anything ) is false.
 function WEAPON:ShouldDropOnDie() end
 
 ---[SHARED] A convenience function to remove primary ammo from clip.
@@ -672,7 +672,7 @@ function WEAPON:Think() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity)
 ---@param act number The activity to translate
----@return number The translated activity
+---@return number #The translated activity
 function WEAPON:TranslateActivity(act) end
 
 ---[SHARED] Allows to change players field of view while player holds the weapon.
@@ -681,7 +681,7 @@ function WEAPON:TranslateActivity(act) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:TranslateFOV)
 ---@param fov number The current/default FOV.
----@return number The target FOV.
+---@return number #The target FOV.
 function WEAPON:TranslateFOV(fov) end
 
 ---[CLIENT] Called straight after the view model has been drawn. This is called before GM:PostDrawViewModel and WEAPON:PostDrawViewModel.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DModelSelect
+---@class DModelSelect : Panel
 local DModelSelect = {}
 
 ---[CLIENT] Sets the height of the panel **in the amount of 64px spawnicons**.
@@ -8,7 +8,7 @@ local DModelSelect = {}
 --- Overrides Panel:SetHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelSelect:SetHeight)
----@param num number Basically how many rows of 64x64 px spawnicons should fit in this DModelSelect
+---@param num? number Basically how many rows of 64x64 px spawnicons should fit in this DModelSelect
 function DModelSelect:SetHeight(num) end
 
 ---[CLIENT] Called to set the list of models within the panel element.

@@ -1,12 +1,12 @@
 ---@meta
 
----@class ImageCheckBox
+---@class ImageCheckBox : Panel
 local ImageCheckBox = {}
 
 ---[CLIENT] Returns the checked state of the ImageCheckBox
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ImageCheckBox:GetChecked)
----@return boolean true for checked, false otherwise
+---@return boolean #true for checked, false otherwise
 function ImageCheckBox:GetChecked() end
 
 ---[CLIENT] Sets the checked state of the checkbox.

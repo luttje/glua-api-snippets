@@ -80,13 +80,13 @@ function gui.InternalMouseWheeled(delta) end
 ---[CLIENT AND MENU] Returns whether the console is visible or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.IsConsoleVisible)
----@return boolean Whether the console is visible or not.
+---@return boolean #Whether the console is visible or not.
 function gui.IsConsoleVisible() end
 
 ---[CLIENT AND MENU] Returns whether the game menu overlay ( main menu ) is open or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.IsGameUIVisible)
----@return boolean Whether the game menu overlay ( main menu ) is open or not
+---@return boolean #Whether the game menu overlay ( main menu ) is open or not
 function gui.IsGameUIVisible() end
 
 ---[CLIENT AND MENU] Use input.GetCursorPos instead.
@@ -94,20 +94,20 @@ function gui.IsGameUIVisible() end
 --- Returns the cursor's position on the screen, or 0, 0 if cursor is not visible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MousePos)
----@return number, number number - mouseX
----@return number, number number - mouseY
+---@return number, number #number - mouseX
+---@return number, number #number - mouseY
 function gui.MousePos() end
 
 ---[CLIENT AND MENU] Returns x component of the mouse position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MouseX)
----@return number mouseX
+---@return number #mouseX
 function gui.MouseX() end
 
 ---[CLIENT AND MENU] Returns y component of the mouse position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MouseY)
----@return number mouseY
+---@return number #mouseY
 function gui.MouseY() end
 
 ---[CLIENT AND MENU] Opens specified URL in the steam overlay browser.
@@ -126,7 +126,7 @@ function gui.OpenURL(url) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ScreenToVector)
 ---@param x number X coordinate on the screen.
 ---@param y number Y coordinate on the screen.
----@return Vector Direction
+---@return Vector #Direction
 function gui.ScreenToVector(x, y) end
 
 ---[CLIENT AND MENU] Use input.SetCursorPos instead.

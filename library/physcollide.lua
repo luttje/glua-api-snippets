@@ -13,7 +13,7 @@ function PhysCollide:Destroy() end
 --- You should just use Global.IsValid instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysCollide:IsValid)
----@return boolean Is valid or not.
+---@return boolean #Is valid or not.
 function PhysCollide:IsValid() end
 
 ---[SHARED] Performs a trace against this PhysCollide with the given parameters. This can be used for both line traces and box traces.
@@ -25,7 +25,7 @@ function PhysCollide:IsValid() end
 ---@param rayEnd Vector The end position of the trace
 ---@param rayMins Vector The mins of the trace's bounds
 ---@param rayMaxs Vector The maxs of the trace's bounds
----@return Vector, Vector, number Vector - Hit position of the trace. This is false if the trace did not hit.
----@return Vector, Vector, number Vector - Hit normal of the trace
----@return Vector, Vector, number number - Fraction of the trace. This is calculated from the distance between startPos, hitPos, and endPos.
+---@return Vector, Vector, number #Vector - Hit position of the trace. This is false if the trace did not hit.
+---@return Vector, Vector, number #Vector - Hit normal of the trace
+---@return Vector, Vector, number #number - Fraction of the trace. This is calculated from the distance between startPos, hitPos, and endPos.
 function PhysCollide:TraceBox(origin, angles, rayStart, rayEnd, rayMins, rayMaxs) end

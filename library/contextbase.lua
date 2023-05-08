@@ -1,6 +1,6 @@
 ---@meta
 
----@class ContextBase
+---@class ContextBase : Panel
 local ContextBase = {}
 
 ---[CLIENT] Called by spawnmenu functions (when creating a context menu) to fill this control with data.
@@ -14,7 +14,7 @@ function ContextBase:ControlValues(contextData) end
 ---[CLIENT] Returns the ConVar for the panel to change/handle, set by ContextBase:SetConVar
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContextBase:ConVar)
----@return string The ConVar for the panel to change.
+---@return string #The ConVar for the panel to change.
 function ContextBase:ConVar() end
 
 ---[CLIENT] Sets the ConVar for the panel to change/handle.

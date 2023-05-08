@@ -1,6 +1,6 @@
 ---@meta
 
----@class DPanel
+---@class DPanel : Panel
 local DPanel = {}
 
 ---[CLIENT] Returns the panel's background color.
@@ -8,25 +8,25 @@ local DPanel = {}
 --- By default this returns **nil** even though the default background color is white
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetBackgroundColor)
----@return table Color of the panel's background.
+---@return table #Color of the panel's background.
 function DPanel:GetBackgroundColor() end
 
 ---[CLIENT] Returns whether or not the panel is disabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetDisabled)
----@return boolean True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
+---@return boolean #True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
 function DPanel:GetDisabled() end
 
 ---[CLIENT] You should use DPanel:GetPaintBackground instead.Returns whether or not the panel background is being drawn. Alias of DPanel:GetPaintBackground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetDrawBackground)
----@return boolean True if the panel background is drawn, false otherwise.
+---@return boolean #True if the panel background is drawn, false otherwise.
 function DPanel:GetDrawBackground() end
 
 ---[CLIENT] Returns whether or not the panel background is being drawn.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetPaintBackground)
----@return boolean True if the panel background is drawn, false otherwise.
+---@return boolean #True if the panel background is drawn, false otherwise.
 function DPanel:GetPaintBackground() end
 
 ---[CLIENT] Sets the background color of the panel.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DBubbleContainer
+---@class DBubbleContainer : Panel
 local DBubbleContainer = {}
 
 ---[CLIENT] Sets the speech bubble position and size along with the dialog point position.

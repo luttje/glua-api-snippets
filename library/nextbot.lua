@@ -7,7 +7,7 @@ local NextBot = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:BecomeRagdoll)
 ---@param info CTakeDamageInfo Damage info passed from an onkilled event
----@return Entity The created ragdoll, if any.
+---@return Entity #The created ragdoll, if any.
 function NextBot:BecomeRagdoll(info) end
 
 ---@class NEXTBOT
@@ -59,7 +59,7 @@ function NEXTBOT:BodyUpdate() end
 --- number stepup - the highest step to step up.
 ---
 --- number stepdown - the highest we can step down without being hurt.
----@return Vector If it finds a spot it will return a vector. If not it will return nil.
+---@return Vector #If it finds a spot it will return a vector. If not it will return nil.
 function NextBot:FindSpot(type, options) end
 
 ---[SERVER] Returns a table of hiding spots.
@@ -80,25 +80,25 @@ function NextBot:FindSpot(type, options) end
 --- number stepup - the highest step to step up.
 ---
 --- number stepdown - the highest we can step down without being hurt.
----@return table An unsorted table of tables containing:     Vector vector - The position of the hiding spot  number distance - the distance to that position
+---@return table #An unsorted table of tables containing:     Vector vector - The position of the hiding spot  number distance - the distance to that position
 function NextBot:FindSpots(specs) end
 
 ---[SERVER] Returns the currently running activity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetActivity)
----@return number The current activity
+---@return number #The current activity
 function NextBot:GetActivity() end
 
 ---[SERVER] Returns the Field of View of the Nextbot NPC, used for its vision functionality, such as NextBot:IsAbleToSee.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetFOV)
----@return number The current FOV of the nextbot
+---@return number #The current FOV of the nextbot
 function NextBot:GetFOV() end
 
 ---[SERVER] Returns the maximum range the nextbot can see other nextbots/players at. See NextBot:IsAbleToSee.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetMaxVisionRange)
----@return number The current vision range
+---@return number #The current vision range
 function NextBot:GetMaxVisionRange() end
 
 ---[SERVER] Returns squared distance to an entity or a position.
@@ -107,7 +107,7 @@ function NextBot:GetMaxVisionRange() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetRangeSquaredTo)
 ---@param to Vector The position to measure distance to. Can be an entity.
----@return number The squared distance
+---@return number #The squared distance
 function NextBot:GetRangeSquaredTo(to) end
 
 ---[SERVER] Returns the distance to an entity or position.
@@ -116,13 +116,13 @@ function NextBot:GetRangeSquaredTo(to) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetRangeTo)
 ---@param to Vector The position to measure distance to. Can be an entity.
----@return number The distance
+---@return number #The distance
 function NextBot:GetRangeTo(to) end
 
 ---[SERVER] Returns the solid mask for given NextBot.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:GetSolidMask)
----@return number The solid mask, see Enums/CONTENTS and Enums/MASK
+---@return number #The solid mask, see Enums/CONTENTS and Enums/MASK
 function NextBot:GetSolidMask() end
 
 ---[SERVER] Called from Lua when the NPC is stuck. This should only be called from the behaviour coroutine - so if you want to override this function and do something special that yields - then go for it.
@@ -138,8 +138,8 @@ function NextBot:HandleStuck() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:IsAbleToSee)
 ---@param ent Entity The entity to test if we can see
----@param useFOV number Whether to use the Field of View of the Nextbot
----@return boolean If the nextbot can see or not
+---@param useFOV? number Whether to use the Field of View of the Nextbot
+---@return boolean #If the nextbot can see or not
 function NextBot:IsAbleToSee(ent, useFOV) end
 
 ---[SERVER] To be called in the behaviour coroutine only! Will yield until the bot has reached the goal or is stuck
@@ -165,7 +165,7 @@ function NextBot:IsAbleToSee(ent, useFOV) end
 ---
 ---
 --- number repath - Rebuilds the path after this number of seconds.
----@return string Either "failed", "stuck", "timeout" or "ok" - depending on how the NPC got on
+---@return string #Either "failed", "stuck", "timeout" or "ok" - depending on how the NPC got on
 function NextBot:MoveToPos(pos, options) end
 
 ---[SERVER] Called when the nextbot touches another entity.
@@ -257,7 +257,7 @@ function NEXTBOT:OnUnStuck() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NextBot:PlaySequenceAndWait)
 ---@param name string The sequence name
----@param speed number Playback Rate of that sequence
+---@param speed? number Playback Rate of that sequence
 function NextBot:PlaySequenceAndWait(name, speed) end
 
 ---[SERVER] A hook called to process nextbot logic.

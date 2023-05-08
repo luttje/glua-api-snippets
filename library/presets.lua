@@ -20,14 +20,14 @@ function presets.BadNameAlert() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Exists)
 ---@param type string The preset group name, usually it's tool class name.
 ---@param name string Name of the preset to test
----@return boolean true if the preset does exist
+---@return boolean #true if the preset does exist
 function presets.Exists(type, name) end
 
 ---[CLIENT] Returns a table with preset names and values from a single preset group.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.GetTable)
 ---@param groupname string Preset group name.
----@return table All presets in specified group.
+---@return table #All presets in specified group.
 function presets.GetTable(groupname) end
 
 ---[CLIENT] Used internally to ask the player if they want to override an already existing preset.

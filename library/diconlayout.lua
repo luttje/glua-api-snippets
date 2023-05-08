@@ -1,12 +1,12 @@
 ---@meta
 
----@class DIconLayout
+---@class DIconLayout : Panel
 local DIconLayout = {}
 
 ---[CLIENT] Creates a replica of the DIconLayout it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:Copy)
----@return Panel The replica.
+---@return Panel #The replica.
 function DIconLayout:Copy() end
 
 ---[CLIENT] Copies the contents (Child elements) of another DIconLayout to itself.
@@ -18,25 +18,25 @@ function DIconLayout:CopyContents(from) end
 ---[CLIENT] Returns the size of the border.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetBorder)
----@return number
+---@return number #
 function DIconLayout:GetBorder() end
 
 ---[CLIENT] Returns the direction that it will be layed out, using the DOCK enumerations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetLayoutDir)
----@return number Layout direction.
+---@return number #Layout direction.
 function DIconLayout:GetLayoutDir() end
 
 ---[CLIENT] Returns the distance between two 'icons' on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetSpaceX)
----@return number Distance between two 'icons' on the X axis.
+---@return number #Distance between two 'icons' on the X axis.
 function DIconLayout:GetSpaceX() end
 
 ---[CLIENT] Returns distance between two "Icons" on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetSpaceY)
----@return number distance between two "Icons" on the Y axis.
+---@return number #distance between two "Icons" on the Y axis.
 function DIconLayout:GetSpaceY() end
 
 ---[CLIENT] Returns whether the icon layout will stretch its height to fit all the children.
@@ -44,7 +44,7 @@ function DIconLayout:GetSpaceY() end
 --- See also DIconLayout:GetStretchWidth
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchHeight)
----@return boolean
+---@return boolean #
 function DIconLayout:GetStretchHeight() end
 
 ---[CLIENT] Returns whether the icon layout will stretch its width to fit all the children.
@@ -52,7 +52,7 @@ function DIconLayout:GetStretchHeight() end
 --- See also DIconLayout:GetStretchHeight
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchWidth)
----@return boolean
+---@return boolean #
 function DIconLayout:GetStretchWidth() end
 
 ---[CLIENT] Resets layout vars before calling Panel:InvalidateLayout. This is called when children are added or removed, and must be called when the spacing, border or layout direction is changed.

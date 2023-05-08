@@ -1,6 +1,6 @@
 ---@meta
 
----@class DGrid
+---@class DGrid : Panel
 local DGrid = {}
 
 ---[CLIENT] Adds a new item to the grid.
@@ -12,32 +12,32 @@ function DGrid:AddItem(item) end
 ---[CLIENT] Returns the number of columns of this DGrid. Set by DGrid:SetCols.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetCols)
----@return number The number of columns of this DGrid
+---@return number #The number of columns of this DGrid
 function DGrid:GetCols() end
 
 ---[CLIENT] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
----@return number The width of each column
+---@return number #The width of each column
 function DGrid:GetColWide() end
 
 ---[CLIENT] Returns a list of panels in the grid.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetItems)
----@return table A list of Panels.
+---@return table #A list of Panels.
 function DGrid:GetItems() end
 
 ---[CLIENT] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
----@return number The height of each row
+---@return number #The height of each row
 function DGrid:GetRowHeight() end
 
 ---[CLIENT] Removes given panel from the DGrid:GetItems.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:RemoveItem)
 ---@param item Panel Item to remove from the grid
----@param bDontDelete boolean If set to true, the actual panel will not be removed via Panel:Remove.
+---@param bDontDelete? boolean If set to true, the actual panel will not be removed via Panel:Remove.
 function DGrid:RemoveItem(item, bDontDelete) end
 
 ---[CLIENT] Sets the number of columns this panel should have.
@@ -68,5 +68,5 @@ function DGrid:SetRowHeight(rowHeight) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
 ---@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
----@param desc boolean True for descending order, false for ascending.
+---@param desc? boolean True for descending order, false for ascending.
 function DGrid:SortByMember(key, desc) end

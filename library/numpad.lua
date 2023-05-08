@@ -23,7 +23,7 @@ function numpad.Deactivate(ply, key, isButton) end
 --- This is caused when a numpad function is triggered by a button SENT being used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.FromButton)
----@return boolean wasButton
+---@return boolean #wasButton
 function numpad.FromButton() end
 
 ---[SERVER] Calls a function registered with numpad.Register when a player presses specified key.
@@ -35,7 +35,7 @@ function numpad.FromButton() end
 ---@param key number The key, corresponding to Enums/KEY
 ---@param name string The name of the function to run, corresponding with the one used in numpad.Register
 ---@param ... ... Arguments to pass to the function passed to numpad.Register.
----@return number The impulse ID
+---@return number #The impulse ID
 function numpad.OnDown(ply, key, name, ...) end
 
 ---[SERVER] Calls a function registered with numpad.Register when a player releases specified key.
@@ -47,7 +47,7 @@ function numpad.OnDown(ply, key, name, ...) end
 ---@param key number The key, corresponding to Enums/KEY
 ---@param name string The name of the function to run, corresponding with the one used in numpad.Register
 ---@param ... ... Arguments to pass to the function passed to numpad.Register.
----@return number The impulse ID
+---@return number #The impulse ID
 function numpad.OnUp(ply, key, name, ...) end
 
 ---[SERVER] Registers a numpad library action for use with numpad.OnDown and numpad.OnUp

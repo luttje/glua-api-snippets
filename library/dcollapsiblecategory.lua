@@ -1,13 +1,13 @@
 ---@meta
 
----@class DCollapsibleCategory
+---@class DCollapsibleCategory : Panel
 local DCollapsibleCategory = {}
 
 ---[CLIENT] Adds a new text button to the collapsible category, like the tool menu in Spawnmenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:Add)
 ---@param name string The name of the button
----@return Panel The DButton
+---@return Panel #The DButton
 function DCollapsibleCategory:Add(name) end
 
 ---[CLIENT] Internal function that handles the open/close animations.
@@ -27,13 +27,13 @@ function DCollapsibleCategory:DoExpansion(expand) end
 ---[CLIENT] Returns the expand/collapse animation time set by DCollapsibleCategory:SetAnimTime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetAnimTime)
----@return number The animation time in seconds
+---@return number #The animation time in seconds
 function DCollapsibleCategory:GetAnimTime() end
 
 ---[CLIENT] Returns whether the DCollapsibleCategory is expanded or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetExpanded)
----@return boolean If expanded it will return true.
+---@return boolean #If expanded it will return true.
 function DCollapsibleCategory:GetExpanded() end
 
 ---[CLIENT] Returns the header height of the DCollapsibleCategory.
@@ -41,13 +41,13 @@ function DCollapsibleCategory:GetExpanded() end
 --- See also DCollapsibleCategory:SetHeaderHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetHeaderHeight)
----@return number The current height of the header.
+---@return number #The current height of the header.
 function DCollapsibleCategory:GetHeaderHeight() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetList)
----@return Panel
+---@return Panel #
 function DCollapsibleCategory:GetList() end
 
 ---[CLIENT] Doesn't actually do anything.
@@ -55,19 +55,19 @@ function DCollapsibleCategory:GetList() end
 --- Returns the number set by DCollapsibleCategory:SetPadding.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetPadding)
----@return number
+---@return number #
 function DCollapsibleCategory:GetPadding() end
 
 ---[CLIENT] Returns whether or not the background should be painted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetPaintBackground)
----@return boolean If the background is painted or not
+---@return boolean #If the background is painted or not
 function DCollapsibleCategory:GetPaintBackground() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetStartHeight)
----@return number
+---@return number #
 function DCollapsibleCategory:GetStartHeight() end
 
 ---[CLIENT] Called by DCollapsibleCategory:Toggle. This function does nothing by itself, as you're supposed to overwrite it.
@@ -93,7 +93,7 @@ function DCollapsibleCategory:SetContents(pnl) end
 --- You should use DCollapsibleCategory:Toggle or DCollapsibleCategory:DoExpansion instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetExpanded)
----@param expanded boolean Whether it shall be expanded or not by default
+---@param expanded? boolean Whether it shall be expanded or not by default
 function DCollapsibleCategory:SetExpanded(expanded) end
 
 ---[CLIENT] Sets the header height of the DCollapsibleCategory.

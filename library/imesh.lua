@@ -24,5 +24,5 @@ function IMesh:Draw() end
 ---[CLIENT] Returns whether this IMesh is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:IsValid)
----@return boolean Whether this IMesh is valid or not.
+---@return boolean #Whether this IMesh is valid or not.
 function IMesh:IsValid() end

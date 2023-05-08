@@ -8,7 +8,7 @@ local CLuaEmitter = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:Add)
 ---@param material string The particles material. Can also be an IMaterial.
 ---@param position Vector The position to spawn the particle on.
----@return CLuaParticle The created particle, if any.
+---@return CLuaParticle #The created particle, if any.
 function CLuaEmitter:Add(material, position) end
 
 ---[CLIENT] Manually renders all particles the emitter has created.
@@ -24,25 +24,25 @@ function CLuaEmitter:Finish() end
 ---[CLIENT] Returns the amount of active particles of this emitter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:GetNumActiveParticles)
----@return number The amount of active particles of this emitter
+---@return number #The amount of active particles of this emitter
 function CLuaEmitter:GetNumActiveParticles() end
 
 ---[CLIENT] Returns the position of this emitter. This is set when creating the emitter with Global.ParticleEmitter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:GetPos)
----@return Vector Position of this particle emitter.
+---@return Vector #Position of this particle emitter.
 function CLuaEmitter:GetPos() end
 
 ---[CLIENT] Returns whether this emitter is 3D or not. This is set when creating the emitter with Global.ParticleEmitter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:Is3D)
----@return boolean Whether this emitter is 3D or not.
+---@return boolean #Whether this emitter is 3D or not.
 function CLuaEmitter:Is3D() end
 
 ---[CLIENT] Returns whether this CLuaEmitter is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:IsValid)
----@return boolean Whether this CLuaEmitter is valid or not.
+---@return boolean #Whether this CLuaEmitter is valid or not.
 function CLuaEmitter:IsValid() end
 
 ---[CLIENT] Sets the bounding box for this emitter.

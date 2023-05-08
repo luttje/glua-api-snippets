@@ -7,7 +7,7 @@
 ---@param tab table The table to add the accessor functions to.
 ---@param key any The key of the table to be get/set.
 ---@param name string The name of the functions (will be prefixed with Get and Set).
----@param force number The type the setter should force to (uses Enums/FORCE).
+---@param force? number The type the setter should force to (uses Enums/FORCE).
 function _G.AccessorFunc(tab, key, name, force) end
 
 ---[SHARED AND MENU] Defines a global entity class variable with an automatic value in order to prevent collisions with other Enums/CLASS. You should prefix your variable with CLASS_ for consistency.
@@ -41,7 +41,7 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 --- 		You can add up to **8192** files. Each file can be up to **64KB** compressed (LZMA)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)
----@param file string The name/path to the Lua file that should be sent, **relative to the garrysmod/lua folder**. If no parameter is specified, it sends the current file.
+---@param file? string The name/path to the Lua file that should be sent, **relative to the garrysmod/lua folder**. If no parameter is specified, it sends the current file.
 ---
 --- The file path can be relative to the script it's ran from. For example, if your script is in `lua/myfolder/stuff.lua`, calling Global.AddCSLuaFile("otherstuff.lua") and Global.AddCSLuaFile("myfolder/otherstuff.lua") is the same thing.
 ---
@@ -52,7 +52,7 @@ function _G.AddCSLuaFile(file) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddonMaterial)
 ---@param name string The name of the file.
----@return IMaterial The material, returns `nil` if the cached file is not an image.
+---@return IMaterial #The material, returns `nil` if the cached file is not an image.
 function _G.AddonMaterial(name) end
 
 ---[SERVER] Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
@@ -82,18 +82,18 @@ function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 --- This function is only available in Sandbox and its derivatives
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddWorldTip)
----@param entindex number **This argument is no longer used**; it has no effect on anything. You can use nil in this argument.
+---@param entindex? number **This argument is no longer used**; it has no effect on anything. You can use nil in this argument.
 ---@param text string The text for the world tip to display.
----@param dieTime number **This argument is no longer used**; when you add a World Tip it will always last only 0.05 seconds. You can use nil in this argument.
----@param pos Vector Where in the world you want the World Tip to be drawn. If you add a valid Entity in the next argument, this argument will have no effect on the actual World Tip.
----@param ent Entity Which entity you want to associate with the World Tip. This argument is optional. If set to a valid entity, this will override the position set in `pos` with the Entity's position.
+---@param dieTime? number **This argument is no longer used**; when you add a World Tip it will always last only 0.05 seconds. You can use nil in this argument.
+---@param pos? Vector Where in the world you want the World Tip to be drawn. If you add a valid Entity in the next argument, this argument will have no effect on the actual World Tip.
+---@param ent? Entity Which entity you want to associate with the World Tip. This argument is optional. If set to a valid entity, this will override the position set in `pos` with the Entity's position.
 function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 
 ---[SHARED AND MENU] Creates an Angle object.
 --- 		This function is very expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example). It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch number The pitch value of the angle.
+---@param pitch? number The pitch value of the angle.
 ---
 ---
 --- If this is an Angle, this function will return a copy of the given angle.
@@ -101,28 +101,28 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 ---
 --- If this is a string, this function will try to parse the string as a angle. If it fails, it returns a 0 angle.
 --- (See examples)
----@param yaw number The yaw value of the angle.
----@param roll number The roll value of the angle.
----@return Angle Created angle
+---@param yaw? number The yaw value of the angle.
+---@param roll? number The roll value of the angle.
+---@return Angle #Created angle
 function _G.Angle(pitch, yaw, roll) end
 
 ---[SHARED AND MENU] Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AngleRand)
----@param min number Min bound inclusive.
----@param max number Max bound exclusive.
----@return Angle The randomly generated angle.
+---@param min? number Min bound inclusive.
+---@param max? number Max bound exclusive.
+---@return Angle #The randomly generated angle.
 function _G.AngleRand(min, max) end
 
 ---[SHARED AND MENU] If the result of the first argument is false or nil, an error is thrown with the second argument as the message.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.assert)
 ---@param expression any The expression to assert.
----@param errorMessage string The error message to throw when assertion fails. This is only type-checked if the assertion fails.
----@param ... ... Any arguments past the error message will be returned by a successful assert.
----@return any, any, ... any - If successful, returns the first argument.
----@return any, any, ... any - If successful, returns the error message. This will be nil if the second argument wasn't specified.  Since the second argument is only type-checked if the assertion fails, this doesn't have to be a string.
----@return any, any, ... ... - Returns any arguments past the error message.
+---@param errorMessage? string The error message to throw when assertion fails. This is only type-checked if the assertion fails.
+---@param ...? ... Any arguments past the error message will be returned by a successful assert.
+---@return any, any, ... #any - If successful, returns the first argument.
+---@return any, any, ... #any - If successful, returns the error message. This will be nil if the second argument wasn't specified.  Since the second argument is only type-checked if the assertion fails, this doesn't have to be a string.
+---@return any, any, ... #... - Returns any arguments past the error message.
 function _G.assert(expression, errorMessage, ...) end
 
 ---[SHARED] Sends the specified Lua code to all connected clients and executes it.
@@ -138,13 +138,13 @@ function _G.BroadcastLua(code) end
 ---[SHARED] Dumps the networked variables of all entities into one table and returns it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.BuildNetworkedVarsTable)
----@return table Format: * key = Entity for NWVars or number (always 0) for global vars * value = table formatted as:   * key = string var name   * value = any type var value
+---@return table #Format: * key = Entity for NWVars or number (always 0) for global vars * value = table formatted as:   * key = string var name   * value = any type var value
 function _G.BuildNetworkedVarsTable() end
 
 ---[MENU] Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CanAddServerToFavorites)
----@return boolean Can add to favorites
+---@return boolean #Can add to favorites
 function _G.CanAddServerToFavorites() end
 
 ---[MENU] Aborts joining of the server you are currently joining.
@@ -193,8 +193,8 @@ function _G.ClearProblem(id) end
 ---@param model string The file path to the model.
 ---
 --- Model must be precached with util.PrecacheModel on the server before usage.
----@param renderGroup number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
----@return CSEnt Created client-side model (`C_BaseFlex`).
+---@param renderGroup? number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
+---@return CSEnt #Created client-side model (`C_BaseFlex`).
 function _G.ClientsideModel(model, renderGroup) end
 
 ---[CLIENT] Creates a fully clientside ragdoll.
@@ -211,8 +211,8 @@ function _G.ClientsideModel(model, renderGroup) end
 ---@param model string The file path to the model.
 ---
 --- Model must be precached with util.PrecacheModel on the server before usage.
----@param renderGroup number The Enums/RENDERGROUP to assign.
----@return CSEnt The newly created client-side ragdoll. ( C_ClientRagdoll )
+---@param renderGroup? number The Enums/RENDERGROUP to assign.
+---@return CSEnt #The newly created client-side ragdoll. ( C_ClientRagdoll )
 function _G.ClientsideRagdoll(model, renderGroup) end
 
 ---[CLIENT] Creates a scene entity based on the scene name and the entity.
@@ -220,7 +220,7 @@ function _G.ClientsideRagdoll(model, renderGroup) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideScene)
 ---@param name string The name of the scene.
 ---@param targetEnt Entity The entity to play the scene on.
----@return CSEnt C_SceneEntity
+---@return CSEnt #C_SceneEntity
 function _G.ClientsideScene(name, targetEnt) end
 
 ---[CLIENT AND MENU] Closes all Derma menus that have been passed to Global.RegisterDermaMenuForClose and calls GM:CloseDermaMenus
@@ -231,12 +231,12 @@ function _G.CloseDermaMenus() end
 ---[SHARED AND MENU] Executes the specified action on the garbage collector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.collectgarbage)
----@param action string The action to run.
+---@param action? string The action to run.
 ---
 --- Valid actions are `collect`, `stop`, `restart`, `count`, `step`, `setpause`, `setstepmul` and `isrunning`.
 --- `isrunning` is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](jit.version)
 ---@param arg number The argument of the specified action, only applicable for `step`, `setpause` and `setstepmul`.
----@return any If the action is count this is the number of kilobytes of memory used by Lua. If the action is step this is true if a garbage collection cycle was finished.  If the action is setpause this is the previous value for the GC's pause. If the action is setstepmul this is the previous value for the GC's step.
+---@return any #If the action is count this is the number of kilobytes of memory used by Lua. If the action is step this is true if a garbage collection cycle was finished.  If the action is setpause this is the previous value for the GC's pause. If the action is setstepmul this is the previous value for the GC's step.
 function _G.collectgarbage(action, arg) end
 
 ---[SHARED AND MENU] Creates a Color.
@@ -246,8 +246,8 @@ function _G.collectgarbage(action, arg) end
 ---@param r number An integer from `0-255` describing the red value of the color.
 ---@param g number An integer from `0-255` describing the green value of the color.
 ---@param b number An integer from `0-255` describing the blue value of the color.
----@param a number An integer from `0-255` describing the alpha (transparency) of the color.
----@return table The created Color.
+---@param a? number An integer from `0-255` describing the alpha (transparency) of the color.
+---@return table #The created Color.
 function _G.Color(r, g, b, a) end
 
 ---[SHARED AND MENU] Returns a new Color with the RGB components of the given Color and the alpha value specified.
@@ -255,39 +255,39 @@ function _G.Color(r, g, b, a) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorAlpha)
 ---@param color table The Color from which to take RGB values. This color will not be modified.
 ---@param alpha number The new alpha value, a number between 0 and 255. Values above 255 will be clamped.
----@return table The new Color with the modified alpha value
+---@return table #The new Color with the modified alpha value
 function _G.ColorAlpha(color, alpha) end
 
 ---[SHARED AND MENU] Creates a Color with randomized red, green, and blue components. If the alpha argument is true, alpha will also be randomized.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorRand)
----@param a boolean Should alpha be randomized.
----@return table The created Color.
+---@param a? boolean Should alpha be randomized.
+---@return table #The created Color.
 function _G.ColorRand(a) end
 
 ---[SHARED AND MENU] Converts a Color into HSL color space.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorToHSL)
 ---@param color table The Color.
----@return number, number, number number - The hue in degrees `[0, 360]`.
----@return number, number, number number - The saturation in the range `[0, 1]`.
----@return number, number, number number - The lightness in the range `[0, 1]`.
+---@return number, number, number #number - The hue in degrees `[0, 360]`.
+---@return number, number, number #number - The saturation in the range `[0, 1]`.
+---@return number, number, number #number - The lightness in the range `[0, 1]`.
 function _G.ColorToHSL(color) end
 
 ---[SHARED AND MENU] Converts a Color into HSV color space.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorToHSV)
 ---@param color table The Color.
----@return number, number, number number - The hue in degrees `[0, 360]`.
----@return number, number, number number - The saturation in the range `[0, 1]`.
----@return number, number, number number - The value in the range `[0, 1]`.
+---@return number, number, number #number - The hue in degrees `[0, 360]`.
+---@return number, number, number #number - The saturation in the range `[0, 1]`.
+---@return number, number, number #number - The value in the range `[0, 1]`.
 function _G.ColorToHSV(color) end
 
 ---[SHARED] Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileFile)
 ---@param path string Path to the file, relative to the garrysmod/lua/ directory.
----@return function The function which executes the script.
+---@return function #The function which executes the script.
 function _G.CompileFile(path) end
 
 ---[SHARED AND MENU] This function will compile the code argument as lua code and return a function that will execute that code.
@@ -297,22 +297,22 @@ function _G.CompileFile(path) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileString)
 ---@param code string The code to compile.
 ---@param identifier string An identifier in case an error is thrown. (The same identifier can be used multiple times)
----@param HandleError boolean If false this function will return an error string instead of throwing an error.
----@return function A function that, when called, will execute the given code.  Returns the error string if there was a Lua error and third argument is false.
+---@param HandleError? boolean If false this function will return an error string instead of throwing an error.
+---@return function #A function that, when called, will execute the given code.  Returns the error string if there was a Lua error and third argument is false.
 function _G.CompileString(code, identifier, HandleError) end
 
 ---[MENU] Returns a table of console command names beginning with the given text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ConsoleAutoComplete)
 ---@param text string Text that the console commands must begin with.
----@return table Table of console command names.
+---@return table #Table of console command names.
 function _G.ConsoleAutoComplete(text) end
 
 ---[SHARED AND MENU] Returns whether a ConVar with the given name exists or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ConVarExists)
 ---@param name string Name of the ConVar.
----@return boolean True if the ConVar exists, false otherwise.
+---@return boolean #True if the ConVar exists, false otherwise.
 function _G.ConVarExists(name) end
 
 ---[SHARED AND MENU] Makes a clientside-only console variable
@@ -326,12 +326,12 @@ function _G.ConVarExists(name) end
 ---
 --- This cannot be a name of existing console command or console variable. It will silently fail if it is.
 ---@param default string Default value of the ConVar.
----@param shouldsave boolean Should the ConVar be saved across sessions in the cfg/client.vdf file.
----@param userinfo boolean Should the ConVar and its containing data be sent to the server when it has changed. This make the convar accessible from server using Player:GetInfoNum and similar functions.
+---@param shouldsave? boolean Should the ConVar be saved across sessions in the cfg/client.vdf file.
+---@param userinfo? boolean Should the ConVar and its containing data be sent to the server when it has changed. This make the convar accessible from server using Player:GetInfoNum and similar functions.
 ---@param helptext string Help text to display in the console.
----@param min number If set, the convar cannot be changed to a number lower than this value.
----@param max number If set, the convar cannot be changed to a number higher than this value.
----@return ConVar Created convar.
+---@param min? number If set, the convar cannot be changed to a number lower than this value.
+---@param max? number If set, the convar cannot be changed to a number higher than this value.
+---@return ConVar #Created convar.
 function _G.CreateClientConVar(name, default, shouldsave, userinfo, helptext, min, max) end
 
 ---[CLIENT] Creates a ContextMenu.
@@ -347,11 +347,11 @@ function _G.CreateContextMenu() end
 ---
 --- This cannot be a name of an engine console command or console variable. It will silently fail if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
----@param flags number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param flags? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
 ---@param helptext string The help text to show in the console.
----@param min number If set, the ConVar cannot be changed to a number lower than this value.
----@param max number If set, the ConVar cannot be changed to a number higher than this value.
----@return ConVar The convar created.
+---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
+---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
+---@return ConVar #The convar created.
 function _G.CreateConVar(name, value, flags, helptext, min, max) end
 
 ---[CLIENT AND MENU] Creates a new material with the specified name and shader.
@@ -372,7 +372,7 @@ function _G.CreateConVar(name, value, flags, helptext, min, max) end
 --- * See: [List of Shader Parameters on Valve Developers Wiki](https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters) and each shader's page from .
 ---
 --- Unlike IMaterial:SetTexture, this table will not accept ITexture values. Instead, use the texture's name (see ITexture:GetName).
----@return IMaterial Created material
+---@return IMaterial #Created material
 function _G.CreateMaterial(name, shaderName, materialData) end
 
 ---[MENU] Creates a new Preset from the given JSON string.
@@ -391,9 +391,9 @@ function _G.CreateNewAddonPreset(data) end
 ---@param ent Entity The entity to attach the control point to.
 ---@param effect string The name of the effect to create. It must be precached.
 ---@param partAttachment number See Enums/PATTACH.
----@param entAttachment number The attachment ID on the entity to attach the particle system to
----@param offset Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
----@return CNewParticleEffect The created particle system.
+---@param entAttachment? number The attachment ID on the entity to attach the particle system to
+---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
+---@return CNewParticleEffect #The created particle system.
 function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, offset) end
 
 ---[SHARED] Creates a new PhysCollide from the given bounds.
@@ -403,14 +403,14 @@ function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, off
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreatePhysCollideBox)
 ---@param mins Vector Min corner of the box. This is not automatically ordered with the maxs and must contain the smallest vector components. See Global.OrderVectors.
 ---@param maxs Vector Max corner of the box. This is not automatically ordered with the mins and must contain the largest vector components.
----@return PhysCollide The new PhysCollide. This will be a NULL PhysCollide (PhysCollide:IsValid returns false) if given bad vectors or no more PhysCollides can be created in the physics engine.
+---@return PhysCollide #The new PhysCollide. This will be a NULL PhysCollide (PhysCollide:IsValid returns false) if given bad vectors or no more PhysCollides can be created in the physics engine.
 function _G.CreatePhysCollideBox(mins, maxs) end
 
 ---[SHARED] Creates PhysCollide objects for every physics object the model has. The model must be precached with util.PrecacheModel before being used with this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreatePhysCollidesFromModel)
 ---@param modelName string Model path to get the collision objects of.
----@return table Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity:GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
+---@return table #Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity:GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
 function _G.CreatePhysCollidesFromModel(modelName) end
 
 ---[SHARED] Returns a sound parented to the specified entity.
@@ -420,19 +420,19 @@ function _G.CreatePhysCollidesFromModel(modelName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateSound)
 ---@param targetEnt Entity The target entity.
 ---@param soundName string The sound to play.
----@param filter CRecipientFilter A CRecipientFilter of the players that will have this sound networked to them.
+---@param filter? CRecipientFilter A CRecipientFilter of the players that will have this sound networked to them.
 ---
 --- If not set, the default is a [CPASAttenuationFilter](https://developer.valvesoftware.com/wiki/CRecipientFilter#Derived_classes).
 ---
 --- This argument only works serverside.
----@return CSoundPatch The sound object
+---@return CSoundPatch #The sound object
 function _G.CreateSound(targetEnt, soundName, filter) end
 
 ---[CLIENT] Creates and returns a new DSprite element with the supplied material.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateSprite)
 ---@param material IMaterial Material the sprite should draw.
----@return Panel The new DSprite element.
+---@return Panel #The new DSprite element.
 function _G.CreateSprite(material) end
 
 ---[SHARED AND MENU] Returns the uptime of the server in seconds (to at least 4 decimal places)
@@ -452,7 +452,7 @@ function _G.CreateSprite(material) end
 --- This returns 0 in GM:PlayerAuthed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CurTime)
----@return number Time synced with the game server.
+---@return number #Time synced with the game server.
 function _G.CurTime() end
 
 ---[SHARED] Returns an CTakeDamageInfo object.
@@ -460,7 +460,7 @@ function _G.CurTime() end
 --- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DamageInfo)
----@return CTakeDamageInfo The CTakeDamageInfo object.
+---@return CTakeDamageInfo #The CTakeDamageInfo object.
 function _G.DamageInfo() end
 
 ---[SHARED AND MENU] Writes text to the right hand side of the screen, like the old error system. Messages disappear after a couple of seconds.
@@ -510,7 +510,7 @@ function _G.DeriveGamemode(base) end
 --- * table anim - the anim table
 --- * number delta - the fraction of the progress through the animation
 --- * any data - optional data passed to the run metatable method
----@return table A lua metatable containing four methods: * Run() - Should be called each frame you want the animation to be ran. * Active() - Returns if the animation is currently active (has not finished and stop has not been called) * Stop() - Halts the animation at its current progress. * Start( Length, Data ) - Prepares the animation to be ran for Length seconds. Must be called once before calling Run(). The data parameter will be passed to the func function.
+---@return table #A lua metatable containing four methods: * Run() - Should be called each frame you want the animation to be ran. * Active() - Returns if the animation is currently active (has not finished and stop has not been called) * Stop() - Halts the animation at its current progress. * Start( Length, Data ) - Prepares the animation to be ran for Length seconds. Must be called once before calling Run(). The data parameter will be passed to the func function.
 function _G.Derma_Anim(name, panel, func) end
 
 ---[CLIENT AND MENU] Draws background blur around the given panel.
@@ -552,23 +552,23 @@ function _G.Derma_Install_Convar_Functions(target) end
 ---@param Text string The text within the created panel.
 ---@param Title string The title of the created panel.
 ---@param Button string The text of the button to close the panel.
----@return Panel The created DFrame
+---@return Panel #The created DFrame
 function _G.Derma_Message(Text, Title, Button) end
 
 ---[CLIENT AND MENU] Shows a message box in the middle of the screen, with up to 4 buttons they can press.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Query)
----@param text string The message to display.
----@param title string The title to give the message box.
+---@param text? string The message to display.
+---@param title? string The title to give the message box.
 ---@param btn1text string The text to display on the first button.
----@param btn1func function The function to run if the user clicks the first button.
----@param btn2text string The text to display on the second button.
----@param btn2func function The function to run if the user clicks the second button.
----@param btn3text string The text to display on the third button
----@param btn3func function The function to run if the user clicks the third button.
----@param btn4text string The text to display on the fourth button
----@param btn4func function The function to run if the user clicks the fourth button.
----@return Panel The Panel object of the created window.
+---@param btn1func? function The function to run if the user clicks the first button.
+---@param btn2text? string The text to display on the second button.
+---@param btn2func? function The function to run if the user clicks the second button.
+---@param btn3text? string The text to display on the third button
+---@param btn3func? function The function to run if the user clicks the third button.
+---@param btn4text? string The text to display on the fourth button
+---@param btn4func? function The function to run if the user clicks the fourth button.
+---@return Panel #The Panel object of the created window.
 function _G.Derma_Query(text, title, btn1text, btn1func, btn2text, btn2func, btn3text, btn3func, btn4text, btn4func) end
 
 ---[CLIENT AND MENU] Creates a derma window asking players to input a string.
@@ -578,18 +578,18 @@ function _G.Derma_Query(text, title, btn1text, btn1func, btn2text, btn2func, btn
 ---@param subtitle string The text above the input box
 ---@param default string The default text for the input box.
 ---@param confirm function The function to be called once the user has confirmed their input.
----@param cancel function The function to be called once the user has cancelled their input
----@param confirmText string Allows you to override text of the "OK" button
----@param cancelText string Allows you to override text of the "Cancel" button
----@return Panel The created DFrame
+---@param cancel? function The function to be called once the user has cancelled their input
+---@param confirmText? string Allows you to override text of the "OK" button
+---@param cancelText? string Allows you to override text of the "Cancel" button
+---@return Panel #The created DFrame
 function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confirmText, cancelText) end
 
 ---[CLIENT AND MENU] Creates a DMenu and closes any current menus.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DermaMenu)
----@param keepOpen boolean If we should keep other DMenus open (`true`) or not (`false`).
----@param parent Panel The panel to parent the created menu to.
----@return Panel The created DMenu.
+---@param keepOpen? boolean If we should keep other DMenus open (`true`) or not (`false`).
+---@param parent? Panel The panel to parent the created menu to.
+---@return Panel #The created DMenu.
 function _G.DermaMenu(keepOpen, parent) end
 
 ---[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not.
@@ -598,7 +598,7 @@ function _G.DermaMenu(keepOpen, parent) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DisableClipping)
 ---@param disable boolean Whether or not clipping should be disabled
----@return boolean Whether the clipping was enabled or not before this function call
+---@return boolean #Whether the clipping was enabled or not before this function call
 function _G.DisableClipping(disable) end
 
 ---[CLIENT] Cancels current DOF post-process effect started with Global.DOF_Start
@@ -742,8 +742,8 @@ function _G.DTVar_ReceiveProxyGL(entity, Type, index, newValue) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DynamicLight)
 ---@param index number An unsigned Integer. Usually an Entity:EntIndex is used here.
----@param elight boolean Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
----@return table A DynamicLight structured table. See Structures/DynamicLight
+---@param elight? boolean Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
+---@return table #A DynamicLight structured table. See Structures/DynamicLight
 function _G.DynamicLight(index, elight) end
 
 ---[MENU] Creates a dynamic Material from the given materialPath
@@ -751,9 +751,9 @@ function _G.DynamicLight(index, elight) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DynamicMaterial)
 ---@param materialPath string The material with path. The path is relative to the `materials/` folder.
----@param flags string Some bind of bits / byte.
+---@param flags? string Some bind of bits / byte.
 --- 		What does this argument do / use. Currently working value: "0100010" --nocull smooth
----@return IMaterial Generated material.
+---@return IMaterial #Generated material.
 function _G.DynamicMaterial(materialPath, flags) end
 
 ---[SHARED] Returns a CEffectData object to be used with util.Effect.
@@ -761,7 +761,7 @@ function _G.DynamicMaterial(materialPath, flags) end
 --- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EffectData)
----@return CEffectData The CEffectData object.
+---@return CEffectData #The CEffectData object.
 function _G.EffectData() end
 
 ---[SHARED AND MENU] An [eagerly evaluated](https://en.wikipedia.org/wiki/Eager_evaluation) [ternary operator](https://en.wikipedia.org/wiki/%3F:), or, in layman's terms, a compact "if then else" statement.
@@ -798,7 +798,7 @@ function _G.EffectData() end
 ---@param condition any The condition to check if true or false.
 ---@param truevar any If the condition isn't nil/false, returns this value.
 ---@param falsevar any If the condition is nil/false, returns this value.
----@return any The result.
+---@return any #The result.
 function _G.Either(condition, truevar, falsevar) end
 
 ---[SHARED] Plays a sentence from `scripts/sentences.txt`
@@ -807,11 +807,11 @@ function _G.Either(condition, truevar, falsevar) end
 ---@param soundName string The sound to play
 ---@param position Vector The position to play at
 ---@param entity number The entity to emit the sound from. Must be Entity:EntIndex
----@param channel number The sound channel, see Enums/CHAN.
----@param volume number The volume of the sound, from 0 to 1
----@param soundLevel number The sound level of the sound, see Enums/SNDLVL
----@param soundFlags number The flags of the sound, see Enums/SND
----@param pitch number The pitch of the sound, 0-255
+---@param channel? number The sound channel, see Enums/CHAN.
+---@param volume? number The volume of the sound, from 0 to 1
+---@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
+---@param soundFlags? number The flags of the sound, see Enums/SND
+---@param pitch? number The pitch of the sound, 0-255
 function _G.EmitSentence(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch) end
 
 ---[SHARED] Emits the specified sound at the specified position.
@@ -828,12 +828,12 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 --- * `0` - Plays sound on the world (position set to `0,0,0`)
 --- * `-1` - Plays sound on the local player (on server acts as `0`)
 --- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
----@param channel number The sound channel, see Enums/CHAN.
----@param volume number The volume of the sound, from 0 to 1
----@param soundLevel number The sound level of the sound, see Enums/SNDLVL
----@param soundFlags number The flags of the sound, see Enums/SND
----@param pitch number The pitch of the sound, 0-255
----@param dsp number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---@param channel? number The sound channel, see Enums/CHAN.
+---@param volume? number The volume of the sound, from 0 to 1
+---@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
+---@param soundFlags? number The flags of the sound, see Enums/SND
+---@param pitch? number The pitch of the sound, 0-255
+---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
 function _G.EmitSound(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch, dsp) end
 
 ---[CLIENT AND MENU] Removes the currently active tool tip from the screen.
@@ -850,7 +850,7 @@ function _G.EndTooltip(panel) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Entity)
 ---@param entityIndex number The entity index.
----@return Entity The entity if it exists, or NULL if it doesn't.
+---@return Entity #The entity if it exists, or NULL if it doesn't.
 function _G.Entity(entityIndex) end
 
 ---[SHARED AND MENU] Throws an error. This is currently an alias of Global.ErrorNoHalt despite it once throwing a halting error like Global.error(lowercase) without the stack trace appended.
@@ -865,7 +865,7 @@ function _G.Error(...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.error(lowercase))
 ---@param message string The error message to throw
----@param errorLevel number The level to throw the error at.
+---@param errorLevel? number The level to throw the error at.
 function _G.error(message, errorLevel) end
 
 ---[SHARED AND MENU] Throws a Lua error but does not break out of the current call stack.
@@ -889,7 +889,7 @@ function _G.ErrorNoHaltWithStack(...) end
 --- This function is only reliable inside rendering hooks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyeAngles)
----@return Angle The angle of the currently rendered scene.
+---@return Angle #The angle of the currently rendered scene.
 function _G.EyeAngles() end
 
 ---[CLIENT] Returns the origin of the current render context as calculated by GM:CalcView.
@@ -897,7 +897,7 @@ function _G.EyeAngles() end
 --- This function is only reliable inside rendering hooks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyePos)
----@return Vector Camera position.
+---@return Vector #Camera position.
 function _G.EyePos() end
 
 ---[CLIENT] Returns the normal vector of the current render context as calculated by GM:CalcView, similar to Global.EyeAngles.
@@ -905,7 +905,7 @@ function _G.EyePos() end
 --- This function is only reliable inside rendering hooks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyeVector)
----@return Vector View direction of the currently rendered scene.
+---@return Vector #View direction of the currently rendered scene.
 function _G.EyeVector() end
 
 ---[SHARED AND MENU] Returns the meta table for the class with the matching name.
@@ -918,16 +918,16 @@ function _G.EyeVector() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FindMetaTable)
 ---@param metaName string The object type to retrieve the meta table of.
----@return table The corresponding meta table.
+---@return table #The corresponding meta table.
 function _G.FindMetaTable(metaName) end
 
 ---[CLIENT AND MENU] Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FindTooltip)
 ---@param panel Panel Panel to find tool-tip of
----@return string, Panel, Panel string - tool-tip text
----@return string, Panel, Panel Panel - tool-tip panel
----@return string, Panel, Panel Panel - panel that the function was called with
+---@return string, Panel, Panel #string - tool-tip text
+---@return string, Panel, Panel #Panel - tool-tip panel
+---@return string, Panel, Panel #Panel - panel that the function was called with
 function _G.FindTooltip(panel) end
 
 ---[MENU] Refreshes all Addon Conflicts and Fires a Problem. Internally uses Global.FireProblem
@@ -956,7 +956,7 @@ function _G.FireProblemFromEngine(id, severity, params) end
 ---@param format string The string to be formatted.
 --- Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
 ---@param ... ... Values to be formatted into the string.
----@return string The formatted string
+---@return string #The formatted string
 function _G.Format(format, ...) end
 
 ---[CLIENT] Returns the number of frames rendered since the game was launched.
@@ -971,7 +971,7 @@ function _G.FrameNumber() end
 --- For real-time-based frame time that isn't affected by host_timescale, use Global.RealFrameTime. RealFrameTime is more suited for things like GUIs or HUDs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameTime)
----@return number time (in seconds)
+---@return number #time (in seconds)
 function _G.FrameTime() end
 
 ---[MENU] Callback function for when the client has joined a server. This function shows the server's loading URL by default.
@@ -988,7 +988,7 @@ function _G.GameDetails(servername, serverurl, mapname, maxplayers, steamid, gam
 ---[SHARED AND MENU] This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead. Returns the current floored dynamic memory usage of Lua in kilobytes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.gcinfo)
----@return number The current floored dynamic memory usage of Lua, in kilobytes.
+---@return number #The current floored dynamic memory usage of Lua, in kilobytes.
 function _G.gcinfo() end
 
 ---[CLIENT] This function adds all models from a specified folder to a custom Spawnlist category. Internally uses Global.AddPropsOfParent
@@ -998,15 +998,15 @@ function _G.gcinfo() end
 ---@param folder string the folder to search for models
 ---@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@param name string The Spawnmenu Category name
----@param icon string The Spawnmenu Category Icon to use
+---@param icon? string The Spawnmenu Category Icon to use
 ---@param appid number The AppID which is needed for the Content
 function _G.GenerateSpawnlistFromPath(folder, path, name, icon, appid) end
 
 ---[MENU] Returns if the game was started with either -noaddons or -noworkshop
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetAddonStatus)
----@return boolean, boolean boolean - true if the game was started with -noaddons. (see Command_Line_Parameters)
----@return boolean, boolean boolean - true if the game was started with -noworkshop. (see Command_Line_Parameters)
+---@return boolean, boolean #boolean - true if the game was started with -noaddons. (see Command_Line_Parameters)
+---@return boolean, boolean #boolean - true if the game was started with -noworkshop. (see Command_Line_Parameters)
 function _G.GetAddonStatus() end
 
 ---[MENU] All dates are in [WDDX](https://www.php.net/manual/en/datetime.formats.compound.php) format
@@ -1088,7 +1088,7 @@ function _G.GetAPIManifest(callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar)
 ---@param name string Name of the ConVar to get
----@return ConVar The ConVar object, or nil if no such ConVar was found.
+---@return ConVar #The ConVar object, or nil if no such ConVar was found.
 function _G.GetConVar(name) end
 
 ---[SHARED AND MENU] This function is very slow and not recommended. See Global.GetConVar for an example on how to properly store the return of what your using so you can avoid using this function as much as possible.
@@ -1096,79 +1096,79 @@ function _G.GetConVar(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar_Internal)
 ---@param name string Name of the ConVar to get
----@return ConVar The ConVar object
+---@return ConVar #The ConVar object
 function _G.GetConVar_Internal(name) end
 
 ---[SHARED AND MENU] Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.Gets the numeric value ConVar with the specified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
 ---@param name string Name of the ConVar to get.
----@return number The ConVar's value.
+---@return number #The ConVar's value.
 function _G.GetConVarNumber(name) end
 
 ---[SHARED AND MENU] Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.Gets the string value ConVar with the specified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarString)
 ---@param name string Name of the ConVar to get.
----@return string The ConVar's value.
+---@return string #The ConVar's value.
 function _G.GetConVarString(name) end
 
 ---[MENU] Returns the default loading screen URL (asset://garrysmod/html/loading.html)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDefaultLoadingHTML)
----@return string Default loading url (asset://garrysmod/html/loading.html)
+---@return string #Default loading url (asset://garrysmod/html/loading.html)
 function _G.GetDefaultLoadingHTML() end
 
 ---[MENU] Retrieves data about the demo with the specified filename. Similar to Global.GetSaveFileDetails.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDemoFileDetails)
 ---@param filename string The file name of the demo.
----@return table Demo data.
+---@return table #Demo data.
 function _G.GetDemoFileDetails(filename) end
 
 ---[MENU] Returns a table with the names of files needed from the server you are currently joining.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDownloadables)
----@return table table of file names
+---@return table #table of file names
 function _G.GetDownloadables() end
 
 ---[SHARED AND MENU] Returns the environment table of either the stack level or the function specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.getfenv)
----@param location function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
----@return table The environment.
+---@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
+---@return table #The environment.
 function _G.getfenv(location) end
 
 ---[SHARED] Returns an angle that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Angle)
 ---@param index string The unique index to identify the global value with.
----@param default Angle The value to return if the global value is not set.
----@return Angle The global value, or default if the global is not set.
+---@param default? Angle The value to return if the global value is not set.
+---@return Angle #The global value, or default if the global is not set.
 function _G.GetGlobal2Angle(index, default) end
 
 ---[SHARED] Returns a boolean that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Bool)
 ---@param index string The unique index to identify the global value with.
----@param default boolean The value to return if the global value is not set.
----@return boolean The global value, or the default if the global value is not set.
+---@param default? boolean The value to return if the global value is not set.
+---@return boolean #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Bool(index, default) end
 
 ---[SHARED] Returns an entity that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Entity)
 ---@param index string The unique index to identify the global value with.
----@param default Entity The value to return if the global value is not set.
----@return Entity The global value, or the default if the global value is not set.
+---@param default? Entity The value to return if the global value is not set.
+---@return Entity #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Entity(index, default) end
 
 ---[SHARED] Returns a float that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Float)
 ---@param index string The unique index to identify the global value with.
----@param default number The value to return if the global value is not set.
----@return number The global value, or the default if the global value is not set.
+---@param default? number The value to return if the global value is not set.
+---@return number #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Float(index, default) end
 
 ---[SHARED] Returns an integer that is shared between the server and all clients.
@@ -1177,8 +1177,8 @@ function _G.GetGlobal2Float(index, default) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Int)
 ---@param index string The unique index to identify the global value with.
----@param default number The value to return if the global value is not set.
----@return number The global value, or the default if the global value is not set.
+---@param default? number The value to return if the global value is not set.
+---@return number #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Int(index, default) end
 
 ---[SHARED] Returns a string that is shared between the server and all clients.
@@ -1186,15 +1186,15 @@ function _G.GetGlobal2Int(index, default) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2String)
 ---@param index string The unique index to identify the global value with.
 ---@param default string The value to return if the global value is not set.
----@return string The global value, or the default if the global value is not set.
+---@return string #The global value, or the default if the global value is not set.
 function _G.GetGlobal2String(index, default) end
 
 ---[SHARED] Returns a value that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Var)
 ---@param index string The unique index to identify the global value with.
----@param default any The value to return if the global value is not set.
----@return any The global value, or the default if the global value is not set.
+---@param default? any The value to return if the global value is not set.
+---@return any #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Var(index, default) end
 
 ---[SHARED] Returns a vector that is shared between the server and all clients.
@@ -1202,39 +1202,39 @@ function _G.GetGlobal2Var(index, default) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Vector)
 ---@param Index string The unique index to identify the global value with.
 ---@param Default Vector The value to return if the global value is not set.
----@return Vector The global value, or the default if the global value is not set.
+---@return Vector #The global value, or the default if the global value is not set.
 function _G.GetGlobal2Vector(Index, Default) end
 
 ---[SHARED] Returns an angle that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalAngle)
 ---@param index string The unique index to identify the global value with.
----@param default Angle The value to return if the global value is not set.
----@return Angle The global value, or default if the global is not set.
+---@param default? Angle The value to return if the global value is not set.
+---@return Angle #The global value, or default if the global is not set.
 function _G.GetGlobalAngle(index, default) end
 
 ---[SHARED] Returns a boolean that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalBool)
 ---@param index string The unique index to identify the global value with.
----@param default boolean The value to return if the global value is not set.
----@return boolean The global value, or the default if the global value is not set.
+---@param default? boolean The value to return if the global value is not set.
+---@return boolean #The global value, or the default if the global value is not set.
 function _G.GetGlobalBool(index, default) end
 
 ---[SHARED] Returns an entity that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalEntity)
 ---@param index string The unique index to identify the global value with.
----@param default Entity The value to return if the global value is not set.
----@return Entity The global value, or the default if the global value is not set.
+---@param default? Entity The value to return if the global value is not set.
+---@return Entity #The global value, or the default if the global value is not set.
 function _G.GetGlobalEntity(index, default) end
 
 ---[SHARED] Returns a float that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalFloat)
 ---@param index string The unique index to identify the global value with.
----@param default number The value to return if the global value is not set.
----@return number The global value, or the default if the global value is not set.
+---@param default? number The value to return if the global value is not set.
+---@return number #The global value, or the default if the global value is not set.
 function _G.GetGlobalFloat(index, default) end
 
 ---[SHARED] Returns an integer that is shared between the server and all clients.
@@ -1243,8 +1243,8 @@ function _G.GetGlobalFloat(index, default) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalInt)
 ---@param index string The unique index to identify the global value with.
----@param default number The value to return if the global value is not set.
----@return number The global value, or the default if the global value is not set.
+---@param default? number The value to return if the global value is not set.
+---@return number #The global value, or the default if the global value is not set.
 function _G.GetGlobalInt(index, default) end
 
 ---[SHARED] Returns a string that is shared between the server and all clients.
@@ -1252,15 +1252,15 @@ function _G.GetGlobalInt(index, default) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalString)
 ---@param index string The unique index to identify the global value with.
 ---@param default string The value to return if the global value is not set.
----@return string The global value, or the default if the global value is not set.
+---@return string #The global value, or the default if the global value is not set.
 function _G.GetGlobalString(index, default) end
 
 ---[SHARED] Returns a value that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalVar)
 ---@param index string The unique index to identify the global value with.
----@param default any The value to return if the global value is not set.
----@return any The global value, or the default if the global value is not set.
+---@param default? any The value to return if the global value is not set.
+---@return any #The global value, or the default if the global value is not set.
 function _G.GetGlobalVar(index, default) end
 
 ---[SHARED] Returns a vector that is shared between the server and all clients.
@@ -1268,13 +1268,13 @@ function _G.GetGlobalVar(index, default) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalVector)
 ---@param Index string The unique index to identify the global value with.
 ---@param Default Vector The value to return if the global value is not set.
----@return Vector The global value, or the default if the global value is not set.
+---@return Vector #The global value, or the default if the global value is not set.
 function _G.GetGlobalVector(Index, Default) end
 
 ---[SHARED] Returns the name of the current server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetHostName)
----@return string The name of the server.
+---@return string #The name of the server.
 function _G.GetHostName() end
 
 ---[CLIENT] Returns the panel that is used as a wrapper for the HUD. If you want your panel to be hidden when the main menu is opened, parent it to this. Child panels will also have their controls disabled.
@@ -1282,25 +1282,25 @@ function _G.GetHostName() end
 --- See also vgui.GetWorldPanel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetHUDPanel)
----@return Panel The HUD panel
+---@return Panel #The HUD panel
 function _G.GetHUDPanel() end
 
 ---[MENU] Returns the loading screen panel and creates it if it doesn't exist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadPanel)
----@return Panel The loading screen panel
+---@return Panel #The loading screen panel
 function _G.GetLoadPanel() end
 
 ---[MENU] Returns the current status of the server join progress.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadStatus)
----@return string The current status
+---@return string #The current status
 function _G.GetLoadStatus() end
 
 ---[MENU] Returns a table with the names of all maps and categories that you have on your client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetMapList)
----@return table Table of map names and categories.
+---@return table #Table of map names and categories.
 function _G.GetMapList() end
 
 ---[SHARED AND MENU] Returns the metatable of an object. This function obeys the metatable's __metatable field, and will return that field if the metatable has it set.
@@ -1311,13 +1311,13 @@ function _G.GetMapList() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.getmetatable)
 ---@param object any The value to return the metatable of.
----@return any The metatable of the value. This is not always a table.
+---@return any #The metatable of the value. This is not always a table.
 function _G.getmetatable(object) end
 
 ---[MENU] Returns the menu overlay panel, a container for panels like the error panel created in GM:OnLuaError.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetOverlayPanel)
----@return Panel The overlay panel
+---@return Panel #The overlay panel
 function _G.GetOverlayPanel() end
 
 ---[MENU] Updates the PlayerList for the Currently Viewed Server. Internally uses serverlist.PlayerList to retrieve the PlayerList.
@@ -1329,7 +1329,7 @@ function _G.GetPlayerList(serverip) end
 ---[SHARED] Returns the player whose movement commands are currently being processed. The player this returns can safely have Player:GetCurrentCommand() called on them. See Prediction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetPredictionPlayer)
----@return Player The player currently being predicted, or NULL if no command processing is currently being done.
+---@return Player #The player currently being predicted, or NULL if no command processing is currently being done.
 function _G.GetPredictionPlayer() end
 
 ---[CLIENT] Creates or gets the rendertarget with the given name.
@@ -1355,7 +1355,7 @@ function _G.GetPredictionPlayer() end
 ---@param name string The internal name of the render target.
 ---@param width number The width of the render target, must be power of 2. If not set to PO2, the size will be automatically converted to the nearest PO2 size.
 ---@param height number The height of the render target, must be power of 2. If not set to PO2, the size will be automatically converted to the nearest PO2 size.
----@return ITexture The render target
+---@return ITexture #The render target
 function _G.GetRenderTarget(name, width, height) end
 
 ---[CLIENT] Gets (or creates if it does not exist) the rendertarget with the given name, this function allows to adjust the creation of a rendertarget more than Global.GetRenderTarget.
@@ -1377,14 +1377,14 @@ function _G.GetRenderTarget(name, width, height) end
 ---@param rtFlags number Flags that controll the HDR behaviour of the render target, see Enums/CREATERENDERTARGETFLAGS.
 ---@param imageFormat number Image format, see Enums/IMAGE_FORMAT.
 --- Some additional image formats are accepted, but don't have enums. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
----@return ITexture The new render target.
+---@return ITexture #The new render target.
 function _G.GetRenderTargetEx(name, width, height, sizeMode, depthMode, textureFlags, rtFlags, imageFormat) end
 
 ---[MENU] Retrieves data about the save with the specified filename. Similar to Global.GetDemoFileDetails.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetSaveFileDetails)
 ---@param filename string The file name of the save.
----@return table Save data.
+---@return table #Save data.
 function _G.GetSaveFileDetails(filename) end
 
 ---[MENU] Starts Searching for Servers in the given Category. Can be stopped with Global.DoStopServers.
@@ -1398,7 +1398,7 @@ function _G.GetServers(category, id) end
 ---[CLIENT] Returns the entity the client is using to see from (such as the player itself, the camera, or another entity).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetViewEntity)
----@return Entity The view entity.
+---@return Entity #The view entity.
 function _G.GetViewEntity() end
 
 ---[MENU] Opens the given URL in a HTML panel.
@@ -1415,7 +1415,7 @@ function _G.GMOD_OpenURLNoOverlay(url) end
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
 ---@param value number The lightness from 0-1.
----@return table The Color created from the HSL color space.
+---@return table #The Color created from the HSL color space.
 function _G.HSLToColor(hue, saturation, value) end
 
 ---[SHARED AND MENU] Converts a color from [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a Color.
@@ -1426,7 +1426,7 @@ function _G.HSLToColor(hue, saturation, value) end
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
 ---@param value number The value from 0-1.
----@return table The Color created from the HSV color space.
+---@return table #The Color created from the HSV color space.
 function _G.HSVToColor(hue, saturation, value) end
 
 ---[SHARED AND MENU] Launches an asynchronous http request with the given parameters.
@@ -1442,7 +1442,7 @@ function _G.HSVToColor(hue, saturation, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.HTTP)
 ---@param parameters table The request parameters. See Structures/HTTPRequest.
 ---
----@return boolean `true` if we made a request, `nil` if we failed.
+---@return boolean #`true` if we made a request, `nil` if we failed.
 function _G.HTTP(parameters) end
 
 ---[SHARED AND MENU] Executes a Lua script.
@@ -1459,7 +1459,7 @@ function _G.HTTP(parameters) end
 ---@param fileName string The name of the script to be executed. The path must be either relative to the current file, or be an absolute path (relative to and excluding the **lua/** folder).
 ---
 --- Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
----@return ... Anything that the executed Lua script returns.
+---@return ... #Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
 ---[SHARED AND MENU] To send the target file to the client simply call AddCSLuaFile() in the target file itself.
@@ -1482,23 +1482,23 @@ function _G.IncludeCS(filename) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ipairs)
 ---@param tab table The table to iterate over.
----@return function, table, number function - The iterator function.
----@return function, table, number table - The table being iterated over.
----@return function, table, number number - The origin index **=0**.
+---@return function, table, number #function - The iterator function.
+---@return function, table, number #table - The table being iterated over.
+---@return function, table, number #number - The origin index **=0**.
 function _G.ipairs(tab) end
 
 ---[SHARED AND MENU] Returns if the passed object is an Angle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isangle)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is an Angle.
+---@return boolean #True if the variable is an Angle.
 function _G.isangle(variable) end
 
 ---[SHARED AND MENU] Returns if the passed object is a boolean.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isbool)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a boolean.
+---@return boolean #True if the variable is a boolean.
 function _G.isbool(variable) end
 
 ---[SHARED AND MENU] Returns whether the given object does or doesn't have a `metatable` of a color.
@@ -1507,7 +1507,7 @@ function _G.isbool(variable) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsColor)
 ---@param Object any The object to be tested
----@return boolean Whether the given object is a color or not
+---@return boolean #Whether the given object is a color or not
 function _G.IsColor(Object) end
 
 ---[SHARED AND MENU] Determines whether or not the provided console command will be blocked if it's ran through Lua functions, such as Global.RunConsoleCommand or Player:ConCommand.
@@ -1516,7 +1516,7 @@ function _G.IsColor(Object) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsConCommandBlocked)
 ---@param name string The console command to test.
----@return boolean Whether the command will be blocked.
+---@return boolean #Whether the command will be blocked.
 function _G.IsConCommandBlocked(name) end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is an enemy.
@@ -1547,14 +1547,14 @@ function _G.IsConCommandBlocked(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsEnemyEntityName)
 ---@param className string Class name of the entity to check
----@return boolean Is an enemy
+---@return boolean #Is an enemy
 function _G.IsEnemyEntityName(className) end
 
 ---[SHARED AND MENU] Returns if the passed object is an Entity. Alias of Global.isentity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsEntity)
 ---@param variable any The variable to check.
----@return boolean True if the variable is an Entity.
+---@return boolean #True if the variable is an Entity.
 function _G.IsEntity(variable) end
 
 ---[SHARED] Returns if this is the first time this hook was predicted.
@@ -1566,7 +1566,7 @@ function _G.IsEntity(variable) end
 --- This is already used internally for Entity:EmitSound, Weapon:SendWeaponAnim and Entity:FireBullets, but NOT in  util.Effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsFirstTimePredicted)
----@return boolean Whether or not this is the first time being predicted.
+---@return boolean #Whether or not this is the first time being predicted.
 function _G.IsFirstTimePredicted() end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is a friend.
@@ -1588,54 +1588,54 @@ function _G.IsFirstTimePredicted() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsFriendEntityName)
 ---@param className string Class name of the entity to check
----@return boolean Is a friend
+---@return boolean #Is a friend
 function _G.IsFriendEntityName(className) end
 
 ---[SHARED AND MENU] Returns if the passed object is a function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isfunction)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a function.
+---@return boolean #True if the variable is a function.
 function _G.isfunction(variable) end
 
 ---[MENU] Returns true if the client is currently playing either a singleplayer or multiplayer game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInGame)
----@return boolean True if we are in a game.
+---@return boolean #True if we are in a game.
 function _G.IsInGame() end
 
 ---[MENU] Returns true when the loading panel is active.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInLoading)
----@return boolean True if loading panel is active.
+---@return boolean #True if loading panel is active.
 function _G.IsInLoading() end
 
 ---[SHARED AND MENU] Returns whether the passed object is a VMatrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ismatrix)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a VMatrix.
+---@return boolean #True if the variable is a VMatrix.
 function _G.ismatrix(variable) end
 
 ---[SHARED AND MENU] Checks whether or not a game is currently mounted. Uses data given by engine.GetGames.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsMounted)
 ---@param game string The game string/app ID to check.
----@return boolean True if the game is mounted.
+---@return boolean #True if the game is mounted.
 function _G.IsMounted(game) end
 
 ---[SHARED AND MENU] Returns if the passed object is a number.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isnumber)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a number.
+---@return boolean #True if the variable is a number.
 function _G.isnumber(variable) end
 
 ---[SHARED AND MENU] Returns if the passed object is a Panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ispanel)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a Panel.
+---@return boolean #True if the variable is a Panel.
 function _G.ispanel(variable) end
 
 ---[MENU] Checks if the given server data is blacklisted or not.
@@ -1646,14 +1646,14 @@ function _G.ispanel(variable) end
 ---@param description string description to check
 ---@param gm string Gamemode name
 ---@param map string Map name
----@return string Returns the reason why the server is blacklisted or nil if the server is not blacklisted.
+---@return string #Returns the reason why the server is blacklisted or nil if the server is not blacklisted.
 function _G.IsServerBlacklisted(address, hostname, description, gm, map) end
 
 ---[SHARED AND MENU] Returns if the passed object is a string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isstring)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a string.
+---@return boolean #True if the variable is a string.
 function _G.isstring(variable) end
 
 ---[SHARED AND MENU] Returns if the passed object is a table.
@@ -1661,14 +1661,14 @@ function _G.isstring(variable) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.istable)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a table.
+---@return boolean #True if the variable is a table.
 function _G.istable(variable) end
 
 ---[SHARED AND MENU] Returns whether or not every element within a table is a valid entity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsTableOfEntitiesValid)
 ---@param table table Table containing entities to check
----@return boolean All entities valid
+---@return boolean #All entities valid
 function _G.IsTableOfEntitiesValid(table) end
 
 ---[SHARED AND MENU] Returns whether or not a model is useless by checking that the file path is that of a proper model.
@@ -1693,7 +1693,7 @@ function _G.IsTableOfEntitiesValid(table) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsUselessModel)
 ---@param modelName string The model name to be checked
----@return boolean Whether or not the model is useless
+---@return boolean #Whether or not the model is useless
 function _G.IsUselessModel(modelName) end
 
 ---[SHARED AND MENU] Returns whether an object is valid or not. (Such as Entitys, Panels, custom table objects and more).
@@ -1703,14 +1703,14 @@ function _G.IsUselessModel(modelName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsValid)
 ---@param toBeValidated any The table or object to be validated.
----@return boolean True if the object is valid.
+---@return boolean #True if the object is valid.
 function _G.IsValid(toBeValidated) end
 
 ---[SHARED AND MENU] Returns if the passed object is a Vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isvector)
 ---@param variable any The variable to perform the type check for.
----@return boolean True if the variable is a Vector.
+---@return boolean #True if the variable is a Vector.
 function _G.isvector(variable) end
 
 ---[MENU] Joins the server with the specified IP.
@@ -1741,8 +1741,8 @@ function _G.JS_Workshop(htmlPanel) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Label)
 ---@param text string The string to set the label's text to
----@param parent Panel Optional. The panel to parent the DLabel to
----@return Panel The created DLabel
+---@param parent? Panel Optional. The panel to parent the DLabel to
+---@return Panel #The created DLabel
 function _G.Label(text, parent) end
 
 ---[MENU] Callback function for when the client's language changes. Called by the engine.
@@ -1760,7 +1760,7 @@ function _G.LanguageChanged(lang) end
 ---@param t number The fraction for finding the result. This number is clamped between 0 and 1. Shouldn't be a constant.
 ---@param from number The starting number. The result will be equal to this if delta is 0.
 ---@param to number The ending number. The result will be equal to this if delta is 1.
----@return number The result of the linear interpolation, `from + (to - from) * t`.
+---@return number #The result of the linear interpolation, `from + (to - from) * t`.
 function _G.Lerp(t, from, to) end
 
 ---[SHARED AND MENU] Returns point between first and second angle using given fraction and linear interpolation
@@ -1770,7 +1770,7 @@ function _G.Lerp(t, from, to) end
 ---@param ratio number Ratio of progress through values
 ---@param angleStart Angle Angle to begin from
 ---@param angleEnd Angle Angle to end at
----@return Angle angle
+---@return Angle #angle
 function _G.LerpAngle(ratio, angleStart, angleEnd) end
 
 ---[SHARED AND MENU] Linear interpolation between two vectors. It is commonly used to smooth movement between two vectors
@@ -1780,7 +1780,7 @@ function _G.LerpAngle(ratio, angleStart, angleEnd) end
 ---@param fraction number Fraction ranging from 0 to 1
 ---@param from Vector The initial Vector
 ---@param to Vector The desired Vector
----@return Vector The lerped vector.
+---@return Vector #The lerped vector.
 function _G.LerpVector(fraction, from, to) end
 
 ---[MENU] Loads all Addon Presets and updates the Preset list.
@@ -1793,7 +1793,7 @@ function _G.ListAddonPresets() end
 --- You can use Global.SaveAddonPresets to modify this file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadAddonPresets)
----@return string The contents of the file.
+---@return string #The contents of the file.
 function _G.LoadAddonPresets() end
 
 ---[MENU] This function is used to get the last map and category to which the map belongs from the cookie saved with Global.SaveLastMap.
@@ -1809,7 +1809,7 @@ function _G.LoadNewsList() end
 ---[CLIENT] Loads all preset settings for the presets and returns them in a table
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadPresets)
----@return table Preset data
+---@return table #Preset data
 function _G.LoadPresets() end
 
 ---[CLIENT AND MENU] Returns a localisation for the given token, if none is found it will return the default (second) parameter.
@@ -1824,7 +1824,7 @@ function _G.Localize(localisationToken, default) end
 --- LocalPlayer() will return NULL until all entities have been initialized. See GM:InitPostEntity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LocalPlayer)
----@return Player The player object representing the client.
+---@return Player #The player object representing the client.
 function _G.LocalPlayer() end
 
 ---[SHARED] Translates the specified position and angle from the specified local coordinate system into worldspace coordinates.
@@ -1838,8 +1838,8 @@ function _G.LocalPlayer() end
 ---@param localAng Angle The angle in the source coordinate system, that should be converted to a world angle. If you don't need to convert an angle, you can supply an arbitrary valid angle (e.g. Global.Angle()).
 ---@param originPos Vector The origin point of the source coordinate system, in world coordinates
 ---@param originAngle Angle The angles of the source coordinate system, as a world angle
----@return Vector, Angle Vector - The world position of the supplied local position.
----@return Vector, Angle Angle - The world angles of the supplied local angle.
+---@return Vector, Angle #Vector - The world position of the supplied local position.
+---@return Vector, Angle #Angle - The world angles of the supplied local angle.
 function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 
 ---[SHARED AND MENU] Either returns the material with the given name, or loads the material interpreting the first argument as the path.
@@ -1853,22 +1853,22 @@ function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 --- To retrieve a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
 ---
 --- Since paths are relative to the materials folder, resource paths like ../data/MyImage.jpg will work since `..` translates to moving up a parent directory in the file tree..
----@param pngParameters string A string containing space separated keywords which will be used to add material parameters.
+---@param pngParameters? string A string containing space separated keywords which will be used to add material parameters.
 ---
 --- See Material Parameters for more information.
 ---
 --- This feature only works when importing .png or .jpeg image files.
----@return IMaterial, number IMaterial - Generated material.
----@return IMaterial, number number - How long it took for the function to run.
+---@return IMaterial, number #IMaterial - Generated material.
+---@return IMaterial, number #number - How long it took for the function to run.
 function _G.Material(materialName, pngParameters) end
 
 ---[SHARED] Returns a VMatrix object, a 4x4 matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Matrix)
----@param data table Initial data to initialize the matrix with. Leave empty to initialize an identity matrix. See examples for usage.
+---@param data? table Initial data to initialize the matrix with. Leave empty to initialize an identity matrix. See examples for usage.
 ---
 --- Can be a VMatrix to copy its data.
----@return VMatrix New matrix.
+---@return VMatrix #New matrix.
 function _G.Matrix(data) end
 
 ---[MENU] Internally uses steamworks.FileInfo to fetch the data.
@@ -1881,15 +1881,15 @@ function _G.MenuGetAddonData(workshopItemID) end
 ---[CLIENT] Returns a new mesh object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Mesh)
----@param mat IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
----@return IMesh The created object.
+---@param mat? IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
+---@return IMesh #The created object.
 function _G.Mesh(mat) end
 
 ---[SHARED AND MENU] Runs util.PrecacheModel and returns the string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Model)
 ---@param model string The model to precache.
----@return string The same string entered as an argument.
+---@return string #The same string entered as an argument.
 function _G.Model(model) end
 
 ---[SHARED AND MENU] Creates a table with the specified module name and sets the function environment for said table.
@@ -1939,14 +1939,14 @@ function _G.MsgN(...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NamedColor)
 ---@param name string Name of color
----@return table A Color or nil
+---@return table #A Color or nil
 function _G.NamedColor(name) end
 
 ---[SHARED AND MENU] Returns a new userdata object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.newproxy)
----@param addMetatable boolean If true, the userdata will get its own metatable automatically. If another newproxy is passed, it will create new one and copy its metatable.
----@return userdata The newly created userdata.
+---@param addMetatable? boolean If true, the userdata will get its own metatable automatically. If another newproxy is passed, it will create new one and copy its metatable.
+---@return userdata #The newly created userdata.
 function _G.newproxy(addMetatable) end
 
 ---[SHARED AND MENU] Returns the next key and value pair in a table.
@@ -1955,15 +1955,15 @@ function _G.newproxy(addMetatable) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.next)
 ---@param tab table The table
----@param prevKey any The previous key in the table.
----@return any, any any - The next key for the table. If the previous key was nil, this will be the first key in the table. If the previous key was the last key in the table, this will be nil.
----@return any, any any - The value associated with that key. If the previous key was the last key in the table, this will be nil.
+---@param prevKey? any The previous key in the table.
+---@return any, any #any - The next key for the table. If the previous key was nil, this will be the first key in the table. If the previous key was the last key in the table, this will be nil.
+---@return any, any #any - The value associated with that key. If the previous key was the last key in the table, this will be nil.
 function _G.next(tab, prevKey) end
 
 ---[MENU] Returns the number of files needed from the server you are currently joining.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NumDownloadables)
----@return number The number of downloadables
+---@return number #The number of downloadables
 function _G.NumDownloadables() end
 
 ---[CLIENT] Returns the amount of skins the specified model has.
@@ -1972,7 +1972,7 @@ function _G.NumDownloadables() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NumModelSkins)
 ---@param modelName string Model to return amount of skins of
----@return number Amount of skins
+---@return number #Amount of skins
 function _G.NumModelSkins(modelName) end
 
 ---[CLIENT] Called by the engine when a model has been loaded. Caches model information with the sql.
@@ -2016,16 +2016,16 @@ function _G.OrderVectors(vector1, vector2) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.pairs)
 ---@param tab table The table to iterate over.
----@return function, table, any function - The iterator (Global.next).
----@return function, table, any table - The table being iterated over.
----@return function, table, any any - **nil** (for the constructor).
+---@return function, table, any #function - The iterator (Global.next).
+---@return function, table, any #table - The table being iterated over.
+---@return function, table, any #any - **nil** (for the constructor).
 function _G.pairs(tab) end
 
 ---[SHARED AND MENU] Calls game.AddParticles and returns given string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Particle)
 ---@param file string The particle file.
----@return string The particle file.
+---@return string #The particle file.
 function _G.Particle(file) end
 
 ---[SHARED] Creates a particle effect.
@@ -2036,7 +2036,7 @@ function _G.Particle(file) end
 ---@param particleName string The name of the particle effect.
 ---@param position Vector The start position of the effect.
 ---@param angles Angle The orientation of the effect.
----@param parent Entity If set, the particle will be parented to the entity.
+---@param parent? Entity If set, the particle will be parented to the entity.
 function _G.ParticleEffect(particleName, position, angles, parent) end
 
 ---[SHARED] Creates a particle effect with specialized parameters.
@@ -2059,7 +2059,7 @@ function _G.ParticleEffectAttach(particleName, attachType, entity, attachmentID)
 ---
 --- This is only used to determine particle drawing order for translucent particles.
 ---@param use3D boolean Whenever to render the particles in 2D or 3D mode.
----@return CLuaEmitter The new particle emitter.
+---@return CLuaEmitter #The new particle emitter.
 function _G.ParticleEmitter(position, use3D) end
 
 ---[SERVER] Creates a path for the bot to follow
@@ -2067,7 +2067,7 @@ function _G.ParticleEmitter(position, use3D) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Path)
 ---@param type string The name of the path to create.
 --- This is going to be "Follow" or "Chase" right now.
----@return PathFollower The path
+---@return PathFollower #The path
 function _G.Path(type) end
 
 ---[SHARED AND MENU] Calls a function and catches an error that can be thrown while the execution of the call.
@@ -2081,8 +2081,8 @@ function _G.Path(type) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.pcall)
 ---@param func function Function to be executed and of which the errors should be caught of
 ---@param ... ... Arguments to call the function with.
----@return boolean, ... boolean - If the function had no errors occur within it.
----@return boolean, ... ... - If an error occurred, this will be a string containing the error message. Otherwise, this will be the return values of the function passed in.
+---@return boolean, ... #boolean - If the function had no errors occur within it.
+---@return boolean, ... #... - If an error occurred, this will be a string containing the error message. Otherwise, this will be the return values of the function passed in.
 function _G.pcall(func, ...) end
 
 ---[SHARED] Returns the player with the matching Player:UserID.
@@ -2094,7 +2094,7 @@ function _G.pcall(func, ...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Player)
 ---@param playerIndex number The player index.
----@return Player The retrieved player.
+---@return Player #The retrieved player.
 function _G.Player(playerIndex) end
 
 ---[CLIENT] Moves the given model to the given position and calculates appropriate camera parameters for rendering the model to an icon.
@@ -2105,7 +2105,7 @@ function _G.Player(playerIndex) end
 ---@param model Entity Model that is being rendered to the spawn icon
 ---@param position Vector Position that the model is being rendered at
 ---@param noAngles boolean If true the function won't reset the angles to 0 for the model.
----@return table Table of information of the view which can be used for rendering
+---@return table #Table of information of the view which can be used for rendering
 function _G.PositionSpawnIcon(model, position, noAngles) end
 
 ---[SHARED] Precaches the particle with the specified name.
@@ -2156,14 +2156,14 @@ function _G.PrintMessage(type, message) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrintTable)
 ---@param tableToPrint table The table to be printed
----@param indent number Number of tabs to start indenting at. Increases by 2 when entering another table.
----@param done table Internal argument, you shouldn't normally change this. Used to check if a nested table has already been printed so it doesn't get caught in a loop.
+---@param indent? number Number of tabs to start indenting at. Increases by 2 when entering another table.
+---@param done? table Internal argument, you shouldn't normally change this. Used to check if a nested table has already been printed so it doesn't get caught in a loop.
 function _G.PrintTable(tableToPrint, indent, done) end
 
 ---[CLIENT] Creates a new ProjectedTexture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProjectedTexture)
----@return ProjectedTexture Newly created projected texture.
+---@return ProjectedTexture #Newly created projected texture.
 function _G.ProjectedTexture() end
 
 ---[SHARED] Runs a function without stopping the whole script on error.
@@ -2172,15 +2172,15 @@ function _G.ProjectedTexture() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProtectedCall)
 ---@param func function Function to run
----@return boolean Whether the function executed successfully or not
+---@return boolean #Whether the function executed successfully or not
 function _G.ProtectedCall(func) end
 
 ---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in random order
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RandomPairs)
 ---@param table table Table to create iterator for
----@param descending boolean Whether the iterator should iterate descending or not
----@return function Iterator function
+---@param descending? boolean Whether the iterator should iterate descending or not
+---@return function #Iterator function
 function _G.RandomPairs(table, descending) end
 
 ---[SHARED AND MENU] Compares the two values without calling their __eq operator.
@@ -2188,7 +2188,7 @@ function _G.RandomPairs(table, descending) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawequal)
 ---@param value1 any The first value to compare.
 ---@param value2 any The second value to compare.
----@return boolean Whether or not the two values are equal.
+---@return boolean #Whether or not the two values are equal.
 function _G.rawequal(value1, value2) end
 
 ---[SHARED AND MENU] Gets the value with the specified key from the table without calling the __index method.
@@ -2196,7 +2196,7 @@ function _G.rawequal(value1, value2) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawget)
 ---@param table table Table to get the value from.
 ---@param index any The index to get the value from.
----@return any The value.
+---@return any #The value.
 function _G.rawget(table, index) end
 
 ---[SHARED AND MENU] Sets the value with the specified key from the table without calling the __newindex method.
@@ -2211,7 +2211,7 @@ function _G.rawset(table, index, value) end
 --- 		The returned number is clamped between `0` and `0.1`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RealFrameTime)
----@return number Real frame time
+---@return number #Real frame time
 function _G.RealFrameTime() end
 
 ---[SHARED] Returns the uptime of the game/server in seconds (to at least **4** decimal places). This value updates itself once every time the realm thinks. For servers, this is the server tickrate. For clients, its their current FPS.
@@ -2227,16 +2227,16 @@ function _G.RealFrameTime() end
 --- See also: Global.CurTime, Global.SysTime
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RealTime)
----@return number Uptime of the game/server.
+---@return number #Uptime of the game/server.
 function _G.RealTime() end
 
 ---[SERVER] Creates a new CRecipientFilter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RecipientFilter)
----@param unreliable boolean If set to true, makes the filter unreliable.
+---@param unreliable? boolean If set to true, makes the filter unreliable.
 ---
 --- This means, when sending over the network in cases like Global.CreateSound (and its subsequent updates), the message is not guaranteed to reach all clients.
----@return CRecipientFilter The new created recipient filter.
+---@return CRecipientFilter #The new created recipient filter.
 function _G.RecipientFilter(unreliable) end
 
 ---[MENU] Adds a frame to the currently recording demo.
@@ -2269,7 +2269,7 @@ function _G.RemoveTooltip() end
 ---[CLIENT] Returns the angle that the clients view is being rendered at
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RenderAngles)
----@return Angle Render Angles
+---@return Angle #Render Angles
 function _G.RenderAngles() end
 
 ---[CLIENT] Renders a Depth of Field effect
@@ -2379,9 +2379,9 @@ function _G.RunGameUICommand(command) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunString)
 ---@param code string The code to execute.
----@param identifier string The name that should appear in any error messages caused by this code.
----@param handleError boolean If false, this function will return a string containing any error messages instead of throwing an error.
----@return string If handleError is false, the error message (if any).
+---@param identifier? string The name that should appear in any error messages caused by this code.
+---@param handleError? boolean If false, this function will return a string containing any error messages instead of throwing an error.
+---@return string #If handleError is false, the error message (if any).
 function _G.RunString(code, identifier, handleError) end
 
 ---[SHARED AND MENU] Alias of Global.RunString.
@@ -2436,19 +2436,19 @@ function _G.SavePresets(presets) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScreenScale)
 ---@param Size number The number you want to scale.
----@return number The scaled number based on your screen's width
+---@return number #The scaled number based on your screen's width
 function _G.ScreenScale(Size) end
 
 ---[CLIENT AND MENU] Gets the height of the game's window (in pixels).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrH)
----@return number The height of the game's window in pixels
+---@return number #The height of the game's window in pixels
 function _G.ScrH() end
 
 ---[CLIENT AND MENU] Gets the width of the game's window (in pixels).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrW)
----@return number The width of the game's window in pixels
+---@return number #The width of the game's window in pixels
 function _G.ScrW() end
 
 ---[SHARED AND MENU] Used to select single values from a vararg or get the count of values in it.
@@ -2459,7 +2459,7 @@ function _G.ScrW() end
 --- * If it's a positive number, the function will return all values starting from the given index.
 --- * If the number is negative, it will return the amount specified from the end instead of the beginning. This mode will not be compiled by LuaJIT.
 ---@param ... ... The vararg. These are the values from which you want to select.
----@return any Returns a number or vararg, depending on the select method.
+---@return any #Returns a number or vararg, depending on the select method.
 function _G.select(parameter, ...) end
 
 ---[SHARED] This uses the umsg internally, which has been deprecated. Use the net instead.
@@ -2476,7 +2476,7 @@ function _G.SendUserMessage(name, recipients, ...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SentenceDuration)
 ---@param name string The sentence name.
----@return number The approximate duration.
+---@return number #The approximate duration.
 function _G.SentenceDuration(name) end
 
 ---[SERVER] Prints `ServerLog: PARAM` without a newline, to the server log and console.
@@ -2498,7 +2498,7 @@ function _G.SetClipboardText(text) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.setfenv)
 ---@param location function The function to set the environment for, or a number representing stack level.
 ---@param environment table Table to be used as the the environment.
----@return function The function passed, otherwise nil.
+---@return function #The function passed, otherwise nil.
 function _G.setfenv(location, environment) end
 
 ---[SHARED] Defines an angle to be automatically networked to clients
@@ -2683,7 +2683,7 @@ function _G.SetGlobalVector(index, vec) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.setmetatable)
 ---@param Tab table The table who's metatable to change.
 ---@param Metatable table The metatable to assign.  If it's nil, the metatable will be removed.
----@return table The first argument.
+---@return table #The first argument.
 function _G.setmetatable(Tab, Metatable) end
 
 ---[SHARED] Called by the engine to set which [constraint system](https://developer.valvesoftware.com/wiki/Phys_constraintsystem) the next created constraints should use.
@@ -2701,9 +2701,9 @@ function _G.SetPhysConstraintSystem(constraintSystem) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairs)
 ---@param table table The table to sort
----@param desc boolean Reverse the sorting order
----@return function, table function - Iterator function
----@return function, table table - The table being iterated over
+---@param desc? boolean Reverse the sorting order
+---@return function, table #function - Iterator function
+---@return function, table #table - The table being iterated over
 function _G.SortedPairs(table, desc) end
 
 ---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in order of member values, when the values of the table are also tables and contain that member.
@@ -2716,9 +2716,9 @@ function _G.SortedPairs(table, desc) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairsByMemberValue)
 ---@param table table Table to create iterator for.
 ---@param memberKey any Key of the value member to sort by.
----@param descending boolean Whether the iterator should iterate in descending order or not.
----@return function, table function - Iterator function
----@return function, table table - The table the iterator was created for.
+---@param descending? boolean Whether the iterator should iterate in descending order or not.
+---@return function, table #function - Iterator function
+---@return function, table #table - The table the iterator was created for.
 function _G.SortedPairsByMemberValue(table, memberKey, descending) end
 
 ---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in order of its **values**.
@@ -2730,9 +2730,9 @@ function _G.SortedPairsByMemberValue(table, memberKey, descending) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairsByValue)
 ---@param table table Table to create iterator for
----@param descending boolean Whether the iterator should iterate in descending order or not
----@return function, table function - Iterator function
----@return function, table table - The table which will be iterated over
+---@param descending? boolean Whether the iterator should iterate in descending order or not
+---@return function, table #function - Iterator function
+---@return function, table #table - The table which will be iterated over
 function _G.SortedPairsByValue(table, descending) end
 
 ---[SHARED AND MENU] Runs util.PrecacheSound and returns the string.
@@ -2741,7 +2741,7 @@ function _G.SortedPairsByValue(table, descending) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Sound)
 ---@param soundPath string The soundpath to precache.
----@return string The string passed as the first argument.
+---@return string #The string passed as the first argument.
 function _G.Sound(soundPath) end
 
 ---[SHARED] Returns the duration of the specified sound in seconds.
@@ -2750,15 +2750,15 @@ function _G.Sound(soundPath) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SoundDuration)
 ---@param soundName string The sound file path.
----@return number Sound duration in seconds.
+---@return number #Sound duration in seconds.
 function _G.SoundDuration(soundName) end
 
 ---[SHARED AND MENU] Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of sql.SQLStr
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SQLStr)
 ---@param input string String to be escaped
----@param noQuotes boolean Whether the returned value should be surrounded in quotes or not
----@return string Escaped input
+---@param noQuotes? boolean Whether the returned value should be surrounded in quotes or not
+---@return string #Escaped input
 function _G.SQLStr(input, noQuotes) end
 
 ---[CLIENT] You should be using Global.ScreenScale instead.
@@ -2773,7 +2773,7 @@ function _G.SScale(Size) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.STNDRD)
 ---@param number number The number to find the ordinal suffix of.
----@return string suffix
+---@return string #suffix
 function _G.STNDRD(number) end
 
 ---[SERVER] Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
@@ -2785,13 +2785,13 @@ function _G.SuppressHostEvents(suppressPlayer) end
 ---[SHARED AND MENU] Returns a highly accurate time in seconds since the start up, ideal for benchmarking. Unlike Global.RealTime, this value will be updated any time the function is called, allowing for sub-think precision.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SysTime)
----@return number Uptime of the server.
+---@return number #Uptime of the server.
 function _G.SysTime() end
 
 ---[SHARED] Returns a TauntCamera object
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TauntCamera)
----@return table TauntCamera
+---@return table #TauntCamera
 function _G.TauntCamera() end
 
 ---[CLIENT AND MENU] Clears focus from any text entries player may have focused.
@@ -2806,7 +2806,7 @@ function _G.TextEntryLoseFocus() end
 ---@param min number Minimum value
 ---@param max number Maximum value
 ---@param offset number Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
----@return number Cosine value
+---@return number #Cosine value
 function _G.TimedCos(frequency, min, max, offset) end
 
 ---[SHARED AND MENU] Returns a sine value that fluctuates based on Global.CurTime. The value returned will be between the start value plus/minus the range value.
@@ -2818,14 +2818,14 @@ function _G.TimedCos(frequency, min, max, offset) end
 ---@param origin number The center value of the sine wave.
 ---@param max number This argument's distance from origin defines the size of the full range of the sine wave. For example, if origin is 3 and max is 5, then the full range of the sine wave is 5-3 = 2. 3 is the center point of the sine wave, so the sine wave will range between 2 and 4.
 ---@param offset number Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
----@return number Sine value
+---@return number #Sine value
 function _G.TimedSin(frequency, origin, max, offset) end
 
 ---[SHARED AND MENU] Attempts to return an appropriate boolean for the given value
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tobool)
 ---@param val any The object to be converted to a boolean
----@return boolean **false** for the boolean false. **false** for "false". **false** for "0". **false** for numeric 0. **false** for nil. **true** otherwise.
+---@return boolean #**false** for the boolean false. **false** for "false". **false** for "0". **false** for numeric 0. **false** for nil. **true** otherwise.
 function _G.tobool(val) end
 
 ---[MENU] Toggles whether or not the named map is favorited in the new game list.
@@ -2840,8 +2840,8 @@ function _G.ToggleFavourite(map) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tonumber)
 ---@param value any The value to convert. Can be a number or string.
----@param base number The base used in the string. Can be any integer between 2 and 36, inclusive.
----@return number The numeric representation of the value with the given base, or nil if the conversion failed.
+---@param base? number The base used in the string. Can be any integer between 2 and 36, inclusive.
+---@return number #The numeric representation of the value with the given base, or nil if the conversion failed.
 function _G.tonumber(value, base) end
 
 ---[SHARED AND MENU] Attempts to convert the value to a string. If the value is an object and its metatable has defined the __tostring metamethod, this will call that function.
@@ -2850,14 +2850,14 @@ function _G.tonumber(value, base) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tostring)
 ---@param value any The object to be converted to a string.
----@return string The string representation of the value.
+---@return string #The string representation of the value.
 function _G.tostring(value) end
 
 ---[MENU] Returns "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TranslateDownloadableName)
 ---@param filename string File name to test
----@return string "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
+---@return string #"Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
 function _G.TranslateDownloadableName(filename) end
 
 ---[SHARED AND MENU] Returns a string representing the name of the type of the passed object.
@@ -2865,7 +2865,7 @@ function _G.TranslateDownloadableName(filename) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.type)
 ---@param var any The object to get the type of.
----@return string The name of the object's type.
+---@return string #The name of the object's type.
 function _G.type(var) end
 
 ---[SHARED] Gets the associated type ID of the variable. Unlike Global.type, this does not work with no value - an argument must be provided.
@@ -2875,22 +2875,22 @@ function _G.type(var) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TypeID)
 ---@param variable any The variable to get the type ID of.
----@return number The type ID of the variable. See the Enums/TYPE.
+---@return number #The type ID of the variable. See the Enums/TYPE.
 function _G.TypeID(variable) end
 
 ---[SHARED AND MENU] This function takes a numeric indexed table and return all the members as a vararg. If specified, it will start at the given index and end at end index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.unpack)
 ---@param tbl table The table to generate the vararg from.
----@param startIndex number Which index to start from. Optional.
----@param endIndex number Which index to end at. Optional, even if you set StartIndex.
----@return ... Output values
+---@param startIndex? number Which index to start from. Optional.
+---@param endIndex? number Which index to end at. Optional, even if you set StartIndex.
+---@return ... #Output values
 function _G.unpack(tbl, startIndex, endIndex) end
 
 ---[SHARED AND MENU] Returns the current asynchronous in-game time.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UnPredictedCurTime)
----@return number The asynchronous in-game time.
+---@return number #The asynchronous in-game time.
 function _G.UnPredictedCurTime() end
 
 ---[MENU] This function retrieves the values from Global.GetAddonStatus and passes them to JS(JavaScript).
@@ -2960,7 +2960,7 @@ function _G.UpdateSubscribedAddons() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UTIL_IsUselessModel)
 ---@param modelName string The model name to be checked
----@return boolean Whether or not the model is useless
+---@return boolean #Whether or not the model is useless
 function _G.UTIL_IsUselessModel(modelName) end
 
 ---[CLIENT AND MENU] You should use Global.IsValid instead
@@ -2975,7 +2975,7 @@ function _G.ValidPanel(panel) end
 --- 		This function is very expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example). It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Vector)
----@param x number The x component of the vector.
+---@param x? number The x component of the vector.
 ---
 ---
 --- If this is a Vector, this function will return a copy of the given vector.
@@ -2983,17 +2983,17 @@ function _G.ValidPanel(panel) end
 ---
 --- If this is a string, this function will try to parse the string as a vector. If it fails, it returns a 0 vector.
 --- (See examples)
----@param y number The y component of the vector.
----@param z number The z component of the vector.
----@return Vector The created vector object.
+---@param y? number The y component of the vector.
+---@param z? number The z component of the vector.
+---@return Vector #The created vector object.
 function _G.Vector(x, y, z) end
 
 ---[SHARED AND MENU] Returns a random vector whose components are each between min(inclusive), max(exclusive).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VectorRand)
----@param min number Min bound inclusive.
----@param max number Max bound exclusive.
----@return Vector The random direction vector.
+---@param min? number Min bound inclusive.
+---@param max? number Max bound exclusive.
+---@return Vector #The random direction vector.
 function _G.VectorRand(min, max) end
 
 ---[SHARED AND MENU] Returns the time in seconds it took to render the VGUI.
@@ -3008,7 +3008,7 @@ function _G.VGUIFrameTime() end
 ---@param y number Y position of the created element
 ---@param w number Width of the created element
 ---@param h number Height of the created element
----@return Panel DShape element
+---@return Panel #DShape element
 function _G.VGUIRect(x, y, w, h) end
 
 ---[CLIENT AND MENU] Used by the **vgui_visualizelayout** convar
@@ -3023,7 +3023,7 @@ function _G.VisualizeLayout(panel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.WorkshopFileBase)
 ---@param namespace string Namespace for the file base
 ---@param requiredTags table Tags required for a Workshop submission to be interacted with by the filebase
----@return table WorkshopFileBase element
+---@return table #WorkshopFileBase element
 function _G.WorkshopFileBase(namespace, requiredTags) end
 
 ---[SHARED] Translates the specified position and angle into the specified coordinate system.
@@ -3033,8 +3033,8 @@ function _G.WorkshopFileBase(namespace, requiredTags) end
 ---@param angle Angle The angles that should be translated from the current to the new system.
 ---@param newSystemOrigin Vector The origin of the system to translate to.
 ---@param newSystemAngles Angle The angles of the system to translate to.
----@return Vector, Angle Vector - Local position
----@return Vector, Angle Angle - Local angles
+---@return Vector, Angle #Vector - Local position
+---@return Vector, Angle #Angle - Local angles
 function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end
 
 ---[SHARED AND MENU] Attempts to call the first function. If the execution succeeds, this returns `true` followed by the returns of the function. If execution fails, this returns `false` and the second function is called with the error message.
@@ -3053,6 +3053,6 @@ function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end
 ---
 --- You cannot throw an Global.error() from this callback: it will have no effect (not even stopping the callback).
 ---@param ... ... Arguments to pass to the initial function.
----@return boolean, ... boolean - Status of the execution; `true` for success, `false` for failure.
----@return boolean, ... ... - The returns of the first function if execution succeeded, otherwise the **first** return value of the error callback.
+---@return boolean, ... #boolean - Status of the execution; `true` for success, `false` for failure.
+---@return boolean, ... #... - The returns of the first function if execution succeeded, otherwise the **first** return value of the error callback.
 function _G.xpcall(func, errorCallback, ...) end

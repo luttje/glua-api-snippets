@@ -1,6 +1,6 @@
 ---@meta
 
----@class ControlPresets
+---@class ControlPresets : Panel
 local ControlPresets = {}
 
 ---[CLIENT] Adds a convar to be managed by this control.
@@ -12,7 +12,7 @@ function ControlPresets:AddConVar(convar) end
 ---[CLIENT] Get a list of all Console Variables being managed by this panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:GetConVars)
----@return table numbered table of convars
+---@return table #numbered table of convars
 function ControlPresets:GetConVars() end
 
 ---[CLIENT] Set the name label text.

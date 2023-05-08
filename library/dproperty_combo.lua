@@ -1,6 +1,6 @@
 ---@meta
 
----@class DProperty_Combo
+---@class DProperty_Combo : Panel
 local DProperty_Combo = {}
 
 ---[CLIENT] Add a choice to your combo control.
@@ -8,7 +8,7 @@ local DProperty_Combo = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:AddChoice)
 ---@param Text string Shown text.
 ---@param data any Stored Data.
----@param select boolean Select this element?
+---@param select? boolean Select this element?
 function DProperty_Combo:AddChoice(Text, data, select) end
 
 ---[CLIENT] Called after the user selects a new value.
@@ -26,7 +26,7 @@ function DProperty_Combo:SetSelected(Id) end
 ---[CLIENT] Sets up a combo control.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:Setup)
----@param data table Data to use to set up the combo box control. See Editable Entities.
+---@param data? table Data to use to set up the combo box control. See Editable Entities.
 ---
 --- Structure:
 --- * string text - The default label for this combo box

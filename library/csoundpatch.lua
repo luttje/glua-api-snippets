@@ -9,7 +9,7 @@ local CSoundPatch = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:ChangePitch)
 ---@param pitch number The pitch can range from 0-255. Where 100 is the original pitch.
----@param deltaTime number The time to fade from previous to the new pitch.
+---@param deltaTime? number The time to fade from previous to the new pitch.
 function CSoundPatch:ChangePitch(pitch, deltaTime) end
 
 ---[SHARED] Adjusts the volume of the sound played.
@@ -17,7 +17,7 @@ function CSoundPatch:ChangePitch(pitch, deltaTime) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:ChangeVolume)
 ---@param volume number The volume ranges from 0 to 1.
----@param deltaTime number Time to fade the volume from previous to new value from.
+---@param deltaTime? number Time to fade the volume from previous to new value from.
 function CSoundPatch:ChangeVolume(volume, deltaTime) end
 
 ---[SHARED] Fades out the volume of the sound from the current volume to 0 in the given amount of seconds.
@@ -29,31 +29,31 @@ function CSoundPatch:FadeOut(seconds) end
 ---[SHARED] Returns the DSP ( Digital Signal Processor ) effect for the sound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetDSP)
----@return number The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
+---@return number #The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
 function CSoundPatch:GetDSP() end
 
 ---[SHARED] Returns the current pitch.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetPitch)
----@return number The current pitch, can range from 0-255.
+---@return number #The current pitch, can range from 0-255.
 function CSoundPatch:GetPitch() end
 
 ---[SHARED] Returns the current sound level.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetSoundLevel)
----@return number The current sound level, see Enums/SNDLVL.
+---@return number #The current sound level, see Enums/SNDLVL.
 function CSoundPatch:GetSoundLevel() end
 
 ---[SHARED] Returns the current volume.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetVolume)
----@return number The current volume, ranging from 0 to 1.
+---@return number #The current volume, ranging from 0 to 1.
 function CSoundPatch:GetVolume() end
 
 ---[SHARED] Returns whenever the sound is being played.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:IsPlaying)
----@return boolean Is playing or not
+---@return boolean #Is playing or not
 function CSoundPatch:IsPlaying() end
 
 ---[SHARED] Starts to play the sound. This will reset the sound's volume and pitch to their default values. See CSoundPatch:PlayEx

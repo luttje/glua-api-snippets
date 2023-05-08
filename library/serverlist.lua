@@ -16,14 +16,14 @@ function serverlist.AddServerToFavorites(address) end
 ---[MENU] Returns true if the current server address is in their favorites.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsCurrentServerFavorite)
----@return boolean true if the current server is in their favorites
+---@return boolean #true if the current server is in their favorites
 function serverlist.IsCurrentServerFavorite() end
 
 ---[MENU] Returns true if the given server address is in their favorites.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsServerFavorite)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
----@return boolean true if the server address is in their favorites
+---@return boolean #true if the server address is in their favorites
 function serverlist.IsServerFavorite(address) end
 
 ---[MENU] Queries a server for its information/ping.

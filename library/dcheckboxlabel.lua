@@ -1,18 +1,18 @@
 ---@meta
 
----@class DCheckBoxLabel
+---@class DCheckBoxLabel : Panel
 local DCheckBoxLabel = {}
 
 ---[CLIENT] Gets the checked state of the checkbox. This calls the checkbox's DCheckBox:GetChecked function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:GetChecked)
----@return boolean Whether the box is checked or not.
+---@return boolean #Whether the box is checked or not.
 function DCheckBoxLabel:GetChecked() end
 
 ---[CLIENT] Gets the indentation of the element on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:GetIndent)
----@return number How much the content is moved to the right in pixels
+---@return number #How much the content is moved to the right in pixels
 function DCheckBoxLabel:GetIndent() end
 
 ---[CLIENT] Called when the "checked" state is changed.

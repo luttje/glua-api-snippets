@@ -1,6 +1,6 @@
 ---@meta
 
----@class DProperty_Generic
+---@class DProperty_Generic : Panel
 local DProperty_Generic = {}
 
 ---[CLIENT] Sets up a generic control for use by DProperties.

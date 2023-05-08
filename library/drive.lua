@@ -7,14 +7,14 @@ drive = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CalcView)
 ---@param ply Player The player
 ---@param view table The view, see Structures/ViewData
----@return boolean true if succeeded
+---@return boolean #true if succeeded
 function drive.CalcView(ply, view) end
 
 ---[SHARED] Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CreateMove)
 ---@param cmd CUserCmd The user command
----@return boolean true if succeeded
+---@return boolean #true if succeeded
 function drive.CreateMove(cmd) end
 
 ---[SHARED] Destroys players current driving method.
@@ -35,14 +35,14 @@ function drive.End(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.FinishMove)
 ---@param ply Player The player
 ---@param mv CMoveData The move data
----@return boolean true if succeeded
+---@return boolean #true if succeeded
 function drive.FinishMove(ply, mv) end
 
 ---[SHARED] Returns ( or creates if inexistent ) a driving method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.GetMethod)
 ---@param ply Player The player
----@return table A method object.
+---@return table #A method object.
 function drive.GetMethod(ply) end
 
 ---[SHARED] The move is executed here.
@@ -50,7 +50,7 @@ function drive.GetMethod(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.Move)
 ---@param ply Player The player
 ---@param mv CMoveData The move data
----@return boolean true if succeeded
+---@return boolean #true if succeeded
 function drive.Move(ply, mv) end
 
 ---[SHARED] Starts driving for the player.
@@ -88,5 +88,5 @@ function drive.Start(ply, ent) end
 ---@param ply Player The player
 ---@param mv CMoveData The move data
 ---@param cmd CUserCmd The user command
----@return boolean true if succeeded
+---@return boolean #true if succeeded
 function drive.StartMove(ply, mv, cmd) end

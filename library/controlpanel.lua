@@ -13,10 +13,10 @@ function controlpanel.Clear() end
 ---@param name string The name of the panel. For normal tools this will be equal to `TOOL.Mode` (the tool's filename without the extension).
 ---
 --- When you create a tool/option via spawnmenu.AddToolMenuOption, the internal control panel name is `TOOL.Mode .. "_" .. tool_tab:lower() .. "_" .. tool_category:lower()`.
----@return Panel The ControlPanel panel.
+---@return Panel #The ControlPanel panel.
 function controlpanel.Get(name) end
 
----@class ControlPanel
+---@class ControlPanel : Panel
 local ControlPanel = {}
 
 ---[CLIENT] It is recommended to use DForm's members instead.
@@ -130,7 +130,7 @@ function ControlPanel:ClearControls() end
 ---@param convarG string Name of the convar that will store the G component of the selected color.
 ---@param convarB string Name of the convar that will store the B component of the selected color.
 ---@param convarA string Name of the convar that will store the A component of the selected color.
----@return Panel The created CtrlColor panel.
+---@return Panel #The created CtrlColor panel.
 function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
 
 ---[CLIENT] Sets control values of the control panel.
@@ -151,7 +151,7 @@ function ControlPanel:FillViaFunction(func) end
 ---[CLIENT] Returns this control panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:GetEmbeddedPanel)
----@return ControlPanel The same control panel the function is being called on.
+---@return ControlPanel #The same control panel the function is being called on.
 function ControlPanel:GetEmbeddedPanel() end
 
 ---[CLIENT] Creates a CtrlNumPad (a Sandbox key binder) panel and adds it as an ControlPanel:AddPanel.
@@ -159,20 +159,20 @@ function ControlPanel:GetEmbeddedPanel() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:KeyBinder)
 ---@param label1 string The label for the left key binder.
 ---@param convar1 string The name of the convar that will store the key code for player selected key of the left key binder.
----@param label2 string If set and `convar2` is set, the label for the right key binder.
----@param convar2 string If set and `label2` is set, the name of the convar that will store the key code for player selected key of the right key binder.
----@return Panel The created CtrlNumPad panel.
+---@param label2? string If set and `convar2` is set, the label for the right key binder.
+---@param convar2? string If set and `label2` is set, the name of the convar that will store the key code for player selected key of the right key binder.
+---@return Panel #The created CtrlNumPad panel.
 function ControlPanel:KeyBinder(label1, convar1, label2, convar2) end
 
 ---[CLIENT] Creates a MatSelect panel and adds it as an ControlPanel:AddPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:MatSelect)
 ---@param convar string Calls MatSelect:ContextBase:SetConVar with this value.
----@param options table If specified, calls MatSelect:AddMaterial(key, value) for each table entry. If the table key is a number, the function will instead be called with the value as both arguments.
----@param autostretch boolean If specified, calls MatSelect:SetAutoHeight with this value.
----@param width number If specified, calls MatSelect:SetItemWidth with this value.
----@param height number If specified, calls MatSelect:SetItemHeight with this value.
----@return MatSelect The created MatSelect panel.
+---@param options? table If specified, calls MatSelect:AddMaterial(key, value) for each table entry. If the table key is a number, the function will instead be called with the value as both arguments.
+---@param autostretch? boolean If specified, calls MatSelect:SetAutoHeight with this value.
+---@param width? number If specified, calls MatSelect:SetItemWidth with this value.
+---@param height? number If specified, calls MatSelect:SetItemHeight with this value.
+---@return MatSelect #The created MatSelect panel.
 function ControlPanel:MatSelect(convar, options, autostretch, width, height) end
 
 ---[CLIENT] Creates a ControlPresets panel and adds it as an ControlPanel:AddPanel.
@@ -180,5 +180,5 @@ function ControlPanel:MatSelect(convar, options, autostretch, width, height) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
 ---@param group string The presets group. Must be unique.
 ---@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
----@return Panel The created ControlPresets panel.
+---@return Panel #The created ControlPresets panel.
 function ControlPanel:ToolPresets(group, cvarList) end

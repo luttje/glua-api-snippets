@@ -1,13 +1,13 @@
 ---@meta
 
----@class DPanelList
+---@class DPanelList : Panel
 local DPanelList = {}
 
 ---[CLIENT] Adds a existing panel to the end of DPanelList.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:AddItem)
 ---@param pnl Panel Panel to be used as element of list
----@param state string If set to "ownline", the item will take its own entire line.
+---@param state? string If set to "ownline", the item will take its own entire line.
 function DPanelList:AddItem(pnl, state) end
 
 ---[CLIENT] Removes all items.
@@ -23,19 +23,19 @@ function DPanelList:EnableVerticalScrollbar() end
 ---[CLIENT] Returns all panels has added by DPanelList:AddItem
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetItems)
----@return table A table of panels used as items of DPanelList.
+---@return table #A table of panels used as items of DPanelList.
 function DPanelList:GetItems() end
 
 ---[CLIENT] Returns offset of list items from the panel borders set by DPanelList:SetPadding
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetPadding)
----@return number Offset from panel borders
+---@return number #Offset from panel borders
 function DPanelList:GetPadding() end
 
 ---[CLIENT] Returns distance between list items set by DPanelList:SetSpacing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetSpacing)
----@return number Distance between panels
+---@return number #Distance between panels
 function DPanelList:GetSpacing() end
 
 ---[CLIENT]

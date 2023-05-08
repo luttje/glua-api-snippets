@@ -6,7 +6,7 @@ local Vehicle = {}
 ---[SERVER] Returns the remaining boosting time left.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:BoostTimeLeft)
----@return number The remaining boosting time left
+---@return number #The remaining boosting time left
 function Vehicle:BoostTimeLeft() end
 
 ---[SERVER] Tries to find an Exit Point for leaving vehicle, if one is unobstructed in the direction given.
@@ -14,7 +14,7 @@ function Vehicle:BoostTimeLeft() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:CheckExitPoint)
 ---@param yaw number Yaw/roll from vehicle angle to check for exit
 ---@param distance number Distance from origin to drop player
----@return Vector Returns the vector for exit position or nil if cannot exit that way.
+---@return Vector #Returns the vector for exit position or nil if cannot exit that way.
 function Vehicle:CheckExitPoint(yaw, distance) end
 
 ---[SERVER] Sets whether the engine is enabled or disabled, i.e. can be started or not.
@@ -26,189 +26,189 @@ function Vehicle:EnableEngine(enable) end
 ---[CLIENT] Returns information about the ammo of the vehicle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetAmmo)
----@return number, number, number number - Ammo type of the vehicle ammo
----@return number, number, number number - Clip size
----@return number, number, number number - Count
+---@return number, number, number #number - Ammo type of the vehicle ammo
+---@return number, number, number #number - Clip size
+---@return number, number, number #number - Count
 function Vehicle:GetAmmo() end
 
 ---[SHARED] Returns third person camera distance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetCameraDistance)
----@return number Camera distance
+---@return number #Camera distance
 function Vehicle:GetCameraDistance() end
 
 ---[SHARED] Gets the driver of the vehicle, returns `NULL` if no driver is present.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetDriver)
----@return Entity The driver of the vehicle.
+---@return Entity #The driver of the vehicle.
 function Vehicle:GetDriver() end
 
 ---[SERVER] Returns the current speed of the vehicle in Half-Life Hammer Units (in/s). Same as Entity:GetVelocity + Vector:Length.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetHLSpeed)
----@return number The speed of the vehicle
+---@return number #The speed of the vehicle
 function Vehicle:GetHLSpeed() end
 
 ---[SERVER] Returns the max speed of the vehicle in MPH.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetMaxSpeed)
----@return number The max speed of the vehicle in MPH
+---@return number #The max speed of the vehicle in MPH
 function Vehicle:GetMaxSpeed() end
 
 ---[SERVER] Returns some info about the vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams)
----@return table The operating params. See Structures/OperatingParams.
+---@return table #The operating params. See Structures/OperatingParams.
 function Vehicle:GetOperatingParams() end
 
 ---[SHARED] Gets the passenger of the vehicle, returns NULL if no drivers is present.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetPassenger)
 ---@param passenger number The index of the passenger
----@return Entity The passenger
+---@return Entity #The passenger
 function Vehicle:GetPassenger(passenger) end
 
 ---[SERVER] Returns the seat position and angle of a given passenger seat.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetPassengerSeatPoint)
 ---@param role number The passenger role. ( 1 is the driver )
----@return Vector, Angle Vector - The seat position
----@return Vector, Angle Angle - The seat angle
+---@return Vector, Angle #Vector - The seat position
+---@return Vector, Angle #Angle - The seat angle
 function Vehicle:GetPassengerSeatPoint(role) end
 
 ---[SERVER] Returns the current RPM of the vehicle. This value is fake and doesn't actually affect the vehicle movement.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetRPM)
----@return number The RPM.
+---@return number #The RPM.
 function Vehicle:GetRPM() end
 
 ---[SERVER] Returns the current speed of the vehicle in MPH.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetSpeed)
----@return number The speed of the vehicle in MPH
+---@return number #The speed of the vehicle in MPH
 function Vehicle:GetSpeed() end
 
 ---[SERVER] Returns the current steering of the vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetSteering)
----@return number The current steering of the vehicle.
+---@return number #The current steering of the vehicle.
 function Vehicle:GetSteering() end
 
 ---[SERVER] Returns the maximum steering degree of the vehicle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetSteeringDegrees)
----@return number The maximum steering degree of the vehicle
+---@return number #The maximum steering degree of the vehicle
 function Vehicle:GetSteeringDegrees() end
 
 ---[SHARED] Returns if vehicle has thirdperson mode enabled or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetThirdPersonMode)
----@return boolean Returns true if third person mode enabled, false otherwise
+---@return boolean #Returns true if third person mode enabled, false otherwise
 function Vehicle:GetThirdPersonMode() end
 
 ---[SERVER] Returns the current throttle of the vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetThrottle)
----@return number The current throttle of the vehicle
+---@return number #The current throttle of the vehicle
 function Vehicle:GetThrottle() end
 
 ---[SHARED] Returns the vehicle class name. This is only useful for Sandbox spawned vehicles or any vehicle that properly sets the vehicle class with Vehicle:SetVehicleClass.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleClass)
----@return string The class name of the vehicle.
+---@return string #The class name of the vehicle.
 function Vehicle:GetVehicleClass() end
 
 ---[SERVER] Returns the vehicle parameters of given vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams)
----@return table The vehicle parameters. See Structures/VehicleParams
+---@return table #The vehicle parameters. See Structures/VehicleParams
 function Vehicle:GetVehicleParams() end
 
 ---[SHARED] Returns the view position and forward angle of a given passenger seat.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleViewPosition)
----@param role number The passenger role. 0 is the driver. This parameter seems to be ignored by the game engine and is therefore optional.
----@return Vector, Angle, number Vector - The view position, will be 0, 0, 0 on failure
----@return Vector, Angle, number Angle - The view angles, will be 0, 0, 0 on failure
----@return Vector, Angle, number number - The field of view, will be 0 on failure
+---@param role? number The passenger role. 0 is the driver. This parameter seems to be ignored by the game engine and is therefore optional.
+---@return Vector, Angle, number #Vector - The view position, will be 0, 0, 0 on failure
+---@return Vector, Angle, number #Angle - The view angles, will be 0, 0, 0 on failure
+---@return Vector, Angle, number #number - The field of view, will be 0 on failure
 function Vehicle:GetVehicleViewPosition(role) end
 
 ---[SERVER] Returns the PhysObj of given wheel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheel)
 ---@param wheel number The wheel to retrieve
----@return PhysObj The wheel
+---@return PhysObj #The wheel
 function Vehicle:GetWheel(wheel) end
 
 ---[SERVER] Returns the base wheel height.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheelBaseHeight)
 ---@param wheel number The wheel to get the base wheel height of.
----@return number The base wheel height.
+---@return number #The base wheel height.
 function Vehicle:GetWheelBaseHeight(wheel) end
 
 ---[SERVER] Returns the wheel contact point.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheelContactPoint)
 ---@param wheel number The wheel to check
----@return Vector, number, boolean Vector - The contact position
----@return Vector, number, boolean number - The Surface Properties ID of hit surface.
----@return Vector, number, boolean boolean - Whether the wheel is on ground or not
+---@return Vector, number, boolean #Vector - The contact position
+---@return Vector, number, boolean #number - The Surface Properties ID of hit surface.
+---@return Vector, number, boolean #boolean - Whether the wheel is on ground or not
 function Vehicle:GetWheelContactPoint(wheel) end
 
 ---[SERVER] Returns the wheel count of the vehicle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheelCount)
----@return number The amount of wheels
+---@return number #The amount of wheels
 function Vehicle:GetWheelCount() end
 
 ---[SERVER] Returns the total wheel height.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheelTotalHeight)
 ---@param wheel number The wheel to get the base wheel height of.
----@return number The total wheel height.
+---@return number #The total wheel height.
 function Vehicle:GetWheelTotalHeight(wheel) end
 
 ---[SERVER] Returns whether this vehicle has boost at all.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:HasBoost)
----@return boolean Whether this vehicle has boost at all.
+---@return boolean #Whether this vehicle has boost at all.
 function Vehicle:HasBoost() end
 
 ---[SERVER] Returns whether this vehicle has a brake pedal. See Vehicle:SetHasBrakePedal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:HasBrakePedal)
----@return boolean Whether this vehicle has a brake pedal or not.
+---@return boolean #Whether this vehicle has a brake pedal or not.
 function Vehicle:HasBrakePedal() end
 
 ---[SERVER] Returns whether this vehicle is currently boosting or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsBoosting)
----@return boolean Whether this vehicle is currently boosting or not.
+---@return boolean #Whether this vehicle is currently boosting or not.
 function Vehicle:IsBoosting() end
 
 ---[SERVER] Returns whether the engine is enabled or not, i.e. whether it can be started.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsEngineEnabled)
----@return boolean Whether the engine is enabled
+---@return boolean #Whether the engine is enabled
 function Vehicle:IsEngineEnabled() end
 
 ---[SERVER] Returns whether the engine is started or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsEngineStarted)
----@return boolean Whether the engine is started or not.
+---@return boolean #Whether the engine is started or not.
 function Vehicle:IsEngineStarted() end
 
 ---[SHARED] Returns true if the vehicle object is a valid or not. This will return false when Vehicle functions are not usable on the vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle)
----@return boolean Is the vehicle a valid vehicle or not
+---@return boolean #Is the vehicle a valid vehicle or not
 function Vehicle:IsValidVehicle() end
 
 ---[SERVER] Returns whether this vehicle's engine is underwater or not. ( Internally the attachment point "engine" or "vehicle_engine" is checked )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsVehicleBodyInWater)
----@return boolean Whether this vehicle's engine is underwater or not.
+---@return boolean #Whether this vehicle's engine is underwater or not.
 function Vehicle:IsVehicleBodyInWater() end
 
 ---[SERVER] Releases the vehicle's handbrake (Jeep) so it can roll without any passengers.

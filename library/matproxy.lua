@@ -29,5 +29,5 @@ function matproxy.Init(name, uname, mat, values) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.ShouldOverrideProxy)
 ---@param name string The name of proxy in question
----@return boolean Are we overriding it?
+---@return boolean #Are we overriding it?
 function matproxy.ShouldOverrideProxy(name) end

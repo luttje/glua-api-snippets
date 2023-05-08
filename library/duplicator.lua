@@ -33,23 +33,23 @@ function duplicator.ClearEntityModifier(ent, key) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.Copy)
 ---@param ent Entity The entity to duplicate. The function will automatically copy all constrained entities.
----@param tableToAdd table A preexisting table to add entities and constraints in from.
+---@param tableToAdd? table A preexisting table to add entities and constraints in from.
 --- Uses the same table format as the table returned from this function.
----@return table A table containing duplication info which includes the following members: * table Entities * table Constraints * Vector Mins * Vector Maxs  The values of Mins & Maxs from the table are returned from duplicator.WorkoutSize
+---@return table #A table containing duplication info which includes the following members: * table Entities * table Constraints * Vector Mins * Vector Maxs  The values of Mins & Maxs from the table are returned from duplicator.WorkoutSize
 function duplicator.Copy(ent, tableToAdd) end
 
 ---[SERVER] Copies the passed table of entities to save for later.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.CopyEnts)
 ---@param ents table A table of entities to save/copy.
----@return table A table containing duplication info which includes the following members: * table Entities * table Constraints * Vector Mins * Vector Maxs
+---@return table #A table containing duplication info which includes the following members: * table Entities * table Constraints * Vector Mins * Vector Maxs
 function duplicator.CopyEnts(ents) end
 
 ---[SERVER] Returns a table with some entity data that can be used to create a new entity with duplicator.CreateEntityFromTable
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.CopyEntTable)
 ---@param ent Entity The entity table to save
----@return table See Structures/EntityCopyData
+---@return table #See Structures/EntityCopyData
 function duplicator.CopyEntTable(ent) end
 
 ---[SERVER] Creates a constraint from a saved/copied constraint table.
@@ -57,7 +57,7 @@ function duplicator.CopyEntTable(ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.CreateConstraintFromTable)
 ---@param constraint table Saved/copied constraint table
 ---@param entityList table The list of entities that are to be constrained
----@return Entity The newly created constraint entity
+---@return Entity #The newly created constraint entity
 function duplicator.CreateConstraintFromTable(constraint, entityList) end
 
 ---[SERVER] "Create an entity from a table."
@@ -74,7 +74,7 @@ function duplicator.CreateConstraintFromTable(constraint, entityList) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable)
 ---@param ply Player The player who wants to create something
 ---@param entTable table The duplication data to build the entity with. See Structures/EntityCopyData
----@return Entity The newly created entity
+---@return Entity #The newly created entity
 function duplicator.CreateEntityFromTable(ply, entTable) end
 
 ---[SERVER] "Restores the bone's data."
@@ -92,7 +92,7 @@ function duplicator.DoBoneManipulator(ent, bones) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.DoFlex)
 ---@param ent Entity The entity to restore the flexes on
 ---@param flex table The flexes to restore
----@param scale number The flex scale to apply. (Flex scale is unchanged if omitted)
+---@param scale? number The flex scale to apply. (Flex scale is unchanged if omitted)
 function duplicator.DoFlex(ent, flex, scale) end
 
 ---[SERVER] "Applies generic every-day entity stuff for ent from table data."
@@ -115,7 +115,7 @@ function duplicator.DoGeneric(ent, data) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics)
 ---@param ent Entity The entity to be applied upon
----@param ply Player The player who owns the entity. Unused in function as of early 2013
+---@param ply? Player The player who owns the entity. Unused in function as of early 2013
 ---@param data table The data to be applied onto the entity
 function duplicator.DoGenericPhysics(ent, ply, data) end
 
@@ -123,7 +123,7 @@ function duplicator.DoGenericPhysics(ent, ply, data) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.FindEntityClass)
 ---@param name string The name of the entity class factory
----@return table Is compromised of the following members: * function Func - The function that creates the entity * table Args - Arguments to pass to the function
+---@return table #Is compromised of the following members: * function Func - The function that creates the entity * table Args - Arguments to pass to the function
 function duplicator.FindEntityClass(name) end
 
 ---[SERVER] "Generic function for duplicating stuff"
@@ -134,7 +134,7 @@ function duplicator.FindEntityClass(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction)
 ---@param ply Player The player who wants to create something
 ---@param data table The duplication data to build the entity with
----@return Entity The newly created entity
+---@return Entity #The newly created entity
 function duplicator.GenericDuplicatorFunction(ply, data) end
 
 ---[SERVER] Fills entStorageTable with all of the entities in a group connected with constraints. Fills constraintStorageTable with all of the constrains constraining the group.
@@ -143,15 +143,15 @@ function duplicator.GenericDuplicatorFunction(ply, data) end
 ---@param ent Entity The entity to start from
 ---@param entStorageTable table The table the entities will be inserted into
 ---@param constraintStorageTable table The table the constraints will be inserted into
----@return table, table table - entStorageTable
----@return table, table table - constraintStorageTable
+---@return table, table #table - entStorageTable
+---@return table, table #table - constraintStorageTable
 function duplicator.GetAllConstrainedEntitiesAndConstraints(ent, entStorageTable, constraintStorageTable) end
 
 ---[SHARED] Returns whether the entity can be duplicated or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.IsAllowed)
 ---@param classname string An entity's classname
----@return boolean Returns true if the entity can be duplicated (nil otherwise)
+---@return boolean #Returns true if the entity can be duplicated (nil otherwise)
 function duplicator.IsAllowed(classname) end
 
 ---[SERVER] "Given entity list and constraint list, create all entities and return their tables"
@@ -164,8 +164,8 @@ function duplicator.IsAllowed(classname) end
 ---@param Player Player The player who wants to create something
 ---@param EntityList table A table of duplicator data to create the entities from
 ---@param ConstraintList table A table of duplicator data to create the constraints from
----@return table, table table - List of created entities
----@return table, table table - List of created constraints
+---@return table, table #table - List of created entities
+---@return table, table #table - List of created constraints
 function duplicator.Paste(Player, EntityList, ConstraintList) end
 
 ---[SHARED] Registers a function to be called on each of an entity's bones when duplicator.ApplyBoneModifiers is called.
@@ -258,6 +258,6 @@ function duplicator.StoreEntityModifier(entity, name, data) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.WorkoutSize)
 ---@param Ents table A table of entity duplication datums.
----@return vector, vector vector - AABB mins vector
----@return vector, vector vector - AABB maxs vector
+---@return vector, vector #vector - AABB mins vector
+---@return vector, vector #vector - AABB maxs vector
 function duplicator.WorkoutSize(Ents) end

@@ -11,50 +11,50 @@ local CNewParticleEffect = {}
 ---@param cpID number The control point ID, 0 to 63.
 ---@param ent Entity The entity to attach the control point to.
 ---@param partAttachment number See Enums/PATTACH.
----@param entAttachment number The attachment ID on the entity to attach the particle system to
----@param offset Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
+---@param entAttachment? number The attachment ID on the entity to attach the particle system to
+---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 function CNewParticleEffect:AddControlPoint(cpID, ent, partAttachment, entAttachment, offset) end
 
 ---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetAutoUpdateBBox)
----@return boolean
+---@return boolean #
 function CNewParticleEffect:GetAutoUpdateBBox() end
 
 ---[CLIENT] Returns the name of the particle effect this system is set to emit.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetEffectName)
----@return string The name of the particle effect.
+---@return string #The name of the particle effect.
 function CNewParticleEffect:GetEffectName() end
 
 ---[CLIENT] Returns the highest control point number for given particle system.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetHighestControlPoint)
----@return boolean The highest control point number for given particle system, 0 to 63.
+---@return boolean #The highest control point number for given particle system, 0 to 63.
 function CNewParticleEffect:GetHighestControlPoint() end
 
 ---[CLIENT] Returns the owner of the particle system, the entity the particle system is attached to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetOwner)
----@return Entity The owner of the particle system.
+---@return Entity #The owner of the particle system.
 function CNewParticleEffect:GetOwner() end
 
 ---[CLIENT] Returns whether the particle system has finished emitting particles or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsFinished)
----@return boolean Whether the particle system has finished emitting particles or not.
+---@return boolean #Whether the particle system has finished emitting particles or not.
 function CNewParticleEffect:IsFinished() end
 
 ---[CLIENT] Returns whether the particle system is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsValid)
----@return boolean Whether the particle system is valid or not.
+---@return boolean #Whether the particle system is valid or not.
 function CNewParticleEffect:IsValid() end
 
 ---[CLIENT] Returns whether the particle system is intended to be used on a view model?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsViewModelEffect)
----@return boolean
+---@return boolean #
 function CNewParticleEffect:IsViewModelEffect() end
 
 ---[CLIENT] Forces the particle system to render using current rendering context.
@@ -145,15 +145,15 @@ function CNewParticleEffect:SetSortOrigin(origin) end
 ---[CLIENT] Starts the particle emission.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StartEmission)
----@param infiniteOnly boolean
+---@param infiniteOnly? boolean
 function CNewParticleEffect:StartEmission(infiniteOnly) end
 
 ---[CLIENT] Stops the particle emission.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmission)
----@param infiniteOnly boolean
----@param removeAllParticles boolean
----@param wakeOnStop boolean
+---@param infiniteOnly? boolean
+---@param removeAllParticles? boolean
+---@param wakeOnStop? boolean
 function CNewParticleEffect:StopEmission(infiniteOnly, removeAllParticles, wakeOnStop) end
 
 ---[CLIENT] Stops particle emission and destroys all particles instantly. Also detaches the particle effect from the entity it was attached to.

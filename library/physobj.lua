@@ -30,7 +30,7 @@ function PhysObj:AddVelocity(velocity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:AlignAngles)
 ---@param from Angle
 ---@param to Angle
----@return Angle
+---@return Angle #
 function PhysObj:AlignAngles(from, to) end
 
 ---[SHARED] Applies the specified impulse in the mass center of the physics object.
@@ -63,8 +63,8 @@ function PhysObj:ApplyTorqueCenter(angularImpulse) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:CalculateForceOffset)
 ---@param impulse Vector The impulse acting on the object in `kg*source_unit/s`. (World frame)
 ---@param position Vector The location of the impulse in world coordinates (`source units`)
----@return Vector, Vector Vector - The calculated linear impulse on the physics object's center of mass in `kg*source_unit/s`. (World frame)
----@return Vector, Vector Vector - The calculated angular impulse on the physics object's center of mass in `kg*m^2*degrees/s`. (Local frame)
+---@return Vector, Vector #Vector - The calculated linear impulse on the physics object's center of mass in `kg*source_unit/s`. (World frame)
+---@return Vector, Vector #Vector - The calculated angular impulse on the physics object's center of mass in `kg*m^2*degrees/s`. (Local frame)
 function PhysObj:CalculateForceOffset(impulse, position) end
 
 ---[SHARED] Calculates the linear and angular velocities on the center of mass for an offset impulse. The outputs can be directly passed to PhysObj:AddVelocity and PhysObj:AddAngleVelocity, respectively.
@@ -74,8 +74,8 @@ function PhysObj:CalculateForceOffset(impulse, position) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:CalculateVelocityOffset)
 ---@param impulse Vector The impulse acting on the object in `kg*source_unit/s`. (World frame)
 ---@param position Vector The location of the impulse in world coordinates (`source units`)
----@return Vector, Vector Vector - The calculated linear velocity from the impulse on the physics object's center of mass in `source_unit/s`. (World frame)
----@return Vector, Vector Vector - The calculated angular velocity from the impulse on the physics object's center of mass in `degrees/s`. (Local frame)
+---@return Vector, Vector #Vector - The calculated linear velocity from the impulse on the physics object's center of mass in `source_unit/s`. (World frame)
+---@return Vector, Vector #Vector - The calculated angular velocity from the impulse on the physics object's center of mass in `degrees/s`. (Local frame)
 function PhysObj:CalculateVelocityOffset(impulse, position) end
 
 ---[SHARED] Removes one of more specified flags.
@@ -125,180 +125,180 @@ function PhysObj:EnableMotion(enable) end
 ---[SHARED] Returns the mins and max of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetAABB)
----@return Vector, Vector Vector - Mins
----@return Vector, Vector Vector - Maxs
+---@return Vector, Vector #Vector - Mins
+---@return Vector, Vector #Vector - Maxs
 function PhysObj:GetAABB() end
 
 ---[SHARED] Returns the angles of the physics object in degrees.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetAngles)
----@return Angle The angles of the physics object.
+---@return Angle #The angles of the physics object.
 function PhysObj:GetAngles() end
 
 ---[SHARED] Gets the angular velocity of the object in degrees per second as a local vector. You can use dot product to read the magnitude from a specific axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetAngleVelocity)
----@return Vector The angular velocity
+---@return Vector #The angular velocity
 function PhysObj:GetAngleVelocity() end
 
 ---[SHARED] Returns the contents flag of the PhysObj.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetContents)
----@return number The Enums/CONTENTS.
+---@return number #The Enums/CONTENTS.
 function PhysObj:GetContents() end
 
 ---[SHARED] Returns the linear and angular damping of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetDamping)
----@return number, number number - The linear damping
----@return number, number number - The angular damping
+---@return number, number #number - The linear damping
+---@return number, number #number - The angular damping
 function PhysObj:GetDamping() end
 
 ---[SHARED] Returns the sum of the linear and rotational kinetic energies of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetEnergy)
----@return number The kinetic energy
+---@return number #The kinetic energy
 function PhysObj:GetEnergy() end
 
 ---[SHARED] Returns the parent entity of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetEntity)
----@return Entity The entity this physics object belongs to
+---@return Entity #The entity this physics object belongs to
 function PhysObj:GetEntity() end
 
 ---[SERVER] Returns the friction snapshot of this physics object. This is useful for determining if an object touching ground for example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetFrictionSnapshot)
----@return table A table of tables containing the following data: * PhysObj Other - The other physics object we came in contact with * number EnergyAbsorbed -  * number FrictionCoefficient -  * number NormalForce -  * Vector Normal - Direction of the friction event * Vector ContactPoint - Contact point of the friction event * number Material - Surface Property ID of our physics obj * number MaterialOther - Surface Property ID of the physics obj we came in contact with
+---@return table #A table of tables containing the following data: * PhysObj Other - The other physics object we came in contact with * number EnergyAbsorbed -  * number FrictionCoefficient -  * number NormalForce -  * Vector Normal - Direction of the friction event * Vector ContactPoint - Contact point of the friction event * number Material - Surface Property ID of our physics obj * number MaterialOther - Surface Property ID of the physics obj we came in contact with
 function PhysObj:GetFrictionSnapshot() end
 
 ---[SHARED] Returns the principal moments of inertia `(Ixx, Iyy, Izz)` of the physics object, in the local frame, with respect to the center of mass.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInertia)
----@return Vector The moment of inertia in `kg * m^2` 			The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)` 			This value changes proportionally to the physics object's mass (e.g. making the object twice as heavy will result in it having twice the angular inertia)
+---@return Vector #The moment of inertia in `kg * m^2` 			The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)` 			This value changes proportionally to the physics object's mass (e.g. making the object twice as heavy will result in it having twice the angular inertia)
 function PhysObj:GetInertia() end
 
 ---[SHARED] Returns 1 divided by the angular inertia. See PhysObj:GetInertia
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInvInertia)
----@return Vector The inverted angular inertia 			Returns `[0, 0, 0]` on frozen physics objects.
+---@return Vector #The inverted angular inertia 			Returns `[0, 0, 0]` on frozen physics objects.
 function PhysObj:GetInvInertia() end
 
 ---[SHARED] Returns 1 divided by the physics object's mass (in kilograms).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInvMass)
----@return number The inverted mass. 			Returns 0 on frozen physics objects.
+---@return number #The inverted mass. 			Returns 0 on frozen physics objects.
 function PhysObj:GetInvMass() end
 
 ---[SHARED] Returns the mass of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetMass)
----@return number The mass in kilograms.
+---@return number #The mass in kilograms.
 function PhysObj:GetMass() end
 
 ---[SHARED] Returns the center of mass of the physics object as a local vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetMassCenter)
----@return Vector The center of mass of the physics object.
+---@return Vector #The center of mass of the physics object.
 function PhysObj:GetMassCenter() end
 
 ---[SHARED] Returns the physical material of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetMaterial)
----@return string The physical material
+---@return string #The physical material
 function PhysObj:GetMaterial() end
 
 ---[SHARED] Returns the physics mesh of the object which is used for physobj-on-physobj collision.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetMesh)
----@return table Table of Structures/MeshVertexs where each three vertices represent a triangle. Returns nil if the physics object is a sphere.
+---@return table #Table of Structures/MeshVertexs where each three vertices represent a triangle. Returns nil if the physics object is a sphere.
 function PhysObj:GetMesh() end
 
 ---[SHARED] Returns all convex physics meshes of the object. See Entity:PhysicsInitMultiConvex for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetMeshConvexes)
----@return table Table of Structures/MeshVertexs where each Structures/MeshVertex is an independent convex mesh and each three vertices represent a triangle. Returns nil if the physics object is a sphere.
+---@return table #Table of Structures/MeshVertexs where each Structures/MeshVertex is an independent convex mesh and each three vertices represent a triangle. Returns nil if the physics object is a sphere.
 function PhysObj:GetMeshConvexes() end
 
 ---[SHARED] Returns the name of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetName)
----@return string The name of the physics object.
+---@return string #The name of the physics object.
 function PhysObj:GetName() end
 
 ---[SHARED] Returns the position of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetPos)
----@return Vector The position in world coordinates. (`source units`)
+---@return Vector #The position in world coordinates. (`source units`)
 function PhysObj:GetPos() end
 
 ---[SHARED] Returns the position and angle of the physics object as a 3x4 matrix (VMatrix is 4x4 so the fourth row goes unused). The first three columns store the angle as a [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix), and the fourth column stores the position vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetPositionMatrix)
----@return VMatrix The position and angle matrix.
+---@return VMatrix #The position and angle matrix.
 function PhysObj:GetPositionMatrix() end
 
 ---[SHARED] Returns the rotation damping of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetRotDamping)
----@return number The rotation damping
+---@return number #The rotation damping
 function PhysObj:GetRotDamping() end
 
 ---[SHARED] Returns the angles of the PhysObj shadow. See PhysObj:UpdateShadow.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetShadowAngles)
----@return Angle The angles of the PhysObj shadow.
+---@return Angle #The angles of the PhysObj shadow.
 function PhysObj:GetShadowAngles() end
 
 ---[SHARED] Returns the position of the PhysObj shadow. See PhysObj:UpdateShadow.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetShadowPos)
----@return Vector The position of the PhysObj shadow.
+---@return Vector #The position of the PhysObj shadow.
 function PhysObj:GetShadowPos() end
 
 ---[SHARED] Returns the speed damping of the physics object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetSpeedDamping)
----@return number speedDamping
+---@return number #speedDamping
 function PhysObj:GetSpeedDamping() end
 
 ---[SERVER] Returns the internal and external stress of the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetStress)
----@return number, number number - The external stress (`𝜎𝑒`). It's the value of a giving force to other entities (in kg).
----@return number, number number - The internal stress (`𝜎𝑖`). It's the value of a receiving force from other entities (in kg).
+---@return number, number #number - The external stress (`𝜎𝑒`). It's the value of a giving force to other entities (in kg).
+---@return number, number #number - The internal stress (`𝜎𝑖`). It's the value of a receiving force from other entities (in kg).
 function PhysObj:GetStress() end
 
 ---[SHARED] Returns the surface area of the physics object in source-units². Or nil if the PhysObj is a generated sphere or box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetSurfaceArea)
----@return number The surface area or nil if the PhysObj is a generated sphere or box.
+---@return number #The surface area or nil if the PhysObj is a generated sphere or box.
 function PhysObj:GetSurfaceArea() end
 
 ---[SHARED] Returns the absolute directional velocity of the physobject.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetVelocity)
----@return Vector velocity
+---@return Vector #velocity
 function PhysObj:GetVelocity() end
 
 ---[SHARED] Returns the world velocity of a point in world coordinates about the object. This is useful for objects rotating around their own axis/origin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetVelocityAtPoint)
 ---@param point Vector A point to test in world space coordinates
----@return Vector Velocity at the given point
+---@return Vector #Velocity at the given point
 function PhysObj:GetVelocityAtPoint(point) end
 
 ---[SHARED] Returns the volume in source units³. Or nil if the PhysObj is a generated sphere or box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetVolume)
----@return number The volume or nil if the PhysObj is a generated sphere or box.
+---@return number #The volume or nil if the PhysObj is a generated sphere or box.
 function PhysObj:GetVolume() end
 
 ---[SHARED] Returns whenever the specified flag(s) is/are set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:HasGameFlag)
 ---@param flags number Bitflag, see Enums/FVPHYSICS.
----@return boolean If flag was set or not
+---@return boolean #If flag was set or not
 function PhysObj:HasGameFlag(flags) end
 
 ---[SHARED] Returns whether the physics object is "sleeping".
@@ -306,37 +306,37 @@ function PhysObj:HasGameFlag(flags) end
 --- See PhysObj:Sleep for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsAsleep)
----@return boolean Whether the physics object is sleeping.
+---@return boolean #Whether the physics object is sleeping.
 function PhysObj:IsAsleep() end
 
 ---[SHARED] Returns whenever the entity is able to collide or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsCollisionEnabled)
----@return boolean isCollisionEnabled
+---@return boolean #isCollisionEnabled
 function PhysObj:IsCollisionEnabled() end
 
 ---[SHARED] Returns whenever the entity is affected by drag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsDragEnabled)
----@return boolean dragEnabled
+---@return boolean #dragEnabled
 function PhysObj:IsDragEnabled() end
 
 ---[SHARED] Returns whenever the entity is affected by gravity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsGravityEnabled)
----@return boolean `true` if the gravity is enabled, `false` otherwise
+---@return boolean #`true` if the gravity is enabled, `false` otherwise
 function PhysObj:IsGravityEnabled() end
 
 ---[SHARED] Returns if the physics object can move itself (by velocity, acceleration)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsMotionEnabled)
----@return boolean `true` if the motion is enabled, `false` otherwise.
+---@return boolean #`true` if the motion is enabled, `false` otherwise.
 function PhysObj:IsMotionEnabled() end
 
 ---[SHARED] Returns whenever the entity is able to move.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsMoveable)
----@return boolean movable
+---@return boolean #movable
 function PhysObj:IsMoveable() end
 
 ---[SHARED] Returns whenever the physics object is penetrating another physics object.
@@ -344,13 +344,13 @@ function PhysObj:IsMoveable() end
 --- This is internally implemented as `PhysObj:HasGameFlag( FVPHYSICS_PENETRATING )` and thus is only updated for non-static physics objects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsPenetrating)
----@return boolean Whether the physics object is penetrating another object.
+---@return boolean #Whether the physics object is penetrating another object.
 function PhysObj:IsPenetrating() end
 
 ---[SHARED] Returns if the physics object is valid/not NULL.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsValid)
----@return boolean isValid
+---@return boolean #isValid
 function PhysObj:IsValid() end
 
 ---[SHARED] Mapping a vector in local frame of the physics object to world frame.
@@ -359,7 +359,7 @@ function PhysObj:IsValid() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld)
 ---@param LocalVec Vector A vector in the physics object's local frame
----@return Vector The corresponding vector in world frame
+---@return Vector #The corresponding vector in world frame
 function PhysObj:LocalToWorld(LocalVec) end
 
 ---[SHARED] Rotate a vector from the local frame of the physics object to world frame.
@@ -368,7 +368,7 @@ function PhysObj:LocalToWorld(LocalVec) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)
 ---@param LocalVec Vector A vector in the physics object's local frame
----@return Vector The corresponding vector in world frame
+---@return Vector #The corresponding vector in world frame
 function PhysObj:LocalToWorldVector(LocalVec) end
 
 ---[SHARED] Prints debug info about the state of the physics object to the console.
@@ -386,7 +386,7 @@ function PhysObj:RecheckCollisionFilter() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:RotateAroundAxis)
 ---@param dir Vector Direction, around which we will rotate
 ---@param ang number Amount of rotation, in degrees
----@return Angle The resulting angle
+---@return Angle #The resulting angle
 function PhysObj:RotateAroundAxis(dir, ang) end
 
 ---[SHARED] Sets the amount of [drag](https://en.wikipedia.org/wiki/Drag_(physics)) to apply to a physics object when attempting to rotate.
@@ -470,7 +470,7 @@ function PhysObj:SetMaterial(materialName) end
 ---@param position Vector The new position of the physobject in world coordinates. (`source units`).
 --- 			The new position will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)
 ---
----@param teleport boolean
+---@param teleport? boolean
 function PhysObj:SetPos(position, teleport) end
 
 ---[SHARED] Sets the velocity of the physics object for the next iteration.
@@ -516,7 +516,7 @@ function PhysObj:Wake() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal)
 ---@param vec Vector The vector in world space coordinates.
----@return Vector The vector local to PhysObj:GetPos.
+---@return Vector #The vector local to PhysObj:GetPos.
 function PhysObj:WorldToLocal(vec) end
 
 ---[SHARED] Rotate a vector from the world frame to the local frame of the physics object.
@@ -525,5 +525,5 @@ function PhysObj:WorldToLocal(vec) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocalVector)
 ---@param WorldVec Vector A vector in the world frame
----@return Vector The corresponding vector relative to the PhysObj
+---@return Vector #The corresponding vector relative to the PhysObj
 function PhysObj:WorldToLocalVector(WorldVec) end

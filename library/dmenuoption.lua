@@ -1,30 +1,30 @@
 ---@meta
 
----@class DMenuOption
+---@class DMenuOption : Panel
 local DMenuOption = {}
 
 ---[CLIENT] Creates a sub DMenu and returns it. Has no duplicate call protection.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:AddSubMenu)
----@return Panel The created DMenu to add options to.
+---@return Panel #The created DMenu to add options to.
 function DMenuOption:AddSubMenu() end
 
 ---[CLIENT] Returns the checked state of DMenuOption.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:GetChecked)
----@return boolean Are we checked or not
+---@return boolean #Are we checked or not
 function DMenuOption:GetChecked() end
 
 ---[CLIENT] Returns whether the DMenuOption is a checkbox option or a normal button option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:GetIsCheckable)
----@return boolean
+---@return boolean #
 function DMenuOption:GetIsCheckable() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:GetMenu)
----@return Panel A DMenu
+---@return Panel #A DMenu
 function DMenuOption:GetMenu() end
 
 ---[CLIENT] Called whenever the DMenuOption's checked state changes.

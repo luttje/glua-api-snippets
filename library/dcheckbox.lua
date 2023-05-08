@@ -1,18 +1,18 @@
 ---@meta
 
----@class DCheckBox
+---@class DCheckBox : Panel
 local DCheckBox = {}
 
 ---[CLIENT] Gets the checked state of the checkbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:GetChecked)
----@return boolean Whether the box is checked or not.
+---@return boolean #Whether the box is checked or not.
 function DCheckBox:GetChecked() end
 
 ---[CLIENT] Returns whether the state of the checkbox is being edited. This means whether the user is currently clicking (mouse-down) on the checkbox, and applies to both the left and right mouse buttons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:IsEditing)
----@return boolean Whether the checkbox is being clicked.
+---@return boolean #Whether the checkbox is being clicked.
 function DCheckBox:IsEditing() end
 
 ---[CLIENT] Called when the "checked" state is changed.

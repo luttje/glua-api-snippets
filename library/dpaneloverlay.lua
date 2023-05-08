@@ -1,18 +1,18 @@
 ---@meta
 
----@class DPanelOverlay
+---@class DPanelOverlay : Panel
 local DPanelOverlay = {}
 
 ---[CLIENT] Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:GetColor)
----@return table The set color. Uses the Color.
+---@return table #The set color. Uses the Color.
 function DPanelOverlay:GetColor() end
 
 ---[CLIENT] Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:GetType)
----@return number The set type.
+---@return number #The set type.
 function DPanelOverlay:GetType() end
 
 ---[CLIENT] Used internally by the panel for type 3.

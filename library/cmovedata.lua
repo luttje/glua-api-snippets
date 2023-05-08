@@ -12,121 +12,121 @@ function CMoveData:AddKey(keys) end
 ---[SHARED] Gets the aim angle. Seems to be same as CMoveData:GetAngles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetAbsMoveAngles)
----@return Angle Aiming angle
+---@return Angle #Aiming angle
 function CMoveData:GetAbsMoveAngles() end
 
 ---[SHARED] Gets the aim angle. On client is the same as Entity:GetAngles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetAngles)
----@return Angle Aiming angle
+---@return Angle #Aiming angle
 function CMoveData:GetAngles() end
 
 ---[SHARED] Gets which buttons are down
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetButtons)
----@return number An integer representing which buttons are down, see Enums/IN
+---@return number #An integer representing which buttons are down, see Enums/IN
 function CMoveData:GetButtons() end
 
 ---[SHARED] Returns the center of the player movement constraint. See CMoveData:SetConstraintCenter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintCenter)
----@return Vector The constraint origin.
+---@return Vector #The constraint origin.
 function CMoveData:GetConstraintCenter() end
 
 ---[SHARED] Returns the radius that constrains the players movement. See CMoveData:SetConstraintRadius.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintRadius)
----@return number The constraint radius
+---@return number #The constraint radius
 function CMoveData:GetConstraintRadius() end
 
 ---[SHARED] Returns the player movement constraint speed scale. See CMoveData:SetConstraintSpeedScale.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintSpeedScale)
----@return number The constraint speed scale
+---@return number #The constraint speed scale
 function CMoveData:GetConstraintSpeedScale() end
 
 ---[SHARED] Returns the width (distance from the edge of the radius, inward) where the actual movement constraint functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintWidth)
----@return number The constraint width
+---@return number #The constraint width
 function CMoveData:GetConstraintWidth() end
 
 ---[SHARED] Returns an internal player movement variable `m_outWishVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalIdealVelocity)
----@return Vector
+---@return Vector #
 function CMoveData:GetFinalIdealVelocity() end
 
 ---[SHARED] Returns an internal player movement variable `m_outJumpVel`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalJumpVelocity)
----@return Vector
+---@return Vector #
 function CMoveData:GetFinalJumpVelocity() end
 
 ---[SHARED] Returns an internal player movement variable `m_outStepHeight`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetFinalStepHeight)
----@return number
+---@return number #
 function CMoveData:GetFinalStepHeight() end
 
 ---[SHARED] Returns the players forward speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetForwardSpeed)
----@return number speed
+---@return number #speed
 function CMoveData:GetForwardSpeed() end
 
 ---[SHARED] Gets the number passed to "impulse" console command
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetImpulseCommand)
----@return number The impulse
+---@return number #The impulse
 function CMoveData:GetImpulseCommand() end
 
 ---[SHARED] Returns the maximum client speed of the player
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetMaxClientSpeed)
----@return number The maximum client speed
+---@return number #The maximum client speed
 function CMoveData:GetMaxClientSpeed() end
 
 ---[SHARED] Returns the maximum speed of the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetMaxSpeed)
----@return number The maximum speed
+---@return number #The maximum speed
 function CMoveData:GetMaxSpeed() end
 
 ---[SHARED] Returns the angle the player is moving at. For more info, see CMoveData:SetMoveAngles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetMoveAngles)
----@return Angle The move direction
+---@return Angle #The move direction
 function CMoveData:GetMoveAngles() end
 
 ---[SHARED] Gets the aim angle. Only works clientside, server returns same as CMoveData:GetAngles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetOldAngles)
----@return Angle The aim angle
+---@return Angle #The aim angle
 function CMoveData:GetOldAngles() end
 
 ---[SHARED] Get which buttons were down last frame
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetOldButtons)
----@return number An integer representing which buttons were down, see Enums/IN
+---@return number #An integer representing which buttons were down, see Enums/IN
 function CMoveData:GetOldButtons() end
 
 ---[SHARED] Gets the player's position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetOrigin)
----@return Vector The player's position.
+---@return Vector #The player's position.
 function CMoveData:GetOrigin() end
 
 ---[SHARED] Returns the strafe speed of the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetSideSpeed)
----@return number speed
+---@return number #speed
 function CMoveData:GetSideSpeed() end
 
 ---[SHARED] Returns the vertical speed of the player. ( Z axis of CMoveData:GetVelocity )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetUpSpeed)
----@return number Vertical speed
+---@return number #Vertical speed
 function CMoveData:GetUpSpeed() end
 
 ---[SHARED] Gets the players velocity.
@@ -134,28 +134,28 @@ function CMoveData:GetUpSpeed() end
 --- This will return Vector(0,0,0) sometimes when walking on props.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetVelocity)
----@return Vector The players velocity
+---@return Vector #The players velocity
 function CMoveData:GetVelocity() end
 
 ---[SHARED] Returns whether the key is down or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyDown)
 ---@param key number The key to test, see Enums/IN
----@return boolean Is the key down or not
+---@return boolean #Is the key down or not
 function CMoveData:KeyDown(key) end
 
 ---[SHARED] Returns whether the key was pressed. If you want to check if the key is held down, try CMoveData:KeyDown
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyPressed)
 ---@param key number The key to test, see Enums/IN
----@return boolean Was the key pressed or not.
+---@return boolean #Was the key pressed or not.
 function CMoveData:KeyPressed(key) end
 
 ---[SHARED] Returns whether the key was released
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyReleased)
 ---@param key number A key to test, see Enums/IN
----@return boolean Was the key released or not.
+---@return boolean #Was the key released or not.
 function CMoveData:KeyReleased(key) end
 
 ---[SHARED] Returns whether the key was down or not.
@@ -167,7 +167,7 @@ function CMoveData:KeyReleased(key) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyWasDown)
 ---@param key number The key to test, see Enums/IN
----@return boolean Was the key down or not
+---@return boolean #Was the key down or not
 function CMoveData:KeyWasDown(key) end
 
 ---[SHARED] Sets absolute move angles.( ? ) Doesn't seem to do anything.

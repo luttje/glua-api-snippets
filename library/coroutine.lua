@@ -6,7 +6,7 @@ coroutine = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.create)
 ---@param func function The function for the coroutine to use.
----@return thread coroutine
+---@return thread #coroutine
 function coroutine.create(func) end
 
 ---[SHARED AND MENU] Returns whether the running coroutine can yield.
@@ -14,7 +14,7 @@ function coroutine.create(func) end
 --- 		This is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](jit.version)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.isyieldable)
----@return boolean Returns true when the running coroutine can yield.
+---@return boolean #Returns true when the running coroutine can yield.
 function coroutine.isyieldable() end
 
 ---[SHARED AND MENU] Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
@@ -22,21 +22,21 @@ function coroutine.isyieldable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.resume)
 ---@param coroutine thread Coroutine to resume.
 ---@param ... ... Arguments to be returned by coroutine.yield.
----@return boolean, ... boolean - If the executed thread code had no errors occur within it.
----@return boolean, ... ... - If an error occurred, this will be a string containing the error message. Otherwise, this will be arguments that were yielded.
+---@return boolean, ... #boolean - If the executed thread code had no errors occur within it.
+---@return boolean, ... #... - If an error occurred, this will be a string containing the error message. Otherwise, this will be arguments that were yielded.
 function coroutine.resume(coroutine, ...) end
 
 ---[SHARED AND MENU] Returns the active coroutine or nil if we are not within a coroutine.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.running)
----@return thread coroutine
+---@return thread #coroutine
 function coroutine.running() end
 
 ---[SHARED AND MENU] Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead".
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.status)
 ---@param coroutine thread Coroutine to check the status of.
----@return string status
+---@return string #status
 function coroutine.status(coroutine) end
 
 ---[SHARED] Repeatedly yields the coroutine for the given duration before continuing.
@@ -55,12 +55,12 @@ function coroutine.wait(duration) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.wrap)
 ---@param coroutine function Coroutine to resume.
----@return function func
+---@return function #func
 function coroutine.wrap(coroutine) end
 
 ---[SHARED AND MENU] Pauses the active coroutine and passes all additional variables to the call of coroutine.resume that resumed the coroutine last time, and returns all additional variables that were passed to the previous call of resume.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.yield)
 ---@param ... ... Arguments to be returned by the last call of coroutine.resume.
----@return ... Arguments that were set previously by coroutine.resume.
+---@return ... #Arguments that were set previously by coroutine.resume.
 function coroutine.yield(...) end

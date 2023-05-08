@@ -1,12 +1,12 @@
 ---@meta
 
----@class DImageButton
+---@class DImageButton : Panel
 local DImageButton = {}
 
 ---[CLIENT] Returns the "image" of the DImageButton. Equivalent of DImage:GetImage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:GetImage)
----@return string The path to the image that is loaded.
+---@return string #The path to the image that is loaded.
 function DImageButton:GetImage() end
 
 ---[CLIENT] Returns whether the image inside the button should be stretched to fit it or not
@@ -14,7 +14,7 @@ function DImageButton:GetImage() end
 --- See DImageButton:SetStretchToFit
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:GetStretchToFit)
----@return boolean
+---@return boolean #
 function DImageButton:GetStretchToFit() end
 
 ---[CLIENT] Sets the color of the image. Equivalent of DImage:SetImageColor

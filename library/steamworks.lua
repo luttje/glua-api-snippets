@@ -65,14 +65,14 @@ function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resul
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.GetPlayerName)
 ---@param steamID64 string The 64bit Steam ID ( aka Community ID ) of the player
----@return string The name of that player
+---@return string #The name of that player
 function steamworks.GetPlayerName(steamID64) end
 
 ---[CLIENT AND MENU] Returns whenever the client is subscribed to the specified Steam Workshop item.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.IsSubscribed)
 ---@param workshopItemID string The ID of the Steam Workshop item.
----@return boolean Is the client subscribed to the addon or not.
+---@return boolean #Is the client subscribed to the addon or not.
 function steamworks.IsSubscribed(workshopItemID) end
 
 ---[CLIENT AND MENU] Opens the workshop website in the steam overlay browser.
@@ -101,14 +101,14 @@ function steamworks.RequestPlayerInfo(steamID64, callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFileCompleted)
 ---@param workshopid string The Steam Workshop item id
----@return string Whatever you have put in as first argument
+---@return string #Whatever you have put in as first argument
 function steamworks.SetFileCompleted(workshopid) end
 
 ---[MENU] Sets whether you have played this addon or not. This will be shown to the user in the Steam Workshop itself:
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFilePlayed)
 ---@param workshopid string The Steam Workshop item ID
----@return string Whatever you have put in as first argument
+---@return string #Whatever you have put in as first argument
 function steamworks.SetFilePlayed(workshopid) end
 
 ---[MENU] Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update.
@@ -122,7 +122,7 @@ function steamworks.SetShouldMountAddon(workshopItemID, shouldMount) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ShouldMountAddon)
 ---@param workshopItemID string The ID of the Steam Workshop
----@return boolean Will the workshop item be mounted or not
+---@return boolean #Will the workshop item be mounted or not
 function steamworks.ShouldMountAddon(workshopItemID) end
 
 ---[MENU] Subscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.

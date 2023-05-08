@@ -1,6 +1,6 @@
 ---@meta
 
----@class DHorizontalScroller
+---@class DHorizontalScroller : Panel
 local DHorizontalScroller = {}
 
 ---[CLIENT] Adds a panel to the DHorizontalScroller.
@@ -12,19 +12,19 @@ function DHorizontalScroller:AddPanel(pnl) end
 ---[CLIENT] Returns the internal canvas panel where the content of DHorizontalScroller are placed on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetCanvas)
----@return Panel The DDragBase panel.
+---@return Panel #The DDragBase panel.
 function DHorizontalScroller:GetCanvas() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetOverlap)
----@return number
+---@return number #
 function DHorizontalScroller:GetOverlap() end
 
 ---[CLIENT] No Description
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetShowDropTargets)
----@return boolean
+---@return boolean #
 function DHorizontalScroller:GetShowDropTargets() end
 
 ---[CLIENT] Same as DDragBase:MakeDroppable.

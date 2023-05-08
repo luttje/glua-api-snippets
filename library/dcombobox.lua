@@ -1,18 +1,18 @@
 ---@meta
 
----@class DComboBox
+---@class DComboBox : Panel
 local DComboBox = {}
 
 ---[CLIENT] Adds a choice to the combo box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:AddChoice)
 ---@param value string The text show to the user.
----@param data any The data accompanying this string. If left empty, the value argument is used instead.
+---@param data? any The data accompanying this string. If left empty, the value argument is used instead.
 ---
 --- Can be accessed with the second argument of DComboBox:GetSelected, DComboBox:GetOptionData and as an argument of DComboBox:OnSelect.
----@param select boolean Should this be the default selected text show to the user or not.
----@param icon string Adds an icon for this choice.
----@return number The index of the new option.
+---@param select? boolean Should this be the default selected text show to the user or not.
+---@param icon? string Adds an icon for this choice.
+---@return number #The index of the new option.
 function DComboBox:AddChoice(value, data, select, icon) end
 
 ---[CLIENT] Adds a spacer below the currently last item in the drop down. Recommended to use with DComboBox:SetSortItems set to `false`.
@@ -47,14 +47,14 @@ function DComboBox:CloseMenu() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionData)
 ---@param index number The option index.
----@return any The option's data value.
+---@return any #The option's data value.
 function DComboBox:GetOptionData(index) end
 
 ---[CLIENT] Returns an option's text based on the given index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionText)
 ---@param index number The option index.
----@return string The option's text value.
+---@return string #The option's text value.
 function DComboBox:GetOptionText(index) end
 
 ---[CLIENT] Returns an option's text based on the given data.
@@ -63,20 +63,20 @@ function DComboBox:GetOptionText(index) end
 ---@param data string The data to look up the name of.
 ---
 --- If given a number and no matching data was found, the function will test given data against each Global.tonumber'd data entry.
----@return string The option's text value.  If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
+---@return string #The option's text value.  If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
 function DComboBox:GetOptionTextByData(data) end
 
 ---[CLIENT] Returns the currently selected option's text and data
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSelected)
----@return string, any string - The option's text value.
----@return string, any any - The option's stored data.
+---@return string, any #string - The option's text value.
+---@return string, any #any - The option's stored data.
 function DComboBox:GetSelected() end
 
 ---[CLIENT] Returns the index (ID) of the currently selected option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSelectedID)
----@return number The ID of the currently selected option.
+---@return number #The ID of the currently selected option.
 function DComboBox:GetSelectedID() end
 
 ---[CLIENT] Returns an whether the items in the dropdown will be alphabetically sorted or not.
@@ -84,13 +84,13 @@ function DComboBox:GetSelectedID() end
 --- See DComboBox:SetSortItems.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSortItems)
----@return boolean True if enabled, false otherwise.
+---@return boolean #True if enabled, false otherwise.
 function DComboBox:GetSortItems() end
 
 ---[CLIENT] Returns whether or not the combo box's menu is opened.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:IsMenuOpen)
----@return boolean True if the menu is open, false otherwise.
+---@return boolean #True if the menu is open, false otherwise.
 function DComboBox:IsMenuOpen() end
 
 ---[CLIENT] Opens the combo box drop down menu. Called when the combo box is clicked.

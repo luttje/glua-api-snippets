@@ -1,12 +1,12 @@
 ---@meta
 
----@class DKillIcon
+---@class DKillIcon : Panel
 local DKillIcon = {}
 
 ---[CLIENT] Gets the killicon being shown.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DKillIcon:GetName)
----@return string The name of the killicon currently being displayed.
+---@return string #The name of the killicon currently being displayed.
 function DKillIcon:GetName() end
 
 ---[CLIENT] Sets the killicon to be displayed. You should call Panel:SizeToContents following this.

@@ -15,13 +15,13 @@ concommand = {}
 --- * string cmd - The concommand string (if one callback is used for several concommands).
 --- * table args - A table of all string arguments.
 --- * string argStr - The arguments as a string.
----@param autoComplete function The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
+---@param autoComplete? function The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
 ---
 --- This only properly works on the client since it is **not** networked. Arguments passed are:
 --- * string cmd - The concommand this autocompletion is for.
 --- * string args - The arguments typed so far.
----@param helpText string The text to display should a user run 'help cmdName'.
----@param flags number Concommand modifier flags. See Enums/FCVAR.
+---@param helpText? string The text to display should a user run 'help cmdName'.
+---@param flags? number Concommand modifier flags. See Enums/FCVAR.
 function concommand.Add(name, callback, autoComplete, helpText, flags) end
 
 ---[SHARED AND MENU] Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
@@ -29,14 +29,14 @@ function concommand.Add(name, callback, autoComplete, helpText, flags) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
 ---@param command string Name of command
 ---@param arguments string Arguments given to the command
----@return table Possibilities for auto-completion. This is the return value of the auto-complete callback.
+---@return table #Possibilities for auto-completion. This is the return value of the auto-complete callback.
 function concommand.AutoComplete(command, arguments) end
 
 ---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
----@return table, table table - Table of command callback functions.
----@return table, table table - Table of command autocomplete functions.
+---@return table, table #table - Table of command callback functions.
+---@return table, table #table - Table of command autocomplete functions.
 function concommand.GetTable() end
 
 ---[SHARED AND MENU] Removes a console command.
@@ -60,5 +60,5 @@ function concommand.Remove(name) end
 ---@param args any Command arguments.
 --- Can be table or string
 ---@param argumentString string string of all arguments sent to the command
----@return boolean `true` if the console command with the given name exists, and `false` if it doesn't.
+---@return boolean #`true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end

@@ -21,7 +21,7 @@ local Panel = {}
 ---@param object Panel The panel to be added (parented). Can also be:
 --- * string Class Name - creates panel with the specified name and adds it to the panel.
 --- * table PANEL table - creates a panel from table and adds it to the panel.
----@return Panel New panel
+---@return Panel #New panel
 function Panel:Add(object) end
 
 ---[CLIENT] Does nothing
@@ -33,25 +33,25 @@ function Panel:AddText() end
 ---[CLIENT] Aligns the panel on the bottom of its parent with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AlignBottom)
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:AlignBottom(offset) end
 
 ---[CLIENT] Aligns the panel on the left of its parent with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AlignLeft)
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:AlignLeft(offset) end
 
 ---[CLIENT] Aligns the panel on the right of its parent with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AlignRight)
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:AlignRight(offset) end
 
 ---[CLIENT] Aligns the panel on the top of its parent with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AlignTop)
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:AlignTop(offset) end
 
 ---[CLIENT] Uses animation to transition the current alpha value of a panel to a new alpha, over a set period of time and after a specified delay.
@@ -59,8 +59,8 @@ function Panel:AlignTop(offset) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AlphaTo)
 ---@param alpha number The alpha value (0-255) to approach.
 ---@param duration number The time in seconds it should take to reach the alpha.
----@param delay number The delay before the animation starts.
----@param callback function The function to be called once the animation finishes. Arguments are:
+---@param delay? number The delay before the animation starts.
+---@param callback? function The function to be called once the animation finishes. Arguments are:
 --- * table animData - The AnimationData that was used. See Structures/AnimationData
 --- * Panel pnl - The panel object whose alpha was changed.
 function Panel:AlphaTo(alpha, duration, delay, callback) end
@@ -84,7 +84,7 @@ function Panel:AnimationThinkInternal() end
 ---[CLIENT] Returns the Global.SysTime value when all animations for this panel object will end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AnimTail)
----@return number The system time value when all animations will end for this panel.
+---@return number #The system time value when all animations will end for this panel.
 function Panel:AnimTail() end
 
 ---[CLIENT] Appends text to a RichText element. This does not automatically add a new line.
@@ -116,26 +116,26 @@ function Panel:Center() end
 ---[CLIENT] Centers the panel horizontally with specified fraction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:CenterHorizontal)
----@param fraction number The center fraction.
+---@param fraction? number The center fraction.
 function Panel:CenterHorizontal(fraction) end
 
 ---[CLIENT] Centers the panel vertically with specified fraction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:CenterVertical)
----@param fraction number The center fraction.
+---@param fraction? number The center fraction.
 function Panel:CenterVertical(fraction) end
 
 ---[CLIENT] Returns the amount of children of the of panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:ChildCount)
----@return number The amount of children the panel has.
+---@return number #The amount of children the panel has.
 function Panel:ChildCount() end
 
 ---[CLIENT] Returns the width and height of the space between the position of the panel (upper-left corner) and the max bound of the children panels (farthest reaching lower-right corner).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:ChildrenSize)
----@return number, number number - The children size width.
----@return number, number number - The children size height.
+---@return number, number #number - The children size width.
+---@return number, number #number - The children size height.
 function Panel:ChildrenSize() end
 
 ---[CLIENT] Marks all of the panel's children for deletion.
@@ -230,8 +230,8 @@ function Panel:CopyWidth(base) end
 --- ie. inaccurate results may be returned if the panel or any of its ancestors have been repositioned outside of PANEL:Think or PANEL:PerformLayout within the last frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:CursorPos)
----@return number, number number - X coordinate of the cursor, relative to the top left of the panel.
----@return number, number number - Y coordinate of the cursor, relative to the top left of the panel.
+---@return number, number #number - X coordinate of the cursor, relative to the top left of the panel.
+---@return number, number #number - Y coordinate of the cursor, relative to the top left of the panel.
 function Panel:CursorPos() end
 
 ---[CLIENT] Performs the CONTROL + X (delete text and copy it to clipboard buffer) action on selected text in a TextEntry or RichText based element.
@@ -256,7 +256,7 @@ function Panel:DisableLerp() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Distance)
 ---@param tgtPanel Panel The target object with which to compare position.
----@return number The linear (straight-line) distance between the center of the two objects.
+---@return number #The linear (straight-line) distance between the center of the two objects.
 function Panel:Distance(tgtPanel) end
 
 ---[CLIENT] Returns the distance between the center of this panel object and a specified point **local to the parent panel**.
@@ -264,7 +264,7 @@ function Panel:Distance(tgtPanel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:DistanceFrom)
 ---@param posX number The horizontal (x) position in pixels of the point to compare with. Local to the parent panel, or container, not the panel the function is called on.
 ---@param posY number The vertical (y) position in pixels of the point to compare with. Local to the parent panel, or container, not the panel the function is called on.
----@return number The linear (straight-line) distance between the specified point local to parent panel and the center of this panel object.
+---@return number #The linear (straight-line) distance between the specified point local to parent panel and the center of this panel object.
 function Panel:DistanceFrom(posX, posY) end
 
 ---[CLIENT] Sets the dock type for the panel, making the panel "dock" in a certain direction, modifying it's position and size.
@@ -313,7 +313,7 @@ function Panel:DoModal() end
 ---[CLIENT] Called by Panel:DragMouseRelease when a user clicks one mouse button whilst dragging with another.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:DragClick)
----@return boolean Always returns `true`.
+---@return boolean #Always returns `true`.
 function Panel:DragClick() end
 
 ---[CLIENT] Called by dragndrop.HoverThink to perform actions on an object that is dragged and hovered over another.
@@ -345,7 +345,7 @@ function Panel:DragMousePress(mouseCode) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:DragMouseRelease)
 ---@param mouseCode number The code for the mouse button pressed, passed by, for example, PANEL:OnMouseReleased. See the Enums/MOUSE.
----@return boolean `true` if an object was being dragged, otherwise `false`.
+---@return boolean #`true` if an object was being dragged, otherwise `false`.
 function Panel:DragMouseRelease(mouseCode) end
 
 ---[CLIENT] Called to draw the drop target when an object is being dragged across another. See Panel:SetDropTarget.
@@ -392,7 +392,7 @@ function Panel:DrawTexturedRect() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Droppable)
 ---@param name string Name of your droppable panel
----@return table Blank table stored on the panel itself under pnl.m_DragSlot[ name ]. Is reset every time this function is called and does not appear to be used or exposed anywhere else.
+---@return table #Blank table stored on the panel itself under pnl.m_DragSlot[ name ]. Is reset every time this function is called and does not appear to be used or exposed anywhere else.
 function Panel:Droppable(name) end
 
 ---[CLIENT] Called when this panel is dropped onto another panel.
@@ -406,7 +406,7 @@ function PANEL:DroppedOn(pnl) end
 ---[CLIENT] Completes a box selection. If the end point of the selection box is within the selection canvas, mouse capture is disabled for the panel object, and the selected state of each child object within the selection box is toggled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:EndBoxSelection)
----@return boolean Whether the end point of the selection box was within the selection canvas.
+---@return boolean #Whether the end point of the selection box was within the selection canvas.
 function Panel:EndBoxSelection() end
 
 ---[CLIENT] Used to run commands within a DHTML window.
@@ -419,7 +419,7 @@ function Panel:Exec(cmd) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Find)
 ---@param panelName string The name of the panel that should be found.
----@return Panel foundPanel
+---@return Panel #foundPanel
 function Panel:Find(panelName) end
 
 ---[CLIENT] Focuses the next panel in the focus queue.
@@ -444,7 +444,7 @@ function PANEL:GenerateExample(class, dpropertysheet, width, height) end
 ---[CLIENT] Returns the alpha multiplier for this panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetAlpha)
----@return number alphaMul
+---@return number #alphaMul
 function Panel:GetAlpha() end
 
 ---[CLIENT] Returns the background color of a panel such as a RichText, Label or DColorCube.
@@ -452,7 +452,7 @@ function Panel:GetAlpha() end
 --- This doesn't apply to all VGUI elements and its function varies between them
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetBGColor)
----@return number The Color structure
+---@return number #The Color structure
 function Panel:GetBGColor() end
 
 ---[CLIENT] Returns the position and size of the panel.
@@ -460,16 +460,16 @@ function Panel:GetBGColor() end
 --- This is equivalent to calling Panel:GetPos and Panel:GetSize together.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetBounds)
----@return number, number, number, number number - The x coordinate of the panel, relative to its parent's top left.
----@return number, number, number, number number - The y coordinate of the panel, relative to its parent's top left.
----@return number, number, number, number number - The width of the panel.
----@return number, number, number, number number - The height of the panel.
+---@return number, number, number, number #number - The x coordinate of the panel, relative to its parent's top left.
+---@return number, number, number, number #number - The y coordinate of the panel, relative to its parent's top left.
+---@return number, number, number, number #number - The width of the panel.
+---@return number, number, number, number #number - The height of the panel.
 function Panel:GetBounds() end
 
 ---[CLIENT] Returns the position/offset of the caret (or text cursor) in a text-based panel object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetCaretPos)
----@return number The caret position/offset from the start of the text. A value of `0` means the caret sits before the first character.
+---@return number #The caret position/offset from the start of the text. A value of `0` means the caret sits before the first character.
 function Panel:GetCaretPos() end
 
 ---[CLIENT] Gets a child by its index. For use with Panel:ChildCount.
@@ -484,14 +484,14 @@ function Panel:GetChild(childIndex) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetChildPosition)
 ---@param pnl Panel The panel to get the position of.
----@return number, number number - The horizontal (x) position of the child relative to this panel object.
----@return number, number number - The vertical (y) position of the child relative to this panel object.
+---@return number, number #number - The horizontal (x) position of the child relative to this panel object.
+---@return number, number #number - The vertical (y) position of the child relative to this panel object.
 function Panel:GetChildPosition(pnl) end
 
 ---[CLIENT] Returns a table with all the child panels of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetChildren)
----@return table All direct children of this panel.
+---@return table #All direct children of this panel.
 function Panel:GetChildren() end
 
 ---[CLIENT] Returns a table of all visible, selectable children of the panel object that lie at least partially within the specified rectangle.
@@ -501,13 +501,13 @@ function Panel:GetChildren() end
 ---@param y number The vertical (y) position of the top-left corner of the rectangle, relative to the panel object.
 ---@param w number The width of the rectangle.
 ---@param h number The height of the rectangle.
----@return table A table of panel objects that lie at least partially within the specified rectangle.
+---@return table #A table of panel objects that lie at least partially within the specified rectangle.
 function Panel:GetChildrenInRect(x, y, w, h) end
 
 ---[CLIENT] Returns the class name of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetClassName)
----@return string className
+---@return string #className
 function Panel:GetClassName() end
 
 ---[CLIENT] Returns the child of this panel object that is closest to the specified point. The point is relative to the object on which the method is called. The distance the child is from this point is also returned.
@@ -515,8 +515,8 @@ function Panel:GetClassName() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetClosestChild)
 ---@param x number The horizontal (x) position of the point.
 ---@param y number The vertical (y) position of the point.
----@return Panel, number Panel - The child object that was closest to the specified point.
----@return Panel, number number - The distance that this child was from the point.
+---@return Panel, number #Panel - The child object that was closest to the specified point.
+---@return Panel, number #number - The distance that this child was from the point.
 function Panel:GetClosestChild(x, y) end
 
 ---[CLIENT] Gets the size of the content/children within a panel object.
@@ -527,8 +527,8 @@ function Panel:GetClosestChild(x, y) end
 --- Will also work on any panel that manually implements this method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetContentSize)
----@return number, number number - The content width of the object.
----@return number, number number - The content height of the object.
+---@return number, number #number - The content width of the object.
+---@return number, number #number - The content height of the object.
 function Panel:GetContentSize() end
 
 ---[CLIENT] Gets the value of a cookie stored by the panel object. This can also be done with cookie.GetString, using the panel's cookie name, a fullstop, and then the actual name of the cookie.
@@ -538,13 +538,13 @@ function Panel:GetContentSize() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetCookie)
 ---@param cookieName string The name of the cookie from which to retrieve the value.
 ---@param default string The default value to return if the cookie does not exist.
----@return string The value of the stored cookie, or the default value should the cookie not exist.
+---@return string #The value of the stored cookie, or the default value should the cookie not exist.
 function Panel:GetCookie(cookieName, default) end
 
 ---[CLIENT] Gets the name the panel uses to store cookies. This is set with Panel:SetCookieName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetCookieName)
----@return string The name the panel uses when reading or writing cookies. The format used is as follows:  ``` panelCookieName.individualCookieName ```
+---@return string #The name the panel uses when reading or writing cookies. The format used is as follows:  ``` panelCookieName.individualCookieName ```
 function Panel:GetCookieName() end
 
 ---[CLIENT] Gets the value of a cookie stored by the panel object, as a number. This can also be done with cookie.GetNumber, using the panel's cookie name, a fullstop, and then the actual name of the cookie.
@@ -554,31 +554,31 @@ function Panel:GetCookieName() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetCookieNumber)
 ---@param cookieName string The name of the cookie from which to retrieve the value.
 ---@param default number The default value to return if the cookie does not exist.
----@return number The number value of the stored cookie, or the default value should the cookie not exist.
+---@return number #The number value of the stored cookie, or the default value should the cookie not exist.
 function Panel:GetCookieNumber(cookieName, default) end
 
 ---[CLIENT] Returns a dock enum for the panel's current docking type.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetDock)
----@return number The dock enum for the panel. See Enums/DOCK.
+---@return number #The dock enum for the panel. See Enums/DOCK.
 function Panel:GetDock() end
 
 ---[CLIENT] Returns the docked margins of the panel. (set by Panel:DockMargin)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetDockMargin)
----@return number, number, number, number number - Left margin.
----@return number, number, number, number number - Top margin.
----@return number, number, number, number number - Right margin.
----@return number, number, number, number number - Bottom margin.
+---@return number, number, number, number #number - Left margin.
+---@return number, number, number, number #number - Top margin.
+---@return number, number, number, number #number - Right margin.
+---@return number, number, number, number #number - Bottom margin.
 function Panel:GetDockMargin() end
 
 ---[CLIENT] Returns the docked padding of the panel. (set by Panel:DockPadding)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetDockPadding)
----@return number, number, number, number number - Left padding.
----@return number, number, number, number number - Top padding.
----@return number, number, number, number number - Right padding.
----@return number, number, number, number number - Bottom padding.
+---@return number, number, number, number #number - Left padding.
+---@return number, number, number, number #number - Top padding.
+---@return number, number, number, number #number - Right padding.
+---@return number, number, number, number #number - Bottom padding.
 function Panel:GetDockPadding() end
 
 ---[CLIENT] Returns the foreground color of the panel.
@@ -588,7 +588,7 @@ function Panel:GetDockPadding() end
 --- This doesn't apply to all VGUI elements (such as DLabel) and its function varies between them
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetFGColor)
----@return table A color structure. See Color
+---@return table #A color structure. See Color
 function Panel:GetFGColor() end
 
 ---[CLIENT] Returns the name of the font that the panel renders its text with.
@@ -596,13 +596,13 @@ function Panel:GetFGColor() end
 --- This is the same font name set with Panel:SetFontInternal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetFont)
----@return string fontName
+---@return string #fontName
 function Panel:GetFont() end
 
 ---[CLIENT] Returns the panel's HTML material. Only works with Awesomium, HTML and DHTML panels that have been fully loaded.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetHTMLMaterial)
----@return IMaterial The HTML material used by the panel. Typically starts with "__vgui_texture_" followed by an incremental number.
+---@return IMaterial #The HTML material used by the panel. Typically starts with "__vgui_texture_" followed by an incremental number.
 function Panel:GetHTMLMaterial() end
 
 ---[CLIENT] Returns the current maximum character count.
@@ -610,13 +610,13 @@ function Panel:GetHTMLMaterial() end
 --- This function will only work on RichText and TextEntry panels and their derivatives.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetMaximumCharCount)
----@return number The maximum amount of characters this panel is allowed to contain.
+---@return number #The maximum amount of characters this panel is allowed to contain.
 function Panel:GetMaximumCharCount() end
 
 ---[CLIENT] Returns the internal name of the panel. Can be set via Panel:SetName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetName)
----@return string The previously set internal name of the panel.
+---@return string #The previously set internal name of the panel.
 function Panel:GetName() end
 
 ---[CLIENT] Returns the number of lines in a RichText. You must wait a couple frames before calling this after using Panel:AppendText or Panel:SetText, otherwise it will return the number of text lines before the text change.
@@ -624,13 +624,13 @@ function Panel:GetName() end
 --- Even though this function can be called on any panel, it will only work with RichText
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetNumLines)
----@return number The number of lines.
+---@return number #The number of lines.
 function Panel:GetNumLines() end
 
 ---[CLIENT] Returns the parent of the panel, returns nil if there is no parent.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetParent)
----@return Panel The parent of given panel
+---@return Panel #The parent of given panel
 function Panel:GetParent() end
 
 ---[CLIENT] Returns the position of the panel relative to its Panel:GetParent.
@@ -642,14 +642,14 @@ function Panel:GetParent() end
 --- See also Panel:GetX and Panel:GetY.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetPos)
----@return number, number number - X coordinate, relative to this panels parents top left corner.
----@return number, number number - Y coordinate, relative to this panels parents top left corner.
+---@return number, number #number - X coordinate, relative to this panels parents top left corner.
+---@return number, number #number - Y coordinate, relative to this panels parents top left corner.
 function Panel:GetPos() end
 
 ---[CLIENT] Returns a table of all children of the panel object that are selected. This is recursive, and the returned table will include tables for any child objects that also have children. This means that not all first-level members in the returned table will be of type Panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetSelectedChildren)
----@return table A table of any child objects that are selected, including tables for children of the child objects (These tables may also contain table members, as the method is recursive).
+---@return table #A table of any child objects that are selected, including tables for children of the child objects (These tables may also contain table members, as the method is recursive).
 function Panel:GetSelectedChildren() end
 
 ---[CLIENT] Returns the currently selected range of text.
@@ -657,14 +657,14 @@ function Panel:GetSelectedChildren() end
 --- This function will only work on RichText and TextEntry panels and their derivatives.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetSelectedTextRange)
----@return number, number number - The start of the range. If no text is selected it may be 0 and/or equal to the end range.
----@return number, number number - The end of the range. If no text is selected it may be 0 and/or equal to the start range.
+---@return number, number #number - The start of the range. If no text is selected it may be 0 and/or equal to the end range.
+---@return number, number #number - The end of the range. If no text is selected it may be 0 and/or equal to the start range.
 function Panel:GetSelectedTextRange() end
 
 ---[CLIENT] Returns the panel object (`self`) if it has been enabled as a selection canvas. This is achieved using Panel:SetSelectionCanvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetSelectionCanvas)
----@return Panel The panel object this method was called on if enabled as a selection canvas, otherwise `nil`.
+---@return Panel #The panel object this method was called on if enabled as a selection canvas, otherwise `nil`.
 function Panel:GetSelectionCanvas() end
 
 ---[CLIENT] Returns the size of the panel.
@@ -672,20 +672,20 @@ function Panel:GetSelectionCanvas() end
 --- If you require both the panel's position and size, consider using Panel:GetBounds instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetSize)
----@return number, number number - width
----@return number, number number - height
+---@return number, number #number - width
+---@return number, number #number - height
 function Panel:GetSize() end
 
 ---[CLIENT] Returns the table for the derma skin currently being used by this panel object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetSkin)
----@return table The derma skin table currently being used by this object.
+---@return table #The derma skin table currently being used by this object.
 function Panel:GetSkin() end
 
 ---[CLIENT] Returns the internal Lua table of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTable)
----@return table A table containing all the members of given panel object.
+---@return table #A table containing all the members of given panel object.
 function Panel:GetTable() end
 
 ---[CLIENT] Returns the height of the panel.
@@ -693,7 +693,7 @@ function Panel:GetTable() end
 --- See Panel:GetWide for the width of the panel. See also Panel:GetSize for a function that returns both.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTall)
----@return number height
+---@return number #height
 function Panel:GetTall() end
 
 ---[CLIENT] Returns the panel's text (where applicable).
@@ -701,27 +701,27 @@ function Panel:GetTall() end
 --- This method returns a maximum of 1023 bytes, except for DTextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetText)
----@return string The panel's text.
+---@return string #The panel's text.
 function Panel:GetText() end
 
 ---[CLIENT] Gets the left and top text margins of a text-based panel object, such as a DButton or DLabel. This is set with Panel:SetTextInset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTextInset)
----@return number, number number - The left margin of the text, in pixels.
----@return number, number number - The top margin of the text, in pixels.
+---@return number, number #number - The left margin of the text, in pixels.
+---@return number, number #number - The top margin of the text, in pixels.
 function Panel:GetTextInset() end
 
 ---[CLIENT] Gets the size of the text within a Label derived panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTextSize)
----@return number, number number - The width of the text in the DLabel.
----@return number, number number - The height of the text in the DLabel.
+---@return number, number #number - The width of the text in the DLabel.
+---@return number, number #number - The height of the text in the DLabel.
 function Panel:GetTextSize() end
 
 ---[CLIENT] Returns the tooltip text that was set with PANEL:SetTooltip.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTooltip)
----@return string The tooltip text, if it was set.
+---@return string #The tooltip text, if it was set.
 function Panel:GetTooltip() end
 
 ---[CLIENT] Returns the tooltip delay (time between hovering over the panel, and the tooltip showing up) that was set with Panel:SetTooltipDelay, or nothing if it was not set.
@@ -729,20 +729,20 @@ function Panel:GetTooltip() end
 --- If the delay is not explicitly set by this function, it will fallback to the value of the `tooltip_delay` ConVar, which is `0.5` by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTooltipDelay)
----@return number The tooltip delay in seconds, if it was set.
+---@return number #The tooltip delay in seconds, if it was set.
 function Panel:GetTooltipDelay() end
 
 ---[CLIENT] Returns the tooltip panel that was set with PANEL:SetTooltipPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetTooltipPanel)
----@return Panel The tooltip panel, if it was set.
+---@return Panel #The tooltip panel, if it was set.
 function Panel:GetTooltipPanel() end
 
 ---[CLIENT] Gets valid receiver slot of currently dragged panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetValidReceiverSlot)
----@return Panel, table Panel - The panel this was called on if a valid receiver slot exists, otherwise false.
----@return Panel, table table - The slot table.
+---@return Panel, table #Panel - The panel this was called on if a valid receiver slot exists, otherwise false.
+---@return Panel, table #table - The slot table.
 function Panel:GetValidReceiverSlot() end
 
 ---[CLIENT] Returns the value the panel holds.
@@ -752,7 +752,7 @@ function Panel:GetValidReceiverSlot() end
 --- This function is limited to 8092 Bytes. If using DTextEntry, use Panel:GetText for unlimited bytes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetValue)
----@return any The value the panel holds.
+---@return any #The value the panel holds.
 function Panel:GetValue() end
 
 ---[CLIENT] Returns the width of the panel.
@@ -760,7 +760,7 @@ function Panel:GetValue() end
 --- See Panel:GetTall for the height of the panel. See also Panel:GetSize for a function that returns both.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetWide)
----@return number width
+---@return number #width
 function Panel:GetWide() end
 
 ---[CLIENT] Returns the X position of the panel relative to its Panel:GetParent.
@@ -768,7 +768,7 @@ function Panel:GetWide() end
 --- Uses Panel:GetPos internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetX)
----@return number X coordinate.
+---@return number #X coordinate.
 function Panel:GetX() end
 
 ---[CLIENT] Returns the Y position of the panel relative to its Panel:GetParent.
@@ -776,13 +776,13 @@ function Panel:GetX() end
 --- Uses Panel:GetPos internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetY)
----@return number Y coordinate.
+---@return number #Y coordinate.
 function Panel:GetY() end
 
 ---[CLIENT] Returns the Z position of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetZPos)
----@return number The Z order position of the panel.
+---@return number #The Z order position of the panel.
 function Panel:GetZPos() end
 
 ---[CLIENT] Goes back one page in the HTML panel's history if available.
@@ -892,26 +892,26 @@ function Panel:GWEN_SetText(txt) end
 ---[CLIENT] Returns whenever the panel has child panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:HasChildren)
----@return boolean hasChilds
+---@return boolean #hasChilds
 function Panel:HasChildren() end
 
 ---[CLIENT] Returns if the panel is focused.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:HasFocus)
----@return boolean hasFocus
+---@return boolean #hasFocus
 function Panel:HasFocus() end
 
 ---[CLIENT] Returns if the panel or any of its children(sub children and so on) has the focus.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:HasHierarchicalFocus)
----@return boolean hasHierarchicalFocus
+---@return boolean #hasHierarchicalFocus
 function Panel:HasHierarchicalFocus() end
 
 ---[CLIENT] Returns whether the panel is a descendent of the given panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:HasParent)
 ---@param parentPanel Panel
----@return boolean True if the panel is contained within parentPanel.
+---@return boolean #True if the panel is contained within parentPanel.
 function Panel:HasParent(parentPanel) end
 
 ---[CLIENT] Makes a panel invisible.
@@ -966,7 +966,7 @@ function Panel:InsertFade(sustain, length) end
 ---[CLIENT] Invalidates the layout of this panel object and all its children. This will cause these objects to re-layout immediately, calling PANEL:PerformLayout. If you want to perform the layout in the next frame, you will have loop manually through all children, and call Panel:InvalidateLayout on each.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:InvalidateChildren)
----@param recursive boolean If `true`, the method will recursively invalidate the layout of all children. Otherwise, only immediate children are affected.
+---@param recursive? boolean If `true`, the method will recursively invalidate the layout of all children. Otherwise, only immediate children are affected.
 function Panel:InvalidateChildren(recursive) end
 
 ---[CLIENT] Causes the panel to re-layout in the next frame. During the layout process  PANEL:PerformLayout will be called on the target panel.
@@ -976,7 +976,7 @@ function Panel:InvalidateChildren(recursive) end
 --- Using this on a panel after clicking on a docked element will cause docked elements to reorient themselves incorrectly. This can be fixed by assigning a unique Panel:SetZPos to each docked element.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout)
----@param layoutNow boolean If true the panel will re-layout instantly and not wait for the next frame.
+---@param layoutNow? boolean If true the panel will re-layout instantly and not wait for the next frame.
 function Panel:InvalidateLayout(layoutNow) end
 
 ---[CLIENT] Calls Panel:InvalidateLayout on the panel's Panel:GetParent. This function will silently fail if the panel has no parent.
@@ -986,26 +986,26 @@ function Panel:InvalidateLayout(layoutNow) end
 --- Internally sets `LayingOutParent` to `true` on this panel, and will silently fail if it is already set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:InvalidateParent)
----@param layoutNow boolean If `true`, the re-layout will occur immediately, otherwise it will be performed in the next frame.
+---@param layoutNow? boolean If `true`, the re-layout will occur immediately, otherwise it will be performed in the next frame.
 function Panel:InvalidateParent(layoutNow) end
 
 ---[CLIENT] Determines whether the mouse cursor is hovered over one of this panel object's children. This is a reverse process using vgui.GetHoveredPanel, and looks upward to find the parent.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsChildHovered)
----@param immediate boolean Set to true to check only the immediate children of given panel ( first level )
----@return boolean Whether or not one of this panel object's children is being hovered over.
+---@param immediate? boolean Set to true to check only the immediate children of given panel ( first level )
+---@return boolean #Whether or not one of this panel object's children is being hovered over.
 function Panel:IsChildHovered(immediate) end
 
 ---[CLIENT] Returns whether this panel is draggable ( if user is able to drag it ) or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsDraggable)
----@return boolean Whether this panel is draggable ( if user is able to drag it ) or not.
+---@return boolean #Whether this panel is draggable ( if user is able to drag it ) or not.
 function Panel:IsDraggable() end
 
 ---[CLIENT] Returns whether this panel is currently being dragged or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsDragging)
----@return boolean Whether this panel is currently being dragged or not.
+---@return boolean #Whether this panel is currently being dragged or not.
 function Panel:IsDragging() end
 
 ---[CLIENT] Returns whether the the panel is enabled or disabled.
@@ -1013,7 +1013,7 @@ function Panel:IsDragging() end
 --- See Panel:SetEnabled for a function that makes the panel enabled or disabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsEnabled)
----@return boolean Whether the panel is enabled or disabled.
+---@return boolean #Whether the panel is enabled or disabled.
 function Panel:IsEnabled() end
 
 ---[CLIENT] Returns whether the mouse cursor is hovering over this panel or not
@@ -1023,13 +1023,13 @@ function Panel:IsEnabled() end
 --- Requires Panel:SetMouseInputEnabled to be set to true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsHovered)
----@return boolean true if the panel is hovered
+---@return boolean #true if the panel is hovered
 function Panel:IsHovered() end
 
 ---[CLIENT] Returns true if the panel can receive keyboard input.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsKeyboardInputEnabled)
----@return boolean keyboardInputEnabled
+---@return boolean #keyboardInputEnabled
 function Panel:IsKeyboardInputEnabled() end
 
 ---[CLIENT] Determines whether or not a HTML or DHTML element is currently loading a page.
@@ -1040,74 +1040,74 @@ function Panel:IsKeyboardInputEnabled() end
 --- On Chromium, the value is only `true` when the root document is not ready. The rendering is not suspended when in-page elements are loading.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsLoading)
----@return boolean Whether or not the (D)HTML object is loading.
+---@return boolean #Whether or not the (D)HTML object is loading.
 function Panel:IsLoading() end
 
 ---[CLIENT] Returns if the panel is going to be deleted in the next frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsMarkedForDeletion)
----@return boolean markedForDeletion
+---@return boolean #markedForDeletion
 function Panel:IsMarkedForDeletion() end
 
 ---[CLIENT] Returns whether the panel was made modal or not. See Panel:DoModal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsModal)
----@return boolean True if the panel is modal.
+---@return boolean #True if the panel is modal.
 function Panel:IsModal() end
 
 ---[CLIENT] Returns true if the panel can receive mouse input.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsMouseInputEnabled)
----@return boolean mouseInputEnabled
+---@return boolean #mouseInputEnabled
 function Panel:IsMouseInputEnabled() end
 
 ---[CLIENT] Returns whether the panel contains the given panel, recursively.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsOurChild)
 ---@param childPanel Panel
----@return boolean True if the panel contains childPanel.
+---@return boolean #True if the panel contains childPanel.
 function Panel:IsOurChild(childPanel) end
 
 ---[CLIENT] Returns if the panel was made popup or not. See Panel:MakePopup
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsPopup)
----@return boolean `true` if the panel was made popup.
+---@return boolean #`true` if the panel was made popup.
 function Panel:IsPopup() end
 
 ---[CLIENT] Determines if the panel object is selectable (like icons in the Spawn Menu, holding Shift). This is set with Panel:SetSelectable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsSelectable)
----@return boolean Whether the panel is selectable or not.
+---@return boolean #Whether the panel is selectable or not.
 function Panel:IsSelectable() end
 
 ---[CLIENT] Returns if the panel object is selected (like icons in the Spawn Menu, holding Shift). This can be set in Lua using Panel:SetSelected.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsSelected)
----@return boolean Whether the panel object is selected or not. Always returns false if the object is not selectable. This can be modified using Panel:SetSelectable.
+---@return boolean #Whether the panel object is selected or not. Always returns false if the object is not selectable. This can be modified using Panel:SetSelectable.
 function Panel:IsSelected() end
 
 ---[CLIENT] Determines if the panel object is a selection canvas or not. This is set with Panel:SetSelectionCanvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsSelectionCanvas)
----@return any The value (if any) set by Panel:SetSelectionCanvas.
+---@return any #The value (if any) set by Panel:SetSelectionCanvas.
 function Panel:IsSelectionCanvas() end
 
 ---[CLIENT] Returns if the panel is valid and not marked for deletion.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsValid)
----@return boolean True if the object is valid.
+---@return boolean #True if the object is valid.
 function Panel:IsValid() end
 
 ---[CLIENT] Returns if the panel is visible. This will **NOT** take into account visibility of the parent.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsVisible)
----@return boolean `true` if the panel ls visible, `false` otherwise.
+---@return boolean #`true` if the panel ls visible, `false` otherwise.
 function Panel:IsVisible() end
 
 ---[CLIENT] Returns if a panel allows world clicking set by Panel:SetWorldClicker.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:IsWorldClicker)
----@return boolean If the panel allows world clicking.
+---@return boolean #If the panel allows world clicking.
 function Panel:IsWorldClicker() end
 
 ---[CLIENT] Remove the focus from the panel.
@@ -1149,7 +1149,7 @@ function PANEL:LoadCookies() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:LoadGWENFile)
 ---@param filename string The file to open. The path is relative to garrysmod/garrysmod/.
----@param path string The path used to look up the file.
+---@param path? string The path used to look up the file.
 ---
 --- * "GAME" Structured like base folder (garrysmod/), searches all the mounted content (main folder, addons, mounted games etc)
 --- * "LUA" or "lsv" - All Lua folders (lua/) including gamesmodes and addons
@@ -1175,8 +1175,8 @@ function Panel:LoadTGAImage(imageName, strPath) end
 ---[CLIENT] Returns the cursor position local to the position of the panel (usually the upper-left corner).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:LocalCursorPos)
----@return number, number number - The x coordinate
----@return number, number number - The y coordinate
+---@return number, number #number - The x coordinate
+---@return number, number #number - The y coordinate
 function Panel:LocalCursorPos() end
 
 ---[CLIENT] Gets the absolute screen position of the position specified relative to the panel.
@@ -1190,8 +1190,8 @@ function Panel:LocalCursorPos() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:LocalToScreen)
 ---@param posX number The X coordinate of the position on the panel to translate.
 ---@param posY number The Y coordinate of the position on the panel to translate.
----@return number, number number - The X coordinate relative to the screen.
----@return number, number number - The Y coordinate relative to the screen.
+---@return number, number #number - The X coordinate relative to the screen.
+---@return number, number #number - The Y coordinate relative to the screen.
 function Panel:LocalToScreen(posX, posY) end
 
 ---[CLIENT] Focuses the panel and enables it to receive input.
@@ -1215,14 +1215,14 @@ function Panel:MouseCapture(doCapture) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveAbove)
 ---@param panel Panel Panel to position relatively to.
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:MoveAbove(panel, offset) end
 
 ---[CLIENT] Places the panel below the passed panel with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveBelow)
 ---@param panel Panel Panel to position relatively to.
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:MoveBelow(panel, offset) end
 
 ---[CLIENT] Moves the panel by the specified coordinates using animation.
@@ -1231,9 +1231,9 @@ function Panel:MoveBelow(panel, offset) end
 ---@param moveX number The number of pixels to move by in the horizontal (x) direction.
 ---@param moveY number The number of pixels to move by in the vertical (y) direction.
 ---@param time number The time (in seconds) in which to perform the animation.
----@param delay number The delay (in seconds) before the animation begins.
----@param ease number The easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
----@param callback function The function to be called once the animation is complete. Arguments are:
+---@param delay? number The delay (in seconds) before the animation begins.
+---@param ease? number The easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
+---@param callback? function The function to be called once the animation is complete. Arguments are:
 --- * table animData - The AnimationData that was used.
 --- * Panel pnl - The panel object that was moved.
 function Panel:MoveBy(moveX, moveY, time, delay, ease, callback) end
@@ -1242,14 +1242,14 @@ function Panel:MoveBy(moveX, moveY, time, delay, ease, callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveLeftOf)
 ---@param panel Panel Panel to position relatively to.
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:MoveLeftOf(panel, offset) end
 
 ---[CLIENT] Places the panel right to the passed panel with the specified offset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveRightOf)
 ---@param panel Panel Panel to position relatively to.
----@param offset number The align offset.
+---@param offset? number The align offset.
 function Panel:MoveRightOf(panel, offset) end
 
 ---[CLIENT] Moves the panel to the specified position using animation.
@@ -1259,8 +1259,8 @@ function Panel:MoveRightOf(panel, offset) end
 ---@param posX number The target x coordinate of the panel.
 ---@param posY number The target y coordinate of the panel.
 ---@param time number The time to perform the animation within.
----@param delay number The delay before the animation starts.
----@param ease number The easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
+---@param delay? number The delay before the animation starts.
+---@param ease? number The easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
 ---@param callback function The function to be called once the animation finishes. Arguments are:
 --- * table animData - The Structures/AnimationData that was used.
 --- * Panel pnl - The panel object that was moved.
@@ -1270,7 +1270,7 @@ function Panel:MoveTo(posX, posY, time, delay, ease, callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveToAfter)
 ---@param siblingPanel Panel The panel to move this one in front of. Must be a child of the same parent panel.
----@return boolean `false` if the passed panel is not a sibling, otherwise `nil`.
+---@return boolean #`false` if the passed panel is not a sibling, otherwise `nil`.
 function Panel:MoveToAfter(siblingPanel) end
 
 ---[CLIENT] Moves the panel object behind all other panels on screen. If the panel has been made a pop-up with Panel:MakePopup, it will still draw in front of any panels that haven't.
@@ -1282,7 +1282,7 @@ function Panel:MoveToBack() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:MoveToBefore)
 ---@param siblingPanel Panel The panel to move this one behind. Must be a child of the same parent panel.
----@return boolean `false` if the passed panel is not a sibling, otherwise `nil`.
+---@return boolean #`false` if the passed panel is not a sibling, otherwise `nil`.
 function Panel:MoveToBefore(siblingPanel) end
 
 ---[CLIENT] Moves the panel in front of all other panels on screen. Unless the panel has been made a pop-up using Panel:MakePopup, it will still draw behind any that have.
@@ -1304,17 +1304,17 @@ function Panel:MoveToFront() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:NewAnimation)
 ---@param length number The length of the animation in seconds.
----@param delay number The delay before the animation starts.
----@param ease number The power/index to use for easing.
+---@param delay? number The delay before the animation starts.
+---@param ease? number The power/index to use for easing.
 --- * Positive values greater than 1 will ease in; the higher the number, the sharper the curve's gradient (less linear).
 --- * A value of 1 removes all easing.
 --- * Positive values between 0 and 1 ease out; values closer to 0 increase the curve's gradient (less linear).
 --- * A value of 0 will break the animation and should be avoided.
 --- * Any value less than zero will ease in/out; the value has no effect on the gradient.
----@param callback function The function to be called when the animation ends. Arguments passed are:
+---@param callback? function The function to be called when the animation ends. Arguments passed are:
 --- * table animTable - The Structures/AnimationData that was used.
 --- * Panel tgtPanel - The panel object that was animated.
----@return table Partially filled Structures/AnimationData with members:  * number EndTime - Equal to `length` and `delay` arguments added together, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue. * number StartTime - Equal to the `delay` argument, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue. * number Ease - Equal to the `ease` argument. * function OnEnd - Equal to the `callback` argument.
+---@return table #Partially filled Structures/AnimationData with members:  * number EndTime - Equal to `length` and `delay` arguments added together, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue. * number StartTime - Equal to the `delay` argument, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue. * number Ease - Equal to the `ease` argument. * function OnEnd - Equal to the `callback` argument.
 function Panel:NewAnimation(length, delay, ease, callback) end
 
 ---[CLIENT]
@@ -1341,7 +1341,7 @@ function Panel:NoClipping(clip) end
 ---[CLIENT] Returns the number of children of the panel object that are selected. This is equivalent to calling Panel:IsSelected on all child objects and counting the number of returns that are `true`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:NumSelectedChildren)
----@return number The number of child objects that are currently selected. This does not include the parent object you are calling the method from.
+---@return number #The number of child objects that are currently selected. This does not include the parent object you are calling the method from.
 function Panel:NumSelectedChildren() end
 
 ---[CLIENT AND MENU] Called when we are activated during level load. Used by the loading screen panel.
@@ -1361,7 +1361,7 @@ function DHTML:OnBeginLoadingDocument(url) end
 ---@param library string Library name of the JS function you are defining.
 ---@param name string Name of the JS function you are defining.
 ---@param callback function Function called when the JS function is called. Arguments passed to the JS function will be passed here.
----@return boolean Return `true` to suppress default engine action.
+---@return boolean #Return `true` to suppress default engine action.
 function DHTML:OnCallback(library, name, callback) end
 
 ---[CLIENT] Called by HTML panels when the target URL of the frame has changed, this happens when you hover over a link.
@@ -1413,7 +1413,7 @@ function PANEL:OnCursorExited() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnCursorMoved)
 ---@param cursorX number The new x position of the cursor relative to the panels origin.
 ---@param cursorY number The new y position of the cursor relative to the panels origin.
----@return boolean Return true to suppress default action.
+---@return boolean #Return true to suppress default action.
 function PANEL:OnCursorMoved(cursorX, cursorY) end
 
 ---[CLIENT AND MENU] Called when we are deactivated during level load. Used by the loading screen panel.
@@ -1433,7 +1433,7 @@ function DHTML:OnDocumentReady(url) end
 --- Only works for panels derived from DDragBase.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnDrop)
----@return Panel The panel to drop instead of us. By default you should return self.
+---@return Panel #The panel to drop instead of us. By default you should return self.
 function PANEL:OnDrop() end
 
 ---[CLIENT] Called when this panel successfully loads a page.
@@ -1456,7 +1456,7 @@ function PANEL:OnFocusChanged(gained) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodePressed)
 ---@param keyCode number The key code of the pressed key, see Enums/KEY.
----@return boolean Return true to suppress default action.
+---@return boolean #Return true to suppress default action.
 function PANEL:OnKeyCodePressed(keyCode) end
 
 ---[CLIENT] Called whenever a keyboard key was released while the panel is focused.
@@ -1465,28 +1465,28 @@ function PANEL:OnKeyCodePressed(keyCode) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodeReleased)
 ---@param keyCode number The key code of the released key, see Enums/KEY.
----@return boolean Return true to suppress default action.
+---@return boolean #Return true to suppress default action.
 function PANEL:OnKeyCodeReleased(keyCode) end
 
 ---[CLIENT] Called whenever a mouse key was pressed while the panel is focused.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnMousePressed)
 ---@param keyCode number They key code of the key pressed, see Enums/MOUSE.
----@return boolean Return true to suppress default action such as right click opening edit menu for DTextEntry.
+---@return boolean #Return true to suppress default action such as right click opening edit menu for DTextEntry.
 function PANEL:OnMousePressed(keyCode) end
 
 ---[CLIENT] Called whenever a mouse key was released while the panel is focused.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnMouseReleased)
 ---@param keyCode number They key code of the key released, see Enums/MOUSE.
----@return boolean Return true to suppress default action.
+---@return boolean #Return true to suppress default action.
 function PANEL:OnMouseReleased(keyCode) end
 
 ---[CLIENT] Called whenever the mouse wheel was used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:OnMouseWheeled)
 ---@param scrollDelta number The scroll delta, indicating how much the user turned the mouse wheel.
----@return boolean Return true to suppress default action.
+---@return boolean #Return true to suppress default action.
 function PANEL:OnMouseWheeled(scrollDelta) end
 
 ---[CLIENT] Called when the panel is about to be removed.
@@ -1549,7 +1549,7 @@ function Panel:OpenURL(URL) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:Paint)
 ---@param width number The panel's width.
 ---@param height number The panel's height.
----@return boolean Returning true prevents the background from being drawn.
+---@return boolean #Returning true prevents the background from being drawn.
 function PANEL:Paint(width, height) end
 
 ---[CLIENT] Paints a ghost copy of the panel at the given position.
@@ -1571,7 +1571,7 @@ function Panel:PaintManual() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:PaintOver)
 ---@param width number The panels current width.
 ---@param height number The panels current height.
----@return boolean Should we disable default PaintOver rendering? This is useful in case with Derma panels that use Derma hooks.
+---@return boolean #Should we disable default PaintOver rendering? This is useful in case with Derma panels that use Derma hooks.
 function PANEL:PaintOver(width, height) end
 
 ---[CLIENT] Parents the panel to the HUD.
@@ -1650,7 +1650,7 @@ function PANEL:PerformLayout(width, height) end
 ---@param y number The vertical (y) position at which to place the label.
 ---@param lbl Panel The label to resize and position.
 ---@param panelObj Panel The panel object to place to the right of the label.
----@return number The distance from the top of the parent panel to the bottom of the tallest object (the `y` position plus the height of the label or passed panel, depending on which is tallest).
+---@return number #The distance from the top of the parent panel to the bottom of the tallest object (the `y` position plus the height of the label or passed panel, depending on which is tallest).
 function Panel:PositionLabel(lblWidth, x, y, lbl, panelObj) end
 
 ---[CLIENT] Only works on elements defined with derma.DefineControl and only if the panel has **AllowAutoRefresh** set to true.
@@ -1726,7 +1726,7 @@ function Panel:Receiver(name, func, menu) end
 ---[CLIENT] Refreshes the HTML panel's current page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Refresh)
----@param ignoreCache boolean If true, the refresh will ignore cached content similar to "ctrl+f5" in most browsers.
+---@param ignoreCache? boolean If true, the refresh will ignore cached content similar to "ctrl+f5" in most browsers.
 function Panel:Refresh(ignoreCache) end
 
 ---[CLIENT] Marks a panel for deletion so it will be deleted on the next frame.
@@ -1779,8 +1779,8 @@ function Panel:SaveUndoState() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:ScreenToLocal)
 ---@param screenX number The x coordinate of the screen position to be translated.
 ---@param screenY number The y coordinate of the screed position be to translated.
----@return number, number number - Relativeposition X
----@return number, number number - Relativeposition Y
+---@return number, number #number - Relativeposition X
+---@return number, number #number - Relativeposition Y
 function Panel:ScreenToLocal(screenX, screenY) end
 
 ---[CLIENT] Selects all items within a panel or object. For text-based objects, selects all text.
@@ -1999,7 +1999,7 @@ function DTextEntry:SetDrawLanguageIDAtLeft(left) end
 --- This does not work when using PANEL:SetPaintedManually or PANEL:PaintAt.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetDrawOnTop)
----@param drawOnTop boolean Whether or not to draw the panel in front of all others.
+---@param drawOnTop? boolean Whether or not to draw the panel in front of all others.
 function Panel:SetDrawOnTop(drawOnTop) end
 
 ---[CLIENT] Sets the target area for dropping when an object is being dragged around this panel using the dragndrop.
@@ -2115,8 +2115,8 @@ function Panel:SetMaximumCharCount(maxChar) end
 --- Calling the function without arguments will remove the minimum size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetMinimumSize)
----@param minW number The minimum width of the object.
----@param minH number The minimum height of the object.
+---@param minW? number The minimum width of the object.
+---@param minH? number The minimum height of the object.
 function Panel:SetMinimumSize(minW, minH) end
 
 ---[CLIENT] Sets the model to be displayed by SpawnIcon.
@@ -2125,7 +2125,7 @@ function Panel:SetMinimumSize(minW, minH) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetModel)
 ---@param ModelPath string The path of the model to set
----@param skin number The skin to set
+---@param skin? number The skin to set
 ---@param bodygroups string The body groups to set. Each single-digit number in the string represents a separate bodygroup, **This argument must be 9 characters in total**.
 function Panel:SetModel(ModelPath, skin, bodygroups) end
 
@@ -2214,7 +2214,7 @@ function Panel:SetSelectable(selectable) end
 ---[CLIENT] Sets the selected state of a selectable panel object. This functionality is set with Panel:SetSelectable and checked with Panel:IsSelectable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetSelected)
----@param selected boolean Whether the object should be selected or deselected. Panel:IsSelected can be used to determine the selected state of the object.
+---@param selected? boolean Whether the object should be selected or deselected. Panel:IsSelected can be used to determine the selected state of the object.
 function Panel:SetSelected(selected) end
 
 ---[CLIENT] Enables the panel object for selection (much like the spawn menu).
@@ -2330,7 +2330,7 @@ function Panel:SetTooltipDelay(tooltip) end
 --- 	Given panel or the previously set one will **NOT** be automatically removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetTooltipPanel)
----@param tooltipPanel Panel The panel to use as the tooltip.
+---@param tooltipPanel? Panel The panel to use as the tooltip.
 function Panel:SetTooltipPanel(tooltipPanel) end
 
 ---[CLIENT] Sets the panel class to be created instead of DTooltip when the player hovers over this panel and a tooltip needs creating.
@@ -2365,7 +2365,7 @@ function Panel:SetURL(url) end
 --- Works for RichText and TextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetVerticalScrollbarEnabled)
----@param display boolean True to display the vertical text scroll bar, false to hide it.
+---@param display? boolean True to display the vertical text scroll bar, false to hide it.
 function Panel:SetVerticalScrollbarEnabled(display) end
 
 ---[CLIENT] Sets the "visibility" of the panel.
@@ -2441,11 +2441,11 @@ function Panel:Show() end
 ---[CLIENT] Uses animation to resize the panel to the specified size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SizeTo)
----@param sizeW number The target width of the panel. Use -1 to retain the current width.
----@param sizeH number The target height of the panel. Use -1 to retain the current height.
+---@param sizeW? number The target width of the panel. Use -1 to retain the current width.
+---@param sizeH? number The target height of the panel. Use -1 to retain the current height.
 ---@param time number The time to perform the animation within.
----@param delay number The delay before the animation starts.
----@param ease number Easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
+---@param delay? number The delay before the animation starts.
+---@param ease? number Easing of the start and/or end speed of the animation. See Panel:NewAnimation for how this works.
 ---@param callback function The function to be called once the animation finishes. Arguments are:
 --- * table animData - The Structures/AnimationData that was used.
 --- * Panel pnl - The panel object that was resized.
@@ -2457,8 +2457,8 @@ function Panel:SizeTo(sizeW, sizeH, time, delay, ease, callback) end
 --- The sizeW and sizeH parameters are false by default. Therefore, calling this function with no arguments will result in a no-op.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SizeToChildren)
----@param sizeW boolean Resize with width of the panel.
----@param sizeH boolean Resize the height of the panel.
+---@param sizeW? boolean Resize with width of the panel.
+---@param sizeH? boolean Resize the height of the panel.
 function Panel:SizeToChildren(sizeW, sizeH) end
 
 ---[CLIENT] Resizes the panel so that its width and height fit all of the content inside.
@@ -2477,7 +2477,7 @@ function Panel:SizeToContents() end
 --- You must call this function **AFTER** setting text/font or adjusting child panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SizeToContentsX)
----@param addVal number The number of extra pixels to add to the width. Can be a negative number, to reduce the width.
+---@param addVal? number The number of extra pixels to add to the width. Can be a negative number, to reduce the width.
 function Panel:SizeToContentsX(addVal) end
 
 ---[CLIENT] Resizes the panel object's height to accommodate all child objects/contents.
@@ -2487,7 +2487,7 @@ function Panel:SizeToContentsX(addVal) end
 --- You must call this function **AFTER** setting text/font or adjusting child panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SizeToContentsY)
----@param addVal number The number of extra pixels to add to the height.
+---@param addVal? number The number of extra pixels to add to the height.
 function Panel:SizeToContentsY(addVal) end
 
 ---[CLIENT] Slides the panel in from above.
@@ -2516,14 +2516,14 @@ function Panel:Stop() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:StretchBottomTo)
 ---@param tgtPanel Panel The panel to align the bottom of this one with.
----@param offset number The gap to leave between this and the passed panel. Negative values will cause the panel's height to increase, forming an overlap.
+---@param offset? number The gap to leave between this and the passed panel. Negative values will cause the panel's height to increase, forming an overlap.
 function Panel:StretchBottomTo(tgtPanel, offset) end
 
 ---[CLIENT] Resizes the panel object's width so that its right edge is aligned with the left of the passed panel. An offset greater than zero will reduce the panel's width to leave a gap between it and the passed panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:StretchRightTo)
 ---@param tgtPanel Panel The panel to align the right edge of this one with.
----@param offset number The gap to leave between this and the passed panel. Negative values will cause the panel's width to increase, forming an overlap.
+---@param offset? number The gap to leave between this and the passed panel. Negative values will cause the panel's width to increase, forming an overlap.
 function Panel:StretchRightTo(tgtPanel, offset) end
 
 ---[CLIENT] Sets the dimensions of the panel to fill its parent. It will only stretch in directions that aren't nil.
@@ -2540,7 +2540,7 @@ function Panel:StretchToParent(offsetLeft, offsetTop, offsetRight, offsetBottom)
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:TestHover)
 ---@param x number The x coordinate of the cursor, in screen space.
 ---@param y number The y coordinate of the cursor, in screen space.
----@return boolean Return false when the cursor is not considered on the panel, true if it is considered on the panel. Do not return anything for default behavior.
+---@return boolean #Return false when the cursor is not considered on the panel, true if it is considered on the panel. Do not return anything for default behavior.
 function PANEL:TestHover(x, y) end
 
 ---[CLIENT] Called every frame while Panel:IsVisible is true.
@@ -2580,5 +2580,5 @@ function Panel:UpdateHTMLTexture() end
 ---[CLIENT] Use Panel:IsValid instead.Returns if a given panel is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Valid)
----@return boolean Whether the panel is valid or not, true being it is, false being it isn't.
+---@return boolean #Whether the panel is valid or not, true being it is, false being it isn't.
 function Panel:Valid() end

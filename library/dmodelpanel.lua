@@ -1,6 +1,6 @@
 ---@meta
 
----@class DModelPanel
+---@class DModelPanel : Panel
 local DModelPanel = {}
 
 ---[CLIENT] Used by the DModelPanel's paint hook to draw the model and background.
@@ -11,61 +11,61 @@ function DModelPanel:DrawModel() end
 ---[CLIENT] Returns the ambient lighting used on the rendered entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetAmbientLight)
----@return table The color of the ambient lighting.
+---@return table #The color of the ambient lighting.
 function DModelPanel:GetAmbientLight() end
 
 ---[CLIENT] Returns whether or not the panel entity should be animated when the default DModelPanel:LayoutEntity function is called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetAnimated)
----@return boolean True if the panel entity can be animated with Entity:SetSequence directly, false otherwise.
+---@return boolean #True if the panel entity can be animated with Entity:SetSequence directly, false otherwise.
 function DModelPanel:GetAnimated() end
 
 ---[CLIENT] Returns the animation speed of the panel entity, see DModelPanel:SetAnimSpeed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetAnimSpeed)
----@return number The animation speed.
+---@return number #The animation speed.
 function DModelPanel:GetAnimSpeed() end
 
 ---[CLIENT] Returns the position of the model viewing camera.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetCamPos)
----@return Vector The position of the camera.
+---@return Vector #The position of the camera.
 function DModelPanel:GetCamPos() end
 
 ---[CLIENT] Returns the color of the rendered entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetColor)
----@return table The color of the entity, see Color.
+---@return table #The color of the entity, see Color.
 function DModelPanel:GetColor() end
 
 ---[CLIENT] Returns the entity being rendered by the model panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetEntity)
----@return CSEnt The rendered entity (client-side)
+---@return CSEnt #The rendered entity (client-side)
 function DModelPanel:GetEntity() end
 
 ---[CLIENT] Returns the FOV (field of view) the camera is using.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetFOV)
----@return number The FOV of the camera.
+---@return number #The FOV of the camera.
 function DModelPanel:GetFOV() end
 
 ---[CLIENT] Returns the angles of the model viewing camera. Is **nil** until changed with DModelPanel:SetLookAng.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetLookAng)
----@return Angle The angles of the camera.
+---@return Angle #The angles of the camera.
 function DModelPanel:GetLookAng() end
 
 ---[CLIENT] Returns the position the viewing camera is pointing toward.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetLookAt)
----@return Vector The position the camera is pointing toward.
+---@return Vector #The position the camera is pointing toward.
 function DModelPanel:GetLookAt() end
 
 ---[CLIENT] Gets the model of the rendered entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelPanel:GetModel)
----@return string The model of the rendered entity.
+---@return string #The model of the rendered entity.
 function DModelPanel:GetModel() end
 
 ---[CLIENT] By default, this function slowly rotates and animates the entity being rendered.

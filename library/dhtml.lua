@@ -1,6 +1,6 @@
 ---@meta
 
----@class DHTML
+---@class DHTML : Panel
 local DHTML = {}
 
 ---[CLIENT] Defines a Javascript function that when called will call a Lua callback.
@@ -29,7 +29,7 @@ function DHTML:ConsoleMessage(msg) end
 ---[CLIENT] Returns if the loaded page can run Lua code, set by DHTML:SetAllowLua
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:GetAllowLua)
----@return boolean Whether or not Lua code can be called from the loaded page.
+---@return boolean #Whether or not Lua code can be called from the loaded page.
 function DHTML:GetAllowLua() end
 
 ---[CLIENT] Runs/Executes a string as JavaScript code in a panel.
@@ -44,7 +44,7 @@ function DHTML:QueueJavascript(js) end
 ---[CLIENT] Determines whether the loaded page can run Lua code or not. See DHTML for how to run Lua from a DHTML window.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:SetAllowLua)
----@param allow boolean Whether or not to allow Lua.
+---@param allow? boolean Whether or not to allow Lua.
 function DHTML:SetAllowLua(allow) end
 
 ---[CLIENT] Broken. Use the CSS `overflow` rule instead. Sets if the loaded window should display scrollbars when the webpage is larger than the viewing window. This is similar to the CSS `overflow` rule.

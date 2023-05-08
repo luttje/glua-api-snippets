@@ -10,7 +10,7 @@ function mesh.AdvanceVertex() end
 ---[CLIENT] Starts a new dynamic mesh. If an IMesh is passed, it will use that mesh instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Begin)
----@param mesh IMesh Mesh to build. This argument can be removed if you wish to build a "dynamic" mesh. See examples below.
+---@param mesh? IMesh Mesh to build. This argument can be removed if you wish to build a "dynamic" mesh. See examples below.
 ---@param primitiveType number Primitive type, see Enums/MATERIAL.
 ---@param primiteCount number The amount of primitives.
 function mesh.Begin(mesh, primitiveType, primiteCount) end
@@ -110,5 +110,5 @@ function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 ---[CLIENT] Returns the amount of vertex that have yet been pushed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.VertexCount)
----@return number vertexCount
+---@return number #vertexCount
 function mesh.VertexCount() end

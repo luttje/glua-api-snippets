@@ -1,6 +1,6 @@
 ---@meta
 
----@class DProperty_VectorColor
+---@class DProperty_VectorColor : Panel
 local DProperty_VectorColor = {}
 
 ---[CLIENT] Called by a property row to setup a color selection control.

@@ -1,6 +1,6 @@
 ---@meta
 
----@class DScrollPanel
+---@class DScrollPanel : Panel
 local DScrollPanel = {}
 
 ---[CLIENT] Parents the passed panel to the DScrollPanel's canvas.
@@ -17,25 +17,25 @@ function DScrollPanel:Clear() end
 ---[CLIENT] Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas)
----@return Panel The canvas
+---@return Panel #The canvas
 function DScrollPanel:GetCanvas() end
 
 ---[CLIENT] Gets the DScrollPanels padding
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetPadding)
----@return number DScrollPanels padding
+---@return number #DScrollPanels padding
 function DScrollPanel:GetPadding() end
 
 ---[CLIENT] Returns the vertical scroll bar of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
----@return Panel The DVScrollBar.
+---@return Panel #The DVScrollBar.
 function DScrollPanel:GetVBar() end
 
 ---[CLIENT] Return the width of the DScrollPanel's canvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:InnerWidth)
----@return number The width of the DScrollPanel's canvas
+---@return number #The width of the DScrollPanel's canvas
 function DScrollPanel:InnerWidth() end
 
 ---[CLIENT]

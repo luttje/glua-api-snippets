@@ -102,13 +102,6 @@ local CamData = {}
 ---@field TheirOldAngularVelocity Vector Old angular velocity of the entity we collided with
 local CollisionData = {}
 
----@class Color
----@field r number The red channel
----@field g number The green channel
----@field b number The blue channel
----@field a number The alpha channel
-local Color = {}
-
 ---@class CreationMenus
 ---@field Function function The function used to generate the content of the tab.
 ---@field Icon string The icon material that will accompany the title of the tab.
@@ -177,7 +170,7 @@ local DynamicLight = {}
 ---@field Pos Vector The origin of the played sound.
 local EmitSoundInfo = {}
 
----@class ENT
+---@class ENT : Entity
 ---@field Base string The base entity to derive from. This **must** be a valid Lua entity
 ---@field Type string Type of the entity. This **must be one of these:** * **anim** * **brush** * **point** * **ai** * **nextbot** * **filter**  See Scripted Entities for a more detailed explanation of what each one is.
 ---@field ClassName string Entity class name of the entity (File or folder name of your entity). **This is set automatically `after` the entity file is loaded.**
@@ -197,7 +190,7 @@ local EmitSoundInfo = {}
 ---@field ScriptedEntityType string (Clientside) Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information.
 ---@field DoNotDuplicate boolean (Serverside) If set, the entity will not be duplicated via the built-in duplicator system.
 ---@field IconOverride string (Clientside) If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
-local ENT = {}
+ENT = {}
 
 ---@class EntityCopyData
 ---@field Name string The entity's name, see Entity:GetName.
@@ -237,19 +230,6 @@ local EntityCopyData = {}
 ---@field additive boolean Additive rendering
 ---@field outline boolean Add a black outline to the font.  This does not work well with antialias, and only allows black 1-pixel outlines. It may be preferable to not use this parameter, and instead use draw.SimpleTextOutlined when drawing text that you want outlined.
 local FontData = {}
-
----@class GM
----@field Name string The fancy name of your gamemode.
----@field Author string The name/contact info of the gamemode author.
----@field Email string The contact email associated with the gamemode.
----@field Website string The website associated with the gamemode.
----@field FolderName string The name of the gamemode folder, automatically set.
----@field Folder string The name of the gamemode folder prepended with "gamemodes/" (such as "gamemodes/sandbox"), automatically set.
----@field TeamBased boolean Set this to true if your gamemode is team-based. Used to enable/disable the base gamemode team system.
----@field IsSandboxDerived boolean True if the gamemode is derived from sandbox.
----@field ThisClass string The name of the gamemode folder prepended with "gamemode_" (such as "gamemode_sandbox"), automatically set.
----@field BaseClass table The table of the base gamemode to derive from, set automatically by Global.DeriveGamemode.  It is recommended to use Global.DEFINE_BASECLASS when referencing the gamemode's BaseClass to prevent unintended behavior  Global.DeriveGamemode modifies the main gamemode's BaseClass, which is shared with parent gamemodes. Because of this, in parent gamemodes the BaseClass can be incorrect, so for instance you need to use `self.BaseClass.BaseClass` in the 1st parent instead
-local GM = {}
 
 ---@class HTTPRequest
 ---@field failed function Function to be called on failure. Arguments are * string reason
@@ -354,26 +334,6 @@ local PhysicsObjectSave = {}
 ---@field GravityToggle boolean Enables or disables gravity for the entity
 ---@field Material string Sets the physics material for the entity
 local PhysProperties = {}
-
----@class PLAYER
----@field DisplayName string The 'nice' name of the player class for display in User Interface and such.
----@field WalkSpeed number How fast to move when not running
----@field RunSpeed number How fast to move when running/sprinting
----@field SlowWalkSpeed number How fast to move when slow walking, which is activated via the +WALK keybind.
----@field CrouchedWalkSpeed number Multiply walk speed by this when crouching
----@field DuckSpeed number How fast to go from not ducking, to ducking
----@field UnDuckSpeed number How fast to go from ducking, to not ducking
----@field JumpPower number How powerful a jump should be
----@field CanUseFlashlight boolean Can the player use the flashlight
----@field MaxHealth number Max health we can have
----@field MaxArmor number Max armor the player can have
----@field StartHealth number How much health we start with
----@field StartArmor number How much armour we start with
----@field DropWeaponOnDie boolean Do we drop our weapon when we die
----@field TeammateNoCollide boolean Do we collide with teammates or run straight through them
----@field AvoidPlayers boolean Automatically swerves around other players
----@field UseVMHands boolean Uses viewmodel hands
-local PLAYER = {}
 
 ---@class PolygonVertex
 ---@field x number The x coordinate of the vertex.
@@ -526,7 +486,7 @@ local SunInfo = {}
 ---@field strainSound string Unused sound.
 local SurfacePropertyData = {}
 
----@class SWEP
+---@class SWEP : Entity
 ---@field ClassName string Entity class name of the SWEP (file or folder name of your SWEP). This is             set automatically
 ---@field Category string The spawn menu category that this weapon             resides in.
 ---@field Spawnable boolean Whether or not this weapon can be obtained through the             spawn menu.
@@ -570,7 +530,7 @@ local SurfacePropertyData = {}
 ---@field ScriptedEntityType string Sets the spawnmenu content icon type             for the entity, used by spawnmenu in the Sandbox-derived gamemodes.             See spawnmenu.AddContentType for more information.
 ---@field m_bPlayPickupSound boolean If set to false, the weapon will not play the             weapon pick up sound when picked up.
 ---@field IconOverride string (Clientside)If set,             overrides the icon path to be displayed in the Spawnmenu for this entity.
-local SWEP = {}
+SWEP = {}
 
 ---@class TeamData
 ---@field Color table Color of the team

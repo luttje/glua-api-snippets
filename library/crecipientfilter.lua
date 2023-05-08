@@ -35,13 +35,13 @@ function CRecipientFilter:AddRecipientsByTeam(teamid) end
 ---[SERVER] Returns the number of valid players in the recipient filter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CRecipientFilter:GetCount)
----@return number Number of valid players in the recipient filter.
+---@return number #Number of valid players in the recipient filter.
 function CRecipientFilter:GetCount() end
 
 ---[SERVER] Returns a table of all valid players currently in the recipient filter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CRecipientFilter:GetPlayers)
----@return table A table of all valid players currently in the recipient filter.
+---@return table #A table of all valid players currently in the recipient filter.
 function CRecipientFilter:GetPlayers() end
 
 ---[SERVER] Removes all players from the recipient filter.

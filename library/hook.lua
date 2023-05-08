@@ -25,13 +25,13 @@ function hook.Add(eventName, identifier, func) end
 ---@param eventName string The event to call hooks for.
 ---@param gamemodeTable table If the gamemode is specified, the gamemode hook within will be called, otherwise not.
 ---@param ... ... The arguments to be passed to the hooks.
----@return ... Return data from called hooks. Limited to **6** return values.
+---@return ... #Return data from called hooks. Limited to **6** return values.
 function hook.Call(eventName, gamemodeTable, ...) end
 
 ---[SHARED AND MENU] Returns a list of all the hooks registered with hook.Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.GetTable)
----@return table A table of tables. See below for output example.
+---@return table #A table of tables. See below for output example.
 function hook.GetTable() end
 
 ---[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
@@ -50,5 +50,5 @@ function hook.Remove(eventName, identifier) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Run)
 ---@param eventName string The event to call hooks for.
 ---@param ... ... The arguments to be passed to the hooks.
----@return any Returned data from called hooks.
+---@return any #Returned data from called hooks.
 function hook.Run(eventName, ...) end
