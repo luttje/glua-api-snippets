@@ -21,13 +21,13 @@ jobs:
       - name: Check if there have been changes to the wiki
         id: wiki_confirm_no_changes
         continue-on-error: true
-        run: npm run cli:wiki-check-changed $(git tag -l --sort=-v:refname)
+        run: npm run wiki-check-changed $(git tag -l --sort=-v:refname)
       - name: Install zip
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         uses: montudor/action-zip@v1
       - name: Scrape wiki
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
-        run: npm run cli:scrape-wiki
+        run: npm run scrape-wiki
       - name: Format the output with StyLua
         uses: JohnnyMorganz/stylua-action@v2
         with:
@@ -36,7 +36,7 @@ jobs:
           args: output/
       - name: Pack release
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
-        run: npm run cli:pack-release
+        run: npm run pack-release
       - name: Get release files and version
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         id: release_json
@@ -72,7 +72,7 @@ jobs:
           artifacts: ${{ join(fromJson(env.releaseJson).releaseFiles, ',') }}
       - name: Publish Lua Language Server Library
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
-        run: npm run cli:publish-library
+        run: npm run publish-library
       - name: Copy library to it's own branch
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         env:

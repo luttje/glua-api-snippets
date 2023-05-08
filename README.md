@@ -49,7 +49,7 @@ You can clone this repository and run the scraper yourself. This is useful if yo
 
 2. Install the dependencies with `npm install`
 
-3. Run the scraper with `npm run cli:scrape-wiki`
+3. Run the scraper with `npm run scrape-wiki`
 
 ### Testing the project
 
