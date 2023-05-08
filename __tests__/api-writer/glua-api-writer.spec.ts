@@ -73,7 +73,7 @@ describe('GLua API Writer', () => {
 
     const api = writer.writePages([<WikiPage>hookJson]);
 
-    expect(api).toEqual(override);
+    expect(api).toEqual(`${override}\n\n`);
   });
   
   it('should allow overriding specific class declarations', () => {

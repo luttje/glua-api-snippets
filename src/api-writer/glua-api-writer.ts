@@ -66,9 +66,18 @@ export class GluaApiWriter {
   }
 
   public writePage(page: WikiPage) {
-    if (this.pageOverrides.has(page.address))
-      return this.pageOverrides.get(page.address);
-    else if (isClassFunction(page))
+    if (this.pageOverrides.has(page.address)) {
+      let api = '';
+      
+      if (isClassFunction(page))
+        api += this.writeClass(page.parent);
+      else if (isLibraryFunction(page))
+        api += this.writeLibraryGlobal(page);
+      
+      api += this.pageOverrides.get(page.address);
+
+      return `${api}\n\n`;
+    } else if (isClassFunction(page))
       return this.writeClassFunction(page);
     else if (isLibraryFunction(page))
       return this.writeLibraryFunction(page);
@@ -107,6 +116,18 @@ export class GluaApiWriter {
     return api;
   }
 
+  private writeLibraryGlobal(func: LibraryFunction) {
+    if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
+      const global = `${func.parent} = {}\n\n`;
+
+      this.writtenLibraryGlobals.add(func.parent);
+
+      return global;
+    }
+
+    return '';
+  }
+
   private writeClassFunction(func: ClassFunction) {
     let api: string = this.writeClass(func.parent);
 
@@ -117,13 +138,7 @@ export class GluaApiWriter {
   }
   
   private writeLibraryFunction(func: LibraryFunction) {
-    let api: string = '';
-
-    if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
-      api += `${func.parent} = {}\n\n`;
-
-      this.writtenLibraryGlobals.add(func.parent);
-    }
+    let api: string = this.writeLibraryGlobal(func);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm);

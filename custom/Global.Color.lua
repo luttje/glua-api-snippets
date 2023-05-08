@@ -6,5 +6,5 @@
 ---@param g number An integer from `0-255` describing the green value of the color.
 ---@param b number An integer from `0-255` describing the blue value of the color.
 ---@param a number An integer from `0-255` describing the alpha (transparency) of the color.
----@return Color #The created Color (is returned as a table without the Color metatable, [(See GitHub issue)](https://github.com/Facepunch/garrysmod-issues/issues/2407)).
+---@return Color #The created Color. Is returned as a table without the Color metatable, [(See GitHub issue)](https://github.com/Facepunch/garrysmod-issues/issues/2407).
 function _G.Color(r, g, b, a) end
