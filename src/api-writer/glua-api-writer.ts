@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
-import { putCommentBeforeEachLine, removeNewlines, toLowerCamelCase } from '../utils/string.js';
+import { putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -62,11 +62,12 @@ export class GluaApiWriter {
   }
 
   public addOverride(pageAddress: string, override: string) {
-    this.pageOverrides.set(pageAddress, override);
+    this.pageOverrides.set(safeFileName(pageAddress, '.'), override);
   }
 
   public writePage(page: WikiPage) {
-    if (this.pageOverrides.has(page.address)) {
+    const fileSafeAddress = safeFileName(page.address, '.');
+    if (this.pageOverrides.has(fileSafeAddress)) {
       let api = '';
       
       if (isClassFunction(page))
@@ -74,7 +75,7 @@ export class GluaApiWriter {
       else if (isLibraryFunction(page))
         api += this.writeLibraryGlobal(page);
       
-      api += this.pageOverrides.get(page.address);
+      api += this.pageOverrides.get(fileSafeAddress);
 
       return `${api}\n\n`;
     } else if (isClassFunction(page))
@@ -184,18 +185,8 @@ export class GluaApiWriter {
       }
     };
 
-    for (const item of _enum.items) {
-      const keys = item.key.split(' or ');
-
-      if (keys.length > 1) {
-        console.warn(`Enum item ${item.key} has multiple keys. This is not supported by the Glua API.`);
-        for (const key of keys) {
-          writeItem(key, item);
-        }
-      } else {
-        writeItem(item.key, item);
-      }
-    }
+    for (const item of _enum.items)
+      writeItem(item.key, item);
 
     if (isContainedInTable)
       api += '}';

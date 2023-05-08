@@ -29,3 +29,14 @@ export function putCommentBeforeEachLine(text: string, skipLineOne: boolean = tr
     return `--- ${line}`;
   }).join('\n');
 }
+
+/**
+ * Makes a string safe for use as a file name
+ * 
+ * @param str The string to make safe
+ * @param replacement The string to replace unsafe characters with
+ * @returns The safe string
+ */
+export function safeFileName(str: string, replacement: string = '_') {
+  return str.replace(/[^a-z0-9_\-\. ]/gi, replacement);
+}

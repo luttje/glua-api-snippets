@@ -1,4 +1,4 @@
-import { removeNewlines, toLowerCamelCase, putCommentBeforeEachLine } from '../../src/utils/string';
+import { removeNewlines, toLowerCamelCase, putCommentBeforeEachLine, safeFileName } from '../../src/utils/string';
 
 describe('toLowerCamelCase', () => {
   it('should convert a string to lowerCamelCase', () => {
@@ -36,5 +36,20 @@ describe('putCommentBeforeEachLine', () => {
     ['hello\r\n\r\n\r\n\r\nworld', '--- hello\n--- \n--- \n--- \n--- world'],
   ])('should put a comment before each line', (input, expected, skipFirstLine = false) => {
     expect(putCommentBeforeEachLine(input, skipFirstLine)).toBe(expected);
+  });
+});
+
+describe('safeFileName', () => {
+  it.each([
+    ['hello world','hello world'],
+    ['hello:World', 'hello_World'],
+    ['hello:World', 'hello-World', '-'],
+    ['hello:World', 'helloWorld', ''],
+    ['hello:World', 'hello World', ' '],
+  ])('should make a string "%s" safe ("%s") for use as a file name', (input: string, expected: string, replacement: string|undefined = undefined) => {
+    if (replacement !== undefined)
+      expect(safeFileName(input, replacement)).toBe(expected);
+    else
+      expect(safeFileName(input)).toBe(expected);
   });
 });
