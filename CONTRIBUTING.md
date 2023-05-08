@@ -98,7 +98,7 @@ At the first of every month the scraper runs and updates the addon for Lua Langu
 5. Update the `garrysmod` sub repository to the latest commit in the `lua-language-server-addon` branch in this repo:
 
     ```bash
-    git submodule update --remote addons/garrysmod/module
+    git submodule update --init --remote addons/garrysmod/module
     ```
 
 6. Commit your changes:
