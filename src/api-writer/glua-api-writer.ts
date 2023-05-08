@@ -1,4 +1,4 @@
-import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, PanelFunction, Realm, Struct, WikiPage } from '../scrapers/wiki-page-markup-scraper.js';
+import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
 import { putCommentBeforeEachLine, removeNewlines, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
@@ -83,6 +83,8 @@ export class GluaApiWriter {
       return this.writeLibraryFunction(page);
     else if (isHookFunction(page))
       return this.writeHookFunction(page);
+    else if (isPanel(page))
+      return this.writePanel(page);
     else if (isPanelFunction(page))
       return this.writePanelFunction(page);
     else if (isEnum(page))
@@ -150,8 +152,12 @@ export class GluaApiWriter {
     return this.writeClassFunction(func);
   }
 
+  private writePanel(panel: Panel) {
+    return this.writeClass(panel.name, panel.parent);
+  }
+
   private writePanelFunction(func: PanelFunction) {
-    let api: string = this.writeClass(func.parent, 'Panel');
+    let api: string = '';
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm, ':');

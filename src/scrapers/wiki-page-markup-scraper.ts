@@ -5,7 +5,7 @@ export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook
 export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
 
 export type CommonWikiProperties = {
-  type: WikiFunctionType | 'enum' | 'struct';
+  type: WikiFunctionType | 'enum' | 'struct' | 'panel';
   address: string;
   name: string;
   description: string;
@@ -43,7 +43,7 @@ export type HookFunction = Function & {
 
 export type PanelFunction = Function & {
   type: 'panelfunc';
-  isPanel: 'yes';
+  isPanelFunction: 'yes';
 };
 
 export type EnumValue = {
@@ -69,7 +69,12 @@ export type Struct = CommonWikiProperties & {
   fields: StructField[];
 };
 
-export type WikiPage = ClassFunction | LibraryFunction | HookFunction | PanelFunction | Enum | Struct;
+export type Panel = CommonWikiProperties & {
+  type: 'panel';
+  parent: string;
+};
+
+export type WikiPage = ClassFunction | LibraryFunction | HookFunction | PanelFunction | Panel | Enum | Struct;
 
 /**
  * Guards
@@ -88,6 +93,10 @@ export function isHookFunction(page: WikiPage): page is HookFunction {
 
 export function isPanelFunction(page: WikiPage): page is PanelFunction {
   return page.type === 'panelfunc';
+}
+
+export function isPanel(page: WikiPage): page is Panel {
+  return page.type === 'panel';
 }
 
 export function isEnum(page: WikiPage): page is Enum {
@@ -114,13 +123,14 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         const isEnum = $('enum').length > 0;
         const isStruct = $('structure').length > 0;
         const isFunction = $('function').length > 0;
-        const mainElement = $(isEnum ? 'enum' : isStruct ? 'struct' : 'function').first();
+        const isPanel = $('panel').length > 0;
+        const mainElement = $(isEnum ? 'enum' : isStruct ? 'struct' : isPanel ? 'panel' : 'function');
         const address = response.url.split('/').pop()!.split('?')[0];
 
         if (isEnum) {
-          const items = $('items item').map(function() {
+          const items = $('items item').map(function () {
             const $el = $(this);
-            return <EnumValue> {
+            return <EnumValue>{
               key: $el.attr('key')!,
               value: $el.attr('value')!,
               description: $el.text()
@@ -136,9 +146,9 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             items
           };
         } else if (isStruct) {
-          const fields = $('fields item').map(function() {
+          const fields = $('fields item').map(function () {
             const $el = $(this);
-            return <StructField> {
+            return <StructField>{
               name: $el.attr('name')!,
               type: $el.attr('type')!,
               default: $el.attr('default'),
@@ -153,6 +163,15 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             description: $('description').text(),
             realm: $('realm').text() as Realm,
             fields
+          };
+        } else if (isPanel) {
+          return <Panel>{
+            type: 'panel',
+            name: address,
+            address: address,
+            description: $('description').text(),
+            realm: $('realm').text() as Realm,
+            parent: $('parent').text()
           };
         } else if (isFunction) {
           const isClassFunction = mainElement.attr('type') === 'classfunc';
@@ -219,7 +238,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             return <PanelFunction> {
               ...base,
               type: 'panelfunc',
-              isPanel: 'yes'
+              isPanelFunction: 'yes'
             };
           }
         }
