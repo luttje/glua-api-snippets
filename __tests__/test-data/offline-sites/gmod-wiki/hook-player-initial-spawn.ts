@@ -81,6 +81,7 @@ export const json = {
   type: 'hook',
   parent: 'GM',
   name: 'PlayerInitialSpawn',
+  address: 'GM:PlayerInitialSpawn',
   description: `
 Called when the player spawns for the first time.
 

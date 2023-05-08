@@ -13,6 +13,7 @@ export const json = {
   url: 'https://wiki.facepunch.com/gmod/Structures/AngPos',
   type: 'struct',
   name: 'AngPos',
+  address: 'AngPos',
   description: 'Table used by various functions, such as Entity:GetAttachment.',
   realm: 'Shared',
   fields: [

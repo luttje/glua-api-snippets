@@ -11,6 +11,7 @@ export const json = {
   type: 'classfunc',
   parent: 'Weapon',
   name: 'AllowsAutoSwitchTo',
+  address: 'Weapon:AllowsAutoSwitchTo',
   description: 'Returns whether the weapon allows to being switched to when a better ( Weapon:GetWeight ) weapon is being picked up.',
   realm: 'Shared',
   arguments: [],
