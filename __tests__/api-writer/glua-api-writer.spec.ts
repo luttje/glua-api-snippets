@@ -3,7 +3,7 @@ import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-da
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
 import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
-import { WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -33,6 +33,37 @@ describe('GLua API Writer', () => {
     expect(structs).toHaveLength(1);
     const api = writer.writePages(structs);
     expect(api).toEqual(structApiDefinition);
+  });
+
+  it('should write optional parameters with a question mark', () => {
+    const writer = new GluaApiWriter();
+    // Non-existant page, only to test the optional parameter
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'Explode',
+      address: 'Global.Explode',
+      parent: '_G',
+      dontDefineParent: true,
+      description: 'Explodes with an optional intensity.',
+      realm: 'Shared',
+      type: 'libraryfunc',
+      url: 'na',
+      arguments: [
+        {
+          name: 'intensity',
+          type: 'number',
+          description: 'The intensity of the explosion.',
+          default: '1000',
+        },
+      ],
+      returns: [
+        {
+          type: 'number',
+          description: 'The amount of damage done.',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number #The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
   });
 
   it('should allow overriding specific page addresses', () => {

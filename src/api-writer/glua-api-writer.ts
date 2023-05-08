@@ -207,7 +207,7 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
         
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default ? `?` : ''} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
       });
     }
 
