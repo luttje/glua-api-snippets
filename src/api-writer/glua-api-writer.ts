@@ -192,11 +192,11 @@ export class GluaApiWriter {
         const description = removeNewlines(ret.description ?? '');
 
         if (func.returns!.length === 1) {
-          luaDocComment += `${returns} ${description}\n`;
+          luaDocComment += `${returns} #${description}\n`;
           return;
         }
         
-        luaDocComment += `${returns} ${this.transformType(ret.type)} - ${description}\n`;
+        luaDocComment += `${returns} #${this.transformType(ret.type)} - ${description}\n`;
       });
     }
 
