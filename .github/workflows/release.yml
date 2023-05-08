@@ -21,7 +21,12 @@ jobs:
       - name: Check if there have been changes to the wiki
         id: wiki_confirm_no_changes
         continue-on-error: true
-        run: npm run wiki-check-changed $(git tag -l --sort=-v:refname)
+        run: |
+          if [ "$RUNNER_DEBUG" = "1" ]; then
+            exit 1
+          else
+            npm run wiki-check-changed $(git tag -l --sort=-v:refname)
+          fi
       - name: Install zip
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         uses: montudor/action-zip@v1
