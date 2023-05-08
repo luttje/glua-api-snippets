@@ -257,7 +257,7 @@ function game.MaxPlayers() end
 --- Any error materials currently loaded that the mounted addon provides will NOT be reloaded. That means that this cannot be used to fix missing map materials, as the map materials are loaded before you are able to call this.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.MountGMA)
----@param path string Location of the GMA file to mount, retrieved from steamworks.DownloadUGC. This file does not have to end with the .gma extension, but will be interpreted as a GMA.
+---@param path string Location of the GMA file to mount, retrieved from steamworks.DownloadUGC or relative to the `garrysmod/` directory (ignores mounting). This file does not have to end with the .gma extension, but will be interpreted as a GMA.
 ---@return boolean, table boolean - success
 ---@return boolean, table table - If successful, a table of files that have been mounted
 function game.MountGMA(path) end

@@ -35,10 +35,13 @@ function file.AsyncRead(fileName, gamePath, callback, sync) end
 function file.CreateDir(name) end
 
 ---[SHARED AND MENU] Deletes a file or `empty` folder that is relative to the **data** folder. You can't remove any files outside of **data** folder.
+--- You are able to delete *any* file in the Menu state.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Delete)
 ---@param name string The file name.
-function file.Delete(name) end
+---@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
+--- This is only available in the menu state.
+function file.Delete(name, path) end
 
 ---[SHARED AND MENU] Returns a boolean of whether the file or directory exists or not.
 ---              This will sometimes return false clientside for directories received from the server via a clientside lua file. You can work around this by using file.Find with the path to the directory followed by a wildcard (no trailing forward slash) and see if the directory is inside the returned directories table (**see second example)**.

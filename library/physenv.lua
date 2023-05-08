@@ -11,7 +11,7 @@ physenv = {}
 function physenv.AddSurfaceData(properties) end
 
 ---[SHARED] Returns the air density used to calculate drag on physics objects.
---- 		The unit is in `kg/m^3`.
+--- 		The unit is in `kg/m³`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetAirDensity)
 ---@return number Default value is 2.

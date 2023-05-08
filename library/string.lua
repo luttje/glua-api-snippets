@@ -83,7 +83,7 @@ function string.find(haystack, needle, startPos, noPatterns) end
 --- * The `.*` precision modifier
 --- * All length modifiers
 ---
---- The following specifiers are exclusive to Lua:
+--- The following specifiers are exclusive to LuaJIT:
 ---
 --- | Format | Description | Example of the output |
 --- |:------:|:-----------:|:---------------------:|
