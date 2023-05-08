@@ -74,6 +74,9 @@ async function main() {
         "/**/",
         "continue",
       ],
+      "Lua.diagnostics.disable": [
+        "duplicate-set-field", // Prevents complaining when a function exists twice in both the CLIENT and SERVER realm
+      ],
       // TODO: runtime.path
     });
   
