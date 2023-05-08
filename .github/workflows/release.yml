@@ -29,6 +29,7 @@ jobs:
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         run: npm run scrape-wiki
       - name: Format the output with StyLua
+        if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
