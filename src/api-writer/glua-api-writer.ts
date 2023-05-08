@@ -62,12 +62,12 @@ export class GluaApiWriter {
   }
 
   public addOverride(pageAddress: string, override: string) {
-    this.pageOverrides.set(pageAddress.toLowerCase(), override);
+    this.pageOverrides.set(pageAddress, override);
   }
 
   public writePage(page: WikiPage) {
-    if (this.pageOverrides.has(page.address.toLowerCase()))
-      return this.pageOverrides.get(page.address.toLowerCase());
+    if (this.pageOverrides.has(page.address))
+      return this.pageOverrides.get(page.address);
     else if (isClassFunction(page))
       return this.writeClassFunction(page);
     else if (isLibraryFunction(page))
@@ -82,15 +82,28 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClassFunction(func: ClassFunction) {
+  private writeClass(className: string, classFields: string = '') {
     let api: string = '';
 
-    if (!this.writtenClasses.has(func.parent)) {
-      api += `---@class ${func.parent}\n`;
-      api += `local ${func.parent} = {}\n\n`;
+    if (!this.writtenClasses.has(className)) {
+      const classOverride = `class.${className}`;
+      if (this.pageOverrides.has(classOverride)) {
+        api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
+        api = api.replace('---{{CLASS_FIELDS}}\n', classFields);
+      } else {
+        api += `---@class ${className}\n`;
+        api += classFields;
+        api += `local ${className} = {}\n\n`;
+      }
 
-      this.writtenClasses.add(func.parent);
+      this.writtenClasses.add(className);
     }
+
+    return api;
+  }
+
+  private writeClassFunction(func: ClassFunction) {
+    let api: string = this.writeClass(func.parent);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm, ':');
@@ -146,17 +159,13 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let api: string = '';
-
-    api += `---@class ${struct.name}\n`;
+    let fields: string = '';
 
     for (const field of struct.fields) {
-      api += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
+      fields += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
     }
-    
-    api += `local ${struct.name} = {}\n\n`;
 
-    return api;
+    return this.writeClass(struct.name, fields);
   }
 
   public writePages(pages: WikiPage[]) {
