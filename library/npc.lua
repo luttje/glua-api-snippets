@@ -1,6 +1,6 @@
 ---@meta
 
----@class NPC
+---@class NPC : Entity
 local NPC = {}
 
 ---[SERVER] Makes the NPC like, hate, feel neutral towards, or fear the entity in question. If you want to setup relationship towards a certain entity `class`, use NPC:AddRelationship.

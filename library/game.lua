@@ -27,7 +27,7 @@ function game.AddDecal(decalName, materialName) end
 --- You will still need to call this function clientside regardless if you create the particle effects serverside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.AddParticles)
----@param particleFileName string The path of the file to add. Must be (file).pcf.
+---@param particleFileName string The path of the file to add. Must be `(file).pcf`.
 function game.AddParticles(particleFileName) end
 
 ---[SHARED] Consider using game.GetAmmoTypes and game.GetAmmoData instead.

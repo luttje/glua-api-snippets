@@ -65,8 +65,8 @@ function _G.AddOriginToPVS(position) end
 --- 	Using this function before SANDBOX:PopulateContent has been called will result in an error
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddPropsOfParent)
----@param pnlContent panel The SMContentPanel of the Node
----@param node panel The Node
+---@param pnlContent Panel The SMContentPanel of the Node
+---@param node Panel The Node
 ---@param parentid number The ParentID to use
 ---@param customProps table The Table with the Contents of the new Category
 function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
@@ -286,7 +286,7 @@ function _G.ColorToHSV(color) end
 ---[SHARED] Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileFile)
----@param path string Path to the file, relative to the garrysmod/lua/ directory.
+---@param path string Path to the file, relative to the `garrysmod/lua/` directory.
 ---@return function #The function which executes the script.
 function _G.CompileFile(path) end
 
@@ -383,7 +383,7 @@ function _G.CreateMaterial(name, shaderName, materialData) end
 ---
 function _G.CreateNewAddonPreset(data) end
 
----[CLIENT] Creates a new particle system.
+---[CLIENT] Creates a new particle system. See also Entity:CreateParticleEffect
 ---
 --- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 ---
@@ -395,6 +395,17 @@ function _G.CreateNewAddonPreset(data) end
 ---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 ---@return CNewParticleEffect #The created particle system.
 function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, offset) end
+
+---[CLIENT] Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles. See also Global.CreateParticleSystem
+---
+--- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity)
+---@param effect string The name of the effect to create. It must be precached.
+---@param pos Vector The position for the particle system.
+---@param ang? Angle The orientation of the particle system.
+---@return CNewParticleEffect #The created particle system.
+function _G.CreateParticleSystemNoEntity(effect, pos, ang) end
 
 ---[SHARED] Creates a new PhysCollide from the given bounds.
 ---
@@ -2028,9 +2039,9 @@ function _G.pairs(tab) end
 ---@return string #The particle file.
 function _G.Particle(file) end
 
----[SHARED] Creates a particle effect.
+---[SHARED] Creates a particle effect. See also Global.CreateParticleSystem.
 ---
---- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
+--- The particle effect must be precached **serverside** with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ParticleEffect)
 ---@param particleName string The name of the particle effect.
@@ -2041,7 +2052,7 @@ function _G.ParticleEffect(particleName, position, angles, parent) end
 
 ---[SHARED] Creates a particle effect with specialized parameters.
 ---
---- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
+--- The particle effect must be precached **serverside** with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach)
 ---@param particleName string The name of the particle effect.
@@ -2108,7 +2119,7 @@ function _G.Player(playerIndex) end
 ---@return table #Table of information of the view which can be used for rendering
 function _G.PositionSpawnIcon(model, position, noAngles) end
 
----[SHARED] Precaches the particle with the specified name.
+---[SHARED] Precaches a particle system with the specified name. The particle system must come from a file that is loaded with game.AddParticles beforehand.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem)
 ---@param particleSystemName string The name of the particle system.
