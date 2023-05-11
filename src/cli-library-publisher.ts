@@ -65,7 +65,7 @@ async function main() {
         "include": "require",
         "IncludeCS": "require",
       },
-      "runtime.nonstandardSymbol": [
+      "Lua.runtime.nonstandardSymbol": [
         "!",
         "!=",
         "&&",
