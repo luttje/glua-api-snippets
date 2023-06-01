@@ -69,6 +69,7 @@ function cam.PopModelMatrix() end
 ---[CLIENT] Pushes the specified matrix onto the render matrix stack. Unlike opengl, this will replace the current model matrix.
 ---
 --- This does not work with cam.Start3D2D if `multiply` is false.
+--- When used in the Paint function of a panel, if you want to rely on the top-left position of the panel, you must use VMatrix:Translate with the (0, 0) position of the panel relative to the screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)
 ---@param matrix VMatrix The matrix to push.

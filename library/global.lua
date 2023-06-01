@@ -970,7 +970,8 @@ function _G.FireProblemFromEngine(id, severity, params) end
 ---@return string #The formatted string
 function _G.Format(format, ...) end
 
----[CLIENT] Returns the number of frames rendered since the game was launched.
+---[SHARED] Returns the number of frames rendered since the game was launched.
+--- 		This function is currently only shared on the `dev` branch, and on other branches it only exists clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameNumber)
 function _G.FrameNumber() end
@@ -979,7 +980,7 @@ function _G.FrameNumber() end
 ---
 --- This should be used for frame/tick based timing, such as movement prediction or animations.
 ---
---- For real-time-based frame time that isn't affected by host_timescale, use Global.RealFrameTime. RealFrameTime is more suited for things like GUIs or HUDs.
+--- For real-time-based frame time that isn't affected by `host_timescale`, use Global.RealFrameTime. RealFrameTime is more suited for things like GUIs or HUDs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameTime)
 ---@return number #time (in seconds)
@@ -1481,6 +1482,7 @@ function _G.include(fileName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IncludeCS)
 ---@param filename string The filename of the Lua file you want to include.
+---@return ... #Anything that the executed Lua script returns.
 function _G.IncludeCS(filename) end
 
 ---[SHARED AND MENU] Returns an iterator function for a for loop, to return ordered key-value pairs from a table.
@@ -2473,9 +2475,14 @@ function _G.ScrW() end
 ---@return any #Returns a number or vararg, depending on the select method.
 function _G.select(parameter, ...) end
 
----[SHARED] This uses the umsg internally, which has been deprecated. Use the net instead.
---- Send a usermessage
---- Useless on client, only server can send info to client.
+---[SHARED] Send a usermessage
+---
+--- 			This uses the umsg internally, which has been deprecated. Use the net instead.
+---
+---
+---
+--- 			Using this clientside seems to cause the client to send the UserMessage to itself, which then get blocked internally.
+--- 			only server can send info to client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SendUserMessage)
 ---@param name string The name of the usermessage

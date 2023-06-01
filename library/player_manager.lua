@@ -81,6 +81,8 @@ function player_manager.SetPlayerClass(ply, classname) end
 
 ---[SHARED] Retrieves correct hands for given player model. By default returns citizen hands.
 ---
+--- See player_manager.AddValidHands for defining/linking hands to a model - this must be defined somewhere otherwise the model will return citizen hands here.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerHands)
 ---@param name string Player model name
 ---@return table #A table with following contents: * string model - Model of hands * number skin - Skin of hands * string body - Bodygroups of hands

@@ -333,7 +333,7 @@ function util.IsInWorld(position) end
 ---@return boolean #Returns true if the model is loaded in the game; otherwise false.
 function util.IsModelLoaded(modelName) end
 
----[CLIENT] Performs OBB on OBB intersection test.
+---[SHARED] Performs OBB on OBB intersection test.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsOBBIntersectingOBB)
 ---@param box1Origin Vector The center of the first box.

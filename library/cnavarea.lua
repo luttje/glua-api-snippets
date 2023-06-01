@@ -296,6 +296,18 @@ function CNavArea:GetSizeX() end
 ---@return number #
 function CNavArea:GetSizeY() end
 
+---[SERVER] Returns all spots that we would encounter when we move to another navmesh. It seems to be broken currently?
+---
+--- 			How should this be used exactly? It doesn't accept another CNavArea to check with.
+--- 			If it is
+--- 			[this](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/server/nav_area.h#L401)
+--- 			function, then it should accept another CNavArea if I'm not wrong.
+--- 			Please adjust this page if you find out how this function works.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetSpotEncounters)
+---@return table #A Table containing all spots that you encounter.
+function CNavArea:GetSpotEncounters() end
+
 ---[SERVER] Returns the total cost when passing from starting area to the goal area through this node. Set by CNavArea:SetTotalCost.
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
@@ -306,6 +318,12 @@ function CNavArea:GetSizeY() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetTotalCost)
 ---@return number #The total cost
 function CNavArea:GetTotalCost() end
+
+---[SERVER] Returns all CNavArea that are visible from this NavArea.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetVisibleAreas)
+---@return table # 			A sequential table containing all CNavArea that are visible from this NavArea.
+function CNavArea:GetVisibleAreas() end
 
 ---[SERVER] Returns the elevation of this Nav Area at the given position.
 ---

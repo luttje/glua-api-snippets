@@ -202,7 +202,7 @@ function render.DrawQuadEasy(position, normal, width, height, color, rotation) e
 ---@param applyPoster? boolean If set to true, when rendering a poster the quad will be properly drawn in parts in the poster. This is used internally by some Post Processing effects. Certain special textures (frame buffer like textures) do not need this adjustment.
 function render.DrawScreenQuad(applyPoster) end
 
----[CLIENT] Draws the the current material set by render.SetMaterial to the area specified. Color cannot be customized.
+---[CLIENT] Draws the current material set by render.SetMaterial to the area specified. Color cannot be customized.
 ---
 --- See also render.DrawScreenQuad.
 ---
@@ -277,8 +277,6 @@ function render.DrawWireframeSphere(position, radius, longitudeSteps, latitudeSt
 ---[CLIENT AND MENU] Sets the status of the clip renderer, returning previous state.
 ---
 --- To prevent unintended rendering behavior of other mods/the game, you must reset the clipping state to its previous value.
----
---- Reloading the map does not reset the previous value of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.EnableClipping)
 ---@param state boolean New clipping state.
@@ -678,6 +676,8 @@ function render.PushFilterMag(texFilterType) end
 
 ---[CLIENT AND MENU] Pushes a texture filter onto the minification texture filter stack.
 ---
+--- See also render.PushFilterMag and render.PopFilterMin.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFilterMin)
 ---@param texFilterType number The texture filter type, see Enums/TEXFILTER
 function render.PushFilterMin(texFilterType) end
@@ -838,7 +838,6 @@ function render.SetGoalToneMappingScale(scale) end
 ---[CLIENT] Sets lighting mode when rendering something.
 ---
 --- **Do not forget to restore the default value** to avoid unexpected behavior, like the world and the HUD/UI being affected
---- Reloading the map does not reset the value of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetLightingMode)
 ---@param Mode number Lighting render mode

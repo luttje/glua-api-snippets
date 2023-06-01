@@ -187,7 +187,17 @@ function surface.GetHUDTexture(name) end
 ---@return table #The color that text drawing operations will use as a Color.
 function surface.GetTextColor() end
 
----[CLIENT AND MENU] Returns the width and height (in pixels) of the given text, but only if the font has been set with surface.SetFont.
+---[CLIENT AND MENU] Returns the X and Y co-ordinate that has been set with surface.SetTextPos.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextPos)
+---@return number, number #number - The X integer co-ordinate.
+---@return number, number #number - The Y integer co-ordinate.
+function surface.GetTextPos() end
+
+---[CLIENT AND MENU] Returns the width and height (in pixels) of the given text with the font that has been set with surface.SetFont.
+---
+---
+--- Does not take into account new lines, the returned height is for the entire font (as specified by the font), not maximum of individual characters.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextSize)
 ---@param text string The string to check the size of.

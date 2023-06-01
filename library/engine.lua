@@ -107,7 +107,7 @@ function engine.OpenDupe(dupeName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.ServerFrameTime)
 ---@return number, number #number - Frame time.
----@return number, number #number - Server Framerate Std Deviation.
+---@return number, number #number - Server framerate [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation).
 function engine.ServerFrameTime() end
 
 ---[MENU] Sets the mounting options for mountable content.

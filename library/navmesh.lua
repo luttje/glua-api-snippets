@@ -141,6 +141,8 @@ function navmesh.IsLoaded() end
 
 ---[SERVER] Loads a new navmesh from the .nav file for current map discarding any changes made to the navmesh previously.
 ---
+--- 			Calling this function too soon, causes the Server to crash!
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.Load)
 function navmesh.Load() end
 

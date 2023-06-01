@@ -470,7 +470,7 @@ function PhysObj:SetMaterial(materialName) end
 ---@param position Vector The new position of the physobject in world coordinates. (`source units`).
 --- 			The new position will not be applied on the parent entity while the physics object is asleep (PhysObj:Sleep)
 ---
----@param teleport? boolean
+---@param teleport? boolean If `true`, temporarily disables collisions of the physics objects just before moving it, then enables collisions back again.
 function PhysObj:SetPos(position, teleport) end
 
 ---[SHARED] Sets the velocity of the physics object for the next iteration.

@@ -38,6 +38,7 @@ function game.AddParticles(particleFileName) end
 function game.BuildAmmoTypes() end
 
 ---[SHARED] If called serverside it will remove **ALL** entities which were not created by the map (not players or weapons held by players).
+--- It won't remove Entities who have the enums/EFL Flag set.
 ---
 --- On the client it will remove decals, sounds, gibs, dead NPCs, and entities created via ents.CreateClientProp.
 ---
