@@ -276,10 +276,11 @@ function ENTITY:CanProperty(ply, property) end
 ---@return boolean #Return `false` to disallow using that tool on this entity, return `true` to allow.
 function ENTITY:CanTool(ply, tr, toolname, tool, button) end
 
----[SERVER] Clears all registered events for map i/o outputs of the Entity.
+---[SERVER] Clears all registered events for map I/O outputs on this entity. If a string is given, will use the string as a wildcard to limit removed outputs by name matches.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ClearAllOutputs)
-function Entity:ClearAllOutputs() end
+---@param outputName? string An optional string that will be used to limit removed outputs by name matches, supports wildcards.
+function Entity:ClearAllOutputs(outputName) end
 
 ---[SHARED] Resets all pose parameters such as aim_yaw, aim_pitch and rotation.
 ---
@@ -306,7 +307,7 @@ function Entity:CollisionRulesChanged() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:CreateBoneFollowers)
 function Entity:CreateBoneFollowers() end
 
----[SERVER] Returns whether the entity was created by map or not.
+---[SHARED] Returns whether the entity was created by map or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:CreatedByMap)
 ---@return boolean #Is created by map?
@@ -814,10 +815,10 @@ function Entity:GetBoneController(boneID) end
 
 ---[SHARED] Returns the amount of bones in the entity.
 ---
---- Will return -1 for Global.ClientsideModel or undrawn entities until Entity:SetupBones is called on the entity.
+--- Will return `0` for Global.ClientsideModel or undrawn entities until Entity:SetupBones is called on the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBoneCount)
----@return number #The amount of bones in given entity; -1 on failure.
+---@return number #The amount of bones in given entity.
 function Entity:GetBoneCount() end
 
 ---[SHARED] Returns the transformation matrix of a given bone on the entity's model. The matrix contains the transformation used to position the bone in the world. It is not relative to the parent bone.
@@ -998,7 +999,9 @@ function Entity:GetConstrainedEntities() end
 ---@return PhysObj, PhysObj #PhysObj - phys2
 function Entity:GetConstrainedPhysObjects() end
 
----[SERVER] Returns entity's creation ID. Unlike Entity:EntIndex or  Entity:MapCreationID, it will always increase and old values won't be reused.
+---[SHARED] Returns entity's creation ID. Unlike Entity:EntIndex or Entity:MapCreationID.
+---
+--- It will increase up until value of `10 000 000`, at which point it will reset back to `0`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetCreationID)
 ---@return number #The creation ID
@@ -1179,7 +1182,7 @@ function Entity:GetFlexWeight(flex) end
 ---@return Vector #forwardDir
 function Entity:GetForward() end
 
----[SERVER] Returns how much friction an entity has. Entities default to 1 (100%) and can be higher or even negative.
+---[SHARED] Returns the friction modifier for this entity. Entities default to `1` (100%) and can be higher.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFriction)
 ---@return number #friction
@@ -2886,7 +2889,7 @@ function Entity:ManipulateBonePosition(boneID, pos, networking) end
 --- The vector will be normalised if its longer than 32 units.
 function Entity:ManipulateBoneScale(boneID, scale) end
 
----[SERVER] Returns entity's map creation ID. Unlike Entity:EntIndex or Entity:GetCreationID, it will always be the same on same map, no matter how much you clean up or restart it.
+---[SHARED] Returns entity's map creation ID. Unlike Entity:EntIndex or Entity:GetCreationID, it will always be the same on same map, no matter how much you clean up or restart it.
 ---
 --- To be used in conjunction with ents.GetMapCreatedEntity.
 ---
@@ -3899,12 +3902,13 @@ function Entity:SetFlexScale(scale) end
 ---@param weight number The new weight to set
 function Entity:SetFlexWeight(flex, weight) end
 
----[SERVER] Sets how much friction an entity has when sliding against a surface. Entities default to 1 (100%) and can be higher or even negative.
+---[SHARED] Sets friction multiplier for this entity when sliding against a surface. Entities default to 1 (100%) and can be higher.
+---
+--- For players, the range is 0 to 10.
+---
 --- This only multiplies the friction of the entity, to change the value itself use PhysObj:SetMaterial.
 ---
 --- Works only for MOVETYPE_STEP entities.
----
---- This has no effect on players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFriction)
 ---@param friction number Friction multiplier
@@ -5335,7 +5339,7 @@ function ENTITY:StoreOutput(name, info) end
 ---[SERVER] Applies the specified amount of damage to the entity with Enums/DMG flag.
 ---
 --- Calling this function on the victim entity in ENTITY:OnTakeDamage can cause infinite loops.
---- This function does not seem to do any damage if you apply it to a player who is into a vehicle.
+--- This function does not seem to do any damage if you apply it to a player who is into a vehicle. You need to call it on the vehicle instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:TakeDamage)
 ---@param damageAmount number The amount of damage to be applied.
@@ -5345,8 +5349,8 @@ function Entity:TakeDamage(damageAmount, attacker, inflictor) end
 
 ---[SERVER] Applies the damage specified by the damage info to the entity.
 ---
---- This function will not deal damage to a player inside a vehicle. You need to call it on the vehicle instead.
 --- Calling this function on the victim entity in ENTITY:OnTakeDamage can cause infinite loops.
+--- This function will not deal damage to a player inside a vehicle. You need to call it on the vehicle instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo)
 ---@param damageInfo CTakeDamageInfo The damage to apply.

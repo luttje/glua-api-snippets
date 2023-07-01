@@ -296,16 +296,10 @@ function CNavArea:GetSizeX() end
 ---@return number #
 function CNavArea:GetSizeY() end
 
----[SERVER] Returns all spots that we would encounter when we move to another navmesh. It seems to be broken currently?
----
---- 			How should this be used exactly? It doesn't accept another CNavArea to check with.
---- 			If it is
---- 			[this](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/server/nav_area.h#L401)
---- 			function, then it should accept another CNavArea if I'm not wrong.
---- 			Please adjust this page if you find out how this function works.
+---[SERVER] Returns all possible path segments through a CNavArea, and the dangerous spots to look at as we traverse that path segment.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetSpotEncounters)
----@return table #A Table containing all spots that you encounter.
+---@return table #A sequential list of spot encounters in the following format: * CNavArea **from** - What CNavArea the path segment is coming from * Vector **from_pos** - Origin position of the path segment * number **from_dir** - Source [Enums/NavDir](NavDir) direction of the path segment * CNavArea **to** - What [CNavArea]() the path segment is going towards * Vector **to_pos** - Target position of the path segment * number **to_dir** - Target [Enums/NavDir](NavDir) direction of the path segment * table **spots** - List of spots to look at, a sequential list of the following structures:   * Vector **pos** - Position of the spot   * table **flags** - Type of spot this is   * CNavArea **area** - The nav area the spot belongs to
 function CNavArea:GetSpotEncounters() end
 
 ---[SERVER] Returns the total cost when passing from starting area to the goal area through this node. Set by CNavArea:SetTotalCost.
@@ -319,10 +313,10 @@ function CNavArea:GetSpotEncounters() end
 ---@return number #The total cost
 function CNavArea:GetTotalCost() end
 
----[SERVER] Returns all CNavArea that are visible from this NavArea.
+---[SERVER] Returns all CNavAreas that are visible from this CNavArea.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetVisibleAreas)
----@return table # 			A sequential table containing all CNavArea that are visible from this NavArea.
+---@return table # 			A sequential table containing all CNavAreas that are visible from this CNavArea.
 function CNavArea:GetVisibleAreas() end
 
 ---[SERVER] Returns the elevation of this Nav Area at the given position.

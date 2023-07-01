@@ -22,7 +22,7 @@ function game.AddAmmoType(ammoData) end
 ---@param materialName string The material to be used for the decal. May also be a list of material names, in which case a random material from that list will be chosen every time the decal is placed.
 function game.AddDecal(decalName, materialName) end
 
----[SHARED] Loads a particle file.
+---[SHARED] Loads a particle file. Individual particle systems will still need to be precached with Global.PrecacheParticleSystem.
 ---
 --- You will still need to call this function clientside regardless if you create the particle effects serverside.
 ---
@@ -189,12 +189,12 @@ function game.GetMapVersion() end
 
 ---[SHARED] Returns the difficulty level of the game.
 ---
---- **TIP:** You can use this function in your scripted NPCs or Nextbots to make them harder, however, it is a good idea to lock powerful attacks behind the highest difficulty instead of just increasing the health.
+--- **TIP:** You can use this function in your scripted NPCs or Nextbots to make them stronger, however, it is a good idea to lock powerful attacks behind the highest difficulty instead of just increasing the health.
 ---
---- Internally this is tied to the gamerules entity, so you'll have to wait to wait until GM:InitPostEntity is called to return the skill level
+--- Internally this is tied to the gamerules entity, so you'll have to wait until GM:InitPostEntity is called to return the skill level
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetSkillLevel)
----@return number #The difficulty level, Easy( 1 ), Normal( 2 ), Hard( 3 ).
+---@return number #The difficulty level, Easy (1), Normal (2), Hard (3).
 function game.GetSkillLevel() end
 
 ---[SHARED] Returns the time scale set with game.SetTimeScale.
@@ -297,8 +297,6 @@ function game.SetGlobalState(name, state) end
 ---[SERVER] Sets the difficulty level of the game, can be retrieved with game.GetSkillLevel.
 ---
 --- This will automatically change whenever the "skill" convar is modified serverside.
----
---- This function will not work if the skill convar doesn't match the targeted value. To work around this, you must use RunConsoleCommand("skill", num) alongside this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.SetSkillLevel)
 ---@param level number The difficulty level, Easy( 1 ), Normal( 2 ), Hard( 3 ).

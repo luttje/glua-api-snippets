@@ -3,19 +3,19 @@
 ---@class DLabel : Label
 local DLabel = {}
 
----[CLIENT] Called just before DLabel:DoClick.
+---[CLIENT AND MENU] Called just before DLabel:DoClick.
 ---
 --- In DLabel does nothing and is safe to override. Used by DMenuOption and DCollapsibleCategory's tabs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:DoClickInternal)
 function DLabel:DoClickInternal() end
 
----[CLIENT] Called just before DLabel:DoDoubleClick. In DLabel does nothing and is safe to override.
+---[CLIENT AND MENU] Called just before DLabel:DoDoubleClick. In DLabel does nothing and is safe to override.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:DoDoubleClickInternal)
 function DLabel:DoDoubleClickInternal() end
 
----[CLIENT] Returns whether the label stretches vertically or not.
+---[CLIENT AND MENU] Returns whether the label stretches vertically or not.
 ---
 --- Set by DLabel:SetAutoStretchVertical.
 ---
@@ -23,7 +23,7 @@ function DLabel:DoDoubleClickInternal() end
 ---@return boolean #Whether the label stretches vertically or not.
 function DLabel:GetAutoStretchVertical() end
 
----[CLIENT] Returns whether the DLabel should set its text color to the current skin's bright text color.
+---[CLIENT AND MENU] Returns whether the DLabel should set its text color to the current skin's bright text color.
 ---
 --- See DLabel:SetBright.
 ---
@@ -31,7 +31,7 @@ function DLabel:GetAutoStretchVertical() end
 ---@return boolean #
 function DLabel:GetBright() end
 
----[CLIENT] Returns the actual color of the text.
+---[CLIENT AND MENU] Returns the actual color of the text.
 ---
 --- See also DLabel:GetTextColor and DLabel:GetTextStyleColor.
 ---
@@ -39,7 +39,7 @@ function DLabel:GetBright() end
 ---@return table #The the actual color of the text.
 function DLabel:GetColor() end
 
----[CLIENT] Returns whether the DLabel should set its text color to the current skin's dark text color.
+---[CLIENT AND MENU] Returns whether the DLabel should set its text color to the current skin's dark text color.
 ---
 --- See DLabel:SetDark.
 ---
@@ -47,7 +47,7 @@ function DLabel:GetColor() end
 ---@return boolean #
 function DLabel:GetDark() end
 
----[CLIENT] Use Panel:IsEnabled instead.
+---[CLIENT AND MENU] Use Panel:IsEnabled instead.
 ---
 --- Gets the disabled state of the DLabel. This is set with DLabel:SetDisabled.
 ---
@@ -55,7 +55,7 @@ function DLabel:GetDark() end
 ---@return boolean #The disabled state of the label.
 function DLabel:GetDisabled() end
 
----[CLIENT] Returns whether or not double clicking will call DLabel:DoDoubleClick.
+---[CLIENT AND MENU] Returns whether or not double clicking will call DLabel:DoDoubleClick.
 ---
 --- See DLabel:SetDoubleClickingEnabled.
 ---
@@ -63,13 +63,13 @@ function DLabel:GetDisabled() end
 ---@return boolean #true = enabled, false means disabled
 function DLabel:GetDoubleClickingEnabled() end
 
----[CLIENT] Returns the current font of the DLabel. This is set with DLabel:SetFont.
+---[CLIENT AND MENU] Returns the current font of the DLabel. This is set with DLabel:SetFont.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:GetFont)
 ---@return string #The name of the font in use.
 function DLabel:GetFont() end
 
----[CLIENT] Returns whether the DLabel should set its text color to the current skin's highlighted text color.
+---[CLIENT AND MENU] Returns whether the DLabel should set its text color to the current skin's highlighted text color.
 ---
 --- See DLabel:SetHighlight.
 ---
@@ -77,19 +77,19 @@ function DLabel:GetFont() end
 ---@return boolean #
 function DLabel:GetHighlight() end
 
----[CLIENT] Returns whether the toggle functionality is enabled for a label. Set with DLabel:SetIsToggle.
+---[CLIENT AND MENU] Returns whether the toggle functionality is enabled for a label. Set with DLabel:SetIsToggle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:GetIsToggle)
 ---@return boolean #Whether or not toggle functionality is enabled.
 function DLabel:GetIsToggle() end
 
----[CLIENT] Returns the "override" text color, set by DLabel:SetTextColor.
+---[CLIENT AND MENU] Returns the "override" text color, set by DLabel:SetTextColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:GetTextColor)
 ---@return table #The color of the text, or nil.
 function DLabel:GetTextColor() end
 
----[CLIENT] Returns the "internal" or fallback color of the text.
+---[CLIENT AND MENU] Returns the "internal" or fallback color of the text.
 ---
 --- See also DLabel:GetTextColor and DLabel:SetTextStyleColor.
 ---
@@ -97,7 +97,7 @@ function DLabel:GetTextColor() end
 ---@return table #The "internal" color of the text
 function DLabel:GetTextStyleColor() end
 
----[CLIENT] Returns the current toggle state of the label. This can be set with DLabel:SetToggle and toggled with DLabel:Toggle.
+---[CLIENT AND MENU] Returns the current toggle state of the label. This can be set with DLabel:SetToggle and toggled with DLabel:Toggle.
 ---
 --- In order to use toggle functionality, you must first call DLabel:SetIsToggle with `true`, as it is disabled by default.
 ---
@@ -105,13 +105,13 @@ function DLabel:GetTextStyleColor() end
 ---@return boolean #The current toggle state.
 function DLabel:GetToggle() end
 
----[CLIENT] Automatically adjusts the height of the label dependent of the height of the text inside of it.
+---[CLIENT AND MENU] Automatically adjusts the height of the label dependent of the height of the text inside of it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetAutoStretchVertical)
 ---@param stretch boolean Whenever to stretch the label vertically or not.
 function DLabel:SetAutoStretchVertical(stretch) end
 
----[CLIENT] You really should use DLabel:SetTextColor.
+---[CLIENT AND MENU] You really should use DLabel:SetTextColor.
 ---
 --- Sets the color of the text to the bright text color defined in the skin.
 ---
@@ -123,13 +123,13 @@ function DLabel:SetAutoStretchVertical(stretch) end
 ---@param bright boolean Whenever to set the text to bright or not.
 function DLabel:SetBright(bright) end
 
----[CLIENT] Changes color of label. Alias of DLabel:SetTextColor.
+---[CLIENT AND MENU] Changes color of label. Alias of DLabel:SetTextColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetColor)
 ---@param color table The color to set. Uses the Color structure.
 function DLabel:SetColor(color) end
 
----[CLIENT] You really should use DLabel:SetTextColor.
+---[CLIENT AND MENU] You really should use DLabel:SetTextColor.
 ---
 --- Sets the color of the text to the dark text color defined in the skin.
 ---
@@ -141,7 +141,7 @@ function DLabel:SetColor(color) end
 ---@param dark boolean Whenever to set the text to dark or not.
 function DLabel:SetDark(dark) end
 
----[CLIENT] Use Panel:SetEnabled instead.
+---[CLIENT AND MENU] Use Panel:SetEnabled instead.
 ---
 --- Sets the disabled state of the DLabel.
 ---
@@ -151,7 +151,7 @@ function DLabel:SetDark(dark) end
 ---@param disable boolean `true` to disable the DLabel, `false` to enable it.
 function DLabel:SetDisabled(disable) end
 
----[CLIENT] Sets whether or not double clicking should call DLabel:DoDoubleClick.
+---[CLIENT AND MENU] Sets whether or not double clicking should call DLabel:DoDoubleClick.
 ---
 --- This is enabled by default.
 ---
@@ -159,7 +159,7 @@ function DLabel:SetDisabled(disable) end
 ---@param enable boolean true to enable, false to disable
 function DLabel:SetDoubleClickingEnabled(enable) end
 
----[CLIENT] Sets the font of the label.
+---[CLIENT AND MENU] Sets the font of the label.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetFont)
 ---@param fontName string The name of the font.
@@ -168,7 +168,7 @@ function DLabel:SetDoubleClickingEnabled(enable) end
 --- Alternatively, use surface.CreateFont to create your own custom font.
 function DLabel:SetFont(fontName) end
 
----[CLIENT] You really should use DLabel:SetTextColor.
+---[CLIENT AND MENU] You really should use DLabel:SetTextColor.
 ---
 --- Sets the color of the text to the highlight text color defined in the skin.
 ---
@@ -182,7 +182,7 @@ function DLabel:SetFont(fontName) end
 ---@param highlight boolean true to set the label's color to skins's text highlight color, false otherwise.
 function DLabel:SetHighlight(highlight) end
 
----[CLIENT] Enables or disables toggle functionality for a label. Retrieved with DLabel:GetIsToggle.
+---[CLIENT AND MENU] Enables or disables toggle functionality for a label. Retrieved with DLabel:GetIsToggle.
 ---
 --- You must call this before using DLabel:SetToggle, DLabel:GetToggle or DLabel:Toggle.
 ---
@@ -190,13 +190,13 @@ function DLabel:SetHighlight(highlight) end
 ---@param allowToggle boolean Whether or not to enable toggle functionality.
 function DLabel:SetIsToggle(allowToggle) end
 
----[CLIENT] Sets the text color of the DLabel. This will take precedence over DLabel:SetTextStyleColor.
+---[CLIENT AND MENU] Sets the text color of the DLabel. This will take precedence over DLabel:SetTextStyleColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetTextColor)
 ---@param color table The text color. Uses the Color.
 function DLabel:SetTextColor(color) end
 
----[CLIENT] Use DLabel:SetTextColor instead!
+---[CLIENT AND MENU] Use DLabel:SetTextColor instead!
 ---
 ---
 --- Used by DLabel:SetDark, DLabel:SetBright and DLabel:SetHighlight to set the text color without affecting DLabel:SetTextColor calls.
@@ -205,7 +205,7 @@ function DLabel:SetTextColor(color) end
 ---@param color table The text color. Uses the Color.
 function DLabel:SetTextStyleColor(color) end
 
----[CLIENT] Sets the toggle state of the label. This can be retrieved with DLabel:GetToggle and toggled with DLabel:Toggle.
+---[CLIENT AND MENU] Sets the toggle state of the label. This can be retrieved with DLabel:GetToggle and toggled with DLabel:Toggle.
 ---
 --- In order to use toggle functionality, you must first call DLabel:SetIsToggle with `true`, as it is disabled by default.
 ---
@@ -213,20 +213,20 @@ function DLabel:SetTextStyleColor(color) end
 ---@param toggleState boolean The toggle state to be set.
 function DLabel:SetToggle(toggleState) end
 
----[CLIENT] Toggles the label's state. This can be set and retrieved with DLabel:SetToggle and DLabel:GetToggle.
+---[CLIENT AND MENU] Toggles the label's state. This can be set and retrieved with DLabel:SetToggle and DLabel:GetToggle.
 ---
 --- In order to use toggle functionality, you must first call DLabel:SetIsToggle with `true`, as it is disabled by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:Toggle)
 function DLabel:Toggle() end
 
----[CLIENT] A hook called from within PANEL:ApplySchemeSettings to determine the color of the text on display.
+---[CLIENT AND MENU] A hook called from within PANEL:ApplySchemeSettings to determine the color of the text on display.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:UpdateColours)
 ---@param skin table A table supposed to contain the color values listed above.
 function DLabel:UpdateColours(skin) end
 
----[CLIENT] Called internally to update the color of the text.
+---[CLIENT AND MENU] Called internally to update the color of the text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:UpdateFGColor)
 function DLabel:UpdateFGColor() end

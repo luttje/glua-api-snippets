@@ -431,14 +431,14 @@ local SequenceInfo = {}
 local ServerQueryData = {}
 
 ---@class SoundData
+---@field sound string Path to the sound file to be used in this sound effect, relative to `sound/` directory (so exclude the `sound/` part).   Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list.  Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
+---@field name string The name of the soundscript, to be referenced by in functions such as Entity:EmitSound.
 ---@field channel number The sound channel to play in. See Enums/CHAN
----@field name string The name of the sound.
----@field pitchstart number The initial pitch. 	Deprecated, use pitch.
----@field pitchend number The pitch end. Deprecated, use pitch.
----@field level number The soundlevel of the sound in dB. See Enums/SNDLVL.
----@field sound string The sound file to be used in this sound effect. Can be a table of sound files. Relative to "sound" directory (must be in a subfolder, so sound/test.wav will not work).
+---@field level number The soundlevel of the sound in dB. See Enums/SNDLVL. This will affect how far the sound can be heard.
 ---@field volume number The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.  **Warning:** Volume of `0` will act as volume of `1`
 ---@field pitch number The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.
+---@field pitchstart number The initial pitch. 	Deprecated, use pitch.
+---@field pitchend number The pitch end. Deprecated, use pitch.
 local SoundData = {}
 
 ---@class SoundHintData

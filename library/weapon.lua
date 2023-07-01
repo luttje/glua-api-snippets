@@ -156,7 +156,7 @@ function WEAPON:DoDrawCrosshair(x, y) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:DoImpactEffect)
 ---@param tr table A Structures/TraceResult from player's eyes to the impact point
 ---@param damageType number The damage type of bullet. See Enums/DMG
----@return boolean #Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
+---@return boolean #Return true to not do the default thing - which is to call `UTIL_ImpactTrace` in C++
 function WEAPON:DoImpactEffect(tr, damageType) end
 
 ---[CLIENT] This hook allows you to draw on screen while this weapon is in use.
@@ -239,6 +239,12 @@ function Weapon:GetActivity() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:GetCapabilities)
 ---@return number #A number defining what NPC should do with the weapon. Use the Enums/CAP.
 function WEAPON:GetCapabilities() end
+
+---[SHARED] Returns the weapon deploy speed, as set by Weapon:SetDeploySpeed. If not previously set, the value will be polled from the `sv_defaultdeployspeed` ConVar.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:GetDeploySpeed)
+---@return number #The value to set deploy speed to.
+function Weapon:GetDeploySpeed() end
 
 ---[SHARED] Returns the hold type of the weapon.
 ---
@@ -392,8 +398,6 @@ function WEAPON:HUDShouldDraw(element) end
 ---[SHARED] Called when the weapon entity is created.
 ---
 --- Entity:GetOwner will return NULL at this point because the weapon is not equpped by a player or NPC yet. Use WEAPON:Equip or WEAPON:Deploy if you need the owner to be valid.
----
---- This is sometimes not called clientside. You can work around this by setting a variable in Initialize and check if it exists in WEAPON:Think. See the example below.
 ---
 --- This is not called serverside after a quicksave.
 ---
@@ -563,8 +567,8 @@ function Weapon:SetClip2(ammo) end
 ---[SHARED] Sets the weapon deploy speed. This value needs to match on client and server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:SetDeploySpeed)
----@param speed number The value to set deploy speed to. Negative will slow down playback.
-function WEAPON:SetDeploySpeed(speed) end
+---@param speed number The value to set deploy speed to. Values less than `1` will slow down the animations. Minimum value is `0.1`.
+function Weapon:SetDeploySpeed(speed) end
 
 ---[SHARED] Sets the hold type of the weapon. This function also calls WEAPON:SetWeaponHoldType and properly networks it to all clients.
 ---

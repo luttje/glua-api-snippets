@@ -96,7 +96,9 @@ function CNewParticleEffect:SetControlPointForwardVector(cpID, forward) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointOrientation)
 ---@param cpID number The control point ID, 0 to 63.
----@param forward Vector The forward direction for given control point
+---@param forward Vector The forward direction for given control point.
+---
+--- This can also be an Angle, in which case the other 2 arguments are not used.
 ---@param right Vector The right direction for given control point
 ---@param up Vector The up direction for given control point
 function CNewParticleEffect:SetControlPointOrientation(cpID, forward, right, up) end

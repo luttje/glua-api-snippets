@@ -3,7 +3,7 @@
 ---@class DForm : DCollapsibleCategory
 local DForm = {}
 
----[CLIENT] Adds one or two items to the DForm.
+---[CLIENT AND MENU] Adds one or two items to the DForm.
 --- If this method is called with only one argument, it is added to the bottom of the form. If two arguments are passed, they are placed side-by-side at the bottom of the form.
 ---
 --- Internally, this function is used by the various DForm functions to, for example, add labels to the left of buttons.
@@ -13,7 +13,7 @@ local DForm = {}
 ---@param right? Panel Right-hand element to add to the DForm.
 function DForm:AddItem(left, right) end
 
----[CLIENT] Adds a DButton onto the DForm
+---[CLIENT AND MENU] Adds a DButton onto the DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Button)
 ---@param text string The text on the button
@@ -22,7 +22,7 @@ function DForm:AddItem(left, right) end
 ---@return Panel #The created DButton
 function DForm:Button(text, concommand, ...) end
 
----[CLIENT] Adds a DCheckBoxLabel onto the DForm.
+---[CLIENT AND MENU] Adds a DCheckBoxLabel onto the DForm.
 --- This will run DCheckBoxLabel:OnChange when being added. This is caused by Panel:SetConVar being used when this function is used. To avoid this, use DForm:AddItem with a DCheckBoxLabel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:CheckBox)
@@ -31,7 +31,7 @@ function DForm:Button(text, concommand, ...) end
 ---@return Panel #The created DCheckBoxLabel
 function DForm:CheckBox(label, convar) end
 
----[CLIENT] Adds a DComboBox onto the DForm
+---[CLIENT AND MENU] Adds a DComboBox onto the DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ComboBox)
 ---@param title string Text to the left of the combo box
@@ -40,21 +40,21 @@ function DForm:CheckBox(label, convar) end
 ---@return Panel, Panel #Panel - The created DLabel
 function DForm:ComboBox(title, convar) end
 
----[CLIENT] Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
+---[CLIENT AND MENU] Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ControlHelp)
 ---@param help string The help message to be displayed.
 ---@return Panel #The created DLabel
 function DForm:ControlHelp(help) end
 
----[CLIENT] Adds a DLabel onto the DForm as a helper
+---[CLIENT AND MENU] Adds a DLabel onto the DForm as a helper
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Help)
 ---@param help string The help message to be displayed
 ---@return Panel #The created DLabel
 function DForm:Help(help) end
 
----[CLIENT] Adds a DListBox onto the DForm
+---[CLIENT AND MENU] Adds a DListBox onto the DForm
 --- Use DListView with DForm:AddItem instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ListBox)
@@ -63,7 +63,7 @@ function DForm:Help(help) end
 ---@return Panel, Panel #Panel - The created DLabel
 function DForm:ListBox(label) end
 
----[CLIENT] Adds a DNumberWang onto the DForm
+---[CLIENT AND MENU] Adds a DNumberWang onto the DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:NumberWang)
 ---@param label string The label to be placed next to the DNumberWang
@@ -75,7 +75,7 @@ function DForm:ListBox(label) end
 ---@return Panel, Panel #Panel - The created DLabel
 function DForm:NumberWang(label, convar, min, max, decimals) end
 
----[CLIENT] Adds a DNumSlider onto the DForm
+---[CLIENT AND MENU] Adds a DNumSlider onto the DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:NumSlider)
 ---@param label string The label of the DNumSlider
@@ -86,13 +86,13 @@ function DForm:NumberWang(label, convar, min, max, decimals) end
 ---@return Panel #The created DNumSlider
 function DForm:NumSlider(label, convar, min, max, decimals) end
 
----[CLIENT] This is derived from the deprecated DPanelSelect.Creates a DPanelSelect and docks it to the top of the DForm.
+---[CLIENT AND MENU] This is derived from the deprecated DPanelSelect.Creates a DPanelSelect and docks it to the top of the DForm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:PanelSelect)
 ---@return Panel #The created DPanelSelect.
 function DForm:PanelSelect() end
 
----[CLIENT] Creates a PropSelect panel and docks it to the top of the DForm.
+---[CLIENT AND MENU] Creates a PropSelect panel and docks it to the top of the DForm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:PropSelect)
 ---@param label string The label to display above the prop select.
@@ -110,18 +110,18 @@ function DForm:PanelSelect() end
 ---@return Panel #The created PropSelect panel.
 function DForm:PropSelect(label, convar, models, height) end
 
----[CLIENT] Does nothing.
+---[CLIENT AND MENU] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Rebuild)
 function DForm:Rebuild() end
 
----[CLIENT] Sets the title (header) name of the DForm. This is `Label` until set.
+---[CLIENT AND MENU] Sets the title (header) name of the DForm. This is `Label` until set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetName)
 ---@param name string The new header name.
 function DForm:SetName(name) end
 
----[CLIENT] Adds a DTextEntry to a DForm
+---[CLIENT AND MENU] Adds a DTextEntry to a DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:TextEntry)
 ---@param label string The label to be next to the text entry

@@ -3,7 +3,7 @@
 ---@class DComboBox : DButton
 local DComboBox = {}
 
----[CLIENT] Adds a choice to the combo box.
+---[CLIENT AND MENU] Adds a choice to the combo box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:AddChoice)
 ---@param value string The text show to the user.
@@ -15,49 +15,49 @@ local DComboBox = {}
 ---@return number #The index of the new option.
 function DComboBox:AddChoice(value, data, select, icon) end
 
----[CLIENT] Adds a spacer below the currently last item in the drop down. Recommended to use with DComboBox:SetSortItems set to `false`.
+---[CLIENT AND MENU] Adds a spacer below the currently last item in the drop down. Recommended to use with DComboBox:SetSortItems set to `false`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:AddSpacer)
 function DComboBox:AddSpacer() end
 
----[CLIENT] Selects a combo box option by its index and changes the text displayed at the top of the combo box.
+---[CLIENT AND MENU] Selects a combo box option by its index and changes the text displayed at the top of the combo box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:ChooseOption)
 ---@param value string The text to display at the top of the combo box.
 ---@param index number The option index.
 function DComboBox:ChooseOption(value, index) end
 
----[CLIENT] Selects an option within a combo box based on its table index.
+---[CLIENT AND MENU] Selects an option within a combo box based on its table index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:ChooseOptionID)
 ---@param index number Selects the option with given index.
 function DComboBox:ChooseOptionID(index) end
 
----[CLIENT] Clears the combo box's text value, choices, and data values.
+---[CLIENT AND MENU] Clears the combo box's text value, choices, and data values.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:Clear)
 function DComboBox:Clear() end
 
----[CLIENT] Closes the combo box menu. Called when the combo box is clicked while open.
+---[CLIENT AND MENU] Closes the combo box menu. Called when the combo box is clicked while open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:CloseMenu)
 function DComboBox:CloseMenu() end
 
----[CLIENT] Returns an option's data based on the given index.
+---[CLIENT AND MENU] Returns an option's data based on the given index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionData)
 ---@param index number The option index.
 ---@return any #The option's data value.
 function DComboBox:GetOptionData(index) end
 
----[CLIENT] Returns an option's text based on the given index.
+---[CLIENT AND MENU] Returns an option's text based on the given index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionText)
 ---@param index number The option index.
 ---@return string #The option's text value.
 function DComboBox:GetOptionText(index) end
 
----[CLIENT] Returns an option's text based on the given data.
+---[CLIENT AND MENU] Returns an option's text based on the given data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetOptionTextByData)
 ---@param data string The data to look up the name of.
@@ -66,20 +66,20 @@ function DComboBox:GetOptionText(index) end
 ---@return string #The option's text value.  If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
 function DComboBox:GetOptionTextByData(data) end
 
----[CLIENT] Returns the currently selected option's text and data
+---[CLIENT AND MENU] Returns the currently selected option's text and data
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSelected)
 ---@return string, any #string - The option's text value.
 ---@return string, any #any - The option's stored data.
 function DComboBox:GetSelected() end
 
----[CLIENT] Returns the index (ID) of the currently selected option.
+---[CLIENT AND MENU] Returns the index (ID) of the currently selected option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSelectedID)
 ---@return number #The ID of the currently selected option.
 function DComboBox:GetSelectedID() end
 
----[CLIENT] Returns an whether the items in the dropdown will be alphabetically sorted or not.
+---[CLIENT AND MENU] Returns an whether the items in the dropdown will be alphabetically sorted or not.
 ---
 --- See DComboBox:SetSortItems.
 ---
@@ -87,18 +87,18 @@ function DComboBox:GetSelectedID() end
 ---@return boolean #True if enabled, false otherwise.
 function DComboBox:GetSortItems() end
 
----[CLIENT] Returns whether or not the combo box's menu is opened.
+---[CLIENT AND MENU] Returns whether or not the combo box's menu is opened.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:IsMenuOpen)
 ---@return boolean #True if the menu is open, false otherwise.
 function DComboBox:IsMenuOpen() end
 
----[CLIENT] Opens the combo box drop down menu. Called when the combo box is clicked.
+---[CLIENT AND MENU] Opens the combo box drop down menu. Called when the combo box is clicked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:OpenMenu)
 function DComboBox:OpenMenu() end
 
----[CLIENT] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls.
+---[CLIENT AND MENU] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls.
 ---
 --- This is enabled by default.
 ---
@@ -106,7 +106,7 @@ function DComboBox:OpenMenu() end
 ---@param sort boolean true to enable, false to disable
 function DComboBox:SetSortItems(sort) end
 
----[CLIENT] Sets the text shown in the combo box when the menu is not collapsed.
+---[CLIENT AND MENU] Sets the text shown in the combo box when the menu is not collapsed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:SetValue)
 ---@param value string The text in the DComboBox.

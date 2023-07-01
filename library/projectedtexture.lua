@@ -50,7 +50,7 @@ function ProjectedTexture:GetHorizontalFOV() end
 ---[CLIENT] Returns whenever or not the Texture should light up world geometry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetLightWorld)
----@return boolean #**true** if the Texture should light up world geometry.
+---@return boolean #`true` if the Texture should light up world geometry.
 function ProjectedTexture:GetLightWorld() end
 
 ---[CLIENT] Returns the linear attenuation of the projected texture, which can also be set by ProjectedTexture:SetLinearAttenuation.
@@ -229,7 +229,7 @@ function ProjectedTexture:SetHorizontalFOV(hFOV) end
 ---[CLIENT] Set whenever or not the Texture should light up world geometry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:SetLightWorld)
----@param lightworld boolean Set it to **true** if the Texture should light up world geometry.
+---@param lightworld boolean Set it to `true` if the Texture should light up world geometry.
 function ProjectedTexture:SetLightWorld(lightworld) end
 
 ---[CLIENT] Sets the linear attenuation of the projected texture.

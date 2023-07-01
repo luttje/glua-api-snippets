@@ -971,7 +971,6 @@ function _G.FireProblemFromEngine(id, severity, params) end
 function _G.Format(format, ...) end
 
 ---[SHARED] Returns the number of frames rendered since the game was launched.
---- 		This function is currently only shared on the `dev` branch, and on other branches it only exists clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameNumber)
 function _G.FrameNumber() end
@@ -2122,6 +2121,10 @@ function _G.Player(playerIndex) end
 function _G.PositionSpawnIcon(model, position, noAngles) end
 
 ---[SHARED] Precaches a particle system with the specified name. The particle system must come from a file that is loaded with game.AddParticles beforehand.
+---
+--- When used on the server, it automatically precaches the particle on client.
+---
+--- There is a limit of 4096 precached particles on the server. So only precache particles that are actually going to be used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem)
 ---@param particleSystemName string The name of the particle system.

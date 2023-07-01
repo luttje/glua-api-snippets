@@ -3,19 +3,19 @@
 ---@class DPanelOverlay : DPanel
 local DPanelOverlay = {}
 
----[CLIENT] Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.
+---[CLIENT AND MENU] Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:GetColor)
 ---@return table #The set color. Uses the Color.
 function DPanelOverlay:GetColor() end
 
----[CLIENT] Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
+---[CLIENT AND MENU] Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:GetType)
 ---@return number #The set type.
 function DPanelOverlay:GetType() end
 
----[CLIENT] Used internally by the panel for type 3.
+---[CLIENT AND MENU] Used internally by the panel for type 3.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintDifferentColours)
 ---@param cola table
@@ -25,19 +25,19 @@ function DPanelOverlay:GetType() end
 ---@param size number
 function DPanelOverlay:PaintDifferentColours(cola, colb, colc, cold, size) end
 
----[CLIENT] Used internally by the panel for types 1 and 2.
+---[CLIENT AND MENU] Used internally by the panel for types 1 and 2.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintInnerCorners)
 ---@param size number
 function DPanelOverlay:PaintInnerCorners(size) end
 
----[CLIENT] Sets the border color of the DPanelOverlay.
+---[CLIENT AND MENU] Sets the border color of the DPanelOverlay.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:SetColor)
 ---@param color table The color to set. Uses the Color.
 function DPanelOverlay:SetColor(color) end
 
----[CLIENT] Sets the type of the DPanelOverlay.
+---[CLIENT AND MENU] Sets the type of the DPanelOverlay.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:SetType)
 ---@param type number The type to set.

@@ -20,7 +20,9 @@ function DHTML:AddFunction(library, name, callback) end
 ---@param js string Specify JavaScript code to be executed.
 function DHTML:Call(js) end
 
----[CLIENT AND MENU] Called when the page inside the DHTML window runs `console.log`. This can also be called within the Lua environment to emulate `console.log`. If the contained message begins with `RUNLUA:` the following text will be executed as code within the Lua environment (this is how Lua is called from DHTML windows).
+---[CLIENT AND MENU] Called when the page inside the DHTML window runs the `console.log` javascript function. On the x86-64 beta, it's called for all built-in `console.*` javascript functions.
+---
+--- If DHTML:SetAllowLua is set to `true` and the message begins with `RUNLUA:`, the text following `RUNLUA:` will be executed as code within the Lua environment (this is how Lua is called from DHTML windows).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:ConsoleMessage)
 ---@param msg string The message to be logged (or Lua code to be executed; see above).

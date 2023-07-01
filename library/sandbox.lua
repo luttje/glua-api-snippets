@@ -314,13 +314,6 @@ function SANDBOX:PopulateNPCs(pnlContent, tree, node) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulatePropMenu)
 function SANDBOX:PopulatePropMenu() end
 
----[CLIENT] Called to populate the Scripted Tool menu.
----
---- This hook is never called. Use SANDBOX:PopulateToolMenu instead.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateSTOOLMenu)
-function SANDBOX:PopulateSTOOLMenu() end
-
 ---[CLIENT] Add the STOOLS to the tool menu. You want to call spawnmenu.AddToolMenuOption in this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateToolMenu)

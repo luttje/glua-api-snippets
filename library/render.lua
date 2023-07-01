@@ -458,7 +458,7 @@ function render.GetResolvedFullFrameDepth() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture)
 ---@param textureIndex? number Max index is 3, but engine only creates the first two for you.
----@return ITexture #
+---@return ITexture #The requested texture.
 function render.GetScreenEffectTexture(textureIndex) end
 
 ---[CLIENT]
@@ -724,6 +724,12 @@ function render.ReadPixel(x, y) end
 ---@param DoStaticProps? boolean When true, this will also apply lighting changes to static props. This is really slow on large maps.
 ---@param UpdateStaticLighting? boolean Forces all props to update their static lighting. Can be slow.
 function render.RedownloadAllLightmaps(DoStaticProps, UpdateStaticLighting) end
+
+---[CLIENT] Renders additive flashlights on an IMesh, a direct replacement for render.PushFlashlightMode.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/render.RenderFlashlights)
+---@param renderFunc function The function that renders the IMesh, or a model.
+function render.RenderFlashlights(renderFunc) end
 
 ---[CLIENT] Renders the HUD on the screen.
 ---
@@ -1089,7 +1095,8 @@ function render.UpdateRefractTexture() end
 ---[CLIENT] Copies the entire screen to the screen effect texture, which can be acquired via render.GetScreenEffectTexture. This function is mainly intended to be used in GM:RenderScreenspaceEffects
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.UpdateScreenEffectTexture)
-function render.UpdateScreenEffectTexture() end
+---@param textureIndex? number Texture index to update. Max index is 3, but engine only creates the first two for you.
+function render.UpdateScreenEffectTexture(textureIndex) end
 
 ---[CLIENT] This function overrides all map materials for one frame.
 ---

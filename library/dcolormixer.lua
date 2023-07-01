@@ -3,30 +3,30 @@
 ---@class DColorMixer : DPanel
 local DColorMixer = {}
 
----[CLIENT]
+---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:ConVarThink)
 function DColorMixer:ConVarThink() end
 
----[CLIENT]
+---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:DoConVarThink)
 ---@param cvar string
 function DColorMixer:DoConVarThink(cvar) end
 
----[CLIENT] Return true if alpha bar is shown, false if not.
+---[CLIENT AND MENU] Return true if alpha bar is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetAlphaBar)
 ---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetAlphaBar() end
 
----[CLIENT] Returns the current selected color.
+---[CLIENT AND MENU] Returns the current selected color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
 ---@return table #The current selected color as a Color.
 function DColorMixer:GetColor() end
 
----[CLIENT] Returns the ConVar name for the alpha channel of the color.
+---[CLIENT AND MENU] Returns the ConVar name for the alpha channel of the color.
 ---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
@@ -37,7 +37,7 @@ function DColorMixer:GetColor() end
 ---@return string #The ConVar name for the alpha channel of the color
 function DColorMixer:GetConVarA() end
 
----[CLIENT] Returns the ConVar name for the blue channel of the color.
+---[CLIENT AND MENU] Returns the ConVar name for the blue channel of the color.
 ---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
@@ -48,7 +48,7 @@ function DColorMixer:GetConVarA() end
 ---@return string #The ConVar name for the blue channel of the color
 function DColorMixer:GetConVarB() end
 
----[CLIENT] Returns the ConVar name for the green channel of the color.
+---[CLIENT AND MENU] Returns the ConVar name for the green channel of the color.
 ---
 --- See also:
 --- * DColorMixer:GetConVarR - For the red channel
@@ -59,7 +59,7 @@ function DColorMixer:GetConVarB() end
 ---@return string #The ConVar name for the green channel of the color
 function DColorMixer:GetConVarG() end
 
----[CLIENT] Returns the ConVar name for the red channel of the color.
+---[CLIENT AND MENU] Returns the ConVar name for the red channel of the color.
 ---
 --- See also:
 --- * DColorMixer:GetConVarG - For the green channel
@@ -70,31 +70,31 @@ function DColorMixer:GetConVarG() end
 ---@return string #The ConVar name for the red channel of the color
 function DColorMixer:GetConVarR() end
 
----[CLIENT] Return true if palette is shown, false if not.
+---[CLIENT AND MENU] Return true if palette is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetPalette)
 ---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetPalette() end
 
----[CLIENT] Returns the color as a normalized Vector.
+---[CLIENT AND MENU] Returns the color as a normalized Vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetVector)
 ---@return Vector #A vector representing the color of the DColorMixer, each value being in range of 0 to 1. Alpha is not included.
 function DColorMixer:GetVector() end
 
----[CLIENT] Return true if the wangs are shown, false if not.
+---[CLIENT AND MENU] Return true if the wangs are shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetWangs)
 ---@return boolean #Return true if shown, false if not.
 function DColorMixer:GetWangs() end
 
----[CLIENT] Show/Hide the alpha bar in DColorMixer
+---[CLIENT AND MENU] Show/Hide the alpha bar in DColorMixer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetAlphaBar)
 ---@param show boolean Show / Hide the alpha bar
 function DColorMixer:SetAlphaBar(show) end
 
----[CLIENT] Sets the base color of the DColorCube part of the DColorMixer.
+---[CLIENT AND MENU] Sets the base color of the DColorCube part of the DColorMixer.
 ---
 --- See also DColorCube:SetBaseRGB
 ---
@@ -102,13 +102,13 @@ function DColorMixer:SetAlphaBar(show) end
 ---@param clr table Color
 function DColorMixer:SetBaseColor(clr) end
 
----[CLIENT] Sets the color of the DColorMixer
+---[CLIENT AND MENU] Sets the color of the DColorMixer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetColor)
 ---@param color table The color to set. See Global.Color
 function DColorMixer:SetColor(color) end
 
----[CLIENT] Sets the ConVar name for the alpha channel of the color.
+---[CLIENT AND MENU] Sets the ConVar name for the alpha channel of the color.
 ---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
@@ -119,7 +119,7 @@ function DColorMixer:SetColor(color) end
 ---@param convar string The ConVar name for the alpha channel of the color
 function DColorMixer:SetConVarA(convar) end
 
----[CLIENT] Sets the ConVar name for the blue channel of the color.
+---[CLIENT AND MENU] Sets the ConVar name for the blue channel of the color.
 ---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
@@ -130,7 +130,7 @@ function DColorMixer:SetConVarA(convar) end
 ---@param convar string The ConVar name for the blue channel of the color
 function DColorMixer:SetConVarB(convar) end
 
----[CLIENT] Sets the ConVar name for the green channel of the color.
+---[CLIENT AND MENU] Sets the ConVar name for the green channel of the color.
 ---
 --- See also:
 --- * DColorMixer:SetConVarR - For the red channel
@@ -141,7 +141,7 @@ function DColorMixer:SetConVarB(convar) end
 ---@param convar string The ConVar name for the green channel of the color
 function DColorMixer:SetConVarG(convar) end
 
----[CLIENT] Sets the ConVar name for the red channel of the color.
+---[CLIENT AND MENU] Sets the ConVar name for the red channel of the color.
 ---
 --- See also:
 --- * DColorMixer:SetConVarG - For the green channel
@@ -152,7 +152,7 @@ function DColorMixer:SetConVarG(convar) end
 ---@param convar string The ConVar name for the red channel of the color
 function DColorMixer:SetConVarR(convar) end
 
----[CLIENT] Sets the label's text to show.
+---[CLIENT AND MENU] Sets the label's text to show.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetLabel)
 ---@param text? string Set to non empty string to show the label and its text.
@@ -160,36 +160,36 @@ function DColorMixer:SetConVarR(convar) end
 --- Give it an empty string or nothing and the label will be hidden.
 function DColorMixer:SetLabel(text) end
 
----[CLIENT] Show or hide the palette panel
+---[CLIENT AND MENU] Show or hide the palette panel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetPalette)
 ---@param enabled boolean Show or hide the palette panel?
 function DColorMixer:SetPalette(enabled) end
 
----[CLIENT] Sets the color of DColorMixer from a Vector. Alpha is not included.
+---[CLIENT AND MENU] Sets the color of DColorMixer from a Vector. Alpha is not included.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetVector)
 ---@param vec Vector The color to set. It is expected that the vector will have values be from 0 to 1. (i.e. be normalized)
 function DColorMixer:SetVector(vec) end
 
----[CLIENT] Show / Hide the colors indicators in DColorMixer
+---[CLIENT AND MENU] Show / Hide the colors indicators in DColorMixer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetWangs)
 ---@param show boolean Show / Hide the colors indicators
 function DColorMixer:SetWangs(show) end
 
----[CLIENT] Does nothing.
+---[CLIENT AND MENU] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:TranslateValues)
 function DColorMixer:TranslateValues() end
 
----[CLIENT] Use DColorMixer:SetColor instead!
+---[CLIENT AND MENU] Use DColorMixer:SetColor instead!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateColor)
 ---@param clr table
 function DColorMixer:UpdateColor(clr) end
 
----[CLIENT]
+---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVar)
 ---@param cvar string The ConVar name
@@ -197,7 +197,7 @@ function DColorMixer:UpdateColor(clr) end
 ---@param clr table The Color
 function DColorMixer:UpdateConVar(cvar, part, clr) end
 
----[CLIENT]
+---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVars)
 ---@param clr table The Color

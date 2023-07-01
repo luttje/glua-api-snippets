@@ -3,19 +3,19 @@
 ---@class DListView_Line : Panel
 local DListView_Line = {}
 
----[CLIENT] Called by DListView:DataLayout
+---[CLIENT AND MENU] Called by DListView:DataLayout
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:DataLayout)
 ---@param pnl DListView The list view.
 function DListView_Line:DataLayout(pnl) end
 
----[CLIENT] Returns whether this line is odd or even in the list. This is internally used (and set) to change the looks of every other line.
+---[CLIENT AND MENU] Returns whether this line is odd or even in the list. This is internally used (and set) to change the looks of every other line.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:GetAltLine)
 ---@return boolean #Whether this line is 'alternative'.
 function DListView_Line:GetAltLine() end
 
----[CLIENT] Gets the string held in the specified column of a DListView_Line panel.
+---[CLIENT AND MENU] Gets the string held in the specified column of a DListView_Line panel.
 ---
 --- This is the same thing as doing Panel:GetValue( column_number ).
 ---
@@ -24,19 +24,19 @@ function DListView_Line:GetAltLine() end
 ---@return string #The contents of the specified column.
 function DListView_Line:GetColumnText(column) end
 
----[CLIENT] Returns the ID of this line, set automatically in DListView:AddLine.
+---[] Returns the ID of this line, set automatically in DListView:AddLine.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:GetID)
 ---@return number #The ID of this line.
 function DListView_Line:GetID() end
 
----[CLIENT] Returns the parent DListView of this line.
+---[CLIENT AND MENU] Returns the parent DListView of this line.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:GetListView)
 ---@return DListView #The parent DListView of this line.
 function DListView_Line:GetListView() end
 
----[CLIENT] Returns the data stored on given cell of this line.
+---[CLIENT AND MENU] Returns the data stored on given cell of this line.
 ---
 --- 	Used in the DListView:SortByColumn function in case you want to sort with something else than the text.
 ---
@@ -45,19 +45,19 @@ function DListView_Line:GetListView() end
 ---@return any #The data that is set for given column of this line, if any.
 function DListView_Line:GetSortValue(column) end
 
----[CLIENT] Returns whether this line is selected.
+---[CLIENT AND MENU] Returns whether this line is selected.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:IsLineSelected)
 ---@return boolean #Whether this line is selected.
 function DListView_Line:IsLineSelected() end
 
----[CLIENT] Sets whether this line is odd or even in the list. This is internally used (and set automatically) to change the looks of every other line.
+---[CLIENT AND MENU] Sets whether this line is odd or even in the list. This is internally used (and set automatically) to change the looks of every other line.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:SetAltLine)
 ---@param alt boolean Whether this line is 'alternative'.
 function DListView_Line:SetAltLine(alt) end
 
----[CLIENT] Sets the string held in the specified column of a DListView_Line panel.
+---[CLIENT AND MENU] Sets the string held in the specified column of a DListView_Line panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:SetColumnText)
 ---@param column number The number of the column to write the text from, starts with 1.
@@ -65,13 +65,13 @@ function DListView_Line:SetAltLine(alt) end
 ---@return DLabel #The DLabel in which the text was set.
 function DListView_Line:SetColumnText(column, value) end
 
----[CLIENT] Sets whether this line is selected or not.
+---[CLIENT AND MENU] Sets whether this line is selected or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Line:SetSelected)
 ---@param selected boolean Whether this line is selected.
 function DListView_Line:SetSelected(selected) end
 
----[CLIENT] Allows you to store data per column.
+---[CLIENT AND MENU] Allows you to store data per column.
 ---
 --- 	Used in the DListView:SortByColumn function in case you want to sort with something else than the text.
 ---

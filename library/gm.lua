@@ -1247,7 +1247,7 @@ function GM:PlayerDeathSound(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerDeathThink)
 ---@param ply Player The player affected in the hook.
----@return boolean #Allow spawn
+---@return boolean #Return a non-nil value to prevent respawn.
 function GM:PlayerDeathThink(ply) end
 
 ---[SERVER] Called when a player leaves the server. See the gameevent/player_disconnect for a shared version of this hook.

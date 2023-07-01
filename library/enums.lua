@@ -2199,10 +2199,12 @@ EF_NODRAW = 32
 EF_NORECEIVESHADOW = 64
 --- Makes the entity blink
 EF_ITEM_BLINK = 256
---- Always assume that the parent entity is animating
+--- Always assume that the parent entity is animating.
 EF_PARENT_ANIMATES = 512
---- Internal flag that is set by Entity:FollowBone
+--- Internal flag that is set by Entity:FollowBone.
 EF_FOLLOWBONE = 1024
+--- Makes the entity not accept being lit by projected textures, including the player's flashlight.
+EF_NOFLASHLIGHT = 8192
 
 ---@enum EFL
 --- This entity is marked for death -- This allows the game to actually delete ents at a safe time.

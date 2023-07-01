@@ -14,28 +14,20 @@ function cam.ApplyShake(pos, angles, factor) end
 ---
 --- This function is an alias of cam.End3D.
 ---
---- This will crash the game if there is no context to end.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End)
 function cam.End() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 2D context.
----
---- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End2D)
 function cam.End2D() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 3D context.
 ---
---- This will crash the game if there is no context to end.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End3D)
 function cam.End3D() end
 
 ---[CLIENT] Switches the renderer back to the previous drawing mode from a 3D2D context.
----
---- This will crash the game if there is no context to end.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.End3D2D)
 function cam.End3D2D() end

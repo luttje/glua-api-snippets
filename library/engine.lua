@@ -2,6 +2,12 @@
 
 engine = {}
 
+---[SHARED] Returns non paused Global.FrameTime.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.AbsoluteFrameTime)
+---@return number #Frame time.
+function engine.AbsoluteFrameTime() end
+
 ---[SHARED AND MENU] Returns the name of the currently running gamemode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.ActiveGamemode)

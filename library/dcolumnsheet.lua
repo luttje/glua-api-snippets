@@ -3,7 +3,7 @@
 ---@class DColumnSheet : Panel
 local DColumnSheet = {}
 
----[CLIENT] Adds a new column/tab.
+---[CLIENT AND MENU] Adds a new column/tab.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:AddSheet)
 ---@param name string Name of the column/tab
@@ -12,19 +12,19 @@ local DColumnSheet = {}
 ---@return table #A table containing the following keys: * Panel Button - The created tab button that will switch to the given panel * Panel Panel - The given panel to switch to when the button is pressed
 function DColumnSheet:AddSheet(name, pnl, icon) end
 
----[CLIENT] Returns the active button of this DColumnSheet.
+---[CLIENT AND MENU] Returns the active button of this DColumnSheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:GetActiveButton)
 ---@return Panel #The active button
 function DColumnSheet:GetActiveButton() end
 
----[CLIENT] Makes a button an active button for this DColumnSheet.
+---[CLIENT AND MENU] Makes a button an active button for this DColumnSheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:SetActiveButton)
 ---@param active Panel The button to make active button
 function DColumnSheet:SetActiveButton(active) end
 
----[CLIENT] Makes the tabs/buttons show only the image and no text.
+---[CLIENT AND MENU] Makes the tabs/buttons show only the image and no text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:UseButtonOnlyStyle)
 function DColumnSheet:UseButtonOnlyStyle() end

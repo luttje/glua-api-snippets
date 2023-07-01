@@ -120,7 +120,7 @@ function CEffectData:SetAttachment(attachment) end
 --- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to 0-255 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetColor)
----@param color number Color represented by a byte.
+---@param color Number Color represented by a byte.
 function CEffectData:SetColor(color) end
 
 ---[SHARED] Sets the damage type of the effect to be created with this effect data.

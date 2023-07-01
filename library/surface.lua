@@ -82,14 +82,18 @@ function surface.DrawPoly(vertices) end
 ---@param height number The integer height of the rectangle.
 function surface.DrawRect(x, y, width, height) end
 
----[CLIENT AND MENU] Draw the specified text on the screen, using the previously set position, font and color.
+---[CLIENT AND MENU] Draw the specified text on the screen, using the previously set [position](surface.SetTextPos), [font](surface.SetFont) and [color](surface.SetTextColor). This function does **not** handle newlines.
 ---
---- This function does not handle newlines properly
---- This function sets new text position at the end of the previous drawn text length - this can be used to change text properties (such as font or color) without recalculating and resetting text position. See example #2 for example use of this behavior.
+--- This function moves the [text position](surface.SetTextPos) by the length of the drawn text - this can be used to change text properties (such as font or color) without having to manually recalculate the text position. See example #2 for example use of this behavior.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawText)
 ---@param text string The text to be rendered.
 ---@param forceAdditive? boolean `true` to force text to render additive, `false` to force not additive, `nil` to use font's value.
+---
+--- When additive rendering is enabled, the rendered text pixels will be added to the existing screen pixels, rather than replacing them outright. This means black text will be invisible, and drawing on a pure white background will be impossible.
+---
+---
+---
 function surface.DrawText(text, forceAdditive) end
 
 ---[CLIENT AND MENU] Draw a textured rectangle with the given position and dimensions on the screen, using the current active texture set with surface.SetMaterial. It is also affected by surface.SetDrawColor.
@@ -187,7 +191,7 @@ function surface.GetHUDTexture(name) end
 ---@return table #The color that text drawing operations will use as a Color.
 function surface.GetTextColor() end
 
----[CLIENT AND MENU] Returns the X and Y co-ordinate that has been set with surface.SetTextPos.
+---[CLIENT AND MENU] Returns the X and Y co-ordinate that has been set with surface.SetTextPos or changed by surface.DrawText.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextPos)
 ---@return number, number #number - The X integer co-ordinate.

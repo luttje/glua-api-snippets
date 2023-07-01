@@ -35,7 +35,7 @@ function file.AsyncRead(fileName, gamePath, callback, sync) end
 function file.CreateDir(name) end
 
 ---[SHARED AND MENU] Deletes a file or `empty` folder that is relative to the **data** folder. You can't remove any files outside of **data** folder.
---- You are able to delete *any* file in the Menu state.
+--- You are able to delete **any** file in the Menu state.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Delete)
 ---@param name string The file name.
@@ -44,7 +44,6 @@ function file.CreateDir(name) end
 function file.Delete(name, path) end
 
 ---[SHARED AND MENU] Returns a boolean of whether the file or directory exists or not.
----              This will sometimes return false clientside for directories received from the server via a clientside lua file. You can work around this by using file.Find with the path to the directory followed by a wildcard (no trailing forward slash) and see if the directory is inside the returned directories table (**see second example)**.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Exists)
 ---@param name string The file or directory's name.
@@ -69,7 +68,7 @@ function file.Exists(name, gamePath) end
 function file.Find(name, path, sorting) end
 
 ---[SHARED AND MENU] Returns whether the given file is a directory or not.
----              This will sometimes return false clientside for directories received from the server via a clientside lua file. You can work around this by using file.Find with the path to the directory followed by a wildcard (no trailing forward slash) and see if the directory is inside the returned directories table (**see second example)**.
+---              This will sometimes return false clientside for directories received from the server via a clientside lua file. You can work around this by using file.Find with the path to the directory followed by a wildcard (no trailing forward slash) and see if the directory is inside the returned directories table (**see second example)**. **This is fixed in the next update.**
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.IsDir)
 ---@param fileName string The file or directory's name.

@@ -44,6 +44,7 @@ function ents.FindAlongRay(start, _end, mins, maxs) end
 ---[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over ents.GetAll. Even if internally ents.GetAll is used, It is faster to use ents.FindByClass than ents.GetAll with a single class comparison.
 ---
 --- Asterisks (*) are the only wildcard supported.
+--- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClass)
 ---@param class string The class of the entities to find.
@@ -58,7 +59,8 @@ function ents.FindByClass(class) end
 ---@return table #A table of found entities or nil if none are found
 function ents.FindByClassAndParent(class, parent) end
 
----[SHARED] Gets all entities with the given model, supports wildcards. This works internally by iterating over ents.GetAll.
+---[SHARED] Gets all entities with the given model, supports wildcards.
+--- 	This works internally by iterating over ents.GetAll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByModel)
 ---@param model string The model of the entities to find.
@@ -117,9 +119,8 @@ function ents.FindInPVS(viewPoint) end
 
 ---[SHARED] Gets all entities within the specified sphere.
 ---
---- Clientside entities will not be returned by this function.
----
---- This function internally calls ents.FindInBox with some [radius checks](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/collisionutils.cpp#L256-L301).
+--- 	Clientside entities will not be returned by this function.
+--- 	This function internally calls ents.FindInBox with some [radius checks](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/collisionutils.cpp#L256-L301).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInSphere)
 ---@param origin Vector Center of the sphere.
@@ -137,7 +138,8 @@ function ents.FindInSphere(origin, radius) end
 ---@param value number This value is passed to ENTITY:Use, but isn't used by any default entities in the engine.
 function ents.FireTargets(target, activator, caller, usetype, value) end
 
----[SHARED] Returns a table of all existing entities. The table is sequential
+---[SHARED] Returns a table of all existing entities.
+--- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetAll)
 ---@return table #Table of all existing Entitys.

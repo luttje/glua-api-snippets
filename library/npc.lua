@@ -685,13 +685,6 @@ function NPC:PlaySentence(sentence, delay, volume) end
 ---@param time? number For how long to remember the entity as unreachable. Negative values will act as `3` seconds.
 function NPC:RememberUnreachable(ent, time) end
 
----[SERVER] This function crashes the game no matter how it is used and will be removed in a future update.
----
---- Use NPC:ClearEnemyMemory instead.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:RemoveMemory)
-function NPC:RemoveMemory() end
-
 ---[SERVER] Resets the ideal activity of the NPC. See also NPC:SetIdealActivity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ResetIdealActivity)

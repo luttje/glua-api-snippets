@@ -830,6 +830,7 @@ function Player:GetPreviousWeapon() end
 function Player:GetPunchAngle() end
 
 ---[SHARED] Returns players death ragdoll. The ragdoll is created by Player:CreateRagdoll.
+--- Calling Entity:GetPos server-side with this function then will return the position when Player:CreateRagdoll was used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRagdollEntity)
 ---@return Entity #The ragdoll.  Unlike normal clientside ragdolls (`C_ClientRagdoll`), this will be a `C_HL2MPRagdoll` on the client, and `hl2mp_ragdoll` on the server.
@@ -997,6 +998,8 @@ function Player:GetWeaponColor() end
 
 ---[SHARED] Returns a table of the player's weapons.
 ---
+--- 			This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapons)
 ---@return table #All the weapons the player currently has.
 function Player:GetWeapons() end
@@ -1034,8 +1037,6 @@ function Player:GodDisable() end
 function Player:GodEnable() end
 
 ---[SHARED] Returns whether the player has god mode or not, contolled by Player:GodEnable and Player:GodDisable.
----
---- This is not synced between the client and server. This will cause the client to always return false even in godmode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:HasGodMode)
 ---@return boolean #Whether the player has god mode or not.
@@ -1109,7 +1110,7 @@ function Player:IsFullyAuthenticated() end
 ---[SERVER] Returns if a player is the host of the current session.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsListenServerHost)
----@return boolean #True if the player is the listen server host, false otherwise.  This will always be true in single player, and false on a dedicated server.
+---@return boolean #`true` if the player is the listen server host, `false` otherwise.  This will always be `true` in single player, and `false` on a dedicated server.
 function Player:IsListenServerHost() end
 
 ---[CLIENT] Returns whether or not the player is muted locally.
@@ -1183,17 +1184,13 @@ function Player:IsUserGroup(groupname) end
 ---@return boolean #isAudible
 function Player:IsVoiceAudible() end
 
----[SHARED] Returns if the player is in the context menu.
----
---- Although this is shared, it will only work properly on the CLIENT for the local player. Using this serverside or on other players will return false.
+---[SHARED] Returns whether the player is using the world clicking feature, see Panel:SetWorldClicker
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClicking)
 ---@return boolean #Is the player world clicking or not.
 function Player:IsWorldClicking() end
 
 ---[SHARED] Returns whether the world clicking is disabled for given player or not. See Player:DisableWorldClicking.
----
---- This value is meant to be networked to the client, but is not currently.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClickingDisabled)
 ---@return boolean #Whether the world clicking is disabled or not.
@@ -1727,13 +1724,13 @@ function PLAYER:SetModel() end
 ---@param mute boolean Mute or unmute.
 function Player:SetMuted(mute) end
 
----[SHARED] Sets whenever the player should not collide with their teammates.
+---[SHARED] Sets whenever the player should not collide with their teammates, based on their Player:Team.
 ---
 --- This will only work for teams with ID 1 to 4 due to internal Engine limitations.
 --- This causes traces with Enums/COLLISION_GROUP to pass through players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetNoCollideWithTeammates)
----@param shouldNotCollide boolean True to disable, false to enable collision.
+---@param shouldNotCollide boolean `true` to disable, `false` to enable collision.
 function Player:SetNoCollideWithTeammates(shouldNotCollide) end
 
 ---[SERVER] Sets the players visibility towards NPCs.

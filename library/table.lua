@@ -31,7 +31,7 @@ function table.CollapseKeyValue(input) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.concat)
 ---@param tbl table The table to concatenate.
----@param concatenator string A separator to insert between strings
+---@param concatenator? string A separator to insert between strings
 ---@param startPos? number The key to start at
 ---@param endPos? number The key to end at
 ---@return string #Concatenated values

@@ -115,7 +115,7 @@ function util.Decal(name, start, _end, filter) end
 ---@param normal Vector The direction of the decal.
 ---@param color table The color of the decal. Uses the Color.
 ---
---- This only works when used on a brush model and only if the decal material has set **$vertexcolor** to 1.
+--- This only works when used on a brush model and only if the decal material has set `$vertexcolor` to `1`.
 ---@param w number The width scale of the decal.
 ---@param h number The height scale of the decal.
 function util.DecalEx(material, ent, position, normal, color, w, h) end
@@ -153,7 +153,7 @@ function util.DistanceToLine(lineStart, lineEnd, pointPos) end
 ---
 --- When dispatching an effect from the server, some values may be clamped for networking optimizations. Visit the Set accessors on CEffectData to see which ones are affected.
 ---
---- You will need to couple this function with Global.IsFirstTimePredicted if you want to use it in Prediction.
+--- You will need to couple this function with Global.IsFirstTimePredicted if you want to use it in a Prediction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Effect)
 ---@param effectName string The name of the effect to create.
@@ -213,8 +213,8 @@ function util.GetModelInfo(mdl) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
 ---@param model string The full path to a model to get the visual meshes of.
----@param lod? number
----@param bodygroupMask? number
+---@param lod? number Which LOD to retrieve. 0 is the best quality, increasing the number lowers the model quaility.
+---@param bodygroupMask? number Bodygroup combination for the model. This can be in format of `"000000"` where each number represents a bodygroup option.
 ---@return table, table #table -  			A table of tables with the following format: * string material - The material of the specific mesh * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.  Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data: * number bone - The bone this vertex is attached to * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
 ---@return table, table #table -  			A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents: * number parent - The ID of the parent bone. * VMatrix matrix - The bone's bind transform in model (not bone) space.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
@@ -732,14 +732,13 @@ function util.tobool(input) end
 ---@return table #Trace result. See Structures/TraceResult
 function util.TraceEntity(tracedata, ent) end
 
----[SHARED] This function is broken and returns the same values all the time
---- Traces from one entity to another.
+---[SHARED] Identical to util.TraceHull but uses an entity for `mins`/`maxs` inputs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceEntityHull)
----@param ent1 Entity The first entity to trace from
----@param ent2 Entity The second entity to trace to
+---@param tracedata table Trace data. See Structures/Trace
+---@param ent Entity The entity to use mins/maxs of for the hull trace.
 ---@return table #Trace result. See Structures/TraceResult
-function util.TraceEntityHull(ent1, ent2) end
+function util.TraceEntityHull(tracedata, ent) end
 
 ---[SHARED] Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
 ---

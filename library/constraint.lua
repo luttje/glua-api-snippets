@@ -527,8 +527,8 @@ function constraint.RemoveConstraints(ent, type) end
 ---@param material string Material of the rope.
 ---@param rigid boolean Whether the constraint is rigid.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity #Entity - Constraint. Will be a keyframe_rope if you roping to the same bone on the same entity. Will return false if the constraint could not be created.
----@return Entity, Entity #Entity - rope. Will return nil if "Constraint" is a keyframe_rope or if the constraint could not be created.
+---@return Entity, Entity #Entity - The constraint entity. Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
+---@return Entity, Entity #Entity - The rope entity. Will return `nil` if `constraint` return value is a `keyframe_rope` or if the constraint could not be created.
 function constraint.Rope(
 	Ent1,
 	Ent2,

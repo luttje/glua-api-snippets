@@ -1,4 +1,4 @@
 ---@meta
 
----@class Button : DLabel
+---@class Button : DButton
 local Button = {}

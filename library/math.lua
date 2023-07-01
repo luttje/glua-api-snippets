@@ -630,7 +630,7 @@ function math.tanh(number) end
 ---@return number #Fraction
 function math.TimeFraction(start, _end, current) end
 
----[SHARED AND MENU] Rounds towards zero.
+---[SHARED AND MENU] Trim unwanted decimal places.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Truncate)
 ---@param num number The number to truncate

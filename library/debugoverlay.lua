@@ -4,7 +4,7 @@ debugoverlay = {}
 
 ---[SHARED] Displays an axis indicator at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Axis)
 ---@param origin Vector Position origin
@@ -16,7 +16,7 @@ function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
 
 ---[SHARED] Displays a solid coloured box at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Box)
 ---@param origin Vector Position origin
@@ -28,7 +28,7 @@ function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 
 ---[SHARED] Displays a solid colored rotated box at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.BoxAngles)
 ---@param pos Vector World position
@@ -41,7 +41,7 @@ function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 
 ---[SHARED] Creates a coloured cross at the specified position for the specified time.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Cross)
 ---@param position Vector Position origin
@@ -53,7 +53,7 @@ function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays 2D text at the specified coordinates.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.EntityTextAtPosition)
 ---@param pos Vector The position in 3D to display the text.
@@ -65,7 +65,7 @@ function debugoverlay.EntityTextAtPosition(pos, line, text, lifetime, color) end
 
 ---[SHARED] Draws a 3D grid of limited size in given position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Grid)
 ---@param position Vector
@@ -73,7 +73,7 @@ function debugoverlay.Grid(position) end
 
 ---[SHARED] Displays a coloured line at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Line)
 ---@param pos1 Vector First position of the line
@@ -85,7 +85,7 @@ function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays text triangle at the specified coordinates.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.ScreenText)
 ---@param x number The position of the text, from 0 ( left ) to 1 ( right ).
@@ -97,7 +97,7 @@ function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 
 ---[SHARED] Displays a coloured sphere at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Sphere)
 ---@param origin Vector Position origin
@@ -109,7 +109,7 @@ function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays "swept" box, two boxes connected with lines by their verices.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.SweptBox)
 ---@param vStart Vector The start position of the box.
@@ -123,7 +123,7 @@ function debugoverlay.SweptBox(vStart, vEnd, vMins, vMaxs, ang, lifetime, color)
 
 ---[SHARED] Displays text at the specified position.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Text)
 ---@param origin Vector Position origin
@@ -134,7 +134,7 @@ function debugoverlay.Text(origin, text, lifetime, viewCheck) end
 
 ---[SHARED] Displays a colored triangle at the specified coordinates.
 ---
---- This function will silently fail if the **developer** ConVar is set to 0.
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Triangle)
 ---@param pos1 Vector First point of the triangle

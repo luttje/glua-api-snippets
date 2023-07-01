@@ -290,7 +290,7 @@ function net.WriteData(binaryData, length) end
 ---@param double number The double to be sent
 function net.WriteDouble(double) end
 
----[SHARED] Appends an entity to the current net message.
+---[SHARED] Appends an entity to the current net message using its Entity:EntIndex.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteEntity)
 ---@param entity Entity The entity to be sent.
