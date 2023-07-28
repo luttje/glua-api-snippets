@@ -112,8 +112,8 @@ export class GluaApiWriter {
           api += ` : ${parent}`;
         
         api += '\n';
-        api += classFields;
         api += `local ${className} = {}\n\n`;
+        api += classFields;
       }
 
       this.writtenClasses.add(className);
