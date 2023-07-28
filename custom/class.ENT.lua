@@ -1,3 +1,4 @@
 ---@class ENT : Entity
----{{CLASS_FIELDS}}
 ENT = {}
+
+---{{CLASS_FIELDS}}

@@ -1,3 +1,4 @@
 ---@class Player : Entity
----{{CLASS_FIELDS}}
 local Player = {}
+
+---{{CLASS_FIELDS}}

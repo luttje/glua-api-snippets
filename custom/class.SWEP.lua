@@ -1,3 +1,4 @@
 ---@class SWEP : WEAPON
----{{CLASS_FIELDS}}
 SWEP = {}
+
+---{{CLASS_FIELDS}}
