@@ -78,11 +78,11 @@ function CNewParticleEffect:Restart() end
 ---@param value Vector The value to set for given control point.
 function CNewParticleEffect:SetControlPoint(cpID, value) end
 
----[CLIENT] Essentially makes child control point follow the parent entity.
+---[CLIENT] Sets an entity to given control point for particle to use.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointEntity)
 ---@param child number The child control point ID, 0 to 63.
----@param parent Entity The parent entity to follow.
+---@param parent Entity The entity to set.
 function CNewParticleEffect:SetControlPointEntity(child, parent) end
 
 ---[CLIENT] Sets the forward direction for given control point.

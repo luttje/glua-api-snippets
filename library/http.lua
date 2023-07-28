@@ -14,17 +14,18 @@ http = {}
 --- * `error` - OnComplete callback's second argument, `bError`, is `true`
 --- * `unsuccessful` - OnComplete's first argument, `pResult->m_bRequestSuccessful`, returned `false`
 ---
+--- This cannot send or receive multiple headers with the same name.
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
 --- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
 ---
---- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp` (serverside only).
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
 ---@param onSuccess? function Function to be called on success. Arguments are
 --- * string body
---- * string size - equal to string.len(body).
+--- * number size - equal to string.len(body).
 --- * table headers
 --- * number code - The HTTP success code.
 ---@param onFailure? function Function to be called on failure. Arguments are
@@ -38,8 +39,12 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 ---
 --- The Structures/HTTPRequest callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist).
 ---
+--- This cannot send or receive multiple headers with the same name.
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
---- HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work. To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp` (serverside only).
+---
+--- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
+---
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Post)
 ---@param url string The url to of the website to post.

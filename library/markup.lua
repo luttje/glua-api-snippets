@@ -5,9 +5,9 @@ markup = {}
 ---[CLIENT AND MENU] A convenience function that converts a Color into its markup ready string representation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/markup.Color)
----@param clr Color The Color to convert.
+---@param col Color The Color to convert.
 ---@return string #The markup color, for example `255,255,255`.
-function markup.Color(clr) end
+function markup.Color(col) end
 
 ---[CLIENT AND MENU] Converts a string to its escaped, markup-safe equivalent.
 ---

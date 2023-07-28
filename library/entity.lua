@@ -21,6 +21,7 @@ local Entity = {}
 --- For some entity types when this function is used after Entity:SetModelScale, the physics object will be recreated with the new scale. [Source-sdk-2013](https://github.com/ValveSoftware/source-sdk-2013/blob/55ed12f8d1eb6887d348be03aee5573d44177ffb/mp/src/game/server/baseanimating.cpp#L321-L327).
 ---
 --- Calling this method after Entity:SetModelScale will recreate a new scaled `SOLID_VPHYSICS` PhysObj on scripted entities. This can be a problem if you made a properly scaled PhysObj of another kind (using Entity:PhysicsInitSphere for instance) or if you edited the PhysObj's properties. This is especially the behavior of the Sandbox spawn menu.
+---
 --- This crashes the game with scaled vehicles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:Activate)
@@ -223,7 +224,7 @@ function Entity:BoundingRadius() end
 ---@return Vector, Angle #Angle - New angles
 function ENTITY:CalcAbsolutePosition(pos, ang) end
 
----[SHARED] Calls all NetworkVarNotify functions with the given new value, but doesn't change the real value.
+---[SHARED] Calls all Entity:NetworkVarNotify functions with the given new value, but doesn't change the real value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:CallDTVarProxies)
 ---@param Type string The NetworkVar Type.
@@ -682,9 +683,9 @@ function Entity:GetAbsVelocity() end
 ---
 --- This returns incorrect results for the local player clientside.
 ---
---- This will return the local player's Global.EyeAngles in Category:3D_Rendering_Hooks.
+--- This will return the local player's Global.EyeAngles in 3D_Rendering_Hooks.
 ---
---- This will return Global.Angle(0,0,0) in Category:3D_Rendering_Hooks while paused in single-player.
+--- This will return Global.Angle(0,0,0) in 3D_Rendering_Hooks while paused in single-player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetAngles)
 ---@return Angle #The angles of the entity.
@@ -2383,9 +2384,9 @@ function Entity:GetWorkshopID() end
 ---
 --- This returns incorrect results for the angular component (columns 1-3) for the local player clientside.
 ---
---- This will use the local player's Global.EyeAngles in Category:3D_Rendering_Hooks.
+--- This will use the local player's Global.EyeAngles in 3D_Rendering_Hooks.
 ---
---- Columns 1-3 will be all 0 (angular component) in Category:3D_Rendering_Hooks while paused in single-player.
+--- Columns 1-3 will be all 0 (angular component) in 3D_Rendering_Hooks while paused in single-player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetWorldTransformMatrix)
 ---@return VMatrix #The position and angle matrix.
@@ -2520,11 +2521,49 @@ function ENTITY:ImpactTrace(traceResult, damageType, customImpactName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:Initialize)
 function ENTITY:Initialize() end
 
----[CLIENT] Initializes this entity as being clientside only.
+---[CLIENT] You should **NEVER** use this function!
+--- 	This function should be removed!
 ---
---- Only works on entities fully created clientside, and as such it has currently no use due this being automatically called by ents.CreateClientProp, ents.CreateClientside, Global.ClientsideModel and Global.ClientsideScene.
+--- 	**These are the reasons why this function should never be used and removed:**
+--- 	Calling this on **ANY**(even clientside only) entity will cause random crashes and it will crash the game as soon as the entity is removed!
 ---
---- Calling this on a clientside entity will crash the game.
+--- 	**Some bugs if you call it on a entity that is not clientside only:**
+--- 		All NWVars break clientside for the given player.
+--- 		The EntIndex becomes -1.
+--- 		The Entity:GetTable gets cleared every time this function is called.
+---
+---
+--- 		As soon as the Entity re-enters the PVS some bugs will fix themself, but it will still crash the game if the entity gets removed!
+--- 		This is behavior only happens for entities, not for players!
+---
+---
+--- 	Calling this function on the World creates a permanent warning that will spam your console.
+--- ```lua
+--- ] lua_run_cl Entity(0):InitializeAsClientEntity()
+--- Refusing to render the map on an entity to prevent crashes! (x9330)
+--- ```
+--- 	Calling this function on an entity that is not **clientside only** causes all networking to break for that specific entity and an Engine Error will occur on a full update
+--- (a full update can be forced with `cl_fullupdate`):
+---
+---
+--- 	Calling this function on a player causes a bunch of unexpected behavior and your game will crash as soon as the player is removed/leaves the server.
+---
+--- 	**Some bugs if you set it on a player (all Entity bugs apply here):**
+--- 		You get some values displayed in the top-left of your screen for some reason.
+--- 		If you call this function on the local player, it causes your eye pos to be your position (EyePos == GetPos):
+--- 		The Player name becomes `ERRORNAME`
+--- 		As soon as the player re-enters the PVS, it crashes the game!
+--- ```lua
+--- lua_run_cl LocalPlayer():InitializeAsClientEntity()
+--- ] lua_run_cl print(LocalPlayer())
+--- Player [-1][ERRORNAME]
+--- ```
+---
+---
+---
+--- Initializes this entity as being clientside only.
+---
+--- Only works on entities fully created clientside, and as such it has currently no use due to this being automatically called by ents.CreateClientProp, ents.CreateClientside, Global.ClientsideModel and Global.ClientsideScene.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:InitializeAsClientEntity)
 function Entity:InitializeAsClientEntity() end
@@ -3889,8 +3928,6 @@ function Entity:SetEyeTarget(pos) end
 
 ---[SHARED] Sets the flex scale of the entity.
 ---
---- This does not work on Global.ClientsideModels or Global.ClientsideRagdolls.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFlexScale)
 ---@param scale number The new flex scale to set to
 function Entity:SetFlexScale(scale) end
@@ -3948,6 +3985,7 @@ function Entity:SetHealth(newHealth) end
 function Entity:SetHitboxSet(id) end
 
 ---[CLIENT] Enables or disable the inverse kinematic usage of this entity.
+--- 		Calling this with false outside of ENTITY:Initialize requires a model change to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetIK)
 ---@param useIK? boolean The state of the IK.
@@ -4680,7 +4718,7 @@ function Entity:SetNW2Vector(key, value) end
 ---[SHARED] Sets a networked angle value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNWAngle both from client and server.
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Angle. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Angle. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWAngle)
@@ -4691,7 +4729,7 @@ function Entity:SetNWAngle(key, value) end
 ---[SHARED] Sets a networked boolean value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNWBool both from client and server.
---- There's a 4096 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Bool. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4096 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Bool. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWBool)
@@ -4702,7 +4740,7 @@ function Entity:SetNWBool(key, value) end
 ---[SHARED] Sets a networked entity value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNWEntity both from client and server.
---- There's a 4096 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Entity. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4096 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Entity. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWEntity)
@@ -4715,7 +4753,7 @@ function Entity:SetNWEntity(key, value) end
 --- The value can then be accessed with Entity:GetNWFloat both from client and server.
 ---
 --- Unlike Entity:SetNWInt, floats don't have to be whole numbers.
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Float. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Float. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWFloat)
@@ -4728,7 +4766,7 @@ function Entity:SetNWFloat(key, value) end
 --- The value can then be accessed with Entity:GetNWInt both from client and server.
 ---
 --- See Entity:SetNWFloat for numbers that aren't integers.
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Int. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Int. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 --- This function will not round decimal values as it actually networks a float internally.
 ---
@@ -4740,7 +4778,7 @@ function Entity:SetNWInt(key, value) end
 ---[SHARED] Sets a networked string value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNWString both from client and server.
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2String. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2String. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWString)
@@ -4765,7 +4803,7 @@ function Entity:SetNWVarProxy(key, callback) end
 ---[SHARED] Sets a networked vector value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNWVector both from client and server.
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Vector. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Entity:SetNW2Vector. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage#nwlimits
 --- Running this function clientside will only set it for the client it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNWVector)
@@ -4970,8 +5008,6 @@ function Entity:SetRenderOrigin(newOrigin) end
 ---[SHARED] Sets a save value for an entity. You can see a full list of an entity's save values by creating it and printing Entity:GetSaveTable().
 ---
 --- See Entity:GetInternalVariable for the opposite of this function.
----
---- This does not type-check entity keys. Setting an entity key to a non-entity value will treat it as NULL.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetSaveValue)
 ---@param name string Name of the save value to set

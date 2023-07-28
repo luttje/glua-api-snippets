@@ -684,7 +684,7 @@ function render.PushFilterMin(texFilterType) end
 
 ---[CLIENT] Enables the flashlight projection for the upcoming rendering.
 ---
---- This will leave models lit under specific conditions.
+--- This will leave models lit under specific conditions. You should use render.RenderFlashlights which is meant as a direct replacement for this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFlashlightMode)
 ---@param enable? boolean Whether the flashlight mode should be enabled or disabled.

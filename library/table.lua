@@ -2,9 +2,9 @@
 
 table = {}
 
----[SHARED AND MENU] Adds the contents from one table into another. The target table will be modified.
+---[SHARED AND MENU] Adds all values from `source` table into the `target` table. This is most useful for sequential tables, not "dictionary" or "map" tables. See table.Merge if you want to merge 2 tables into one.
 ---
---- See also table.insert, table.Inherit and table.Merge.
+--- See table.insert for a function that adds a single value, and table.Inherit for a function that inherits keys from one table to another.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Add)
 ---@param target table The table to insert the new values into.
@@ -186,7 +186,7 @@ function table.GetWinningKey(inputTable) end
 ---@return boolean #Returns true if the table has that value, false otherwise
 function table.HasValue(tbl, value) end
 
----[SHARED AND MENU] Copies any missing data from base to target, and sets the target's `BaseClass` member to the base table's pointer.
+---[SHARED AND MENU] Copies any missing data from `base` to `target`, and sets the `target`'s `BaseClass` member to the `base` table's pointer.
 ---
 --- See table.Merge, which overrides existing values and doesn't add a BaseClass member.
 ---
@@ -268,13 +268,13 @@ function table.maxn(tbl) end
 ---@return table #A list of found values, or an empty table.
 function table.MemberValuesFromKey(inputTable, keyName) end
 
----[SHARED AND MENU] Merges the contents of the second table with the content in the first one. The destination table will be modified.
+---[SHARED AND MENU] Merges the key-value pairs of the `source` table with the key-value pairs in the `destination` table.
 ---
 --- See table.Inherit, which doesn't override existing values.
 ---
 ---
 --- See also table.Add, which simply adds values of one table to another.
---- This function will cause a stack overflow under certain circumstances.
+--- This function can cause a stack overflow under certain circumstances.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Merge)
 ---@param destination table The table you want the source table to merge with

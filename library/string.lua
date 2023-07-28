@@ -122,23 +122,23 @@ function string.GetChar(str, index) end
 ---[SHARED AND MENU] Returns extension of the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename)
----@param file string String eg. file-path to get the file extensions from.
----@return string #fileExtension
-function string.GetExtensionFromFilename(file) end
+---@param path string The string eg. file-path to get the file extension from.
+---@return string #File extension or `nil`.
+function string.GetExtensionFromFilename(path) end
 
 ---[SHARED AND MENU] Returns file name and extension.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.GetFileFromFilename)
----@param pathString string The string eg. file-path to get the file-name from.
----@return string #The file name
-function string.GetFileFromFilename(pathString) end
+---@param path string The string eg. file-path to get the file-name from.
+---@return string #File name or unmodified string.
+function string.GetFileFromFilename(path) end
 
 ---[SHARED AND MENU] Returns the path only from a file's path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.GetPathFromFilename)
----@param Inputstring string String to get path from.
----@return string #Path
-function string.GetPathFromFilename(Inputstring) end
+---@param path string The string eg. file-path to get the path from.
+---@return string #Path or empty string.
+function string.GetPathFromFilename(path) end
 
 ---[SHARED AND MENU] This function is removed in Lua versions later than what GMod is currently using. Use string.gmatch instead.Returns an iterator function that is called for every complete match of the pattern, all sub matches will be passed as to the loop.
 ---
@@ -324,9 +324,9 @@ function string.StartWith(inputStr, start) end
 ---[SHARED AND MENU] Removes the extension of a path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.StripExtension)
----@param Inputstring string The path to change.
----@return string #Modifiedstring
-function string.StripExtension(Inputstring) end
+---@param path string The string eg. file-path to strip the extension.
+---@return string #File-path without extension or unmodified string.
+function string.StripExtension(path) end
 
 ---[SHARED AND MENU] Returns a sub-string, starting from the character at position `StartPos` of the string (inclusive), and optionally ending at the character at position `EndPos` of the string (also inclusive). If EndPos is not given, the rest of the string is returned.
 ---

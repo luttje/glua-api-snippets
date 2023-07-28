@@ -1964,7 +1964,7 @@ function GM:ScaleNPCDamage(npc, hitgroup, dmginfo) end
 
 ---[SHARED] This hook allows you to change how much damage a player receives when one takes damage to a specific body part.
 ---
---- This is called only for bullet damage a player receives, you should use GM:EntityTakeDamage instead if you need to detect *ALL* damage.
+--- This is called only for bullet damage a player receives, you should use GM:EntityTakeDamage instead if you need to detect **ALL** damage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ScalePlayerDamage)
 ---@param ply Player The player taking damage.

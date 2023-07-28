@@ -75,7 +75,7 @@ function math.atan2(y, x) end
 ---@return number #Base 10 number.
 function math.BinToInt(string) end
 
----[SHARED AND MENU] Basic code for  algorithm.
+---[SHARED AND MENU] Basic code for Bezier-Spline algorithm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.BSplinePoint)
 ---@param tDiff number From 0 to 1, where alongside the spline the point will be.

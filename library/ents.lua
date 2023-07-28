@@ -167,7 +167,7 @@ function ents.GetCount(IncludeKillMe) end
 ---@return number #Number of networked entities
 function ents.GetEdictCount() end
 
----[SERVER] Returns entity that has given Entity:MapCreationID.
+---[SHARED] Returns entity that has given Entity:MapCreationID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity)
 ---@param id number Entity's creation id

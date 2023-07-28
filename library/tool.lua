@@ -56,6 +56,7 @@ function Tool:CreateConVars() end
 --- This is also called when switching from another tool on the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Deploy)
+---@return boolean #Return true to allow switching away from the toolgun using lastinv command
 function TOOL:Deploy() end
 
 ---[CLIENT] Called when WEAPON:DrawHUD of the toolgun is called, only when the user has this tool selected.

@@ -4,12 +4,10 @@ gameevent = {}
 
 ---[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
 ---
---- 		List of valid events (with examples) can be found [here](gameevent).
----
 --- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
----@param eventName string The event to listen to.
+---@param eventName string The event to listen to. List of valid events (with examples) can be found [here](gameevent).
 function gameevent.Listen(eventName) end
 
 ---@class achievement_earned

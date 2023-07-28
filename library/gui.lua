@@ -9,7 +9,8 @@ function gui.ActivateGameUI() end
 
 ---[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu.
 ---
---- Some CUserCmd functions will return incorrect values when this function is active.
+---
+--- 	Some CUserCmd functions will return incorrect values when this function is active because [the user input is getting overtaken by the vgui system](https://github.com/Facepunch/garrysmod-issues/issues/982#issuecomment-505671531).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.EnableScreenClicker)
 ---@param enabled boolean Whether the cursor should be enabled or not. (true = enable, false = disable)

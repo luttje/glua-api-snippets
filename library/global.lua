@@ -10,7 +10,7 @@
 ---@param force? number The type the setter should force to (uses Enums/FORCE).
 function _G.AccessorFunc(tab, key, name, force) end
 
----[SHARED AND MENU] Defines a global entity class variable with an automatic value in order to prevent collisions with other Enums/CLASS. You should prefix your variable with CLASS_ for consistency.
+---[SHARED AND MENU] Defines a global entity class variable with an automatic value. In order to prevent collisions with other Enums/CLASS. You should prefix your variable with CLASS_ for consistency.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Add_NPC_Class)
 ---@param name string The name of the new enum/global variable.
@@ -327,7 +327,7 @@ function _G.ConVarExists(name) end
 --- This cannot be a name of existing console command or console variable. It will silently fail if it is.
 ---@param default string Default value of the ConVar.
 ---@param shouldsave? boolean Should the ConVar be saved across sessions in the cfg/client.vdf file.
----@param userinfo? boolean Should the ConVar and its containing data be sent to the server when it has changed. This make the convar accessible from server using Player:GetInfoNum and similar functions.
+---@param userinfo? boolean Should the ConVar and its containing data be sent to the server when it has changed. This makes the convar accessible from server using Player:GetInfoNum and similar functions.
 ---@param helptext string Help text to display in the console.
 ---@param min? number If set, the convar cannot be changed to a number lower than this value.
 ---@param max? number If set, the convar cannot be changed to a number higher than this value.
@@ -362,7 +362,7 @@ function _G.CreateConVar(name, value, flags, helptext, min, max) end
 ---
 --- .pngs must be loaded with Global.Material before being used with this function.
 ---
---- This will not create a new material if another material object with the same name already exists.
+--- This will not create a new material if another material object with the same name already exists. All Materials created by this functions are cleaned up on map shutdown.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateMaterial)
 ---@param name string The material name. Must be unique.
@@ -1220,7 +1220,7 @@ function _G.GetGlobal2Vector(Index, Default) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalAngle)
 ---@param index string The unique index to identify the global value with.
----@param default? Angle The value to return if the global value is not set.
+---@param default Angle The value to return if the global value is not set.
 ---@return Angle #The global value, or default if the global is not set.
 function _G.GetGlobalAngle(index, default) end
 
@@ -1443,7 +1443,6 @@ function _G.HSVToColor(hue, saturation, value) end
 ---[SHARED AND MENU] Launches an asynchronous http request with the given parameters.
 ---
 --- 		This cannot send or receive multiple headers with the same name.
---- 		This function fails with an `invalid url` error if the substring `"10."` appears anywhere in the URL, when `-allowlocalhttp` is not active. Where possible, this can be worked around by encoding the `.` character as `%2E`.
 --- 		HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
 --- 			HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
@@ -1533,33 +1532,35 @@ function _G.IsConCommandBlocked(name) end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is an enemy.
 ---
---- Returns true if the entity name is one of the following:
---- * "npc_antlion"
---- * "npc_antlionguard"
---- * "npc_antlionguardian"
---- * "npc_barnacle"
---- * "npc_breen"
---- * "npc_clawscanner"
---- * "npc_combine_s"
---- * "npc_cscanner"
---- * "npc_fastzombie"
---- * "npc_fastzombie_torso"
---- * "npc_headcrab"
---- * "npc_headcrab_fast"
---- * "npc_headcrab_poison"
---- * "npc_hunter"
---- * "npc_metropolice"
---- * "npc_manhack"
---- * "npc_poisonzombie"
---- * "npc_strider"
---- * "npc_stalker"
---- * "npc_zombie"
---- * "npc_zombie_torso"
---- * "npc_zombine"
+--- Some NPCs are missing from this list even though they are hostile to players. If you'd like to complete this function until this [pull request](https://github.com/Facepunch/garrysmod/pull/2000) is merged, here are the missing NPCs: `npc_combine_camera`, `npc_turret_ceiling`, `npc_combinedropship`, `npc_combinegunship`, `npc_helicopter`, `npc_turret_floor`, `npc_antlion_worker`, `npc_headcrab_black`.
+---
+--- Returns `true` if the entity name is one of the following:
+--- * `npc_antlion`
+--- * `npc_antlionguard`
+--- * `npc_antlionguardian`
+--- * `npc_barnacle`
+--- * `npc_breen`
+--- * `npc_clawscanner`
+--- * `npc_combine_s`
+--- * `npc_cscanner`
+--- * `npc_fastzombie`
+--- * `npc_fastzombie_torso`
+--- * `npc_headcrab`
+--- * `npc_headcrab_fast`
+--- * `npc_headcrab_poison`
+--- * `npc_hunter`
+--- * `npc_metropolice`
+--- * `npc_manhack`
+--- * `npc_poisonzombie`
+--- * `npc_strider`
+--- * `npc_stalker`
+--- * `npc_zombie`
+--- * `npc_zombie_torso`
+--- * `npc_zombine`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsEnemyEntityName)
----@param className string Class name of the entity to check
----@return boolean #Is an enemy
+---@param className string Class name of the entity to check.
+---@return boolean #Is an enemy?
 function _G.IsEnemyEntityName(className) end
 
 ---[SHARED AND MENU] Returns if the passed object is an Entity. Alias of Global.isentity.
@@ -1583,20 +1584,20 @@ function _G.IsFirstTimePredicted() end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is a friend.
 ---
---- Returns true if the entity name is one of the following:
---- * "npc_alyx"
---- * "npc_barney"
---- * "npc_citizen"
---- * "npc_dog"
---- * "npc_eli"
---- * "npc_fisherman"
---- * "npc_gman"
---- * "npc_kleiner"
---- * "npc_magnusson"
---- * "npc_monk"
---- * "npc_mossman"
---- * "npc_odessa"
---- * "npc_vortigaunt"
+--- Returns `true` if the entity name is one of the following:
+--- * `npc_alyx`
+--- * `npc_barney`
+--- * `npc_citizen`
+--- * `npc_dog`
+--- * `npc_eli`
+--- * `npc_fisherman`
+--- * `npc_gman`
+--- * `npc_kleiner`
+--- * `npc_magnusson`
+--- * `npc_monk`
+--- * `npc_mossman`
+--- * `npc_odessa`
+--- * `npc_vortigaunt`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsFriendEntityName)
 ---@param className string Class name of the entity to check

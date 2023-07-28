@@ -107,7 +107,7 @@ function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
 function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 
----[SHARED] Displays "swept" box, two boxes connected with lines by their verices.
+---[SHARED] Displays "swept" box, two boxes connected with lines by their vertices.
 ---
 --- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---

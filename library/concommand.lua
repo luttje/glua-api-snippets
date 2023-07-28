@@ -41,7 +41,6 @@ function concommand.GetTable() end
 
 ---[SHARED AND MENU] Removes a console command.
 ---
---- This will not always remove the command from auto-complete.
 --- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)

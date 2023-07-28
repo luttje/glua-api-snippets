@@ -286,15 +286,15 @@ function util.GetSurfacePropName(id) end
 ---@return table #A table of users where the key is the SteamID of the user and the value is a table with 2 fields:   		> string name - Player Steam name   		> string group - Player usergroup name
 function util.GetUserGroups() end
 
----[SHARED] Performs a "ray" box intersection and returns position, normal and the fraction.
+---[SHARED] Performs a Ray-OBB (Orientated Bounding Box) intersection and returns position, normal and the fraction if there was an intersection.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IntersectRayWithOBB)
----@param rayStart Vector Origin/start position of the ray.
----@param rayDelta Vector The ray vector itself. This can be thought of as: the ray end point relative to the start point.
+---@param rayStart Vector Origin or start position of the ray.
+---@param rayDelta Vector The ray vector itself, the ray end point relative to the start point. Can be implemented as `direction * distance`
 ---
 --- Note that in this implementation, the ray is not infinite - it's only a segment.
 ---@param boxOrigin Vector The center of the box.
----@param boxAngles Angle The angles of the box.
+---@param boxAngles Angle The angle of the box.
 ---@param boxMins Vector The min position of the box.
 ---@param boxMaxs Vector The max position of the box.
 ---@return Vector, Vector, number #Vector - Hit position, nil if not hit.
@@ -344,6 +344,7 @@ function util.IsModelLoaded(modelName) end
 ---@param box2Angles Angle The angles of the second box.
 ---@param box2Mins Vector The min position of the second box.
 ---@param box2Maxs Vector The max position of the second box.
+---@param tolerance number Tolerance for error. Leave at 0 if unsure.
 ---@return boolean #Whether there is an intersection.
 function util.IsOBBIntersectingOBB(
 	box1Origin,
@@ -353,7 +354,8 @@ function util.IsOBBIntersectingOBB(
 	box2Origin,
 	box2Angles,
 	box2Mins,
-	box2Maxs
+	box2Maxs,
+	tolerance
 )
 end
 

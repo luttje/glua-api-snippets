@@ -33,7 +33,7 @@ function player.GetAll() end
 ---@return table #A table only containing bots ( AI / non human players )
 function player.GetBots() end
 
----[SHARED] Gets the player with the specified AccountID.
+---[SHARED] Tried to get the player with the specified Player:AccountID.
 --- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByAccountID)
@@ -103,12 +103,12 @@ function player.GetHumans() end
 ---@class Player : Entity
 local Player = {}
 
----[SHARED] Returns the player's AccountID aka SteamID3. (`[U:1:AccountID]`)
+---[SHARED] Returns the player's AccountID part of their full SteamID.
+---
+--- Since this does not include other vital parts of the SteamID such as "Account Type" and "Account Instance", it should be avoided, as AccountIDs are finite, and can be the same for multiple valid accounts.
 ---
 --- See Player:SteamID for the text representation of the full SteamID.
 --- See Player:SteamID64 for a 64bit representation of the full SteamID.
----
---- Unlike other variations of SteamID, SteamID3 does not include the "Account Type" and "Account Instance" part of the SteamID.
 ---
 --- In a `-multirun` environment, this will return `no value` for all "copies" of a player because they are not authenticated with Steam.
 ---
@@ -1954,8 +1954,6 @@ function PLAYER:Spawn() end
 
 ---[SERVER] Starts spectate mode for given player. This will also affect the players movetype in some cases.
 ---
---- Using this function while spectating the player's own ragdoll will cause it to teleport it to the center of the map. You will spectate the ragdoll even after it's been teleported. This only happens on the client of the player spectating the ragdoll and is purely client-side.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Spectate)
 ---@param mode number Spectate mode, see Enums/OBS_MODE.
 function Player:Spectate(mode) end
@@ -2017,7 +2015,7 @@ function Player:StartWalking() end
 
 ---[SHARED] Returns the player's SteamID.
 ---
---- See Player:AccountID for a shorter version of the SteamID and Player:SteamID64 for the Community/Profile formatted SteamID.
+--- See Player:AccountID for a shorter version of the SteamID and Player:SteamID64 for the full SteamID.
 ---
 --- In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
 ---
@@ -2027,9 +2025,9 @@ function Player:StartWalking() end
 ---@return string #SteamID
 function Player:SteamID() end
 
----[SHARED] Returns the player's 64-bit SteamID aka CommunityID.
+---[SHARED] Returns the player's full 64-bit SteamID aka Community ID. Information on how data is packed into this value can be found [here](https://developer.valvesoftware.com/wiki/SteamID).
 ---
---- See Player:AccountID for a shorter version of the SteamID and Player:SteamID for the normal version of the SteamID.
+--- See Player:AccountID for a function that returns only the Account ID part of the SteamID and Player:SteamID for the text version of the SteamID.
 ---
 --- In a `-multirun` environment, this will return `nil` for all "copies" of a player because they are not authenticated with Steam.
 ---
@@ -2142,9 +2140,7 @@ function Player:TranslateWeaponActivity(act) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UnfreezePhysicsObjects)
 function Player:UnfreezePhysicsObjects() end
 
----[SHARED] Use Player:SteamID64, Player:SteamID or Player:AccountID to uniquely identify players instead.
----
---- **This function has collisions,** where more than one player has the same UniqueID. It is **highly** recommended to use Player:AccountID, Player:SteamID or Player:SteamID64 instead, which are guaranteed to be unique to each player.
+---[SHARED] **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
 ---
 --- Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key.
 ---
@@ -2157,8 +2153,9 @@ function Player:UniqueID() end
 ---[SHARED] This is based on Player:UniqueID which is deprecated and vulnerable to collisions.
 ---
 ---
---- Returns a table that will stay allocated for the specific player between connects until the server shuts down.
---- This table is not synchronized between client and server.
+--- Returns a table that will stay allocated for the specific player serveside between connects until the server shuts down. On client it has no such special behavior.
+---
+--- This table is not synchronized (networked) between client and server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueIDTable)
 ---@param key any Unique table key.
