@@ -46,5 +46,9 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
-  "gitHead": "2513190cc1de00d1049e35f9c942b779447530f9"
+  "gitHead": "2513190cc1de00d1049e35f9c942b779447530f9",
+  "engines": {
+	"node": ">=18.0.0"
+  },
+  "engineStrict": true
 }
