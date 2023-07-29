@@ -153,7 +153,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               key: $el.attr('key')!,
               value: $el.attr('value')!,
               description: $el.text(),
-              deprecated,
+              deprecated: deprecated || undefined,
             };
           }).get();
 
@@ -178,7 +178,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               type: $el.attr('type')!,
               default: $el.attr('default'),
               description: $el.text(),
-              deprecated
+              deprecated: deprecated || undefined,
             };
           }).get();
 
