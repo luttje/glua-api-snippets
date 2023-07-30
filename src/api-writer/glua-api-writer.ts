@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -69,12 +69,12 @@ export class GluaApiWriter {
     const fileSafeAddress = safeFileName(page.address, '.');
     if (this.pageOverrides.has(fileSafeAddress)) {
       let api = '';
-
+      
       if (isClassFunction(page))
-        api += this.writeClass(page.parent, undefined, undefined, page.deprecated);
+        api += this.writeClass(page.parent);
       else if (isLibraryFunction(page))
         api += this.writeLibraryGlobal(page);
-
+      
       api += this.pageOverrides.get(fileSafeAddress);
 
       return `${api}\n\n`;
@@ -94,26 +94,23 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClass(className: string, parent?: string, classFields: string = '', deprecated?: string ) {
+  private writeClass(className: string, parent?: string, classFields: string = '') {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
       const classOverride = `class.${className}`;
       if (this.pageOverrides.has(classOverride)) {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
-        api = api.replace('---{{CLASS_FIELDS}}', classFields);
+        api = api.replace('---{{CLASS_FIELDS}}\n', classFields);
       } else {
-        if (deprecated)
-          api += `---@deprecated ${deprecated ?? ''}\n`
-
         api += `---@class ${className}`;
 
         if (parent)
           api += ` : ${parent}`;
         
         api += '\n';
-        api += `local ${className} = {}\n\n`;
         api += classFields;
+        api += `local ${className} = {}\n\n`;
       }
 
       this.writtenClasses.add(className);
@@ -124,12 +121,7 @@ export class GluaApiWriter {
 
   private writeLibraryGlobal(func: LibraryFunction) {
     if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
-      let global = '';
-
-      if(func.deprecated)
-        global += `---@deprecated ${func.deprecated ?? ''}\n`;
-
-      global += `${func.parent} = {}\n\n`;
+      const global = `${func.parent} = {}\n\n`;
 
       this.writtenLibraryGlobals.add(func.parent);
 
@@ -140,7 +132,7 @@ export class GluaApiWriter {
   }
 
   private writeClassFunction(func: ClassFunction) {
-    let api: string = this.writeClass(func.parent, undefined, undefined, func.deprecated);
+    let api: string = this.writeClass(func.parent);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm, ':');
@@ -162,7 +154,7 @@ export class GluaApiWriter {
   }
 
   private writePanel(panel: Panel) {
-    return this.writeClass(panel.name, panel.parent, undefined, panel.deprecated);
+    return this.writeClass(panel.name, panel.parent);
   }
 
   private writePanelFunction(func: PanelFunction) {
@@ -178,9 +170,6 @@ export class GluaApiWriter {
     let api: string = '';
     const isContainedInTable = _enum.items[0]?.key.includes('.') ?? false;
 
-    if (_enum.deprecated)
-      api += `---@deprecated ${_enum.deprecated ?? ''}\n`;
-
     api += `---@enum ${_enum.name}\n`;
 
     if (isContainedInTable)
@@ -191,10 +180,8 @@ export class GluaApiWriter {
         key = key.split('.')[1];
         api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : ''
-        if (item.deprecated)
-          api += `---@deprecated ${item.deprecated ?? ''}\n`;
-        api += `${key} = ${item.value}\n`;
+        const comment = item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : '';
+        api += `${comment}${key} = ${item.value}\n`;
       }
     };
 
@@ -209,31 +196,14 @@ export class GluaApiWriter {
     return api;
   }
 
-  private writeType(type: string, value: any) {
-    if (type === 'string')
-      return `'${escapeSingleQuotes(value)}'`;
-
-    if (type === 'Vector')
-      return `Vector${value}`;
-
-    return value;
-  }
-
   private writeStruct(struct: Struct) {
     let fields: string = '';
 
     for (const field of struct.fields) {
-      if (field.deprecated)
-        fields += `---@deprecated ${field.deprecated ?? ''}\n`;
-
-      fields += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
-
-      const type = this.transformType(field.type)
-      fields += `---@type ${type}\n`
-      fields += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
+      fields += `---@field ${GluaApiWriter.safeName(field.name)} ${this.transformType(field.type)} ${removeNewlines(field.description!)}\n`;
     }
 
-    return this.writeClass(struct.name, undefined, fields, struct.deprecated);
+    return this.writeClass(struct.name, undefined, fields);
   }
 
   public writePages(pages: WikiPage[]) {
@@ -283,9 +253,6 @@ export class GluaApiWriter {
         luaDocComment += `${returns} #${this.transformType(ret.type)} - ${description}\n`;
       });
     }
-
-    if (func.deprecated)
-        luaDocComment += `---@deprecated ${func.deprecated ?? ''}\n`;
 
     return luaDocComment;
   }

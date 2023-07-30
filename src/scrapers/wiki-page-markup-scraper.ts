@@ -11,7 +11,6 @@ export type CommonWikiProperties = {
   description: string;
   realm: Realm;
   url: string;
-  deprecated?: string;
 }
 
 export type WikiIdentifier = {
@@ -51,7 +50,6 @@ export type EnumValue = {
   key: string;
   value: string;
   description: string;
-  deprecated?: string;
 };
 
 export type Enum = CommonWikiProperties & {
@@ -64,7 +62,6 @@ export type StructField = {
   type: string;
   default?: any;
   description: string;
-  deprecated?: string;
 };
 
 export type Struct = CommonWikiProperties & {
@@ -128,32 +125,15 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         const isFunction = $('function').length > 0;
         const isPanel = $('panel').length > 0;
         const mainElement = $(isEnum ? 'enum' : isStruct ? 'struct' : isPanel ? 'panel' : 'function');
-        const isDeprecated = $('deprecated').length > 0;
         const address = response.url.split('/').pop()!.split('?')[0];
-
-		let deprecated: string | undefined = undefined;
-		if (isDeprecated && !isEnum && !isStruct) {
-			deprecated = $('deprecated').map(function() {
-				const $el = $(this);
-				return $el.text().trim();
-			}).get().join(' - ')
-
-			$('deprecated').remove();
-		}
 
         if (isEnum) {
           const items = $('items item').map(function () {
             const $el = $(this);
-            const deprecated = $el.find('deprecated').map(function() {
-              const $el = $(this);
-              return $el.text().trim();
-            }).get().join(' - ');
-
             return <EnumValue>{
               key: $el.attr('key')!,
               value: $el.attr('value')!,
-              description: $el.text(),
-              deprecated: deprecated || undefined,
+              description: $el.text()
             };
           }).get();
 
@@ -168,17 +148,11 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         } else if (isStruct) {
           const fields = $('fields item').map(function () {
             const $el = $(this);
-            const deprecated = $el.find('deprecated').map(function() {
-              const $el = $(this);
-              return $el.text().trim();
-            }).get().join(' - ');
-
             return <StructField>{
               name: $el.attr('name')!,
               type: $el.attr('type')!,
               default: $el.attr('default'),
-              description: $el.text(),
-              deprecated: deprecated || undefined,
+              description: $el.text()
             };
           }).get();
 
@@ -188,8 +162,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             address: address,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
-            fields,
-            deprecated
+            fields
           };
         } else if (isPanel) {
           return <Panel>{
@@ -198,8 +171,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             address: address,
             description: $('description').text(),
             realm: $('realm').text() as Realm,
-            parent: $('parent').text(),
-            deprecated
+            parent: $('parent').text()
           };
         } else if (isFunction) {
           const isClassFunction = mainElement.attr('type') === 'classfunc';
@@ -217,7 +189,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
             if ($el.attr('default'))
               argument.default = $el.attr('default')!;
-
+            
             return argument;
           }).get();
 
@@ -238,8 +210,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             description: $('description:first').text(),
             realm: $('realm:first').text() as Realm,
             arguments: arguments_,
-            returns,
-            deprecated
+            returns
           };
 
           if (isClassFunction) {
@@ -252,7 +223,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               base.parent = '_G';
               (<LibraryFunction>base).dontDefineParent = true;
             }
-
+            
             return <LibraryFunction> {
               ...base,
               type: 'libraryfunc'

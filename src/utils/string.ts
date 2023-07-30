@@ -40,13 +40,3 @@ export function putCommentBeforeEachLine(text: string, skipLineOne: boolean = tr
 export function safeFileName(str: string, replacement: string = '_') {
   return str.replace(/[^a-z0-9_\-\. ]/gi, replacement);
 }
-
-/**
- * Escapes all single quotes in a string
- * 
- * @param str The string to escape
- * @returns The escaped string
- */
-export function escapeSingleQuotes(str: string) {
-  return str.replace(/'/g, '\\\'');
-}
