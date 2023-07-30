@@ -1,3 +1,4 @@
 ---@class NPC : Entity
----{{CLASS_FIELDS}}
 local NPC = {}
+
+---{{CLASS_FIELDS}}
