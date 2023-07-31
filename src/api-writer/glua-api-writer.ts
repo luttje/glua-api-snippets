@@ -127,7 +127,7 @@ export class GluaApiWriter {
       let global = '';
 
       if(func.deprecated)
-        global += `---@deprecated ${func.deprecated ?? ''}\n`;
+        global += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
 
       global += `${func.parent} = {}\n\n`;
 
@@ -179,7 +179,7 @@ export class GluaApiWriter {
     const isContainedInTable = _enum.items[0]?.key.includes('.') ?? false;
 
     if (_enum.deprecated)
-      api += `---@deprecated ${_enum.deprecated ?? ''}\n`;
+      api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     api += `---@enum ${_enum.name}\n`;
 
@@ -193,7 +193,7 @@ export class GluaApiWriter {
       } else {
         api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : ''
         if (item.deprecated)
-          api += `---@deprecated ${item.deprecated ?? ''}\n`;
+          api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
       }
     };
@@ -224,7 +224,7 @@ export class GluaApiWriter {
 
     for (const field of struct.fields) {
       if (field.deprecated)
-        fields += `---@deprecated ${field.deprecated ?? ''}\n`;
+        fields += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
       fields += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
 
@@ -285,7 +285,7 @@ export class GluaApiWriter {
     }
 
     if (func.deprecated)
-        luaDocComment += `---@deprecated ${func.deprecated ?? ''}\n`;
+        luaDocComment += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
 
     return luaDocComment;
   }
