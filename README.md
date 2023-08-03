@@ -58,3 +58,13 @@ This project uses [Jest](https://jestjs.io/) to automate testing. You can run th
 ### API as JSON
 
 The API is also available as JSON. You can find it with the Lua API package [on the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DD_HH-MM-SS.json.zip`.
+
+## ❤️ Contributors
+
+Besides me ([@luttje](https://github.com/luttje)) more people contribute. Super special thanks to them for helping make this project a lot better. I wouldn't be able to do this all by myself.
+
+|[![](https://github.com/aske02.png?size=50)<br>Aske](https://github.com/aske02)|   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+
+_If you contributed and are missing from this list, feel free to create an issue._
