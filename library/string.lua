@@ -111,12 +111,13 @@ function string.FormattedTime(float, format) end
 ---@return string #Output
 function string.FromColor(color) end
 
----[SHARED AND MENU] Use either string.sub(str, index, index) or str[index]. Returns char value from the specified index in the supplied string.
+---[SHARED AND MENU] Returns char value from the specified index in the supplied string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.GetChar)
 ---@param str string The string that you will be searching with the supplied index.
 ---@param index number The index's value of the string to be returned.
 ---@return string #str
+---@deprecated Use either string.sub(str, index, index) or str[index].
 function string.GetChar(str, index) end
 
 ---[SHARED AND MENU] Returns extension of the file.
@@ -140,12 +141,13 @@ function string.GetFileFromFilename(path) end
 ---@return string #Path or empty string.
 function string.GetPathFromFilename(path) end
 
----[SHARED AND MENU] This function is removed in Lua versions later than what GMod is currently using. Use string.gmatch instead.Returns an iterator function that is called for every complete match of the pattern, all sub matches will be passed as to the loop.
+---[SHARED AND MENU] Returns an iterator function that is called for every complete match of the pattern, all sub matches will be passed as to the loop.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.gfind)
 ---@param data string The string to search in
 ---@param pattern string The pattern to search for
 ---@return function #The iterator function that can be used in a for-in loop
+---@deprecated This function is removed in Lua versions later than what GMod is currently using. Use string.gmatch instead.
 function string.gfind(data, pattern) end
 
 ---[SHARED AND MENU] Using Patterns, returns an iterator which will return either one value if no capture groups are defined, or any capture group matches.
@@ -171,9 +173,7 @@ function string.gmatch(data, pattern) end
 ---@return string, number #number - replaceCount
 function string.gsub(string, pattern, replacement, maxReplaces) end
 
----[SHARED AND MENU] You really should just use table.concat.
----
---- Joins the values of a table together to form a string.
+---[SHARED AND MENU] Joins the values of a table together to form a string.
 ---
 --- This is the reverse of string.Explode and is functionally identical to table.concat, but with less features.
 ---
@@ -181,6 +181,7 @@ function string.gsub(string, pattern, replacement, maxReplaces) end
 ---@param separator string The separator to insert between each piece.
 ---@param pieces table The table of pieces to concatenate. The keys for these must be numeric and sequential.
 ---@return string #Imploded pieces
+---@deprecated You really should just use table.concat.
 function string.Implode(separator, pieces) end
 
 ---[SHARED AND MENU] Interpolates a given string with the given table. This is useful for formatting localized strings.
@@ -311,14 +312,13 @@ function string.Split(Inputstring, Separator) end
 ---@return boolean #Whether the first string starts with the second.
 function string.StartsWith(inputStr, start) end
 
----[SHARED AND MENU] Use string.StartsWith.
----
---- Returns whether or not the first string starts with the second. This is a alias of string.StartsWith.
+---[SHARED AND MENU] Returns whether or not the first string starts with the second. This is a alias of string.StartsWith.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.StartWith)
 ---@param inputStr string String to check.
 ---@param start string String to check with.
 ---@return boolean #Whether the first string starts with the second.
+---@deprecated Use string.StartsWith.
 function string.StartWith(inputStr, start) end
 
 ---[SHARED AND MENU] Removes the extension of a path.

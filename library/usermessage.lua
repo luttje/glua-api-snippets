@@ -8,9 +8,7 @@ usermessage = {}
 ---@return table #hooks
 function usermessage.GetTable() end
 
----[SHARED] You should be using net instead
----
---- Sets a hook for the specified to be called when a usermessage with the specified name arrives.
+---[SHARED] Sets a hook for the specified to be called when a usermessage with the specified name arrives.
 ---
 --- Usermessages have a limit of only 256 bytes!
 ---
@@ -20,6 +18,7 @@ function usermessage.GetTable() end
 --- * bf_read msg
 --- * vararg preArgs
 ---@param ...? ... Arguments that are passed to the callback function when the hook is called.
+---@deprecated You should be using net instead
 function usermessage.Hook(name, callback, ...) end
 
 ---[SHARED] Called by the engine when a usermessage arrives, this method calls the hook function specified by usermessage.Hook if any.

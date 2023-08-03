@@ -1233,12 +1233,11 @@ function Entity:GetHitBoxBounds(hitbox, set) end
 ---@return number #The number of hit boxes.
 function Entity:GetHitBoxCount(group) end
 
----[SHARED] You should use Entity:GetHitboxSetCount instead.
----
---- Returns the number of hit box sets that an entity has. Functionally identical to Entity:GetHitboxSetCount
+---[SHARED] Returns the number of hit box sets that an entity has. Functionally identical to Entity:GetHitboxSetCount
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetHitBoxGroupCount)
 ---@return number #number of hit box sets
+---@deprecated You should use Entity:GetHitboxSetCount instead.
 function Entity:GetHitBoxGroupCount() end
 
 ---[SHARED] Gets the hit group of a given hitbox in a given hitbox set.
@@ -1520,67 +1519,68 @@ function Entity:GetName() end
 function Entity:GetNetworkAngles() end
 
 ---[SHARED] Retrieves a networked angle value at specified index on the entity that is set by Entity:SetNetworked2Angle.
---- You should be using Entity:GetNW2Angle instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Angle)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Angle instead.
 function Entity:GetNetworked2Angle(key, fallback) end
 
 ---[SHARED] Retrieves a networked boolean value at specified index on the entity that is set by Entity:SetNetworked2Bool.
---- You should be using Entity:GetNW2Bool instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Bool)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Bool instead.
 function Entity:GetNetworked2Bool(key, fallback) end
 
 ---[SHARED] Retrieves a networked entity value at specified index on the entity that is set by Entity:SetNetworked2Entity.
---- You should be using Entity:GetNW2Entity instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Entity)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Entity instead.
 function Entity:GetNetworked2Entity(key, fallback) end
 
 ---[SHARED] Retrieves a networked float value at specified index on the entity that is set by Entity:SetNetworked2Float.
---- You should be using Entity:GetNW2Float instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Float)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Float instead.
 function Entity:GetNetworked2Float(key, fallback) end
 
 ---[SHARED] Retrieves a networked integer (whole number) value that was previously set by Entity:SetNetworked2Int.
---- You should be using Entity:GetNW2Int instead.
+---
 --- The integer has a 32 bit limit. Use Entity:SetNWInt and Entity:GetNWInt instead
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Int)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value (If it isn't set).
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Int instead.
 function Entity:GetNetworked2Int(key, fallback) end
 
 ---[SHARED] Retrieves a networked string value at specified index on the entity that is set by Entity:SetNetworked2String.
---- You should be using Entity:GetNW2String instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2String)
 ---@param key string The key that is associated with the value
 ---@param fallback any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2String instead.
 function Entity:GetNetworked2String(key, fallback) end
 
 ---[SHARED] Retrieves a networked value at specified index on the entity that is set by Entity:SetNetworked2Var.
---- You should be using Entity:GetNW2Var instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Var)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Var instead.
 function Entity:GetNetworked2Var(key, fallback) end
 
 ---[SHARED] Returns callback function for given NWVar of this entity.
@@ -1591,54 +1591,49 @@ function Entity:GetNetworked2Var(key, fallback) end
 function Entity:GetNetworked2VarProxy(key) end
 
 ---[SHARED] Returns all the networked2 variables in an entity.
---- You should be using Entity:GetNW2VarTable instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2VarTable)
 ---@return table #Key-Value table of all networked2 variables.
+---@deprecated You should be using Entity:GetNW2VarTable instead.
 function Entity:GetNetworked2VarTable() end
 
 ---[SHARED] Retrieves a networked vector value at specified index on the entity that is set by Entity:SetNetworked2Vector.
---- You should be using Entity:GetNW2Vector instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Vector)
 ---@param key string The key that is associated with the value
 ---@param fallback? any The value to return if we failed to retrieve the value. (If it isn't set)
 ---@return any #The value associated with the key
+---@deprecated You should be using Entity:GetNW2Vector instead.
 function Entity:GetNetworked2Vector(key, fallback) end
 
----[SHARED] You should use Entity:GetNWAngle instead.
----
---- Retrieves a networked angle value at specified index on the entity that is set by Entity:SetNetworkedAngle.
+---[SHARED] Retrieves a networked angle value at specified index on the entity that is set by Entity:SetNetworkedAngle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedAngle)
 ---@param key string The key that is associated with the value
 ---@param fallback? Angle The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return Angle #The retrieved value
+---@deprecated You should use Entity:GetNWAngle instead.
 function Entity:GetNetworkedAngle(key, fallback) end
 
----[SHARED] You should use Entity:GetNWBool instead.
----
---- Retrieves a networked boolean value at specified index on the entity that is set by Entity:SetNetworkedBool.
+---[SHARED] Retrieves a networked boolean value at specified index on the entity that is set by Entity:SetNetworkedBool.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedBool)
 ---@param key string The key that is associated with the value
 ---@param fallback? boolean The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return boolean #The retrieved value
+---@deprecated You should use Entity:GetNWBool instead.
 function Entity:GetNetworkedBool(key, fallback) end
 
----[SHARED] You should use Entity:GetNWEntity instead.
----
---- Retrieves a networked float value at specified index on the entity that is set by Entity:SetNetworkedEntity.
+---[SHARED] Retrieves a networked float value at specified index on the entity that is set by Entity:SetNetworkedEntity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedEntity)
 ---@param key string The key that is associated with the value
 ---@param fallback? Entity The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return Entity #The retrieved value
+---@deprecated You should use Entity:GetNWEntity instead.
 function Entity:GetNetworkedEntity(key, fallback) end
 
----[SHARED] You should use Entity:GetNWFloat instead.
----
---- Retrieves a networked float value at specified index on the entity that is set by Entity:SetNetworkedFloat.
+---[SHARED] Retrieves a networked float value at specified index on the entity that is set by Entity:SetNetworkedFloat.
 ---
 --- Seems to be the same as Entity:GetNetworkedInt.
 ---
@@ -1646,26 +1641,25 @@ function Entity:GetNetworkedEntity(key, fallback) end
 ---@param key string The key that is associated with the value
 ---@param fallback? number The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return number #The retrieved value
+---@deprecated You should use Entity:GetNWFloat instead.
 function Entity:GetNetworkedFloat(key, fallback) end
 
----[SHARED] You should use Entity:GetNWInt instead.
----
---- Retrieves a networked integer value at specified index on the entity that is set by Entity:SetNetworkedInt.
+---[SHARED] Retrieves a networked integer value at specified index on the entity that is set by Entity:SetNetworkedInt.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedInt)
 ---@param key string The key that is associated with the value
 ---@param fallback? number The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return number #The retrieved value
+---@deprecated You should use Entity:GetNWInt instead.
 function Entity:GetNetworkedInt(key, fallback) end
 
----[SHARED] You should use Entity:GetNWString instead.
----
---- Retrieves a networked string value at specified index on the entity that is set by Entity:SetNetworkedString.
+---[SHARED] Retrieves a networked string value at specified index on the entity that is set by Entity:SetNetworkedString.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedString)
 ---@param key string The key that is associated with the value
 ---@param fallback string The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return string #The retrieved value
+---@deprecated You should use Entity:GetNWString instead.
 function Entity:GetNetworkedString(key, fallback) end
 
 ---[SHARED] Retrieves a networked value at specified index on the entity that is set by Entity:SetNetworkedVar.
@@ -1684,22 +1678,20 @@ function Entity:GetNetworkedVar(key, fallback) end
 ---@return function #The callback of given NWVar, if any.
 function Entity:GetNetworkedVarProxy(name) end
 
----[SHARED] You should be using Entity:GetNWVarTable instead.
----
---- Returns all the networked variables in an entity.
+---[SHARED] Returns all the networked variables in an entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedVarTable)
 ---@return table #Key-Value table of all networked variables.
+---@deprecated You should be using Entity:GetNWVarTable instead.
 function Entity:GetNetworkedVarTable() end
 
----[SHARED] You should use Entity:GetNWVector instead.
----
---- Retrieves a networked vector value at specified index on the entity that is set by Entity:SetNetworkedVector.
+---[SHARED] Retrieves a networked vector value at specified index on the entity that is set by Entity:SetNetworkedVector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkedVector)
 ---@param key string The key that is associated with the value
 ---@param fallback? Vector The value to return if we failed to retrieve the value. ( If it isn't set )
 ---@return Vector #The retrieved value
+---@deprecated You should use Entity:GetNWVector instead.
 function Entity:GetNetworkedVector(key, fallback) end
 
 ---[SHARED] Gets networked origin for entity.
@@ -2521,19 +2513,16 @@ function ENTITY:ImpactTrace(traceResult, damageType, customImpactName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:Initialize)
 function ENTITY:Initialize() end
 
----[CLIENT] You should **NEVER** use this function!
---- 	This function should be removed!
+---[CLIENT] **These are the reasons why this function was disabled:**
+--- 	Calling this on **ANY**(even clientside only) entity will cause random crashes, and it will crash the game as soon as the entity is removed!
 ---
---- 	**These are the reasons why this function should never be used and removed:**
---- 	Calling this on **ANY**(even clientside only) entity will cause random crashes and it will crash the game as soon as the entity is removed!
----
---- 	**Some bugs if you call it on a entity that is not clientside only:**
+--- 	**Some bugs if you call it on an entity that is not clientside only:**
 --- 		All NWVars break clientside for the given player.
 --- 		The EntIndex becomes -1.
 --- 		The Entity:GetTable gets cleared every time this function is called.
 ---
 ---
---- 		As soon as the Entity re-enters the PVS some bugs will fix themself, but it will still crash the game if the entity gets removed!
+--- 		As soon as the Entity re-enters the PVS, some bugs will fix themself, but it will still crash the game if the entity gets removed!
 --- 		This is behavior only happens for entities, not for players!
 ---
 ---
@@ -2566,6 +2555,7 @@ function ENTITY:Initialize() end
 --- Only works on entities fully created clientside, and as such it has currently no use due to this being automatically called by ents.CreateClientProp, ents.CreateClientside, Global.ClientsideModel and Global.ClientsideScene.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:InitializeAsClientEntity)
+---@deprecated This function got disabled and will always throw an error if it's used. This is the error:  ```lua [ERROR] InitializeAsClientEntity is deprecated and should no longer be used. ```
 function Entity:InitializeAsClientEntity() end
 
 ---[SERVER] Fires input to the entity with the ability to make another entity responsible, bypassing the event queue system.
@@ -2870,7 +2860,7 @@ function Entity:LookupPoseParameter(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:LookupSequence)
 ---@param name string Sequence name
----@return number, number #number - Sequence ID for that name. This **will** differ for models with same sequence names. Will be -1 whether the sequence is invalid.
+---@return number, number #number - Sequence ID for that name. This **will** differ for models with same sequence names. Will be -1 when the sequence is invalid.
 ---@return number, number #number - The sequence duration * 0 if the sequence is invalid
 function Entity:LookupSequence(name) end
 
@@ -2965,6 +2955,7 @@ function Entity:NearestPoint(position) end
 ---
 ---
 --- Make sure to not call the SetDT* and your custom set methods on the client realm unless you know exactly what you are doing.
+--- Combining this function with util.TableToJSON can also provide a way to network tables as serialized strings.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:NetworkVar)
 ---@param type string Supported choices:
@@ -3708,9 +3699,7 @@ function Entity:SetAnimation(playerAnim) end
 ---@param time number The time the animation was supposed to begin.
 function Entity:SetAnimTime(time) end
 
----[SHARED] You should be using Entity:SetParent instead.
----
---- Parents the sprite to an attachment on another model.
+---[SHARED] Parents the sprite to an attachment on another model.
 ---
 --- Works only on env_sprite.
 ---
@@ -3719,6 +3708,7 @@ function Entity:SetAnimTime(time) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetAttachment)
 ---@param ent Entity The entity to attach/parent to
 ---@param attachment number The attachment ID to parent to
+---@deprecated You should be using Entity:SetParent instead.
 function Entity:SetAttachment(ent, attachment) end
 
 ---[SHARED] Toggles automatic frame advancing for animated sequences on an entity.
@@ -4249,7 +4239,7 @@ function Entity:SetNetworkAngles(angle) end
 ---[SHARED] Sets a networked angle value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNetworked2Angle both from client and server.
----  You should be using Entity:SetNW2Angle instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS. use Entity:SetNWAngle instead
 ---
 --- Running this function clientside will only set it for the client it is called on.
@@ -4259,12 +4249,13 @@ function Entity:SetNetworkAngles(angle) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Angle)
 ---@param key string The key to associate the value with
 ---@param value Angle The value to set
+---@deprecated You should be using Entity:SetNW2Angle instead.
 function Entity:SetNetworked2Angle(key, value) end
 
 ---[SHARED] Sets a networked boolean value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNetworked2Bool both from client and server.
---- You should be using Entity:SetNW2Bool instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS. use Entity:SetNWBool instead
 ---
 --- Running this function clientside will only set it for the client it is called on.
@@ -4274,12 +4265,13 @@ function Entity:SetNetworked2Angle(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Bool)
 ---@param key string The key to associate the value with
 ---@param value boolean The value to set
+---@deprecated You should be using Entity:SetNW2Bool instead.
 function Entity:SetNetworked2Bool(key, value) end
 
 ---[SHARED] Sets a networked entity value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNetworked2Entity both from client and server.
---- You should be using Entity:SetNW2Entity instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS. use Entity:SetNWEntity instead
 ---
 --- Running this function clientside will only set it for the client it is called on.
@@ -4289,6 +4281,7 @@ function Entity:SetNetworked2Bool(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Entity)
 ---@param key string The key to associate the value with
 ---@param value Entity The value to set
+---@deprecated You should be using Entity:SetNW2Entity instead.
 function Entity:SetNetworked2Entity(key, value) end
 
 ---[SHARED] Sets a networked float (number) value on the entity.
@@ -4313,7 +4306,7 @@ function Entity:SetNetworked2Float(key, value) end
 --- The value can then be accessed with Entity:GetNetworked2Int both from client and server.
 ---
 --- See Entity:SetNW2Float for numbers that aren't integers.
---- You should be using Entity:SetNW2Int instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS.
 --- The integer has a 32 bit limit. Use Entity:SetNWInt instead
 ---
@@ -4324,13 +4317,14 @@ function Entity:SetNetworked2Float(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Int)
 ---@param key string The key to associate the value with
 ---@param value number The value to set
+---@deprecated You should be using Entity:SetNW2Int instead.
 function Entity:SetNetworked2Int(key, value) end
 
 ---[SHARED] Sets a networked string value on the entity.
 ---
 --- The value can then be accessed with Entity:GetNetworked2String both from client and server.
 ---
---- You should be using Entity:SetNW2String instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS. use Entity:SetNWString instead
 ---
 --- Running this function clientside will only set it for the client it is called on.
@@ -4340,6 +4334,7 @@ function Entity:SetNetworked2Int(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2String)
 ---@param key string The key to associate the value with
 ---@param value string The value to set, up to 511 characters.
+---@deprecated You should be using Entity:SetNW2String instead.
 function Entity:SetNetworked2String(key, value) end
 
 ---[SHARED] Sets a networked value on the entity.
@@ -4355,7 +4350,7 @@ function Entity:SetNetworked2String(key, value) end
 --- | Int             |
 --- | String          |
 --- | Vector          |
---- You should be using Entity:SetNW2Var instead.
+---
 --- Trying to network a type that is not listed above leads to the value not being networked!
 --- Running this function clientside will only set it for the client it is called on.
 --- The value will only be networked if it isn't the same as the current value and unlike SetNW*
@@ -4364,6 +4359,7 @@ function Entity:SetNetworked2String(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Var)
 ---@param key string The key to associate the value with
 ---@param value any The value to set
+---@deprecated You should be using Entity:SetNW2Var instead.
 function Entity:SetNetworked2Var(key, value) end
 
 ---[SHARED] Sets a function to be called when the NW2Var changes. Internally uses GM:EntityNetworkedVarChanged to call the function.
@@ -4383,7 +4379,7 @@ function Entity:SetNetworked2VarProxy(name, callback) end
 ---
 --- The value can then be accessed with Entity:GetNetworked2Vector both from client and server.
 ---
---- You should be using Entity:SetNW2Vector instead.
+---
 --- The value will only be updated clientside if the entity is or enters the clients PVS. use Entity:SetNWVector instead
 --- Running this function clientside will only set it for the client it is called on.
 --- The value will only be networked if it isn't the same as the current value and unlike SetNW*
@@ -4392,11 +4388,10 @@ function Entity:SetNetworked2VarProxy(name, callback) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Vector)
 ---@param key string The key to associate the value with
 ---@param value Vector The value to set
+---@deprecated You should be using Entity:SetNW2Vector instead.
 function Entity:SetNetworked2Vector(key, value) end
 
----[SHARED] You should use Entity:SetNWAngle instead.
----
---- Sets a networked angle value at specified index on the entity.
+---[SHARED] Sets a networked angle value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedAngle both from client and server.
 ---
@@ -4405,11 +4400,10 @@ function Entity:SetNetworked2Vector(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedAngle)
 ---@param key string The key to associate the value with
 ---@param value? Angle The value to set
+---@deprecated You should use Entity:SetNWAngle instead.
 function Entity:SetNetworkedAngle(key, value) end
 
----[SHARED] You should use Entity:SetNWBool instead.
----
---- Sets a networked boolean value at specified index on the entity.
+---[SHARED] Sets a networked boolean value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedBool both from client and server.
 ---
@@ -4418,11 +4412,10 @@ function Entity:SetNetworkedAngle(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedBool)
 ---@param key string The key to associate the value with
 ---@param value? boolean The value to set
+---@deprecated You should use Entity:SetNWBool instead.
 function Entity:SetNetworkedBool(key, value) end
 
----[SHARED] You should use Entity:SetNWEntity instead.
----
---- Sets a networked entity value at specified index on the entity.
+---[SHARED] Sets a networked entity value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedEntity both from client and server.
 ---
@@ -4431,11 +4424,10 @@ function Entity:SetNetworkedBool(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedEntity)
 ---@param key string The key to associate the value with
 ---@param value? Entity The value to set
+---@deprecated You should use Entity:SetNWEntity instead.
 function Entity:SetNetworkedEntity(key, value) end
 
----[SHARED] You should use Entity:SetNWFloat instead.
----
---- Sets a networked float value at specified index on the entity.
+---[SHARED] Sets a networked float value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedFloat both from client and server.
 ---
@@ -4446,11 +4438,10 @@ function Entity:SetNetworkedEntity(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedFloat)
 ---@param key string The key to associate the value with
 ---@param value? number The value to set
+---@deprecated You should use Entity:SetNWFloat instead.
 function Entity:SetNetworkedFloat(key, value) end
 
----[SHARED] You should use Entity:SetNWInt instead.
----
---- Sets a networked integer value at specified index on the entity.
+---[SHARED] Sets a networked integer value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedInt both from client and server.
 ---
@@ -4459,20 +4450,18 @@ function Entity:SetNetworkedFloat(key, value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedInt)
 ---@param key string The key to associate the value with
 ---@param value? number The value to set
+---@deprecated You should use Entity:SetNWInt instead.
 function Entity:SetNetworkedInt(key, value) end
 
----[SHARED] You should be using Entity:SetNWFloat instead.
----
---- Sets a networked number at the specified index on the entity.
+---[SHARED] Sets a networked number at the specified index on the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedNumber)
 ---@param index any The index that the value is stored in.
 ---@param number number The value to network.
+---@deprecated You should be using Entity:SetNWFloat instead.
 function Entity:SetNetworkedNumber(index, number) end
 
----[SHARED] You should use Entity:SetNWString instead.
----
---- Sets a networked string value at specified index on the entity.
+---[SHARED] Sets a networked string value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedString both from client and server.
 ---
@@ -4481,6 +4470,7 @@ function Entity:SetNetworkedNumber(index, number) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedString)
 ---@param key string The key to associate the value with
 ---@param value string The value to set
+---@deprecated You should use Entity:SetNWString instead.
 function Entity:SetNetworkedString(key, value) end
 
 ---[SHARED] Sets a networked value on the entity.
@@ -4509,17 +4499,15 @@ function Entity:SetNetworkedString(key, value) end
 ---@param value any The value to set
 function Entity:SetNetworkedVar(key, value) end
 
----[SHARED] You should be using Entity:SetNWVarProxy instead.
---- Sets callback function to be called when given NWVar changes.
+---[SHARED] Sets callback function to be called when given NWVar changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedVarProxy)
 ---@param name string The name of the NWVar to add callback for.
 ---@param callback function The function to be called when the NWVar changes.
+---@deprecated You should be using Entity:SetNWVarProxy instead.
 function Entity:SetNetworkedVarProxy(name, callback) end
 
----[SHARED] You should use Entity:SetNWVector instead.
----
---- Sets a networked vector value at specified index on the entity.
+---[SHARED] Sets a networked vector value at specified index on the entity.
 ---
 --- The value then can be accessed with Entity:GetNetworkedVector both from client and server.
 ---
@@ -4528,6 +4516,7 @@ function Entity:SetNetworkedVarProxy(name, callback) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkedVector)
 ---@param key string The key to associate the value with
 ---@param value? Vector The value to set
+---@deprecated You should use Entity:SetNWVector instead.
 function Entity:SetNetworkedVector(key, value) end
 
 ---[SHARED] Virtually changes entity position for clients. Does the same thing as Entity:SetPos when used serverside.
@@ -5081,7 +5070,7 @@ function Entity:SetSpawnEffect(spawnEffect) end
 
 ---[SHARED] Overrides a single material on the model of this entity.
 ---
---- To set a Lua material created with Global.CreateMaterial, just prepend a "!" to the material name.
+--- To set a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
 ---
 --- The server's value takes priority on the client.
 ---

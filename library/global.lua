@@ -356,13 +356,13 @@ function _G.CreateConVar(name, value, flags, helptext, min, max) end
 
 ---[CLIENT AND MENU] Creates a new material with the specified name and shader.
 ---
---- Materials created with this function can be used in Entity:SetMaterial and Entity:SetSubMaterial by prepending a "!" to their material name argument.
+--- Materials created with this function can be used in Entity:SetMaterial and Entity:SetSubMaterial by prepending a `!` to their material name argument.
+---
+--- This will not create a new material if another material object with the same name already exists. All Materials created by this functions are cleaned up on map shutdown.
 ---
 --- This does not work with [patch materials](https://developer.valvesoftware.com/wiki/Patch).
 ---
 --- .pngs must be loaded with Global.Material before being used with this function.
----
---- This will not create a new material if another material object with the same name already exists. All Materials created by this functions are cleaned up on map shutdown.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateMaterial)
 ---@param name string The material name. Must be unique.
@@ -996,10 +996,11 @@ function _G.FrameTime() end
 ---@param gamemode string Server's current gamemode's folder name.
 function _G.GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) end
 
----[SHARED AND MENU] This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead. Returns the current floored dynamic memory usage of Lua in kilobytes.
+---[SHARED AND MENU] Returns the current floored dynamic memory usage of Lua in kilobytes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.gcinfo)
 ---@return number #The current floored dynamic memory usage of Lua, in kilobytes.
+---@deprecated This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead.
 function _G.gcinfo() end
 
 ---[CLIENT] This function adds all models from a specified folder to a custom Spawnlist category. Internally uses Global.AddPropsOfParent
@@ -1110,18 +1111,20 @@ function _G.GetConVar(name) end
 ---@return ConVar #The ConVar object
 function _G.GetConVar_Internal(name) end
 
----[SHARED AND MENU] Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.Gets the numeric value ConVar with the specified name.
+---[SHARED AND MENU] Gets the numeric value ConVar with the specified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
 ---@param name string Name of the ConVar to get.
 ---@return number #The ConVar's value.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.
 function _G.GetConVarNumber(name) end
 
----[SHARED AND MENU] Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.Gets the string value ConVar with the specified name.
+---[SHARED AND MENU] Gets the string value ConVar with the specified name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarString)
 ---@param name string Name of the ConVar to get.
 ---@return string #The ConVar's value.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.
 function _G.GetConVarString(name) end
 
 ---[MENU] Returns the default loading screen URL (asset://garrysmod/html/loading.html)
@@ -1472,15 +1475,14 @@ function _G.HTTP(parameters) end
 ---@return ... #Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
----[SHARED AND MENU] To send the target file to the client simply call AddCSLuaFile() in the target file itself.
----
---- This function works exactly the same as Global.include both clientside and serverside.
+---[SHARED AND MENU] This function works exactly the same as Global.include both clientside and serverside.
 ---
 --- The only difference is that on the serverside it also calls Global.AddCSLuaFile on the filename, so that it gets sent to the client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IncludeCS)
 ---@param filename string The filename of the Lua file you want to include.
 ---@return ... #Anything that the executed Lua script returns.
+---@deprecated To send the target file to the client simply call AddCSLuaFile() in the target file itself.
 function _G.IncludeCS(filename) end
 
 ---[SHARED AND MENU] Returns an iterator function for a for loop, to return ordered key-value pairs from a table.
@@ -1530,11 +1532,25 @@ function _G.IsColor(Object) end
 ---@return boolean #Whether the command will be blocked.
 function _G.IsConCommandBlocked(name) end
 
----[SHARED AND MENU] Returns if the given NPC class name is an enemy.
----
---- Some NPCs are missing from this list even though they are hostile to players. If you'd like to complete this function until this [pull request](https://github.com/Facepunch/garrysmod/pull/2000) is merged, here are the missing NPCs: `npc_combine_camera`, `npc_turret_ceiling`, `npc_combinedropship`, `npc_combinegunship`, `npc_helicopter`, `npc_turret_floor`, `npc_antlion_worker`, `npc_headcrab_black`.
----
---- Returns `true` if the entity name is one of the following:
+---[SHARED AND MENU] Returns if the given NPC class name is an enemy. Returns `true` if the entity name is one of the following:
+--- * `monster_alien_grunt`
+--- * `monster_nihilanth`
+--- * `monster_tentacle`
+--- * `monster_alien_slave`
+--- * `monster_bigmomma`
+--- * `monster_bullchicken`
+--- * `monster_gargantua`
+--- * `monster_human_assassin`
+--- * `monster_babycrab`
+--- * `monster_human_grunt`
+--- * `monster_cockroach`
+--- * `monster_houndeye`
+--- * `monster_zombie`
+--- * `monster_headcrab`
+--- * `monster_alien_controller`
+--- * `monster_turret`
+--- * `monster_miniturret`
+--- * `monster_sentry`
 --- * `npc_antlion`
 --- * `npc_antlionguard`
 --- * `npc_antlionguardian`
@@ -1557,6 +1573,14 @@ function _G.IsConCommandBlocked(name) end
 --- * `npc_zombie`
 --- * `npc_zombie_torso`
 --- * `npc_zombine`
+--- * `npc_combine_camera`
+--- * `npc_turret_ceiling`
+--- * `npc_combinedropship`
+--- * `npc_combinegunship`
+--- * `npc_helicopter`
+--- * `npc_turret_floor`
+--- * `npc_antlion_worker`
+--- * `npc_headcrab_black`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsEnemyEntityName)
 ---@param className string Class name of the entity to check.
@@ -1582,9 +1606,9 @@ function _G.IsEntity(variable) end
 ---@return boolean #Whether or not this is the first time being predicted.
 function _G.IsFirstTimePredicted() end
 
----[SHARED AND MENU] Returns if the given NPC class name is a friend.
----
---- Returns `true` if the entity name is one of the following:
+---[SHARED AND MENU] Returns if the given NPC class name is a friend. Returns `true` if the entity name is one of the following:
+--- * `monster_scientist`
+--- * `monster_barney`
 --- * `npc_alyx`
 --- * `npc_barney`
 --- * `npc_citizen`
@@ -2403,9 +2427,8 @@ function _G.RunString(code, identifier, handleError) end
 
 ---[SHARED AND MENU] Alias of Global.RunString.
 ---
---- Use Global.RunString instead.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunStringEx)
+---@deprecated Use Global.RunString instead.
 function _G.RunStringEx() end
 
 ---[SHARED AND MENU] Removes the given entity unless it is a player or the world entity
@@ -2481,8 +2504,6 @@ function _G.select(parameter, ...) end
 
 ---[SHARED] Send a usermessage
 ---
---- 			This uses the umsg internally, which has been deprecated. Use the net instead.
----
 ---
 ---
 --- 			Using this clientside seems to cause the client to send the UserMessage to itself, which then get blocked internally.
@@ -2492,6 +2513,7 @@ function _G.select(parameter, ...) end
 ---@param name string The name of the usermessage
 ---@param recipients any Can be a CRecipientFilter, table or Player object.
 ---@param ... ... Data to send in the usermessage
+---@deprecated This uses the umsg internally, which has been deprecated. Use the net instead.
 function _G.SendUserMessage(name, recipients, ...) end
 
 ---[SHARED] Returns approximate duration of a sentence by name. See Global.EmitSentence.
@@ -2783,12 +2805,11 @@ function _G.SoundDuration(soundName) end
 ---@return string #Escaped input
 function _G.SQLStr(input, noQuotes) end
 
----[CLIENT] You should be using Global.ScreenScale instead.
----
---- Returns a number based on the Size argument and your screen's width. Alias of Global.ScreenScale.
+---[CLIENT] Returns a number based on the Size argument and your screen's width. Alias of Global.ScreenScale.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SScale)
 ---@param Size number The number you want to scale.
+---@deprecated You should be using Global.ScreenScale instead.
 function _G.SScale(Size) end
 
 ---[SHARED AND MENU] Returns the ordinal suffix of a given number.
@@ -2958,9 +2979,7 @@ function _G.UpdateServerSettings() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateSubscribedAddons)
 function _G.UpdateSubscribedAddons() end
 
----[SHARED AND MENU] You should use Global.IsUselessModel instead.
----
---- Returns whether or not a model is useless by checking that the file path is that of a proper model.
+---[SHARED AND MENU] Returns whether or not a model is useless by checking that the file path is that of a proper model.
 ---
 --- If the string ".mdl" is not found in the model name, the function will return true.
 ---
@@ -2983,14 +3002,14 @@ function _G.UpdateSubscribedAddons() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UTIL_IsUselessModel)
 ---@param modelName string The model name to be checked
 ---@return boolean #Whether or not the model is useless
+---@deprecated You should use Global.IsUselessModel instead.
 function _G.UTIL_IsUselessModel(modelName) end
 
----[CLIENT AND MENU] You should use Global.IsValid instead
----
---- Returns if a panel is safe to use.
+---[CLIENT AND MENU] Returns if a panel is safe to use.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ValidPanel)
 ---@param panel Panel The panel to validate.
+---@deprecated You should use Global.IsValid instead
 function _G.ValidPanel(panel) end
 
 ---[SHARED AND MENU] Creates a Vector object.

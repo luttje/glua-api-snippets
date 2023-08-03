@@ -151,10 +151,11 @@ function IMaterial:SetInt(materialInt, int) end
 ---@param matrix VMatrix The new matrix.
 function IMaterial:SetMatrix(materialMatrix, matrix) end
 
----[SHARED AND MENU] This function does nothingThe functionality of this function was removed due to the amount of crashes it caused.
+---[SHARED AND MENU] The functionality of this function was removed due to the amount of crashes it caused.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:SetShader)
 ---@param shaderName string Name of the shader
+---@deprecated This function does nothing
 function IMaterial:SetShader(shaderName) end
 
 ---[SHARED AND MENU] Sets the specified material value to the specified string, does nothing on a type mismatch.

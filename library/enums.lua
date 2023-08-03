@@ -1907,6 +1907,7 @@ COLLISION_GROUP_BREAKABLE_GLASS = 6
 COLLISION_GROUP_VEHICLE = 7
 --- For HL2, same as Collision_Group_Player, for TF2, this filters out other players and CBaseObjects
 COLLISION_GROUP_PLAYER_MOVEMENT = 8
+--- Generic NPC group
 COLLISION_GROUP_NPC = 9
 --- Doesn't collide with anything, no traces
 COLLISION_GROUP_IN_VEHICLE = 10
@@ -1923,7 +1924,9 @@ COLLISION_GROUP_PASSABLE_DOOR = 15
 COLLISION_GROUP_DISSOLVING = 16
 --- Nonsolid on client and server, pushaway in player code
 COLLISION_GROUP_PUSHAWAY = 17
+--- Used so NPCs in scripts ignore the player
 COLLISION_GROUP_NPC_ACTOR = 18
+--- Used for NPCs in scripts that should not collide with each other
 COLLISION_GROUP_NPC_SCRIPTED = 19
 --- Doesn't collide with players/props
 COLLISION_GROUP_WORLD = 20
@@ -4070,6 +4073,7 @@ TRANSMIT_PVS = 2
 --- Invalid type
 TYPE_NONE = -1
 --- Use TYPE_NONE
+---@deprecated Use TYPE_NONE
 TYPE_INVALID = -1
 --- nil
 TYPE_NIL = 0
@@ -4112,6 +4116,7 @@ TYPE_RECIPIENTFILTER = 18
 --- CUserCmd
 TYPE_USERCMD = 19
 --- Leftover from GMod 13 Beta
+---@deprecated Leftover from GMod 13 Beta
 TYPE_SCRIPTEDVEHICLE = 20
 --- IMaterial
 TYPE_MATERIAL = 21

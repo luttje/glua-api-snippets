@@ -591,9 +591,7 @@ function render.OverrideBlend(
 )
 end
 
----[CLIENT AND MENU] Use render.OverrideBlend instead.
----
---- Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
+---[CLIENT AND MENU] Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
 ---
 --- See also render.OverrideAlphaWriteEnable.
 ---
@@ -605,6 +603,7 @@ end
 ---@param destBlend number
 ---@param srcBlendAlpha? number The source alpha blend function Enums/BLEND. Determines how a rendered texture's final alpha should be calculated.
 ---@param destBlendAlpha? number
+---@deprecated Use render.OverrideBlend instead.
 function render.OverrideBlendFunc(enabled, srcBlend, destBlend, srcBlendAlpha, destBlendAlpha) end
 
 ---[CLIENT AND MENU] Overrides the write behaviour of all next rendering operations towards the color channel of the current render target.

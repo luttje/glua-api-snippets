@@ -24,10 +24,10 @@ local Panel = {}
 ---@return Panel #New panel
 function Panel:Add(object) end
 
----[CLIENT AND MENU] Does nothing
---- This function does nothing.
+---[CLIENT AND MENU] This function does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:AddText)
+---@deprecated Does nothing
 function Panel:AddText() end
 
 ---[CLIENT AND MENU] Aligns the panel on the bottom of its parent with the specified offset.
@@ -1580,15 +1580,14 @@ function PANEL:PaintOver(width, height) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:ParentToHUD)
 function Panel:ParentToHUD() end
 
----[CLIENT AND MENU] Due to privacy concerns, this function has been disabled
----
---- Only works for TextEntries.
+---[CLIENT AND MENU] Only works for TextEntries.
 ---
 --- Pastes the contents of the clipboard into the TextEntry.
 ---
 --- Tab characters will be dropped from the pasted text
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Paste)
+---@deprecated Due to privacy concerns, this function has been disabled
 function Panel:Paste() end
 
 ---[CLIENT] Called whenever the panels' layout needs to be performed again. This means all child panels must be re-positioned to fit the possibly new size of this panel.
@@ -1625,12 +1624,13 @@ function Panel:PositionLabel(lblWidth, x, y, lbl, panelObj) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:PostAutoRefresh)
 function PANEL:PostAutoRefresh() end
 
----[CLIENT AND MENU] Only used in deprecated Derma controls.Sends a command to the panel.
+---[CLIENT AND MENU] Sends a command to the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:PostMessage)
 ---@param messageName string The name of the message.
 ---@param valueType string The type of the variable to post.
 ---@param value string The value to post.
+---@deprecated Only used in deprecated Derma controls.
 function Panel:PostMessage(messageName, valueType, value) end
 
 ---[CLIENT] Only works on elements defined with derma.DefineControl and only if the panel has **AllowAutoRefresh** set to true.
@@ -1756,11 +1756,10 @@ function Panel:SelectAll() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SelectAllOnFocus)
 function Panel:SelectAllOnFocus() end
 
----[CLIENT AND MENU] Duplicate of Panel:SelectAll.
----
---- Selects all the text in a panel object. Will not select non-text items; for this, use Panel:SelectAll.
+---[CLIENT AND MENU] Selects all the text in a panel object. Will not select non-text items; for this, use Panel:SelectAll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SelectAllText)
+---@deprecated Duplicate of Panel:SelectAll.
 function Panel:SelectAllText() end
 
 ---[CLIENT AND MENU] Deselects all items in a panel object. For text-based objects, this will deselect all text.
@@ -1774,9 +1773,7 @@ function Panel:SelectNone() end
 ---@param id number Achievement number ID
 function Panel:SetAchievement(id) end
 
----[CLIENT AND MENU] Does nothing at all.
----
---- Used in Button to call a function when the button is clicked and in Slider when the value changes.
+---[CLIENT AND MENU] Used in Button to call a function when the button is clicked and in Slider when the value changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetActionFunction)
 ---@param func function Function to call when the Button is clicked or the Slider value is changed.
@@ -1786,6 +1783,7 @@ function Panel:SetAchievement(id) end
 --- * string action - "Command" on button press, "SliderMoved" on slider move.
 --- * number val - The new value of the Slider. Will always equal 0 for buttons.
 --- * number zed - Always equals 0.
+---@deprecated Does nothing at all.
 function Panel:SetActionFunction(func) end
 
 ---[CLIENT AND MENU] Configures a text input to allow user to type characters that are not included in the US-ASCII (7-bit ASCII) character set.
@@ -2051,10 +2049,11 @@ function Panel:SetHeight(height) end
 ---@param hTMLCode string The code to set.
 function Panel:SetHTML(hTMLCode) end
 
----[CLIENT AND MENU] Alias of Panel:SetKeyboardInputEnabled(lowercase)Enables or disables the keyboard input for the panel.
+---[CLIENT AND MENU] Enables or disables the keyboard input for the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetKeyBoardInputEnabled)
 ---@param keyboardInput boolean Whether to enable or disable keyboard input.
+---@deprecated Alias of Panel:SetKeyboardInputEnabled(lowercase)
 function Panel:SetKeyBoardInputEnabled(keyboardInput) end
 
 ---[CLIENT] Allows or disallows the panel to receive keyboard focus and input. This is recursively applied to all children.
@@ -2124,9 +2123,9 @@ function Panel:SetPaintBorderEnabled(paintBorder) end
 function Panel:SetPaintedManually(paintedManually) end
 
 ---[CLIENT AND MENU] This function does nothing.
---- This function does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetPaintFunction)
+---@deprecated This function does nothing.
 function Panel:SetPaintFunction() end
 
 ---[CLIENT AND MENU] Sets the parent of the panel.
@@ -2540,8 +2539,9 @@ function Panel:UnselectAll() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:UpdateHTMLTexture)
 function Panel:UpdateHTMLTexture() end
 
----[CLIENT AND MENU] Use Panel:IsValid instead.Returns if a given panel is valid or not.
+---[CLIENT AND MENU] Returns if a given panel is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Valid)
 ---@return boolean #Whether the panel is valid or not, true being it is, false being it isn't.
+---@deprecated Use Panel:IsValid instead.
 function Panel:Valid() end

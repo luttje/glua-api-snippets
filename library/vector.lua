@@ -73,11 +73,12 @@ function Vector:Div(divisor) end
 ---@return number #The dot product between the two vectors
 function Vector:Dot(otherVector) end
 
----[SHARED AND MENU] This is an alias of Vector:Dot. Use that instead.Returns the dot product of the two vectors.
+---[SHARED AND MENU] Returns the dot product of the two vectors.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:DotProduct)
 ---@param Vector Vector The other vector.
 ---@return number #Dot Product
+---@deprecated This is an alias of Vector:Dot. Use that instead.
 function Vector:DotProduct(Vector) end
 
 ---[SHARED AND MENU] Returns the negative version of this vector, i.e. a vector with every component to the negative value of itself.
@@ -88,12 +89,11 @@ function Vector:DotProduct(Vector) end
 ---@return Vector #The negative of this vector.
 function Vector:GetNegated() end
 
----[SHARED AND MENU] Use Vector:GetNormalized instead.
----
---- Returns a normalized version of the vector. This is a alias of Vector:GetNormalized.
+---[SHARED AND MENU] Returns a normalized version of the vector. This is a alias of Vector:GetNormalized.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNormal)
 ---@return Vector #Normalized version of the vector.
+---@deprecated Use Vector:GetNormalized instead.
 function Vector:GetNormal() end
 
 ---[SHARED AND MENU] Returns a normalized version of the vector. Normalized means vector with same direction but with length of 1.

@@ -49,10 +49,11 @@ function DHTML:QueueJavascript(js) end
 ---@param allow? boolean Whether or not to allow Lua.
 function DHTML:SetAllowLua(allow) end
 
----[CLIENT AND MENU] Broken. Use the CSS `overflow` rule instead. Sets if the loaded window should display scrollbars when the webpage is larger than the viewing window. This is similar to the CSS `overflow` rule.
+---[CLIENT AND MENU] Sets if the loaded window should display scrollbars when the webpage is larger than the viewing window. This is similar to the CSS `overflow` rule.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:SetScrollbars)
 ---@param show boolean True if scrollbars should be visible.
+---@deprecated Broken. Use the CSS `overflow` rule instead.
 function DHTML:SetScrollbars(show) end
 
 ---[CLIENT] Stops the loading of the HTML panel's current page.

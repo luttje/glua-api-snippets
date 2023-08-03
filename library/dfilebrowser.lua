@@ -71,9 +71,9 @@ function DFileBrowser:GetSearch() end
 --- Double-clicking a file or icon will trigger **both** this and DFileBrowser:OnSelect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:OnDoubleClick)
----@param filePath string The path to the file that was double-clicked.
 ---@param selectedPanel Panel The panel that was double-clicked to select this file.This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser:SetModels.
-function DFileBrowser:OnDoubleClick(filePath, selectedPanel) end
+---@param filePath string The path to the file that was double-clicked.
+function DFileBrowser:OnDoubleClick(selectedPanel, filePath) end
 
 ---[CLIENT] Called when a file is right-clicked.
 ---
@@ -89,9 +89,9 @@ function DFileBrowser:OnRightClick(filePath, selectedPanel) end
 ---[CLIENT] Called when a file is selected.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:OnSelect)
----@param filePath string The path to the file that was selected.
 ---@param selectedPanel Panel The panel that was clicked to select this file.This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser:SetModels.
-function DFileBrowser:OnSelect(filePath, selectedPanel) end
+---@param filePath string The path to the file that was selected.
+function DFileBrowser:OnSelect(selectedPanel, filePath) end
 
 ---[CLIENT] Sets the root directory/folder of the file tree.
 ---

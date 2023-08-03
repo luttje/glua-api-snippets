@@ -19,14 +19,13 @@ surface = {}
 ---@param fontData table The font properties. See the Structures/FontData.
 function surface.CreateFont(fontName, fontData) end
 
----[CLIENT AND MENU] Alias of Global.DisableClipping so use that instead.
----
---- Enables or disables the clipping used by the VGUI that limits the drawing operations to a panels bounds.
+---[CLIENT AND MENU] Enables or disables the clipping used by the VGUI that limits the drawing operations to a panels bounds.
 ---
 --- Identical to Global.DisableClipping. See also Panel:NoClipping.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DisableClipping)
 ---@param disable boolean True to disable, false to enable the clipping
+---@deprecated Alias of Global.DisableClipping so use that instead.
 function surface.DisableClipping(disable) end
 
 ---[CLIENT AND MENU] Draws a hollow circle, made of lines. For a filled circle, see examples for surface.DrawPoly.
@@ -248,18 +247,18 @@ function surface.GetTextureSize(textureID) end
 ---
 function surface.PlaySound(soundfile) end
 
----[CLIENT AND MENU] You should use Global.ScrH instead.
---- Returns the height of the current client's screen.
+---[CLIENT AND MENU] Returns the height of the current client's screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenHeight)
 ---@return number #screenHeight
+---@deprecated You should use Global.ScrH instead.
 function surface.ScreenHeight() end
 
----[CLIENT AND MENU] You should use Global.ScrW instead.
---- Returns the width of the current client's screen.
+---[CLIENT AND MENU] Returns the width of the current client's screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenWidth)
 ---@return number #screenWidth
+---@deprecated You should use Global.ScrW instead.
 function surface.ScreenWidth() end
 
 ---[CLIENT AND MENU] Sets the alpha multiplier that will influence all upcoming drawing operations.

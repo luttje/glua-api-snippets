@@ -215,8 +215,6 @@ function game.GetWorld() end
 
 ---[SHARED] Returns true if the server is a dedicated server, false if it is a listen server or a singleplayer game.
 ---
---- This always returns false on the client.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.IsDedicated)
 ---@return boolean #Is the server dedicated or not.
 function game.IsDedicated() end

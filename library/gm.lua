@@ -944,8 +944,7 @@ function GM:OnPhysgunPickup(ply, ent) end
 ---@return boolean #Whether the player can reload with the physgun or not
 function GM:OnPhysgunReload(physgun, ply) end
 
----[SERVER] Use GM:PlayerChangedTeam instead, which works for every Player:SetTeam call.
---- Called when a player has changed team using GM:PlayerJoinTeam.
+---[SERVER] Called when a player has changed team using GM:PlayerJoinTeam.
 ---
 --- This hook will not work with hook.Add and it is only called manually from GM:PlayerJoinTeam by the base gamemode
 ---
@@ -953,6 +952,7 @@ function GM:OnPhysgunReload(physgun, ply) end
 ---@param ply Player Player who has changed team
 ---@param oldTeam number Index of the team the player was originally in
 ---@param newTeam number Index of the team the player has changed to
+---@deprecated Use GM:PlayerChangedTeam instead, which works for every Player:SetTeam call.
 function GM:OnPlayerChangedTeam(ply, oldTeam, newTeam) end
 
 ---[CLIENT] Called whenever a player sends a chat message. For the serverside equivalent, see GM:PlayerSay.

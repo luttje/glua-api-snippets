@@ -12,9 +12,10 @@ timer = {}
 ---@return boolean #`true` if succeeded.
 function timer.Adjust(identifier, delay, repetitions, func) end
 
----[SHARED AND MENU] If you want to check if whether or not a timer exists, use timer.Exists. This function does nothing.
+---[SHARED AND MENU] This function does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Check)
+---@deprecated If you want to check if whether or not a timer exists, use timer.Exists.
 function timer.Check() end
 
 ---[SHARED AND MENU] Creates a new timer that will repeat its function given amount of times.
@@ -31,10 +32,11 @@ function timer.Check() end
 ---@param func function Function called when timer has finished the countdown.
 function timer.Create(identifier, delay, repetitions, func) end
 
----[SHARED AND MENU] You should be using timer.Remove instead. Stops and destroys the given timer. Alias of timer.Remove.
+---[SHARED AND MENU] Stops and destroys the given timer. Alias of timer.Remove.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Destroy)
 ---@param identifier string Identifier of the timer to destroy.
+---@deprecated You should be using timer.Remove instead.
 function timer.Destroy(identifier) end
 
 ---[SHARED AND MENU] Returns whenever the given timer exists or not.

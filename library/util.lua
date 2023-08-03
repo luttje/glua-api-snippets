@@ -715,13 +715,12 @@ function util.Timer(startdelay) end
 ---@return number #Time since this function has been last called in ms
 function util.TimerCycle() end
 
----[SHARED AND MENU] You should use Global.tobool instead.
----
---- Converts string or a number to a bool, if possible. Alias of Global.tobool.
+---[SHARED AND MENU] Converts string or a number to a bool, if possible. Alias of Global.tobool.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.tobool)
 ---@param input any A string or a number to convert.
 ---@return boolean #False if the input is equal to the string or boolean "false", if the input is equal to the string or number "0", or if the input is nil. Returns true otherwise.
+---@deprecated You should use Global.tobool instead.
 function util.tobool(input) end
 
 ---[SHARED] Runs a trace using the entity's collisionmodel between two points. This does not take the entity's angles into account and will trace its unrotated collisionmodel.

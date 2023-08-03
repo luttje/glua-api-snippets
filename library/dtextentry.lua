@@ -170,12 +170,11 @@ function DTextEntry:OpenAutoComplete(tab) end
 ---@param color table The color to set the cursor to.
 function DTextEntry:SetCursorColor(color) end
 
----[CLIENT AND MENU] Use Panel:SetEnabled instead.
----
---- Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox.
+---[CLIENT AND MENU] Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetDisabled)
 ---@param disabled boolean Whether the textbox should be disabled
+---@deprecated Use Panel:SetEnabled instead.
 function DTextEntry:SetDisabled(disabled) end
 
 ---[CLIENT AND MENU] Disables Input on a DTextEntry. This differs from DTextEntry:SetDisabled - SetEditable will not affect the appearance of the textbox.
@@ -216,7 +215,7 @@ function DTextEntry:SetMultiline(multiline) end
 ---@param numericOnly boolean Whether to accept only numeric characters.
 function DTextEntry:SetNumeric(numericOnly) end
 
----[CLIENT AND MENU] Sets whether to show background.
+---[CLIENT AND MENU] Sets whether to show the default background of the DTextEntry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetPaintBackground)
 ---@param show boolean `false` hides the background; this is `true` by default.
@@ -260,3 +259,10 @@ function DTextEntry:SetUpdateOnType(updateOnType) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetValue)
 ---@param text string The value to set.
 function DTextEntry:SetValue(text) end
+
+---[CLIENT AND MENU] Used by DTextEntry:OnTextChanged, DTextEntry:OnEnter and DTextEntry:OnLoseFocus
+---
+--- Updates the ConVar associated with the TextEntry to its new value.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:UpdateConvarValue)
+function DTextEntry:UpdateConvarValue() end

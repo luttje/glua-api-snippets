@@ -71,9 +71,7 @@ function player.GetBySteamID(steamID) end
 ---@return Player #Player if one is found, false otherwise.
 function player.GetBySteamID64(steamID64) end
 
----[SHARED] Use player.GetBySteamID64, player.GetBySteamID or player.GetByAccountID to get a player by a unique identifier instead.
----
---- Gets the player with the specified uniqueID (not recommended way to identify players).
+---[SHARED] Gets the player with the specified uniqueID (not recommended way to identify players).
 ---
 --- It is highly recommended to use player.GetByAccountID, player.GetBySteamID or player.GetBySteamID64 instead as this function can have collisions ( be same for different people ) while SteamID is guaranteed to unique to each player.
 --- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
@@ -81,6 +79,7 @@ function player.GetBySteamID64(steamID64) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
 ---@return Player #Player if one is found, false otherwise.
+---@deprecated Use player.GetBySteamID64, player.GetBySteamID or player.GetByAccountID to get a player by a unique identifier instead.
 function player.GetByUniqueID(uniqueID) end
 
 ---[SHARED] Gives you the player count.
@@ -822,11 +821,11 @@ function Player:GetPressedWidget() end
 ---@return Entity #The previous weapon of the player.  This is not guaranteed to be a weapon entity so it should be checked with Entity:IsWeapon for safety.
 function Player:GetPreviousWeapon() end
 
----[SHARED] You should use Player:GetViewPunchAngles instead.
---- Returns players screen punch effect angle. See Player:ViewPunch and Player:SetViewPunchAngles
+---[SHARED] Returns players screen punch effect angle. See Player:ViewPunch and Player:SetViewPunchAngles
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPunchAngle)
 ---@return Angle #The punch angle
+---@deprecated You should use Player:GetViewPunchAngles instead.
 function Player:GetPunchAngle() end
 
 ---[SHARED] Returns players death ragdoll. The ragdoll is created by Player:CreateRagdoll.
@@ -1999,18 +1998,16 @@ function Player:SprintEnable() end
 ---@return boolean #Return true to prevent default action
 function PLAYER:StartMove(mv, cmd) end
 
----[SHARED] This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
----
---- Doesn't appear to do anything.
+---[SHARED] Doesn't appear to do anything.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StartSprinting)
+---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StartSprinting() end
 
----[SHARED] This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
----
---- When used in a GM:SetupMove hook, this function will force the player to walk, as well as preventing the player from sprinting.
+---[SHARED] When used in a GM:SetupMove hook, this function will force the player to walk, as well as preventing the player from sprinting.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StartWalking)
+---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StartWalking() end
 
 ---[SHARED] Returns the player's SteamID.
@@ -2041,20 +2038,18 @@ function Player:SteamID() end
 ---@return string #Player's 64-bit SteamID aka CommunityID.
 function Player:SteamID64() end
 
----[SHARED] This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
----
---- When used in a GM:SetupMove hook, this function will prevent the player from sprinting.
+---[SHARED] When used in a GM:SetupMove hook, this function will prevent the player from sprinting.
 ---
 --- When +walk is engaged, the player will still be able to sprint to half speed (normal run speed) as opposed to full sprint speed without this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StopSprinting)
+---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StopSprinting() end
 
----[SHARED] This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
----
---- When used in a GM:SetupMove hook, this function behaves unexpectedly by preventing the player from sprinting similar to Player:StopSprinting.
+---[SHARED] When used in a GM:SetupMove hook, this function behaves unexpectedly by preventing the player from sprinting similar to Player:StopSprinting.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StopWalking)
+---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StopWalking() end
 
 ---[SERVER] Turns off the zoom mode of the player. (+zoom console command)
@@ -2140,26 +2135,23 @@ function Player:TranslateWeaponActivity(act) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UnfreezePhysicsObjects)
 function Player:UnfreezePhysicsObjects() end
 
----[SHARED] **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
----
---- Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key.
+---[SHARED] Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key.
 ---
 --- In Singleplayer, this function will always return 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueID)
 ---@return number #The player's Unique ID
+---@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
 function Player:UniqueID() end
 
----[SHARED] This is based on Player:UniqueID which is deprecated and vulnerable to collisions.
----
----
---- Returns a table that will stay allocated for the specific player serveside between connects until the server shuts down. On client it has no such special behavior.
+---[SHARED] Returns a table that will stay allocated for the specific player serveside between connects until the server shuts down. On client it has no such special behavior.
 ---
 --- This table is not synchronized (networked) between client and server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueIDTable)
 ---@param key any Unique table key.
 ---@return table #The table that contains any info you have put in it.
+---@deprecated This is based on Player:UniqueID which is deprecated and vulnerable to collisions.
 function Player:UniqueIDTable(key) end
 
 ---[SERVER] Unlocks the player movement if locked previously.

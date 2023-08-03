@@ -50,22 +50,21 @@ function steamworks.FileInfo(workshopItemID, resultCallback) end
 --- * favorite - Player's favorites
 ---
 ---@param tags table A table of tags to match.
----@param offset number How much of results to skip from first one. Mainly used for pages.
----@param numRetrieve number How much items to retrieve, up to 50 at a time.
----@param days number When getting Most Popular content from Steam, this determines a time period. ( 7 = most popular addons in last 7 days, 1 = most popular addons today, etc )
+---@param offset number How much of results to skip from first one. This is useful for pagination. Negative values are invalid.
+---@param numRetrieve number How many items to retrieve, up to 50 at a time. Negative values are invalid.
+---@param days number When getting `trending` content from Steam, this determines a time period, in range of days from 0 to 365. ( 7 = most popular addons in last 7 days, 30 = most popular addons in the last month, etc )
 ---@param userID string "0" to retrieve all addons, "1" to retrieve addons only published by you, or a valid SteamID64 of a user to get workshop items of.
 ---@param resultCallback function The function to process retrieved data. The first and only argument is a table, containing all the info, or nil in case of error
 function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback) end
 
----[CLIENT AND MENU] You should use the callback of steamworks.RequestPlayerInfo instead.
----
---- Retrieves players name by their 64bit SteamID.
+---[CLIENT AND MENU] Retrieves players name by their 64bit SteamID.
 ---
 --- You must call steamworks.RequestPlayerInfo a decent amount of time before calling this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.GetPlayerName)
 ---@param steamID64 string The 64bit Steam ID ( aka Community ID ) of the player
 ---@return string #The name of that player
+---@deprecated You should use the callback of steamworks.RequestPlayerInfo instead.
 function steamworks.GetPlayerName(steamID64) end
 
 ---[CLIENT AND MENU] Returns whenever the client is subscribed to the specified Steam Workshop item.
@@ -152,11 +151,10 @@ function steamworks.ViewFile(workshopItemID) end
 ---@param upOrDown boolean Sets if the user should vote up/down. True makes them upvote, false down
 function steamworks.Vote(workshopItemID, upOrDown) end
 
----[CLIENT AND MENU] Use data steamworks.FileInfo instead.
----
---- Retrieves vote info of supplied addon.
+---[CLIENT AND MENU] Retrieves vote info of supplied addon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.VoteInfo)
 ---@param workshopItemID string The ID of workshop item.
 ---@param resultCallback function The function to process retrieved data. The first and only argument is a table, containing all the info.
+---@deprecated Use data steamworks.FileInfo instead.
 function steamworks.VoteInfo(workshopItemID, resultCallback) end

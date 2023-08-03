@@ -1,5 +1,6 @@
 ---@meta
 
+---@deprecated This is derived from the deprecated DPanelList.
 ---@class DModelSelect : DPanelSelect
 local DModelSelect = {}
 

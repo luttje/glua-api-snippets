@@ -17,10 +17,11 @@ function DPanel:GetBackgroundColor() end
 ---@return boolean #True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
 function DPanel:GetDisabled() end
 
----[CLIENT AND MENU] You should use DPanel:GetPaintBackground instead.Returns whether or not the panel background is being drawn. Alias of DPanel:GetPaintBackground.
+---[CLIENT AND MENU] Returns whether or not the panel background is being drawn. Alias of DPanel:GetPaintBackground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetDrawBackground)
 ---@return boolean #True if the panel background is drawn, false otherwise.
+---@deprecated You should use DPanel:GetPaintBackground instead.
 function DPanel:GetDrawBackground() end
 
 ---[CLIENT AND MENU] Returns whether or not the panel background is being drawn.
@@ -41,10 +42,11 @@ function DPanel:SetBackgroundColor(color) end
 ---@param disabled boolean True to disable the panel (mouse input disabled and background alpha set to 75), false to enable it (mouse input enabled and background alpha set to 255).
 function DPanel:SetDisabled(disabled) end
 
----[CLIENT AND MENU] You should use DPanel:SetPaintBackground instead.Sets whether or not to draw the panel background. Alias of DPanel:SetPaintBackground.
+---[CLIENT AND MENU] Sets whether or not to draw the panel background. Alias of DPanel:SetPaintBackground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetDrawBackground)
 ---@param draw boolean True to show the panel's background, false to hide it.
+---@deprecated You should use DPanel:SetPaintBackground instead.
 function DPanel:SetDrawBackground(draw) end
 
 ---[CLIENT AND MENU] Sets whether or not to paint/draw the panel background.

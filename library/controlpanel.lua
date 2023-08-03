@@ -19,9 +19,7 @@ function controlpanel.Clear() end
 ---@return Panel #The ControlPanel panel.
 function controlpanel.Get(name) end
 
----[CLIENT] It is recommended to use DForm's members instead.
----
---- Adds a control to the control panel.
+---[CLIENT] Adds a control to the control panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:AddControl)
 ---@param type string The control type to add. The complete list is:
@@ -109,6 +107,7 @@ function controlpanel.Get(name) end
 --- 	* rows (def: `4`)
 --- 	* convar
 --- 	* options
+---@deprecated It is recommended to use DForm's members instead.
 function ControlPanel:AddControl(type, controlinfo) end
 
 ---[CLIENT] Adds an item by calling DForm:AddItem.

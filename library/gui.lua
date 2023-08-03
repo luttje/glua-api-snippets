@@ -90,13 +90,12 @@ function gui.IsConsoleVisible() end
 ---@return boolean #Whether the game menu overlay ( main menu ) is open or not
 function gui.IsGameUIVisible() end
 
----[CLIENT AND MENU] Use input.GetCursorPos instead.
----
---- Returns the cursor's position on the screen, or 0, 0 if cursor is not visible.
+---[CLIENT AND MENU] Returns the cursor's position on the screen, or 0, 0 if cursor is not visible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MousePos)
 ---@return number, number #number - mouseX
 ---@return number, number #number - mouseY
+---@deprecated Use input.GetCursorPos instead.
 function gui.MousePos() end
 
 ---[CLIENT AND MENU] Returns x component of the mouse position.
@@ -130,12 +129,12 @@ function gui.OpenURL(url) end
 ---@return Vector #Direction
 function gui.ScreenToVector(x, y) end
 
----[CLIENT AND MENU] Use input.SetCursorPos instead.
---- Sets the cursor's position on the screen, relative to the topleft corner of the window
+---[CLIENT AND MENU] Sets the cursor's position on the screen, relative to the topleft corner of the window
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.SetMousePos)
 ---@param mouseX number The X coordinate to move the cursor to.
 ---@param mouseY number The Y coordinate to move the cursor to.
+---@deprecated Use input.SetCursorPos instead.
 function gui.SetMousePos(mouseX, mouseY) end
 
 ---[MENU] Shows console in the game UI.

@@ -55,12 +55,12 @@ function DForm:ControlHelp(help) end
 function DForm:Help(help) end
 
 ---[CLIENT AND MENU] Adds a DListBox onto the DForm
---- Use DListView with DForm:AddItem instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ListBox)
 ---@param label string The label to set on the DListBox
 ---@return Panel, Panel #Panel - The created DListBox
 ---@return Panel, Panel #Panel - The created DLabel
+---@deprecated Use DListView with DForm:AddItem instead.
 function DForm:ListBox(label) end
 
 ---[CLIENT AND MENU] Adds a DNumberWang onto the DForm
@@ -86,10 +86,11 @@ function DForm:NumberWang(label, convar, min, max, decimals) end
 ---@return Panel #The created DNumSlider
 function DForm:NumSlider(label, convar, min, max, decimals) end
 
----[CLIENT AND MENU] This is derived from the deprecated DPanelSelect.Creates a DPanelSelect and docks it to the top of the DForm.
+---[CLIENT AND MENU] Creates a DPanelSelect and docks it to the top of the DForm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:PanelSelect)
 ---@return Panel #The created DPanelSelect.
+---@deprecated This is derived from the deprecated DPanelSelect.
 function DForm:PanelSelect() end
 
 ---[CLIENT AND MENU] Creates a PropSelect panel and docks it to the top of the DForm.

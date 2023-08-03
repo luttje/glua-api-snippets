@@ -133,9 +133,7 @@ function math.cosh(number) end
 ---@return number #degrees
 function math.deg(radians) end
 
----[SHARED AND MENU] You should use math.Distance instead
----
---- Returns the difference between two points in 2D space. Alias of math.Distance.
+---[SHARED AND MENU] Returns the difference between two points in 2D space. Alias of math.Distance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Dist)
 ---@param x1 number X position of first point
@@ -143,6 +141,7 @@ function math.deg(radians) end
 ---@param x2 number X position of second point
 ---@param y2 number Y position of second point
 ---@return number #Distance between the two points.
+---@deprecated You should use math.Distance instead
 function math.Dist(x1, y1, x2, y2) end
 
 ---[SHARED AND MENU] Returns the difference between two points in 2D space.
@@ -477,14 +476,13 @@ function math.max(...) end
 ---@return number #The smallest number
 function math.min(...) end
 
----[SHARED AND MENU] This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math.fmod instead.
----
---- Returns the modulus of the specified values. Same as math.fmod.
+---[SHARED AND MENU] Returns the modulus of the specified values. Same as math.fmod.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.mod)
 ---@param base number The base value
 ---@param modulator number Modulator
 ---@return number #The calculated modulus
+---@deprecated This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math.fmod instead.
 function math.mod(base, modulator) end
 
 ---[SHARED AND MENU] Returns the integral and fractional component of the modulo operation.

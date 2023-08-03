@@ -24,12 +24,13 @@ function DButton:IsDown() end
 ---@param args string The arguments for the command.
 function DButton:SetConsoleCommand(command, args) end
 
----[CLIENT AND MENU] Use Panel:SetEnabled instead.Sets whether or not the DButton is disabled.
+---[CLIENT AND MENU] Sets whether or not the DButton is disabled.
 ---
 --- When disabled, the button is `greyed out` and cannot be clicked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetDisabled)
 ---@param disable boolean When true Enable the button, when false Disable the button.
+---@deprecated Use Panel:SetEnabled instead.
 function DButton:SetDisabled(disable) end
 
 ---[CLIENT AND MENU] Does absolutely nothing at all. Default value is automatically set to true.

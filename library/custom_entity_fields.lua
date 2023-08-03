@@ -1,21 +1,72 @@
 ---@meta
 
 ---@class Custom_Entity_Fields
----@field GetEntityDriveMode function `Serverside`, Sandbox and Sandbox derived only.  Called by the Drive property to override the default drive type, which is `drive_sandbox`.
----@field OnEntityCopyTableFinish function Documented at ENTITY:OnEntityCopyTableFinish.
----@field PostEntityCopy function Documented at ENTITY:PostEntityCopy.
----@field PostEntityPaste function Documented at ENTITY:PostEntityPaste.
----@field PreEntityCopy function Documented at ENTITY:PreEntityCopy.
----@field OnDuplicated function Documented at ENTITY:OnDuplicated.
----@field PhysgunDisabled boolean `Shared`, Sandbox or Sandbox derived only.  If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
----@field PhysgunPickup function `Shared`, Sandbox or Sandbox derived only.  Called from GM:PhysgunPickup, overrides `PhysgunDisabled`
----@field m_tblToolsAllowed table `Shared`, Sandbox or Sandbox derived only.  Controls which tools **and** properties can be used on this entity. Format is a list of strings where each string is the tool or property classname.  This can also be set from map, see Sandbox Specific Mapping
----@field GravGunPickupAllowed function Documented at ENTITY:GravGunPickupAllowed.
----@field GravGunPunt function Documented at ENTITY:GravGunPunt.
----@field CanProperty function Documented at ENTITY:CanProperty.
----@field CanTool function Documented at ENTITY:CanTool.
----@field CalcAbsolutePosition function Documented at ENTITY:CalcAbsolutePosition.
----@field RenderOverride function Documented at ENTITY:RenderOverride.
----@field m_RenderOrigin Vector (Clientside) Do not use.
----@field m_RenderAngles Angle (Clientside) Do not use.
 local Custom_Entity_Fields = {}
+
+---`Serverside`, Sandbox and Sandbox derived only. Called by the Drive property to override the default drive type, which is `drive_sandbox`.
+---@type function
+Custom_Entity_Fields.GetEntityDriveMode = nil
+
+---Documented at ENTITY:OnEntityCopyTableFinish.
+---@type function
+Custom_Entity_Fields.OnEntityCopyTableFinish = nil
+
+---Documented at ENTITY:PostEntityCopy.
+---@type function
+Custom_Entity_Fields.PostEntityCopy = nil
+
+---Documented at ENTITY:PostEntityPaste.
+---@type function
+Custom_Entity_Fields.PostEntityPaste = nil
+
+---Documented at ENTITY:PreEntityCopy.
+---@type function
+Custom_Entity_Fields.PreEntityCopy = nil
+
+---Documented at ENTITY:OnDuplicated.
+---@type function
+Custom_Entity_Fields.OnDuplicated = nil
+
+---`Shared`, Sandbox or Sandbox derived only. If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
+---@type boolean
+Custom_Entity_Fields.PhysgunDisabled = nil
+
+---`Shared`, Sandbox or Sandbox derived only. Called from GM:PhysgunPickup, overrides `PhysgunDisabled`
+---@type function
+Custom_Entity_Fields.PhysgunPickup = nil
+
+---`Shared`, Sandbox or Sandbox derived only. Controls which tools **and** properties can be used on this entity. Format is a list of strings where each string is the tool or property classname. This can also be set from map, see Sandbox Specific Mapping
+---@type table
+Custom_Entity_Fields.m_tblToolsAllowed = nil
+
+---Documented at ENTITY:GravGunPickupAllowed.
+---@type function
+Custom_Entity_Fields.GravGunPickupAllowed = nil
+
+---Documented at ENTITY:GravGunPunt.
+---@type function
+Custom_Entity_Fields.GravGunPunt = nil
+
+---Documented at ENTITY:CanProperty.
+---@type function
+Custom_Entity_Fields.CanProperty = nil
+
+---Documented at ENTITY:CanTool.
+---@type function
+Custom_Entity_Fields.CanTool = nil
+
+---Documented at ENTITY:CalcAbsolutePosition.
+---@type function
+Custom_Entity_Fields.CalcAbsolutePosition = nil
+
+---Documented at ENTITY:RenderOverride.
+---@type function
+Custom_Entity_Fields.RenderOverride = nil
+
+---(Clientside) Do not use.
+---@type Vector
+Custom_Entity_Fields.m_RenderOrigin = nil
+
+---(Clientside) Do not use.
+---@type Angle
+Custom_Entity_Fields.m_RenderAngles = nil

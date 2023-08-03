@@ -75,22 +75,22 @@ function table.DeSanitise(tbl) end
 ---@param tbl table The table to empty.
 function table.Empty(tbl) end
 
----[SHARED AND MENU] Instead, iterate the table using ipairs or increment from the previous index using Global.next. Non-numerically indexed tables are not ordered.
---- Returns the value positioned after the supplied value in a table. If it isn't found then the first element in the table is returned
+---[SHARED AND MENU] Returns the value positioned after the supplied value in a table. If it isn't found then the first element in the table is returned
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.FindNext)
 ---@param tbl table Table to search
 ---@param value any Value to return element after
 ---@return any #Found element
+---@deprecated Instead, iterate the table using ipairs or increment from the previous index using Global.next. Non-numerically indexed tables are not ordered.
 function table.FindNext(tbl, value) end
 
----[SHARED AND MENU] Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
---- Returns the value positioned before the supplied value in a table. If it isn't found then the last element in the table is returned
+---[SHARED AND MENU] Returns the value positioned before the supplied value in a table. If it isn't found then the last element in the table is returned
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.FindPrev)
 ---@param tbl table Table to search
 ---@param value any Value to return element before
 ---@return any #Found element
+---@deprecated Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
 function table.FindPrev(tbl, value) end
 
 ---[SHARED AND MENU] Inserts a value in to the given table even if the table is non-existent
@@ -101,42 +101,40 @@ function table.FindPrev(tbl, value) end
 ---@return table #The supplied or created table
 function table.ForceInsert(tab, value) end
 
----[SHARED AND MENU] This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.pairs instead. Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
+---[SHARED AND MENU] Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
 ---
 --- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use Global.pairs instead. The GLua interpretation of this is table.ForEach.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreach)
 ---@param tbl table The table to iterate over.
 ---@param callback function The function to run for each key and value.
+---@deprecated This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.pairs instead.
 function table.foreach(tbl, callback) end
 
----[SHARED AND MENU] This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.ipairs() instead. Iterates for each numeric index in the table in order.
+---[SHARED AND MENU] Iterates for each numeric index in the table in order.
 ---
 --- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use Global.ipairs() instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreachi)
 ---@param table table The table to iterate over.
 ---@param func function The function to run for each index.
+---@deprecated This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.ipairs() instead.
 function table.foreachi(table, func) end
 
----[SHARED AND MENU] Instead, expect the first key to be 1.
----
---- Non-numerically indexed tables are not ordered and do not have a first key.
---- Returns the first key found in the given table
+---[SHARED AND MENU] Returns the first key found in the given table
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetFirstKey)
 ---@param tab table Table to retrieve key from
 ---@return any #Key
+---@deprecated Instead, expect the first key to be 1.  Non-numerically indexed tables are not ordered and do not have a first key.
 function table.GetFirstKey(tab) end
 
----[SHARED AND MENU] Instead, index the table with a key of 1.
----
---- Non-numerically indexed tables are not ordered and do not have a first key.
---- Returns the first value found in the given table
+---[SHARED AND MENU] Returns the first value found in the given table
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetFirstValue)
 ---@param tab table Table to retrieve value from
 ---@return any #Value
+---@deprecated Instead, index the table with a key of 1.  Non-numerically indexed tables are not ordered and do not have a first key.
 function table.GetFirstValue(tab) end
 
 ---[SHARED AND MENU] Returns all keys of a table.
@@ -146,27 +144,28 @@ function table.GetFirstValue(tab) end
 ---@return table #Table of keys
 function table.GetKeys(tabl) end
 
----[SHARED AND MENU] Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
---- Returns the last key found in the given table
+---[SHARED AND MENU] Returns the last key found in the given table
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetLastKey)
 ---@param tab table Table to retrieve key from
 ---@return any #Key
+---@deprecated Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
 function table.GetLastKey(tab) end
 
----[SHARED AND MENU] Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
---- Returns the last value found in the given table
+---[SHARED AND MENU] Returns the last value found in the given table
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.GetLastValue)
 ---@param tab table Table to retrieve value from
 ---@return any #Value
+---@deprecated Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
 function table.GetLastValue(tab) end
 
----[SHARED AND MENU] This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead. Returns the length of the table.
+---[SHARED AND MENU] Returns the length of the table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.getn)
 ---@param tbl table The table to check.
 ---@return number #Sequential length.
+---@deprecated This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead.
 function table.getn(tbl) end
 
 ---[SHARED AND MENU] Returns a key of the supplied table with the highest number value.

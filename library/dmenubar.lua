@@ -33,12 +33,11 @@ function DMenuBar:GetBackgroundColor() end
 ---@return boolean #Is disabled
 function DMenuBar:GetDisabled() end
 
----[CLIENT AND MENU] Use DMenuBar:GetPaintBackground instead.
----
---- Returns whether or not the background should be painted. Is the same as DMenuBar:GetPaintBackground
+---[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as DMenuBar:GetPaintBackground
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDrawBackground)
 ---@return boolean #Should the background be painted
+---@deprecated Use DMenuBar:GetPaintBackground instead.
 function DMenuBar:GetDrawBackground() end
 
 ---[CLIENT AND MENU] Returns whether or not the panel is a menu. Used for closing menus when another panel is selected.
@@ -71,12 +70,11 @@ function DMenuBar:SetBackgroundColor(color) end
 ---@param disable boolean Should be disabled or not
 function DMenuBar:SetDisabled(disable) end
 
----[CLIENT AND MENU] Use DMenuBar:SetPaintBackground
----
---- Sets whether or not the background should be painted. Is the same as DMenuBar:SetPaintBackground
+---[CLIENT AND MENU] Sets whether or not the background should be painted. Is the same as DMenuBar:SetPaintBackground
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetDrawBackground)
 ---@param shouldPaint boolean Should the background be painted
+---@deprecated Use DMenuBar:SetPaintBackground
 function DMenuBar:SetDrawBackground(shouldPaint) end
 
 ---[CLIENT AND MENU] Sets whether or not the panel is a menu. Used for closing menus when another panel is selected.

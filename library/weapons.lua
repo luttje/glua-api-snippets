@@ -16,7 +16,7 @@ function weapons.Get(classname) end
 ---@return table #List of all the registered SWEPs
 function weapons.GetList() end
 
----[SHARED] Gets the REAL weapon table, not a copy. The produced table does `not` inherit fields from the weapon's base class, unlike weapons.Get.
+---[SHARED] Gets the REAL weapon table, not a copy. The produced table does *not* inherit fields from the weapon's base class, unlike weapons.Get.
 ---
 --- Modifying this table will modify what is stored by the weapons library. Take a copy or use weapons.Get to avoid this.
 ---

@@ -1,5 +1,6 @@
 ---@meta
 
+---@deprecated Use a combination of DIconLayout, DListLayout and DScrollPanel instead.
 ---@class DPanelList : DPanel
 local DPanelList = {}
 

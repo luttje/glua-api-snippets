@@ -21,12 +21,11 @@ function DCheckBoxLabel:GetIndent() end
 ---@param bVal boolean Whether the checkbox is checked or unchecked.
 function DCheckBoxLabel:OnChange(bVal) end
 
----[CLIENT AND MENU] You really should be using DCheckBoxLabel:SetTextColor instead
----
---- Sets the color of the DCheckBoxLabel's text to the bright text color defined in the skin.
+---[CLIENT AND MENU] Sets the color of the DCheckBoxLabel's text to the bright text color defined in the skin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetBright)
 ---@param bright boolean true makes the text bright.
+---@deprecated You really should be using DCheckBoxLabel:SetTextColor instead
 function DCheckBoxLabel:SetBright(bright) end
 
 ---[CLIENT AND MENU] Sets the checked state of the checkbox. Does not call DCheckBoxLabel:OnChange or Panel:ConVarChanged, unlike DCheckBoxLabel:SetValue.
@@ -41,12 +40,11 @@ function DCheckBoxLabel:SetChecked(checked) end
 ---@param convar string The name of the convar to set
 function DCheckBoxLabel:SetConVar(convar) end
 
----[CLIENT AND MENU] You really should be using DCheckBoxLabel:SetTextColor instread
----
---- Sets the text of the DCheckBoxLabel to be dark colored.
+---[CLIENT AND MENU] Sets the text of the DCheckBoxLabel to be dark colored.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetDark)
 ---@param darkify boolean True to be dark, false to be default
+---@deprecated You really should be using DCheckBoxLabel:SetTextColor instread
 function DCheckBoxLabel:SetDark(darkify) end
 
 ---[CLIENT AND MENU] Sets the font of the text part of the DCheckBoxLabel.

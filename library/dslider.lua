@@ -25,11 +25,11 @@ function DSlider:GetLockX() end
 ---@return number #
 function DSlider:GetLockY() end
 
----[CLIENT AND MENU] Does not affect anything by default.
---- Returns the current notch color, set by DSlider:SetNotchColor
+---[CLIENT AND MENU] Returns the current notch color, set by DSlider:SetNotchColor
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
 ---@return Color #The current color
+---@deprecated Does not affect anything by default.
 function DSlider:GetNotchColor() end
 
 ---[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as DNumSlider.
@@ -114,11 +114,11 @@ function DSlider:SetLockX(lockX) end
 --- The value range is from 0 to 1.
 function DSlider:SetLockY(lockY) end
 
----[CLIENT AND MENU] Does not affect anything by default.
---- Sets the current notch color, overriding the color set by the derma skin.
+---[CLIENT AND MENU] Sets the current notch color, overriding the color set by the derma skin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
 ---@param clr Color The new color to set
+---@deprecated Does not affect anything by default.
 function DSlider:SetNotchColor(clr) end
 
 ---[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as DNumSlider.
