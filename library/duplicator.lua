@@ -2,10 +2,10 @@
 
 duplicator = {}
 
----[SHARED] Allow this entity to be duplicated
+---[SHARED] Allow entities with given class name to be duplicated. See duplicator.Disallow for the opposite effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.Allow)
----@param classname string An entity's classname
+---@param classname string An entity's classname to allow duuplicating.
 function duplicator.Allow(classname) end
 
 ---[SERVER] Calls every function registered with duplicator.RegisterBoneModifier on each bone the ent has.
@@ -76,6 +76,14 @@ function duplicator.CreateConstraintFromTable(constraint, entityList) end
 ---@param entTable table The duplication data to build the entity with. See Structures/EntityCopyData
 ---@return Entity #The newly created entity
 function duplicator.CreateEntityFromTable(ply, entTable) end
+
+---[SHARED] Disallow this entity to be duplicated. Opposite of duplicator.Allow.
+---
+--- By default, all classes are disallowed to be duplicated. This function is useful for temporarily disabling duplication of certain entity classes that may have been previously allowed.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.Disallow)
+---@param classname string An entity's classname to disallow duplicating.
+function duplicator.Disallow(classname) end
 
 ---[SERVER] "Restores the bone's data."
 ---

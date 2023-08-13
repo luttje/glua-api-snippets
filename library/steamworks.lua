@@ -52,7 +52,7 @@ function steamworks.FileInfo(workshopItemID, resultCallback) end
 ---@param tags table A table of tags to match.
 ---@param offset number How much of results to skip from first one. This is useful for pagination. Negative values are invalid.
 ---@param numRetrieve number How many items to retrieve, up to 50 at a time. Negative values are invalid.
----@param days number When getting `trending` content from Steam, this determines a time period, in range of days from 0 to 365. ( 7 = most popular addons in last 7 days, 30 = most popular addons in the last month, etc )
+---@param days number When getting `popular` or `trending` content from Steam, this determines a time period, in range of days from 0 to 365. ( 7 = most popular addons in last 7 days, 30 = most popular addons in the last month, etc ). If given a zero, will automatically choose a value, which is 7 for `trending`.
 ---@param userID string "0" to retrieve all addons, "1" to retrieve addons only published by you, or a valid SteamID64 of a user to get workshop items of.
 ---@param resultCallback function The function to process retrieved data. The first and only argument is a table, containing all the info, or nil in case of error
 function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback) end

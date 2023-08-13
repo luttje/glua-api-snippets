@@ -103,6 +103,17 @@ function math.calcBSplineN(i, k, t, tinc) end
 ---@return number #ceiled numbers
 function math.ceil(number) end
 
+---[SHARED AND MENU] Cubic Hermite spline algorithm.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/math.CHSpline)
+---@param frac number From 0 to 1, where alongside the spline the point will be.
+---@param point0 Vector First point for the spline.
+---@param tan0 Vector Tangent for the first point for the spline.
+---@param point1 Vector Second point for the spline.
+---@param tan1 Vector Tangent for the second point for the spline.
+---@return Vector #Point on the cubic Hermite spline, at given fraction.
+function math.CHSpline(frac, point0, tan0, point1, tan1) end
+
 ---[SHARED AND MENU] Clamps a number between a minimum and maximum value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Clamp)
@@ -125,6 +136,19 @@ function math.cos(number) end
 ---@param number number Angle in radians.
 ---@return number #The hyperbolic cosine of the given angle.
 function math.cosh(number) end
+
+---[SHARED AND MENU] Lerp point between 4 control points with cubic bezier.
+---
+--- See math.QuadraticBezier for a similar function which works with 3 control points.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/math.CubicBezier)
+---@param frac number The fraction for finding the result. This number is clamped between 0 and 1.
+---@param p0 Vector First control point
+---@param p1 Vector First tangent
+---@param p2 Vector Second tangent
+---@param p3 Vector Second control point
+---@return Vector #Point between control points at the specified fraction
+function math.CubicBezier(frac, p0, p1, p2, p3) end
 
 ---[SHARED AND MENU] Converts radians to degrees.
 ---
@@ -508,6 +532,18 @@ function math.NormalizeAngle(angle) end
 ---@param y number Exponent.
 ---@return number #y power of x
 function math.pow(x, y) end
+
+---[SHARED AND MENU] Lerp point between 3 control points with quadratic bezier.
+---
+--- See math.CubicBezier for a function which works with 4 control points.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/math.QuadraticBezier)
+---@param frac number The fraction for finding the result. This number is clamped between 0 and 1.
+---@param p0 Vector First control point
+---@param p1 Vector Tangent
+---@param p2 Vector Second control point
+---@return Vector #Point between control points at the specified fraction
+function math.QuadraticBezier(frac, p0, p1, p2) end
 
 ---[SHARED AND MENU] Converts an angle in degrees to it's equivalent in radians.
 ---

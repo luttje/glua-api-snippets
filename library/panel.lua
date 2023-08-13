@@ -1554,7 +1554,7 @@ function PANEL:Paint(width, height) end
 
 ---[CLIENT AND MENU] Paints a ghost copy of the panel at the given position.
 ---
---- 			Breaks Z pos of panel PANEL:SetZPos
+--- 			This function sets Z pos of panel's children (PANEL:SetZPos)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:PaintAt)
 ---@param posX number The x coordinate to draw the panel from.
@@ -1564,7 +1564,8 @@ function Panel:PaintAt(posX, posY) end
 ---[CLIENT AND MENU] Paints the panel at its current position. To use this you must call Panel:SetPaintedManually(true).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:PaintManual)
-function Panel:PaintManual() end
+---@param unclamp? boolean  If set, overrides panels' clipping so that it can render fully when its size is larger than the game's resolution.
+function Panel:PaintManual(unclamp) end
 
 ---[CLIENT] Called whenever the panel and all its children were drawn, return true to override the default drawing.
 ---

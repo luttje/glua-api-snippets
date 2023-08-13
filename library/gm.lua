@@ -18,8 +18,6 @@ function GM:AcceptInput(ent, input, activator, caller, value) end
 
 ---[CLIENT] Adds a death notice entry.
 ---
---- You cannot use hook.Add on this hook yet.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:AddDeathNotice)
 ---@param attacker string The name of the attacker
 ---@param attackerTeam number The team of the attacker
@@ -1369,17 +1367,17 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 --- ```
 --- local load_queue = {}
 ---
---- hook.Add("PlayerInitialSpawn", "myAddonName/Load", function(ply)
---- 	load_queue[ply] = true
---- end)
+--- hook.Add( "PlayerInitialSpawn", "myAddonName/Load", function( ply )
+--- 	load_queue[ ply ] = true
+--- end )
 ---
---- hook.Add("SetupMove", "myAddonName/Load", function(ply, _, cmd)
---- 	if load_queue[ply] and not cmd:IsForced() then
---- 		load_queue[ply] = nil
+--- hook.Add( "SetupMove", "myAddonName/Load", function( ply, _, cmd )
+--- 	if load_queue[ ply ] and not cmd:IsForced() then
+--- 		load_queue[ ply ] = nil
 ---
---- 		myAddon:OnPlayerNetReady(ply) -- Send what you need here!
+--- 		myAddon:OnPlayerNetReady( ply ) -- Send what you need here!
 --- 	end
---- end)
+--- end )
 --- ```
 ---
 ---
@@ -1439,6 +1437,7 @@ function GM:PlayerLoadout(ply) end
 function GM:PlayerNoClip(ply, desiredState) end
 
 ---[SHARED] Called after the player's think.
+--- 		On the client side, it is only called for the local player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerPostThink)
 ---@param ply Player The player
@@ -2147,7 +2146,8 @@ function GM:Think() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:Tick)
 function GM:Tick() end
 
----[SHARED] Allows you to translate player activities.
+---[SHARED] Isn't call when CalcMainActivity return a valid override sequence id
+--- 		Allows you to translate player activities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:TranslateActivity)
 ---@param ply Player The player

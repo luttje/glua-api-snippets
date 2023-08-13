@@ -312,12 +312,33 @@ function util.IntersectRayWithOBB(rayStart, rayDelta, boxOrigin, boxAngles, boxM
 ---@return Vector #The position of intersection, nil if not hit.
 function util.IntersectRayWithPlane(rayOrigin, rayDirection, planePosition, planeNormal) end
 
+---[SHARED] Performs a ray-sphere intersection and returns the intersection positions or nil.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IntersectRayWithSphere)
+---@param rayOrigin Vector Origin/start position of the ray.
+---@param rayDelta Vector The end position of the ray relative to the start position. Equivalent of `direction * distance`.
+---@param shperePosition Vector Any position of the sphere.
+---@param sphereRadius number The radius of the sphere.
+---@return number, number #number - The first intersection position along the ray, or `nil` if there is no intersection.
+---@return number, number #number - The second intersection position along the ray, or `nil` if there is no intersection.
+function util.IntersectRayWithSphere(rayOrigin, rayDelta, shperePosition, sphereRadius) end
+
 ---[SHARED AND MENU] Returns whether a binary module is installed and is resolvable by Global.require.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsBinaryModuleInstalled)
 ---@param name string Name of the binary module, exactly the same as you would enter it as the argument to Global.require.
 ---@return boolean #Whether the binary module is installed and Global.require can resolve it.
 function util.IsBinaryModuleInstalled(name) end
+
+---[SHARED] Performs a box-sphere intersection and returns whether there was an intersection or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingSphere)
+---@param boxMin Vector The minimum extents of the Axis-Aligned box.
+---@param boxMax Vector The maximum extents of the Axis-Aligned box.
+---@param shpere2Position Vector Any position of the second sphere.
+---@param sphere2Radius number The radius of the second sphere.
+---@return boolean #`true` if there is an intersection, `false` otherwise.
+function util.IsBoxIntersectingSphere(boxMin, boxMax, shpere2Position, sphere2Radius) end
 
 ---[SERVER] Checks if a certain position is within the world bounds.
 ---
@@ -367,6 +388,27 @@ end
 ---@param position Vector The position to check the skybox visibility from.
 ---@return boolean #Whether the skybox is visible from the position.
 function util.IsSkyboxVisibleFromPoint(position) end
+
+---[SHARED] Returns whether a point is within a cone or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsSphereIntersectingCone)
+---@param point Vector The position of the point to test.
+---@param coneOrigin Vector The position of the cone tip.
+---@param coneAxis Vector The direction of the cone.
+---@param coneSine number The sine of the cone's angle.
+---@param coneLength number Length of the cone's axis.
+---@return boolean #`true` if the point is within the cone, `false` otherwise.
+function util.IsPointInCone(point, coneOrigin, coneAxis, coneSine, coneLength) end
+
+---[SHARED] Performs a sphere-sphere intersection and returns whether there was an intersection or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsSphereIntersectingSphere)
+---@param sphere1Position Vector Any position of the first sphere.
+---@param sphere1Radius number The radius of the first sphere.
+---@param sphere2Position Vector Any position of the second sphere.
+---@param sphere2Radius number The radius of the second sphere.
+---@return boolean #`true` if there is an intersection, `false` otherwise.
+function util.IsSphereIntersectingSphere(sphere1Position, sphere1Radius, sphere2Position, sphere2Radius) end
 
 ---[SHARED] Checks if the specified model is valid.
 ---
@@ -547,6 +589,8 @@ function util.PrecacheModel(modelName) end
 function util.PrecacheSound(soundName) end
 
 ---[SHARED AND MENU] Performs a trace with the given origin, direction, and filter.
+---
+--- This function will throw an error in the menu realm because it internally uses util.TraceLine which doesn't exist in the menu realm and thus error.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.QuickTrace)
 ---@param origin Vector The origin of the trace.

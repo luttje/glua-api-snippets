@@ -2513,49 +2513,12 @@ function ENTITY:ImpactTrace(traceResult, damageType, customImpactName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:Initialize)
 function ENTITY:Initialize() end
 
----[CLIENT] **These are the reasons why this function was disabled:**
---- 	Calling this on **ANY**(even clientside only) entity will cause random crashes, and it will crash the game as soon as the entity is removed!
+---[CLIENT] Initializes this entity as being clientside only.
 ---
---- 	**Some bugs if you call it on an entity that is not clientside only:**
---- 		All NWVars break clientside for the given player.
---- 		The EntIndex becomes -1.
---- 		The Entity:GetTable gets cleared every time this function is called.
----
----
---- 		As soon as the Entity re-enters the PVS, some bugs will fix themself, but it will still crash the game if the entity gets removed!
---- 		This is behavior only happens for entities, not for players!
----
----
---- 	Calling this function on the World creates a permanent warning that will spam your console.
---- ```lua
---- ] lua_run_cl Entity(0):InitializeAsClientEntity()
---- Refusing to render the map on an entity to prevent crashes! (x9330)
---- ```
---- 	Calling this function on an entity that is not **clientside only** causes all networking to break for that specific entity and an Engine Error will occur on a full update
---- (a full update can be forced with `cl_fullupdate`):
----
----
---- 	Calling this function on a player causes a bunch of unexpected behavior and your game will crash as soon as the player is removed/leaves the server.
----
---- 	**Some bugs if you set it on a player (all Entity bugs apply here):**
---- 		You get some values displayed in the top-left of your screen for some reason.
---- 		If you call this function on the local player, it causes your eye pos to be your position (EyePos == GetPos):
---- 		The Player name becomes `ERRORNAME`
---- 		As soon as the player re-enters the PVS, it crashes the game!
---- ```lua
---- lua_run_cl LocalPlayer():InitializeAsClientEntity()
---- ] lua_run_cl print(LocalPlayer())
---- Player [-1][ERRORNAME]
---- ```
----
----
----
---- Initializes this entity as being clientside only.
----
---- Only works on entities fully created clientside, and as such it has currently no use due to this being automatically called by ents.CreateClientProp, ents.CreateClientside, Global.ClientsideModel and Global.ClientsideScene.
+--- Only works on entities fully created clientside, and as such it currently has no use due to this being automatically called by ents.CreateClientProp, ents.CreateClientside, Global.ClientsideModel and Global.ClientsideScene.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:InitializeAsClientEntity)
----@deprecated This function got disabled and will always throw an error if it's used. This is the error:  ```lua [ERROR] InitializeAsClientEntity is deprecated and should no longer be used. ```
+---@deprecated This function got disabled and will always throw an error if it's used. This is the error:  ``` [ERROR] InitializeAsClientEntity is deprecated and should no longer be used. ```
 function Entity:InitializeAsClientEntity() end
 
 ---[SERVER] Fires input to the entity with the ability to make another entity responsible, bypassing the event queue system.
@@ -2656,7 +2619,7 @@ function Entity:IsLagCompensated() end
 ---@return boolean #Returns true if the line of sight is clear
 function Entity:IsLineOfSightClear(target) end
 
----[SHARED] Returns if the entity is going to be deleted in the next frame.
+---[SHARED] Returns if the entity is going to be deleted in the next frame. Entities marked for deletion should not be accessed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:IsMarkedForDeletion)
 ---@return boolean #If the entity is going to be deleted.
@@ -3564,6 +3527,22 @@ function ENTITY:RenderOverride(flags) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ResetSequence)
 ---@param sequence number The sequence to play. Also accepts strings.
+---
+--- If set to a string, the function will automatically call Entity:LookupSequence to retrieve the sequence ID as a number.
+function Entity:ResetSequence(sequence) end
+
+---[SHARED] Plays an animation on the entity. This may not always work on engine entities.
+---
+--- This will not reset the animation on viewmodels, use Entity:SendViewModelMatchingSequence instead.
+---
+--- This will not work properly if called directly after calling Entity:SetModel. Consider waiting until the next Tick.
+---
+--- Will not work on players due to the animations being reset every frame by the base gamemode animation system. See GM:CalcMainActivity.
+---
+--- For custom scripted entities you will want to apply example from ENTITY:Think to make animations work.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ResetSequence)
+---@param sequence string The sequence to play. Also accepts strings.
 ---
 --- If set to a string, the function will automatically call Entity:LookupSequence to retrieve the sequence ID as a number.
 function Entity:ResetSequence(sequence) end
@@ -5364,7 +5343,7 @@ function ENTITY:StoreOutput(name, info) end
 ---[SERVER] Applies the specified amount of damage to the entity with Enums/DMG flag.
 ---
 --- Calling this function on the victim entity in ENTITY:OnTakeDamage can cause infinite loops.
---- This function does not seem to do any damage if you apply it to a player who is into a vehicle. You need to call it on the vehicle instead.
+--- This function does not seem to do any damage if you apply it to a player who is driving a prop_vehicle_jeep or prop_vehicle_jeep_old vehicle. You need to call it on the vehicle instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:TakeDamage)
 ---@param damageAmount number The amount of damage to be applied.
@@ -5375,7 +5354,7 @@ function Entity:TakeDamage(damageAmount, attacker, inflictor) end
 ---[SERVER] Applies the damage specified by the damage info to the entity.
 ---
 --- Calling this function on the victim entity in ENTITY:OnTakeDamage can cause infinite loops.
---- This function will not deal damage to a player inside a vehicle. You need to call it on the vehicle instead.
+--- This function does not seem to do any damage if you apply it to a player who is driving a prop_vehicle_jeep or prop_vehicle_jeep_old vehicle. You need to call it on the vehicle instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo)
 ---@param damageInfo CTakeDamageInfo The damage to apply.

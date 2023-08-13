@@ -112,7 +112,7 @@ function debug.setfenv(object, env) end
 --- * t - Triggers the hook on each function call made from Lua or C/C++.
 --- * u - Triggers the hook on each function return made from Lua or C/C++.
 --- * k - Triggers the hook on each function call or return made from Lua or C/C++.
----@param count number How often to call the hook (in instructions). 0 for every instruction
+---@param count number How often to call the hook (in instructions). 0 for every instruction. Can be omitted.
 function debug.sethook(thread, hook, mask, count) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.

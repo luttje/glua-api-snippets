@@ -103,10 +103,10 @@ function NPC:ClearSchedule() end
 ---@return string #A human understandable string equivalent of that condition.
 function NPC:ConditionName(cond) end
 
----[SERVER] Returns the way the NPC "feels" about the entity.
+---[SERVER] Returns the way the NPC "feels" about a given entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:Disposition)
----@param ent Entity The entity to get the disposition from.
+---@param ent Entity The entity to test our disposition towards.
 ---@return number #The NPCs disposition, see Enums/D.
 function NPC:Disposition(ent) end
 

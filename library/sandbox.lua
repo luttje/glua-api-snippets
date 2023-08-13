@@ -107,6 +107,12 @@ function SANDBOX:ContextMenuOpen() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuOpened)
 function SANDBOX:ContextMenuOpened() end
 
+---[CLIENT] Called to poll if active tool settings should appear in the context menu. Please note that this is only called on initial opening of the context menu, not every frame the context menu is in use.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuShowTool)
+---@return boolean #Return `false` to prevent active tool settings from displaying in the context menu.
+function SANDBOX:ContextMenuShowTool() end
+
 ---[CLIENT] Called when the Client reverts spawnlist changes
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:OnRevertSpawnlist)

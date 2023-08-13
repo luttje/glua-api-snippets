@@ -93,6 +93,22 @@ function table.FindNext(tbl, value) end
 ---@deprecated Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
 function table.FindPrev(tbl, value) end
 
+---[SHARED AND MENU] Flips key-value pairs of each element within a table, so that each value becomes the key, and each key becomes the value.
+---
+--- Take care when using this function, as a Lua table cannot contain multiple instances of the same key. As such, data loss is possible when using this function on tables with duplicate values.
+---
+--- ```
+--- local test = { test = 1, test2 = 1 }
+--- local f = table.Flip( test )
+--- PrintTable( f )
+--- -- Outputs "1	=	test2"
+--- ```
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Flip)
+---@param input table The table to flip items of.
+---@return table #The flipped table.
+function table.Flip(input) end
+
 ---[SHARED AND MENU] Inserts a value in to the given table even if the table is non-existent
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.ForceInsert)
@@ -292,6 +308,14 @@ function table.Merge(destination, source) end
 ---@param destTbl table The destination table to which the elements are to be moved. By default, this is the same as the source table.
 ---@return table #The modified destination table.
 function table.move(sourceTbl, from, to, dest, destTbl) end
+
+---[SHARED AND MENU] Packs a set of items into a table and returns the new table. It is meant as an alternative implementation of `table.pack` from newer versions of Lua.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Pack)
+---@param ... ... The items to pack into a table.
+---@return table, number #table - A table containing the `items`.
+---@return table, number #number - The amount of items that were added to the table.
+function table.Pack(...) end
 
 ---[SHARED AND MENU] Returns a random value from the supplied table.
 ---

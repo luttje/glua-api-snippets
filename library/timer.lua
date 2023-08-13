@@ -7,8 +7,8 @@ timer = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Adjust)
 ---@param identifier any Identifier of the timer to adjust.
 ---@param delay number The delay interval in seconds. **Must be specified.**
----@param repetitions number Repetitions. Use `0` for infinite or `nil` to keep previous value.
----@param func function The new function. Use `nil` to keep previous value.
+---@param repetitions? number Repetitions. Use `0` for infinite or `nil` to keep previous value.
+---@param func? function The new function. Use `nil` to keep previous value.
 ---@return boolean #`true` if succeeded.
 function timer.Adjust(identifier, delay, repetitions, func) end
 

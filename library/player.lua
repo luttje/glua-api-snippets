@@ -109,9 +109,9 @@ local Player = {}
 --- See Player:SteamID for the text representation of the full SteamID.
 --- See Player:SteamID64 for a 64bit representation of the full SteamID.
 ---
---- In a `-multirun` environment, this will return `no value` for all "copies" of a player because they are not authenticated with Steam.
+--- In a `-multirun` environment, this will return `-1` for all "copies" of a player because they are not authenticated with Steam.
 ---
---- For bots this will return values starting with `0` for the first bot, `1` for the second bot and so on. It will return `no value` clientside for bots.
+--- For bots this will return values starting with `0` for the first bot, `1` for the second bot and so on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AccountID)
 ---@return number #The AccountID of Player's SteamID.
@@ -1106,7 +1106,7 @@ function Player:IsFrozen() end
 ---@return boolean #Whether the player has been fully authenticated or not.  This will always be true for singleplayer and the listen server host. This will always be false for bots.
 function Player:IsFullyAuthenticated() end
 
----[SERVER] Returns if a player is the host of the current session.
+---[SHARED] Returns if a player is the host of the current session.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsListenServerHost)
 ---@return boolean #`true` if the player is the listen server host, `false` otherwise.  This will always be `true` in single player, and `false` on a dedicated server.
@@ -2026,13 +2026,11 @@ function Player:SteamID() end
 ---
 --- See Player:AccountID for a function that returns only the Account ID part of the SteamID and Player:SteamID for the text version of the SteamID.
 ---
---- In a `-multirun` environment, this will return `nil` for all "copies" of a player because they are not authenticated with Steam.
+--- In a `-multirun` environment, this will return `"0"` for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For bots, this will return `90071996842377216` (equivalent to `STEAM_0:0:0`) for the first bot to join.
 ---
 --- For each additional bot, the number increases by 1. So the next bot will be `90071996842377217` (`STEAM_0:1:0`) then `90071996842377218` (`STEAM_0:0:1`) and so on.
----
---- It returns `no value` for bots clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SteamID64)
 ---@return string #Player's 64-bit SteamID aka CommunityID.
