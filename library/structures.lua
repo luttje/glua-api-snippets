@@ -2615,6 +2615,10 @@ ViewData.dopostprocess = false
 ---@type boolean
 ViewData.bloomtone = true
 
+---This is identifying which logical part of the scene an entity is being redered in, see Enums/VIEW.
+---@type number
+ViewData.viewid = 0
+
 ---This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders. It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. Values outside the viewport are allowed, but not recommended - instead you should increase the view FOV.
 ---@type table
 ViewData.offcenter = nil

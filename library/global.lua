@@ -36,9 +36,16 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 ---
 --- 		The string cannot have whitespace.
 ---
---- 		This function is not needed for scripts located in **lua/autorun/** and **lua/autorun/client/**: they are automatically sent to clients.
 ---
---- 		You can add up to **8192** files. Each file can be up to **64KB** compressed (LZMA)
+--- 			This function is not needed for scripts located in these paths because they are automatically sent to clients.
+--- 			**lua/matproxy/**
+--- 			**lua/postprocess/**
+--- 			**lua/vgui/**
+--- 			**lua/skins/**
+--- 			**lua/autorun/**
+--- 			**lua/autorun/client/**
+---
+--- 			You can add up to **8192** files. Each file can be up to **64KB** compressed (LZMA)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)
 ---@param file? string The name/path to the Lua file that should be sent, **relative to the garrysmod/lua folder**. If no parameter is specified, it sends the current file.
@@ -348,7 +355,7 @@ function _G.CreateContextMenu() end
 --- This cannot be a name of an engine console command or console variable. It will silently fail if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
 ---@param flags? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
----@param helptext string The help text to show in the console.
+---@param helptext? string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
 ---@return ConVar #The convar created.

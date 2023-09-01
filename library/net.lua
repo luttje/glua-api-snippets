@@ -179,6 +179,14 @@ function net.ReadType(typeID) end
 ---@return number #The unsigned integer read, or `0` if the integer could not be read.
 function net.ReadUInt(numberOfBits) end
 
+---[SHARED] Reads a unsigned integer with 64 bits from the received net message.
+---
+--- You **must** read information in same order as you write it.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadUInt64)
+---@return string #The uint64 number.
+function net.ReadUInt64() end
+
 ---[SHARED] Reads a vector from the received net message. Vectors sent by this function are **compressed**, which may result in precision loss. See net.WriteVector for more information.
 ---
 --- You **must** read information in same order as you write it.
@@ -302,7 +310,7 @@ function net.WriteEntity(entity) end
 ---@param float number The float to be sent.
 function net.WriteFloat(float) end
 
----[SHARED] Appends an integer - a whole number - to the current net message. Can be read back with net.ReadInt on the receiving end.
+---[SHARED] Appends a signed integer - a whole number, positive/negative - to the current net message. Can be read back with net.ReadInt on the receiving end.
 ---
 --- Use net.WriteUInt to send an unsigned number (that you know will **never** be negative). Use net.WriteFloat for a non-whole number (e.g. `2.25`).
 ---
@@ -441,6 +449,19 @@ function net.WriteType(Data) end
 --- | 32 | 4294967295 |
 ---
 function net.WriteUInt(unsignedInteger, numberOfBits) end
+
+---[SHARED] Appends an unsigned integer with 64 bits to the current net message.
+---
+--- 			The limit for an uint64 is 18.446.744.073.709.551.615.
+--- 			Everything above the limit will be set to the limit.
+---
+--- 			Unsigned numbers **do not** support negative numbers.
+--- 			If you use negative numbers, it will read it incorrectly (limit + (input + 1)).
+--- 			You can give it a number, but it will break as soon as it has 14 digits
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteUInt64)
+---@param uint64 string The uint64 to be sent.
+function net.WriteUInt64(uint64) end
 
 ---[SHARED] Appends a vector to the current net message.
 --- Vectors sent by this function are compressed, which may result in precision loss. XYZ components greater than `16384` or less than `-16384` are irrecoverably altered (most significant bits are trimmed) and precision after the decimal point is low.

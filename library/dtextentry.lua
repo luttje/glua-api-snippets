@@ -3,6 +3,14 @@
 ---@class DTextEntry : TextEntry
 local DTextEntry = {}
 
+---[CLIENT AND MENU] Adds an entry to DTextEntry's history.
+---
+--- See DTextEntry:SetHistoryEnabled.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AddHistory)
+---@param text string Text to add to the text entry's history.
+function DTextEntry:AddHistory(text) end
+
 ---[CLIENT AND MENU] Called whenever the value of the panel has been updated (whether by user input or otherwise).
 ---
 --- It allows you to determine whether a user can modify the TextEntry's text.
@@ -103,37 +111,6 @@ function DTextEntry:IsEditing() end
 ---@return boolean #Whether the object is in multi-line mode or not.
 function DTextEntry:IsMultiline() end
 
----[CLIENT AND MENU] Called internally by DTextEntry:OnTextChanged when the user modifies the text in the DTextEntry.
----
---- You should override this function to define custom behavior when the DTextEntry text changes.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnChange)
-function DTextEntry:OnChange() end
-
----[CLIENT AND MENU] Called whenever enter is pressed on a DTextEntry.
----
---- DTextEntry:IsEditing will still return true in this callback!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnEnter)
----@param value string The current text of the DTextEntry
-function DTextEntry:OnEnter(value) end
-
----[CLIENT AND MENU] Called whenever the DTextEntry gains focus.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnGetFocus)
-function DTextEntry:OnGetFocus() end
-
----[CLIENT AND MENU] Called from DTextEntry's TextEntry:OnKeyCodeTyped override whenever a valid character is typed while the text entry is focused.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnKeyCode)
----@param keyCode number They key code of the key pressed, see Enums/KEY.
-function DTextEntry:OnKeyCode(keyCode) end
-
----[CLIENT AND MENU] Called whenever the DTextEntry lose focus.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnLoseFocus)
-function DTextEntry:OnLoseFocus() end
-
 ---[CLIENT AND MENU] Called internally when the text inside the DTextEntry changes.
 ---
 --- You should not override this function. Use DTextEntry:OnValueChange instead.
@@ -141,21 +118,6 @@ function DTextEntry:OnLoseFocus() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnTextChanged)
 ---@param noMenuRemoval boolean Determines whether to remove the autocomplete menu (false) or not (true).
 function DTextEntry:OnTextChanged(noMenuRemoval) end
-
----[CLIENT AND MENU] Called internally when the text changes of the DTextEntry are applied. (And set to the attached console variable, if one is given)
----
---- See also DTextEntry:OnChange for a function that is called on every text change, even if the console variable is not updated.
----
---- You should override this function to define custom behavior when the text changes.
----
---- This method is called:
---- * When Enter is pressed after typing
---- * When DTextEntry:SetValue is used
---- * For every key typed - only if DTextEntry:SetUpdateOnType was set to true (default is false)
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange)
----@param value string The DTextEntry text.
-function DTextEntry:OnValueChange(value) end
 
 ---[CLIENT AND MENU] You really should be using DTextEntry:GetAutoComplete instead.
 --- Builds a DMenu for the DTextEntry based on the input table.
@@ -195,7 +157,9 @@ function DTextEntry:SetEnterAllowed(allowEnter) end
 ---@param font string The name of the font to be changed to.
 function DTextEntry:SetFont(font) end
 
----[CLIENT AND MENU] Enables or disables the history functionality of  DTextEntry.
+---[CLIENT AND MENU] Enables or disables the history functionality of  DTextEntry. This allows the player to scroll through history elements using up and down arrow keys.
+---
+--- See DTextEntry:AddHistory.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetHistoryEnabled)
 ---@param enable boolean Whether to enable history or not.

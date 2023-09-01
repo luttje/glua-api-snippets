@@ -1483,7 +1483,7 @@ function Player:SelectWeapon(className) end
 --- This function is only available in Sandbox and its derivatives. Since this adds `#Hint_` to the beginning of each message, you should only use it with default hint messages, or those cached with language.Add. For hints with custom text, look at notification.AddLegacy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SendHint)
----@param name string Name/class/index of the hint. The text of the hint will contain this value. ( "#Hint_" .. name ) An example is `PhysgunFreeze`.
+---@param name string Name/class/index of the hint. You can find a list of hint names for this function List_of_Hint_Classes.
 ---@param delay number Delay in seconds before showing the hint
 function Player:SendHint(name, delay) end
 
@@ -1774,7 +1774,7 @@ function Player:SetPlayerColor(Color) end
 ---@param pressedWidget? Entity The widget the player is currently using.
 function Player:SetPressedWidget(pressedWidget) end
 
----[SHARED] Sets the render angles of a player.
+---[SHARED] Sets the render angles of a player. Value set by this function is reset to player's angles (Entity:GetAngles) right after GM:UpdateAnimation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetRenderAngles)
 ---@param ang Angle The new render angles to set
@@ -2016,7 +2016,7 @@ function Player:StartWalking() end
 ---
 --- In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
 ---
---- For Bots this will return `BOT` on the server and on the client it returns `NULL`.
+--- For Bots this will return `BOT`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SteamID)
 ---@return string #SteamID
@@ -2080,7 +2080,7 @@ function Player:StripWeapons() end
 --- This function is only available in Sandbox and its derivatives
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SuppressHint)
----@param name string Hint name/class/index to prevent from showing up
+---@param name string Hint name/class/index to prevent from showing up. You can find a list of hint names for this function List_of_Hint_Classes.
 function Player:SuppressHint(name) end
 
 ---[SERVER] Attempts to switch the player weapon to the one specified in the "cl_defaultweapon" convar, if the player does not own the specified weapon nothing will happen.

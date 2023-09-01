@@ -15,7 +15,7 @@ function team.AddScore(index, increment) end
 ---@return number #Team index
 function team.BestAutoJoinTeam() end
 
----[SHARED] Returns a table consisting of information on every defined team
+---[SHARED] Returns the real table consisting of information on every defined team
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.GetAllTeams)
 ---@return table #Team info

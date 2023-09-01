@@ -262,6 +262,8 @@ function GM:DoAnimationEvent(ply, event, data) end
 --- * GM:PlayerDeath is called after this hook
 --- * GM:PostPlayerDeath is called after that
 ---
+--- Player:Alive will return false in this hook.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:DoPlayerDeath)
 ---@param ply Player The player
 ---@param attacker Entity The entity that killed the player
@@ -1222,7 +1224,7 @@ function GM:PlayerConnect(name, ip) end
 ---
 --- See Player:LastHitGroup if you need to get the last hit hitgroup of the player.
 ---
---- Player:Alive will return true in this hook.
+--- Player:Alive will return false in this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerDeath)
 ---@param victim Player The player who died
@@ -1739,7 +1741,7 @@ function GM:PostGamemodeLoaded() end
 ---
 --- This hook will be called for all deaths, including Player:KillSilent
 ---
---- The player is considered dead when this is hook is called, Player:Alive will return false.
+--- Player:Alive will return false in this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PostPlayerDeath)
 ---@param ply Player The player

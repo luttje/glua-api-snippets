@@ -4920,10 +4920,10 @@ function Entity:SetRagdollBuildFunction(func) end
 ---@param pos Vector Position to set
 function Entity:SetRagdollPos(boneid, pos) end
 
----[CLIENT] Sets the render angles of the Entity.
+---[CLIENT] Sets the render angle override for the Entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles)
----@param newAngles Angle The new render angles to be set to.
+---@param newAngles? Angle The new render angles to be set to. To disable the override, set to nil.
 function Entity:SetRenderAngles(newAngles) end
 
 ---[CLIENT] Sets the render bounds for the entity. For world space coordinates see Entity:SetRenderBoundsWS.
@@ -4967,10 +4967,10 @@ function Entity:SetRenderFX(renderFX) end
 ---@param renderMode number New render mode to set, see Enums/RENDERMODE.
 function Entity:SetRenderMode(renderMode) end
 
----[CLIENT] Set the origin in which the Entity will be drawn from.
+---[CLIENT] Set the render origin override, a position where the Entity will be rendered at.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetRenderOrigin)
----@param newOrigin Vector The new origin in world coordinates where the Entity's model will now be rendered from.
+---@param newOrigin? Vector The new origin in world coordinates where the Entity's model will now be rendered at. To disable the override, set to nil.
 function Entity:SetRenderOrigin(newOrigin) end
 
 ---[SHARED] Sets a save value for an entity. You can see a full list of an entity's save values by creating it and printing Entity:GetSaveTable().

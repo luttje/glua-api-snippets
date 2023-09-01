@@ -4177,6 +4177,26 @@ USE_ON = 1
 USE_SET = 2
 USE_TOGGLE = 3
 
+---@enum VIEW
+--- Default value
+VIEW_MAIN = 0
+--- 3D skybox
+VIEW_3DSKY = 1
+--- Rendering for `_rt_Camera` base texture material (`func_monitor`, `info_camera_link`).
+VIEW_MONITOR = 2
+--- Water reflection
+VIEW_REFLECTION = 3
+--- Water refraction
+VIEW_REFRACTION = 4
+--- Used by `script_intro` entity.
+VIEW_INTRO_PLAYER = 5
+--- Used by `script_intro` entity.
+VIEW_INTRO_CAMERA = 6
+--- Internally used for Global.ProjectedTexture and flashlight.
+VIEW_SHADOW_DEPTH_TEXTURE = 7
+--- For SSAO depth. Can be accessed via render.GetResolvedFullFrameDepth.
+VIEW_SSAO = 8
+
 ---@enum WEAPON_PROFICIENCY
 --- The NPC will miss a large majority of their shots.
 WEAPON_PROFICIENCY_POOR = 0

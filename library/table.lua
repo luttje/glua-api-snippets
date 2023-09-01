@@ -373,7 +373,7 @@ function table.Sanitise(tab) end
 function table.Shuffle(target) end
 
 ---[SHARED AND MENU] Sorts a sequential table either ascending or by the given sort function.
---- This function modifies the table you give to it.
+--- This function modifies the table you give to it and internally uses the [quick sort algorithm](http://www.lua.org/source/5.2/ltablib.c.html#sort).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.sort)
 ---@param tbl table The table to sort.
