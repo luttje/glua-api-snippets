@@ -150,6 +150,8 @@ function file.Time(path, gamePath) end
 --- * .mp3
 --- * .wav
 --- * .ogg
+--- * .vcd
+--- * .dem
 ---
 --- Restricted symbols are: `" :`
 ---
@@ -226,6 +228,12 @@ function File:ReadLong() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadShort)
 ---@return number #int16
 function File:ReadShort() end
+
+---[SHARED AND MENU] Reads an unsigned 64-bit integer from the file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadUInt64)
+---@return number #An unsigned 64-bit integer
+function File:ReadUInt64() end
 
 ---[SHARED AND MENU] Reads an unsigned little-endian 32-bit integer from the file.
 ---
@@ -305,6 +313,12 @@ function File:WriteLong(int32) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:WriteShort)
 ---@param int16 number The 16-bit signed integer to be written to the file.
 function File:WriteShort(int16) end
+
+---[SHARED AND MENU] Writes an unsigned 64-bit integer to the file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/File:WriteUInt64)
+---@param uint64 number The unsigned 64-bit integer to be written to the file.
+function File:WriteUInt64(uint64) end
 
 ---[SHARED AND MENU] Writes an unsigned little-endian 32-bit integer to the file.
 ---

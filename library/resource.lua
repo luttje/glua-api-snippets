@@ -10,7 +10,7 @@ resource = {}
 ---
 --- There's a 8192 downloadable file limit. If you need more, consider using Workshop addons - resource.AddWorkshop. You should also consider the fact that you have way too many downloads. This limit is shared among all resource.Add functions.
 ---
---- Running this function using a path relative to the main `garrysmod/` folder will not work for files in addons and gamemodes. Instead, the files must be added relative to their respective content folders. For example, a sound file from an addon would use the path "sound/[FILENAME_AND_EXTENSION]," despite the file being located in "addons/[ADDON_NAME]/sound/[FILENAME_AND_EXTENSION]"
+--- Running this function using a path relative to the main `garrysmod/` folder will not work for files in addons and gamemodes. Instead, the files must be added relative to their respective content folders. For example, a sound file from an addon would use the path "sound/[FILENAME_AND_EXTENSION]," despite the file being located in `addons/[ADDON_NAME]/sound/[FILENAME_AND_EXTENSION]`
 ---
 --- The file must exist on the server or players will not download it!
 ---

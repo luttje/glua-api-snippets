@@ -772,7 +772,7 @@ function NPC:SetCurrentWeaponProficiency(proficiency) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetEnemy)
 ---@param enemy Entity The enemy that the NPC should target
----@param newenemy? boolean Calls NPC:SetCondition(COND_NEW_ENEMY) if the new enemy is valid and not equal to the last enemy.
+---@param newenemy? boolean Calls NPC:SetCondition(COND.NEW_ENEMY) if the new enemy is valid and not equal to the last enemy.
 function NPC:SetEnemy(enemy, newenemy) end
 
 ---[SERVER] Sets the NPC's .vcd expression. Similar to Entity:PlayScene except the scene is looped until it's interrupted by default NPC behavior or NPC:ClearExpression.

@@ -19,6 +19,8 @@ function DTextEntry:AddHistory(text) end
 ---
 --- This is actually an engine hook that only works on TextEntry derived elements.
 ---
+--- If you are looking for a way to modify character limits, see Panel:SetMaximumCharCount
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AllowInput)
 ---@param char string The last character entered into the panel.
 ---@return boolean #Return `true` to prevent the value from changing, `false` to allow it.

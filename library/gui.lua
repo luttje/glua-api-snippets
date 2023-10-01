@@ -7,6 +7,14 @@ gui = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ActivateGameUI)
 function gui.ActivateGameUI() end
 
+---[CLIENT] Pushes text to the closed caption box.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.AddCaption)
+---@param text string The caption to emit. See [Closed Captions](https://developer.valvesoftware.com/wiki/Closed_Captions) for more info
+---@param duration number How long the caption should stay for
+---@param fromPlayer? boolean Is this caption coming from the player?
+function gui.AddCaption(text, duration, fromPlayer) end
+
 ---[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu.
 ---
 ---
@@ -113,7 +121,6 @@ function gui.MouseY() end
 ---[CLIENT AND MENU] Opens specified URL in the steam overlay browser.
 ---
 --- When called clientside, user will be asked for confirmation before the website will open.
---- Will silently fail if the URL is more than 512 characters long.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.OpenURL)
 ---@param url string URL to open, it has to start with either `http://` or `https://`.

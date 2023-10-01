@@ -291,9 +291,9 @@ function GM:DrawMonitors() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:DrawOverlay)
 function GM:DrawOverlay() end
 
----[CLIENT] Allows you to override physgun beam drawing.
+---[CLIENT] Allows you to override physgun effects rendering.
 ---
---- This is still called when physgun_drawbeams is disabled.
+--- This is still called when `physgun_drawbeams` is set to `0`, because this hook is also capable of overriding physgun sprite effects, while the convar does not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:DrawPhysgunBeam)
 ---@param ply Player Physgun owner
@@ -302,7 +302,7 @@ function GM:DrawOverlay() end
 ---@param target Entity Entity we are grabbing. This will be NULL if nothing is being held
 ---@param physBone number ID of the physics bone (PhysObj) we are grabbing at. Use Entity:TranslatePhysBoneToBone to translate to an actual bone.
 ---@param hitPos Vector Beam hit position relative to the physics bone (PhysObj) we are grabbing.
----@return boolean #Return false to hide default beam
+---@return boolean #Return false to hide default effects
 function GM:DrawPhysgunBeam(ply, physgun, enabled, target, physBone, hitPos) end
 
 ---[SHARED] Called right before an entity stops driving. Overriding this hook will cause it to not call drive.End and the player will not stop driving.
@@ -358,12 +358,18 @@ function GM:EntityKeyValue(ent, key, value) end
 ---@param newval any The new value of the NW2Var
 function GM:EntityNetworkedVarChanged(ent, name, oldval, newval) end
 
----[SHARED] Called right before the removal of an entity.
---- 		This hook is called during clientside full updates. See ENTITY:OnRemove#clientsidebehaviourremarks for more information.
+---[SHARED] Called right before removal of an entity.
+---
+--- 			This hook is called clientside during full updates due to how networking works in the Source Engine.
+---
+--- This can happen when the client briefly loses connection to the server, and can be simulated via `cl_fullupdate` for testing purposes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:EntityRemoved)
 ---@param ent Entity Entity being removed
-function GM:EntityRemoved(ent) end
+---@param fullUpdate boolean Whether the removal is happening due to a full update clientside.
+---
+--- The entity may or **may not** be recreated immediately after, depending on whether it is in the local player's [PVS](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community"). (See Entity:IsDormant)
+function GM:EntityRemoved(ent, fullUpdate) end
 
 ---[SERVER] Called when an entity takes damage. You can modify all parts of the damage info in this hook.
 ---
@@ -566,7 +572,7 @@ function GM:HandlePlayerDucking(ply, velocity) end
 ---@return boolean #Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerJumping(ply, velocity) end
 
----[SHARED] Allows to override player landing animations.
+---[SHARED] Called every frame by the player model animation system. Allows to override player landing animations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerLanding)
 ---@param ply Player The player
@@ -822,6 +828,16 @@ function GM:OnChatTab(text) end
 ---@return boolean #Return false to suppress the cleanup notification.
 function GM:OnCleanup(name) end
 
+---[CLIENT] Called when a caption has been emitted to the closed caption box.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnCloseCaptionEmit)
+---@param soundScript string The name of the soundscript, or `customLuaToken` if it's from gui.AddCaption
+---@param duration number How long the caption should stay for
+---@param fromPlayer boolean Is this caption coming from the player?
+---@param fullText string The caption. Can be nil if its token is not registered
+---@return boolean #Return `true` to prevent the caption from appearing
+function GM:OnCloseCaptionEmit(soundScript, duration, fromPlayer, fullText) end
+
 ---[CLIENT] Called when the context menu keybind (+menu_context) is released, which by default is C.
 ---
 --- This hook will not run if input.IsKeyTrapping returns true.
@@ -920,7 +936,6 @@ function GM:OnPermissionsChanged() end
 ---@param physobj PhysObj Physics object of the entity.
 ---@param ent Entity The target entity.
 ---@param ply Player The player who tried to freeze the entity.
----@return boolean #Allows you to override whether the player can freeze the entity
 function GM:OnPhysgunFreeze(weapon, physobj, ent, ply) end
 
 ---[SERVER] Called to when a player has successfully picked up an entity with their Physics Gun.
@@ -975,6 +990,13 @@ function GM:OnPlayerChat(ply, text, teamChat, isDead) end
 ---@param speed number The speed at which the player hit the ground
 ---@return boolean #Return true to suppress default action
 function GM:OnPlayerHitGround(player, inWater, onFloater, speed) end
+
+---[SHARED] Called when a player jumps.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnPlayerJump)
+---@param player Entity Player
+---@param speed number The velocity/impulse of the jump
+function GM:OnPlayerJump(player, speed) end
 
 ---[SERVER] Called when a player +use drops an entity.
 ---
@@ -2104,16 +2126,12 @@ function GM:SpawnMenuCreated() end
 ---@return boolean #Return true to hide the default chat box.
 function GM:StartChat(isTeamChat) end
 
----[SHARED] Allows you to change the players inputs before they are processed by the server.
----
----
----
+---[SHARED] Allows you to change the players inputs before they are processed by the server. This function is also called for bots, making it the best solution to control them.
 ---
 --- This is basically a shared version of GM:CreateMove.
 ---
---- This function is also called for bots, making it the best solution to control them so far
 ---
---- This hook is predicted, but not by usual means, this hook is called when a CUserCmd is generated on the client, and on the server when it is received, so it is necessary for this hook to be called clientside even on singleplayer
+--- This hook is predicted, but not by usual means, it is called when a CUserCmd is generated on the client, and on the server when it is received, so it is necessary for this hook to be called clientside even on singleplayer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:StartCommand)
 ---@param ply Player The player

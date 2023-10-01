@@ -409,7 +409,7 @@ server_spawn.mapname = nil
 ---@type number
 server_spawn.maxplayers = nil
 
----The OS of the Server. **W**(WIN32) or **L**(LINUX)
+---The OS of the Server. **W**(WIN32), **L**(LINUX) or **O**(OSX)
 ---@type string
 server_spawn.os = nil
 

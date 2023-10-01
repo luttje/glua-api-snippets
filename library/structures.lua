@@ -633,6 +633,10 @@ ENT.DoNotDuplicate = false
 ---@type string
 ENT.IconOverride = "materials/entities/<ClassName>.png"
 
+---If set, the entity forbid physgun interaction.
+---@type boolean
+ENT.PhysgunDisabled = false
+
 ---@class EntityCopyData
 local EntityCopyData = {}
 

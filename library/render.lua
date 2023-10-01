@@ -68,10 +68,9 @@ function render.ClearBuffersObeyStencil(r, g, b, a, depth) end
 
 ---[CLIENT AND MENU] Resets the depth buffer.
 ---
---- This function also clears the stencil buffer. Use render.Clear in the meantime.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearDepth)
-function render.ClearDepth() end
+---@param clearStencil? boolean Whether to also clear the stencil buffer.
+function render.ClearDepth(clearStencil) end
 
 ---[CLIENT] Clears a render target
 ---
@@ -514,12 +513,12 @@ function render.GetViewSetup(noPlayer) end
 ---@param material IMaterial The material to use as override, use nil to disable.
 function render.MaterialOverride(material) end
 
----[CLIENT] Similar to render.MaterialOverride, but overrides the materials per index.
+---[CLIENT] Similar to render.MaterialOverride, but overrides the materials per index. Similar to Entity:SetSubMaterial
 ---
 --- render.MaterialOverride overrides effects of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.MaterialOverrideByIndex)
----@param index number Starts with 0, the index of the material to override
+---@param index number The index of the material to override, in range of 0 to 31.
 ---@param material IMaterial The material to override with
 function render.MaterialOverrideByIndex(index, material) end
 

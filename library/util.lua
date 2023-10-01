@@ -461,17 +461,23 @@ function util.IsValidProp(modelName) end
 function util.IsValidRagdoll(ragdollName) end
 
 ---[SHARED AND MENU] Converts a JSON string to a Lua table.
----
---- Keys are converted to numbers wherever possible. This means using Player:SteamID64 as keys won't work.
----
---- There is a limit of 15,000 keys total.
---- This will attempt cast the string keys "inf", "nan", "true", and "false" to their respective Lua values. This completely ignores nulls in arrays.
+--- This will attempt to cast the string keys "inf", "nan", "true", and "false" to their respective Lua values. This completely ignores nulls in arrays.
 --- Colors will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.JSONToTable)
 ---@param json string The JSON string to convert.
+---@param ignorelimits? boolean
+--- 			ignore the depth and breadth limits, **use at your own risk!**.
+--- 			If this is false, there is a limit of 15,000 keys total.
+---
+---@param ignoreconversions? boolean
+--- 			ignore string to number conversions for table keys.
+---
+--- 				if this is false, keys are converted to numbers wherever possible. This means using Player:SteamID64 as keys won't work.
+---
+---
 ---@return table #The table containing converted information. Returns nothing on failure.
-function util.JSONToTable(json) end
+function util.JSONToTable(json, ignorelimits, ignoreconversions) end
 
 ---[SHARED AND MENU] Converts a Valve KeyValue string (typically from util.TableToKeyValues) to a Lua table.
 ---
@@ -632,15 +638,16 @@ function util.RemovePData(steamID, name) end
 ---@param pos Vector The origin of the effect.
 --- 			Does nothing on client.
 ---
----@param amplitude number The strength of the effect.
----@param frequency number The frequency of the effect in hertz.
+---@param amplitude number The strength of the effect. How far away from its origin the camera will move while shaking.
+---@param frequency number How many times per second to change the direction of the camera wobble. 40 is generally enough; values higher are hardly distinguishable.
 ---@param duration number The duration of the effect in seconds.
 ---@param radius number The range from the origin within which views will be affected, in Hammer units.
 --- 			Does nothing on client.
 ---
-function util.ScreenShake(pos, amplitude, frequency, duration, radius) end
+---@param airshake? boolean whether players in the air should also be affected.
+function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake) end
 
----[SHARED AND MENU] Sets PData for offline player using his SteamID.
+---[SHARED AND MENU] Sets PData for offline player using their SteamID.
 --- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.SetPData)
@@ -722,10 +729,12 @@ function util.SteamIDTo64(id) end
 function util.StringToType(str, typename) end
 
 ---[SHARED AND MENU] Converts a table to a JSON string.
---- Trying to serialize or deserialize SteamID64s in JSON will NOT work correctly. They will be interpreted as numbers which cannot be precisely stored by JavaScript, Lua and JSON, leading to loss of data. You may want to use util.SteamIDFrom64 to work around this.
---- Alternatively, just append a character to the SteamID64 to force util.JSONToTable to treat it as a string.
---- All integers will be converted to decimals (5 -> 5.0).
+---
 --- All keys are strings in the JSON format, so all keys will be converted to strings!
+---
+--- All integers will be converted to decimals (5 -> 5.0).
+---
+---
 --- This will produce invalid JSON if the provided table contains nan or inf values.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TableToJSON)

@@ -241,11 +241,10 @@ function Entity:CallDTVarProxies(Type, index, newValue) end
 
 ---[SHARED] Causes a specified function to be run if the entity is removed by any means. This can later be undone by Entity:RemoveCallOnRemove if you need it to not run.
 ---
---- 		This hook is called during clientside full updates. See ENTITY:OnRemove#clientsidebehaviourremarks for more information.
---- 		Using players with this function will provide a gimped entity to the callback.
+--- This hook is called clientside during full updates. See GM:EntityRemoved for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:CallOnRemove)
----@param identifier string Identifier of the function within CallOnRemove
+---@param identifier string Identifier that can be optionally used with Entity:RemoveCallOnRemove to undo this call on remove.
 ---@param removeFunc function Function to be called on remove
 ---@param ... ... Optional arguments to pass to removeFunc. Do note that the first argument passed to the function will always be the entity being removed, and the arguments passed on here start after that.
 function Entity:CallOnRemove(identifier, removeFunc, ...) end
@@ -523,8 +522,7 @@ function Entity:EnableCustomCollisions(useCustom) end
 --- If your old scales are wrong due to a recent update, use Entity:SetLegacyTransform as a quick fix.
 ---
 --- The matrix can also be modified to apply a custom rotation and offset via the VMatrix:SetAngles and VMatrix:SetTranslation functions.
---- This does not scale procedural bones.
---- This disables inverse kinematics of an entity.
+--- This does not scale procedural bones, and disables inverse kinematics of the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:EnableMatrix)
 ---@param matrixType string The name of the matrix type.
@@ -970,14 +968,13 @@ function Entity:GetCollisionGroup() end
 
 ---[SHARED] Returns the color the entity is set to.
 ---
---- The returned color will not have the color metatable.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetColor)
 ---@return table #The color of the entity as a Color.
 function Entity:GetColor() end
 
----[SHARED] Returns the color the entity is set to.
---- This functions will return Colors set with Entity:GetColor
+---[SHARED] Returns the color the entity is set to without using a color object.
+---
+--- Internally used to implement Entity:GetColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetColor4Part)
 ---@return number, number, number, number #number -
@@ -1154,11 +1151,13 @@ function Entity:GetFlexIDByName(name) end
 ---[SHARED] Returns flex name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexName)
----@param id number The flex id to look up name of
----@return string #The flex name
+---@param id number The flex index to look up name of. The range is between `0` and Entity:GetFlexNum - 1.
+---@return string #The flex name, or no value if the requested ID is out of bounds.
 function Entity:GetFlexName(id) end
 
----[SHARED] Returns the number of flexes this entity has.
+---[SHARED] Returns the number of flex controllers this entity's model has.
+---
+--- Please note that while this function can return the real number of flex controllers, the game supports only a certain amount due to networking limitations. See Entity:SetFlexWeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexNum)
 ---@return number #The number of flexes.
@@ -1170,11 +1169,11 @@ function Entity:GetFlexNum() end
 ---@return number #The flex scale
 function Entity:GetFlexScale() end
 
----[SHARED] Returns current weight ( value ) of the flex.
+---[SHARED] Returns current weight ( value ) of given flex controller. Please see Entity:SetFlexWeight regarding limitations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexWeight)
 ---@param flex number The ID of the flex to get weight of
----@return number #The current weight of the flex
+---@return number #The current weight of the flex, or 0 if out of bounds.
 function Entity:GetFlexWeight(flex) end
 
 ---[SHARED] Returns the forward vector of the entity, as a normalized direction vector
@@ -2239,10 +2238,8 @@ function ENTITY:GetShadowCastDirection(type) end
 
 ---[SHARED] Checks if the entity plays a sound when picked up by a player.
 ---
---- This will return nil if Entity:SetShouldPlayPickupSound has not been called.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetShouldPlayPickupSound)
----@return boolean #True if it plays the pickup sound, false otherwise.
+---@return boolean #`true` if it plays the pickup sound, `false` otherwise.
 function Entity:GetShouldPlayPickupSound() end
 
 ---[SHARED] Returns if entity should create a server ragdoll on death or a client one.
@@ -2312,10 +2309,10 @@ function Entity:GetSubModels() end
 ---@return Vector, Vector #Vector - The maximum vector for the entity's bounding box in world space.
 function Entity:GetSurroundingBounds() end
 
----[SHARED] Returns the table that contains all values saved within the entity.
+---[SHARED] Returns the table that contains all script values saved within the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetTable)
----@return table #entTable
+---@return table #The entity's Lua table.
 function Entity:GetTable() end
 
 ---[SHARED] Returns the last trace used in the collision callbacks such as ENTITY:StartTouch, ENTITY:Touch and ENTITY:EndTouch.
@@ -2333,8 +2330,6 @@ function Entity:GetTouchTrace() end
 function Entity:GetTransmitWithParent() end
 
 ---[SERVER] Returns if the entity is unfreezable, meaning it can't be frozen with the physgun. By default props are freezable, so this function will typically return false.
----
---- This will return nil if Entity:SetUnFreezable has not been called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetUnFreezable)
 ---@return boolean #True if the entity is unfreezable, false otherwise.
@@ -2366,10 +2361,9 @@ function Entity:GetVelocity() end
 
 ---[SERVER] Returns ID of workshop addon that the entity is from.
 ---
---- The function **currently** does nothing and always returns nil
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetWorkshopID)
 ---@return number #The workshop ID
+---@deprecated The function **currently** does nothing and always returns nil
 function Entity:GetWorkshopID() end
 
 ---[SHARED] Returns the position and angle of the entity as a 3x4 matrix (VMatrix is 4x4 so the fourth row goes unused). The first three columns store the angle as a [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix), and the fourth column stores the position vector.
@@ -2560,7 +2554,10 @@ function Entity:IsConstrained() end
 ---@return boolean #Is the entity a constraint or not
 function Entity:IsConstraint() end
 
----[SHARED] Returns whether the entity is dormant or not. Client/server entities become dormant when they leave the PVS on the server. Client side entities can decide for themselves whether to become dormant. This mainly applies to PVS.
+---[SHARED] Returns whether the entity is dormant or not.
+---
+--- Client/server entities become dormant when they leave the PVS on the server. Client side entities can decide for themselves whether to become dormant.
+--- This mainly applies to [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:IsDormant)
 ---@return boolean #Whether the entity is dormant or not.
@@ -3055,7 +3052,7 @@ function ENTITY:OnCondition(conditionID) end
 --- This hook is called after ENTITY:Initialize and before ENTITY:PostEntityPaste.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:OnDuplicated)
----@param entTable table Structures/EntityCopyData of the source entity.
+---@param entTable table The stored data about the original entity that was duplicated. This would typically contain the Entity:GetTable fields that are serializalble. See Structures/EntityCopyData.
 function ENTITY:OnDuplicated(entTable) end
 
 ---[SERVER] Called after duplicator finishes saving the entity, allowing you to modify the save data.
@@ -3384,9 +3381,11 @@ function ENTITY:PostEntityCopy() end
 ---@param ply Player The player who pasted the entity.
 ---
 --- This may not be a valid player in some circumstances. For example, when a save is loaded from the main menu, this hook will be called before the player is spawned. This argument will be a NULL entity in that case.
---- This will be nil for invalid players.
----@param ent Entity The entity itself. Same as 'self'.
----@param createdEntities table All entities that are within the placed dupe. The keys of each value in this table are the original entity indexes when the duplication was created. This can be utilized to restore entity references that don't get saved in duplications.
+---
+---@param ent Entity The entity itself. Same as `self` within the function context.
+---@param createdEntities table All entities that are within the placed dupe.
+--- The keys of each value in this table are the original entity indexes when the duplication was created. This can be utilized to restore entity references that don't get saved in duplications.
+---
 function ENTITY:PostEntityPaste(ply, ent, createdEntities) end
 
 ---[SERVER] Precaches gibs for the entity's model.
@@ -3448,7 +3447,7 @@ function Entity:RemoveCallback(hook, callbackid) end
 ---[SHARED] Removes a function previously added via Entity:CallOnRemove.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:RemoveCallOnRemove)
----@param identifier string Identifier of the function within CallOnRemove
+---@param identifier string Identifier of the function given to Entity:CallOnRemove.
 function Entity:RemoveCallOnRemove(identifier) end
 
 ---[SHARED] Removes an engine effect applied to an entity.
@@ -3635,8 +3634,6 @@ function Entity:SelectWeightedSequenceSeeded(act, seed) end
 ---
 --- This function is only usable on view models.
 ---
---- Sequences 0-6 will not be looped regardless if they're marked as a looped animation or not.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SendViewModelMatchingSequence)
 ---@param seq number The sequence ID returned by Entity:LookupSequence or  Entity:SelectWeightedSequence.
 function Entity:SendViewModelMatchingSequence(seq) end
@@ -3780,8 +3777,9 @@ function Entity:SetCollisionGroup(group) end
 ---@param color? table The color to set. Uses the Color.
 function Entity:SetColor(color) end
 
----[SHARED] Sets the color of an entity.
---- This function overrides Colors set with Entity:SetColor
+---[SHARED] Sets the color of an entity without usage of a Global.Color object.
+---
+--- Used internally to implement Entity:SetColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetColor4Part)
 ---@param r number
@@ -3895,16 +3893,18 @@ function Entity:SetEntity(name, entity) end
 ---@param pos Vector If NPC, the **world position** for the entity to look towards, for Ragdolls, a **local position** in front of their `eyes` attachment.
 function Entity:SetEyeTarget(pos) end
 
----[SHARED] Sets the flex scale of the entity.
+---[SHARED] Sets the scale of all the flexes of this entity. See Entity:SetFlexWeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFlexScale)
 ---@param scale number The new flex scale to set to
 function Entity:SetFlexScale(scale) end
 
----[SHARED] Sets the flex weight.
+---[SHARED] Sets the weight/value of given flex controller.
+---
+--- Only `96` flex controllers can be set! Flex controllers on models with higher amounts will not be accessible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight)
----@param flex number The ID of the flex to modify weight of
+---@param flex number The ID of the flex to modify weight of.  The range is between `0` and Entity:GetFlexNum - 1.
 ---@param weight number The new weight to set
 function Entity:SetFlexWeight(flex, weight) end
 
@@ -3923,6 +3923,7 @@ function Entity:SetFriction(friction) end
 ---[SHARED] Sets the gravity multiplier of the entity.
 ---
 --- This function is not predicted.
+--- This only works on players
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetGravity)
 ---@param gravityMultiplier number Value which specifies the gravity multiplier.
@@ -4844,13 +4845,14 @@ function Entity:SetPlaybackRate(fSpeed) end
 
 ---[SHARED] Moves the entity to the specified position.
 ---
+--- Some entities, such as ragdolls, will continually reset their position. Consider using PhysObj:SetPos on every physics object to move ragdolls.
+---
 --- If the new position doesn't take effect right away, you can use Entity:SetupBones to force it to do so. This issue is especially common when trying to render the same entity twice or more in a single frame at different positions.
 ---
---- Entities with Entity:GetSolid of SOLID_BBOX will have their angles reset!
+---
+--- Entities with Entity:GetSolid of `SOLID_BBOX` will have their angles reset!
 ---
 --- This will fail inside of predicted functions called during player movement processing. This includes WEAPON:PrimaryAttack and WEAPON:Think.
----
---- Some entities, such as ragdolls, will appear unaffected by this function in the next frame. Consider PhysObj:SetPos if necessary.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetPos)
 ---@param position Vector The position to move the entity to.
@@ -5157,7 +5159,7 @@ function Entity:SetVar(key, value) end
 ---
 --- Actually binds to CBaseEntity::SetBaseVelocity() which sets the entity's velocity due to forces applied by other entities.
 ---
---- If applied to a player, this will actually **ADD** velocity, not set it.
+--- If applied to a player, this will actually **ADD** velocity, not set it. (due to how movement code handles base velocity)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetVelocity)
 ---@param velocity Vector The new velocity to set.
@@ -5394,7 +5396,7 @@ function ENTITY:TaskTime() end
 ---@return table #Returning a `table` will allow you to override trace results. Table should contain the following keys, all optional: * Vector `HitPos` - The new hitpos of the trace. * number `Fraction` - A number from `0` to `1`, describing how far the trace went from its origin point, `1` = did not hit. * Vector `Normal` - A unit vector (length=1) describing the direction perpendicular to the hit surface.  Returning `true` will allow "normal" collisions to happen for `SOLID_VPHYSICS` and `SOLID_BBOX` entities. Returning `nothing` or `false` allows the trace to ignore the entity completely.
 function ENTITY:TestCollision(startpos, delta, isbox, extents, mask) end
 
----[SERVER] Check if the given position or entity is within this entity's PVS.
+---[SERVER] Check if the given position or entity is within this entity's [PVS(Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
 ---
 --- See also Entity:IsDormant.
 ---

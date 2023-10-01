@@ -355,7 +355,7 @@ function _G.CreateContextMenu() end
 --- This cannot be a name of an engine console command or console variable. It will silently fail if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
 ---@param flags? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
----@param helptext? string The help text to show in the console.
+---@param helptext string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
 ---@return ConVar #The convar created.
@@ -832,9 +832,7 @@ function _G.Either(condition, truevar, falsevar) end
 ---@param pitch? number The pitch of the sound, 0-255
 function _G.EmitSentence(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch) end
 
----[SHARED] Emits the specified sound at the specified position.
----
---- Sounds must be precached serverside manually before they can be played. util.PrecacheSound does not work for this purpose, Entity:EmitSound does the trick
+---[SHARED] Emits the specified sound at the specified position. See also Entity:EmitSound if you wish to play sounds on a specific entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EmitSound)
 ---@param soundName string The sound to play
@@ -842,7 +840,7 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 --- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 ---
 ---@param position Vector The position where the sound is meant to play, used only for a network  filter (`CPASAttenuationFilter`) to decide which players will hear the sound.
----@param entity number The entity to emit the sound from. Can be an Entity:EntIndex or one of the following:
+---@param entity? number The entity to emit the sound from. Can be an Entity:EntIndex or one of the following:
 --- * `0` - Plays sound on the world (position set to `0,0,0`)
 --- * `-1` - Plays sound on the local player (on server acts as `0`)
 --- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
@@ -1358,7 +1356,7 @@ function _G.GetPredictionPlayer() end
 --- See Global.GetRenderTargetEx for an advanced version of this function with more options.
 ---
 --- This crashes when used on a cubemap texture.
----
+--- Rendertargets are not garbage-collected, which means they will remain in memory until you disconnect. So make sure to avoid creating new ones unecessarily and re-use as many of your existing rendertargets as possible to avoid filling up all your memory.
 ---
 --- Calling this function is equivalent to
 --- ```lua
@@ -1922,7 +1920,7 @@ function _G.Matrix(data) end
 ---@param workshopItemID string The ID of Steam Workshop item.
 function _G.MenuGetAddonData(workshopItemID) end
 
----[CLIENT] Returns a new mesh object.
+---[CLIENT] Returns a new static mesh object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Mesh)
 ---@param mat? IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.

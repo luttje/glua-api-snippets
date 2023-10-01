@@ -61,7 +61,7 @@ function CRecipientFilter:RemovePAS(position) end
 ---@param Player Player The player that should be in the recipient filter if you call this function.
 function CRecipientFilter:RemovePlayer(Player) end
 
----[SERVER] Removes all players that can see this PVS from the recipient filter.
+---[SERVER] Removes all players that can see this [PVS(Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") from the recipient filter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CRecipientFilter:RemovePVS)
 ---@param pos Vector Position that players may be able to see.

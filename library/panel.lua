@@ -808,8 +808,6 @@ function Panel:GotoTextEnd() end
 
 ---[CLIENT AND MENU] Causes a RichText element to scroll to the top of its text.
 ---
---- This does not work on the same frame as Panel:SetText.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GotoTextStart)
 function Panel:GotoTextStart() end
 

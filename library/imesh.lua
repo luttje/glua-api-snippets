@@ -5,6 +5,8 @@ local IMesh = {}
 
 ---[CLIENT] Builds the mesh from a table mesh vertexes.
 ---
+--- When modifying a previously built mesh, your new mesh must match the vertex count!
+---
 --- See Global.Mesh and util.GetModelMeshes for examples.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles)

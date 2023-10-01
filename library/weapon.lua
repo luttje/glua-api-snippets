@@ -49,9 +49,7 @@ function WEAPON:Ammo2() end
 
 ---[CLIENT] Allows you to adjust player view while this weapon in use.
 ---
---- This hook is called from the default implementation of GM:CalcView which is [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/base/gamemode/cl_init.lua#L387-L395). Therefore, it will not be called if any other hook added to CalcView returns any value, or if the current gamemode overrides the default hook and does not call the SWEP function.
----
---- SWEPs that define this function will not work with the Global.TauntCamera
+--- This hook is called from the default implementation of GM:CalcView which is [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/base/gamemode/cl_init.lua#L387-L395). Therefore, it will not be called if any other hook added to `CalcView` returns any value, or if the current gamemode overrides the default hook and does not call the SWEP function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:CalcView)
 ---@param ply Player The owner of weapon
@@ -589,7 +587,7 @@ function Weapon:SetLastShootTime(time) end
 
 ---[SHARED] Sets when the weapon can fire again. Time should be based on Global.CurTime.
 ---
---- The standard HL2 "weapon_pistol" bypasses this function due to an [internal implementation](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/weapon_pistol.cpp#L313-L317).
+--- The standard HL2 Pistol (`weapon_pistol`) bypasses this function due to an [internal implementation](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/weapon_pistol.cpp#L313-L317).
 --- This will fire extra bullets if the time is set to less than Global.CurTime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:SetNextPrimaryFire)

@@ -24,7 +24,6 @@ function physenv.GetAirDensity() end
 function physenv.GetGravity() end
 
 ---[SHARED] Returns the last simulation duration of the in-game physics.
---- 		Seems to experience significant loss of precision after several hours of uptime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetLastSimulationTime)
 ---@return number #The last simulation duration of the in-game physics in seconds

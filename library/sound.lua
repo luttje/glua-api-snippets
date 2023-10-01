@@ -4,6 +4,8 @@ sound = {}
 
 ---[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 ---
+--- You can find a list of common sound scripts that are shipped with the game by default here: Common Sounds.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
 ---@param soundData table The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
@@ -61,16 +63,13 @@ function sound.GetTable() end
 --- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
----@param Name string A path to the sound.
+---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 ---
---- Does this function support sound scripts?
---- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
----
----@param Pos Vector Where the sound should play.
----@param Level number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
----@param Pitch number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
----@param Volume number Output volume of the sound in range 0 to 1.
-function sound.Play(Name, Pos, Level, Pitch, Volume) end
+---@param pos Vector Where the sound should play.
+---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
+---@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
+---@param volume? number Output volume of the sound in range 0 to 1.
+function sound.Play(snd, pos, level, pitch, volume) end
 
 ---[CLIENT] Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---

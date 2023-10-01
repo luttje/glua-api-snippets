@@ -90,13 +90,13 @@ function player.GetByUniqueID(uniqueID) end
 ---@return number #Number of players
 function player.GetCount() end
 
----[SHARED] Returns a table of all human ( non bot/AI ) players.
+---[SHARED] Returns a table containing all human players (non-bot/AI).
 ---
 --- Unlike player.GetAll, this does not include bots.
 --- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetHumans)
----@return table #A table of all human ( non bot/AI ) players.
+---@return table #A table containing all human (non-bot/AI) players.
 function player.GetHumans() end
 
 ---@class Player : Entity
@@ -282,12 +282,11 @@ local PLAYER = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:ClassChanged)
 function PLAYER:ClassChanged() end
 
----[SHARED] Runs the concommand on the player. This does not work on bots.
+---[SHARED] Runs the concommand on the player. This does not work on bots. If used clientside, always runs the command on the local player.
 ---
 --- If you wish to directly modify the movement input of bots, use GM:StartCommand instead.
 ---
 --- Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
---- On clientside running a ConCommand on an other player will not throw any warnings or errors but will run the ConCommand on LocalPlayer() instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ConCommand)
 ---@param command string command to run
@@ -1974,14 +1973,10 @@ function Player:SprayDecal(sprayOrigin, sprayEndPos) end
 
 ---[SERVER] Disables the sprint on the player.
 ---
---- Not working - use Player:SetRunSpeed or CMoveData:SetMaxSpeed in a GM:Move hook, instead.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SprintDisable)
 function Player:SprintDisable() end
 
 ---[SERVER] Enables the sprint on the player.
----
---- Not working - use Player:SetRunSpeed or CMoveData:SetMaxSpeed in a GM:Move hook, instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SprintEnable)
 function Player:SprintEnable() end

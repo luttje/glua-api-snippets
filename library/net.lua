@@ -456,11 +456,16 @@ function net.WriteUInt(unsignedInteger, numberOfBits) end
 --- 			Everything above the limit will be set to the limit.
 ---
 --- 			Unsigned numbers **do not** support negative numbers.
---- 			If you use negative numbers, it will read it incorrectly (limit + (input + 1)).
---- 			You can give it a number, but it will break as soon as it has 14 digits
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteUInt64)
----@param uint64 string The uint64 to be sent.
+---@param uint64 string The uint64 to be sent. Can be a number.
+---
+--- 				If your input is a number and not a string, it won't be networked correctly as soon as it has more than 13 digits.
+--- 				This is because Lua represents numbers over 13 digits as `1e+14`(`100.000.000.000.000`)
+--- 				You can do something like this to convert it to a string: `string.format("%.0f", number)`.
+--- 				If you try to use Global.tostring it will fail because it will create a result something like `1e+14` which doesn't work.
+---
+---
 function net.WriteUInt64(uint64) end
 
 ---[SHARED] Appends a vector to the current net message.

@@ -176,7 +176,6 @@ function NEXTBOT:OnContact(ent) end
 
 ---[SERVER] Called when the nextbot NPC sees another Nextbot NPC or a Player.
 --- 		This hook will only run after NextBot:SetFOV or other vision related function is called on the nextbot. See NextBot:IsAbleToSee for more details.
---- 		This hook is not called in some scenarios.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NEXTBOT:OnEntitySight)
 ---@param ent Entity the entity that was seen
@@ -184,7 +183,6 @@ function NEXTBOT:OnEntitySight(ent) end
 
 ---[SERVER] Called when the nextbot NPC loses sight of another Nextbot NPC or a Player.
 --- 		This hook will only run after NextBot:SetFOV or other vision related function is called on the nextbot. See NextBot:IsAbleToSee for more details.
---- 		This hook is not called in some scenarios.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NEXTBOT:OnEntitySightLost)
 ---@param ent Entity the entity that we lost sight of
