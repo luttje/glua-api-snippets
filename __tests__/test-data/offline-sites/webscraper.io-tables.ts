@@ -32,7 +32,7 @@ export const html = /* html */ `
 	<link rel="icon" sizes="128x128" href="/favicon.png">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<link rel="stylesheet" href="/css/app.css?id=ed0b76b9bc27b6c8a72298dc6c494781">
 
 	<link rel="canonical" href="https://webscraper.io/test-sites/tables">
@@ -40,7 +40,7 @@ export const html = /* html */ `
 
 		<script defer src="/js/app.js?id=d2e2345e7d04a28ba94540a683bf36c4"></script>
 
-	
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -77,12 +77,12 @@ export const html = /* html */ `
 					<li class="hidden">
 						<a href="#page-top"></a>
 					</li>
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
 					<li>
 						<a href="/" class="menuitm">
 							<p>Web Scraper</p>
@@ -102,15 +102,15 @@ export const html = /* html */ `
 						</a>
 					</li>
 
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
+
+
 					<li class="dropdown">
 						<a href="#section3" class="menuitm dropdown-toggle" data-toggle="dropdown">
 							<p>Learn</p>
@@ -147,7 +147,7 @@ export const html = /* html */ `
 </header>
 
 <div class="wrapper">
-	
+
 	<div class="formenu-here container-fluid">
 
 	</div>
@@ -334,17 +334,17 @@ export const html = /* html */ `
 					<li>
 						<a href="/pricing">Web Scraper Cloud</a>
 					</li>
-					
-					
+
+
 				</ul>
 			</div>
 			<div class="col-md-3">
 				<ul>
 					<li><p>Company</p></li>
-					
+
 					<li><a href="/contact">Contact</a>
 					</li>
-					
+
 					<li>
 						<a href="/privacy-policy">Website Privacy Policy</a>
 					</li>
@@ -354,7 +354,7 @@ export const html = /* html */ `
 					<li>
 						<a href="https://webscraper.io/downloads/Web_Scraper_Media_Kit.zip">Media kit</a>
 					</li>
-					
+
 					<li><a href="/jobs">Jobs</a></li>
 				</ul>
 			</div>
@@ -385,7 +385,7 @@ export const html = /* html */ `
 					<li>
 						<a href="mailto:info@webscraper.io">info@webscraper.io</a>
 					</li>
-					
+
 					<li>Rupniecibas iela 30,<br> Riga, Latvia, LV-1045</li>
 				</ul>
 				<ul class="smedia">
@@ -395,7 +395,7 @@ export const html = /* html */ `
 					<li>
 						<a href="https://twitter.com/webscraperio" target="_blank" rel="noopener"><img src="/img/twicon.png" alt="Web Scraper on Twitter"></a>
 					</li>
-					
+
 
 				</ul>
 			</div>

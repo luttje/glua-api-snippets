@@ -21,7 +21,7 @@ class PageWithTables<T> implements Scrapeable {
 
 class Simple implements Scrapeable {
   public childUrls: Set<string> = new Set();
-  
+
   constructor(
     public content: string = 'test'
   ) { }
@@ -34,11 +34,11 @@ describe('Scraper', () => {
 
   it('can provide a scraper callback directly', async () => {
     const baseUrl = 'https://webscraper.io/test-sites/tables';
-    
+
     fetchMock.mockResponseOnce(html, {
       url: baseUrl,
     });
-    
+
     // Combines the functionality of TableScraper and PageTraverseScraper
     const scraper = new Scraper<PageWithTables<Person>>(baseUrl, async (response: Response, html: string) => {
       const tableScraperCallback = new TableScraper<Person>(baseUrl, () => new Person()).getScrapeCallback();
@@ -62,7 +62,7 @@ describe('Scraper', () => {
   it('should retry on failure', async () => {
     const baseUrl = 'https://test.example';
     const html = '<html><body><h1>Test</h1></body></html>';
-    
+
     // Simply try 3 times in total with an exponential backoff delay between each attempt starting with 100ms
     fetchMock.mockResponses(
       (req) => Promise.reject(new Error('Failed to fetch')),
@@ -72,7 +72,7 @@ describe('Scraper', () => {
         status: 200,
       })
     );
-    
+
     const scraper = new Scraper<Simple>(baseUrl, (response: Response, html: string) => [new Simple(html)]);
     scraper.setRetryOptions({
       retries: 2,
@@ -85,13 +85,13 @@ describe('Scraper', () => {
     expect(results.length).toBe(1);
     expect(results[0].content).toBe(html);
   });
-  
+
   it('should simply get no results if we fail to fetch the page', async () => {
     const baseUrl = 'https://test.example';
     const error = new Error('Failed to fetch');
-    
+
     fetchMock.mockReject(error);
-    
+
     const scraper = new Scraper<Simple>(baseUrl, (response: Response, html: string) => [new Simple(html)]);
 
     const disabledWarning = console.warn;

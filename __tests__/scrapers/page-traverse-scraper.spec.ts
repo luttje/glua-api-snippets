@@ -21,13 +21,13 @@ describe('PageTraverseScraper', () => {
       const page = pages[0];
 
       expect(page.url).toMatch(baseUrl);
-      
+
       for (const url of page.childUrls) {
         if (!url.startsWith(baseUrl))
           hasExternalLink = true;
       }
     });
-    
+
     await scraper.scrape();
 
     // Validate this test is useful by checking that there are indeed external links
@@ -52,18 +52,18 @@ describe('PageTraverseScraper', () => {
 
   it('should work with permanent redirects', async () => {
     fetchMock.dontMockOnce();
-    
+
     const scraper = new PageTraverseScraper('https://www.lutt.online'); // Permanent redirect to https://lutt.online
-    
+
     scraper.on('scraped', (url: string, pages: Page[]) => {
       const page = pages[0];
-      
+
       expect(page.url).toMatch('https://lutt.online');
     });
 
     await scraper.scrape();
   });
-  
+
   it('does not get stuck scraping an infinite loop', async () => {
     const baseUrl = 'https://test.example/';
     const htmlA = `<html><body><h1>Test A</h1><a href="${baseUrl}b">B</a></body></html>`;

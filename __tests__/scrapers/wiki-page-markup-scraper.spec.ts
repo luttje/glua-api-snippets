@@ -18,11 +18,11 @@ describe('GMod Wiki Page Markup Parse', () => {
       url: libraryFunctionJson.url,
     };
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
-    
+
     expect(scrapeCallback(responseMock, libraryFunctionMarkup)).toEqual([<LibraryFunction>libraryFunctionJson]);
   });
 
-  it('should be able to parse a class function markup', async () => {    
+  it('should be able to parse a class function markup', async () => {
     fetchMock.mockResponseOnce(classFunctionMarkup);
 
     const responseMock = <Response>{
@@ -44,7 +44,7 @@ describe('GMod Wiki Page Markup Parse', () => {
     expect(scrapeCallback(responseMock, hookMarkup)).toEqual([<HookFunction>hookJson]);
   });
 
-  it('should be able to parse a enum markup', async () => {  
+  it('should be able to parse a enum markup', async () => {
     fetchMock.mockResponseOnce(enumMarkup);
 
     const responseMock = <Response>{
@@ -54,7 +54,7 @@ describe('GMod Wiki Page Markup Parse', () => {
 
     expect(scrapeCallback(responseMock, enumMarkup)).toEqual([<Enum>enumJson]);
   });
-  
+
   it('should be able to parse a structure markup', async () => {
     fetchMock.mockResponseOnce(structMarkup);
 

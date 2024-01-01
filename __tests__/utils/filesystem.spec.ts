@@ -89,7 +89,7 @@ describe('zipFiles', () => {
     await zipFiles(archivePath, files, testDirectory);
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    
+
     const zip = new StreamZip.async({ file: archivePath });
     const entries = await zip.entries();
     zip.close();
@@ -104,7 +104,7 @@ describe('zipFiles', () => {
     await zipFiles(archivePath, files, testDirectory);
 
     expect(fs.existsSync(archivePath)).toBe(true);
-    
+
     const zip = new StreamZip.async({ file: archivePath });
     const entries = await zip.entries();
     zip.close();
@@ -127,7 +127,7 @@ describe('zipFiles', () => {
     expect(Object.keys(entries).length).toBe(files.length);
     expect(Object.keys(entries).sort()).toEqual(files.map(file => convertWindowsToUnixPath(path.relative(testDirectory, file))).sort());
   });
-  
+
   it('should throw an error if it fails to zip files', async () => {
     const files = [
       path.join(testDirectory, 'non-existent-file.json'),

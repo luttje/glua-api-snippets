@@ -18,12 +18,12 @@ describe('cli-change-checker', () => {
 
   beforeEach(() => {
     mockExit = jest.spyOn(process, 'exit')
-      .mockImplementation((code) => { 
+      .mockImplementation((code) => {
         throw new Error(`Process.exit(${code})`); // Throw so normal execution doesn't continue
       });
     mockConsoleError = jest.spyOn(console, 'error')
       .mockImplementation(jest.fn());
-    
+
     const baseUrl = 'https://wiki.facepunch.com/gmod/~recentchanges';
     fetchMock.mockResponseOnce(html, { url: baseUrl });
   });

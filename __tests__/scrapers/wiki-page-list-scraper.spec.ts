@@ -23,7 +23,7 @@ describe('WikiPageListScraper', () => {
 
         resolve(true);
       });
-    
+
       scrapeCallback.scrape();
     });
   });

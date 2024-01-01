@@ -45,19 +45,19 @@ export class GluaApiWriter {
   public static safeName(name: string) {
     if (name.includes('/'))
       name = name.replace(/\//g, ' or ');
-    
+
     if (name.includes('='))
       name = name.split('=')[0];
-      
+
     if (name.includes(' '))
       name = toLowerCamelCase(name);
-    
+
     // Remove any remaining characters not valid in a Lua variable/function name.
     name = name.replace(/[^A-Za-z\d_.]/g, '');
 
     if (RESERVERD_KEYWORDS.has(name))
       return `_${name}`;
-    
+
     return name;
   }
 
@@ -110,7 +110,7 @@ export class GluaApiWriter {
 
         if (parent)
           api += ` : ${parent}`;
-        
+
         api += '\n';
         api += `local ${className} = {}\n\n`;
         api += classFields;
@@ -147,7 +147,7 @@ export class GluaApiWriter {
 
     return api;
   }
-  
+
   private writeLibraryFunction(func: LibraryFunction) {
     let api: string = this.writeLibraryGlobal(func);
 
@@ -249,7 +249,7 @@ export class GluaApiWriter {
   private transformType(type: string) {
     if (type === 'vararg')
       return '...';
-    
+
     return type;
   }
 
@@ -261,10 +261,10 @@ export class GluaApiWriter {
       func.arguments.forEach((arg, index) => {
         if (!arg.name)
           arg.name = arg.type;
-        
+
         if (arg.type === 'vararg')
           arg.name = '...';
-        
+
         luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
       });
     }
@@ -279,7 +279,7 @@ export class GluaApiWriter {
           luaDocComment += `${returns} #${description}\n`;
           return;
         }
-        
+
         luaDocComment += `${returns} #${this.transformType(ret.type)} - ${description}\n`;
       });
     }
@@ -297,7 +297,7 @@ export class GluaApiWriter {
       declaration += func.arguments.map(arg => {
         if (arg.type === 'vararg')
           return '...';
-        
+
         return GluaApiWriter.safeName(arg.name!);
       }).join(', ');
     }

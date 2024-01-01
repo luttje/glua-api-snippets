@@ -79,11 +79,11 @@ async function main() {
       ],
       // TODO: runtime.path
     });
-  
+
   fs.writeFileSync(path.join(options.output, 'config.json'), JSON.stringify(config, null, 2));
-  
+
   const files = walk(options.input, (file, isDirectory) => isDirectory || (file.endsWith(`.lua`)));
-  
+
   files.forEach((file) => {
     const relativePath = path.relative(options.input, file);
     const outputPath = path.join(options.output, libraryDirectory, relativePath);

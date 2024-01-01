@@ -117,7 +117,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
   /**
    * @param response The response from the page
    * @param content The content of the request
-   * 
+   *
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<WikiPage> {
@@ -277,7 +277,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
       if (!page)
         return [];
-      
+
       page.url = response.url.replace(/\?format=text$/, '');
 
       return [page];

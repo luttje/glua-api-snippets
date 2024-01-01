@@ -46,11 +46,11 @@ export function convertWindowsToUnixPath(windowsPath: string) {
   unixPath = unixPath.replace(/\\/g, '/');
 
   let colonIndex = unixPath.indexOf(':');
-  
+
   if (colonIndex > -1)
     unixPath = unixPath.replace(/:/, '');
 
-  if (unixPath.startsWith('.')) 
+  if (unixPath.startsWith('.'))
     unixPath = unixPath.substring(2);
   else if (!unixPath.startsWith('/') && colonIndex > -1)
     unixPath = '/' + unixPath;
@@ -67,7 +67,7 @@ export async function zipFiles(outputFile: string, filePaths: string[], trimPath
 
     const outputStream = fs.createWriteStream(outputFile);
     const archive = archiver.create('zip', { zlib: { level: 9 } });
-    
+
     outputStream.on('close', function () {
       resolve(archive);
     });
@@ -84,7 +84,7 @@ export async function zipFiles(outputFile: string, filePaths: string[], trimPath
 
       archive.file(filePath, { name: trimPath ? path.relative(trimPath, filePath) : filePath });
     }
-    
+
     await archive.finalize();
   });
 }

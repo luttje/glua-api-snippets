@@ -12,7 +12,7 @@ export type TableColumnDefinition = {
 };
 
 export function tableColumn(columnName: string): PropertyDecorator {
-  return (target: object, propertyKey: string | symbol) => {
+  return (target: Object, propertyKey: string | symbol): void => {
     const existingColumns: TableColumnDefinition[] = Reflect.getMetadata(tableColumnMetadataKey, target) || [];
     const propertyType = Reflect.getMetadata("design:type", target, propertyKey);
 
@@ -89,12 +89,12 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
       headingRows = $(tableElement).find('tbody > tr:first-child');
       shouldTrimHeadings = true;
     }
-    
+
     let headings : cheerio.Element[] | undefined;
-    
+
     if (headingRows.length > 0)
       headings = $(headingRows[0]).find('th').toArray();
-    
+
     if (!headings || headings.length === 0)
       throw new Error('No headings found in table');
 
@@ -102,18 +102,18 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
 
     if (rows.length === 0)
       rows = $(tableElement).find('tr').toArray();
-    
+
     if (shouldTrimHeadings)
       rows = rows.slice(headingRows.length);
 
     let isEmpty = true;
-    
+
     for (const row of rows) {
       const rowResult = this.fromRowElement($, row, headings);
 
       if (rowResult === null)
         continue;
-      
+
       tableResult.addRow(rowResult);
       isEmpty = false;
     }
@@ -136,12 +136,12 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
 
       if (!heading)
         continue;
-      
+
       const headingText = $(heading).text();
 
       if (!headingText)
         continue;
-      
+
       let tableColumnDefinition = allTableColumns.find(column => column.columnName === headingText);
 
       if (!tableColumnDefinition) {
@@ -150,19 +150,19 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
 
         if (!propertyKey)
           continue;
-        
+
         tableColumnDefinition = {
           propertyKey,
           columnName: headingText,
           typeConverter: (value: string) => value
         };
       }
-      
+
       const cellText = $(cell).text();
 
       if (!cellText)
         continue;
-      
+
       (rowResult as any)[tableColumnDefinition.propertyKey] = tableColumnDefinition.typeConverter(cellText);
       isEmpty = false;
     }

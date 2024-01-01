@@ -24,10 +24,10 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
 
   /**
    * Scrapes a wiki history page for information on wiki changes
-   * 
+   *
    * @param response The response from the page
    * @param content The content of the request
-   * 
+   *
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<WikiHistoryPage> {
@@ -38,7 +38,7 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
 
       if (pages.length === 0)
         return [];
-      
+
       // There is only one page per response
       const page = pages[0];
 
@@ -47,7 +47,7 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
 
       if (!changeElements)
         return [page];
-      
+
       for (const changeElement of changeElements) {
         const pageLinkElement = $(changeElement).find('.address');
         const pageLinkAnchorElement = pageLinkElement.find('a');

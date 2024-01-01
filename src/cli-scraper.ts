@@ -40,7 +40,7 @@ async function startScrape() {
       return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
     }
   }
-  
+
   pageListScraper.setRetryOptions(retryOptions);
 
   writeMetadata(baseUrl, baseDirectory);
@@ -50,7 +50,7 @@ async function startScrape() {
 
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
-  
+
   if (customDirectory !== null) {
     if (!fs.existsSync(customDirectory)) {
       console.error(`Custom overrides directory ${customDirectory} does not exist`);
@@ -79,16 +79,16 @@ async function startScrape() {
       writer.addOverride(pageName, fileContent);
     }
   }
-  
+
   const pageIndexes = await scrapeAndCollect(pageListScraper);
 
   for (const pageIndex of pageIndexes) {
     const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageIndex.address}?format=text`);
-    
+
     pageMarkupScraper.on('scraped', (url, pageMarkups) => {
       if (pageMarkups.length === 0)
         return;
-      
+
       const api = writer.writePages(pageMarkups);
 
       let fileName = pageIndex.address;
@@ -105,7 +105,7 @@ async function startScrape() {
 
       if (!fs.existsSync(`${moduleFile}.lua`))
         fs.writeFileSync(`${moduleFile}.lua`, '---@meta\n\n');
-      
+
       if (!fs.existsSync(moduleFile))
         fs.mkdirSync(moduleFile, { recursive: true });
 

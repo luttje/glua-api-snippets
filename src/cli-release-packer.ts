@@ -38,7 +38,7 @@ async function main() {
   ];
 
   const baseFileName = dateToFilename(metadata.lastUpdate);
-  
+
   for (const target of targets) {
     const files = walk(options.input, (file, isDirectory) => isDirectory || file.endsWith(`.${target}`) || file.endsWith('__metadata.json'));
     const targetPath = path.join(options.output, `${baseFileName}.${target}.zip`);

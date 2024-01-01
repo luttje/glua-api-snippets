@@ -24,10 +24,10 @@ export class PageTraverseScraper<T extends Page = Page> extends TraverseScraper<
 
   /**
    * Scrapes a page for its URL and title, and returns a list of child URLs
-   * 
+   *
    * @param response The response from the page
    * @param content The content of the request
-   * 
+   *
    * @returns A list containing only the scraped page
    */
   public getScrapeCallback(): ScrapeCallback<T> {
@@ -47,10 +47,10 @@ export class PageTraverseScraper<T extends Page = Page> extends TraverseScraper<
 
         if (page.childUrls.has(absoluteUrl))
           continue;
-        
+
         if (this.childPageFilter && !this.childPageFilter(absoluteUrl))
           continue;
-    
+
         page.childUrls.add(absoluteUrl);
       }
 

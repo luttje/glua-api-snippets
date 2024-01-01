@@ -30,10 +30,10 @@ describe('putCommentBeforeEachLine', () => {
     ['hello\nworld', 'hello\n--- world', true],
     ['hello\nworld', '--- hello\n--- world'],
     ['hello\r\nworld', '--- hello\n--- world'],
-    ['hello\n\nworld', '--- hello\n--- \n--- world'],
-    ['hello\r\n\r\nworld', '--- hello\n--- \n--- world'],
-    ['hello\n\n\n\nworld', '--- hello\n--- \n--- \n--- \n--- world'],
-    ['hello\r\n\r\n\r\n\r\nworld', '--- hello\n--- \n--- \n--- \n--- world'],
+    ['hello\n\nworld', '--- hello\n---\n--- world'],
+    ['hello\r\n\r\nworld', '--- hello\n---\n--- world'],
+    ['hello\n\n\n\nworld', '--- hello\n---\n---\n---\n--- world'],
+    ['hello\r\n\r\n\r\n\r\nworld', '--- hello\n---\n---\n---\n--- world'],
   ])('should put a comment before each line', (input, expected, skipFirstLine = false) => {
     expect(putCommentBeforeEachLine(input, skipFirstLine)).toBe(expected);
   });

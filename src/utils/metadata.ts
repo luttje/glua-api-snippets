@@ -18,12 +18,12 @@ export async function writeMetadata(url: string, outputDirectory: string): Promi
 
   if (!(await exists(outputDirectory)))
     fs.mkdirSync(outputDirectory, { recursive: true });
-  
+
   const write = await promisify(fs.writeFileSync);
 
   const metadataPath = path.join(outputDirectory, metadataFilename);
   const metadata: Metadata = { lastUpdate };
-  
+
   write(metadataPath, JSON.stringify(metadata, null, 2), metadataEncoding);
 
   return metadata;
@@ -35,10 +35,10 @@ export async function readMetadata(outputDirectory: string) : Promise<Metadata |
 
   if (!(await exists(metadataPath)))
     return undefined;
-  
+
   const read = promisify(fs.readFile);
   const metadata = JSON.parse(await read(metadataPath, metadataEncoding));
-  
+
   return {
     lastUpdate: new Date(metadata.lastUpdate)
   };

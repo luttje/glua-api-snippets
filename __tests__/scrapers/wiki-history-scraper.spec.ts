@@ -10,7 +10,7 @@ describe('GMod Wiki History Page Parse', () => {
 
   it('should be able to parse a hooks page', async () => {
     const baseUrl = 'https://wiki.facepunch.com/gmod/~recentchanges';
-    
+
     fetchMock.mockResponseOnce(html, { url: baseUrl });
 
     const scraper = new WikiHistoryPageScraper(baseUrl);

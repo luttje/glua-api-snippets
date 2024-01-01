@@ -9,7 +9,7 @@ See <page>GM:PlayerSpawn</page> for a hook called every player spawn.
 
 <note>You can send <page>net</page> messages starting from the player_activate event (see <page>Game_Events</page>).</note>
 
-<warning>Due to the above note, sending <page>net</page> messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718). 
+<warning>Due to the above note, sending <page>net</page> messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
 
 Workaround without networking:
 \`\`\`
@@ -91,7 +91,7 @@ This hook is called before the player has fully loaded, when the player is still
 
 You can send net messages starting from the player_activate event (see Game_Events).
 
-Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718). 
+Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
 
 Workaround without networking:
 \`\`\`
@@ -147,33 +147,33 @@ export const apiDefinition = `---@class GM
 local GM = {}
 
 ---[SERVER] Called when the player spawns for the first time.
---- 
+---
 --- See GM:PlayerSpawn for a hook called every player spawn.
---- 
+---
 --- This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the Entity:GetModel function will return the default model (\`models/player.mdl\`).
---- 
+---
 --- You can send net messages starting from the player_activate event (see Game_Events).
---- 
---- Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718). 
---- 
+---
+--- Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
+---
 --- Workaround without networking:
 --- \`\`\`
 --- local load_queue = {}
---- 
+---
 --- hook.Add("PlayerInitialSpawn", "myAddonName/Load", function(ply)
 --- load_queue[ply] = true
 --- end)
---- 
+---
 --- hook.Add("SetupMove", "myAddonName/Load", function(ply, _, cmd)
 --- if load_queue[ply] and not cmd:IsForced() then
 --- load_queue[ply] = nil
---- 
+---
 --- myAddon:OnPlayerNetReady(ply) -- Send what you need here!
 --- end
 --- end)
 --- \`\`\`
---- 
---- 
+---
+---
 --- With networking:
 --- \`\`\`
 --- -- CLIENT
@@ -185,7 +185,7 @@ local GM = {}
 --- \`\`\`
 --- -- SERVER
 --- util.AddNetworkString( "cool_addon_client_ready" )
---- 
+---
 --- net.Receive( "cool_addon_client_ready", function( len, ply )
 --- -- Send what you need here!
 --- end )

@@ -23,7 +23,7 @@ describe('Metadata', () => {
 
     expect(fs.existsSync(path.join(outputDirectory, metadataFilename))).toBeTruthy();
   });
-  
+
   it('should be able to write metadata to a non-existing directory', async () => {
     fetchMock.mockResponseOnce(html, { url: 'https://wiki.facepunch.com/gmod/~recentchanges' });
     const nonExistingDirectory = path.join(outputDirectory, 'non-existing');

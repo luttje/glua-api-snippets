@@ -18,7 +18,7 @@ describe('GLua API Writer', () => {
 
     expect(api).toEqual(hookApiDefinition);
   });
-  
+
   it('should be able to write Lua API definitions directly from wiki json data for a struct', async () => {
     const writer = new GluaApiWriter();
 
@@ -75,7 +75,7 @@ describe('GLua API Writer', () => {
 
     expect(api).toEqual(`${override}\n\n`);
   });
-  
+
   it('should allow overriding specific class declarations', () => {
     const writer = new GluaApiWriter();
     const overrideStart = `---@class Custom_Entity_Fields : Parent`;
@@ -91,7 +91,7 @@ describe('GLua API Writer', () => {
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
   //   fetchMock.mockResponseOnce(html, { url: baseUrl });
-    
+
   //   const scraper = new WikiPageScraper(baseUrl);
   //   scraper.setChildPageFilter((url) => !url.includes('~'));
   //   const writer = new GluaApiWriter();
@@ -110,7 +110,7 @@ describe('GLua API Writer', () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/';
   //   const uselessHtml = '<html><body>Hello World</body></html>';
   //   fetchMock.mockResponseOnce(uselessHtml, { url: baseUrl });
-    
+
   //   const scraper = new WikiPageScraper(baseUrl);
   //   scraper.setChildPageFilter((url) => !url.includes('~'));
   //   const writer = new GluaApiWriter();
@@ -126,7 +126,7 @@ describe('GLua API Writer', () => {
 
   //   expect(count).toEqual(1);
   // });
-  
+
   // it('should write functions without a class just fine', async () => {
   //   const mockWikiPage = new WikiPage('https://wiki.facepunch.com/gmod/Global/IsValid', 'Global/IsValid');
   //   mockWikiPage.realm = Realm.Shared;
@@ -156,7 +156,7 @@ describe('GLua API Writer', () => {
   //     `---@return boolean If the object is valid.\n` +
   //     `function IsValid(obj) end\n\n`);
   // });
-  
+
   // it('should write functions in a static global variable correctly', async () => {
   //   const mockWikiPage = new WikiPage('https://wiki.facepunch.com/gmod/ai.GetScheduleID', 'ai.GetScheduleID');
   //   mockWikiPage.realm = Realm.Server;
@@ -187,7 +187,7 @@ describe('GLua API Writer', () => {
   //     `---@return number The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.\n` +
   //     `function ai.GetScheduleID(sched) end\n\n`);
   // });
-  
+
   // it('should write functions with arguments with a slash in their name correctly', async () => {
   //   const mockWikiPage = new WikiPage('https://wiki.facepunch.com/gmod/surface.GetTextureID', 'surface.GetTextureID');
   //   mockWikiPage.realm = Realm.Client;
@@ -218,7 +218,7 @@ describe('GLua API Writer', () => {
   //     `---@return number The texture ID\n` +
   //     `function surface.GetTextureID(nameOrPath) end\n\n`);
   // });
-  
+
   // it('should write functions with arguments with a default value in their name correctly', async () => {
   //   const mockWikiPage = new WikiPage('https://wiki.facepunch.com/gmod/ControlPanel:MatSelect', 'ControlPanel:MatSelect');
   //   mockWikiPage.realm = Realm.Client;
@@ -303,7 +303,7 @@ describe('GLua API Writer', () => {
   ])('should make %s safe as a variable/argument name', async (input, output) => {
     expect(GluaApiWriter.safeName(input)).toEqual(output);
   });
-  
+
   it.each([
     ['some/another', 'someOrAnother'],
     ['some/another/thing', 'someOrAnotherOrThing'],

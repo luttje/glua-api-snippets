@@ -7,7 +7,7 @@ export interface Scrapeable {
 export class TraverseScraper<T extends Scrapeable> extends Scraper<T> {
   protected readonly traversedUrls: Set<string> = new Set();
   protected childPageFilter?: (url: string) => boolean;
-  
+
   public setChildPageFilter(filter: (url: string) => boolean): void {
     this.childPageFilter = filter;
   }
@@ -24,26 +24,26 @@ export class TraverseScraper<T extends Scrapeable> extends Scraper<T> {
   protected getTraverseUrl(url: string): string | false {
     if (!url.startsWith(this.baseUrl))
       return false;
-    
+
     if (url.endsWith('/'))
       url = url.substring(0, url.length - 1);
-    
+
     if (url.includes('#'))
       url = url.substring(0, url.indexOf('#'));
-    
+
     if (this.traversedUrls.has(url))
       return false;
-    
+
     if (this.childPageFilter && !this.childPageFilter(url))
       return false;
-    
+
     return url;
   }
 
   public async traverse(url: string, callback?: ScrapeCallback<T>): Promise<void> {
     if (!callback)
       callback = this.getScrapeCallback();
-    
+
     const urlsToTraverse: string[] = [url];
 
     while (urlsToTraverse.length > 0) {
@@ -52,9 +52,9 @@ export class TraverseScraper<T extends Scrapeable> extends Scraper<T> {
 
       if (!url)
         continue;
-      
+
       const currentResults = await this.visitOne(url, callback);
-      
+
       this.traversedUrls.add(url);
 
       for (const result of currentResults) {

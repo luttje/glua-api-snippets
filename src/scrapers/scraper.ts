@@ -15,11 +15,11 @@ export type ScraperEvents<T> = {
 
 export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEvents<T>> {
   protected retryOptions: RequestInitWithRetry = {};
-    
+
   constructor(
     protected readonly baseUrl: string,
     protected readonly scrapeCallback?: ScrapeCallback<T>
-  ) { 
+  ) {
     super();
   }
 
@@ -46,7 +46,7 @@ export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEv
 
     if (!!process.env.VERBOSE_LOGGING)
       console.debug(`Scraping ${url}...`);
-  
+
     this.emit('beforescrape', url);
 
     let response;
