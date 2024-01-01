@@ -71,6 +71,7 @@ The API is also available as JSON. You can find it with the Lua API package [on 
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/luttje"><img src="https://avatars.githubusercontent.com/u/2738114?v=4?s=100" width="100px;" alt="luttje"/><br /><sub><b>luttje</b></sub></a><br /><a href="#code-luttje" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/aske02"><img src="https://avatars.githubusercontent.com/u/45128441?v=4?s=100" width="100px;" alt="Aske"/><br /><sub><b>Aske</b></sub></a><br /><a href="#code-aske02" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://vurv78.github.io/"><img src="https://avatars.githubusercontent.com/u/56230599?v=4?s=100" width="100px;" alt="Vurv"/><br /><sub><b>Vurv</b></sub></a><br /><a href="#code-Vurv78" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yogwoggf"><img src="https://avatars.githubusercontent.com/u/100450992?v=4?s=100" width="100px;" alt="jason"/><br /><sub><b>jason</b></sub></a><br /><a href="#ideas-yogwoggf" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
