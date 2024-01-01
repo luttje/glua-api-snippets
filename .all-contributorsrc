@@ -1,4 +1,21 @@
 {
   "projectName": "glua-api-snippets",
-  "projectOwner": "luttje"
+  "projectOwner": "luttje",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "aske02",
+      "name": "Aske",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45128441?v=4",
+      "profile": "https://github.com/aske02",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
 }
