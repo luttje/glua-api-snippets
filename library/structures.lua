@@ -331,6 +331,22 @@ CollisionData.OurOldAngularVelocity = nil
 ---@type Vector
 CollisionData.TheirOldAngularVelocity = nil
 
+---The red channel
+---@type number
+Color.r = nil
+
+---The green channel
+---@type number
+Color.g = nil
+
+---The blue channel
+---@type number
+Color.b = nil
+
+---The alpha channel
+---@type number
+Color.a = nil
+
 ---@class CreationMenus
 local CreationMenus = {}
 
@@ -783,6 +799,46 @@ FontData.additive = false
 ---@type boolean
 FontData.outline = false
 
+---The fancy name of your gamemode.
+---@type string
+GM.Name = nil
+
+---The name/contact info of the gamemode author.
+---@type string
+GM.Author = nil
+
+---The contact email associated with the gamemode.
+---@type string
+GM.Email = nil
+
+---The website associated with the gamemode.
+---@type string
+GM.Website = nil
+
+---The name of the gamemode folder, automatically set.
+---@type string
+GM.FolderName = nil
+
+---The name of the gamemode folder prepended with "gamemodes/" (such as "gamemodes/sandbox"), automatically set.
+---@type string
+GM.Folder = nil
+
+---Set this to true if your gamemode is team-based. Used to enable/disable the base gamemode team system.
+---@type boolean
+GM.TeamBased = nil
+
+---True if the gamemode is derived from sandbox.
+---@type boolean
+GM.IsSandboxDerived = nil
+
+---The name of the gamemode folder prepended with "gamemode_" (such as "gamemode_sandbox"), automatically set.
+---@type string
+GM.ThisClass = nil
+
+---The table of the base gamemode to derive from, set automatically by Global.DeriveGamemode. It is recommended to use Global.DEFINE_BASECLASS when referencing the gamemode's BaseClass to prevent unintended behavior Global.DeriveGamemode modifies the main gamemode's BaseClass, which is shared with parent gamemodes. Because of this, in parent gamemodes the BaseClass can be incorrect, so for instance you need to use `self.BaseClass.BaseClass` in the 1st parent instead
+---@type table
+GM.BaseClass = nil
+
 ---@class HTTPRequest
 local HTTPRequest = {}
 
@@ -1179,6 +1235,74 @@ PhysProperties.GravityToggle = nil
 ---Sets the physics material for the entity
 ---@type string
 PhysProperties.Material = "nil"
+
+---The 'nice' name of the player class for display in User Interface and such.
+---@type string
+PLAYER.DisplayName = nil
+
+---How fast to move when not running
+---@type number
+PLAYER.WalkSpeed = 400
+
+---How fast to move when running/sprinting
+---@type number
+PLAYER.RunSpeed = 600
+
+---How fast to move when slow walking, which is activated via the +WALK keybind.
+---@type number
+PLAYER.SlowWalkSpeed = 200
+
+---Multiply walk speed by this when crouching
+---@type number
+PLAYER.CrouchedWalkSpeed = 0.3
+
+---How fast to go from not ducking, to ducking
+---@type number
+PLAYER.DuckSpeed = 0.3
+
+---How fast to go from ducking, to not ducking
+---@type number
+PLAYER.UnDuckSpeed = 0.3
+
+---How powerful a jump should be
+---@type number
+PLAYER.JumpPower = 200
+
+---Can the player use the flashlight
+---@type boolean
+PLAYER.CanUseFlashlight = true
+
+---Max health we can have
+---@type number
+PLAYER.MaxHealth = 100
+
+---Max armor the player can have
+---@type number
+PLAYER.MaxArmor = 0
+
+---How much health we start with
+---@type number
+PLAYER.StartHealth = 100
+
+---How much armour we start with
+---@type number
+PLAYER.StartArmor = 0
+
+---Do we drop our weapon when we die
+---@type boolean
+PLAYER.DropWeaponOnDie = false
+
+---Do we collide with teammates or run straight through them
+---@type boolean
+PLAYER.TeammateNoCollide = true
+
+---Automatically swerves around other players
+---@type boolean
+PLAYER.AvoidPlayers = true
+
+---Uses viewmodel hands
+---@type boolean
+PLAYER.UseVMHands = true
 
 ---@class PolygonVertex
 local PolygonVertex = {}
