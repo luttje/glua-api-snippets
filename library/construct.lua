@@ -22,21 +22,21 @@ construct = {}
 ---@param frozen? boolean Freeze the magnet on start
 ---@return Entity # The magnet
 function construct.Magnet(
-  ply,
-  pos,
-  ang,
-  model,
-  material,
-  key,
-  maxObjects,
-  strength,
-  nopull,
-  allowrot,
-  startOn,
-  toggle,
-  vel,
-  aVel,
-  frozen
+	ply,
+	pos,
+	ang,
+	model,
+	material,
+	key,
+	maxObjects,
+	strength,
+	nopull,
+	allowrot,
+	startOn,
+	toggle,
+	vel,
+	aVel,
+	frozen
 )
 end
 

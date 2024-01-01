@@ -592,13 +592,13 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 ---@param destBlendAlpha? number The destination alpha blend function Enums/BLEND.
 ---@param blendFuncAlpha? number The blend mode used for drawing the alpha layer Enums/BLENDFUNC.
 function render.OverrideBlend(
-  enabled,
-  srcBlend,
-  destBlend,
-  blendFunc,
-  srcBlendAlpha,
-  destBlendAlpha,
-  blendFuncAlpha
+	enabled,
+	srcBlend,
+	destBlend,
+	blendFunc,
+	srcBlendAlpha,
+	destBlendAlpha,
+	blendFuncAlpha
 )
 end
 

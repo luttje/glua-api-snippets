@@ -372,15 +372,15 @@ function util.IsModelLoaded(modelName) end
 ---@param tolerance number Tolerance for error. Leave at 0 if unsure.
 ---@return boolean # Whether there is an intersection.
 function util.IsOBBIntersectingOBB(
-  box1Origin,
-  box1Angles,
-  box1Mins,
-  box1Maxs,
-  box2Origin,
-  box2Angles,
-  box2Mins,
-  box2Maxs,
-  tolerance
+	box1Origin,
+	box1Angles,
+	box1Mins,
+	box1Maxs,
+	box2Origin,
+	box2Angles,
+	box2Mins,
+	box2Maxs,
+	tolerance
 )
 end
 

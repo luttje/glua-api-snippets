@@ -237,13 +237,13 @@ function DListView:SortByColumn(columnIndex, descending) end
 ---@param column4? number
 ---@param descrending4? boolean
 function DListView:SortByColumns(
-  column1,
-  descrending1,
-  column2,
-  descrending2,
-  column3,
-  descrending3,
-  column4,
-  descrending4
+	column1,
+	descrending1,
+	column2,
+	descrending2,
+	column3,
+	descrending3,
+	column4,
+	descrending4
 )
 end

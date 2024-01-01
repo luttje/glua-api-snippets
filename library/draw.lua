@@ -55,16 +55,16 @@ function draw.RoundedBox(cornerRadius, x, y, width, height, color) end
 ---@param roundBottomLeft? boolean Whether the bottom left corner should be rounded.
 ---@param roundBottomRight? boolean Whether the bottom right corner should be rounded.
 function draw.RoundedBoxEx(
-  cornerRadius,
-  x,
-  y,
-  width,
-  height,
-  color,
-  roundTopLeft,
-  roundTopRight,
-  roundBottomLeft,
-  roundBottomRight
+	cornerRadius,
+	x,
+	y,
+	width,
+	height,
+	color,
+	roundTopLeft,
+	roundTopRight,
+	roundBottomLeft,
+	roundBottomRight
 )
 end
 
