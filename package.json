@@ -19,10 +19,10 @@
   "type": "module",
   "scripts": {
     "clear-output": "rm -rf ./output/",
-    "wiki-check-changed": "npx ts-node-esm ./src/cli-change-checker.ts",
-    "scrape-wiki": "npx ts-node-esm ./src/cli-scraper.ts --output ./output/ --customOverrides ./custom/",
-    "pack-release": "npx ts-node-esm ./src/cli-release-packer.ts --input ./output/ --output ./dist/release/",
-    "publish-library": "npx ts-node-esm ./src/cli-library-publisher.ts --input ./output/ --output ./dist/libraries/garrysmod",
+    "wiki-check-changed": "tsx ./src/cli-change-checker.ts",
+    "scrape-wiki": "tsx ./src/cli-scraper.ts --output ./output/ --customOverrides ./custom/",
+    "pack-release": "tsx ./src/cli-release-packer.ts --input ./output/ --output ./dist/release/",
+    "publish-library": "tsx ./src/cli-library-publisher.ts --input ./output/ --output ./dist/libraries/garrysmod",
     "stylua-custom": "npx --yes @johnnymorganz/stylua-bin@0.17.1 ./custom",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules VERBOSE_LOGGING=1 npx jest",
     "ci:test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --ci --coverage"
@@ -43,7 +43,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^29.1.0",
     "ts-jest-resolver": "^2.0.1",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.7.0",
     "typescript": "^4.9.5"
   },
   "gitHead": "2513190cc1de00d1049e35f9c942b779447530f9",
