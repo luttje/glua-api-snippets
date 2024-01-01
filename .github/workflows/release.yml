@@ -3,8 +3,18 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - 'custom/**'
   schedule:
     - cron: '0 0 1 * *'
+  workflow_dispatch:
+    inputs:
+      fullScrape:
+        description: 'Scrape the entire wiki, instead of only the changed pages'
+        required: true
+        default: false
+        type: boolean
 jobs:
   release:
     permissions: write-all
@@ -32,7 +42,14 @@ jobs:
         uses: montudor/action-zip@v1
       - name: Scrape wiki
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
-        run: npm run scrape-wiki
+        env:
+          FULL_SCRAPE: ${{ inputs.fullScrape || false }}
+        run: |
+          if [ "$FULL_SCRAPE" = "true" ]; then
+            npm run wiki-scrape
+          else
+            npm run wiki-scrape -- --update-changed-by-tag $(git tag -l --sort=-v:refname | head -n 1)
+          fi
       - name: Format the output with StyLua
         if: ${{ steps.wiki_confirm_no_changes.outcome == 'failure' }}
         uses: JohnnyMorganz/stylua-action@v2.0.0

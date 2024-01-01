@@ -73,7 +73,7 @@ export class WikiHistoryPageScraper extends PageTraverseScraper<WikiHistoryPage>
           dateTime,
           user,
           change,
-          url
+          url,
         });
       }
 

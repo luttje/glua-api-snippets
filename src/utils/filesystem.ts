@@ -1,3 +1,4 @@
+import extract from 'extract-zip';
 import archiver from 'archiver';
 import path from 'path';
 import fs from 'fs';
@@ -87,4 +88,31 @@ export async function zipFiles(outputFile: string, filePaths: string[], trimPath
 
     await archive.finalize();
   });
+}
+
+export async function unzipFiles(zipFile: string, outputDirectory: string) {
+  return new Promise<void>(async (resolve, reject) => {
+    if (!fs.existsSync(zipFile))
+      reject(new Error(`File ${zipFile} does not exist.`));
+
+    await extract(zipFile, { dir: path.resolve(outputDirectory) });
+
+    resolve();
+  });
+}
+
+export async function saveFile(file: string, stream: ReadableStream<Uint8Array>) {
+  let buffer = new Int8Array();
+  const reader = stream.getReader();
+
+  while (true) {
+    const { done, value } = await reader.read();
+
+    if (done)
+      break;
+
+    buffer = new Int8Array([...buffer, ...value]);
+  }
+
+  fs.writeFileSync(file, buffer);
 }
