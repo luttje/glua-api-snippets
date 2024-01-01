@@ -7,13 +7,13 @@ weapons = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.Get)
 ---@param classname string Class name of weapon to retrieve
----@return table #The retrieved table or nil
+---@return table # The retrieved table or nil
 function weapons.Get(classname) end
 
 ---[SHARED] Get a list of all the registered SWEPs. This does not include weapons added to spawnmenu manually.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.GetList)
----@return table #List of all the registered SWEPs
+---@return table # List of all the registered SWEPs
 function weapons.GetList() end
 
 ---[SHARED] Gets the REAL weapon table, not a copy. The produced table does *not* inherit fields from the weapon's base class, unlike weapons.Get.
@@ -22,7 +22,7 @@ function weapons.GetList() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.GetStored)
 ---@param weapon_class string Weapon class to retrieve weapon table of
----@return table #The weapon table
+---@return table # The weapon table
 function weapons.GetStored(weapon_class) end
 
 ---[SHARED] Checks if name is based on base
@@ -30,7 +30,7 @@ function weapons.GetStored(weapon_class) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.IsBasedOn)
 ---@param name string Entity's class name to be checked
 ---@param base string Base class name to be checked
----@return boolean #Returns true if class name is based on base, else false.
+---@return boolean # Returns true if class name is based on base, else false.
 function weapons.IsBasedOn(name, base) end
 
 ---[SHARED] Called after all SWEPS have been loaded and runs baseclass.Set on each one.

@@ -12,16 +12,16 @@ function DHorizontalScroller:AddPanel(pnl) end
 ---[CLIENT AND MENU] Returns the internal canvas panel where the content of DHorizontalScroller are placed on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetCanvas)
----@return Panel #The DDragBase panel.
+---@return Panel # The DDragBase panel.
 function DHorizontalScroller:GetCanvas() end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Returns the overlap set by DHorizontalScroller:GetOverlap.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetOverlap)
----@return number #
+---@return number # The overlap.
 function DHorizontalScroller:GetOverlap() end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Returns whether this panel should show drop targets.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:GetShowDropTargets)
 ---@return boolean #
@@ -33,11 +33,6 @@ function DHorizontalScroller:GetShowDropTargets() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:MakeDroppable)
 ---@param name string
 function DHorizontalScroller:MakeDroppable(name) end
-
----[CLIENT AND MENU] Called when the panel is scrolled.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:OnDragModified)
-function DHorizontalScroller:OnDragModified() end
 
 ---[CLIENT AND MENU] Scrolls the DHorizontalScroller to given child panel.
 ---
@@ -57,7 +52,7 @@ function DHorizontalScroller:SetOverlap(overlap) end
 ---@param scroll number The new scroll amount
 function DHorizontalScroller:SetScroll(scroll) end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Sets whether this panel should show drop targets.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalScroller:SetShowDropTargets)
 ---@param newState boolean

@@ -19,7 +19,7 @@ function spawnmenu.ActivateToolPanel(tab, cp) end
 ---[CLIENT] Returns currently opened control panel of a tool, post process effect or some other menu in spawnmenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.ActiveControlPanel)
----@return Panel #The currently opened control panel, if any.
+---@return Panel # The currently opened control panel, if any.
 function spawnmenu.ActiveControlPanel() end
 
 ---[CLIENT] Registers a new content type that is saveable into spawnlists.
@@ -129,7 +129,7 @@ function spawnmenu.ClearToolMenus() end
 ---@param type string The type of the content icon.
 ---@param parent Panel The parent to add the content icon to.
 ---@param data table The data to send to the content icon in spawnmenu.AddContentType
----@return Panel #The created content icon, if it was returned by spawnmenu.AddContentType
+---@return Panel # The created content icon, if it was returned by spawnmenu.AddContentType
 function spawnmenu.CreateContentIcon(type, parent, data) end
 
 ---[CLIENT] Calls spawnmenu.SaveToTextFiles.
@@ -142,13 +142,13 @@ function spawnmenu.DoSaveToTextFiles(spawnlists) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetContentType)
 ---@param contentType string
----@return function #The panel creation function
+---@return function # The panel creation function
 function spawnmenu.GetContentType(contentType) end
 
 ---[CLIENT] Returns the list of Creation tabs. Creation tabs are added via spawnmenu.AddCreationTab.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetCreationTabs)
----@return table #The list of Creation tabs. See the Structures/CreationMenus.
+---@return table # The list of Creation tabs. See the Structures/CreationMenus.
 function spawnmenu.GetCreationTabs() end
 
 ---[CLIENT] Similar to spawnmenu.GetPropTable, but only returns spawnlists created by addons via spawnmenu.AddPropCategory.
@@ -156,7 +156,7 @@ function spawnmenu.GetCreationTabs() end
 --- These spawnlists are shown in a separate menu in-game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetCustomPropTable)
----@return table #See spawnmenu.GetPropTable for table format.
+---@return table # See spawnmenu.GetPropTable for table format.
 function spawnmenu.GetCustomPropTable() end
 
 ---[CLIENT] Returns a table of all prop categories and their props in the spawnmenu.
@@ -166,7 +166,7 @@ function spawnmenu.GetCustomPropTable() end
 --- This will not return spawnlists created by addons, see  spawnmenu.GetCustomPropTable for that.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetPropTable)
----@return table #Table of all the prop categories and props in the following format:  ``` { 	["settings/spawnlist/001-construction props.txt"] = { 		name = "Construction Props", 		icon = "icon16/page.png", 		id = 1, 		parentid = 0, 		needsapp = "", 		contents = { 			{ 				model = "models/Cranes/crane_frame.mdl", 				type = "model" 			} 			-- etc. 		}, 	} 	-- etc. } ```
+---@return table # Table of all the prop categories and props in the following format:  ``` { 	["settings/spawnlist/001-construction props.txt"] = { 		name = "Construction Props", 		icon = "icon16/page.png", 		id = 1, 		parentid = 0, 		needsapp = "", 		contents = { 			{ 				model = "models/Cranes/crane_frame.mdl", 				type = "model" 			} 			-- etc. 		}, 	} 	-- etc. } ```
 function spawnmenu.GetPropTable() end
 
 ---[CLIENT] Adds a new tool tab (or returns an existing one by name) to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook.
@@ -175,13 +175,13 @@ function spawnmenu.GetPropTable() end
 ---@param name string The internal name of the tab. This is used for sorting.
 ---@param label? string The 'nice' name of the tab
 ---@param icon? string The filepath to the icon of the tab. Should be a .png
----@return table #A table of tables representing categories and items in the left part of the tab. See example below to example structure.
+---@return table # A table of tables representing categories and items in the left part of the tab. See example below to example structure.
 function spawnmenu.GetToolMenu(name, label, icon) end
 
 ---[CLIENT] Gets a table of tools on the client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.GetTools)
----@return table #A table with groups of tools, along with information on each tool.
+---@return table # A table with groups of tools, along with information on each tool.
 function spawnmenu.GetTools() end
 
 ---[CLIENT] Calls spawnmenu.PopulateFromTextFiles.

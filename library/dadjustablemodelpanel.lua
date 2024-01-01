@@ -16,7 +16,7 @@ function DAdjustableModelPanel:FirstPersonControls() end
 ---[CLIENT] Gets whether mouse and keyboard-based adjustment of the perspective has been enabled. See DAdjustableModelPanel:SetFirstPerson for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:GetFirstPerson)
----@return boolean #Whether first person controls are enabled. See DAdjustableModelPanel:FirstPersonControls.
+---@return boolean # Whether first person controls are enabled. See DAdjustableModelPanel:FirstPersonControls.
 function DAdjustableModelPanel:GetFirstPerson() end
 
 ---[CLIENT] Enables mouse and keyboard-based adjustment of the perspective.

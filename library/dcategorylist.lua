@@ -7,7 +7,7 @@ local DCategoryList = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:Add)
 ---@param categoryName string The name of the category to add.
----@return Panel #The created DCollapsibleCategory
+---@return Panel # The created DCollapsibleCategory
 function DCategoryList:Add(categoryName) end
 
 ---[CLIENT AND MENU] Adds an element to the list.

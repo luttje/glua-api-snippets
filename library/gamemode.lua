@@ -10,15 +10,15 @@ gamemode = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gamemode.Call)
 ---@param name string The name of the hook to call.
----@param ... ... The arguments
----@return any #The result of the hook function - can be up to 6 values. Returns false if the gamemode function doesn't exist (i.e. nothing happened), but remember - a hook can also return false.
+---@param ... any The arguments
+---@return any # The result of the hook function - can be up to 6 values. Returns false if the gamemode function doesn't exist (i.e. nothing happened), but remember - a hook can also return false.
 function gamemode.Call(name, ...) end
 
 ---[SHARED] This returns the internally stored gamemode table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gamemode.Get)
 ---@param name string The name of the gamemode you want to get
----@return table #The gamemode's table
+---@return table # The gamemode's table
 function gamemode.Get(name) end
 
 ---[SHARED] Called by the engine when a gamemode is being loaded.

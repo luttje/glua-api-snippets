@@ -13,7 +13,7 @@ function DColorPalette:DoClick(clr, btn) end
 ---[CLIENT AND MENU] Returns the size of each palette button. Set by DColorPalette:SetButtonSize.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetButtonSize)
----@return number #The size of each palette button
+---@return number # The size of each palette button
 function DColorPalette:GetButtonSize() end
 
 ---[CLIENT AND MENU] Returns the ConVar name for the alpha channel of the color.
@@ -24,7 +24,7 @@ function DColorPalette:GetButtonSize() end
 --- * DColorPalette:GetConVarB - For the blue channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarA)
----@return string #The ConVar name for the alpha channel of the color
+---@return string # The ConVar name for the alpha channel of the color
 function DColorPalette:GetConVarA() end
 
 ---[CLIENT AND MENU] Returns the ConVar name for the blue channel of the color.
@@ -35,7 +35,7 @@ function DColorPalette:GetConVarA() end
 --- * DColorPalette:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarB)
----@return string #The ConVar name for the blue channel of the color
+---@return string # The ConVar name for the blue channel of the color
 function DColorPalette:GetConVarB() end
 
 ---[CLIENT AND MENU] Returns the ConVar name for the green channel of the color.
@@ -46,7 +46,7 @@ function DColorPalette:GetConVarB() end
 --- * DColorPalette:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarG)
----@return string #The ConVar name for the green channel of the color
+---@return string # The ConVar name for the green channel of the color
 function DColorPalette:GetConVarG() end
 
 ---[CLIENT AND MENU] Returns the ConVar name for the red channel of the color.
@@ -57,13 +57,13 @@ function DColorPalette:GetConVarG() end
 --- * DColorPalette:GetConVarA - For the alpha channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR)
----@return string #The ConVar name for the red channel of the color
+---@return string # The ConVar name for the red channel of the color
 function DColorPalette:GetConVarR() end
 
 ---[CLIENT AND MENU] Returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetNumRows)
----@return number #Number of rows of the DColorPalette.
+---@return number # Number of rows of the DColorPalette.
 function DColorPalette:GetNumRows() end
 
 ---[CLIENT AND MENU] Used internally to make sure changes on one palette affect other palettes with same name.

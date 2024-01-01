@@ -34,7 +34,7 @@ function game.AddParticles(particleFileName) end
 --- Called by the engine to retrieve the ammo types.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.BuildAmmoTypes)
----@return table #All ammo types registered via game.AddAmmoType, sorted by its name value.
+---@return table # All ammo types registered via game.AddAmmoType, sorted by its name value.
 function game.BuildAmmoTypes() end
 
 ---[SHARED] If called serverside it will remove **ALL** entities which were not created by the map (not players or weapons held by players).
@@ -70,14 +70,14 @@ function game.ConsoleCommand(stringCommand) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoDamageType)
 ---@param id number Ammo ID to retrieve the damage type of. Starts from 1.
----@return number #See Enums/DMG
+---@return number # See Enums/DMG
 function game.GetAmmoDamageType(id) end
 
 ---[SHARED] Returns the Structures/AmmoData for given ID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoData)
 ---@param id number ID of the ammo type to look up the data for
----@return table #The Structures/AmmoData containing all ammo data
+---@return table # The Structures/AmmoData containing all ammo data
 function game.GetAmmoData(id) end
 
 ---[SHARED] Returns the ammo bullet force that is applied when an entity is hit by a bullet of given ammo type.
@@ -93,14 +93,14 @@ function game.GetAmmoForce(id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoID)
 ---@param name string Name of the ammo type to look up ID of
----@return number #The ammo type ID of given ammo type name, or -1 if not found
+---@return number # The ammo type ID of given ammo type name, or -1 if not found
 function game.GetAmmoID(name) end
 
 ---[SHARED] Returns the real maximum amount of ammo of given ammo ID, regardless of the setting of `gmod_maxammo` convar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoMax)
 ---@param id number Ammo type ID
----@return number #The maximum amount of reserve ammo a player can hold of this ammo type.
+---@return number # The maximum amount of reserve ammo a player can hold of this ammo type.
 function game.GetAmmoMax(id) end
 
 ---[SHARED] Returns the ammo name for given ammo type ID.
@@ -109,7 +109,7 @@ function game.GetAmmoMax(id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoName)
 ---@param id number Ammo ID to retrieve the name of. Starts from 1.
----@return string #The name of given ammo type ID or nil if ammo type ID is invalid.
+---@return string # The name of given ammo type ID or nil if ammo type ID is invalid.
 function game.GetAmmoName(id) end
 
 ---[SHARED] Returns the damage given ammo type should do to NPCs.
@@ -129,7 +129,7 @@ function game.GetAmmoPlayerDamage(id) end
 ---[SHARED] Returns a list of all ammo types currently registered.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetAmmoTypes)
----@return table #A table containing all ammo types. The keys are ammo IDs, the values are the names associated with those IDs.
+---@return table # A table containing all ammo types. The keys are ammo IDs, the values are the names associated with those IDs.
 function game.GetAmmoTypes() end
 
 ---[SERVER] Returns the counter of a Global State.
@@ -142,7 +142,7 @@ function game.GetAmmoTypes() end
 --- If the Global State by that name does not exist, it will be created.
 ---
 --- See Global States for a list of default global states.
----@return number #The value of the given Global State, 0 if the global state doesn't exist.
+---@return number # The value of the given Global State, 0 if the global state doesn't exist.
 function game.GetGlobalCounter(name) end
 
 ---[SERVER] Returns whether a Global State is off, active or dead ( inactive )
@@ -155,7 +155,7 @@ function game.GetGlobalCounter(name) end
 --- If the Global State by that name does not exist, **GLOBAL_DEAD** will be returned.
 ---
 --- See Global States for a list of default global states.
----@return number #The state of the Global State. See Enums/GLOBAL
+---@return number # The state of the Global State. See Enums/GLOBAL
 function game.GetGlobalState(name) end
 
 ---[SHARED] Returns the public IP address and port of the current server. This will return the IP/port that you are connecting through when ran clientside.
@@ -164,7 +164,7 @@ function game.GetGlobalState(name) end
 --- Returns "0.0.0.0:`port`" on the server when called too early, including in GM:Initialize and GM:InitPostEntity. This bug seems to only happen the first time a server is launched, and will return the correct value after switching maps.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetIPAddress)
----@return string #The IP address and port in the format "x.x.x.x:x"
+---@return string # The IP address and port in the format "x.x.x.x:x"
 function game.GetIPAddress() end
 
 ---[SHARED AND MENU] Returns the name of the current map, without a file extension.
@@ -172,19 +172,19 @@ function game.GetIPAddress() end
 --- In Multiplayer this does not return the current map in the CLIENT realm before GM:Initialize.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetMap)
----@return string #The name of the current map, without a file extension.
+---@return string # The name of the current map, without a file extension.
 function game.GetMap() end
 
 ---[SERVER] Returns the next map that would be loaded according to the file that is set by the mapcyclefile convar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetMapNext)
----@return string #nextMap
+---@return string # nextMap
 function game.GetMapNext() end
 
 ---[SERVER] Returns the revision (Not to be confused with [VBSP Version](https://developer.valvesoftware.com/wiki/Source_BSP_File_Format#Versions)) of the current map.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetMapVersion)
----@return number #Revision of the currently loaded map.
+---@return number # Revision of the currently loaded map.
 function game.GetMapVersion() end
 
 ---[SHARED] Returns the difficulty level of the game.
@@ -194,7 +194,7 @@ function game.GetMapVersion() end
 --- Internally this is tied to the gamerules entity, so you'll have to wait until GM:InitPostEntity is called to return the skill level
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetSkillLevel)
----@return number #The difficulty level, Easy (1), Normal (2), Hard (3).
+---@return number # The difficulty level, Easy (1), Normal (2), Hard (3).
 function game.GetSkillLevel() end
 
 ---[SHARED] Returns the time scale set with game.SetTimeScale.
@@ -204,19 +204,19 @@ function game.GetSkillLevel() end
 --- 		```
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetTimeScale)
----@return number #The time scale
+---@return number # The time scale
 function game.GetTimeScale() end
 
 ---[SHARED] Returns the worldspawn entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.GetWorld)
----@return Entity #The world
+---@return Entity # The world
 function game.GetWorld() end
 
 ---[SHARED] Returns true if the server is a dedicated server, false if it is a listen server or a singleplayer game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.IsDedicated)
----@return boolean #Is the server dedicated or not.
+---@return boolean # Is the server dedicated or not.
 function game.IsDedicated() end
 
 ---[SERVER] Kicks a player from the server. This can be ran before the player has spawned.
@@ -238,13 +238,13 @@ function game.LoadNextMap() end
 --- After changing the map with the console command `changelevel`, "newgame" is returned. With `changelevel2` (single player only), "transition" is returned.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.MapLoadType)
----@return string #The load type. Possible values are: "newgame", "loadgame", "transition", "background".
+---@return string # The load type. Possible values are: "newgame", "loadgame", "transition", "background".
 function game.MapLoadType() end
 
 ---[SHARED] Returns the maximum amount of players (including bots) that the server can have.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.MaxPlayers)
----@return number #The maximum amount of players
+---@return number # The maximum amount of players
 function game.MaxPlayers() end
 
 ---[SHARED] Mounts a GMA addon from the disk.
@@ -257,8 +257,8 @@ function game.MaxPlayers() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.MountGMA)
 ---@param path string Location of the GMA file to mount, retrieved from steamworks.DownloadUGC or relative to the `garrysmod/` directory (ignores mounting). This file does not have to end with the .gma extension, but will be interpreted as a GMA.
----@return boolean, table #boolean - success
----@return boolean, table #table - If successful, a table of files that have been mounted
+---@return boolean # success
+---@return table # If successful, a table of files that have been mounted
 function game.MountGMA(path) end
 
 ---[SHARED] Removes all the clientside ragdolls.
@@ -317,11 +317,11 @@ function game.SetTimeScale(timeScale) end
 ---[SHARED] Returns whether the current session is a single player game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.SinglePlayer)
----@return boolean #isSinglePlayer
+---@return boolean # isSinglePlayer
 function game.SinglePlayer() end
 
 ---[SHARED] Returns position the player should start from, this is not the same thing as spawn points, it is used to properly transit the player between maps.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.StartSpot)
----@return Vector #startSpot
+---@return Vector # startSpot
 function game.StartSpot() end

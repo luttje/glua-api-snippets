@@ -20,5 +20,5 @@ function search.AddProvider(provider, id) end
 ---@param query string Search query
 ---@param types? string If set, only searches given provider type(s), instead of everything. For example `"tool"` will only search tools in Sandbox. Can be a table for multiple types.
 ---@param maxResults? number How many results to stop at
----@return table #A table of results
+---@return table # A table of results
 function search.GetResults(query, types, maxResults) end

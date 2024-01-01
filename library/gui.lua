@@ -13,9 +13,11 @@ function gui.ActivateGameUI() end
 ---@param text string The caption to emit. See [Closed Captions](https://developer.valvesoftware.com/wiki/Closed_Captions) for more info
 ---@param duration number How long the caption should stay for
 ---@param fromPlayer? boolean Is this caption coming from the player?
+---
+--- This is used to give different colors to the caption to differentiate, for example, whether the SMG is fired by the player or NPC.
 function gui.AddCaption(text, duration, fromPlayer) end
 
----[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu.
+---[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu. See vgui.CursorVisible for a function to see if the cursor is visible or not.
 ---
 ---
 --- 	Some CUserCmd functions will return incorrect values when this function is active because [the user input is getting overtaken by the vgui system](https://github.com/Facepunch/garrysmod-issues/issues/982#issuecomment-505671531).
@@ -89,33 +91,33 @@ function gui.InternalMouseWheeled(delta) end
 ---[CLIENT AND MENU] Returns whether the console is visible or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.IsConsoleVisible)
----@return boolean #Whether the console is visible or not.
+---@return boolean # Whether the console is visible or not.
 function gui.IsConsoleVisible() end
 
 ---[CLIENT AND MENU] Returns whether the game menu overlay ( main menu ) is open or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.IsGameUIVisible)
----@return boolean #Whether the game menu overlay ( main menu ) is open or not
+---@return boolean # Whether the game menu overlay ( main menu ) is open or not
 function gui.IsGameUIVisible() end
 
 ---[CLIENT AND MENU] Returns the cursor's position on the screen, or 0, 0 if cursor is not visible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MousePos)
----@return number, number #number - mouseX
----@return number, number #number - mouseY
+---@return number # mouseX
+---@return number # mouseY
 ---@deprecated Use input.GetCursorPos instead.
 function gui.MousePos() end
 
 ---[CLIENT AND MENU] Returns x component of the mouse position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MouseX)
----@return number #mouseX
+---@return number # mouseX
 function gui.MouseX() end
 
 ---[CLIENT AND MENU] Returns y component of the mouse position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.MouseY)
----@return number #mouseY
+---@return number # mouseY
 function gui.MouseY() end
 
 ---[CLIENT AND MENU] Opens specified URL in the steam overlay browser.
@@ -133,7 +135,7 @@ function gui.OpenURL(url) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ScreenToVector)
 ---@param x number X coordinate on the screen.
 ---@param y number Y coordinate on the screen.
----@return Vector #Direction
+---@return Vector # Direction
 function gui.ScreenToVector(x, y) end
 
 ---[CLIENT AND MENU] Sets the cursor's position on the screen, relative to the topleft corner of the window

@@ -28,146 +28,147 @@ function CLuaLocomotion:FaceTowards(goal) end
 ---[SERVER] Returns the acceleration speed
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetAcceleration)
----@return number #Current acceleration speed
+---@return number # Current acceleration speed
 function CLuaLocomotion:GetAcceleration() end
 
 ---[SERVER] Returns whether the Nextbot is allowed to avoid obstacles or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetAvoidAllowed)
----@return boolean #Whether this bot is allowed to try to avoid obstacles.
+---@return boolean # Whether this bot is allowed to try to avoid obstacles.
 function CLuaLocomotion:GetAvoidAllowed() end
 
 ---[SERVER] Returns whether the Nextbot is allowed to climb or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetClimbAllowed)
----@return boolean #Whether this bot is allowed to climb.
+---@return boolean # Whether this bot is allowed to climb.
 function CLuaLocomotion:GetClimbAllowed() end
 
 ---[SERVER] Returns the current acceleration as a vector
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetCurrentAcceleration)
----@return Vector #Current acceleration
+---@return Vector # Current acceleration
 function CLuaLocomotion:GetCurrentAcceleration() end
 
 ---[SERVER] Gets the height the bot is scared to fall from
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetDeathDropHeight)
----@return number #Current death drop height
+---@return number # Current death drop height
 function CLuaLocomotion:GetDeathDropHeight() end
 
 ---[SERVER] Gets the deceleration speed
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetDeceleration)
----@return number #Current deceleration speed
+---@return number # Current deceleration speed
 function CLuaLocomotion:GetDeceleration() end
 
 ---[SERVER] Returns the desired movement speed set by CLuaLocomotion:SetDesiredSpeed
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetDesiredSpeed)
----@return number #The desired movement speed.
+---@return number # The desired movement speed.
 function CLuaLocomotion:GetDesiredSpeed() end
 
 ---[SERVER] Returns the locomotion's gravity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetGravity)
----@return number #The gravity.
+---@return number # The gravity.
 function CLuaLocomotion:GetGravity() end
 
 ---[SERVER] Return unit vector in XY plane describing our direction of motion - even if we are currently not moving
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetGroundMotionVector)
----@return Vector #A vector representing the X and Y movement
+---@return Vector # A vector representing the X and Y movement
 function CLuaLocomotion:GetGroundMotionVector() end
 
 ---[SERVER] Returns the current ground normal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetGroundNormal)
----@return Vector #The current ground normal.
+---@return Vector # The current ground normal.
 function CLuaLocomotion:GetGroundNormal() end
 
 ---[SERVER] Returns whether the Nextbot is allowed to jump gaps or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetJumpGapsAllowed)
----@return boolean #Whether this bot is allowed to jump gaps.
+---@return boolean # Whether this bot is allowed to jump gaps.
 function CLuaLocomotion:GetJumpGapsAllowed() end
 
 ---[SERVER] Gets the height of the bot's jump
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetJumpHeight)
----@return number #Current jump height
+---@return number # Current jump height
 function CLuaLocomotion:GetJumpHeight() end
 
 ---[SERVER] Returns maximum jump height of this CLuaLocomotion.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetMaxJumpHeight)
----@return number #The maximum jump height.
+---@return number # The maximum jump height.
 function CLuaLocomotion:GetMaxJumpHeight() end
 
 ---[SERVER] Returns the max rate at which the NextBot can visually rotate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetMaxYawRate)
----@return number #Maximum yaw rate
+---@return number # Maximum yaw rate
 function CLuaLocomotion:GetMaxYawRate() end
 
 ---[SERVER] Returns the NextBot this locomotion is associated with.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetNextBot)
----@return NextBot #The nextbot
+---@return NextBot # The nextbot
 function CLuaLocomotion:GetNextBot() end
 
 ---[SERVER] Gets the max height the bot can step up
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetStepHeight)
----@return number #Current step height
+---@return number # Current step height
 function CLuaLocomotion:GetStepHeight() end
 
 ---[SERVER] Returns the current movement velocity as a vector
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetVelocity)
----@return Vector #Current velocity
+---@return Vector # Current velocity
 function CLuaLocomotion:GetVelocity() end
 
 ---[SERVER] Returns whether this CLuaLocomotion can reach and/or traverse/move in given CNavArea.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsAreaTraversable)
 ---@param area CNavArea The area to test
----@return boolean #Whether this CLuaLocomotion can traverse given CNavArea.
+---@return boolean # Whether this CLuaLocomotion can traverse given CNavArea.
 function CLuaLocomotion:IsAreaTraversable(area) end
 
 ---[SERVER] Returns true if we're trying to move.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsAttemptingToMove)
----@return boolean #Whether we're trying to move or not.
+---@return boolean # Whether we're trying to move or not.
 function CLuaLocomotion:IsAttemptingToMove() end
 
 ---[SERVER] Returns true of the locomotion engine is jumping or climbing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsClimbingOrJumping)
----@return boolean #Whether we're climbing or jumping or not
+---@return boolean # Whether we're climbing or jumping or not
 function CLuaLocomotion:IsClimbingOrJumping() end
 
 ---[SERVER] Returns whether the nextbot this locomotion is attached to is on ground or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsOnGround)
----@return boolean #Whether the nextbot is on ground or not.
+---@return boolean # Whether the nextbot is on ground or not.
 function CLuaLocomotion:IsOnGround() end
 
 ---[SERVER] Returns true if we're stuck
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsStuck)
----@return boolean #Whether we're stuck or not
+---@return boolean # Whether we're stuck or not
 function CLuaLocomotion:IsStuck() end
 
 ---[SERVER] Returns whether or not the target in question is on a ladder or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsUsingLadder)
----@return boolean #If the target is on a ladder or not.
+---@return boolean # If the target is on a ladder or not.
 function CLuaLocomotion:IsUsingLadder() end
 
 ---[SERVER] Makes the bot jump. It must be on ground (Entity:IsOnGround) and its model must have `ACT_JUMP` activity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:Jump)
-function CLuaLocomotion:Jump() end
+---@param act? number The activity to use as the jumping animation.
+function CLuaLocomotion:Jump(act) end
 
 ---[SERVER] Makes the bot jump across a gap. The bot must be on ground (Entity:IsOnGround) and its model must have `ACT_JUMP` activity.
 ---

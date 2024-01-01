@@ -11,19 +11,19 @@ function DFileBrowser:Clear() end
 ---[CLIENT] Returns the root directory/folder of the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetBaseFolder)
----@return string #The path to the root folder.
+---@return string # The path to the root folder.
 function DFileBrowser:GetBaseFolder() end
 
 ---[CLIENT] Returns the current directory/folder being displayed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetCurrentFolder)
----@return string #The directory the file list is currently displaying.
+---@return string # The directory the file list is currently displaying.
 function DFileBrowser:GetCurrentFolder() end
 
 ---[CLIENT] Returns the current file type filter on the file list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetFileTypes)
----@return string #The current filter applied to the file list.
+---@return string # The current filter applied to the file list.
 function DFileBrowser:GetFileTypes() end
 
 ---[CLIENT] Returns the DTree Node that the file tree stems from.
@@ -31,25 +31,25 @@ function DFileBrowser:GetFileTypes() end
 --- This is a child of the root node of the DTree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetFolderNode)
----@return Panel #The DTree_Node used for the tree.
+---@return Panel # The DTree_Node used for the tree.
 function DFileBrowser:GetFolderNode() end
 
 ---[CLIENT] Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as SpawnIcons instead of a list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetModels)
----@return boolean #Whether or not files will be displayed using SpawnIcons.
+---@return boolean # Whether or not files will be displayed using SpawnIcons.
 function DFileBrowser:GetModels() end
 
 ---[CLIENT] Returns the name being used for the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetName)
----@return string #The name used for the root of the file tree.
+---@return string # The name used for the root of the file tree.
 function DFileBrowser:GetName() end
 
 ---[CLIENT] Returns whether or not the file tree is open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetOpen)
----@return boolean #Whether or not the file tree is open.
+---@return boolean # Whether or not the file tree is open.
 function DFileBrowser:GetOpen() end
 
 ---[CLIENT] Returns the access path of the file tree. This is `GAME` unless changed with DFileBrowser:SetPath.
@@ -57,41 +57,14 @@ function DFileBrowser:GetOpen() end
 --- See file.Read for how paths work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetPath)
----@return string #The current access path i.e. "GAME", "LUA", "DATA" etc.
+---@return string # The current access path i.e. "GAME", "LUA", "DATA" etc.
 function DFileBrowser:GetPath() end
 
 ---[CLIENT] Returns the current search filter on the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetSearch)
----@return string #The filter in use on the file tree.
+---@return string # The filter in use on the file tree.
 function DFileBrowser:GetSearch() end
-
----[CLIENT] Called when a file is double-clicked.
----
---- Double-clicking a file or icon will trigger **both** this and DFileBrowser:OnSelect.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:OnDoubleClick)
----@param selectedPanel Panel The panel that was double-clicked to select this file.This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser:SetModels.
----@param filePath string The path to the file that was double-clicked.
-function DFileBrowser:OnDoubleClick(selectedPanel, filePath) end
-
----[CLIENT] Called when a file is right-clicked.
----
---- When not in model viewer mode, DFileBrowser:OnSelect will also be called if the file is not already selected.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:OnRightClick)
----@param filePath string The path to the file that was right-clicked.
----@param selectedPanel Panel The panel that was right-clicked to select this file.
----
---- This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser:SetModels.
-function DFileBrowser:OnRightClick(filePath, selectedPanel) end
-
----[CLIENT] Called when a file is selected.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:OnSelect)
----@param selectedPanel Panel The panel that was clicked to select this file.This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser:SetModels.
----@param filePath string The path to the file that was selected.
-function DFileBrowser:OnSelect(selectedPanel, filePath) end
 
 ---[CLIENT] Sets the root directory/folder of the file tree.
 ---
@@ -161,7 +134,7 @@ function DFileBrowser:SetSearch(filter) end
 --- Calls DFileBrowser:SetupTree and DFileBrowser:SetupFiles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:Setup)
----@return boolean #Whether or not the variables needed to set up have been defined.
+---@return boolean # Whether or not the variables needed to set up have been defined.
 function DFileBrowser:Setup() end
 
 ---[CLIENT] Called to set up the DListView or DIconBrowser by DFileBrowser:Setup.
@@ -169,13 +142,13 @@ function DFileBrowser:Setup() end
 --- The icon browser is used when in models mode. See DFileBrowser:SetModels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetupFiles)
----@return boolean #Whether or not the files pane was set up successfully.
+---@return boolean # Whether or not the files pane was set up successfully.
 function DFileBrowser:SetupFiles() end
 
 ---[CLIENT] Called to set up the DTree by DFileBrowser:Setup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetupTree)
----@return boolean #Whether or not the tree was set up successfully.
+---@return boolean # Whether or not the tree was set up successfully.
 function DFileBrowser:SetupTree() end
 
 ---[CLIENT] Builds the file or icon list for the current directory.

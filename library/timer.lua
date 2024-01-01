@@ -9,7 +9,7 @@ timer = {}
 ---@param delay number The delay interval in seconds. **Must be specified.**
 ---@param repetitions? number Repetitions. Use `0` for infinite or `nil` to keep previous value.
 ---@param func? function The new function. Use `nil` to keep previous value.
----@return boolean #`true` if succeeded.
+---@return boolean # `true` if succeeded.
 function timer.Adjust(identifier, delay, repetitions, func) end
 
 ---[SHARED AND MENU] This function does nothing.
@@ -43,14 +43,14 @@ function timer.Destroy(identifier) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Exists)
 ---@param identifier string Identifier of the timer.
----@return boolean #Returns true if the timer exists, false if it doesn't
+---@return boolean # Returns true if the timer exists, false if it doesn't
 function timer.Exists(identifier) end
 
 ---[SHARED AND MENU] Pauses the given timer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Pause)
 ---@param identifier any Identifier of the timer.
----@return boolean #false if the timer didn't exist or was already paused, true otherwise.
+---@return boolean # false if the timer didn't exist or was already paused, true otherwise.
 function timer.Pause(identifier) end
 
 ---[SHARED AND MENU] Stops and removes a timer created by timer.Create.
@@ -64,7 +64,7 @@ function timer.Remove(identifier) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.RepsLeft)
 ---@param identifier any Identifier of the timer.
----@return number #The amount of executions left.
+---@return number # The amount of executions left.
 function timer.RepsLeft(identifier) end
 
 ---[SHARED AND MENU] Creates a simple timer that runs the given function after a specified delay.
@@ -85,14 +85,14 @@ function timer.Simple(delay, func) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Start)
 ---@param identifier any Identifier of the timer.
----@return boolean #true if the timer exists, false if it doesn't.
+---@return boolean # true if the timer exists, false if it doesn't.
 function timer.Start(identifier) end
 
 ---[SHARED AND MENU] Stops the given timer and rewinds it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Stop)
 ---@param identifier any Identifier of the timer.
----@return boolean #false if the timer didn't exist or was already stopped, true otherwise.
+---@return boolean # false if the timer didn't exist or was already stopped, true otherwise.
 function timer.Stop(identifier) end
 
 ---[SHARED AND MENU] Returns amount of time left (in seconds) before the timer executes its function.
@@ -101,19 +101,19 @@ function timer.Stop(identifier) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.TimeLeft)
 ---@param identifier any Identifier of the timer.
----@return number #The amount of time left (in seconds).
+---@return number # The amount of time left (in seconds).
 function timer.TimeLeft(identifier) end
 
 ---[SHARED AND MENU] Runs either timer.Pause or timer.UnPause based on the timer's current status.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Toggle)
 ---@param identifier any Identifier of the timer.
----@return boolean #status of the timer.
+---@return boolean # status of the timer.
 function timer.Toggle(identifier) end
 
 ---[SHARED AND MENU] Unpauses the timer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.UnPause)
 ---@param identifier any Identifier of the timer.
----@return boolean #false if the timer didn't exist or was already running, true otherwise.
+---@return boolean # false if the timer didn't exist or was already running, true otherwise.
 function timer.UnPause(identifier) end

@@ -7,7 +7,7 @@ local DCollapsibleCategory = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:Add)
 ---@param name string The name of the button
----@return Panel #The DButton
+---@return Panel # The DButton
 function DCollapsibleCategory:Add(name) end
 
 ---[CLIENT AND MENU] Internal function that handles the open/close animations.
@@ -27,13 +27,20 @@ function DCollapsibleCategory:DoExpansion(expand) end
 ---[CLIENT AND MENU] Returns the expand/collapse animation time set by DCollapsibleCategory:SetAnimTime.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetAnimTime)
----@return number #The animation time in seconds
+---@return number # The animation time in seconds
 function DCollapsibleCategory:GetAnimTime() end
+
+---[CLIENT AND MENU] Returns whether or not the panel background is being drawn. Alias of DCollapsibleCategory:GetPaintBackground.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetDrawBackground)
+---@return boolean # True if the panel background is drawn, false otherwise.
+---@deprecated You should use DCollapsibleCategory:GetPaintBackground instead.
+function DCollapsibleCategory:GetDrawBackground() end
 
 ---[CLIENT AND MENU] Returns whether the DCollapsibleCategory is expanded or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetExpanded)
----@return boolean #If expanded it will return true.
+---@return boolean # If expanded it will return true.
 function DCollapsibleCategory:GetExpanded() end
 
 ---[CLIENT AND MENU] Returns the header height of the DCollapsibleCategory.
@@ -41,10 +48,10 @@ function DCollapsibleCategory:GetExpanded() end
 --- See also DCollapsibleCategory:SetHeaderHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetHeaderHeight)
----@return number #The current height of the header.
+---@return number # The current height of the header.
 function DCollapsibleCategory:GetHeaderHeight() end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Returns whatever is set by DCollapsibleCategory:SetList.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetList)
 ---@return Panel #
@@ -61,20 +68,14 @@ function DCollapsibleCategory:GetPadding() end
 ---[CLIENT AND MENU] Returns whether or not the background should be painted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetPaintBackground)
----@return boolean #If the background is painted or not
+---@return boolean # If the background is painted or not
 function DCollapsibleCategory:GetPaintBackground() end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Returns whatever was set by DCollapsibleCategory:SetStartHeight
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetStartHeight)
 ---@return number #
 function DCollapsibleCategory:GetStartHeight() end
-
----[CLIENT AND MENU] Called by DCollapsibleCategory:Toggle. This function does nothing by itself, as you're supposed to overwrite it.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:OnToggle)
----@param expanded boolean If it was expanded or not
-function DCollapsibleCategory:OnToggle(expanded) end
 
 ---[CLIENT AND MENU] Sets the time in seconds it takes to expand the DCollapsibleCategory
 ---
@@ -87,6 +88,13 @@ function DCollapsibleCategory:SetAnimTime(time) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetContents)
 ---@param pnl Panel The panel, containing the contents for the DCollapsibleCategory, mostly an DScrollPanel
 function DCollapsibleCategory:SetContents(pnl) end
+
+---[CLIENT AND MENU] Sets whether or not to draw the panel background. Alias of DCollapsibleCategory:SetPaintBackground.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetDrawBackground)
+---@param draw boolean True to show the panel's background, false to hide it.
+---@deprecated You should use DCollapsibleCategory:SetPaintBackground instead.
+function DCollapsibleCategory:SetDrawBackground(draw) end
 
 ---[CLIENT AND MENU] Sets whether the DCollapsibleCategory is expanded or not upon opening the container.
 ---
@@ -110,10 +118,11 @@ function DCollapsibleCategory:SetHeaderHeight(height) end
 ---@param label string The label/name of the DCollapsibleCategory.
 function DCollapsibleCategory:SetLabel(label) end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Sets a panel to call Panel:UnselectAll on, instead of calling it on itself.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetList)
 ---@param pnl Panel
+---@deprecated Unused in the base game. What is this for?
 function DCollapsibleCategory:SetList(pnl) end
 
 ---[CLIENT AND MENU] Doesn't actually do anything.
@@ -128,7 +137,7 @@ function DCollapsibleCategory:SetPadding(padding) end
 ---@param paint boolean
 function DCollapsibleCategory:SetPaintBackground(paint) end
 
----[CLIENT AND MENU] No Description
+---[CLIENT AND MENU] Does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetStartHeight)
 ---@param height number
@@ -140,11 +149,6 @@ function DCollapsibleCategory:SetStartHeight(height) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:Toggle)
 function DCollapsibleCategory:Toggle() end
-
----[CLIENT AND MENU] No Description
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:UnselectAll)
-function DCollapsibleCategory:UnselectAll() end
 
 ---[CLIENT AND MENU] Used internally to update the "AltLine" property on all "child" panels.
 ---

@@ -14,7 +14,7 @@ local DMenu = {}
 ---
 --- It will have only one argument:
 --- Panel pnl - The created DMenuOptionCVar
----@return Panel #The created DMenuOptionCVar
+---@return Panel # The created DMenuOptionCVar
 function DMenu:AddCVar(strText, convar, on, off, funcFunction) end
 
 ---[CLIENT] Add an option to the DMenu
@@ -51,7 +51,7 @@ function DMenu:AddSubMenu(Name, func) end
 ---[CLIENT AND MENU] Returns the number of child elements of DMenu's DScrollPanel:GetCanvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:ChildCount)
----@return number #The number of child elements
+---@return number # The number of child elements
 function DMenu:ChildCount() end
 
 ---[CLIENT AND MENU] Clears all highlights made by DMenu:HighlightItem.
@@ -92,19 +92,19 @@ function DMenu:GetDrawBorder() end
 --- See DMenu:SetDrawColumn
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetDrawColumn)
----@return boolean #Whether to draw the column or not
+---@return boolean # Whether to draw the column or not
 function DMenu:GetDrawColumn() end
 
 ---[CLIENT AND MENU] Returns the maximum height of the DMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetMaxHeight)
----@return number #The maximum height in pixels
+---@return number # The maximum height in pixels
 function DMenu:GetMaxHeight() end
 
 ---[CLIENT AND MENU] Returns the minimum width of the DMenu in pixels
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetMinimumWidth)
----@return number #the minimum width of the DMenu
+---@return number # the minimum width of the DMenu
 function DMenu:GetMinimumWidth() end
 
 ---[CLIENT AND MENU] Returns the currently opened submenu.
@@ -112,7 +112,7 @@ function DMenu:GetMinimumWidth() end
 --- Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenu:GetOpenSubMenu)
----@return Panel #The currently opened submenu, if any.
+---@return Panel # The currently opened submenu, if any.
 function DMenu:GetOpenSubMenu() end
 
 ---[CLIENT AND MENU] Used to safely hide (not remove) the menu. This will also hide any opened submenues recursively.

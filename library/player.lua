@@ -15,22 +15,23 @@ player = {}
 ---@param botName string The name of the bot, using an already existing name will append brackets at the end of it with a number pertaining it.
 ---
 --- Example: "Bot name test", "Bot name test(1)".
----@return Player #The newly created Player bot. Returns NULL if there's no Player slots available to host it.
+---@return Player # The newly created Player bot. Returns NULL if there's no Player slots available to host it.
 function player.CreateNextBot(botName) end
 
 ---[SHARED] Gets all the current players in the server (not including connecting clients).
 ---
 --- This function returns bots as well as human players. See player.GetBots and  player.GetHumans.
+---
 --- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetAll)
----@return table #All Players currently in the server.
+---@return table # All Players currently in the server.
 function player.GetAll() end
 
 ---[SHARED] Returns a table of all bots on the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBots)
----@return table #A table only containing bots ( AI / non human players )
+---@return table # A table only containing bots ( AI / non human players )
 function player.GetBots() end
 
 ---[SHARED] Tried to get the player with the specified Player:AccountID.
@@ -38,7 +39,7 @@ function player.GetBots() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByAccountID)
 ---@param accountID number The Player:AccountID to find the player by.
----@return Player #Player if one is found, false otherwise.
+---@return Player # Player if one is found, false otherwise.
 function player.GetByAccountID(accountID) end
 
 ---[SHARED] Gets the player with the specified connection ID.
@@ -52,7 +53,7 @@ function player.GetByAccountID(accountID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByID)
 ---@param connectionID number The connection ID to find the player by.
----@return Player #Player if one is found, nil otherwise
+---@return Player # Player if one is found, nil otherwise
 function player.GetByID(connectionID) end
 
 ---[SHARED] Gets the player with the specified SteamID.
@@ -60,7 +61,7 @@ function player.GetByID(connectionID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
----@return Player #Player if one is found, false otherwise.
+---@return Player # Player if one is found, false otherwise.
 function player.GetBySteamID(steamID) end
 
 ---[SHARED] Gets the player with the specified SteamID64.
@@ -68,7 +69,7 @@ function player.GetBySteamID(steamID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBySteamID64)
 ---@param steamID64 string The Player:SteamID64 to find the player by.
----@return Player #Player if one is found, false otherwise.
+---@return Player # Player if one is found, false otherwise.
 function player.GetBySteamID64(steamID64) end
 
 ---[SHARED] Gets the player with the specified uniqueID (not recommended way to identify players).
@@ -78,7 +79,7 @@ function player.GetBySteamID64(steamID64) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
----@return Player #Player if one is found, false otherwise.
+---@return Player # Player if one is found, false otherwise.
 ---@deprecated Use player.GetBySteamID64, player.GetBySteamID or player.GetByAccountID to get a player by a unique identifier instead.
 function player.GetByUniqueID(uniqueID) end
 
@@ -87,7 +88,7 @@ function player.GetByUniqueID(uniqueID) end
 --- Similar to **#**player.GetAll() but with better performance since the player table doesn't have to be generated. If player.GetAll is already being called for iteration, then using the **#** operator on the table will be faster than calling this function since it is JITted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetCount)
----@return number #Number of players
+---@return number # Number of players
 function player.GetCount() end
 
 ---[SHARED] Returns a table containing all human players (non-bot/AI).
@@ -96,15 +97,25 @@ function player.GetCount() end
 --- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetHumans)
----@return table #A table containing all human (non-bot/AI) players.
+---@return table # A table containing all human (non-bot/AI) players.
 function player.GetHumans() end
+
+---[SHARED] Returns an iterator for all players on the server.
+---
+--- This will be quite a bit faster than player.GetAll, especially when using the `break` keyword.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player.Iterator)
+---@return function # Iterator function
+---@return table # Table of all existing Players.
+---@return number # Will always be 0. Start index?
+function player.Iterator() end
 
 ---@class Player : Entity
 local Player = {}
 
 ---[SHARED] Returns the player's AccountID part of their full SteamID.
 ---
---- Since this does not include other vital parts of the SteamID such as "Account Type" and "Account Instance", it should be avoided, as AccountIDs are finite, and can be the same for multiple valid accounts.
+--- Since this does not include other vital parts of the SteamID such as "Account Type" and "Account Instance", it should be avoided, as AccountIDs are finite, and can theoretically be the same for multiple valid accounts.
 ---
 --- See Player:SteamID for the text representation of the full SteamID.
 --- See Player:SteamID64 for a 64bit representation of the full SteamID.
@@ -114,7 +125,7 @@ local Player = {}
 --- For bots this will return values starting with `0` for the first bot, `1` for the second bot and so on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AccountID)
----@return number #The AccountID of Player's SteamID.
+---@return number # The AccountID of Player's SteamID.
 function Player:AccountID() end
 
 ---[SHARED] Adds an entity to the player's clean up list.
@@ -172,7 +183,7 @@ function Player:AddVCDSequenceToGestureSlot(slot, sequenceId, cycle, autokill) e
 ---[SHARED] Checks if the player is alive.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Alive)
----@return boolean #Whether the player is alive
+---@return boolean # Whether the player is alive
 function Player:Alive() end
 
 ---[SHARED] Sets if the player can toggle their flashlight. Function exists on both the server and client but has no effect when ran on the client.
@@ -225,7 +236,7 @@ function Player:AnimSetGestureWeight(slot, weight) end
 ---[SHARED] Returns the player's armor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Armor)
----@return number #The player's armor.
+---@return number # The player's armor.
 function Player:Armor() end
 
 ---[SERVER] Bans the player from the server for a certain amount of minutes.
@@ -240,7 +251,7 @@ function Player:Ban(minutes, kick) end
 --- This is not synchronized between clients and server automatically!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight)
----@return boolean #Whether the player can use flashlight.
+---@return boolean # Whether the player can use flashlight.
 function Player:CanUseFlashlight() end
 
 ---[SHARED] Prints a string to the chatbox of the client.
@@ -271,7 +282,7 @@ function Player:ChatPrint(message) end
 --- * "hoverballs"
 --- * "buttons"
 --- * "emitters"
----@return boolean #Returns true if limit is not hit, false if it is hit
+---@return boolean # Returns true if limit is not hit, false if it is hit
 function Player:CheckLimit(limitType) end
 
 ---@class PLAYER
@@ -316,7 +327,7 @@ function Player:CrosshairEnable() end
 ---[SHARED] Returns whether the player is crouching or not (Enums/FL flag).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Crouching)
----@return boolean #Whether the player is crouching.
+---@return boolean # Whether the player is crouching.
 function Player:Crouching() end
 
 ---[SERVER] Called when the player dies
@@ -327,7 +338,7 @@ function PLAYER:Death() end
 ---[SHARED] Returns the player's death count
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Deaths)
----@return number #The number of deaths the player has had.
+---@return number # The number of deaths the player has had.
 function Player:Deaths() end
 
 ---[SERVER] Prints the players' name and position to the console.
@@ -447,7 +458,7 @@ function Player:ExitVehicle() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:FinishMove)
 ---@param mv CMoveData
----@return boolean #Return true to prevent default action
+---@return boolean # Return true to prevent default action
 function PLAYER:FinishMove(mv) end
 
 ---[SERVER] Enables/Disables the player's flashlight.Player:CanUseFlashlight must be true in order for the player's flashlight to be changed.
@@ -459,7 +470,7 @@ function Player:Flashlight(isOn) end
 ---[SHARED] Returns true if the player's flashlight is on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:FlashlightIsOn)
----@return boolean #Whether the player's flashlight is on.
+---@return boolean # Whether the player's flashlight is on.
 function Player:FlashlightIsOn() end
 
 ---[SHARED] Returns the amount of frags a player has.
@@ -467,7 +478,7 @@ function Player:FlashlightIsOn() end
 --- The value will change depending on the player's kill or suicide: +1 for a kill, -1 for a suicide.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Frags)
----@return number #frags
+---@return number # frags
 function Player:Frags() end
 
 ---[SERVER] Freeze the player. Frozen players cannot move, look around, or attack. Key bindings are still called. Similar to Player:Lock but the player can still take damage.
@@ -485,68 +496,68 @@ function Player:Freeze(frozen) end
 --- If used on a Global.LocalPlayer() and the player is spectating another player with `OBS_MODE_IN_EYE`, the weapon returned will be of the spectated player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetActiveWeapon)
----@return Weapon #The weapon the player currently has equipped.
+---@return Weapon # The weapon the player currently has equipped or NULL if the player doesn't have an active weapon eg. when they're dead.
 function Player:GetActiveWeapon() end
 
 ---[SERVER] Returns the player's current activity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetActivity)
----@return number #The player's current activity. See Enums/ACT.
+---@return number # The player's current activity. See Enums/ACT.
 function Player:GetActivity() end
 
 ---[SHARED] Returns the direction that the player is aiming.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAimVector)
----@return Vector #The direction vector of players aim
+---@return Vector # The direction vector of players aim
 function Player:GetAimVector() end
 
 ---[SHARED] Returns true if the players' model is allowed to rotate around the pitch and roll axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAllowFullRotation)
----@return boolean #Allowed
+---@return boolean # Allowed
 function Player:GetAllowFullRotation() end
 
 ---[SHARED] Returns whether the player is allowed to use their weapons in a vehicle or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAllowWeaponsInVehicle)
----@return boolean #Whether the player is allowed to use their weapons in a vehicle or not.
+---@return boolean # Whether the player is allowed to use their weapons in a vehicle or not.
 function Player:GetAllowWeaponsInVehicle() end
 
 ---[SHARED] Returns a table of all ammo the player has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAmmo)
----@return table #A table with the following format * number Key - AmmoID to be used with functions like game.GetAmmoName. * number Value - Amount of ammo the player has of this kind.
+---@return table # A table with the following format * number Key - AmmoID to be used with functions like game.GetAmmoName. * number Value - Amount of ammo the player has of this kind.
 function Player:GetAmmo() end
 
 ---[SHARED] Gets the amount of ammo the player has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAmmoCount)
 ---@param ammotype any The ammunition type. Can be either number ammo ID or string ammo name.
----@return number #The amount of ammo player has in reserve.
+---@return number # The amount of ammo player has in reserve.
 function Player:GetAmmoCount(ammotype) end
 
 ---[SHARED] Gets if the player will be pushed out of nocollided players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAvoidPlayers)
----@return boolean #pushed
+---@return boolean # pushed
 function Player:GetAvoidPlayers() end
 
 ---[SHARED] Returns true if the player is able to walk using the (default) alt key.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCanWalk)
----@return boolean #AbleToWalk
+---@return boolean # AbleToWalk
 function Player:GetCanWalk() end
 
 ---[SHARED] Determines whenever the player is allowed to use the zoom functionality.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCanZoom)
----@return boolean #canZoom
+---@return boolean # canZoom
 function Player:GetCanZoom() end
 
 ---[SHARED] Returns the player's class id.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetClassID)
----@return number #The player's class id.
+---@return number # The player's class id.
 function Player:GetClassID() end
 
 ---[SHARED] Gets total count of entities of same type.
@@ -570,7 +581,7 @@ function Player:GetClassID() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCount)
 ---@param type string Type to get entity count of.
 ---@param minus? number If specified, it will reduce the counter by this value. Works only serverside.
----@return number #The returned count.
+---@return number # The returned count.
 function Player:GetCount(type, minus) end
 
 ---[SHARED] Returns the crouched walk speed multiplier.
@@ -578,7 +589,7 @@ function Player:GetCount(type, minus) end
 --- See also Player:GetWalkSpeed and Player:SetCrouchedWalkSpeed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCrouchedWalkSpeed)
----@return number #The crouched walk speed multiplier.
+---@return number # The crouched walk speed multiplier.
 function Player:GetCrouchedWalkSpeed() end
 
 ---[SHARED] Returns the last command which was sent by the specified player. This can only be called on the player which Global.GetPredictionPlayer() returns.
@@ -588,7 +599,7 @@ function Player:GetCrouchedWalkSpeed() end
 --- This will fail in GM:StartCommand.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCurrentCommand)
----@return CUserCmd #Last user commands
+---@return CUserCmd # Last user commands
 function Player:GetCurrentCommand() end
 
 ---[SHARED] Gets the **actual** view offset which equals the difference between the players actual position and their view when standing.
@@ -596,31 +607,31 @@ function Player:GetCurrentCommand() end
 --- Do not confuse with Player:GetViewOffset and Player:GetViewOffsetDucked
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCurrentViewOffset)
----@return Vector #The actual view offset.
+---@return Vector # The actual view offset.
 function Player:GetCurrentViewOffset() end
 
 ---[SHARED] Gets the entity the player is currently driving via the drive library.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetDrivingEntity)
----@return Entity #The currently driven entity, or NULL entity
+---@return Entity # The currently driven entity, or NULL entity
 function Player:GetDrivingEntity() end
 
 ---[SHARED] Returns driving mode of the player. See Entity Driving.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetDrivingMode)
----@return number #The drive mode ID or 0 if player doesn't use the drive system.
+---@return number # The drive mode ID or 0 if player doesn't use the drive system.
 function Player:GetDrivingMode() end
 
 ---[SHARED] Returns a player's duck speed (in seconds)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetDuckSpeed)
----@return number #duckspeed
+---@return number # duckspeed
 function Player:GetDuckSpeed() end
 
 ---[SHARED] Returns the entity the player is currently using, like func_tank mounted turrets or +use prop pickups.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetEntityInUse)
----@return Entity #Entity in use, or NULL entity otherwise. For +use prop pickups, this will be NULL clientside.
+---@return Entity # Entity in use, or NULL entity otherwise. For +use prop pickups, this will be NULL clientside.
 function Player:GetEntityInUse() end
 
 ---[SHARED] Returns a table with information of what the player is looking at.
@@ -632,7 +643,7 @@ function Player:GetEntityInUse() end
 --- See also Player:GetEyeTraceNoCursor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetEyeTrace)
----@return table #Trace information, see Structures/TraceResult.
+---@return table # Trace information, see Structures/TraceResult.
 function Player:GetEyeTrace() end
 
 ---[SHARED] Returns the trace according to the players view direction, ignoring their mouse (holding C and moving the mouse in Sandbox).
@@ -644,51 +655,51 @@ function Player:GetEyeTrace() end
 --- See also Player:GetEyeTrace.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor)
----@return table #Trace result. See Structures/TraceResult.
+---@return table # Trace result. See Structures/TraceResult.
 function Player:GetEyeTraceNoCursor() end
 
 ---[SHARED] Returns the FOV of the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetFOV)
----@return number #Field of view as a float
+---@return number # Field of view as a float
 function Player:GetFOV() end
 
 ---[CLIENT] Returns the steam "relationship" towards the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetFriendStatus)
----@return string #Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none" or "requested".
+---@return string # Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none" or "requested".
 function Player:GetFriendStatus() end
 
 ---[SHARED] Gets the hands entity of a player
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHands)
----@return Entity #The hands entity if players has one
+---@return Entity # The hands entity if players has one
 function Player:GetHands() end
 
 ---[CLIENT] Called on player spawn to determine which hand model to use
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:GetHandsModel)
----@return table #A table containing info about view model hands model to be set. See examples.
+---@return table # A table containing info about view model hands model to be set. See examples.
 function PLAYER:GetHandsModel() end
 
 ---[SHARED] Returns the widget the player is hovering with their mouse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHoveredWidget)
----@return Entity #The hovered widget.
+---@return Entity # The hovered widget.
 function Player:GetHoveredWidget() end
 
 ---[SHARED] Gets the bottom base and the top base size of the player's hull.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHull)
----@return Vector, Vector #Vector - Player's hull bottom base size.
----@return Vector, Vector #Vector - Player's hull top base size.
+---@return Vector # Player's hull bottom base size.
+---@return Vector # Player's hull top base size.
 function Player:GetHull() end
 
 ---[SHARED] Gets the bottom base and the top base size of the player's crouch hull.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
----@return Vector, Vector #Vector - Player's crouch hull bottom base size.
----@return Vector, Vector #Vector - Player's crouch hull top base size.
+---@return Vector # Player's crouch hull bottom base size.
+---@return Vector # Player's crouch hull top base size.
 function Player:GetHullDuck() end
 
 ---[SHARED] Retrieves the value of a client-side ConVar. The ConVar must have a Enums/FCVAR flag for this to work.
@@ -698,7 +709,7 @@ function Player:GetHullDuck() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetInfo)
 ---@param cVarName string The name of the client-side ConVar.
----@return string #The value of the ConVar.
+---@return string # The value of the ConVar.
 function Player:GetInfo(cVarName) end
 
 ---[SHARED] Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The ConVar must have a Enums/FCVAR flag for this to work.
@@ -706,13 +717,13 @@ function Player:GetInfo(cVarName) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetInfoNum)
 ---@param cVarName string The name of the ConVar to query the value of
 ---@param default number Default value if we failed to retrieve the number.
----@return number #The value of the ConVar or the default value
+---@return number # The value of the ConVar or the default value
 function Player:GetInfoNum(cVarName, default) end
 
 ---[SHARED] Returns the jump power of the player
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetJumpPower)
----@return number #Jump power
+---@return number # Jump power
 function Player:GetJumpPower() end
 
 ---[SHARED] Returns the player's ladder climbing speed.
@@ -720,19 +731,19 @@ function Player:GetJumpPower() end
 --- See Player:GetWalkSpeed for normal walking speed, Player:GetRunSpeed for sprinting speed and Player:GetSlowWalkSpeed for slow walking speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetLadderClimbSpeed)
----@return number #The ladder climbing speed.
+---@return number # The ladder climbing speed.
 function Player:GetLadderClimbSpeed() end
 
 ---[SHARED] Returns the timescale multiplier of the player movement.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetLaggedMovementValue)
----@return number #The timescale multiplier, defaults to `1`.
+---@return number # The timescale multiplier, defaults to `1`.
 function Player:GetLaggedMovementValue() end
 
 ---[SHARED] Returns the maximum amount of armor the player should have. Default value is 100.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetMaxArmor)
----@return number #The new max armor value
+---@return number # The new max armor value
 function Player:GetMaxArmor() end
 
 ---[SHARED] Returns the player's maximum movement speed.
@@ -740,7 +751,7 @@ function Player:GetMaxArmor() end
 --- See also Player:SetMaxSpeed, Player:GetWalkSpeed and Player:GetRunSpeed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetMaxSpeed)
----@return number #The maximum movement speed the player can go at.
+---@return number # The maximum movement speed the player can go at.
 function Player:GetMaxSpeed() end
 
 ---[SHARED] Returns the player's name, this is an alias of Player:Nick.
@@ -748,19 +759,19 @@ function Player:GetMaxSpeed() end
 --- This function overrides Entity:GetName (in the Lua metatable, not in c++), keep it in mind when dealing with ents.FindByName or any engine function which requires the mapping name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetName)
----@return string #The player's name.
+---@return string # The player's name.
 function Player:GetName() end
 
 ---[SHARED] Returns whenever the player is set not to collide with their teammates.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetNoCollideWithTeammates)
----@return boolean #noCollideWithTeammates
+---@return boolean # noCollideWithTeammates
 function Player:GetNoCollideWithTeammates() end
 
 ---[SHARED] Returns the the observer mode of the player
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetObserverMode)
----@return number #Observe mode of that player, see Enums/OBS_MODE.
+---@return number # Observe mode of that player, see Enums/OBS_MODE.
 function Player:GetObserverMode() end
 
 ---[SHARED] Returns the entity the player is currently observing.
@@ -768,12 +779,12 @@ function Player:GetObserverMode() end
 --- Set using Player:SpectateEntity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetObserverTarget)
----@return Entity #The entity the player is currently spectating, or Global_Variables if the player has no target.
+---@return Entity # The entity the player is currently spectating, or Global_Variables if the player has no target.
 function Player:GetObserverTarget() end
 
----[SHARED] Returns a **P**layer **Data** key-value pair from the SQL database. (sv.db when called on server,  cl.db when called on client)
+---[SHARED] Returns a **P**ersistent **Data** key-value pair from the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql.
+--- Internally uses the sql library. See util.GetPData for cases when the player is not currently on the server.
 ---
 --- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
 ---
@@ -782,19 +793,19 @@ function Player:GetObserverTarget() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPData)
 ---@param key string Name of the PData key
 ---@param default? any Default value if PData key doesn't exist.
----@return string #The data in the SQL database or the default value given.
+---@return string # The data in the SQL database or the default value given.
 function Player:GetPData(key, default) end
 
----[SHARED] Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
+---[SHARED] Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPlayerColor)
----@return Vector #color
+---@return Vector # The format is `Vector(r,g,b)`, and each color component should be between 0 and 1.
 function Player:GetPlayerColor() end
 
 ---[SHARED] Returns a table containing player information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPlayerInfo)
----@return table #A table containing player information.
+---@return table # A table containing player information.
 function Player:GetPlayerInfo() end
 
 ---[SERVER] Returns the preferred carry angles of an object, if any are set.
@@ -803,7 +814,7 @@ function Player:GetPlayerInfo() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPreferredCarryAngles)
 ---@param carryEnt Entity Entity to retrieve the carry angles of.
----@return Angle #Carry angles or nil if the entity has no preferred carry angles.
+---@return Angle # Carry angles or nil if the entity has no preferred carry angles.
 function Player:GetPreferredCarryAngles(carryEnt) end
 
 ---[SHARED] Returns the widget entity the player is using.
@@ -811,19 +822,19 @@ function Player:GetPreferredCarryAngles(carryEnt) end
 --- Having a pressed widget stops the player from firing their weapon to allow input to be passed onto the widget.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPressedWidget)
----@return Entity #The pressed widget.
+---@return Entity # The pressed widget.
 function Player:GetPressedWidget() end
 
 ---[SHARED] Returns the weapon the player previously had equipped.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPreviousWeapon)
----@return Entity #The previous weapon of the player.  This is not guaranteed to be a weapon entity so it should be checked with Entity:IsWeapon for safety.
+---@return Entity # The previous weapon of the player.  This is not guaranteed to be a weapon entity so it should be checked with Entity:IsWeapon for safety.
 function Player:GetPreviousWeapon() end
 
 ---[SHARED] Returns players screen punch effect angle. See Player:ViewPunch and Player:SetViewPunchAngles
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPunchAngle)
----@return Angle #The punch angle
+---@return Angle # The punch angle
 ---@deprecated You should use Player:GetViewPunchAngles instead.
 function Player:GetPunchAngle() end
 
@@ -831,13 +842,13 @@ function Player:GetPunchAngle() end
 --- Calling Entity:GetPos server-side with this function then will return the position when Player:CreateRagdoll was used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRagdollEntity)
----@return Entity #The ragdoll.  Unlike normal clientside ragdolls (`C_ClientRagdoll`), this will be a `C_HL2MPRagdoll` on the client, and `hl2mp_ragdoll` on the server.
+---@return Entity # The ragdoll.  Unlike normal clientside ragdolls (`C_ClientRagdoll`), this will be a `C_HL2MPRagdoll` on the client, and `hl2mp_ragdoll` on the server.
 function Player:GetRagdollEntity() end
 
 ---[SHARED] Returns the render angles for the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRenderAngles)
----@return Angle #The render angles of the player. Only **yaw** part of the angle seems to be present.
+---@return Angle # The render angles of the player. Only **yaw** part of the angle seems to be present.
 function Player:GetRenderAngles() end
 
 ---[SHARED] Returns the player's sprint speed.
@@ -845,7 +856,7 @@ function Player:GetRenderAngles() end
 --- See also Player:SetRunSpeed, Player:GetWalkSpeed and Player:GetMaxSpeed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRunSpeed)
----@return number #The sprint speed
+---@return number # The sprint speed
 function Player:GetRunSpeed() end
 
 ---[SHARED] Returns the position of a Player's view
@@ -853,7 +864,7 @@ function Player:GetRunSpeed() end
 --- This is the same as calling Entity:EyePos on the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetShootPos)
----@return Vector #aim pos
+---@return Vector # The position of the player's view.
 function Player:GetShootPos() end
 
 ---[SHARED] Returns the player's slow walking speed, which is activated via +WALK keybind.
@@ -861,13 +872,13 @@ function Player:GetShootPos() end
 --- See Player:GetWalkSpeed for normal walking speed, Player:GetRunSpeed for sprinting speed and Player:GetLadderClimbSpeed for ladder climb speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetSlowWalkSpeed)
----@return number #The new slow walking speed.
+---@return number # The new slow walking speed.
 function Player:GetSlowWalkSpeed() end
 
 ---[SHARED] Returns the maximum height player can step onto.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetStepSize)
----@return number #The maximum height player can get up onto without jumping, in hammer units.
+---@return number # The maximum height player can get up onto without jumping, in hammer units.
 function Player:GetStepSize() end
 
 ---[SHARED] Returns the player's HEV suit power.
@@ -875,7 +886,7 @@ function Player:GetStepSize() end
 --- This will only work for the local player when used clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetSuitPower)
----@return number #The current suit power.
+---@return number # The current suit power.
 function Player:GetSuitPower() end
 
 ---[SERVER] Returns the number of seconds that the player has been timing out for. You can check if a player is timing out with Player:IsTimingOut.
@@ -883,20 +894,20 @@ function Player:GetSuitPower() end
 --- This function is relatively useless because it is tied to the value of the `sv_timeout` ConVar, which is irrelevant to the description above. [This is not considered as a bug](https://discord.com/channels/565105920414318602/567617926991970306/748970396224585738).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetTimeoutSeconds)
----@return number #Timeout seconds.
+---@return number # Timeout seconds.
 function Player:GetTimeoutSeconds() end
 
 ---[SHARED] Returns Structures/TOOL table of players current tool, or of the one specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetTool)
 ---@param mode? string Classname of the tool to retrieve. ( Filename of the tool in gmod_tool/stools/ )
----@return table #TOOL table, or nil if the table wasn't found or the player doesn't have a tool gun.
+---@return table # TOOL table, or nil if the table wasn't found or the player doesn't have a tool gun.
 function Player:GetTool(mode) end
 
 ---[SHARED] Returns a player's unduck speed (in seconds)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetUnDuckSpeed)
----@return number #unduck speed
+---@return number # unduck speed
 function Player:GetUnDuckSpeed() end
 
 ---[SHARED] Returns the entity the player would use if they would press their `+use` keybind.
@@ -905,26 +916,26 @@ function Player:GetUnDuckSpeed() end
 --- Issue tracker: [5027](https://github.com/Facepunch/garrysmod-issues/issues/5027)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetUseEntity)
----@return Entity #The entity that would be used or NULL.
+---@return Entity # The entity that would be used or NULL.
 function Player:GetUseEntity() end
 
 ---[SHARED] Returns the player's user group. By default, player user groups are loaded from `garrysmod/settings/users.txt`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetUserGroup)
----@return string #The user group of the player. This will return "user" if player has no user group.
+---@return string # The user group of the player. This will return "user" if player has no user group.
 function Player:GetUserGroup() end
 
 ---[SHARED] Gets the vehicle the player is driving, returns NULL ENTITY if the player is not driving.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetVehicle)
----@return Vehicle #vehicle
+---@return Vehicle # vehicle
 function Player:GetVehicle() end
 
 ---[SHARED] Returns the entity the player is using to see from (such as the player itself, the camera, or another entity).
 --- 	This function will return a [NULL Entity] until Player:SetViewEntity has been used
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewEntity)
----@return Entity #The entity the player is using to see from
+---@return Entity # The entity the player is using to see from
 function Player:GetViewEntity() end
 
 ---[SHARED] Returns the player's view model entity by the index.
@@ -936,7 +947,7 @@ function Player:GetViewEntity() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewModel)
 ---@param index? number optional index of the view model to return, can range from 0 to 2
----@return Entity #The view model entity
+---@return Entity # The view model entity
 function Player:GetViewModel(index) end
 
 ---[SHARED] Returns the view offset of the player which equals the difference between the players actual position and their view.
@@ -944,7 +955,7 @@ function Player:GetViewModel(index) end
 --- See also Player:GetViewOffsetDucked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewOffset)
----@return Vector #New view offset, must be local vector to players Entity:GetPos
+---@return Vector # New view offset, must be local vector to players Entity:GetPos
 function Player:GetViewOffset() end
 
 ---[SHARED] Returns the view offset of the player which equals the difference between the players actual position and their view when ducked.
@@ -952,25 +963,25 @@ function Player:GetViewOffset() end
 --- See also Player:GetViewOffset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewOffsetDucked)
----@return Vector #New crouching view offset, must be local vector to players Entity:GetPos
+---@return Vector # New crouching view offset, must be local vector to players Entity:GetPos
 function Player:GetViewOffsetDucked() end
 
 ---[SHARED] Returns players screen punch effect angle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewPunchAngles)
----@return Angle #The punch angle
+---@return Angle # The punch angle
 function Player:GetViewPunchAngles() end
 
 ---[SHARED] Returns client's view punch velocity. See Player:ViewPunch and Player:SetViewPunchVelocity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewPunchVelocity)
----@return Angle #The current view punch angle velocity.
+---@return Angle # The current view punch angle velocity.
 function Player:GetViewPunchVelocity() end
 
 ---[CLIENT] Returns the current voice volume scale for given player on client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetVoiceVolumeScale)
----@return number #The voice volume scale, where 0 is 0% and 1 is 100%.
+---@return number # The voice volume scale, where 0 is 0% and 1 is 100%.
 function Player:GetVoiceVolumeScale() end
 
 ---[SHARED] Returns the player's normal walking speed. Not sprinting, not slow walking. (+walk)
@@ -978,20 +989,20 @@ function Player:GetVoiceVolumeScale() end
 --- See also Player:SetWalkSpeed, Player:GetMaxSpeed and Player:GetRunSpeed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed)
----@return number #The normal walking speed.
+---@return number # The normal walking speed.
 function Player:GetWalkSpeed() end
 
 ---[SHARED] Returns the weapon for the specified class
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapon)
 ---@param className string Class name of weapon
----@return Weapon #The weapon for the specified class.
+---@return Weapon # The weapon for the specified class.
 function Player:GetWeapon(className) end
 
 ---[SHARED] Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeaponColor)
----@return Vector #color
+---@return Vector # color
 function Player:GetWeaponColor() end
 
 ---[SHARED] Returns a table of the player's weapons.
@@ -999,7 +1010,7 @@ function Player:GetWeaponColor() end
 --- 			This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapons)
----@return table #All the weapons the player currently has.
+---@return table # All the weapons the player currently has.
 function Player:GetWeapons() end
 
 ---[SERVER] Gives the player a weapon.
@@ -1009,7 +1020,7 @@ function Player:GetWeapons() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Give)
 ---@param weaponClassName string Class name of weapon to give the player
 ---@param bNoAmmo? boolean Set to true to not give any ammo on weapon spawn. (Reserve ammo set by DefaultClip)
----@return Weapon #The weapon given to the player, if one was given. It will return NULL if the player already has the weapon, or the weapon entity (entity with given classname) doesn't exist.
+---@return Weapon # The weapon given to the player, if one was given. It will return NULL if the player already has the weapon, or the weapon entity (entity with given classname) doesn't exist.
 function Player:Give(weaponClassName, bNoAmmo) end
 
 ---[SERVER] Gives ammo to a player
@@ -1021,7 +1032,7 @@ function Player:Give(weaponClassName, bNoAmmo) end
 ---
 --- You can find a list of default ammo types Default_Ammo_Types.
 ---@param hidePopup? boolean Hide display popup when giving the ammo
----@return number #Ammo given.
+---@return number # Ammo given.
 function Player:GiveAmmo(amount, type, hidePopup) end
 
 ---[SERVER] Disables god mode on the player.
@@ -1037,14 +1048,14 @@ function Player:GodEnable() end
 ---[SHARED] Returns whether the player has god mode or not, contolled by Player:GodEnable and Player:GodDisable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:HasGodMode)
----@return boolean #Whether the player has god mode or not.
+---@return boolean # Whether the player has god mode or not.
 function Player:HasGodMode() end
 
 ---[SHARED] Returns if the player has the specified weapon
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:HasWeapon)
 ---@param className string Class name of the weapon
----@return boolean #True if the player has the weapon
+---@return boolean # True if the player has the weapon
 function Player:HasWeapon(className) end
 
 ---[SHARED] Called when the class object is created
@@ -1055,14 +1066,14 @@ function PLAYER:Init() end
 ---[SHARED] Returns if the player is in a vehicle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:InVehicle)
----@return boolean #Whether the player is in a vehicle.
+---@return boolean # Whether the player is in a vehicle.
 function Player:InVehicle() end
 
 ---[SERVER] Returns the player's IP address and connection port in ip:port form
 --- Returns `Error!` for bots.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IPAddress)
----@return string #The player's IP address and connection port
+---@return string # The player's IP address and connection port
 function Player:IPAddress() end
 
 ---[SHARED] Returns whether the player is an admin or not. It will also return `true` if the player is Player:IsSuperAdmin by default.
@@ -1070,31 +1081,31 @@ function Player:IPAddress() end
 --- Internally this is determined by Player:IsUserGroup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsAdmin)
----@return boolean #True if the player is an admin or a super admin.
+---@return boolean # True if the player is an admin or a super admin.
 function Player:IsAdmin() end
 
 ---[SHARED] Returns if the player is an bot or not
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsBot)
----@return boolean #True if the player is a bot.
+---@return boolean # True if the player is a bot.
 function Player:IsBot() end
 
 ---[SERVER] Returns true from the point when the player is sending client info but not fully in the game until they disconnect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsConnected)
----@return boolean #isConnected
+---@return boolean # isConnected
 function Player:IsConnected() end
 
 ---[SHARED] Used to find out if a player is currently 'driving' an entity (by which we mean 'right click > drive' ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsDrivingEntity)
----@return boolean #A value representing whether or not the player is 'driving' an entity.
+---@return boolean # A value representing whether or not the player is 'driving' an entity.
 function Player:IsDrivingEntity() end
 
 ---[SHARED] Returns whether the players movement is currently frozen, controlled by Player:Freeze.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsFrozen)
----@return boolean #Whether the players movement is currently frozen or not.
+---@return boolean # Whether the players movement is currently frozen or not.
 function Player:IsFrozen() end
 
 ---[SERVER] Returns whether the player identity was confirmed by the steam network.
@@ -1102,31 +1113,31 @@ function Player:IsFrozen() end
 --- See also GM:PlayerAuthed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated)
----@return boolean #Whether the player has been fully authenticated or not.  This will always be true for singleplayer and the listen server host. This will always be false for bots.
+---@return boolean # Whether the player has been fully authenticated or not.  This will always be true for singleplayer and the listen server host. This will always be false for bots.
 function Player:IsFullyAuthenticated() end
 
 ---[SHARED] Returns if a player is the host of the current session.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsListenServerHost)
----@return boolean #`true` if the player is the listen server host, `false` otherwise.  This will always be `true` in single player, and `false` on a dedicated server.
+---@return boolean # `true` if the player is the listen server host, `false` otherwise.  This will always be `true` in single player, and `false` on a dedicated server.
 function Player:IsListenServerHost() end
 
 ---[CLIENT] Returns whether or not the player is muted locally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsMuted)
----@return boolean #whether or not the player is muted locally.
+---@return boolean # whether or not the player is muted locally.
 function Player:IsMuted() end
 
 ---[SHARED] Returns true if the player is playing a taunt.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsPlayingTaunt)
----@return boolean #Whether the player is playing a taunt.
+---@return boolean # Whether the player is playing a taunt.
 function Player:IsPlayingTaunt() end
 
 ---[SHARED] Returns whenever the player is heard by the local player clientside, or if the player is speaking serverside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsSpeaking)
----@return boolean #Is the player speaking or not.
+---@return boolean # Is the player speaking or not.
 function Player:IsSpeaking() end
 
 ---[SHARED] Returns whether the player is currently sprinting or not, specifically if they are holding their sprint key and are allowed to sprint.
@@ -1134,7 +1145,7 @@ function Player:IsSpeaking() end
 --- This will not check if the player is currently sprinting into a wall. (i.e. holding their sprint key but not moving)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsSprinting)
----@return boolean #Is the player sprinting or not
+---@return boolean # Is the player sprinting or not
 function Player:IsSprinting() end
 
 ---[SHARED] Returns whenever the player is equipped with the suit item.
@@ -1142,7 +1153,7 @@ function Player:IsSprinting() end
 --- This will only work for the local player when used clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsSuitEquipped)
----@return boolean #Is the suit equipped or not.
+---@return boolean # Is the suit equipped or not.
 function Player:IsSuitEquipped() end
 
 ---[SHARED] Returns whether the player is a super admin.
@@ -1150,15 +1161,15 @@ function Player:IsSuitEquipped() end
 --- Internally this is determined by Player:IsUserGroup. See also Player:IsAdmin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsSuperAdmin)
----@return boolean #True if the player is a super admin.
+---@return boolean # True if the player is a super admin.
 function Player:IsSuperAdmin() end
 
----[SERVER] Returns true if the player is timing out (i.e. is losing connection), false otherwise.
+---[SERVER] Returns `true` if the player is timing out (i.e. is losing connection), `false` otherwise.
 ---
 --- A player is considered timing out when more than 4 seconds has elapsed since a network packet was received from given player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsTimingOut)
----@return boolean #isTimingOut
+---@return boolean # Whether the player is timing out.
 function Player:IsTimingOut() end
 
 ---[SHARED] Returns whether the player is typing in their chat.
@@ -1166,60 +1177,66 @@ function Player:IsTimingOut() end
 --- This may not work properly if the server uses a custom chatbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsTyping)
----@return boolean #Whether the player is typing in their chat or not.
+---@return boolean # Whether the player is typing in their chat or not.
 function Player:IsTyping() end
 
 ---[SHARED] Returns true/false if the player is in specified group or not. See Player:GetUserGroup for a way to get player's usergroup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsUserGroup)
 ---@param groupname string Group to check the player for.
----@return boolean #isInUserGroup
+---@return boolean # isInUserGroup
 function Player:IsUserGroup(groupname) end
 
 ---[CLIENT] Returns if the player can be heard by the local player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsVoiceAudible)
----@return boolean #isAudible
+---@return boolean # isAudible
 function Player:IsVoiceAudible() end
+
+---[SHARED] Returns if the player currently walking. (`+walk` keybind)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWalking)
+---@return boolean # True if the player is currently walking.
+function Player:IsWalking() end
 
 ---[SHARED] Returns whether the player is using the world clicking feature, see Panel:SetWorldClicker
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClicking)
----@return boolean #Is the player world clicking or not.
+---@return boolean # Is the player world clicking or not.
 function Player:IsWorldClicking() end
 
 ---[SHARED] Returns whether the world clicking is disabled for given player or not. See Player:DisableWorldClicking.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClickingDisabled)
----@return boolean #Whether the world clicking is disabled or not.
+---@return boolean # Whether the world clicking is disabled or not.
 function Player:IsWorldClickingDisabled() end
 
----[SHARED] Gets whether a key is down. This is not networked to other players, meaning only the local client can see the keys they are pressing.
+---[SHARED] Returns whether a key is down. This is not networked to other players, meaning only the local client can see the keys they are pressing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KeyDown)
 ---@param key number The key, see Enums/IN
----@return boolean #isDown ?
+---@return boolean # whether the key is down or not.
 function Player:KeyDown(key) end
 
 ---[SHARED] Gets whether a key was down one tick ago.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KeyDownLast)
 ---@param key number The key, see Enums/IN
----@return boolean #Is key down ?
+---@return boolean # Is key down ?
 function Player:KeyDownLast(key) end
 
 ---[SHARED] Gets whether a key was just pressed this tick.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KeyPressed)
 ---@param key number Corresponds to an Enums/IN
----@return boolean #Was pressed or not
+---@return boolean # Was pressed or not
 function Player:KeyPressed(key) end
 
 ---[SHARED] Gets whether a key was just released this tick.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KeyReleased)
 ---@param key number The key, see Enums/IN
----@return boolean #Was released or not
+---@return boolean # Was released or not
 function Player:KeyReleased(key) end
 
 ---[SERVER] Kicks the player from the server.
@@ -1264,7 +1281,7 @@ function Player:LagCompensation(lagCompensation) end
 ---[SERVER] Returns the hitgroup where the player was last hit.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:LastHitGroup)
----@return number #Hitgroup, see Enums/HITGROUP
+---@return number # Hitgroup, see Enums/HITGROUP
 function Player:LastHitGroup() end
 
 ---[SHARED] Shows "limit hit" notification in sandbox.
@@ -1284,7 +1301,7 @@ function PLAYER:Loadout() end
 --- Unlike Entity:EyeAngles, this function does not include angles of the Player's Entity:GetParent.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:LocalEyeAngles)
----@return Angle #local eye angles
+---@return Angle # local eye angles
 function Player:LocalEyeAngles() end
 
 ---[SERVER] Stops a player from using any inputs, such as moving, turning, or attacking. Key binds are still called. Similar to Player:Freeze but the player takes no damage.
@@ -1300,7 +1317,7 @@ function Player:Lock() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:MotionSensorPos)
 ---@param bone number Bone to get the position of. Must be from 0 to 19.
----@return Vector #Position of the bone.
+---@return Vector # Position of the bone.
 function Player:MotionSensorPos(bone) end
 
 ---[CLIENT] Called from GM:Move.
@@ -1311,19 +1328,19 @@ function Player:MotionSensorPos(bone) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:Move)
 ---@param mv CMoveData Movement information
----@return boolean #Return true to prevent default action
+---@return boolean # Return true to prevent default action
 function PLAYER:Move(mv) end
 
 ---[SHARED] Returns the players name. Identical to Player:Nick and Player:GetName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Name)
----@return string #Player's Steam name.
+---@return string # Player's Steam name.
 function Player:Name() end
 
 ---[SHARED] Returns the player's nickname.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Nick)
----@return string #Player's Steam name
+---@return string # Player's Steam name
 function Player:Nick() end
 
 ---[SERVER] Returns the 64-bit SteamID aka CommunityID of the Steam Account that owns the Garry's Mod license this player is using. This is useful for detecting players using Steam Family Sharing.
@@ -1333,19 +1350,19 @@ function Player:Nick() end
 --- This data will only be available after the player has fully authenticated with Steam. See Player:IsFullyAuthenticated.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:OwnerSteamID64)
----@return string #The 64bit SteamID
+---@return string # The 64bit SteamID
 function Player:OwnerSteamID64() end
 
 ---[SHARED] Returns the packet loss of the client. It is not networked so it only returns 0 when run clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PacketLoss)
----@return number #Packets lost
+---@return number # Packets lost
 function Player:PacketLoss() end
 
 ---[SHARED] Unfreezes the props player is looking at. This is essentially the same as pressing reload with the physics gun, including double press for unfreeze all.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PhysgunUnfreeze)
----@return number #Number of props unfrozen.
+---@return number # Number of props unfrozen.
 function Player:PhysgunUnfreeze() end
 
 ---[SERVER] This makes the player hold ( same as pressing E on a small prop ) the provided entity.
@@ -1365,13 +1382,13 @@ function Player:PickupObject(entity) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PickupWeapon)
 ---@param wep Weapon The weapon to try to pick up.
 ---@param ammoOnly? boolean If set to true, the player will only attempt to pick up the ammo from the weapon. The weapon will not be picked up even if the player doesn't have a weapon of this type, and the weapon will be removed if the player picks up any ammo from it.
----@return boolean #Whether the player succeeded in picking up the weapon or not.
+---@return boolean # Whether the player succeeded in picking up the weapon or not.
 function Player:PickupWeapon(wep, ammoOnly) end
 
 ---[SHARED] Returns the player's ping to server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Ping)
----@return number #The player's ping.
+---@return number # The player's ping.
 function Player:Ping() end
 
 ---[SERVER] Plays the correct step sound according to what the player is staying on.
@@ -1422,15 +1439,15 @@ function Player:RemoveAllItems() end
 ---@param ammoName string The name of the ammunition to remove from. This can also be a number ammoID.
 function Player:RemoveAmmo(ammoCount, ammoName) end
 
----[SHARED] Removes a **P**layer **Data** key-value pair from the SQL database. (sv.db when called on server,  cl.db when called on client)
+---[SHARED] Removes a **P**ersistent **Data** key-value pair from the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql.
+--- Internally uses the sql library. See util.RemovePData for cases when the player is not currently on the server.
 ---
 --- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:RemovePData)
 ---@param key string Key to remove
----@return boolean #true is succeeded, false otherwise
+---@return boolean # true is succeeded, false otherwise
 function Player:RemovePData(key) end
 
 ---[SERVER] Strips the player's suit item.
@@ -1600,6 +1617,8 @@ function Player:SetDrivingEntity(drivingEntity, drivingMode) end
 ---@param soundFilter number The index of the sound filter to apply.
 --- Pick from the [list of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets).
 ---@param fastReset boolean If set to true the sound filter will be removed faster.
+---
+--- **This only works clientside**. If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
 function Player:SetDSP(soundFilter, fastReset) end
 
 ---[SHARED] Sets how quickly a player ducks.
@@ -1745,18 +1764,18 @@ function Player:SetNoTarget(visibility) end
 ---@param mode number Spectator mode using Enums/OBS_MODE.
 function Player:SetObserverMode(mode) end
 
----[SHARED] Writes a **P**layer **Data** key-value pair to the SQL database. (sv.db when called on server,  cl.db when called on client)
+---[SHARED] Writes a **P**ersistent **Data** key-value pair to the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql.
+--- Internally uses the sql library. See util.SetPData for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
 ---
 --- PData is not networked from servers to clients!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetPData)
 ---@param key string Name of the PData key
 ---@param value any Value to write to the key (**must** be an SQL valid data type, such as a string or integer)
----@return boolean #Whether the operation was successful or not
+---@return boolean # Whether the operation was successful or not
 function Player:SetPData(key, value) end
 
 ---[SHARED] Sets the player model's color. The part of the model that is colored is determined by the model itself, and is different for each model.
@@ -1916,7 +1935,7 @@ function Player:SetWeaponColor(Color) end
 ---[CLIENT] Returns whether the player's player model will be drawn at the time the function is called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ShouldDrawLocalPlayer)
----@return boolean #`true` if the player's playermodel is visible
+---@return boolean # `true` if the player's playermodel is visible
 function Player:ShouldDrawLocalPlayer() end
 
 ---[SERVER] Sets whether the player's current weapon should drop on death.
@@ -1990,7 +2009,7 @@ function Player:SprintEnable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:StartMove)
 ---@param mv CMoveData
 ---@param cmd CUserCmd
----@return boolean #Return true to prevent default action
+---@return boolean # Return true to prevent default action
 function PLAYER:StartMove(mv, cmd) end
 
 ---[SHARED] Doesn't appear to do anything.
@@ -2009,15 +2028,17 @@ function Player:StartWalking() end
 ---
 --- See Player:AccountID for a shorter version of the SteamID and Player:SteamID64 for the full SteamID.
 ---
+--- It is recommended to use Player:SteamID64 over the other SteamID formats whenever possible.
+---
 --- In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For Bots this will return `BOT`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SteamID)
----@return string #SteamID
+---@return string # "Text" representation of the player's SteamID.
 function Player:SteamID() end
 
----[SHARED] Returns the player's full 64-bit SteamID aka Community ID. Information on how data is packed into this value can be found [here](https://developer.valvesoftware.com/wiki/SteamID).
+---[SHARED] Returns the player's full **64-bit SteamID**, also known as **CommunityID**. Information on how data is packed into this value can be found [here](https://developer.valvesoftware.com/wiki/SteamID).
 ---
 --- See Player:AccountID for a function that returns only the Account ID part of the SteamID and Player:SteamID for the text version of the SteamID.
 ---
@@ -2028,7 +2049,7 @@ function Player:SteamID() end
 --- For each additional bot, the number increases by 1. So the next bot will be `90071996842377217` (`STEAM_0:1:0`) then `90071996842377218` (`STEAM_0:0:1`) and so on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SteamID64)
----@return string #Player's 64-bit SteamID aka CommunityID.
+---@return string # Player's 64-bit SteamID aka CommunityID.  The return value is a string, not a number, since Lua's numbers are unable to store the entire 64bit numbers without data loss.
 function Player:SteamID64() end
 
 ---[SHARED] When used in a GM:SetupMove hook, this function will prevent the player from sprinting.
@@ -2055,6 +2076,7 @@ function Player:StopZooming() end
 ---[SERVER] Removes all ammo from the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StripAmmo)
+---@deprecated Alias of Player:RemoveAllAmmo
 function Player:StripAmmo() end
 
 ---[SERVER] Removes the specified weapon class from a certain player
@@ -2090,7 +2112,7 @@ function Player:SwitchToDefaultWeapon() end
 --- Returns 0 clientside when the game is not fully loaded.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Team)
----@return number #The player's team's index number, as in the Enums/TEAM or a custom team defined in team.SetUp.
+---@return number # The player's team's index number, as in the Enums/TEAM or a custom team defined in team.SetUp.
 function Player:Team() end
 
 ---[SERVER] Returns the time in seconds since the player connected.
@@ -2113,14 +2135,14 @@ function Player:TimeConnected() end
 ---@param damageFlags number Bitflag specifying the damage type, see Enums/DMG.
 ---@param damageForce number The force to be applied to the hit object.
 ---@param damageAllNPCs boolean Whether to apply damage to all hit NPCs or not.
----@return Entity #The hit entity
+---@return Entity # The hit entity
 function Player:TraceHullAttack(startPos, endPos, mins, maxs, damage, damageFlags, damageForce, damageAllNPCs) end
 
 ---[SHARED] Translates Enums/ACT according to the holdtype of players currently held weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:TranslateWeaponActivity)
 ---@param act number The initial Enums/ACT
----@return number #Translated Enums/ACT
+---@return number # Translated Enums/ACT
 function Player:TranslateWeaponActivity(act) end
 
 ---[SHARED] Unfreezes all objects the player has frozen with their Physics Gun. Same as double pressing R while holding Physics Gun.
@@ -2133,7 +2155,7 @@ function Player:UnfreezePhysicsObjects() end
 --- In Singleplayer, this function will always return 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueID)
----@return number #The player's Unique ID
+---@return number # The player's Unique ID
 ---@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
 function Player:UniqueID() end
 
@@ -2143,7 +2165,7 @@ function Player:UniqueID() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueIDTable)
 ---@param key any Unique table key.
----@return table #The table that contains any info you have put in it.
+---@return table # The table that contains any info you have put in it.
 ---@deprecated This is based on Player:UniqueID which is deprecated and vulnerable to collisions.
 function Player:UniqueIDTable(key) end
 
@@ -2163,7 +2185,7 @@ function Player:UnSpectate() end
 --- You can use Global.Player() to get the player by their ID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UserID)
----@return number #The player's user ID
+---@return number # The player's user ID
 function Player:UserID() end
 
 ---[CLIENT] Called when the player changes their weapon to another one causing their viewmodel model to change
@@ -2189,5 +2211,5 @@ function Player:ViewPunchReset(tolerance) end
 ---[CLIENT] Returns the players voice volume, how loud the player's voice communication currently is, as a normal number. Doesn't work on local player unless the voice_loopback convar is set to 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:VoiceVolume)
----@return number #The voice volume.
+---@return number # The voice volume.
 function Player:VoiceVolume() end

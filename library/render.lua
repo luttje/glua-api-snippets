@@ -13,6 +13,8 @@ function render.AddBeam(startPos, width, textureEnd, color) end
 
 ---[CLIENT] Blurs the render target ( or a given texture )
 ---
+--- 		Calling this on a RenderTarget created with TEXTUREFLAGS_POINTSAMPLE will result in strange visual glitching.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.BlurRenderTarget)
 ---@param rendertarget ITexture The texture to blur
 ---@param blurx number Horizontal amount of blur
@@ -35,10 +37,12 @@ function render.BrushMaterialOverride(mat) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Capture)
 ---@param captureData table Parameters of the capture. See Structures/RenderCaptureData.
----@return string #binaryData
+---@return string # binaryData
 function render.Capture(captureData) end
 
 ---[CLIENT] Dumps the current render target and allows the pixels to be accessed by render.ReadPixel.
+---
+--- 	Capturing outside a render hook will return 0 0 0 255
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.CapturePixels)
 function render.CapturePixels() end
@@ -103,7 +107,7 @@ function render.ClearStencilBufferRectangle(originX, originY, endX, endY, stenci
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ComputeDynamicLighting)
 ---@param position Vector The position to sample from.
 ---@param normal Vector The normal of the surface.
----@return Vector #A vector representing the light at that point.
+---@return Vector # A vector representing the light at that point.
 function render.ComputeDynamicLighting(position, normal) end
 
 ---[CLIENT] Calculates the light color of a certain surface.
@@ -111,8 +115,16 @@ function render.ComputeDynamicLighting(position, normal) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ComputeLighting)
 ---@param position Vector The position of the surface to get the light from.
 ---@param normal Vector The normal of the surface to get the light from.
----@return Vector #A vector representing the light at that point.
+---@return Vector # A vector representing the light at that point.
 function render.ComputeLighting(position, normal) end
+
+---[CLIENT] Calculates diameter of a 3D sphere on a 2D screen.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ComputePixelDiameterOfSphere)
+---@param point Vector The position of the sphere in 3D space.
+---@param radius number The radius of the sphere in 3D space.
+---@return number # The diameter of the sphere in 2D screen space.
+function render.ComputePixelDiameterOfSphere(point, radius) end
 
 ---[CLIENT] Copies the currently active Render Target to the specified texture.
 ---
@@ -279,7 +291,7 @@ function render.DrawWireframeSphere(position, radius, longitudeSteps, latitudeSt
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.EnableClipping)
 ---@param state boolean New clipping state.
----@return boolean #Previous clipping state.
+---@return boolean # Previous clipping state.
 function render.EnableClipping(state) end
 
 ---[CLIENT] Ends the beam mesh of a beam started with render.StartBeam.
@@ -325,19 +337,19 @@ function render.FogStart(fogStart) end
 ---[CLIENT] Returns the ambient color of the map.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetAmbientLightColor)
----@return Vector #color
+---@return Vector # color
 function render.GetAmbientLightColor() end
 
 ---[CLIENT] Returns the current alpha blending.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetBlend)
----@return number #Current alpha blending in range 0 to 1.
+---@return number # Current alpha blending in range 0 to 1.
 function render.GetBlend() end
 
 ---[CLIENT]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetBloomTex0)
----@return ITexture #The bloom texture
+---@return ITexture # The bloom texture
 function render.GetBloomTex0() end
 
 ---[CLIENT]
@@ -349,40 +361,40 @@ function render.GetBloomTex1() end
 ---[CLIENT] Returns the current color modulation values as normals.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetColorModulation)
----@return number, number, number #number - r
----@return number, number, number #number - g
----@return number, number, number #number - b
+---@return number # r
+---@return number # g
+---@return number # b
 function render.GetColorModulation() end
 
 ---[CLIENT AND MENU] Returns the maximum available directX version.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetDXLevel)
----@return number #dxLevel
+---@return number # dxLevel
 function render.GetDXLevel() end
 
 ---[CLIENT] Returns the current fog color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetFogColor)
----@return number, number, number #number - Red part of the color.
----@return number, number, number #number - Green part of the color
----@return number, number, number #number - Blue part of the color
+---@return number # Red part of the color.
+---@return number # Green part of the color
+---@return number # Blue part of the color
 function render.GetFogColor() end
 
 ---[CLIENT] Returns the fog start and end distance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetFogDistances)
----@return number, number, number #number - Fog start distance set by render.FogStart
----@return number, number, number #number - For end distance set by render.FogEnd
----@return number, number, number #number - Fog Z distance set by render.SetFogZ
+---@return number # Fog start distance set by render.FogStart
+---@return number # For end distance set by render.FogEnd
+---@return number # Fog Z distance set by render.SetFogZ
 function render.GetFogDistances() end
 
 ---[CLIENT] Returns the fog mode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetFogMode)
----@return number #Fog mode, see Enums/MATERIAL_FOG
+---@return number # Fog mode, see Enums/MATERIAL_FOG
 function render.GetFogMode() end
 
----[CLIENT] Returns the _rt_FullFrameDepth texture. Alias of _rt_PowerOfTwoFB
+---[CLIENT] Returns the `_rt_FullFrameDepth` texture. Alias of `_rt_PowerOfTwoFB`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetFullScreenDepthTexture)
 ---@return ITexture #
@@ -391,14 +403,14 @@ function render.GetFullScreenDepthTexture() end
 ---[CLIENT AND MENU] Returns whether HDR is currently enabled or not. This takes into account hardware support, current map and current client settings.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetHDREnabled)
----@return boolean #`true` if the player currently has HDR enabled.
+---@return boolean # `true` if the player currently has HDR enabled.
 function render.GetHDREnabled() end
 
 ---[CLIENT] Gets the light exposure on the specified position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetLightColor)
 ---@param position Vector The position of the surface to get the light from.
----@return Vector #lightColor
+---@return Vector # lightColor
 function render.GetLightColor(position) end
 
 ---[CLIENT]
@@ -428,7 +440,7 @@ function render.GetMorphTex1() end
 ---[CLIENT] Returns the render target's power of two texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetPowerOfTwoTexture)
----@return ITexture #The power of two texture, which is **_rt_poweroftwofb** by default.
+---@return ITexture # The power of two texture, which is **_rt_poweroftwofb** by default.
 function render.GetPowerOfTwoTexture() end
 
 ---[CLIENT] Alias of render.GetPowerOfTwoTexture.
@@ -442,13 +454,13 @@ function render.GetRefractTexture() end
 --- Instead of saving the current render target using this function and restoring to it later, it is generally better practice to use render.PushRenderTarget and render.PopRenderTarget.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetRenderTarget)
----@return ITexture #The currently active Render Target
+---@return ITexture # The currently active Render Target
 function render.GetRenderTarget() end
 
 ---[CLIENT] Returns the `_rt_ResolvedFullFrameDepth` texture for SSAO depth. It will only be updated if GM:NeedsDepthPass returns true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetResolvedFullFrameDepth)
----@return ITexture #The depth texture.
+---@return ITexture # The depth texture.
 function render.GetResolvedFullFrameDepth() end
 
 ---[CLIENT] Obtain an ITexture of the screen. You must call render.UpdateScreenEffectTexture in order to update this texture with the currently rendered scene.
@@ -457,7 +469,7 @@ function render.GetResolvedFullFrameDepth() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture)
 ---@param textureIndex? number Max index is 3, but engine only creates the first two for you.
----@return ITexture #The requested texture.
+---@return ITexture # The requested texture.
 function render.GetScreenEffectTexture(textureIndex) end
 
 ---[CLIENT]
@@ -477,13 +489,13 @@ function render.GetSmallTex1() end
 --- The gmodscreenspace doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSuperFPTex)
----@return ITexture #Render target named "__rt_supertexture1"
+---@return ITexture # Render target named "__rt_supertexture1"
 function render.GetSuperFPTex() end
 
 ---[CLIENT] See render.GetSuperFPTex
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSuperFPTex2)
----@return ITexture #Render target named "__rt_supertexture2"
+---@return ITexture # Render target named "__rt_supertexture2"
 function render.GetSuperFPTex2() end
 
 ---[CLIENT] Performs a render trace and returns the color of the surface hit, this uses a low res version of the texture.
@@ -491,20 +503,20 @@ function render.GetSuperFPTex2() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetSurfaceColor)
 ---@param startPos Vector The start position to trace from.
 ---@param endPos Vector The end position of the trace.
----@return Vector #color
+---@return Vector # color
 function render.GetSurfaceColor(startPos, endPos) end
 
 ---[CLIENT] Returns a vector representing linear tone mapping scale.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetToneMappingScaleLinear)
----@return Vector #The vector representing linear tone mapping scale.
+---@return Vector # The vector representing linear tone mapping scale.
 function render.GetToneMappingScaleLinear() end
 
 ---[CLIENT] Returns the current view setup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.GetViewSetup)
 ---@param noPlayer? boolean If `true`, returns the `view->GetViewSetup`, if `false` - returns `view->GetPlayerViewSetup`
----@return table #Current current view setup. See Structures/ViewSetup
+---@return table # Current current view setup. See Structures/ViewSetup
 function render.GetViewSetup(noPlayer) end
 
 ---[CLIENT] Sets the render material override for all next calls of Entity:DrawModel. Also overrides render.MaterialOverrideByIndex.
@@ -525,13 +537,13 @@ function render.MaterialOverrideByIndex(index, material) end
 ---[CLIENT AND MENU] Returns the maximum texture height the renderer can handle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.MaxTextureHeight)
----@return number #maxTextureHeight
+---@return number # maxTextureHeight
 function render.MaxTextureHeight() end
 
 ---[CLIENT AND MENU] Returns the maximum texture width the renderer can handle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.MaxTextureWidth)
----@return number #maxTextureWidth
+---@return number # maxTextureWidth
 function render.MaxTextureWidth() end
 
 ---[CLIENT] Creates a new Global.ClientsideModel, renders it at the specified pos/ang, and removes it. Can also be given an existing CSEnt to reuse instead.
@@ -580,13 +592,13 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 ---@param destBlendAlpha? number The destination alpha blend function Enums/BLEND.
 ---@param blendFuncAlpha? number The blend mode used for drawing the alpha layer Enums/BLENDFUNC.
 function render.OverrideBlend(
-	enabled,
-	srcBlend,
-	destBlend,
-	blendFunc,
-	srcBlendAlpha,
-	destBlendAlpha,
-	blendFuncAlpha
+  enabled,
+  srcBlend,
+  destBlend,
+  blendFunc,
+  srcBlendAlpha,
+  destBlendAlpha,
+  blendFuncAlpha
 )
 end
 
@@ -619,7 +631,7 @@ function render.OverrideColorWriteEnable(enable, shouldWrite) end
 ---@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the depth buffer or not. Has no effect if the previous argument is false.
 function render.OverrideDepthEnable(enable, shouldWrite) end
 
----[CLIENT AND MENU]
+---[CLIENT AND MENU] Perform stencil operations to every pixel on the screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PerformFullScreenStencilOperation)
 function render.PerformFullScreenStencilOperation() end
@@ -710,10 +722,10 @@ function render.PushRenderTarget(texture, x, y, w, h) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ReadPixel)
 ---@param x number The x coordinate.
 ---@param y number The y coordinate.
----@return number, number, number, number #number - The red channel value.
----@return number, number, number, number #number - The green channel value.
----@return number, number, number, number #number - The blue channel value.
----@return number, number, number, number #number - The alpha channel value or no value if the render target has no alpha channel.
+---@return number # The red channel value.
+---@return number # The green channel value.
+---@return number # The blue channel value.
+---@return number # The alpha channel value or no value if the render target has no alpha channel.
 function render.ReadPixel(x, y) end
 
 ---[CLIENT] This applies the changes made to map lighting using engine.LightStyle.
@@ -1038,25 +1050,25 @@ function render.StartBeam(segmentCount) end
 ---[CLIENT AND MENU] Returns whether the player's hardware supports HDR. (High Dynamic Range) HDR can still be disabled by the `mat_hdr_level` console variable or just not be supported by the map.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SupportsHDR)
----@return boolean #`true` if the player's hardware supports HDR.
+---@return boolean # `true` if the player's hardware supports HDR.
 function render.SupportsHDR() end
 
 ---[CLIENT AND MENU] Returns if the current settings and the system allow the usage of pixel shaders 1.4.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SupportsPixelShaders_1_4)
----@return boolean #Whether Pixel Shaders 1.4 are supported or not.
+---@return boolean # Whether Pixel Shaders 1.4 are supported or not.
 function render.SupportsPixelShaders_1_4() end
 
 ---[CLIENT AND MENU] Returns if the current settings and the system allow the usage of pixel shaders 2.0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SupportsPixelShaders_2_0)
----@return boolean #Whether Pixel Shaders 2.0 are supported or not.
+---@return boolean # Whether Pixel Shaders 2.0 are supported or not.
 function render.SupportsPixelShaders_2_0() end
 
 ---[CLIENT AND MENU] Returns if the current settings and the system allow the usage of vertex shaders 2.0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SupportsVertexShaders_2_0)
----@return boolean #Whether Vertex Shaders 2.0 are supported or not.
+---@return boolean # Whether Vertex Shaders 2.0 are supported or not.
 function render.SupportsVertexShaders_2_0() end
 
 ---[CLIENT] Suppresses or enables any engine lighting for any upcoming render operation.
@@ -1082,7 +1094,7 @@ function render.UpdateFullScreenDepthTexture() end
 ---[CLIENT] Updates the power of two texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.UpdatePowerOfTwoTexture)
----@return ITexture #Returns render.GetPowerOfTwoTexture.
+---@return ITexture # Returns render.GetPowerOfTwoTexture.
 function render.UpdatePowerOfTwoTexture() end
 
 ---[CLIENT] Pretty much alias of render.UpdatePowerOfTwoTexture but does not return the texture.

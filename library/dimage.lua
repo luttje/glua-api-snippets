@@ -24,13 +24,13 @@ function DImage:GetFailsafeMatName() end
 ---[CLIENT AND MENU] Returns the image loaded in the image panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetImage)
----@return string #The path to the image that is loaded.
+---@return string # The path to the image that is loaded.
 function DImage:GetImage() end
 
 ---[CLIENT AND MENU] Returns the color override of the image panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetImageColor)
----@return table #The color override of the image. Uses the Color.
+---@return table # The color override of the image. Uses the Color.
 function DImage:GetImageColor() end
 
 ---[CLIENT AND MENU] Returns whether the DImage should keep the aspect ratio of its image when being resized.
@@ -38,7 +38,7 @@ function DImage:GetImageColor() end
 --- See DImage:SetKeepAspect for more info on how it works.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImage:GetKeepAspect)
----@return boolean #Whether the DImage should keep the aspect ratio of its image when being resized.
+---@return boolean # Whether the DImage should keep the aspect ratio of its image when being resized.
 function DImage:GetKeepAspect() end
 
 ---[CLIENT AND MENU] Returns the current Global.Material of the DImage.

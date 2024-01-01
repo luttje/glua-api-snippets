@@ -24,31 +24,31 @@ function CNewParticleEffect:GetAutoUpdateBBox() end
 ---[CLIENT] Returns the name of the particle effect this system is set to emit.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetEffectName)
----@return string #The name of the particle effect.
+---@return string # The name of the particle effect.
 function CNewParticleEffect:GetEffectName() end
 
 ---[CLIENT] Returns the highest control point number for given particle system.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetHighestControlPoint)
----@return boolean #The highest control point number for given particle system, 0 to 63.
+---@return boolean # The highest control point number for given particle system, 0 to 63.
 function CNewParticleEffect:GetHighestControlPoint() end
 
 ---[CLIENT] Returns the owner of the particle system, the entity the particle system is attached to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetOwner)
----@return Entity #The owner of the particle system.
+---@return Entity # The owner of the particle system.
 function CNewParticleEffect:GetOwner() end
 
 ---[CLIENT] Returns whether the particle system has finished emitting particles or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsFinished)
----@return boolean #Whether the particle system has finished emitting particles or not.
+---@return boolean # Whether the particle system has finished emitting particles or not.
 function CNewParticleEffect:IsFinished() end
 
 ---[CLIENT] Returns whether the particle system is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsValid)
----@return boolean #Whether the particle system is valid or not.
+---@return boolean # Whether the particle system is valid or not.
 function CNewParticleEffect:IsValid() end
 
 ---[CLIENT] Returns whether the particle system is intended to be used on a view model?
@@ -124,10 +124,10 @@ function CNewParticleEffect:SetControlPointRightVector(cpID, right) end
 ---@param upward Vector The upward direction for given control point
 function CNewParticleEffect:SetControlPointUpVector(cpID, upward) end
 
----[CLIENT]
+---[CLIENT] Set whether this particle effect is a view model effect or not. This will have an effect on attachment positioning and other things.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetIsViewModelEffect)
----@param isViewModel boolean
+---@param isViewModel boolean Whether this particle effect is a view model effect or not.
 function CNewParticleEffect:SetIsViewModelEffect(isViewModel) end
 
 ---[CLIENT] Forces the particle system to stop automatically rendering.

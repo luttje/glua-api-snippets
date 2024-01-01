@@ -17,28 +17,33 @@ function DScrollPanel:Clear() end
 ---[CLIENT AND MENU] Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas)
----@return Panel #The canvas
+---@return Panel # The canvas
 function DScrollPanel:GetCanvas() end
 
----[CLIENT AND MENU] Gets the DScrollPanels padding
+---[CLIENT AND MENU] Gets the DScrollPanels padding, set by DScrollPanel:SetPadding.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetPadding)
----@return number #DScrollPanels padding
+---@return number # DScrollPanels padding
 function DScrollPanel:GetPadding() end
 
 ---[CLIENT AND MENU] Returns the vertical scroll bar of the panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
----@return Panel #The DVScrollBar.
+---@return Panel # The DVScrollBar.
 function DScrollPanel:GetVBar() end
 
 ---[CLIENT AND MENU] Return the width of the DScrollPanel's canvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:InnerWidth)
----@return number #The width of the DScrollPanel's canvas
+---@return number # The width of the DScrollPanel's canvas
 function DScrollPanel:InnerWidth() end
 
----[CLIENT AND MENU]
+---[CLIENT AND MENU] Used internally to rebuild the panel's children positioning. You should use Panel:InvalidateLayout instead.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:PerformLayoutInternal)
+function DScrollPanel:PerformLayoutInternal() end
+
+---[CLIENT AND MENU] Used internally to rebuild the panel's children positioning. You should use Panel:InvalidateLayout instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:Rebuild)
 function DScrollPanel:Rebuild() end

@@ -81,7 +81,7 @@ function saverestore.PreSave() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.ReadTable)
 ---@param save IRestore The restore object to read the table from.
----@return table #The table that has been read, if any
+---@return table # The table that has been read, if any
 function saverestore.ReadTable(save) end
 
 ---[SHARED] Loads a variable from the save game file that is being loaded.
@@ -90,7 +90,7 @@ function saverestore.ReadTable(save) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.ReadVar)
 ---@param save IRestore The restore object to read variables from.
----@return any #The variable that was read, if any.
+---@return any # The variable that was read, if any.
 function saverestore.ReadVar(save) end
 
 ---[SHARED] Saves entitys Entity:GetTable to the save game file that is being saved.
@@ -112,7 +112,7 @@ function saverestore.SaveGlobal(save) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.WritableKeysInTable)
 ---@param table table The table to test.
----@return number #The number of keys that can be written with saverestore.WriteTable.
+---@return number # The number of keys that can be written with saverestore.WriteTable.
 function saverestore.WritableKeysInTable(table) end
 
 ---[SHARED] Write a table to a save game file that is being saved.

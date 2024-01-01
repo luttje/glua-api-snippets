@@ -25,7 +25,7 @@ function file.Append(name, content) end
 --- * string data - The entirety of the data of the file.
 ---
 ---@param sync? boolean If `true` the file will be read synchronously.
----@return number #Enums/FSASYNC on success, Enums/FSASYNC on failure.
+---@return number # Enums/FSASYNC on success, Enums/FSASYNC on failure.
 function file.AsyncRead(fileName, gamePath, callback, sync) end
 
 ---[SHARED AND MENU] Creates a directory that is relative to the `data` folder.
@@ -48,10 +48,11 @@ function file.Delete(name, path) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Exists)
 ---@param name string The file or directory's name.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return boolean #Returns `true` if the file exists and `false` if it does not.
+---@return boolean # Returns `true` if the file exists and `false` if it does not.
 function file.Exists(name, gamePath) end
 
 ---[SHARED AND MENU] Returns a list of files and directories inside a single folder.
+--- 		It seems that paths with capital letters (e.g. lua/MyFolder/*) don't work as expected on Linux.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Find)
 ---@param name string The wildcard to search for. `models/*.mdl` will list **.mdl** files in the `models/` folder.
@@ -63,8 +64,8 @@ function file.Exists(name, gamePath) end
 --- * `dateasc` sort the files ascending by date.
 --- * `datedesc` sort the files descending by date.
 ---
----@return table, table #table - A table of found files, or `nil` if the path is invalid
----@return table, table #table - A table of found directories, or `nil` if the path is invalid
+---@return table # A table of found files, or `nil` if the path is invalid
+---@return table # A table of found directories, or `nil` if the path is invalid
 function file.Find(name, path, sorting) end
 
 ---[SHARED AND MENU] Returns whether the given file is a directory or not.
@@ -72,7 +73,7 @@ function file.Find(name, path, sorting) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.IsDir)
 ---@param fileName string The file or directory's name.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return boolean #`true` if the given path is a directory or `false` if it's a file.
+---@return boolean # `true` if the given path is a directory or `false` if it's a file.
 function file.IsDir(fileName, gamePath) end
 
 ---[SHARED AND MENU] Attempts to open a file with the given mode.
@@ -87,7 +88,7 @@ function file.IsDir(fileName, gamePath) end
 --- * **wb** - binary write mode
 --- * **ab** - binary append mode
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return file_class #The opened file object, or `nil` if it failed to open due to it not existing or being used by another process.
+---@return file_class # The opened file object, or `nil` if it failed to open due to it not existing or being used by another process.
 function file.Open(fileName, fileMode, gamePath) end
 
 ---[SHARED AND MENU] Returns the content of a file.
@@ -97,7 +98,7 @@ function file.Open(fileName, fileMode, gamePath) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Read)
 ---@param fileName string The name of the file.
 ---@param gamePath? string The path to look for the files and directories in. If this argument is set to `true` then the path will be `GAME`, otherwise if the argument is `false` or `nil` then the path will be `DATA`. See File_Search_Paths for a list of valid paths.
----@return string #The data from the file as a string, or `nil` if the file isn't found.
+---@return string # The data from the file as a string, or `nil` if the file isn't found.
 function file.Read(fileName, gamePath) end
 
 ---[SHARED AND MENU] Attempts to rename a file with the given name to another given name.
@@ -111,7 +112,7 @@ function file.Read(fileName, gamePath) end
 ---@param targetFileName string The target file or folder name. See file.Write for details on filename restrictions when writing to files.
 ---
 --- **This argument will be forced lowercase.**
----@return boolean #`true` on success, `false` otherwise.
+---@return boolean # `true` on success, `false` otherwise.
 function file.Rename(orignalFileName, targetFileName) end
 
 ---[SHARED AND MENU] Returns the file's size in bytes. If the file is not found, returns `-1`.
@@ -126,7 +127,7 @@ function file.Size(fileName, gamePath) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Time)
 ---@param path string The **file** or **folder** path.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return number #Seconds passed since Unix epoch.
+---@return number # Seconds passed since Unix epoch.
 function file.Time(path, gamePath) end
 
 ---[SHARED AND MENU] Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use file.Append.
@@ -152,6 +153,7 @@ function file.Time(path, gamePath) end
 --- * .ogg
 --- * .vcd
 --- * .dem
+--- * .gma
 ---
 --- Restricted symbols are: `" :`
 ---
@@ -169,7 +171,7 @@ function File:Close() end
 ---[SHARED AND MENU] Returns whether the File object has reached the end of file or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:EndOfFile)
----@return boolean #Whether the file has reached end or not.
+---@return boolean # Whether the file has reached end or not.
 function File:EndOfFile() end
 
 ---[SHARED AND MENU] Dumps the file changes to disk and saves the file.
@@ -187,25 +189,25 @@ function File:Read(length) end
 ---[SHARED AND MENU] Reads one byte of the file and returns whether that byte was not 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadBool)
----@return boolean #val
+---@return boolean # val
 function File:ReadBool() end
 
 ---[SHARED AND MENU] Reads one unsigned 8-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadByte)
----@return number #The unsigned 8-bit integer from the file.
+---@return number # The unsigned 8-bit integer from the file.
 function File:ReadByte() end
 
 ---[SHARED AND MENU] Reads an 8-byte little-endian IEEE-754 floating point double from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadDouble)
----@return number #The double-precision floating point value read from the file.
+---@return number # The double-precision floating point value read from the file.
 function File:ReadDouble() end
 
 ---[SHARED AND MENU] Reads an IEEE 754 little-endian 4-byte float from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadFloat)
----@return number #The read value
+---@return number # The read value
 function File:ReadFloat() end
 
 ---[SHARED AND MENU] Returns the contents of the file from the current position up until the end of the current line.
@@ -214,37 +216,37 @@ function File:ReadFloat() end
 --- This function will not return more than 8192 characters. The return value will include the `\n` character.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadLine)
----@return string #The string of data from the read line.
+---@return string # The string of data from the read line.
 function File:ReadLine() end
 
 ---[SHARED AND MENU] Reads a signed little-endian 32-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadLong)
----@return number #A signed 32-bit integer
+---@return number # A signed 32-bit integer
 function File:ReadLong() end
 
 ---[SHARED AND MENU] Reads a signed little-endian 16-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadShort)
----@return number #int16
+---@return number # int16
 function File:ReadShort() end
 
 ---[SHARED AND MENU] Reads an unsigned 64-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadUInt64)
----@return number #An unsigned 64-bit integer
+---@return string # An unsigned 64-bit integer. Since Lua cannot store full 64-bit integers, this function returns a string. It is mainly aimed at usage with Player:SteamID64.
 function File:ReadUInt64() end
 
 ---[SHARED AND MENU] Reads an unsigned little-endian 32-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadULong)
----@return number #An unsigned 32-bit integer
+---@return number # An unsigned 32-bit integer
 function File:ReadULong() end
 
 ---[SHARED AND MENU] Reads an unsigned little-endian 16-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadUShort)
----@return number #The 16-bit integer
+---@return number # The 16-bit integer
 function File:ReadUShort() end
 
 ---[SHARED AND MENU] Sets the file pointer to the specified position.
@@ -263,13 +265,13 @@ function File:Size() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:Skip)
 ---@param amount number The amount of chars to skip, can be negative to skip backwards.
----@return number #amount
+---@return number # amount
 function File:Skip(amount) end
 
 ---[SHARED AND MENU] Returns the current position of the file pointer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:Tell)
----@return number #pos
+---@return number # pos
 function File:Tell() end
 
 ---[SHARED AND MENU] Writes the given string into the file.
@@ -317,7 +319,10 @@ function File:WriteShort(int16) end
 ---[SHARED AND MENU] Writes an unsigned 64-bit integer to the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:WriteUInt64)
----@param uint64 number The unsigned 64-bit integer to be written to the file.
+---@param uint64 string The unsigned 64-bit integer to be written to the file.
+---
+--- Since Lua cannot store full 64-bit integers, this function takes a string. It is mainly aimed at usage with Player:SteamID64.
+---
 function File:WriteUInt64(uint64) end
 
 ---[SHARED AND MENU] Writes an unsigned little-endian 32-bit integer to the file.

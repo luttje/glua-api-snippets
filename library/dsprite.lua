@@ -6,10 +6,10 @@ local DSprite = {}
 ---[CLIENT] Gets the color the sprite is using as a modifier.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetColor)
----@return table #The Global.Color being used.
+---@return table # The Global.Color being used.
 function DSprite:GetColor() end
 
----[CLIENT] No Description
+---[CLIENT] Returns the value set by DSprite:SetHandle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetHandle)
 ---@return Vector #
@@ -18,13 +18,13 @@ function DSprite:GetHandle() end
 ---[CLIENT] Gets the material the sprite is using.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetMaterial)
----@return IMaterial #The material in use.
+---@return IMaterial # The material in use.
 function DSprite:GetMaterial() end
 
 ---[CLIENT] Gets the 2D rotation angle of the sprite, in the plane of the screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetRotation)
----@return number #The anti-clockwise rotation in degrees.
+---@return number # The anti-clockwise rotation in degrees.
 function DSprite:GetRotation() end
 
 ---[CLIENT] Sets the color modifier for the sprite.

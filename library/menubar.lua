@@ -14,7 +14,7 @@ function menubar.Init() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.IsParent)
 ---@param pnl Panel The panel to check
----@return boolean #Is parent or not
+---@return boolean # Is parent or not
 function menubar.IsParent(pnl) end
 
 ---[CLIENT] Parents the menubar to the panel and displays the menubar.

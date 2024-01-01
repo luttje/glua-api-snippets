@@ -6,7 +6,7 @@ local DIconLayout = {}
 ---[CLIENT AND MENU] Creates a replica of the DIconLayout it is called on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:Copy)
----@return Panel #The replica.
+---@return Panel # The replica.
 function DIconLayout:Copy() end
 
 ---[CLIENT AND MENU] Copies the contents (Child elements) of another DIconLayout to itself.
@@ -24,19 +24,19 @@ function DIconLayout:GetBorder() end
 ---[CLIENT AND MENU] Returns the direction that it will be layed out, using the DOCK enumerations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetLayoutDir)
----@return number #Layout direction.
+---@return number # Layout direction.
 function DIconLayout:GetLayoutDir() end
 
 ---[CLIENT AND MENU] Returns the distance between two 'icons' on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetSpaceX)
----@return number #Distance between two 'icons' on the X axis.
+---@return number # Distance between two 'icons' on the X axis.
 function DIconLayout:GetSpaceX() end
 
 ---[CLIENT AND MENU] Returns distance between two "Icons" on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetSpaceY)
----@return number #distance between two "Icons" on the Y axis.
+---@return number # distance between two "Icons" on the Y axis.
 function DIconLayout:GetSpaceY() end
 
 ---[CLIENT AND MENU] Returns whether the icon layout will stretch its height to fit all the children.

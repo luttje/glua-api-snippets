@@ -16,7 +16,7 @@ function properties.Add(name, propertyData) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.CanBeTargeted)
 ---@param ent Entity The entity to test
 ---@param ply Player If given, will also perform a distance check based on the entity's Orientated Bounding Box.
----@return boolean #True if entity can be targeted, false otherwise
+---@return boolean # True if entity can be targeted, false otherwise
 function properties.CanBeTargeted(ent, ply) end
 
 ---[CLIENT] Returns an entity player is hovering over with their cursor.
@@ -24,7 +24,7 @@ function properties.CanBeTargeted(ent, ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.GetHovered)
 ---@param pos Vector Eye position of local player, Entity:EyePos
 ---@param aimVec Vector Aim vector of local player, Player:GetAimVector
----@return Entity #The hovered entity
+---@return Entity # The hovered entity
 function properties.GetHovered(pos, aimVec) end
 
 ---[SHARED] Checks if player hovers over any entities and open a properties menu for it.

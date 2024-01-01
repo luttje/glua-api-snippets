@@ -42,7 +42,7 @@ function cam.EndOrthoView() end
 --- 	This function essentially returns the copy of the last pushed model matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.GetModelMatrix)
----@return VMatrix #The currently active matrix.
+---@return VMatrix # The currently active matrix.
 function cam.GetModelMatrix() end
 
 ---[CLIENT] Tells the renderer to ignore the depth buffer and draw any upcoming operation "ontop" of everything that was drawn yet.

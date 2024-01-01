@@ -12,14 +12,14 @@ local IMaterial = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetColor)
 ---@param x number The X coordinate.
 ---@param y number The Y coordinate.
----@return table #The color of the pixel as a Color.
+---@return table # The color of the pixel as a Color.
 function IMaterial:GetColor(x, y) end
 
 ---[SHARED AND MENU] Returns the specified material value as a float, or nil if the value is not set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetFloat)
 ---@param materialFloat string The name of the material value.
----@return number #float
+---@return number # float
 function IMaterial:GetFloat(materialFloat) end
 
 ---[SHARED AND MENU] Returns the specified material value as a int, rounds the value if its a float, or nil if the value is not set.
@@ -28,26 +28,26 @@ function IMaterial:GetFloat(materialFloat) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetInt)
 ---@param materialInt string The name of the material integer.
----@return number #The retrieved value as an integer
+---@return number # The retrieved value as an integer
 function IMaterial:GetInt(materialInt) end
 
 ---[SHARED] Gets all the key values defined for the material.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetKeyValues)
----@return table #The material's key values.
+---@return table # The material's key values.
 function IMaterial:GetKeyValues() end
 
 ---[SHARED] Returns the specified material matrix as a int, or nil if the value is not set or is not a matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetMatrix)
 ---@param materialMatrix string The name of the material matrix.
----@return VMatrix #matrix
+---@return VMatrix # matrix
 function IMaterial:GetMatrix(materialMatrix) end
 
 ---[SHARED AND MENU] Returns the name of the material, in most cases the path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetName)
----@return string #Material name/path
+---@return string # Material name/path
 function IMaterial:GetName() end
 
 ---[SHARED AND MENU] Returns the name of the materials shader.
@@ -55,21 +55,21 @@ function IMaterial:GetName() end
 --- This function does not work serverside on Linux SRCDS.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetShader)
----@return string #shaderName
+---@return string # shaderName
 function IMaterial:GetShader() end
 
 ---[SHARED AND MENU] Returns the specified material string, or nil if the value is not set or if the value can not be converted to a string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetString)
 ---@param materialString string The name of the material string.
----@return string #The value as a string
+---@return string # The value as a string
 function IMaterial:GetString(materialString) end
 
 ---[SHARED AND MENU] Returns an ITexture based on the passed shader parameter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)
 ---@param param string The [shader parameter](https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters) to retrieve. This should normally be `$basetexture`.
----@return ITexture #The value of the shader parameter. Returns nothing if the param doesn't exist.
+---@return ITexture # The value of the shader parameter. Returns nothing if the param doesn't exist.
 function IMaterial:GetTexture(param) end
 
 ---[SHARED AND MENU] Returns the specified material vector, or nil if the value is not set.
@@ -78,17 +78,17 @@ function IMaterial:GetTexture(param) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVector)
 ---@param materialVector string The name of the material vector.
----@return Vector #The color vector
+---@return Vector # The color vector
 function IMaterial:GetVector(materialVector) end
 
 ---[SHARED AND MENU] Returns the specified material vector as a 4 component vector.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVector4D)
 ---@param name string The name of the material vector to retrieve.
----@return number, number, number, number #number - The x component of the vector.
----@return number, number, number, number #number - The y component of the vector.
----@return number, number, number, number #number - The z component of the vector.
----@return number, number, number, number #number - The w component of the vector.
+---@return number # The x component of the vector.
+---@return number # The y component of the vector.
+---@return number # The z component of the vector.
+---@return number # The w component of the vector.
 function IMaterial:GetVector4D(name) end
 
 ---[SHARED AND MENU] Returns the specified material linear color vector, or nil if the value is not set.
@@ -99,19 +99,19 @@ function IMaterial:GetVector4D(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVectorLinear)
 ---@param materialVector string The name of the material vector.
----@return Vector #The linear color vector
+---@return Vector # The linear color vector
 function IMaterial:GetVectorLinear(materialVector) end
 
 ---[SHARED AND MENU] Returns the height of the member texture set for $basetexture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Height)
----@return number #height
+---@return number # height
 function IMaterial:Height() end
 
 ---[SHARED AND MENU] Returns whenever the material is valid, i.e. whether it was not loaded successfully from disk or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:IsError)
----@return boolean #Is this material the error material? (___error)
+---@return boolean # Is this material the error material? (___error)
 function IMaterial:IsError() end
 
 ---[SHARED AND MENU] Recomputes the material's snapshot. This needs to be called if you have changed variables on your material and it isn't changing.
@@ -198,5 +198,5 @@ function IMaterial:SetVector4D(name, x, y, z, w) end
 ---[SHARED AND MENU] Returns the width of the member texture set for $basetexture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Width)
----@return number #width
+---@return number # width
 function IMaterial:Width() end

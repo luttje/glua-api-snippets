@@ -3,64 +3,69 @@
 ---@class DVerticalDivider : DPanel
 local DVerticalDivider = {}
 
+---[CLIENT] Used internally to clamp the vertical divider to DVerticalDivider:GetTopMin and DVerticalDivider:GetBottomMin.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:DoConstraints)
+function DVerticalDivider:DoConstraints() end
+
 ---[CLIENT] Returns the bottom content panel of the DVerticalDivider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetBottom)
----@return Panel #The bottom content panel.
+---@return Panel # The bottom content panel.
 function DVerticalDivider:GetBottom() end
 
 ---[CLIENT] Returns the minimum height of the bottom content panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetBottomMin)
----@return number #The minimum height of the bottom content panel.
+---@return number # The minimum height of the bottom content panel.
 function DVerticalDivider:GetBottomMin() end
 
 ---[CLIENT] Returns the height of the divider bar between the top and bottom content panels of the DVerticalDivider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetDividerHeight)
----@return number #The height of the divider bar.
+---@return number # The height of the divider bar.
 function DVerticalDivider:GetDividerHeight() end
 
 ---[CLIENT] Returns whether the divider is being dragged or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetDragging)
----@return boolean #If true, mouse movement will alter the size of the divider.
+---@return boolean # If true, mouse movement will alter the size of the divider.
 function DVerticalDivider:GetDragging() end
 
 ---[CLIENT] Returns the local Y position of where the user starts dragging the divider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetHoldPos)
----@return number #The local Y position where divider dragging has started.
+---@return number # The local Y position where divider dragging has started.
 function DVerticalDivider:GetHoldPos() end
 
 ---[CLIENT] Returns the middle content panel of the DVerticalDivider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetMiddle)
----@return Panel #The middle content panel.
+---@return Panel # The middle content panel.
 function DVerticalDivider:GetMiddle() end
 
 ---[CLIENT] Returns the top content panel of the DVerticalDivider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetTop)
----@return Panel #The top content panel.
+---@return Panel # The top content panel.
 function DVerticalDivider:GetTop() end
 
 ---[CLIENT] Returns the current height of the top content panel set by DVerticalDivider:SetTopHeight or by the user.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetTopHeight)
----@return number #The current height of the DVerticalDivider.
+---@return number # The current height of the DVerticalDivider.
 function DVerticalDivider:GetTopHeight() end
 
 ---[CLIENT] Returns the maximum height of the top content panel. See DVerticalDivider:SetTopMax for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetTopMax)
----@return number #The maximum height of the top content panel.
+---@return number # The maximum height of the top content panel.
 function DVerticalDivider:GetTopMax() end
 
 ---[CLIENT] Returns the minimum height of the top content panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVerticalDivider:GetTopMin)
----@return number #The minimum height of the top content panel.
+---@return number # The minimum height of the top content panel.
 function DVerticalDivider:GetTopMin() end
 
 ---[CLIENT] Sets the passed panel as the bottom content of the DVerticalDivider.

@@ -28,61 +28,61 @@ function CUserCmd:ClearMovement() end
 --- The value returned is occasionally 0 inside GM:CreateMove and GM:StartCommand. It is advised to check for a non-zero value if you wish to get the correct number.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:CommandNumber)
----@return number #The command number
+---@return number # The command number
 function CUserCmd:CommandNumber() end
 
 ---[SHARED] Returns a bitflag indicating which buttons are pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetButtons)
----@return number #Pressed buttons, see Enums/IN
+---@return number # Pressed buttons, see Enums/IN
 function CUserCmd:GetButtons() end
 
 ---[SHARED] The speed the client wishes to move forward with, negative if the clients wants to move backwards.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetForwardMove)
----@return number #The desired speed
+---@return number # The desired speed
 function CUserCmd:GetForwardMove() end
 
 ---[SHARED] Gets the current impulse from the client, usually 0. [See impulses list](https://developer.valvesoftware.com/wiki/Impulse) and some CUserCmd:SetImpulse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetImpulse)
----@return number #The impulse
+---@return number # The impulse
 function CUserCmd:GetImpulse() end
 
 ---[SHARED] Returns the scroll delta as whole number.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetMouseWheel)
----@return number #Scroll delta
+---@return number # Scroll delta
 function CUserCmd:GetMouseWheel() end
 
 ---[SHARED] Returns the delta of the angular horizontal mouse movement of the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetMouseX)
----@return number #xDelta
+---@return number # xDelta
 function CUserCmd:GetMouseX() end
 
 ---[SHARED] Returns the delta of the angular vertical mouse movement of the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetMouseY)
----@return number #yDelta
+---@return number # yDelta
 function CUserCmd:GetMouseY() end
 
 ---[SHARED] The speed the client wishes to move sideways with, positive if it wants to move right, negative if it wants to move left.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetSideMove)
----@return number #requestSpeed
+---@return number # requestSpeed
 function CUserCmd:GetSideMove() end
 
 ---[SHARED] The speed the client wishes to move up with, negative if the clients wants to move down.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetUpMove)
----@return number #requestSpeed
+---@return number # requestSpeed
 function CUserCmd:GetUpMove() end
 
 ---[SHARED] Gets the direction the player is looking in.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:GetViewAngles)
----@return Angle #The direction the player is looking in.
+---@return Angle # The direction the player is looking in.
 function CUserCmd:GetViewAngles() end
 
 ---[SHARED] When players are not sending usercommands to the server (often due to lag), their last usercommand will be executed multiple times as a backup. This function returns true if that is happening.
@@ -90,14 +90,14 @@ function CUserCmd:GetViewAngles() end
 --- This will never return true clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:IsForced)
----@return boolean #isForced
+---@return boolean # isForced
 function CUserCmd:IsForced() end
 
 ---[SHARED] Returns true if the specified button(s) is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:KeyDown)
 ---@param key number Bitflag representing which button to check, see Enums/IN.
----@return boolean #Is key down or not
+---@return boolean # Is key down or not
 function CUserCmd:KeyDown(key) end
 
 ---[SHARED] Removes a key bit from the current key bitflag.
@@ -204,5 +204,5 @@ function CUserCmd:SetViewAngles(viewAngle) end
 --- Returns 0 clientside during prediction calls. If you are trying to use CUserCmd:Set*() on the client in a movement or command hook, keep doing so till TickCount returns a non-zero number to maintain prediction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CUserCmd:TickCount)
----@return number #The amount of ticks passed since joining the server.
+---@return number # The amount of ticks passed since joining the server.
 function CUserCmd:TickCount() end

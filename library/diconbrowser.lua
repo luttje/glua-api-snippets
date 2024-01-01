@@ -23,7 +23,7 @@ function DIconBrowser:GetManual() end
 ---[CLIENT AND MENU] Returns the currently selected icon's file path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:GetSelectedIcon)
----@return string #The currently selected icon's file path.
+---@return string # The currently selected icon's file path.
 function DIconBrowser:GetSelectedIcon() end
 
 ---[CLIENT AND MENU] Called when the selected icon was changed. Use DIconBrowser:GetSelectedIcon to get the selected icon's filepath.

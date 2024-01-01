@@ -22,7 +22,7 @@ function cvars.AddChangeCallback(name, callback, identifier) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.Bool)
 ---@param cvar string Name of console variable
 ---@param default? boolean The value to return if the console variable does not exist
----@return boolean #Retrieved value
+---@return boolean # Retrieved value
 function cvars.Bool(cvar, default) end
 
 ---[SHARED AND MENU] Returns a table of the given ConVars callbacks.
@@ -33,7 +33,7 @@ function cvars.Bool(cvar, default) end
 ---
 ---
 --- This argument is internal and should not be used.
----@return table #A table of the convar's callbacks, or nil if the convar doesn't exist.
+---@return table # A table of the convar's callbacks, or nil if the convar doesn't exist.
 function cvars.GetConVarCallbacks(name, createIfNotFound) end
 
 ---[SHARED AND MENU] Retrieves console variable as a number.
@@ -41,7 +41,7 @@ function cvars.GetConVarCallbacks(name, createIfNotFound) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.Number)
 ---@param cvar string Name of console variable
 ---@param default? any The value to return if the console variable does not exist
----@return number #Retrieved value
+---@return number # Retrieved value
 function cvars.Number(cvar, default) end
 
 ---[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.
@@ -66,5 +66,5 @@ function cvars.RemoveChangeCallback(name, indentifier) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.String)
 ---@param cvar string Name of console variable
 ---@param default? any The value to return if the console variable does not exist
----@return string #Retrieved value
+---@return string # Retrieved value
 function cvars.String(cvar, default) end

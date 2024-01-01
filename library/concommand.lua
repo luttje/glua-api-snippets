@@ -29,14 +29,14 @@ function concommand.Add(name, callback, autoComplete, helpText, flags) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
 ---@param command string Name of command
 ---@param arguments string Arguments given to the command
----@return table #Possibilities for auto-completion. This is the return value of the auto-complete callback.
+---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
 function concommand.AutoComplete(command, arguments) end
 
 ---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
----@return table, table #table - Table of command callback functions.
----@return table, table #table - Table of command autocomplete functions.
+---@return table # Table of command callback functions.
+---@return table # Table of command autocomplete functions.
 function concommand.GetTable() end
 
 ---[SHARED AND MENU] Removes a console command.
@@ -59,5 +59,5 @@ function concommand.Remove(name) end
 ---@param args any Command arguments.
 --- Can be table or string
 ---@param argumentString string string of all arguments sent to the command
----@return boolean #`true` if the console command with the given name exists, and `false` if it doesn't.
+---@return boolean # `true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end

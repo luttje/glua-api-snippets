@@ -20,13 +20,21 @@ function Angle:Div(scalar) end
 ---[SHARED AND MENU] Returns a normal vector facing in the direction that the angle points.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Forward)
----@return Vector #The forward direction of the angle
+---@return Vector # The forward direction of the angle
 function Angle:Forward() end
+
+---[SHARED AND MENU] Returns if the angle is equal to another angle with the given tolerance.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsEqualTol)
+---@param compare Angle The angle to compare to.
+---@param tolerance number The tolerance range.
+---@return boolean # Are the angles equal or not.
+function Angle:IsEqualTol(compare, tolerance) end
 
 ---[SHARED AND MENU] Returns whether the pitch, yaw and roll are 0 or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsZero)
----@return boolean #Whether the pitch, yaw and roll are 0 or not.
+---@return boolean # Whether the pitch, yaw and roll are 0 or not.
 function Angle:IsZero() end
 
 ---[SHARED AND MENU] Multiplies a scalar to all the values of the orignal angle. This functions the same as num * angle without creating a new angle object, skipping object construction and garbage collection.
@@ -50,7 +58,7 @@ function Angle:Random(min, max) end
 ---[SHARED AND MENU] Returns a normal vector facing in the direction that points right relative to the angle's direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Right)
----@return Vector #The right direction of the angle
+---@return Vector # The right direction of the angle
 function Angle:Right() end
 
 ---[SHARED AND MENU] Rotates the angle around the specified axis by the specified degrees.
@@ -81,7 +89,7 @@ function Angle:SetUnpacked(p, y, r) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:SnapTo)
 ---@param axis string The component/axis to snap. Can be either `p`/`pitch`, `y`/`yaw` or `r`/`roll`.
 ---@param target number The target angle snap interval
----@return Angle #The snapped angle.
+---@return Angle # The snapped angle.
 function Angle:SnapTo(axis, target) end
 
 ---[SHARED AND MENU] Subtracts the values of the argument angle to the orignal angle. This functions the same as angle1 - angle2 without creating a new angle object, skipping object construction and garbage collection.
@@ -93,21 +101,21 @@ function Angle:Sub(angle) end
 ---[SHARED AND MENU] Returns the angle as a table with three elements.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:ToTable)
----@return table #The table with elements 1 = p, 2 = y, 3 = r.
+---@return table # The table with elements 1 = p, 2 = y, 3 = r.
 function Angle:ToTable() end
 
 ---[SHARED AND MENU] Returns the pitch, yaw, and roll components of the angle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Unpack)
----@return number, number, number #number - p, pitch, x, or Angle[1].
----@return number, number, number #number - y, yaw, or Angle[2].
----@return number, number, number #number - r, roll, r, or Angle[3].
+---@return number # p, pitch, x, or Angle[1].
+---@return number # y, yaw, or Angle[2].
+---@return number # r, roll, r, or Angle[3].
 function Angle:Unpack() end
 
 ---[SHARED AND MENU] Returns a normal vector facing in the direction that points up relative to the angle's direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Up)
----@return Vector #The up direction of the angle.
+---@return Vector # The up direction of the angle.
 function Angle:Up() end
 
 ---[SHARED AND MENU] Sets pitch, yaw and roll to 0.

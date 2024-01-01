@@ -1935,77 +1935,77 @@ LAST_SHARED_COLLISION_GROUP = 21
 
 ---@enum COND
 local COND = {
-	BEHIND_ENEMY = 29,
-	BETTER_WEAPON_AVAILABLE = 46,
-	CAN_MELEE_ATTACK1 = 23,
-	CAN_MELEE_ATTACK2 = 24,
-	CAN_RANGE_ATTACK1 = 21,
-	CAN_RANGE_ATTACK2 = 22,
-	ENEMY_DEAD = 30,
-	ENEMY_FACING_ME = 28,
-	ENEMY_OCCLUDED = 13,
-	ENEMY_TOO_FAR = 27,
-	ENEMY_UNREACHABLE = 31,
-	ENEMY_WENT_NULL = 12,
-	FLOATING_OFF_GROUND = 61,
-	GIVE_WAY = 48,
-	HAVE_ENEMY_LOS = 15,
-	HAVE_TARGET_LOS = 16,
-	HEALTH_ITEM_AVAILABLE = 47,
-	HEAR_BUGBAIT = 52,
-	HEAR_BULLET_IMPACT = 56,
-	HEAR_COMBAT = 53,
-	HEAR_DANGER = 50,
-	HEAR_MOVE_AWAY = 58,
-	HEAR_PHYSICS_DANGER = 57,
-	HEAR_PLAYER = 55,
-	HEAR_SPOOKY = 59,
-	HEAR_THUMPER = 51,
-	HEAR_WORLD = 54,
-	HEAVY_DAMAGE = 18,
-	IDLE_INTERRUPT = 2,
-	IN_PVS = 1,
-	LIGHT_DAMAGE = 17,
-	LOST_ENEMY = 11,
-	LOST_PLAYER = 33,
-	LOW_PRIMARY_AMMO = 3,
-	MOBBED_BY_ENEMIES = 62,
-	NEW_ENEMY = 26,
-	NO_CUSTOM_INTERRUPTS = 70,
-	NO_HEAR_DANGER = 60,
-	NO_PRIMARY_AMMO = 4,
-	NO_SECONDARY_AMMO = 5,
-	NO_WEAPON = 6,
-	NONE = 0, --[[ No additional conditions are being played ]]
-	NOT_FACING_ATTACK = 40,
-	NPC_FREEZE = 67, --[[ Freezes NPC movement ]]
-	NPC_UNFREEZE = 68, --[[ Unfreezes NPC movement ]]
-	PHYSICS_DAMAGE = 19,
-	PLAYER_ADDED_TO_SQUAD = 64,
-	PLAYER_PUSHING = 66,
-	PLAYER_REMOVED_FROM_SQUAD = 65,
-	PROVOKED = 25,
-	RECEIVED_ORDERS = 63,
-	REPEATED_DAMAGE = 20,
-	SCHEDULE_DONE = 36,
-	SEE_DISLIKE = 9,
-	SEE_ENEMY = 10,
-	SEE_FEAR = 8,
-	SEE_HATE = 7,
-	SEE_NEMESIS = 34,
-	SEE_PLAYER = 32,
-	SMELL = 37,
-	TALKER_RESPOND_TO_QUESTION = 69,
-	TARGET_OCCLUDED = 14,
-	TASK_FAILED = 35,
-	TOO_CLOSE_TO_ATTACK = 38,
-	TOO_FAR_TO_ATTACK = 39,
-	WAY_CLEAR = 49,
-	WEAPON_BLOCKED_BY_FRIEND = 42,
-	WEAPON_HAS_LOS = 41,
-	WEAPON_PLAYER_IN_SPREAD = 43,
-	WEAPON_PLAYER_NEAR_TARGET = 44,
-	undefined = 45,
+  BEHIND_ENEMY = 29,
+  BETTER_WEAPON_AVAILABLE = 46,
+  CAN_MELEE_ATTACK1 = 23,
+  CAN_MELEE_ATTACK2 = 24,
+  CAN_RANGE_ATTACK1 = 21,
+  CAN_RANGE_ATTACK2 = 22,
+  ENEMY_DEAD = 30,
+  ENEMY_FACING_ME = 28,
+  ENEMY_OCCLUDED = 13,
+  ENEMY_TOO_FAR = 27,
+  ENEMY_UNREACHABLE = 31,
+  ENEMY_WENT_NULL = 12,
+  FLOATING_OFF_GROUND = 61,
+  GIVE_WAY = 48,
+  HAVE_ENEMY_LOS = 15,
+  HAVE_TARGET_LOS = 16,
+  HEALTH_ITEM_AVAILABLE = 47,
+  HEAR_BUGBAIT = 52,
+  HEAR_BULLET_IMPACT = 56,
+  HEAR_COMBAT = 53,
+  HEAR_DANGER = 50,
+  HEAR_MOVE_AWAY = 58,
+  HEAR_PHYSICS_DANGER = 57,
+  HEAR_PLAYER = 55,
+  HEAR_SPOOKY = 59,
+  HEAR_THUMPER = 51,
+  HEAR_WORLD = 54,
+  HEAVY_DAMAGE = 18,
+  IDLE_INTERRUPT = 2,
+  IN_PVS = 1,
+  LIGHT_DAMAGE = 17,
+  LOST_ENEMY = 11,
+  LOST_PLAYER = 33,
+  LOW_PRIMARY_AMMO = 3,
+  MOBBED_BY_ENEMIES = 62,
+  NEW_ENEMY = 26,
+  NO_CUSTOM_INTERRUPTS = 70,
+  NO_HEAR_DANGER = 60,
+  NO_PRIMARY_AMMO = 4,
+  NO_SECONDARY_AMMO = 5,
+  NO_WEAPON = 6,
+  NONE = 0, --[[ No additional conditions are being played ]]
+  NOT_FACING_ATTACK = 40,
+  NPC_FREEZE = 67, --[[ Freezes NPC movement ]]
+  NPC_UNFREEZE = 68, --[[ Unfreezes NPC movement ]]
+  PHYSICS_DAMAGE = 19,
+  PLAYER_ADDED_TO_SQUAD = 64,
+  PLAYER_PUSHING = 66,
+  PLAYER_REMOVED_FROM_SQUAD = 65,
+  PROVOKED = 25,
+  RECEIVED_ORDERS = 63,
+  REPEATED_DAMAGE = 20,
+  SCHEDULE_DONE = 36,
+  SEE_DISLIKE = 9,
+  SEE_ENEMY = 10,
+  SEE_FEAR = 8,
+  SEE_HATE = 7,
+  SEE_NEMESIS = 34,
+  SEE_PLAYER = 32,
+  SMELL = 37,
+  TALKER_RESPOND_TO_QUESTION = 69,
+  TARGET_OCCLUDED = 14,
+  TASK_FAILED = 35,
+  TOO_CLOSE_TO_ATTACK = 38,
+  TOO_FAR_TO_ATTACK = 39,
+  WAY_CLEAR = 49,
+  WEAPON_BLOCKED_BY_FRIEND = 42,
+  WEAPON_HAS_LOS = 41,
+  WEAPON_PLAYER_IN_SPREAD = 43,
+  WEAPON_PLAYER_NEAR_TARGET = 44,
+  undefined = 45,
 }
 
 ---@enum CONTENTS
@@ -2218,7 +2218,7 @@ EFL_DORMANT = 2
 EFL_NOCLIP_ACTIVE = 4
 --- Set while a model is setting up its bones
 EFL_SETTING_UP_BONES = 8
---- This is a special entity that should not be deleted when we restart entities only
+--- This is a special entity that should not be deleted when we respawn entities via game.CleanUpMap.
 EFL_KEEP_ON_RECREATE_ENTITIES = 16
 --- One of the child entities is a player
 EFL_HAS_PLAYER_CHILD = 16
@@ -2552,6 +2552,26 @@ GMOD_CHANNEL_PLAYING = 1
 GMOD_CHANNEL_PAUSED = 2
 --- The channel is buffering
 GMOD_CHANNEL_STALLED = 3
+
+---@enum GOALTYPE
+--- No goal type.
+GOALTYPE_NONE = 0
+--- The goal type is an entity.
+GOALTYPE_TARGETENT = 1
+--- The goal type is the enemy entity.
+GOALTYPE_ENEMY = 2
+--- The goal type is a path corner.
+GOALTYPE_PATHCORNER = 3
+--- The goal type is a position.
+GOALTYPE_LOCATION = 4
+--- The goal type is a node nearest to a certain position.
+GOALTYPE_LOCATION_NEAREST_NODE = 5
+--- Goal type is a flank location.
+GOALTYPE_FLANK = 6
+--- Goal type is a cover spot.
+GOALTYPE_COVER = 7
+--- Invalid goal type.
+GOALTYPE_INVALID = 8
 
 ---@enum HITGROUP
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
@@ -3138,12 +3158,15 @@ NAV_MESH_STAIRS = 4096
 NAV_MESH_NO_MERGE = 8192
 --- This nav area is the climb point on the tip of an obstacle
 NAV_MESH_OBSTACLE_TOP = 16384
---- This nav area is adjacent to a drop of at least CliffHeight
+--- This nav area is adjacent to a drop of at least `CliffHeight` (300 hammer units). Unused by base game.
 NAV_MESH_CLIFF = 32768
---- Area has designer specified cost controlled by func_nav_cost entities
+--- Area has designer specified cost controlled by `func_nav_cost` entities
 NAV_MESH_FUNC_COST = 536870912
+--- Whether the area has a `prop_door_rotating` that is blocking it (because the door is closed)
+NAV_MESH_BLOCKED_PROPDOOR = 268435456
 --- Area is in an elevator's path
 NAV_MESH_HAS_ELEVATOR = 1073741824
+--- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.
 NAV_MESH_NAV_BLOCKER = -2147483648
 
 ---@enum NavCorner
@@ -3451,9 +3474,9 @@ SCHED_FEAR_FACE = 14
 SCHED_FLEE_FROM_BEST_SOUND = 29
 --- Plays ACT_FLINCH_PHYSICS.
 SCHED_FLINCH_PHYSICS = 80
---- Force walk to position (debug).
+--- Force walk to SaveValue: m_vecLastPosition (debug).
 SCHED_FORCED_GO = 71
---- Force run to position (debug).
+--- Force run to SaveValue: m_vecLastPosition (debug).
 SCHED_FORCED_GO_RUN = 72
 --- Pick up item if within a radius of 5 units.
 SCHED_GET_HEALTHKIT = 66
@@ -3536,35 +3559,35 @@ SCHED_WAKE_ANGRY = 4
 
 ---@enum SCREENFADE
 local SCREENFADE = {
-	IN = 1, --[[ Fade out after the hold time has passed ]]
-	OUT = 2, --[[ Fade in, hold time passes, disappear ]]
-	MODULATE = 4, --[[ With white color, turns the screen black ]]
-	STAYOUT = 8, --[[ No effects, never disappear ]]
-	PURGE = 16, --[[ Appear, Disappear, no effects ]]
+  IN = 1, --[[ Fade out after the hold time has passed ]]
+  OUT = 2, --[[ Fade in, hold time passes, disappear ]]
+  MODULATE = 4, --[[ With white color, turns the screen black ]]
+  STAYOUT = 8, --[[ No effects, never disappear ]]
+  PURGE = 16, --[[ Appear, Disappear, no effects ]]
 }
 
 ---@enum SENSORBONE
 local SENSORBONE = {
-	SHOULDER_RIGHT = 8,
-	SHOULDER_LEFT = 4,
-	HIP = 0,
-	ELBOW_RIGHT = 9,
-	KNEE_RIGHT = 17,
-	WRIST_RIGHT = 10,
-	ANKLE_LEFT = 14,
-	FOOT_LEFT = 15,
-	WRIST_LEFT = 6,
-	FOOT_RIGHT = 19,
-	HAND_RIGHT = 11,
-	SHOULDER = 2,
-	HIP_LEFT = 12,
-	HIP_RIGHT = 16,
-	HAND_LEFT = 7,
-	ANKLE_RIGHT = 18,
-	SPINE = 1,
-	ELBOW_LEFT = 5,
-	KNEE_LEFT = 13,
-	HEAD = 3,
+  SHOULDER_RIGHT = 8,
+  SHOULDER_LEFT = 4,
+  HIP = 0,
+  ELBOW_RIGHT = 9,
+  KNEE_RIGHT = 17,
+  WRIST_RIGHT = 10,
+  ANKLE_LEFT = 14,
+  FOOT_LEFT = 15,
+  WRIST_LEFT = 6,
+  FOOT_RIGHT = 19,
+  HAND_RIGHT = 11,
+  SHOULDER = 2,
+  HIP_LEFT = 12,
+  HIP_RIGHT = 16,
+  HAND_LEFT = 7,
+  ANKLE_RIGHT = 18,
+  SPINE = 1,
+  ELBOW_LEFT = 5,
+  KNEE_LEFT = 13,
+  HEAD = 3,
 }
 
 ---@enum SF
@@ -3960,10 +3983,10 @@ TEAM_SPECTATOR = 1002
 
 ---@enum TEXFILTER
 local TEXFILTER = {
-	NONE = 0,
-	POINT = 1,
-	LINEAR = 2,
-	ANISOTROPIC = 3,
+  NONE = 0,
+  POINT = 1,
+  LINEAR = 2,
+  ANISOTROPIC = 3,
 }
 
 ---@enum TEXT_ALIGN
@@ -4027,6 +4050,7 @@ TEXTUREFLAGS_NODEBUGOVERRIDE = 131072
 TEXTUREFLAGS_SINGLECOPY = 262144
 TEXTUREFLAGS_UNUSED_00080000 = 524288
 ---
+---
 --- Immediately destroy this texture when its reference count hits zero
 ---
 --- (aka TEXTUREFLAGS_UNUSED_00100000)
@@ -4065,7 +4089,7 @@ TRACER_LINE_AND_WHIZ = 4
 TRANSMIT_ALWAYS = 0
 --- Never transmit the entity, default for point entities
 TRANSMIT_NEVER = 1
---- Transmit when entity is in players view
+--- Transmit when entity is in players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community")
 TRANSMIT_PVS = 2
 
 ---@enum TYPE

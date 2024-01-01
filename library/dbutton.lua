@@ -6,13 +6,13 @@ local DButton = {}
 ---[CLIENT AND MENU] Returns value set by DButton:SetDrawBorder. See that page for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:GetDrawBorder)
----@return boolean #value set by DButton:SetDrawBorder.
+---@return boolean # value set by DButton:SetDrawBorder.
 function DButton:GetDrawBorder() end
 
 ---[CLIENT AND MENU] Returns true if the DButton is currently depressed (a user is clicking on it).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:IsDown)
----@return boolean #Whether or not the button is depressed.
+---@return boolean # Whether or not the button is depressed.
 function DButton:IsDown() end
 
 ---[CLIENT AND MENU] Sets a console command to be called when the button is clicked.

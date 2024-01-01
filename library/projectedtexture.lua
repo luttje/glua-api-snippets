@@ -6,13 +6,13 @@ local ProjectedTexture = {}
 ---[CLIENT] Returns the angle of the ProjectedTexture, which were previously set by ProjectedTexture:SetAngles
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetAngles)
----@return Angle #The angles of the ProjectedTexture.
+---@return Angle # The angles of the ProjectedTexture.
 function ProjectedTexture:GetAngles() end
 
 ---[CLIENT] Returns the brightness of the ProjectedTexture, which was previously set by ProjectedTexture:SetBrightness
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetBrightness)
----@return number #The brightness of the ProjectedTexture.
+---@return number # The brightness of the ProjectedTexture.
 function ProjectedTexture:GetBrightness() end
 
 ---[CLIENT] Returns the color of the ProjectedTexture, which was previously set by ProjectedTexture:SetColor.
@@ -20,71 +20,71 @@ function ProjectedTexture:GetBrightness() end
 --- The returned color will not have the color metatable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetColor)
----@return table #Color, the color of the ProjectedTexture.
+---@return table # Color, the color of the ProjectedTexture.
 function ProjectedTexture:GetColor() end
 
 ---[CLIENT] Returns the constant attenuation of the projected texture, which can also be set by ProjectedTexture:SetConstantAttenuation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetConstantAttenuation)
----@return number #The constant attenuation
+---@return number # The constant attenuation
 function ProjectedTexture:GetConstantAttenuation() end
 
 ---[CLIENT] Returns whether shadows are enabled for this ProjectedTexture, which was previously set by ProjectedTexture:SetEnableShadows
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetEnableShadows)
----@return boolean #Whether shadows are enabled.
+---@return boolean # Whether shadows are enabled.
 function ProjectedTexture:GetEnableShadows() end
 
 ---[CLIENT] Returns the projection distance of the ProjectedTexture, which was previously set by ProjectedTexture:SetFarZ
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetFarZ)
----@return number #The projection distance of the ProjectedTexture.
+---@return number # The projection distance of the ProjectedTexture.
 function ProjectedTexture:GetFarZ() end
 
 ---[CLIENT] Returns the horizontal FOV of the ProjectedTexture, which was previously set by ProjectedTexture:SetHorizontalFOV or ProjectedTexture:SetFOV
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetHorizontalFOV)
----@return number #The horizontal FOV of the ProjectedTexture.
+---@return number # The horizontal FOV of the ProjectedTexture.
 function ProjectedTexture:GetHorizontalFOV() end
 
 ---[CLIENT] Returns whenever or not the Texture should light up world geometry.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetLightWorld)
----@return boolean #`true` if the Texture should light up world geometry.
+---@return boolean # `true` if the Texture should light up world geometry.
 function ProjectedTexture:GetLightWorld() end
 
 ---[CLIENT] Returns the linear attenuation of the projected texture, which can also be set by ProjectedTexture:SetLinearAttenuation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetLinearAttenuation)
----@return number #The linear attenuation.
+---@return number # The linear attenuation.
 function ProjectedTexture:GetLinearAttenuation() end
 
 ---[CLIENT] Returns the NearZ value of the ProjectedTexture, which was previously set by ProjectedTexture:SetNearZ
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetNearZ)
----@return number #NearZ of the ProjectedTexture.
+---@return number # NearZ of the ProjectedTexture.
 function ProjectedTexture:GetNearZ() end
 
 ---[CLIENT] Returns the current orthographic settings of the Projected Texture. To set these values, use ProjectedTexture:SetOrthographic.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetOrthographic)
----@return boolean, number, number, number, number #boolean - Whether or not this projected texture is orthographic. When false, nothing else is returned.
----@return boolean, number, number, number, number #number - left
----@return boolean, number, number, number, number #number - top
----@return boolean, number, number, number, number #number - right
----@return boolean, number, number, number, number #number - bottom
+---@return boolean # Whether or not this projected texture is orthographic. When false, nothing else is returned.
+---@return number # left
+---@return number # top
+---@return number # right
+---@return number # bottom
 function ProjectedTexture:GetOrthographic() end
 
 ---[CLIENT] Returns the position of the ProjectedTexture, which was previously set by ProjectedTexture:SetPos
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetPos)
----@return Vector #The position of the ProjectedTexture.
+---@return Vector # The position of the ProjectedTexture.
 function ProjectedTexture:GetPos() end
 
 ---[CLIENT] Returns the quadratic attenuation of the projected texture, which can also be set by ProjectedTexture:SetQuadraticAttenuation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetQuadraticAttenuation)
----@return number #The quadratic attenuation
+---@return number # The quadratic attenuation
 function ProjectedTexture:GetQuadraticAttenuation() end
 
 ---[CLIENT] Returns the shadow depth bias of the projected texture.
@@ -92,7 +92,7 @@ function ProjectedTexture:GetQuadraticAttenuation() end
 --- Set by ProjectedTexture:SetShadowDepthBias.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetShadowDepthBias)
----@return number #The current shadow depth bias.
+---@return number # The current shadow depth bias.
 function ProjectedTexture:GetShadowDepthBias() end
 
 ---[CLIENT] Returns the shadow "filter size" of the projected texture. `0` is fully pixelated, higher values will blur the shadow more.
@@ -100,7 +100,7 @@ function ProjectedTexture:GetShadowDepthBias() end
 --- Set by ProjectedTexture:SetShadowFilter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetShadowFilter)
----@return number #The current shadow filter size.
+---@return number # The current shadow filter size.
 function ProjectedTexture:GetShadowFilter() end
 
 ---[CLIENT] Returns the shadow depth slope scale bias of the projected texture.
@@ -108,31 +108,31 @@ function ProjectedTexture:GetShadowFilter() end
 --- Set by ProjectedTexture:SetShadowSlopeScaleDepthBias.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetShadowSlopeScaleDepthBias)
----@return number #The current shadow depth slope scale bias.
+---@return number # The current shadow depth slope scale bias.
 function ProjectedTexture:GetShadowSlopeScaleDepthBias() end
 
 ---[CLIENT] Returns the target entity of this projected texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetTargetEntity)
----@return Entity #The current target entity.
+---@return Entity # The current target entity.
 function ProjectedTexture:GetTargetEntity() end
 
 ---[CLIENT] Returns the texture of the ProjectedTexture, which was previously set by ProjectedTexture:SetTexture
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetTexture)
----@return ITexture #The texture of the ProjectedTexture.
+---@return ITexture # The texture of the ProjectedTexture.
 function ProjectedTexture:GetTexture() end
 
 ---[CLIENT] Returns the texture frame of the ProjectedTexture, which was previously set by ProjectedTexture:SetTextureFrame
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetTextureFrame)
----@return number #The texture frame.
+---@return number # The texture frame.
 function ProjectedTexture:GetTextureFrame() end
 
 ---[CLIENT] Returns the vertical FOV of the ProjectedTexture, which was previously set by ProjectedTexture:SetVerticalFOV or ProjectedTexture:SetFOV
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetVerticalFOV)
----@return number #The vertical FOV of the ProjectedTexture.
+---@return number # The vertical FOV of the ProjectedTexture.
 function ProjectedTexture:GetVerticalFOV() end
 
 ---[CLIENT] Returns true if the projected texture is valid (i.e. has not been removed), false otherwise.
@@ -148,7 +148,7 @@ function ProjectedTexture:GetVerticalFOV() end
 --- This not only checks whether the projected texture is valid - but also checks whether it's nil.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:IsValid)
----@return boolean #Whether the projected texture is valid.
+---@return boolean # Whether the projected texture is valid.
 function ProjectedTexture:IsValid() end
 
 ---[CLIENT] Removes the projected texture. After calling this, ProjectedTexture:IsValid will return false, and any hooks with the projected texture as the identifier will be automatically deleted.
@@ -349,6 +349,8 @@ function ProjectedTexture:SetTextureFrame(frame) end
 function ProjectedTexture:SetVerticalFOV(vFOV) end
 
 ---[CLIENT] Updates the Projected Light and applies all previously set parameters.
+---
+--- The best place to call this function is in GM:PreDrawOpaqueRenderables.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:Update)
 function ProjectedTexture:Update() end

@@ -2,6 +2,11 @@
 
 net = {}
 
+---[SHARED] Cancels a net message started by net.Start, so you can immediately start a new one without any errors.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Abort)
+function net.Abort() end
+
 ---[SERVER] Sends the currently built net message to all connected players.
 --- More information can be found in Net Library Usage.
 ---
@@ -13,8 +18,8 @@ function net.Broadcast() end
 --- 		This will include 6 extra bits (or 1 byte rounded-up) used by the engine internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.BytesLeft)
----@return number, number #number - The amount of data left to read in the current net message in **bytes**. Returns `nil` if no net message has been started.
----@return number, number #number - The amount of data left to read in the current net message in **bits**. Returns `nil` if no net message has been started.
+---@return number # The amount of data left to read in the current net message in **bytes**. Returns `nil` if no net message has been started.
+---@return number # The amount of data left to read in the current net message in **bits**. Returns `nil` if no net message has been started.
 function net.BytesLeft() end
 
 ---[SHARED] Returns the size of the current message.
@@ -22,8 +27,8 @@ function net.BytesLeft() end
 --- This will include 3 extra bytes (24 bits) used by the engine internally to send the data over the network.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.BytesWritten)
----@return number, number #number - The amount of **bytes** written to the current net message. Returns `nil` if no net message has been started.
----@return number, number #number - The amount of **bits** written to the current net message. Returns `nil` if no net message has been started.
+---@return number # The amount of **bytes** written to the current net message. Returns `nil` if no net message has been started.
+---@return number # The amount of **bits** written to the current net message. Returns `nil` if no net message has been started.
 function net.BytesWritten() end
 
 ---[SHARED] You may be looking for net.Receive.
@@ -40,7 +45,7 @@ function net.Incoming(length, client) end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadAngle)
----@return Angle #The read angle, or `Angle( 0, 0, 0 )` if no angle could be read
+---@return Angle # The read angle, or `Angle( 0, 0, 0 )` if no angle could be read
 function net.ReadAngle() end
 
 ---[SHARED] Reads a bit from the received net message.
@@ -48,7 +53,7 @@ function net.ReadAngle() end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadBit)
----@return number #`0` or `1`, or `0` if the bit could not be read.
+---@return number # `0` or `1`, or `0` if the bit could not be read.
 function net.ReadBit() end
 
 ---[SHARED] Reads a boolean from the received net message.
@@ -56,7 +61,7 @@ function net.ReadBit() end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadBool)
----@return boolean #`true` or `false`, or `false` if the bool could not be read.
+---@return boolean # `true` or `false`, or `false` if the bool could not be read.
 function net.ReadBool() end
 
 ---[SHARED] Reads a Color from the current net message.
@@ -65,7 +70,7 @@ function net.ReadBool() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadColor)
 ---@param hasAlpha? boolean If the color has alpha written or not. **Must match what was given to net.WriteColor.**
----@return table #The Color read from the current net message, or `Color( 0, 0, 0, 0 )` if the color could not be read.
+---@return table # The Color read from the current net message, or `Color( 0, 0, 0, 0 )` if the color could not be read.
 function net.ReadColor(hasAlpha) end
 
 ---[SHARED] Reads pure binary data from the message.
@@ -74,7 +79,7 @@ function net.ReadColor(hasAlpha) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadData)
 ---@param length number The length of the data to be read, in **bytes**.
----@return string #The binary data read, or a string containing one character with a byte of `0` if no data could be read.
+---@return string # The binary data read, or a string containing one character with a byte of `0` if no data could be read.
 function net.ReadData(length) end
 
 ---[SHARED] Reads a double-precision number from the received net message.
@@ -82,15 +87,15 @@ function net.ReadData(length) end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadDouble)
----@return number #The double-precision number, or `0` if no number could be read.
+---@return number # The double-precision number, or `0` if no number could be read.
 function net.ReadDouble() end
 
----[SHARED] Reads an entity from the received net message. You should always check if the specified entity exists as it may have been removed and therefore `NULL` if it is outside of the players [PVS](https://developer.valvesoftware.com/wiki/PVS) or was already removed.
+---[SHARED] Reads an entity from the received net message. You should always check if the specified entity exists as it may have been removed and therefore `NULL` if it is outside of the players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") or was already removed.
 ---
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadEntity)
----@return Entity #The entity, or `Entity(0)` if no entity could be read.
+---@return Entity # The entity, or `Entity(0)` if no entity could be read.
 function net.ReadEntity() end
 
 ---[SHARED] Reads a floating point number from the received net message.
@@ -98,13 +103,13 @@ function net.ReadEntity() end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadFloat)
----@return number #The floating point number, or `0` if no number could be read.
+---@return number # The floating point number, or `0` if no number could be read.
 function net.ReadFloat() end
 
 ---[SHARED] Reads a word, basically unsigned short. This is used internally to read the "header" of the message which is an unsigned short which can be converted to the corresponding message name via util.NetworkIDToString.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadHeader)
----@return number #The header number
+---@return number # The header number
 function net.ReadHeader() end
 
 ---[SHARED] Reads an integer from the received net message.
@@ -116,14 +121,14 @@ function net.ReadHeader() end
 ---
 --- This must be set to what you set to net.WriteInt. Read more information at net.WriteInt.
 ---
----@return number #The read integer number, or `0` if no integer could be read.
+---@return number # The read integer number, or `0` if no integer could be read.
 function net.ReadInt(bitCount) end
 
 ---[SHARED] Reads a VMatrix from the received net message.
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadMatrix)
----@return VMatrix #The matrix, or an empty matrix if no matrix could be read.
+---@return VMatrix # The matrix, or an empty matrix if no matrix could be read.
 function net.ReadMatrix() end
 
 ---[SHARED] Reads a normal vector from the net message.
@@ -131,30 +136,42 @@ function net.ReadMatrix() end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadNormal)
----@return Vector #The normalized vector ( length = `1` ), or `Vector( 0, 0, 1 )` if no normal could be read.
+---@return Vector # The normalized vector ( length = `1` ), or `Vector( 0, 0, 1 )` if no normal could be read.
 function net.ReadNormal() end
+
+---[SHARED] Reads a player entity that was written with net.WritePlayer from the received net message.
+---
+--- You should always check if the specified entity exists as it may have been removed and therefore `NULL` if it is outside of the local players [PVS](https://developer.valvesoftware.com/wiki/PVS) or was already removed.
+---
+--- You **must** read information in same order as you write it.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadPlayer)
+---@return Player # The player, or `Entity(0)` if no entity could be read.
+function net.ReadPlayer() end
 
 ---[SHARED] Reads a [null-terminated string](https://en.wikipedia.org/wiki/Null-terminated_string) from the net stream. The size of the string is 8 bits plus 8 bits for every ASCII character in the string.
 ---
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadString)
----@return string #The read string, or a string with `0` length if no string could be read.
+---@return string # The read string, or a string with `0` length if no string could be read.
 function net.ReadString() end
 
 ---[SHARED] Reads a table from the received net message.
 ---
---- Sometimes when sending a table through the net library, the order of the keys may be switched. So be cautious when comparing (See example 1).
----
---- You **must** read information in same order as you write it.
----
 --- See net.WriteTable for extra info.
+---
+--- Sometimes when sending a table through the net library, the order of the keys may be switched. So be cautious when comparing (See example 1).
 ---
 --- You may get `net.ReadType: Couldn't read type X` during the execution of the function, the problem is that you are sending objects that **cannot** be serialized/sent over the network.
 ---
+---
+--- You **must** read information in same order as you write it.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadTable)
----@return table #Table recieved via the net message, or a blank table if no table could be read.
-function net.ReadTable() end
+---@param sequential? boolean Set to `true` if the input table is sequential. This saves on bandwidth.
+---@return table # Table received via the net message, or a blank table if no table could be read.
+function net.ReadTable(sequential) end
 
 ---[SHARED] Used internally by net.ReadTable.
 ---
@@ -164,7 +181,7 @@ function net.ReadTable() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadType)
 ---@param typeID? number The type of value to be read, using Enums/TYPE.
----@return any #The value, or the respective blank value based on the type you're reading if the value could not be read.
+---@return any # The value, or the respective blank value based on the type you're reading if the value could not be read.
 function net.ReadType(typeID) end
 
 ---[SHARED] Reads an unsigned integer with the specified number of bits from the received net message.
@@ -176,7 +193,7 @@ function net.ReadType(typeID) end
 ---
 --- This must be set to what you set to net.WriteUInt. Read more information at net.WriteUInt.
 ---
----@return number #The unsigned integer read, or `0` if the integer could not be read.
+---@return number # The unsigned integer read, or `0` if the integer could not be read.
 function net.ReadUInt(numberOfBits) end
 
 ---[SHARED] Reads a unsigned integer with 64 bits from the received net message.
@@ -184,7 +201,7 @@ function net.ReadUInt(numberOfBits) end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadUInt64)
----@return string #The uint64 number.
+---@return string # The uint64 number.  Since Lua cannot store full 64-bit integers, this function returns a string. It is mainly aimed at usage with Player:SteamID64.
 function net.ReadUInt64() end
 
 ---[SHARED] Reads a vector from the received net message. Vectors sent by this function are **compressed**, which may result in precision loss. See net.WriteVector for more information.
@@ -192,7 +209,7 @@ function net.ReadUInt64() end
 --- You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadVector)
----@return Vector #The read vector, or `Vector( 0, 0, 0 )` if no vector could be read.
+---@return Vector # The read vector, or `Vector( 0, 0, 0 )` if no vector could be read.
 function net.ReadVector() end
 
 ---[SHARED] Adds a net message handler. Only one receiver can be used to receive the net message.
@@ -229,7 +246,7 @@ function net.SendOmit(ply) end
 ---@param position Vector PAS position.
 function net.SendPAS(position) end
 
----[SERVER] Sends the message to all players the position is in the [PVS](https://developer.valvesoftware.com/wiki/PVS) of or, more simply said, sends the message to players that can potentially see this position.
+---[SERVER] Sends the message to all players in the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") of the position, or, more simply said, sends the message to players that can potentially see this position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendPVS)
 ---@param position Vector Position that must be in players' visibility set.
@@ -255,7 +272,7 @@ function net.SendToServer() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Start)
 ---@param messageName string The name of the message to send
 ---@param unreliable? boolean If set to `true`, the message is not guaranteed to reach its destination
----@return boolean #`true` if the message has been started.
+---@return boolean # `true` if the message has been started.
 function net.Start(messageName, unreliable) end
 
 ---[SHARED] Writes an angle to the current net message.
@@ -299,6 +316,8 @@ function net.WriteData(binaryData, length) end
 function net.WriteDouble(double) end
 
 ---[SHARED] Appends an entity to the current net message using its Entity:EntIndex.
+---
+--- See net.ReadEntity for the function to read the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteEntity)
 ---@param entity Entity The entity to be sent.
@@ -371,13 +390,21 @@ function net.WriteMatrix(matrix) end
 ---@param normal Vector The normalized/direction vector to be send.
 function net.WriteNormal(normal) end
 
+---[SHARED] Appends a player entity to the current net message using its Entity:EntIndex. This saves a small amount of network bandwidth over net.WriteEntity.
+---
+--- See net.ReadPlayer for the function to read the entity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WritePlayer)
+---@param ply Player The player to be sent.
+function net.WritePlayer(ply) end
+
 ---[SHARED] Appends a string to the current net message. The size of the string is 8 bits plus 8 bits for every ASCII character in the string. The maximum allowed length of a single written string is **65532 characters**.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteString)
 ---@param string string The string to be sent.
 function net.WriteString(string) end
 
----[SHARED] Appends a table to the current net message. Adds **16 extra bits** per key/value pair so you're better off writing each individual key/value as the exact type if possible.
+---[SHARED] Appends a table to the current net message. Adds **16 extra bits** per key/value pair, so you're better off writing each individual key/value as the exact type if possible.
 ---
 --- All net messages have a **64kb** buffer. This function will not check or error when that buffer is overflown. You might want to consider using util.TableToJSON and util.Compress and send the resulting string in **60kb** chunks, doing the opposite on the receiving end.
 ---
@@ -387,7 +414,11 @@ function net.WriteString(string) end
 --- If the table contains a `nil` key the table may not be read correctly.
 ---
 --- Not all objects can be sent over the network. Things like functions, IMaterials, etc will cause errors when reading the table from a net message.
-function net.WriteTable(table) end
+---@param sequential? boolean Set to `true` if the input table is sequential. This saves on bandwidth, adding **8 extra bits** per key/value pair instead of 16 bits.
+---
+--- To read the table you need to give net.ReadTable the same value!
+---
+function net.WriteTable(table, sequential) end
 
 ---[SHARED] Used internally by net.WriteTable.
 ---
@@ -460,8 +491,10 @@ function net.WriteUInt(unsignedInteger, numberOfBits) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteUInt64)
 ---@param uint64 string The uint64 to be sent. Can be a number.
 ---
+--- 				Since Lua cannot store full 64-bit integers, this function returns a string. It is mainly aimed at usage with Player:SteamID64.
+---
 --- 				If your input is a number and not a string, it won't be networked correctly as soon as it has more than 13 digits.
---- 				This is because Lua represents numbers over 13 digits as `1e+14`(`100.000.000.000.000`)
+--- 				This is because Lua represents numbers over 13 digits as `1e+14`(`100 000 000 000 000`)
 --- 				You can do something like this to convert it to a string: `string.format("%.0f", number)`.
 --- 				If you try to use Global.tostring it will fail because it will create a result something like `1e+14` which doesn't work.
 ---

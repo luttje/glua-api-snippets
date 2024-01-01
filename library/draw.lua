@@ -21,7 +21,7 @@ function draw.DrawText(text, font, x, y, color, xAlign) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.GetFontHeight)
 ---@param font string Name of the font to get the height of.
----@return number #The font height
+---@return number # The font height
 function draw.GetFontHeight(font) end
 
 ---[CLIENT AND MENU] Sets drawing texture to a default white texture (vgui/white) via surface.SetMaterial. Useful for resetting the drawing texture.
@@ -55,16 +55,16 @@ function draw.RoundedBox(cornerRadius, x, y, width, height, color) end
 ---@param roundBottomLeft? boolean Whether the bottom left corner should be rounded.
 ---@param roundBottomRight? boolean Whether the bottom right corner should be rounded.
 function draw.RoundedBoxEx(
-	cornerRadius,
-	x,
-	y,
-	width,
-	height,
-	color,
-	roundTopLeft,
-	roundTopRight,
-	roundBottomLeft,
-	roundBottomRight
+  cornerRadius,
+  x,
+  y,
+  width,
+  height,
+  color,
+  roundTopLeft,
+  roundTopRight,
+  roundBottomLeft,
+  roundBottomRight
 )
 end
 
@@ -79,8 +79,8 @@ end
 ---@param color? table The color of the text. Uses the Color.
 ---@param xAlign? number The alignment of the X coordinate using Enums/TEXT_ALIGN.
 ---@param yAlign? number The alignment of the Y coordinate using Enums/TEXT_ALIGN.
----@return number, number #number - The width of the text. Same value as if you were calling surface.GetTextSize.
----@return number, number #number - The height of the text. Same value as if you were calling surface.GetTextSize.
+---@return number # The width of the text. Same value as if you were calling surface.GetTextSize.
+---@return number # The height of the text. Same value as if you were calling surface.GetTextSize.
 function draw.SimpleText(text, font, x, y, color, xAlign, yAlign) end
 
 ---[CLIENT AND MENU] Creates a simple line of text that is outlined.
@@ -95,16 +95,16 @@ function draw.SimpleText(text, font, x, y, color, xAlign, yAlign) end
 ---@param yAlign? number The alignment of the Y Coordinate using Enums/TEXT_ALIGN.
 ---@param outlinewidth number Width of the outline.
 ---@param outlinecolor? table Color of the outline. Uses the Color.
----@return number, number #number - The width of the text. Same value as if you were calling surface.GetTextSize.
----@return number, number #number - The height of the text. Same value as if you were calling surface.GetTextSize.
+---@return number # The width of the text. Same value as if you were calling surface.GetTextSize.
+---@return number # The height of the text. Same value as if you were calling surface.GetTextSize.
 function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlinewidth, outlinecolor) end
 
 ---[CLIENT AND MENU] Works like draw.SimpleText but uses a table structure instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.Text)
 ---@param textdata table The text properties. See the Structures/TextData
----@return number, number #number - Width of drawn text
----@return number, number #number - Height of drawn text
+---@return number # Width of drawn text
+---@return number # Height of drawn text
 function draw.Text(textdata) end
 
 ---[CLIENT AND MENU] Works like draw.Text, but draws the text as a shadow.
@@ -133,6 +133,6 @@ function draw.TexturedQuad(texturedata) end
 ---@param textcolor table The text color. Uses the Color.
 ---@param xalign? number The alignment of the X coordinate using Enums/TEXT_ALIGN.
 ---@param yalign? number The alignment of the Y coordinate using Enums/TEXT_ALIGN.
----@return number, number #number - The width of the word box.
----@return number, number #number - The height of the word box.
+---@return number # The width of the word box.
+---@return number # The height of the word box.
 function draw.WordBox(bordersize, x, y, text, font, boxcolor, textcolor, xalign, yalign) end

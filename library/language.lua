@@ -13,5 +13,5 @@ function language.Add(placeholder, fulltext) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/language.GetPhrase)
 ---@param phrase string The phrase to translate
----@return string #The translated phrase, or the input string if no translation was found. There is a limit of 4000 bytes for the returned string.
+---@return string # The translated phrase, or the input string if no translation was found. There is a limit of 4000 bytes for the returned string.
 function language.GetPhrase(phrase) end

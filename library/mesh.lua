@@ -110,5 +110,5 @@ function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 ---[CLIENT] Returns the amount of vertex that have yet been pushed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.VertexCount)
----@return number #vertexCount
+---@return number # vertexCount
 function mesh.VertexCount() end

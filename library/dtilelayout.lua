@@ -20,7 +20,7 @@ function DTileLayout:ConsumeTiles(x, y, w, h) end
 ---[CLIENT] Creates and returns an exact copy of the DTileLayout.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:Copy)
----@return Panel #The created copy.
+---@return Panel # The created copy.
 function DTileLayout:Copy() end
 
 ---[CLIENT] Creates copies of all the children from the given panel object and parents them to this one.
@@ -36,8 +36,8 @@ function DTileLayout:CopyContents(source) end
 ---@param y number The y coordinate to start looking from.
 ---@param w number The needed width.
 ---@param h number The needed height.
----@return number, number #number - The x coordinate of the found available space.
----@return number, number #number - The y coordinate of the found available space.
+---@return number # The x coordinate of the found available space.
+---@return number # The y coordinate of the found available space.
 function DTileLayout:FindFreeTile(x, y, w, h) end
 
 ---[CLIENT] Determines if a group of tiles is vacant.
@@ -47,25 +47,25 @@ function DTileLayout:FindFreeTile(x, y, w, h) end
 ---@param y number The y coordinate of the first tile.
 ---@param w number The width needed.
 ---@param h number The height needed.
----@return boolean #Whether or not this group is available for occupation.
+---@return boolean # Whether or not this group is available for occupation.
 function DTileLayout:FitsInTile(x, y, w, h) end
 
 ---[CLIENT] Returns the size of each single tile, set with DTileLayout:SetBaseSize.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetBaseSize)
----@return number #Base tile size.
+---@return number # Base tile size.
 function DTileLayout:GetBaseSize() end
 
 ---[CLIENT] Returns the border spacing set by DTileLayout:SetBorder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetBorder)
----@return number #
+---@return number # The border spacing
 function DTileLayout:GetBorder() end
 
 ---[CLIENT] Returns the minimum height the DTileLayout can resize to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetMinHeight)
----@return number #The minimum height the panel can shrink to.
+---@return number # The minimum height the panel can shrink to.
 function DTileLayout:GetMinHeight() end
 
 ---[CLIENT] Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX.
@@ -85,7 +85,7 @@ function DTileLayout:GetSpaceY() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetTile)
 ---@param x number The x coordinate of the tile.
 ---@param y number The y coordinate of the tile.
----@return any #The occupied state of the tile, normally `1` or `nil`.
+---@return any # The occupied state of the tile, normally `1` or `nil`.
 function DTileLayout:GetTile(x, y) end
 
 ---[CLIENT] Resets the last width/height info, and invalidates the panel's layout, causing it to recalculate all child positions. It is called whenever a child is added or removed, and can be called to refresh the panel.
@@ -97,11 +97,6 @@ function DTileLayout:Layout() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:LayoutTiles)
 function DTileLayout:LayoutTiles() end
-
----[CLIENT] Called when anything is dropped on or rearranged within the DTileLayout.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:OnModified)
-function DTileLayout:OnModified() end
 
 ---[CLIENT] Sets the size of a single tile. If a child panel is larger than this size, it will occupy several tiles.
 ---
@@ -126,13 +121,13 @@ function DTileLayout:SetMinHeight(minH) end
 ---[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceX)
----@param spacingX number
+---@param spacingX number New X axis spacing.
 function DTileLayout:SetSpaceX(spacingX) end
 
 ---[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceY)
----@param spaceY number
+---@param spaceY number New Y axis spacing.
 function DTileLayout:SetSpaceY(spaceY) end
 
 ---[CLIENT] Called to set the occupied state of a tile.

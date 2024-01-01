@@ -12,7 +12,7 @@ local DPropertySheet = {}
 ---@param noStretchX? boolean Should DPropertySheet try to fill itself with given panel horizontally.
 ---@param noStretchY? boolean Should DPropertySheet try to fill itself with given panel vertically.
 ---@param tooltip? string Tooltip for the tab when user hovers over it with his cursor
----@return table #A table containing the following keys: * Panel Tab - The created DTab. * string Name - Name of the created tab * Panel Panel - The contents panel of the tab
+---@return table # A table containing the following keys: * Panel Tab - The created DTab. * string Name - Name of the created tab * Panel Panel - The contents panel of the tab
 function DPropertySheet:AddSheet(name, pnl, icon, noStretchX, noStretchY, tooltip) end
 
 ---[CLIENT AND MENU] Removes tab and/or panel from the parent DPropertySheet.
@@ -22,7 +22,7 @@ function DPropertySheet:AddSheet(name, pnl, icon, noStretchX, noStretchY, toolti
 ---
 --- See DPropertySheet:GetItems.
 ---@param removePanel boolean Set to true to remove the associated panel object as well.
----@return Panel #The panel of the tab.
+---@return Panel # The panel of the tab.
 function DPropertySheet:CloseTab(tab, removePanel) end
 
 ---[CLIENT AND MENU] Internal function that handles the cross fade animation when the player switches tabs.
@@ -36,7 +36,7 @@ function DPropertySheet:CrossFade(anim, delta, data) end
 ---[CLIENT AND MENU] Returns the active DTab of this DPropertySheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetActiveTab)
----@return Panel #The DTab
+---@return Panel # The DTab
 function DPropertySheet:GetActiveTab() end
 
 ---[CLIENT AND MENU] Returns the amount of time (in seconds) it takes to fade between tabs.
@@ -44,19 +44,19 @@ function DPropertySheet:GetActiveTab() end
 --- Set by DPropertySheet:SetFadeTime
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetFadeTime)
----@return number #The amount of time (in seconds) it takes to fade between tabs.
+---@return number # The amount of time (in seconds) it takes to fade between tabs.
 function DPropertySheet:GetFadeTime() end
 
 ---[CLIENT AND MENU] Returns a list of all tabs of this DPropertySheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetItems)
----@return table #A table of tables. Each table contains 3 key-value pairs:  * string Name - The name of the tab. * Panel Tab - The DTab associated with the tab. * Panel Panel - The Panel associated with the tab.
+---@return table # A table of tables. Each table contains 3 key-value pairs:  * string Name - The name of the tab. * Panel Tab - The DTab associated with the tab. * Panel Panel - The Panel associated with the tab.
 function DPropertySheet:GetItems() end
 
 ---[CLIENT AND MENU] Gets the padding from the parent panel to child panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetPadding)
----@return number #Padding
+---@return number # Padding
 function DPropertySheet:GetPadding() end
 
 ---[CLIENT AND MENU] Returns whatever value was set by DPropertySheet:SetShowIcons.
@@ -64,15 +64,6 @@ function DPropertySheet:GetPadding() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetShowIcons)
 ---@return boolean #
 function DPropertySheet:GetShowIcons() end
-
----[CLIENT AND MENU] Called when a player switches the tabs.
----
---- 		Source code states that this is meant to be overridden.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:OnActiveTabChanged)
----@param old Panel The previously active DTab
----@param new Panel The newly active DTab
-function DPropertySheet:OnActiveTabChanged(old, new) end
 
 ---[CLIENT AND MENU] Sets the active tab of the DPropertySheet.
 ---

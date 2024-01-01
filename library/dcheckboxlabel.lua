@@ -6,20 +6,14 @@ local DCheckBoxLabel = {}
 ---[CLIENT AND MENU] Gets the checked state of the checkbox. This calls the checkbox's DCheckBox:GetChecked function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:GetChecked)
----@return boolean #Whether the box is checked or not.
+---@return boolean # Whether the box is checked or not.
 function DCheckBoxLabel:GetChecked() end
 
 ---[CLIENT AND MENU] Gets the indentation of the element on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:GetIndent)
----@return number #How much the content is moved to the right in pixels
+---@return number # How much the content is moved to the right in pixels
 function DCheckBoxLabel:GetIndent() end
-
----[CLIENT AND MENU] Called when the "checked" state is changed.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:OnChange)
----@param bVal boolean Whether the checkbox is checked or unchecked.
-function DCheckBoxLabel:OnChange(bVal) end
 
 ---[CLIENT AND MENU] Sets the color of the DCheckBoxLabel's text to the bright text color defined in the skin.
 ---

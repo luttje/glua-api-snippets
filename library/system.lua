@@ -9,13 +9,13 @@ system = {}
 --- This function does not work on Dedicated Servers and will instead return no value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.AppTime)
----@return number #Seconds of game uptime as an integer.
+---@return number # Seconds of game uptime as an integer.
 function system.AppTime() end
 
 ---[SHARED AND MENU] Returns the current battery power.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.BatteryPower)
----@return number #0-100 if a battery (laptop, UPS, etc) is present.  Will instead return 255 if plugged in without a battery.
+---@return number # 0-100 if a battery (laptop, UPS, etc) is present.  Will instead return 255 if plugged in without a battery.
 function system.BatteryPower() end
 
 ---[CLIENT AND MENU] Flashes the window, turning the border to white briefly
@@ -28,7 +28,7 @@ function system.FlashWindow() end
 --- This function does not work on Dedicated Servers and will instead return no value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.GetCountry)
----@return string #Two-letter country code, using [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard.
+---@return string # Two-letter country code, using [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard.
 function system.GetCountry() end
 
 ---[SHARED AND MENU] Returns whether or not the game window has focus.
@@ -36,31 +36,31 @@ function system.GetCountry() end
 --- This function does not work on dedicated servers and will instead return no value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.HasFocus)
----@return boolean #Whether or not the game window has focus.
+---@return boolean # Whether or not the game window has focus.
 function system.HasFocus() end
 
 ---[SHARED AND MENU] Returns whether the current OS is Linux.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsLinux)
----@return boolean #Whether or not the game is running on Linux.
+---@return boolean # Whether or not the game is running on Linux.
 function system.IsLinux() end
 
 ---[SHARED AND MENU] Returns whether the current OS is OSX.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsOSX)
----@return boolean #Whether or not the game is running on OSX.
+---@return boolean # Whether or not the game is running on OSX.
 function system.IsOSX() end
 
 ---[CLIENT AND MENU] Returns whether the game is being run in a window or in fullscreen (you can change this by opening the menu, clicking 'Options', then clicking the 'Video' tab, and changing the Display Mode using the dropdown menu):
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsWindowed)
----@return boolean #Is the game running in a window?
+---@return boolean # Is the game running in a window?
 function system.IsWindowed() end
 
 ---[SHARED AND MENU] Returns whether the current OS is Windows.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsWindows)
----@return boolean #Whether the system the game runs on is Windows or not.
+---@return boolean # Whether the system the game runs on is Windows or not.
 function system.IsWindows() end
 
 ---[SHARED AND MENU] Returns the synchronized Steam time. This is the number of seconds since the [Unix epoch](http://en.wikipedia.org/wiki/Unix_time).
@@ -68,7 +68,7 @@ function system.IsWindows() end
 --- This function does not work on Dedicated Servers and will instead return no value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.SteamTime)
----@return number #Current Steam-synchronized Unix time.
+---@return number # Current Steam-synchronized Unix time.
 function system.SteamTime() end
 
 ---[SHARED AND MENU] Returns the amount of seconds since the Steam user last moved their mouse.
@@ -78,5 +78,5 @@ function system.SteamTime() end
 --- This function does not work on Dedicated Servers and will instead return no value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.UpTime)
----@return number #The amount of seconds since the Steam user last moved their mouse.
+---@return number # The amount of seconds since the Steam user last moved their mouse.
 function system.UpTime() end

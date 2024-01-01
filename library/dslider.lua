@@ -3,6 +3,16 @@
 ---@class DSlider : Panel
 local DSlider = {}
 
+---[CLIENT AND MENU] Used internally to set the X axis convar.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarXNumberThink)
+function DSlider:ConVarXNumberThink() end
+
+---[CLIENT AND MENU] Used internally to set the Y axis convar.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarYNumberThink)
+function DSlider:ConVarYNumberThink() end
+
 ---[CLIENT AND MENU] Identical to DSlider:IsEditing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetDragging)
@@ -28,7 +38,7 @@ function DSlider:GetLockY() end
 ---[CLIENT AND MENU] Returns the current notch color, set by DSlider:SetNotchColor
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
----@return Color #The current color
+---@return Color # The current color
 ---@deprecated Does not affect anything by default.
 function DSlider:GetNotchColor() end
 
@@ -49,7 +59,7 @@ function DSlider:GetNumSlider() end
 --- Set by DSlider:SetSlideX.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideX)
----@return number #The value range seems to be from 0 to 1
+---@return number # The value range seems to be from 0 to 1
 function DSlider:GetSlideX() end
 
 ---[CLIENT AND MENU] Returns the target position of the draggable "knob" panel of the slider on the Y axis.
@@ -57,7 +67,7 @@ function DSlider:GetSlideX() end
 --- Set by DSlider:SetSlideY.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideY)
----@return number #The value range seems to be from 0 to 1
+---@return number # The value range seems to be from 0 to 1
 function DSlider:GetSlideY() end
 
 ---[CLIENT AND MENU] Returns the value set by DSlider:SetTrapInside.
@@ -72,11 +82,28 @@ function DSlider:GetTrapInside() end
 ---@return boolean #
 function DSlider:IsEditing() end
 
+---[CLIENT AND MENU] Used internally to fire DSlider:OnValueChanged
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:OnValuesChangedInternal)
+function DSlider:OnValuesChangedInternal() end
+
 ---[CLIENT AND MENU] Sets the background for the slider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetBackground)
 ---@param path string Path to the image.
 function DSlider:SetBackground(path) end
+
+---[CLIENT AND MENU] Sets the ConVar to be set when the slider changes on the X axis.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarX)
+---@param convar string Name of the convar to set.
+function DSlider:SetConVarX(convar) end
+
+---[CLIENT AND MENU] Sets the ConVar to be set when the slider changes on the Y axis.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarY)
+---@param convar string Name of the convar to set.
+function DSlider:SetConVarY(convar) end
 
 ---[CLIENT AND MENU] Sets whether or not the slider is being dragged.
 ---

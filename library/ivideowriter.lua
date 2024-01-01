@@ -18,7 +18,7 @@ function IVideoWriter:Finish() end
 ---[CLIENT AND MENU] Returns the height of the video stream.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Height)
----@return number #height
+---@return number # height
 function IVideoWriter:Height() end
 
 ---[CLIENT AND MENU] Sets whether to record sound or not.
@@ -30,5 +30,5 @@ function IVideoWriter:SetRecordSound(record) end
 ---[CLIENT AND MENU] Returns the width of the video stream.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Width)
----@return number #width
+---@return number # width
 function IVideoWriter:Width() end

@@ -6,97 +6,97 @@ local CEffectData = {}
 ---[SHARED] Returns the angles of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetAngles)
----@return Angle #The angles of the effect
+---@return Angle # The angles of the effect
 function CEffectData:GetAngles() end
 
 ---[SHARED] Returns the attachment ID for the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetAttachment)
----@return number #The attachment ID of the effect.
+---@return number # The attachment ID of the effect.
 function CEffectData:GetAttachment() end
 
 ---[SHARED] Returns byte which represents the color of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetColor)
----@return number #The color of the effect
+---@return number # The color of the effect
 function CEffectData:GetColor() end
 
 ---[SHARED] Returns the damage type of the effect
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetDamageType)
----@return number #Damage type of the effect, see Enums/DMG
+---@return number # Damage type of the effect, see Enums/DMG
 function CEffectData:GetDamageType() end
 
 ---[SERVER] Returns the entity index of the entity set for the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetEntIndex)
----@return number #The entity index of the entity set for the effect.
+---@return number # The entity index of the entity set for the effect.
 function CEffectData:GetEntIndex() end
 
 ---[SHARED] Returns the entity assigned to the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetEntity)
----@return Entity #The entity assigned to the effect
+---@return Entity # The entity assigned to the effect
 function CEffectData:GetEntity() end
 
 ---[SHARED] Returns the flags of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetFlags)
----@return number #The flags of the effect.
+---@return number # The flags of the effect.
 function CEffectData:GetFlags() end
 
 ---[SHARED] Returns the hit box ID of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetHitBox)
----@return number #The hit box ID of the effect.
+---@return number # The hit box ID of the effect.
 function CEffectData:GetHitBox() end
 
 ---[SHARED] Returns the magnitude of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetMagnitude)
----@return number #The magnitude of the effect.
+---@return number # The magnitude of the effect.
 function CEffectData:GetMagnitude() end
 
 ---[SHARED] Returns the material ID of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetMaterialIndex)
----@return number #The material ID of the effect.
+---@return number # The material ID of the effect.
 function CEffectData:GetMaterialIndex() end
 
 ---[SHARED] Returns the normalized direction vector of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetNormal)
----@return Vector #The normalized direction vector of the effect.
+---@return Vector # The normalized direction vector of the effect.
 function CEffectData:GetNormal() end
 
 ---[SHARED] Returns the origin position of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetOrigin)
----@return Vector #The origin position of the effect.
+---@return Vector # The origin position of the effect.
 function CEffectData:GetOrigin() end
 
 ---[SHARED] Returns the radius of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetRadius)
----@return number #The radius of the effect.
+---@return number # The radius of the effect.
 function CEffectData:GetRadius() end
 
 ---[SHARED] Returns the scale of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetScale)
----@return number #The scale of the effect
+---@return number # The scale of the effect
 function CEffectData:GetScale() end
 
 ---[SHARED] Returns the start position of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetStart)
----@return Vector #The start position of the effect
+---@return Vector # The start position of the effect
 function CEffectData:GetStart() end
 
 ---[SHARED] Returns the surface property index of the effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:GetSurfaceProp)
----@return number #The surface property index of the effect
+---@return number # The surface property index of the effect
 function CEffectData:GetSurfaceProp() end
 
 ---[SHARED] Sets the angles of the effect.
@@ -120,7 +120,7 @@ function CEffectData:SetAttachment(attachment) end
 --- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to 0-255 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetColor)
----@param color Number Color represented by a byte.
+---@param color number Color represented by a byte.
 function CEffectData:SetColor(color) end
 
 ---[SHARED] Sets the damage type of the effect to be created with this effect data.

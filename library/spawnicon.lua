@@ -6,19 +6,19 @@ local SpawnIcon = {}
 ---[CLIENT] Returns the currently set body groups of the spawn icon. This is set by SpawnIcon:SetBodyGroup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:GetBodyGroup)
----@return string #The bodygroups of the spawnicon
+---@return string # The bodygroups of the spawnicon
 function SpawnIcon:GetBodyGroup() end
 
 ---[CLIENT] Returns the currently set model name. This is set by SpawnIcon:SetModelName.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:GetModelName)
----@return string #The model name
+---@return string # The model name
 function SpawnIcon:GetModelName() end
 
 ---[CLIENT] Returns the currently set skin of the spawnicon. This is set by SpawnIcon:SetSkinID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:GetSkinID)
----@return number #Current skin ID
+---@return number # Current skin ID
 function SpawnIcon:GetSkinID() end
 
 ---[CLIENT] Called when right clicked on the SpawnIcon. It will not be called if there is a selection (Panel:GetSelectionCanvas), in which case SANDBOX:SpawnlistOpenGenericMenu is called.

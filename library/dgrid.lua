@@ -12,25 +12,25 @@ function DGrid:AddItem(item) end
 ---[CLIENT AND MENU] Returns the number of columns of this DGrid. Set by DGrid:SetCols.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetCols)
----@return number #The number of columns of this DGrid
+---@return number # The number of columns of this DGrid
 function DGrid:GetCols() end
 
 ---[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
----@return number #The width of each column
+---@return number # The width of each column
 function DGrid:GetColWide() end
 
 ---[CLIENT AND MENU] Returns a list of panels in the grid.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetItems)
----@return table #A list of Panels.
+---@return table # A list of Panels.
 function DGrid:GetItems() end
 
 ---[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
----@return number #The height of each row
+---@return number # The height of each row
 function DGrid:GetRowHeight() end
 
 ---[CLIENT AND MENU] Removes given panel from the DGrid:GetItems.

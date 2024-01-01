@@ -43,24 +43,26 @@ function sound.Generate(indentifier, samplerate, length, callback) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
 ---@param types number The types of sounds to choose from. See Enums/SOUND.
 ---@param pos Vector The position to sense sounds at.
----@return table #A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
+---@return table # A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
 
 ---[SHARED] Returns properties of the soundscript.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
 ---@param name string The name of the sound script
----@return table #The properties of the soundscript. See Structures/SoundData
+---@return table # The properties of the soundscript. See Structures/SoundData
 function sound.GetProperties(name) end
 
 ---[SHARED] Returns a list of all registered sound scripts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
----@return table #The list/array of all registered sound scripts ( No other information is provided )
+---@return table # The list/array of all registered sound scripts ( No other information is provided )
 function sound.GetTable() end
 
 ---[SHARED] Plays a sound from the specified position in the world.
 --- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
+---
+--- This function is similar to Global.EmitSound, but with less options.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
 ---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
@@ -108,7 +110,7 @@ function sound.PlayFile(path, flags, callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.PlayURL)
 ---@param url string The URL of the sound to play
----@param flags string Flags for the sound. Can be one or more of following, separated by a space (" "):
+---@param flags string Flags for the sound. Can be one or more of following, separated by a space (`" "`):
 --- * 3d - Makes the sound 3D, so you can set its position
 --- * mono - Forces the sound to have only one channel
 --- * noplay - Forces the sound not to play as soon as this function is called
@@ -117,15 +119,9 @@ function sound.PlayFile(path, flags, callback) end
 ---
 ---
 ---
---- If you don't want to use any of the above, you can just leave it as "".
----@param callback function Callback function that is called as soon as the the stream is loaded. It has next arguments:
----
----
---- IGModAudioChannel soundchannel - The sound channel
----
----
---- number errorID - ID of an error, if an error has occured
----
----
---- string errorName - Name of an error, if an error has occured
+--- If you don't want to use any of the above, you can just leave it as `""`.
+---@param callback function Callback function that is called as soon as the the stream is loaded. It has the following arguments:
+--- * IGModAudioChannel soundchannel - The sound channel
+--- * number errorID - ID of an error, if an error has occured
+--- * string errorName - Name of an error, if an error has occured
 function sound.PlayURL(url, flags, callback) end

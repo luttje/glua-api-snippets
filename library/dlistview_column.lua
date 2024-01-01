@@ -6,20 +6,38 @@ local DListView_Column = {}
 ---[CLIENT AND MENU] Gets the index used for this column.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetColumnID)
----@return number #The column index of the DListView_Column.
+---@return number # The column index of the DListView_Column.
 function DListView_Column:GetColumnID() end
+
+---[CLIENT AND MENU] Returns whether the column is sorted in descending order or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetDescending)
+---@return boolean # Whether the column is sorted in descending order or not.
+function DListView_Column:GetDescending() end
+
+---[CLIENT AND MENU] Returns the fixed width of this column.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetFixedWidth)
+---@return number # The fixed width.
+function DListView_Column:GetFixedWidth() end
 
 ---[CLIENT AND MENU] Returns the maximum width set with DListView_Column:SetMaxWidth.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetMaxWidth)
----@return number #The maximum width
+---@return number # The maximum width
 function DListView_Column:GetMaxWidth() end
 
 ---[CLIENT AND MENU] Returns the minimum width set with DListView_Column:SetMinWidth.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetMinWidth)
----@return number #The minimum width
+---@return number # The minimum width
 function DListView_Column:GetMinWidth() end
+
+---[CLIENT AND MENU] Returns the text alignment for the column
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetTextAlign)
+---@return number # The direction of the content, based on the number pad. See DListView_Column:SetTextAlign.
+function DListView_Column:GetTextAlign() end
 
 ---[CLIENT AND MENU] Resizes the column, additionally adjusting the size of the column to the right, if any.
 ---
@@ -30,6 +48,18 @@ function DListView_Column:GetMinWidth() end
 --- 			Positive values will make it wider, and negative values will make it thinner.
 ---
 function DListView_Column:ResizeColumn(size) end
+
+---[CLIENT AND MENU] Sets the index used for this column.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetColumnID)
+---@param index number The column index of the DListView_Column.
+function DListView_Column:SetColumnID(index) end
+
+---[CLIENT AND MENU] Sets whether the column is sorted in descending order or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetDescending)
+---@param desc boolean Whether the column is sorted in descending order or not.
+function DListView_Column:SetDescending(desc) end
 
 ---[CLIENT AND MENU] Sets the fixed width of the column.
 ---

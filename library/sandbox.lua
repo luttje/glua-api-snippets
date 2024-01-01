@@ -31,7 +31,7 @@ function SANDBOX:AddToolMenuTabs() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:CanArmDupe)
 ---@param ply Player The player who attempted to arm a dupe.
----@return boolean #Can the player arm a dupe or not.
+---@return boolean # Can the player arm a dupe or not.
 function SANDBOX:CanArmDupe(ply) end
 
 ---[SHARED] Called when a player attempts to drive a prop via Prop Drive
@@ -39,19 +39,8 @@ function SANDBOX:CanArmDupe(ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:CanDrive)
 ---@param ply Player The player who attempted to use Prop Drive.
 ---@param ent Entity The entity the player is attempting to drive
----@return boolean #Return true to allow driving, false to disallow
+---@return boolean # Return true to allow driving, false to disallow
 function SANDBOX:CanDrive(ply, ent) end
-
----[SHARED] Controls if a property can be used or not.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:CanProperty)
----@param ply Player Player, that tried to use the property
----@param property string Class of the property that is tried to use, for example - bonemanipulate
----
---- This is not guaranteed to be the internal property name used in properties.Add!
----@param ent Entity The entity, on which property is tried to be used on
----@return boolean #Return false to disallow using that property
-function SANDBOX:CanProperty(ply, property, ent) end
 
 ---[SHARED] Called when a player attempts to fire their tool gun. Return true to specifically allow the attempt, false to block it.
 ---
@@ -61,7 +50,7 @@ function SANDBOX:CanProperty(ply, property, ent) end
 ---@param toolname string The tool mode the player currently has selected.
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
----@return boolean #Can use toolgun or not.
+---@return boolean # Can use toolgun or not.
 function SANDBOX:CanTool(ply, tr, toolname, tool, button) end
 
 ---[CLIENT] Called when player selects an item on the spawnmenu sidebar at the left.
@@ -89,13 +78,13 @@ function SANDBOX:ContextMenuCreated(g_ContextMenu) end
 ---[CLIENT] Allows to prevent the creation of the context menu. If the context menu is already created, this will have no effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuEnabled)
----@return boolean #Return `false` to prevent the context menu from being created.
+---@return boolean # Return `false` to prevent the context menu from being created.
 function SANDBOX:ContextMenuEnabled() end
 
 ---[CLIENT] Called when the context menu is trying to be opened.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuOpen)
----@return boolean #Return `false` to block the opening.
+---@return boolean # Return `false` to block the opening.
 function SANDBOX:ContextMenuOpen() end
 
 ---[CLIENT] Called when the context menu is supposedly opened.
@@ -110,7 +99,7 @@ function SANDBOX:ContextMenuOpened() end
 ---[CLIENT] Called to poll if active tool settings should appear in the context menu. Please note that this is only called on initial opening of the context menu, not every frame the context menu is in use.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:ContextMenuShowTool)
----@return boolean #Return `false` to prevent active tool settings from displaying in the context menu.
+---@return boolean # Return `false` to prevent active tool settings from displaying in the context menu.
 function SANDBOX:ContextMenuShowTool() end
 
 ---[CLIENT] Called when the Client reverts spawnlist changes
@@ -161,7 +150,7 @@ function SANDBOX:PersistenceSave(name) end
 ---@param ply Player The player who attempted to give themselves a weapon.
 ---@param weapon string Class name of the weapon the player tried to give themselves.
 ---@param swep table The swep table of this weapon, see Structures/SWEP
----@return boolean #Can the SWEP be given to the player
+---@return boolean # Can the SWEP be given to the player
 function SANDBOX:PlayerGiveSWEP(ply, weapon, swep) end
 
 ---[SERVER] Called after the player spawned an effect.
@@ -223,7 +212,7 @@ function SANDBOX:PlayerSpawnedVehicle(ply, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnEffect)
 ---@param ply Player The player that wants to spawn an effect
 ---@param model string The effect model that player wants to spawn
----@return boolean #Return false to disallow spawning that effect
+---@return boolean # Return false to disallow spawning that effect
 function SANDBOX:PlayerSpawnEffect(ply, model) end
 
 ---[SERVER] Called to ask if player allowed to spawn a particular NPC or not.
@@ -232,7 +221,7 @@ function SANDBOX:PlayerSpawnEffect(ply, model) end
 ---@param ply Player The player that wants to spawn that NPC
 ---@param npc_type string The npc type that player is trying to spawn
 ---@param weapon string The weapon of that NPC
----@return boolean #Return false to disallow spawning that NPC
+---@return boolean # Return false to disallow spawning that NPC
 function SANDBOX:PlayerSpawnNPC(ply, npc_type, weapon) end
 
 ---[SERVER] Called to ask whether player is allowed to spawn a given model. This includes props, effects, and ragdolls and is called before the respective PlayerSpawn* hook.
@@ -241,7 +230,7 @@ function SANDBOX:PlayerSpawnNPC(ply, npc_type, weapon) end
 ---@param ply Player The player in question
 ---@param model string Model path
 ---@param skin number Skin number
----@return boolean #Return false to disallow the player to spawn the given model.
+---@return boolean # Return false to disallow the player to spawn the given model.
 function SANDBOX:PlayerSpawnObject(ply, model, skin) end
 
 ---[SERVER] Called when a player attempts to spawn a prop from the Q menu.
@@ -249,7 +238,7 @@ function SANDBOX:PlayerSpawnObject(ply, model, skin) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnProp)
 ---@param ply Player The player who attempted to spawn a prop.
 ---@param model string Path to the model of the prop the player is attempting to spawn.
----@return boolean #Should the player be able to spawn the prop or not.
+---@return boolean # Should the player be able to spawn the prop or not.
 function SANDBOX:PlayerSpawnProp(ply, model) end
 
 ---[SERVER] Called when a player attempts to spawn a ragdoll from the Q menu.
@@ -257,7 +246,7 @@ function SANDBOX:PlayerSpawnProp(ply, model) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnRagdoll)
 ---@param ply Player The player who attempted to spawn a ragdoll.
 ---@param model string Path to the model of the ragdoll the player is attempting to spawn.
----@return boolean #Should the player be able to spawn the ragdoll or not.
+---@return boolean # Should the player be able to spawn the ragdoll or not.
 function SANDBOX:PlayerSpawnRagdoll(ply, model) end
 
 ---[SERVER] Called when a player attempts to spawn an Entity from the Q menu.
@@ -265,7 +254,7 @@ function SANDBOX:PlayerSpawnRagdoll(ply, model) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnSENT)
 ---@param ply Player The player who attempted to spawn the entity.
 ---@param class string Class name of the entity the player tried to spawn.
----@return boolean #Should the player be able to spawn the entity or not.
+---@return boolean # Should the player be able to spawn the entity or not.
 function SANDBOX:PlayerSpawnSENT(ply, class) end
 
 ---[SERVER] Called when a player attempts to spawn a weapon from the Q menu. ( Mouse wheel clicks on an icon )
@@ -274,7 +263,7 @@ function SANDBOX:PlayerSpawnSENT(ply, class) end
 ---@param ply Player The player who attempted to spawn a weapon.
 ---@param weapon string Class name of the weapon the player tried to spawn.
 ---@param swep table Information about the weapon the player is trying to spawn, see Structures/SWEP
----@return boolean #Can the SWEP be spawned
+---@return boolean # Can the SWEP be spawned
 function SANDBOX:PlayerSpawnSWEP(ply, weapon, swep) end
 
 ---[SERVER] Called to ask if player allowed to spawn a particular vehicle or not.
@@ -284,34 +273,34 @@ function SANDBOX:PlayerSpawnSWEP(ply, weapon, swep) end
 ---@param model string The vehicle model that player wants to spawn
 ---@param name string Vehicle name
 ---@param table table Table of that vehicle, containing info about it See Structures/VehicleTable.
----@return boolean #Return false to disallow spawning that vehicle
+---@return boolean # Return false to disallow spawning that vehicle
 function SANDBOX:PlayerSpawnVehicle(ply, model, name, table) end
 
 ---[CLIENT] Called by the spawnmenu when the content tab is generated
 --- 	Creating an error in this Hook will result in a completely broken Content Tab
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateContent)
----@param pnlContent panel The SpawnmenuContentPanel
----@param tree panel The ContentNavBar tree from the SpawnmenuContentPanel
----@param node panel The old Spawnlists
+---@param pnlContent Panel The SpawnmenuContentPanel
+---@param tree Panel The ContentNavBar tree from the SpawnmenuContentPanel
+---@param node Panel The old Spawnlists
 function SANDBOX:PopulateContent(pnlContent, tree, node) end
 
 ---[CLIENT] Called by the spawnmenu when the Entities tab is generated
 --- 	Creating an error in this Hook will result in a completely broken Entites Tab
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateEntities)
----@param pnlContent panel The SpawnmenuContentPanel
----@param tree panel The ContentNavBar tree from the SpawnmenuContentPanel
----@param node panel The old Spawnlists
+---@param pnlContent Panel The SpawnmenuContentPanel
+---@param tree Panel The ContentNavBar tree from the SpawnmenuContentPanel
+---@param node Panel The old Spawnlists
 function SANDBOX:PopulateEntities(pnlContent, tree, node) end
 
 ---[CLIENT] Called by the spawnmenu when the NPCs tab is generated
 --- 	Creating an error in this Hook will result in a completely broken NPCs Tab
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateNPCs)
----@param pnlContent panel The SpawnmenuContentPanel
----@param tree panel The ContentNavBar tree from the SpawnmenuContentPanel
----@param node panel The old Spawnlists
+---@param pnlContent Panel The SpawnmenuContentPanel
+---@param tree Panel The ContentNavBar tree from the SpawnmenuContentPanel
+---@param node Panel The old Spawnlists
 function SANDBOX:PopulateNPCs(pnlContent, tree, node) end
 
 ---[CLIENT] This hook makes the engine load the spawnlist text files.
@@ -320,7 +309,7 @@ function SANDBOX:PopulateNPCs(pnlContent, tree, node) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulatePropMenu)
 function SANDBOX:PopulatePropMenu() end
 
----[CLIENT] Add the STOOLS to the tool menu. You want to call spawnmenu.AddToolMenuOption in this hook.
+---[CLIENT] Add the TOOL to the tool menu. You want to call spawnmenu.AddToolMenuOption in this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateToolMenu)
 function SANDBOX:PopulateToolMenu() end
@@ -329,24 +318,32 @@ function SANDBOX:PopulateToolMenu() end
 --- 	Creating an error in this Hook will result in a completely broken vehicles Tab
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateVehicles)
----@param pnlContent panel The SpawnmenuContentPanel
----@param tree panel The ContentNavBar tree from the SpawnmenuContentPanel
----@param node panel The old Spawnlists
+---@param pnlContent Panel The SpawnmenuContentPanel
+---@param tree Panel The ContentNavBar tree from the SpawnmenuContentPanel
+---@param node Panel The old Spawnlists
 function SANDBOX:PopulateVehicles(pnlContent, tree, node) end
 
 ---[CLIENT] Called by the spawnmenu when the Weapons tab is generated
 --- 	Creating an error in this Hook will result in a completely broken Weapons Tab
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PopulateWeapons)
----@param pnlContent panel The SpawnmenuContentPanel
----@param tree panel The ContentNavBar tree from the SpawnmenuContentPanel
----@param node panel The old Spawnlists
+---@param pnlContent Panel The SpawnmenuContentPanel
+---@param tree Panel The ContentNavBar tree from the SpawnmenuContentPanel
+---@param node Panel The old Spawnlists
 function SANDBOX:PopulateWeapons(pnlContent, tree, node) end
 
 ---[CLIENT] Called right after the Lua Loaded tool menus are reloaded. This is a good place to set up any ControlPanels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PostReloadToolsMenu)
 function SANDBOX:PostReloadToolsMenu() end
+
+---[SHARED] Called just before registering a Sandbox scripted tool.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PreRegisterTOOL)
+---@param tool table The TOOL table to be registered. See Structures/TOOL.
+---@param class string The class name to be assigned.
+---@return boolean # Return `false` to prevent the TOOL from being registered.
+function SANDBOX:PreRegisterTOOL(tool, class) end
 
 ---[CLIENT] Called right before the Lua Loaded tool menus are reloaded.
 ---
@@ -367,7 +364,7 @@ function SANDBOX:SpawnlistOpenGenericMenu(canvas) end
 ---[CLIENT] If false is returned then the spawn menu is never created. This saves load times if your mod doesn't actually use the spawn menu for any reason.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:SpawnMenuEnabled)
----@return boolean #Whether to create spawnmenu or not.
+---@return boolean # Whether to create spawnmenu or not.
 function SANDBOX:SpawnMenuEnabled() end
 
 ---[CLIENT] Called when spawnmenu is trying to be opened.
@@ -375,7 +372,7 @@ function SANDBOX:SpawnMenuEnabled() end
 --- Hiding the spawnmenu will not stop people from being able to use the various console commands to spawn in items, etc. See GM:PlayerSpawn* hooks for blocking actual spawning.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:SpawnMenuOpen)
----@return boolean #Return false to dissallow opening the spawnmenu
+---@return boolean # Return false to dissallow opening the spawnmenu
 function SANDBOX:SpawnMenuOpen() end
 
 ---[CLIENT] Called when the spawnmenu is opened.

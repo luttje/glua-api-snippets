@@ -15,7 +15,7 @@ function undo.AddEntity(ent) end
 ---
 --- Returning `false` will mark execution of this function as "failed", meaning that the undo might be skipped if no other entities are removed by it. This is useful when for example an entity you want to access is removed therefore there's nothing to do.
 ---
----@param ... ... Arguments to pass to the function (after the undo info table)
+---@param ... any Arguments to pass to the function (after the undo info table)
 function undo.AddFunction(func, ...) end
 
 ---[SERVER] Begins a new undo entry
@@ -30,7 +30,7 @@ function undo.Create(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.Do_Undo)
 ---@param tab table The undo block to process as an Structures/Undo
----@return number #Number of removed entities
+---@return number # Number of removed entities
 function undo.Do_Undo(tab) end
 
 ---[SERVER] Completes an undo entry, and registers it with the player's client
@@ -43,7 +43,7 @@ function undo.Finish(NiceText) end
 --- 	Serverside, this table's keys use Player:UniqueID to store a player's undo blocks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.GetTable)
----@return table #The undo table.
+---@return table # The undo table.
 function undo.GetTable() end
 
 ---[CLIENT] Makes the UI dirty - it will re-create the controls the next time it is viewed.
@@ -56,7 +56,7 @@ function undo.MakeUIDirty() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.ReplaceEntity)
 ---@param from Entity The old entity
 ---@param to Entity The new entity to replace the old one
----@return boolean #somethingReplaced
+---@return boolean # somethingReplaced
 function undo.ReplaceEntity(from, to) end
 
 ---[SERVER] Sets a custom undo text for the current undo block

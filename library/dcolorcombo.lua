@@ -11,7 +11,7 @@ function DColorCombo:BuildControls() end
 ---[CLIENT] Returns the color of the DColorCombo.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
----@return table #A Color
+---@return table # A Color
 function DColorCombo:GetColor() end
 
 ---[CLIENT] Returns true if the panel is currently being edited

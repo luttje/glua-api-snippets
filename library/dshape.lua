@@ -8,13 +8,13 @@ local DShape = {}
 --- See DShape:SetBorderColor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetBorderColor)
----@return table #The border color   See Color
+---@return table # The border Color
 function DShape:GetBorderColor() end
 
 ---[CLIENT] Returns the color set to display the shape with.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetColor)
----@return table #The Color
+---@return table # The shape Color
 function DShape:GetColor() end
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.
@@ -22,7 +22,7 @@ function DShape:GetColor() end
 --- See DShape:SetType.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetType)
----@return string #
+---@return string # Current shape type.
 function DShape:GetType() end
 
 ---[CLIENT] Sets the border color of the shape.

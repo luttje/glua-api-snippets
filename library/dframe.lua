@@ -18,25 +18,25 @@ function DFrame:Close() end
 ---[CLIENT AND MENU] Gets whether the background behind the frame is being blurred.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetBackgroundBlur)
----@return boolean #Whether or not background blur is enabled.
+---@return boolean # Whether or not background blur is enabled.
 function DFrame:GetBackgroundBlur() end
 
 ---[CLIENT AND MENU] Determines whether or not the DFrame will be removed when it is closed. This is set with DFrame:SetDeleteOnClose.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetDeleteOnClose)
----@return boolean #Whether or not the frame will be removed on close.
+---@return boolean # Whether or not the frame will be removed on close.
 function DFrame:GetDeleteOnClose() end
 
 ---[CLIENT AND MENU] Gets whether or not the frame is draggable by the user.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetDraggable)
----@return boolean #Whether the frame is draggable or not.
+---@return boolean # Whether the frame is draggable or not.
 function DFrame:GetDraggable() end
 
 ---[CLIENT AND MENU] Gets whether or not the frame is part of a derma menu. This is set with DFrame:SetIsMenu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetIsMenu)
----@return boolean #Whether or not this frame is a menu component.
+---@return boolean # Whether or not this frame is a menu component.
 function DFrame:GetIsMenu() end
 
 ---[CLIENT AND MENU] Gets the minimum height the DFrame can be resized to by the user.
@@ -44,7 +44,7 @@ function DFrame:GetIsMenu() end
 --- You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetMinHeight)
----@return number #The minimum height the user can resize the frame to.
+---@return number # The minimum height the user can resize the frame to.
 function DFrame:GetMinHeight() end
 
 ---[CLIENT AND MENU] Gets the minimum width the DFrame can be resized to by the user.
@@ -52,19 +52,19 @@ function DFrame:GetMinHeight() end
 --- You must call DFrame:SetSizable before the user can resize the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetMinWidth)
----@return number #The minimum width the user can resize the frame to.
+---@return number # The minimum width the user can resize the frame to.
 function DFrame:GetMinWidth() end
 
 ---[CLIENT AND MENU] Gets whether or not the shadow effect bordering the DFrame is being drawn.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetPaintShadow)
----@return boolean #Whether or not the shadow is being drawn.
+---@return boolean # Whether or not the shadow is being drawn.
 function DFrame:GetPaintShadow() end
 
 ---[CLIENT AND MENU] Gets whether or not the DFrame is restricted to the boundaries of the screen resolution.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetScreenLock)
----@return boolean #Whether or not the frame is restricted.
+---@return boolean # Whether or not the frame is restricted.
 function DFrame:GetScreenLock() end
 
 ---[CLIENT AND MENU] Gets whether or not the DFrame can be resized by the user.
@@ -72,19 +72,19 @@ function DFrame:GetScreenLock() end
 --- This is achieved by clicking and dragging in the bottom right corner of the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetSizable)
----@return boolean #Whether the frame can be resized or not.
+---@return boolean # Whether the frame can be resized or not.
 function DFrame:GetSizable() end
 
 ---[CLIENT AND MENU] Returns the title of the frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:GetTitle)
----@return string #Title of the frame.
+---@return string # Title of the frame.
 function DFrame:GetTitle() end
 
 ---[CLIENT AND MENU] Determines if the frame or one of its children has the screen focus.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFrame:IsActive)
----@return boolean #Whether or not the frame has focus.
+---@return boolean # Whether or not the frame has focus.
 function DFrame:IsActive() end
 
 ---[CLIENT AND MENU] Indicate that the background elements won't be usable.

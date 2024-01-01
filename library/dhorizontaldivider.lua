@@ -6,13 +6,13 @@ local DHorizontalDivider = {}
 ---[CLIENT] Returns the width of the horizontal divider bar, set by DHorizontalDivider:SetDividerWidth.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetDividerWidth)
----@return number #The width of the horizontal divider bar
+---@return number # The width of the horizontal divider bar
 function DHorizontalDivider:GetDividerWidth() end
 
 ---[CLIENT] Returns whether or not the player is currently dragging the middle divider bar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetDragging)
----@return boolean #Whether or not the player is currently dragging the middle divider bar.
+---@return boolean # Whether or not the player is currently dragging the middle divider bar.
 function DHorizontalDivider:GetDragging() end
 
 ---[CLIENT] Returns the local X coordinate of where the player started dragging the thing
@@ -24,37 +24,37 @@ function DHorizontalDivider:GetHoldPos() end
 ---[CLIENT] Returns the left side content of the DHorizontalDivider
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetLeft)
----@return Panel #The content on the left side
+---@return Panel # The content on the left side
 function DHorizontalDivider:GetLeft() end
 
 ---[CLIENT] Returns the minimum width of the left side, set by DHorizontalDivider:SetLeftMin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetLeftMin)
----@return number #The minimum width of the left side
+---@return number # The minimum width of the left side
 function DHorizontalDivider:GetLeftMin() end
 
 ---[CLIENT] Returns the current width of the left side, set by DHorizontalDivider:SetLeftWidth or by the user.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetLeftWidth)
----@return number #The current width of the left side
+---@return number # The current width of the left side
 function DHorizontalDivider:GetLeftWidth() end
 
 ---[CLIENT] Returns the middle content, set by DHorizontalDivider:SetMiddle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetMiddle)
----@return Panel #The middle content
+---@return Panel # The middle content
 function DHorizontalDivider:GetMiddle() end
 
 ---[CLIENT] Returns the right side content
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetRight)
----@return Panel #The right side content
+---@return Panel # The right side content
 function DHorizontalDivider:GetRight() end
 
 ---[CLIENT] Returns the minimum width of the right side, set by DHorizontalDivider:SetRightMin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:GetRightMin)
----@return number #The minimum width of the right side
+---@return number # The minimum width of the right side
 function DHorizontalDivider:GetRightMin() end
 
 ---[CLIENT] Sets the width of the horizontal divider bar.
@@ -113,7 +113,7 @@ function DHorizontalDivider:SetRight(pnl) end
 ---@param minWidth number The minimum width of the right side
 function DHorizontalDivider:SetRightMin(minWidth) end
 
----[CLIENT]
+---[CLIENT] TODO Document me
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHorizontalDivider:StartGrab)
 function DHorizontalDivider:StartGrab() end

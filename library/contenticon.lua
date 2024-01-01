@@ -6,25 +6,25 @@ local ContentIcon = {}
 ---[CLIENT] Returns the color set by ContentIcon:SetColor
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetColor)
----@return table #See Color
+---@return table # See Color
 function ContentIcon:GetColor() end
 
 ---[CLIENT] Returns the content type used to save and restore the content icon in a spawnlist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetContentType)
----@return string #The content type, for example "entity" or "weapon".
+---@return string # The content type, for example "entity" or "weapon".
 function ContentIcon:GetContentType() end
 
 ---[CLIENT] Returns a table of weapon classes for the content icon with "NPC" content type to be randomly chosen from when user tries to spawn the NPC.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetNPCWeapon)
----@return table #A table of weapon classes to be chosen from when user tries to spawn the NPC.
+---@return table # A table of weapon classes to be chosen from when user tries to spawn the NPC.
 function ContentIcon:GetNPCWeapon() end
 
 ---[CLIENT] Returns the internal "name" for the content icon, usually a class name for an entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetSpawnName)
----@return string #Internal "name" to be used when user left clicks the icon.
+---@return string # Internal "name" to be used when user left clicks the icon.
 function ContentIcon:GetSpawnName() end
 
 ---[CLIENT] A hook for override, by default does nothing. Called when user right clicks on the content icon, you are supposed to open a Global.DermaMenu here with additional options.

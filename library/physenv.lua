@@ -14,25 +14,25 @@ function physenv.AddSurfaceData(properties) end
 --- 		The unit is in `kg/m³`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetAirDensity)
----@return number #Default value is 2.
+---@return number # Default value is 2.
 function physenv.GetAirDensity() end
 
 ---[SHARED] Gets the gravitational acceleration used for physics objects in `source_unit/s^2`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetGravity)
----@return Vector #gravAccel
+---@return Vector # gravAccel
 function physenv.GetGravity() end
 
 ---[SHARED] Returns the last simulation duration of the in-game physics.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetLastSimulationTime)
----@return number #The last simulation duration of the in-game physics in seconds
+---@return number # The last simulation duration of the in-game physics in seconds
 function physenv.GetLastSimulationTime() end
 
 ---[SHARED] Gets the current performance settings in table form.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings)
----@return table #Performance settings. See Structures/PhysEnvPerformanceSettings
+---@return table # Performance settings. See Structures/PhysEnvPerformanceSettings
 function physenv.GetPerformanceSettings() end
 
 ---[SHARED] Sets the air density.

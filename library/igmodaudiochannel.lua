@@ -24,34 +24,34 @@ function IGModAudioChannel:EnableLooping(enable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT)
 ---@param tbl table The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
 ---@param size number The number of samples to use. See Enums/FFT
----@return number #The number of frequency bins that have been filled in the output table.
+---@return number # The number of frequency bins that have been filled in the output table.
 function IGModAudioChannel:FFT(tbl, size) end
 
 ---[CLIENT] Returns 3D cone of the sound channel. See IGModAudioChannel:Set3DCone.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DCone)
----@return number, number, number #number - The angle of the inside projection cone in degrees.
----@return number, number, number #number - The angle of the outside projection cone in degrees.
----@return number, number, number #number - The delta-volume outside the outer projection cone.
+---@return number # The angle of the inside projection cone in degrees.
+---@return number # The angle of the outside projection cone in degrees.
+---@return number # The delta-volume outside the outer projection cone.
 function IGModAudioChannel:Get3DCone() end
 
 ---[CLIENT] Returns if the sound channel is currently in 3D mode or not. This value will be affected by IGModAudioChannel:Set3DEnabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DEnabled)
----@return boolean #Is currently 3D or not.
+---@return boolean # Is currently 3D or not.
 function IGModAudioChannel:Get3DEnabled() end
 
 ---[CLIENT] Returns 3D fade distances of a sound channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DFadeDistance)
----@return number, number #number - The minimum distance. The channel's volume is at maximum when the listener is within this distance
----@return number, number #number - The maximum distance. The channel's volume stops decreasing when the listener is beyond this distance
+---@return number # The minimum distance. The channel's volume is at maximum when the listener is within this distance
+---@return number # The maximum distance. The channel's volume stops decreasing when the listener is beyond this distance
 function IGModAudioChannel:Get3DFadeDistance() end
 
 ---[CLIENT] Returns the average bit rate of the sound channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetAverageBitRate)
----@return number #The average bit rate of the sound channel.
+---@return number # The average bit rate of the sound channel.
 function IGModAudioChannel:GetAverageBitRate() end
 
 ---[CLIENT] Retrieves the number of bits per sample of the sound channel.
@@ -59,62 +59,70 @@ function IGModAudioChannel:GetAverageBitRate() end
 --- Doesn't work for mp3 and ogg files.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetBitsPerSample)
----@return number #Number of bits per sample, or 0 if unknown.
+---@return number # Number of bits per sample, or 0 if unknown.
 function IGModAudioChannel:GetBitsPerSample() end
+
+---[CLIENT] Returns the buffered time of the sound channel in seconds, for online streaming sound channels. (sound.PlayURL)
+---
+--- For offline channels this will be equivalent to IGModAudioChannel:GetLength.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetBufferedTime)
+---@return number # The current buffered time of the stream, in seconds.
+function IGModAudioChannel:GetBufferedTime() end
 
 ---[CLIENT] Returns the filename for the sound channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetFileName)
----@return string #The file name. This will not be always what you have put into the sound.PlayURL as first argument.
+---@return string # The file name. This will not be always what you have put into the sound.PlayURL as first argument.
 function IGModAudioChannel:GetFileName() end
 
----[CLIENT] Returns the length of sound played by the sound channel.
+---[CLIENT] Returns the length of sound played by the sound channel in seconds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetLength)
----@return number #The length of the sound. This value seems to be less then 0 for continuous radio streams.
+---@return number # The length of the sound. This value seems to be less then 0 for continuous radio streams.
 function IGModAudioChannel:GetLength() end
 
 ---[CLIENT] Returns the right and left levels of sound played by the sound channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetLevel)
----@return number, number #number - The left sound level. The value is between 0 and 1.
----@return number, number #number - The right sound level. The value is between 0 and 1.
+---@return number # The left sound level. The value is between 0 and 1.
+---@return number # The right sound level. The value is between 0 and 1.
 function IGModAudioChannel:GetLevel() end
 
 ---[CLIENT] Gets the relative volume of the left and right channels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetPan)
----@return number #Relative volume between the left and right channels. `-1` means only in left channel, `0` is center and `1` is only in the right channel. `0` by default.
+---@return number # Relative volume between the left and right channels. `-1` means only in left channel, `0` is center and `1` is only in the right channel. `0` by default.
 function IGModAudioChannel:GetPan() end
 
 ---[CLIENT] Returns the playback rate of the sound channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetPlaybackRate)
----@return number #The current playback rate of the sound channel
+---@return number # The current playback rate of the sound channel
 function IGModAudioChannel:GetPlaybackRate() end
 
 ---[CLIENT] Returns position of the sound channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetPos)
----@return Vector #The position of the sound channel, previously set by IGModAudioChannel:SetPos
+---@return Vector # The position of the sound channel, previously set by IGModAudioChannel:SetPos
 function IGModAudioChannel:GetPos() end
 
 ---[CLIENT] Returns the sample rate for currently playing sound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetSamplingRate)
----@return number #The sample rate in Hz. This should always be 44100.
+---@return number # The sample rate in Hz. This should always be 44100.
 function IGModAudioChannel:GetSamplingRate() end
 
 ---[CLIENT] Returns the state of a sound channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetState)
----@return number #The state of the sound channel, see Enums/GMOD_CHANNEL
+---@return number # The state of the sound channel, see Enums/GMOD_CHANNEL
 function IGModAudioChannel:GetState() end
 
 ---[CLIENT] Retrieves HTTP headers from a bass stream channel created by sound.PlayURL, if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsHTTP)
----@return table #Returns a table of HTTP headers.Returns nil if no information is available.
+---@return table # Returns a table of HTTP headers.Returns nil if no information is available.
 function IGModAudioChannel:GetTagsHTTP() end
 
 ---[CLIENT] Retrieves the ID3 version 1 info from a bass channel created by sound.PlayFile or sound.PlayURL, if available.
@@ -122,67 +130,67 @@ function IGModAudioChannel:GetTagsHTTP() end
 --- ID3v2 is not supported.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsID3)
----@return table #Returns a table containing the information. Returns nil if no information is available.
+---@return table # Returns a table containing the information. Returns nil if no information is available.
 function IGModAudioChannel:GetTagsID3() end
 
 ---[CLIENT] Retrieves meta stream info from a bass stream channel created by sound.PlayURL, if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsMeta)
----@return string #Returns a string containing the information. Returns nil if no information is available.
+---@return string # Returns a string containing the information. Returns nil if no information is available.
 function IGModAudioChannel:GetTagsMeta() end
 
 ---[CLIENT] Retrieves OGG media info tag, from a bass channel created by sound.PlayURL or sound.PlayFile, if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsOGG)
----@return table #Returns a table containing the information. Returns nil if no information is available.
+---@return table # Returns a table containing the information. Returns nil if no information is available.
 function IGModAudioChannel:GetTagsOGG() end
 
 ---[CLIENT] Retrieves OGG Vendor tag, usually containing the application that created the file, from a bass channel created by sound.PlayURL or sound.PlayFile, if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsVendor)
----@return string #Returns a string containing the information. Returns nil if no information is available.
+---@return string # Returns a string containing the information. Returns nil if no information is available.
 function IGModAudioChannel:GetTagsVendor() end
 
 ---[CLIENT] Returns the current time of the sound channel in seconds
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTime)
----@return number #The current time of the stream
+---@return number # The current time of the stream
 function IGModAudioChannel:GetTime() end
 
 ---[CLIENT] Returns volume of a sound channel
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetVolume)
----@return number #The volume of the sound channel
+---@return number # The volume of the sound channel
 function IGModAudioChannel:GetVolume() end
 
 ---[CLIENT] Returns if the sound channel is in 3D mode or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Is3D)
----@return boolean #Is 3D or not.
+---@return boolean # Is 3D or not.
 function IGModAudioChannel:Is3D() end
 
 ---[CLIENT] Returns whether the audio stream is block streamed or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsBlockStreamed)
----@return boolean #Is the audio stream block streamed or not.
+---@return boolean # Is the audio stream block streamed or not.
 function IGModAudioChannel:IsBlockStreamed() end
 
 ---[CLIENT] Returns if the sound channel is looping or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsLooping)
----@return boolean #Is looping or not.
+---@return boolean # Is looping or not.
 function IGModAudioChannel:IsLooping() end
 
 ---[CLIENT] Returns if the sound channel is streamed from the Internet or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsOnline)
----@return boolean #Is online or not.
+---@return boolean # Is online or not.
 function IGModAudioChannel:IsOnline() end
 
 ---[CLIENT] Returns if the sound channel is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsValid)
----@return boolean #Is the sound channel valid or not
+---@return boolean # Is the sound channel valid or not
 function IGModAudioChannel:IsValid() end
 
 ---[CLIENT] Pauses the stream. It can be started again using IGModAudioChannel:Play
@@ -246,7 +254,7 @@ function IGModAudioChannel:Set3DFadeDistance(min, max) end
 ---[CLIENT] Sets the relative volume of the left and right channels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:SetPan)
----@param pan number Relative volume between the left and right channels. -1 means only in left channel, 0 is center and 1 is only in the right channel.
+---@param pan number Relative volume between the left and right channels. `-1` means only in left channel, `0` is center (default) and `1` is only in the right channel. Fractional values are supported.
 function IGModAudioChannel:SetPan(pan) end
 
 ---[CLIENT] Sets the playback rate of the sound channel. May not work with high values for radio streams.

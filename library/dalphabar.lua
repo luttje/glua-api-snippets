@@ -6,13 +6,13 @@ local DAlphaBar = {}
 ---[CLIENT AND MENU] Returns the base color of the alpha bar. This is the color for which the alpha channel is being modified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAlphaBar:GetBarColor)
----@return table #The current base color.
+---@return table # The current base color.
 function DAlphaBar:GetBarColor() end
 
 ---[CLIENT AND MENU] Returns the alpha value of the alpha bar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAlphaBar:GetValue)
----@return number #The current alpha value.
+---@return number # The current alpha value.
 function DAlphaBar:GetValue() end
 
 ---[CLIENT AND MENU] Sets the base color of the alpha bar. This is the color for which the alpha channel is being modified.

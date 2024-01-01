@@ -29,31 +29,31 @@ function CSoundPatch:FadeOut(seconds) end
 ---[SHARED] Returns the DSP ( Digital Signal Processor ) effect for the sound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetDSP)
----@return number #The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
+---@return number # The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
 function CSoundPatch:GetDSP() end
 
 ---[SHARED] Returns the current pitch.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetPitch)
----@return number #The current pitch, can range from 0-255.
+---@return number # The current pitch, can range from 0-255.
 function CSoundPatch:GetPitch() end
 
 ---[SHARED] Returns the current sound level.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetSoundLevel)
----@return number #The current sound level, see Enums/SNDLVL.
+---@return number # The current sound level, see Enums/SNDLVL.
 function CSoundPatch:GetSoundLevel() end
 
 ---[SHARED] Returns the current volume.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetVolume)
----@return number #The current volume, ranging from 0 to 1.
+---@return number # The current volume, ranging from 0 to 1.
 function CSoundPatch:GetVolume() end
 
 ---[SHARED] Returns whenever the sound is being played.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:IsPlaying)
----@return boolean #Is playing or not
+---@return boolean # Is playing or not
 function CSoundPatch:IsPlaying() end
 
 ---[SHARED] Starts to play the sound. This will reset the sound's volume and pitch to their default values. See CSoundPatch:PlayEx

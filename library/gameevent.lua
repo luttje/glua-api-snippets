@@ -40,7 +40,7 @@ achievement_event.max_val = nil
 local break_breakable = {}
 
 ---The Entity:EntIndex of the broken prop.
----@type string
+---@type number
 break_breakable.entindex = nil
 
 ---The Player:UserID of the connected player.
@@ -55,7 +55,7 @@ break_breakable.material = nil
 local break_prop = {}
 
 ---The Entity:EntIndex of the broken prop.
----@type string
+---@type number
 break_prop.entindex = nil
 
 ---The Player:UserID of the connected player. Seems to be 0 every time.
@@ -126,8 +126,21 @@ entity_killed.entindex_killed = nil
 local flare_ignite_npc = {}
 
 ---The Entity:EntIndex of the ignited NPC.
----@type string
+---@type number
 flare_ignite_npc.entindex = nil
+
+---@class freezecam_started
+local freezecam_started = {}
+
+---@class game_newmap
+local game_newmap = {}
+
+---The Map name
+---@type string
+game_newmap.mapname = nil
+
+---@class hide_freezepanel
+local hide_freezepanel = {}
 
 ---@class host_quit
 local host_quit = {}
@@ -253,7 +266,7 @@ local player_hurt = {}
 ---@type number
 player_hurt.health = nil
 
----**[Server-only]** Event priority number used by HLTV.
+---Event priority number used by HLTV.
 ---@type number
 player_hurt.priority = nil
 
@@ -295,7 +308,7 @@ player_info.networkid = nil
 ---@class player_say
 local player_say = {}
 
----**[Server-only]** Event priority number used by HLTV.
+---Event priority number used by HLTV.
 ---@type number
 player_say.priority = nil
 
@@ -318,7 +331,7 @@ player_spawn.userid = nil
 local ragdoll_dissolved = {}
 
 ---The Entity:EntIndex of the disolved Ragdoll.
----@type string
+---@type number
 ragdoll_dissolved.entindex = nil
 
 ---@class server_addban
@@ -420,3 +433,10 @@ server_spawn.dedicated = nil
 ---true if the Server is password protected.
 ---@type boolean
 server_spawn.password = nil
+
+---@class show_freezepanel
+local show_freezepanel = {}
+
+---The Index of the Entity that is being spectated or `0`
+---@type number
+show_freezepanel.killer = nil

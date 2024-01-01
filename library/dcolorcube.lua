@@ -6,7 +6,7 @@ local DColorCube = {}
 ---[CLIENT AND MENU] Returns the base Color set by DColorCube:SetBaseRGB.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetBaseRGB)
----@return table #A Color
+---@return table # A Color
 function DColorCube:GetBaseRGB() end
 
 ---[CLIENT AND MENU] Returns the value set by DColorCube:SetHue.
@@ -18,14 +18,8 @@ function DColorCube:GetHue() end
 ---[CLIENT AND MENU] Returns the color cube's current set color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetRGB)
----@return table #The set color, uses Color.
+---@return table # The set color, uses Color.
 function DColorCube:GetRGB() end
-
----[CLIENT AND MENU] Function which is called when the color cube slider is moved (through user input). Meant to be overridden.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:OnUserChanged)
----@param color table The new color, uses Color.
-function DColorCube:OnUserChanged(color) end
 
 ---[CLIENT AND MENU] Sets the base color and the color used to draw the color cube panel itself.
 ---
@@ -58,8 +52,8 @@ function DColorCube:SetRGB(clr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:TranslateValues)
 ---@param x number The x position to sample color from/the percentage of saturation to remove from the color (ranges from 0.0 to 1.0).
 ---@param y number The y position to sample color from/the percentage of brightness or value to remove from the color (ranges from 0.0 to 1.0).
----@return number, number #number - The given x position.
----@return number, number #number - The given y position.
+---@return number # The given x position.
+---@return number # The given y position.
 function DColorCube:TranslateValues(x, y) end
 
 ---[CLIENT AND MENU] Updates the color cube RGB based on the given x and y position. Similar to DColorCube:TranslateValues.

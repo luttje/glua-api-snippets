@@ -46,27 +46,27 @@ function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) 
 ---@param zfric number Rotational friction in the Z axis local to the constraint.
 ---@param onlyrotation number Only limit rotation, free movement.
 ---@param nocollide number Whether the entities should be no-collided.
----@return Entity #A phys_ragdollconstraint entity. Will return false if the constraint could not be created.
+---@return Entity # A phys_ragdollconstraint entity. Will return false if the constraint could not be created.
 function constraint.AdvBallsocket(
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	forcelimit,
-	torquelimit,
-	xmin,
-	ymin,
-	zmin,
-	xmax,
-	ymax,
-	zmax,
-	xfric,
-	yfric,
-	zfric,
-	onlyrotation,
-	nocollide
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  forcelimit,
+  torquelimit,
+  xmin,
+  ymin,
+  zmin,
+  xmax,
+  ymax,
+  zmax,
+  xfric,
+  yfric,
+  zfric,
+  onlyrotation,
+  nocollide
 )
 end
 
@@ -85,20 +85,20 @@ end
 ---@param nocollide number Whether the entities should be no-collided.
 ---@param LocalAxis Vector If you include the LocalAxis then LPos2 will not be used in the final constraint. However, LPos2 is still a required argument.
 ---@param DontAddTable boolean Whether or not to add the constraint info on the entity table. See constraint.AddConstraintTable.
----@return Entity #Constraint. Will return false if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
 function constraint.Axis(
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	forcelimit,
-	torquelimit,
-	friction,
-	nocollide,
-	LocalAxis,
-	DontAddTable
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  forcelimit,
+  torquelimit,
+  friction,
+  nocollide,
+  LocalAxis,
+  DontAddTable
 )
 end
 
@@ -113,7 +113,7 @@ end
 ---@param forcelimit number Amount of force until it breaks (0 = unbreakable)
 ---@param torquelimit number Amount of torque (rotation speed) until it breaks (0 = unbreakable)
 ---@param nocollide number Whether the entities should be nocollided
----@return Entity #Constraint. Will return false if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
 function constraint.Ballsocket(Ent1, Ent2, Bone1, Bone2, LocalPos, forcelimit, torquelimit, nocollide) end
 
 ---[SERVER] Basic checks to make sure that the specified entity and bone are valid. Returns false if we should not be constraining the entity.
@@ -121,7 +121,7 @@ function constraint.Ballsocket(Ent1, Ent2, Bone1, Bone2, LocalPos, forcelimit, t
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CanConstrain)
 ---@param ent Entity The entity to check
 ---@param bone number The bone of the entity to check (use 0 for mono boned ents)
----@return boolean #shouldConstrain
+---@return boolean # shouldConstrain
 function constraint.CanConstrain(ent, bone) end
 
 ---[SERVER] Creates a rope without any constraint.
@@ -138,7 +138,7 @@ function constraint.CanConstrain(ent, bone) end
 ---@param LPos2 Vector Position of second end of the rope. Local to Ent2.
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls)
 ---@param kv table (Optional) Any additional key/values to be set on the rope.
----@return Entity #rope
+---@return Entity # rope
 function constraint.CreateKeyframeRope(pos, width, material, Constraint, Ent1, LPos1, Bone1, Ent2, LPos2, Bone2, kv) end
 
 ---[SERVER] Creates an invisible, non-moveable anchor point in the world to which things can be attached.
@@ -148,10 +148,10 @@ function constraint.CreateKeyframeRope(pos, width, material, Constraint, Ent1, L
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CreateStaticAnchorPoint)
 ---@param pos Vector The position to spawn the anchor at
----@return Entity, PhysObj, number, Vector #Entity - anchor
----@return Entity, PhysObj, number, Vector #PhysObj - physicsObject,
----@return Entity, PhysObj, number, Vector #number - bone
----@return Entity, PhysObj, number, Vector #Vector - LPos
+---@return Entity # anchor
+---@return PhysObj # physicsObject,
+---@return number # bone
+---@return Vector # LPos
 function constraint.CreateStaticAnchorPoint(pos) end
 
 ---[SERVER] Creates an elastic constraint.
@@ -170,22 +170,22 @@ function constraint.CreateStaticAnchorPoint(pos) end
 ---@param width number Width of rope.
 ---@param stretchonly boolean
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity #Entity - Constraint. Will return false if the constraint could not be created.
----@return Entity, Entity #Entity - rope.  Will return nil if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
+---@return Entity # rope.  Will return nil if the constraint could not be created.
 function constraint.Elastic(
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	constant,
-	damping,
-	rdamping,
-	material,
-	width,
-	stretchonly,
-	color
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  constant,
+  damping,
+  rdamping,
+  material,
+  width,
+  stretchonly,
+  color
 )
 end
 
@@ -211,7 +211,7 @@ end
 --- * `Slider`
 ---@param bone1 number The bone number for the first entity (0 for monoboned entities)
 ---@param bone2 number The bone number for the second entity
----@return Entity #constraint
+---@return Entity # constraint
 function constraint.Find(ent1, ent2, type, bone1, bone2) end
 
 ---[SERVER] Returns the first constraint of a specific type directly connected to the entity found
@@ -233,7 +233,7 @@ function constraint.Find(ent1, ent2, type, bone1, bone2) end
 --- * `Muscle`
 --- * `Keepupright`
 --- * `Slider`
----@return table #The constraint table, set with constraint.AddConstraintTable
+---@return table # The constraint table, set with constraint.AddConstraintTable
 function constraint.FindConstraint(ent, type) end
 
 ---[SERVER] Returns the other entity involved in the first constraint of a specific type directly connected to the entity
@@ -255,7 +255,7 @@ function constraint.FindConstraint(ent, type) end
 --- * `Muscle`
 --- * `Keepupright`
 --- * `Slider`
----@return Entity #The other entity.
+---@return Entity # The other entity.
 function constraint.FindConstraintEntity(ent, type) end
 
 ---[SERVER] Returns a table of all constraints of a specific type directly connected to the entity
@@ -277,7 +277,7 @@ function constraint.FindConstraintEntity(ent, type) end
 --- * `Muscle`
 --- * `Keepupright`
 --- * `Slider`
----@return table #All the constraints of this entity.
+---@return table # All the constraints of this entity.
 function constraint.FindConstraints(ent, type) end
 
 ---[SERVER] Make this entity forget any constraints it knows about. Note that this will not actually remove the constraints.
@@ -291,21 +291,21 @@ function constraint.ForgetConstraints(ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.GetAllConstrainedEntities)
 ---@param ent Entity The entity to check
 ---@param ResultTable? table Table used to return result. Optional.
----@return table #A table containing all of the constrained entities. This includes all entities constrained to entities constrained to the supplied entity, etc.
+---@return table # A table containing all of the constrained entities. This includes all entities constrained to entities constrained to the supplied entity, etc.
 function constraint.GetAllConstrainedEntities(ent, ResultTable) end
 
 ---[SERVER] Returns a table of all constraints directly connected to the entity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.GetTable)
 ---@param ent Entity The entity to check
----@return table #A list of all constraints connected to the entity.
+---@return table # A list of all constraints connected to the entity.
 function constraint.GetTable(ent) end
 
 ---[SERVER] Returns true if the entity has constraints attached to it
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.HasConstraints)
 ---@param ent Entity The entity to check
----@return boolean #Whether the entity has any constraints or not.
+---@return boolean # Whether the entity has any constraints or not.
 function constraint.HasConstraints(ent) end
 
 ---[SERVER] Creates a Hydraulic constraint.
@@ -326,26 +326,26 @@ function constraint.HasConstraints(ent) end
 ---@param speed number
 ---@param material string The material of the rope.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity, Entity, Entity #Entity - Constraint. Will return false if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - rope. Will return nil if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - controller. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - slider. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
+---@return Entity # rope. Will return nil if the constraint could not be created.
+---@return Entity # controller. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
+---@return Entity # slider. Can return nil depending on how the constraint was created. Will return nil if the constraint could not be created.
 function constraint.Hydraulic(
-	pl,
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	Length1,
-	Length2,
-	width,
-	key,
-	fixed,
-	speed,
-	material,
-	color
+  pl,
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  Length1,
+  Length2,
+  width,
+  key,
+  fixed,
+  speed,
+  material,
+  color
 )
 end
 
@@ -358,7 +358,7 @@ end
 ---@param ang Angle The angle defined as "upright"
 ---@param bone number The bone of the entity to constrain (0 for boneless)
 ---@param angularLimit number Basically, the strength of the constraint
----@return Entity #The created constraint, if any or false if the constraint failed to set
+---@return Entity # The created constraint, if any or false if the constraint failed to set
 function constraint.Keepupright(ent, ang, bone, angularLimit) end
 
 ---[SERVER] Creates a motor constraint.
@@ -381,26 +381,26 @@ function constraint.Keepupright(ent, ang, bone, angularLimit) end
 ---@param numpadkey_bwd number The key binding for "backwards", corresponding to an Enums/KEY
 ---@param direction number
 ---@param LocalAxis Vector
----@return Entity, Entity #Entity - Constraint. Will return false if the constraint could not be created.
----@return Entity, Entity #Entity - axis. Will return nil if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
+---@return Entity # axis. Will return nil if the constraint could not be created.
 function constraint.Motor(
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	friction,
-	torque,
-	forcetime,
-	nocollide,
-	toggle,
-	pl,
-	forcelimit,
-	numpadkey_fwd,
-	numpadkey_bwd,
-	direction,
-	LocalAxis
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  friction,
+  torque,
+  forcetime,
+  nocollide,
+  toggle,
+  pl,
+  forcelimit,
+  numpadkey_fwd,
+  numpadkey_bwd,
+  direction,
+  LocalAxis
 )
 end
 
@@ -424,28 +424,28 @@ end
 ---@param starton boolean
 ---@param material string Material of the rope.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity, Entity, Entity #Entity - Constraint. Will return false if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - rope. Will return nil if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - controller. Will return nil if the constraint could not be created.
----@return Entity, Entity, Entity, Entity #Entity - slider. Will return nil if the fixed argument is not 1 or if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
+---@return Entity # rope. Will return nil if the constraint could not be created.
+---@return Entity # controller. Will return nil if the constraint could not be created.
+---@return Entity # slider. Will return nil if the fixed argument is not 1 or if the constraint could not be created.
 function constraint.Muscle(
-	pl,
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	Length1,
-	Length2,
-	width,
-	key,
-	fixed,
-	period,
-	amplitude,
-	starton,
-	material,
-	color
+  pl,
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  Length1,
+  Length2,
+  width,
+  key,
+  fixed,
+  period,
+  amplitude,
+  starton,
+  material,
+  color
 )
 end
 
@@ -457,7 +457,7 @@ end
 ---@param Ent2 Entity Second entity.
 ---@param Bone1 number Bone of first entity (0 for non-ragdolls).
 ---@param Bone2 number Bone of second entity (0 for non-ragdolls).
----@return Entity #Constraint. Will return false if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
 function constraint.NoCollide(Ent1, Ent2, Bone1, Bone2) end
 
 ---[SERVER] Creates a pulley constraint.
@@ -476,21 +476,21 @@ function constraint.NoCollide(Ent1, Ent2, Bone1, Bone2) end
 ---@param width number Width of the rope.
 ---@param material string Material of the rope.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity #Constraint. Will return false if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
 function constraint.Pulley(
-	Ent1,
-	Ent4,
-	Bone1,
-	Bone4,
-	LPos1,
-	LPos4,
-	WPos2,
-	WPos3,
-	forcelimit,
-	rigid,
-	width,
-	material,
-	color
+  Ent1,
+  Ent4,
+  Bone1,
+  Bone4,
+  LPos1,
+  LPos4,
+  WPos2,
+  WPos3,
+  forcelimit,
+  rigid,
+  width,
+  material,
+  color
 )
 end
 
@@ -498,8 +498,8 @@ end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.RemoveAll)
 ---@param ent Entity The entity to remove constraints from
----@return boolean, number #boolean - Whether any constraints were removed
----@return boolean, number #number - Number of constraints removed
+---@return boolean # Whether any constraints were removed
+---@return number # Number of constraints removed
 function constraint.RemoveAll(ent) end
 
 ---[SERVER] Attempts to remove all constraints of a specified type associated with an entity
@@ -507,8 +507,8 @@ function constraint.RemoveAll(ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.RemoveConstraints)
 ---@param ent Entity The entity to check
 ---@param type string The constraint type to remove (eg. "Weld", "Elastic", "NoCollide")
----@return boolean, number #boolean - Whether we removed any constraints or not
----@return boolean, number #number - The amount of constraints removed
+---@return boolean # Whether we removed any constraints or not
+---@return number # The amount of constraints removed
 function constraint.RemoveConstraints(ent, type) end
 
 ---[SERVER] Creates a rope constraint - with rope!
@@ -527,22 +527,22 @@ function constraint.RemoveConstraints(ent, type) end
 ---@param material string Material of the rope.
 ---@param rigid boolean Whether the constraint is rigid.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity #Entity - The constraint entity. Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
----@return Entity, Entity #Entity - The rope entity. Will return `nil` if `constraint` return value is a `keyframe_rope` or if the constraint could not be created.
+---@return Entity # The constraint entity. Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
+---@return Entity # The rope entity. Will return `nil` if `constraint` return value is a `keyframe_rope` or if the constraint could not be created.
 function constraint.Rope(
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	length,
-	addlength,
-	forcelimit,
-	width,
-	material,
-	rigid,
-	color
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  length,
+  addlength,
+  forcelimit,
+  width,
+  material,
+  rigid,
+  color
 )
 end
 
@@ -558,8 +558,8 @@ end
 ---@param width number The width of the rope.
 ---@param material string The material of the rope.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity #Entity - Constraint. Will return false if the constraint could not be created.
----@return Entity, Entity #Entity - rope. Will return nil if the constraint could not be created.
+---@return Entity # Constraint. Will return false if the constraint could not be created.
+---@return Entity # rope. Will return nil if the constraint could not be created.
 function constraint.Slider(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, width, material, color) end
 
 ---[SERVER] Creates a weld constraint
@@ -574,7 +574,7 @@ function constraint.Slider(Ent1, Ent2, Bone1, Bone2, LPos1, LPos2, width, materi
 ---@param forcelimit number The amount of force appliable to the constraint before it will break (0 is never)
 ---@param nocollide boolean Should ent1 be nocollided to ent2 via this constraint
 ---@param deleteent1onbreak boolean If true, when ent2 is removed, ent1 will also be removed
----@return Entity #constraint
+---@return Entity # constraint
 function constraint.Weld(ent1, ent2, bone1, bone2, forcelimit, nocollide, deleteent1onbreak) end
 
 ---[SERVER] Creates a Winch constraint.
@@ -595,24 +595,24 @@ function constraint.Weld(ent1, ent2, bone1, bone2, forcelimit, nocollide, delete
 ---@param material string The material of the rope.
 ---@param toggle boolean Whether the winch should be on toggle.
 ---@param color table The color of the rope. See Global.Color.
----@return Entity, Entity, Entity #Entity - Constraint. Can return nil. Will return false if the constraint could not be created.
----@return Entity, Entity, Entity #Entity - rope. Will return nil if the constraint could not be created.
----@return Entity, Entity, Entity #Entity - controller. Can return nil.
+---@return Entity # Constraint. Can return nil. Will return false if the constraint could not be created.
+---@return Entity # rope. Will return nil if the constraint could not be created.
+---@return Entity # controller. Can return nil.
 function constraint.Winch(
-	pl,
-	Ent1,
-	Ent2,
-	Bone1,
-	Bone2,
-	LPos1,
-	LPos2,
-	width,
-	fwd_bind,
-	bwd_bind,
-	fwd_speed,
-	bwd_speed,
-	material,
-	toggle,
-	color
+  pl,
+  Ent1,
+  Ent2,
+  Bone1,
+  Bone2,
+  LPos1,
+  LPos2,
+  width,
+  fwd_bind,
+  bwd_bind,
+  fwd_speed,
+  bwd_speed,
+  material,
+  toggle,
+  color
 )
 end

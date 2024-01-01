@@ -24,27 +24,32 @@ function DPanelList:EnableVerticalScrollbar() end
 ---[CLIENT AND MENU] Returns all panels has added by DPanelList:AddItem
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetItems)
----@return table #A table of panels used as items of DPanelList.
+---@return table # A table of panels used as items of DPanelList.
 function DPanelList:GetItems() end
 
 ---[CLIENT AND MENU] Returns offset of list items from the panel borders set by DPanelList:SetPadding
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetPadding)
----@return number #Offset from panel borders
+---@return number # Offset from panel borders
 function DPanelList:GetPadding() end
 
 ---[CLIENT AND MENU] Returns distance between list items set by DPanelList:SetSpacing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetSpacing)
----@return number #Distance between panels
+---@return number # Distance between panels
 function DPanelList:GetSpacing() end
 
----[CLIENT AND MENU]
+---[CLIENT AND MENU] Insert given panel at the top of the list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:InsertAtTop)
 ---@param insert Panel The panel to insert
 ---@param strLineState string If set to "ownline", no other panels will be placed to the left or right of the panel we are inserting
 function DPanelList:InsertAtTop(insert, strLineState) end
+
+---[CLIENT AND MENU] Used internally to rebuild the child panel positions.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:Rebuild)
+function DPanelList:Rebuild() end
 
 ---[CLIENT AND MENU] Sets the offset of the lists items from the panel borders
 ---

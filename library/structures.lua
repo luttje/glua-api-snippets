@@ -54,6 +54,10 @@ AngPos.Ang = nil
 ---@type Vector
 AngPos.Pos = nil
 
+---The bone ID the attachment point is parented to.
+---@type number
+AngPos.Bone = nil
+
 ---@class AnimationData
 local AnimationData = {}
 
@@ -177,7 +181,7 @@ local Bullet = {}
 ---@type Entity
 Bullet.Attacker = self
 
----Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo
+---Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo The return value can be a table with following keys: * boolean effects - `false` to not do any of the effects. * boolean damage - `false` to not do any damage.
 ---@type function
 Bullet.Callback = nil
 
@@ -561,15 +565,19 @@ ENT = {}
 ---@type string
 ENT.Base = nil
 
----Type of the entity. This **must be one of these:** * **anim** * **brush** * **point** * **ai** * **nextbot** * **filter** See Scripted Entities for a more detailed explanation of what each one is.
+---Type of the entity. This **must** be one of these: * **anim** * **brush** * **point** * **ai** * **nextbot** * **filter** See Scripted Entities for a more detailed explanation of what each one is.
 ---@type string
 ENT.Type = nil
 
----Entity class name of the entity (File or folder name of your entity). **This is set automatically `after` the entity file is loaded.**
+---The class name of the entity (File or folder name of your entity). **This is set automatically _after_ the entity file is loaded.**
 ---@type string
 ENT.ClassName = nil
 
----The folder from where the entity was loaded. This should always be "entity/ent_myentity", regardless whether your entity is stored as a file, or multiple files in a folder. **This is set automatically `before` the entity file is loaded.**
+---If set, overrides the classname of the SWEP.
+---@type string
+ENT.ClassNameOverride = nil
+
+---The folder from where the entity was loaded. This should always be "entity/ent_myentity", regardless whether your entity is stored as a file, or multiple files in a folder. **This is set automatically _before_ the entity file is loaded.**
 ---@type string
 ENT.Folder = nil
 
@@ -577,7 +585,7 @@ ENT.Folder = nil
 ---@type boolean
 ENT.AutomaticFrameAdvance = false
 
----(Clientside) Spawnmenu category to put the entity into
+---Spawnmenu category to put the entity into
 ---@type string
 ENT.Category = "Other"
 
@@ -593,43 +601,43 @@ ENT.Editable = false
 ---@type boolean
 ENT.AdminOnly = false
 
----(Clientside) Nice name of the entity to appear in the spawn menu
+---Nice name of the entity to appear in the spawn menu
 ---@type string
 ENT.PrintName = nil
 
----(Clientside) The author of the entity
+---The author of the entity
 ---@type string
 ENT.Author = nil
 
----(Clientside) The contacts of the entity creator
+---The contacts of the entity creator
 ---@type string
 ENT.Contact = nil
 
----(Clientside) The purpose of the entity creation
+---The purpose of the entity creation
 ---@type string
 ENT.Purpose = nil
 
----(Clientside) How to use your entity
+--- How to use your entity
 ---@type string
 ENT.Instructions = nil
 
----(Clientside) The entity's render group, see Enums/RENDERGROUP.
+---The entity's render group, see Enums/RENDERGROUP. If unset, the engine will decide the render group based on the entity's model.
 ---@type number
-ENT.RenderGroup = RENDERGROUP_OPAQUE
+ENT.RenderGroup = nil
 
----(Serverside) Disable the ability for players to duplicate this entity.
+---Disable the ability for players to duplicate this entity.
 ---@type boolean
 ENT.DisableDuplicator = false
 
----(Clientside) Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information.
+---Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information.
 ---@type string
 ENT.ScriptedEntityType = nil
 
----(Serverside) If set, the entity will not be duplicated via the built-in duplicator system.
+---If set, the entity will not be duplicated via the built-in duplicator system.
 ---@type boolean
 ENT.DoNotDuplicate = false
 
----(Clientside) If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
+---If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
 ---@type string
 ENT.IconOverride = "materials/entities/<ClassName>.png"
 
@@ -958,6 +966,77 @@ MeshVertex.v = nil
 ---@type table
 MeshVertex.userdata = nil
 
+---@class NPCData
+local NPCData = {}
+
+---The nice name of the NPC for UI display.
+---@type string
+NPCData.Name = nil
+
+---Class name of the entity to spawn.
+---@type string
+NPCData.Class = nil
+
+---Spawnmenu category to put the NPCinto.
+---@type string
+NPCData.Category = "Other"
+
+---A list of weapons this NPC is typically meant to use. One will be picked on spawn at random, unless overwritten by the player.
+---@type table
+NPCData.Weapons = {}
+
+---Key-value pairs to apply to the NPC on spawn. See Entity:SetKeyValue.
+---@type table
+NPCData.KeyValues = {}
+
+---Model override for this NPC.
+---@type string
+NPCData.Model = "nil"
+
+---Additional spawnflags for this NPC. See Entity:GetSpawnFlags. Ignored if `TotalSpawnFlags` key is present.
+---@type number
+NPCData.SpawnFlags = 0
+
+---Total spawnflags override for this NPC.
+---@type number
+NPCData.TotalSpawnFlags = nil
+
+---If set to `true`, this NPC can only be spawned on the ceiling. Stacks with `OnFloor`.
+---@type boolean
+NPCData.OnCeiling = false
+
+---If set to `true`, this NPC can only be spawned on the floor. Stacks with `OnCeiling`.
+---@type boolean
+NPCData.OnFloor = false
+
+---Offset, in Hammer units, away from the surface where the player is looking at for the NPC spawn position.
+---@type number
+NPCData.Offset = 0
+
+---Material override for this NPC. See Entity:SetMaterial.
+---@type string
+NPCData.Material = nil
+
+---Skin override for the NPC. See Entity:SetSkin.
+---@type number
+NPCData.Skin = nil
+
+---If set to `true`, do not try to teleport the NPC to the ground.
+---@type boolean
+NPCData.NoDrop = false
+
+---Used to add additional rotation the NPC post spawn. Usually all NPCs would be facing the player on spawn. Value of `Angle( 0, 180, 0 )` would make the NPC face away from the player.
+---@type Angle
+NPCData.Rotate = Angle(0, 0, 0)
+
+---Health override for this NPC. Also sets Entity:SetMaxHealth.
+---@type number
+NPCData.Health = nil
+
+---If set, a function to be called when the NPC is pasted using the duplicator library.
+---@type function
+NPCData.OnDuplicated = nil
+
 ---@class OperatingParams
 local OperatingParams = {}
 
@@ -1135,7 +1214,7 @@ Preset.disabled = nil
 ---@type string
 Preset.name = nil
 
----What to do with addons not in the preset. Can be **enable** **disable** or nothing.
+---What to do with addons not in the preset. Can be `enable`, `disable` or nothing.
 ---@type string
 Preset.newAction = nil
 
@@ -1604,6 +1683,10 @@ SWEP = {}
 ---@type string
 SWEP.ClassName = nil
 
+---If set, overrides the classname of the SWEP.
+---@type string
+SWEP.ClassNameOverride = nil
+
 ---The spawn menu category that this weapon resides in.
 ---@type string
 SWEP.Category = "Other"
@@ -1648,7 +1731,7 @@ SWEP.Purpose = nil
 ---@type string
 SWEP.Instructions = nil
 
----The client-side, relative path to the SWEP's view model.
+---Relative path to the SWEP's view model.
 ---@type string
 SWEP.ViewModel = "models/weapons/v_pistol.mdl"
 
@@ -1668,7 +1751,7 @@ SWEP.ViewModelFlip2 = false
 ---@type number
 SWEP.ViewModelFOV = 62
 
----The server-side, relative path to the SWEP's world model.
+---Relative path to the SWEP's world model.
 ---@type string
 SWEP.WorldModel = "models/weapons/w_357.mdl"
 
@@ -1708,9 +1791,9 @@ SWEP.DrawAmmo = true
 ---@type boolean
 SWEP.DrawCrosshair = true
 
----The SWEP render group, see Enums/RENDERGROUP
+---The SWEP render group, see Enums/RENDERGROUP. If unset, the engine will decide the render group based on the SWEPs world model.
 ---@type number
-SWEP.RenderGroup = RENDERGROUP_OPAQUE
+SWEP.RenderGroup = nil
 
 ---Slot in the weapon selection menu, starts with `0`
 ---@type number
@@ -1720,7 +1803,7 @@ SWEP.Slot = 0
 ---@type number
 SWEP.SlotPos = 10
 
----(Clientside) Internal variable for drawing the info box in weapon selection
+---Internal variable for drawing the info box in weapon selection
 ---@type number
 SWEP.SpeechBubbleLid = surface.GetTextureID("gui/speech_lid")
 
@@ -1732,11 +1815,11 @@ SWEP.WepSelectIcon = surface.GetTextureID("weapons/swep")
 ---@type boolean
 SWEP.CSMuzzleFlashes = false
 
----Use the X shape muzzle flash instead of the default Counter-Strike muzzle flash. Requires CSMuzzleFlashes to be set to true
+---Use the X shape muzzle flash instead of the default Counter-Strike muzzle flash. Requires Structures/SWEP#CSMuzzleFlashes to be set to true.
 ---@type boolean
 SWEP.CSMuzzleX = false
 
----Primary attack settings. The table contains these fields: * string Ammo - Ammo type ("Pistol", "SMG1" etc) * number ClipSize - The maximum amount of bullets one clip can hold. Setting it to `-1` means weapon uses no clips, like a grenade or a rocket launch. * number DefaultClip - Default ammo in the clip, making it higher than ClipSize will give player additional ammo on spawn * boolean Automatic - If true makes the weapon shoot automatically as long as the player has primary attack button held down
+---Primary attack settings. The table contains these fields: * string `Ammo` - Ammo type (`Pistol`, `SMG1`, etc.) See game.AddAmmoType. * number `ClipSize` - The maximum amount of bullets one clip can hold. Setting it to `-1` means weapon uses no clips, like a grenade or a rocket launch. * number `DefaultClip` - Default ammo in the clip, making it higher than ClipSize will give player additional ammo on spawn * boolean `Automatic` - If true makes the weapon shoot automatically as long as the player has primary attack button held down
 ---@type table
 SWEP.Primary = nil
 
@@ -1768,7 +1851,7 @@ SWEP.ScriptedEntityType = "weapon"
 ---@type boolean
 SWEP.m_bPlayPickupSound = true
 
----(Clientside)If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
+---If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
 ---@type string
 SWEP.IconOverride = "materials/entities/<ClassName>.png"
 
@@ -2453,33 +2536,41 @@ VehicleParamsSteering.turnThrottleReduceSlow = nil
 ---@class VehicleTable
 local VehicleTable = {}
 
----
+---Entity class name for this vehicle.
 ---@type string
-VehicleTable.Author = "VALVe"
+VehicleTable.Class = nil
 
----
+---Nice name for this vehicle, for UI purposes.
 ---@type string
-VehicleTable.Model = "models/nova/jeep_seat.mdl"
+VehicleTable.Name = nil
 
----
+---Model of the vehicle.
 ---@type string
-VehicleTable.Class = "prop_vehicle_prisoner_pod"
+VehicleTable.Model = nil
 
----
----@type string
-VehicleTable.Category = "Chairs"
-
----
----@type string
-VehicleTable.Information = "A Seat from VALVe's Jeep"
-
----
----@type string
-VehicleTable.Name = "Jeep Seat"
-
---- Do any other values belong in the KeyValues table?
+---A list of key-value pairs to apply to the vehicle entity. Possible valid keys that can be set are: * `vehiclescript` * `limitview` * `vehiclelocked` * `cargovisible` * `enablegun`
 ---@type table
-VehicleTable.KeyValues = { ["vehiclescript"] = "scripts/vehicles/prisoner_pod.txt", ["limitview"] = 0 }
+VehicleTable.KeyValues = nil
+
+---Offset away the surface player is looking at to spawn at.
+---@type number
+VehicleTable.Offset = nil
+
+---Set these members on the spawned vehicle's table (Entity:GetTable) to given values.
+---@type table
+VehicleTable.Members = nil
+
+---Author of the vehicle, for UI purposes.
+---@type string
+VehicleTable.Author = nil
+
+---Category of this vehicle, for UI purposes.
+---@type string
+VehicleTable.Category = "Other"
+
+---A small description of the vehicle, for UI purposes.
+---@type string
+VehicleTable.Information = nil
 
 ---@class VideoData
 local VideoData = {}

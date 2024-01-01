@@ -17,11 +17,6 @@ function DEntityProperties:EditVariable(varname, editdata) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EntityLost)
 function DEntityProperties:EntityLost() end
 
----[CLIENT] Called when we were editing an entity and then it became invalid (probably removed)
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:OnEntityLost)
-function DEntityProperties:OnEntityLost() end
-
 ---[CLIENT] Called internally by DEntityProperties:SetEntity to rebuild the controls.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)

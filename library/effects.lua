@@ -48,13 +48,13 @@ function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Create)
 ---@param name string Effect name.
----@return table #Effect table.
+---@return table # Effect table.
 function effects.Create(name) end
 
 ---[CLIENT] Returns a list of all Lua-defined effects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
----@return table #The effects table.
+---@return table # The effects table.
 function effects.GetList() end
 
 ---[CLIENT] Registers a new effect.

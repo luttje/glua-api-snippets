@@ -6,7 +6,7 @@ local DExpandButton = {}
 ---[CLIENT AND MENU] Returns whether this DExpandButton is expanded or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DExpandButton:GetExpanded)
----@return boolean #True if expanded, false otherwise
+---@return boolean # True if expanded, false otherwise
 function DExpandButton:GetExpanded() end
 
 ---[CLIENT AND MENU] Sets whether this DExpandButton should be expanded or not. Only changes appearance.

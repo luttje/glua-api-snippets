@@ -34,7 +34,7 @@ function cleanup.GetList() end
 ---[SHARED] Gets the table of cleanup types.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetTable)
----@return table #A list of cleanup types.
+---@return table # A list of cleanup types.
 function cleanup.GetTable() end
 
 ---[SHARED] Registers a new cleanup type.
@@ -48,7 +48,7 @@ function cleanup.Register(type) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.ReplaceEntity)
 ---@param from Entity Old entity
 ---@param to Entity New entity
----@return boolean #Whether any action was taken.
+---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
 
 ---[CLIENT] Repopulates the clients cleanup menu

@@ -31,8 +31,15 @@ function DHTML:ConsoleMessage(msg) end
 ---[CLIENT AND MENU] Returns if the loaded page can run Lua code, set by DHTML:SetAllowLua
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:GetAllowLua)
----@return boolean #Whether or not Lua code can be called from the loaded page.
+---@return boolean # Whether or not Lua code can be called from the loaded page.
 function DHTML:GetAllowLua() end
+
+---[CLIENT AND MENU] Returns the value set by DHTML:SetScrollbars.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:GetScrollbars)
+---@return boolean # True if scrollbars should be visible.
+---@deprecated Broken. Use the CSS `overflow` rule instead.
+function DHTML:GetScrollbars() end
 
 ---[CLIENT AND MENU] Runs/Executes a string as JavaScript code in a panel.
 ---
@@ -55,8 +62,3 @@ function DHTML:SetAllowLua(allow) end
 ---@param show boolean True if scrollbars should be visible.
 ---@deprecated Broken. Use the CSS `overflow` rule instead.
 function DHTML:SetScrollbars(show) end
-
----[CLIENT] Stops the loading of the HTML panel's current page.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTML:StopLoading)
-function DHTML:StopLoading() end

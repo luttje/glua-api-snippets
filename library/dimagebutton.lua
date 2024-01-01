@@ -3,10 +3,21 @@
 ---@class DImageButton : DButton
 local DImageButton = {}
 
+---[CLIENT AND MENU] Used internally to briefly scale the image when clicked.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:DepressImage)
+function DImageButton:DepressImage() end
+
+---[CLIENT AND MENU] Returns whether DImageButton:DepressImage is functional or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:GetDepressImage)
+---@return boolean # `true` to enable image depressing when clicked.
+function DImageButton:GetDepressImage() end
+
 ---[CLIENT AND MENU] Returns the "image" of the DImageButton. Equivalent of DImage:GetImage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:GetImage)
----@return string #The path to the image that is loaded.
+---@return string # The path to the image that is loaded.
 function DImageButton:GetImage() end
 
 ---[CLIENT AND MENU] Returns whether the image inside the button should be stretched to fit it or not
@@ -22,6 +33,12 @@ function DImageButton:GetStretchToFit() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:SetColor)
 ---@param color table The Global.Color to set
 function DImageButton:SetColor(color) end
+
+---[CLIENT AND MENU] Controls whether DImageButton:DepressImage is functional or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DImageButton:SetDepressImage)
+---@param enable boolean `true` to enable image depressing when clicked.
+function DImageButton:SetDepressImage(enable) end
 
 ---[CLIENT AND MENU] Alias of DImageButton:SetImage.
 ---

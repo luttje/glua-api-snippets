@@ -35,7 +35,7 @@ function DNumberScratch:GetActive() end
 ---[CLIENT AND MENU] Returns the desired amount of numbers after the decimal point.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetDecimals)
----@return number #0 for whole numbers only, 1 for one number after the decimal point, etc.
+---@return number # 0 for whole numbers only, 1 for one number after the decimal point, etc.
 function DNumberScratch:GetDecimals() end
 
 ---[CLIENT AND MENU] Returns the real value of the DNumberScratch as a number.
@@ -43,7 +43,7 @@ function DNumberScratch:GetDecimals() end
 --- See also DNumberScratch:GetTextValue and DNumberScratch:GetFraction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetFloatValue)
----@return number #The real value of the DNumberScratch
+---@return number # The real value of the DNumberScratch
 function DNumberScratch:GetFloatValue() end
 
 ---[CLIENT AND MENU] Returns the value of the DNumberScratch as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the DNumberScratch.
@@ -54,25 +54,25 @@ function DNumberScratch:GetFloatValue() end
 --- * DNumberScratch:SetFraction
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetFraction)
----@return number #A value between 0 and 1
+---@return number # A value between 0 and 1
 function DNumberScratch:GetFraction() end
 
 ---[CLIENT AND MENU] Returns the maximum value that can be selected on the number scratch
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetMax)
----@return number #The maximum value that can be selected on the number scratch
+---@return number # The maximum value that can be selected on the number scratch
 function DNumberScratch:GetMax() end
 
 ---[CLIENT AND MENU] Returns the minimum value that can be selected on the number scratch
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetMin)
----@return number #The minimum value that can be selected on the number scratch
+---@return number # The minimum value that can be selected on the number scratch
 function DNumberScratch:GetMin() end
 
 ---[CLIENT AND MENU] Returns the range of the DNumberScratch. Basically max value - min value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetRange)
----@return number #The range of the DNumberScratch
+---@return number # The range of the DNumberScratch
 function DNumberScratch:GetRange() end
 
 ---[CLIENT AND MENU] Returns whether the scratch window should be visible or not.
@@ -86,7 +86,7 @@ function DNumberScratch:GetShouldDrawScreen() end
 --- See also DNumberScratch:GetFloatValue and DNumberScratch:GetFraction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetTextValue)
----@return string #The real value of the DNumberScratch
+---@return string # The real value of the DNumberScratch
 function DNumberScratch:GetTextValue() end
 
 ---[CLIENT AND MENU] Returns the zoom level of the scratch window
@@ -98,7 +98,7 @@ function DNumberScratch:GetZoom() end
 ---[CLIENT AND MENU] Returns the ideal zoom level for the panel based on the DNumberScratch:GetRange.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:IdealZoom)
----@return number #The ideal zoom level for the panel based on the panels range.
+---@return number # The ideal zoom level for the panel based on the panels range.
 function DNumberScratch:IdealZoom() end
 
 ---[CLIENT AND MENU] Returns whether the player is currently editing the value of the DNumberScratch.

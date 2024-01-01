@@ -6,49 +6,49 @@ local DNumSlider = {}
 ---[CLIENT AND MENU] Returns the amount of numbers after the decimal point.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetDecimals)
----@return number #0 for whole numbers only, 1 for one number after the decimal point, etc.
+---@return number # 0 for whole numbers only, 1 for one number after the decimal point, etc.
 function DNumSlider:GetDecimals() end
 
 ---[CLIENT AND MENU] Returns the default value of the slider, if one was set by DNumSlider:SetDefaultValue
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetDefaultValue)
----@return number #The default value of the slider
+---@return number # The default value of the slider
 function DNumSlider:GetDefaultValue() end
 
 ---[CLIENT AND MENU] Returns the maximum value of the slider
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetMax)
----@return number #The maximum value of the slider
+---@return number # The maximum value of the slider
 function DNumSlider:GetMax() end
 
 ---[CLIENT AND MENU] Returns the minimum value of the slider
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetMin)
----@return number #The minimum value of the slider
+---@return number # The minimum value of the slider
 function DNumSlider:GetMin() end
 
 ---[CLIENT AND MENU] Returns the range of the slider, basically maximum value - minimum value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetRange)
----@return number #The range of the slider
+---@return number # The range of the slider
 function DNumSlider:GetRange() end
 
 ---[CLIENT AND MENU] Returns the DTextEntry component of the slider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetTextArea)
----@return Panel #The DTextEntry.
+---@return Panel # The DTextEntry.
 function DNumSlider:GetTextArea() end
 
 ---[CLIENT AND MENU] Returns the value of the DNumSlider
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:GetValue)
----@return number #The value of the slider.
+---@return number # The value of the slider.
 function DNumSlider:GetValue() end
 
 ---[CLIENT AND MENU] Returns true if either the DTextEntry, the DSlider or the DNumberScratch are being edited.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:IsEditing)
----@return boolean #Whether or not the DNumSlider is being edited by the player.
+---@return boolean # Whether or not the DNumSlider is being edited by the player.
 function DNumSlider:IsEditing() end
 
 ---[CLIENT AND MENU] Resets the slider to the default value, if one was set by DNumSlider:SetDefaultValue.
@@ -118,11 +118,11 @@ function DNumSlider:SetValue(val) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:TranslateSliderValues)
 ---@param x number
 ---@param y number
----@return number, number #number -
----@return number, number #number - The second passed argument.
+---@return number #
+---@return number # The second passed argument.
 function DNumSlider:TranslateSliderValues(x, y) end
 
----[CLIENT AND MENU]
+---[CLIENT AND MENU] Updates visual notches on the slider.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumSlider:UpdateNotches)
 function DNumSlider:UpdateNotches() end
