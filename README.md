@@ -65,6 +65,13 @@ The API is also available as JSON. You can find it with the Lua API package [on 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://vurv78.github.io/"><img src="https://avatars.githubusercontent.com/u/56230599?v=4?s=100" width="100px;" alt="Vurv"/><br /><sub><b>Vurv</b></sub></a><br /><a href="#code-Vurv78" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
