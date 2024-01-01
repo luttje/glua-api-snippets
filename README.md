@@ -4,6 +4,7 @@
 [![GitHub License](https://img.shields.io/github/license/luttje/glua-api-snippets)](https://github.com/luttje/glua-api-snippets/blob/main/LICENSE)
 [![GitHub Tests Action](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml/badge.svg)](https://github.com/luttje/glua-api-snippets/actions/workflows/tests.yml)
 [![Test Coverage Status](https://coveralls.io/repos/github/luttje/glua-api-snippets/badge.svg?branch=main)](https://coveralls.io/github/luttje/glua-api-snippets?branch=main)
+[![All Contributors](https://img.shields.io/github/all-contributors/luttje/glua-api-snippets?color=ee8449&style=flat-square)](#contributors)
 
 This repository scrapes the Garry's Mod Lua API and generates snippets that will help provide autocompletion for Lua in editors like VSCode, NeoVim and more.
 
@@ -58,3 +59,14 @@ This project uses [Jest](https://jestjs.io/) to automate testing. You can run th
 ### API as JSON
 
 The API is also available as JSON. You can find it with the Lua API package [on the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DD_HH-MM-SS.json.zip`.
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->

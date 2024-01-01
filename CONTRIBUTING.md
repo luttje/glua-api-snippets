@@ -77,6 +77,16 @@ You can help the project even more by fixing the error yourself. To do this, you
 
 ✨ **Thanks in advance for your contribution!**
 
+### Getting acknowledged for your contribution
+
+We use [All Contributors](https://allcontributors.org/) to acknowledge contributions. If you want to be added to the list of contributors, please comment to your pull request with:
+
+```bash
+@all-contributors please add @<your-github-username> for <contributions>
+```
+
+[&raquo; Learn more about the `All Contributors` bot here](https://allcontributors.org/docs/en/bot/usage)
+
 ## Updating the addon for Lua Language Server
 
 At the first of every month the scraper runs and updates the addon for Lua Language Server to [the `lua-language-server-addon` branch in this repo](https://github.com/luttje/glua-api-snippets/tree/lua-language-server-addon). However this does not automatically update the Lua Language Server Addon, since the branch is only a sub repository in the [LuaLS/LLS-Addons repository](https://github.com/LuaLS/LLS-Addons)
