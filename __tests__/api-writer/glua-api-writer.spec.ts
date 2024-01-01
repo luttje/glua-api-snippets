@@ -3,6 +3,7 @@ import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-da
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
 import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
+import { markup as panelMarkup, structApiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
@@ -33,6 +34,22 @@ describe('GLua API Writer', () => {
     expect(structs).toHaveLength(1);
     const api = writer.writePages(structs);
     expect(api).toEqual(structApiDefinition);
+  });
+
+  it('should handle deprecated in description', async () => {
+    const writer = new GluaApiWriter();
+
+    fetchMock.mockResponseOnce(panelMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/Slider?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const panel = await scrapeCallback(responseMock, panelMarkup);
+    expect(panel).toHaveLength(1);
+    const api = writer.writePages(panel);
+    expect(api).toEqual(panelApiDefinition);
   });
 
   it('should write optional parameters with a question mark', () => {

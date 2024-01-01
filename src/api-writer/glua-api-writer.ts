@@ -94,7 +94,7 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClass(className: string, parent?: string, classFields: string = '', deprecated?: string ) {
+  private writeClass(className: string, parent?: string, classFields: string = '', deprecated?: string) {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
@@ -104,7 +104,7 @@ export class GluaApiWriter {
         api = api.replace('---{{CLASS_FIELDS}}', classFields);
       } else {
         if (deprecated)
-          api += `---@deprecated ${deprecated ?? ''}\n`
+          api += `---@deprecated ${removeNewlines(deprecated)}\n`
 
         api += `---@class ${className}`;
 
@@ -126,7 +126,7 @@ export class GluaApiWriter {
     if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
       let global = '';
 
-      if(func.deprecated)
+      if (func.deprecated)
         global += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
 
       global += `${func.parent} = {}\n\n`;
@@ -285,7 +285,7 @@ export class GluaApiWriter {
     }
 
     if (func.deprecated)
-        luaDocComment += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
+      luaDocComment += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
 
     return luaDocComment;
   }
