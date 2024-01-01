@@ -248,7 +248,7 @@ export class GluaApiWriter {
 
   private transformType(type: string) {
     if (type === 'vararg')
-      return '...';
+      return 'any';
 
     return type;
   }
@@ -270,17 +270,17 @@ export class GluaApiWriter {
     }
 
     if (func.returns) {
-      const returns = `---@return ${func.returns.map(ret => this.transformType(ret.type)).join(', ')}`;
-
       func.returns.forEach(ret => {
         const description = removeNewlines(ret.description ?? '');
 
-        if (func.returns!.length === 1) {
-          luaDocComment += `${returns} #${description}\n`;
-          return;
-        }
+        luaDocComment += `---@return `;
 
-        luaDocComment += `${returns} #${this.transformType(ret.type)} - ${description}\n`;
+        if (ret.type === 'vararg')
+          luaDocComment += 'any ...';
+        else
+          luaDocComment += `${this.transformType(ret.type)}`;
+
+        luaDocComment += ` # ${description}\n`;
       });
     }
 

@@ -3,7 +3,9 @@ import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-da
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
 import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
-import { markup as panelMarkup, structApiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
+import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
+import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
+import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
 import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
@@ -52,6 +54,38 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(panelApiDefinition);
   });
 
+  it('should properly handle multiple return types', async () => {
+    const writer = new GluaApiWriter();
+
+    fetchMock.mockResponseOnce(multiReturnFuncMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/concommand.GetTable?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const panel = await scrapeCallback(responseMock, multiReturnFuncMarkup);
+    expect(panel).toHaveLength(1);
+    const api = writer.writePages(panel);
+    expect(api).toEqual(multiReturnFuncApiDefinition);
+  });
+
+  it('should properly handle varargs in parameter and return types', async () => {
+    const writer = new GluaApiWriter();
+
+    fetchMock.mockResponseOnce(varargsFuncMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/coroutine.resume?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const panel = await scrapeCallback(responseMock, varargsFuncMarkup);
+    expect(panel).toHaveLength(1);
+    const api = writer.writePages(panel);
+    expect(api).toEqual(varargsFuncApiDefinition);
+  });
+
   it('should write optional parameters with a question mark', () => {
     const writer = new GluaApiWriter();
     // Non-existant page, only to test the optional parameter
@@ -80,7 +114,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[SHARED] Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number #The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
+    expect(api).toEqual(`---[SHARED] Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number # The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
   });
 
   it('should allow overriding specific page addresses', () => {
