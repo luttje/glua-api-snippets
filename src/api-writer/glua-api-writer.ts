@@ -71,7 +71,7 @@ export class GluaApiWriter {
       let api = '';
 
       if (isClassFunction(page))
-        api += this.writeClass(page.parent, undefined, undefined, page.deprecated);
+        api += this.writeClassStart(page.parent, undefined, page.deprecated);
       else if (isLibraryFunction(page))
         api += this.writeLibraryGlobal(page);
 
@@ -94,14 +94,13 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClass(className: string, parent?: string, classFields: string = '', deprecated?: string) {
+  private writeClassStart(className: string, parent?: string, deprecated?: string) {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
       const classOverride = `class.${className}`;
       if (this.pageOverrides.has(classOverride)) {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
-        api = api.replace('---{{CLASS_FIELDS}}', classFields);
       } else {
         if (deprecated)
           api += `---@deprecated ${removeNewlines(deprecated)}\n`
@@ -113,7 +112,6 @@ export class GluaApiWriter {
 
         api += '\n';
         api += `local ${className} = {}\n\n`;
-        api += classFields;
       }
 
       this.writtenClasses.add(className);
@@ -140,7 +138,7 @@ export class GluaApiWriter {
   }
 
   private writeClassFunction(func: ClassFunction) {
-    let api: string = this.writeClass(func.parent, undefined, undefined, func.deprecated);
+    let api: string = this.writeClassStart(func.parent, undefined, func.deprecated);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm, ':');
@@ -162,7 +160,9 @@ export class GluaApiWriter {
   }
 
   private writePanel(panel: Panel) {
-    return this.writeClass(panel.name, panel.parent, undefined, panel.deprecated);
+    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated);
+
+    return api;
   }
 
   private writePanelFunction(func: PanelFunction) {
@@ -220,20 +220,20 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let fields: string = '';
+    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated);
 
     for (const field of struct.fields) {
       if (field.deprecated)
-        fields += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
+        api += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
-      fields += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
+      api += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
 
       const type = this.transformType(field.type)
-      fields += `---@type ${type}\n`
-      fields += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
+      api += `---@type ${type}\n`
+      api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
 
-    return this.writeClass(struct.name, undefined, fields, struct.deprecated);
+    return api;
   }
 
   public writePages(pages: WikiPage[]) {

@@ -130,7 +130,7 @@ describe('GLua API Writer', () => {
   it('should allow overriding specific class declarations', () => {
     const writer = new GluaApiWriter();
     const overrideStart = `---@class Custom_Entity_Fields : Parent`;
-    const override = `${overrideStart}\n---{{CLASS_FIELDS}}\nlocal Custom_Entity_Fields = {}`;
+    const override = `${overrideStart}\nlocal Custom_Entity_Fields = {}`;
     writer.addOverride('class.Custom_Entity_Fields', override);
 
     const api = writer.writePages([<WikiPage>structJson]);
