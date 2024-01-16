@@ -307,7 +307,7 @@ function NPC:GetIdealYaw() end
 --- See also NPC:GetKnownEnemyCount
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemies)
----@return table # Table of entities that this NPC knowns as enemies.
+---@return table # Table of entities that this NPC knows as enemies.
 function NPC:GetKnownEnemies() end
 
 ---[SERVER] Returns known enemy count of this NPC.
@@ -315,10 +315,10 @@ function NPC:GetKnownEnemies() end
 --- See also NPC:GetKnownEnemies
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemyCount)
----@return number # Amount of entities that this NPC knowns as enemies.
+---@return number # Amount of entities that this NPC knows as enemies.
 function NPC:GetKnownEnemyCount() end
 
----[SERVER] Returns Global.CurTime based time since this NPC last received damage from given enemy.
+---[SERVER] Returns Global.CurTime based time since this NPC last received damage from given enemy. The last damage time is set when NPC:MarkTookDamageFromEnemy is called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetLastTimeTookDamageFromEnemy)
 ---@param enemy? Entity The enemy to test. Defaults to currently active enemy (NPC:GetEnemy)
@@ -744,7 +744,7 @@ function NPC:RememberUnreachable(ent, time) end
 ---[SERVER] Removes conditions to ignore for the this NPC.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:RemoveIgnoreConditions)
----@param conditions? number Ignore conditions to remove, see Enums/COND. If omitted, removes all ignore conditions.
+---@param conditions? table Ignore conditions to remove, see Enums/COND. If omitted, removes all ignore conditions.
 function NPC:RemoveIgnoreConditions(conditions) end
 
 ---[SERVER] Resets the ideal activity of the NPC. See also NPC:SetIdealActivity.
@@ -879,8 +879,9 @@ function NPC:SetIdealYawAndUpdate(angle, speed) end
 ---[SERVER] Sets conditions to ignore for the this NPC.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetIgnoreConditions)
----@param conditions number Conditions to ignore, see Enums/COND.
-function NPC:SetIgnoreConditions(conditions) end
+---@param conditions table Conditions to ignore, see Enums/COND.
+---@param size number Number of conditions to include in the ignored conditions table. Set this to the size of ignored conditions table to ignore all specified conditions.
+function NPC:SetIgnoreConditions(conditions, size) end
 
 ---[SERVER] Sets the last registered or memorized position for an npc. When using scheduling, the NPC will focus on navigating to the last position via nodes.
 ---

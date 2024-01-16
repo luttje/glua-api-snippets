@@ -1470,9 +1470,9 @@ function _G.HSVToColor(hue, saturation, value) end
 --- 		This cannot send or receive multiple headers with the same name.
 --- 		HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
---- 			HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
+--- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- 			To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`.
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.HTTP)
 ---@param parameters table The request parameters. See Structures/HTTPRequest.
@@ -1916,7 +1916,9 @@ function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 ---
 --- To retrieve a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
 ---
---- Since paths are relative to the materials folder, resource paths like ../data/MyImage.jpg will work since `..` translates to moving up a parent directory in the file tree..
+--- Since paths are relative to the materials folder, resource paths like ../data/MyImage.jpg will work since `..` translates to moving up a parent directory in the file tree.
+---
+--- Note that the maps folder is excluded, so things like map thumbnails can't be made into materials.
 ---@param pngParameters? string A string containing space separated keywords which will be used to add material parameters.
 ---
 --- See Material Parameters for more information.

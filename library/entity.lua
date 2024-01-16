@@ -2583,12 +2583,12 @@ function Entity:IsEFlagSet(flag) end
 ---@return boolean # Is set or not
 function Entity:IsFlagSet(flag) end
 
----[SERVER] Returns whether the entity is inside a wall or outside of the map.
+---[SERVER] Returns whether the entity is in the world (not inside a wall or outside of the map).
 ---
 --- Internally this function uses util.IsInWorld, that means that this function only checks Entity:GetPos of the entity. If an entity is only partially inside a wall, or has a weird GetPos offset, this function may not give reliable output.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:IsInWorld)
----@return boolean # Is the entity in world
+---@return boolean # False if the entity is inside a wall or outside of the map, true otherwise.
 function Entity:IsInWorld() end
 
 ---[SERVER] Called when deciding if the Scripted NPC should be able to perform a certain jump or not.
@@ -3973,7 +3973,7 @@ function Entity:SetHealth(newHealth) end
 --- If the operation failed, the function will silently fail.
 function Entity:SetHitboxSet(id) end
 
----[SHARED] Enables or disable the inverse kinematic usage of this entity.
+---[CLIENT] Enables or disable the inverse kinematic usage of this entity.
 --- 		Calling this with false outside of ENTITY:Initialize requires a model change to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetIK)

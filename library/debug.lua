@@ -79,6 +79,7 @@ function debug.getmetatable(object) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getregistry)
 ---@return table # The Lua registry
+---@deprecated This function **will** return an empty table.   	If you get an error because of this see the example below for a workaround
 function debug.getregistry() end
 
 ---[SHARED AND MENU] Used for getting variable values in an index from the passed function. This does nothing for C functions.

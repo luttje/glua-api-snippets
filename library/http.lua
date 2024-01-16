@@ -17,9 +17,9 @@ http = {}
 --- This cannot send or receive multiple headers with the same name.
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
---- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
+--- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`.
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
@@ -42,9 +42,9 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 --- This cannot send or receive multiple headers with the same name.
 --- HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
---- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`) won't work.
+--- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`.
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Post)
 ---@param url string The url to of the website to post.

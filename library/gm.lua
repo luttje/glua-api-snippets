@@ -930,9 +930,9 @@ function GM:OnEntityWaterLevelChanged(entity, old, new) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnGamemodeLoaded)
 function GM:OnGamemodeLoaded() end
 
----[MENU] Called when a Lua error occurs, only works in the Menu realm.
+---[MENU] Called when a Lua error occurs, only works in the Menu States.
 ---
---- Modify menu state Lua code at your own risk!
+--- This will be available in all realms in a future update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnLuaError)
 ---@param error string The error that occurred.
@@ -2213,11 +2213,11 @@ function GM:StartEntityDriving(ent, ply) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:StartGame)
 function GM:StartGame() end
 
----[SHARED] Called every frame on client and server. This will be the same as GM:Tick on the server when there is no lag, but will only be called once every processed server frame during lag.
+---[SHARED AND MENU] Called every frame. This will be the same as GM:Tick on the server when there is no lag, but will only be called once every processed server frame during lag.
 ---
 --- See GM:Tick for a hook that runs every tick on both the client and server.
 ---
---- This hook **WILL NOT** run if the server is empty, unless you set the ConVar `sv_hibernate_think` to 1
+--- On server, this hook **WILL NOT** run if the server is empty, unless you set the ConVar `sv_hibernate_think` to `1`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:Think)
 function GM:Think() end
