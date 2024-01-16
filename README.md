@@ -73,6 +73,7 @@ The API is also available as JSON. You can find it with the Lua API package [on 
       <td align="center" valign="top" width="14.28%"><a href="https://vurv78.github.io/"><img src="https://avatars.githubusercontent.com/u/56230599?v=4?s=100" width="100px;" alt="Vurv"/><br /><sub><b>Vurv</b></sub></a><br /><a href="#code-Vurv78" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/yogwoggf"><img src="https://avatars.githubusercontent.com/u/100450992?v=4?s=100" width="100px;" alt="jason"/><br /><sub><b>jason</b></sub></a><br /><a href="#ideas-yogwoggf" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://blog.amd-nick.me"><img src="https://avatars.githubusercontent.com/u/9200174?v=4?s=100" width="100px;" alt="_AMD_"/><br /><sub><b>_AMD_</b></sub></a><br /><a href="#bug-AMD-NICK" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/b0mbie"><img src="https://avatars.githubusercontent.com/u/69766525?v=4?s=100" width="100px;" alt="[aka]bomb"/><br /><sub><b>[aka]bomb</b></sub></a><br /><a href="#bug-b0mbie" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
