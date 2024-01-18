@@ -8,7 +8,7 @@
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Receive)
 ---@param messageName string The message name to hook to.
----@param callback fun(len: number, ply: Player) The function to be called if the specified message was received. Arguments are:
+---@param callback fun(len: integer, ply: Player) The function to be called if the specified message was received. Arguments are:
 ---
 --- * number len - Length of the message, in bits.
 --- * Player ply - The player that sent the message, works **only** server-side.
