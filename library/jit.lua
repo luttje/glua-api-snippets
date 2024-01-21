@@ -142,6 +142,8 @@ function jit.util.funcbc(func, pos) end
 function jit.util.funcinfo(func, pos) end
 
 ---[SHARED AND MENU] Gets a constant at a certain index in a function.
+---
+---
 --- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 --- Numbers constants goes from 0 (included) to n-1, n being the value of nconsts in jit.util.funcinfo in other words, the consts goes from (nconsts-1) to -n
 --- This function only works for Lua defined functions.
@@ -150,6 +152,7 @@ function jit.util.funcinfo(func, pos) end
 ---@param func function Function to get constant from
 ---@param index number Constant index (counting down from the top of the function at -1)
 ---@return any # The constant found.  This will return a proto for functions that are created inside the target function - see Example 2.
+---@deprecated This function was disabled due to security concerns.
 function jit.util.funck(func, index) end
 
 ---[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
@@ -159,6 +162,7 @@ function jit.util.funck(func, index) end
 ---@param func function Function to get the upvalue indexed from
 ---@param index number The upvalue index, starting from 0
 ---@return string # The function returns nil if there is no upvalue with the given index, otherwise the name of the upvalue is returned
+---@deprecated This function was disabled due to security concerns.
 function jit.util.funcuvname(func, index) end
 
 ---[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see Ircalladdr Functions
@@ -167,6 +171,7 @@ function jit.util.funcuvname(func, index) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
 ---@param index number The index of the function address to get from the ircalladdr func array (starting from 0)
 ---@return number # The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71.
+---@deprecated This function was disabled due to security concerns. It will always return 0.
 function jit.util.ircalladdr(index) end
 
 ---[SHARED AND MENU]
@@ -186,6 +191,7 @@ function jit.util.traceexitstub(exitno) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceinfo)
 ---@param trace number trace index to retrieve info for (gotten via jit.attach)
 ---@return table # trace info
+---@deprecated This function was disabled due to security concerns.
 function jit.util.traceinfo(trace) end
 
 ---[SHARED AND MENU]
@@ -198,6 +204,7 @@ function jit.util.traceinfo(trace) end
 ---@return number # op1
 ---@return number # op2
 ---@return number # prev
+---@deprecated This function was disabled due to security concerns.
 function jit.util.traceir(tr, index) end
 
 ---[SHARED AND MENU]
@@ -208,6 +215,7 @@ function jit.util.traceir(tr, index) end
 ---@return any # k
 ---@return number # t
 ---@return number # slot; optional
+---@deprecated This function was disabled due to security concerns.
 function jit.util.tracek(tr, index) end
 
 ---[SHARED AND MENU]
@@ -217,6 +225,7 @@ function jit.util.tracek(tr, index) end
 ---@return string # mcode
 ---@return number # address
 ---@return number # loop
+---@deprecated This function was disabled due to security concerns. It will always return 3 `0`s.
 function jit.util.tracemc(tr) end
 
 ---[SHARED AND MENU] Return table fields:
@@ -229,4 +238,5 @@ function jit.util.tracemc(tr) end
 ---@param tr number trace index to retrieve snapshot for (gotten via jit.attach)
 ---@param sn number snapshot index for trace (starting from 0 to nexit - 1, nexit gotten via jit.util.traceinfo)
 ---@return table # snapshot
+---@deprecated This function was disabled due to security concerns.
 function jit.util.tracesnap(tr, sn) end

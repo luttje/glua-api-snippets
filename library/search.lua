@@ -5,7 +5,7 @@ search = {}
 ---[CLIENT] Adds a search result provider. For examples, see gamemodes/sandbox/gamemode/cl_search_models.lua
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/search.AddProvider)
----@param provider function Provider function. It has one argument: string searchQuery
+---@param provider fun(searchQuery: string): table[] Provider function. It has one argument: string searchQuery
 --- You must return a list of tables structured like this:
 --- * string text - Text to "Copy to clipboard"
 --- * function func - Function to use/spawn the item

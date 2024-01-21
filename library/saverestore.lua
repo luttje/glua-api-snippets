@@ -6,7 +6,7 @@ saverestore = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddRestoreHook)
 ---@param identifier string The unique identifier for this hook.
----@param callback function The function to be called when an engine save is being loaded. It has one argument:
+---@param callback fun(save: IRestore) The function to be called when an engine save is being loaded. It has one argument:
 ---
 ---
 --- IRestore save - The restore object to be used to read data from save file that is being loaded
@@ -31,7 +31,7 @@ function saverestore.AddRestoreHook(identifier, callback) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddSaveHook)
 ---@param identifier string The unique identifier for this hook.
----@param callback function The function to be called when an engine save is being saved. It has one argument:
+---@param callback fun(save: ISave) The function to be called when an engine save is being saved. It has one argument:
 ---
 ---
 --- ISave save - The save object to be used to write data to the save file that is being saved

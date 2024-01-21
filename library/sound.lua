@@ -35,7 +35,7 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
 ---@param length number The length in seconds of the sound to generate.
----@param callback function A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
+---@param callback fun(sample: integer): number A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
 function sound.Generate(indentifier, samplerate, length, callback) end
 
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
@@ -120,7 +120,7 @@ function sound.PlayFile(path, flags, callback) end
 ---
 ---
 --- If you don't want to use any of the above, you can just leave it as `""`.
----@param callback function Callback function that is called as soon as the the stream is loaded. It has the following arguments:
+---@param callback fun(soundchannel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded. It has the following arguments:
 --- * IGModAudioChannel soundchannel - The sound channel
 --- * number errorID - ID of an error, if an error has occured
 --- * string errorName - Name of an error, if an error has occured

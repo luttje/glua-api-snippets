@@ -452,6 +452,8 @@ function PhysObj:SetInertia(angularInertia) end
 
 ---[SHARED] Sets the mass of the physics object.
 ---
+--- This resets PhysObj:SetBuoyancyRatio (Recalculated based materials' and the physics objects' densities, latter of which is dependent on mass). This is a physics engine limitation.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:SetMass)
 ---@param mass number The mass in kilograms, in range `[0, 50000]`
 function PhysObj:SetMass(mass) end

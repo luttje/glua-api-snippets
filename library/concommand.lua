@@ -10,13 +10,12 @@ concommand = {}
 ---@param name string The command name to be used in console.
 ---
 --- This cannot be a name of existing console command or console variable. It will silently fail if it is.
----@param callback function The function to run when the concommand is executed. Arguments passed are:
+---@param callback fun(ply: Player, cmd: string, args: table, argStr: string) The function to run when the concommand is executed. Arguments passed are:
 --- * Player ply - The player that ran the concommand. NULL entity if command was entered with the dedicated server console.
 --- * string cmd - The concommand string (if one callback is used for several concommands).
 --- * table args - A table of all string arguments.
 --- * string argStr - The arguments as a string.
----@param autoComplete? function The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
----
+---@param autoComplete? fun(cmd: string, args: string): string[]? The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
 --- This only properly works on the client since it is **not** networked. Arguments passed are:
 --- * string cmd - The concommand this autocompletion is for.
 --- * string args - The arguments typed so far.

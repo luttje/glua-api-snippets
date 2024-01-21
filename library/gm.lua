@@ -930,9 +930,8 @@ function GM:OnEntityWaterLevelChanged(entity, old, new) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnGamemodeLoaded)
 function GM:OnGamemodeLoaded() end
 
----[MENU] Called when a Lua error occurs, only works in the Menu States.
----
---- This will be available in all realms in a future update.
+---[SHARED AND MENU] Called when a Lua error occurs.
+--- On the States, this hook will only account for server-side errors, not client-side ones.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnLuaError)
 ---@param error string The error that occurred.

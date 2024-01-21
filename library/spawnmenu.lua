@@ -27,7 +27,7 @@ function spawnmenu.ActiveControlPanel() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddContentType)
 ---@param name string An unique name of the content type.
----@param constructor function A function that is called whenever we need create a new panel for this content type.
+---@param constructor fun(container: Panel, data: table) A function that is called whenever we need create a new panel for this content type.
 ---
 --- It has two arguments:
 ---
@@ -41,8 +41,9 @@ function spawnmenu.AddContentType(name, constructor) end
 ---[CLIENT] Inserts a new tab into the CreationMenus table, which will be used by the creation menu to generate its tabs (Spawnlists, Weapons, Entities, etc.)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab)
+---@generic T : Panel
 ---@param name string What text will appear on the tab (I.E Spawnlists).
----@param _function function The function called to generate the content of the tab.
+---@param _function fun(): T The function called to generate the content of the tab.
 ---@param material? string Path to the material that will be used as an icon on the tab.
 ---@param order? number The order in which this tab should be shown relative to the other tabs on the creation menu.
 ---@param tooltip? string The tooltip to be shown for this tab.
@@ -192,7 +193,7 @@ function spawnmenu.PopulateFromEngineTextFiles() end
 ---[CLIENT] Loads spawnlists from text files.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.PopulateFromTextFiles)
----@param callback function The function to call. Arguments are ( strFilename, strName, tabContents, icon, id, parentid, needsapp )
+---@param callback fun(filename: string, name: string, contents: table, icon: string, id: integer, parentid: integer, needsapp: string) The function to call. Arguments are ( strFilename, strName, tabContents, icon, id, parentid, needsapp )
 function spawnmenu.PopulateFromTextFiles(callback) end
 
 ---[CLIENT] Saves a table of spawnlists to files.

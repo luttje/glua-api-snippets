@@ -10,7 +10,7 @@ cvars = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.AddChangeCallback)
 ---@param name string The name of the convar to add the change callback to.
----@param callback function The function to be called when the convar changes. The arguments passed are:
+---@param callback fun(convar: string, oldValue: string, newValue: string) The function to be called when the convar changes. The arguments passed are:
 --- * string convar - The name of the convar.
 --- * string oldValue - The old value of the convar.
 --- * string newValue - The new value of the convar.

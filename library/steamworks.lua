@@ -17,14 +17,14 @@ function steamworks.ApplyAddons() end
 ---@param workshopPreviewID string The Preview ID of workshop item.
 ---@param uncompress boolean Whether to uncompress the file or not, assuming it was compressed with LZMA.
 --- You will usually want to set this to true.
----@param resultCallback function The function to process retrieved data. The first and only argument is a string, containing path to the saved file.
+---@param resultCallback fun(pathToSavedFile: string) The function to process retrieved data. The first and only argument is a string, containing path to the saved file.
 function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 
 ---[CLIENT AND MENU] Downloads a Steam Workshop file by its ID and returns a path to it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
 ---@param workshopID string The ID of workshop item to download. **NOT** a file ID.
----@param resultCallback function The function to process retrieved data. Arguments passed are:
+---@param resultCallback fun(path: string, file: file_class) The function to process retrieved data. Arguments passed are:
 --- * string path - Contains a path to the saved file, or nil if the download failed for any reason.
 --- * file_class file - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
 function steamworks.DownloadUGC(workshopID, resultCallback) end
