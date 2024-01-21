@@ -1,0 +1,11 @@
+---[CLIENT] Creates a sound from a function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Generate)
+---@param indentifier string An unique identified for the sound.
+---
+--- 			You cannot override already existing ones.
+---
+---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
+---@param length number The length in seconds of the sound to generate.
+---@param callback fun(sample: integer): number A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
+function sound.Generate(indentifier, samplerate, length, callback) end

@@ -1,0 +1,15 @@
+---[SHARED] Adds a net message handler. Only one receiver can be used to receive the net message.
+--- The message-name is converted to lower-case so the message-names "`BigBlue`" and "`bigblue`" would be equal.
+--- You **must** put this function **outside** of any other function or hook for it to work properly unless you know what you are doing!
+---
+--- You **must** read information in the same order as you write it.
+---
+--- Each net message has a length limit of **64KB**!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Receive)
+---@param messageName string The message name to hook to.
+---@param callback fun(len: integer, ply: Player) The function to be called if the specified message was received. Arguments are:
+---
+--- * number len - Length of the message, in bits.
+--- * Player ply - The player that sent the message, works **only** server-side.
+function net.Receive(messageName, callback) end

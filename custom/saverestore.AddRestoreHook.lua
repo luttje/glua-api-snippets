@@ -1,0 +1,24 @@
+---[SHARED] Adds a restore/load hook for the Half-Life 2 save system.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddRestoreHook)
+---@param identifier string The unique identifier for this hook.
+---@param callback fun(save: IRestore) The function to be called when an engine save is being loaded. It has one argument:
+---
+---
+--- IRestore save - The restore object to be used to read data from save file that is being loaded
+---
+---
+---
+---
+---
+--- You can also use those functions to read data:
+---
+---
+--- saverestore.ReadVar
+---
+---
+--- saverestore.ReadTable
+---
+---
+--- saverestore.LoadEntity
+function saverestore.AddRestoreHook(identifier, callback) end
