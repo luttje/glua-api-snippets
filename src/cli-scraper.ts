@@ -1,13 +1,15 @@
-import { WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
-import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
-import packageJson from '../package.json' assert { type: "json" };
-import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { scrapeAndCollect } from './scrapers/collector.js';
-import { writeMetadata } from './utils/metadata.js';
-import { RequestInitWithRetry } from 'fetch-retry';
 import { Command } from 'commander';
-import path from 'path';
+import { convertWindowsToUnixPath, dateToFilename, saveFile, unzipFiles, walk } from './utils/filesystem.js';
+import { GluaApiWriter } from './api-writer/glua-api-writer.js';
+import { RequestInitWithRetry } from 'fetch-retry';
+import { scrapeAndCollect } from './scrapers/collector.js';
+import { WikiHistoryPageScraper } from './scrapers/wiki-history-scraper.js';
+import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
+import { WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
+import { writeMetadata } from './utils/metadata.js';
 import fs from 'fs';
+import packageJson from '../package.json' assert { type: "json" };
+import path from 'path';
 
 async function startScrape() {
   const program = new Command();
@@ -16,34 +18,16 @@ async function startScrape() {
     .version(packageJson.version)
     .description('Scrapes the Garry\'s Mod wiki for API information')
     .option('-o, --output <path>', 'The path to the directory where the output json and lua files should be saved', './output')
-    .option('-u, --url <url>', 'The pagelist URL of the Garry\'s Mod wiki that holds all pages to scrape', 'https://wiki.facepunch.com/gmod/')
     .option('-c, --customOverrides [path]', 'The path to a directory containing custom overrides for the API')
     .option('-w, --wipe', 'Clean the output directory before scraping', false)
+    .option('-t, --update-changed-by-tag <last-tag|false>', 'Use the provided last git tag to only update pages that have changed since the last scrape', false)
     .parse(process.argv);
 
   const options = program.opts();
-
-  if (!options.url) {
-    console.error('No URL provided');
-    process.exit(1);
-  }
-
   const baseDirectory = options.output.replace(/\/$/, '');
   const customDirectory = options.customOverrides?.replace(/\/$/, '') ?? null;
-  const baseUrl = options.url.replace(/\/$/, '');
-  const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
+  const baseUrl = 'https://wiki.facepunch.com/gmod';
   const writer = new GluaApiWriter();
-
-  const retryOptions: RequestInitWithRetry = {
-    retries: 5,
-    retryDelay: function(attempt, error, response) {
-      return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
-    }
-  }
-
-  pageListScraper.setRetryOptions(retryOptions);
-
-  writeMetadata(baseUrl, baseDirectory);
 
   if (options.wipe && fs.existsSync(baseDirectory))
     fs.rmSync(baseDirectory, { recursive: true });
@@ -51,12 +35,81 @@ async function startScrape() {
   if (!fs.existsSync(baseDirectory))
     fs.mkdirSync(baseDirectory, { recursive: true });
 
-  if (customDirectory !== null) {
-    if (!fs.existsSync(customDirectory)) {
-      console.error(`Custom overrides directory ${customDirectory} does not exist`);
+  if (customDirectory !== null && !fs.existsSync(customDirectory)) {
+    console.error(`Custom overrides directory ${customDirectory} does not exist`);
+    process.exit(1);
+  }
+
+  function writeLuaFile(moduleName: string, pageMarkups: any[]) {
+    const api = writer.writePages(pageMarkups);
+
+    const moduleFile = path.join(baseDirectory, moduleName);
+
+    if (!fs.existsSync(`${moduleFile}.lua`))
+      fs.writeFileSync(`${moduleFile}.lua`, '---@meta\n\n');
+
+    fs.appendFileSync(`${moduleFile}.lua`, api);
+  }
+
+  // If the update-changed-by-tag option is set, download that the json for that tag from the github releases as our starting point
+  if (options.updateChangedByTag && options.updateChangedByTag !== 'false') {
+    const url = `https://api.github.com/repos/luttje/glua-api-snippets/releases/tags/${options.updateChangedByTag}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    const asset = json.assets.find((asset: any) => asset.name === `${options.updateChangedByTag}.json.zip`);
+
+    if (!asset) {
+      console.error(`No asset found for tag ${options.updateChangedByTag}`);
       process.exit(1);
     }
 
+    const zipUrl = asset.browser_download_url;
+    const zipResponse = await fetch(zipUrl);
+
+    if (!zipResponse.ok || zipResponse.body === null) {
+      console.error(`Failed to download zip file from ${zipUrl}`);
+      process.exit(1);
+    }
+
+    const zipFile = path.join(baseDirectory, `${options.updateChangedByTag}.json.zip`);
+    await saveFile(zipFile, zipResponse.body);
+    await unzipFiles(zipFile, baseDirectory);
+    fs.rmSync(zipFile);
+    const files = walk(baseDirectory);
+
+    // Unzip the starting files so we can use them as a starting point
+    for (const file of files) {
+      const fileStat = fs.statSync(file);
+
+      if (fileStat.isDirectory()) {
+        console.warn(`Skipping directory ${file} in custom (not supported)`);
+        continue;
+      }
+
+      if (!file.endsWith('.json') || file.endsWith('__metadata.json'))
+        continue;
+
+      const fileContent = fs.readFileSync(file, { encoding: 'utf-8' });
+      let fileName = convertWindowsToUnixPath(file)
+        .replace(convertWindowsToUnixPath(baseDirectory + '/')
+          .replace(/^\.\//, ''),
+          ''
+        )
+        .replace(/\.json$/, '');
+      let moduleName = fileName;
+
+      [moduleName, fileName] = fileName.split(/[:.\/]/, 2);
+
+      const pageMarkups = JSON.parse(fileContent);
+      writeLuaFile(moduleName, pageMarkups);
+    }
+  }
+
+  writeMetadata(baseUrl, baseDirectory);
+
+  // Copy all files from the custom directory to the output directory.
+  // This allows us to override the output of the scraper with custom (hard-coded) files.
+  if (customDirectory !== null) {
     const files = fs.readdirSync(customDirectory);
 
     for (const file of files) {
@@ -80,18 +133,49 @@ async function startScrape() {
     }
   }
 
-  const pageIndexes = await scrapeAndCollect(pageListScraper);
+  let pageAddresses: string[] = [];
 
-  for (const pageIndex of pageIndexes) {
-    const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageIndex.address}?format=text`);
+  // If the update-changed-by-tag option is not set (or its false), scrape all pages on the wiki
+  if (!options.updateChangedByTag || options.updateChangedByTag === 'false') {
+    const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
+    const retryOptions: RequestInitWithRetry = {
+      retries: 5,
+      retryDelay: function (attempt, error, response): number {
+        return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
+      }
+    };
+    pageListScraper.setRetryOptions(retryOptions);
+
+    const pageIndexes = await scrapeAndCollect(pageListScraper);
+
+    pageAddresses = pageIndexes.map((pageIndex) => {
+      return pageIndex.address;
+    });
+  } else {
+    // Go through all history pages and add them to the list of pages to be scraped.
+    // Stop when we reach a page that has already been scraped.
+    const historyResult = (await scrapeAndCollect(new WikiHistoryPageScraper(`${baseUrl}/~recentchanges`)))[0];
+    pageAddresses = [];
+
+    for (const history of historyResult.history) {
+      const tagName = dateToFilename(history.dateTime);
+
+      if (options.updateChangedByTag === tagName)
+        break;
+
+      const address = history.url.replace(/^\/gmod\//, '');
+      pageAddresses.push(address);
+    }
+  }
+
+  for (const pageAddress of pageAddresses) {
+    const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageAddress}?format=text`);
 
     pageMarkupScraper.on('scraped', (url, pageMarkups) => {
       if (pageMarkups.length === 0)
         return;
 
-      const api = writer.writePages(pageMarkups);
-
-      let fileName = pageIndex.address;
+      let fileName = pageAddress;
       let moduleName = fileName;
 
       if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {
@@ -100,23 +184,18 @@ async function startScrape() {
 
       // Make sure modules like Entity and ENTITY are placed in the same file.
       moduleName = moduleName.toLowerCase();
+      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+      writeLuaFile(moduleName, pageMarkups);
 
       const moduleFile = path.join(baseDirectory, moduleName);
-
-      if (!fs.existsSync(`${moduleFile}.lua`))
-        fs.writeFileSync(`${moduleFile}.lua`, '---@meta\n\n');
 
       if (!fs.existsSync(moduleFile))
         fs.mkdirSync(moduleFile, { recursive: true });
 
-      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-
-      // Lua API
-      fs.appendFileSync(path.join(baseDirectory, `${moduleName}.lua`), api);
-
-      // JSON data
+      // Store JSON data so it can be used later to regenerate the lua files
       const json = JSON.stringify(pageMarkups, null, 2);
-      fs.writeFileSync(path.join(baseDirectory, moduleName, `${fileName}.json`), json);
+      fs.writeFileSync(path.join(moduleFile, `${fileName}.json`), json);
     });
 
     await pageMarkupScraper.scrape();
