@@ -1716,6 +1716,14 @@ function Entity:GetNetworkVars() end
 ---@return boolean # Whether the entity's rendering and transmitting has been disabled.
 function Entity:GetNoDraw() end
 
+---[SERVER] Gets the NPC classification. Internally gets the `m_iClass` variable which is polled by the engine. This will be equivalent to NPC:Classify.
+---
+--- This is a helper function only available if your SENT is based on `base_ai`
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:GetNPCClass)
+---@return number # See Enums/CLASS
+function ENTITY:GetNPCClass() end
+
 ---[SHARED] Returns the body group count of the entity.
 --- If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
 ---

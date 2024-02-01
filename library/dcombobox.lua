@@ -103,7 +103,7 @@ function DComboBox:IsMenuOpen() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:OpenMenu)
 function DComboBox:OpenMenu() end
 
----[CLIENT AND MENU] Called when the player opens the dropdown menu.
+---[CLIENT AND MENU] Removes a choice added with DComboBox:AddChoice
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:RemoveChoice)
 ---@param index number The index of the option to remove.

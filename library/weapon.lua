@@ -136,7 +136,7 @@ function Weapon:DefaultReload(act) end
 --- Due to this hook being predicted, it is not called clientside in singleplayer at all, and in multiplayer it will not be called clientside if the weapon is switched with Player:SelectWeapon or the "use" console command, however it will be called clientside with the default weapon selection menu and when using CUserCmd:SelectWeapon
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:Deploy)
----@return boolean # Return true to allow switching away from this weapon using lastinv command
+---@return boolean # Return true to allow switching away from this weapon using `lastinv` command
 function WEAPON:Deploy() end
 
 ---[CLIENT] Called when the crosshair is about to get drawn, and allows you to override it.

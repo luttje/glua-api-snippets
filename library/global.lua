@@ -97,7 +97,7 @@ function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 
 ---[SHARED AND MENU] Creates an Angle object.
---- 		This function is very expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example). It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
+--- 		This function is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Angle:Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
 ---@param pitch? number The pitch value of the angle.
@@ -198,8 +198,6 @@ function _G.ClearProblem(id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideModel)
 ---@param model string The file path to the model.
----
---- Model must be precached with util.PrecacheModel on the server before usage.
 ---@param renderGroup? number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
 ---@return CSEnt # Created client-side model (`C_BaseFlex`).
 function _G.ClientsideModel(model, renderGroup) end
@@ -217,7 +215,7 @@ function _G.ClientsideModel(model, renderGroup) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideRagdoll)
 ---@param model string The file path to the model.
 ---
---- Model must be precached with util.PrecacheModel on the server before usage.
+--- Model must be precached with util.PrecacheModel on the server for physics to work. This will be fixed in the next update.
 ---@param renderGroup? number The Enums/RENDERGROUP to assign.
 ---@return CSEnt # The newly created client-side ragdoll. ( C_ClientRagdoll )
 function _G.ClientsideRagdoll(model, renderGroup) end
@@ -3050,7 +3048,7 @@ function _G.UTIL_IsUselessModel(modelName) end
 function _G.ValidPanel(panel) end
 
 ---[SHARED AND MENU] Creates a Vector object.
---- 		This function is very expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example). It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
+--- 		Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Vector:Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Vector)
 ---@param x? number The x component of the vector.

@@ -429,7 +429,8 @@ function Player:DropObject() end
 ---@param velocity? Vector If set and previous argument is unset, launches the weapon with given velocity. If the velocity is higher than 400, it will be clamped to 400.
 function Player:DropWeapon(weapon, target, velocity) end
 
----[SERVER] Enters the player into specified vehicle
+---[SERVER] Force puts the player into a specified vehicle.
+--- This bypasses GM:CanPlayerEnterVehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:EnterVehicle)
 ---@param vehicle Vehicle Vehicle the player will enter
@@ -445,7 +446,9 @@ function Player:EnterVehicle(vehicle) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:EquipSuit)
 function Player:EquipSuit() end
 
----[SERVER] Makes the player exit the vehicle if they're in one.
+---[SERVER] Forces the player to exit the vehicle if they're in one.
+---
+--- This bypasses GM:CanExitVehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ExitVehicle)
 function Player:ExitVehicle() end
@@ -1702,7 +1705,7 @@ function Player:SetLadderClimbSpeed(speed) end
 ---
 --- This is reset to 1 on spawn.
 ---
---- There is no weapon counterpart to this, you'll have to hardcode the multiplier in the weapon or call Weapon:SetNextPrimaryFire / Weapon:SetNextSecondaryFire manually from a.
+--- There is no weapon counterpart to this, you'll have to hardcode the multiplier in the weapon or call Weapon:SetNextPrimaryFire / Weapon:SetNextSecondaryFire manually.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetLaggedMovementValue)
 ---@param timescale number The timescale multiplier.

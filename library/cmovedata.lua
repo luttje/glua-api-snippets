@@ -276,7 +276,7 @@ function CMoveData:SetMaxSpeed(maxSpeed) end
 
 ---[SHARED] Sets the serverside move angles, making the movement keys act as if player was facing that direction.
 ---
---- This does nothing clientside.
+--- This function is predicted, and should be called shared with matching data on client and server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetMoveAngles)
 ---@param dir Angle The aim direction.

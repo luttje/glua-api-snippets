@@ -110,6 +110,7 @@ function jit.opt.start(...) end
 function jit.status() end
 
 ---[SHARED AND MENU] Returns bytecode of a function at a position.
+--- 		This function only works for Lua defined functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcbc)
 ---@param func function Function to retrieve bytecode from.

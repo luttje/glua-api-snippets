@@ -20,7 +20,6 @@ function ents.Create(class) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.CreateClientProp)
 ---@param model? string The model for the entity to be created.
---- Model must be precached with util.PrecacheModel on the server before usage.
 ---@return Entity # Created entity (`C_PhysPropClientside`).
 function ents.CreateClientProp(model) end
 

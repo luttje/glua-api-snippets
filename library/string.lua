@@ -305,7 +305,7 @@ function string.SetChar(InputString, Index, ReplacementChar) end
 
 ---[SHARED AND MENU] Splits the string into a table of strings, separated by the second argument.
 ---
---- This is an alias of string.Explode.
+--- This is an alias of string.Explode, but with flipped arguments.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Split)
 ---@param Inputstring string String to split

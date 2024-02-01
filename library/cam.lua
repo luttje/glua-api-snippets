@@ -90,9 +90,6 @@ function cam.Start2D() end
 --- For more advanced settings such as an orthographic view, use cam.Start instead.
 ---
 ---
---- Both zNear and zFar need a value before any of them work.
----
---- zNear also requires a value higher than 0.
 ---
 --- Negative x/y values won't work.
 ---
@@ -107,6 +104,13 @@ function cam.Start2D() end
 ---@param w? number Width of the new viewport.
 ---@param h? number Height of the new viewport.
 ---@param zNear? number Distance to near clipping plane.
+---
+---
+--- Both zNear and zFar need a value before any of them work.
+---
+--- zNear also requires a value higher than 0.
+---
+---
 ---@param zFar? number Distance to far clipping plane.
 function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 

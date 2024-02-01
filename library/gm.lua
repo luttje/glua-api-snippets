@@ -116,7 +116,7 @@ function GM:CanCreateUndo(ply, undo) end
 ---@return boolean # Return true to allow editing.
 function GM:CanEditVariable(ent, ply, key, val, editor) end
 
----[SERVER] Determines if the player can exit the vehicle.
+---[SERVER] Determines if the player can exit the vehicle on their own. Player:ExitVehicle will bypass this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanExitVehicle)
 ---@param veh Vehicle The vehicle entity
@@ -124,13 +124,13 @@ function GM:CanEditVariable(ent, ply, key, val, editor) end
 ---@return boolean # True if the player can exit the vehicle.
 function GM:CanExitVehicle(veh, ply) end
 
----[SERVER] Determines whether or not the player can enter the vehicle.
+---[SERVER] Determines whether or not a given player player can enter the given vehicle. Player:EnterVehicle will bypass this hook.
 ---
 --- Called just before GM:PlayerEnteredVehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanPlayerEnterVehicle)
----@param player Player The player.
----@param vehicle Vehicle The vehicle.
+---@param player Player The player that wants to enter a vehicle.
+---@param vehicle Vehicle The vehicle in question.
 ---@param role number The seat number.
 ---@return boolean # `false` if the player is not allowed to enter the vehicle.
 function GM:CanPlayerEnterVehicle(player, vehicle, role) end

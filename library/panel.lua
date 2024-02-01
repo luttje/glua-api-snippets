@@ -595,7 +595,7 @@ function Panel:GetFont() end
 ---[CLIENT] Returns the panel's HTML material. Only works with Awesomium, HTML and DHTML panels that have been fully loaded.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetHTMLMaterial)
----@return IMaterial # The HTML material used by the panel. Typically starts with "__vgui_texture_" followed by an incremental number.
+---@return IMaterial # The HTML material used by the panel. Typically starts with `__vgui_texture_` followed by an incremental number.
 function Panel:GetHTMLMaterial() end
 
 ---[CLIENT AND MENU] Returns the height of a single line of a RichText panel.
