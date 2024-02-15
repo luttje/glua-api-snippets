@@ -184,7 +184,10 @@ export class GluaApiWriter {
     api += `---@enum ${_enum.name}\n`;
 
     if (isContainedInTable)
-      api += `local ${_enum.name} = {\n`;
+    {
+      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description, false)}\n` : ''
+      api += `${_enum.name} = {\n`;
+    }
 
     const writeItem = (key: string, item: typeof _enum.items[0]) => {
       if (isContainedInTable) {
