@@ -215,7 +215,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               description: $el.text()
             };
 
-            if ($el.attr('default'))
+            if ($el.attr('default')!= undefined)
               argument.default = $el.attr('default')!;
 
             return argument;
