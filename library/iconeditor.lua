@@ -5,12 +5,11 @@
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:SetDefaultLighting)
 function IconEditor:SetDefaultLighting() end
 
----[CLIENT] Applies the front view camera settings for the model in the DAdjustableModelPanel.
+---[CLIENT] Fills the DListView on the left of the editor with the model entity's animation list. Called by IconEditor:Refresh.
 ---
---- Called when a user clicks the `Front` (second) button (See the ).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:FullFrontalLayout)
-function IconEditor:FullFrontalLayout() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:FillAnimations)
+---@param ent Entity The entity being rendered within the model panel.
+function IconEditor:FillAnimations(ent) end
 
 ---[CLIENT] Places the camera at the origin (0,0,0), relative to the entity, in the DAdjustableModelPanel.
 ---
@@ -19,18 +18,12 @@ function IconEditor:FullFrontalLayout() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:OriginLayout)
 function IconEditor:OriginLayout() end
 
----[CLIENT] Applies the right side view camera settings for the model in the DAdjustableModelPanel.
+---[CLIENT] Applies the best camera settings for the model in the DAdjustableModelPanel, using the values returned by Global.PositionSpawnIcon.
 ---
---- Called when a user clicks the `Right` (fourth) button (See the ). (Note: The icon for this points left.)
+--- Called when a user clicks the `wand` button (See the ) and when IconEditor:Refresh is called.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:RightLayout)
-function IconEditor:RightLayout() end
-
----[CLIENT] Sets the SpawnIcon to modify. You should call Panel:Refresh immediately after this, as the user will not be able to make changes to the icon beforehand.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:SetIcon)
----@param icon Panel The SpawnIcon object to be modified.
-function IconEditor:SetIcon(icon) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:BestGuessLayout)
+function IconEditor:BestGuessLayout() end
 
 ---[CLIENT] Applies the top-down view camera settings for the model in the DAdjustableModelPanel.
 ---
@@ -38,6 +31,32 @@ function IconEditor:SetIcon(icon) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:AboveLayout)
 function IconEditor:AboveLayout() end
+
+---[CLIENT] Updates the entity being rendered in the internal DAdjustableModelPanel. Called by the model panel's DModelPanel:LayoutEntity method.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:UpdateEntity)
+---@param ent Entity The entity being rendered within the model panel.
+function IconEditor:UpdateEntity(ent) end
+
+---[CLIENT] Applies the right side view camera settings for the model in the DAdjustableModelPanel.
+---
+--- Called when a user clicks the `Right` (fourth) button (See the ). (Note: The icon for this points left.)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:RightLayout)
+function IconEditor:RightLayout() end
+
+---[CLIENT] Applies the front view camera settings for the model in the DAdjustableModelPanel.
+---
+--- Called when a user clicks the `Front` (second) button (See the ).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:FullFrontalLayout)
+function IconEditor:FullFrontalLayout() end
+
+---[CLIENT] Sets the SpawnIcon to modify. You should call Panel:Refresh immediately after this, as the user will not be able to make changes to the icon beforehand.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:SetIcon)
+---@param icon Panel The SpawnIcon object to be modified.
+function IconEditor:SetIcon(icon) end
 
 ---[CLIENT] Sets the editor's model and icon from an entity. Alternative to IconEditor:SetIcon, with uses a SpawnIcon.
 ---
@@ -47,19 +66,6 @@ function IconEditor:AboveLayout() end
 ---@param ent Entity The entity to retrieve the model and skin from.
 function IconEditor:SetFromEntity(ent) end
 
----[CLIENT] Re-renders the SpawnIcon.
----
---- Called when a user clicks the `RENDER` button, this retrieves the render data from the internal DAdjustableModelPanel and passes it as a table to Panel:RebuildSpawnIconEx.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:RenderIcon)
-function IconEditor:RenderIcon() end
-
----[CLIENT] Fills the DListView on the left of the editor with the model entity's animation list. Called by IconEditor:Refresh.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:FillAnimations)
----@param ent Entity The entity being rendered within the model panel.
-function IconEditor:FillAnimations(ent) end
-
 ---[CLIENT] Updates the internal DAdjustableModelPanel and SpawnIcon.
 ---
 --- This should be called immediately after setting the SpawnIcon with IconEditor:SetIcon.
@@ -67,18 +73,12 @@ function IconEditor:FillAnimations(ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:Refresh)
 function IconEditor:Refresh() end
 
----[CLIENT] Updates the entity being rendered in the internal DAdjustableModelPanel. Called by the model panel's DModelPanel:LayoutEntity method.
+---[CLIENT] Re-renders the SpawnIcon.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:UpdateEntity)
----@param ent Entity The entity being rendered within the model panel.
-function IconEditor:UpdateEntity(ent) end
-
----[CLIENT] Applies the best camera settings for the model in the DAdjustableModelPanel, using the values returned by Global.PositionSpawnIcon.
+--- Called when a user clicks the `RENDER` button, this retrieves the render data from the internal DAdjustableModelPanel and passes it as a table to Panel:RebuildSpawnIconEx.
 ---
---- Called when a user clicks the `wand` button (See the ) and when IconEditor:Refresh is called.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:BestGuessLayout)
-function IconEditor:BestGuessLayout() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IconEditor:RenderIcon)
+function IconEditor:RenderIcon() end
 
 ---@class IconEditor : DFrame
 local IconEditor = {}

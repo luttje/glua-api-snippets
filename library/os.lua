@@ -18,13 +18,6 @@ function os.difftime(timeA, timeB) end
 ---@return number # runtime
 function os.clock() end
 
----[SHARED AND MENU] Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/os.time)
----@param dateData? table Table to generate the time from. This table's data is interpreted as being in the local timezone. See Structures/DateData
----@return number # Seconds passed since Unix epoch
-function os.time(dateData) end
-
 ---[SHARED AND MENU] Returns the date/time as a formatted string or in a table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/os.date)
@@ -69,3 +62,10 @@ function os.time(dateData) end
 ---@param time? number Time to use for the format.
 ---@return string # Formatted date This will be a Structures/DateData if the first argument equals to `*t` or `!*t`
 function os.date(format, time) end
+
+---[SHARED AND MENU] Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/os.time)
+---@param dateData? table Table to generate the time from. This table's data is interpreted as being in the local timezone. See Structures/DateData
+---@return number # Seconds passed since Unix epoch
+function os.time(dateData) end

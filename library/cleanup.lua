@@ -2,12 +2,6 @@
 
 cleanup = {}
 
----[SHARED] Registers a new cleanup type.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Register)
----@param type string Name of type.
-function cleanup.Register(type) end
-
 ---[SERVER] Gets the cleanup list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetList)
@@ -20,12 +14,6 @@ function cleanup.GetList() end
 ---@param command string The console command that called this function.
 ---@param args table First and only arg is the cleanup type.
 function cleanup.CC_AdminCleanup(pl, command, args) end
-
----[SHARED] Gets the table of cleanup types.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetTable)
----@return table # A list of cleanup types.
-function cleanup.GetTable() end
 
 ---[SERVER] Called by the `gmod_cleanup` console command. Allows players to cleanup their own props.
 ---
@@ -42,6 +30,18 @@ function cleanup.CC_Cleanup(pl, command, args) end
 ---@param type string The type of cleanup.
 ---@param ent Entity The entity to add to the player's cleanup list.
 function cleanup.Add(pl, type, ent) end
+
+---[SHARED] Gets the table of cleanup types.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetTable)
+---@return table # A list of cleanup types.
+function cleanup.GetTable() end
+
+---[SHARED] Registers a new cleanup type.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Register)
+---@param type string Name of type.
+function cleanup.Register(type) end
 
 ---[CLIENT] Repopulates the clients cleanup menu
 ---

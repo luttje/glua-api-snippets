@@ -111,17 +111,35 @@ function ControlPanel:AddControl(type, controlinfo) end
 ---@return Panel # The ControlPanel panel.
 function controlpanel.Get(name) end
 
----[CLIENT] Calls the given function with this panel as the only argument. Used by the spawnmenu to populate the control panel.
+---[CLIENT] Creates a CtrlColor (a color picker) panel and adds it as an ControlPanel:AddPanel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:FillViaFunction)
----@param func function A function that takes one argument:
---- * ControlPanel panelToPopulate
-function ControlPanel:FillViaFunction(func) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ColorPicker)
+---@param label string The label for this color picker.
+---@param convarR string Name of the convar that will store the R component of the selected color.
+---@param convarG string Name of the convar that will store the G component of the selected color.
+---@param convarB string Name of the convar that will store the B component of the selected color.
+---@param convarA string Name of the convar that will store the A component of the selected color.
+---@return Panel # The created CtrlColor panel.
+function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
 
 ---[CLIENT] Alias of Panel:Clear.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ClearControls)
 function ControlPanel:ClearControls() end
+
+---[CLIENT] Creates a ControlPresets panel and adds it as an ControlPanel:AddPanel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
+---@param group string The presets group. Must be unique.
+---@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
+---@return Panel # The created ControlPresets panel.
+function ControlPanel:ToolPresets(group, cvarList) end
+
+---[CLIENT] Returns this control panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:GetEmbeddedPanel)
+---@return ControlPanel # The same control panel the function is being called on.
+function ControlPanel:GetEmbeddedPanel() end
 
 ---[CLIENT] Sets control values of the control panel.
 ---
@@ -158,27 +176,9 @@ function ControlPanel:KeyBinder(label1, convar1, label2, convar2) end
 ---@return MatSelect # The created MatSelect panel.
 function ControlPanel:MatSelect(convar, options, autostretch, width, height) end
 
----[CLIENT] Creates a CtrlColor (a color picker) panel and adds it as an ControlPanel:AddPanel.
+---[CLIENT] Calls the given function with this panel as the only argument. Used by the spawnmenu to populate the control panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ColorPicker)
----@param label string The label for this color picker.
----@param convarR string Name of the convar that will store the R component of the selected color.
----@param convarG string Name of the convar that will store the G component of the selected color.
----@param convarB string Name of the convar that will store the B component of the selected color.
----@param convarA string Name of the convar that will store the A component of the selected color.
----@return Panel # The created CtrlColor panel.
-function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
-
----[CLIENT] Returns this control panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:GetEmbeddedPanel)
----@return ControlPanel # The same control panel the function is being called on.
-function ControlPanel:GetEmbeddedPanel() end
-
----[CLIENT] Creates a ControlPresets panel and adds it as an ControlPanel:AddPanel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
----@param group string The presets group. Must be unique.
----@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
----@return Panel # The created ControlPresets panel.
-function ControlPanel:ToolPresets(group, cvarList) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:FillViaFunction)
+---@param func function A function that takes one argument:
+--- * ControlPanel panelToPopulate
+function ControlPanel:FillViaFunction(func) end

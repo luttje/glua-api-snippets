@@ -1,5 +1,11 @@
 ---@meta
 
+---[CLIENT] Get a list of all Console Variables being managed by this panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:GetConVars)
+---@return table # numbered table of convars
+function ControlPresets:GetConVars() end
+
 ---[CLIENT] Adds a convar to be managed by this control.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:AddConVar)
@@ -14,9 +20,3 @@ function ControlPresets:SetLabel(name) end
 
 ---@class ControlPresets : Panel
 local ControlPresets = {}
-
----[CLIENT] Get a list of all Console Variables being managed by this panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:GetConVars)
----@return table # numbered table of convars
-function ControlPresets:GetConVars() end

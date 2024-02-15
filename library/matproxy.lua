@@ -2,6 +2,13 @@
 
 matproxy = {}
 
+---[CLIENT] Called by engine to determine if a certain material proxy is registered in Lua.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.ShouldOverrideProxy)
+---@param name string The name of proxy in question
+---@return boolean # Whether the material proxy of given name is registered.
+function matproxy.ShouldOverrideProxy(name) end
+
 ---[CLIENT] Called by the engine from `OnBind`. Calls Structures/MatProxyData#init method of the Lua material proxy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.Init)
@@ -16,13 +23,6 @@ function matproxy.Init(name, uname, mat, values) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.Add)
 ---@param matProxyData table The information about the proxy. See Structures/MatProxyData
 function matproxy.Add(matProxyData) end
-
----[CLIENT] Called by engine to determine if a certain material proxy is registered in Lua.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.ShouldOverrideProxy)
----@param name string The name of proxy in question
----@return boolean # Whether the material proxy of given name is registered.
-function matproxy.ShouldOverrideProxy(name) end
 
 ---[CLIENT] Called by the engine from `OnBind`. Calls Structures/MatProxyData#bind method of the Lua material proxy.
 ---

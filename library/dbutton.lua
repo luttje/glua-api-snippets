@@ -1,10 +1,13 @@
 ---@meta
 
----[CLIENT AND MENU] Sets an image to be displayed as the button's background. Alias of DButton:SetImage
+---[CLIENT AND MENU] Sets a console command to be called when the button is clicked.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetIcon)
----@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
-function DButton:SetIcon(img) end
+--- This overrides the button's `DoClick` method.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetConsoleCommand)
+---@param command string The console command to be called.
+---@param args? string The arguments for the command.
+function DButton:SetConsoleCommand(command, args) end
 
 ---[CLIENT AND MENU] Returns true if the DButton is currently depressed (a user is clicking on it).
 ---
@@ -18,6 +21,12 @@ function DButton:IsDown() end
 ---@param draw boolean Does nothing.
 function DButton:SetDrawBorder(draw) end
 
+---[CLIENT AND MENU] Sets an image to be displayed as the button's background. Alias of DButton:SetImage
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetIcon)
+---@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
+function DButton:SetIcon(img) end
+
 ---[CLIENT AND MENU] Sets an image to be displayed as the button's background.
 ---
 --- See DButton:SetImage for equivalent function that uses file paths instead. Also see DImageButton.
@@ -25,12 +34,6 @@ function DButton:SetDrawBorder(draw) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetMaterial)
 ---@param img? IMaterial The material to use. If this is nil, the image background is removed.
 function DButton:SetMaterial(img) end
-
----[CLIENT AND MENU] Returns value set by DButton:SetDrawBorder. See that page for more info.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:GetDrawBorder)
----@return boolean # value set by DButton:SetDrawBorder.
-function DButton:GetDrawBorder() end
 
 ---[CLIENT AND MENU] Sets an image to be displayed as the button's background.
 ---
@@ -42,15 +45,6 @@ function DButton:GetDrawBorder() end
 ---@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
 function DButton:SetImage(img) end
 
----[CLIENT AND MENU] Sets a console command to be called when the button is clicked.
----
---- This overrides the button's `DoClick` method.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:SetConsoleCommand)
----@param command string The console command to be called.
----@param args? string The arguments for the command.
-function DButton:SetConsoleCommand(command, args) end
-
 ---[CLIENT AND MENU] Sets whether or not the DButton is disabled.
 ---
 --- When disabled, the button is `greyed out` and cannot be clicked.
@@ -59,6 +53,12 @@ function DButton:SetConsoleCommand(command, args) end
 ---@param disable boolean When true Enable the button, when false Disable the button.
 ---@deprecated Use Panel:SetEnabled instead.
 function DButton:SetDisabled(disable) end
+
+---[CLIENT AND MENU] Returns value set by DButton:SetDrawBorder. See that page for more info.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DButton:GetDrawBorder)
+---@return boolean # value set by DButton:SetDrawBorder.
+function DButton:GetDrawBorder() end
 
 ---@class DButton : DLabel
 local DButton = {}

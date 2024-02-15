@@ -2,25 +2,15 @@
 
 jit = {}
 
----[SHARED AND MENU] Flushes the whole cache of compiled code.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.flush)
-function jit.flush() end
-
 ---[SHARED AND MENU] Disables LuaJIT Lua compilation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.off)
 function jit.off() end
 
----[SHARED AND MENU] Returns bytecode of a function at a position.
---- 		This function only works for Lua defined functions.
+---[SHARED AND MENU] Enables LuaJIT Lua compilation.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcbc)
----@param func function Function to retrieve bytecode from.
----@param pos number Position of the bytecode to retrieve.
----@return number # bytecode instruction
----@return number # bytecode opcode
-function jit.util.funcbc(func, pos) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.on)
+function jit.on() end
 
 ---[SHARED AND MENU] Returns the status of the JIT compiler and the current optimizations enabled.
 ---
@@ -28,6 +18,26 @@ function jit.util.funcbc(func, pos) end
 ---@return boolean # Is JIT enabled
 ---@return any # Strings for CPU-specific features and enabled optimizations
 function jit.status() end
+
+---[SHARED AND MENU] JIT compiler optimization control. The opt sub-module provides the backend for the -O command line LuaJIT option.
+--- You can also use it programmatically, e.g.:
+---
+--- ```
+--- jit.opt.start(2) -- same as -O2
+--- jit.opt.start("-dce")
+--- jit.opt.start("hotloop=10", "hotexit=2")
+--- ```
+---
+--- 	A list of LuaJIT -O command line options can be found here(a table of various optimization levels are displayed towards the bottom of the page along with exactly which optimization options are enabled for each level): http://luajit.org/running.html
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.opt.start)
+---@param ... any
+function jit.opt.start(...) end
+
+---[SHARED AND MENU] Flushes the whole cache of compiled code.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.flush)
+function jit.flush() end
 
 ---[SHARED AND MENU] You can attach callbacks to a number of compiler events with jit.attach. The callback can be called:
 ---
@@ -99,45 +109,15 @@ function jit.status() end
 ---@param event string The event to hook into.
 function jit.attach(callback, event) end
 
----[SHARED AND MENU] JIT compiler optimization control. The opt sub-module provides the backend for the -O command line LuaJIT option.
---- You can also use it programmatically, e.g.:
+---[SHARED AND MENU] Returns bytecode of a function at a position.
+--- 		This function only works for Lua defined functions.
 ---
---- ```
---- jit.opt.start(2) -- same as -O2
---- jit.opt.start("-dce")
---- jit.opt.start("hotloop=10", "hotexit=2")
---- ```
----
---- 	A list of LuaJIT -O command line options can be found here(a table of various optimization levels are displayed towards the bottom of the page along with exactly which optimization options are enabled for each level): http://luajit.org/running.html
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.opt.start)
----@param ... any
-function jit.opt.start(...) end
-
----[SHARED AND MENU] Enables LuaJIT Lua compilation.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.on)
-function jit.on() end
-
----[SHARED AND MENU]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceir)
----@param tr number
----@param index number
----@return number # m
----@return number # ot
----@return number # op1
----@return number # op2
----@return number # prev
----@deprecated This function was disabled due to security concerns.
-function jit.util.traceir(tr, index) end
-
----[SHARED AND MENU]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceexitstub)
----@param exitno number exit number to retrieve exit stub address from (gotten via jit.attach with the texit event)
----@return number # exitstub trace address
-function jit.util.traceexitstub(exitno) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcbc)
+---@param func function Function to retrieve bytecode from.
+---@param pos number Position of the bytecode to retrieve.
+---@return number # bytecode instruction
+---@return number # bytecode opcode
+function jit.util.funcbc(func, pos) end
 
 ---[SHARED AND MENU] Return table fields:
 --- * 0 (ref) (number): first IR ref for the snapshot
@@ -151,16 +131,6 @@ function jit.util.traceexitstub(exitno) end
 ---@return table # snapshot
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.tracesnap(tr, sn) end
-
----[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
---- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcuvname)
----@param func function Function to get the upvalue indexed from
----@param index number The upvalue index, starting from 0
----@return string # The function returns nil if there is no upvalue with the given index, otherwise the name of the upvalue is returned
----@deprecated This function was disabled due to security concerns.
-function jit.util.funcuvname(func, index) end
 
 ---[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see Ircalladdr Functions
 --- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
@@ -185,6 +155,16 @@ function jit.util.ircalladdr(index) end
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.funck(func, index) end
 
+---[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
+--- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcuvname)
+---@param func function Function to get the upvalue indexed from
+---@param index number The upvalue index, starting from 0
+---@return string # The function returns nil if there is no upvalue with the given index, otherwise the name of the upvalue is returned
+---@deprecated This function was disabled due to security concerns.
+function jit.util.funcuvname(func, index) end
+
 ---[SHARED AND MENU] Return table fields:
 --- * link (number): the linked trace (0 for link types: none, return, interpreter)
 --- * nk (number): the lowest IR constant (???)
@@ -197,27 +177,6 @@ function jit.util.funck(func, index) end
 ---@return table # trace info
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.traceinfo(trace) end
-
----[SHARED AND MENU]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracek)
----@param tr number
----@param index number
----@return any # k
----@return number # t
----@return number # slot; optional
----@deprecated This function was disabled due to security concerns.
-function jit.util.tracek(tr, index) end
-
----[SHARED AND MENU]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracemc)
----@param tr number
----@return string # mcode
----@return number # address
----@return number # loop
----@deprecated This function was disabled due to security concerns. It will always return 3 `0`s.
-function jit.util.tracemc(tr) end
 
 ---[SHARED AND MENU] Retrieves LuaJIT information about a given function, similarly to debug.getinfo. Possible table fields:
 --- * linedefined: as for debug.getinfo
@@ -241,3 +200,44 @@ function jit.util.tracemc(tr) end
 ---@param pos? number
 ---@return table # Information about the supplied function/proto.
 function jit.util.funcinfo(func, pos) end
+
+---[SHARED AND MENU]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceir)
+---@param tr number
+---@param index number
+---@return number # m
+---@return number # ot
+---@return number # op1
+---@return number # op2
+---@return number # prev
+---@deprecated This function was disabled due to security concerns.
+function jit.util.traceir(tr, index) end
+
+---[SHARED AND MENU]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceexitstub)
+---@param exitno number exit number to retrieve exit stub address from (gotten via jit.attach with the texit event)
+---@return number # exitstub trace address
+function jit.util.traceexitstub(exitno) end
+
+---[SHARED AND MENU]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracek)
+---@param tr number
+---@param index number
+---@return any # k
+---@return number # t
+---@return number # slot; optional
+---@deprecated This function was disabled due to security concerns.
+function jit.util.tracek(tr, index) end
+
+---[SHARED AND MENU]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.tracemc)
+---@param tr number
+---@return string # mcode
+---@return number # address
+---@return number # loop
+---@deprecated This function was disabled due to security concerns. It will always return 3 `0`s.
+function jit.util.tracemc(tr) end

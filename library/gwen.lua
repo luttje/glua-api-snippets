@@ -10,17 +10,6 @@ GWEN = {}
 ---@return table # The color of the point on the skin as a Color.
 function GWEN.TextureColor(x, y) end
 
----[CLIENT AND MENU] Used in derma skins to create a rectangle drawing function from an image. The rectangle will not be scaled, but instead it will be drawn in the center of the box. The texture is taken from SKIN.GwenTexture when mat_override it's not defined
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/GWEN.CreateTextureCentered)
----@param x number The X coordinate on the texture
----@param y number The Y coordinate on the texture
----@param w number Width of the area on texture
----@param h number Height of the area on texture
----@param matOverride IMaterial Optional. Sets the material this function will use
----@return function # The drawing function. Arguments are: number x - X coordinate for the box   number y - Y coordinate for the box   number w - Width of the box   number h - Height of the box   table clr - Optional color, default is white. Uses the Color
-function GWEN.CreateTextureCentered(x, y, w, h, matOverride) end
-
 ---[CLIENT AND MENU] Used in derma skins to create a rectangle drawing function from an image. The texture of the rectangle will be scaled. The texture is taken from SKIN.GwenTexture when mat_override is not supplied
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GWEN.CreateTextureNormal)
@@ -31,6 +20,17 @@ function GWEN.CreateTextureCentered(x, y, w, h, matOverride) end
 ---@param matOverride IMaterial Optional. Sets the material this function will use
 ---@return function # The drawing function. Arguments are: * number x - X coordinate for the box * number y - Y coordinate for the box * number w - Width of the box * number h - Height of the box * table clr - Optional color, default is white. Uses the Color
 function GWEN.CreateTextureNormal(x, y, w, h, matOverride) end
+
+---[CLIENT AND MENU] Used in derma skins to create a rectangle drawing function from an image. The rectangle will not be scaled, but instead it will be drawn in the center of the box. The texture is taken from SKIN.GwenTexture when mat_override it's not defined
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/GWEN.CreateTextureCentered)
+---@param x number The X coordinate on the texture
+---@param y number The Y coordinate on the texture
+---@param w number Width of the area on texture
+---@param h number Height of the area on texture
+---@param matOverride IMaterial Optional. Sets the material this function will use
+---@return function # The drawing function. Arguments are: number x - X coordinate for the box   number y - Y coordinate for the box   number w - Width of the box   number h - Height of the box   table clr - Optional color, default is white. Uses the Color
+function GWEN.CreateTextureCentered(x, y, w, h, matOverride) end
 
 ---[CLIENT AND MENU] Used in derma skins to create a bordered rectangle drawing function from an image. The texture is taken either from last argument or from SKIN.GwenTexture when material source it's not supplied
 ---

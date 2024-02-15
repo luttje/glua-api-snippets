@@ -2,17 +2,6 @@
 
 cvars = {}
 
----[SHARED AND MENU] Returns a table of the given ConVars callbacks.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.GetConVarCallbacks)
----@param name string The name of the ConVar.
----@param createIfNotFound? boolean Whether or not to create the internal callback table for given ConVar if there isn't one yet.
----
----
---- This argument is internal and should not be used.
----@return table # A table of the convar's callbacks, or nil if the convar doesn't exist.
-function cvars.GetConVarCallbacks(name, createIfNotFound) end
-
 ---[SHARED AND MENU] Removes a callback for a convar using the the callback's identifier. The identifier should be the third argument specified for cvars.AddChangeCallback.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.RemoveChangeCallback)
@@ -36,6 +25,27 @@ function cvars.Bool(cvar, default) end
 ---@return string # Retrieved value
 function cvars.String(cvar, default) end
 
+---[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.
+---
+--- Called by the engine when a convar value changes.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.OnConVarChanged)
+---@param name string Convar name
+---@param oldVal string The old value of the convar
+---@param newVal string The new value of the convar
+function cvars.OnConVarChanged(name, oldVal, newVal) end
+
+---[SHARED AND MENU] Returns a table of the given ConVars callbacks.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.GetConVarCallbacks)
+---@param name string The name of the ConVar.
+---@param createIfNotFound? boolean Whether or not to create the internal callback table for given ConVar if there isn't one yet.
+---
+---
+--- This argument is internal and should not be used.
+---@return table # A table of the convar's callbacks, or nil if the convar doesn't exist.
+function cvars.GetConVarCallbacks(name, createIfNotFound) end
+
 ---[SHARED AND MENU] Adds a callback to be called when the named convar changes.
 ---
 --- This does not callback convars in the menu state.
@@ -58,13 +68,3 @@ function cvars.AddChangeCallback(name, callback, identifier) end
 ---@param default? any The value to return if the console variable does not exist
 ---@return number # Retrieved value
 function cvars.Number(cvar, default) end
-
----[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.
----
---- Called by the engine when a convar value changes.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.OnConVarChanged)
----@param name string Convar name
----@param oldVal string The old value of the convar
----@param newVal string The new value of the convar
-function cvars.OnConVarChanged(name, oldVal, newVal) end

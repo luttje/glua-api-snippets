@@ -1,11 +1,5 @@
 ---@meta
 
----[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
----@return number # The width of each column
-function DGrid:GetColWide() end
-
 ---[CLIENT AND MENU] Adds a new item to the grid.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:AddItem)
@@ -21,20 +15,11 @@ function DGrid:GetCols() end
 ---@class DGrid : Panel
 local DGrid = {}
 
----[CLIENT AND MENU] Sets the width of each column.
+---[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
 ---
---- The cell panels (grid items) will not be resized or centered.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetColWide)
----@param colWidth number The width of each column.
-function DGrid:SetColWide(colWidth) end
-
----[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
----@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
----@param desc? boolean True for descending order, false for ascending.
-function DGrid:SortByMember(key, desc) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
+---@return number # The width of each column
+function DGrid:GetColWide() end
 
 ---[CLIENT AND MENU] Sets the height of each row.
 ---
@@ -70,3 +55,18 @@ function DGrid:GetItems() end
 ---@param item Panel Item to remove from the grid
 ---@param bDontDelete? boolean If set to true, the actual panel will not be removed via Panel:Remove.
 function DGrid:RemoveItem(item, bDontDelete) end
+
+---[CLIENT AND MENU] Sets the width of each column.
+---
+--- The cell panels (grid items) will not be resized or centered.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetColWide)
+---@param colWidth number The width of each column.
+function DGrid:SetColWide(colWidth) end
+
+---[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
+---@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
+---@param desc? boolean True for descending order, false for ascending.
+function DGrid:SortByMember(key, desc) end

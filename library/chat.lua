@@ -2,12 +2,6 @@
 
 chat = {}
 
----[CLIENT] Opens the chat window.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/chat.Open)
----@param mode number If equals 1, opens public chat, otherwise opens team chat
-function chat.Open(mode) end
-
 ---[CLIENT] Returns the chatbox position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.GetChatBoxPos)
@@ -15,10 +9,21 @@ function chat.Open(mode) end
 ---@return number # The Y coordinate of the chatbox's position.
 function chat.GetChatBoxPos() end
 
+---[CLIENT] Plays the chat "tick" sound.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.PlaySound)
+function chat.PlaySound() end
+
 ---[CLIENT] Closes the chat window.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.Close)
 function chat.Close() end
+
+---[CLIENT] Opens the chat window.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.Open)
+---@param mode number If equals 1, opens public chat, otherwise opens team chat
+function chat.Open(mode) end
 
 ---[CLIENT] Returns the chatbox size.
 ---
@@ -26,11 +31,6 @@ function chat.Close() end
 ---@return number # The width of the chatbox.
 ---@return number # The height of the chatbox.
 function chat.GetChatBoxSize() end
-
----[CLIENT] Plays the chat "tick" sound.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/chat.PlaySound)
-function chat.PlaySound() end
 
 ---[CLIENT] Adds text to the local player's chat box (which only they can read).
 ---

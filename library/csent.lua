@@ -1,6 +1,6 @@
 ---@meta
 
----@class CSEnt
+---@class CSEnt : Entity
 local CSEnt = {}
 
 ---[CLIENT] Removes the clientside entity

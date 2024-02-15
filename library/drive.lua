@@ -2,42 +2,6 @@
 
 drive = {}
 
----[SHARED] Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CreateMove)
----@param cmd CUserCmd The user command
----@return boolean # true if succeeded
-function drive.CreateMove(cmd) end
-
----[SHARED] Destroys players current driving method.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.DestroyMethod)
----@param ply Player The player to affect
-function drive.DestroyMethod(ply) end
-
----[SHARED] Stops the player from driving anything. ( For example a prop in sandbox )
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.PlayerStopDriving)
----@param ply Player The player to affect
-function drive.PlayerStopDriving(ply) end
-
----[SHARED] The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.StartMove)
----@param ply Player The player
----@param mv CMoveData The move data
----@param cmd CUserCmd The user command
----@return boolean # true if succeeded
-function drive.StartMove(ply, mv, cmd) end
-
----[SHARED] Optionally alter the view.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CalcView)
----@param ply Player The player
----@param view table The view, see Structures/ViewData
----@return boolean # true if succeeded
-function drive.CalcView(ply, view) end
-
 ---[SHARED] Called when the player first starts driving this entity
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.Start)
@@ -51,6 +15,14 @@ function drive.Start(ply, ent) end
 ---@param ply Player The player
 ---@param ent Entity The entity
 function drive.End(ply, ent) end
+
+---[SHARED] The move is finished. Copy mv back into the target.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.FinishMove)
+---@param ply Player The player
+---@param mv CMoveData The move data
+---@return boolean # true if succeeded
+function drive.FinishMove(ply, mv) end
 
 ---[SHARED] The move is executed here.
 ---
@@ -68,6 +40,28 @@ function drive.Move(ply, mv) end
 ---@param mode string The driving mode
 function drive.PlayerStartDriving(ply, ent, mode) end
 
+---[SHARED] Destroys players current driving method.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.DestroyMethod)
+---@param ply Player The player to affect
+function drive.DestroyMethod(ply) end
+
+---[SHARED] The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.StartMove)
+---@param ply Player The player
+---@param mv CMoveData The move data
+---@param cmd CUserCmd The user command
+---@return boolean # true if succeeded
+function drive.StartMove(ply, mv, cmd) end
+
+---[SHARED] Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CreateMove)
+---@param cmd CUserCmd The user command
+---@return boolean # true if succeeded
+function drive.CreateMove(cmd) end
+
 ---[SHARED] Returns ( or creates if inexistent ) a driving method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.GetMethod)
@@ -75,13 +69,19 @@ function drive.PlayerStartDriving(ply, ent, mode) end
 ---@return table # A method object.
 function drive.GetMethod(ply) end
 
----[SHARED] The move is finished. Copy mv back into the target.
+---[SHARED] Stops the player from driving anything. ( For example a prop in sandbox )
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/drive.FinishMove)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.PlayerStopDriving)
+---@param ply Player The player to affect
+function drive.PlayerStopDriving(ply) end
+
+---[SHARED] Optionally alter the view.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CalcView)
 ---@param ply Player The player
----@param mv CMoveData The move data
+---@param view table The view, see Structures/ViewData
 ---@return boolean # true if succeeded
-function drive.FinishMove(ply, mv) end
+function drive.CalcView(ply, view) end
 
 ---[SHARED] Registers a new entity drive.
 ---

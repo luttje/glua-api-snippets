@@ -1,54 +1,19 @@
 ---@meta
 
-gameevent = {}
+---@class achievement_event
+local achievement_event = {}
 
----[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
----
---- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
----@param eventName string The event to listen to. List of valid events (with examples) can be found [here](gameevent).
-function gameevent.Listen(eventName) end
-
----@class hide_freezepanel
-local hide_freezepanel = {}
-
----@class client_connected
-local client_connected = {}
-
----The Server address. Will be **loopback** in hosted games.
+---the name of the achievement.
 ---@type string
-client_connected.address = nil
+achievement_event.achievement_name = nil
 
----The IP of the Server. Will be **0** in hosted games. Use the **address** instead of this.
+---amount of steps toward achievement
 ---@type number
-client_connected.ip = nil
+achievement_event.cur_val = nil
 
----The port of the Server. Will be **0** in hosted games.
+---total amount of steps in achievement
 ---@type number
-client_connected.port = nil
-
----@class client_beginconnect
-local client_beginconnect = {}
-
----The Server address. Will be `localhost:27015` in hosted games.
----@type string
-client_beginconnect.address = nil
-
----The IP of the Server. Will be `16777343` in hosted games. Use the `address` instead of this.
----@type number
-client_beginconnect.ip = nil
-
----The port of the Server. Will be `27015` in hosted games.
----@type number
-client_beginconnect.port = nil
-
----The Source why the client is trying to connect to the Server. If you use `connect [IP:Port]` to connect to a Server, this will be an empty string.
----@type string
-client_beginconnect.source = nil
-
----@class host_quit
-local host_quit = {}
+achievement_event.max_val = nil
 
 ---@class break_prop
 local break_prop = {}
@@ -61,12 +26,25 @@ break_prop.entindex = nil
 ---@type number
 break_prop.userid = nil
 
+---@class flare_ignite_npc
+local flare_ignite_npc = {}
+
+---The Entity:EntIndex of the ignited NPC.
+---@type number
+flare_ignite_npc.entindex = nil
+
+---@class freezecam_started
+local freezecam_started = {}
+
 ---@class game_newmap
 local game_newmap = {}
 
 ---The Map name
 ---@type string
 game_newmap.mapname = nil
+
+---@class hide_freezepanel
+local hide_freezepanel = {}
 
 ---@class entity_killed
 local entity_killed = {}
@@ -87,41 +65,37 @@ entity_killed.damagebits = nil
 ---@type number
 entity_killed.entindex_killed = nil
 
----@class freezecam_started
-local freezecam_started = {}
-
----@class achievement_event
-local achievement_event = {}
-
----the name of the achievement.
----@type string
-achievement_event.achievement_name = nil
-
----amount of steps toward achievement
----@type number
-achievement_event.cur_val = nil
-
----total amount of steps in achievement
----@type number
-achievement_event.max_val = nil
-
----@class achievement_earned
-local achievement_earned = {}
-
----The achievement ID.
----@type number
-achievement_earned.achievement = nil
-
----The Player:UserID of the player.
----@type number
-achievement_earned.player = nil
-
 ---@class client_disconnect
 local client_disconnect = {}
 
 ---The disconnecting reason. Can be an empty String
 ---@type string
 client_disconnect.message = nil
+
+---@class client_connected
+local client_connected = {}
+
+---The Server address. Will be **loopback** in hosted games.
+---@type string
+client_connected.address = nil
+
+---The IP of the Server. Will be **0** in hosted games. Use the **address** instead of this.
+---@type number
+client_connected.ip = nil
+
+---The port of the Server. Will be **0** in hosted games.
+---@type number
+client_connected.port = nil
+
+gameevent = {}
+
+---[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
+---
+--- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
+---@param eventName string The event to listen to. List of valid events (with examples) can be found [here](gameevent).
+function gameevent.Listen(eventName) end
 
 ---@class break_breakable
 local break_breakable = {}
@@ -138,26 +112,38 @@ break_breakable.userid = nil
 ---@type number
 break_breakable.material = nil
 
----@class flare_ignite_npc
-local flare_ignite_npc = {}
+---@class client_beginconnect
+local client_beginconnect = {}
 
----The Entity:EntIndex of the ignited NPC.
+---The Server address. Will be `localhost:27015` in hosted games.
+---@type string
+client_beginconnect.address = nil
+
+---The IP of the Server. Will be `16777343` in hosted games. Use the `address` instead of this.
 ---@type number
-flare_ignite_npc.entindex = nil
+client_beginconnect.ip = nil
 
----@class show_freezepanel
-local show_freezepanel = {}
-
----The Index of the Entity that is being spectated or `0`
+---The port of the Server. Will be `27015` in hosted games.
 ---@type number
-show_freezepanel.killer = nil
+client_beginconnect.port = nil
 
----@class player_activate
-local player_activate = {}
+---The Source why the client is trying to connect to the Server. If you use `connect [IP:Port]` to connect to a Server, this will be an empty string.
+---@type string
+client_beginconnect.source = nil
 
----The Player:UserID of the Player.
+---@class achievement_earned
+local achievement_earned = {}
+
+---The achievement ID.
 ---@type number
-player_activate.userid = nil
+achievement_earned.achievement = nil
+
+---The Player:UserID of the player.
+---@type number
+achievement_earned.player = nil
+
+---@class host_quit
+local host_quit = {}
 
 ---@class player_spawn
 local player_spawn = {}
@@ -166,20 +152,45 @@ local player_spawn = {}
 ---@type number
 player_spawn.userid = nil
 
----@class server_removeban
-local server_removeban = {}
+---@class show_freezepanel
+local show_freezepanel = {}
 
----The Player:SteamID of the banned Player.
----@type string
-server_removeban.networkid = nil
+---The Index of the Entity that is being spectated or `0`
+---@type number
+show_freezepanel.killer = nil
 
----The Player:IPAddress of the banned Player.
----@type string
-server_removeban.ip = nil
+---@class server_cvar
+local server_cvar = {}
 
----The Person who unbanned the Player. Can be Console.
+---The convar name. e.g "sv_cheats".
 ---@type string
-server_removeban.by = nil
+server_cvar.cvarname = nil
+
+---The new value. Always a string. e.g "1".
+---@type string
+server_cvar.cvarvalue = nil
+
+---@class player_activate
+local player_activate = {}
+
+---The Player:UserID of the Player.
+---@type number
+player_activate.userid = nil
+
+---@class player_say
+local player_say = {}
+
+---Event priority number used by HLTV.
+---@type number
+player_say.priority = nil
+
+---The Player:UserID of the Player. For Console the UserID is 0.
+---@type number
+player_say.userid = nil
+
+---The text that was said.
+---@type string
+player_say.text = nil
 
 ---@class player_connect_client
 local player_connect_client = {}
@@ -203,36 +214,6 @@ player_connect_client.userid = nil
 ---The Entity:EntIndex of the player, minus one.
 ---@type number
 player_connect_client.index = nil
-
----@class player_say
-local player_say = {}
-
----Event priority number used by HLTV.
----@type number
-player_say.priority = nil
-
----The Player:UserID of the Player. For Console the UserID is 0.
----@type number
-player_say.userid = nil
-
----The text that was said.
----@type string
-player_say.text = nil
-
----@class player_changename
-local player_changename = {}
-
----The Player:UserID of the Player.
----@type number
-player_changename.userid = nil
-
----The old Name.
----@type string
-player_changename.oldname = nil
-
----The new Name.
----@type string
-player_changename.newname = nil
 
 ---@class server_addban
 local server_addban = {}
@@ -265,16 +246,39 @@ server_addban.by = nil
 ---@type boolean
 server_addban.kicked = nil
 
----@class server_cvar
-local server_cvar = {}
+---@class player_changename
+local player_changename = {}
 
----The convar name. e.g "sv_cheats".
----@type string
-server_cvar.cvarname = nil
+---The Player:UserID of the Player.
+---@type number
+player_changename.userid = nil
 
----The new value. Always a string. e.g "1".
+---The old Name.
 ---@type string
-server_cvar.cvarvalue = nil
+player_changename.oldname = nil
+
+---The new Name.
+---@type string
+player_changename.newname = nil
+
+---@class OnRequestFullUpdate
+local OnRequestFullUpdate = {}
+
+---The SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
+---@type string
+OnRequestFullUpdate.networkid = nil
+
+---The Player:Nick the player has.
+---@type string
+OnRequestFullUpdate.name = nil
+
+---The Player:UserID the player has.
+---@type number
+OnRequestFullUpdate.userid = nil
+
+---The Entity:EntIndex of the player, minus one.
+---@type number
+OnRequestFullUpdate.index = nil
 
 ---@class player_disconnect
 local player_disconnect = {}
@@ -299,24 +303,54 @@ player_disconnect.userid = nil
 ---@type string
 player_disconnect.reason = nil
 
----@class OnRequestFullUpdate
-local OnRequestFullUpdate = {}
+---@class player_info
+local player_info = {}
 
----The SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
----@type string
-OnRequestFullUpdate.networkid = nil
-
----The Player:Nick the player has.
----@type string
-OnRequestFullUpdate.name = nil
-
----The Player:UserID the player has.
+---The Player:AccountID of the Player.
 ---@type number
-OnRequestFullUpdate.userid = nil
+player_info.friendsid = nil
 
----The Entity:EntIndex of the player, minus one.
+---The Entity:EntIndex of the Player minus one.
 ---@type number
-OnRequestFullUpdate.index = nil
+player_info.index = nil
+
+---1 or 0 if it is a bot or not.
+---@type number
+player_info.bot = nil
+
+---The Player:UserID of the Player.
+---@type number
+player_info.userid = nil
+
+---The Player:Name of the Player.
+---@type string
+player_info.name = nil
+
+---The Player:SteamID of the Player.
+---@type string
+player_info.networkid = nil
+
+---@class server_removeban
+local server_removeban = {}
+
+---The Player:SteamID of the banned Player.
+---@type string
+server_removeban.networkid = nil
+
+---The Player:IPAddress of the banned Player.
+---@type string
+server_removeban.ip = nil
+
+---The Person who unbanned the Player. Can be Console.
+---@type string
+server_removeban.by = nil
+
+---@class ragdoll_dissolved
+local ragdoll_dissolved = {}
+
+---The Entity:EntIndex of the disolved Ragdoll.
+---@type number
+ragdoll_dissolved.entindex = nil
 
 ---@class player_hurt
 local player_hurt = {}
@@ -336,13 +370,6 @@ player_hurt.userid = nil
 ---The Player:UserID of the attacker.
 ---@type number
 player_hurt.attacker = nil
-
----@class ragdoll_dissolved
-local ragdoll_dissolved = {}
-
----The Entity:EntIndex of the disolved Ragdoll.
----@type number
-ragdoll_dissolved.entindex = nil
 
 ---@class server_spawn
 local server_spawn = {}
@@ -386,33 +413,6 @@ server_spawn.dedicated = nil
 ---true if the Server is password protected.
 ---@type boolean
 server_spawn.password = nil
-
----@class player_info
-local player_info = {}
-
----The Player:AccountID of the Player.
----@type number
-player_info.friendsid = nil
-
----The Entity:EntIndex of the Player minus one.
----@type number
-player_info.index = nil
-
----1 or 0 if it is a bot or not.
----@type number
-player_info.bot = nil
-
----The Player:UserID of the Player.
----@type number
-player_info.userid = nil
-
----The Player:Name of the Player.
----@type string
-player_info.name = nil
-
----The Player:SteamID of the Player.
----@type string
-player_info.networkid = nil
 
 ---@class player_connect
 local player_connect = {}

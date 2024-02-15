@@ -47,23 +47,65 @@ function Angle:Mul(scalar) end
 ---@return Vector # The right direction of the angle
 function Angle:Right() end
 
----[SHARED AND MENU] Copies pitch, yaw and roll from the second angle to the first.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Set)
----@param originalAngle Angle The angle to copy the values from.
-function Angle:Set(originalAngle) end
-
----[SHARED AND MENU] Normalizes the angles by applying a module with 360 to pitch, yaw and roll.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Normalize)
-function Angle:Normalize() end
-
 ---[SHARED AND MENU] Randomizes each element of this Angle object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Random)
 ---@param min? number The minimum value for each component.
 ---@param max? number The maximum value for each component.
 function Angle:Random(min, max) end
+
+---[SHARED AND MENU] Normalizes the angles by applying a module with 360 to pitch, yaw and roll.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Normalize)
+function Angle:Normalize() end
+
+---[SHARED AND MENU] Sets the p, y, and r of the angle.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:SetUnpacked)
+---@param p number The pitch component of the Angle
+---@param y number The yaw component of the Angle
+---@param r number The roll component of the Angle
+function Angle:SetUnpacked(p, y, r) end
+
+---[SHARED AND MENU] Copies pitch, yaw and roll from the second angle to the first.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Set)
+---@param originalAngle Angle The angle to copy the values from.
+function Angle:Set(originalAngle) end
+
+---[SHARED AND MENU] Returns a normal vector facing in the direction that points up relative to the angle's direction.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Up)
+---@return Vector # The up direction of the angle.
+function Angle:Up() end
+
+---[SHARED AND MENU] Returns whether the pitch, yaw and roll are 0 or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsZero)
+---@return boolean # Whether the pitch, yaw and roll are 0 or not.
+function Angle:IsZero() end
+
+---[SHARED AND MENU] Returns if the angle is equal to another angle with the given tolerance.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsEqualTol)
+---@param compare Angle The angle to compare to.
+---@param tolerance number The tolerance range.
+---@return boolean # Are the angles equal or not.
+function Angle:IsEqualTol(compare, tolerance) end
+
+---[SHARED AND MENU] Returns the pitch, yaw, and roll components of the angle.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Unpack)
+---@return number # p, pitch, x, or Angle[1].
+---@return number # y, yaw, or Angle[2].
+---@return number # r, roll, r, or Angle[3].
+function Angle:Unpack() end
+
+---[SHARED AND MENU] Subtracts the values of the argument angle to the orignal angle. This functions the same as angle1 - angle2 without creating a new angle object, skipping object construction and garbage collection.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Sub)
+---@param angle Angle The angle to subtract.
+function Angle:Sub(angle) end
 
 ---[SHARED] Snaps the angle to nearest interval of degrees.
 ---
@@ -75,51 +117,9 @@ function Angle:Random(min, max) end
 ---@return Angle # The snapped angle.
 function Angle:SnapTo(axis, target) end
 
----[SHARED AND MENU] Returns whether the pitch, yaw and roll are 0 or not.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsZero)
----@return boolean # Whether the pitch, yaw and roll are 0 or not.
-function Angle:IsZero() end
-
 ---[SHARED AND MENU] Rotates the angle around the specified axis by the specified degrees.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:RotateAroundAxis)
 ---@param axis Vector The axis to rotate around as a normalized unit vector. When argument is not a unit vector, you will experience numerical offset errors in the rotated angle.
 ---@param rotation number The degrees to rotate around the specified axis.
 function Angle:RotateAroundAxis(axis, rotation) end
-
----[SHARED AND MENU] Returns if the angle is equal to another angle with the given tolerance.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsEqualTol)
----@param compare Angle The angle to compare to.
----@param tolerance number The tolerance range.
----@return boolean # Are the angles equal or not.
-function Angle:IsEqualTol(compare, tolerance) end
-
----[SHARED AND MENU] Returns a normal vector facing in the direction that points up relative to the angle's direction.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Up)
----@return Vector # The up direction of the angle.
-function Angle:Up() end
-
----[SHARED AND MENU] Sets the p, y, and r of the angle.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:SetUnpacked)
----@param p number The pitch component of the Angle
----@param y number The yaw component of the Angle
----@param r number The roll component of the Angle
-function Angle:SetUnpacked(p, y, r) end
-
----[SHARED AND MENU] Subtracts the values of the argument angle to the orignal angle. This functions the same as angle1 - angle2 without creating a new angle object, skipping object construction and garbage collection.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Sub)
----@param angle Angle The angle to subtract.
-function Angle:Sub(angle) end
-
----[SHARED AND MENU] Returns the pitch, yaw, and roll components of the angle.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:Unpack)
----@return number # p, pitch, x, or Angle[1].
----@return number # y, yaw, or Angle[2].
----@return number # r, roll, r, or Angle[3].
-function Angle:Unpack() end

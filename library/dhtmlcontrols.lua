@@ -5,12 +5,6 @@
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:FinishedLoading)
 function DHTMLControls:FinishedLoading() end
 
----[CLIENT AND MENU] Sets the DHTML element to control with these DHTMLControls.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:SetHTML)
----@param dhtml Panel The HTML panel
-function DHTMLControls:SetHTML(dhtml) end
-
 ---[CLIENT AND MENU] Sets the color of the navigation buttons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:SetButtonColor)
@@ -20,10 +14,16 @@ function DHTMLControls:SetButtonColor(clr) end
 ---@class DHTMLControls : Panel
 local DHTMLControls = {}
 
+---[CLIENT AND MENU] Sets the DHTML element to control with these DHTMLControls.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:SetHTML)
+---@param dhtml Panel The HTML panel
+function DHTMLControls:SetHTML(dhtml) end
+
 ---[CLIENT AND MENU]
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:StartedLoading)
-function DHTMLControls:StartedLoading() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateNavButtonStatus)
+function DHTMLControls:UpdateNavButtonStatus() end
 
 ---[CLIENT AND MENU] Basically adds an URL to the history.
 ---
@@ -33,5 +33,5 @@ function DHTMLControls:UpdateHistory(url) end
 
 ---[CLIENT AND MENU]
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateNavButtonStatus)
-function DHTMLControls:UpdateNavButtonStatus() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:StartedLoading)
+function DHTMLControls:StartedLoading() end

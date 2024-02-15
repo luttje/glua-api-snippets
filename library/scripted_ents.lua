@@ -2,12 +2,53 @@
 
 scripted_ents = {}
 
+---[SHARED] Returns a list of all ENT tables which contain ENT.Spawnable
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetSpawnable)
+---@return table # A table of Structures/ENTs
+function scripted_ents.GetSpawnable() end
+
 ---[SHARED] Defines an alias string that can be used to refer to another classname
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.Alias)
 ---@param alias string A new string which can be used to refer to another classname
 ---@param classname string The classname the alias should refer to
 function scripted_ents.Alias(alias, classname) end
+
+---[SHARED] Returns a copy of the ENT table for a class, including functions defined by the base class
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.Get)
+---@param classname string The classname of the ENT table to return, can be an alias
+---@return table # entTable
+function scripted_ents.Get(classname) end
+
+---[SHARED] Returns the actual ENT table for a class. Modifying functions/variables in this table will change newly spawned entities
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetStored)
+---@param classname string The classname of the ENT table to return
+---@return table # entTable
+function scripted_ents.GetStored(classname) end
+
+---[SHARED] Returns a copy of the list of all ENT tables registered
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetList)
+---@return table # A table of all entities in the following format: (table keys are the classnames) * table t - The Structures/ENT table associated with the entity * boolean isBaseType - Always true * string Base - The entity base (note capital B in the key name) * string type - The entity type
+function scripted_ents.GetList() end
+
+---[SHARED] Returns the 'type' of a class, this will one of the following: 'anim', 'ai', 'brush', 'point'.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetType)
+---@param classname string The classname to check
+---@return string # type
+function scripted_ents.GetType(classname) end
+
+---[SHARED] Retrieves a member of entity's table.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetMember)
+---@param class string Entity's class name
+---@param name string Name of member to retrieve
+---@return any # The member or nil if failed
+function scripted_ents.GetMember(class, name) end
 
 ---[SHARED] Registers an ENT table with a classname. Reregistering an existing classname will automatically update the functions of all existing entities of that class.
 ---
@@ -26,47 +67,6 @@ function scripted_ents.Register(ENT, classname) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.OnLoaded)
 function scripted_ents.OnLoaded() end
-
----[SHARED] Returns a list of all ENT tables which contain ENT.Spawnable
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetSpawnable)
----@return table # A table of Structures/ENTs
-function scripted_ents.GetSpawnable() end
-
----[SHARED] Returns a copy of the ENT table for a class, including functions defined by the base class
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.Get)
----@param classname string The classname of the ENT table to return, can be an alias
----@return table # entTable
-function scripted_ents.Get(classname) end
-
----[SHARED] Retrieves a member of entity's table.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetMember)
----@param class string Entity's class name
----@param name string Name of member to retrieve
----@return any # The member or nil if failed
-function scripted_ents.GetMember(class, name) end
-
----[SHARED] Returns the 'type' of a class, this will one of the following: 'anim', 'ai', 'brush', 'point'.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetType)
----@param classname string The classname to check
----@return string # type
-function scripted_ents.GetType(classname) end
-
----[SHARED] Returns the actual ENT table for a class. Modifying functions/variables in this table will change newly spawned entities
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetStored)
----@param classname string The classname of the ENT table to return
----@return table # entTable
-function scripted_ents.GetStored(classname) end
-
----[SHARED] Returns a copy of the list of all ENT tables registered
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetList)
----@return table # A table of all entities in the following format: (table keys are the classnames) * table t - The Structures/ENT table associated with the entity * boolean isBaseType - Always true * string Base - The entity base (note capital B in the key name) * string type - The entity type
-function scripted_ents.GetList() end
 
 ---[SHARED] Checks if name is based on base
 ---

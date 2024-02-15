@@ -12,11 +12,11 @@ function DCategoryList:UnselectAll() end
 ---@return Panel # The created DCollapsibleCategory
 function DCategoryList:Add(categoryName) end
 
+---@class DCategoryList : DScrollPanel
+local DCategoryList = {}
+
 ---[CLIENT AND MENU] Adds an element to the list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:AddItem)
 ---@param element Panel VGUI element to add to the list.
 function DCategoryList:AddItem(element) end
-
----@class DCategoryList : DScrollPanel
-local DCategoryList = {}

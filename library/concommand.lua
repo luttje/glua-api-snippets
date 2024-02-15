@@ -17,6 +17,14 @@ function concommand.GetTable() end
 ---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
 function concommand.AutoComplete(command, arguments) end
 
+---[SHARED AND MENU] Removes a console command.
+---
+--- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)
+---@param name string The name of the command to be removed.
+function concommand.Remove(name) end
+
 ---[SHARED AND MENU] You might be looking for Global.RunConsoleCommand or Player:ConCommand.
 ---
 --- Used by the engine to run a console command's callback function. This will only be called for commands that were added with Global.AddConsoleCommand, which concommand.Add calls internally. An error is sent to the player's chat if no callback is found.
@@ -31,14 +39,6 @@ function concommand.AutoComplete(command, arguments) end
 ---@param argumentString string string of all arguments sent to the command
 ---@return boolean # `true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end
-
----[SHARED AND MENU] Removes a console command.
----
---- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)
----@param name string The name of the command to be removed.
-function concommand.Remove(name) end
 
 ---[SHARED AND MENU] Creates a console command that runs a function in lua with optional autocompletion function and help text.
 ---

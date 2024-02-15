@@ -6,8 +6,13 @@
 ---@return boolean # true for checked, false otherwise
 function ImageCheckBox:GetChecked() end
 
----@class ImageCheckBox : Button
-local ImageCheckBox = {}
+---[CLIENT] Sets the checked state of the checkbox.
+---
+--- Checked state can be obtained by ImageCheckBox.State.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ImageCheckBox:Set)
+---@param OnOff boolean true for checked, false otherwise
+function ImageCheckBox:Set(OnOff) end
 
 ---[CLIENT] Sets the checked state of the checkbox.
 ---
@@ -17,13 +22,8 @@ local ImageCheckBox = {}
 ---@param bOn boolean true for checked, false otherwise
 function ImageCheckBox:SetChecked(bOn) end
 
----[CLIENT] Sets the checked state of the checkbox.
----
---- Checked state can be obtained by ImageCheckBox.State.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ImageCheckBox:Set)
----@param OnOff boolean true for checked, false otherwise
-function ImageCheckBox:Set(OnOff) end
+---@class ImageCheckBox : Button
+local ImageCheckBox = {}
 
 ---[CLIENT] Sets the material that will be visible when the ImageCheckBox is checked.
 ---

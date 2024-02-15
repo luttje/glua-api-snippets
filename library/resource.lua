@@ -2,18 +2,6 @@
 
 resource = {}
 
----[SERVER] Adds the specified file to the files the client should download.
----
---- If you wish to add textures or models, consider using resource.AddFile to add all the files required for a texture/model.
----
---- There's a 8192 downloadable file limit. If you need more than 8192, consider using Workshop addons - resource.AddWorkshop. You should also consider the fact that you have way too many downloads. This limit is shared among all resource.Add functions.
----
---- The file must exist on the server or players will not download it!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/resource.AddSingleFile)
----@param path string Path of the file to be added, relative to garrysmod/
-function resource.AddSingleFile(path) end
-
 ---[SERVER] Adds a workshop addon for the client to download before entering the server. This will not "install" the addon on your server, see Workshop for Dedicated Servers for installing Steam Workshop addons onto your servers.
 ---
 --- Having the raw files from a workshop item does not count as having already downloaded it.
@@ -28,6 +16,18 @@ function resource.AddSingleFile(path) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/resource.AddWorkshop)
 ---@param workshopid string The workshop id of the file. This cannot be a collection.
 function resource.AddWorkshop(workshopid) end
+
+---[SERVER] Adds the specified file to the files the client should download.
+---
+--- If you wish to add textures or models, consider using resource.AddFile to add all the files required for a texture/model.
+---
+--- There's a 8192 downloadable file limit. If you need more than 8192, consider using Workshop addons - resource.AddWorkshop. You should also consider the fact that you have way too many downloads. This limit is shared among all resource.Add functions.
+---
+--- The file must exist on the server or players will not download it!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/resource.AddSingleFile)
+---@param path string Path of the file to be added, relative to garrysmod/
+function resource.AddSingleFile(path) end
 
 ---[SERVER] Adds the specified and all related files to the files the client should download.
 ---
