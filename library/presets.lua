@@ -2,14 +2,6 @@
 
 presets = {}
 
----[CLIENT] Adds preset to a preset group.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Add)
----@param groupname string The preset group name, usually it's tool class name.
----@param name string Preset name, must be unique.
----@param values table A table of preset console commands.
-function presets.Add(groupname, name, values) end
-
 ---[CLIENT] Used internally to tell the player that the name they tried to use in their preset is not acceptable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.BadNameAlert)
@@ -23,18 +15,26 @@ function presets.BadNameAlert() end
 ---@return boolean # true if the preset does exist
 function presets.Exists(type, name) end
 
----[CLIENT] Returns a table with preset names and values from a single preset group.
+---[CLIENT] Adds preset to a preset group.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.GetTable)
----@param groupname string Preset group name.
----@return table # All presets in specified group.
-function presets.GetTable(groupname) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Add)
+---@param groupname string The preset group name, usually it's tool class name.
+---@param name string Preset name, must be unique.
+---@param values table A table of preset console commands.
+function presets.Add(groupname, name, values) end
 
 ---[CLIENT] Used internally to ask the player if they want to override an already existing preset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.OverwritePresetPrompt)
 ---@param callback function
 function presets.OverwritePresetPrompt(callback) end
+
+---[CLIENT] Returns a table with preset names and values from a single preset group.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.GetTable)
+---@param groupname string Preset group name.
+---@return table # All presets in specified group.
+function presets.GetTable(groupname) end
 
 ---[CLIENT] Removes a preset entry from a preset group.
 ---

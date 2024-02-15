@@ -32,23 +32,18 @@ function CSoundPatch:FadeOut(seconds) end
 ---@return number # The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
 function CSoundPatch:GetDSP() end
 
----[SHARED] Returns the current pitch.
+---[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound. Similar to Player:SetDSP but for individual sounds.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetPitch)
----@return number # The current pitch, can range from 0-255.
-function CSoundPatch:GetPitch() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
+---@param dsp number The DSP effect to set.
+--- Pick from the [list of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
+function CSoundPatch:SetDSP(dsp) end
 
 ---[SHARED] Returns the current sound level.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetSoundLevel)
 ---@return number # The current sound level, see Enums/SNDLVL.
 function CSoundPatch:GetSoundLevel() end
-
----[SHARED] Returns the current volume.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetVolume)
----@return number # The current volume, ranging from 0 to 1.
-function CSoundPatch:GetVolume() end
 
 ---[SHARED] Returns whenever the sound is being played.
 ---
@@ -68,18 +63,23 @@ function CSoundPatch:Play() end
 ---@param pitch number The pitch can range from 0-255.
 function CSoundPatch:PlayEx(volume, pitch) end
 
----[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound. Similar to Player:SetDSP but for individual sounds.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
----@param dsp number The DSP effect to set.
---- Pick from the [list of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
-function CSoundPatch:SetDSP(dsp) end
-
 ---[SHARED] Sets the sound level in decibel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:SetSoundLevel)
 ---@param level number The sound level in decibel. See Enums/SNDLVL
 function CSoundPatch:SetSoundLevel(level) end
+
+---[SHARED] Returns the current pitch.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetPitch)
+---@return number # The current pitch, can range from 0-255.
+function CSoundPatch:GetPitch() end
+
+---[SHARED] Returns the current volume.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetVolume)
+---@return number # The current volume, ranging from 0 to 1.
+function CSoundPatch:GetVolume() end
 
 ---[SHARED] Stops the sound from being played.
 ---

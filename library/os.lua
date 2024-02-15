@@ -2,6 +2,14 @@
 
 os = {}
 
+---[SHARED AND MENU] Subtracts the second from the first value and rounds the result.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/os.difftime)
+---@param timeA number The first value.
+---@param timeB number The value to subtract.
+---@return number # diffTime
+function os.difftime(timeA, timeB) end
+
 ---[SHARED AND MENU] Returns the approximate cpu time the application ran.
 --- See also Global.SysTime
 --- This function has different precision on Linux (1/100).
@@ -9,6 +17,13 @@ os = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/os.clock)
 ---@return number # runtime
 function os.clock() end
+
+---[SHARED AND MENU] Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/os.time)
+---@param dateData? table Table to generate the time from. This table's data is interpreted as being in the local timezone. See Structures/DateData
+---@return number # Seconds passed since Unix epoch
+function os.time(dateData) end
 
 ---[SHARED AND MENU] Returns the date/time as a formatted string or in a table.
 ---
@@ -54,18 +69,3 @@ function os.clock() end
 ---@param time? number Time to use for the format.
 ---@return string # Formatted date This will be a Structures/DateData if the first argument equals to `*t` or `!*t`
 function os.date(format, time) end
-
----[SHARED AND MENU] Subtracts the second from the first value and rounds the result.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/os.difftime)
----@param timeA number The first value.
----@param timeB number The value to subtract.
----@return number # diffTime
-function os.difftime(timeA, timeB) end
-
----[SHARED AND MENU] Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/os.time)
----@param dateData? table Table to generate the time from. This table's data is interpreted as being in the local timezone. See Structures/DateData
----@return number # Seconds passed since Unix epoch
-function os.time(dateData) end

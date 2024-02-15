@@ -1,7 +1,17 @@
 ---@meta
 
----@class DForm : DCollapsibleCategory
-local DForm = {}
+---[CLIENT AND MENU] Does nothing.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetSpacing)
+---@return number #
+function DForm:GetSpacing() end
+
+---[CLIENT AND MENU] Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ControlHelp)
+---@param help string The help message to be displayed.
+---@return Panel # The created DLabel
+function DForm:ControlHelp(help) end
 
 ---[CLIENT AND MENU] Adds one or two items to the DForm.
 --- If this method is called with only one argument, it is added to the bottom of the form. If two arguments are passed, they are placed side-by-side at the bottom of the form.
@@ -13,6 +23,12 @@ local DForm = {}
 ---@param right? Panel Right-hand element to add to the DForm.
 function DForm:AddItem(left, right) end
 
+---[CLIENT AND MENU] Does nothing.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetAutoSize)
+---@return boolean #
+function DForm:GetAutoSize() end
+
 ---[CLIENT AND MENU] Adds a DButton onto the DForm
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Button)
@@ -21,15 +37,6 @@ function DForm:AddItem(left, right) end
 ---@param ... any The arguments to pass on to the concommand when the button is clicked
 ---@return Panel # The created DButton
 function DForm:Button(text, concommand, ...) end
-
----[CLIENT AND MENU] Adds a DCheckBoxLabel onto the DForm.
---- This will run DCheckBoxLabel:OnChange when being added. This is caused by Panel:SetConVar being used when this function is used. To avoid this, use DForm:AddItem with a DCheckBoxLabel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:CheckBox)
----@param label string The label to be set next to the check box
----@param convar string The console variable to change when this is changed
----@return Panel # The created DCheckBoxLabel
-function DForm:CheckBox(label, convar) end
 
 ---[CLIENT AND MENU] Adds a DComboBox onto the DForm
 ---
@@ -40,40 +47,17 @@ function DForm:CheckBox(label, convar) end
 ---@return Panel # The created DLabel
 function DForm:ComboBox(title, convar) end
 
----[CLIENT AND MENU] Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ControlHelp)
----@param help string The help message to be displayed.
----@return Panel # The created DLabel
-function DForm:ControlHelp(help) end
+---@class DForm : DCollapsibleCategory
+local DForm = {}
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] Adds a DCheckBoxLabel onto the DForm.
+--- This will run DCheckBoxLabel:OnChange when being added. This is caused by Panel:SetConVar being used when this function is used. To avoid this, use DForm:AddItem with a DCheckBoxLabel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetAutoSize)
----@return boolean #
-function DForm:GetAutoSize() end
-
----[CLIENT AND MENU] Does nothing.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetSpacing)
----@return number #
-function DForm:GetSpacing() end
-
----[CLIENT AND MENU] Adds a DLabel onto the DForm as a helper
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Help)
----@param help string The help message to be displayed
----@return Panel # The created DLabel
-function DForm:Help(help) end
-
----[CLIENT AND MENU] Adds a DListBox onto the DForm
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ListBox)
----@param label string The label to set on the DListBox
----@return Panel # The created DListBox
----@return Panel # The created DLabel
----@deprecated Use DListView with DForm:AddItem instead.
-function DForm:ListBox(label) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:CheckBox)
+---@param label string The label to be set next to the check box
+---@param convar string The console variable to change when this is changed
+---@return Panel # The created DCheckBoxLabel
+function DForm:CheckBox(label, convar) end
 
 ---[CLIENT AND MENU] Adds a DNumberWang onto the DForm
 ---
@@ -87,16 +71,10 @@ function DForm:ListBox(label) end
 ---@return Panel # The created DLabel
 function DForm:NumberWang(label, convar, min, max, decimals) end
 
----[CLIENT AND MENU] Adds a DNumSlider onto the DForm
+---[CLIENT AND MENU] Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:NumSlider)
----@param label string The label of the DNumSlider
----@param convar string The console variable to change when the slider is changed
----@param min number The minimum value of the slider
----@param max number The maximum value of the slider
----@param decimals? number The number of decimals to allow on the slider. (Optional)
----@return Panel # The created DNumSlider
-function DForm:NumSlider(label, convar, min, max, decimals) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Rebuild)
+function DForm:Rebuild() end
 
 ---[CLIENT AND MENU] Creates a DPanelSelect and docks it to the top of the DForm.
 ---
@@ -125,14 +103,16 @@ function DForm:PropSelect(label, convar, models, height) end
 
 ---[CLIENT AND MENU] Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Rebuild)
-function DForm:Rebuild() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetSpacing)
+---@param number number
+function DForm:SetSpacing(number) end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] Adds a DLabel onto the DForm as a helper
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetAutoSize)
----@param boolean boolean
-function DForm:SetAutoSize(boolean) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Help)
+---@param help string The help message to be displayed
+---@return Panel # The created DLabel
+function DForm:Help(help) end
 
 ---[CLIENT AND MENU] Sets the title (header) name of the DForm. This is `Label` until set.
 ---
@@ -142,9 +122,29 @@ function DForm:SetName(name) end
 
 ---[CLIENT AND MENU] Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetSpacing)
----@param number number
-function DForm:SetSpacing(number) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetAutoSize)
+---@param boolean boolean
+function DForm:SetAutoSize(boolean) end
+
+---[CLIENT AND MENU] Adds a DNumSlider onto the DForm
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:NumSlider)
+---@param label string The label of the DNumSlider
+---@param convar string The console variable to change when the slider is changed
+---@param min number The minimum value of the slider
+---@param max number The maximum value of the slider
+---@param decimals? number The number of decimals to allow on the slider. (Optional)
+---@return Panel # The created DNumSlider
+function DForm:NumSlider(label, convar, min, max, decimals) end
+
+---[CLIENT AND MENU] Adds a DListBox onto the DForm
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:ListBox)
+---@param label string The label to set on the DListBox
+---@return Panel # The created DListBox
+---@return Panel # The created DLabel
+---@deprecated Use DListView with DForm:AddItem instead.
+function DForm:ListBox(label) end
 
 ---[CLIENT AND MENU] Adds a DTextEntry to a DForm
 ---

@@ -3,6 +3,12 @@
 ---@class IVideoWriter
 local IVideoWriter = {}
 
+---[CLIENT AND MENU] Returns the width of the video stream.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Width)
+---@return number # width
+function IVideoWriter:Width() end
+
 ---[CLIENT AND MENU] Adds the current framebuffer to the video stream.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:AddFrame)
@@ -15,20 +21,14 @@ function IVideoWriter:AddFrame(frameTime, downsample) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Finish)
 function IVideoWriter:Finish() end
 
----[CLIENT AND MENU] Returns the height of the video stream.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Height)
----@return number # height
-function IVideoWriter:Height() end
-
 ---[CLIENT AND MENU] Sets whether to record sound or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:SetRecordSound)
 ---@param record boolean Record.
 function IVideoWriter:SetRecordSound(record) end
 
----[CLIENT AND MENU] Returns the width of the video stream.
+---[CLIENT AND MENU] Returns the height of the video stream.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Width)
----@return number # width
-function IVideoWriter:Width() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IVideoWriter:Height)
+---@return number # height
+function IVideoWriter:Height() end

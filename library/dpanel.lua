@@ -1,21 +1,10 @@
 ---@meta
 
----@class DPanel : Panel
-local DPanel = {}
-
----[CLIENT AND MENU] Returns the panel's background color.
+---[CLIENT AND MENU] Returns whether or not the panel background is being drawn.
 ---
---- By default this returns **nil** even though the default background color is white
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetBackgroundColor)
----@return table # Color of the panel's background.
-function DPanel:GetBackgroundColor() end
-
----[CLIENT AND MENU] Returns whether or not the panel is disabled.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetDisabled)
----@return boolean # True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
-function DPanel:GetDisabled() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetPaintBackground)
+---@return boolean # True if the panel background is drawn, false otherwise.
+function DPanel:GetPaintBackground() end
 
 ---[CLIENT AND MENU] Returns whether or not the panel background is being drawn. Alias of DPanel:GetPaintBackground.
 ---
@@ -34,17 +23,28 @@ function DPanel:GetDrawBackground() end
 ---@return boolean # Whether this panel is a Menu Component
 function DPanel:GetIsMenu() end
 
----[CLIENT AND MENU] Returns whether or not the panel background is being drawn.
+---[CLIENT AND MENU] Returns whether or not the panel is disabled.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetPaintBackground)
----@return boolean # True if the panel background is drawn, false otherwise.
-function DPanel:GetPaintBackground() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetDisabled)
+---@return boolean # True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
+function DPanel:GetDisabled() end
 
----[CLIENT AND MENU] Does nothing. Returns value set by DPanel:SetTabbingDisabled.
+---[CLIENT AND MENU] Returns the panel's background color.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetTabbingDisabled)
----@return boolean #
-function DPanel:GetTabbingDisabled() end
+--- By default this returns **nil** even though the default background color is white
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetBackgroundColor)
+---@return table # Color of the panel's background.
+function DPanel:GetBackgroundColor() end
+
+---@class DPanel : Panel
+local DPanel = {}
+
+---[CLIENT AND MENU] Does nothing.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetTabbingDisabled)
+---@param draw boolean
+function DPanel:SetTabbingDisabled(draw) end
 
 ---[CLIENT AND MENU] Sets the background color of the panel.
 ---
@@ -52,18 +52,10 @@ function DPanel:GetTabbingDisabled() end
 ---@param color table The background color.
 function DPanel:SetBackgroundColor(color) end
 
----[CLIENT AND MENU] Sets whether or not to disable the panel.
+---[CLIENT AND MENU] Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetDisabled)
----@param disabled boolean True to disable the panel (mouse input disabled and background alpha set to 75), false to enable it (mouse input enabled and background alpha set to 255).
-function DPanel:SetDisabled(disabled) end
-
----[CLIENT AND MENU] Sets whether or not to draw the panel background. Alias of DPanel:SetPaintBackground.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetDrawBackground)
----@param draw boolean True to show the panel's background, false to hide it.
----@deprecated You should use DPanel:SetPaintBackground instead.
-function DPanel:SetDrawBackground(draw) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:UpdateColours)
+function DPanel:UpdateColours() end
 
 ---[CLIENT AND MENU] Used internally by DMenu.
 ---
@@ -76,19 +68,27 @@ function DPanel:SetDrawBackground(draw) end
 ---@param isMenu boolean Whether this pane is a Menu Component
 function DPanel:SetIsMenu(isMenu) end
 
+---[CLIENT AND MENU] Does nothing. Returns value set by DPanel:SetTabbingDisabled.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:GetTabbingDisabled)
+---@return boolean #
+function DPanel:GetTabbingDisabled() end
+
+---[CLIENT AND MENU] Sets whether or not to draw the panel background. Alias of DPanel:SetPaintBackground.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetDrawBackground)
+---@param draw boolean True to show the panel's background, false to hide it.
+---@deprecated You should use DPanel:SetPaintBackground instead.
+function DPanel:SetDrawBackground(draw) end
+
 ---[CLIENT AND MENU] Sets whether or not to paint/draw the panel background.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetPaintBackground)
 ---@param paint boolean True to show the panel's background, false to hide it.
 function DPanel:SetPaintBackground(paint) end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] Sets whether or not to disable the panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetTabbingDisabled)
----@param draw boolean
-function DPanel:SetTabbingDisabled(draw) end
-
----[CLIENT AND MENU] Does nothing.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:UpdateColours)
-function DPanel:UpdateColours() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanel:SetDisabled)
+---@param disabled boolean True to disable the panel (mouse input disabled and background alpha set to 75), false to enable it (mouse input enabled and background alpha set to 255).
+function DPanel:SetDisabled(disabled) end

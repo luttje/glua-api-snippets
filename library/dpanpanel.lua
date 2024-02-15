@@ -1,7 +1,10 @@
 ---@meta
 
----@class DPanPanel : DPanel
-local DPanPanel = {}
+---[CLIENT AND MENU] Scroll to a specific child panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:ScrollToChild)
+---@param pnl Panel The panel to scroll to.
+function DPanPanel:ScrollToChild(pnl) end
 
 ---[CLIENT AND MENU] Parents the passed panel to the DPanPanel:GetCanvas.
 ---
@@ -9,11 +12,20 @@ local DPanPanel = {}
 ---@param pnl Panel The panel to add.
 function DPanPanel:AddItem(pnl) end
 
+---[CLIENT AND MENU] Used internally.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:SetCanvas)
+---@param pnl Panel The canvas panel.
+function DPanPanel:SetCanvas(pnl) end
+
 ---[CLIENT AND MENU] The internal canvas panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:GetCanvas)
 ---@return Panel # The canvas panel.
 function DPanPanel:GetCanvas() end
+
+---@class DPanPanel : DPanel
+local DPanPanel = {}
 
 ---[CLIENT AND MENU] Used internally, called from DPanPanel:ScrollToChild.
 ---
@@ -21,15 +33,3 @@ function DPanPanel:GetCanvas() end
 ---@param x number
 ---@param y number
 function DPanPanel:OnScroll(x, y) end
-
----[CLIENT AND MENU] Scroll to a specific child panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:ScrollToChild)
----@param pnl Panel The panel to scroll to.
-function DPanPanel:ScrollToChild(pnl) end
-
----[CLIENT AND MENU] Used internally.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:SetCanvas)
----@param pnl Panel The canvas panel.
-function DPanPanel:SetCanvas(pnl) end

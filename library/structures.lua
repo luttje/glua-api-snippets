@@ -1,5 +1,112 @@
 ---@meta
 
+---@class CreationMenus
+local CreationMenus = {}
+
+---The function used to generate the content of the tab.
+---@type function
+CreationMenus.Function = nil
+
+---The icon material that will accompany the title of the tab.
+---@type string
+CreationMenus.Icon = nil
+
+---The order in which a tab will be displayed relative to the other tabs.
+---@type number
+CreationMenus.Order = nil
+
+---The tooltip to be shown with the tab.
+---@type string
+CreationMenus.Tooltip = nil
+
+---@class AngPos
+local AngPos = {}
+
+---Angle object
+---@type Angle
+AngPos.Ang = nil
+
+---Vector object
+---@type Vector
+AngPos.Pos = nil
+
+---The bone ID the attachment point is parented to.
+---@type number
+AngPos.Bone = nil
+
+---@class EmitSoundInfo
+local EmitSoundInfo = {}
+
+---The file path of the played sound. Sounds prefixed with ) tell the sound engine that it is a spatial sound; this allows the sound to emit from a specific location within the world. Sounds prefixed with ^ tell the sound engine that it is a distance based sound. The left channel of the .wav is the 'near' sound that will play when the sound originates close to you, and the right channel is the 'far' sound that will play when the sound originates far from you.
+---@type string
+EmitSoundInfo.SoundName = nil
+
+---The original file path or soundscript name. Even if the SoundName value is changed, the OriginalSoundName value will remain the same. Sounds may be returned as soundscripts (for example, "Weapon_357.Single") instead of the sound's file path. You can use sound.GetProperties to retrieve the actual file path.
+---@type string
+EmitSoundInfo.OriginalSoundName = nil
+
+---The time at which the sound should be played. If equal to 0 or CurTime(), the sound is played immediately. If greater than CurTime(), the sound is played with a delay. If less than CurTime(), part of the sound is skipped.
+---@type number
+EmitSoundInfo.SoundTime = 0
+
+---The DSP (digital signal processing) preset applied to the sound. There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments. [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---@type number
+EmitSoundInfo.DSP = 0
+
+---The sound's attenuation, a number between 0 (low) and 511 (high) This determines how fast the sound drops away. A higher value means the sound can be heard farther away. See Enums/SNDLVL.
+---@type number
+EmitSoundInfo.SoundLevel = 75
+
+---The pitch of the played sound, a number between 0 (low) and 255 (high), where 100 is the sound's original pitch.
+---@type number
+EmitSoundInfo.Pitch = 100
+
+---The bit flags of the played sound. See Enums/SND for available options.
+---@type number
+EmitSoundInfo.Flags = 0
+
+---The sound's channel. See Enums/CHAN for available options.
+---@type number
+EmitSoundInfo.Channel = nil
+
+---The volume of the played sound, return as a decimal number between 0 (low) and 1 (high).
+---@type number
+EmitSoundInfo.Volume = nil
+
+---The entity that played the sound.
+---@type Entity
+EmitSoundInfo.Entity = nil
+
+---The origin of the played sound.
+---@type Vector
+EmitSoundInfo.Pos = nil
+
+---@class BoneManipulationData
+local BoneManipulationData = {}
+
+---The entity's scale manipulation of the bone
+---@type Vector
+BoneManipulationData.s = Vectornil
+
+---The entity's angle manipulation of the bone
+---@type Angle
+BoneManipulationData.a = nil
+
+---The entity's position manipulation of the given bone
+---@type Vector
+BoneManipulationData.p = Vectornil
+
+---@class AttachmentData
+local AttachmentData = {}
+
+---Index of the attachment.
+---@type number
+AttachmentData.id = nil
+
+---Name of the attachment.
+---@type string
+AttachmentData.name = nil
+
 ---@class AmmoData
 local AmmoData = {}
 
@@ -43,196 +150,6 @@ AmmoData.maxcarry = 9999
 ---@type number
 AmmoData.flags = 0
 
----@class AngPos
-local AngPos = {}
-
----Angle object
----@type Angle
-AngPos.Ang = nil
-
----Vector object
----@type Vector
-AngPos.Pos = nil
-
----The bone ID the attachment point is parented to.
----@type number
-AngPos.Bone = nil
-
----@class AnimationData
-local AnimationData = {}
-
----The system time value returned by Global.SysTime when the animation starts/will start.
----@type number
-AnimationData.StartTime = nil
-
----The system time value returned by Global.SysTime when the animation ends/will end.
----@type number
-AnimationData.EndTime = nil
-
----The ease in/out level of the animation.
----@type number
-AnimationData.Ease = -1
-
----The callback function that will be called upon completion of the animation. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation was run on.
----@type function
-AnimationData.OnEnd = nil
-
----The `think` function called every frame that will animate the panel object. This varies based on the animation. You can create a custom function for this if you aren't using the stock panel methods. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation is being run on. * number fraction - The progress fraction of the animation, between 0 and 1. The change rate of this number will not be linear if you are easing.
----@type function
-AnimationData.Think = nil
-
----The target position, or target translation of the panel object. Used by Panel:MoveTo and Panel:MoveBy respectively.
----@type Vector
-AnimationData.Pos = nil
-
----The position of the panel object when the animation started. Used by Panel:MoveTo and Panel:MoveBy.
----@type Vector
-AnimationData.StartPos = nil
-
----Whether to resize the panel horizontally or not. Only used by Panel:SizeTo.
----@type boolean
-AnimationData.SizeX = nil
-
----Whether to resize the panel vertically or not. Only used by Panel:SizeTo.
----@type boolean
-AnimationData.SizeY = nil
-
----The target size of the panel object. Only used by Panel:SizeTo.
----@type Vector
-AnimationData.Size = Vector(0, 0, 0)
-
----The size of the panel object when the animation started. Only used by Panel:SizeTo.
----@type Vector
-AnimationData.StartSize = nil
-
----The target colour of the panel object. Only used by Panel:ColorTo.
----@type table
-AnimationData.Color = nil
-
----The colour of the panel object when the animation started. Only used by Panel:ColorTo.
----@type table
-AnimationData.StartColor = nil
-
----The target alpha (0-255) of the panel object. Only used by Panel:AlphaTo.
----@type number
-AnimationData.Alpha = nil
-
----The alpha (0-255) of the panel object when the animation started. Only used by Panel:AlphaTo.
----@type number
-AnimationData.StartAlpha = nil
-
----The speed to use for transitions when using linear interpolation (Lerp) animations. Only used by Panel:LerpPositions.
----@type number
-AnimationData.Speed = nil
-
----Whether or not to use easing to make the panel 'jump' at its target, slowing as it approaches. Only used by Panel:LerpPositions.
----@type boolean
-AnimationData.UseGravity = nil
-
----@class AttachmentData
-local AttachmentData = {}
-
----Index of the attachment.
----@type number
-AttachmentData.id = nil
-
----Name of the attachment.
----@type string
-AttachmentData.name = nil
-
----@class BodyGroupData
-local BodyGroupData = {}
-
----Index of the body group.
----@type number
-BodyGroupData.id = nil
-
----Name of the body group.
----@type string
-BodyGroupData.name = nil
-
----Amount of subgroups.
----@type number
-BodyGroupData.num = nil
-
----A zero-indexed table that is of length _num_ with values being the name of the smd mesh file of the respective body group value.
----@type table
-BodyGroupData.submodels = nil
-
----@class BoneManipulationData
-local BoneManipulationData = {}
-
----The entity's scale manipulation of the bone
----@type Vector
-BoneManipulationData.s = Vectornil
-
----The entity's angle manipulation of the bone
----@type Angle
-BoneManipulationData.a = nil
-
----The entity's position manipulation of the given bone
----@type Vector
-BoneManipulationData.p = Vectornil
-
----@class Bullet
-local Bullet = {}
-
----The entity that should be reported as attacker eg. a player By default this would be set to the entity Entity:FireBullets is called on.
----@type Entity
-Bullet.Attacker = self
-
----Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo The return value can be a table with following keys: * boolean effects - `false` to not do any of the effects. * boolean damage - `false` to not do any damage.
----@type function
-Bullet.Callback = nil
-
----The damage dealt by the bullet. If set to `0`, it means the damage should be calculated from the ammo type's ConVars if the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set. See Structures/AmmoData.
----@type number
-Bullet.Damage = 1
-
----The force of the bullets
----@type number
-Bullet.Force = 1
-
----Maximum distance the bullet can travel
----@type number
-Bullet.Distance = 56756
-
----The hull size of the bullet
----@type number
-Bullet.HullSize = 0
-
----The amount of bullets to fire
----@type number
-Bullet.Num = 1
-
----Show tracer for every x bullets
----@type number
-Bullet.Tracer = 1
-
----The ammunition name
----@type string
-Bullet.AmmoType = "<empty string>"
-
----The tracer name. You can find a list of default effects Effects.
----@type string
-Bullet.TracerName = "nil"
-
----The fire direction
----@type Vector
-Bullet.Dir = VectorVector(0, 0, 0)
-
----The spread, only x and y are needed
----@type Vector
-Bullet.Spread = VectorVector(0, 0, 0)
-
----The position to fire the bullets from
----@type Vector
-Bullet.Src = VectorVector(0, 0, 0)
-
----The entity that the bullet will ignore when it will be shot.
----@type Entity
-Bullet.IgnoreEntity = NULL
-
 ---@class CamData
 local CamData = {}
 
@@ -263,202 +180,6 @@ CamData.drawviewer = false
 ---If set, enables orthographic mode. The table has following arguments: * number left * number right * number top * number bottom Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
 ---@type table
 CamData.ortho = nil
-
----@class CollisionData
-local CollisionData = {}
-
----The collision position
----@type Vector
-CollisionData.HitPos = nil
-
----The other collision entity
----@type Entity
-CollisionData.HitEntity = nil
-
----The entity's velocity before the collision
----@type Vector
-CollisionData.OurOldVelocity = nil
-
----Other entity's physics object
----@type PhysObj
-CollisionData.HitObject = nil
-
----Time since the last collision with the `HitEntity`
----@type number
-CollisionData.DeltaTime = nil
-
----Speed of the other entity before the collision
----@type Vector
-CollisionData.TheirOldVelocity = nil
-
----The speed of the entity before the collision
----@type number
-CollisionData.Speed = nil
-
----Normal of the surface that hit the other entity
----@type Vector
-CollisionData.HitNormal = nil
-
----Entity's physics object
----@type PhysObj
-CollisionData.PhysObject = nil
-
----Surface Property ID of `this` entity
----@type number
-CollisionData.OurSurfaceProps = nil
-
----Surface Property ID of the entity we collided with
----@type number
-CollisionData.TheirSurfaceProps = nil
-
----The speed at which the impact happened
----@type Vector
-CollisionData.HitSpeed = nil
-
----Our new velocity after the impact
----@type Vector
-CollisionData.OurNewVelocity = nil
-
----The new velocity after the impact of the entity we collided with
----@type Vector
-CollisionData.TheirNewVelocity = nil
-
----Old angular velocity of this entity
----@type Vector
-CollisionData.OurOldAngularVelocity = nil
-
----Old angular velocity of the entity we collided with
----@type Vector
-CollisionData.TheirOldAngularVelocity = nil
-
----The red channel
----@type number
-Color.r = nil
-
----The green channel
----@type number
-Color.g = nil
-
----The blue channel
----@type number
-Color.b = nil
-
----The alpha channel
----@type number
-Color.a = nil
-
----@class CreationMenus
-local CreationMenus = {}
-
----The function used to generate the content of the tab.
----@type function
-CreationMenus.Function = nil
-
----The icon material that will accompany the title of the tab.
----@type string
-CreationMenus.Icon = nil
-
----The order in which a tab will be displayed relative to the other tabs.
----@type number
-CreationMenus.Order = nil
-
----The tooltip to be shown with the tab.
----@type string
-CreationMenus.Tooltip = nil
-
----@class DateData
-local DateData = {}
-
----Day of the month
----@type number
-DateData.day = nil
-
----Hour
----@type number
-DateData.hour = nil
-
----Daylight saving enabled
----@type boolean
-DateData.isdst = nil
-
----Minute
----@type number
-DateData.min = nil
-
----Month January: 1, December: 12
----@type number
-DateData.month = nil
-
----Second
----@type number
-DateData.sec = nil
-
----Day of the week Sunday: 1, Saturday: 7
----@type number
-DateData.wday = nil
-
----Day of the year
----@type number
-DateData.yday = nil
-
----Year
----@type number
-DateData.year = nil
-
----@class DebugInfo
-local DebugInfo = {}
-
----Reference to the function that was passed in. If a stack level was specified, this will be the function at that stack level. 0 = debug.getinfo, 1 = function that called debug.getinfo, etc. **Option: f**
----@type function
-DebugInfo.func = nil
-
----The line where the function definiton starts (where "function" is located). **Option: S**
----@type number
-DebugInfo.linedefined = nil
-
----The line the function definition ended (where "end" is located). **Option: S**
----@type number
-DebugInfo.lastlinedefined = nil
-
----The path to the file where the passed function is defined prepended by an @ (ex. "@lua/autorun/mytestfile.lua"). This will be the Global.CompileString or Global.RunString identifier if the function wasn't defined in a file, also prepended by an @. **Option: S**
----@type string
-DebugInfo.source = nil
-
----The shortened name of the source (without the @). May be truncated if the source path is long. **Option: S**
----@type string
-DebugInfo.short_src = nil
-
----The language used. Either "Lua" or "C". **Option: S**
----@type string
-DebugInfo.what = nil
-
----The current line. This will be -1 if the code is not executed from a file. **Option: l** (lowercase L)
----@type number
-DebugInfo.currentline = nil
-
----The function name. This will be nil if the name cannot be found. Only works if stack level is passed rather than function pointer. **Option: n**
----@type string
-DebugInfo.name = nil
-
----The function "type". This will be "global", "local", "method", "field". Can also be an empty string if the function name could not be found. Only works if stack level is passed rather than function pointer. **Option: n**
----@type string
-DebugInfo.namewhat = nil
-
----Whether the function is variadic (has a `...` argument). **Option: u**
----@type boolean
-DebugInfo.isvararg = nil
-
----The number of arguments the function uses excluding varargs. **Option: u**
----@type number
-DebugInfo.nparams = nil
-
----Upvalue count. Max index that can be used with debug.getupvalue. C functions can have upvalues but they cannot be accessed from Lua. **Option: u**
----@type number
-DebugInfo.nups = nil
-
----A table of all the active lines in the function - that is, lines with code that actually does something (not blank lines or lines with comments only). The table keys will be line numbers, and their values will all be true. Lines that are inactive are simply not included in the table - they have the value nil. It doesn't check for activeline in subfunctions. **Option: L**
----@type table
-DebugInfo.activelines = nil
 
 ---@class DynamicLight
 local DynamicLight = {}
@@ -527,52 +248,241 @@ DynamicLight.g = nil
 ---@type number
 DynamicLight.r = nil
 
----@class EmitSoundInfo
-local EmitSoundInfo = {}
+---@class DebugInfo
+local DebugInfo = {}
 
----The file path of the played sound. Sounds prefixed with ) tell the sound engine that it is a spatial sound; this allows the sound to emit from a specific location within the world. Sounds prefixed with ^ tell the sound engine that it is a distance based sound. The left channel of the .wav is the 'near' sound that will play when the sound originates close to you, and the right channel is the 'far' sound that will play when the sound originates far from you.
+---Reference to the function that was passed in. If a stack level was specified, this will be the function at that stack level. 0 = debug.getinfo, 1 = function that called debug.getinfo, etc. **Option: f**
+---@type function
+DebugInfo.func = nil
+
+---The line where the function definiton starts (where "function" is located). **Option: S**
+---@type number
+DebugInfo.linedefined = nil
+
+---The line the function definition ended (where "end" is located). **Option: S**
+---@type number
+DebugInfo.lastlinedefined = nil
+
+---The path to the file where the passed function is defined prepended by an @ (ex. "@lua/autorun/mytestfile.lua"). This will be the Global.CompileString or Global.RunString identifier if the function wasn't defined in a file, also prepended by an @. **Option: S**
 ---@type string
-EmitSoundInfo.SoundName = nil
+DebugInfo.source = nil
 
----The original file path or soundscript name. Even if the SoundName value is changed, the OriginalSoundName value will remain the same. Sounds may be returned as soundscripts (for example, "Weapon_357.Single") instead of the sound's file path. You can use sound.GetProperties to retrieve the actual file path.
+---The shortened name of the source (without the @). May be truncated if the source path is long. **Option: S**
 ---@type string
-EmitSoundInfo.OriginalSoundName = nil
+DebugInfo.short_src = nil
 
----The time at which the sound should be played. If equal to 0 or CurTime(), the sound is played immediately. If greater than CurTime(), the sound is played with a delay. If less than CurTime(), part of the sound is skipped.
+---The language used. Either "Lua" or "C". **Option: S**
+---@type string
+DebugInfo.what = nil
+
+---The current line. This will be -1 if the code is not executed from a file. **Option: l** (lowercase L)
 ---@type number
-EmitSoundInfo.SoundTime = 0
+DebugInfo.currentline = nil
 
----The DSP (digital signal processing) preset applied to the sound. There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments. [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---The function name. This will be nil if the name cannot be found. Only works if stack level is passed rather than function pointer. **Option: n**
+---@type string
+DebugInfo.name = nil
+
+---The function "type". This will be "global", "local", "method", "field". Can also be an empty string if the function name could not be found. Only works if stack level is passed rather than function pointer. **Option: n**
+---@type string
+DebugInfo.namewhat = nil
+
+---Whether the function is variadic (has a `...` argument). **Option: u**
+---@type boolean
+DebugInfo.isvararg = nil
+
+---The number of arguments the function uses excluding varargs. **Option: u**
 ---@type number
-EmitSoundInfo.DSP = 0
+DebugInfo.nparams = nil
 
----The sound's attenuation, a number between 0 (low) and 511 (high) This determines how fast the sound drops away. A higher value means the sound can be heard farther away. See Enums/SNDLVL.
+---Upvalue count. Max index that can be used with debug.getupvalue. C functions can have upvalues but they cannot be accessed from Lua. **Option: u**
 ---@type number
-EmitSoundInfo.SoundLevel = 75
+DebugInfo.nups = nil
 
----The pitch of the played sound, a number between 0 (low) and 255 (high), where 100 is the sound's original pitch.
----@type number
-EmitSoundInfo.Pitch = 100
+---A table of all the active lines in the function - that is, lines with code that actually does something (not blank lines or lines with comments only). The table keys will be line numbers, and their values will all be true. Lines that are inactive are simply not included in the table - they have the value nil. It doesn't check for activeline in subfunctions. **Option: L**
+---@type table
+DebugInfo.activelines = nil
 
----The bit flags of the played sound. See Enums/SND for available options.
----@type number
-EmitSoundInfo.Flags = 0
+---@class Bullet
+local Bullet = {}
 
----The sound's channel. See Enums/CHAN for available options.
----@type number
-EmitSoundInfo.Channel = nil
-
----The volume of the played sound, return as a decimal number between 0 (low) and 1 (high).
----@type number
-EmitSoundInfo.Volume = nil
-
----The entity that played the sound.
+---The entity that should be reported as attacker eg. a player By default this would be set to the entity Entity:FireBullets is called on.
 ---@type Entity
-EmitSoundInfo.Entity = nil
+Bullet.Attacker = self
 
----The origin of the played sound.
+---Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo The return value can be a table with following keys: * boolean effects - `false` to not do any of the effects. * boolean damage - `false` to not do any damage.
+---@type function
+Bullet.Callback = nil
+
+---The damage dealt by the bullet. If set to `0`, it means the damage should be calculated from the ammo type's ConVars if the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set. See Structures/AmmoData.
+---@type number
+Bullet.Damage = 1
+
+---The force of the bullets
+---@type number
+Bullet.Force = 1
+
+---Maximum distance the bullet can travel
+---@type number
+Bullet.Distance = 56756
+
+---The hull size of the bullet
+---@type number
+Bullet.HullSize = 0
+
+---The amount of bullets to fire
+---@type number
+Bullet.Num = 1
+
+---Show tracer for every x bullets
+---@type number
+Bullet.Tracer = 1
+
+---The ammunition name
+---@type string
+Bullet.AmmoType = "<empty string>"
+
+---The tracer name. You can find a list of default effects Effects.
+---@type string
+Bullet.TracerName = "nil"
+
+---The fire direction
 ---@type Vector
-EmitSoundInfo.Pos = nil
+Bullet.Dir = VectorVector(0, 0, 0)
+
+---The spread, only x and y are needed
+---@type Vector
+Bullet.Spread = VectorVector(0, 0, 0)
+
+---The position to fire the bullets from
+---@type Vector
+Bullet.Src = VectorVector(0, 0, 0)
+
+---The entity that the bullet will ignore when it will be shot.
+---@type Entity
+Bullet.IgnoreEntity = NULL
+
+---The red channel
+---@type number
+Color.r = nil
+
+---The green channel
+---@type number
+Color.g = nil
+
+---The blue channel
+---@type number
+Color.b = nil
+
+---The alpha channel
+---@type number
+Color.a = nil
+
+---@class CollisionData
+local CollisionData = {}
+
+---The collision position
+---@type Vector
+CollisionData.HitPos = nil
+
+---The other collision entity
+---@type Entity
+CollisionData.HitEntity = nil
+
+---The entity's velocity before the collision
+---@type Vector
+CollisionData.OurOldVelocity = nil
+
+---Other entity's physics object
+---@type PhysObj
+CollisionData.HitObject = nil
+
+---Time since the last collision with the `HitEntity`
+---@type number
+CollisionData.DeltaTime = nil
+
+---Speed of the other entity before the collision
+---@type Vector
+CollisionData.TheirOldVelocity = nil
+
+---The speed of the entity before the collision
+---@type number
+CollisionData.Speed = nil
+
+---Normal of the surface that hit the other entity
+---@type Vector
+CollisionData.HitNormal = nil
+
+---Entity's physics object
+---@type PhysObj
+CollisionData.PhysObject = nil
+
+---Surface Property ID of `this` entity
+---@type number
+CollisionData.OurSurfaceProps = nil
+
+---Surface Property ID of the entity we collided with
+---@type number
+CollisionData.TheirSurfaceProps = nil
+
+---The speed at which the impact happened
+---@type Vector
+CollisionData.HitSpeed = nil
+
+---Our new velocity after the impact
+---@type Vector
+CollisionData.OurNewVelocity = nil
+
+---The new velocity after the impact of the entity we collided with
+---@type Vector
+CollisionData.TheirNewVelocity = nil
+
+---Old angular velocity of this entity
+---@type Vector
+CollisionData.OurOldAngularVelocity = nil
+
+---Old angular velocity of the entity we collided with
+---@type Vector
+CollisionData.TheirOldAngularVelocity = nil
+
+---@class DateData
+local DateData = {}
+
+---Day of the month
+---@type number
+DateData.day = nil
+
+---Hour
+---@type number
+DateData.hour = nil
+
+---Daylight saving enabled
+---@type boolean
+DateData.isdst = nil
+
+---Minute
+---@type number
+DateData.min = nil
+
+---Month January: 1, December: 12
+---@type number
+DateData.month = nil
+
+---Second
+---@type number
+DateData.sec = nil
+
+---Day of the week Sunday: 1, Saturday: 7
+---@type number
+DateData.wday = nil
+
+---Day of the year
+---@type number
+DateData.yday = nil
+
+---Year
+---@type number
+DateData.year = nil
 
 ---@class ENT : Entity
 ENT = {}
@@ -736,6 +646,77 @@ EntityCopyData.MapCreationID = nil
 ---@type number
 EntityCopyData.WorkshopID = nil
 
+---@class AnimationData
+local AnimationData = {}
+
+---The system time value returned by Global.SysTime when the animation starts/will start.
+---@type number
+AnimationData.StartTime = nil
+
+---The system time value returned by Global.SysTime when the animation ends/will end.
+---@type number
+AnimationData.EndTime = nil
+
+---The ease in/out level of the animation.
+---@type number
+AnimationData.Ease = -1
+
+---The callback function that will be called upon completion of the animation. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation was run on.
+---@type function
+AnimationData.OnEnd = nil
+
+---The `think` function called every frame that will animate the panel object. This varies based on the animation. You can create a custom function for this if you aren't using the stock panel methods. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation is being run on. * number fraction - The progress fraction of the animation, between 0 and 1. The change rate of this number will not be linear if you are easing.
+---@type function
+AnimationData.Think = nil
+
+---The target position, or target translation of the panel object. Used by Panel:MoveTo and Panel:MoveBy respectively.
+---@type Vector
+AnimationData.Pos = nil
+
+---The position of the panel object when the animation started. Used by Panel:MoveTo and Panel:MoveBy.
+---@type Vector
+AnimationData.StartPos = nil
+
+---Whether to resize the panel horizontally or not. Only used by Panel:SizeTo.
+---@type boolean
+AnimationData.SizeX = nil
+
+---Whether to resize the panel vertically or not. Only used by Panel:SizeTo.
+---@type boolean
+AnimationData.SizeY = nil
+
+---The target size of the panel object. Only used by Panel:SizeTo.
+---@type Vector
+AnimationData.Size = Vector(0, 0, 0)
+
+---The size of the panel object when the animation started. Only used by Panel:SizeTo.
+---@type Vector
+AnimationData.StartSize = nil
+
+---The target colour of the panel object. Only used by Panel:ColorTo.
+---@type table
+AnimationData.Color = nil
+
+---The colour of the panel object when the animation started. Only used by Panel:ColorTo.
+---@type table
+AnimationData.StartColor = nil
+
+---The target alpha (0-255) of the panel object. Only used by Panel:AlphaTo.
+---@type number
+AnimationData.Alpha = nil
+
+---The alpha (0-255) of the panel object when the animation started. Only used by Panel:AlphaTo.
+---@type number
+AnimationData.StartAlpha = nil
+
+---The speed to use for transitions when using linear interpolation (Lerp) animations. Only used by Panel:LerpPositions.
+---@type number
+AnimationData.Speed = nil
+
+---Whether or not to use easing to make the panel 'jump' at its target, slowing as it approaches. Only used by Panel:LerpPositions.
+---@type boolean
+AnimationData.UseGravity = nil
+
 ---@class FontData
 local FontData = {}
 
@@ -799,6 +780,25 @@ FontData.additive = false
 ---@type boolean
 FontData.outline = false
 
+---@class BodyGroupData
+local BodyGroupData = {}
+
+---Index of the body group.
+---@type number
+BodyGroupData.id = nil
+
+---Name of the body group.
+---@type string
+BodyGroupData.name = nil
+
+---Amount of subgroups.
+---@type number
+BodyGroupData.num = nil
+
+---A zero-indexed table that is of length _num_ with values being the name of the smd mesh file of the respective body group value.
+---@type table
+BodyGroupData.submodels = nil
+
 ---The fancy name of your gamemode.
 ---@type string
 GM.Name = nil
@@ -839,44 +839,85 @@ GM.ThisClass = nil
 ---@type table
 GM.BaseClass = nil
 
----@class HTTPRequest
-local HTTPRequest = {}
+---@class PhysProperties
+local PhysProperties = {}
 
----Function to be called on failure. Arguments are * string reason
----@type function
-HTTPRequest.failed = nil
+---Enables or disables gravity for the entity
+---@type boolean
+PhysProperties.GravityToggle = nil
 
----Function to be called on success. Arguments are * number code * string body * table headers
----@type function
-HTTPRequest.success = nil
-
----Request method, case insensitive. Possible values are: * GET * POST * HEAD * PUT * DELETE * PATCH * OPTIONS
+---Sets the physics material for the entity
 ---@type string
-HTTPRequest.method = nil
+PhysProperties.Material = "nil"
 
----The target url
----@type string
-HTTPRequest.url = nil
+---@class OperatingParams
+local OperatingParams = {}
 
----KeyValue table for parameters. This is only applicable to the following request methods: * GET * POST * HEAD
----@type table
-HTTPRequest.parameters = nil
-
----KeyValue table for headers
----@type table
-HTTPRequest.headers = nil
-
----Body string for POST data. If set, will override parameters
----@type string
-HTTPRequest.body = nil
-
----Content type for body.
----@type string
-HTTPRequest.type = "text/plain; charset=utf-8"
-
----The timeout for the connection.
+---The current RPM of the vehicle
 ---@type number
-HTTPRequest.timeout = 60
+OperatingParams.RPM = nil
+
+---The current gear of the vehicle, starting from 0
+---@type number
+OperatingParams.gear = nil
+
+---Is the vehicle boosting?
+---@type boolean
+OperatingParams.isTorqueBoosting = nil
+
+---The current speed, in inches per second
+---@type number
+OperatingParams.speed = nil
+
+---Steering angle
+---@type number
+OperatingParams.steeringAngle = nil
+
+---Wheels on ground
+---@type number
+OperatingParams.wheelsInContact = nil
+
+---@class Problem
+local Problem = {}
+
+---The Problem ID.
+---@type string
+Problem.id = nil
+
+---The Text to Display.
+---@type string
+Problem.text = nil
+
+--- The Problem severity.
+---@type number
+Problem.severity = nil
+
+---The Problem Type. Possible values are: * config * hardware * addons
+---@type string
+Problem.type = nil
+
+---a Function that fixes the Problem.
+---@type function
+Problem.fix = nil
+
+---@class Preset
+local Preset = {}
+
+---A Table containing all enabled addons.
+---@type table
+Preset.enabled = nil
+
+---A Table containing all disabled addons.
+---@type table
+Preset.disabled = nil
+
+---The name of the Preset.
+---@type string
+Preset.name = nil
+
+---What to do with addons not in the preset. Can be `enable`, `disable` or nothing.
+---@type string
+Preset.newAction = nil
 
 ---@class HullTrace
 local HullTrace = {}
@@ -917,256 +958,6 @@ HullTrace.ignoreworld = false
 ---@type table
 HullTrace.output = nil
 
----@class LocalLight
-local LocalLight = {}
-
----The type of the light source, see Enums/MATERIAL_LIGHT.
----@type number
-LocalLight.type = MATERIAL_LIGHT_POINT
-
----The color of the light source (x is red, y is green, z is blue). Values are not restricted to a specific range, higher values will result in a brighter light.
----@type Vector
-LocalLight.color = Vectorvector_origin
-
----The origin of the light in world coordinates.
----@type Vector
-LocalLight.pos = Vectorvector_origin
-
----The direction of the light. Only required for directional and spot lights.
----@type Vector
-LocalLight.dir = Vectorvector_origin
-
----The maximum range of the light source. Does not actually control light attenuation. Usually left at 0 for infinite range.
----@type number
-LocalLight.range = 0
-
----Angular falloff exponent for spot lights. Higher values result in a sharper transition between the inner cone and the outer cone.
----@type number
-LocalLight.angularFalloff = 5
-
----The inner cone angle for spot lights, in degrees. No angular falloff will occur inside that cone.
----@type number
-LocalLight.innerAngle = 45
-
----The outer cone angle for spot lights, in degrees.
----@type number
-LocalLight.outerAngle = 45
-
----The distance at which the light will fade to 50% of its brightness.
----@type number
-LocalLight.fiftyPercentDistance = nil
-
----The distance at which the light will completely fade out.
----@type number
-LocalLight.zeroPercentDistance = nil
-
----The quadratic term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
-LocalLight.quadraticFalloff = 0
-
----The linear term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
-LocalLight.linearFalloff = 0
-
----The constant term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
-LocalLight.constantFalloff = 1
-
----@class MatProxyData
-local MatProxyData = {}
-
----The name of the material proxy
----@type string
-MatProxyData.name = nil
-
----The function used to get variables from the ".vmt". Called once per each ".vmt". Arguments are: * table self * string materialName * table values
----@type function
-MatProxyData.init = nil
-
----The function used to apply the proxy. This is called every frame while any materials with this proxy are used in world. Arguments are: * table self * string materialName * Entity ent
----@type function
-MatProxyData.bind = nil
-
----@class MeshVertex
-local MeshVertex = {}
-
----The vertex color. Uses the Color.
----@type table
-MeshVertex.color = nil
-
----The triangles normal required to calculate lighting(optional).
----@type Vector
-MeshVertex.normal = nil
-
----The triangles tangent. Not used by the VertexLitGeneric shader.
----@type Vector
-MeshVertex.tangent = nil
-
----The triangles binormal. Not used by the VertexLitGeneric shader.
----@type Vector
-MeshVertex.binormal = nil
-
----The vertex position.
----@type Vector
-MeshVertex.pos = nil
-
----The u texture scale.
----@type number
-MeshVertex.u = nil
-
----The v texture scale.
----@type number
-MeshVertex.v = nil
-
----A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
----@type table
-MeshVertex.userdata = nil
-
----@class NPCData
-local NPCData = {}
-
----The nice name of the NPC for UI display.
----@type string
-NPCData.Name = nil
-
----Class name of the entity to spawn.
----@type string
-NPCData.Class = nil
-
----Spawnmenu category to put the NPCinto.
----@type string
-NPCData.Category = "Other"
-
----A list of weapons this NPC is typically meant to use. One will be picked on spawn at random, unless overwritten by the player.
----@type table
-NPCData.Weapons = {}
-
----Key-value pairs to apply to the NPC on spawn. See Entity:SetKeyValue.
----@type table
-NPCData.KeyValues = {}
-
----Model override for this NPC.
----@type string
-NPCData.Model = "nil"
-
----Additional spawnflags for this NPC. See Entity:GetSpawnFlags. Ignored if `TotalSpawnFlags` key is present.
----@type number
-NPCData.SpawnFlags = 0
-
----Total spawnflags override for this NPC.
----@type number
-NPCData.TotalSpawnFlags = nil
-
----If set to `true`, this NPC can only be spawned on the ceiling. Stacks with `OnFloor`.
----@type boolean
-NPCData.OnCeiling = false
-
----If set to `true`, this NPC can only be spawned on the floor. Stacks with `OnCeiling`.
----@type boolean
-NPCData.OnFloor = false
-
----Offset, in Hammer units, away from the surface where the player is looking at for the NPC spawn position.
----@type number
-NPCData.Offset = 0
-
----Material override for this NPC. See Entity:SetMaterial.
----@type string
-NPCData.Material = nil
-
----Skin override for the NPC. See Entity:SetSkin.
----@type number
-NPCData.Skin = nil
-
----If set to `true`, do not try to teleport the NPC to the ground.
----@type boolean
-NPCData.NoDrop = false
-
----Used to add additional rotation the NPC post spawn. Usually all NPCs would be facing the player on spawn. Value of `Angle( 0, 180, 0 )` would make the NPC face away from the player.
----@type Angle
-NPCData.Rotate = Angle(0, 0, 0)
-
----Health override for this NPC. Also sets Entity:SetMaxHealth.
----@type number
-NPCData.Health = nil
-
----If set, a function to be called when the NPC is pasted using the duplicator library.
----@type function
-NPCData.OnDuplicated = nil
-
----@class OperatingParams
-local OperatingParams = {}
-
----The current RPM of the vehicle
----@type number
-OperatingParams.RPM = nil
-
----The current gear of the vehicle, starting from 0
----@type number
-OperatingParams.gear = nil
-
----Is the vehicle boosting?
----@type boolean
-OperatingParams.isTorqueBoosting = nil
-
----The current speed, in inches per second
----@type number
-OperatingParams.speed = nil
-
----Steering angle
----@type number
-OperatingParams.steeringAngle = nil
-
----Wheels on ground
----@type number
-OperatingParams.wheelsInContact = nil
-
----@class PathSegment
-local PathSegment = {}
-
----The navmesh area this segment occupies.
----@type CNavArea
-PathSegment.area = nil
-
----How much of a curve should the bot execute when navigating this segment. 0 = none, 1 = 180°
----@type number
-PathSegment.curvature = nil
-
----Distance of this segment from the start of the path.
----@type number
-PathSegment.distanceFromStart = nil
-
----The direction of travel to reach the end of this segment from the start, represented as a normalised vector.
----@type Vector
-PathSegment.forward = nil
-
----The direction of travel to reach the end of this segment from the start, represented as a cardinal direction integer 0 to 3, or 9 for vertical movement.
----@type number
-PathSegment.how = nil
-
----The navmesh ladder this segment occupies, if any.
----@type CNavLadder
-PathSegment.ladder = nil
-
----Length of this segment.
----@type number
-PathSegment.length = nil
-
----
----@type Vector
-PathSegment.m_portalCenter = nil
-
----
----@type number
-PathSegment.m_portalHalfWidth = nil
-
----The position of the end of this segment.
----@type Vector
-PathSegment.pos = nil
-
----The movement type of this segment, indicating how bots are expected to move along this segment. * 0 is ground movement * 1 is falling down * 2 is climbing up or jumping * 3 is jumping over a gap * 4 is climbing a ladder up (unused) * 5 is climbing a ladder down (unused)
----@type number
-PathSegment.type = nil
-
 ---@class PhysEnvPerformanceSettings
 local PhysEnvPerformanceSettings = {}
 
@@ -1202,6 +993,37 @@ PhysEnvPerformanceSettings.MaxVelocity = nil
 ---@type number
 PhysEnvPerformanceSettings.MinFrictionMass = nil
 
+---@class RenderCaptureData
+local RenderCaptureData = {}
+
+---Format of the capture. Valid formats are: * `jpeg` or `jpg` * `png`
+---@type string
+RenderCaptureData.format = nil
+
+---X coordinate of the capture origin
+---@type number
+RenderCaptureData.x = nil
+
+---Y coordinate of the capture origin
+---@type number
+RenderCaptureData.y = nil
+
+---Width of the capture
+---@type number
+RenderCaptureData.w = nil
+
+---Height of the capture
+---@type number
+RenderCaptureData.h = nil
+
+---The quality of the capture. Affects jpeg only.
+---@type number
+RenderCaptureData.quality = nil
+
+---Set to false to capture an image with alpha channel set to fully opaque. Affects png only.
+---@type boolean
+RenderCaptureData.alpha = true
+
 ---@class PhysicsObjectSave
 local PhysicsObjectSave = {}
 
@@ -1225,16 +1047,20 @@ PhysicsObjectSave.NoGrav = nil
 ---@type boolean
 PhysicsObjectSave.Sleep = nil
 
----@class PhysProperties
-local PhysProperties = {}
+---@class MatProxyData
+local MatProxyData = {}
 
----Enables or disables gravity for the entity
----@type boolean
-PhysProperties.GravityToggle = nil
-
----Sets the physics material for the entity
+---The name of the material proxy
 ---@type string
-PhysProperties.Material = "nil"
+MatProxyData.name = nil
+
+---The function used to get variables from the ".vmt". Called once per each ".vmt". Arguments are: * table self * string materialName * table values
+---@type function
+MatProxyData.init = nil
+
+---The function used to apply the proxy. This is called every frame while any materials with this proxy are used in world. Arguments are: * table self * string materialName * Entity ent
+---@type function
+MatProxyData.bind = nil
 
 ---The 'nice' name of the player class for display in User Interface and such.
 ---@type string
@@ -1304,6 +1130,33 @@ PLAYER.AvoidPlayers = true
 ---@type boolean
 PLAYER.UseVMHands = true
 
+---@class ServerQueryData
+local ServerQueryData = {}
+
+---The game directory to get the servers for
+---@type string
+ServerQueryData.GameDir = "garrysmod"
+
+---Type of servers to retrieve. Valid values are `internet`, `favorite`, `history` and `lan`
+---@type string
+ServerQueryData.Type = nil
+
+---Steam application ID to get the servers for
+---@type number
+ServerQueryData.AppID = 4000
+
+---Called when a new server is found and queried. Arguments: number ping - Latency to the server. string name - Name of the server string desc - "Nice" gamemode name string map - Current map number players - Total player number ( bot + human ) number maxplayers - Maximum reported amount of players number botplayers - Amount of bots on the server boolean pass - Whether this server has password or not number lastplayed - Time when you last played on this server, as UNIX timestamp or 0 string address - IP Address of the server string gamemode - Gamemode folder name number workshopid - Gamemode Steam Workshop ID boolean isanon - Is the server signed into an anonymous account? string version - Version number, same format as jit.version_num string localization - Two digit country code, `us` if nil string gmcategory - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay` Return false to stop the query.
+---@type function
+ServerQueryData.Callback = nil
+
+--- Called if the query has failed, called with the servers IP Address
+---@type function
+ServerQueryData.CallbackFailed = nil
+
+---Called when the query is finished. No arguments
+---@type function
+ServerQueryData.Finished = nil
+
 ---@class PolygonVertex
 local PolygonVertex = {}
 
@@ -1323,94 +1176,91 @@ PolygonVertex.u = nil
 ---@type number
 PolygonVertex.v = nil
 
----@class Preset
-local Preset = {}
+---@class HTTPRequest
+local HTTPRequest = {}
 
----A Table containing all enabled addons.
+---Function to be called on failure. Arguments are * string reason
+---@type function
+HTTPRequest.failed = nil
+
+---Function to be called on success. Arguments are * number code * string body * table headers
+---@type function
+HTTPRequest.success = nil
+
+---Request method, case insensitive. Possible values are: * GET * POST * HEAD * PUT * DELETE * PATCH * OPTIONS
+---@type string
+HTTPRequest.method = nil
+
+---The target url
+---@type string
+HTTPRequest.url = nil
+
+---KeyValue table for parameters. This is only applicable to the following request methods: * GET * POST * HEAD
 ---@type table
-Preset.enabled = nil
+HTTPRequest.parameters = nil
 
----A Table containing all disabled addons.
+---KeyValue table for headers
 ---@type table
-Preset.disabled = nil
+HTTPRequest.headers = nil
 
----The name of the Preset.
+---Body string for POST data. If set, will override parameters
 ---@type string
-Preset.name = nil
+HTTPRequest.body = nil
 
----What to do with addons not in the preset. Can be `enable`, `disable` or nothing.
+---Content type for body.
 ---@type string
-Preset.newAction = nil
+HTTPRequest.type = "text/plain; charset=utf-8"
 
----@class Problem
-local Problem = {}
-
----The Problem ID.
----@type string
-Problem.id = nil
-
----The Text to Display.
----@type string
-Problem.text = nil
-
---- The Problem severity.
+---The timeout for the connection.
 ---@type number
-Problem.severity = nil
+HTTPRequest.timeout = 60
 
----The Problem Type. Possible values are: * config * hardware * addons
----@type string
-Problem.type = nil
+---@class PathSegment
+local PathSegment = {}
 
----a Function that fixes the Problem.
----@type function
-Problem.fix = nil
+---The navmesh area this segment occupies.
+---@type CNavArea
+PathSegment.area = nil
 
----@class PropertyAdd
-local PropertyAdd = {}
-
----Can be set to "toggle" to make this property a toggle property.
----@type string
-PropertyAdd.Type = "simple"
-
----Label to show on opened menu
----@type string
-PropertyAdd.MenuLabel = nil
-
----Icon to show on opened menu for this item. Optional for simple properties and unused for toggle properties.
----@type string
-PropertyAdd.MenuIcon = nil
-
----Where in the list should the property be positioned, relative to other properties. For reference, here are the default properties and their Order values: Property | Order | ---------|-------| | Bone Manipulate | 500 | | Bodygroups | 600 | | Skin | 601 | | Keep Upright | 900 | | Ignite/Extinguish | 999 | | Remove | 1000 | | Gravity | 1001 | | Drive | 1100 | | Collision | 1500 | | Statue | 1501 | | NPC Biggify/Smallify | 1799, 1800 | | Motion Control (Kinect) | 2500 | | Editable_Entities | 90001 |
+---How much of a curve should the bot execute when navigating this segment. 0 = none, 1 = 180°
 ---@type number
-PropertyAdd.structureFieldOrder = nil
+PathSegment.curvature = nil
 
----Whether to add a spacer before this property. This should generally be true for the first property in a group of properties.
----@type boolean
-PropertyAdd.PrependSpacer = false
+---Distance of this segment from the start of the path.
+---@type number
+PathSegment.distanceFromStart = nil
 
----Used **clientside** to decide whether this property should be shown for an entity. Gets these arguments: * table self - the property table * Entity ent - the entity the player clicked * Global.LocalPlayer player - the localplayer Return true if the property should be shown for this entity. It's good practice to call SANDBOX:CanProperty in this hook via gamemode.Call or hook.Run.
----@type function
-PropertyAdd.Filter = nil
+---The direction of travel to reach the end of this segment from the start, represented as a normalised vector.
+---@type Vector
+PathSegment.forward = nil
 
---- Required for toggle properties (clientside). Must return a boolean value to either check or uncheck the toggle property. * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace
----@type function
-PropertyAdd.Checked = nil
+---The direction of travel to reach the end of this segment from the start, represented as a cardinal direction integer 0 to 3, or 9 for vertical movement.
+---@type number
+PathSegment.how = nil
 
---- Called **clientside** when the property is clicked with these arguments: * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace When appropriate, within this function you can call self:MsgStart(), write data with the net 'Write' functions, and finish with self:MsgEnd(). This will activate the 'Receive' function on the server. In most cases, you will want to send the entity to the server, as it's not done by default.
----@type function
-PropertyAdd.Action = nil
+---The navmesh ladder this segment occupies, if any.
+---@type CNavLadder
+PathSegment.ladder = nil
 
---- Called **serverside** if the client sends a message in the 'Action' function (see above). * table self - the property table * number len - the net message length, although this includes the property identifier used internally (the name of the property) * Player ply - the player who clicked the property You can read data received from the client with the net 'Read' functions. It's good practice to check SANDBOX:CanProperty here via gamemode.Call or hook.Run.
----@type function
-PropertyAdd.Receive = nil
+---Length of this segment.
+---@type number
+PathSegment.length = nil
 
---- Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties! * table self - the property table * DMenuOption option - the menu option * Entity ent - the entity the player right-clicked * table tr - the player's eye trace
----@type function
-PropertyAdd.MenuOpen = nil
+---
+---@type Vector
+PathSegment.m_portalCenter = nil
 
---- Same as MenuOpen, but also called for toggle properties and has different arguments. This is called immediately after MenuOpen, but nothing happens in between so you should only ever use one or the other. * table self - the property table * DMenu menu - the property menu * DMenuOption option - the menu option
----@type function
-PropertyAdd.OnCreate = nil
+---
+---@type number
+PathSegment.m_portalHalfWidth = nil
+
+---The position of the end of this segment.
+---@type Vector
+PathSegment.pos = nil
+
+---The movement type of this segment, indicating how bots are expected to move along this segment. * 0 is ground movement * 1 is falling down * 2 is climbing up or jumping * 3 is jumping over a gap * 4 is climbing a ladder up (unused) * 5 is climbing a ladder down (unused)
+---@type number
+PathSegment.type = nil
 
 ---@class RenderCamData
 local RenderCamData = {}
@@ -1475,36 +1325,40 @@ RenderCamData.offcenter = nil
 ---@type table
 RenderCamData.ortho = nil
 
----@class RenderCaptureData
-local RenderCaptureData = {}
+---@class MeshVertex
+local MeshVertex = {}
 
----Format of the capture. Valid formats are: * `jpeg` or `jpg` * `png`
----@type string
-RenderCaptureData.format = nil
+---The vertex color. Uses the Color.
+---@type table
+MeshVertex.color = nil
 
----X coordinate of the capture origin
+---The triangles normal required to calculate lighting(optional).
+---@type Vector
+MeshVertex.normal = nil
+
+---The triangles tangent. Not used by the VertexLitGeneric shader.
+---@type Vector
+MeshVertex.tangent = nil
+
+---The triangles binormal. Not used by the VertexLitGeneric shader.
+---@type Vector
+MeshVertex.binormal = nil
+
+---The vertex position.
+---@type Vector
+MeshVertex.pos = nil
+
+---The u texture scale.
 ---@type number
-RenderCaptureData.x = nil
+MeshVertex.u = nil
 
----Y coordinate of the capture origin
+---The v texture scale.
 ---@type number
-RenderCaptureData.y = nil
+MeshVertex.v = nil
 
----Width of the capture
----@type number
-RenderCaptureData.w = nil
-
----Height of the capture
----@type number
-RenderCaptureData.h = nil
-
----The quality of the capture. Affects jpeg only.
----@type number
-RenderCaptureData.quality = nil
-
----Set to false to capture an image with alpha channel set to fully opaque. Affects png only.
----@type boolean
-RenderCaptureData.alpha = true
+---A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
+---@type table
+MeshVertex.userdata = nil
 
 ---@class SequenceInfo
 local SequenceInfo = {}
@@ -1585,67 +1439,297 @@ SequenceInfo.cycleposeindex = nil
 ---@type table
 SequenceInfo.anims = nil
 
----@class ServerQueryData
-local ServerQueryData = {}
+---@class NPCData
+local NPCData = {}
 
----The game directory to get the servers for
+---The nice name of the NPC for UI display.
 ---@type string
-ServerQueryData.GameDir = "garrysmod"
+NPCData.Name = nil
 
----Type of servers to retrieve. Valid values are `internet`, `favorite`, `history` and `lan`
+---Class name of the entity to spawn.
 ---@type string
-ServerQueryData.Type = nil
+NPCData.Class = nil
 
----Steam application ID to get the servers for
+---Spawnmenu category to put the NPCinto.
+---@type string
+NPCData.Category = "Other"
+
+---A list of weapons this NPC is typically meant to use. One will be picked on spawn at random, unless overwritten by the player.
+---@type table
+NPCData.Weapons = {}
+
+---Key-value pairs to apply to the NPC on spawn. See Entity:SetKeyValue.
+---@type table
+NPCData.KeyValues = {}
+
+---Model override for this NPC.
+---@type string
+NPCData.Model = "nil"
+
+---Additional spawnflags for this NPC. See Entity:GetSpawnFlags. Ignored if `TotalSpawnFlags` key is present.
 ---@type number
-ServerQueryData.AppID = 4000
+NPCData.SpawnFlags = 0
 
----Called when a new server is found and queried. Arguments: number ping - Latency to the server. string name - Name of the server string desc - "Nice" gamemode name string map - Current map number players - Total player number ( bot + human ) number maxplayers - Maximum reported amount of players number botplayers - Amount of bots on the server boolean pass - Whether this server has password or not number lastplayed - Time when you last played on this server, as UNIX timestamp or 0 string address - IP Address of the server string gamemode - Gamemode folder name number workshopid - Gamemode Steam Workshop ID boolean isanon - Is the server signed into an anonymous account? string version - Version number, same format as jit.version_num string localization - Two digit country code, `us` if nil string gmcategory - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay` Return false to stop the query.
+---Total spawnflags override for this NPC.
+---@type number
+NPCData.TotalSpawnFlags = nil
+
+---If set to `true`, this NPC can only be spawned on the ceiling. Stacks with `OnFloor`.
+---@type boolean
+NPCData.OnCeiling = false
+
+---If set to `true`, this NPC can only be spawned on the floor. Stacks with `OnCeiling`.
+---@type boolean
+NPCData.OnFloor = false
+
+---Offset, in Hammer units, away from the surface where the player is looking at for the NPC spawn position.
+---@type number
+NPCData.Offset = 0
+
+---Material override for this NPC. See Entity:SetMaterial.
+---@type string
+NPCData.Material = nil
+
+---Skin override for the NPC. See Entity:SetSkin.
+---@type number
+NPCData.Skin = nil
+
+---If set to `true`, do not try to teleport the NPC to the ground.
+---@type boolean
+NPCData.NoDrop = false
+
+---Used to add additional rotation the NPC post spawn. Usually all NPCs would be facing the player on spawn. Value of `Angle( 0, 180, 0 )` would make the NPC face away from the player.
+---@type Angle
+NPCData.Rotate = Angle(0, 0, 0)
+
+---Health override for this NPC. Also sets Entity:SetMaxHealth.
+---@type number
+NPCData.Health = nil
+
+---If set, a function to be called when the NPC is pasted using the duplicator library.
 ---@type function
-ServerQueryData.Callback = nil
+NPCData.OnDuplicated = nil
 
---- Called if the query has failed, called with the servers IP Address
----@type function
-ServerQueryData.CallbackFailed = nil
+---@class PropertyAdd
+local PropertyAdd = {}
 
----Called when the query is finished. No arguments
----@type function
-ServerQueryData.Finished = nil
-
----@class SoundData
-local SoundData = {}
-
----Path to the sound file to be used in this sound effect, relative to `sound/` directory (so exclude the `sound/` part). Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list. Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
+---Can be set to "toggle" to make this property a toggle property.
 ---@type string
-SoundData.sound = nil
+PropertyAdd.Type = "simple"
 
----The name of the soundscript, to be referenced by in functions such as Entity:EmitSound.
+---Label to show on opened menu
 ---@type string
-SoundData.name = nil
+PropertyAdd.MenuLabel = nil
 
----The sound channel to play in. See Enums/CHAN
----@type number
-SoundData.channel = nil
+---Icon to show on opened menu for this item. Optional for simple properties and unused for toggle properties.
+---@type string
+PropertyAdd.MenuIcon = nil
 
----The soundlevel of the sound in dB. See Enums/SNDLVL. This will affect how far the sound can be heard.
+---Where in the list should the property be positioned, relative to other properties. For reference, here are the default properties and their Order values: Property | Order | ---------|-------| | Bone Manipulate | 500 | | Bodygroups | 600 | | Skin | 601 | | Keep Upright | 900 | | Ignite/Extinguish | 999 | | Remove | 1000 | | Gravity | 1001 | | Drive | 1100 | | Collision | 1500 | | Statue | 1501 | | NPC Biggify/Smallify | 1799, 1800 | | Motion Control (Kinect) | 2500 | | Editable_Entities | 90001 |
 ---@type number
-SoundData.level = nil
+PropertyAdd.structureFieldOrder = nil
 
----The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value. **Warning:** Volume of `0` will act as volume of `1`
----@type number
-SoundData.volume = 1.0
+---Whether to add a spacer before this property. This should generally be true for the first property in a group of properties.
+---@type boolean
+PropertyAdd.PrependSpacer = false
 
----The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.
----@type number
-SoundData.pitch = 100
+---Used **clientside** to decide whether this property should be shown for an entity. Gets these arguments: * table self - the property table * Entity ent - the entity the player clicked * Global.LocalPlayer player - the localplayer Return true if the property should be shown for this entity. It's good practice to call SANDBOX:CanProperty in this hook via gamemode.Call or hook.Run.
+---@type function
+PropertyAdd.Filter = nil
 
----The initial pitch. Deprecated, use pitch.
----@type number
-SoundData.pitchstart = nil
+--- Required for toggle properties (clientside). Must return a boolean value to either check or uncheck the toggle property. * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace
+---@type function
+PropertyAdd.Checked = nil
 
----The pitch end. Deprecated, use pitch.
+--- Called **clientside** when the property is clicked with these arguments: * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace When appropriate, within this function you can call self:MsgStart(), write data with the net 'Write' functions, and finish with self:MsgEnd(). This will activate the 'Receive' function on the server. In most cases, you will want to send the entity to the server, as it's not done by default.
+---@type function
+PropertyAdd.Action = nil
+
+--- Called **serverside** if the client sends a message in the 'Action' function (see above). * table self - the property table * number len - the net message length, although this includes the property identifier used internally (the name of the property) * Player ply - the player who clicked the property You can read data received from the client with the net 'Read' functions. It's good practice to check SANDBOX:CanProperty here via gamemode.Call or hook.Run.
+---@type function
+PropertyAdd.Receive = nil
+
+--- Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties! * table self - the property table * DMenuOption option - the menu option * Entity ent - the entity the player right-clicked * table tr - the player's eye trace
+---@type function
+PropertyAdd.MenuOpen = nil
+
+--- Same as MenuOpen, but also called for toggle properties and has different arguments. This is called immediately after MenuOpen, but nothing happens in between so you should only ever use one or the other. * table self - the property table * DMenu menu - the property menu * DMenuOption option - the menu option
+---@type function
+PropertyAdd.OnCreate = nil
+
+---@class LocalLight
+local LocalLight = {}
+
+---The type of the light source, see Enums/MATERIAL_LIGHT.
 ---@type number
-SoundData.pitchend = nil
+LocalLight.type = MATERIAL_LIGHT_POINT
+
+---The color of the light source (x is red, y is green, z is blue). Values are not restricted to a specific range, higher values will result in a brighter light.
+---@type Vector
+LocalLight.color = Vectorvector_origin
+
+---The origin of the light in world coordinates.
+---@type Vector
+LocalLight.pos = Vectorvector_origin
+
+---The direction of the light. Only required for directional and spot lights.
+---@type Vector
+LocalLight.dir = Vectorvector_origin
+
+---The maximum range of the light source. Does not actually control light attenuation. Usually left at 0 for infinite range.
+---@type number
+LocalLight.range = 0
+
+---Angular falloff exponent for spot lights. Higher values result in a sharper transition between the inner cone and the outer cone.
+---@type number
+LocalLight.angularFalloff = 5
+
+---The inner cone angle for spot lights, in degrees. No angular falloff will occur inside that cone.
+---@type number
+LocalLight.innerAngle = 45
+
+---The outer cone angle for spot lights, in degrees.
+---@type number
+LocalLight.outerAngle = 45
+
+---The distance at which the light will fade to 50% of its brightness.
+---@type number
+LocalLight.fiftyPercentDistance = nil
+
+---The distance at which the light will completely fade out.
+---@type number
+LocalLight.zeroPercentDistance = nil
+
+---The quadratic term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
+---@type number
+LocalLight.quadraticFalloff = 0
+
+---The linear term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
+---@type number
+LocalLight.linearFalloff = 0
+
+---The constant term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
+---@type number
+LocalLight.constantFalloff = 1
+
+---@class SunInfo
+local SunInfo = {}
+
+---The suns direction relative to 0,0,0
+---@type Vector
+SunInfo.direction = nil
+
+---Indicates how obstructed the sun is, 1 not visible, 0 fully visible
+---@type number
+SunInfo.obstruction = nil
+
+---@class TeamData
+local TeamData = {}
+
+---Color of the team
+---@type table
+TeamData.Color = nil
+
+---Whether the team is joinable or not.
+---@type boolean
+TeamData.Joinable = nil
+
+---Name of the team
+---@type string
+TeamData.Name = nil
+
+---Score of the team
+---@type number
+TeamData.Score = nil
+
+---@class TextData
+local TextData = {}
+
+---Text to be drawn.
+---@type string
+TextData.text = nil
+
+---The font to draw with. List of default fonts can be found Default_Fonts.
+---@type string
+TextData.font = "DermaDefault"
+
+---This holds the X and Y coordinates. Key value 1 is x, key value 2 is y.
+---@type table
+TextData.pos = nil
+
+---The alignment of the X position. See Enums/TEXT_ALIGN
+---@type number
+TextData.xalign = TEXT_ALIGN_LEFT
+
+---The alignment of the Y position. See Enums/TEXT_ALIGN
+---@type number
+TextData.yalign = TEXT_ALIGN_TOP
+
+---The text color
+---@type table
+TextData.color = color_white
+
+---@class VehicleParamsBody
+local VehicleParamsBody = {}
+
+---Additional gravity to be applied to the vehicle
+---@type number
+VehicleParamsBody.addGravity = nil
+
+---
+---@type number
+VehicleParamsBody.counterTorqueFactor = nil
+
+---
+---@type number
+VehicleParamsBody.keepUprightTorque = nil
+
+---Mass center override
+---@type Vector
+VehicleParamsBody.massCenterOverride = nil
+
+---Mass override
+---@type number
+VehicleParamsBody.massOverride = nil
+
+---Maximum angular velocity
+---@type number
+VehicleParamsBody.maxAngularVelocity = nil
+
+---
+---@type number
+VehicleParamsBody.tiltForce = nil
+
+---
+---@type number
+VehicleParamsBody.tiltForceHeight = nil
+
+---@class TextureData
+local TextureData = {}
+
+---surface.GetTextureID number of the texture to be drawn.
+---@type number
+TextureData.texture = nil
+
+---The x Coordinate.
+---@type number
+TextureData.x = nil
+
+---The y Coordinate.
+---@type number
+TextureData.y = nil
+
+---The width of the texture.
+---@type number
+TextureData.w = nil
+
+---The height of the texture.
+---@type number
+TextureData.h = nil
+
+---The texture color. See Color.
+---@type table
+TextureData.color = color_white
 
 ---@class SoundHintData
 local SoundHintData = {}
@@ -1682,16 +1766,301 @@ SoundHintData.expires = nil
 ---@type number
 SoundHintData.channel = nil
 
----@class SunInfo
-local SunInfo = {}
+---@class VideoData
+local VideoData = {}
 
----The suns direction relative to 0,0,0
----@type Vector
-SunInfo.direction = nil
+---The video container format. Valid options are: `webm`, `ogg`
+---@type string
+VideoData.container = nil
 
----Indicates how obstructed the sun is, 1 not visible, 0 fully visible
+---The video codec. Valid options are: `vp8`, `theora`
+---@type string
+VideoData.video = nil
+
+---The audio codec. Valid options are: `vorbis`
+---@type string
+VideoData.audio = nil
+
+---The video quality
 ---@type number
-SunInfo.obstruction = nil
+VideoData.quality = nil
+
+---The record bitrate
+---@type number
+VideoData.bitrate = nil
+
+---Frames per second
+---@type number
+VideoData.fps = nil
+
+---Lock the frame count per second
+---@type boolean
+VideoData.lockfps = nil
+
+---The file name for the video
+---@type string
+VideoData.name = nil
+
+---The videos width
+---@type number
+VideoData.width = nil
+
+---The videos height
+---@type number
+VideoData.height = nil
+
+---@class ToScreenData
+local ToScreenData = {}
+
+---The x coordinate on the players screen
+---@type number
+ToScreenData.x = nil
+
+---The y coordinate on the players screen
+---@type number
+ToScreenData.y = nil
+
+---The coordinate is not behind the player. **This does not mean the coordinate is on the screen.** When this is false, it means that the coordinate would not be on the screen even if the player had a full 180 degree FOV.
+---@type boolean
+ToScreenData.visible = nil
+
+---@class SoundData
+local SoundData = {}
+
+---Path to the sound file to be used in this sound effect, relative to `sound/` directory (so exclude the `sound/` part). Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list. Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
+---@type string
+SoundData.sound = nil
+
+---The name of the soundscript, to be referenced by in functions such as Entity:EmitSound.
+---@type string
+SoundData.name = nil
+
+---The sound channel to play in. See Enums/CHAN
+---@type number
+SoundData.channel = nil
+
+---The soundlevel of the sound in dB. See Enums/SNDLVL. This will affect how far the sound can be heard.
+---@type number
+SoundData.level = nil
+
+---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value. **Warning:** Volume of `0` will act as volume of `1`
+---@type number
+SoundData.volume = 1.0
+
+---The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.
+---@type number
+SoundData.pitch = 100
+
+---The initial pitch. Deprecated, use pitch.
+---@type number
+SoundData.pitchstart = nil
+
+---The pitch end. Deprecated, use pitch.
+---@type number
+SoundData.pitchend = nil
+
+---@class VehicleParams
+local VehicleParams = {}
+
+---Wheels per axle
+---@type number
+VehicleParams.wheelsPerAxle = nil
+
+---Number of axles
+---@type number
+VehicleParams.axleCount = nil
+
+---A table of Structures/VehicleParamsAxle tables.
+---@type table
+VehicleParams.axles = nil
+
+---See Structures/VehicleParamsBody
+---@type table
+VehicleParams.body = nil
+
+---See Structures/VehicleParamsEngine
+---@type table
+VehicleParams.engine = nil
+
+---See Structures/VehicleParamsSteering
+---@type table
+VehicleParams.steering = nil
+
+---@class Undo
+local Undo = {}
+
+---The player responsible who owns the undo
+---@type Player
+Undo.Owner = nil
+
+---The name of the text to report to the player
+---@type string
+Undo.Name = nil
+
+---A table of entities to be removed by the undo
+---@type table
+Undo.Entities = nil
+
+---A table of {function_to_call, func_arg2, func_arg3}
+---@type table
+Undo.Functions = nil
+
+---A custom undo text to show the client
+---@type string
+Undo.CustomUndoText = nil
+
+---A "nice" name of the undo, which will be used for the UI
+---@type string
+Undo.NiceName = nil
+
+---@class VehicleTable
+local VehicleTable = {}
+
+---Entity class name for this vehicle.
+---@type string
+VehicleTable.Class = nil
+
+---Nice name for this vehicle, for UI purposes.
+---@type string
+VehicleTable.Name = nil
+
+---Model of the vehicle.
+---@type string
+VehicleTable.Model = nil
+
+---A list of key-value pairs to apply to the vehicle entity. Possible valid keys that can be set are: * `vehiclescript` * `limitview` * `vehiclelocked` * `cargovisible` * `enablegun`
+---@type table
+VehicleTable.KeyValues = nil
+
+---Offset away the surface player is looking at to spawn at.
+---@type number
+VehicleTable.Offset = nil
+
+---Set these members on the spawned vehicle's table (Entity:GetTable) to given values.
+---@type table
+VehicleTable.Members = nil
+
+---Author of the vehicle, for UI purposes.
+---@type string
+VehicleTable.Author = nil
+
+---Category of this vehicle, for UI purposes.
+---@type string
+VehicleTable.Category = "Other"
+
+---A small description of the vehicle, for UI purposes.
+---@type string
+VehicleTable.Information = nil
+
+---@class VehicleParamsSteering
+local VehicleParamsSteering = {}
+
+---
+---@type number
+VehicleParamsSteering.boostSteeringRateFactor = nil
+
+---
+---@type number
+VehicleParamsSteering.boostSteeringRestRateFactor = nil
+
+---
+---@type number
+VehicleParamsSteering.brakeSteeringRateFactor = nil
+
+---The maximum angle at which the vehicle can turn while boosting
+---@type number
+VehicleParamsSteering.degreesBoost = nil
+
+---The maximum angle at which the vehicle can turn while moving at max speed and not boosting
+---@type number
+VehicleParamsSteering.degreesFast = nil
+
+---The maximum angle at which the vehicle can turn while moving slowest
+---@type number
+VehicleParamsSteering.degreesSlow = nil
+
+---Disabled in Garry's Mod. In Half-Life 2: Episode 2 this dictates whether the vehicle should leave wheel dust effects when driving around
+---@type boolean
+VehicleParamsSteering.dustCloud = nil
+
+---Whether the vehicle is allowed to skid/drift
+---@type boolean
+VehicleParamsSteering.isSkidAllowed = nil
+
+---In Hammer Units
+---@type number
+VehicleParamsSteering.powerSlideAccel = nil
+
+---
+---@type number
+VehicleParamsSteering.speedFast = nil
+
+---
+---@type number
+VehicleParamsSteering.speedSlow = nil
+
+---
+---@type number
+VehicleParamsSteering.steeringExponent = nil
+
+---
+---@type number
+VehicleParamsSteering.steeringRateFast = nil
+
+---
+---@type number
+VehicleParamsSteering.steeringRateSlow = nil
+
+---
+---@type number
+VehicleParamsSteering.steeringRestRateFast = nil
+
+---
+---@type number
+VehicleParamsSteering.steeringRestRateSlow = nil
+
+---
+---@type number
+VehicleParamsSteering.throttleSteeringRestRateFactor = nil
+
+---
+---@type number
+VehicleParamsSteering.turnThrottleReduceFast = nil
+
+---
+---@type number
+VehicleParamsSteering.turnThrottleReduceSlow = nil
+
+---@class Trace
+local Trace = {}
+
+---The start position of the trace
+---@type Vector
+Trace.start = VectorVector(0, 0, 0)
+
+---The end position of the trace
+---@type Vector
+Trace.endpos = VectorVector(0, 0, 0)
+
+---Things the trace should not hit. Can also be a table of entities or a function with one argument: * Entity ent - The entity that the trace hit Return true in the function to hit the entity, false to skip it. Using a function here is super slow - try to avoid it.
+---@type Entity
+Trace.filter = {}
+
+---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
+---@type number
+Trace.mask = MASK_SOLID
+
+---The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
+---@type number
+Trace.collisiongroup = COLLISION_GROUP_NONE
+
+---Should the trace ignore world or not
+---@type boolean
+Trace.ignoreworld = false
+
+---If set, the trace result will be written to the supplied table instead of returning a new table
+---@type table
+Trace.output = nil
 
 ---@class SurfacePropertyData
 local SurfacePropertyData = {}
@@ -1799,6 +2168,413 @@ SurfacePropertyData.stepRightSound = nil
 ---Unused sound.
 ---@type string
 SurfacePropertyData.strainSound = nil
+
+---@class TOOL
+local TOOL = {}
+
+---If set to false, the tool won't be added to the tool menu and players will have to access it by other means.
+---@type boolean
+TOOL.AddToMenu = true
+
+---The tool menu category under which the tool should be listed.
+---@type string
+TOOL.Category = "New Category"
+
+---The console command to execute upon being selected in the Q menu.
+---@type string
+TOOL.Command = "gmod_toolmode [tool]"
+
+---The name of the tool in the Q menu. Common practice is to set this to "#tool.[lua filename].name" to match the name displayed in the tool information box.
+---@type string
+TOOL.Name = "#[tool mode]"
+
+---A key-value ( convar name-default value ) table containing the client-side convars to create. All convars will be prefixed with the filename of the tool. You can later use Tool:GetClientNumber or Tool:GetClientInfo to retrieve these values.
+---@type table
+TOOL.ClientConVar = nil
+
+---Same as above, but created server-side instead.
+---@type table
+TOOL.ServerConVar = nil
+
+---A key-value ( string name - ConVar object ) table containing the cached convar objected created from `ClientConVar`.
+---@type table
+TOOL.ClientConVars = nil
+
+---Same as above, but server-side (`ServerConVar`) instead.
+---@type table
+TOOL.ServerConVars = nil
+
+---The function that is called to build the context menu for your tool. It has one argument, namely the context menu's base panel to which all of your custom panels are going to be parented to. While it might sound like a hook, it isn't - you won't receive a `self` argument inside the function. See TOOL.BuildCPanel.
+---@type function
+TOOL.BuildCPanel = nil
+
+---Allows you to override the tool usage information shown when the tool is equipped. See Tool Information Display for more information.
+---@type table
+TOOL.Information = nil
+
+---Class name of the tool. (name of the .lua file) This is set automatically.
+---@type string
+TOOL.Mode = nil
+
+---The tool tab (spawnmenu.AddToolTab) to add this tool to. (The internal name, first argument)
+---@type string
+TOOL.Tab = nil
+
+---When enabled the game tries to run the left mouse click as soon as possible
+---@type boolean
+TOOL.LeftClickAutomatic = false
+
+---When enabled the game tries to run the right mouse click as soon as possible
+---@type boolean
+TOOL.RightClickAutomatic = false
+
+---@class UGCFileInfo
+local UGCFileInfo = {}
+
+---The Workshop item ID
+---@type number
+UGCFileInfo.id = nil
+
+---The title of the Workshop item
+---@type string
+UGCFileInfo.title = nil
+
+---The description of the Workshop item
+---@type string
+UGCFileInfo.description = nil
+
+---The internal File ID of the workshop item, if any
+---@type number
+UGCFileInfo.fileid = nil
+
+---The internal File ID of the workshop item preview, if any
+---@type number
+UGCFileInfo.previewid = nil
+
+---A URL to the preview image of the workshop item
+---@type string
+UGCFileInfo.previewurl = nil
+
+---The SteamID64 of the original uploader of the addon
+---@type number
+UGCFileInfo.owner = nil
+
+---Unix timestamp of when the item was created
+---@type number
+UGCFileInfo.created = nil
+
+---Unix timestamp of when the file was last updated
+---@type number
+UGCFileInfo.updated = nil
+
+---Whether the file is banned or not
+---@type boolean
+UGCFileInfo.banned = nil
+
+---Comma (,) separated list of tags, may be truncated to some length
+---@type string
+UGCFileInfo.tags = nil
+
+---File size of the workshop item contents
+---@type number
+UGCFileInfo.size = nil
+
+---Filesize of the preview file
+---@type number
+UGCFileInfo.previewsize = nil
+
+---If the addon is subscribed, this value represents whether it is installed on the client and its files are accessible, false otherwise.
+---@type boolean
+UGCFileInfo.installed = nil
+
+---If the addon is subscribed, this value represents whether it is disabled on the client, false otherwise.
+---@type boolean
+UGCFileInfo.disabled = nil
+
+---A list of child Workshop Items for this item. For collections this will be sub-collections, for workshop items this will be the items they depend on.
+---@type table
+UGCFileInfo.children = nil
+
+---We advise against using this. It may be changed or removed in a future update. The "nice" name of the Uploader, or "Unnammed Player" if we failed to get the data for some reason. Do not use this field as it will most likely not be updated in time. Use steamworks.RequestPlayerInfo instead.
+---@type string
+UGCFileInfo.ownername = nil
+
+---If this key is set, no other data will be present in the response. Values above 0 represent Steam Error codes, values below 0 mean the following: * -1 means Failed to create query * -2 means Failed to send query * -3 means Received 0 or more than 1 result * -4 means Failed to get item data from the response * -5 means Workshop item ID in the response is invalid * -6 means Workshop item ID in response is mismatching the requested file ID
+---@type number
+UGCFileInfo.error = nil
+
+---Number of "up" votes for this item.
+---@type number
+UGCFileInfo.up = nil
+
+---Number of "down" votes for this item.
+---@type number
+UGCFileInfo.down = nil
+
+---Number of total votes (up and down) for this item. This is NOT `up - down`.
+---@type number
+UGCFileInfo.total = nil
+
+---The up down vote ratio for this item, i.e. `1` is when every vote is `up`, `0.5` is when half of the total votes are the up votes, etc.
+---@type number
+UGCFileInfo.score = nil
+
+---@class VehicleParamsEngine
+local VehicleParamsEngine = {}
+
+---
+---@type number
+VehicleParamsEngine.autobrakeSpeedFactor = nil
+
+---
+---@type number
+VehicleParamsEngine.autobrakeSpeedGain = nil
+
+---This acts as the final ratio of the gearbox. It's like a master coefficient of the gearbox.
+---@type number
+VehicleParamsEngine.axleRatio = nil
+
+---Amount of seconds between being able to use the boost ( by pressing Shift key by default )
+---@type number
+VehicleParamsEngine.boostDelay = nil
+
+---Duration of the boost in seconds
+---@type number
+VehicleParamsEngine.boostDuration = nil
+
+---
+---@type number
+VehicleParamsEngine.boostForce = nil
+
+---Maximum speed while boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---@type number
+VehicleParamsEngine.boostMaxSpeed = nil
+
+---Amount of gears this vehicle has.
+---@type number
+VehicleParamsEngine.gearCount = nil
+
+---A table of numbers, of gear rations. Table length is equal to "gearCount" member of this table.
+---@type table
+VehicleParamsEngine.gearRatio = nil
+
+---The HP amount of the vehicle This value is used to calculate the effectively applied torque, along with ratios and `maxRPM`.
+---@type number
+VehicleParamsEngine.horsepower = nil
+
+---If `true`, the gearbox shifts gears, if `false` the gearbox stays stuck to the 1st gear (gear number 0).
+---@type boolean
+VehicleParamsEngine.isAutoTransmission = nil
+
+---Maximum RPM of the vehicle. Despite this being a maximum value, the vehicle can exceed it. Attempts to exceed the max RPM will force the active gear ratio to be that of the 1st gear, which will provide even more torque. This is the opposite of a rev limiter. This value is only used for the calculation of the effectively applied torque.
+---@type number
+VehicleParamsEngine.maxRPM = nil
+
+---Maximum reverse speed of the vehicle The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---@type number
+VehicleParamsEngine.maxRevSpeed = nil
+
+---Maximum forward going speed of the vehicle without boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---@type number
+VehicleParamsEngine.maxSpeed = nil
+
+---Amount of RPM to automatically shift one gear down
+---@type number
+VehicleParamsEngine.shiftDownRPM = nil
+
+---Amount of RPM to automatically shift one gear up
+---@type number
+VehicleParamsEngine.shiftUpRPM = nil
+
+---
+---@type number
+VehicleParamsEngine.throttleTime = nil
+
+---
+---@type boolean
+VehicleParamsEngine.torqueBoost = nil
+
+---@class VehicleParamsAxle
+local VehicleParamsAxle = {}
+
+---
+---@type number
+VehicleParamsAxle.brakeFactor = nil
+
+---
+---@type Vector
+VehicleParamsAxle.offset = nil
+
+---
+---@type Vector
+VehicleParamsAxle.raytraceCenterOffset = nil
+
+---
+---@type Vector
+VehicleParamsAxle.raytraceOffset = nil
+
+---
+---@type number
+VehicleParamsAxle.suspension_maxBodyForce = nil
+
+---
+---@type number
+VehicleParamsAxle.suspension_springConstant = nil
+
+---
+---@type number
+VehicleParamsAxle.suspension_springDamping = nil
+
+---
+---@type number
+VehicleParamsAxle.suspension_springDampingCompression = nil
+
+---
+---@type number
+VehicleParamsAxle.suspension_stabilizerConstant = nil
+
+---
+---@type number
+VehicleParamsAxle.torqueFactor = nil
+
+---
+---@type Vector
+VehicleParamsAxle.wheelOffset = nil
+
+---Material index of braking material of the wheels. Upon braking, the wheels will be set to this material.
+---@type number
+VehicleParamsAxle.wheels_brakeMaterialIndex = nil
+
+---
+---@type number
+VehicleParamsAxle.wheels_damping = nil
+
+---
+---@type number
+VehicleParamsAxle.wheels_frictionScale = nil
+
+---
+---@type number
+VehicleParamsAxle.wheels_inertia = nil
+
+---Mass of each wheel.
+---@type number
+VehicleParamsAxle.wheels_mass = nil
+
+---Material index of the wheels by default.
+---@type number
+VehicleParamsAxle.wheels_materialIndex = nil
+
+---Radius of the wheels.
+---@type number
+VehicleParamsAxle.wheels_radius = nil
+
+---
+---@type number
+VehicleParamsAxle.wheels_rotdamping = nil
+
+---Material index of skid material of the wheels. Upon skidding ( pressing Space and sliding the vehicle ), the wheels will be set to this material.
+---@type number
+VehicleParamsAxle.wheels_skidMaterialIndex = nil
+
+---
+---@type number
+VehicleParamsAxle.wheels_springAdditionalLength = nil
+
+---@class TraceResult
+local TraceResult = {}
+
+---The entity hit by the trace.
+---@type Entity
+TraceResult.Entity = NULL
+
+---This indicates the how much of your trace length was used from 0-1 (resultLength/originalLength).
+---@type number
+TraceResult.Fraction = 1
+
+---Given the trace started in a solid enviroment, this will return at what distance the trace left the solid from 0-1. Doesn't work if the trace hit a non-worldspawn entity.
+---@type number
+TraceResult.FractionLeftSolid = 0
+
+---Indicates whether the trace hit something.
+---@type boolean
+TraceResult.Hit = false
+
+---The ID of the hitbox hit by the trace.
+---@type number
+TraceResult.HitBox = 0
+
+---Enums/HITGROUP describing what hitgroup the trace hit (not the same as HitBox).
+---@type number
+TraceResult.HitGroup = 0
+
+---Indicates whenever the trace hit a no-draw brush.
+---@type boolean
+TraceResult.HitNoDraw = false
+
+---Indicates whenever the trace did not hit the world.
+---@type boolean
+TraceResult.HitNonWorld = false
+
+---The direction of the surface that was hit as a normal vector (vector with Vector:Length of 1).
+---@type Vector
+TraceResult.HitNormal = VectorGlobal.Vector(0, 0, 0)
+
+---The position the trace stopped. This will be the provided endpos if the trace hit nothing.
+---@type Vector
+TraceResult.HitPos = nil
+
+---Indicates whenever the trace hit the sky.
+---@type boolean
+TraceResult.HitSky = false
+
+---The surface material (not texture) of whatever the trace hit. Will be `**displacement**` if the trace hit a displacement, and `**studio**` if it hit a prop.
+---@type string
+TraceResult.HitTexture = "** empty **"
+
+---Indicates whenever the trace hit the world.
+---@type boolean
+TraceResult.HitWorld = false
+
+---Enums/MAT of the material hit by the trace.
+---@type number
+TraceResult.MatType = 0
+
+---The direction of the trace as a normal vector (vector with Vector:Length of 1). Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()`
+---@type Vector
+TraceResult.Normal = nil
+
+---The PhysObj ID that was hit. Used for Entity:GetPhysicsObjectNum.
+---@type number
+TraceResult.PhysicsBone = 0
+
+---The origin of the trace. Will match the provided startpos.
+---@type Vector
+TraceResult.StartPos = nil
+
+---ID of hit surface property from `scripts/surfaceproperties.txt`. You can get the name using util.GetSurfacePropName. Used for CEffectData:SetSurfaceProp.
+---@type number
+TraceResult.SurfaceProps = 0
+
+---Indicates whenever the trace started in a solid enviroment.
+---@type boolean
+TraceResult.StartSolid = false
+
+---True if the entire trace is inside a solid.
+---@type boolean
+TraceResult.AllSolid = false
+
+---The surface flags of the hit surface. See Enums/SURF.
+---@type number
+TraceResult.SurfaceFlags = 0
+
+---The displacement flags of the hit surface. See Enums/DISPSURF.
+---@type number
+TraceResult.DispFlags = 0
+
+---The contents of the hit surface. See Enums/CONTENTS.
+---@type number
+TraceResult.Contents = nil
 
 ---@class SWEP : WEAPON
 SWEP = {}
@@ -1979,765 +2755,84 @@ SWEP.m_bPlayPickupSound = true
 ---@type string
 SWEP.IconOverride = "materials/entities/<ClassName>.png"
 
----@class TeamData
-local TeamData = {}
+---@class ViewSetup
+local ViewSetup = {}
 
----Color of the team
----@type table
-TeamData.Color = nil
-
----Whether the team is joinable or not.
----@type boolean
-TeamData.Joinable = nil
-
----Name of the team
----@type string
-TeamData.Name = nil
-
----Score of the team
----@type number
-TeamData.Score = nil
-
----@class TextData
-local TextData = {}
-
----Text to be drawn.
----@type string
-TextData.text = nil
-
----The font to draw with. List of default fonts can be found Default_Fonts.
----@type string
-TextData.font = "DermaDefault"
-
----This holds the X and Y coordinates. Key value 1 is x, key value 2 is y.
----@type table
-TextData.pos = nil
-
----The alignment of the X position. See Enums/TEXT_ALIGN
----@type number
-TextData.xalign = TEXT_ALIGN_LEFT
-
----The alignment of the Y position. See Enums/TEXT_ALIGN
----@type number
-TextData.yalign = TEXT_ALIGN_TOP
-
----The text color
----@type table
-TextData.color = color_white
-
----@class TextureData
-local TextureData = {}
-
----surface.GetTextureID number of the texture to be drawn.
----@type number
-TextureData.texture = nil
-
----The x Coordinate.
----@type number
-TextureData.x = nil
-
----The y Coordinate.
----@type number
-TextureData.y = nil
-
----The width of the texture.
----@type number
-TextureData.w = nil
-
----The height of the texture.
----@type number
-TextureData.h = nil
-
----The texture color. See Color.
----@type table
-TextureData.color = color_white
-
----@class TOOL
-local TOOL = {}
-
----If set to false, the tool won't be added to the tool menu and players will have to access it by other means.
----@type boolean
-TOOL.AddToMenu = true
-
----The tool menu category under which the tool should be listed.
----@type string
-TOOL.Category = "New Category"
-
----The console command to execute upon being selected in the Q menu.
----@type string
-TOOL.Command = "gmod_toolmode [tool]"
-
----The name of the tool in the Q menu. Common practice is to set this to "#tool.[lua filename].name" to match the name displayed in the tool information box.
----@type string
-TOOL.Name = "#[tool mode]"
-
----A key-value ( convar name-default value ) table containing the client-side convars to create. All convars will be prefixed with the filename of the tool. You can later use Tool:GetClientNumber or Tool:GetClientInfo to retrieve these values.
----@type table
-TOOL.ClientConVar = nil
-
----Same as above, but created server-side instead.
----@type table
-TOOL.ServerConVar = nil
-
----A key-value ( string name - ConVar object ) table containing the cached convar objected created from `ClientConVar`.
----@type table
-TOOL.ClientConVars = nil
-
----Same as above, but server-side (`ServerConVar`) instead.
----@type table
-TOOL.ServerConVars = nil
-
----The function that is called to build the context menu for your tool. It has one argument, namely the context menu's base panel to which all of your custom panels are going to be parented to. While it might sound like a hook, it isn't - you won't receive a `self` argument inside the function. See TOOL.BuildCPanel.
----@type function
-TOOL.BuildCPanel = nil
-
----Allows you to override the tool usage information shown when the tool is equipped. See Tool Information Display for more information.
----@type table
-TOOL.Information = nil
-
----Class name of the tool. (name of the .lua file) This is set automatically.
----@type string
-TOOL.Mode = nil
-
----The tool tab (spawnmenu.AddToolTab) to add this tool to. (The internal name, first argument)
----@type string
-TOOL.Tab = nil
-
----When enabled the game tries to run the left mouse click as soon as possible
----@type boolean
-TOOL.LeftClickAutomatic = false
-
----When enabled the game tries to run the right mouse click as soon as possible
----@type boolean
-TOOL.RightClickAutomatic = false
-
----@class ToScreenData
-local ToScreenData = {}
-
----The x coordinate on the players screen
----@type number
-ToScreenData.x = nil
-
----The y coordinate on the players screen
----@type number
-ToScreenData.y = nil
-
----The coordinate is not behind the player. **This does not mean the coordinate is on the screen.** When this is false, it means that the coordinate would not be on the screen even if the player had a full 180 degree FOV.
----@type boolean
-ToScreenData.visible = nil
-
----@class Trace
-local Trace = {}
-
----The start position of the trace
+---The view's origin/position
 ---@type Vector
-Trace.start = VectorVector(0, 0, 0)
+ViewSetup.origin = nil
 
----The end position of the trace
----@type Vector
-Trace.endpos = VectorVector(0, 0, 0)
+---The view's angles
+---@type Angle
+ViewSetup.angles = nil
 
----Things the trace should not hit. Can also be a table of entities or a function with one argument: * Entity ent - The entity that the trace hit Return true in the function to hit the entity, false to skip it. Using a function here is super slow - try to avoid it.
----@type Entity
-Trace.filter = {}
-
----The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
+---Width divided by height
 ---@type number
-Trace.mask = MASK_SOLID
+ViewSetup.aspect = nil
 
----The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
+---The x position of the viewport
 ---@type number
-Trace.collisiongroup = COLLISION_GROUP_NONE
+ViewSetup.x = nil
 
----Should the trace ignore world or not
----@type boolean
-Trace.ignoreworld = false
+---The y position of the viewport
+---@type number
+ViewSetup.y = nil
 
----If set, the trace result will be written to the supplied table instead of returning a new table
+---The width of the viewport
+---@type number
+ViewSetup.width = nil
+
+---The height of the viewport
+---@type number
+ViewSetup.height = nil
+
+---The main view's FOV, adjusted for aspect ratio.
+---@type number
+ViewSetup.fov = nil
+
+---The main view's FOV as the user setting.
+---@type number
+ViewSetup.fov_unscaled = nil
+
+---The viewmodel's FOV, adjusted for aspect ratio.
+---@type number
+ViewSetup.fovviewmodel = nil
+
+---The viewmodel's FOV as the user setting.
+---@type number
+ViewSetup.fovviewmodel_unscaled = nil
+
+---If the current view is orthogonal, a table with these keys: * left * right * top * bottom Will not be present if view is not orthagonal.
 ---@type table
-Trace.output = nil
+ViewSetup.ortho = nil
 
----@class TraceResult
-local TraceResult = {}
-
----The entity hit by the trace.
----@type Entity
-TraceResult.Entity = NULL
-
----This indicates the how much of your trace length was used from 0-1 (resultLength/originalLength).
+---The distance of the view's origin to the near clipping plane
 ---@type number
-TraceResult.Fraction = 1
+ViewSetup.znear = nil
 
----Given the trace started in a solid enviroment, this will return at what distance the trace left the solid from 0-1. Doesn't work if the trace hit a non-worldspawn entity.
+---The distance of the view's origin to the far clipping plane
 ---@type number
-TraceResult.FractionLeftSolid = 0
+ViewSetup.zfar = nil
 
----Indicates whether the trace hit something.
+---The distance of the view's origin to the near clipping plane for the viewmodel
+---@type number
+ViewSetup.znearviewmodel = nil
+
+---The distance of the view's origin to the far clipping plane for the viewmodel
+---@type number
+ViewSetup.zfarviewmodel = nil
+
+---Whether default engine bloom and tonemapping are enabled at this instant for this view.
 ---@type boolean
-TraceResult.Hit = false
+ViewSetup.bloomtone = nil
 
----The ID of the hitbox hit by the trace.
----@type number
-TraceResult.HitBox = 0
-
----Enums/HITGROUP describing what hitgroup the trace hit (not the same as HitBox).
----@type number
-TraceResult.HitGroup = 0
-
----Indicates whenever the trace hit a no-draw brush.
+---Whether `m_bRenderToSubrectOfLargerScreen` if set for this view.
 ---@type boolean
-TraceResult.HitNoDraw = false
+ViewSetup.subrect = nil
 
----Indicates whenever the trace did not hit the world.
----@type boolean
-TraceResult.HitNonWorld = false
-
----The direction of the surface that was hit as a normal vector (vector with Vector:Length of 1).
----@type Vector
-TraceResult.HitNormal = VectorGlobal.Vector(0, 0, 0)
-
----The position the trace stopped. This will be the provided endpos if the trace hit nothing.
----@type Vector
-TraceResult.HitPos = nil
-
----Indicates whenever the trace hit the sky.
----@type boolean
-TraceResult.HitSky = false
-
----The surface material (not texture) of whatever the trace hit. Will be `**displacement**` if the trace hit a displacement, and `**studio**` if it hit a prop.
----@type string
-TraceResult.HitTexture = "** empty **"
-
----Indicates whenever the trace hit the world.
----@type boolean
-TraceResult.HitWorld = false
-
----Enums/MAT of the material hit by the trace.
----@type number
-TraceResult.MatType = 0
-
----The direction of the trace as a normal vector (vector with Vector:Length of 1). Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()`
----@type Vector
-TraceResult.Normal = nil
-
----The PhysObj ID that was hit. Used for Entity:GetPhysicsObjectNum.
----@type number
-TraceResult.PhysicsBone = 0
-
----The origin of the trace. Will match the provided startpos.
----@type Vector
-TraceResult.StartPos = nil
-
----ID of hit surface property from `scripts/surfaceproperties.txt`. You can get the name using util.GetSurfacePropName. Used for CEffectData:SetSurfaceProp.
----@type number
-TraceResult.SurfaceProps = 0
-
----Indicates whenever the trace started in a solid enviroment.
----@type boolean
-TraceResult.StartSolid = false
-
----True if the entire trace is inside a solid.
----@type boolean
-TraceResult.AllSolid = false
-
----The surface flags of the hit surface. See Enums/SURF.
----@type number
-TraceResult.SurfaceFlags = 0
-
----The displacement flags of the hit surface. See Enums/DISPSURF.
----@type number
-TraceResult.DispFlags = 0
-
----The contents of the hit surface. See Enums/CONTENTS.
----@type number
-TraceResult.Contents = nil
-
----@class UGCFileInfo
-local UGCFileInfo = {}
-
----The Workshop item ID
----@type number
-UGCFileInfo.id = nil
-
----The title of the Workshop item
----@type string
-UGCFileInfo.title = nil
-
----The description of the Workshop item
----@type string
-UGCFileInfo.description = nil
-
----The internal File ID of the workshop item, if any
----@type number
-UGCFileInfo.fileid = nil
-
----The internal File ID of the workshop item preview, if any
----@type number
-UGCFileInfo.previewid = nil
-
----A URL to the preview image of the workshop item
----@type string
-UGCFileInfo.previewurl = nil
-
----The SteamID64 of the original uploader of the addon
----@type number
-UGCFileInfo.owner = nil
-
----Unix timestamp of when the item was created
----@type number
-UGCFileInfo.created = nil
-
----Unix timestamp of when the file was last updated
----@type number
-UGCFileInfo.updated = nil
-
----Whether the file is banned or not
----@type boolean
-UGCFileInfo.banned = nil
-
----Comma (,) separated list of tags, may be truncated to some length
----@type string
-UGCFileInfo.tags = nil
-
----File size of the workshop item contents
----@type number
-UGCFileInfo.size = nil
-
----Filesize of the preview file
----@type number
-UGCFileInfo.previewsize = nil
-
----If the addon is subscribed, this value represents whether it is installed on the client and its files are accessible, false otherwise.
----@type boolean
-UGCFileInfo.installed = nil
-
----If the addon is subscribed, this value represents whether it is disabled on the client, false otherwise.
----@type boolean
-UGCFileInfo.disabled = nil
-
----A list of child Workshop Items for this item. For collections this will be sub-collections, for workshop items this will be the items they depend on.
+--- It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. This will not be present if offscreen rendering is not enabled for this view. See Structures/ViewData for more info.
 ---@type table
-UGCFileInfo.children = nil
-
----We advise against using this. It may be changed or removed in a future update. The "nice" name of the Uploader, or "Unnammed Player" if we failed to get the data for some reason. Do not use this field as it will most likely not be updated in time. Use steamworks.RequestPlayerInfo instead.
----@type string
-UGCFileInfo.ownername = nil
-
----If this key is set, no other data will be present in the response. Values above 0 represent Steam Error codes, values below 0 mean the following: * -1 means Failed to create query * -2 means Failed to send query * -3 means Received 0 or more than 1 result * -4 means Failed to get item data from the response * -5 means Workshop item ID in the response is invalid * -6 means Workshop item ID in response is mismatching the requested file ID
----@type number
-UGCFileInfo.error = nil
-
----@class Undo
-local Undo = {}
-
----The player responsible who owns the undo
----@type Player
-Undo.Owner = nil
-
----The name of the text to report to the player
----@type string
-Undo.Name = nil
-
----A table of entities to be removed by the undo
----@type table
-Undo.Entities = nil
-
----A table of {function_to_call, func_arg2, func_arg3}
----@type table
-Undo.Functions = nil
-
----A custom undo text to show the client
----@type string
-Undo.CustomUndoText = nil
-
----A "nice" name of the undo, which will be used for the UI
----@type string
-Undo.NiceName = nil
-
----@class VehicleParams
-local VehicleParams = {}
-
----Wheels per axle
----@type number
-VehicleParams.wheelsPerAxle = nil
-
----Number of axles
----@type number
-VehicleParams.axleCount = nil
-
----A table of Structures/VehicleParamsAxle tables.
----@type table
-VehicleParams.axles = nil
-
----See Structures/VehicleParamsBody
----@type table
-VehicleParams.body = nil
-
----See Structures/VehicleParamsEngine
----@type table
-VehicleParams.engine = nil
-
----See Structures/VehicleParamsSteering
----@type table
-VehicleParams.steering = nil
-
----@class VehicleParamsAxle
-local VehicleParamsAxle = {}
-
----
----@type number
-VehicleParamsAxle.brakeFactor = nil
-
----
----@type Vector
-VehicleParamsAxle.offset = nil
-
----
----@type Vector
-VehicleParamsAxle.raytraceCenterOffset = nil
-
----
----@type Vector
-VehicleParamsAxle.raytraceOffset = nil
-
----
----@type number
-VehicleParamsAxle.suspension_maxBodyForce = nil
-
----
----@type number
-VehicleParamsAxle.suspension_springConstant = nil
-
----
----@type number
-VehicleParamsAxle.suspension_springDamping = nil
-
----
----@type number
-VehicleParamsAxle.suspension_springDampingCompression = nil
-
----
----@type number
-VehicleParamsAxle.suspension_stabilizerConstant = nil
-
----
----@type number
-VehicleParamsAxle.torqueFactor = nil
-
----
----@type Vector
-VehicleParamsAxle.wheelOffset = nil
-
----Material index of braking material of the wheels. Upon braking, the wheels will be set to this material.
----@type number
-VehicleParamsAxle.wheels_brakeMaterialIndex = nil
-
----
----@type number
-VehicleParamsAxle.wheels_damping = nil
-
----
----@type number
-VehicleParamsAxle.wheels_frictionScale = nil
-
----
----@type number
-VehicleParamsAxle.wheels_inertia = nil
-
----Mass of each wheel.
----@type number
-VehicleParamsAxle.wheels_mass = nil
-
----Material index of the wheels by default.
----@type number
-VehicleParamsAxle.wheels_materialIndex = nil
-
----Radius of the wheels.
----@type number
-VehicleParamsAxle.wheels_radius = nil
-
----
----@type number
-VehicleParamsAxle.wheels_rotdamping = nil
-
----Material index of skid material of the wheels. Upon skidding ( pressing Space and sliding the vehicle ), the wheels will be set to this material.
----@type number
-VehicleParamsAxle.wheels_skidMaterialIndex = nil
-
----
----@type number
-VehicleParamsAxle.wheels_springAdditionalLength = nil
-
----@class VehicleParamsBody
-local VehicleParamsBody = {}
-
----Additional gravity to be applied to the vehicle
----@type number
-VehicleParamsBody.addGravity = nil
-
----
----@type number
-VehicleParamsBody.counterTorqueFactor = nil
-
----
----@type number
-VehicleParamsBody.keepUprightTorque = nil
-
----Mass center override
----@type Vector
-VehicleParamsBody.massCenterOverride = nil
-
----Mass override
----@type number
-VehicleParamsBody.massOverride = nil
-
----Maximum angular velocity
----@type number
-VehicleParamsBody.maxAngularVelocity = nil
-
----
----@type number
-VehicleParamsBody.tiltForce = nil
-
----
----@type number
-VehicleParamsBody.tiltForceHeight = nil
-
----@class VehicleParamsEngine
-local VehicleParamsEngine = {}
-
----
----@type number
-VehicleParamsEngine.autobrakeSpeedFactor = nil
-
----
----@type number
-VehicleParamsEngine.autobrakeSpeedGain = nil
-
----This acts as the final ratio of the gearbox. It's like a master coefficient of the gearbox.
----@type number
-VehicleParamsEngine.axleRatio = nil
-
----Amount of seconds between being able to use the boost ( by pressing Shift key by default )
----@type number
-VehicleParamsEngine.boostDelay = nil
-
----Duration of the boost in seconds
----@type number
-VehicleParamsEngine.boostDuration = nil
-
----
----@type number
-VehicleParamsEngine.boostForce = nil
-
----Maximum speed while boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
----@type number
-VehicleParamsEngine.boostMaxSpeed = nil
-
----Amount of gears this vehicle has.
----@type number
-VehicleParamsEngine.gearCount = nil
-
----A table of numbers, of gear rations. Table length is equal to "gearCount" member of this table.
----@type table
-VehicleParamsEngine.gearRatio = nil
-
----The HP amount of the vehicle This value is used to calculate the effectively applied torque, along with ratios and `maxRPM`.
----@type number
-VehicleParamsEngine.horsepower = nil
-
----If `true`, the gearbox shifts gears, if `false` the gearbox stays stuck to the 1st gear (gear number 0).
----@type boolean
-VehicleParamsEngine.isAutoTransmission = nil
-
----Maximum RPM of the vehicle. Despite this being a maximum value, the vehicle can exceed it. Attempts to exceed the max RPM will force the active gear ratio to be that of the 1st gear, which will provide even more torque. This is the opposite of a rev limiter. This value is only used for the calculation of the effectively applied torque.
----@type number
-VehicleParamsEngine.maxRPM = nil
-
----Maximum reverse speed of the vehicle The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
----@type number
-VehicleParamsEngine.maxRevSpeed = nil
-
----Maximum forward going speed of the vehicle without boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
----@type number
-VehicleParamsEngine.maxSpeed = nil
-
----Amount of RPM to automatically shift one gear down
----@type number
-VehicleParamsEngine.shiftDownRPM = nil
-
----Amount of RPM to automatically shift one gear up
----@type number
-VehicleParamsEngine.shiftUpRPM = nil
-
----
----@type number
-VehicleParamsEngine.throttleTime = nil
-
----
----@type boolean
-VehicleParamsEngine.torqueBoost = nil
-
----@class VehicleParamsSteering
-local VehicleParamsSteering = {}
-
----
----@type number
-VehicleParamsSteering.boostSteeringRateFactor = nil
-
----
----@type number
-VehicleParamsSteering.boostSteeringRestRateFactor = nil
-
----
----@type number
-VehicleParamsSteering.brakeSteeringRateFactor = nil
-
----The maximum angle at which the vehicle can turn while boosting
----@type number
-VehicleParamsSteering.degreesBoost = nil
-
----The maximum angle at which the vehicle can turn while moving at max speed and not boosting
----@type number
-VehicleParamsSteering.degreesFast = nil
-
----The maximum angle at which the vehicle can turn while moving slowest
----@type number
-VehicleParamsSteering.degreesSlow = nil
-
----Disabled in Garry's Mod. In Half-Life 2: Episode 2 this dictates whether the vehicle should leave wheel dust effects when driving around
----@type boolean
-VehicleParamsSteering.dustCloud = nil
-
----Whether the vehicle is allowed to skid/drift
----@type boolean
-VehicleParamsSteering.isSkidAllowed = nil
-
----In Hammer Units
----@type number
-VehicleParamsSteering.powerSlideAccel = nil
-
----
----@type number
-VehicleParamsSteering.speedFast = nil
-
----
----@type number
-VehicleParamsSteering.speedSlow = nil
-
----
----@type number
-VehicleParamsSteering.steeringExponent = nil
-
----
----@type number
-VehicleParamsSteering.steeringRateFast = nil
-
----
----@type number
-VehicleParamsSteering.steeringRateSlow = nil
-
----
----@type number
-VehicleParamsSteering.steeringRestRateFast = nil
-
----
----@type number
-VehicleParamsSteering.steeringRestRateSlow = nil
-
----
----@type number
-VehicleParamsSteering.throttleSteeringRestRateFactor = nil
-
----
----@type number
-VehicleParamsSteering.turnThrottleReduceFast = nil
-
----
----@type number
-VehicleParamsSteering.turnThrottleReduceSlow = nil
-
----@class VehicleTable
-local VehicleTable = {}
-
----Entity class name for this vehicle.
----@type string
-VehicleTable.Class = nil
-
----Nice name for this vehicle, for UI purposes.
----@type string
-VehicleTable.Name = nil
-
----Model of the vehicle.
----@type string
-VehicleTable.Model = nil
-
----A list of key-value pairs to apply to the vehicle entity. Possible valid keys that can be set are: * `vehiclescript` * `limitview` * `vehiclelocked` * `cargovisible` * `enablegun`
----@type table
-VehicleTable.KeyValues = nil
-
----Offset away the surface player is looking at to spawn at.
----@type number
-VehicleTable.Offset = nil
-
----Set these members on the spawned vehicle's table (Entity:GetTable) to given values.
----@type table
-VehicleTable.Members = nil
-
----Author of the vehicle, for UI purposes.
----@type string
-VehicleTable.Author = nil
-
----Category of this vehicle, for UI purposes.
----@type string
-VehicleTable.Category = "Other"
-
----A small description of the vehicle, for UI purposes.
----@type string
-VehicleTable.Information = nil
-
----@class VideoData
-local VideoData = {}
-
----The video container format. Valid options are: `webm`, `ogg`
----@type string
-VideoData.container = nil
-
----The video codec. Valid options are: `vp8`, `theora`
----@type string
-VideoData.video = nil
-
----The audio codec. Valid options are: `vorbis`
----@type string
-VideoData.audio = nil
-
----The video quality
----@type number
-VideoData.quality = nil
-
----The record bitrate
----@type number
-VideoData.bitrate = nil
-
----Frames per second
----@type number
-VideoData.fps = nil
-
----Lock the frame count per second
----@type boolean
-VideoData.lockfps = nil
-
----The file name for the video
----@type string
-VideoData.name = nil
-
----The videos width
----@type number
-VideoData.width = nil
-
----The videos height
----@type number
-VideoData.height = nil
+ViewSetup.offcenter = nil
 
 ---@class ViewData
 local ViewData = {}
@@ -2841,82 +2936,3 @@ ViewData.viewid = 0
 ---This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders. It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. Values outside the viewport are allowed, but not recommended - instead you should increase the view FOV.
 ---@type table
 ViewData.offcenter = nil
-
----@class ViewSetup
-local ViewSetup = {}
-
----The view's origin/position
----@type Vector
-ViewSetup.origin = nil
-
----The view's angles
----@type Angle
-ViewSetup.angles = nil
-
----Width divided by height
----@type number
-ViewSetup.aspect = nil
-
----The x position of the viewport
----@type number
-ViewSetup.x = nil
-
----The y position of the viewport
----@type number
-ViewSetup.y = nil
-
----The width of the viewport
----@type number
-ViewSetup.width = nil
-
----The height of the viewport
----@type number
-ViewSetup.height = nil
-
----The main view's FOV, adjusted for aspect ratio.
----@type number
-ViewSetup.fov = nil
-
----The main view's FOV as the user setting.
----@type number
-ViewSetup.fov_unscaled = nil
-
----The viewmodel's FOV, adjusted for aspect ratio.
----@type number
-ViewSetup.fovviewmodel = nil
-
----The viewmodel's FOV as the user setting.
----@type number
-ViewSetup.fovviewmodel_unscaled = nil
-
----If the current view is orthogonal, a table with these keys: * left * right * top * bottom Will not be present if view is not orthagonal.
----@type table
-ViewSetup.ortho = nil
-
----The distance of the view's origin to the near clipping plane
----@type number
-ViewSetup.znear = nil
-
----The distance of the view's origin to the far clipping plane
----@type number
-ViewSetup.zfar = nil
-
----The distance of the view's origin to the near clipping plane for the viewmodel
----@type number
-ViewSetup.znearviewmodel = nil
-
----The distance of the view's origin to the far clipping plane for the viewmodel
----@type number
-ViewSetup.zfarviewmodel = nil
-
----Whether default engine bloom and tonemapping are enabled at this instant for this view.
----@type boolean
-ViewSetup.bloomtone = nil
-
----Whether `m_bRenderToSubrectOfLargerScreen` if set for this view.
----@type boolean
-ViewSetup.subrect = nil
-
---- It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. This will not be present if offscreen rendering is not enabled for this view. See Structures/ViewData for more info.
----@type table
-ViewSetup.offcenter = nil

@@ -2,6 +2,18 @@
 
 derma = {}
 
+---[CLIENT AND MENU] Returns a copy of the table containing every Derma skin
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetSkinTable)
+---@return table # Table of every Derma skin
+function derma.GetSkinTable() end
+
+---[CLIENT AND MENU] Returns the derma.Controls table, a list of all derma controls registered with derma.DefineControl.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetControlList)
+---@return table # A listing of all available derma-based controls. See derma.Controls for structure and contents.
+function derma.GetControlList() end
+
 ---[CLIENT AND MENU] Gets the color from a Derma skin of a panel and returns default color if not found
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.Color)
@@ -26,6 +38,23 @@ function derma.Color(name, pnl, default) end
 ---@return table # A table containing the new control's methods and properties
 function derma.DefineControl(name, description, tab, base) end
 
+---[CLIENT AND MENU] Returns how many times derma.RefreshSkins has been called.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.SkinChangeIndex)
+---@return number # Amount of times derma.RefreshSkins has been called.
+function derma.SkinChangeIndex() end
+
+---[CLIENT AND MENU] Returns the default skin table, which can be changed with the hook GM:ForceDermaSkin
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetDefaultSkin)
+---@return table # Skin table
+function derma.GetDefaultSkin() end
+
+---[CLIENT AND MENU] Clears all cached panels so that they reassess which skin they should be using.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.RefreshSkins)
+function derma.RefreshSkins() end
+
 ---[CLIENT AND MENU] Defines a new skin so that it is usable by Derma. The default skin can be found in `garrysmod/lua/skins/default.lua`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.DefineSkin)
@@ -34,41 +63,12 @@ function derma.DefineControl(name, description, tab, base) end
 ---@param skin table Table containing skin data
 function derma.DefineSkin(name, descriptions, skin) end
 
----[CLIENT AND MENU] Returns the derma.Controls table, a list of all derma controls registered with derma.DefineControl.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetControlList)
----@return table # A listing of all available derma-based controls. See derma.Controls for structure and contents.
-function derma.GetControlList() end
-
----[CLIENT AND MENU] Returns the default skin table, which can be changed with the hook GM:ForceDermaSkin
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetDefaultSkin)
----@return table # Skin table
-function derma.GetDefaultSkin() end
-
 ---[CLIENT AND MENU] Returns the skin table of the skin with the supplied name
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetNamedSkin)
 ---@param name string Name of skin
 ---@return table # Skin table
 function derma.GetNamedSkin(name) end
-
----[CLIENT AND MENU] Returns a copy of the table containing every Derma skin
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetSkinTable)
----@return table # Table of every Derma skin
-function derma.GetSkinTable() end
-
----[CLIENT AND MENU] Clears all cached panels so that they reassess which skin they should be using.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/derma.RefreshSkins)
-function derma.RefreshSkins() end
-
----[CLIENT AND MENU] Returns how many times derma.RefreshSkins has been called.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/derma.SkinChangeIndex)
----@return number # Amount of times derma.RefreshSkins has been called.
-function derma.SkinChangeIndex() end
 
 ---[CLIENT AND MENU] Calls the specified hook for the given panel
 ---

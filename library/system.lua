@@ -23,40 +23,6 @@ function system.BatteryPower() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.FlashWindow)
 function system.FlashWindow() end
 
----[SHARED AND MENU] Returns the country code of this computer, determined by the localisation settings of the OS.
----
---- This function does not work on Dedicated Servers and will instead return no value.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/system.GetCountry)
----@return string # Two-letter country code, using [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard.
-function system.GetCountry() end
-
----[SHARED AND MENU] Returns whether or not the game window has focus.
----
---- This function does not work on dedicated servers and will instead return no value.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/system.HasFocus)
----@return boolean # Whether or not the game window has focus.
-function system.HasFocus() end
-
----[SHARED AND MENU] Returns whether the current OS is Linux.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsLinux)
----@return boolean # Whether or not the game is running on Linux.
-function system.IsLinux() end
-
----[SHARED AND MENU] Returns whether the current OS is OSX.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsOSX)
----@return boolean # Whether or not the game is running on OSX.
-function system.IsOSX() end
-
----[CLIENT AND MENU] Returns whether the game is being run in a window or in fullscreen (you can change this by opening the menu, clicking 'Options', then clicking the 'Video' tab, and changing the Display Mode using the dropdown menu):
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsWindowed)
----@return boolean # Is the game running in a window?
-function system.IsWindowed() end
-
 ---[SHARED AND MENU] Returns whether the current OS is Windows.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsWindows)
@@ -70,6 +36,40 @@ function system.IsWindows() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/system.SteamTime)
 ---@return number # Current Steam-synchronized Unix time.
 function system.SteamTime() end
+
+---[CLIENT AND MENU] Returns whether the game is being run in a window or in fullscreen (you can change this by opening the menu, clicking 'Options', then clicking the 'Video' tab, and changing the Display Mode using the dropdown menu):
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsWindowed)
+---@return boolean # Is the game running in a window?
+function system.IsWindowed() end
+
+---[SHARED AND MENU] Returns the country code of this computer, determined by the localisation settings of the OS.
+---
+--- This function does not work on Dedicated Servers and will instead return no value.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/system.GetCountry)
+---@return string # Two-letter country code, using [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard.
+function system.GetCountry() end
+
+---[SHARED AND MENU] Returns whether the current OS is Linux.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsLinux)
+---@return boolean # Whether or not the game is running on Linux.
+function system.IsLinux() end
+
+---[SHARED AND MENU] Returns whether or not the game window has focus.
+---
+--- This function does not work on dedicated servers and will instead return no value.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/system.HasFocus)
+---@return boolean # Whether or not the game window has focus.
+function system.HasFocus() end
+
+---[SHARED AND MENU] Returns whether the current OS is OSX.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/system.IsOSX)
+---@return boolean # Whether or not the game is running on OSX.
+function system.IsOSX() end
 
 ---[SHARED AND MENU] Returns the amount of seconds since the Steam user last moved their mouse.
 ---

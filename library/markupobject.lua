@@ -14,17 +14,17 @@ local MarkupObject = {}
 ---@param textAlign? number The alignment of the text horizontally using Enums/TEXT_ALIGN
 function MarkupObject:Draw(xOffset, yOffset, xAlign, yAlign, alphaoverride, textAlign) end
 
----[CLIENT AND MENU] Gets computed the height of the markupobject.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetHeight)
----@return number # The computed height.
-function MarkupObject:GetHeight() end
-
 ---[CLIENT AND MENU] Gets maximum width for this markup object as defined in markup.Parse.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetMaxWidth)
 ---@return number # The max width.
 function MarkupObject:GetMaxWidth() end
+
+---[CLIENT AND MENU] Gets computed the height of the markupobject.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetHeight)
+---@return number # The computed height.
+function MarkupObject:GetHeight() end
 
 ---[CLIENT AND MENU] Gets computed the width of the markupobject.
 ---

@@ -1,8 +1,5 @@
 ---@meta
 
----@class MatSelect : ContextBase
-local MatSelect = {}
-
 ---[CLIENT] Clears all added materials and clears selection.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:Clear)
@@ -20,3 +17,6 @@ function MatSelect:FindMaterialByValue(mat) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:SelectMaterial)
 ---@param mat DImageButton The material to select, found by MatSelect:FindMaterialByValue
 function MatSelect:SelectMaterial(mat) end
+
+---@class MatSelect : ContextBase
+local MatSelect = {}

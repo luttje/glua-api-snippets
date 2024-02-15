@@ -2,13 +2,16 @@
 
 cleanup = {}
 
----[SERVER] Adds an entity to a player's cleanup list.
+---[SHARED] Registers a new cleanup type.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Add)
----@param pl Player Who's cleanup list to add the entity to.
----@param type string The type of cleanup.
----@param ent Entity The entity to add to the player's cleanup list.
-function cleanup.Add(pl, type, ent) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Register)
+---@param type string Name of type.
+function cleanup.Register(type) end
+
+---[SERVER] Gets the cleanup list.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetList)
+function cleanup.GetList() end
 
 ---[SERVER] Called by the `gmod_admin_cleanup` console command. Allows admins to clean up the server.
 ---
@@ -18,6 +21,12 @@ function cleanup.Add(pl, type, ent) end
 ---@param args table First and only arg is the cleanup type.
 function cleanup.CC_AdminCleanup(pl, command, args) end
 
+---[SHARED] Gets the table of cleanup types.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetTable)
+---@return table # A list of cleanup types.
+function cleanup.GetTable() end
+
 ---[SERVER] Called by the `gmod_cleanup` console command. Allows players to cleanup their own props.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.CC_Cleanup)
@@ -26,22 +35,18 @@ function cleanup.CC_AdminCleanup(pl, command, args) end
 ---@param args table First and only argument is the cleanup type.
 function cleanup.CC_Cleanup(pl, command, args) end
 
----[SERVER] Gets the cleanup list.
+---[SERVER] Adds an entity to a player's cleanup list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetList)
-function cleanup.GetList() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Add)
+---@param pl Player Who's cleanup list to add the entity to.
+---@param type string The type of cleanup.
+---@param ent Entity The entity to add to the player's cleanup list.
+function cleanup.Add(pl, type, ent) end
 
----[SHARED] Gets the table of cleanup types.
+---[CLIENT] Repopulates the clients cleanup menu
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.GetTable)
----@return table # A list of cleanup types.
-function cleanup.GetTable() end
-
----[SHARED] Registers a new cleanup type.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.Register)
----@param type string Name of type.
-function cleanup.Register(type) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.UpdateUI)
+function cleanup.UpdateUI() end
 
 ---[SERVER] Replaces one entity in the cleanup module with another
 ---
@@ -50,8 +55,3 @@ function cleanup.Register(type) end
 ---@param to Entity New entity
 ---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
-
----[CLIENT] Repopulates the clients cleanup menu
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.UpdateUI)
-function cleanup.UpdateUI() end

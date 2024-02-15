@@ -3,11 +3,16 @@
 ---@class DBinder : DButton
 local DBinder = {}
 
----[CLIENT] Gets the code of the key currently bound by the DBinder. Same as DBinder:GetValue.
+---[CLIENT] Alias of DBinder:SetSelectedNumber.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:GetSelectedNumber)
----@return number # The key code of the bound key. See Enums/KEY.
-function DBinder:GetSelectedNumber() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:SetValue)
+---@param keyCode number The key code of the key to bind. See Enums/KEY.
+function DBinder:SetValue(keyCode) end
+
+---[CLIENT] Used to set the text of the DBinder to the current key binding, or `NONE`.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:UpdateText)
+function DBinder:UpdateText() end
 
 ---[CLIENT] Gets the code of the key currently bound by the DBinder. Same as DBinder:GetSelectedNumber.
 ---
@@ -21,13 +26,8 @@ function DBinder:GetValue() end
 ---@param keyCode number The key code of the key to bind. See Enums/KEY.
 function DBinder:SetSelectedNumber(keyCode) end
 
----[CLIENT] Alias of DBinder:SetSelectedNumber.
+---[CLIENT] Gets the code of the key currently bound by the DBinder. Same as DBinder:GetValue.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:SetValue)
----@param keyCode number The key code of the key to bind. See Enums/KEY.
-function DBinder:SetValue(keyCode) end
-
----[CLIENT] Used to set the text of the DBinder to the current key binding, or `NONE`.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:UpdateText)
-function DBinder:UpdateText() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:GetSelectedNumber)
+---@return number # The key code of the bound key. See Enums/KEY.
+function DBinder:GetSelectedNumber() end

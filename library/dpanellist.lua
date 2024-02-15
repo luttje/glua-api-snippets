@@ -1,32 +1,5 @@
 ---@meta
 
----@deprecated Use a combination of DIconLayout, DListLayout and DScrollPanel instead.
----@class DPanelList : DPanel
-local DPanelList = {}
-
----[CLIENT AND MENU] Adds a existing panel to the end of DPanelList.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:AddItem)
----@param pnl Panel Panel to be used as element of list
----@param state? string If set to "ownline", the item will take its own entire line.
-function DPanelList:AddItem(pnl, state) end
-
----[CLIENT AND MENU] Removes all items.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:CleanList)
-function DPanelList:CleanList() end
-
----[CLIENT AND MENU] Enables/creates the vertical scroll bar so that the panel list can be scrolled through.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:EnableVerticalScrollbar)
-function DPanelList:EnableVerticalScrollbar() end
-
----[CLIENT AND MENU] Returns all panels has added by DPanelList:AddItem
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetItems)
----@return table # A table of panels used as items of DPanelList.
-function DPanelList:GetItems() end
-
 ---[CLIENT AND MENU] Returns offset of list items from the panel borders set by DPanelList:SetPadding
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetPadding)
@@ -38,6 +11,22 @@ function DPanelList:GetPadding() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetSpacing)
 ---@return number # Distance between panels
 function DPanelList:GetSpacing() end
+
+---[CLIENT AND MENU] Returns all panels has added by DPanelList:AddItem
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetItems)
+---@return table # A table of panels used as items of DPanelList.
+function DPanelList:GetItems() end
+
+---[CLIENT AND MENU] Removes all items.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:CleanList)
+function DPanelList:CleanList() end
+
+---[CLIENT AND MENU] Enables/creates the vertical scroll bar so that the panel list can be scrolled through.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:EnableVerticalScrollbar)
+function DPanelList:EnableVerticalScrollbar() end
 
 ---[CLIENT AND MENU] Insert given panel at the top of the list.
 ---
@@ -57,8 +46,19 @@ function DPanelList:Rebuild() end
 ---@param Offset number Offset from panel borders
 function DPanelList:SetPadding(Offset) end
 
+---[CLIENT AND MENU] Adds a existing panel to the end of DPanelList.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:AddItem)
+---@param pnl Panel Panel to be used as element of list
+---@param state? string If set to "ownline", the item will take its own entire line.
+function DPanelList:AddItem(pnl, state) end
+
 ---[CLIENT AND MENU] Sets distance between list items
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:SetSpacing)
 ---@param Distance number Distance between panels
 function DPanelList:SetSpacing(Distance) end
+
+---@deprecated Use a combination of DIconLayout, DListLayout and DScrollPanel instead.
+---@class DPanelList : DPanel
+local DPanelList = {}

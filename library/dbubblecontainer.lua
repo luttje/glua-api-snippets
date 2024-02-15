@@ -1,8 +1,5 @@
 ---@meta
 
----@class DBubbleContainer : DPanel
-local DBubbleContainer = {}
-
 ---[CLIENT] Sets the speech bubble position and size along with the dialog point position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DBubbleContainer:OpenForPos)
@@ -11,3 +8,6 @@ local DBubbleContainer = {}
 ---@param w number The width of the bubble container.
 ---@param h number The height of the bubble container.
 function DBubbleContainer:OpenForPos(x, y, w, h) end
+
+---@class DBubbleContainer : DPanel
+local DBubbleContainer = {}

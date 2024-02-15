@@ -1,14 +1,9 @@
 ---@meta
 
----@class DEntityProperties : DProperties
-local DEntityProperties = {}
-
----[CLIENT] Called internally by DEntityProperties:RebuildControls.
+---[CLIENT] Called internally by DEntityProperties:SetEntity to rebuild the controls.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EditVariable)
----@param varname string
----@param editdata table
-function DEntityProperties:EditVariable(varname, editdata) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)
+function DEntityProperties:RebuildControls() end
 
 ---[CLIENT] Called internally when an entity being edited became invalid.
 ---
@@ -17,13 +12,18 @@ function DEntityProperties:EditVariable(varname, editdata) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EntityLost)
 function DEntityProperties:EntityLost() end
 
----[CLIENT] Called internally by DEntityProperties:SetEntity to rebuild the controls.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)
-function DEntityProperties:RebuildControls() end
+---@class DEntityProperties : DProperties
+local DEntityProperties = {}
 
 ---[CLIENT] Sets the entity to be edited by this panel. The entity must support the Editable Entities system or nothing will happen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:SetEntity)
 ---@param ent Entity The entity to edit
 function DEntityProperties:SetEntity(ent) end
+
+---[CLIENT] Called internally by DEntityProperties:RebuildControls.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EditVariable)
+---@param varname string
+---@param editdata table
+function DEntityProperties:EditVariable(varname, editdata) end

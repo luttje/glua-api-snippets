@@ -1,5 +1,10 @@
 ---@meta
 
+---[CLIENT] Internally calls ContentSidebar:EnableSearch, ContentSidebar:CreateSaveNotification and creates a ContentSidebarToolbox which is accessible under ContentSidebar.Toolbox. Call the Hook SANDBOX:OpenToolbox to open the created Toolbox
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify)
+function ContentSidebar:EnableModify() end
+
 ---@class ContentSidebar : DPanel
 local ContentSidebar = {}
 
@@ -9,11 +14,6 @@ local ContentSidebar = {}
 ---@param style string
 ---@param hookname? string A Populate Hook like PopulateEntities
 function ContentSidebar:CreateSaveNotification(style, hookname) end
-
----[CLIENT] Internally calls ContentSidebar:EnableSearch, ContentSidebar:CreateSaveNotification and creates a ContentSidebarToolbox which is accessible under ContentSidebar.Toolbox. Call the Hook SANDBOX:OpenToolbox to open the created Toolbox
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify)
-function ContentSidebar:EnableModify() end
 
 ---[CLIENT] Creates a search bar which will be displayed over the Nodes.
 ---

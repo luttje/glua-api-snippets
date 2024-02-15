@@ -2,30 +2,25 @@
 
 vgui = {}
 
----[CLIENT AND MENU] Creates a panel by the specified classname.
---- Custom VGUI elements are not loaded instantly. Use GM:OnGamemodeLoaded to create them on startup.
+---[CLIENT AND MENU] Returns whenever the cursor is currently active and visible.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Create)
----@generic T: Panel
----@param classname `T` Classname of the panel to create.
----
---- Default panel classnames can be found on the VGUI Element List.
----
---- New panels can be registered via vgui.Register
----
----@param parent Panel? Panel to parent to.
----@param name string? Custom name of the created panel for scripting/debugging purposes. Can be retrieved with Panel:GetName.
----@return T #The created panel, or `nil` if creation failed for whatever reason.
-function vgui.Create(classname, parent, name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CursorVisible)
+---@return boolean # Whether the cursor is visible or not.
+function vgui.CursorVisible() end
 
----[CLIENT AND MENU] Creates a panel from table. Typically used with vgui.RegisterFile and vgui.RegisterTable.
+---[CLIENT AND MENU] Returns the panel which is currently receiving keyboard input.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CreateFromTable)
----@param metatable table Your PANEL table.
----@param parent? Panel Which panel to parent the newly created panel to.
----@param name? string Custom name of the created panel for scripting/debugging purposes. Can be retrieved with Panel:GetName.
----@return Panel # The created panel, or `nil` if creation failed for whatever reason.
-function vgui.CreateFromTable(metatable, parent, name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetKeyboardFocus)
+---@return Panel # The panel with keyboard focus
+function vgui.GetKeyboardFocus() end
+
+---[CLIENT AND MENU] Returns the global world panel which is the parent to all others, except for the HUD panel.
+---
+--- See also Global.GetHUDPanel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetWorldPanel)
+---@return Panel # The world panel
+function vgui.GetWorldPanel() end
 
 ---[CLIENT AND MENU] Creates an engine panel.
 ---
@@ -36,25 +31,11 @@ function vgui.CreateFromTable(metatable, parent, name) end
 ---@return Panel # Created panel
 function vgui.CreateX(class, parent, name) end
 
----[CLIENT AND MENU] Returns whenever the cursor is currently active and visible.
+---[CLIENT AND MENU] Returns whenever the cursor is hovering the world panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CursorVisible)
----@return boolean # Whether the cursor is visible or not.
-function vgui.CursorVisible() end
-
----[CLIENT AND MENU] Returns true if Lua-defined panel exists by name. Uses vgui.GetControlTable internally.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Exists)
----@param Panelname string The name of the panel to get test.
----@return boolean # Whether a panel with given name was registered yet or not.
-function vgui.Exists(Panelname) end
-
----[CLIENT AND MENU] Returns whether the currently focused panel is a child of the given one.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.FocusedHasParent)
----@param parent Panel The parent panel to check the currently focused one against. This doesn't need to be a direct parent (focused panel can be a child of a child and so on).
----@return boolean # Whether or not the focused panel is a child of the passed one.
-function vgui.FocusedHasParent(parent) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.IsHoveringWorld)
+---@return boolean # isHoveringWorld
+function vgui.IsHoveringWorld() end
 
 ---[CLIENT AND MENU] Returns the table of a Lua-defined panel by name. Does not return parent members of the table!
 ---
@@ -73,25 +54,28 @@ function vgui.GetControlTable(Panelname) end
 ---@return Panel # The panel that the user is currently hovering over with their cursor.
 function vgui.GetHoveredPanel() end
 
----[CLIENT AND MENU] Returns the panel which is currently receiving keyboard input.
+---[CLIENT AND MENU] Creates a panel by the specified classname.
+--- Custom VGUI elements are not loaded instantly. Use GM:OnGamemodeLoaded to create them on startup.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetKeyboardFocus)
----@return Panel # The panel with keyboard focus
-function vgui.GetKeyboardFocus() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Create)
+---@generic T: Panel
+---@param classname `T` Classname of the panel to create.
+---
+--- Default panel classnames can be found on the VGUI Element List.
+---
+--- New panels can be registered via vgui.Register
+---
+---@param parent Panel? Panel to parent to.
+---@param name string? Custom name of the created panel for scripting/debugging purposes. Can be retrieved with Panel:GetName.
+---@return T #The created panel, or `nil` if creation failed for whatever reason.
+function vgui.Create(classname, parent, name) end
 
----[CLIENT AND MENU] Returns the global world panel which is the parent to all others, except for the HUD panel.
+---[CLIENT AND MENU] Returns true if Lua-defined panel exists by name. Uses vgui.GetControlTable internally.
 ---
---- See also Global.GetHUDPanel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetWorldPanel)
----@return Panel # The world panel
-function vgui.GetWorldPanel() end
-
----[CLIENT AND MENU] Returns whenever the cursor is hovering the world panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.IsHoveringWorld)
----@return boolean # isHoveringWorld
-function vgui.IsHoveringWorld() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Exists)
+---@param Panelname string The name of the panel to get test.
+---@return boolean # Whether a panel with given name was registered yet or not.
+function vgui.Exists(Panelname) end
 
 ---[CLIENT AND MENU] Registers a panel for later creation via vgui.Create.
 ---
@@ -101,6 +85,22 @@ function vgui.IsHoveringWorld() end
 ---@param baseName? string Classname of a panel to inherit functionality from. Functions with same names will be overwritten preferring the panel that is being registered.
 ---@return table # The given panel table from second argument
 function vgui.Register(classname, panelTable, baseName) end
+
+---[CLIENT AND MENU] Creates a panel from a table, used alongside vgui.RegisterFile and vgui.RegisterTable to efficiently define, register, and instantiate custom panels.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CreateFromTable)
+---@param metatable table Your PANEL table.
+---@param parent? Panel Which panel to parent the newly created panel to.
+---@param name? string Custom name of the created panel for scripting/debugging purposes. Can be retrieved with Panel:GetName.
+---@return Panel # The created panel, or `nil` if creation failed for whatever reason.
+function vgui.CreateFromTable(metatable, parent, name) end
+
+---[CLIENT AND MENU] Returns whether the currently focused panel is a child of the given one.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.FocusedHasParent)
+---@param parent Panel The parent panel to check the currently focused one against. This doesn't need to be a direct parent (focused panel can be a child of a child and so on).
+---@return boolean # Whether or not the focused panel is a child of the passed one.
+function vgui.FocusedHasParent(parent) end
 
 ---[CLIENT AND MENU] Registers a new VGUI panel from a file, to be used with vgui.CreateFromTable.
 ---

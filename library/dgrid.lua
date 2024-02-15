@@ -1,7 +1,10 @@
 ---@meta
 
----@class DGrid : Panel
-local DGrid = {}
+---[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
+---@return number # The width of each column
+function DGrid:GetColWide() end
 
 ---[CLIENT AND MENU] Adds a new item to the grid.
 ---
@@ -15,38 +18,8 @@ function DGrid:AddItem(item) end
 ---@return number # The number of columns of this DGrid
 function DGrid:GetCols() end
 
----[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
----@return number # The width of each column
-function DGrid:GetColWide() end
-
----[CLIENT AND MENU] Returns a list of panels in the grid.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetItems)
----@return table # A list of Panels.
-function DGrid:GetItems() end
-
----[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
----@return number # The height of each row
-function DGrid:GetRowHeight() end
-
----[CLIENT AND MENU] Removes given panel from the DGrid:GetItems.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:RemoveItem)
----@param item Panel Item to remove from the grid
----@param bDontDelete? boolean If set to true, the actual panel will not be removed via Panel:Remove.
-function DGrid:RemoveItem(item, bDontDelete) end
-
----[CLIENT AND MENU] Sets the number of columns this panel should have.
----
---- The DGrid will resize its width to match this value.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetCols)
----@param cols number The desired number of columns
-function DGrid:SetCols(cols) end
+---@class DGrid : Panel
+local DGrid = {}
 
 ---[CLIENT AND MENU] Sets the width of each column.
 ---
@@ -56,6 +29,13 @@ function DGrid:SetCols(cols) end
 ---@param colWidth number The width of each column.
 function DGrid:SetColWide(colWidth) end
 
+---[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
+---@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
+---@param desc? boolean True for descending order, false for ascending.
+function DGrid:SortByMember(key, desc) end
+
 ---[CLIENT AND MENU] Sets the height of each row.
 ---
 --- The cell panels (grid items) will not be resized or centered.
@@ -64,9 +44,29 @@ function DGrid:SetColWide(colWidth) end
 ---@param rowHeight number The height of each row
 function DGrid:SetRowHeight(rowHeight) end
 
----[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
+---[CLIENT AND MENU] Sets the number of columns this panel should have.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
----@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.
----@param desc? boolean True for descending order, false for ascending.
-function DGrid:SortByMember(key, desc) end
+--- The DGrid will resize its width to match this value.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetCols)
+---@param cols number The desired number of columns
+function DGrid:SetCols(cols) end
+
+---[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
+---@return number # The height of each row
+function DGrid:GetRowHeight() end
+
+---[CLIENT AND MENU] Returns a list of panels in the grid.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetItems)
+---@return table # A list of Panels.
+function DGrid:GetItems() end
+
+---[CLIENT AND MENU] Removes given panel from the DGrid:GetItems.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:RemoveItem)
+---@param item Panel Item to remove from the grid
+---@param bDontDelete? boolean If set to true, the actual panel will not be removed via Panel:Remove.
+function DGrid:RemoveItem(item, bDontDelete) end

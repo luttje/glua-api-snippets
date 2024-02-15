@@ -2,6 +2,12 @@
 
 sound = {}
 
+---[SHARED] Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
+---@param filepath string Path to the script file to load.
+function sound.AddSoundOverrides(filepath) end
+
 ---[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 ---
 --- You can find a list of common sound scripts that are shipped with the game by default here: Common Sounds.
@@ -10,11 +16,11 @@ sound = {}
 ---@param soundData table The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
 
----[SHARED] Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
+---[SHARED] Returns a list of all registered sound scripts.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
----@param filepath string Path to the script file to load.
-function sound.AddSoundOverrides(filepath) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
+---@return table # The list/array of all registered sound scripts ( No other information is provided )
+function sound.GetTable() end
 
 ---[SERVER] Emits a sound hint to the game elements to react to, for example to repel or attract antlions.
 ---
@@ -38,6 +44,13 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---@param callback fun(sample: integer): number A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
 function sound.Generate(indentifier, samplerate, length, callback) end
 
+---[SHARED] Returns properties of the soundscript.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
+---@param name string The name of the sound script
+---@return table # The properties of the soundscript. See Structures/SoundData
+function sound.GetProperties(name) end
+
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
@@ -46,18 +59,30 @@ function sound.Generate(indentifier, samplerate, length, callback) end
 ---@return table # A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
 
----[SHARED] Returns properties of the soundscript.
+---[CLIENT] Allows you to play external sound files, as well as online radio streams.
+--- You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
----@param name string The name of the sound script
----@return table # The properties of the soundscript. See Structures/SoundData
-function sound.GetProperties(name) end
-
----[SHARED] Returns a list of all registered sound scripts.
+--- For offline file playback, see sound.PlayFile.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
----@return table # The list/array of all registered sound scripts ( No other information is provided )
-function sound.GetTable() end
+--- Due to a bug with [BASS](http://www.un4seen.com/), AAC codec streams cannot be played in 3D mode.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.PlayURL)
+---@param url string The URL of the sound to play
+---@param flags string Flags for the sound. Can be one or more of following, separated by a space (`" "`):
+--- * 3d - Makes the sound 3D, so you can set its position
+--- * mono - Forces the sound to have only one channel
+--- * noplay - Forces the sound not to play as soon as this function is called
+--- * noblock - Disables streaming in blocks. It is more resource-intensive, but it is required for IGModAudioChannel:SetTime.
+---
+---
+---
+---
+--- If you don't want to use any of the above, you can just leave it as `""`.
+---@param callback fun(soundchannel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded. It has the following arguments:
+--- * IGModAudioChannel soundchannel - The sound channel
+--- * number errorID - ID of an error, if an error has occured
+--- * string errorName - Name of an error, if an error has occured
+function sound.PlayURL(url, flags, callback) end
 
 ---[SHARED] Plays a sound from the specified position in the world.
 --- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
@@ -100,28 +125,3 @@ function sound.Play(snd, pos, level, pitch, volume) end
 --- * number errorID - ID of an error if an error has occured. Will be nil, otherwise.
 --- * string errorName - Name of an error if an error has occured. Will be nil, otherwise.
 function sound.PlayFile(path, flags, callback) end
-
----[CLIENT] Allows you to play external sound files, as well as online radio streams.
---- You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
----
---- For offline file playback, see sound.PlayFile.
----
---- Due to a bug with [BASS](http://www.un4seen.com/), AAC codec streams cannot be played in 3D mode.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.PlayURL)
----@param url string The URL of the sound to play
----@param flags string Flags for the sound. Can be one or more of following, separated by a space (`" "`):
---- * 3d - Makes the sound 3D, so you can set its position
---- * mono - Forces the sound to have only one channel
---- * noplay - Forces the sound not to play as soon as this function is called
---- * noblock - Disables streaming in blocks. It is more resource-intensive, but it is required for IGModAudioChannel:SetTime.
----
----
----
----
---- If you don't want to use any of the above, you can just leave it as `""`.
----@param callback fun(soundchannel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded. It has the following arguments:
---- * IGModAudioChannel soundchannel - The sound channel
---- * number errorID - ID of an error, if an error has occured
---- * string errorName - Name of an error, if an error has occured
-function sound.PlayURL(url, flags, callback) end

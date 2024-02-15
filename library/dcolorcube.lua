@@ -1,13 +1,10 @@
 ---@meta
 
----@class DColorCube : DSlider
-local DColorCube = {}
-
----[CLIENT AND MENU] Returns the base Color set by DColorCube:SetBaseRGB.
+---[CLIENT AND MENU] Returns the color cube's current set color.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetBaseRGB)
----@return table # A Color
-function DColorCube:GetBaseRGB() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetRGB)
+---@return table # The set color, uses Color.
+function DColorCube:GetRGB() end
 
 ---[CLIENT AND MENU] Returns the value set by DColorCube:SetHue.
 ---
@@ -15,25 +12,11 @@ function DColorCube:GetBaseRGB() end
 ---@return number #
 function DColorCube:GetHue() end
 
----[CLIENT AND MENU] Returns the color cube's current set color.
+---[CLIENT AND MENU] Used internally to set the real "output" color of the panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetRGB)
----@return table # The set color, uses Color.
-function DColorCube:GetRGB() end
-
----[CLIENT AND MENU] Sets the base color and the color used to draw the color cube panel itself.
----
---- Calling this when using a color that isn't 100% saturated and valued (Global.HSVToColor with saturation and value set to 1) causes the color cube to look inaccurate compared to the color that's returned by methods like DColorCube:GetRGB and DColorCube:OnUserChanged. You should use DColorCube:SetColor instead
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetBaseRGB)
----@param color table The base color to set, uses Color.
-function DColorCube:SetBaseRGB(color) end
-
----[CLIENT AND MENU] Sets the base color of the color cube and updates the slider position.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetColor)
----@param color table The color to set, uses Color.
-function DColorCube:SetColor(color) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetRGB)
+---@param clr table A Color
+function DColorCube:SetRGB(clr) end
 
 ---[CLIENT AND MENU] Appears to do nothing and unused.
 ---
@@ -41,11 +24,11 @@ function DColorCube:SetColor(color) end
 ---@param hue number
 function DColorCube:SetHue(hue) end
 
----[CLIENT AND MENU] Used internally to set the real "output" color of the panel.
+---[CLIENT AND MENU] Sets the base color of the color cube and updates the slider position.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetRGB)
----@param clr table A Color
-function DColorCube:SetRGB(clr) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetColor)
+---@param color table The color to set, uses Color.
+function DColorCube:SetColor(color) end
 
 ---[CLIENT AND MENU] Updates the color cube RGB based on the given x and y position and returns its arguments. Similar to DColorCube:UpdateColor.
 ---
@@ -55,6 +38,23 @@ function DColorCube:SetRGB(clr) end
 ---@return number # The given x position.
 ---@return number # The given y position.
 function DColorCube:TranslateValues(x, y) end
+
+---@class DColorCube : DSlider
+local DColorCube = {}
+
+---[CLIENT AND MENU] Sets the base color and the color used to draw the color cube panel itself.
+---
+--- Calling this when using a color that isn't 100% saturated and valued (Global.HSVToColor with saturation and value set to 1) causes the color cube to look inaccurate compared to the color that's returned by methods like DColorCube:GetRGB and DColorCube:OnUserChanged. You should use DColorCube:SetColor instead
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetBaseRGB)
+---@param color table The base color to set, uses Color.
+function DColorCube:SetBaseRGB(color) end
+
+---[CLIENT AND MENU] Returns the base Color set by DColorCube:SetBaseRGB.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetBaseRGB)
+---@return table # A Color
+function DColorCube:GetBaseRGB() end
 
 ---[CLIENT AND MENU] Updates the color cube RGB based on the given x and y position. Similar to DColorCube:TranslateValues.
 ---

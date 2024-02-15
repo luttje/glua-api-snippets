@@ -2,13 +2,6 @@
 
 ai = {}
 
----[SERVER] Translates a schedule name to its corresponding ID.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetScheduleID)
----@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name.
----@return number # The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.
-function ai.GetScheduleID(sched) end
-
 ---[SERVER] Returns the squad leader of the given squad.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadLeader)
@@ -22,6 +15,13 @@ function ai.GetSquadLeader(squad) end
 ---@param squad string The squad name.
 ---@return number # The member count.
 function ai.GetSquadMemberCount(squad) end
+
+---[SERVER] Translates a schedule name to its corresponding ID.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetScheduleID)
+---@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name.
+---@return number # The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.
+function ai.GetScheduleID(sched) end
 
 ---[SERVER] Returns all members of a given squad. See also ai.GetSquadMemberCount and NPC:GetSquad.
 ---

@@ -2,16 +2,6 @@
 
 ents = {}
 
----[SERVER] Creates an entity. This function will fail and return `NULL` if the networked-edict limit is hit (around **8176**), or the provided entity class doesn't exist.
----
---- Do not use before GM:InitPostEntity has been called, otherwise the server will crash!
---- If you need to perform entity creation when the game starts, create a hook for GM:InitPostEntity and do it there.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.Create)
----@param class string The classname of the entity to create.
----@return Entity # The created entity, or `NULL` if failed.
-function ents.Create(class) end
-
 ---[CLIENT] Creates a clientside only prop. See also Global.ClientsideModel.
 ---
 ---
@@ -30,6 +20,16 @@ function ents.CreateClientProp(model) end
 ---@return Entity # Created entity.
 function ents.CreateClientside(class) end
 
+---[SERVER] Creates an entity. This function will fail and return `NULL` if the networked-edict limit is hit (around **8176**), or the provided entity class doesn't exist.
+---
+--- Do not use before GM:InitPostEntity has been called, otherwise the server will crash!
+--- If you need to perform entity creation when the game starts, create a hook for GM:InitPostEntity and do it there.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.Create)
+---@param class string The classname of the entity to create.
+---@return Entity # The created entity, or `NULL` if failed.
+function ents.Create(class) end
+
 ---[SHARED] Returns a table of all entities along the ray. The ray does not stop on collisions, meaning it will go through walls/entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindAlongRay)
@@ -40,15 +40,23 @@ function ents.CreateClientside(class) end
 ---@return table # Table of the found entities. There's a limit of 1024 entities.
 function ents.FindAlongRay(start, _end, mins, maxs) end
 
----[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over ents.GetAll. Even if internally ents.GetAll is used, It is faster to use ents.FindByClass than ents.GetAll with a single class comparison.
+---[SERVER] Finds all entities that lie within a [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
 ---
---- Asterisks (*) are the only wildcard supported.
---- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+--- The function won't take in to account Global.AddOriginToPVS and the like.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClass)
----@param class string The class of the entities to find.
----@return table # A table containing all found entities
-function ents.FindByClass(class) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInPVS)
+---@param viewPoint any Entity or Vector to find entities within the PVS of. If a player is given, this function will use the player's view entity.
+---@return table # The found Entitys.
+function ents.FindInPVS(viewPoint) end
+
+---[SHARED] Gives you the amount of currently existing entities.
+---
+--- Similar to **#**ents.GetAll() but with better performance since the entity table doesn't have to be generated. If ents.GetAll is already being called for iteration, than using the **#** operator on the table will be faster than calling this function since it is JITted.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetCount)
+---@param IncludeKillMe? boolean Include entities with the FL_KILLME flag. This will skip an internal loop, and the function will be more efficient as a byproduct.
+---@return number # Number of entities
+function ents.GetCount(IncludeKillMe) end
 
 ---[SHARED] Finds all entities that are of given class and are children of given entity. This works internally by iterating over ents.GetAll.
 ---
@@ -66,6 +74,32 @@ function ents.FindByClassAndParent(class, parent) end
 ---@return table # A table of all found entities.
 function ents.FindByModel(model) end
 
+---[SERVER] Returns the amount of networked entities, which is limited to 8192. ents.Create will fail somewhere between 8064 and 8176 - this can vary based on the amount of existing temp ents.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetEdictCount)
+---@return number # Number of networked entities
+function ents.GetEdictCount() end
+
+---[SHARED] Returns a table of all existing entities.
+---
+--- Consider using ents.Iterator instead for better performance.
+---
+--- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetAll)
+---@return table # Table of all existing Entitys.
+function ents.GetAll() end
+
+---[SERVER] Fires a use event.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FireTargets)
+---@param target string Name of the target entity.
+---@param activator Entity Activator of the event.
+---@param caller Entity Caller of the event.
+---@param usetype number Use type. See the Enums/USE.
+---@param value number This value is passed to ENTITY:Use, but isn't used by any default entities in the engine.
+function ents.FireTargets(target, activator, caller, usetype, value) end
+
 ---[SHARED] Gets all entities with the given hammer targetname. This works internally by iterating over ents.GetAll.
 ---
 --- Doesn't do anything on client.
@@ -74,6 +108,13 @@ function ents.FindByModel(model) end
 ---@param name string The targetname to look for
 ---@return table # A table of all found entities
 function ents.FindByName(name) end
+
+---[SHARED] Returns entity that has given Entity:MapCreationID.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity)
+---@param id number Entity's creation id
+---@return Entity # Found entity
+function ents.GetMapCreatedEntity(id) end
 
 ---[SHARED] Returns all entities within the specified box.
 ---
@@ -86,6 +127,16 @@ function ents.FindByName(name) end
 ---@param boxMaxs Vector The box maximum coordinates.
 ---@return table # A table of all found entities.
 function ents.FindInBox(boxMins, boxMaxs) end
+
+---[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over ents.GetAll. Even if internally ents.GetAll is used, It is faster to use ents.FindByClass than ents.GetAll with a single class comparison.
+---
+--- Asterisks (*) are the only wildcard supported.
+--- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClass)
+---@param class string The class of the entities to find.
+---@return table # A table containing all found entities
+function ents.FindByClass(class) end
 
 ---[SHARED] Finds and returns all entities within the specified cone. Only entities whose Entity:WorldSpaceCenter is within the cone are considered to be in it.
 ---
@@ -109,14 +160,12 @@ function ents.FindInBox(boxMins, boxMaxs) end
 ---@return table # A table of all found Entitys.
 function ents.FindInCone(origin, normal, range, angle_cos) end
 
----[SERVER] Finds all entities that lie within a [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
+---[SHARED] Returns an entity by its index. Same as Global.Entity.
 ---
---- The function won't take in to account Global.AddOriginToPVS and the like.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInPVS)
----@param viewPoint any Entity or Vector to find entities within the PVS of. If a player is given, this function will use the player's view entity.
----@return table # The found Entitys.
-function ents.FindInPVS(viewPoint) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetByIndex)
+---@param entIdx number The index of the entity.
+---@return Entity # The entity if it exists.
+function ents.GetByIndex(entIdx) end
 
 ---[SHARED] Gets all entities within the specified sphere.
 ---
@@ -128,55 +177,6 @@ function ents.FindInPVS(viewPoint) end
 ---@param radius number Radius of the sphere.
 ---@return table # A table of all found Entitys. Has a limit of 1024 entities.
 function ents.FindInSphere(origin, radius) end
-
----[SERVER] Fires a use event.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FireTargets)
----@param target string Name of the target entity.
----@param activator Entity Activator of the event.
----@param caller Entity Caller of the event.
----@param usetype number Use type. See the Enums/USE.
----@param value number This value is passed to ENTITY:Use, but isn't used by any default entities in the engine.
-function ents.FireTargets(target, activator, caller, usetype, value) end
-
----[SHARED] Returns a table of all existing entities.
----
---- Consider using ents.Iterator instead for better performance.
----
---- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetAll)
----@return table # Table of all existing Entitys.
-function ents.GetAll() end
-
----[SHARED] Returns an entity by its index. Same as Global.Entity.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetByIndex)
----@param entIdx number The index of the entity.
----@return Entity # The entity if it exists.
-function ents.GetByIndex(entIdx) end
-
----[SHARED] Gives you the amount of currently existing entities.
----
---- Similar to **#**ents.GetAll() but with better performance since the entity table doesn't have to be generated. If ents.GetAll is already being called for iteration, than using the **#** operator on the table will be faster than calling this function since it is JITted.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetCount)
----@param IncludeKillMe? boolean Include entities with the FL_KILLME flag. This will skip an internal loop, and the function will be more efficient as a byproduct.
----@return number # Number of entities
-function ents.GetCount(IncludeKillMe) end
-
----[SERVER] Returns the amount of networked entities, which is limited to 8192. ents.Create will fail somewhere between 8064 and 8176 - this can vary based on the amount of existing temp ents.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetEdictCount)
----@return number # Number of networked entities
-function ents.GetEdictCount() end
-
----[SHARED] Returns entity that has given Entity:MapCreationID.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity)
----@param id number Entity's creation id
----@return Entity # Found entity
-function ents.GetMapCreatedEntity(id) end
 
 ---[SHARED] Returns an iterator for all existing entities.
 ---

@@ -2,6 +2,13 @@
 
 motionsensor = {}
 
+---[SHARED]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ChooseBuilderFromEntity)
+---@param ent Entity Entity to choose builder for
+---@return string # Chosen builder. The builders are stored in `list.Get( "SkeletonConvertor" )`
+function motionsensor.ChooseBuilderFromEntity(ent) end
+
 ---[SHARED] Called to build the skeleton. See Using The Kinect and Kinect developing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
@@ -13,18 +20,24 @@ motionsensor = {}
 ---@return table # Sensor
 function motionsensor.BuildSkeleton(translator, player, rotation) end
 
----[SHARED]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ChooseBuilderFromEntity)
----@param ent Entity Entity to choose builder for
----@return string # Chosen builder. The builders are stored in `list.Get( "SkeletonConvertor" )`
-function motionsensor.ChooseBuilderFromEntity(ent) end
-
 ---[CLIENT AND MENU] Returns the depth map material.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.GetColourMaterial)
 ---@return IMaterial # The material
 function motionsensor.GetColourMaterial() end
+
+---[SHARED] Used internally by motionsensor.BuildSkeleton. See Using The Kinect and Kinect developing.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
+---@param translator table
+---@param sensor table
+---@return table # Positions. if `!translator.PositionTable` then return - `{}`
+function motionsensor.ProcessPositionTable(translator, sensor) end
+
+---[CLIENT] Stops the motion capture.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Stop)
+function motionsensor.Stop() end
 
 ---[CLIENT] Returns players skeletal data if they are using Kinect. See Using The Kinect and Kinect developing.
 ---
@@ -67,21 +80,8 @@ function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors
 ---@return table # Ang. If `!translator.AnglesTable` then `return {}`
 function motionsensor.ProcessAnglesTable(translator, sensor, pos, rotation) end
 
----[SHARED] Used internally by motionsensor.BuildSkeleton. See Using The Kinect and Kinect developing.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
----@param translator table
----@param sensor table
----@return table # Positions. if `!translator.PositionTable` then return - `{}`
-function motionsensor.ProcessPositionTable(translator, sensor) end
-
 ---[CLIENT AND MENU] This starts access to the kinect sensor. Note that this usually freezes the game for a couple of seconds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Start)
 ---@return boolean # `true` if the access has been started
 function motionsensor.Start() end
-
----[CLIENT] Stops the motion capture.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Stop)
-function motionsensor.Stop() end

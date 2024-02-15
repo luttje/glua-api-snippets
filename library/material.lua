@@ -1,8 +1,5 @@
 ---@meta
 
----@class Material : Button
-local Material = {}
-
 ---[CLIENT] Sets the alpha value of the Material panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Material:SetAlpha)
@@ -16,3 +13,6 @@ function Material:SetAlpha(alpha) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Material:SetMaterial)
 ---@param matname string The file path of the material to set (relative to "garrysmod/materials/").
 function Material:SetMaterial(matname) end
+
+---@class Material : Button
+local Material = {}

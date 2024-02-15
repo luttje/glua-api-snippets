@@ -1,8 +1,5 @@
 ---@meta
 
----@class DProgress : Panel
-local DProgress = {}
-
 ---[CLIENT AND MENU] Returns the progress bar's fraction. 0 is 0% and 1 is 100%.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProgress:GetFraction)
@@ -14,3 +11,6 @@ function DProgress:GetFraction() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProgress:SetFraction)
 ---@param fraction number Fraction of the progress bar. Range is 0 to 1 (0% to 100%).
 function DProgress:SetFraction(fraction) end
+
+---@class DProgress : Panel
+local DProgress = {}

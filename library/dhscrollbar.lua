@@ -19,18 +19,6 @@ function DHScrollBar:AddScroll(add) end
 ---@param ease? number See Panel:NewAnimation for explanation.
 function DHScrollBar:AnimateTo(scroll, length, delay, ease) end
 
----[CLIENT AND MENU] Returns the scale of the scroll bar based on the difference in size between the visible "window" into the canvas that is being scrolled. Should be used after DHScrollBar:SetUp.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:BarScale)
----@return number # The scale of the scrollbar.
-function DHScrollBar:BarScale() end
-
----[CLIENT AND MENU] Returns whether or not the manual left/right scroll buttons are visible or not. Set by DHScrollBar:SetHideButtons.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:GetHideButtons)
----@return boolean # Whether or not the manual left/right scroll buttons are visible or not.
-function DHScrollBar:GetHideButtons() end
-
 ---[CLIENT AND MENU] Returns the negative of DHScrollBar:GetScroll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:GetOffset)
@@ -48,6 +36,15 @@ function DHScrollBar:GetScroll() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:Grip)
 function DHScrollBar:Grip() end
 
+---[CLIENT AND MENU] Sets up the scrollbar for use.
+---
+--- The scrollbar will automatically disable itself if the total width of the canvas is lower than the width of the panel that holds the canvas during this function call.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:SetUp)
+---@param barSize number The size of the panel that holds the canvas, basically size of "1 page".
+---@param canvasSize number The total size of the canvas, this typically is the bigger number.
+function DHScrollBar:SetUp(barSize, canvasSize) end
+
 ---[CLIENT AND MENU] Allows hiding the left and right buttons for better visual stylisation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:SetHideButtons)
@@ -60,11 +57,14 @@ function DHScrollBar:SetHideButtons(hide) end
 ---@param scroll number The new scroll value.
 function DHScrollBar:SetScroll(scroll) end
 
----[CLIENT AND MENU] Sets up the scrollbar for use.
+---[CLIENT AND MENU] Returns the scale of the scroll bar based on the difference in size between the visible "window" into the canvas that is being scrolled. Should be used after DHScrollBar:SetUp.
 ---
---- The scrollbar will automatically disable itself if the total width of the canvas is lower than the width of the panel that holds the canvas during this function call.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:BarScale)
+---@return number # The scale of the scrollbar.
+function DHScrollBar:BarScale() end
+
+---[CLIENT AND MENU] Returns whether or not the manual left/right scroll buttons are visible or not. Set by DHScrollBar:SetHideButtons.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:SetUp)
----@param barSize number The size of the panel that holds the canvas, basically size of "1 page".
----@param canvasSize number The total size of the canvas, this typically is the bigger number.
-function DHScrollBar:SetUp(barSize, canvasSize) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHScrollBar:GetHideButtons)
+---@return boolean # Whether or not the manual left/right scroll buttons are visible or not.
+function DHScrollBar:GetHideButtons() end

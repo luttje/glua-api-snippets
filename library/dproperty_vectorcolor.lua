@@ -1,8 +1,5 @@
 ---@meta
 
----@class DProperty_VectorColor : DProperty_Generic
-local DProperty_VectorColor = {}
-
 ---[CLIENT] Called by a property row to setup a color selection control.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_VectorColor:Setup)
@@ -14,3 +11,6 @@ function DProperty_VectorColor:Setup(settings) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_VectorColor:SetValue)
 ---@param color Vector Sets the color to use in a DProperty_VectorColor.
 function DProperty_VectorColor:SetValue(color) end
+
+---@class DProperty_VectorColor : DProperty_Generic
+local DProperty_VectorColor = {}

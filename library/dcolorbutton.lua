@@ -1,13 +1,16 @@
 ---@meta
 
----@class DColorButton : DLabel
-local DColorButton = {}
-
 ---[CLIENT AND MENU] Returns the color of the button
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetColor)
 ---@return table # The Color of the button
 function DColorButton:GetColor() end
+
+---[CLIENT AND MENU] Used internally by DColorPalette to detect which button is which.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetID)
+---@param id number A unique ID to give this button
+function DColorButton:SetID(id) end
 
 ---[CLIENT AND MENU] Returns value set by DColorButton:SetDrawBorder. See that page for more info.
 ---
@@ -23,18 +26,6 @@ function DColorButton:GetDrawBorder() end
 ---@return number # The unique ID of the button
 function DColorButton:GetID() end
 
----[CLIENT AND MENU] Alias of Panel:IsSelected.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetSelected)
----@return boolean #
-function DColorButton:GetSelected() end
-
----[CLIENT AND MENU] Returns whether the DColorButton is currently being pressed (the user is holding it down).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:IsDown)
----@return boolean #
-function DColorButton:IsDown() end
-
 ---[CLIENT AND MENU] Sets the color of the DColorButton.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetColor)
@@ -42,14 +33,23 @@ function DColorButton:IsDown() end
 ---@param noTooltip? boolean If true, the tooltip will not be reset to display the selected color.
 function DColorButton:SetColor(color, noTooltip) end
 
+---@class DColorButton : DLabel
+local DColorButton = {}
+
+---[CLIENT AND MENU] Alias of Panel:IsSelected.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetSelected)
+---@return boolean #
+function DColorButton:GetSelected() end
+
 ---[CLIENT AND MENU] Does absolutely nothing at all. Default value is automatically set to true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetDrawBorder)
 ---@param draw boolean Does nothing.
 function DColorButton:SetDrawBorder(draw) end
 
----[CLIENT AND MENU] Used internally by DColorPalette to detect which button is which.
+---[CLIENT AND MENU] Returns whether the DColorButton is currently being pressed (the user is holding it down).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetID)
----@param id number A unique ID to give this button
-function DColorButton:SetID(id) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:IsDown)
+---@return boolean #
+function DColorButton:IsDown() end

@@ -1,9 +1,5 @@
 ---@meta
 
----@deprecated This is derived from the deprecated DPanelList.
----@class DModelSelect : DPanelSelect
-local DModelSelect = {}
-
 ---[CLIENT] Sets the height of the panel **in the amount of 64px spawnicons**.
 ---
 --- Overrides Panel:SetHeight.
@@ -20,3 +16,7 @@ function DModelSelect:SetHeight(num) end
 ---@param dontSort boolean Do not sort the list. (by the `Model` member)
 ---@param dontCallListConVars boolean If set, only the `convar` from the 2nd argument will be set, not individual convars from the models list.
 function DModelSelect:SetModelList(models, convar, dontSort, dontCallListConVars) end
+
+---@deprecated This is derived from the deprecated DPanelList.
+---@class DModelSelect : DPanelSelect
+local DModelSelect = {}

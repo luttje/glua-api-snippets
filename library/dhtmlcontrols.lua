@@ -1,12 +1,15 @@
 ---@meta
 
----@class DHTMLControls : Panel
-local DHTMLControls = {}
-
 ---[CLIENT AND MENU]
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:FinishedLoading)
 function DHTMLControls:FinishedLoading() end
+
+---[CLIENT AND MENU] Sets the DHTML element to control with these DHTMLControls.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:SetHTML)
+---@param dhtml Panel The HTML panel
+function DHTMLControls:SetHTML(dhtml) end
 
 ---[CLIENT AND MENU] Sets the color of the navigation buttons.
 ---
@@ -14,11 +17,8 @@ function DHTMLControls:FinishedLoading() end
 ---@param clr table A Color
 function DHTMLControls:SetButtonColor(clr) end
 
----[CLIENT AND MENU] Sets the DHTML element to control with these DHTMLControls.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:SetHTML)
----@param dhtml Panel The HTML panel
-function DHTMLControls:SetHTML(dhtml) end
+---@class DHTMLControls : Panel
+local DHTMLControls = {}
 
 ---[CLIENT AND MENU]
 ---
