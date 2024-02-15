@@ -94,7 +94,7 @@ export class GluaApiWriter {
       return this.writeStruct(page);
   }
 
-  private writeClassStart(className: string, parent?: string, deprecated?: string) {
+  private writeClassStart(className: string, parent?: string, deprecated?: string, description?: string) {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
@@ -102,8 +102,10 @@ export class GluaApiWriter {
       if (this.pageOverrides.has(classOverride)) {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
+        api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+
         if (deprecated)
-          api += `---@deprecated ${removeNewlines(deprecated)}\n`
+          api += `---@deprecated ${removeNewlines(deprecated)}\n`;
 
         api += `---@class ${className}`;
 
@@ -160,7 +162,7 @@ export class GluaApiWriter {
   }
 
   private writePanel(panel: Panel) {
-    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated);
+    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated, panel.description);
 
     return api;
   }
@@ -185,7 +187,7 @@ export class GluaApiWriter {
 
     if (isContainedInTable)
     {
-      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description, false)}\n` : ''
+      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description, false)}\n` : '';
       api += `${_enum.name} = {\n`;
     }
 
@@ -194,7 +196,7 @@ export class GluaApiWriter {
         key = key.split('.')[1];
         api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : ''
+        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
@@ -223,7 +225,7 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated);
+    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated, struct.description);
 
     for (const field of struct.fields) {
       if (field.deprecated)
@@ -232,7 +234,7 @@ export class GluaApiWriter {
       api += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
 
       const type = this.transformType(field.type)
-      api += `---@type ${type}\n`
+      api += `---@type ${type}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
 
