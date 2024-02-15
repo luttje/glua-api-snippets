@@ -82,6 +82,7 @@ async function startScrape() {
 
   const pageIndexes = await scrapeAndCollect(pageListScraper);
 
+  let queue: Promise<any>[] = [];
   for (const pageIndex of pageIndexes) {
     const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageIndex.address}?format=text`);
 
@@ -119,7 +120,13 @@ async function startScrape() {
       fs.writeFileSync(path.join(baseDirectory, moduleName, `${fileName}.json`), json);
     });
 
-    await pageMarkupScraper.scrape();
+    queue.push(pageMarkupScraper.scrape());
+
+    if (queue.length > 20)
+    {
+      await Promise.allSettled(queue);
+      queue = [];
+    }
   }
 
   console.log(`Done with scraping! You can find the output in ${baseDirectory}`);
