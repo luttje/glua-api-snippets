@@ -20,7 +20,7 @@
   "scripts": {
     "clear-output": "rm -rf ./output/",
     "wiki-check-changed": "tsx ./src/cli-change-checker.ts",
-    "scrape-wiki": "tsx ./src/cli-scraper.ts --output ./output/ --customOverrides ./custom/",
+    "scrape-wiki": "tsx ./src/cli-scraper.ts --output ./output/ --customOverrides ./custom/ --wipe",
     "pack-release": "tsx ./src/cli-release-packer.ts --input ./output/ --output ./dist/release/",
     "publish-library": "tsx ./src/cli-library-publisher.ts --input ./output/ --output ./dist/libraries/garrysmod",
     "stylua-custom": "npx --yes @johnnymorganz/stylua-bin@0.17.1 ./custom",
