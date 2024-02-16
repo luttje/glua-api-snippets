@@ -27,7 +27,7 @@ export function putCommentBeforeEachLine(text: string, skipLineOne: boolean = tr
       return line;
 
     let space = line.length > 0 ? ' ' : '';
-    return `---${space}${line}`;
+    return `---${space}${line.trimEnd()}`;
   }).join('\n');
 }
 

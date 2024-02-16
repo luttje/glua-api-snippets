@@ -5,7 +5,7 @@ export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook
 export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
 
 export type CommonWikiProperties = {
-  type: WikiFunctionType | 'enum' | 'struct' | 'panel';
+  type: WikiFunctionType | 'enum' | 'struct' | 'panel' | 'class' | 'library';
   address: string;
   name: string;
   description: string;
@@ -77,7 +77,12 @@ export type Panel = CommonWikiProperties & {
   parent: string;
 };
 
-export type WikiPage = ClassFunction | LibraryFunction | HookFunction | PanelFunction | Panel | Enum | Struct;
+
+export type TypePage = CommonWikiProperties & {
+  parent: string;
+};
+
+export type WikiPage = ClassFunction | LibraryFunction | HookFunction | PanelFunction | Panel | Enum | Struct | TypePage
 
 /**
  * Guards
@@ -110,6 +115,14 @@ export function isStruct(page: WikiPage): page is Struct {
   return page.type === 'struct';
 }
 
+export function isLibrary(page: WikiPage): page is TypePage {
+  return page.type === 'library';
+}
+
+export function isClass(page: WikiPage): page is TypePage {
+  return page.type === 'class';
+}
+
 /**
  * Scraper
  */
@@ -126,20 +139,21 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         const isEnum = $('enum').length > 0;
         const isStruct = $('structure').length > 0;
         const isFunction = $('function').length > 0;
+        const isTypePage = $('type').length > 0;
         const isPanel = $('panel').length > 0;
         const mainElement = $(isEnum ? 'enum' : isStruct ? 'struct' : isPanel ? 'panel' : 'function');
         const isDeprecated = $('deprecated').length > 0;
         const address = response.url.split('/').pop()!.split('?')[0];
 
-		let deprecated: string | undefined = undefined;
-		if (isDeprecated && !isEnum && !isStruct) {
-			deprecated = $('deprecated').map(function() {
-				const $el = $(this);
-				return $el.text().trim();
-			}).get().join(' - ')
+        let deprecated: string | undefined = undefined;
+        if (isDeprecated && !isEnum && !isStruct) {
+          deprecated = $('deprecated').map(function() {
+            const $el = $(this);
+            return $el.text().trim();
+          }).get().join(' - ');
 
-			$('deprecated').remove();
-		}
+          $('deprecated').remove();
+        }
 
         if (isEnum) {
           const items = $('items item').map(function () {
@@ -215,7 +229,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               description: $el.text()
             };
 
-            if ($el.attr('default')!= undefined)
+            if ($el.attr('default') != undefined)
               argument.default = $el.attr('default')!;
 
             return argument;
@@ -270,6 +284,17 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               isPanelFunction: 'yes'
             };
           }
+        } else if (isTypePage) {
+          const $el = $('type');
+
+          return <TypePage>{
+            type: $el.attr('is'),
+            name: $el.attr('name'),
+            parent: $el.attr('parent'),
+            address: address,
+            description: $('type summary').text(),
+            deprecated: deprecated
+          };
         }
 
         return null;

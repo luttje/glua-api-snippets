@@ -1,13 +1,16 @@
-import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
+import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
 import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
   isLibraryFunction,
+  isLibrary,
+  isClass,
   isPanelFunction,
   isStruct,
   isEnum,
 } from '../scrapers/wiki-page-markup-scraper.js';
+import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
   'and',
@@ -39,6 +42,8 @@ export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
   private readonly pageOverrides: Map<string, string> = new Map();
+
+  private readonly files: Map<string, WikiPage[]> = new Map();
 
   constructor() { }
 
@@ -73,7 +78,7 @@ export class GluaApiWriter {
       if (isClassFunction(page))
         api += this.writeClassStart(page.parent, undefined, page.deprecated);
       else if (isLibraryFunction(page))
-        api += this.writeLibraryGlobal(page);
+        api += this.writeLibraryGlobalFallback(page);
 
       api += this.pageOverrides.get(fileSafeAddress);
 
@@ -92,9 +97,13 @@ export class GluaApiWriter {
       return this.writeEnum(page);
     else if (isStruct(page))
       return this.writeStruct(page);
+    else if (isLibrary(page))
+      return this.writeLibraryGlobal(page);
+    else if (isClass(page))
+      return this.writeClassGlobal(page);
   }
 
-  private writeClassStart(className: string, parent?: string, deprecated?: string) {
+  private writeClassStart(className: string, parent?: string, deprecated?: string, description?: string) {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
@@ -102,8 +111,10 @@ export class GluaApiWriter {
       if (this.pageOverrides.has(classOverride)) {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
+        api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+
         if (deprecated)
-          api += `---@deprecated ${removeNewlines(deprecated)}\n`
+          api += `---@deprecated ${removeNewlines(deprecated)}\n`;
 
         api += `---@class ${className}`;
 
@@ -111,7 +122,10 @@ export class GluaApiWriter {
           api += ` : ${parent}`;
 
         api += '\n';
-        api += `local ${className} = {}\n\n`;
+
+        // for PLAYER, WEAPON, etc. we want to define globals
+        if (className !== className.toUpperCase()) api += 'local ';
+        api += `${className} = {}\n\n`;
       }
 
       this.writtenClasses.add(className);
@@ -120,21 +134,42 @@ export class GluaApiWriter {
     return api;
   }
 
-  private writeLibraryGlobal(func: LibraryFunction) {
+  private writeLibraryGlobalFallback(func: LibraryFunction) {
     if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
-      let global = '';
+      let api = '';
 
-      if (func.deprecated)
-        global += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
-
-      global += `${func.parent} = {}\n\n`;
+      api += `---Missing description.`;
+      api += `${func.parent} = {}\n\n`;
 
       this.writtenLibraryGlobals.add(func.parent);
 
-      return global;
+      return api;
     }
 
     return '';
+  }
+
+  private writeLibraryGlobal(page: TypePage) {
+    if (!this.writtenLibraryGlobals.has(page.name)) {
+      let api = '';
+
+      api += page.description ? `${putCommentBeforeEachLine(page.description, false)}\n` : '';
+    
+      if (page.deprecated)
+        api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
+
+      api += `${page.name} = {}\n\n`;
+
+      this.writtenLibraryGlobals.add(page.name);
+
+      return api;
+    }
+
+    return '';
+  }
+  
+  private writeClassGlobal(page: TypePage) {
+    return this.writeClassStart(page.name, page.parent, page.deprecated, page.description);
   }
 
   private writeClassFunction(func: ClassFunction) {
@@ -147,7 +182,7 @@ export class GluaApiWriter {
   }
 
   private writeLibraryFunction(func: LibraryFunction) {
-    let api: string = this.writeLibraryGlobal(func);
+    let api: string = this.writeLibraryGlobalFallback(func);
 
     api += this.writeFunctionLuaDocComment(func, func.realm);
     api += this.writeFunctionDeclaration(func, func.realm);
@@ -160,7 +195,7 @@ export class GluaApiWriter {
   }
 
   private writePanel(panel: Panel) {
-    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated);
+    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated, panel.description);
 
     return api;
   }
@@ -184,14 +219,17 @@ export class GluaApiWriter {
     api += `---@enum ${_enum.name}\n`;
 
     if (isContainedInTable)
-      api += `local ${_enum.name} = {\n`;
+    {
+      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description, false)}\n` : '';
+      api += `${_enum.name} = {\n`;
+    }
 
     const writeItem = (key: string, item: typeof _enum.items[0]) => {
       if (isContainedInTable) {
         key = key.split('.')[1];
         api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : ''
+        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
@@ -220,7 +258,7 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated);
+    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated, struct.description);
 
     for (const field of struct.fields) {
       if (field.deprecated)
@@ -229,21 +267,34 @@ export class GluaApiWriter {
       api += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
 
       const type = this.transformType(field.type)
-      api += `---@type ${type}\n`
+      api += `---@type ${type}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
 
     return api;
   }
 
-  public writePages(pages: WikiPage[]) {
-    let api: string = '';
+  public writePages(pages: WikiPage[], filePath: string) {
+    if (!this.files.has(filePath)) this.files.set(filePath, []);
+    this.files.get(filePath)!.push(...pages);
+  }
 
-    for (const page of pages) {
-      api += this.writePage(page);
-    }
+  public writeToDisk() {
+    this.files.forEach((pages: WikiPage[], filePath: string) => {
+      let api = "";
 
-    return api;
+      // First we write the "header" types
+      for (const page of pages.filter(x => isClass(x) || isLibrary(x))) {
+        api += this.writePage(page);
+      }
+      for (const page of pages.filter(x => !isClass(x) && !isLibrary(x))) {
+        api += this.writePage(page);
+      }
+
+      if (api.length > 0) {
+        fs.appendFileSync(filePath, "---@meta\n\n" + api);
+      }
+    });
   }
 
   private transformType(type: string) {
