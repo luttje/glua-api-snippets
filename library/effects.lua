@@ -1,5 +1,6 @@
 ---@meta
 
+--- The effects library allows you to manually add scripted effects.
 effects = {}
 
 ---[SHARED] Creates a bubble trail effect, the very same you get when shooting underwater.
@@ -13,18 +14,18 @@ effects = {}
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 
----[CLIENT] Registers a new effect.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Register)
----@param effect_table table Effect table.
----@param name string Effect name.
-function effects.Register(effect_table, name) end
-
 ---[CLIENT] Returns a list of all Lua-defined effects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
 ---@return table # The effects table.
 function effects.GetList() end
+
+---[CLIENT] You are looking for util.Effect.Returns the table of the effect specified.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Create)
+---@param name string Effect name.
+---@return table # Effect table.
+function effects.Create(name) end
 
 ---[SHARED] Creates a bunch of bubbles inside a defined box.
 ---
@@ -36,13 +37,6 @@ function effects.GetList() end
 ---@param speed? number How quickly the bubbles move.
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.Bubbles(mins, maxs, count, height, speed, delay) end
-
----[CLIENT] You are looking for util.Effect.Returns the table of the effect specified.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Create)
----@param name string Effect name.
----@return table # Effect table.
-function effects.Create(name) end
 
 ---[SHARED] Creates a "beam ring point" effect.
 ---
@@ -63,3 +57,10 @@ function effects.Create(name) end
 --- * string material - The material to use instead of the default one.
 ---
 function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude, color, extra) end
+
+---[CLIENT] Registers a new effect.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Register)
+---@param effect_table table Effect table.
+---@param name string Effect name.
+function effects.Register(effect_table, name) end

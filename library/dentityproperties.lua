@@ -1,5 +1,17 @@
 ---@meta
 
+---[CLIENT] Called internally when an entity being edited became invalid.
+---
+--- You should use DEntityProperties:OnEntityLost instead.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EntityLost)
+function DEntityProperties:EntityLost() end
+
+---[CLIENT] Called internally by DEntityProperties:SetEntity to rebuild the controls.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)
+function DEntityProperties:RebuildControls() end
+
 ---[CLIENT] Called internally by DEntityProperties:RebuildControls.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EditVariable)
@@ -13,17 +25,12 @@ function DEntityProperties:EditVariable(varname, editdata) end
 ---@param ent Entity The entity to edit
 function DEntityProperties:SetEntity(ent) end
 
----[CLIENT] Called internally when an entity being edited became invalid.
 ---
---- You should use DEntityProperties:OnEntityLost instead.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:EntityLost)
-function DEntityProperties:EntityLost() end
-
----[CLIENT] Called internally by DEntityProperties:SetEntity to rebuild the controls.
+--- 			Unless you know what you are doing and you benefit from this panel, you should be using the DProperties instead.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)
-function DEntityProperties:RebuildControls() end
-
+---
+--- 		A panel used by the Editable Entities system.
+---
 ---@class DEntityProperties : DProperties
 local DEntityProperties = {}

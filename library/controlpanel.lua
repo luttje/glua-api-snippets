@@ -1,14 +1,20 @@
 ---@meta
 
+--- The controlpanel library.
+controlpanel = {}
+
+--- Used by the context menu in sandbox.
 ---@class ControlPanel : DForm
 local ControlPanel = {}
 
-controlpanel = {}
-
----[CLIENT] Clears ALL the control panels ( for tools )
+---[CLIENT] Returns (or creates if not exists) a control panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/controlpanel.Clear)
-function controlpanel.Clear() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/controlpanel.Get)
+---@param name string The name of the panel. For normal tools this will be equal to `TOOL.Mode` (the tool's filename without the extension).
+---
+--- When you create a tool/option via spawnmenu.AddToolMenuOption, the internal control panel name is `TOOL.Mode .. "_" .. tool_tab:lower() .. "_" .. tool_category:lower()`.
+---@return Panel # The ControlPanel panel.
+function controlpanel.Get(name) end
 
 ---[CLIENT] Adds a control to the control panel.
 ---
@@ -102,14 +108,24 @@ function controlpanel.Clear() end
 ---@deprecated It is recommended to use DForm's members instead.
 function ControlPanel:AddControl(type, controlinfo) end
 
----[CLIENT] Returns (or creates if not exists) a control panel.
+---[CLIENT] Clears ALL the control panels ( for tools )
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/controlpanel.Get)
----@param name string The name of the panel. For normal tools this will be equal to `TOOL.Mode` (the tool's filename without the extension).
+---[(View on wiki)](https://wiki.facepunch.com/gmod/controlpanel.Clear)
+function controlpanel.Clear() end
+
+---[CLIENT] Adds an item by calling DForm:AddItem.
 ---
---- When you create a tool/option via spawnmenu.AddToolMenuOption, the internal control panel name is `TOOL.Mode .. "_" .. tool_tab:lower() .. "_" .. tool_category:lower()`.
----@return Panel # The ControlPanel panel.
-function controlpanel.Get(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:AddPanel)
+---@param panel Panel Panel to add as an item to the control panel.
+function ControlPanel:AddPanel(panel) end
+
+---[CLIENT] Sets control values of the control panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ControlValues)
+---@param data table A two-membered table:
+--- * boolean closed - Sets if the control panel should be unexpanded.
+--- * string label - The text to display inside the control's label.
+function ControlPanel:ControlValues(data) end
 
 ---[CLIENT] Creates a CtrlColor (a color picker) panel and adds it as an ControlPanel:AddPanel.
 ---
@@ -122,38 +138,11 @@ function controlpanel.Get(name) end
 ---@return Panel # The created CtrlColor panel.
 function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
 
----[CLIENT] Alias of Panel:Clear.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ClearControls)
-function ControlPanel:ClearControls() end
-
----[CLIENT] Creates a ControlPresets panel and adds it as an ControlPanel:AddPanel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
----@param group string The presets group. Must be unique.
----@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
----@return Panel # The created ControlPresets panel.
-function ControlPanel:ToolPresets(group, cvarList) end
-
 ---[CLIENT] Returns this control panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:GetEmbeddedPanel)
 ---@return ControlPanel # The same control panel the function is being called on.
 function ControlPanel:GetEmbeddedPanel() end
-
----[CLIENT] Sets control values of the control panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ControlValues)
----@param data table A two-membered table:
---- * boolean closed - Sets if the control panel should be unexpanded.
---- * string label - The text to display inside the control's label.
-function ControlPanel:ControlValues(data) end
-
----[CLIENT] Adds an item by calling DForm:AddItem.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:AddPanel)
----@param panel Panel Panel to add as an item to the control panel.
-function ControlPanel:AddPanel(panel) end
 
 ---[CLIENT] Creates a CtrlNumPad (a Sandbox key binder) panel and adds it as an ControlPanel:AddPanel.
 ---
@@ -165,6 +154,11 @@ function ControlPanel:AddPanel(panel) end
 ---@return Panel # The created CtrlNumPad panel.
 function ControlPanel:KeyBinder(label1, convar1, label2, convar2) end
 
+---[CLIENT] Alias of Panel:Clear.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ClearControls)
+function ControlPanel:ClearControls() end
+
 ---[CLIENT] Creates a MatSelect panel and adds it as an ControlPanel:AddPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:MatSelect)
@@ -175,6 +169,14 @@ function ControlPanel:KeyBinder(label1, convar1, label2, convar2) end
 ---@param height? number If specified, calls MatSelect:SetItemHeight with this value.
 ---@return MatSelect # The created MatSelect panel.
 function ControlPanel:MatSelect(convar, options, autostretch, width, height) end
+
+---[CLIENT] Creates a ControlPresets panel and adds it as an ControlPanel:AddPanel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
+---@param group string The presets group. Must be unique.
+---@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
+---@return Panel # The created ControlPresets panel.
+function ControlPanel:ToolPresets(group, cvarList) end
 
 ---[CLIENT] Calls the given function with this panel as the only argument. Used by the spawnmenu to populate the control panel.
 ---

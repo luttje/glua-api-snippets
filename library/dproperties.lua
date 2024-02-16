@@ -1,7 +1,25 @@
 ---@meta
 
+---
+--- A grid for editing the properties of something using names and values. Properties can be categorized and strongly typed.
+---
+--- ![](http://wiki.garrysmod.com/images/9/99/DProperties.png)
+--- ##  Associated controls
+--- * DProperty_VectorColor
+--- * DProperty_Boolean
+--- * DProperty_Generic
+--- * DProperty_Combo
+--- * DProperty_Float
+--- * DProperty_Int
+--- 	Creates a DProperties control with a few properties set up
 ---@class DProperties : Panel
 local DProperties = {}
+
+---[CLIENT] Returns the DScrollPanel all the properties panels are attached to.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperties:GetCanvas)
+---@return Panel # A DScrollPanel canvas
+function DProperties:GetCanvas() end
 
 ---[CLIENT] Creates a row in the properties panel.
 ---
@@ -20,9 +38,3 @@ function DProperties:CreateRow(category, name) end
 ---@param create boolean Create a new category if it doesn't exist.
 ---@return Panel # An internal panel.
 function DProperties:GetCategory(name, create) end
-
----[CLIENT] Returns the DScrollPanel all the properties panels are attached to.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DProperties:GetCanvas)
----@return Panel # A DScrollPanel canvas
-function DProperties:GetCanvas() end

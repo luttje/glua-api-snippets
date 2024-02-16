@@ -1,5 +1,6 @@
 ---@meta
 
+--- The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 hook = {}
 
 ---[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
@@ -26,6 +27,18 @@ function hook.GetTable() end
 ---@return any ... # Return data from called hooks. Limited to **6** return values.
 function hook.Call(eventName, gamemodeTable, ...) end
 
+---[SHARED AND MENU] Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:`; alternative, if one exists.
+---
+--- This function internally calls hook.Call.
+---
+--- See also: gamemode.Call - same as this, but does not call hooks if the gamemode hasn't defined the function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Run)
+---@param eventName string The event to call hooks for.
+---@param ... any The arguments to be passed to the hooks.
+---@return any # Returned data from called hooks.
+function hook.Run(eventName, ...) end
+
 ---[SHARED AND MENU] Add a hook to be called upon the given event occurring.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Add)
@@ -40,15 +53,3 @@ function hook.Call(eventName, gamemodeTable, ...) end
 ---
 --- It WILL break other addons.
 function hook.Add(eventName, identifier, func) end
-
----[SHARED AND MENU] Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:`; alternative, if one exists.
----
---- This function internally calls hook.Call.
----
---- See also: gamemode.Call - same as this, but does not call hooks if the gamemode hasn't defined the function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Run)
----@param eventName string The event to call hooks for.
----@param ... any The arguments to be passed to the hooks.
----@return any # Returned data from called hooks.
-function hook.Run(eventName, ...) end

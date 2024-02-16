@@ -1,11 +1,5 @@
 ---@meta
 
----[CLIENT] Returns the checked state of the ImageCheckBox
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ImageCheckBox:GetChecked)
----@return boolean # true for checked, false otherwise
-function ImageCheckBox:GetChecked() end
-
 ---[CLIENT] Sets the checked state of the checkbox.
 ---
 --- Checked state can be obtained by ImageCheckBox.State.
@@ -22,6 +16,19 @@ function ImageCheckBox:Set(OnOff) end
 ---@param bOn boolean true for checked, false otherwise
 function ImageCheckBox:SetChecked(bOn) end
 
+---[CLIENT] Returns the checked state of the ImageCheckBox
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ImageCheckBox:GetChecked)
+---@return boolean # true for checked, false otherwise
+function ImageCheckBox:GetChecked() end
+
+---
+--- A checkbox panel similar to DCheckBox and DImageButton with customizable checked state image.
+---
+--- Uses the Material panel internally. Can't have a label.
+---
+--- Will error if no material was set.
+--- 	Example of ImageCheckBox usage.
 ---@class ImageCheckBox : Button
 local ImageCheckBox = {}
 

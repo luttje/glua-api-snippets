@@ -11,6 +11,10 @@ function DColorCombo:BuildControls() end
 ---@return table # A Color
 function DColorCombo:GetColor() end
 
+---
+--- 		The **DColorCombo** allows the user to choose color, without alpha,
+--- 		using DColorMixer or DColorPalette in a tabbed view.
+--- 	Creates a DColorCombo and sets its initial value.
 ---@class DColorCombo : DPropertySheet
 local DColorCombo = {}
 

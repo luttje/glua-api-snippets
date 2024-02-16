@@ -1,5 +1,6 @@
 ---@meta
 
+--- The baseclass library. Used to lookup a field from a metatable.
 baseclass = {}
 
 ---[SHARED AND MENU] Add a new base class that can be derived by others. This is done automatically for:

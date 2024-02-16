@@ -1,5 +1,6 @@
 ---@meta
 
+--- The hammer library.
 hammer = {}
 
 ---[SERVER] Sends command to Hammer, if Hammer is running with the current map loaded.

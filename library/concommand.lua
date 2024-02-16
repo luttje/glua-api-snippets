@@ -1,13 +1,7 @@
 ---@meta
 
+--- The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server.
 concommand = {}
-
----[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
----@return table # Table of command callback functions.
----@return table # Table of command autocomplete functions.
-function concommand.GetTable() end
 
 ---[SHARED AND MENU] Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
 ---
@@ -17,13 +11,12 @@ function concommand.GetTable() end
 ---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
 function concommand.AutoComplete(command, arguments) end
 
----[SHARED AND MENU] Removes a console command.
+---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
 ---
---- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)
----@param name string The name of the command to be removed.
-function concommand.Remove(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
+---@return table # Table of command callback functions.
+---@return table # Table of command autocomplete functions.
+function concommand.GetTable() end
 
 ---[SHARED AND MENU] You might be looking for Global.RunConsoleCommand or Player:ConCommand.
 ---
@@ -60,3 +53,11 @@ function concommand.Run(ply, cmd, args, argumentString) end
 ---@param helpText? string The text to display should a user run 'help cmdName'.
 ---@param flags? number Concommand modifier flags. See Enums/FCVAR.
 function concommand.Add(name, callback, autoComplete, helpText, flags) end
+
+---[SHARED AND MENU] Removes a console command.
+---
+--- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)
+---@param name string The name of the command to be removed.
+function concommand.Remove(name) end

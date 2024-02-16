@@ -14,5 +14,6 @@ function Material:SetMaterial(matname) end
 ---@param alpha number The alpha value, from 0 to 255.
 function Material:SetAlpha(alpha) end
 
+--- Material is a VGUI element that renders a VMT material.Creates a Material panel with TV static under a DModelPanel with a spinning Garry's Mod logo model.Creates a custom material (using existing textures) of a Portal background with scrolling scan lines, and then displays that material in a Material panel in the center of the screen.
 ---@class Material : Button
 local Material = {}

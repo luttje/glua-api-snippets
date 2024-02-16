@@ -1,5 +1,51 @@
 ---@meta
 
+---[CLIENT AND MENU] Resets this entire color palette to a default preset one, without saving.
+---
+--- See DColorPalette:ResetSavedColors for version that also saves the changes.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:Reset)
+function DColorPalette:Reset() end
+
+---[CLIENT AND MENU] Returns the size of each palette button. Set by DColorPalette:SetButtonSize.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetButtonSize)
+---@return number # The size of each palette button
+function DColorPalette:GetButtonSize() end
+
+---[CLIENT AND MENU] Sets the size of each palette button.
+---
+--- This is best kept to such a number, where this equation would return a whole number:
+--- `WidthOfColorPalette / ButtonSize= WholeNumber`
+---
+--- If not, there will be ugly whitespace on the right side of the panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetButtonSize)
+---@param size number Sets the new size
+function DColorPalette:SetButtonSize(size) end
+
+---[CLIENT AND MENU] Called when a palette button has been pressed
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:OnRightClickButton)
+---@param pnl Panel The DColorButton that was pressed.
+function DColorPalette:OnRightClickButton(pnl) end
+
+---[CLIENT AND MENU] Used internally to make sure changes on one palette affect other palettes with same name.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:NetworkColorChange)
+function DColorPalette:NetworkColorChange() end
+
+---[CLIENT AND MENU] Sets the ConVar name for the red channel of the color.
+---
+--- See also:
+--- * DColorPalette:SetConVarG - For the green channel
+--- * DColorPalette:SetConVarB - For the blue channel
+--- * DColorPalette:SetConVarA - For the alpha channel
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarR)
+---@param convar string The ConVar name for the red channel of the color
+function DColorPalette:SetConVarR(convar) end
+
 ---[CLIENT AND MENU] Returns the ConVar name for the green channel of the color.
 ---
 --- See also:
@@ -11,10 +57,38 @@
 ---@return string # The ConVar name for the green channel of the color
 function DColorPalette:GetConVarG() end
 
----[CLIENT AND MENU] Used internally to make sure changes on one palette affect other palettes with same name.
+---[CLIENT AND MENU] Returns the ConVar name for the red channel of the color.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:NetworkColorChange)
-function DColorPalette:NetworkColorChange() end
+--- See also:
+--- * DColorPalette:GetConVarG - For the green channel
+--- * DColorPalette:GetConVarB - For the blue channel
+--- * DColorPalette:GetConVarA - For the alpha channel
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR)
+---@return string # The ConVar name for the red channel of the color
+function DColorPalette:GetConVarR() end
+
+---[CLIENT AND MENU] Returns the ConVar name for the alpha channel of the color.
+---
+--- See also:
+--- * DColorPalette:GetConVarR - For the red channel
+--- * DColorPalette:GetConVarG - For the green channel
+--- * DColorPalette:GetConVarB - For the blue channel
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarA)
+---@return string # The ConVar name for the alpha channel of the color
+function DColorPalette:GetConVarA() end
+
+---[CLIENT AND MENU] Returns the ConVar name for the blue channel of the color.
+---
+--- See also:
+--- * DColorPalette:GetConVarR - For the red channel
+--- * DColorPalette:GetConVarG - For the green channel
+--- * DColorPalette:GetConVarA - For the alpha channel
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarB)
+---@return string # The ConVar name for the blue channel of the color
+function DColorPalette:GetConVarB() end
 
 ---[CLIENT AND MENU] Currently does nothing. Intended to "select" the color.
 ---
@@ -28,44 +102,11 @@ function DColorPalette:SetColor(clr) end
 ---@return number # Number of rows of the DColorPalette.
 function DColorPalette:GetNumRows() end
 
----[CLIENT AND MENU] Called when a palette button has been pressed
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:OnRightClickButton)
----@param pnl Panel The DColorButton that was pressed.
-function DColorPalette:OnRightClickButton(pnl) end
-
----[CLIENT AND MENU] Resets this entire color palette to a default preset one, without saving.
----
---- See DColorPalette:ResetSavedColors for version that also saves the changes.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:Reset)
-function DColorPalette:Reset() end
-
----[CLIENT AND MENU] Sets the size of each palette button.
----
---- This is best kept to such a number, where this equation would return a whole number:
---- `WidthOfColorPalette / ButtonSize= WholeNumber`
----
---- If not, there will be ugly whitespace on the right side of the panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetButtonSize)
----@param size number Sets the new size
-function DColorPalette:SetButtonSize(size) end
-
----@class DColorPalette : DIconLayout
-local DColorPalette = {}
-
 ---[CLIENT AND MENU] Clears the palette and adds new buttons with given colors.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetColorButtons)
 ---@param tab table A number indexed table where each value is a Color
 function DColorPalette:SetColorButtons(tab) end
-
----[CLIENT AND MENU] Returns the size of each palette button. Set by DColorPalette:SetButtonSize.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetButtonSize)
----@return number # The size of each palette button
-function DColorPalette:GetButtonSize() end
 
 ---[CLIENT AND MENU] Sets the ConVar name for the alpha channel of the color.
 ---
@@ -77,48 +118,6 @@ function DColorPalette:GetButtonSize() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarA)
 ---@param convar string The ConVar name for the alpha channel of the color
 function DColorPalette:SetConVarA(convar) end
-
----[CLIENT AND MENU] Sets the ConVar name for the blue channel of the color.
----
---- See also:
---- * DColorPalette:SetConVarR - For the red channel
---- * DColorPalette:SetConVarG - For the green channel
---- * DColorPalette:SetConVarA - For the alpha channel
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarB)
----@param convar string The ConVar name for the blue channel of the color
-function DColorPalette:SetConVarB(convar) end
-
----[CLIENT AND MENU] Returns the ConVar name for the blue channel of the color.
----
---- See also:
---- * DColorPalette:GetConVarR - For the red channel
---- * DColorPalette:GetConVarG - For the green channel
---- * DColorPalette:GetConVarA - For the alpha channel
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarB)
----@return string # The ConVar name for the blue channel of the color
-function DColorPalette:GetConVarB() end
-
----[CLIENT AND MENU] Saves the color of given button across sessions.
---- The color is saved as a panel cookie, see Panel:SetCookie and Panel:SetCookieName.
---- It is expected that the amount of colors per palette (Panel:SetCookieName) is the same every time.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SaveColor)
----@param btn Panel The button to save the color of. Used to get the ID of the button.
----@param clr table The color to save to this button's index
-function DColorPalette:SaveColor(btn, clr) end
-
----[CLIENT AND MENU] Sets the ConVar name for the red channel of the color.
----
---- See also:
---- * DColorPalette:SetConVarG - For the green channel
---- * DColorPalette:SetConVarB - For the blue channel
---- * DColorPalette:SetConVarA - For the alpha channel
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarR)
----@param convar string The ConVar name for the red channel of the color
-function DColorPalette:SetConVarR(convar) end
 
 ---[CLIENT AND MENU] Resets this entire color palette to a default preset one and saves the changes.
 ---
@@ -134,17 +133,6 @@ function DColorPalette:ResetSavedColors() end
 ---@param btn Panel The DColorButton that was pressed.
 function DColorPalette:DoClick(clr, btn) end
 
----[CLIENT AND MENU] Returns the ConVar name for the red channel of the color.
----
---- See also:
---- * DColorPalette:GetConVarG - For the green channel
---- * DColorPalette:GetConVarB - For the blue channel
---- * DColorPalette:GetConVarA - For the alpha channel
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR)
----@return string # The ConVar name for the red channel of the color
-function DColorPalette:GetConVarR() end
-
 ---[CLIENT AND MENU] Sets the ConVar name for the green channel of the color.
 ---
 --- See also:
@@ -156,16 +144,33 @@ function DColorPalette:GetConVarR() end
 ---@param convar string The ConVar name for the green channel of the color
 function DColorPalette:SetConVarG(convar) end
 
----[CLIENT AND MENU] Returns the ConVar name for the alpha channel of the color.
+---[CLIENT AND MENU] Sets the ConVar name for the blue channel of the color.
 ---
 --- See also:
---- * DColorPalette:GetConVarR - For the red channel
---- * DColorPalette:GetConVarG - For the green channel
---- * DColorPalette:GetConVarB - For the blue channel
+--- * DColorPalette:SetConVarR - For the red channel
+--- * DColorPalette:SetConVarG - For the green channel
+--- * DColorPalette:SetConVarA - For the alpha channel
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarA)
----@return string # The ConVar name for the alpha channel of the color
-function DColorPalette:GetConVarA() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarB)
+---@param convar string The ConVar name for the blue channel of the color
+function DColorPalette:SetConVarB(convar) end
+
+---
+--- 		The **DColorPalette** allows the player to select a color from a list of given colors.
+--- 		This panel supports saving across sessions via the panel cookie system.
+--- 		Use Panel:SetCookieName to change "save files".
+--- 	Creates a DColorPalette in a DFrame, clicking on a color will change the DColorButton's color to the selected color
+---@class DColorPalette : DIconLayout
+local DColorPalette = {}
+
+---[CLIENT AND MENU] Saves the color of given button across sessions.
+--- The color is saved as a panel cookie, see Panel:SetCookie and Panel:SetCookieName.
+--- It is expected that the amount of colors per palette (Panel:SetCookieName) is the same every time.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SaveColor)
+---@param btn Panel The button to save the color of. Used to get the ID of the button.
+---@param clr table The color to save to this button's index
+function DColorPalette:SaveColor(btn, clr) end
 
 ---[CLIENT AND MENU] Internal helper function for DColorPalette:UpdateConVars.
 ---

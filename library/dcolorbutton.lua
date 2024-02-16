@@ -1,17 +1,28 @@
 ---@meta
 
----[CLIENT AND MENU] Sets the color of the DColorButton.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetColor)
----@param color table A Color to set the color as
----@param noTooltip? boolean If true, the tooltip will not be reset to display the selected color.
-function DColorButton:SetColor(color, noTooltip) end
-
 ---[CLIENT AND MENU] Returns value set by DColorButton:SetDrawBorder. See that page for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetDrawBorder)
 ---@return boolean # Value set by DColorButton:SetDrawBorder.
 function DColorButton:GetDrawBorder() end
+
+---[CLIENT AND MENU] Does absolutely nothing at all. Default value is automatically set to true.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetDrawBorder)
+---@param draw boolean Does nothing.
+function DColorButton:SetDrawBorder(draw) end
+
+---[CLIENT AND MENU] Alias of Panel:IsSelected.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetSelected)
+---@return boolean #
+function DColorButton:GetSelected() end
+
+---[CLIENT AND MENU] Used internally by DColorPalette to detect which button is which.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetID)
+---@param id number A unique ID to give this button
+function DColorButton:SetID(id) end
 
 ---[CLIENT AND MENU] Returns the unique ID set by DColorButton:SetID.
 ---
@@ -21,6 +32,9 @@ function DColorButton:GetDrawBorder() end
 ---@return number # The unique ID of the button
 function DColorButton:GetID() end
 
+---
+--- 		Colorful buttons. Used internally by DColorPalette.
+--- 	Creates a DColorButton buton.
 ---@class DColorButton : DLabel
 local DColorButton = {}
 
@@ -36,20 +50,9 @@ function DColorButton:IsDown() end
 ---@return table # The Color of the button
 function DColorButton:GetColor() end
 
----[CLIENT AND MENU] Alias of Panel:IsSelected.
+---[CLIENT AND MENU] Sets the color of the DColorButton.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:GetSelected)
----@return boolean #
-function DColorButton:GetSelected() end
-
----[CLIENT AND MENU] Used internally by DColorPalette to detect which button is which.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetID)
----@param id number A unique ID to give this button
-function DColorButton:SetID(id) end
-
----[CLIENT AND MENU] Does absolutely nothing at all. Default value is automatically set to true.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetDrawBorder)
----@param draw boolean Does nothing.
-function DColorButton:SetDrawBorder(draw) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorButton:SetColor)
+---@param color table A Color to set the color as
+---@param noTooltip? boolean If true, the tooltip will not be reset to display the selected color.
+function DColorButton:SetColor(color, noTooltip) end

@@ -1,20 +1,7 @@
 ---@meta
 
+--- The gmsave library provides functions relating to the singleplayer save system in Garry's Mod.
 gmsave = {}
-
----[SERVER] Sets player position and angles from supplied table
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/gmsave.PlayerLoad)
----@param ply Player The player to "load" values for
----@param data table A table containing Origin and Angle keys for position and angles to set.
-function gmsave.PlayerLoad(ply, data) end
-
----[SERVER] Returns a table containing player position and angles. Used by gmsave.SaveMap.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/gmsave.PlayerSave)
----@param ply Player The player to "save"
----@return table # A table containing player position ( Origin ) and angles ( Angle )
-function gmsave.PlayerSave(ply) end
 
 ---[SERVER] Saves the map
 ---
@@ -30,6 +17,20 @@ function gmsave.SaveMap(ply) end
 ---@param t table A table containing classname key with entities classname.
 ---@return boolean # Should save entity or not
 function gmsave.ShouldSaveEntity(ent, t) end
+
+---[SERVER] Returns a table containing player position and angles. Used by gmsave.SaveMap.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gmsave.PlayerSave)
+---@param ply Player The player to "save"
+---@return table # A table containing player position ( Origin ) and angles ( Angle )
+function gmsave.PlayerSave(ply) end
+
+---[SERVER] Sets player position and angles from supplied table
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gmsave.PlayerLoad)
+---@param ply Player The player to "load" values for
+---@param data table A table containing Origin and Angle keys for position and angles to set.
+function gmsave.PlayerLoad(ply, data) end
 
 ---[SERVER] Loads a saved map.
 ---

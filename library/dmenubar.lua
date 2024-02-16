@@ -1,13 +1,13 @@
 ---@meta
 
----@class DMenuBar : DPanel
-local DMenuBar = {}
-
----[CLIENT AND MENU] Returns whether or not the DMenuBar is disabled
+---[CLIENT AND MENU] Retrieves a DMenu object from the menu bar. If one with the given label doesn't exist, a new one is created.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDisabled)
----@return boolean # Is disabled
-function DMenuBar:GetDisabled() end
+--- To add a DMenu without checking, use DMenuBar:AddMenu.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:AddOrGetMenu)
+---@param label string The name (label) of the derma menu to get or create.
+---@return Panel # The DMenu with the given label.
+function DMenuBar:AddOrGetMenu(label) end
 
 ---[CLIENT AND MENU] Creates a new DMenu object tied to a DButton with the given label on the menu bar.
 ---
@@ -24,33 +24,21 @@ function DMenuBar:AddMenu(label) end
 ---@return table # The background's color. See Color
 function DMenuBar:GetBackgroundColor() end
 
----[CLIENT AND MENU] Retrieves a DMenu object from the menu bar. If one with the given label doesn't exist, a new one is created.
----
---- To add a DMenu without checking, use DMenuBar:AddMenu.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:AddOrGetMenu)
----@param label string The name (label) of the derma menu to get or create.
----@return Panel # The DMenu with the given label.
-function DMenuBar:AddOrGetMenu(label) end
+--- A simple Derma MenuBarCreates a DMenuBar in a DFrame.A sub menu example
+---@class DMenuBar : DPanel
+local DMenuBar = {}
 
----[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as DMenuBar:GetPaintBackground
+---[CLIENT AND MENU] Returns whether or not the DMenuBar is disabled
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDrawBackground)
----@return boolean # Should the background be painted
----@deprecated Use DMenuBar:GetPaintBackground instead.
-function DMenuBar:GetDrawBackground() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDisabled)
+---@return boolean # Is disabled
+function DMenuBar:GetDisabled() end
 
----[CLIENT AND MENU] Sets the background color
+---[CLIENT AND MENU] Returns whether or not the panel is a menu. Used for closing menus when another panel is selected.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetBackgroundColor)
----@param color table See Color
-function DMenuBar:SetBackgroundColor(color) end
-
----[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as DMenuBar:GetDrawBackground
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetPaintBackground)
----@return boolean # Should the background be painted
-function DMenuBar:GetPaintBackground() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetIsMenu)
+---@return boolean # Is a menu
+function DMenuBar:GetIsMenu() end
 
 ---[CLIENT AND MENU] If a menu is visible/opened, then the menu is returned.
 ---
@@ -58,17 +46,12 @@ function DMenuBar:GetPaintBackground() end
 ---@return Panel # Returns the visible/open menu or nil.
 function DMenuBar:GetOpenMenu() end
 
----[CLIENT AND MENU] Sets whether or not the panel is disabled
+---[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as DMenuBar:GetPaintBackground
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetDisabled)
----@param disable boolean Should be disabled or not
-function DMenuBar:SetDisabled(disable) end
-
----[CLIENT AND MENU] Returns whether or not the panel is a menu. Used for closing menus when another panel is selected.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetIsMenu)
----@return boolean # Is a menu
-function DMenuBar:GetIsMenu() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDrawBackground)
+---@return boolean # Should the background be painted
+---@deprecated Use DMenuBar:GetPaintBackground instead.
+function DMenuBar:GetDrawBackground() end
 
 ---[CLIENT AND MENU] Sets whether or not the panel is part of a DMenu.
 ---
@@ -78,11 +61,11 @@ function DMenuBar:GetIsMenu() end
 ---@param isMenu boolean Is this a menu
 function DMenuBar:SetIsMenu(isMenu) end
 
----[CLIENT AND MENU] Sets whether or not the background should be painted. Is the same as DMenuBar:SetDrawBackground
+---[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as DMenuBar:GetDrawBackground
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetPaintBackground)
----@param shouldPaint boolean Should the background be painted
-function DMenuBar:SetPaintBackground(shouldPaint) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetPaintBackground)
+---@return boolean # Should the background be painted
+function DMenuBar:GetPaintBackground() end
 
 ---[CLIENT AND MENU] Sets whether or not the background should be painted. Is the same as DMenuBar:SetPaintBackground
 ---
@@ -90,3 +73,21 @@ function DMenuBar:SetPaintBackground(shouldPaint) end
 ---@param shouldPaint boolean Should the background be painted
 ---@deprecated Use DMenuBar:SetPaintBackground
 function DMenuBar:SetDrawBackground(shouldPaint) end
+
+---[CLIENT AND MENU] Sets whether or not the background should be painted. Is the same as DMenuBar:SetDrawBackground
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetPaintBackground)
+---@param shouldPaint boolean Should the background be painted
+function DMenuBar:SetPaintBackground(shouldPaint) end
+
+---[CLIENT AND MENU] Sets the background color
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetBackgroundColor)
+---@param color table See Color
+function DMenuBar:SetBackgroundColor(color) end
+
+---[CLIENT AND MENU] Sets whether or not the panel is disabled
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetDisabled)
+---@param disable boolean Should be disabled or not
+function DMenuBar:SetDisabled(disable) end

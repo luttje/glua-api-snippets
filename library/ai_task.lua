@@ -1,5 +1,6 @@
 ---@meta
 
+--- Used to create tasks for scripted NPCs.
 ai_task = {}
 
 ---[SERVER] Create a new empty task. Used by Schedule:AddTask and Schedule:EngTask.

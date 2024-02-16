@@ -1,5 +1,6 @@
 ---@meta
 
+--- The search library
 search = {}
 
 ---[CLIENT] Retrieves search results.

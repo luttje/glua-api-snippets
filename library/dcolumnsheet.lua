@@ -12,13 +12,14 @@ function DColumnSheet:GetActiveButton() end
 ---@param active Panel The button to make active button
 function DColumnSheet:SetActiveButton(active) end
 
+--- Similar to DPropertySheet, but with tabs on the left.Example of how you'd use this panel
+---@class DColumnSheet : Panel
+local DColumnSheet = {}
+
 ---[CLIENT AND MENU] Makes the tabs/buttons show only the image and no text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:UseButtonOnlyStyle)
 function DColumnSheet:UseButtonOnlyStyle() end
-
----@class DColumnSheet : Panel
-local DColumnSheet = {}
 
 ---[CLIENT AND MENU] Adds a new column/tab.
 ---

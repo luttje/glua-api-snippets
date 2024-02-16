@@ -1,6 +1,17 @@
 ---@meta
 
+--- The debugoverlay library is mainly useful for 3D debugging, it can be used to draw shapes on the screen for debug purposes.
+---
+--- These functions will not do anything unless the **developer** console variable is set to non 0.
 debugoverlay = {}
+
+---[SHARED] Draws a 3D grid of limited size in given position.
+---
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Grid)
+---@param position Vector
+function debugoverlay.Grid(position) end
 
 ---[SHARED] Displays 2D text at the specified coordinates.
 ---
@@ -13,6 +24,30 @@ debugoverlay = {}
 ---@param lifetime? number Number of seconds to appear
 ---@param color? table The color of the box. Uses the Color
 function debugoverlay.EntityTextAtPosition(pos, line, text, lifetime, color) end
+
+---[SHARED] Creates a coloured cross at the specified position for the specified time.
+---
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Cross)
+---@param position Vector Position origin
+---@param size number Size of the cross
+---@param lifetime? number Number of seconds the cross will appear for
+---@param color? table The color of the cross. Uses the Color
+---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
+function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
+
+---[SHARED] Displays an axis indicator at the specified position.
+---
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Axis)
+---@param origin Vector Position origin
+---@param ang Angle Angle of the axis
+---@param size number Size of the axis
+---@param lifetime? number Number of seconds to appear
+---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
+function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
 
 ---[SHARED] Displays a solid colored rotated box at the specified position.
 ---
@@ -27,50 +62,6 @@ function debugoverlay.EntityTextAtPosition(pos, line, text, lifetime, color) end
 ---@param color? table The color of the box. Uses the Color
 function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 
----[SHARED] Displays a coloured sphere at the specified position.
----
---- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Sphere)
----@param origin Vector Position origin
----@param size number Size of the sphere
----@param lifetime? number Number of seconds to appear
----@param color? table The color of the sphere. Uses the Color
----@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
-function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
-
----[SHARED] Displays an axis indicator at the specified position.
----
---- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Axis)
----@param origin Vector Position origin
----@param ang Angle Angle of the axis
----@param size number Size of the axis
----@param lifetime? number Number of seconds to appear
----@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
-function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
-
----[SHARED] Draws a 3D grid of limited size in given position.
----
---- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Grid)
----@param position Vector
-function debugoverlay.Grid(position) end
-
----[SHARED] Displays a solid coloured box at the specified position.
----
---- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Box)
----@param origin Vector Position origin
----@param mins Vector Minimum bounds of the box
----@param maxs Vector Maximum bounds of the box
----@param lifetime? number Number of seconds to appear
----@param color? table The color of the box. Uses the Color
-function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
-
 ---[SHARED] Displays text triangle at the specified coordinates.
 ---
 --- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
@@ -82,6 +73,29 @@ function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 ---@param lifetime? number Number of seconds to appear
 ---@param color? table The color of the box. Uses the Color
 function debugoverlay.ScreenText(x, y, text, lifetime, color) end
+
+---[SHARED] Displays text at the specified position.
+---
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Text)
+---@param origin Vector Position origin
+---@param text string String message to display
+---@param lifetime? number Number of seconds to appear
+---@param viewCheck? boolean Clip text that is obscured
+function debugoverlay.Text(origin, text, lifetime, viewCheck) end
+
+---[SHARED] Displays a coloured sphere at the specified position.
+---
+--- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Sphere)
+---@param origin Vector Position origin
+---@param size number Size of the sphere
+---@param lifetime? number Number of seconds to appear
+---@param color? table The color of the sphere. Uses the Color
+---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
+function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 
 ---[SHARED] Displays a colored triangle at the specified coordinates.
 ---
@@ -96,17 +110,17 @@ function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
 function debugoverlay.Triangle(pos1, pos2, pos3, lifetime, color, ignoreZ) end
 
----[SHARED] Displays a coloured line at the specified position.
+---[SHARED] Displays a solid coloured box at the specified position.
 ---
 --- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Line)
----@param pos1 Vector First position of the line
----@param pos2 Vector Second position of the line
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Box)
+---@param origin Vector Position origin
+---@param mins Vector Minimum bounds of the box
+---@param maxs Vector Maximum bounds of the box
 ---@param lifetime? number Number of seconds to appear
----@param color? table The color of the line. Uses the Color
----@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
-function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
+---@param color? table The color of the box. Uses the Color
+function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 
 ---[SHARED] Displays "swept" box, two boxes connected with lines by their vertices.
 ---
@@ -122,25 +136,14 @@ function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 ---@param color? table The color of the box. Uses the Color
 function debugoverlay.SweptBox(vStart, vEnd, vMins, vMaxs, ang, lifetime, color) end
 
----[SHARED] Creates a coloured cross at the specified position for the specified time.
+---[SHARED] Displays a coloured line at the specified position.
 ---
 --- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Cross)
----@param position Vector Position origin
----@param size number Size of the cross
----@param lifetime? number Number of seconds the cross will appear for
----@param color? table The color of the cross. Uses the Color
----@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
-function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
-
----[SHARED] Displays text at the specified position.
----
---- This function will silently fail if the `developer` ConVar is set to `0`. It is not networked to clients, except for the Player:IsListenServerHost.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Text)
----@param origin Vector Position origin
----@param text string String message to display
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debugoverlay.Line)
+---@param pos1 Vector First position of the line
+---@param pos2 Vector Second position of the line
 ---@param lifetime? number Number of seconds to appear
----@param viewCheck? boolean Clip text that is obscured
-function debugoverlay.Text(origin, text, lifetime, viewCheck) end
+---@param color? table The color of the line. Uses the Color
+---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer
+function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end

@@ -1,5 +1,6 @@
 ---@meta
 
+--- Similar purpose to the game and engine, allows access to various features of the game's engine.
 gmod = {}
 
 ---[SHARED] Returns GAMEMODE.

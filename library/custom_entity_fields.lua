@@ -1,5 +1,10 @@
 ---@meta
 
+---
+--- Information about custom fields **all** entities can have.
+---
+--- See also Structures/ENT
+---
 ---@class Custom_Entity_Fields
 local Custom_Entity_Fields = {}
 

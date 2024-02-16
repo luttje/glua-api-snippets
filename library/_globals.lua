@@ -112,17 +112,3 @@ color_black = Color(0, 0, 0, 255)
 ---@type Color
 ---A color with only the alpha value set to 0.
 color_transparent = Color(255, 255, 255, 0)
-
---[[
-  Table-type enums
---]]
-
----@type table<string, number>
----Enumerations used by Kinect SDK bindings.
-SENSORBONE = nil
-
----@type table<string, number>
----Enumerations used by render.PushFilterMin and render.PushFilterMag.
----
----See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
-TEXFILTER = nil

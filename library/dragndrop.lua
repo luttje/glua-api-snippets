@@ -1,5 +1,6 @@
 ---@meta
 
+--- The drag'n'drop library, used internally by certain base panels to allow for drag'n'drop functionality, like spawnmenu's customizations.
 dragndrop = {}
 
 ---[CLIENT AND MENU] Clears all the internal drag'n'drop variables.
@@ -16,10 +17,10 @@ function dragndrop.Clear() end
 ---@param my number The local to the panel  mouse cursor Y position when the click happened.
 function dragndrop.CallReceiverFunction(bDoDrop, command, mx, my) end
 
----[CLIENT AND MENU] Handles the drop action of drag'n'drop library.
+---[CLIENT AND MENU] Updates the receiver to drop the panels onto. Called from dragndrop.Think.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Drop)
-function dragndrop.Drop() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.UpdateReceiver)
+function dragndrop.UpdateReceiver() end
 
 ---[CLIENT AND MENU] If returns true, calls dragndrop.StopDragging in dragndrop.Drop. Seems to be broken and does nothing. Is it for override?
 ---
@@ -31,31 +32,20 @@ function dragndrop.HandleDroppedInGame() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.StartDragging)
 function dragndrop.StartDragging() end
 
----[CLIENT AND MENU] Updates the receiver to drop the panels onto. Called from dragndrop.Think.
+---[CLIENT AND MENU] Handles the drop action of drag'n'drop library.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.UpdateReceiver)
-function dragndrop.UpdateReceiver() end
-
----[CLIENT AND MENU] Stops the drag'n'drop and calls dragndrop.Clear.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.StopDragging)
-function dragndrop.StopDragging() end
-
----[CLIENT AND MENU] Returns whether the user is dragging something with the drag'n'drop system.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.IsDragging)
----@return boolean # True if the user is dragging something with the drag'n'drop system.
-function dragndrop.IsDragging() end
-
----[CLIENT AND MENU] Handles all the drag'n'drop processes. Calls dragndrop.UpdateReceiver and dragndrop.HoverThink.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Think)
-function dragndrop.Think() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Drop)
+function dragndrop.Drop() end
 
 ---[CLIENT AND MENU] Handles the hover think. Called from dragndrop.Think.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.HoverThink)
 function dragndrop.HoverThink() end
+
+---[CLIENT AND MENU] Handles all the drag'n'drop processes. Calls dragndrop.UpdateReceiver and dragndrop.HoverThink.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Think)
+function dragndrop.Think() end
 
 ---[CLIENT AND MENU] Returns a table of currently dragged panels.
 ---
@@ -63,3 +53,14 @@ function dragndrop.HoverThink() end
 ---@param name? string If set, the function will return only the panels with this Panel:Droppable name.
 ---@return table # A table of all panels that are being currently dragged, if any.
 function dragndrop.GetDroppable(name) end
+
+---[CLIENT AND MENU] Returns whether the user is dragging something with the drag'n'drop system.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.IsDragging)
+---@return boolean # True if the user is dragging something with the drag'n'drop system.
+function dragndrop.IsDragging() end
+
+---[CLIENT AND MENU] Stops the drag'n'drop and calls dragndrop.Clear.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.StopDragging)
+function dragndrop.StopDragging() end

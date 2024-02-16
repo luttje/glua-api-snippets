@@ -1,11 +1,18 @@
 ---@meta
 
+---
+---
+--- The usermessage library is used to receive user messages from the server on the client.
+---
+--- Usermessages have a limit of only 256 bytes!
+---@deprecated You should be using the net instead
 usermessage = {}
 
 ---[SHARED] Returns a table of every usermessage hook
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/usermessage.GetTable)
----@return table # hooks
+---@return table # User message hooks
+---@deprecated You should be using net instead
 function usermessage.GetTable() end
 
 ---[SHARED] Called by the engine when a usermessage arrives, this method calls the hook function specified by usermessage.Hook if any.

@@ -1,18 +1,7 @@
 ---@meta
 
+--- The physenv library allows you to control the physics environment created by the engine, and lets you modify constants such as gravity and maximum velocity.
 physenv = {}
-
----[SHARED] Sets the air density.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetAirDensity)
----@param airDensity number The new air density.
-function physenv.SetAirDensity(airDensity) end
-
----[SHARED] Returns the last simulation duration of the in-game physics.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetLastSimulationTime)
----@return number # The last simulation duration of the in-game physics in seconds
-function physenv.GetLastSimulationTime() end
 
 ---[SHARED] Returns the air density used to calculate drag on physics objects.
 --- 		The unit is in `kg/m³`.
@@ -29,23 +18,17 @@ function physenv.GetAirDensity() end
 ---@param properties string The properties to add. Each one should include "base" or the game will crash due to some values being missing.
 function physenv.AddSurfaceData(properties) end
 
----[SHARED] Sets the performance settings.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings)
----@param performanceSettings table The new performance settings. See Structures/PhysEnvPerformanceSettings
-function physenv.SetPerformanceSettings(performanceSettings) end
-
 ---[SHARED] Gets the gravitational acceleration used for physics objects in `source_unit/s^2`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetGravity)
 ---@return Vector # gravAccel
 function physenv.GetGravity() end
 
----[SHARED] Gets the current performance settings in table form.
+---[SHARED] Sets the air density.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings)
----@return table # Performance settings. See Structures/PhysEnvPerformanceSettings
-function physenv.GetPerformanceSettings() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetAirDensity)
+---@param airDensity number The new air density.
+function physenv.SetAirDensity(airDensity) end
 
 ---[SHARED] Sets the gravitational acceleration used for physics objects.
 --- 		Does not work on players.
@@ -53,3 +36,21 @@ function physenv.GetPerformanceSettings() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetGravity)
 ---@param gravAccel Vector The new gravity in `source_unit/s^2`.
 function physenv.SetGravity(gravAccel) end
+
+---[SHARED] Gets the current performance settings in table form.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings)
+---@return table # Performance settings. See Structures/PhysEnvPerformanceSettings
+function physenv.GetPerformanceSettings() end
+
+---[SHARED] Returns the last simulation duration of the in-game physics.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetLastSimulationTime)
+---@return number # The last simulation duration of the in-game physics in seconds
+function physenv.GetLastSimulationTime() end
+
+---[SHARED] Sets the performance settings.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings)
+---@param performanceSettings table The new performance settings. See Structures/PhysEnvPerformanceSettings
+function physenv.SetPerformanceSettings(performanceSettings) end

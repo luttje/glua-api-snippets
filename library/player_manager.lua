@@ -1,5 +1,6 @@
 ---@meta
 
+--- The player_manager library lets you manage players, such as setting their models or creating player classes.
 player_manager = {}
 
 ---[SHARED] Associates a simplified name with a path to a valid player model.
@@ -23,26 +24,11 @@ function player_manager.AddValidModel(name, model) end
 ---  This is useful when player models have multiple user-selectable skins.
 function player_manager.AddValidHands(name, model, skin, bodygroups, matchBodySkin) end
 
----[SHARED] Returns the valid model path for a simplified name.
+---[SHARED] Clears a player's class association by setting their ClassID to 0
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel)
----@param shortName string The short name of the model.
----@return string # The valid model path for the short name.
-function player_manager.TranslatePlayerModel(shortName) end
-
----[SHARED] Retrieves a copy of all registered player classes.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.GetPlayerClasses)
----@return table # A copy of all registered player classes.
-function player_manager.GetPlayerClasses() end
-
----[SHARED] Register a class metatable to be assigned to players later
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RegisterClass)
----@param name string Class name
----@param table table Class metatable
----@param base string Base class name
-function player_manager.RegisterClass(name, table, base) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.ClearPlayerClass)
+---@param ply Player Player to clear class from
+function player_manager.ClearPlayerClass(ply) end
 
 ---[SHARED] Gets a players class
 ---
@@ -51,11 +37,11 @@ function player_manager.RegisterClass(name, table, base) end
 ---@return string # The players class
 function player_manager.GetPlayerClass(ply) end
 
----[SHARED] Clears a player's class association by setting their ClassID to 0
+---[SHARED] Retrieves a copy of all registered player classes.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.ClearPlayerClass)
----@param ply Player Player to clear class from
-function player_manager.ClearPlayerClass(ply) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.GetPlayerClasses)
+---@return table # A copy of all registered player classes.
+function player_manager.GetPlayerClasses() end
 
 ---[SHARED] Returns the entire list of valid player models.
 ---
@@ -70,6 +56,21 @@ function player_manager.AllValidModels() end
 ---@param model string The model path to a player model
 ---@return string # The simplified name for that model
 function player_manager.TranslateToPlayerModelName(model) end
+
+---[SHARED] Register a class metatable to be assigned to players later
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RegisterClass)
+---@param name string Class name
+---@param table table Class metatable
+---@param base string Base class name
+function player_manager.RegisterClass(name, table, base) end
+
+---[SHARED] Returns the valid model path for a simplified name.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel)
+---@param shortName string The short name of the model.
+---@return string # The valid model path for the short name.
+function player_manager.TranslatePlayerModel(shortName) end
 
 ---[SHARED] Sets a player's class
 ---
@@ -87,15 +88,6 @@ function player_manager.SetPlayerClass(ply, classname) end
 ---@return table # A table with following contents: * string model - Model of hands * number skin - Skin of hands * string body - Bodygroups of hands
 function player_manager.TranslatePlayerHands(name) end
 
----[SHARED] Execute a named function within the player's set class
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RunClass)
----@param ply Player Player to execute function on.
----@param funcName string Name of function.
----@param ... any Optional arguments. Can be of any type.
----@return any ... # The values returned by the called function.
-function player_manager.RunClass(ply, funcName, ...) end
-
 ---[SHARED] Applies basic class variables when the player spawns.
 ---
 --- Called from GM:PlayerSpawn in the base gamemode.
@@ -104,3 +96,12 @@ function player_manager.RunClass(ply, funcName, ...) end
 ---@param ply Player Player to setup.
 ---@param transiton boolean If true, the player just spawned from a map transition. You probably want to not touch player's weapons or positiom if this is set to `true`.
 function player_manager.OnPlayerSpawn(ply, transiton) end
+
+---[SHARED] Execute a named function within the player's set class
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RunClass)
+---@param ply Player Player to execute function on.
+---@param funcName string Name of function.
+---@param ... any Optional arguments. Can be of any type.
+---@return any ... # The values returned by the called function.
+function player_manager.RunClass(ply, funcName, ...) end

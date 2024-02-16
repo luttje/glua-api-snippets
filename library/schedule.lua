@@ -1,5 +1,6 @@
 ---@meta
 
+--- The object returned by ai_schedule.New.
 ---@class Schedule
 local Schedule = {}
 
@@ -22,16 +23,6 @@ function Schedule:NumTasks() end
 ---@param num number Task index.
 function Schedule:GetTask(num) end
 
----[SERVER] Adds a task to the schedule with completely custom function names.
----
---- See also Schedule:AddTask.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTaskEx)
----@param start string The full name of a function on the entity's table to be ran when the task is started.
----@param run string The full name of a function on the entity's table to be ran when the task is continuously running.
----@param data number Task data to be passed into the NPC's functions
-function Schedule:AddTaskEx(start, run, data) end
-
 ---[SERVER] Adds a task to the schedule. See also Schedule:AddTaskEx if you wish to customize task start and run function names.
 ---
 --- See also ENTITY:StartSchedule, NPC:StartEngineTask, and NPC:RunEngineTask.
@@ -46,3 +37,13 @@ function Schedule:AddTask(taskname, taskdata) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:Init)
 ---@param debugName string The name passed from ai_schedule.New.
 function Schedule:Init(debugName) end
+
+---[SERVER] Adds a task to the schedule with completely custom function names.
+---
+--- See also Schedule:AddTask.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTaskEx)
+---@param start string The full name of a function on the entity's table to be ran when the task is started.
+---@param run string The full name of a function on the entity's table to be ran when the task is continuously running.
+---@param data number Task data to be passed into the NPC's functions
+function Schedule:AddTaskEx(start, run, data) end

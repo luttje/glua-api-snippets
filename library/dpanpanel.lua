@@ -1,11 +1,5 @@
 ---@meta
 
----[CLIENT AND MENU] Used internally.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:SetCanvas)
----@param pnl Panel The canvas panel.
-function DPanPanel:SetCanvas(pnl) end
-
 ---[CLIENT AND MENU] Parents the passed panel to the DPanPanel:GetCanvas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:AddItem)
@@ -24,12 +18,21 @@ function DPanPanel:GetCanvas() end
 ---@param pnl Panel The panel to scroll to.
 function DPanPanel:ScrollToChild(pnl) end
 
+---
+--- A panel similar to DScrollPanel, but that allows the player to pan around, for example a zoomed in image within a small window.
+---
+---@class DPanPanel : DPanel
+local DPanPanel = {}
+
+---[CLIENT AND MENU] Used internally.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:SetCanvas)
+---@param pnl Panel The canvas panel.
+function DPanPanel:SetCanvas(pnl) end
+
 ---[CLIENT AND MENU] Used internally, called from DPanPanel:ScrollToChild.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanPanel:OnScroll)
 ---@param x number
 ---@param y number
 function DPanPanel:OnScroll(x, y) end
-
----@class DPanPanel : DPanel
-local DPanPanel = {}

@@ -1,5 +1,6 @@
 ---@meta
 
+--- GWEN is a system that allows you to load a spritesheet and generate a skin out of it.
 GWEN = {}
 
 ---[CLIENT AND MENU] When used in a material skin, it returns a color value from a point in the skin image.

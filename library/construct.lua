@@ -1,5 +1,6 @@
 ---@meta
 
+--- The construct library is used to control the physical properties of entities.
 construct = {}
 
 ---[SERVER] Sets props physical properties.

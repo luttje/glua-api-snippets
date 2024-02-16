@@ -1,14 +1,7 @@
 ---@meta
 
+--- The gamemode library provides functions relating to the gamemode system in Garry's Mod. This entire library also passes through the C -> Lua bridge.
 gamemode = {}
-
----[SHARED] Called by the engine when a gamemode is being loaded.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/gamemode.Register)
----@param gm table Your GM table
----@param name string Name of your gamemode, lowercase, no spaces.
----@param derived string The gamemode name that your gamemode is derived from
-function gamemode.Register(gm, name, derived) end
 
 ---[SHARED] This returns the internally stored gamemode table.
 ---
@@ -28,3 +21,11 @@ function gamemode.Get(name) end
 ---@param ... any The arguments
 ---@return any # The result of the hook function - can be up to 6 values. Returns false if the gamemode function doesn't exist (i.e. nothing happened), but remember - a hook can also return false.
 function gamemode.Call(name, ...) end
+
+---[SHARED] Called by the engine when a gamemode is being loaded.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gamemode.Register)
+---@param gm table Your GM table
+---@param name string Name of your gamemode, lowercase, no spaces.
+---@param derived string The gamemode name that your gamemode is derived from
+function gamemode.Register(gm, name, derived) end

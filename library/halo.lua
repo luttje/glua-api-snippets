@@ -1,6 +1,13 @@
 ---@meta
 
+--- The halo library is used to draw glowing outlines around entities, an example of this can be seen by picking up props with the physgun in Garry's Mod 13.
 halo = {}
+
+---[CLIENT] Renders a halo according to the specified table, only used internally, called from a GM:PostDrawEffects hook added by the halo library.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/halo.Render)
+---@param entry table Table with info about the halo to draw.
+function halo.Render(entry) end
 
 ---[CLIENT] Returns the entity the halo library is currently rendering the halo for.
 ---
@@ -9,12 +16,6 @@ halo = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/halo.RenderedEntity)
 ---@return Entity # If set, the currently rendered entity by the halo library.
 function halo.RenderedEntity() end
-
----[CLIENT] Renders a halo according to the specified table, only used internally, called from a GM:PostDrawEffects hook added by the halo library.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/halo.Render)
----@param entry table Table with info about the halo to draw.
-function halo.Render(entry) end
 
 ---[CLIENT] Applies a halo glow effect to one or multiple entities.
 --- Using this function outside of the GM:PreDrawHalos hook can cause instability or crashes.

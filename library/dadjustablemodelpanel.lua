@@ -1,15 +1,24 @@
 ---@meta
 
----[CLIENT] Enables mouse and keyboard-based adjustment of the perspective.
+---[CLIENT] Used by the panel to perform mouse capture operations when adjusting the model.
 ---
---- This is set to `true` automatically each time mouse capture is enabled, and hence doesn't serve as a usable setting, other than to disable this functionality after the PANEL:OnMousePressed event.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:SetFirstPerson)
----@param enable boolean Whether to enable/disable first person controls. See DAdjustableModelPanel:FirstPersonControls.
-function DAdjustableModelPanel:SetFirstPerson(enable) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:CaptureMouse)
+function DAdjustableModelPanel:CaptureMouse() end
 
+---
+--- A derivative of the DModelPanel in which the user may modify the perspective of the model with their mouse and keyboard by clicking and dragging.
+---
+--- The keyboard keys W S A D Up Down Left Right Space and Ctrl can be used when the right mouse is held down, with Shift acting as a speed multiplier. When the left mouse is used, the Shift key holds the current `y` angle steady.
+---
+--- This is used by IconEditor for modifying spawn icons.
+--- 	Creates an Adjustable Model Panel
 ---@class DAdjustableModelPanel : DModelPanel
 local DAdjustableModelPanel = {}
+
+---[CLIENT] Used to adjust the perspective in the model panel via the keyboard, when the right mouse button is used.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:FirstPersonControls)
+function DAdjustableModelPanel:FirstPersonControls() end
 
 ---[CLIENT] Gets whether mouse and keyboard-based adjustment of the perspective has been enabled. See DAdjustableModelPanel:SetFirstPerson for more information.
 ---
@@ -17,12 +26,10 @@ local DAdjustableModelPanel = {}
 ---@return boolean # Whether first person controls are enabled. See DAdjustableModelPanel:FirstPersonControls.
 function DAdjustableModelPanel:GetFirstPerson() end
 
----[CLIENT] Used to adjust the perspective in the model panel via the keyboard, when the right mouse button is used.
+---[CLIENT] Enables mouse and keyboard-based adjustment of the perspective.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:FirstPersonControls)
-function DAdjustableModelPanel:FirstPersonControls() end
-
----[CLIENT] Used by the panel to perform mouse capture operations when adjusting the model.
+--- This is set to `true` automatically each time mouse capture is enabled, and hence doesn't serve as a usable setting, other than to disable this functionality after the PANEL:OnMousePressed event.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:CaptureMouse)
-function DAdjustableModelPanel:CaptureMouse() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:SetFirstPerson)
+---@param enable boolean Whether to enable/disable first person controls. See DAdjustableModelPanel:FirstPersonControls.
+function DAdjustableModelPanel:SetFirstPerson(enable) end

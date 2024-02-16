@@ -1,5 +1,6 @@
 ---@meta
 
+--- The video library.
 video = {}
 
 ---[CLIENT AND MENU] Attempts to create an IVideoWriter.

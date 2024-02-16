@@ -1,5 +1,6 @@
 ---@meta
 
+--- The menu library.
 menu = {}
 
 ---[CLIENT] Used by "Demo to Video" to record the frame.

@@ -1,5 +1,6 @@
 ---@meta
 
+--- Adds curved corners.Creates a DPanel with a DPanelOverlay and adds a DLabel to it
 ---@class DPanelOverlay : DPanel
 local DPanelOverlay = {}
 
@@ -8,6 +9,16 @@ local DPanelOverlay = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:GetColor)
 ---@return table # The set color. Uses the Color.
 function DPanelOverlay:GetColor() end
+
+---[CLIENT AND MENU] Used internally by the panel for type 3.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintDifferentColours)
+---@param cola table
+---@param colb table
+---@param colc table
+---@param cold table
+---@param size number
+function DPanelOverlay:PaintDifferentColours(cola, colb, colc, cold, size) end
 
 ---[CLIENT AND MENU] Sets the border color of the DPanelOverlay.
 ---
@@ -25,16 +36,6 @@ function DPanelOverlay:SetColor(color) end
 --- * 2 - 4px corners of given type
 --- * 3 - 2 top? corners of hardcoded color, 2 other corners of given color
 function DPanelOverlay:SetType(type) end
-
----[CLIENT AND MENU] Used internally by the panel for type 3.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelOverlay:PaintDifferentColours)
----@param cola table
----@param colb table
----@param colc table
----@param cold table
----@param size number
-function DPanelOverlay:PaintDifferentColours(cola, colb, colc, cold, size) end
 
 ---[CLIENT AND MENU] Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
 ---

@@ -12,11 +12,16 @@ function ControlPresets:GetConVars() end
 ---@param convar string The convar to add.
 function ControlPresets:AddConVar(convar) end
 
+---
+--- 		A preset manager, found at the top of almost every default tool's C-menu.
+---
+--- 		This control only exists in Sandbox derived gamemodes.
+---
+---@class ControlPresets : Panel
+local ControlPresets = {}
+
 ---[CLIENT] Set the name label text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:SetLabel)
 ---@param name string The text to put in the label
 function ControlPresets:SetLabel(name) end
-
----@class ControlPresets : Panel
-local ControlPresets = {}
