@@ -1,4 +1,4 @@
-import { WikiPageMarkupScraper } from './scrapers/wiki-page-markup-scraper.js';
+import { WikiPageMarkupScraper, isLibrary, isClass } from './scrapers/wiki-page-markup-scraper.js';
 import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
 import packageJson from '../package.json' assert { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
@@ -80,7 +80,15 @@ async function startScrape() {
     }
   }
 
+  console.log('Collecting all pages...');
+  let collect_start = performance.now();
+
   const pageIndexes = await scrapeAndCollect(pageListScraper);
+
+  console.log(`Took ${Math.floor((performance.now()-collect_start) / 100) / 10}s!\n`);
+
+  console.log('Scraping all pages...');
+  let scrape_start = performance.now();
 
   let queue: Promise<any>[] = [];
   for (const pageIndex of pageIndexes) {
@@ -90,8 +98,7 @@ async function startScrape() {
       if (pageMarkups.length === 0)
         return;
 
-      const api = writer.writePages(pageMarkups);
-
+      // Generate file names
       let fileName = pageIndex.address;
       let moduleName = fileName;
 
@@ -99,23 +106,24 @@ async function startScrape() {
         [moduleName, fileName] = fileName.split(/[:.\/]/, 2);
       }
 
+      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    
       // Make sure modules like Entity and ENTITY are placed in the same file.
       moduleName = moduleName.toLowerCase();
 
+      // Special cases for library and hook pages
+      if (moduleName.endsWith("(library)")) moduleName = moduleName.substring(0, moduleName.length - 9);
+      if (moduleName.endsWith("_hooks")) moduleName = moduleName.substring(0, moduleName.length - 6);
+
       const moduleFile = path.join(baseDirectory, moduleName);
 
-      if (!fs.existsSync(`${moduleFile}.lua`))
-        fs.writeFileSync(`${moduleFile}.lua`, '---@meta\n\n');
+      // Write Lua API docs
+      writer.writePages(pageMarkups, path.join(baseDirectory, `${moduleName}.lua`));
 
+      // Write JSON data
       if (!fs.existsSync(moduleFile))
         fs.mkdirSync(moduleFile, { recursive: true });
 
-      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-
-      // Lua API
-      fs.appendFileSync(path.join(baseDirectory, `${moduleName}.lua`), api);
-
-      // JSON data
       const json = JSON.stringify(pageMarkups, null, 2);
       fs.writeFileSync(path.join(baseDirectory, moduleName, `${fileName}.json`), json);
     });
@@ -128,6 +136,10 @@ async function startScrape() {
       queue = [];
     }
   }
+
+  console.log(`Took ${Math.floor((performance.now()-scrape_start) / 100) / 10}s!`);
+
+  writer.writeToDisk();
 
   console.log(`Done with scraping! You can find the output in ${baseDirectory}`);
 }
