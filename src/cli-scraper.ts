@@ -137,6 +137,9 @@ async function startScrape() {
     }
   }
 
+  // Await any after the loop exits
+  await Promise.allSettled(queue);
+
   console.log(`Took ${Math.floor((performance.now()-scrape_start) / 100) / 10}s!`);
 
   writer.writeToDisk();
