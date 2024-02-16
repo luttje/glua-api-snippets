@@ -10,6 +10,8 @@ import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scra
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
+const mockFilePath = '<irrelevant for this test>';
+
 describe('GLua API Writer', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
@@ -17,7 +19,8 @@ describe('GLua API Writer', () => {
 
   it('should be able to write Lua API definitions directly from wiki json data', async () => {
     const writer = new GluaApiWriter();
-    const api = writer.writePages([<WikiPage>hookJson]);
+    writer.writePages([<WikiPage>hookJson], mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
 
     expect(api).toEqual(hookApiDefinition);
   });
@@ -34,7 +37,8 @@ describe('GLua API Writer', () => {
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
     const structs = await scrapeCallback(responseMock, structMarkup);
     expect(structs).toHaveLength(1);
-    const api = writer.writePages(structs);
+    writer.writePages(structs, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(structApiDefinition);
   });
 
@@ -50,7 +54,8 @@ describe('GLua API Writer', () => {
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
     const panel = await scrapeCallback(responseMock, panelMarkup);
     expect(panel).toHaveLength(1);
-    const api = writer.writePages(panel);
+    writer.writePages(panel, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(panelApiDefinition);
   });
 
@@ -66,7 +71,8 @@ describe('GLua API Writer', () => {
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
     const panel = await scrapeCallback(responseMock, multiReturnFuncMarkup);
     expect(panel).toHaveLength(1);
-    const api = writer.writePages(panel);
+    writer.writePages(panel, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(multiReturnFuncApiDefinition);
   });
 
@@ -82,7 +88,8 @@ describe('GLua API Writer', () => {
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
     const panel = await scrapeCallback(responseMock, varargsFuncMarkup);
     expect(panel).toHaveLength(1);
-    const api = writer.writePages(panel);
+    writer.writePages(panel, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(varargsFuncApiDefinition);
   });
 
@@ -122,7 +129,8 @@ describe('GLua API Writer', () => {
     const override = Math.random().toString(36).substring(7);
     writer.addOverride(hookJson.address, override);
 
-    const api = writer.writePages([<WikiPage>hookJson]);
+    writer.writePages([<WikiPage>hookJson], mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
 
     expect(api).toEqual(`${override}\n\n`);
   });
@@ -133,7 +141,8 @@ describe('GLua API Writer', () => {
     const override = `${overrideStart}\nlocal Custom_Entity_Fields = {}`;
     writer.addOverride('class.Custom_Entity_Fields', override);
 
-    const api = writer.writePages([<WikiPage>structJson]);
+    writer.writePages([<WikiPage>structJson], mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
 
     expect(api).toMatch(new RegExp(`^${overrideStart}`));
   });

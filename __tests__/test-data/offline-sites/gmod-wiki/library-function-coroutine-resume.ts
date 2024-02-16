@@ -12,7 +12,8 @@ export const markup = `<function name="resume" parent="coroutine" type="libraryf
 </function>`;
 
 export const apiDefinition =
-`coroutine = {}
+`--- Missing description.
+coroutine = {}
 
 ---[SHARED AND MENU] Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
 ---

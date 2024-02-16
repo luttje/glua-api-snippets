@@ -138,7 +138,7 @@ export class GluaApiWriter {
     if (!func.dontDefineParent && !this.writtenLibraryGlobals.has(func.parent)) {
       let api = '';
 
-      api += `---Missing description.`;
+      api += `--- Missing description.\n`;
       api += `${func.parent} = {}\n\n`;
 
       this.writtenLibraryGlobals.add(func.parent);
@@ -154,7 +154,7 @@ export class GluaApiWriter {
       let api = '';
 
       api += page.description ? `${putCommentBeforeEachLine(page.description, false)}\n` : '';
-    
+
       if (page.deprecated)
         api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
 
@@ -167,7 +167,7 @@ export class GluaApiWriter {
 
     return '';
   }
-  
+
   private writeClassGlobal(page: TypePage) {
     return this.writeClassStart(page.name, page.parent, page.deprecated, page.description);
   }
@@ -279,17 +279,28 @@ export class GluaApiWriter {
     this.files.get(filePath)!.push(...pages);
   }
 
+  public getPages(filePath: string) {
+    return this.files.get(filePath) ?? [];
+  }
+
+  public makeApiFromPages(pages: WikiPage[]) {
+    let api = "";
+
+    // First we write the "header" types
+    for (const page of pages.filter(x => isClass(x) || isLibrary(x))) {
+      api += this.writePage(page);
+    }
+
+    for (const page of pages.filter(x => !isClass(x) && !isLibrary(x))) {
+      api += this.writePage(page);
+    }
+
+    return api;
+  }
+
   public writeToDisk() {
     this.files.forEach((pages: WikiPage[], filePath: string) => {
-      let api = "";
-
-      // First we write the "header" types
-      for (const page of pages.filter(x => isClass(x) || isLibrary(x))) {
-        api += this.writePage(page);
-      }
-      for (const page of pages.filter(x => !isClass(x) && !isLibrary(x))) {
-        api += this.writePage(page);
-      }
+      let api = this.makeApiFromPages(pages);
 
       if (api.length > 0) {
         fs.appendFileSync(filePath, "---@meta\n\n" + api);

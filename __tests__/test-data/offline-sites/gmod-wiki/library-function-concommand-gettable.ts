@@ -10,7 +10,8 @@ export const markup = `<function name="GetTable" parent="concommand" type="libra
 </function>`;
 
 export const apiDefinition =
-`concommand = {}
+`--- Missing description.
+concommand = {}
 
 ---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
 ---

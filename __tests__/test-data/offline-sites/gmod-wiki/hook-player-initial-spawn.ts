@@ -144,7 +144,7 @@ end )
 };
 
 export const apiDefinition = `---@class GM
-local GM = {}
+GM = {}
 
 ---[SERVER] Called when the player spawns for the first time.
 ---

@@ -47,7 +47,12 @@ This can also be set from map, see <page>Sandbox Specific Mapping</page></item>
 </structure>`;
 
 export const apiDefinition =
-`---@class Custom_Entity_Fields
+`---
+--- Information about custom fields **all** entities can have.
+---
+--- See also Structures/ENT
+---
+---@class Custom_Entity_Fields
 local Custom_Entity_Fields = {}
 
 ---\`Serverside\`, Sandbox and Sandbox derived only. Called by the Drive property to override the default drive type, which is \`drive_sandbox\`.
