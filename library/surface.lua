@@ -3,13 +3,12 @@
 --- The surface library allows you to draw text and shapes on the screen. Primarily used for making HUDs & custom GUI panels.
 surface = {}
 
----[CLIENT AND MENU] Returns the current color affecting draw operations.
+---[CLIENT] Gets the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID with the specified name.
 ---
---- The returned color will not have the color metatable.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetDrawColor)
----@return table # The color that drawing operations will use as a Color.
-function surface.GetDrawColor() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetHUDTexture)
+---@param name string The name of the texture.
+---@return number #
+function surface.GetHUDTexture(name) end
 
 ---[CLIENT AND MENU] Draw a textured rectangle with the given position and dimensions on the screen, using the current active texture set with surface.SetMaterial. It is also affected by surface.SetDrawColor.
 ---
@@ -24,6 +23,13 @@ function surface.GetDrawColor() end
 ---@param height number The integer height of the rectangle.
 function surface.DrawTexturedRect(x, y, width, height) end
 
+---[CLIENT AND MENU] Returns the X and Y co-ordinate that has been set with surface.SetTextPos or changed by surface.DrawText.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextPos)
+---@return number # The X integer co-ordinate.
+---@return number # The Y integer co-ordinate.
+function surface.GetTextPos() end
+
 ---[CLIENT AND MENU] Draws a line from one point to another.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawLine)
@@ -32,6 +38,28 @@ function surface.DrawTexturedRect(x, y, width, height) end
 ---@param endX number The end x float coordinate.
 ---@param endY number The end y float coordinate.
 function surface.DrawLine(startX, startY, endX, endY) end
+
+---[CLIENT AND MENU] Returns the current color affecting text draw operations.
+---
+--- The returned color will not have the color metatable.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextColor)
+---@return table # The color that text drawing operations will use as a Color.
+function surface.GetTextColor() end
+
+---[CLIENT AND MENU] Returns the current color affecting draw operations.
+---
+--- The returned color will not have the color metatable.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetDrawColor)
+---@return table # The color that drawing operations will use as a Color.
+function surface.GetDrawColor() end
+
+---[CLIENT AND MENU] Returns the current alpha multiplier affecting drawing operations. This is set by surface.SetAlphaMultiplier or by the game engine in certain other cases.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetAlphaMultiplier)
+---@return number # The multiplier ranging from 0 to 1.
+function surface.GetAlphaMultiplier() end
 
 ---[CLIENT AND MENU] Enables or disables the clipping used by the VGUI that limits the drawing operations to a panels bounds.
 ---
@@ -42,6 +70,19 @@ function surface.DrawLine(startX, startY, endX, endY) end
 ---@return boolean # Whether the clipping was enabled or not before this function call
 ---@deprecated Alias of Global.DisableClipping so use that instead.
 function surface.DisableClipping(disable) end
+
+---[CLIENT AND MENU] Draws a textured polygon (secretly a triangle fan) with a maximum of 4096 vertices.
+--- Only works properly with convex polygons. You may try to render concave polygons, but there is no guarantee that things wont get messed up.
+---
+--- Unlike most surface library functions, non-integer coordinates are not rounded.
+---
+--- You must reset the drawing color and texture before calling the function to ensure consistent results. See examples below.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawPoly)
+---@param vertices table A table containing integer vertices. See the Structures/PolygonVertex.
+---
+--- **The vertices must be in clockwise order.**
+function surface.DrawPoly(vertices) end
 
 ---[CLIENT AND MENU] Draw the specified text on the screen, using the previously set [position](surface.SetTextPos), [font](surface.SetFont) and [color](surface.SetTextColor). This function does **not** handle newlines.
 ---
@@ -57,44 +98,14 @@ function surface.DisableClipping(disable) end
 ---
 function surface.DrawText(text, forceAdditive) end
 
----[CLIENT AND MENU] Returns the current alpha multiplier affecting drawing operations. This is set by surface.SetAlphaMultiplier or by the game engine in certain other cases.
+---[CLIENT AND MENU] Draws a solid rectangle on the screen.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetAlphaMultiplier)
----@return number # The multiplier ranging from 0 to 1.
-function surface.GetAlphaMultiplier() end
-
----[CLIENT AND MENU] Returns the current color affecting text draw operations.
----
---- The returned color will not have the color metatable.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextColor)
----@return table # The color that text drawing operations will use as a Color.
-function surface.GetTextColor() end
-
----[CLIENT] Gets the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID with the specified name.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetHUDTexture)
----@param name string The name of the texture.
----@return number #
-function surface.GetHUDTexture(name) end
-
----[CLIENT AND MENU] Returns the X and Y co-ordinate that has been set with surface.SetTextPos or changed by surface.DrawText.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextPos)
----@return number # The X integer co-ordinate.
----@return number # The Y integer co-ordinate.
-function surface.GetTextPos() end
-
----[CLIENT AND MENU] Returns the texture id of the material with the given name/path, for use with surface.SetTexture.
----
---- Opposite version of this function is surface.GetTextureNameByID.
----
---- This function will not work with .png or .jpg images. For that, see Global.Material. You will probably want to use it regardless.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureID)
----@param nameOrPath string Name or path of the texture.
----@return number # The texture ID
-function surface.GetTextureID(nameOrPath) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawRect)
+---@param x number The X integer co-ordinate.
+---@param y number The Y integer co-ordinate.
+---@param width number The integer width of the rectangle.
+---@param height number The integer height of the rectangle.
+function surface.DrawRect(x, y, width, height) end
 
 ---[CLIENT AND MENU] Returns the width and height (in pixels) of the given text with the font that has been set with surface.SetFont.
 ---
@@ -133,6 +144,18 @@ function surface.CreateFont(fontName, fontData) end
 ---@param height number The integer height of the rectangle.
 ---@param rotation number The rotation of the rectangle, in degrees.
 function surface.DrawTexturedRectRotated(x, y, width, height, rotation) end
+
+---[CLIENT AND MENU] Draws a hollow circle, made of lines. For a filled circle, see examples for surface.DrawPoly.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawCircle)
+---@param originX number The center x integer coordinate.
+---@param originY number The center y integer coordinate.
+---@param radius number The radius of the circle.
+---@param r number The red value of the color to draw the circle with, or a Color.
+---@param g number The green value of the color to draw the circle with. Unused if a Color was given.
+---@param b number The blue value of the color to draw the circle with. Unused if a Color was given.
+---@param a? number The alpha value of the color to draw the circle with. Unused if a Color was given.
+function surface.DrawCircle(originX, originY, radius, r, g, b, a) end
 
 ---[CLIENT AND MENU] Draws a textured rectangle with a repeated or partial texture.
 ---
@@ -177,40 +200,6 @@ function surface.DrawTexturedRectRotated(x, y, width, height, rotation) end
 ---@param endV number The V texture mapping of the rectangle end.
 function surface.DrawTexturedRectUV(x, y, width, height, startU, startV, endU, endV) end
 
----[CLIENT AND MENU] Draws a solid rectangle on the screen.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawRect)
----@param x number The X integer co-ordinate.
----@param y number The Y integer co-ordinate.
----@param width number The integer width of the rectangle.
----@param height number The integer height of the rectangle.
-function surface.DrawRect(x, y, width, height) end
-
----[CLIENT AND MENU] Draws a hollow circle, made of lines. For a filled circle, see examples for surface.DrawPoly.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawCircle)
----@param originX number The center x integer coordinate.
----@param originY number The center y integer coordinate.
----@param radius number The radius of the circle.
----@param r number The red value of the color to draw the circle with, or a Color.
----@param g number The green value of the color to draw the circle with. Unused if a Color was given.
----@param b number The blue value of the color to draw the circle with. Unused if a Color was given.
----@param a? number The alpha value of the color to draw the circle with. Unused if a Color was given.
-function surface.DrawCircle(originX, originY, radius, r, g, b, a) end
-
----[CLIENT AND MENU] Draws a textured polygon (secretly a triangle fan) with a maximum of 4096 vertices.
---- Only works properly with convex polygons. You may try to render concave polygons, but there is no guarantee that things wont get messed up.
----
---- Unlike most surface library functions, non-integer coordinates are not rounded.
----
---- You must reset the drawing color and texture before calling the function to ensure consistent results. See examples below.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawPoly)
----@param vertices table A table containing integer vertices. See the Structures/PolygonVertex.
----
---- **The vertices must be in clockwise order.**
-function surface.DrawPoly(vertices) end
-
 ---[CLIENT AND MENU] Draws a hollow box with a given border width.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawOutlinedRect)
@@ -220,6 +209,24 @@ function surface.DrawPoly(vertices) end
 ---@param h number The integer height.
 ---@param thickness? number The thickness of the outlined box border.
 function surface.DrawOutlinedRect(x, y, w, h, thickness) end
+
+---[CLIENT AND MENU] Returns the texture id of the material with the given name/path, for use with surface.SetTexture.
+---
+--- Opposite version of this function is surface.GetTextureNameByID.
+---
+--- This function will not work with .png or .jpg images. For that, see Global.Material. You will probably want to use it regardless.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureID)
+---@param nameOrPath string Name or path of the texture.
+---@return number # The texture ID
+function surface.GetTextureID(nameOrPath) end
+
+---[CLIENT AND MENU] Returns name/path of texture by ID. Opposite version of this function is surface.GetTextureID.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureNameByID)
+---@param id number ID of texture.
+---@return string # Returns name/path of texture.
+function surface.GetTextureNameByID(id) end
 
 ---[CLIENT AND MENU] Returns the size of the texture with the associated texture ID.
 ---
@@ -231,12 +238,31 @@ function surface.DrawOutlinedRect(x, y, w, h, thickness) end
 ---@return number # The texture height.
 function surface.GetTextureSize(textureID) end
 
----[CLIENT AND MENU] Returns the width of the current client's screen.
+---[CLIENT AND MENU] Sets the texture to be used in all upcoming draw operations using the surface library.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenWidth)
----@return number # screenWidth
----@deprecated You should use Global.ScrW instead.
-function surface.ScreenWidth() end
+--- See surface.SetMaterial for an IMaterial alternative.
+---
+--- It's probably best to use the alternative mentioned above.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTexture)
+---@param textureID number The ID of the texture to draw with returned by surface.GetTextureID.
+function surface.SetTexture(textureID) end
+
+---[CLIENT AND MENU] Sets the material to be used in all upcoming draw operations using the surface library.
+---
+--- Not to be confused with render.SetMaterial.
+---
+--- If you need to unset the texture, use the draw.NoTexture convenience function.
+---
+--- Global.Material function calls are expensive to be done inside this function or inside rendering context, you should be caching the results of Global.Material calls
+--- When using render.PushRenderTarget or render.SetRenderTarget, `material` should have the `$ignorez` flag set to make it visible. If the material is not used in 3D rendering, it is probably safe to add it with this code:
+--- ```lua
+--- material:SetInt( "$flags", bit.bor( material:GetInt( "$flags" ), 32768 ) )
+--- ```
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetMaterial)
+---@param material IMaterial The material to be used.
+function surface.SetMaterial(material) end
 
 ---[CLIENT AND MENU] Play a sound file directly on the client (such as UI sounds, etc).
 ---
@@ -255,34 +281,12 @@ function surface.ScreenWidth() end
 ---
 function surface.PlaySound(soundfile) end
 
----[CLIENT AND MENU] Set the current font to be used for text operations later.
+---[CLIENT AND MENU] Sets the alpha multiplier that will influence all upcoming drawing operations.
+--- See also render.SetBlend.
 ---
---- The fonts must first be created with surface.CreateFont or be one of the Default Fonts.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetFont)
----@param fontName string The name of the font to use.
-function surface.SetFont(fontName) end
-
----[CLIENT AND MENU] Set the top-left position to draw any future text at.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTextPos)
----@param x number The X integer co-ordinate.
----@param y number The Y integer co-ordinate.
-function surface.SetTextPos(x, y) end
-
----[CLIENT AND MENU] Returns the height of the current client's screen.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenHeight)
----@return number # screenHeight
----@deprecated You should use Global.ScrH instead.
-function surface.ScreenHeight() end
-
----[CLIENT AND MENU] Returns name/path of texture by ID. Opposite version of this function is surface.GetTextureID.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetTextureNameByID)
----@param id number ID of texture.
----@return string # Returns name/path of texture.
-function surface.GetTextureNameByID(id) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetAlphaMultiplier)
+---@param multiplier number The multiplier ranging from 0 to 1.
+function surface.SetAlphaMultiplier(multiplier) end
 
 ---[CLIENT AND MENU] Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a Color.
 ---
@@ -296,15 +300,20 @@ function surface.GetTextureNameByID(id) end
 ---@param a? number The alpha value of color
 function surface.SetTextColor(r, g, b, a) end
 
----[CLIENT AND MENU] Sets the texture to be used in all upcoming draw operations using the surface library.
+---[CLIENT AND MENU] Returns the height of the current client's screen.
 ---
---- See surface.SetMaterial for an IMaterial alternative.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenHeight)
+---@return number # screenHeight
+---@deprecated You should use Global.ScrH instead.
+function surface.ScreenHeight() end
+
+---[CLIENT AND MENU] Set the current font to be used for text operations later.
 ---
---- It's probably best to use the alternative mentioned above.
+--- The fonts must first be created with surface.CreateFont or be one of the Default Fonts.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTexture)
----@param textureID number The ID of the texture to draw with returned by surface.GetTextureID.
-function surface.SetTexture(textureID) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetFont)
+---@param fontName string The name of the font to use.
+function surface.SetFont(fontName) end
 
 ---[CLIENT AND MENU] Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a Color. Using a color structure is not recommended to be created procedurally.
 --- 		Providing a Color structure is slower than providing four numbers. You may use Color:Unpack for this.
@@ -318,25 +327,16 @@ function surface.SetTexture(textureID) end
 ---@param a? number The alpha value of color. Unused if a Color was given.
 function surface.SetDrawColor(r, g, b, a) end
 
----[CLIENT AND MENU] Sets the material to be used in all upcoming draw operations using the surface library.
+---[CLIENT AND MENU] Set the top-left position to draw any future text at.
 ---
---- Not to be confused with render.SetMaterial.
----
---- If you need to unset the texture, use the draw.NoTexture convenience function.
----
---- Global.Material function calls are expensive to be done inside this function or inside rendering context, you should be caching the results of Global.Material calls
---- When using render.PushRenderTarget or render.SetRenderTarget, `material` should have the `$ignorez` flag set to make it visible. If the material is not used in 3D rendering, it is probably safe to add it with this code:
---- ```lua
---- material:SetInt( "$flags", bit.bor( material:GetInt( "$flags" ), 32768 ) )
---- ```
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetMaterial)
----@param material IMaterial The material to be used.
-function surface.SetMaterial(material) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTextPos)
+---@param x number The X integer co-ordinate.
+---@param y number The Y integer co-ordinate.
+function surface.SetTextPos(x, y) end
 
----[CLIENT AND MENU] Sets the alpha multiplier that will influence all upcoming drawing operations.
---- See also render.SetBlend.
+---[CLIENT AND MENU] Returns the width of the current client's screen.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetAlphaMultiplier)
----@param multiplier number The multiplier ranging from 0 to 1.
-function surface.SetAlphaMultiplier(multiplier) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.ScreenWidth)
+---@return number # screenWidth
+---@deprecated You should use Global.ScrW instead.
+function surface.ScreenWidth() end

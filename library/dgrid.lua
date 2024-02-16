@@ -6,12 +6,6 @@
 ---@param item Panel The item to add. It will be forced visible and parented to the DGrid.
 function DGrid:AddItem(item) end
 
----[CLIENT AND MENU] Returns the number of columns of this DGrid. Set by DGrid:SetCols.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetCols)
----@return number # The number of columns of this DGrid
-function DGrid:GetCols() end
-
 ---
 --- 		A really simple grid layout panel.
 ---
@@ -21,11 +15,11 @@ function DGrid:GetCols() end
 ---@class DGrid : Panel
 local DGrid = {}
 
----[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
+---[CLIENT AND MENU] Returns the number of columns of this DGrid. Set by DGrid:SetCols.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
----@return number # The height of each row
-function DGrid:GetRowHeight() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetCols)
+---@return number # The number of columns of this DGrid
+function DGrid:GetCols() end
 
 ---[CLIENT AND MENU] Sets the height of each row.
 ---
@@ -41,14 +35,6 @@ function DGrid:SetRowHeight(rowHeight) end
 ---@return number # The width of each column
 function DGrid:GetColWide() end
 
----[CLIENT AND MENU] Sets the width of each column.
----
---- The cell panels (grid items) will not be resized or centered.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetColWide)
----@param colWidth number The width of each column.
-function DGrid:SetColWide(colWidth) end
-
 ---[CLIENT AND MENU] Sets the number of columns this panel should have.
 ---
 --- The DGrid will resize its width to match this value.
@@ -56,6 +42,20 @@ function DGrid:SetColWide(colWidth) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetCols)
 ---@param cols number The desired number of columns
 function DGrid:SetCols(cols) end
+
+---[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
+---@return number # The height of each row
+function DGrid:GetRowHeight() end
+
+---[CLIENT AND MENU] Sets the width of each column.
+---
+--- The cell panels (grid items) will not be resized or centered.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetColWide)
+---@param colWidth number The width of each column.
+function DGrid:SetColWide(colWidth) end
 
 ---[CLIENT AND MENU] Returns a list of panels in the grid.
 ---

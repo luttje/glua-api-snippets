@@ -6,6 +6,14 @@
 ---@return table # The color set on the color picker, see Color.
 function DRGBPicker:GetRGB() end
 
+---[CLIENT AND MENU] Sets the color stored in the color picker.
+---
+--- This function is meant to be called internally and will not update the position of the color picker line or call DRGBPicker:OnChange
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:SetRGB)
+---@param color table The color to set, see Color.
+function DRGBPicker:SetRGB(color) end
+
 ---[CLIENT AND MENU] Returns the color at given position on the internal texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:GetPosColor)
@@ -25,11 +33,3 @@ function DRGBPicker:GetPosColor(x, y) end
 --- 	Creates a color picker which controls the color of the background panel it's parented to.Creates a DRGBPicker that controls the hue of  a DColorCube, which outputs the color to the background panel, label, and your copy/paste buffer.
 ---@class DRGBPicker : DPanel
 local DRGBPicker = {}
-
----[CLIENT AND MENU] Sets the color stored in the color picker.
----
---- This function is meant to be called internally and will not update the position of the color picker line or call DRGBPicker:OnChange
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:SetRGB)
----@param color table The color to set, see Color.
-function DRGBPicker:SetRGB(color) end

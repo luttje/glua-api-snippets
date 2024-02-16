@@ -14,17 +14,29 @@
 ---@class DMenuOptionCVar : DMenuOption
 local DMenuOptionCVar = {}
 
----[CLIENT] Return the value of the ConVars when the DMenuOptionCVar is checked.
+---[CLIENT] Returns the ConVars used by the DMenuOptionCVar.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOn)
----@return string # The value
-function DMenuOptionCVar:GetValueOn() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetConVar)
+---@return string # The ConVars used
+function DMenuOptionCVar:GetConVar() end
 
 ---[CLIENT] Sets the value of the ConVars when the DMenuOptionCVar is checked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOn)
 ---@param value string The value
 function DMenuOptionCVar:SetValueOn(value) end
+
+---[CLIENT] Return the value of the ConVars when the DMenuOptionCVar is checked.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOn)
+---@return string # The value
+function DMenuOptionCVar:GetValueOn() end
+
+---[CLIENT] Returns the value of the ConVars when the DMenuOptionCVar is not checked.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOff)
+---@return string # The value
+function DMenuOptionCVar:GetValueOff() end
 
 ---[CLIENT] Sets the value of the ConVars when the DMenuOptionCVar is not checked.
 ---
@@ -37,15 +49,3 @@ function DMenuOptionCVar:SetValueOff(value) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetConVar)
 ---@param cvar string The ConVars name to set
 function DMenuOptionCVar:SetConVar(cvar) end
-
----[CLIENT] Returns the value of the ConVars when the DMenuOptionCVar is not checked.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOff)
----@return string # The value
-function DMenuOptionCVar:GetValueOff() end
-
----[CLIENT] Returns the ConVars used by the DMenuOptionCVar.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetConVar)
----@return string # The ConVars used
-function DMenuOptionCVar:GetConVar() end

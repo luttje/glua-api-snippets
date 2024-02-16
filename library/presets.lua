@@ -3,14 +3,6 @@
 --- The presets library lets you add and modify the pre-set options for scripted tools (selected via the white bar at the top of each tools control panel).
 presets = {}
 
----[CLIENT] Returns whether a preset with given name exists or not
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Exists)
----@param type string The preset group name, usually it's tool class name.
----@param name string Name of the preset to test
----@return boolean # true if the preset does exist
-function presets.Exists(type, name) end
-
 ---[CLIENT] Used internally to tell the player that the name they tried to use in their preset is not acceptable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.BadNameAlert)
@@ -23,6 +15,14 @@ function presets.BadNameAlert() end
 ---@param name string Preset name, must be unique.
 ---@param values table A table of preset console commands.
 function presets.Add(groupname, name, values) end
+
+---[CLIENT] Returns whether a preset with given name exists or not
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Exists)
+---@param type string The preset group name, usually it's tool class name.
+---@param name string Name of the preset to test
+---@return boolean # true if the preset does exist
+function presets.Exists(type, name) end
 
 ---[CLIENT] Removes a preset entry from a preset group.
 ---

@@ -6,41 +6,12 @@
 ---@class Tool
 local Tool = {}
 
----[SHARED] This is called automatically for most toolgun actions so you shouldn't need to use it.
----
---- Checks all added objects to see if they're still valid, if not, clears the list of objects.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:CheckObjects)
-function Tool:CheckObjects() end
-
----[SHARED] Called when WEAPON:Deploy of the toolgun is called.
----
---- This is also called when switching from another tool on the server.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Deploy)
----@return boolean # Return true to allow switching away from the toolgun using lastinv command
-function TOOL:Deploy() end
-
----[SHARED] This is called automatically for all tools.
---- Initializes the tool object
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:Create)
----@return Tool # The created tool object.
-function Tool:Create() end
-
 ---[SHARED] Retrieves a physics bone number previously stored using Tool:SetObject.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetBone)
 ---@param id number The id of the object which was set in Tool:SetObject.
 ---@return number # Associated physics bone with given id.
 function Tool:GetBone(id) end
-
----[SHARED] Attempts to grab a clientside tool ConVar as a string.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetClientInfo)
----@param name string Name of the convar to retrieve. The function will automatically add the `mytoolfilename_` part to it.
----@return string # The value of the requested ConVar.
-function Tool:GetClientInfo(name) end
 
 ---[SHARED] This is called automatically for all tools.
 ---
@@ -49,13 +20,12 @@ function Tool:GetClientInfo(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:CreateConVars)
 function Tool:CreateConVars() end
 
----[SHARED] Returns whether the tool is allowed to be used or not. This function ignores the SANDBOX:CanTool hook.
+---[SHARED] This is called automatically for most toolgun actions so you shouldn't need to use it.
 ---
---- By default this will always return true clientside and uses `TOOL.AllowedCVar`which is a ConVar object pointing to  `toolmode_allow_*toolname*` convar on the server.
+--- Checks all added objects to see if they're still valid, if not, clears the list of objects.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:Allowed)
----@return boolean # Returns true if the tool is allowed.
-function Tool:Allowed() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:CheckObjects)
+function Tool:CheckObjects() end
 
 ---[CLIENT] Called when the tool's control panel needs to be rebuilt.
 ---
@@ -65,12 +35,25 @@ function Tool:Allowed() end
 ---@param cpanel Panel The DForm control panel to add settings to.
 function TOOL:BuildCPanel(cpanel) end
 
----[SHARED] Retrieves an Entity previously stored using Tool:SetObject.
+---[SHARED] Attempts to grab a clientside tool ConVar as a string.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetEnt)
----@param id number The id of the object which was set in Tool:SetObject.
----@return Entity # Associated Entity with given id.
-function Tool:GetEnt(id) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetClientInfo)
+---@param name string Name of the convar to retrieve. The function will automatically add the `mytoolfilename_` part to it.
+---@return string # The value of the requested ConVar.
+function Tool:GetClientInfo(name) end
+
+---[SHARED] Attempts to grab a clientside tool ConVar's value as a number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetClientNumber)
+---@param name string Name of the convar to retrieve. The function will automatically add the `mytoolfilename_` part to it.
+---@param default? number The default value to return in case the lookup fails.
+---@return number # The value of the requested ConVar.
+function Tool:GetClientNumber(name, default) end
+
+---[SHARED] Clears all objects previously set with Tool:SetObject.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:ClearObjects)
+function Tool:ClearObjects() end
 
 ---[CLIENT] Called after the default tool screen has been drawn from WEAPON:RenderScreen.
 ---
@@ -88,6 +71,33 @@ function TOOL:DrawToolScreen(width, height) end
 ---@return boolean # Return true to freeze the player
 function TOOL:FreezeMovement() end
 
+---[SHARED] Returns whether the tool is allowed to be used or not. This function ignores the SANDBOX:CanTool hook.
+---
+--- By default this will always return true clientside and uses `TOOL.AllowedCVar`which is a ConVar object pointing to  `toolmode_allow_*toolname*` convar on the server.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:Allowed)
+---@return boolean # Returns true if the tool is allowed.
+function Tool:Allowed() end
+
+---[CLIENT] Called when WEAPON:DrawHUD of the toolgun is called, only when the user has this tool selected.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:DrawHUD)
+function TOOL:DrawHUD() end
+
+---[SHARED] Called when WEAPON:Deploy of the toolgun is called.
+---
+--- This is also called when switching from another tool on the server.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Deploy)
+---@return boolean # Return true to allow switching away from the toolgun using lastinv command
+function TOOL:Deploy() end
+
+---[SHARED] Builds a list of all ConVars set via the ClientConVar variable on the Structures/TOOL and their default values. This is used for the preset system.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:BuildConVarList)
+---@return table # A list of all convars and their default values.
+function Tool:BuildConVarList() end
+
 ---[SHARED] Attempts to grab a clientside tool ConVar value as a boolean.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetClientBool)
@@ -96,109 +106,19 @@ function TOOL:FreezeMovement() end
 ---@return number # The value of the requested ConVar. It will be true if the value if the convar is not 0, just like ConVar:GetBool
 function Tool:GetClientBool(name, default) end
 
----[SHARED] Builds a list of all ConVars set via the ClientConVar variable on the Structures/TOOL and their default values. This is used for the preset system.
+---[SHARED] This is called automatically for all tools.
+--- Initializes the tool object
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:BuildConVarList)
----@return table # A list of all convars and their default values.
-function Tool:BuildConVarList() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:Create)
+---@return Tool # The created tool object.
+function Tool:Create() end
 
----[SHARED] Clears all objects previously set with Tool:SetObject.
+---[SHARED] Retrieves an Entity previously stored using Tool:SetObject.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:ClearObjects)
-function Tool:ClearObjects() end
-
----[SHARED] Attempts to grab a clientside tool ConVar's value as a number.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetClientNumber)
----@param name string Name of the convar to retrieve. The function will automatically add the `mytoolfilename_` part to it.
----@param default? number The default value to return in case the lookup fails.
----@return number # The value of the requested ConVar.
-function Tool:GetClientNumber(name, default) end
-
----[CLIENT] Called when WEAPON:DrawHUD of the toolgun is called, only when the user has this tool selected.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:DrawHUD)
-function TOOL:DrawHUD() end
-
----[SHARED] Returns the name of the current tool mode.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetMode)
----@return string # The current tool mode.
-function Tool:GetMode() end
-
----[SHARED] Retrieves an local vector previously stored using Tool:SetObject.
---- See also Tool:GetPos.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetLocalPos)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetEnt)
 ---@param id number The id of the object which was set in Tool:SetObject.
----@return Vector # Associated local vector with given id.
-function Tool:GetLocalPos(id) end
-
----[SHARED] Removes any ghost entity created for this tool.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:ReleaseGhostEntity)
-function Tool:ReleaseGhostEntity() end
-
----[SHARED] Retrieves an PhysObj previously stored using Tool:SetObject.
---- See also Tool:GetEnt.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetPhys)
----@param id number The id of the object which was set in Tool:SetObject.
----@return PhysObj # Associated PhysObj with given id. If it wasn't specified, returns current PhysObj of associated Entity.
-function Tool:GetPhys(id) end
-
----[SHARED] Called when WEAPON:Holster of the toolgun is called, as well as serverside when switching between different toolguns.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Holster)
-function TOOL:Holster() end
-
----[CLIENT] Automatically forces the tool's control panel to be rebuilt.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:RebuildControlPanel)
----@param ... any Any arguments given to this function will be added to TOOL.BuildCPanel's arguments.
-function Tool:RebuildControlPanel(...) end
-
----[SHARED] Returns the current stage of the tool set by Tool:SetStage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetStage)
----@return number # The current stage of the current operation the tool is at.
-function Tool:GetStage() end
-
----[SHARED] Retrieves an vector previously stored using Tool:SetObject. See also Tool:GetLocalPos.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetPos)
----@param id number The id of the object which was set in Tool:SetObject.
----@return Vector # Associated vector with given id. The vector is converted from Tool:GetLocalPos.
-function Tool:GetPos(id) end
-
----[SHARED] Sets the current operation of the tool. Does nothing clientside. See also Tool:SetStage.
----
---- Operations and stages work as follows:
---- * Operation 1
---- * * Stage 1
---- * * Stage 2
---- * * Stage 3
---- * Operation 2
---- * * Stage 1
---- * * Stage 2
---- * * Stage ...
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetOperation)
----@param operation number The new operation ID to set.
-function Tool:SetOperation(operation) end
-
----[SHARED] Returns a language key based on this tool's name and the current stage it is on.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetHelpText)
----@return string # The returned language key, for example `"#tool.weld.1"`
-function Tool:GetHelpText() end
-
----[SHARED] Called when the user left clicks with the tool.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:LeftClick)
----@param tr table A trace from user's eyes to wherever they aim at. See Structures/TraceResult
----@return boolean # Return `true` to draw the tool gun beam and play fire animations, `false` otherwise.
-function TOOL:LeftClick(tr) end
+---@return Entity # Associated Entity with given id.
+function Tool:GetEnt(id) end
 
 ---[SHARED] Called when the user presses the reload key with the tool out.
 ---
@@ -206,39 +126,6 @@ function TOOL:LeftClick(tr) end
 ---@param tr table A trace from user's eyes to wherever they aim at. See Structures/TraceResult
 ---@return boolean # Return `true` to draw the tool gun beam and play fire animations, `false` otherwise
 function TOOL:Reload(tr) end
-
----[SHARED] Retrieves an normal vector previously stored using Tool:SetObject.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetNormal)
----@param id number The id of the object which was set in Tool:SetObject.
----@return Vector # Associated normal vector with given id.
-function Tool:GetNormal(id) end
-
----[SHARED] Initializes the ghost entity with the given model. Removes any old ghost entity if called multiple times.
----
---- The ghost is a regular prop_physics entity in singleplayer games, and a clientside prop in multiplayer games.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:MakeGhostEntity)
----@param model string The model of the new ghost entity
----@param pos Vector Position to initialize the ghost entity at, usually not needed since this is updated in Tool:UpdateGhostEntity.
----@param angle Angle Angle to initialize the ghost entity at, usually not needed since this is updated in Tool:UpdateGhostEntity.
-function Tool:MakeGhostEntity(model, pos, angle) end
-
----[SHARED] Attempts to grab a serverside tool ConVar.
---- This will not do anything on client, despite the function being defined shared.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetServerInfo)
----@param name string Name of the convar to retrieve. The function will automatically add the "mytoolfilename_" part to it.
----@return string # The value of the requested ConVar.
-function Tool:GetServerInfo(name) end
-
----[SHARED] Sets the current stage of the tool. Does nothing clientside.
----
---- See also Tool:SetOperation.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetStage)
----@param stage number The new stage to set.
-function Tool:SetStage(stage) end
 
 ---[SHARED] Returns the owner of this tool.
 ---
@@ -259,6 +146,110 @@ function Tool:GetOperation() end
 ---@return number # The amount of stored objects, or Tool:GetStage clientide.
 function Tool:NumObjects() end
 
+---[SHARED] Removes any ghost entity created for this tool.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:ReleaseGhostEntity)
+function Tool:ReleaseGhostEntity() end
+
+---[SHARED] Called when the user left clicks with the tool.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:LeftClick)
+---@param tr table A trace from user's eyes to wherever they aim at. See Structures/TraceResult
+---@return boolean # Return `true` to draw the tool gun beam and play fire animations, `false` otherwise.
+function TOOL:LeftClick(tr) end
+
+---[CLIENT] Automatically forces the tool's control panel to be rebuilt.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:RebuildControlPanel)
+---@param ... any Any arguments given to this function will be added to TOOL.BuildCPanel's arguments.
+function Tool:RebuildControlPanel(...) end
+
+---[SHARED] Returns the name of the current tool mode.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetMode)
+---@return string # The current tool mode.
+function Tool:GetMode() end
+
+---[SHARED] Returns the current stage of the tool set by Tool:SetStage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetStage)
+---@return number # The current stage of the current operation the tool is at.
+function Tool:GetStage() end
+
+---[SHARED] Called when WEAPON:Holster of the toolgun is called, as well as serverside when switching between different toolguns.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Holster)
+function TOOL:Holster() end
+
+---[SHARED] Retrieves an PhysObj previously stored using Tool:SetObject.
+--- See also Tool:GetEnt.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetPhys)
+---@param id number The id of the object which was set in Tool:SetObject.
+---@return PhysObj # Associated PhysObj with given id. If it wasn't specified, returns current PhysObj of associated Entity.
+function Tool:GetPhys(id) end
+
+---[SHARED] Initializes the ghost entity with the given model. Removes any old ghost entity if called multiple times.
+---
+--- The ghost is a regular prop_physics entity in singleplayer games, and a clientside prop in multiplayer games.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:MakeGhostEntity)
+---@param model string The model of the new ghost entity
+---@param pos Vector Position to initialize the ghost entity at, usually not needed since this is updated in Tool:UpdateGhostEntity.
+---@param angle Angle Angle to initialize the ghost entity at, usually not needed since this is updated in Tool:UpdateGhostEntity.
+function Tool:MakeGhostEntity(model, pos, angle) end
+
+---[SHARED] Attempts to grab a serverside tool ConVar.
+--- This will not do anything on client, despite the function being defined shared.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetServerInfo)
+---@param name string Name of the convar to retrieve. The function will automatically add the "mytoolfilename_" part to it.
+---@return string # The value of the requested ConVar.
+function Tool:GetServerInfo(name) end
+
+---[SHARED] Retrieves an local vector previously stored using Tool:SetObject.
+--- See also Tool:GetPos.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetLocalPos)
+---@param id number The id of the object which was set in Tool:SetObject.
+---@return Vector # Associated local vector with given id.
+function Tool:GetLocalPos(id) end
+
+---[SHARED] Retrieves an normal vector previously stored using Tool:SetObject.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetNormal)
+---@param id number The id of the object which was set in Tool:SetObject.
+---@return Vector # Associated normal vector with given id.
+function Tool:GetNormal(id) end
+
+---[SHARED] Returns a language key based on this tool's name and the current stage it is on.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetHelpText)
+---@return string # The returned language key, for example `"#tool.weld.1"`
+function Tool:GetHelpText() end
+
+---[SHARED] Called when the user right clicks with the tool.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:RightClick)
+---@param tr table A trace from user's eyes to wherever they aim at. See Structures/TraceResult
+---@return boolean # Return `true` to draw the tool gun beam and play fire animations, `false` otherwise
+function TOOL:RightClick(tr) end
+
+---[SHARED] Retrieves an vector previously stored using Tool:SetObject. See also Tool:GetLocalPos.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:GetPos)
+---@param id number The id of the object which was set in Tool:SetObject.
+---@return Vector # Associated vector with given id. The vector is converted from Tool:GetLocalPos.
+function Tool:GetPos(id) end
+
+---[SHARED] Sets the current stage of the tool. Does nothing clientside.
+---
+--- See also Tool:SetOperation.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetStage)
+---@param stage number The new stage to set.
+function Tool:SetStage(stage) end
+
 ---[SHARED] Stores an Entity for later use in the tool.
 ---
 --- The stored values can be retrieved by Tool:GetEnt, Tool:GetPos, Tool:GetLocalPos, Tool:GetPhys, Tool:GetBone and Tool:GetNormal
@@ -273,12 +264,21 @@ function Tool:NumObjects() end
 ---@param normal Vector The hit normal to store.
 function Tool:SetObject(id, ent, pos, phys, bone, normal) end
 
----[SHARED] Called when the user right clicks with the tool.
+---[SHARED] Sets the current operation of the tool. Does nothing clientside. See also Tool:SetStage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:RightClick)
----@param tr table A trace from user's eyes to wherever they aim at. See Structures/TraceResult
----@return boolean # Return `true` to draw the tool gun beam and play fire animations, `false` otherwise
-function TOOL:RightClick(tr) end
+--- Operations and stages work as follows:
+--- * Operation 1
+--- * * Stage 1
+--- * * Stage 2
+--- * * Stage 3
+--- * Operation 2
+--- * * Stage 1
+--- * * Stage 2
+--- * * Stage ...
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:SetOperation)
+---@param operation number The new operation ID to set.
+function Tool:SetOperation(operation) end
 
 ---[SHARED] Called on deploy automatically
 ---
@@ -287,10 +287,11 @@ function TOOL:RightClick(tr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:UpdateData)
 function Tool:UpdateData() end
 
----[SHARED] Called when WEAPON:Think of the toolgun is called. This only happens when the tool gun is currently equipped/selected by the player and the selected tool is this tool.
+---[SHARED] Initializes the ghost entity based on the supplied entity.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Think)
-function TOOL:Think() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:StartGhostEntity)
+---@param ent Entity The entity to copy ghost parameters off
+function Tool:StartGhostEntity(ent) end
 
 ---[SHARED] Updates the position and orientation of the ghost entity based on where the toolgun owner is looking along with data from object with id 1 set by Tool:SetObject.
 ---
@@ -301,8 +302,7 @@ function TOOL:Think() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:UpdateGhostEntity)
 function Tool:UpdateGhostEntity() end
 
----[SHARED] Initializes the ghost entity based on the supplied entity.
+---[SHARED] Called when WEAPON:Think of the toolgun is called. This only happens when the tool gun is currently equipped/selected by the player and the selected tool is this tool.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:StartGhostEntity)
----@param ent Entity The entity to copy ghost parameters off
-function Tool:StartGhostEntity(ent) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Think)
+function TOOL:Think() end

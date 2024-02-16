@@ -1,12 +1,5 @@
 ---@meta
 
----[CLIENT] Changes the Spawnmenu category to search in
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableSearch)
----@param category string The category
----@param hookname string The Hook name
-function SpawnmenuContentPanel:EnableSearch(category, hookname) end
-
 ---
 --- 		The default SpawnmenuContentPanel
 ---
@@ -14,16 +7,23 @@ function SpawnmenuContentPanel:EnableSearch(category, hookname) end
 ---@class SpawnmenuContentPanel : DPanel
 local SpawnmenuContentPanel = {}
 
----[CLIENT] Allows the modification of the ContentSidebar
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableModify)
-function SpawnmenuContentPanel:EnableModify() end
-
 ---[CLIENT] Changes the Spawnmenu category to search in
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:CallPopulateHook)
 ---@param hookname string The Hook name
 function SpawnmenuContentPanel:CallPopulateHook(hookname) end
+
+---[CLIENT] Changes the Spawnmenu category to search in
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableSearch)
+---@param category string The category
+---@param hookname string The Hook name
+function SpawnmenuContentPanel:EnableSearch(category, hookname) end
+
+---[CLIENT] Allows the modification of the ContentSidebar
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableModify)
+function SpawnmenuContentPanel:EnableModify() end
 
 ---[CLIENT] Switches the current panel with the given panel
 ---

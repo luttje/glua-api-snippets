@@ -3,12 +3,26 @@
 --- The ai library.
 ai = {}
 
+---[SERVER] Returns the amount of members a given squad has. See also ai.GetSquadMembers.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMemberCount)
+---@param squad string The squad name.
+---@return number # The member count.
+function ai.GetSquadMemberCount(squad) end
+
 ---[SERVER] Translates a schedule name to its corresponding ID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetScheduleID)
 ---@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name.
 ---@return number # The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.
 function ai.GetScheduleID(sched) end
+
+---[SERVER] Returns all members of a given squad. See also ai.GetSquadMemberCount and NPC:GetSquad.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMembers)
+---@param squad string The squad name.
+---@return table # A table of NPCs in the given squad.
+function ai.GetSquadMembers(squad) end
 
 ---[SERVER] Translates a task name to its corresponding ID.
 ---
@@ -23,17 +37,3 @@ function ai.GetTaskID(task) end
 ---@param squad string The squad name.
 ---@return NPC # The squad leader.
 function ai.GetSquadLeader(squad) end
-
----[SERVER] Returns the amount of members a given squad has. See also ai.GetSquadMembers.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMemberCount)
----@param squad string The squad name.
----@return number # The member count.
-function ai.GetSquadMemberCount(squad) end
-
----[SERVER] Returns all members of a given squad. See also ai.GetSquadMemberCount and NPC:GetSquad.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMembers)
----@param squad string The squad name.
----@return table # A table of NPCs in the given squad.
-function ai.GetSquadMembers(squad) end

@@ -3,33 +3,11 @@
 --- Steamworks related functions.
 steamworks = {}
 
----[CLIENT AND MENU] Downloads a Steam Workshop file by its ID and returns a path to it.
+---[CLIENT AND MENU] Opens the workshop website for specified Steam Workshop item in the Steam overlay browser.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
----@param workshopID string The ID of workshop item to download. **NOT** a file ID.
----@param resultCallback fun(path: string, file: file_class) The function to process retrieved data. Arguments passed are:
---- * string path - Contains a path to the saved file, or nil if the download failed for any reason.
---- * file_class file - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
-function steamworks.DownloadUGC(workshopID, resultCallback) end
-
----[CLIENT AND MENU] Returns whenever the client is subscribed to the specified Steam Workshop item.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.IsSubscribed)
----@param workshopItemID string The ID of the Steam Workshop item.
----@return boolean # Is the client subscribed to the addon or not.
-function steamworks.IsSubscribed(workshopItemID) end
-
----[MENU] Refreshes clients addons.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ApplyAddons)
-function steamworks.ApplyAddons() end
-
----[MENU] Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetShouldMountAddon)
----@param workshopItemID string The ID of the Steam Workshop item we should enable/disable
----@param shouldMount boolean true to enable the item, false to disable.
-function steamworks.SetShouldMountAddon(workshopItemID, shouldMount) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ViewFile)
+---@param workshopItemID string The ID of workshop item.
+function steamworks.ViewFile(workshopItemID) end
 
 ---[CLIENT AND MENU] Retrieves players name by their 64bit SteamID.
 ---
@@ -41,18 +19,50 @@ function steamworks.SetShouldMountAddon(workshopItemID, shouldMount) end
 ---@deprecated You should use the callback of steamworks.RequestPlayerInfo instead.
 function steamworks.GetPlayerName(steamID64) end
 
+---[MENU] Refreshes clients addons.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ApplyAddons)
+function steamworks.ApplyAddons() end
+
+---[MENU] Sets the workshop item as "completed" by the player. There will be a visual indicator on the Steam Workshop for completed items.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFileCompleted)
+---@param workshopid string The Steam Workshop item id
+---@return string # Whatever you have put in as first argument
+function steamworks.SetFileCompleted(workshopid) end
+
+---[CLIENT AND MENU] Returns whenever the specified Steam Workshop addon will be mounted or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ShouldMountAddon)
+---@param workshopItemID string The ID of the Steam Workshop
+---@return boolean # Will the workshop item be mounted or not
+function steamworks.ShouldMountAddon(workshopItemID) end
+
+---[CLIENT AND MENU] Opens the workshop website in the steam overlay browser.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.OpenWorkshop)
+function steamworks.OpenWorkshop() end
+
+---[MENU] Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetShouldMountAddon)
+---@param workshopItemID string The ID of the Steam Workshop item we should enable/disable
+---@param shouldMount boolean true to enable the item, false to disable.
+function steamworks.SetShouldMountAddon(workshopItemID, shouldMount) end
+
 ---[MENU] Subscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Subscribe)
 ---@param workshopItemID string The ID of the Steam Workshop item we should subscribe to
 function steamworks.Subscribe(workshopItemID) end
 
----[MENU] Sets whether you have played this addon or not. This will be shown to the user in the Steam Workshop itself:
+---[CLIENT AND MENU] Retrieves info about supplied Steam Workshop addon.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFilePlayed)
----@param workshopid string The Steam Workshop item ID
----@return string # Whatever you have put in as first argument
-function steamworks.SetFilePlayed(workshopid) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.FileInfo)
+---@param workshopItemID string The ID of Steam Workshop item.
+---@param resultCallback function The function to process retrieved data, with the following arguments:
+--- * table data - The data about the item, if the request succeeded, nil otherwise. See Structures/UGCFileInfo.
+function steamworks.FileInfo(workshopItemID, resultCallback) end
 
 ---[CLIENT AND MENU] Retrieves a customized list of Steam Workshop addons.
 ---
@@ -73,6 +83,30 @@ function steamworks.SetFilePlayed(workshopid) end
 ---@param userID string "0" to retrieve all addons, "1" to retrieve addons only published by you, or a valid SteamID64 of a user to get workshop items of.
 ---@param resultCallback function The function to process retrieved data. The first and only argument is a table, containing all the info, or nil in case of error
 function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback) end
+
+---[CLIENT AND MENU] Downloads a Steam Workshop file by its ID and returns a path to it.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
+---@param workshopID string The ID of workshop item to download. **NOT** a file ID.
+---@param resultCallback fun(path: string, file: file_class) The function to process retrieved data. Arguments passed are:
+--- * string path - Contains a path to the saved file, or nil if the download failed for any reason.
+--- * file_class file - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
+function steamworks.DownloadUGC(workshopID, resultCallback) end
+
+---[CLIENT AND MENU] Returns whenever the client is subscribed to the specified Steam Workshop item.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.IsSubscribed)
+---@param workshopItemID string The ID of the Steam Workshop item.
+---@return boolean # Is the client subscribed to the addon or not.
+function steamworks.IsSubscribed(workshopItemID) end
+
+---[MENU] Unsubscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.
+---
+--- This function should `never` be called without a user's consent and should not be called if the addon is currently in use (aka: the user is not in the main menu) as it may result in unexpected behaviour.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Unsubscribe)
+---@param workshopItemID string The ID of the Steam Workshop item we should unsubscribe from.
+function steamworks.Unsubscribe(workshopItemID) end
 
 ---[CLIENT AND MENU] Requests information of the player with SteamID64 for later use with steamworks.GetPlayerName.
 ---
@@ -96,25 +130,6 @@ function steamworks.VoteInfo(workshopItemID, resultCallback) end
 ---@param upOrDown boolean Sets if the user should vote up/down. True makes them upvote, false down
 function steamworks.Vote(workshopItemID, upOrDown) end
 
----[CLIENT AND MENU] Opens the workshop website for specified Steam Workshop item in the Steam overlay browser.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ViewFile)
----@param workshopItemID string The ID of workshop item.
-function steamworks.ViewFile(workshopItemID) end
-
----[MENU] Unsubscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.
----
---- This function should `never` be called without a user's consent and should not be called if the addon is currently in use (aka: the user is not in the main menu) as it may result in unexpected behaviour.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Unsubscribe)
----@param workshopItemID string The ID of the Steam Workshop item we should unsubscribe from.
-function steamworks.Unsubscribe(workshopItemID) end
-
----[CLIENT AND MENU] Opens the workshop website in the steam overlay browser.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.OpenWorkshop)
-function steamworks.OpenWorkshop() end
-
 ---[MENU] Publishes dupes, saves or demos to workshop.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.Publish)
@@ -130,27 +145,12 @@ function steamworks.OpenWorkshop() end
 ---@param changelist? string List of changes when updating an item.
 function steamworks.Publish(tags, filename, image, name, desc, callback, fileid, changelist) end
 
----[MENU] Sets the workshop item as "completed" by the player. There will be a visual indicator on the Steam Workshop for completed items.
+---[MENU] Sets whether you have played this addon or not. This will be shown to the user in the Steam Workshop itself:
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFileCompleted)
----@param workshopid string The Steam Workshop item id
+---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.SetFilePlayed)
+---@param workshopid string The Steam Workshop item ID
 ---@return string # Whatever you have put in as first argument
-function steamworks.SetFileCompleted(workshopid) end
-
----[CLIENT AND MENU] Returns whenever the specified Steam Workshop addon will be mounted or not.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ShouldMountAddon)
----@param workshopItemID string The ID of the Steam Workshop
----@return boolean # Will the workshop item be mounted or not
-function steamworks.ShouldMountAddon(workshopItemID) end
-
----[CLIENT AND MENU] Retrieves info about supplied Steam Workshop addon.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.FileInfo)
----@param workshopItemID string The ID of Steam Workshop item.
----@param resultCallback function The function to process retrieved data, with the following arguments:
---- * table data - The data about the item, if the request succeeded, nil otherwise. See Structures/UGCFileInfo.
-function steamworks.FileInfo(workshopItemID, resultCallback) end
+function steamworks.SetFilePlayed(workshopid) end
 
 ---[CLIENT AND MENU] Downloads a file from the supplied addon and saves it as a .cache file in garrysmod/cache folder.
 ---

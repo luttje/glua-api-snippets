@@ -1,10 +1,10 @@
 ---@meta
 
+---[CLIENT AND MENU] Returns whether the DSizeToContents panel should size to contents horizontally.
 ---
---- 		A helper panel that will automatically resize itself to fit all its children using Panel:SizeToChildren.
----
----@class DSizeToContents : Panel
-local DSizeToContents = {}
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeX)
+---@return number # Whether the panel should size to contents horizontally.
+function DSizeToContents:GetSizeX() end
 
 ---[CLIENT AND MENU] Returns whether the DSizeToContents panel should size to contents vertically.
 ---
@@ -18,11 +18,11 @@ function DSizeToContents:GetSizeY() end
 ---@param number number Whether the panel should size to contents horizontally.
 function DSizeToContents:SetSizeX(number) end
 
----[CLIENT AND MENU] Returns whether the DSizeToContents panel should size to contents horizontally.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeX)
----@return number # Whether the panel should size to contents horizontally.
-function DSizeToContents:GetSizeX() end
+--- 		A helper panel that will automatically resize itself to fit all its children using Panel:SizeToChildren.
+---
+---@class DSizeToContents : Panel
+local DSizeToContents = {}
 
 ---[CLIENT AND MENU] Sets whether the DSizeToContents panel should size to contents vertically. This is `true` by default.
 ---

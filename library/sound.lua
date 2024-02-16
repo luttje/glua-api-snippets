@@ -3,6 +3,14 @@
 --- Used primarily for adding new soundscript entries.
 sound = {}
 
+---[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
+---
+--- You can find a list of common sound scripts that are shipped with the game by default here: Common Sounds.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
+---@param soundData table The sounds properties. See Structures/SoundData
+function sound.Add(soundData) end
+
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
@@ -10,12 +18,6 @@ sound = {}
 ---@param pos Vector The position to sense sounds at.
 ---@return table # A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
-
----[SHARED] Returns a list of all registered sound scripts.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
----@return table # The list/array of all registered sound scripts ( No other information is provided )
-function sound.GetTable() end
 
 ---[SERVER] Emits a sound hint to the game elements to react to, for example to repel or attract antlions.
 ---
@@ -26,19 +28,6 @@ function sound.GetTable() end
 ---@param duration number The duration of the hint in seconds
 ---@param owner? Entity
 function sound.EmitHint(hint, pos, volume, duration, owner) end
-
----[SHARED] Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
----@param filepath string Path to the script file to load.
-function sound.AddSoundOverrides(filepath) end
-
----[SHARED] Returns properties of the soundscript.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
----@param name string The name of the sound script
----@return table # The properties of the soundscript. See Structures/SoundData
-function sound.GetProperties(name) end
 
 ---[CLIENT] Creates a sound from a function.
 ---
@@ -52,13 +41,24 @@ function sound.GetProperties(name) end
 ---@param callback fun(sample: integer): number A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
 function sound.Generate(indentifier, samplerate, length, callback) end
 
----[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
+---[SHARED] Returns properties of the soundscript.
 ---
---- You can find a list of common sound scripts that are shipped with the game by default here: Common Sounds.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
+---@param name string The name of the sound script
+---@return table # The properties of the soundscript. See Structures/SoundData
+function sound.GetProperties(name) end
+
+---[SHARED] Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
----@param soundData table The sounds properties. See Structures/SoundData
-function sound.Add(soundData) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
+---@param filepath string Path to the script file to load.
+function sound.AddSoundOverrides(filepath) end
+
+---[SHARED] Returns a list of all registered sound scripts.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
+---@return table # The list/array of all registered sound scripts ( No other information is provided )
+function sound.GetTable() end
 
 ---[CLIENT] Allows you to play external sound files, as well as online radio streams.
 --- You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
@@ -84,6 +84,20 @@ function sound.Add(soundData) end
 --- * number errorID - ID of an error, if an error has occured
 --- * string errorName - Name of an error, if an error has occured
 function sound.PlayURL(url, flags, callback) end
+
+---[SHARED] Plays a sound from the specified position in the world.
+--- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
+---
+--- This function is similar to Global.EmitSound, but with less options.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
+---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
+---
+---@param pos Vector Where the sound should play.
+---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
+---@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
+---@param volume? number Output volume of the sound in range 0 to 1.
+function sound.Play(snd, pos, level, pitch, volume) end
 
 ---[CLIENT] Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
@@ -112,17 +126,3 @@ function sound.PlayURL(url, flags, callback) end
 --- * number errorID - ID of an error if an error has occured. Will be nil, otherwise.
 --- * string errorName - Name of an error if an error has occured. Will be nil, otherwise.
 function sound.PlayFile(path, flags, callback) end
-
----[SHARED] Plays a sound from the specified position in the world.
---- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
----
---- This function is similar to Global.EmitSound, but with less options.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
----@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
----
----@param pos Vector Where the sound should play.
----@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
----@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
----@param volume? number Output volume of the sound in range 0 to 1.
-function sound.Play(snd, pos, level, pitch, volume) end

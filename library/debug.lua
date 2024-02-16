@@ -3,13 +3,6 @@
 --- The debug library is intended to help you debug your scripts, however it also has several other powerful uses. Some builtin debug function were removed in GMod due to security reasons
 debug = {}
 
----[SHARED AND MENU] Returns the environment of the passed object. This can be set with debug.setfenv
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getfenv)
----@param object table Object to get environment of
----@return table # Environment
-function debug.getfenv(object) end
-
 ---[SHARED AND MENU] Returns the internal Lua registry table.
 ---
 --- The Lua registry is used by the engine and binary modules to create references to Lua values. The registry contains every global ran and used in the Lua environment. Avoid creating entries into the registry with a number as the key, as they are reserved for the reference system.
@@ -30,15 +23,6 @@ function debug.getregistry() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.debug)
 function debug.debug() end
 
----[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.gethook)
----@param thread? thread Which thread to retrieve its hook from
----@return function # Hook function
----@return string # Hook mask
----@return number # Hook count
-function debug.gethook(thread) end
-
 ---[SHARED AND MENU] Sets the environment of the passed object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setfenv)
@@ -47,26 +31,12 @@ function debug.gethook(thread) end
 ---@return table # The object
 function debug.setfenv(object, env) end
 
----[SHARED AND MENU] This function was removed due to security concerns.
+---[SHARED AND MENU] Returns the environment of the passed object. This can be set with debug.setfenv
 ---
---- Sets a local variable's value.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setlocal)
----@param thread? thread The thread
----@param level number The level above the thread.
---- 0 is the function that was called (most always this function)'s arguments
----
---- 1 is the thread that had called this function.
----
---- 2 is the thread that had called the function that started the thread that called this function.
----@param index number The variable's index you want to get.
----
---- 1 = the first local defined in the thread
----
---- 2 = the second local defined in the thread
----@param value? any The value to set the local to
----@return string # The name of the local variable if the local at the index exists, otherwise nil is returned.
-function debug.setlocal(thread, level, index, value) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getfenv)
+---@param object table Object to get environment of
+---@return table # Environment
+function debug.getfenv(object) end
 
 ---[SHARED AND MENU] Returns debug information about a function.
 ---
@@ -84,6 +54,15 @@ function debug.setlocal(thread, level, index, value) end
 --- * u - Populates the argument and upvalue fields (isvararg, nparams, nups)
 ---@return table # A table as a Structures/DebugInfo containing information about the function you passed. Can return nil if the stack level didn't point to a valid stack frame.
 function debug.getinfo(funcOrStackLevel, fields) end
+
+---[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.gethook)
+---@param thread? thread Which thread to retrieve its hook from
+---@return function # Hook function
+---@return string # Hook mask
+---@return number # Hook count
+function debug.gethook(thread) end
 
 ---[SHARED AND MENU] Gets the name and value of a local variable indexed from the level.
 --- 	When a function has a tailcall return, you cannot access the locals of this function.
@@ -104,6 +83,15 @@ function debug.getinfo(funcOrStackLevel, fields) end
 ---@return string # The name of the variable.  Sometimes this will be `(*temporary)` if the local variable had no name.   Variables with names starting with **(** are **internal variables**.
 ---@return any # The value of the local variable.
 function debug.getlocal(thread, level, index) end
+
+---[SHARED AND MENU] Used for getting variable values in an index from the passed function. This does nothing for C functions.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getupvalue)
+---@param func function Function to get the upvalue indexed from.
+---@param index number The index in the upvalue array. The max number of entries can be found in debug.getinfo's "Structures/DebugInfo" key.
+---@return string # Name of the upvalue. Will be nil if the index was out of range (< 1 or > debug.getinfo.nups), or the function was defined in C.
+---@return any # Value of the upvalue.
+function debug.getupvalue(func, index) end
 
 ---[SHARED AND MENU] Returns the metatable of an object. This function ignores the metatable's __metatable field.
 ---
@@ -129,28 +117,41 @@ function debug.getmetatable(object) end
 ---@param count number How often to call the hook (in instructions). 0 for every instruction. Can be omitted.
 function debug.sethook(thread, hook, mask, count) end
 
----[SHARED AND MENU] Used for getting variable values in an index from the passed function. This does nothing for C functions.
+---[SHARED AND MENU] This function was removed due to security concerns.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getupvalue)
----@param func function Function to get the upvalue indexed from.
----@param index number The index in the upvalue array. The max number of entries can be found in debug.getinfo's "Structures/DebugInfo" key.
----@return string # Name of the upvalue. Will be nil if the index was out of range (< 1 or > debug.getinfo.nups), or the function was defined in C.
----@return any # Value of the upvalue.
-function debug.getupvalue(func, index) end
+--- Sets a local variable's value.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setlocal)
+---@param thread? thread The thread
+---@param level number The level above the thread.
+--- 0 is the function that was called (most always this function)'s arguments
+---
+--- 1 is the thread that had called this function.
+---
+--- 2 is the thread that had called the function that started the thread that called this function.
+---@param index number The variable's index you want to get.
+---
+--- 1 = the first local defined in the thread
+---
+--- 2 = the second local defined in the thread
+---@param value? any The value to set the local to
+---@return string # The name of the local variable if the local at the index exists, otherwise nil is returned.
+function debug.setlocal(thread, level, index, value) end
 
 ---[SHARED AND MENU] Prints out the lua function call stack to the console.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.Trace)
 function debug.Trace() end
 
----[SHARED AND MENU] Sets the object's metatable. Unlike Global.setmetatable, this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil.
+---[SHARED AND MENU] This function was removed due to security concerns.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setmetatable)
----@param object any Object to set the metatable for.
----@param metatable table The metatable to set for the object.
---- If this argument is nil, then the object's metatable is removed.
----@return boolean # true if the object's metatable was set successfully.
-function debug.setmetatable(object, metatable) end
+--- Returns an unique identifier for the upvalue indexed from func
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.upvalueid)
+---@param func function The function to index the upvalue from
+---@param index number The index from func
+---@return number # A unique identifier
+function debug.upvalueid(func, index) end
 
 ---[SHARED AND MENU] Returns a full execution stack trace.
 ---
@@ -160,6 +161,15 @@ function debug.setmetatable(object, metatable) end
 ---@param level? number Which level to start the traceback.
 ---@return string # A dump of the execution stack.
 function debug.traceback(thread, message, level) end
+
+---[SHARED AND MENU] Sets the object's metatable. Unlike Global.setmetatable, this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setmetatable)
+---@param object any Object to set the metatable for.
+---@param metatable table The metatable to set for the object.
+--- If this argument is nil, then the object's metatable is removed.
+---@return boolean # true if the object's metatable was set successfully.
+function debug.setmetatable(object, metatable) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
 ---
@@ -171,16 +181,6 @@ function debug.traceback(thread, message, level) end
 ---@param f2 function
 ---@param n2 number
 function debug.upvaluejoin(f1, n1, f2, n2) end
-
----[SHARED AND MENU] This function was removed due to security concerns.
----
---- Returns an unique identifier for the upvalue indexed from func
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/debug.upvalueid)
----@param func function The function to index the upvalue from
----@param index number The index from func
----@return number # A unique identifier
-function debug.upvalueid(func, index) end
 
 ---[SHARED AND MENU] This function was removed due to security concerns.
 ---

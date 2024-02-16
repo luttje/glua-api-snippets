@@ -17,13 +17,13 @@ local DHTMLControls = {}
 
 ---[CLIENT AND MENU]
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:StartedLoading)
-function DHTMLControls:StartedLoading() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateNavButtonStatus)
+function DHTMLControls:UpdateNavButtonStatus() end
 
 ---[CLIENT AND MENU]
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:UpdateNavButtonStatus)
-function DHTMLControls:UpdateNavButtonStatus() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DHTMLControls:StartedLoading)
+function DHTMLControls:StartedLoading() end
 
 ---[CLIENT AND MENU] Basically adds an URL to the history.
 ---

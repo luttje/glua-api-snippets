@@ -12,6 +12,11 @@
 ---@class IMesh
 local IMesh = {}
 
+---[CLIENT] Renders the mesh with the active matrix.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:Draw)
+function IMesh:Draw() end
+
 ---[CLIENT] Returns whether this IMesh is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:IsValid)
@@ -36,8 +41,3 @@ function IMesh:Destroy() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles)
 ---@param vertexes table A table consisting of Structures/MeshVertexs.
 function IMesh:BuildFromTriangles(vertexes) end
-
----[CLIENT] Renders the mesh with the active matrix.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:Draw)
-function IMesh:Draw() end

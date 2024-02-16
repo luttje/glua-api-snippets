@@ -5,18 +5,18 @@
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:BuildControls)
 function DColorCombo:BuildControls() end
 
----[CLIENT] Returns the color of the DColorCombo.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
----@return table # A Color
-function DColorCombo:GetColor() end
-
 ---
 --- 		The **DColorCombo** allows the user to choose color, without alpha,
 --- 		using DColorMixer or DColorPalette in a tabbed view.
 --- 	Creates a DColorCombo and sets its initial value.
 ---@class DColorCombo : DPropertySheet
 local DColorCombo = {}
+
+---[CLIENT] Returns the color of the DColorCombo.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
+---@return table # A Color
+function DColorCombo:GetColor() end
 
 ---[CLIENT] Sets the color of this panel.
 ---

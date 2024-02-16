@@ -6,12 +6,6 @@
 ---
 matproxy = {}
 
----[CLIENT] Register a material proxy. See matproxy for more general explanation of what they are.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.Add)
----@param matProxyData table The information about the proxy. See Structures/MatProxyData
-function matproxy.Add(matProxyData) end
-
 ---[CLIENT] Called by the engine from `OnBind`. Calls Structures/MatProxyData#bind method of the Lua material proxy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.Call)
@@ -28,6 +22,12 @@ function matproxy.Call(uname, mat, ent) end
 ---@param mat IMaterial Material the material proxy is applied to.
 ---@param values table `.vmt` shader parameters of the material.
 function matproxy.Init(name, uname, mat, values) end
+
+---[CLIENT] Register a material proxy. See matproxy for more general explanation of what they are.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/matproxy.Add)
+---@param matProxyData table The information about the proxy. See Structures/MatProxyData
+function matproxy.Add(matProxyData) end
 
 ---[CLIENT] Called by engine to determine if a certain material proxy is registered in Lua.
 ---

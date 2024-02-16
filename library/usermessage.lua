@@ -15,13 +15,6 @@ usermessage = {}
 ---@deprecated You should be using net instead
 function usermessage.GetTable() end
 
----[SHARED] Called by the engine when a usermessage arrives, this method calls the hook function specified by usermessage.Hook if any.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/usermessage.IncomingMessage)
----@param name string The message name.
----@param msg bf_read The message.
-function usermessage.IncomingMessage(name, msg) end
-
 ---[SHARED] Sets a hook for the specified to be called when a usermessage with the specified name arrives.
 ---
 --- Usermessages have a limit of only 256 bytes!
@@ -34,3 +27,10 @@ function usermessage.IncomingMessage(name, msg) end
 ---@param ...? any Arguments that are passed to the callback function when the hook is called.
 ---@deprecated You should be using net instead
 function usermessage.Hook(name, callback, ...) end
+
+---[SHARED] Called by the engine when a usermessage arrives, this method calls the hook function specified by usermessage.Hook if any.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/usermessage.IncomingMessage)
+---@param name string The message name.
+---@param msg bf_read The message.
+function usermessage.IncomingMessage(name, msg) end

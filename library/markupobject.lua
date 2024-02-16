@@ -16,18 +16,18 @@ function MarkupObject:GetHeight() end
 ---@return number # The max width.
 function MarkupObject:GetMaxWidth() end
 
+---[CLIENT AND MENU] Gets computed the width of the markupobject.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetWidth)
+---@return number # The computed width.
+function MarkupObject:GetWidth() end
+
 ---[CLIENT AND MENU] Gets computed the width and height of the markupobject.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:Size)
 ---@return number # The computed width.
 ---@return number # The computed height.
 function MarkupObject:Size() end
-
----[CLIENT AND MENU] Gets computed the width of the markupobject.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetWidth)
----@return number # The computed width.
-function MarkupObject:GetWidth() end
 
 ---[CLIENT AND MENU] Draws the computed markupobject to the screen. See markup.Parse.
 ---
