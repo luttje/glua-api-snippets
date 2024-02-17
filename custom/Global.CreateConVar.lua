@@ -1,0 +1,14 @@
+---[SHARED AND MENU] Creates a console variable (ConVar), in general these are for things like gamemode/server settings.
+--- 		Do not use the FCVAR_NEVER_AS_STRING and FCVAR_REPLICATED flags together, as this can cause the console variable to have strange values on the client.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateConVar)
+---@param name string Name of the ConVar.
+---
+--- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
+---@param value string Default value of the convar. Can also be a number.
+---@param flags?|table? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param helptext? string The help text to show in the console.
+---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
+---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
+---@return ConVar # The convar created.
+function _G.CreateConVar(name, value, flags, helptext, min, max) end
