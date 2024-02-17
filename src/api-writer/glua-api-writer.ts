@@ -38,12 +38,17 @@ export const RESERVERD_KEYWORDS = new Set([
   'while'
 ]);
 
+type IndexedWikiPage = {
+  index: number;
+  page: WikiPage;
+};
+
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
   private readonly pageOverrides: Map<string, string> = new Map();
 
-  private readonly files: Map<string, WikiPage[]> = new Map();
+  private readonly files: Map<string, IndexedWikiPage[]> = new Map();
 
   constructor() { }
 
@@ -274,32 +279,36 @@ export class GluaApiWriter {
     return api;
   }
 
-  public writePages(pages: WikiPage[], filePath: string) {
+  public writePages(pages: WikiPage[], filePath: string, index: number = 0) {
     if (!this.files.has(filePath)) this.files.set(filePath, []);
-    this.files.get(filePath)!.push(...pages);
+
+    pages.forEach(page => {
+      this.files.get(filePath)!.push({index: index, page: page});
+    });
   }
 
   public getPages(filePath: string) {
     return this.files.get(filePath) ?? [];
   }
 
-  public makeApiFromPages(pages: WikiPage[]) {
+  public makeApiFromPages(pages: IndexedWikiPage[]) {
     let api = "";
 
-    // First we write the "header" types
-    for (const page of pages.filter(x => isClass(x) || isLibrary(x))) {
-      api += this.writePage(page);
-    }
+    pages.sort((a, b) => a.index - b.index);
 
-    for (const page of pages.filter(x => !isClass(x) && !isLibrary(x))) {
-      api += this.writePage(page);
-    }
+      // First we write the "header" types
+      for (const page of pages.filter(x => isClass(x.page) || isLibrary(x.page) || isPanel(x.page))) {
+        api += this.writePage(page.page);
+      }
+      for (const page of pages.filter(x => !isClass(x.page) && !isLibrary(x.page) && !isPanel(x.page))) {
+        api += this.writePage(page.page);
+      }
 
     return api;
   }
 
   public writeToDisk() {
-    this.files.forEach((pages: WikiPage[], filePath: string) => {
+    this.files.forEach((pages: IndexedWikiPage[], filePath: string) => {
       let api = this.makeApiFromPages(pages);
 
       if (api.length > 0) {

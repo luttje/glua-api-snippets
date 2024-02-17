@@ -90,10 +90,12 @@ async function startScrape() {
   console.log('Scraping all pages...');
   let scrape_start = performance.now();
 
+  let cur = 0;
   let queue: Promise<any>[] = [];
   for (const pageIndex of pageIndexes) {
     const pageMarkupScraper = new WikiPageMarkupScraper(`${baseUrl}/${pageIndex.address}?format=text`);
 
+    const indexForThis = cur++;
     pageMarkupScraper.on('scraped', (url, pageMarkups) => {
       if (pageMarkups.length === 0)
         return;
@@ -118,7 +120,7 @@ async function startScrape() {
       const moduleFile = path.join(baseDirectory, moduleName);
 
       // Write Lua API docs
-      writer.writePages(pageMarkups, path.join(baseDirectory, `${moduleName}.lua`));
+      writer.writePages(pageMarkups, path.join(baseDirectory, `${moduleName}.lua`), indexForThis);
 
       // Write JSON data
       if (!fs.existsSync(moduleFile))
