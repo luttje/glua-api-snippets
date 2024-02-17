@@ -1,24 +1,16 @@
 ---@meta
 
----[CLIENT] Called after the user selects a new value.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:DataChanged)
----@param data any The new data that was selected.
-function DProperty_Combo:DataChanged(data) end
-
 ---[CLIENT] Set the selected option.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:SetSelected)
 ---@param Id number Id of the choice to be selected.
 function DProperty_Combo:SetSelected(Id) end
 
----[CLIENT] Add a choice to your combo control.
+---[CLIENT] Called after the user selects a new value.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:AddChoice)
----@param Text string Shown text.
----@param data any Stored Data.
----@param select? boolean Select this element?
-function DProperty_Combo:AddChoice(Text, data, select) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:DataChanged)
+---@param data any The new data that was selected.
+function DProperty_Combo:DataChanged(data) end
 
 ---
 ---
@@ -27,6 +19,14 @@ function DProperty_Combo:AddChoice(Text, data, select) end
 ---
 ---@class DProperty_Combo : DProperty_Generic
 local DProperty_Combo = {}
+
+---[CLIENT] Add a choice to your combo control.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:AddChoice)
+---@param Text string Shown text.
+---@param data any Stored Data.
+---@param select? boolean Select this element?
+function DProperty_Combo:AddChoice(Text, data, select) end
 
 ---[CLIENT] Sets up a combo control.
 ---

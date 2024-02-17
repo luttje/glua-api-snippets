@@ -12,15 +12,6 @@ ENTITY = {}
 ---@param newState number The new state. See Enums/NPC_STATE.
 function ENTITY:OnStateChange(oldState, newState) end
 
----[SERVER] Called to completely override NPC movement. This can be used for example for flying NPCs.
----
---- This hook only exists for `ai` type SENTs.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ENT:OverrideMove)
----@param interval number Time interval for the movement, in seconds. Usually time since last movement.
----@return boolean # Return `true` to disable the default movement code.
-function ENTITY:OverrideMove(interval) end
-
 ---[SERVER] Called by the engine to alter NPC schedules, if desired by the NPC.
 ---
 --- This hook only exists for `ai` type SENTs.
@@ -29,6 +20,15 @@ function ENTITY:OverrideMove(interval) end
 ---@param schedule number The schedule to translate. See Enums/SCHED.
 ---@return number # The schedule that should override the incoming schedule. See Enums/SCHED.  Do not return anything to not override.
 function ENTITY:TranslateSchedule(schedule) end
+
+---[SERVER] Called to completely override NPC movement. This can be used for example for flying NPCs.
+---
+--- This hook only exists for `ai` type SENTs.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ENT:OverrideMove)
+---@param interval number Time interval for the movement, in seconds. Usually time since last movement.
+---@return boolean # Return `true` to disable the default movement code.
+function ENTITY:OverrideMove(interval) end
 
 ---[SERVER] Called to completely override NPC movement facing.
 ---

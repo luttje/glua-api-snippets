@@ -4,11 +4,11 @@
 ---@class MarkupObject
 local MarkupObject = {}
 
----[CLIENT AND MENU] Gets computed the height of the markupobject.
+---[CLIENT AND MENU] Gets computed the width of the markupobject.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetHeight)
----@return number # The computed height.
-function MarkupObject:GetHeight() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetWidth)
+---@return number # The computed width.
+function MarkupObject:GetWidth() end
 
 ---[CLIENT AND MENU] Gets maximum width for this markup object as defined in markup.Parse.
 ---
@@ -16,11 +16,11 @@ function MarkupObject:GetHeight() end
 ---@return number # The max width.
 function MarkupObject:GetMaxWidth() end
 
----[CLIENT AND MENU] Gets computed the width of the markupobject.
+---[CLIENT AND MENU] Gets computed the height of the markupobject.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetWidth)
----@return number # The computed width.
-function MarkupObject:GetWidth() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetHeight)
+---@return number # The computed height.
+function MarkupObject:GetHeight() end
 
 ---[CLIENT AND MENU] Gets computed the width and height of the markupobject.
 ---

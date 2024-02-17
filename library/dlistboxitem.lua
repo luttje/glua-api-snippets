@@ -1,11 +1,5 @@
 ---@meta
 
----[CLIENT] Returns the parent "mother" of this **DListBoxItem** set by DListBoxItem:SetMother.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListBoxItem:GetMother)
----@return Panel # The "mother" DListBox.
-function DListBoxItem:GetMother() end
-
 ---[CLIENT] Selects this item.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListBoxItem:Select)
@@ -25,3 +19,9 @@ function DListBoxItem:SetMother(parent) end
 ---
 ---@class DListBoxItem : DLabel
 local DListBoxItem = {}
+
+---[CLIENT] Returns the parent "mother" of this **DListBoxItem** set by DListBoxItem:SetMother.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DListBoxItem:GetMother)
+---@return Panel # The "mother" DListBox.
+function DListBoxItem:GetMother() end

@@ -26,6 +26,13 @@ function chat.PlaySound() end
 ---@return number # The Y coordinate of the chatbox's position.
 function chat.GetChatBoxPos() end
 
+---[CLIENT] Returns the chatbox size.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.GetChatBoxSize)
+---@return number # The width of the chatbox.
+---@return number # The height of the chatbox.
+function chat.GetChatBoxSize() end
+
 ---[CLIENT] Adds text to the local player's chat box (which only they can read).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/chat.AddText)
@@ -35,10 +42,3 @@ function chat.GetChatBoxPos() end
 --- * Player - Adds the name of the player in the player's team color to the chat box.
 --- * any - Any other type, such as Entity will be converted to string and added as text.
 function chat.AddText(...) end
-
----[CLIENT] Returns the chatbox size.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/chat.GetChatBoxSize)
----@return number # The width of the chatbox.
----@return number # The height of the chatbox.
-function chat.GetChatBoxSize() end

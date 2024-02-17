@@ -12,6 +12,12 @@ function ControlPresets:GetConVars() end
 ---@param convar string The convar to add.
 function ControlPresets:AddConVar(convar) end
 
+---[CLIENT] Set the name label text.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:SetLabel)
+---@param name string The text to put in the label
+function ControlPresets:SetLabel(name) end
+
 ---
 --- 		A preset manager, found at the top of almost every default tool's C-menu.
 ---
@@ -19,9 +25,3 @@ function ControlPresets:AddConVar(convar) end
 ---
 ---@class ControlPresets : Panel
 local ControlPresets = {}
-
----[CLIENT] Set the name label text.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ControlPresets:SetLabel)
----@param name string The text to put in the label
-function ControlPresets:SetLabel(name) end

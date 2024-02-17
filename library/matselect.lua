@@ -1,5 +1,12 @@
 ---@meta
 
+---[CLIENT] Find a DImageButton panel based on the input material path.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:FindMaterialByValue)
+---@param mat string The material to find within this MatSelect.
+---@return DImageButton # The found material, or nil.
+function MatSelect:FindMaterialByValue(mat) end
+
 ---[CLIENT] Selects a given material panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:SelectMaterial)
@@ -14,10 +21,3 @@ function MatSelect:Clear() end
 --- The panel used by Material & Lamp Sandbox tools for texture selection.
 ---@class MatSelect : ContextBase
 local MatSelect = {}
-
----[CLIENT] Find a DImageButton panel based on the input material path.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:FindMaterialByValue)
----@param mat string The material to find within this MatSelect.
----@return DImageButton # The found material, or nil.
-function MatSelect:FindMaterialByValue(mat) end

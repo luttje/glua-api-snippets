@@ -1,5 +1,40 @@
 ---@meta
 
+---[SHARED] Sends the specified Lua code to all connected clients and executes it.
+---
+--- 			If you need to use this function more than once, consider using net library.
+--- 			Send net message and make the entire code you want to execute in net.Receive on client.
+--- 			If executed **clientside** it won't do anything.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.BroadcastLua)
+---@param code string The code to be executed. Capped at length of 254 characters.
+function _G.BroadcastLua(code) end
+
+---[MENU] Adds the specified image path to the main menu background pool. Image can be png or jpeg.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddBackgroundImage)
+---@param path string Path to the image.
+function _G.AddBackgroundImage(path) end
+
+---[MENU] Sets the active main menu background image to a random entry from the background images pool. Images are added with Global.AddBackgroundImage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ChangeBackground)
+---@param currentgm string Apparently does nothing.
+function _G.ChangeBackground(currentgm) end
+
+---[SERVER] Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddOriginToPVS)
+---@param position Vector The origin to add.
+function _G.AddOriginToPVS(position) end
+
+---[CLIENT AND MENU] Loads the specified image from the `/cache` folder, used in combination steamworks.Download. Most addons will provide a 512x512 png image.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddonMaterial)
+---@param name string The name of the file.
+---@return IMaterial # The material, returns `nil` if the cached file is not an image.
+function _G.AddonMaterial(name) end
+
 ---[SHARED AND MENU] Defines a global entity class variable with an automatic value. In order to prevent collisions with other Enums/CLASS. You should prefix your variable with CLASS_ for consistency.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Add_NPC_Class)
@@ -11,6 +46,20 @@ function _G.Add_NPC_Class(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CancelLoading)
 function _G.CancelLoading() end
 
+---[MENU] Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CanAddServerToFavorites)
+---@return boolean # Can add to favorites
+function _G.CanAddServerToFavorites() end
+
+---[SHARED AND MENU] Use concommand.Add instead.Tells the engine to register a console command. If the command was ran, the engine calls concommand.Run.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand)
+---@param name string The name of the console command to add.
+---@param helpText string The help text.
+---@param flags number Concommand flags using Enums/FCVAR
+function _G.AddConsoleCommand(name, helpText, flags) end
+
 ---[SHARED AND MENU] Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AngleRand)
@@ -19,40 +68,40 @@ function _G.CancelLoading() end
 ---@return Angle # The randomly generated angle.
 function _G.AngleRand(min, max) end
 
----[MENU] Adds the specified image path to the main menu background pool. Image can be png or jpeg.
+---[SHARED AND MENU] Creates an Angle object.
+--- 		This function is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Angle:Add.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddBackgroundImage)
----@param path string Path to the image.
-function _G.AddBackgroundImage(path) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
+---@param pitch? number The pitch value of the angle.
+---
+---
+--- If this is an Angle, this function will return a copy of the given angle.
+---
+---
+--- If this is a string, this function will try to parse the string as a angle. If it fails, it returns a 0 angle.
+--- (See examples)
+---@param yaw? number The yaw value of the angle.
+---@param roll? number The roll value of the angle.
+---@return Angle # Created angle
+function _G.Angle(pitch, yaw, roll) end
 
----[CLIENT AND MENU] Loads the specified image from the `/cache` folder, used in combination steamworks.Download. Most addons will provide a 512x512 png image.
+---[CLIENT] This function creates a World Tip, similar to the one shown when aiming at a Thruster where it shows you its force.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddonMaterial)
----@param name string The name of the file.
----@return IMaterial # The material, returns `nil` if the cached file is not an image.
-function _G.AddonMaterial(name) end
-
----[SERVER] Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
+--- This function will make a World Tip that will only last 50 milliseconds (1/20th of a second), so you must call it continuously as long as you want the World Tip to be shown. It is common to call it inside a Think hook.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddOriginToPVS)
----@param position Vector The origin to add.
-function _G.AddOriginToPVS(position) end
-
----[SHARED] Sends the specified Lua code to all connected clients and executes it.
+--- Contrary to what the function's name implies, it is impossible to create more than one World Tip at the same time. A new World Tip will overwrite the old one, so only use this function when you know nothing else will also be using it.
 ---
---- 			If you need to use this function more than once, consider using net library.
---- 			Send net message and make the entire code you want to execute in net.Receive on client.
---- 			If executed **clientside** it won't do anything.
+--- See SANDBOX:PaintWorldTips for more information.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.BroadcastLua)
----@param code string The code to be executed. Capped at length of 254 characters.
-function _G.BroadcastLua(code) end
-
----[MENU] Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites.
+--- This function is only available in Sandbox and its derivatives
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CanAddServerToFavorites)
----@return boolean # Can add to favorites
-function _G.CanAddServerToFavorites() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddWorldTip)
+---@param entindex? number **This argument is no longer used**; it has no effect on anything. You can use nil in this argument.
+---@param text string The text for the world tip to display.
+---@param dieTime? number **This argument is no longer used**; when you add a World Tip it will always last only 0.05 seconds. You can use nil in this argument.
+---@param pos? Vector Where in the world you want the World Tip to be drawn. If you add a valid Entity in the next argument, this argument will have no effect on the actual World Tip.
+---@param ent? Entity Which entity you want to associate with the World Tip. This argument is optional. If set to a valid entity, this will override the position set in `pos` with the Entity's position.
+function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 
 ---[SHARED AND MENU] Adds simple Get/Set accessor functions on the specified table.
 --- Can also force the value to be set to a number, bool or string.
@@ -63,6 +112,23 @@ function _G.CanAddServerToFavorites() end
 ---@param name string The name of the functions (will be prefixed with Get and Set).
 ---@param force? number The type the setter should force to (uses Enums/FORCE).
 function _G.AccessorFunc(tab, key, name, force) end
+
+---[SHARED] Dumps the networked variables of all entities into one table and returns it.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.BuildNetworkedVarsTable)
+---@return table # Format: * key = Entity for NWVars or number (always 0) for global vars * value = table formatted as:   * key = string var name   * value = any type var value
+function _G.BuildNetworkedVarsTable() end
+
+---[SHARED AND MENU] If the result of the first argument is false or nil, an error is thrown with the second argument as the message.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.assert)
+---@param expression any The expression to assert.
+---@param errorMessage? string The error message to throw when assertion fails. This is only type-checked if the assertion fails.
+---@param ...? any Any arguments past the error message will be returned by a successful assert.
+---@return any # If successful, returns the first argument.
+---@return any # If successful, returns the error message. This will be nil if the second argument wasn't specified.  Since the second argument is only type-checked if the assertion fails, this doesn't have to be a string.
+---@return any ... # Returns any arguments past the error message.
+function _G.assert(expression, errorMessage, ...) end
 
 ---[SHARED] Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems.
 ---
@@ -89,31 +155,6 @@ function _G.AccessorFunc(tab, key, name, force) end
 --- Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
 function _G.AddCSLuaFile(file) end
 
----[SHARED AND MENU] Creates an Angle object.
---- 		This function is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Angle:Add.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch? number The pitch value of the angle.
----
----
---- If this is an Angle, this function will return a copy of the given angle.
----
----
---- If this is a string, this function will try to parse the string as a angle. If it fails, it returns a 0 angle.
---- (See examples)
----@param yaw? number The yaw value of the angle.
----@param roll? number The roll value of the angle.
----@return Angle # Created angle
-function _G.Angle(pitch, yaw, roll) end
-
----[SHARED AND MENU] Use concommand.Add instead.Tells the engine to register a console command. If the command was ran, the engine calls concommand.Run.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand)
----@param name string The name of the console command to add.
----@param helpText string The help text.
----@param flags number Concommand flags using Enums/FCVAR
-function _G.AddConsoleCommand(name, helpText, flags) end
-
 ---[CLIENT] This function creates a Custom Category in the Spawnlist. Use Global.GenerateSpawnlistFromPath if you want to create a category with the contents of a folder.
 --- 	Using this function before SANDBOX:PopulateContent has been called will result in an error
 ---
@@ -124,51 +165,10 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 ---@param customProps table The Table with the Contents of the new Category
 function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 
----[CLIENT] This function creates a World Tip, similar to the one shown when aiming at a Thruster where it shows you its force.
----
---- This function will make a World Tip that will only last 50 milliseconds (1/20th of a second), so you must call it continuously as long as you want the World Tip to be shown. It is common to call it inside a Think hook.
----
---- Contrary to what the function's name implies, it is impossible to create more than one World Tip at the same time. A new World Tip will overwrite the old one, so only use this function when you know nothing else will also be using it.
----
---- See SANDBOX:PaintWorldTips for more information.
----
---- This function is only available in Sandbox and its derivatives
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddWorldTip)
----@param entindex? number **This argument is no longer used**; it has no effect on anything. You can use nil in this argument.
----@param text string The text for the world tip to display.
----@param dieTime? number **This argument is no longer used**; when you add a World Tip it will always last only 0.05 seconds. You can use nil in this argument.
----@param pos? Vector Where in the world you want the World Tip to be drawn. If you add a valid Entity in the next argument, this argument will have no effect on the actual World Tip.
----@param ent? Entity Which entity you want to associate with the World Tip. This argument is optional. If set to a valid entity, this will override the position set in `pos` with the Entity's position.
-function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
-
----[SHARED] Dumps the networked variables of all entities into one table and returns it.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.BuildNetworkedVarsTable)
----@return table # Format: * key = Entity for NWVars or number (always 0) for global vars * value = table formatted as:   * key = string var name   * value = any type var value
-function _G.BuildNetworkedVarsTable() end
-
----[SHARED AND MENU] If the result of the first argument is false or nil, an error is thrown with the second argument as the message.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.assert)
----@param expression any The expression to assert.
----@param errorMessage? string The error message to throw when assertion fails. This is only type-checked if the assertion fails.
----@param ...? any Any arguments past the error message will be returned by a successful assert.
----@return any # If successful, returns the first argument.
----@return any # If successful, returns the error message. This will be nil if the second argument wasn't specified.  Since the second argument is only type-checked if the assertion fails, this doesn't have to be a string.
----@return any ... # Returns any arguments past the error message.
-function _G.assert(expression, errorMessage, ...) end
-
 ---[MENU] Empties the pool of main menu background images.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClearBackgroundImages)
 function _G.ClearBackgroundImages() end
-
----[MENU] Sets the active main menu background image to a random entry from the background images pool. Images are added with Global.AddBackgroundImage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ChangeBackground)
----@param currentgm string Apparently does nothing.
-function _G.ChangeBackground(currentgm) end
 
 ---[CLIENT] Creates a ContextMenu.
 ---
@@ -181,20 +181,30 @@ function _G.CreateContextMenu() end
 ---@param panel Panel Panel that has been hovered over
 function _G.ChangeTooltip(panel) end
 
+---[MENU] Removes the given Problem from the Problems table and refreshes the Problems panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClearProblem)
+---@param id string The Problem ID to remove
+function _G.ClearProblem(id) end
+
 ---[MENU] Clears all Lua Errors with the given group id.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClearLuaErrorGroup)
 ---@param group_id string group_id to remove. Will be "[addon-name]-0" or "Other-"
 function _G.ClearLuaErrorGroup(group_id) end
 
----[SHARED AND MENU] Converts a Color into HSV color space.
+---[SHARED AND MENU] Returns a new Color with the RGB components of the given Color and the alpha value specified.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorToHSV)
----@param color table The Color.
----@return number # The hue in degrees `[0, 360]`.
----@return number # The saturation in the range `[0, 1]`.
----@return number # The value in the range `[0, 1]`.
-function _G.ColorToHSV(color) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorAlpha)
+---@param color table The Color from which to take RGB values. This color will not be modified.
+---@param alpha number The new alpha value, a number between 0 and 255. Values above 255 will be clamped.
+---@return table # The new Color with the modified alpha value
+function _G.ColorAlpha(color, alpha) end
+
+---[CLIENT AND MENU] Closes all Derma menus that have been passed to Global.RegisterDermaMenuForClose and calls GM:CloseDermaMenus
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CloseDermaMenus)
+function _G.CloseDermaMenus() end
 
 ---[SHARED AND MENU] Converts a Color into HSL color space.
 ---
@@ -205,68 +215,12 @@ function _G.ColorToHSV(color) end
 ---@return number # The lightness in the range `[0, 1]`.
 function _G.ColorToHSL(color) end
 
----[CLIENT] Creates a fully clientside ragdoll.
+---[SHARED AND MENU] Creates a Color with randomized red, green, and blue components. If the alpha argument is true, alpha will also be randomized.
 ---
---- The ragdoll initially starts as hidden and with shadows disabled, see the example for how to enable it.
----
---- There's no need to call Entity:Spawn on this entity.
----
---- The physics won't initialize at all if the model hasn't been precached serverside first.
----
---- Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideRagdoll)
----@param model string The file path to the model.
----
---- Model must be precached with util.PrecacheModel on the server for physics to work. This will be fixed in the next update.
----@param renderGroup? number The Enums/RENDERGROUP to assign.
----@return CSEnt # The newly created client-side ragdoll. ( C_ClientRagdoll )
-function _G.ClientsideRagdoll(model, renderGroup) end
-
----[SHARED AND MENU] This function will compile the code argument as lua code and return a function that will execute that code.
----
---- Please note that this function will not automatically execute the given code after compiling it.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileString)
----@param code string The code to compile.
----@param identifier string An identifier in case an error is thrown. (The same identifier can be used multiple times)
----@param HandleError? boolean If false this function will return an error string instead of throwing an error.
----@return function # A function that, when called, will execute the given code.  Returns the error string if there was a Lua error and third argument is false.
-function _G.CompileString(code, identifier, HandleError) end
-
----[CLIENT AND MENU] Closes all Derma menus that have been passed to Global.RegisterDermaMenuForClose and calls GM:CloseDermaMenus
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CloseDermaMenus)
-function _G.CloseDermaMenus() end
-
----[SHARED AND MENU] Returns a new Color with the RGB components of the given Color and the alpha value specified.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorAlpha)
----@param color table The Color from which to take RGB values. This color will not be modified.
----@param alpha number The new alpha value, a number between 0 and 255. Values above 255 will be clamped.
----@return table # The new Color with the modified alpha value
-function _G.ColorAlpha(color, alpha) end
-
----[CLIENT] Creates a non physical entity that only exists on the client. See also ents.CreateClientProp.
----
---- Parented clientside models will become detached if the parent entity leaves the PVS. **A workaround is available on its github page.**
----
---- Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually. **To workaround this bug, you need to hold a reference (in a variable) to the entity and remove it when necessary.**
----
---- Clientside models will occasionally delete themselves during high server lag.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideModel)
----@param model string The file path to the model.
----@param renderGroup? number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
----@return CSEnt # Created client-side model (`C_BaseFlex`).
-function _G.ClientsideModel(model, renderGroup) end
-
----[SHARED AND MENU] Returns whether a ConVar with the given name exists or not
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ConVarExists)
----@param name string Name of the ConVar.
----@return boolean # True if the ConVar exists, false otherwise.
-function _G.ConVarExists(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorRand)
+---@param a? boolean Should alpha be randomized.
+---@return table # The created Color.
+function _G.ColorRand(a) end
 
 ---[SHARED AND MENU] Creates a Color.
 --- 	This function is very expensive when used in rendering hooks or in operations requiring very frequent calls (like loops for example). It is better to store the color in a variable or to use the [default colors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
@@ -287,25 +241,19 @@ function _G.Color(r, g, b, a) end
 ---@return CSEnt # C_SceneEntity
 function _G.ClientsideScene(name, targetEnt) end
 
----[SHARED] Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script.
+---[CLIENT] Creates a non physical entity that only exists on the client. See also ents.CreateClientProp.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileFile)
----@param path string Path to the file, relative to the `garrysmod/lua/` directory.
----@return function # The function which executes the script.
-function _G.CompileFile(path) end
-
----[MENU] Removes the given Problem from the Problems table and refreshes the Problems panel.
+--- Parented clientside models will become detached if the parent entity leaves the PVS. **A workaround is available on its github page.**
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClearProblem)
----@param id string The Problem ID to remove
-function _G.ClearProblem(id) end
-
----[SHARED AND MENU] Creates a Color with randomized red, green, and blue components. If the alpha argument is true, alpha will also be randomized.
+--- Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually. **To workaround this bug, you need to hold a reference (in a variable) to the entity and remove it when necessary.**
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorRand)
----@param a? boolean Should alpha be randomized.
----@return table # The created Color.
-function _G.ColorRand(a) end
+--- Clientside models will occasionally delete themselves during high server lag.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideModel)
+---@param model string The file path to the model.
+---@param renderGroup? number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
+---@return CSEnt # Created client-side model (`C_BaseFlex`).
+function _G.ClientsideModel(model, renderGroup) end
 
 ---[SHARED AND MENU] Executes the specified action on the garbage collector.
 ---
@@ -317,6 +265,94 @@ function _G.ColorRand(a) end
 ---@param arg number The argument of the specified action, only applicable for `step`, `setpause` and `setstepmul`.
 ---@return any # If the action is count this is the number of kilobytes of memory used by Lua. If the action is step this is true if a garbage collection cycle was finished.  If the action is setpause this is the previous value for the GC's pause. If the action is setstepmul this is the previous value for the GC's step.
 function _G.collectgarbage(action, arg) end
+
+---[CLIENT AND MENU] Creates a new material with the specified name and shader.
+---
+--- Materials created with this function can be used in Entity:SetMaterial and Entity:SetSubMaterial by prepending a `!` to their material name argument.
+---
+--- This will not create a new material if another material object with the same name already exists. All Materials created by this functions are cleaned up on map shutdown.
+---
+--- This does not work with [patch materials](https://developer.valvesoftware.com/wiki/Patch).
+---
+--- .pngs must be loaded with Global.Material before being used with this function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateMaterial)
+---@param name string The material name. Must be unique.
+---@param shaderName string The shader name. See Shaders.
+---@param materialData table Key-value table that contains shader parameters and proxies.
+---
+--- * See: [List of Shader Parameters on Valve Developers Wiki](https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters) and each shader's page from .
+---
+--- Unlike IMaterial:SetTexture, this table will not accept ITexture values. Instead, use the texture's name (see ITexture:GetName).
+---@return IMaterial # Created material
+function _G.CreateMaterial(name, shaderName, materialData) end
+
+---[CLIENT] Creates a fully clientside ragdoll.
+---
+--- The ragdoll initially starts as hidden and with shadows disabled, see the example for how to enable it.
+---
+--- There's no need to call Entity:Spawn on this entity.
+---
+--- The physics won't initialize at all if the model hasn't been precached serverside first.
+---
+--- Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideRagdoll)
+---@param model string The file path to the model.
+---
+--- Model must be precached with util.PrecacheModel on the server for physics to work. This will be fixed in the next update.
+---@param renderGroup? number The Enums/RENDERGROUP to assign.
+---@return CSEnt # The newly created client-side ragdoll. ( C_ClientRagdoll )
+function _G.ClientsideRagdoll(model, renderGroup) end
+
+---[SHARED AND MENU] Creates a console variable (ConVar), in general these are for things like gamemode/server settings.
+--- 		Do not use the FCVAR_NEVER_AS_STRING and FCVAR_REPLICATED flags together, as this can cause the console variable to have strange values on the client.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateConVar)
+---@param name string Name of the ConVar.
+---
+--- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
+---@param value string Default value of the convar. Can also be a number.
+---@param flags?|table? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param helptext? string The help text to show in the console.
+---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
+---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
+---@return ConVar # The convar created.
+function _G.CreateConVar(name, value, flags, helptext, min, max) end
+
+---[SHARED AND MENU] Converts a Color into HSV color space.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ColorToHSV)
+---@param color table The Color.
+---@return number # The hue in degrees `[0, 360]`.
+---@return number # The saturation in the range `[0, 1]`.
+---@return number # The value in the range `[0, 1]`.
+function _G.ColorToHSV(color) end
+
+---[SHARED] Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileFile)
+---@param path string Path to the file, relative to the `garrysmod/lua/` directory.
+---@return function # The function which executes the script.
+function _G.CompileFile(path) end
+
+---[SHARED AND MENU] This function will compile the code argument as lua code and return a function that will execute that code.
+---
+--- Please note that this function will not automatically execute the given code after compiling it.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileString)
+---@param code string The code to compile.
+---@param identifier string An identifier in case an error is thrown. (The same identifier can be used multiple times)
+---@param HandleError? boolean If false this function will return an error string instead of throwing an error.
+---@return function # A function that, when called, will execute the given code.  Returns the error string if there was a Lua error and third argument is false.
+function _G.CompileString(code, identifier, HandleError) end
+
+---[SHARED AND MENU] Returns whether a ConVar with the given name exists or not
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ConVarExists)
+---@param name string Name of the ConVar.
+---@return boolean # True if the ConVar exists, false otherwise.
+function _G.ConVarExists(name) end
 
 ---[SHARED AND MENU] Makes a clientside-only console variable
 ---
@@ -337,20 +373,12 @@ function _G.collectgarbage(action, arg) end
 ---@return ConVar # Created convar.
 function _G.CreateClientConVar(name, default, shouldsave, userinfo, helptext, min, max) end
 
----[SHARED AND MENU] Creates a console variable (ConVar), in general these are for things like gamemode/server settings.
---- 		Do not use the FCVAR_NEVER_AS_STRING and FCVAR_REPLICATED flags together, as this can cause the console variable to have strange values on the client.
+---[SHARED AND MENU] Writes text to the right hand side of the screen, like the old error system. Messages disappear after a couple of seconds.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateConVar)
----@param name string Name of the ConVar.
----
---- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
----@param value string Default value of the convar. Can also be a number.
----@param flags? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
----@param helptext? string The help text to show in the console.
----@param min? number If set, the ConVar cannot be changed to a number lower than this value.
----@param max? number If set, the ConVar cannot be changed to a number higher than this value.
----@return ConVar # The convar created.
-function _G.CreateConVar(name, value, flags, helptext, min, max) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DebugInfo)
+---@param slot number The location on the right hand screen to write the debug info to. Starts at 0, no upper limit
+---@param info string The debugging information to be written to the screen
+function _G.DebugInfo(slot, info) end
 
 ---[SHARED] Creates PhysCollide objects for every physics object the model has. The model must be precached with util.PrecacheModel before being used with this function.
 ---
@@ -374,58 +402,39 @@ function _G.CreatePhysCollidesFromModel(modelName) end
 ---@param value string Baseclass name
 function _G.DEFINE_BASECLASS(value) end
 
----[MENU] Creates a new Preset from the given JSON string.
+---[SHARED AND MENU] Returns the uptime of the server in seconds (to at least 4 decimal places)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset)
----@param data string A JSON string containing all necessary informations.
---- 			JSON structue should be Structures/Preset
+--- This is a synchronised value and affected by various factors such as host_timescale (or game.GetTimeScale) and the server being paused - either by sv_pausable or all players disconnecting.
 ---
-function _G.CreateNewAddonPreset(data) end
+--- You should use this function for timing in-game events but not for real-world events.
+---
+--- See also: Global.RealTime, Global.SysTime
+---
+--- This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary).
+---
+---
+---
+--- This is **NOT** easy as it sounds to fix in the engine, so please refrain from posting issues about this
+---
+--- This returns 0 in GM:PlayerAuthed.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CurTime)
+---@return number # Time synced with the game server.
+function _G.CurTime() end
 
----[CLIENT AND MENU] Creates panel method that calls the supplied Derma skin hook via derma.SkinHook
+---[SHARED] Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for gamemode.Register.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Hook)
----@param panel Panel Panel to add the hook to
----@param functionName string Name of panel function to create
----@param hookName string Name of Derma skin hook to call within the function
----@param typeName string Type of element to call Derma skin hook for
-function _G.Derma_Hook(panel, functionName, hookName, typeName) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DeriveGamemode)
+---@param base string Gamemode name to derive from.
+function _G.DeriveGamemode(base) end
 
----[CLIENT AND MENU] Creates a new material with the specified name and shader.
+---[CLIENT AND MENU] Draws background blur around the given panel.
+--- 		Calling this on the same Panel multiple times makes the blur darker.
 ---
---- Materials created with this function can be used in Entity:SetMaterial and Entity:SetSubMaterial by prepending a `!` to their material name argument.
----
---- This will not create a new material if another material object with the same name already exists. All Materials created by this functions are cleaned up on map shutdown.
----
---- This does not work with [patch materials](https://developer.valvesoftware.com/wiki/Patch).
----
---- .pngs must be loaded with Global.Material before being used with this function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateMaterial)
----@param name string The material name. Must be unique.
----@param shaderName string The shader name. See Shaders.
----@param materialData table Key-value table that contains shader parameters and proxies.
----
---- * See: [List of Shader Parameters on Valve Developers Wiki](https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters) and each shader's page from .
----
---- Unlike IMaterial:SetTexture, this table will not accept ITexture values. Instead, use the texture's name (see ITexture:GetName).
----@return IMaterial # Created material
-function _G.CreateMaterial(name, shaderName, materialData) end
-
----[SHARED AND MENU] Writes text to the right hand side of the screen, like the old error system. Messages disappear after a couple of seconds.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DebugInfo)
----@param slot number The location on the right hand screen to write the debug info to. Starts at 0, no upper limit
----@param info string The debugging information to be written to the screen
-function _G.DebugInfo(slot, info) end
-
----[SHARED] Returns an CTakeDamageInfo object.
----
---- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DamageInfo)
----@return CTakeDamageInfo # The CTakeDamageInfo object.
-function _G.DamageInfo() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_DrawBackgroundBlur)
+---@param panel Panel Panel to draw the background blur around
+---@param startTime number Time that the blur began being painted
+function _G.Derma_DrawBackgroundBlur(panel, startTime) end
 
 ---[CLIENT] Creates and returns a new DSprite element with the supplied material.
 ---
@@ -434,35 +443,16 @@ function _G.DamageInfo() end
 ---@return Panel # The new DSprite element.
 function _G.CreateSprite(material) end
 
----[CLIENT] Creates a new particle system. See also Entity:CreateParticleEffect
+---[CLIENT] Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles. See also Global.CreateParticleSystem
 ---
 --- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
----@param ent Entity The entity to attach the control point to.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity)
 ---@param effect string The name of the effect to create. It must be precached.
----@param partAttachment number See Enums/PATTACH.
----@param entAttachment? number The attachment ID on the entity to attach the particle system to
----@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
+---@param pos Vector The position for the particle system.
+---@param ang? Angle The orientation of the particle system.
 ---@return CNewParticleEffect # The created particle system.
-function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, offset) end
-
----[CLIENT AND MENU] Makes the panel (usually an input of sorts) respond to changes in console variables by adding next functions to the panel:
---- * Panel:SetConVar
---- * Panel:ConVarChanged
---- * Panel:ConVarStringThink
---- * Panel:ConVarNumberThink
----
---- The console variable value is saved in the `m_strConVar` property of the panel.
----
---- The panel should call
---- Panel:ConVarStringThink or
---- Panel:ConVarNumberThink
---- in its PANEL:Think hook and should call Panel:ConVarChanged when the panel's value has changed.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Install_Convar_Functions)
----@param target Panel The panel the functions should be added to.
-function _G.Derma_Install_Convar_Functions(target) end
+function _G.CreateParticleSystemNoEntity(effect, pos, ang) end
 
 ---[SHARED] Returns a sound parented to the specified entity.
 ---
@@ -484,46 +474,14 @@ function _G.Derma_Install_Convar_Functions(target) end
 ---@return CSoundPatch # The sound object. You should keep a reference to this object for as long as you wish the sound to play!
 function _G.CreateSound(targetEnt, soundName, filter) end
 
----[CLIENT AND MENU] Creates a derma window to display information
+---[CLIENT AND MENU] Creates panel method that calls the supplied Derma skin hook via derma.SkinHook
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Message)
----@param Text string The text within the created panel.
----@param Title string The title of the created panel.
----@param Button string The text of the button to close the panel.
----@return Panel # The created DFrame
-function _G.Derma_Message(Text, Title, Button) end
-
----[SHARED] Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for gamemode.Register.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DeriveGamemode)
----@param base string Gamemode name to derive from.
-function _G.DeriveGamemode(base) end
-
----[MENU] Deletes the given Preset.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DeleteAddonPreset)
----@param name string The name of the Preset to delete.
-function _G.DeleteAddonPreset(name) end
-
----[SHARED AND MENU] Returns the uptime of the server in seconds (to at least 4 decimal places)
----
---- This is a synchronised value and affected by various factors such as host_timescale (or game.GetTimeScale) and the server being paused - either by sv_pausable or all players disconnecting.
----
---- You should use this function for timing in-game events but not for real-world events.
----
---- See also: Global.RealTime, Global.SysTime
----
---- This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary).
----
----
----
---- This is **NOT** easy as it sounds to fix in the engine, so please refrain from posting issues about this
----
---- This returns 0 in GM:PlayerAuthed.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CurTime)
----@return number # Time synced with the game server.
-function _G.CurTime() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Hook)
+---@param panel Panel Panel to add the hook to
+---@param functionName string Name of panel function to create
+---@param hookName string Name of Derma skin hook to call within the function
+---@param typeName string Type of element to call Derma skin hook for
+function _G.Derma_Hook(panel, functionName, hookName, typeName) end
 
 ---[SHARED] Creates a new PhysCollide from the given bounds.
 ---
@@ -534,54 +492,6 @@ function _G.CurTime() end
 ---@param maxs Vector Max corner of the box. This is not automatically ordered with the mins and must contain the largest vector components.
 ---@return PhysCollide # The new PhysCollide. This will be a NULL PhysCollide (PhysCollide:IsValid returns false) if given bad vectors or no more PhysCollides can be created in the physics engine.
 function _G.CreatePhysCollideBox(mins, maxs) end
-
----[CLIENT] Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles. See also Global.CreateParticleSystem
----
---- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity)
----@param effect string The name of the effect to create. It must be precached.
----@param pos Vector The position for the particle system.
----@param ang? Angle The orientation of the particle system.
----@return CNewParticleEffect # The created particle system.
-function _G.CreateParticleSystemNoEntity(effect, pos, ang) end
-
----[CLIENT AND MENU] Creates a derma window asking players to input a string.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_StringRequest)
----@param title string The title of the created panel.
----@param subtitle string The text above the input box
----@param default string The default text for the input box.
----@param confirm function The function to be called once the user has confirmed their input.
----@param cancel? function The function to be called once the user has cancelled their input
----@param confirmText? string Allows you to override text of the "OK" button
----@param cancelText? string Allows you to override text of the "Cancel" button
----@return Panel # The created DFrame
-function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confirmText, cancelText) end
-
----[CLIENT AND MENU] Shows a message box in the middle of the screen, with up to 4 buttons they can press.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Query)
----@param text? string The message to display.
----@param title? string The title to give the message box.
----@param btn1text string The text to display on the first button.
----@param btn1func? function The function to run if the user clicks the first button.
----@param btn2text? string The text to display on the second button.
----@param btn2func? function The function to run if the user clicks the second button.
----@param btn3text? string The text to display on the third button
----@param btn3func? function The function to run if the user clicks the third button.
----@param btn4text? string The text to display on the fourth button
----@param btn4func? function The function to run if the user clicks the fourth button.
----@return Panel # The Panel object of the created window.
-function _G.Derma_Query(text, title, btn1text, btn1func, btn2text, btn2func, btn3text, btn3func, btn4text, btn4func) end
-
----[CLIENT AND MENU] Draws background blur around the given panel.
---- 		Calling this on the same Panel multiple times makes the blur darker.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_DrawBackgroundBlur)
----@param panel Panel Panel to draw the background blur around
----@param startTime number Time that the blur began being painted
-function _G.Derma_DrawBackgroundBlur(panel, startTime) end
 
 ---[CLIENT AND MENU] Creates a new derma animation.
 ---
@@ -599,32 +509,129 @@ function _G.Derma_DrawBackgroundBlur(panel, startTime) end
 ---@return table # A lua metatable containing four methods: * Run() - Should be called each frame you want the animation to be ran. * Active() - Returns if the animation is currently active (has not finished and stop has not been called) * Stop() - Halts the animation at its current progress. * Start( Length, Data ) - Prepares the animation to be ran for Length seconds. Must be called once before calling Run(). The data parameter will be passed to the func function.
 function _G.Derma_Anim(name, panel, func) end
 
----[MENU] Stops searching for new servers in the given category
+---[CLIENT] Creates a new particle system. See also Entity:CreateParticleEffect
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DoStopServers)
----@param category string The category to stop searching in. **Working Values: internet, favorite, history, lan**
-function _G.DoStopServers(category) end
+--- The particle effect must be precached with Global.PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
+---@param ent Entity The entity to attach the control point to.
+---@param effect string The name of the effect to create. It must be precached.
+---@param partAttachment number See Enums/PATTACH.
+---@param entAttachment? number The attachment ID on the entity to attach the particle system to
+---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
+---@return CNewParticleEffect # The created particle system.
+function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, offset) end
 
----[CLIENT] Cancels current DOF post-process effect started with Global.DOF_Start
+---[CLIENT AND MENU] Creates a derma window asking players to input a string.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOF_Kill)
-function _G.DOF_Kill() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_StringRequest)
+---@param title string The title of the created panel.
+---@param subtitle string The text above the input box
+---@param default string The default text for the input box.
+---@param confirm function The function to be called once the user has confirmed their input.
+---@param cancel? function The function to be called once the user has cancelled their input
+---@param confirmText? string Allows you to override text of the "OK" button
+---@param cancelText? string Allows you to override text of the "Cancel" button
+---@return Panel # The created DFrame
+function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confirmText, cancelText) end
 
----[CLIENT] A hacky method used to fix some bugs regarding DoF. What this basically does it force all `C_BaseAnimating` entities to have the translucent Enums/RENDERGROUP, even if they use opaque or two-pass models.
+---[MENU] Deletes the given Preset.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOFModeHack)
----@param enable boolean Enables or disables depth-of-field mode
-function _G.DOFModeHack(enable) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DeleteAddonPreset)
+---@param name string The name of the Preset to delete.
+function _G.DeleteAddonPreset(name) end
 
----[CLIENT] Renders the post-processing effect of beams of light originating from the map's sun. Utilises the `pp/sunbeams` material.
+---[CLIENT AND MENU] Shows a message box in the middle of the screen, with up to 4 buttons they can press.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSunbeams)
----@param darken number `$darken` property for sunbeams material.
----@param multiplier number `$multiply` property for sunbeams material.
----@param sunSize number `$sunsize` property for sunbeams material.
----@param sunX number `$sunx` property for sunbeams material.
----@param sunY number `$suny` property for sunbeams material.
-function _G.DrawSunbeams(darken, multiplier, sunSize, sunX, sunY) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Query)
+---@param text? string The message to display.
+---@param title? string The title to give the message box.
+---@param btn1text string The text to display on the first button.
+---@param btn1func? function The function to run if the user clicks the first button.
+---@param btn2text? string The text to display on the second button.
+---@param btn2func? function The function to run if the user clicks the second button.
+---@param btn3text? string The text to display on the third button
+---@param btn3func? function The function to run if the user clicks the third button.
+---@param btn4text? string The text to display on the fourth button
+---@param btn4func? function The function to run if the user clicks the fourth button.
+---@return Panel # The Panel object of the created window.
+function _G.Derma_Query(text, title, btn1text, btn1func, btn2text, btn2func, btn3text, btn3func, btn4text, btn4func) end
+
+---[CLIENT AND MENU] Makes the panel (usually an input of sorts) respond to changes in console variables by adding next functions to the panel:
+--- * Panel:SetConVar
+--- * Panel:ConVarChanged
+--- * Panel:ConVarStringThink
+--- * Panel:ConVarNumberThink
+---
+--- The console variable value is saved in the `m_strConVar` property of the panel.
+---
+--- The panel should call
+--- Panel:ConVarStringThink or
+--- Panel:ConVarNumberThink
+--- in its PANEL:Think hook and should call Panel:ConVarChanged when the panel's value has changed.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Install_Convar_Functions)
+---@param target Panel The panel the functions should be added to.
+function _G.Derma_Install_Convar_Functions(target) end
+
+---[CLIENT AND MENU] Creates a derma window to display information
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Derma_Message)
+---@param Text string The text within the created panel.
+---@param Title string The title of the created panel.
+---@param Button string The text of the button to close the panel.
+---@return Panel # The created DFrame
+function _G.Derma_Message(Text, Title, Button) end
+
+---[MENU] Creates a new Preset from the given JSON string.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset)
+---@param data string A JSON string containing all necessary informations.
+--- 			JSON structue should be Structures/Preset
+---
+function _G.CreateNewAddonPreset(data) end
+
+---[SHARED] Returns an CTakeDamageInfo object.
+---
+--- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DamageInfo)
+---@return CTakeDamageInfo # The CTakeDamageInfo object.
+function _G.DamageInfo() end
+
+---[CLIENT AND MENU] Creates a DMenu and closes any current menus.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DermaMenu)
+---@param keepOpen? boolean If we should keep other DMenus open (`true`) or not (`false`).
+---@param parent? Panel The panel to parent the created menu to.
+---@return DMenu #The created DMenu.
+function _G.DermaMenu(keepOpen, parent) end
+
+---[CLIENT] Cancels any existing DOF post-process effects.
+--- Begins the DOF post-process effect.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOF_Start)
+function _G.DOF_Start() end
+
+---[CLIENT] Draws the sobel shader, which detects edges and draws a black border.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSobel)
+---@param Threshold number Determines the threshold of edges. A value of `0` will make your screen completely black.
+function _G.DrawSobel(Threshold) end
+
+---[CLIENT] Draws the Bokeh Depth Of Field effect .
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawBokehDOF)
+---@param intensity number Intensity of the effect.
+---@param distance number **Not worldspace distance**. Value range is from `0` to `1`.
+---@param focus number Focus. Recommended values are from 0 to 12.
+function _G.DrawBokehDOF(intensity, distance, focus) end
+
+---[SERVER] Drops the specified entity if it is being held by any player with Gravity Gun or +use pickup.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DropEntityIfHeld)
+---@param ent Entity The entity to drop.
+function _G.DropEntityIfHeld(ent) end
 
 ---[CLIENT] Creates a motion blur effect by drawing your screen multiple times.
 ---
@@ -634,21 +641,6 @@ function _G.DrawSunbeams(darken, multiplier, sunSize, sunX, sunY) end
 ---@param Delay number Determines the amount of time between frames to capture.
 function _G.DrawMotionBlur(AddAlpha, DrawAlpha, Delay) end
 
----[CLIENT] Cancels any existing DOF post-process effects.
---- Begins the DOF post-process effect.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOF_Start)
-function _G.DOF_Start() end
-
----[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not.
----
---- See also Panel:NoClipping.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DisableClipping)
----@param disable boolean Whether or not clipping should be disabled
----@return boolean # Whether the clipping was enabled or not before this function call
-function _G.DisableClipping(disable) end
-
 ---[MENU] Draws the currently active main menu background image and handles transitioning between background images.
 ---
 --- This is called by default in the menu panel's Paint hook.
@@ -656,13 +648,32 @@ function _G.DisableClipping(disable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawBackground)
 function _G.DrawBackground() end
 
----[CLIENT AND MENU] Creates a DMenu and closes any current menus.
+---[CLIENT] Draws the sharpen shader, which creates more contrast.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DermaMenu)
----@param keepOpen? boolean If we should keep other DMenus open (`true`) or not (`false`).
----@param parent? Panel The panel to parent the created menu to.
----@return DMenu #The created DMenu.
-function _G.DermaMenu(keepOpen, parent) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSharpen)
+---@param Contrast number How much contrast to create.
+---@param Distance number How large the contrast effect will be.
+function _G.DrawSharpen(Contrast, Distance) end
+
+---[SHARED] Returns a CEffectData object to be used with util.Effect.
+---
+--- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EffectData)
+---@return CEffectData # The CEffectData object.
+function _G.EffectData() end
+
+---[CLIENT] Draws the texturize shader, which replaces each pixel on your screen with a different part of the texture depending on its brightness. See Shaders/g_texturize for information on making the texture.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawTexturize)
+---@param Scale number Scale of the texture. A smaller number creates a larger texture.
+---@param BaseTexture number This will be the texture to use in the effect. Make sure you use Global.Material to get the texture number.
+function _G.DrawTexturize(Scale, BaseTexture) end
+
+---[CLIENT] Cancels current DOF post-process effect started with Global.DOF_Start
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOF_Kill)
+function _G.DOF_Kill() end
 
 ---[MENU] Creates a dynamic Material from the given materialPath
 --- This function should never be used in a Rendering Hook because it creates a new dynamic material every time and can fill up your vram.
@@ -673,6 +684,44 @@ function _G.DermaMenu(keepOpen, parent) end
 --- 		What does this argument do / use. Currently working value: "0100010" --nocull smooth
 ---@return IMaterial # Generated material.
 function _G.DynamicMaterial(materialPath, flags) end
+
+---[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not.
+---
+--- See also Panel:NoClipping.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DisableClipping)
+---@param disable boolean Whether or not clipping should be disabled
+---@return boolean # Whether the clipping was enabled or not before this function call
+function _G.DisableClipping(disable) end
+
+---[CLIENT] Draws a material overlay on the screen.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawMaterialOverlay)
+---@param Material string This will be the material that is drawn onto the screen.
+---@param RefractAmount number This will adjust how much the material will refract your screen.
+function _G.DrawMaterialOverlay(Material, RefractAmount) end
+
+---[CLIENT] Creates or replaces a dynamic light with the given id.
+---
+--- Only 32 dlights and 64 elights can be active at once.
+--- It is not safe to hold a reference to this object after creation since its data can be replaced by another dlight at any time.
+--- The minlight parameter affects the world and entities differently.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DynamicLight)
+---@param index number An unsigned Integer. Usually an Entity:EntIndex is used here.
+---@param elight? boolean Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
+---@return table # A DynamicLight structured table. See Structures/DynamicLight
+function _G.DynamicLight(index, elight) end
+
+---[CLIENT] Renders the post-processing effect of beams of light originating from the map's sun. Utilises the `pp/sunbeams` material.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSunbeams)
+---@param darken number `$darken` property for sunbeams material.
+---@param multiplier number `$multiply` property for sunbeams material.
+---@param sunSize number `$sunsize` property for sunbeams material.
+---@param sunX number `$sunx` property for sunbeams material.
+---@param sunY number `$suny` property for sunbeams material.
+function _G.DrawSunbeams(darken, multiplier, sunSize, sunX, sunY) end
 
 ---[CLIENT] Draws the Color Modify shader, which can be used to adjust colors on screen.
 ---
@@ -704,59 +753,6 @@ function _G.DrawToyTown(Passes, Height) end
 ---@param newValue any The new value.
 function _G.DTVar_ReceiveProxyGL(entity, Type, index, newValue) end
 
----[CLIENT] Draws the Bokeh Depth Of Field effect .
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawBokehDOF)
----@param intensity number Intensity of the effect.
----@param distance number **Not worldspace distance**. Value range is from `0` to `1`.
----@param focus number Focus. Recommended values are from 0 to 12.
-function _G.DrawBokehDOF(intensity, distance, focus) end
-
----[CLIENT] Draws the sharpen shader, which creates more contrast.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSharpen)
----@param Contrast number How much contrast to create.
----@param Distance number How large the contrast effect will be.
-function _G.DrawSharpen(Contrast, Distance) end
-
----[CLIENT] Creates or replaces a dynamic light with the given id.
----
---- Only 32 dlights and 64 elights can be active at once.
---- It is not safe to hold a reference to this object after creation since its data can be replaced by another dlight at any time.
---- The minlight parameter affects the world and entities differently.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DynamicLight)
----@param index number An unsigned Integer. Usually an Entity:EntIndex is used here.
----@param elight? boolean Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
----@return table # A DynamicLight structured table. See Structures/DynamicLight
-function _G.DynamicLight(index, elight) end
-
----[SERVER] Drops the specified entity if it is being held by any player with Gravity Gun or +use pickup.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DropEntityIfHeld)
----@param ent Entity The entity to drop.
-function _G.DropEntityIfHeld(ent) end
-
----[CLIENT] Draws the texturize shader, which replaces each pixel on your screen with a different part of the texture depending on its brightness. See Shaders/g_texturize for information on making the texture.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawTexturize)
----@param Scale number Scale of the texture. A smaller number creates a larger texture.
----@param BaseTexture number This will be the texture to use in the effect. Make sure you use Global.Material to get the texture number.
-function _G.DrawTexturize(Scale, BaseTexture) end
-
----[CLIENT] Draws a material overlay on the screen.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawMaterialOverlay)
----@param Material string This will be the material that is drawn onto the screen.
----@param RefractAmount number This will adjust how much the material will refract your screen.
-function _G.DrawMaterialOverlay(Material, RefractAmount) end
-
----[CLIENT] Draws the sobel shader, which detects edges and draws a black border.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawSobel)
----@param Threshold number Determines the threshold of edges. A value of `0` will make your screen completely black.
-function _G.DrawSobel(Threshold) end
-
 ---[CLIENT] Draws the bloom shader, which creates a glowing effect from bright objects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DrawBloom)
@@ -771,11 +767,27 @@ function _G.DrawSobel(Threshold) end
 ---@param Blue number How much blue to multiply with the glowing color. Should be between `0` and `1`.
 function _G.DrawBloom(Darken, Multiply, SizeX, SizeY, Passes, ColorMultiply, Red, Green, Blue) end
 
----[MENU] Fires a Problem with the given Data.
+---[MENU] Stops searching for new servers in the given category
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblem)
----@param prob table The Problem table. See Structures/Problem
-function _G.FireProblem(prob) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DoStopServers)
+---@param category string The category to stop searching in. **Working Values: internet, favorite, history, lan**
+function _G.DoStopServers(category) end
+
+---[CLIENT] A hacky method used to fix some bugs regarding DoF. What this basically does it force all `C_BaseAnimating` entities to have the translucent Enums/RENDERGROUP, even if they use opaque or two-pass models.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DOFModeHack)
+---@param enable boolean Enables or disables depth-of-field mode
+function _G.DOFModeHack(enable) end
+
+---[MENU] Refreshes all Addon Conflicts and Fires a Problem. Internally uses Global.FireProblem
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireAddonConflicts)
+function _G.FireAddonConflicts() end
+
+---[SHARED] Returns the number of frames rendered since the game was launched.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameNumber)
+function _G.FrameNumber() end
 
 ---[SHARED AND MENU] Throws a Lua error and breaks out of the current call stack.
 ---
@@ -783,73 +795,6 @@ function _G.FireProblem(prob) end
 ---@param message string The error message to throw
 ---@param errorLevel? number The level to throw the error at.
 function _G.error(message, errorLevel) end
-
----[SHARED] Returns the number of frames rendered since the game was launched.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FrameNumber)
-function _G.FrameNumber() end
-
----[CLIENT] Returns the origin of the current render context as calculated by GM:CalcView.
----
---- This function is only reliable inside rendering hooks.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyePos)
----@return Vector # Camera position.
-function _G.EyePos() end
-
----[MENU] Refreshes all Addon Conflicts and Fires a Problem. Internally uses Global.FireProblem
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireAddonConflicts)
-function _G.FireAddonConflicts() end
-
----[SHARED AND MENU] Throws an error. This is currently an alias of Global.ErrorNoHalt despite it once throwing a halting error like Global.error(lowercase) without the stack trace appended.
----
---- This function throws a non-halting error instead of a halting error.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Error)
----@param ... any Converts all arguments to strings and prints them with no spacing or line breaks.
-function _G.Error(...) end
-
----[MENU] Internally uses Global.FireProblem to create / fire the Problem.
---- 		This function is called from the engine to notify the player about a problem in a more user friendly way compared to a console message.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblemFromEngine)
----@param id string The Problem ID.
----@param severity number The Problem severity.
----@param params string Additional Parameters.
-function _G.FireProblemFromEngine(id, severity, params) end
-
----[SHARED] Returns the entity with the matching Entity:EntIndex.
----
---- Indices `1` through game.MaxPlayers() are always reserved for players.
----
---- In examples on this wiki, `Entity( 1 )` is used when a player entity is needed (see ). In singleplayer and listen servers, `Entity( 1 )` will always be the first player. In dedicated servers, however, `Entity( 1 )` won't always be a valid player if there is no one currently on the server.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Entity)
----@param entityIndex number The entity index.
----@return Entity # The entity if it exists, or NULL if it doesn't.
-function _G.Entity(entityIndex) end
-
----[SHARED AND MENU] Returns the meta table for the class with the matching name.
----
---- Internally returns debug.getregistry()[metaName]
----
---- You can learn more about meta tables on the Meta Tables page.
----
---- You can find a list of meta tables that can be retrieved with this function on Enums/TYPE. The name in the description is the string to use with this function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FindMetaTable)
----@param metaName string The object type to retrieve the meta table of.
----@return table # The corresponding meta table.
-function _G.FindMetaTable(metaName) end
-
----[SHARED] Returns a CEffectData object to be used with util.Effect.
----
---- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EffectData)
----@return CEffectData # The CEffectData object.
-function _G.EffectData() end
 
 ---[SHARED] Plays a sentence from `scripts/sentences.txt`
 ---
@@ -871,6 +816,107 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyeAngles)
 ---@return Angle # The angle of the currently rendered scene.
 function _G.EyeAngles() end
+
+---[SHARED AND MENU] Throws a Lua error but does not break out of the current call stack.
+---
+--- This function will print a stack trace like a normal error would.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ErrorNoHaltWithStack)
+---@param ... any Converts all arguments to strings and prints them with no spacing.
+function _G.ErrorNoHaltWithStack(...) end
+
+---[MENU] Fires a Problem with the given Data.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblem)
+---@param prob table The Problem table. See Structures/Problem
+function _G.FireProblem(prob) end
+
+---[SHARED AND MENU] Returns the meta table for the class with the matching name.
+---
+--- Internally returns debug.getregistry()[metaName]
+---
+--- You can learn more about meta tables on the Meta Tables page.
+---
+--- You can find a list of meta tables that can be retrieved with this function on Enums/TYPE. The name in the description is the string to use with this function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FindMetaTable)
+---@param metaName string The object type to retrieve the meta table of.
+---@return table # The corresponding meta table.
+function _G.FindMetaTable(metaName) end
+
+---[SHARED AND MENU] Throws an error. This is currently an alias of Global.ErrorNoHalt despite it once throwing a halting error like Global.error(lowercase) without the stack trace appended.
+---
+--- This function throws a non-halting error instead of a halting error.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Error)
+---@param ... any Converts all arguments to strings and prints them with no spacing or line breaks.
+function _G.Error(...) end
+
+---[CLIENT] Returns the origin of the current render context as calculated by GM:CalcView.
+---
+--- This function is only reliable inside rendering hooks.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyePos)
+---@return Vector # Camera position.
+function _G.EyePos() end
+
+---[SHARED] Returns the entity with the matching Entity:EntIndex.
+---
+--- Indices `1` through game.MaxPlayers() are always reserved for players.
+---
+--- In examples on this wiki, `Entity( 1 )` is used when a player entity is needed (see ). In singleplayer and listen servers, `Entity( 1 )` will always be the first player. In dedicated servers, however, `Entity( 1 )` won't always be a valid player if there is no one currently on the server.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Entity)
+---@param entityIndex number The entity index.
+---@return Entity # The entity if it exists, or NULL if it doesn't.
+function _G.Entity(entityIndex) end
+
+---[SHARED AND MENU] Formats the specified values into the string given. Same as string.format.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Format)
+---@param format string The string to be formatted.
+--- Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
+---@param ... any Values to be formatted into the string.
+---@return string # The formatted string
+function _G.Format(format, ...) end
+
+---[MENU] Callback function for when the client has joined a server. This function shows the server's loading URL by default.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GameDetails)
+---@param servername string Server's name.
+---@param serverurl string Server's loading screen URL, or "" if the URL is not set.
+---@param mapname string Server's current map's name.
+---@param maxplayers number Max player count of server.
+---@param steamid string The local player's Player:SteamID64.
+---@param gamemode string Server's current gamemode's folder name.
+function _G.GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) end
+
+---[SHARED] Emits the specified sound at the specified position. See also Entity:EmitSound if you wish to play sounds on a specific entity.
+---
+---
+--- Valid sample rates: **11025 Hz, 22050 Hz and 44100 Hz**, otherwise you may see this kind of message:
+---
+--- `Unsupported 32-bit wave file your_sound.wav` and
+--- `Invalid sample rate (48000) for sound 'your_sound.wav'`
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EmitSound)
+---@param soundName string The sound to play
+---
+--- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
+---
+---@param position Vector The position where the sound is meant to play, which is also used for a network filter (`CPASAttenuationFilter`) to decide which players will hear the sound.
+---@param entity? number The entity to emit the sound from. Can be an Entity:EntIndex or one of the following:
+--- * `0` - Plays sound on the world (position set to `0,0,0`)
+--- * `-1` - Plays sound on the local player (on server acts as `0`)
+--- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
+---@param channel? number The sound channel, see Enums/CHAN.
+---@param volume? number The volume of the sound, from 0 to 1
+---@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
+---@param soundFlags? number The flags of the sound, see Enums/SND
+---@param pitch? number The pitch of the sound, 0-255
+---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
+function _G.EmitSound(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch, dsp, filter) end
 
 ---[SHARED AND MENU] An [eagerly evaluated](https://en.wikipedia.org/wiki/Eager_evaluation) [ternary operator](https://en.wikipedia.org/wiki/%3F:), or, in layman's terms, a compact "if then else" statement.
 ---
@@ -909,22 +955,14 @@ function _G.EyeAngles() end
 ---@return any # The result.
 function _G.Either(condition, truevar, falsevar) end
 
----[CLIENT] Returns the normal vector of the current render context as calculated by GM:CalcView, similar to Global.EyeAngles.
+---[MENU] Internally uses Global.FireProblem to create / fire the Problem.
+--- 		This function is called from the engine to notify the player about a problem in a more user friendly way compared to a console message.
 ---
---- This function is only reliable inside rendering hooks.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyeVector)
----@return Vector # View direction of the currently rendered scene.
-function _G.EyeVector() end
-
----[SHARED AND MENU] Formats the specified values into the string given. Same as string.format.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Format)
----@param format string The string to be formatted.
---- Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
----@param ... any Values to be formatted into the string.
----@return string # The formatted string
-function _G.Format(format, ...) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblemFromEngine)
+---@param id string The Problem ID.
+---@param severity number The Problem severity.
+---@param params string Additional Parameters.
+function _G.FireProblemFromEngine(id, severity, params) end
 
 ---[CLIENT AND MENU] Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself
 ---
@@ -934,6 +972,28 @@ function _G.Format(format, ...) end
 ---@return Panel # tool-tip panel
 ---@return Panel # panel that the function was called with
 function _G.FindTooltip(panel) end
+
+---[CLIENT AND MENU] Removes the currently active tool tip from the screen.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EndTooltip)
+---@param panel Panel This is the panel that has a tool tip.
+function _G.EndTooltip(panel) end
+
+---[SHARED AND MENU] Throws a Lua error but does not break out of the current call stack.
+--- This function will not print a stack trace like a normal error would.
+--- Essentially similar if not equivalent to Global.Msg.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ErrorNoHalt)
+---@param ... any Converts all arguments to strings and prints them with no spacing.
+function _G.ErrorNoHalt(...) end
+
+---[CLIENT] Returns the normal vector of the current render context as calculated by GM:CalcView, similar to Global.EyeAngles.
+---
+--- This function is only reliable inside rendering hooks.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EyeVector)
+---@return Vector # View direction of the currently rendered scene.
+function _G.EyeVector() end
 
 ---[SHARED AND MENU] Returns the Global.CurTime-based time in seconds it took to render the last frame.
 ---
@@ -945,87 +1005,28 @@ function _G.FindTooltip(panel) end
 ---@return number # time (in seconds)
 function _G.FrameTime() end
 
----[CLIENT AND MENU] Removes the currently active tool tip from the screen.
+---[SHARED AND MENU] Returns the environment table of either the stack level or the function specified.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EndTooltip)
----@param panel Panel This is the panel that has a tool tip.
-function _G.EndTooltip(panel) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.getfenv)
+---@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
+---@return table # The environment.
+function _G.getfenv(location) end
 
----[SHARED AND MENU] Throws a Lua error but does not break out of the current call stack.
+---[SHARED AND MENU] Gets the numeric value ConVar with the specified name.
 ---
---- This function will print a stack trace like a normal error would.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ErrorNoHaltWithStack)
----@param ... any Converts all arguments to strings and prints them with no spacing.
-function _G.ErrorNoHaltWithStack(...) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
+---@param name string Name of the ConVar to get.
+---@return number # The ConVar's value.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.
+function _G.GetConVarNumber(name) end
 
----[SHARED AND MENU] Throws a Lua error but does not break out of the current call stack.
---- This function will not print a stack trace like a normal error would.
---- Essentially similar if not equivalent to Global.Msg.
+---[SHARED] Returns a vector that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ErrorNoHalt)
----@param ... any Converts all arguments to strings and prints them with no spacing.
-function _G.ErrorNoHalt(...) end
-
----[SHARED] Emits the specified sound at the specified position. See also Entity:EmitSound if you wish to play sounds on a specific entity.
----
----
---- Valid sample rates: **11025 Hz, 22050 Hz and 44100 Hz**, otherwise you may see this kind of message:
----
---- `Unsupported 32-bit wave file your_sound.wav` and
---- `Invalid sample rate (48000) for sound 'your_sound.wav'`
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.EmitSound)
----@param soundName string The sound to play
----
---- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
----
----@param position Vector The position where the sound is meant to play, which is also used for a network filter (`CPASAttenuationFilter`) to decide which players will hear the sound.
----@param entity? number The entity to emit the sound from. Can be an Entity:EntIndex or one of the following:
---- * `0` - Plays sound on the world (position set to `0,0,0`)
---- * `-1` - Plays sound on the local player (on server acts as `0`)
---- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
----@param channel? number The sound channel, see Enums/CHAN.
----@param volume? number The volume of the sound, from 0 to 1
----@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
----@param soundFlags? number The flags of the sound, see Enums/SND
----@param pitch? number The pitch of the sound, 0-255
----@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
----@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
-function _G.EmitSound(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch, dsp, filter) end
-
----[SHARED] Returns a float that is shared between the server and all clients.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Float)
----@param index string The unique index to identify the global value with.
----@param default? number The value to return if the global value is not set.
----@return number # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Float(index, default) end
-
----[MENU] Retrieves data about the demo with the specified filename. Similar to Global.GetSaveFileDetails.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDemoFileDetails)
----@param filename string The file name of the demo.
----@return table # Demo data.
-function _G.GetDemoFileDetails(filename) end
-
----[SHARED AND MENU] Returns the current floored dynamic memory usage of Lua in kilobytes.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.gcinfo)
----@return number # The current floored dynamic memory usage of Lua, in kilobytes.
----@deprecated This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead.
-function _G.gcinfo() end
-
----[MENU] Callback function for when the client has joined a server. This function shows the server's loading URL by default.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GameDetails)
----@param servername string Server's name.
----@param serverurl string Server's loading screen URL, or "" if the URL is not set.
----@param mapname string Server's current map's name.
----@param maxplayers number Max player count of server.
----@param steamid string The local player's Player:SteamID64.
----@param gamemode string Server's current gamemode's folder name.
-function _G.GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Vector)
+---@param Index string The unique index to identify the global value with.
+---@param Default Vector The value to return if the global value is not set.
+---@return Vector # The global value, or the default if the global value is not set.
+function _G.GetGlobal2Vector(Index, Default) end
 
 ---[MENU] Returns the default loading screen URL (asset://garrysmod/html/loading.html)
 ---
@@ -1041,12 +1042,38 @@ function _G.GetDefaultLoadingHTML() end
 ---@return string # The global value, or the default if the global value is not set.
 function _G.GetGlobal2String(index, default) end
 
----[MENU] Returns if the game was started with either -noaddons or -noworkshop
+---[SHARED AND MENU] This function is very slow and not recommended. See Global.GetConVar for an example on how to properly store the return of what your using so you can avoid using this function as much as possible.
+--- 	Gets the ConVar with the specified name. This function doesn't cache the convar.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetAddonStatus)
----@return boolean # true if the game was started with -noaddons. (see Command_Line_Parameters)
----@return boolean # true if the game was started with -noworkshop. (see Command_Line_Parameters)
-function _G.GetAddonStatus() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar_Internal)
+---@param name string Name of the ConVar to get
+---@return ConVar # The ConVar object
+function _G.GetConVar_Internal(name) end
+
+---[SHARED AND MENU] Gets the ConVar with the specified name.
+---
+--- This function uses Global.GetConVar_Internal internally, but caches the result in Lua for quicker lookups.
+--- Due to this function using Global.GetConVar_Internal internally it tends to be relatively slow. Please attempt to 'cache' the return of what you used to make it instead of using this function.
+---
+--- Example:
+--- ```
+--- local exampleConvar = CreateClientConVar("exampleConvar", "hi")
+---
+--- print(exampleConvar:GetString())
+--- ```
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar)
+---@param name string Name of the ConVar to get
+---@return ConVar # The ConVar object, or nil if no such ConVar was found.
+function _G.GetConVar(name) end
+
+---[SHARED AND MENU] Gets the string value ConVar with the specified name.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarString)
+---@param name string Name of the ConVar to get.
+---@return string # The ConVar's value.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.
+function _G.GetConVarString(name) end
 
 ---[MENU] Returns a table with the names of files needed from the server you are currently joining.
 ---
@@ -1056,29 +1083,42 @@ function _G.GetDownloadables() end
 
 ---[SHARED] Returns an angle that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Angle)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalAngle)
 ---@param index string The unique index to identify the global value with.
----@param default? Angle The value to return if the global value is not set.
+---@param default Angle The value to return if the global value is not set.
 ---@return Angle # The global value, or default if the global is not set.
-function _G.GetGlobal2Angle(index, default) end
+function _G.GetGlobalAngle(index, default) end
 
----[SHARED] Returns a vector that is shared between the server and all clients.
+---[SHARED] Returns a value that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Vector)
----@param Index string The unique index to identify the global value with.
----@param Default Vector The value to return if the global value is not set.
----@return Vector # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Vector(Index, Default) end
-
----[SHARED] Returns an integer that is shared between the server and all clients.
----
---- The integer has a 32 bit limit. Use Global.GetGlobalInt for a higher limit
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Int)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Var)
 ---@param index string The unique index to identify the global value with.
----@param default? number The value to return if the global value is not set.
----@return number # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Int(index, default) end
+---@param default? any The value to return if the global value is not set.
+---@return any # The global value, or the default if the global value is not set.
+function _G.GetGlobal2Var(index, default) end
+
+---[MENU] Returns if the game was started with either -noaddons or -noworkshop
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetAddonStatus)
+---@return boolean # true if the game was started with -noaddons. (see Command_Line_Parameters)
+---@return boolean # true if the game was started with -noworkshop. (see Command_Line_Parameters)
+function _G.GetAddonStatus() end
+
+---[SHARED] Returns an entity that is shared between the server and all clients.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Entity)
+---@param index string The unique index to identify the global value with.
+---@param default? Entity The value to return if the global value is not set.
+---@return Entity # The global value, or the default if the global value is not set.
+function _G.GetGlobal2Entity(index, default) end
+
+---[SHARED] Returns a boolean that is shared between the server and all clients.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Bool)
+---@param index string The unique index to identify the global value with.
+---@param default? boolean The value to return if the global value is not set.
+---@return boolean # The global value, or the default if the global value is not set.
+function _G.GetGlobal2Bool(index, default) end
 
 ---[CLIENT] This function adds all models from a specified folder to a custom Spawnlist category. Internally uses Global.AddPropsOfParent
 --- 	Using this function before SANDBOX:PopulateContent has been called will result in an error
@@ -1091,37 +1131,15 @@ function _G.GetGlobal2Int(index, default) end
 ---@param appid number The AppID which is needed for the Content
 function _G.GenerateSpawnlistFromPath(folder, path, name, icon, appid) end
 
----[SHARED] Returns a boolean that is shared between the server and all clients.
+---[SHARED] Returns an integer that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Bool)
+--- The integer has a 32 bit limit. Use Global.GetGlobalInt for a higher limit
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Int)
 ---@param index string The unique index to identify the global value with.
----@param default? boolean The value to return if the global value is not set.
----@return boolean # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Bool(index, default) end
-
----[SHARED AND MENU] Gets the string value ConVar with the specified name.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarString)
----@param name string Name of the ConVar to get.
----@return string # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.
-function _G.GetConVarString(name) end
-
----[SHARED] Returns an entity that is shared between the server and all clients.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Entity)
----@param index string The unique index to identify the global value with.
----@param default? Entity The value to return if the global value is not set.
----@return Entity # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Entity(index, default) end
-
----[SHARED AND MENU] This function is very slow and not recommended. See Global.GetConVar for an example on how to properly store the return of what your using so you can avoid using this function as much as possible.
---- 	Gets the ConVar with the specified name. This function doesn't cache the convar.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar_Internal)
----@param name string Name of the ConVar to get
----@return ConVar # The ConVar object
-function _G.GetConVar_Internal(name) end
+---@param default? number The value to return if the global value is not set.
+---@return number # The global value, or the default if the global value is not set.
+function _G.GetGlobal2Int(index, default) end
 
 ---[MENU] All dates are in [WDDX](https://www.php.net/manual/en/datetime.formats.compound.php) format
 ---
@@ -1188,96 +1206,35 @@ function _G.GetConVar_Internal(name) end
 ---
 function _G.GetAPIManifest(callback) end
 
----[SHARED AND MENU] Gets the ConVar with the specified name.
+---[MENU] Retrieves data about the demo with the specified filename. Similar to Global.GetSaveFileDetails.
 ---
---- This function uses Global.GetConVar_Internal internally, but caches the result in Lua for quicker lookups.
---- Due to this function using Global.GetConVar_Internal internally it tends to be relatively slow. Please attempt to 'cache' the return of what you used to make it instead of using this function.
----
---- Example:
---- ```
---- local exampleConvar = CreateClientConVar("exampleConvar", "hi")
----
---- print(exampleConvar:GetString())
---- ```
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar)
----@param name string Name of the ConVar to get
----@return ConVar # The ConVar object, or nil if no such ConVar was found.
-function _G.GetConVar(name) end
-
----[SHARED] Returns a value that is shared between the server and all clients.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Var)
----@param index string The unique index to identify the global value with.
----@param default? any The value to return if the global value is not set.
----@return any # The global value, or the default if the global value is not set.
-function _G.GetGlobal2Var(index, default) end
-
----[SHARED AND MENU] Gets the numeric value ConVar with the specified name.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
----@param name string Name of the ConVar to get.
----@return number # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.
-function _G.GetConVarNumber(name) end
-
----[SHARED AND MENU] Returns the environment table of either the stack level or the function specified.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.getfenv)
----@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
----@return table # The environment.
-function _G.getfenv(location) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDemoFileDetails)
+---@param filename string The file name of the demo.
+---@return table # Demo data.
+function _G.GetDemoFileDetails(filename) end
 
 ---[SHARED] Returns an angle that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalAngle)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Angle)
 ---@param index string The unique index to identify the global value with.
----@param default Angle The value to return if the global value is not set.
+---@param default? Angle The value to return if the global value is not set.
 ---@return Angle # The global value, or default if the global is not set.
-function _G.GetGlobalAngle(index, default) end
+function _G.GetGlobal2Angle(index, default) end
 
----[SHARED] Returns a string that is shared between the server and all clients.
+---[SHARED] Returns a float that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalString)
----@param index string The unique index to identify the global value with.
----@param default? string The value to return if the global value is not set.
----@return string # The global value, or the default if the global value is not set.
-function _G.GetGlobalString(index, default) end
-
----[SHARED] Returns the player whose movement commands are currently being processed. The player this returns can safely have Player:GetCurrentCommand() called on them. See Prediction.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetPredictionPlayer)
----@return Player # The player currently being predicted, or NULL if no command processing is currently being done.
-function _G.GetPredictionPlayer() end
-
----[MENU] Retrieves data about the save with the specified filename. Similar to Global.GetDemoFileDetails.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetSaveFileDetails)
----@param filename string The file name of the save.
----@return table # Save data.
-function _G.GetSaveFileDetails(filename) end
-
----[SHARED] Returns an integer that is shared between the server and all clients.
----
---- This function will not round decimal values as it actually networks a float internally.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalInt)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobal2Float)
 ---@param index string The unique index to identify the global value with.
 ---@param default? number The value to return if the global value is not set.
 ---@return number # The global value, or the default if the global value is not set.
-function _G.GetGlobalInt(index, default) end
+function _G.GetGlobal2Float(index, default) end
 
----[MENU] Returns the current status of the server join progress.
+---[SHARED AND MENU] Returns the current floored dynamic memory usage of Lua in kilobytes.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadStatus)
----@return string # The current status
-function _G.GetLoadStatus() end
-
----[MENU] Updates the PlayerList for the Currently Viewed Server. Internally uses serverlist.PlayerList to retrieve the PlayerList.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetPlayerList)
----@param serverip string The ServerIP to retrieve the PlayerList from.
-function _G.GetPlayerList(serverip) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.gcinfo)
+---@return number # The current floored dynamic memory usage of Lua, in kilobytes.
+---@deprecated This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead.
+function _G.gcinfo() end
 
 ---[MENU] Returns a table with the names of all maps and categories that you have on your client.
 ---
@@ -1285,11 +1242,11 @@ function _G.GetPlayerList(serverip) end
 ---@return table # Table of map names and categories.
 function _G.GetMapList() end
 
----[SHARED] Returns the name of the current server.
+---[MENU] Returns the current status of the server join progress.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetHostName)
----@return string # The name of the server.
-function _G.GetHostName() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadStatus)
+---@return string # The current status
+function _G.GetLoadStatus() end
 
 ---[SHARED] Returns a float that is shared between the server and all clients.
 ---
@@ -1299,6 +1256,32 @@ function _G.GetHostName() end
 ---@return number # The global value, or the default if the global value is not set.
 function _G.GetGlobalFloat(index, default) end
 
+---[SHARED] Returns the name of the current server.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetHostName)
+---@return string # The name of the server.
+function _G.GetHostName() end
+
+---[MENU] Returns the loading screen panel and creates it if it doesn't exist.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadPanel)
+---@return Panel # The loading screen panel
+function _G.GetLoadPanel() end
+
+---[SHARED] Returns the player whose movement commands are currently being processed. The player this returns can safely have Player:GetCurrentCommand() called on them. See Prediction.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetPredictionPlayer)
+---@return Player # The player currently being predicted, or NULL if no command processing is currently being done.
+function _G.GetPredictionPlayer() end
+
+---[SHARED] Returns an entity that is shared between the server and all clients.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalEntity)
+---@param index string The unique index to identify the global value with.
+---@param default? Entity The value to return if the global value is not set.
+---@return Entity # The global value, or the default if the global value is not set.
+function _G.GetGlobalEntity(index, default) end
+
 ---[SHARED] Returns a value that is shared between the server and all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalVar)
@@ -1307,19 +1290,18 @@ function _G.GetGlobalFloat(index, default) end
 ---@return any # The global value, or the default if the global value is not set.
 function _G.GetGlobalVar(index, default) end
 
+---[CLIENT] Returns if the client is timing out, and time since last ping from the server. Similar to the server side Player:IsTimingOut.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetTimeoutInfo)
+---@return boolean # Is timing out?
+---@return number # Get time since last pinged received.
+function _G.GetTimeoutInfo() end
+
 ---[MENU] Returns the menu overlay panel, a container for panels like the error panel created in GM:OnLuaError.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetOverlayPanel)
 ---@return Panel # The overlay panel
 function _G.GetOverlayPanel() end
-
----[SHARED] Returns a boolean that is shared between the server and all clients.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalBool)
----@param index string The unique index to identify the global value with.
----@param default? boolean The value to return if the global value is not set.
----@return boolean # The global value, or the default if the global value is not set.
-function _G.GetGlobalBool(index, default) end
 
 ---[SHARED AND MENU] Returns the metatable of an object. This function obeys the metatable's __metatable field, and will return that field if the metatable has it set.
 ---
@@ -1332,6 +1314,30 @@ function _G.GetGlobalBool(index, default) end
 ---@return any # The metatable of the value. This is not always a table.
 function _G.getmetatable(object) end
 
+---[SHARED] Returns a vector that is shared between the server and all clients.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalVector)
+---@param Index string The unique index to identify the global value with.
+---@param Default Vector The value to return if the global value is not set.
+---@return Vector # The global value, or the default if the global value is not set.
+function _G.GetGlobalVector(Index, Default) end
+
+---[MENU] Starts Searching for Servers in the given Category. Can be stopped with Global.DoStopServers.
+--- 		Internally uses serverlist.Query to search for Servers.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetServers)
+---@param category string The Category to start searching the Servers in. **Working Values: internet, favorite, history, lan**
+---@param id number Some ID. can be a random number?
+function _G.GetServers(category, id) end
+
+---[SHARED] Returns a string that is shared between the server and all clients.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalString)
+---@param index string The unique index to identify the global value with.
+---@param default? string The value to return if the global value is not set.
+---@return string # The global value, or the default if the global value is not set.
+function _G.GetGlobalString(index, default) end
+
 ---[CLIENT] Returns the panel that is used as a wrapper for the HUD. If you want your panel to be hidden when the main menu is opened, parent it to this. Child panels will also have their controls disabled.
 ---
 --- See also vgui.GetWorldPanel
@@ -1340,45 +1346,18 @@ function _G.getmetatable(object) end
 ---@return Panel # The HUD panel
 function _G.GetHUDPanel() end
 
----[SHARED] Returns an entity that is shared between the server and all clients.
+---[MENU] Retrieves data about the save with the specified filename. Similar to Global.GetDemoFileDetails.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalEntity)
----@param index string The unique index to identify the global value with.
----@param default? Entity The value to return if the global value is not set.
----@return Entity # The global value, or the default if the global value is not set.
-function _G.GetGlobalEntity(index, default) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetSaveFileDetails)
+---@param filename string The file name of the save.
+---@return table # Save data.
+function _G.GetSaveFileDetails(filename) end
 
----[CLIENT] Gets (or creates if it does not exist) the rendertarget with the given name, this function allows to adjust the creation of a rendertarget more than Global.GetRenderTarget.
+---[MENU] Updates the PlayerList for the Currently Viewed Server. Internally uses serverlist.PlayerList to retrieve the PlayerList.
 ---
---- See also render.PushRenderTarget and render.SetRenderTarget.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx)
----@param name string The internal name of the render target.
----
---- The name is treated like a path and gets its extension discarded."name.1" and "name.2" are considered the same name and will result in the same render target being reused.
----@param width number The width of the render target, must be power of 2.
----@param height number The height of the render target, must be power of 2.
----@param sizeMode number Bitflag that influences the sizing of the render target, see Enums/RT_SIZE.
----@param depthMode number
---- 	Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
----
---- 		PNG's may not render to non MATERIAL_RT_DEPTH_NONE RenderTargets
----
----@param textureFlags number Bitflag that configurates the texture, see Enums/TEXTUREFLAGS.
----
---- List of flags can also be found on the Valve's Developer Wiki:
---- https://developer.valvesoftware.com/wiki/Valve_Texture_Format
----@param rtFlags number Flags that controll the HDR behaviour of the render target, see Enums/CREATERENDERTARGETFLAGS.
----@param imageFormat number Image format, see Enums/IMAGE_FORMAT.
---- Some additional image formats are accepted, but don't have enums. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
----@return ITexture # The new render target.
-function _G.GetRenderTargetEx(name, width, height, sizeMode, depthMode, textureFlags, rtFlags, imageFormat) end
-
----[MENU] Returns the loading screen panel and creates it if it doesn't exist.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetLoadPanel)
----@return Panel # The loading screen panel
-function _G.GetLoadPanel() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetPlayerList)
+---@param serverip string The ServerIP to retrieve the PlayerList from.
+function _G.GetPlayerList(serverip) end
 
 ---[CLIENT] Creates or gets the rendertarget with the given name.
 ---
@@ -1406,21 +1385,55 @@ function _G.GetLoadPanel() end
 ---@return ITexture # The render target
 function _G.GetRenderTarget(name, width, height) end
 
----[MENU] Starts Searching for Servers in the given Category. Can be stopped with Global.DoStopServers.
---- 		Internally uses serverlist.Query to search for Servers.
+---[CLIENT] Gets (or creates if it does not exist) the rendertarget with the given name, this function allows to adjust the creation of a rendertarget more than Global.GetRenderTarget.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetServers)
----@param category string The Category to start searching the Servers in. **Working Values: internet, favorite, history, lan**
----@param id number Some ID. can be a random number?
-function _G.GetServers(category, id) end
+--- See also render.PushRenderTarget and render.SetRenderTarget.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx)
+---@param name string The internal name of the render target.
+---
+--- The name is treated like a path and gets its extension discarded."name.1" and "name.2" are considered the same name and will result in the same render target being reused.
+---@param width number The width of the render target, must be power of 2.
+---@param height number The height of the render target, must be power of 2.
+---@param sizeMode number Bitflag that influences the sizing of the render target, see Enums/RT_SIZE.
+---@param depthMode number
+--- 	Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
+---
+--- 		PNG's may not render to non MATERIAL_RT_DEPTH_NONE RenderTargets
+---
+---@param textureFlags number Bitflag that configurates the texture, see Enums/TEXTUREFLAGS.
+---
+--- List of flags can also be found on the Valve's Developer Wiki:
+--- https://developer.valvesoftware.com/wiki/Valve_Texture_Format
+---@param rtFlags number Flags that controll the HDR behaviour of the render target, see Enums/CREATERENDERTARGETFLAGS.
+---@param imageFormat number Image format, see Enums/IMAGE_FORMAT.
+--- Some additional image formats are accepted, but don't have enums. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
+---@return ITexture # The new render target.
+function _G.GetRenderTargetEx(name, width, height, sizeMode, depthMode, textureFlags, rtFlags, imageFormat) end
 
----[SHARED] Returns a vector that is shared between the server and all clients.
+---[SHARED] Returns a boolean that is shared between the server and all clients.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalVector)
----@param Index string The unique index to identify the global value with.
----@param Default Vector The value to return if the global value is not set.
----@return Vector # The global value, or the default if the global value is not set.
-function _G.GetGlobalVector(Index, Default) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalBool)
+---@param index string The unique index to identify the global value with.
+---@param default? boolean The value to return if the global value is not set.
+---@return boolean # The global value, or the default if the global value is not set.
+function _G.GetGlobalBool(index, default) end
+
+---[SHARED] Returns an integer that is shared between the server and all clients.
+---
+--- This function will not round decimal values as it actually networks a float internally.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetGlobalInt)
+---@param index string The unique index to identify the global value with.
+---@param default? number The value to return if the global value is not set.
+---@return number # The global value, or the default if the global value is not set.
+function _G.GetGlobalInt(index, default) end
+
+---[CLIENT] Returns the entity the client is using to see from (such as the player itself, the camera, or another entity).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetViewEntity)
+---@return Entity # The view entity.
+function _G.GetViewEntity() end
 
 ---[SHARED AND MENU] Converts a color from [HSL color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a Color.
 ---
@@ -1433,11 +1446,73 @@ function _G.GetGlobalVector(Index, Default) end
 ---@return table # The Color created from the HSL color space.
 function _G.HSLToColor(hue, saturation, value) end
 
----[CLIENT] Returns the entity the client is using to see from (such as the player itself, the camera, or another entity).
+---[MENU] Returns true when the loading panel is active.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetViewEntity)
----@return Entity # The view entity.
-function _G.GetViewEntity() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInLoading)
+---@return boolean # True if loading panel is active.
+function _G.IsInLoading() end
+
+---[MENU] Opens the given URL in a HTML panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GMOD_OpenURLNoOverlay)
+---@param url string The url to open.
+function _G.GMOD_OpenURLNoOverlay(url) end
+
+---[SHARED AND MENU] Determines whether or not the provided console command will be blocked if it's ran through Lua functions, such as Global.RunConsoleCommand or Player:ConCommand.
+---
+--- 		For more info on blocked console commands, check out Blocked_ConCommands.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsConCommandBlocked)
+---@param name string The console command to test.
+---@return boolean # Whether the command will be blocked.
+function _G.IsConCommandBlocked(name) end
+
+---[SHARED AND MENU] Returns whether the passed object is a VMatrix.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ismatrix)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is a VMatrix.
+function _G.ismatrix(variable) end
+
+---[MENU] Returns true if the client is currently playing either a singleplayer or multiplayer game.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInGame)
+---@return boolean # True if we are in a game.
+function _G.IsInGame() end
+
+---[SHARED AND MENU] Returns if the passed object is a boolean.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isbool)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is a boolean.
+function _G.isbool(variable) end
+
+---[SHARED AND MENU] Launches an asynchronous http request with the given parameters.
+---
+--- 		This cannot send or receive multiple headers with the same name.
+--- 		HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
+---
+--- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
+---
+--- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`. (Dedicated servers only)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.HTTP)
+---@param parameters table The request parameters. See Structures/HTTPRequest.
+---
+---@return boolean # `true` if we made a request, `nil` if we failed.
+function _G.HTTP(parameters) end
+
+---[SHARED] Returns if this is the first time this hook was predicted.
+---
+--- This is useful for one-time logic in your SWEPs PrimaryAttack, SecondaryAttack and Reload and other  (to prevent those hooks from being called rapidly in succession). It's also useful in a Move hook for when the client predicts movement.
+---
+--- Visit Prediction for more information about this behavior.
+---
+--- This is already used internally for Entity:EmitSound, Weapon:SendWeaponAnim and Entity:FireBullets, but NOT in  util.Effect.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsFirstTimePredicted)
+---@return boolean # Whether or not this is the first time being predicted.
+function _G.IsFirstTimePredicted() end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is a friend. Returns `true` if the entity name is one of the following:
 --- * `monster_scientist`
@@ -1461,20 +1536,21 @@ function _G.GetViewEntity() end
 ---@return boolean # Is a friend
 function _G.IsFriendEntityName(className) end
 
----[SHARED AND MENU] Launches an asynchronous http request with the given parameters.
+---[SHARED AND MENU] Checks whether or not a game is currently mounted. Uses data given by engine.GetGames.
 ---
---- 		This cannot send or receive multiple headers with the same name.
---- 		HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsMounted)
+---@param game string The game string/app ID to check.
+---@return boolean # True if the game is mounted.
+function _G.IsMounted(game) end
+
+---[SHARED AND MENU] Returns whether the given object does or doesn't have a `metatable` of a color.
 ---
---- 	HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
+--- Engine functions (i.e. those not written in plain Lua) that return color objects do not currently set the color metatable and this function will return false if you use it on them.
 ---
---- 	To enable HTTP-requests to destinations on private networks use Command Line Parameters `-allowlocalhttp`. (Dedicated servers only)
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.HTTP)
----@param parameters table The request parameters. See Structures/HTTPRequest.
----
----@return boolean # `true` if we made a request, `nil` if we failed.
-function _G.HTTP(parameters) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsColor)
+---@param Object any The object to be tested
+---@return boolean # Whether the given object is a color or not
+function _G.IsColor(Object) end
 
 ---[SHARED AND MENU] Returns if the given NPC class name is an enemy. Returns `true` if the entity name is one of the following:
 --- * `monster_alien_grunt`
@@ -1531,48 +1607,20 @@ function _G.HTTP(parameters) end
 ---@return boolean # Is an enemy?
 function _G.IsEnemyEntityName(className) end
 
----[SHARED AND MENU] This function works exactly the same as Global.include both clientside and serverside.
+---[SHARED AND MENU] Returns an iterator function for a for loop, to return ordered key-value pairs from a table.
 ---
---- The only difference is that on the serverside it also calls Global.AddCSLuaFile on the filename, so that it gets sent to the client.
+--- This will only iterate though **numerical** keys, and these must also be **sequential**; starting at 1 with no gaps.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IncludeCS)
----@param filename string The filename of the Lua file you want to include.
----@return any ... # Anything that the executed Lua script returns.
----@deprecated To send the target file to the client simply call AddCSLuaFile() in the target file itself.
-function _G.IncludeCS(filename) end
-
----[MENU] Returns true when the loading panel is active.
+--- For unordered pairs, see Global.pairs.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInLoading)
----@return boolean # True if loading panel is active.
-function _G.IsInLoading() end
-
----[SHARED AND MENU] Returns if the passed object is a boolean.
+--- For pairs sorted by key in alphabetical order, see Global.SortedPairs.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isbool)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a boolean.
-function _G.isbool(variable) end
-
----[SHARED AND MENU] Returns if the passed object is a function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isfunction)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a function.
-function _G.isfunction(variable) end
-
----[MENU] Opens the given URL in a HTML panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GMOD_OpenURLNoOverlay)
----@param url string The url to open.
-function _G.GMOD_OpenURLNoOverlay(url) end
-
----[CLIENT] Returns if the client is timing out, and time since last ping from the server. Similar to the server side Player:IsTimingOut.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetTimeoutInfo)
----@return boolean # Is timing out?
----@return number # Get time since last pinged received.
-function _G.GetTimeoutInfo() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ipairs)
+---@param tab table The table to iterate over.
+---@return function # The iterator function.
+---@return table # The table being iterated over.
+---@return number # The origin index **=0**.
+function _G.ipairs(tab) end
 
 ---[SHARED AND MENU] Executes a Lua script.
 ---
@@ -1591,57 +1639,29 @@ function _G.GetTimeoutInfo() end
 ---@return any ... # Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
----[SHARED AND MENU] Returns whether the passed object is a VMatrix.
+---[SHARED AND MENU] Returns if the passed object is a function.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ismatrix)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isfunction)
 ---@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a VMatrix.
-function _G.ismatrix(variable) end
+---@return boolean # True if the variable is a function.
+function _G.isfunction(variable) end
 
----[SHARED] Returns if this is the first time this hook was predicted.
+---[SHARED AND MENU] Returns if the passed object is an Angle.
 ---
---- This is useful for one-time logic in your SWEPs PrimaryAttack, SecondaryAttack and Reload and other  (to prevent those hooks from being called rapidly in succession). It's also useful in a Move hook for when the client predicts movement.
----
---- Visit Prediction for more information about this behavior.
----
---- This is already used internally for Entity:EmitSound, Weapon:SendWeaponAnim and Entity:FireBullets, but NOT in  util.Effect.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsFirstTimePredicted)
----@return boolean # Whether or not this is the first time being predicted.
-function _G.IsFirstTimePredicted() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isangle)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is an Angle.
+function _G.isangle(variable) end
 
----[SHARED AND MENU] Returns whether the given object does or doesn't have a `metatable` of a color.
+---[SHARED AND MENU] This function works exactly the same as Global.include both clientside and serverside.
 ---
---- Engine functions (i.e. those not written in plain Lua) that return color objects do not currently set the color metatable and this function will return false if you use it on them.
+--- The only difference is that on the serverside it also calls Global.AddCSLuaFile on the filename, so that it gets sent to the client.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsColor)
----@param Object any The object to be tested
----@return boolean # Whether the given object is a color or not
-function _G.IsColor(Object) end
-
----[SHARED AND MENU] Returns an iterator function for a for loop, to return ordered key-value pairs from a table.
----
---- This will only iterate though **numerical** keys, and these must also be **sequential**; starting at 1 with no gaps.
----
---- For unordered pairs, see Global.pairs.
----
---- For pairs sorted by key in alphabetical order, see Global.SortedPairs.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ipairs)
----@param tab table The table to iterate over.
----@return function # The iterator function.
----@return table # The table being iterated over.
----@return number # The origin index **=0**.
-function _G.ipairs(tab) end
-
----[SHARED AND MENU] Determines whether or not the provided console command will be blocked if it's ran through Lua functions, such as Global.RunConsoleCommand or Player:ConCommand.
----
---- 		For more info on blocked console commands, check out Blocked_ConCommands.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsConCommandBlocked)
----@param name string The console command to test.
----@return boolean # Whether the command will be blocked.
-function _G.IsConCommandBlocked(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IncludeCS)
+---@param filename string The filename of the Lua file you want to include.
+---@return any ... # Anything that the executed Lua script returns.
+---@deprecated To send the target file to the client simply call AddCSLuaFile() in the target file itself.
+function _G.IncludeCS(filename) end
 
 ---[SHARED AND MENU] Converts a color from [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a Color.
 ---
@@ -1654,19 +1674,6 @@ function _G.IsConCommandBlocked(name) end
 ---@return table # The Color created from the HSV color space.
 function _G.HSVToColor(hue, saturation, value) end
 
----[SHARED AND MENU] Returns if the passed object is an Angle.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isangle)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is an Angle.
-function _G.isangle(variable) end
-
----[MENU] Returns true if the client is currently playing either a singleplayer or multiplayer game.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsInGame)
----@return boolean # True if we are in a game.
-function _G.IsInGame() end
-
 ---[SHARED AND MENU] Returns if the passed object is an Entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsEntity)
@@ -1674,10 +1681,17 @@ function _G.IsInGame() end
 ---@return boolean # True if the variable is an Entity.
 function _G.isentity(variable) end
 
----[MENU] Loads all Addon Presets and updates the Preset list.
+---[CLIENT AND MENU] Adds workshop related javascript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ListAddonPresets)
-function _G.ListAddonPresets() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Workshop)
+---@param htmlPanel Panel Panel to add javascript functions to.
+function _G.JS_Workshop(htmlPanel) end
+
+---[CLIENT AND MENU] Adds javascript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's motionsensor.IsAvailable function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Utility)
+---@param htmlPanel Panel Panel to add javascript function 'util.MotionSensorAvailable' to.
+function _G.JS_Utility(htmlPanel) end
 
 ---[SHARED AND MENU] Returns whether or not every element within a table is a valid entity
 ---
@@ -1686,11 +1700,67 @@ function _G.ListAddonPresets() end
 ---@return boolean # All entities valid
 function _G.IsTableOfEntitiesValid(table) end
 
+---[MENU] This function is used to get the last map and category to which the map belongs from the cookie saved with Global.SaveLastMap.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadLastMap)
+function _G.LoadLastMap() end
+
+---[MENU] Returns the contents of `addonpresets.txt` located in the `garrysmod/settings` folder. By default, this file stores your addon presets as JSON.
+---
+--- You can use Global.SaveAddonPresets to modify this file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadAddonPresets)
+---@return string # The contents of the file.
+function _G.LoadAddonPresets() end
+
+---[SHARED AND MENU] Returns if the passed object is a Panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ispanel)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is a Panel.
+function _G.ispanel(variable) end
+
+---[SHARED AND MENU] Returns if the passed object is a number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isnumber)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is a number.
+function _G.isnumber(variable) end
+
+---[SHARED AND MENU] Returns point between first and second angle using given fraction and linear interpolation
+--- This function is not meant to be used with constant value in the first argument, if you're dealing with animation! Use a value that changes over time
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LerpAngle)
+---@param ratio number Ratio of progress through values
+---@param angleStart Angle Angle to begin from
+---@param angleEnd Angle Angle to end at
+---@return Angle # angle
+function _G.LerpAngle(ratio, angleStart, angleEnd) end
+
+---[MENU] Joins the server with the specified IP.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JoinServer)
+---@param IP string The IP of the server to join
+function _G.JoinServer(IP) end
+
+---[CLIENT AND MENU] Adds javascript function 'language.Update' to an HTML panel as a method to call Lua's language.GetPhrase function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Language)
+---@param htmlPanel Panel Panel to add javascript function 'language.Update' to.
+function _G.JS_Language(htmlPanel) end
+
 ---[MENU] Callback function for when the client's language changes. Called by the engine.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LanguageChanged)
 ---@param lang string The new language code.
 function _G.LanguageChanged(lang) end
+
+---[SHARED AND MENU] Returns if the passed object is a Vector.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isvector)
+---@param variable any The variable to perform the type check for.
+---@return boolean # True if the variable is a Vector.
+function _G.isvector(variable) end
 
 ---[SHARED AND MENU] Performs a linear interpolation from the start number to the end number.
 ---
@@ -1707,20 +1777,6 @@ function _G.LanguageChanged(lang) end
 ---@return number # The result of the linear interpolation, `from + (to - from) * t`.
 function _G.Lerp(t, from, to) end
 
----[SHARED AND MENU] Checks whether or not a game is currently mounted. Uses data given by engine.GetGames.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsMounted)
----@param game string The game string/app ID to check.
----@return boolean # True if the game is mounted.
-function _G.IsMounted(game) end
-
----[SHARED AND MENU] Returns if the passed object is a Panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ispanel)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a Panel.
-function _G.ispanel(variable) end
-
 ---[SHARED AND MENU] Returns if the passed object is a table.
 --- 	Will return TRUE for variables of type Color
 ---
@@ -1729,13 +1785,6 @@ function _G.ispanel(variable) end
 ---@return boolean # True if the variable is a table.
 function _G.istable(variable) end
 
----[SHARED AND MENU] Returns if the passed object is a number.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isnumber)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a number.
-function _G.isnumber(variable) end
-
 ---[SHARED AND MENU] Returns if the passed object is a string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isstring)
@@ -1743,11 +1792,27 @@ function _G.isnumber(variable) end
 ---@return boolean # True if the variable is a string.
 function _G.isstring(variable) end
 
----[CLIENT AND MENU] Adds javascript function 'language.Update' to an HTML panel as a method to call Lua's language.GetPhrase function.
+---[MENU] Checks if the given server data is blacklisted or not.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Language)
----@param htmlPanel Panel Panel to add javascript function 'language.Update' to.
-function _G.JS_Language(htmlPanel) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsServerBlacklisted)
+---@param address string Server ip. can end with *
+---@param hostname string Server name
+---@param description string description to check
+---@param gm string Gamemode name
+---@param map string Map name
+---@return string # Returns the reason why the server is blacklisted or nil if the server is not blacklisted.
+function _G.IsServerBlacklisted(address, hostname, description, gm, map) end
+
+---[SHARED AND MENU] Returns whether an object is valid or not. (Such as Entity, Panels, custom table objects and more).
+---
+--- Checks that an object is not nil, has an `IsValid` method and if this method returns `true`. If the object has no `IsValid` method, it will return `false`.
+---
+--- Due to vehicles being technically valid the moment they're spawned, also use Vehicle:IsValidVehicle to make sure they're fully initialized.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsValid)
+---@param toBeValidated any The table or object to be validated.
+---@return boolean # True if the object is valid.
+function _G.IsValid(toBeValidated) end
 
 ---[SHARED AND MENU] Returns whether or not a model is useless by checking that the file path is that of a proper model.
 ---
@@ -1774,39 +1839,6 @@ function _G.JS_Language(htmlPanel) end
 ---@return boolean # Whether or not the model is useless
 function _G.IsUselessModel(modelName) end
 
----[CLIENT AND MENU] Adds javascript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's motionsensor.IsAvailable function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Utility)
----@param htmlPanel Panel Panel to add javascript function 'util.MotionSensorAvailable' to.
-function _G.JS_Utility(htmlPanel) end
-
----[CLIENT AND MENU] Adds workshop related javascript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JS_Workshop)
----@param htmlPanel Panel Panel to add javascript functions to.
-function _G.JS_Workshop(htmlPanel) end
-
----[SHARED AND MENU] Returns point between first and second angle using given fraction and linear interpolation
---- This function is not meant to be used with constant value in the first argument, if you're dealing with animation! Use a value that changes over time
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LerpAngle)
----@param ratio number Ratio of progress through values
----@param angleStart Angle Angle to begin from
----@param angleEnd Angle Angle to end at
----@return Angle # angle
-function _G.LerpAngle(ratio, angleStart, angleEnd) end
-
----[SHARED AND MENU] Returns whether an object is valid or not. (Such as Entity, Panels, custom table objects and more).
----
---- Checks that an object is not nil, has an `IsValid` method and if this method returns `true`. If the object has no `IsValid` method, it will return `false`.
----
---- Due to vehicles being technically valid the moment they're spawned, also use Vehicle:IsValidVehicle to make sure they're fully initialized.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsValid)
----@param toBeValidated any The table or object to be validated.
----@return boolean # True if the object is valid.
-function _G.IsValid(toBeValidated) end
-
 ---[SHARED AND MENU] Linear interpolation between two vectors. It is commonly used to smooth movement between two vectors
 --- This function is not meant to be used with constant value in the first argument, if you're dealing with animation! Use a value that changes over time
 ---
@@ -1817,37 +1849,10 @@ function _G.IsValid(toBeValidated) end
 ---@return Vector # The lerped vector.
 function _G.LerpVector(fraction, from, to) end
 
----[MENU] Checks if the given server data is blacklisted or not.
+---[MENU] Loads all Addon Presets and updates the Preset list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.IsServerBlacklisted)
----@param address string Server ip. can end with *
----@param hostname string Server name
----@param description string description to check
----@param gm string Gamemode name
----@param map string Map name
----@return string # Returns the reason why the server is blacklisted or nil if the server is not blacklisted.
-function _G.IsServerBlacklisted(address, hostname, description, gm, map) end
-
----[MENU] Joins the server with the specified IP.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.JoinServer)
----@param IP string The IP of the server to join
-function _G.JoinServer(IP) end
-
----[MENU] Returns the contents of `addonpresets.txt` located in the `garrysmod/settings` folder. By default, this file stores your addon presets as JSON.
----
---- You can use Global.SaveAddonPresets to modify this file.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadAddonPresets)
----@return string # The contents of the file.
-function _G.LoadAddonPresets() end
-
----[SHARED AND MENU] Returns if the passed object is a Vector.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.isvector)
----@param variable any The variable to perform the type check for.
----@return boolean # True if the variable is a Vector.
-function _G.isvector(variable) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ListAddonPresets)
+function _G.ListAddonPresets() end
 
 ---[CLIENT AND MENU] Convenience function that creates a DLabel, sets the text, and returns it
 ---
@@ -1857,36 +1862,17 @@ function _G.isvector(variable) end
 ---@return Panel # The created DLabel
 function _G.Label(text, parent) end
 
----[MENU] This function is used to get the last map and category to which the map belongs from the cookie saved with Global.SaveLastMap.
+---[MENU] Internally uses steamworks.FileInfo to fetch the data.
+--- 		This function retrieves the Addon data and passes it onto JS(JavaScript)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadLastMap)
-function _G.LoadLastMap() end
-
----[CLIENT] Returns named color defined in resource/ClientScheme.res.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NamedColor)
----@param name string Name of color
----@return table # A Color or nil
-function _G.NamedColor(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MenuGetAddonData)
+---@param workshopItemID string The ID of Steam Workshop item.
+function _G.MenuGetAddonData(workshopItemID) end
 
 ---[MENU] Updates the News List
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadNewsList)
 function _G.LoadNewsList() end
-
----[CLIENT] Returns the player object of the current client.
----
---- LocalPlayer() will return NULL until all entities have been initialized. See GM:InitPostEntity.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LocalPlayer)
----@return Player # The player object representing the client.
-function _G.LocalPlayer() end
-
----[CLIENT] Loads all preset settings for the presets and returns them in a table
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadPresets)
----@return table # Preset data
-function _G.LoadPresets() end
 
 ---[CLIENT AND MENU] Returns a localisation for the given token, if none is found it will return the default (second) parameter.
 ---
@@ -1895,24 +1881,63 @@ function _G.LoadPresets() end
 ---@param default string The default value to be returned if no translation was found.
 function _G.Localize(localisationToken, default) end
 
----[SHARED] Works exactly like Global.Msg except that, if called on the server, will print to all players consoles plus the server console.
+---[CLIENT] Returns the amount of skins the specified model has.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgAll)
----@param ... any List of values to print.
-function _G.MsgAll(...) end
+--- See also Entity:SkinCount if you have an entity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NumModelSkins)
+---@param modelName string Model to return amount of skins of
+---@return number # Amount of skins
+function _G.NumModelSkins(modelName) end
 
----[MENU] Internally uses steamworks.FileInfo to fetch the data.
---- 		This function retrieves the Addon data and passes it onto JS(JavaScript)
+---[SHARED AND MENU] Writes every given argument to the console.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MenuGetAddonData)
----@param workshopItemID string The ID of Steam Workshop item.
-function _G.MenuGetAddonData(workshopItemID) end
+--- Automatically attempts to convert each argument to a string. (See Global.tostring)
+---
+--- Unlike Global.print, arguments are not separated by anything. They are simply concatenated.
+---
+--- Additionally, a newline isn't added automatically to the end, so subsequent Msg or print operations will continue the same line of text in the console. See Global.MsgN for a version that does add a newline.
+---
+--- The text is blue on the server, orange on the client, and green on the menu:
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Msg)
+---@param ... any List of values to print.
+function _G.Msg(...) end
+
+---[CLIENT] Returns named color defined in resource/ClientScheme.res.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NamedColor)
+---@param name string Name of color
+---@return table # A Color or nil
+function _G.NamedColor(name) end
+
+---[SHARED AND MENU] Runs util.PrecacheModel and returns the string.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Model)
+---@param model string The model to precache.
+---@return string # The same string entered as an argument.
+function _G.Model(model) end
 
 ---[MENU] Returns the number of files needed from the server you are currently joining.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NumDownloadables)
 ---@return number # The number of downloadables
 function _G.NumDownloadables() end
+
+---[SHARED AND MENU] Same as Global.print, except it concatinates the arguments without inserting any whitespace in between them.
+---
+--- See also Global.Msg, which doesn't add a newline (`"\n"`) at the end.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgN)
+---@param ... any List of values to print. They can be of any type and will be converted to strings with Global.tostring.
+function _G.MsgN(...) end
+
+---[CLIENT] Returns a new static mesh object.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Mesh)
+---@param mat? IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
+---@return IMesh # The created object.
+function _G.Mesh(mat) end
 
 ---[SHARED AND MENU] Creates a table with the specified module name and sets the function environment for said table.
 ---
@@ -1923,25 +1948,17 @@ function _G.NumDownloadables() end
 ---@param ... any Calls each function passed with the new table as an argument.
 function _G.module(name, ...) end
 
----[CLIENT] Returns a new static mesh object.
+---[CLIENT] Called by the engine when a model has been loaded. Caches model information with the sql.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Mesh)
----@param mat? IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
----@return IMesh # The created object.
-function _G.Mesh(mat) end
-
----[SHARED AND MENU] Just like Global.Msg, except it can also print colored text, just like chat.AddText.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgC)
----@param ... any Values to print. If you put in a color, all text after that color will be printed in that color.
-function _G.MsgC(...) end
-
----[SHARED AND MENU] Runs util.PrecacheModel and returns the string.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Model)
----@param model string The model to precache.
----@return string # The same string entered as an argument.
-function _G.Model(model) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OnModelLoaded)
+---@param modelName string Name of the model.
+---@param numPostParams number Number of pose parameters the model has.
+---@param numSeq number Number of sequences the model has.
+---@param numAttachments number Number of attachments the model has.
+---@param numBoneControllers number Number of bone controllers the model has.
+---@param numSkins number Number of skins that the model has.
+---@param size number Size of the model.
+function _G.OnModelLoaded(modelName, numPostParams, numSeq, numAttachments, numBoneControllers, numSkins, size) end
 
 ---[SHARED] Translates the specified position and angle from the specified local coordinate system into worldspace coordinates.
 ---
@@ -1958,22 +1975,20 @@ function _G.Model(model) end
 ---@return Angle # The world angles of the supplied local angle.
 function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 
----[CLIENT] Returns the amount of skins the specified model has.
+---[CLIENT] Loads all preset settings for the presets and returns them in a table
 ---
---- See also Entity:SkinCount if you have an entity.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.NumModelSkins)
----@param modelName string Model to return amount of skins of
----@return number # Amount of skins
-function _G.NumModelSkins(modelName) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LoadPresets)
+---@return table # Preset data
+function _G.LoadPresets() end
 
----[SHARED AND MENU] Same as Global.print, except it concatinates the arguments without inserting any whitespace in between them.
+---[SHARED] Returns a VMatrix object, a 4x4 matrix.
 ---
---- See also Global.Msg, which doesn't add a newline (`"\n"`) at the end.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Matrix)
+---@param data? table Initial data to initialize the matrix with. Leave empty to initialize an identity matrix. See examples for usage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgN)
----@param ... any List of values to print. They can be of any type and will be converted to strings with Global.tostring.
-function _G.MsgN(...) end
+--- Can be a VMatrix to copy its data.
+---@return VMatrix # New matrix.
+function _G.Matrix(data) end
 
 ---[SHARED AND MENU] Returns a new userdata object.
 ---
@@ -1982,19 +1997,11 @@ function _G.MsgN(...) end
 ---@return userdata # The newly created userdata.
 function _G.newproxy(addMetatable) end
 
----[SHARED AND MENU] Writes every given argument to the console.
+---[SHARED AND MENU] Just like Global.Msg, except it can also print colored text, just like chat.AddText.
 ---
---- Automatically attempts to convert each argument to a string. (See Global.tostring)
----
---- Unlike Global.print, arguments are not separated by anything. They are simply concatenated.
----
---- Additionally, a newline isn't added automatically to the end, so subsequent Msg or print operations will continue the same line of text in the console. See Global.MsgN for a version that does add a newline.
----
---- The text is blue on the server, orange on the client, and green on the menu:
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Msg)
----@param ... any List of values to print.
-function _G.Msg(...) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgC)
+---@param ... any Values to print. If you put in a color, all text after that color will be printed in that color.
+function _G.MsgC(...) end
 
 ---[SHARED AND MENU] Either returns the material with the given name, or loads the material interpreting the first argument as the path.
 ---
@@ -2030,40 +2037,24 @@ function _G.Material(materialName, pngParameters) end
 ---@return any # The value associated with that key. If the previous key was the last key in the table, this will be nil.
 function _G.next(tab, prevKey) end
 
----[SHARED] Returns a VMatrix object, a 4x4 matrix.
+---[SHARED] Works exactly like Global.Msg except that, if called on the server, will print to all players consoles plus the server console.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Matrix)
----@param data? table Initial data to initialize the matrix with. Leave empty to initialize an identity matrix. See examples for usage.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.MsgAll)
+---@param ... any List of values to print.
+function _G.MsgAll(...) end
+
+---[CLIENT] Returns the player object of the current client.
 ---
---- Can be a VMatrix to copy its data.
----@return VMatrix # New matrix.
-function _G.Matrix(data) end
+--- LocalPlayer() will return NULL until all entities have been initialized. See GM:InitPostEntity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.LocalPlayer)
+---@return Player # The player object representing the client.
+function _G.LocalPlayer() end
 
 ---[MENU] Opens the Problems Panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OpenProblemsPanel)
 function _G.OpenProblemsPanel() end
-
----[SERVER] Precache a sentence group in a sentences.txt definition file.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheSentenceGroup)
----@param group string The group to precache.
-function _G.PrecacheSentenceGroup(group) end
-
----[MENU] Opens a folder with the given name in the garrysmod folder using the operating system's file browser.
----
---- This does not work on OSX or Linux.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OpenFolder)
----@param folder string The subdirectory to open in the garrysmod folder.
-function _G.OpenFolder(folder) end
-
----[SHARED AND MENU] Calls game.AddParticles and returns given string.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Particle)
----@param file string The particle file.
----@return string # The particle file.
-function _G.Particle(file) end
 
 ---[SHARED AND MENU] Recursively prints the contents of a table to the console.
 ---
@@ -2079,6 +2070,20 @@ function _G.PrintTable(tableToPrint, indent, done) end
 ---@param filename string The path to the custom sentences.txt.
 function _G.PrecacheSentenceFile(filename) end
 
+---[SERVER] Precache a sentence group in a sentences.txt definition file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheSentenceGroup)
+---@param group string The group to precache.
+function _G.PrecacheSentenceGroup(group) end
+
+---[MENU] Opens a folder with the given name in the garrysmod folder using the operating system's file browser.
+---
+--- This does not work on OSX or Linux.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OpenFolder)
+---@param folder string The subdirectory to open in the garrysmod folder.
+function _G.OpenFolder(folder) end
+
 ---[SHARED] Precaches a particle system with the specified name. The particle system must come from a file that is loaded with game.AddParticles beforehand.
 ---
 --- When used on the server, it automatically precaches the particle on client.
@@ -2088,6 +2093,57 @@ function _G.PrecacheSentenceFile(filename) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem)
 ---@param particleSystemName string The name of the particle system.
 function _G.PrecacheParticleSystem(particleSystemName) end
+
+---[SHARED AND MENU] Writes every given argument to the console.
+--- Automatically attempts to convert each argument to a string. (See Global.tostring)
+---
+--- Seperates lines with a line break (`"\n"`)
+---
+--- Separates arguments with a tab character (`"\t"`).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.print)
+---@param ... any List of values to print.
+function _G.print(...) end
+
+---[SERVER] Precaches a scene file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheScene)
+---@param scene string Path to the scene file to precache.
+function _G.PrecacheScene(scene) end
+
+---[SHARED AND MENU] Calls game.AddParticles and returns given string.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Particle)
+---@param file string The particle file.
+---@return string # The particle file.
+function _G.Particle(file) end
+
+---[CLIENT] Creates a new ProjectedTexture.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProjectedTexture)
+---@return ProjectedTexture # Newly created projected texture.
+function _G.ProjectedTexture() end
+
+---[SERVER] Displays a message in the chat, console, or center of screen of every player.
+---
+--- This uses the archaic user message system (umsg) and hence is limited to 255 characters.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrintMessage)
+---@param type number Which type of message should be sent to the players (see Enums/HUD)
+---@param message string Message to be sent to the players
+function _G.PrintMessage(type, message) end
+
+---[SHARED] Returns the player with the matching Player:UserID.
+---
+--- For a function that returns a player based on their Entity:EntIndex, see Global.Entity.
+---
+---
+--- For a function that returns a player based on their connection ID, see player.GetByID.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Player)
+---@param playerIndex number The player index.
+---@return Player # The retrieved player.
+function _G.Player(playerIndex) end
 
 ---[SHARED] Creates a particle effect with specialized parameters.
 ---
@@ -2099,61 +2155,6 @@ function _G.PrecacheParticleSystem(particleSystemName) end
 ---@param entity Entity The entity to be used in the way specified by the attachType.
 ---@param attachmentID number The id of the attachment to be used in the way specified by the attachType.
 function _G.ParticleEffectAttach(particleName, attachType, entity, attachmentID) end
-
----[CLIENT] Creates a new CLuaEmitter.
----
---- Do not forget to delete the emitter with CLuaEmitter:Finish once you are done with it
---- There is a limit of 4097 emitters that can be active at once, exceeding this limit will throw a non-halting error in console!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ParticleEmitter)
----@param position Vector The start position of the emitter.
----
---- This is only used to determine particle drawing order for translucent particles.
----@param use3D? boolean Whenever to render the particles in 2D or 3D mode. Supplying "true" will enable 3D (non-billboarded), otherwise it will default to 2D.
----@return CLuaEmitter # The new particle emitter.
-function _G.ParticleEmitter(position, use3D) end
-
----[CLIENT] Called by the engine when a model has been loaded. Caches model information with the sql.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OnModelLoaded)
----@param modelName string Name of the model.
----@param numPostParams number Number of pose parameters the model has.
----@param numSeq number Number of sequences the model has.
----@param numAttachments number Number of attachments the model has.
----@param numBoneControllers number Number of bone controllers the model has.
----@param numSkins number Number of skins that the model has.
----@param size number Size of the model.
-function _G.OnModelLoaded(modelName, numPostParams, numSeq, numAttachments, numBoneControllers, numSkins, size) end
-
----[SHARED AND MENU] Returns an iterator function(Global.next) for a for loop that will return the values of the specified table in an arbitrary order.
----
---- * For alphabetical **key** order use Global.SortedPairs.
---- * For alphabetical **value** order use Global.SortedPairsByValue.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.pairs)
----@param tab table The table to iterate over.
----@return function # The iterator (Global.next).
----@return table # The table being iterated over.
----@return any # **nil** (for the constructor).
-function _G.pairs(tab) end
-
----[SERVER] Displays a message in the chat, console, or center of screen of every player.
----
---- This uses the archaic user message system (umsg) and hence is limited to 255 characters.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrintMessage)
----@param type number Which type of message should be sent to the players (see Enums/HUD)
----@param message string Message to be sent to the players
-function _G.PrintMessage(type, message) end
-
----[SHARED AND MENU] Modifies the given vectors so that all of vector2's axis are larger than vector1's by switching them around. Also known as ordering vectors.
----
---- This function will irreversibly modify the given vectors
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OrderVectors)
----@param vector1 Vector Bounding box min resultant
----@param vector2 Vector Bounding box max resultant
-function _G.OrderVectors(vector1, vector2) end
 
 ---[SHARED] Creates a particle effect. See also Global.CreateParticleSystem.
 ---
@@ -2177,16 +2178,56 @@ function _G.ParticleEffect(particleName, position, angles, parent) end
 ---@return table # Table of information of the view which can be used for rendering
 function _G.PositionSpawnIcon(model, position, noAngles) end
 
----[SHARED AND MENU] Writes every given argument to the console.
---- Automatically attempts to convert each argument to a string. (See Global.tostring)
+---[CLIENT] Creates a new CLuaEmitter.
 ---
---- Seperates lines with a line break (`"\n"`)
+--- Do not forget to delete the emitter with CLuaEmitter:Finish once you are done with it
+--- There is a limit of 4097 emitters that can be active at once, exceeding this limit will throw a non-halting error in console!
 ---
---- Separates arguments with a tab character (`"\t"`).
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ParticleEmitter)
+---@param position Vector The start position of the emitter.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.print)
----@param ... any List of values to print.
-function _G.print(...) end
+--- This is only used to determine particle drawing order for translucent particles.
+---@param use3D? boolean Whenever to render the particles in 2D or 3D mode. Supplying "true" will enable 3D (non-billboarded), otherwise it will default to 2D.
+---@return CLuaEmitter # The new particle emitter.
+function _G.ParticleEmitter(position, use3D) end
+
+---[SHARED] Runs a function without stopping the whole script on error.
+---
+--- This function is similar to Global.pcall and Global.xpcall except the errors are still printed and sent to the error handler (i.e. sent to server console if clientside and GM:OnLuaError called).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProtectedCall)
+---@param func function Function to run
+---@return boolean # Whether the function executed successfully or not
+function _G.ProtectedCall(func) end
+
+---[SHARED AND MENU] Returns an iterator function(Global.next) for a for loop that will return the values of the specified table in an arbitrary order.
+---
+--- * For alphabetical **key** order use Global.SortedPairs.
+--- * For alphabetical **value** order use Global.SortedPairsByValue.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.pairs)
+---@param tab table The table to iterate over.
+---@return function # The iterator (Global.next).
+---@return table # The table being iterated over.
+---@return any # **nil** (for the constructor).
+function _G.pairs(tab) end
+
+---[SHARED AND MENU] Modifies the given vectors so that all of vector2's axis are larger than vector1's by switching them around. Also known as ordering vectors.
+---
+--- This function will irreversibly modify the given vectors
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.OrderVectors)
+---@param vector1 Vector Bounding box min resultant
+---@param vector2 Vector Bounding box max resultant
+function _G.OrderVectors(vector1, vector2) end
+
+---[SERVER] Creates a path for the bot to follow
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Path)
+---@param type string The name of the path to create.
+--- This is going to be "Follow" or "Chase" right now.
+---@return PathFollower # The path
+function _G.Path(type) end
 
 ---[SHARED AND MENU] Calls a function and catches an error that can be thrown while the execution of the call.
 ---
@@ -2201,43 +2242,89 @@ function _G.print(...) end
 ---@return any ... # If an error occurred, this will be a string containing the error message. Otherwise, this will be the return values of the function passed in.
 function _G.pcall(func, ...) end
 
----[CLIENT] Creates a new ProjectedTexture.
+---[CLIENT AND MENU] Does the removing of the tooltip panel. Called by Global.EndTooltip.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProjectedTexture)
----@return ProjectedTexture # Newly created projected texture.
-function _G.ProjectedTexture() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RemoveTooltip)
+function _G.RemoveTooltip() end
 
----[SERVER] Precaches a scene file.
+---[MENU] Adds a frame to the currently recording demo.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.PrecacheScene)
----@param scene string Path to the scene file to precache.
-function _G.PrecacheScene(scene) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RecordDemoFrame)
+function _G.RecordDemoFrame() end
 
----[SERVER] Creates a path for the bot to follow
+---[CLIENT AND MENU] Saves position of your cursor on screen. You can restore it by using
+--- Global.RestoreCursorPosition.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Path)
----@param type string The name of the path to create.
---- This is going to be "Follow" or "Chase" right now.
----@return PathFollower # The path
-function _G.Path(type) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RememberCursorPosition)
+function _G.RememberCursorPosition() end
 
----[SHARED] Returns the player with the matching Player:UserID.
+---[CLIENT] Returns the real frame-time which is unaffected by host_timescale. To be used for GUI effects (for example)
+--- 		The returned number is clamped between `0` and `0.1`.
 ---
---- For a function that returns a player based on their Entity:EntIndex, see Global.Entity.
----
----
---- For a function that returns a player based on their connection ID, see player.GetByID.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Player)
----@param playerIndex number The player index.
----@return Player # The retrieved player.
-function _G.Player(playerIndex) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RealFrameTime)
+---@return number # Real frame time
+function _G.RealFrameTime() end
 
----[CLIENT] Returns the angle that the clients view is being rendered at
+---[MENU] Refreshes all Addon Conflicts after 1 Second. Internally uses Global.FireAddonConflicts
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RenderAngles)
----@return Angle # Render Angles
-function _G.RenderAngles() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RefreshAddonConflicts)
+function _G.RefreshAddonConflicts() end
+
+---[SERVER] Creates a new CRecipientFilter.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RecipientFilter)
+---@param unreliable? boolean If set to true, makes the filter unreliable.
+---
+--- This means, when sending over the network in cases like Global.CreateSound (and its subsequent updates), the message is not guaranteed to reach all clients.
+---@return CRecipientFilter # The new created recipient filter.
+function _G.RecipientFilter(unreliable) end
+
+---[SHARED AND MENU] First tries to load a binary module with the given name, if unsuccessful, it tries to load a Lua module with the given name.
+---
+--- Running this function with Global.pcall or Global.xpcall will still print an error that counts towards sv_kickerrornum.
+--- This function will try to load local client file if `sv_allowcslua` is set to `1`
+---
+--- 	Binary modules can't be installed as part of an addon and have to be put directly into ``garrysmod/lua/bin/`` to be detected.
+--- 	This is a safety measure, because modules can be malicious and harm the system.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.require)
+---@param name string The name of the module to be loaded.
+function _G.require(name) end
+
+---[CLIENT] Renders the stereoscopic post-process effect
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RenderStereoscopy)
+---@param viewOrigin Vector Origin to render the effect at
+---@param viewAngles Angle Angles to render the effect at
+function _G.RenderStereoscopy(viewOrigin, viewAngles) end
+
+---[MENU] Called by permissions.AskToConnect
+--- 		If the server has the permission "connect" granted, it will instantly connect you to the server.
+--- If the permission is not granted it will, it opens a confirmation window to connect to the server.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RequestConnectToServer)
+---@param serverip string The server ip to connect to
+function _G.RequestConnectToServer(serverip) end
+
+---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in random order
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RandomPairs)
+---@param table table Table to create iterator for
+---@param descending? boolean Whether the iterator should iterate descending or not
+---@return function # Iterator function
+function _G.RandomPairs(table, descending) end
+
+---[CLIENT AND MENU] Registers a Derma element to be closed the next time Global.CloseDermaMenus is called
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RegisterDermaMenuForClose)
+---@param menu Panel Menu to be registered for closure
+function _G.RegisterDermaMenuForClose(menu) end
+
+---[MENU] Opens a confirmation window to open the url.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RequestOpenURL)
+---@param url string The Website URL to open.
+function _G.RequestOpenURL(url) end
 
 ---[CLIENT] Renders the Super Depth of Field post-process effect
 ---
@@ -2246,6 +2333,28 @@ function _G.RenderAngles() end
 ---@param viewAngles Angle Angles to render the effect at
 ---@param viewFOV number Field of View to render the effect at
 function _G.RenderSuperDoF(viewOrigin, viewAngles, viewFOV) end
+
+---[SHARED AND MENU] Compares the two values without calling their __eq operator.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawequal)
+---@param value1 any The first value to compare.
+---@param value2 any The second value to compare.
+---@return boolean # Whether or not the two values are equal.
+function _G.rawequal(value1, value2) end
+
+---[CLIENT] Returns the angle that the clients view is being rendered at
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RenderAngles)
+---@return Angle # Render Angles
+function _G.RenderAngles() end
+
+---[SHARED AND MENU] Gets the value with the specified key from the table without calling the __index method.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawget)
+---@param table table Table to get the value from.
+---@param index any The index to get the value from.
+---@return any # The value.
+function _G.rawget(table, index) end
 
 ---[SHARED] Returns the uptime of the game/server in seconds (to at least **4** decimal places). This value updates itself once every time the realm thinks. For servers, this is the server tickrate. For clients, its their current FPS.
 ---
@@ -2263,78 +2372,11 @@ function _G.RenderSuperDoF(viewOrigin, viewAngles, viewFOV) end
 ---@return number # Uptime of the game/server.
 function _G.RealTime() end
 
----[MENU] Adds a frame to the currently recording demo.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RecordDemoFrame)
-function _G.RecordDemoFrame() end
-
----[CLIENT AND MENU] Does the removing of the tooltip panel. Called by Global.EndTooltip.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RemoveTooltip)
-function _G.RemoveTooltip() end
-
 ---[MENU] Opens a confirmation window to grant the requested permission.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RequestPermission)
 ---@param permission string The permission to ask
 function _G.RequestPermission(permission) end
-
----[CLIENT AND MENU] Saves position of your cursor on screen. You can restore it by using
---- Global.RestoreCursorPosition.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RememberCursorPosition)
-function _G.RememberCursorPosition() end
-
----[SHARED] Runs a function without stopping the whole script on error.
----
---- This function is similar to Global.pcall and Global.xpcall except the errors are still printed and sent to the error handler (i.e. sent to server console if clientside and GM:OnLuaError called).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProtectedCall)
----@param func function Function to run
----@return boolean # Whether the function executed successfully or not
-function _G.ProtectedCall(func) end
-
----[MENU] Refreshes all Addon Conflicts after 1 Second. Internally uses Global.FireAddonConflicts
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RefreshAddonConflicts)
-function _G.RefreshAddonConflicts() end
-
----[CLIENT] Renders the stereoscopic post-process effect
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RenderStereoscopy)
----@param viewOrigin Vector Origin to render the effect at
----@param viewAngles Angle Angles to render the effect at
-function _G.RenderStereoscopy(viewOrigin, viewAngles) end
-
----[SHARED AND MENU] Compares the two values without calling their __eq operator.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawequal)
----@param value1 any The first value to compare.
----@param value2 any The second value to compare.
----@return boolean # Whether or not the two values are equal.
-function _G.rawequal(value1, value2) end
-
----[SERVER] Creates a new CRecipientFilter.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RecipientFilter)
----@param unreliable? boolean If set to true, makes the filter unreliable.
----
---- This means, when sending over the network in cases like Global.CreateSound (and its subsequent updates), the message is not guaranteed to reach all clients.
----@return CRecipientFilter # The new created recipient filter.
-function _G.RecipientFilter(unreliable) end
-
----[CLIENT] Returns the real frame-time which is unaffected by host_timescale. To be used for GUI effects (for example)
---- 		The returned number is clamped between `0` and `0.1`.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RealFrameTime)
----@return number # Real frame time
-function _G.RealFrameTime() end
-
----[MENU] Opens a confirmation window to open the url.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RequestOpenURL)
----@param url string The Website URL to open.
-function _G.RequestOpenURL(url) end
 
 ---[SHARED AND MENU] Sets the value with the specified key from the table without calling the __newindex method.
 ---
@@ -2343,48 +2385,6 @@ function _G.RequestOpenURL(url) end
 ---@param index any The index to get the value from.
 ---@param value any The value to set for the specified key.
 function _G.rawset(table, index, value) end
-
----[SHARED AND MENU] First tries to load a binary module with the given name, if unsuccessful, it tries to load a Lua module with the given name.
----
---- Running this function with Global.pcall or Global.xpcall will still print an error that counts towards sv_kickerrornum.
---- This function will try to load local client file if `sv_allowcslua` is set to `1`
----
---- 	Binary modules can't be installed as part of an addon and have to be put directly into ``garrysmod/lua/bin/`` to be detected.
---- 	This is a safety measure, because modules can be malicious and harm the system.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.require)
----@param name string The name of the module to be loaded.
-function _G.require(name) end
-
----[SHARED AND MENU] Gets the value with the specified key from the table without calling the __index method.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.rawget)
----@param table table Table to get the value from.
----@param index any The index to get the value from.
----@return any # The value.
-function _G.rawget(table, index) end
-
----[CLIENT AND MENU] Registers a Derma element to be closed the next time Global.CloseDermaMenus is called
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RegisterDermaMenuForClose)
----@param menu Panel Menu to be registered for closure
-function _G.RegisterDermaMenuForClose(menu) end
-
----[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in random order
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RandomPairs)
----@param table table Table to create iterator for
----@param descending? boolean Whether the iterator should iterate descending or not
----@return function # Iterator function
-function _G.RandomPairs(table, descending) end
-
----[MENU] Called by permissions.AskToConnect
---- 		If the server has the permission "connect" granted, it will instantly connect you to the server.
---- If the permission is not granted it will, it opens a confirmation window to connect to the server.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RequestConnectToServer)
----@param serverip string The server ip to connect to
-function _G.RequestConnectToServer(serverip) end
 
 ---[CLIENT] Renders a Depth of Field effect
 ---
@@ -2405,31 +2405,27 @@ function _G.RenderDoF(origin, angle, usableFocusPoint, angleSize, radialSteps, p
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RestoreCursorPosition)
 function _G.RestoreCursorPosition() end
 
+---[CLIENT] Returns a number based on the `size` argument and players' screen height. The height is scaled in relation to `640x480` resolution.  This function is primarily used for scaling font sizes.
+---
+--- See Global.ScreenScale for a function that scales from width.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScreenScaleH)
+---@param size number The number you want to scale.
+---@return number # The scaled number based on your screen's height.
+function _G.ScreenScaleH(size) end
+
 ---[CLIENT AND MENU] Adds the given string to the computers clipboard, which can then be pasted in or outside of GMod with Ctrl + V.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetClipboardText)
 ---@param text string The text to add to the clipboard.
 function _G.SetClipboardText(text) end
 
----[SHARED AND MENU] Removes the given entity unless it is a player or the world entity
+---[SHARED] Returns approximate duration of a sentence by name. See Global.EmitSentence.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity)
----@param ent Entity Entity to safely remove.
-function _G.SafeRemoveEntity(ent) end
-
----[SHARED AND MENU] Alias of Global.RunString.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunStringEx)
----@deprecated Use Global.RunString instead.
-function _G.RunStringEx() end
-
----[SERVER] Prints `ServerLog: PARAM` without a newline, to the server log and console.
----
---- As of June 2022, if `sv_logecho` is set to `0` (defaults to `1`) the message will not print to console and will only be written to the server's log file.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ServerLog)
----@param parameter string The value to be printed to console.
-function _G.ServerLog(parameter) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SentenceDuration)
+---@param name string The sentence name.
+---@return number # The approximate duration.
+function _G.SentenceDuration(name) end
 
 ---[CLIENT] Returns a number based on the `size` argument and the players' screen width. The width is scaled in relation to `640x480` resolution.  This function is primarily used for scaling font sizes.
 ---
@@ -2440,42 +2436,32 @@ function _G.ServerLog(parameter) end
 ---@return number # The scaled number based on your screen's width
 function _G.ScreenScale(size) end
 
----[SHARED AND MENU] Removes entity after delay using Global.SafeRemoveEntity
+---[CLIENT AND MENU] Gets the width of the game's window (in pixels).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntityDelayed)
----@param entity Entity Entity to be removed
----@param delay number Delay for entity removal in seconds
-function _G.SafeRemoveEntityDelayed(entity, delay) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrW)
+---@return number # The width of the game's window in pixels
+function _G.ScrW() end
 
----[CLIENT AND MENU] Gets the height of the game's window (in pixels).
+---[SHARED AND MENU] Alias of Global.RunString.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrH)
----@return number # The height of the game's window in pixels
-function _G.ScrH() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunStringEx)
+---@deprecated Use Global.RunString instead.
+function _G.RunStringEx() end
 
----[MENU] Sets the content of `addonpresets.txt` located in the `garrysmod/settings` folder. By default, this file stores your addon presets as JSON.
+---[SHARED] Defines an angle to be automatically networked to clients
 ---
---- You can use Global.LoadAddonPresets to retrieve the data in this file.
+--- Running this function clientside will only set it clientside for the client it is called on!
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveAddonPresets)
----@param JSON string The new contents of the file.
-function _G.SaveAddonPresets(JSON) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Angle)
+---@param index any Index to identify the global angle with
+---@param angle Angle Angle to be networked
+function _G.SetGlobal2Angle(index, angle) end
 
----[SHARED AND MENU] Executes the given console command with the parameters.
+---[CLIENT] Overwrites all presets with the supplied table. Used by the presets for preset saving
 ---
---- Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand)
----@param command string The command to be executed.
----@param ... any The arguments. Note, that unlike Player:ConCommand, you must pass each argument as a new string, not separating them with a space.
-function _G.RunConsoleCommand(command, ...) end
-
----[MENU] This function is used to save the last map and category to which the map belongs as a .
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveLastMap)
----@param map string The name of the map.
----@param category string The name of the category to which this map belongs.
-function _G.SaveLastMap(map, category) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SavePresets)
+---@param presets table Presets to be saved
+function _G.SavePresets(presets) end
 
 ---[MENU] Runs a menu command. Equivalent to Global.RunConsoleCommand`( "gamemenucommand", command )` unless the command starts with the `"engine"` keyword in which case it is equivalent to Global.RunConsoleCommand`( command )`.
 ---
@@ -2504,6 +2490,60 @@ function _G.SaveLastMap(map, category) end
 --- * `engine ` - Runs a console command. Unlike Global.RunConsoleCommand(  ) It will ignore Blocked ConCommands
 function _G.RunGameUICommand(command) end
 
+---[MENU] Hides the News List when set to true.
+--- 		If you call this don't forget to call Global.LoadNewsList to update the News List.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveHideNews)
+---@param hide boolean true if it should hide the News.
+function _G.SaveHideNews(hide) end
+
+---[SERVER] Prints `ServerLog: PARAM` without a newline, to the server log and console.
+---
+--- As of June 2022, if `sv_logecho` is set to `0` (defaults to `1`) the message will not print to console and will only be written to the server's log file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ServerLog)
+---@param parameter string The value to be printed to console.
+function _G.ServerLog(parameter) end
+
+---[SHARED AND MENU] Evaluates and executes the given code, will throw an error on failure.
+--- Local variables are not passed to the given code.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunString)
+---@param code string The code to execute.
+---@param identifier? string The name that should appear in any error messages caused by this code.
+---@param handleError? boolean If false, this function will return a string containing any error messages instead of throwing an error.
+---@return string # If handleError is false, the error message (if any).
+function _G.RunString(code, identifier, handleError) end
+
+---[MENU] This function is used to save the last map and category to which the map belongs as a .
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveLastMap)
+---@param map string The name of the map.
+---@param category string The name of the category to which this map belongs.
+function _G.SaveLastMap(map, category) end
+
+---[SHARED AND MENU] Removes the given entity unless it is a player or the world entity
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity)
+---@param ent Entity Entity to safely remove.
+function _G.SafeRemoveEntity(ent) end
+
+---[SHARED AND MENU] Executes the given console command with the parameters.
+---
+--- Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand)
+---@param command string The command to be executed.
+---@param ... any The arguments. Note, that unlike Player:ConCommand, you must pass each argument as a new string, not separating them with a space.
+function _G.RunConsoleCommand(command, ...) end
+
+---[SHARED AND MENU] Removes entity after delay using Global.SafeRemoveEntity
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntityDelayed)
+---@param entity Entity Entity to be removed
+---@param delay number Delay for entity removal in seconds
+function _G.SafeRemoveEntityDelayed(entity, delay) end
+
 ---[SHARED] Send a usermessage
 ---
 ---
@@ -2517,27 +2557,6 @@ function _G.RunGameUICommand(command) end
 ---@deprecated This uses the umsg internally, which has been deprecated. Use the net instead.
 function _G.SendUserMessage(name, recipients, ...) end
 
----[CLIENT] Overwrites all presets with the supplied table. Used by the presets for preset saving
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SavePresets)
----@param presets table Presets to be saved
-function _G.SavePresets(presets) end
-
----[SHARED AND MENU] Sets the environment for a function or a stack level. Can be used to sandbox code.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.setfenv)
----@param location function The function to set the environment for, or a number representing stack level.
----@param environment table Table to be used as the the environment.
----@return function # The function passed, otherwise nil.
-function _G.setfenv(location, environment) end
-
----[MENU] Hides the News List when set to true.
---- 		If you call this don't forget to call Global.LoadNewsList to update the News List.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveHideNews)
----@param hide boolean true if it should hide the News.
-function _G.SaveHideNews(hide) end
-
 ---[SHARED AND MENU] Used to select single values from a vararg or get the count of values in it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.select)
@@ -2549,37 +2568,27 @@ function _G.SaveHideNews(hide) end
 ---@return any # Returns a number or vararg, depending on the select method.
 function _G.select(parameter, ...) end
 
----[SHARED] Returns approximate duration of a sentence by name. See Global.EmitSentence.
+---[SHARED AND MENU] Sets the environment for a function or a stack level. Can be used to sandbox code.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SentenceDuration)
----@param name string The sentence name.
----@return number # The approximate duration.
-function _G.SentenceDuration(name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.setfenv)
+---@param location function The function to set the environment for, or a number representing stack level.
+---@param environment table Table to be used as the the environment.
+---@return function # The function passed, otherwise nil.
+function _G.setfenv(location, environment) end
 
----[CLIENT AND MENU] Gets the width of the game's window (in pixels).
+---[MENU] Sets the content of `addonpresets.txt` located in the `garrysmod/settings` folder. By default, this file stores your addon presets as JSON.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrW)
----@return number # The width of the game's window in pixels
-function _G.ScrW() end
+--- You can use Global.LoadAddonPresets to retrieve the data in this file.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SaveAddonPresets)
+---@param JSON string The new contents of the file.
+function _G.SaveAddonPresets(JSON) end
 
----[CLIENT] Returns a number based on the `size` argument and players' screen height. The height is scaled in relation to `640x480` resolution.  This function is primarily used for scaling font sizes.
+---[CLIENT AND MENU] Gets the height of the game's window (in pixels).
 ---
---- See Global.ScreenScale for a function that scales from width.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScreenScaleH)
----@param size number The number you want to scale.
----@return number # The scaled number based on your screen's height.
-function _G.ScreenScaleH(size) end
-
----[SHARED AND MENU] Evaluates and executes the given code, will throw an error on failure.
---- Local variables are not passed to the given code.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunString)
----@param code string The code to execute.
----@param identifier? string The name that should appear in any error messages caused by this code.
----@param handleError? boolean If false, this function will return a string containing any error messages instead of throwing an error.
----@return string # If handleError is false, the error message (if any).
-function _G.RunString(code, identifier, handleError) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrH)
+---@return number # The height of the game's window in pixels
+function _G.ScrH() end
 
 ---[SHARED AND MENU] Sets, changes or removes a table's metatable. Returns Tab (the first argument).
 ---
@@ -2598,128 +2607,6 @@ function _G.setmetatable(Tab, Metatable) end
 ---@param string string String to be networked
 function _G.SetGlobal2String(index, string) end
 
----[SHARED] Defined a boolean to be automatically networked to clients
----
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Bool)
----@param index any Index to identify the global boolean with
----@param bool boolean Boolean to be networked
-function _G.SetGlobal2Bool(index, bool) end
-
----[SHARED] Defines a floating point number to be automatically networked to clients
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Float. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalFloat)
----@param index any Index to identify the global float with
----@param float number Float to be networked
-function _G.SetGlobalFloat(index, float) end
-
----[SHARED] Defines an entity to be automatically networked to clients
----
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Entity)
----@param index any Index to identify the global entity with
----@param ent Entity Entity to be networked
-function _G.SetGlobal2Entity(index, ent) end
-
----[SHARED] Defines a string with a maximum of 199 characters to be automatically networked to clients
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2String. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- If you want to have a higher characters limit use Global.SetGlobal2String
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalString)
----@param index any Index to identify the global string with
----@param string string String to be networked
-function _G.SetGlobalString(index, string) end
-
----[SHARED] Defines an angle to be automatically networked to clients
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Angle. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalAngle)
----@param index any Index to identify the global angle with
----@param angle Angle Angle to be networked
-function _G.SetGlobalAngle(index, angle) end
-
----[SHARED] Defined a boolean to be automatically networked to clients
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Bool. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalBool)
----@param index any Index to identify the global boolean with
----@param bool boolean Boolean to be networked
-function _G.SetGlobalBool(index, bool) end
-
----[SHARED] Defines a vector to be automatically networked to clients
----
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Vector)
----@param index any Index to identify the global vector with
----@param vec Vector Vector to be networked
-function _G.SetGlobal2Vector(index, vec) end
-
----[SHARED] Defines a vector to be automatically networked to clients
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Vector. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalVector)
----@param index any Index to identify the global vector with
----@param vec Vector Vector to be networked
-function _G.SetGlobalVector(index, vec) end
-
----[SHARED AND MENU] This function can be used in a for loop instead of Global.pairs. It sorts all **keys** alphabetically.
----
---- For sorting by specific **value member**, use Global.SortedPairsByMemberValue.
----
----
---- For sorting by **value**, use Global.SortedPairsByValue.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairs)
----@param table table The table to sort
----@param desc? boolean Reverse the sorting order
----@return function # Iterator function
----@return table # The table being iterated over
-function _G.SortedPairs(table, desc) end
-
----[SHARED] Sets an integer that is shared between the server and all clients.
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Int. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
---- This function will not round decimal values as it actually networks a float internally.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalInt)
----@param index string The unique index to identify the global value with.
----@param value number The value to set the global value to
-function _G.SetGlobalInt(index, value) end
-
----[SHARED] Called by the engine to set which [constraint system](https://developer.valvesoftware.com/wiki/Phys_constraintsystem) the next created constraints should use.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetPhysConstraintSystem)
----@param constraintSystem Entity Constraint system to use
-function _G.SetPhysConstraintSystem(constraintSystem) end
-
----[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in order of its **values**.
----
---- To sort by specific **value member**, use Global.SortedPairsByMemberValue.
----
----
---- To sort by **keys**, use Global.SortedPairs.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairsByValue)
----@param table table Table to create iterator for
----@param descending? boolean Whether the iterator should iterate in descending order or not
----@return function # Iterator function
----@return table # The table which will be iterated over
-function _G.SortedPairsByValue(table, descending) end
-
 ---[SHARED] Sets an integer that is shared between the server and all clients.
 --- The integer has a 32 bit limit. Use Global.SetGlobalInt instead
 --- Running this function clientside will only set it clientside for the client it is called on!
@@ -2731,12 +2618,50 @@ function _G.SetGlobal2Int(index, value) end
 
 ---[SHARED] Defines an angle to be automatically networked to clients
 ---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Angle. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
 --- Running this function clientside will only set it clientside for the client it is called on!
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Angle)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalAngle)
 ---@param index any Index to identify the global angle with
 ---@param angle Angle Angle to be networked
-function _G.SetGlobal2Angle(index, angle) end
+function _G.SetGlobalAngle(index, angle) end
+
+---[SHARED] Defines a floating point number to be automatically networked to clients
+---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Float. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalFloat)
+---@param index any Index to identify the global float with
+---@param float number Float to be networked
+function _G.SetGlobalFloat(index, float) end
+
+---[SHARED AND MENU] Runs util.PrecacheSound and returns the string.
+---
+--- util.PrecacheSound does nothing and therefore so does this function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Sound)
+---@param soundPath string The soundpath to precache.
+---@return string # The string passed as the first argument.
+function _G.Sound(soundPath) end
+
+---[SHARED] Defined a boolean to be automatically networked to clients
+---
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Bool)
+---@param index any Index to identify the global boolean with
+---@param bool boolean Boolean to be networked
+function _G.SetGlobal2Bool(index, bool) end
+
+---[SHARED] Defines a vector to be automatically networked to clients
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Vector. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalVector)
+---@param index any Index to identify the global vector with
+---@param vec Vector Vector to be networked
+function _G.SetGlobalVector(index, vec) end
 
 ---[SHARED] Defines a variable to be automatically networked to clients
 ---
@@ -2757,6 +2682,110 @@ function _G.SetGlobal2Angle(index, angle) end
 ---@param index any Index to identify the global vector with
 ---@param value any Value to be networked
 function _G.SetGlobal2Var(index, value) end
+
+---[SHARED] Defines a vector to be automatically networked to clients
+---
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Vector)
+---@param index any Index to identify the global vector with
+---@param vec Vector Vector to be networked
+function _G.SetGlobal2Vector(index, vec) end
+
+---[SHARED] Called by the engine to set which [constraint system](https://developer.valvesoftware.com/wiki/Phys_constraintsystem) the next created constraints should use.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetPhysConstraintSystem)
+---@param constraintSystem Entity Constraint system to use
+function _G.SetPhysConstraintSystem(constraintSystem) end
+
+---[SHARED] Defines a string with a maximum of 199 characters to be automatically networked to clients
+---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2String. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- If you want to have a higher characters limit use Global.SetGlobal2String
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalString)
+---@param index any Index to identify the global string with
+---@param string string String to be networked
+function _G.SetGlobalString(index, string) end
+
+---[SHARED] Defines an entity to be automatically networked to clients
+---
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Entity)
+---@param index any Index to identify the global entity with
+---@param ent Entity Entity to be networked
+function _G.SetGlobal2Entity(index, ent) end
+
+---[SHARED] Defined a boolean to be automatically networked to clients
+---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Bool. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalBool)
+---@param index any Index to identify the global boolean with
+---@param bool boolean Boolean to be networked
+function _G.SetGlobalBool(index, bool) end
+
+---[SHARED AND MENU] This function can be used in a for loop instead of Global.pairs. It sorts all **keys** alphabetically.
+---
+--- For sorting by specific **value member**, use Global.SortedPairsByMemberValue.
+---
+---
+--- For sorting by **value**, use Global.SortedPairsByValue.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairs)
+---@param table table The table to sort
+---@param desc? boolean Reverse the sorting order
+---@return function # Iterator function
+---@return table # The table being iterated over
+function _G.SortedPairs(table, desc) end
+
+---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in order of its **values**.
+---
+--- To sort by specific **value member**, use Global.SortedPairsByMemberValue.
+---
+---
+--- To sort by **keys**, use Global.SortedPairs.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SortedPairsByValue)
+---@param table table Table to create iterator for
+---@param descending? boolean Whether the iterator should iterate in descending order or not
+---@return function # Iterator function
+---@return table # The table which will be iterated over
+function _G.SortedPairsByValue(table, descending) end
+
+---[SHARED] Defines a floating point number to be automatically networked to clients
+---
+--- This function has a floating point precision error. Use Global.SetGlobalFloat instead
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Float)
+---@param index any Index to identify the global float with
+---@param float number Float to be networked
+function _G.SetGlobal2Float(index, float) end
+
+---[SHARED] Sets an integer that is shared between the server and all clients.
+---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Int. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- Running this function clientside will only set it clientside for the client it is called on!
+--- This function will not round decimal values as it actually networks a float internally.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalInt)
+---@param index string The unique index to identify the global value with.
+---@param value number The value to set the global value to
+function _G.SetGlobalInt(index, value) end
+
+---[SHARED] Defines an entity to be automatically networked to clients
+---
+--- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Entity. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
+--- Running this function clientside will only set it clientside for the client it is called on!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalEntity)
+---@param index any Index to identify the global entity with
+---@param ent Entity Entity to be networked
+function _G.SetGlobalEntity(index, ent) end
 
 ---[SHARED] Defines a variable to be automatically networked to clients
 ---
@@ -2795,51 +2824,78 @@ function _G.SetGlobalVar(index, value) end
 ---@return table # The table the iterator was created for.
 function _G.SortedPairsByMemberValue(table, memberKey, descending) end
 
----[SHARED] Defines an entity to be automatically networked to clients
----
---- There's a 4095 slots Network limit. If you need more, consider using the net library or Global.SetGlobal2Entity. You should also consider the fact that you have way too many variables. You can learn more about this limit here: Networking_Usage
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalEntity)
----@param index any Index to identify the global entity with
----@param ent Entity Entity to be networked
-function _G.SetGlobalEntity(index, ent) end
-
----[SHARED] Defines a floating point number to be automatically networked to clients
----
---- This function has a floating point precision error. Use Global.SetGlobalFloat instead
---- Running this function clientside will only set it clientside for the client it is called on!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobal2Float)
----@param index any Index to identify the global float with
----@param float number Float to be networked
-function _G.SetGlobal2Float(index, float) end
-
 ---[SHARED AND MENU] Returns the current asynchronous in-game time.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UnPredictedCurTime)
 ---@return number # The asynchronous in-game time.
 function _G.UnPredictedCurTime() end
 
----[SERVER] Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SuppressHostEvents)
----@param suppressPlayer Player The player to suppress any networking to.
-function _G.SuppressHostEvents(suppressPlayer) end
-
 ---[CLIENT AND MENU] Clears focus from any text entries player may have focused.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TextEntryLoseFocus)
 function _G.TextEntryLoseFocus() end
 
----[SHARED AND MENU] Runs util.PrecacheSound and returns the string.
+---[MENU] Toggles whether or not the named map is favorited in the new game list.
 ---
---- util.PrecacheSound does nothing and therefore so does this function.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ToggleFavourite)
+---@param map string Map to toggle favorite.
+function _G.ToggleFavourite(map) end
+
+---[CLIENT] Returns a number based on the Size argument and your screen's width. Alias of Global.ScreenScale.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Sound)
----@param soundPath string The soundpath to precache.
----@return string # The string passed as the first argument.
-function _G.Sound(soundPath) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SScale)
+---@param Size number The number you want to scale.
+---@deprecated You should be using Global.ScreenScale instead.
+function _G.SScale(Size) end
+
+---[SHARED AND MENU] Attempts to convert the value to a number.
+---
+--- Returns nil on failure.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tonumber)
+---@param value any The value to convert. Can be a number or string.
+---@param base? number The base used in the string. Can be any integer between 2 and 36, inclusive.
+---@return number # The numeric representation of the value with the given base, or nil if the conversion failed.
+function _G.tonumber(value, base) end
+
+---[MENU] This function is called by Global.UpdateMapList to pass the AddonMaps to JS to be used for the Search.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateAddonMapList)
+function _G.UpdateAddonMapList() end
+
+---[SHARED] Returns the duration of the specified sound in seconds.
+---
+--- This function does not return the correct duration on MacOS and Linux, or if the file is a non-.wav file on Windows.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SoundDuration)
+---@param soundName string The sound file path.
+---@return number # Sound duration in seconds.
+function _G.SoundDuration(soundName) end
+
+---[MENU] Returns "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TranslateDownloadableName)
+---@param filename string File name to test
+---@return string # "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
+function _G.TranslateDownloadableName(filename) end
+
+---[MENU] This function retrieves the values from Global.GetAddonStatus and passes them to JS(JavaScript).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateAddonDisabledState)
+function _G.UpdateAddonDisabledState() end
+
+---[SHARED] Returns a TauntCamera object
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TauntCamera)
+---@return table # TauntCamera
+function _G.TauntCamera() end
+
+---[SHARED AND MENU] Attempts to return an appropriate boolean for the given value
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tobool)
+---@param input any The object to be converted to a boolean
+---@return boolean #  * `false` for the boolean `false`. * `false` for `"false"`. * `false` for `"0"`. * `false` for numeric `0`. * `false` for `nil`. * `true` otherwise.
+function _G.tobool(input) end
 
 ---[SHARED AND MENU] Returns a highly accurate time in seconds since the start up, ideal for benchmarking. Unlike Global.RealTime, this value will be updated any time the function is called, allowing for sub-think precision.
 ---
@@ -2847,10 +2903,57 @@ function _G.Sound(soundPath) end
 ---@return number # Uptime of the server.
 function _G.SysTime() end
 
----[MENU] This function retrieves the values from Global.GetAddonStatus and passes them to JS(JavaScript).
+---[SHARED AND MENU] Returns a cosine value that fluctuates based on the current time
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateAddonDisabledState)
-function _G.UpdateAddonDisabledState() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TimedCos)
+---@param frequency number The frequency of fluctuation
+---@param min number Minimum value
+---@param max number Maximum value
+---@param offset number Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
+---@return number # Cosine value
+function _G.TimedCos(frequency, min, max, offset) end
+
+---[SERVER] Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SuppressHostEvents)
+---@param suppressPlayer Player The player to suppress any networking to.
+function _G.SuppressHostEvents(suppressPlayer) end
+
+---[SHARED] Gets the associated type ID of the variable. Unlike Global.type, this does not work with no value - an argument must be provided.
+---
+--- This returns garbage for _LOADLIB objects.
+--- This returns TYPE_NIL for protos.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TypeID)
+---@param variable any The variable to get the type ID of.
+---@return number # The type ID of the variable. See the Enums/TYPE.
+function _G.TypeID(variable) end
+
+---[SHARED AND MENU] This function takes a numeric indexed table and return all the members as a vararg. If specified, it will start at the given index and end at end index.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.unpack)
+---@param tbl table The table to generate the vararg from.
+---@param startIndex? number Which index to start from. Optional.
+---@param endIndex? number Which index to end at. Optional, even if you set StartIndex.
+---@return any ... # Output values
+function _G.unpack(tbl, startIndex, endIndex) end
+
+---[SHARED AND MENU] Returns the ordinal suffix of a given number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.STNDRD)
+---@param number number The number to find the ordinal suffix of.
+---@return string # suffix
+function _G.STNDRD(number) end
+
+---[SHARED AND MENU] Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of sql.SQLStr
+---
+--- This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SQLStr)
+---@param input string String to be escaped
+---@param noQuotes? boolean Whether the returned value should be surrounded in quotes or not
+---@return string # Escaped input
+function _G.SQLStr(input, noQuotes) end
 
 ---[SHARED AND MENU] Returns a sine value that fluctuates based on Global.CurTime. The value returned will be between the start value plus/minus the range value.
 ---
@@ -2864,13 +2967,6 @@ function _G.UpdateAddonDisabledState() end
 ---@return number # Sine value
 function _G.TimedSin(frequency, origin, max, offset) end
 
----[MENU] Returns "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TranslateDownloadableName)
----@param filename string File name to test
----@return string # "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
-function _G.TranslateDownloadableName(filename) end
-
 ---[SHARED AND MENU] Returns a string representing the name of the type of the passed object.
 --- This will return `table` if the input is Global.Color, consider using Global.IsColor in that case.
 ---
@@ -2878,30 +2974,6 @@ function _G.TranslateDownloadableName(filename) end
 ---@param var any The object to get the type of.
 ---@return string # The name of the object's type.
 function _G.type(var) end
-
----[SHARED AND MENU] Attempts to return an appropriate boolean for the given value
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tobool)
----@param val any The object to be converted to a boolean
----@return boolean # **false** for the boolean false. **false** for "false". **false** for "0". **false** for numeric 0. **false** for nil. **true** otherwise.
-function _G.tobool(val) end
-
----[SHARED AND MENU] Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of sql.SQLStr
----
---- This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SQLStr)
----@param input string String to be escaped
----@param noQuotes? boolean Whether the returned value should be surrounded in quotes or not
----@return string # Escaped input
-function _G.SQLStr(input, noQuotes) end
-
----[SHARED AND MENU] Returns the ordinal suffix of a given number.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.STNDRD)
----@param number number The number to find the ordinal suffix of.
----@return string # suffix
-function _G.STNDRD(number) end
 
 ---[SHARED AND MENU] Attempts to convert the value to a string. If the value is an object and its metatable has defined the __tostring metamethod, this will call that function.
 ---
@@ -2912,90 +2984,16 @@ function _G.STNDRD(number) end
 ---@return string # The string representation of the value.
 function _G.tostring(value) end
 
----[SHARED AND MENU] Returns a cosine value that fluctuates based on the current time
+---[MENU] Runs JavaScript on the loading screen panel (Global.GetLoadPanel).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TimedCos)
----@param frequency number The frequency of fluctuation
----@param min number Minimum value
----@param max number Maximum value
----@param offset number Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
----@return number # Cosine value
-function _G.TimedCos(frequency, min, max, offset) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateLoadPanel)
+---@param javascript string JavaScript to run on the loading panel.
+function _G.UpdateLoadPanel(javascript) end
 
----[SHARED] Returns the duration of the specified sound in seconds.
+---[MENU] Updates the Gamelist.
 ---
---- This function does not return the correct duration on MacOS and Linux, or if the file is a non-.wav file on Windows.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SoundDuration)
----@param soundName string The sound file path.
----@return number # Sound duration in seconds.
-function _G.SoundDuration(soundName) end
-
----[SHARED AND MENU] Attempts to convert the value to a number.
----
---- Returns nil on failure.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tonumber)
----@param value any The value to convert. Can be a number or string.
----@param base? number The base used in the string. Can be any integer between 2 and 36, inclusive.
----@return number # The numeric representation of the value with the given base, or nil if the conversion failed.
-function _G.tonumber(value, base) end
-
----[SHARED AND MENU] This function takes a numeric indexed table and return all the members as a vararg. If specified, it will start at the given index and end at end index.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.unpack)
----@param tbl table The table to generate the vararg from.
----@param startIndex? number Which index to start from. Optional.
----@param endIndex? number Which index to end at. Optional, even if you set StartIndex.
----@return any ... # Output values
-function _G.unpack(tbl, startIndex, endIndex) end
-
----[CLIENT] Returns a number based on the Size argument and your screen's width. Alias of Global.ScreenScale.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SScale)
----@param Size number The number you want to scale.
----@deprecated You should be using Global.ScreenScale instead.
-function _G.SScale(Size) end
-
----[MENU] Toggles whether or not the named map is favorited in the new game list.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ToggleFavourite)
----@param map string Map to toggle favorite.
-function _G.ToggleFavourite(map) end
-
----[SHARED] Gets the associated type ID of the variable. Unlike Global.type, this does not work with no value - an argument must be provided.
----
---- This returns garbage for _LOADLIB objects.
---- This returns TYPE_NIL for protos.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TypeID)
----@param variable any The variable to get the type ID of.
----@return number # The type ID of the variable. See the Enums/TYPE.
-function _G.TypeID(variable) end
-
----[SHARED] Returns a TauntCamera object
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TauntCamera)
----@return table # TauntCamera
-function _G.TauntCamera() end
-
----[CLIENT AND MENU] Returns if a panel is safe to use.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ValidPanel)
----@param panel Panel The panel to validate.
----@deprecated You should use Global.IsValid instead
-function _G.ValidPanel(panel) end
-
----[MENU] This function searches for all available languages and passes them to JS(JavaScript). JS then updates the Language list with the given languages.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateLanguages)
-function _G.UpdateLanguages() end
-
----[MENU] Called from JS when starting a new game
---- 		Updates the Server Settings when called.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateServerSettings)
-function _G.UpdateServerSettings() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateGames)
+function _G.UpdateGames() end
 
 ---[SHARED AND MENU] Returns the time in seconds it took to render the VGUI.
 ---
@@ -3003,27 +3001,15 @@ function _G.UpdateServerSettings() end
 function _G.VGUIFrameTime() end
 
 ---[MENU] Called from JS when starting a new game
---- 		This function updates the Map List
+--- 		Updates the Server Settings when called.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateMapList)
-function _G.UpdateMapList() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateServerSettings)
+function _G.UpdateServerSettings() end
 
----[MENU] Updates the Gamelist.
+---[MENU] This function searches for all available languages and passes them to JS(JavaScript). JS then updates the Language list with the given languages.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateGames)
-function _G.UpdateGames() end
-
----[MENU] Updates the Addons list.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateSubscribedAddons)
-function _G.UpdateSubscribedAddons() end
-
----[CLIENT AND MENU] Used by the **vgui_visualizelayout** convar
---- Briefly displays layout details of the given panel on-screen
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VisualizeLayout)
----@param panel Panel Panel to display layout details of
-function _G.VisualizeLayout(panel) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateLanguages)
+function _G.UpdateLanguages() end
 
 ---[SHARED AND MENU] Returns a random vector whose components are each between min(inclusive), max(exclusive).
 ---
@@ -3033,26 +3019,17 @@ function _G.VisualizeLayout(panel) end
 ---@return Vector # The random direction vector.
 function _G.VectorRand(min, max) end
 
----[MENU] Runs JavaScript on the loading screen panel (Global.GetLoadPanel).
+---[MENU] Updates the Addons list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateLoadPanel)
----@param javascript string JavaScript to run on the loading panel.
-function _G.UpdateLoadPanel(javascript) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateSubscribedAddons)
+function _G.UpdateSubscribedAddons() end
 
----[MENU] This function is called by Global.UpdateMapList to pass the AddonMaps to JS to be used for the Search.
+---[CLIENT AND MENU] Returns if a panel is safe to use.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateAddonMapList)
-function _G.UpdateAddonMapList() end
-
----[CLIENT] Creates and returns a DShape rectangle GUI element with the given dimensions.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VGUIRect)
----@param x number X position of the created element
----@param y number Y position of the created element
----@param w number Width of the created element
----@param h number Height of the created element
----@return Panel # DShape element
-function _G.VGUIRect(x, y, w, h) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ValidPanel)
+---@param panel Panel The panel to validate.
+---@deprecated You should use Global.IsValid instead
+function _G.ValidPanel(panel) end
 
 ---[SHARED AND MENU] Returns whether or not a model is useless by checking that the file path is that of a proper model.
 ---
@@ -3080,6 +3057,37 @@ function _G.VGUIRect(x, y, w, h) end
 ---@deprecated You should use Global.IsUselessModel instead.
 function _G.UTIL_IsUselessModel(modelName) end
 
+---[MENU] Called from JS when starting a new game
+--- 		This function updates the Map List
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateMapList)
+function _G.UpdateMapList() end
+
+---[CLIENT AND MENU] Returns a new WorkshopFileBase element
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.WorkshopFileBase)
+---@param namespace string Namespace for the file base
+---@param requiredTags table Tags required for a Workshop submission to be interacted with by the filebase
+---@return table # WorkshopFileBase element
+function _G.WorkshopFileBase(namespace, requiredTags) end
+
+---[CLIENT AND MENU] Used by the **vgui_visualizelayout** convar
+--- Briefly displays layout details of the given panel on-screen
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VisualizeLayout)
+---@param panel Panel Panel to display layout details of
+function _G.VisualizeLayout(panel) end
+
+---[CLIENT] Creates and returns a DShape rectangle GUI element with the given dimensions.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VGUIRect)
+---@param x number X position of the created element
+---@param y number Y position of the created element
+---@param w number Width of the created element
+---@param h number Height of the created element
+---@return Panel # DShape element
+function _G.VGUIRect(x, y, w, h) end
+
 ---[SHARED AND MENU] Creates a Vector object.
 --- 		Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Vector:Add.
 ---
@@ -3096,6 +3104,17 @@ function _G.UTIL_IsUselessModel(modelName) end
 ---@param z? number The z component of the vector.
 ---@return Vector # The created vector object.
 function _G.Vector(x, y, z) end
+
+---[SHARED] Translates the specified position and angle into the specified coordinate system.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.WorldToLocal)
+---@param position Vector The position that should be translated from the current to the new system.
+---@param angle Angle The angles that should be translated from the current to the new system.
+---@param newSystemOrigin Vector The origin of the system to translate to.
+---@param newSystemAngles Angle The angles of the system to translate to.
+---@return Vector # Local position
+---@return Angle # Local angles
+function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end
 
 ---[SHARED AND MENU] Attempts to call the first function. If the execution succeeds, this returns `true` followed by the returns of the function. If execution fails, this returns `false` and the second function is called with the error message.
 ---
@@ -3114,22 +3133,3 @@ function _G.Vector(x, y, z) end
 ---@return boolean # Status of the execution; `true` for success, `false` for failure.
 ---@return any ... # The returns of the first function if execution succeeded, otherwise the **first** return value of the error callback.
 function _G.xpcall(func, errorCallback, ...) end
-
----[CLIENT AND MENU] Returns a new WorkshopFileBase element
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.WorkshopFileBase)
----@param namespace string Namespace for the file base
----@param requiredTags table Tags required for a Workshop submission to be interacted with by the filebase
----@return table # WorkshopFileBase element
-function _G.WorkshopFileBase(namespace, requiredTags) end
-
----[SHARED] Translates the specified position and angle into the specified coordinate system.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.WorldToLocal)
----@param position Vector The position that should be translated from the current to the new system.
----@param angle Angle The angles that should be translated from the current to the new system.
----@param newSystemOrigin Vector The origin of the system to translate to.
----@param newSystemAngles Angle The angles of the system to translate to.
----@return Vector # Local position
----@return Angle # Local angles
-function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end

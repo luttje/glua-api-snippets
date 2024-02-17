@@ -18,12 +18,6 @@ function coroutine.isyieldable() end
 ---@return thread # coroutine
 function coroutine.create(func) end
 
----[SHARED AND MENU] Returns the active coroutine or nil if we are not within a coroutine.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.running)
----@return thread # coroutine
-function coroutine.running() end
-
 ---[SHARED AND MENU] Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.resume)
@@ -32,6 +26,12 @@ function coroutine.running() end
 ---@return boolean # If the executed thread code had no errors occur within it.
 ---@return any ... # If an error occurred, this will be a string containing the error message. Otherwise, this will be arguments that were yielded.
 function coroutine.resume(coroutine, ...) end
+
+---[SHARED AND MENU] Returns the active coroutine or nil if we are not within a coroutine.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.running)
+---@return thread # coroutine
+function coroutine.running() end
 
 ---[SHARED] Repeatedly yields the coroutine for the given duration before continuing.
 ---

@@ -1,5 +1,13 @@
 ---@meta
 
+---[CLIENT] Sets the killicon to be displayed. You should call Panel:SizeToContents following this.
+---
+--- Killicons can be added with killicon.Add and killicon.AddFont.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DKillIcon:SetName)
+---@param iconName string The name of the killicon to be displayed.
+function DKillIcon:SetName(iconName) end
+
 ---[CLIENT] Gets the killicon being shown.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DKillIcon:GetName)
@@ -9,11 +17,3 @@ function DKillIcon:GetName() end
 --- Uses the killicon to persistently draw a killicon.Creates a DKillIcon and sets it to the crowbar killicon.
 ---@class DKillIcon : Panel
 local DKillIcon = {}
-
----[CLIENT] Sets the killicon to be displayed. You should call Panel:SizeToContents following this.
----
---- Killicons can be added with killicon.Add and killicon.AddFont.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DKillIcon:SetName)
----@param iconName string The name of the killicon to be displayed.
-function DKillIcon:SetName(iconName) end

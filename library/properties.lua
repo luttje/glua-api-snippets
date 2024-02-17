@@ -3,12 +3,12 @@
 --- The properties library gives you access to the menu that shows up when right clicking entities while holding C.
 properties = {}
 
----[SHARED] Opens properties menu for given entity.
+---[SHARED] Checks if player hovers over any entities and open a properties menu for it.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/properties.OpenEntityMenu)
----@param ent Entity The entity to open menu for
----@param tr table The trace that is passed as second argument to Action callback of a property
-function properties.OpenEntityMenu(ent, tr) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.OnScreenClick)
+---@param eyepos Vector The eye pos of a player
+---@param eyevec Vector The aim vector of a player
+function properties.OnScreenClick(eyepos, eyevec) end
 
 ---[SHARED] Add properties to the properties module
 ---
@@ -17,12 +17,12 @@ function properties.OpenEntityMenu(ent, tr) end
 ---@param propertyData table A table that defines the property. Uses the Structures/PropertyAdd.
 function properties.Add(name, propertyData) end
 
----[SHARED] Checks if player hovers over any entities and open a properties menu for it.
+---[SHARED] Opens properties menu for given entity.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/properties.OnScreenClick)
----@param eyepos Vector The eye pos of a player
----@param eyevec Vector The aim vector of a player
-function properties.OnScreenClick(eyepos, eyevec) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.OpenEntityMenu)
+---@param ent Entity The entity to open menu for
+---@param tr table The trace that is passed as second argument to Action callback of a property
+function properties.OpenEntityMenu(ent, tr) end
 
 ---[CLIENT] Returns an entity player is hovering over with their cursor.
 ---

@@ -23,6 +23,12 @@ function frame_blend.DrawPreview() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.CompleteFrame)
 function frame_blend.CompleteFrame() end
 
+---[CLIENT] Returns whether frame blend post processing effect is enabled or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.IsActive)
+---@return boolean # Is frame blend enabled or not
+function frame_blend.IsActive() end
+
 ---[CLIENT] Returns amount of frames needed to render?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.RenderableFrames)
@@ -40,9 +46,3 @@ function frame_blend.ShouldSkipFrame() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.IsLastFrame)
 ---@return boolean # Whether the current frame is the last frame?
 function frame_blend.IsLastFrame() end
-
----[CLIENT] Returns whether frame blend post processing effect is enabled or not.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.IsActive)
----@return boolean # Is frame blend enabled or not
-function frame_blend.IsActive() end

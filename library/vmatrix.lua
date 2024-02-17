@@ -23,27 +23,19 @@ local VMatrix = {}
 ---@param input VMatrix The input matrix to add.
 function VMatrix:Add(input) end
 
----[SHARED] Returns the absolute rotation of the matrix.
+---[SHARED] Gets the forward direction of the matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetAngles)
----@return Angle # Absolute rotation of the matrix
-function VMatrix:GetAngles() end
+--- ie. The first column of the matrix, excluding the w coordinate.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetForward)
+---@return Vector # The forward direction of the matrix.
+function VMatrix:GetForward() end
 
----[SHARED] Returns a specific field in the matrix.
+---[SHARED] Returns the absolute scale of the matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetField)
----@param row number Row of the field whose value is to be retrieved, from 1 to 4
----@param column number Column of the field whose value is to be retrieved, from 1 to 4
----@return number # The value of the specified field
-function VMatrix:GetField(row, column) end
-
----[SHARED] Gets the right direction of the matrix.
----
---- ie. The second column of the matrix, negated, excluding the w coordinate.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetRight)
----@return Vector # The right direction of the matrix.
-function VMatrix:GetRight() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetScale)
+---@return Vector # Absolute scale of the matrix
+function VMatrix:GetScale() end
 
 ---[SHARED] Gets the up direction of the matrix.
 ---
@@ -53,53 +45,49 @@ function VMatrix:GetRight() end
 ---@return Vector # The up direction of the matrix.
 function VMatrix:GetUp() end
 
----[SHARED] Returns whether the matrix is a rotation matrix or not.
+---[SHARED] Inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
 ---
---- Technically it checks if the forward, right and up vectors are orthogonal and normalized.
+--- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsRotationMatrix)
----@return boolean # Is the matrix a rotation matrix or not
-function VMatrix:IsRotationMatrix() end
+--- To invert a matrix that contains other modifications, see VMatrix:Invert.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:InvertTR)
+function VMatrix:InvertTR() end
 
----[SHARED] Rotates the matrix by the given angle.
+---[SHARED] Returns an inverted matrix without modifying the original matrix.
 ---
---- Postmultiplies the matrix by a rotation matrix (A = AR).
+--- Inverting the matrix will fail if its [determinant](https://en.wikipedia.org/wiki/Determinant) is 0 or close to 0. (ie. its "scale" in any direction is 0.)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Rotate)
----@param rotation Angle Rotation.
-function VMatrix:Rotate(rotation) end
+--- See also VMatrix:GetInverseTR.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverse)
+---@return VMatrix # The inverted matrix if possible, nil otherwise
+function VMatrix:GetInverse() end
 
----[SHARED] Returns whether the matrix is equal to Identity matrix or not.
+---[SHARED] Returns the transpose (each row becomes a column) of this matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsIdentity)
----@return boolean # Is the matrix an Identity matrix or not
-function VMatrix:IsIdentity() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTransposed)
+---@return VMatrix # The transposed matrix.
+function VMatrix:GetTransposed() end
 
----[SHARED] Returns the absolute scale of the matrix.
+---[SHARED] Initializes the matrix as Identity matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetScale)
----@return Vector # Absolute scale of the matrix
-function VMatrix:GetScale() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Identity)
+function VMatrix:Identity() end
 
----[SHARED] Gets the forward direction of the matrix.
+---[SHARED] Returns the absolute rotation of the matrix.
 ---
---- ie. The first column of the matrix, excluding the w coordinate.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetForward)
----@return Vector # The forward direction of the matrix.
-function VMatrix:GetForward() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetAngles)
+---@return Angle # Absolute rotation of the matrix
+function VMatrix:GetAngles() end
 
----[SHARED] Copies values from the given matrix object.
+---[SHARED] Gets the right direction of the matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Set)
----@param src VMatrix The matrix to copy values from.
-function VMatrix:Set(src) end
-
----[SHARED] Returns the absolute translation of the matrix.
+--- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTranslation)
----@return Vector # Absolute translation of the matrix
-function VMatrix:GetTranslation() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetRight)
+---@return Vector # The right direction of the matrix.
+function VMatrix:GetRight() end
 
 ---[SHARED] Scales the matrix by the given vector.
 ---
@@ -121,11 +109,11 @@ function VMatrix:Scale(scale) end
 ---@return boolean # Whether the matrix was inverted or not
 function VMatrix:Invert() end
 
----[SHARED] Sets the absolute rotation of the matrix.
+---[SHARED] Scales the absolute translation with the given value.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetAngles)
----@param angle Angle New angles.
-function VMatrix:SetAngles(angle) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:ScaleTranslation)
+---@param scale number Value to scale the translation with.
+function VMatrix:ScaleTranslation(scale) end
 
 ---[SHARED] Returns an inverted matrix without modifying the original matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
 ---
@@ -137,41 +125,31 @@ function VMatrix:SetAngles(angle) end
 ---@return VMatrix # The inverted matrix.
 function VMatrix:GetInverseTR() end
 
----[SHARED] Returns the transpose (each row becomes a column) of this matrix.
+---[SHARED] Returns the absolute translation of the matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTransposed)
----@return VMatrix # The transposed matrix.
-function VMatrix:GetTransposed() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetTranslation)
+---@return Vector # Absolute translation of the matrix
+function VMatrix:GetTranslation() end
 
----[SHARED] Initializes the matrix as Identity matrix.
+---[SHARED] Multiplies this matrix by given matrix.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Identity)
-function VMatrix:Identity() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Mul)
+---@param input VMatrix The input matrix to multiply by.
+function VMatrix:Mul(input) end
 
----[SHARED] Inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
+---[SHARED] Copies values from the given matrix object.
 ---
---- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
----
---- To invert a matrix that contains other modifications, see VMatrix:Invert.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:InvertTR)
-function VMatrix:InvertTR() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Set)
+---@param src VMatrix The matrix to copy values from.
+function VMatrix:Set(src) end
 
----[SHARED] Scales the absolute translation with the given value.
+---[SHARED] Returns whether the matrix is a rotation matrix or not.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:ScaleTranslation)
----@param scale number Value to scale the translation with.
-function VMatrix:ScaleTranslation(scale) end
-
----[SHARED] Returns an inverted matrix without modifying the original matrix.
+--- Technically it checks if the forward, right and up vectors are orthogonal and normalized.
 ---
---- Inverting the matrix will fail if its [determinant](https://en.wikipedia.org/wiki/Determinant) is 0 or close to 0. (ie. its "scale" in any direction is 0.)
----
---- See also VMatrix:GetInverseTR.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverse)
----@return VMatrix # The inverted matrix if possible, nil otherwise
-function VMatrix:GetInverse() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsRotationMatrix)
+---@return boolean # Is the matrix a rotation matrix or not
+function VMatrix:IsRotationMatrix() end
 
 ---[SHARED] Checks whenever all fields of the matrix are 0, aka if this is a [null matrix](https://en.wikipedia.org/wiki/Zero_matrix).
 ---
@@ -179,11 +157,27 @@ function VMatrix:GetInverse() end
 ---@return boolean # If the matrix is a null matrix.
 function VMatrix:IsZero() end
 
----[SHARED] Multiplies this matrix by given matrix.
+---[SHARED] Returns whether the matrix is equal to Identity matrix or not.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Mul)
----@param input VMatrix The input matrix to multiply by.
-function VMatrix:Mul(input) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:IsIdentity)
+---@return boolean # Is the matrix an Identity matrix or not
+function VMatrix:IsIdentity() end
+
+---[SHARED] Returns a specific field in the matrix.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetField)
+---@param row number Row of the field whose value is to be retrieved, from 1 to 4
+---@param column number Column of the field whose value is to be retrieved, from 1 to 4
+---@return number # The value of the specified field
+function VMatrix:GetField(row, column) end
+
+---[SHARED] Rotates the matrix by the given angle.
+---
+--- Postmultiplies the matrix by a rotation matrix (A = AR).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Rotate)
+---@param rotation Angle Rotation.
+function VMatrix:Rotate(rotation) end
 
 ---[SHARED] Sets a specific field in the matrix.
 ---
@@ -193,19 +187,17 @@ function VMatrix:Mul(input) end
 ---@param value number The value to set in that field
 function VMatrix:SetField(row, column, value) end
 
+---[SHARED] Subtracts given matrix from this matrix.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Sub)
+---@param input VMatrix The input matrix to subtract.
+function VMatrix:Sub(input) end
+
 ---[SHARED] Converts the matrix to a 4x4 table. See Global.Matrix function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:ToTable)
 ---@return table # The 4x4 table.
 function VMatrix:ToTable() end
-
----[SHARED] Sets the right direction of the matrix.
----
---- ie. The second column of the matrix, negated, excluding the w coordinate.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetRight)
----@param forward Vector The right direction of the matrix.
-function VMatrix:SetRight(forward) end
 
 ---[SHARED] Sets all components of the matrix to 0, also known as a [null matrix](https://en.wikipedia.org/wiki/Zero_matrix).
 ---
@@ -214,25 +206,25 @@ function VMatrix:SetRight(forward) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Zero)
 function VMatrix:Zero() end
 
----[SHARED] Translates the matrix by the given vector aka. adds the vector to the translation.
+---[SHARED] Sets the forward direction of the matrix.
 ---
---- Postmultiplies the matrix by a translation matrix (A = AT).
+--- ie. The first column of the matrix, excluding the w coordinate.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Translate)
----@param translation Vector Vector to translate the matrix by.
-function VMatrix:Translate(translation) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetForward)
+---@param forward Vector The forward direction of the matrix.
+function VMatrix:SetForward(forward) end
+
+---[SHARED] Sets the absolute rotation of the matrix.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetAngles)
+---@param angle Angle New angles.
+function VMatrix:SetAngles(angle) end
 
 ---[SHARED] Sets the absolute translation of the matrix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetTranslation)
 ---@param translation Vector New translation.
 function VMatrix:SetTranslation(translation) end
-
----[SHARED] Subtracts given matrix from this matrix.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Sub)
----@param input VMatrix The input matrix to subtract.
-function VMatrix:Sub(input) end
 
 ---[SHARED] Sets the up direction of the matrix.
 ---
@@ -242,13 +234,21 @@ function VMatrix:Sub(input) end
 ---@param forward Vector The up direction of the matrix.
 function VMatrix:SetUp(forward) end
 
----[SHARED] Sets the forward direction of the matrix.
+---[SHARED] Sets the right direction of the matrix.
 ---
---- ie. The first column of the matrix, excluding the w coordinate.
+--- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetForward)
----@param forward Vector The forward direction of the matrix.
-function VMatrix:SetForward(forward) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:SetRight)
+---@param forward Vector The right direction of the matrix.
+function VMatrix:SetRight(forward) end
+
+---[SHARED] Translates the matrix by the given vector aka. adds the vector to the translation.
+---
+--- Postmultiplies the matrix by a translation matrix (A = AT).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Translate)
+---@param translation Vector Vector to translate the matrix by.
+function VMatrix:Translate(translation) end
 
 ---[SHARED] Modifies the scale of the matrix while preserving the rotation and translation.
 ---

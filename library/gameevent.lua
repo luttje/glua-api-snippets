@@ -12,14 +12,26 @@
 gameevent = {}
 
 ---
---- 		Called when a flare sets an NPC on fire.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class flare_ignite_npc
-local flare_ignite_npc = {}
+--- 		Called when the connection to a Server has been established.
+---
+---
+--- 			This is only available in the Menu state because this is called before the Client State has even started.
+---
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed. [This](https://github.com/RaphaelIT7/gmod-gameevent) Binary Module has been used.
+---@class client_connected
+local client_connected = {}
 
----The Entity:EntIndex of the ignited NPC.
+---The Server address. Will be **loopback** in hosted games.
+---@type string
+client_connected.address = nil
+
+---The IP of the Server. Will be **0** in hosted games. Use the **address** instead of this.
 ---@type number
-flare_ignite_npc.entindex = nil
+client_connected.ip = nil
+
+---The port of the Server. Will be **0** in hosted games.
+---@type number
+client_connected.port = nil
 
 ---
 --- 		Called when the freeze cam is finished.
@@ -39,24 +51,22 @@ flare_ignite_npc.entindex = nil
 local hide_freezepanel = {}
 
 ---
---- 			Called when a player makes progress on an achievement.
----
---- 			Only called clientside for the player who made progress.
+--- 		Called when a flare sets an NPC on fire.
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class achievement_event
-local achievement_event = {}
+---@class flare_ignite_npc
+local flare_ignite_npc = {}
 
----the name of the achievement.
----@type string
-achievement_event.achievement_name = nil
-
----amount of steps toward achievement
+---The Entity:EntIndex of the ignited NPC.
 ---@type number
-achievement_event.cur_val = nil
+flare_ignite_npc.entindex = nil
 
----total amount of steps in achievement
----@type number
-achievement_event.max_val = nil
+---[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
+---
+--- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
+---@param eventName string The event to listen to. List of valid events (with examples) can be found [here](gameevent).
+function gameevent.Listen(eventName) end
 
 ---
 --- 		Called when the freeze cam starts spectating something.
@@ -72,14 +82,6 @@ achievement_event.max_val = nil
 ---
 ---@class freezecam_started
 local freezecam_started = {}
-
----[SHARED] Adds a [game event](gameevent) listener, creating a new hook using the hook library, which can be listened to via hook.Add with the given `eventName` as event.
----
---- 			All gameevents are called in the **Menu State**, but if you want to use them you need to use some DLL(like [this](https://github.com/RaphaelIT7/gmod-gameevent) one) or you need to create your own.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/gameevent.Listen)
----@param eventName string The event to listen to. List of valid events (with examples) can be found [here](gameevent).
-function gameevent.Listen(eventName) end
 
 ---
 --- 		Called when an entity dies.
@@ -106,32 +108,12 @@ entity_killed.damagebits = nil
 entity_killed.entindex_killed = nil
 
 ---
---- 		Called when a map is loaded.
+--- 		Called **only** in the specific realm when the game is existing.
 ---
----
---- 			This is only available in the Menu state because this is called before the Client State has even started.
----
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed. [This](https://github.com/RaphaelIT7/gmod-gameevent) Binary Module has been used.
----@class game_newmap
-local game_newmap = {}
-
----The Map name
----@type string
-game_newmap.mapname = nil
-
----
---- 		Called when a prop_dynamic or prop_physics is broken by a player.
+--- 		This is not called reliable serverside.
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class break_prop
-local break_prop = {}
-
----The Entity:EntIndex of the broken prop.
----@type number
-break_prop.entindex = nil
-
----The Player:UserID of the connected player. Seems to be 0 every time.
----@type number
-break_prop.userid = nil
+---@class host_quit
+local host_quit = {}
 
 ---
 --- 			Called when a player earns an achievement.
@@ -148,26 +130,18 @@ achievement_earned.achievement = nil
 achievement_earned.player = nil
 
 ---
---- 		Called when the connection to a Server has been established.
----
----
---- 			This is only available in the Menu state because this is called before the Client State has even started.
----
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed. [This](https://github.com/RaphaelIT7/gmod-gameevent) Binary Module has been used.
----@class client_connected
-local client_connected = {}
+--- 		Called when a prop_dynamic or prop_physics is broken by a player.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class break_prop
+local break_prop = {}
 
----The Server address. Will be **loopback** in hosted games.
----@type string
-client_connected.address = nil
-
----The IP of the Server. Will be **0** in hosted games. Use the **address** instead of this.
+---The Entity:EntIndex of the broken prop.
 ---@type number
-client_connected.ip = nil
+break_prop.entindex = nil
 
----The port of the Server. Will be **0** in hosted games.
+---The Player:UserID of the connected player. Seems to be 0 every time.
 ---@type number
-client_connected.port = nil
+break_prop.userid = nil
 
 ---
 --- 		Called when trying to connect to a Server.
@@ -213,64 +187,6 @@ local client_disconnect = {}
 client_disconnect.message = nil
 
 ---
---- 		Called **only** in the specific realm when the game is existing.
----
---- 		This is not called reliable serverside.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class host_quit
-local host_quit = {}
-
----
---- 		Called when a func_break is broken by a player.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class break_breakable
-local break_breakable = {}
-
----The Entity:EntIndex of the broken prop.
----@type number
-break_breakable.entindex = nil
-
----The Player:UserID of the connected player.
----@type number
-break_breakable.userid = nil
-
----Material index of the broken entity.
----@type number
-break_breakable.material = nil
-
----
---- 			Called when a player changes their Steam name.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_changename
-local player_changename = {}
-
----The Player:UserID of the Player.
----@type number
-player_changename.userid = nil
-
----The old Name.
----@type string
-player_changename.oldname = nil
-
----The new Name.
----@type string
-player_changename.newname = nil
-
----
---- 			Called when a player spawns.
----
----
---- 			This is not called clientside for the local player or in single-player.
----
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_spawn
-local player_spawn = {}
-
----The Player:UserID the player has.
----@type number
-player_spawn.userid = nil
-
----
 --- 		Called when a player requests a full update from the server.
 --- 		Called Clientside when the Update is received or when another player requested a full update.
 ---
@@ -299,6 +215,68 @@ OnRequestFullUpdate.userid = nil
 OnRequestFullUpdate.index = nil
 
 ---
+--- 		Called when a map is loaded.
+---
+---
+--- 			This is only available in the Menu state because this is called before the Client State has even started.
+---
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed. [This](https://github.com/RaphaelIT7/gmod-gameevent) Binary Module has been used.
+---@class game_newmap
+local game_newmap = {}
+
+---The Map name
+---@type string
+game_newmap.mapname = nil
+
+---
+--- 		Called when a func_break is broken by a player.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class break_breakable
+local break_breakable = {}
+
+---The Entity:EntIndex of the broken prop.
+---@type number
+break_breakable.entindex = nil
+
+---The Player:UserID of the connected player.
+---@type number
+break_breakable.userid = nil
+
+---Material index of the broken entity.
+---@type number
+break_breakable.material = nil
+
+---
+--- 			Called when a player makes progress on an achievement.
+---
+--- 			Only called clientside for the player who made progress.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class achievement_event
+local achievement_event = {}
+
+---the name of the achievement.
+---@type string
+achievement_event.achievement_name = nil
+
+---amount of steps toward achievement
+---@type number
+achievement_event.cur_val = nil
+
+---total amount of steps in achievement
+---@type number
+achievement_event.max_val = nil
+
+---
+--- 		Called when a Ragdoll is going to be Dissolved.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class ragdoll_dissolved
+local ragdoll_dissolved = {}
+
+---The Entity:EntIndex of the disolved Ragdoll.
+---@type number
+ragdoll_dissolved.entindex = nil
+
+---
 --- 		Called when a Player is unbanned using the **removeid** or **removeip** command.
 ---
 ---
@@ -322,106 +300,63 @@ server_removeban.ip = nil
 server_removeban.by = nil
 
 ---
---- 		Called when a convar with FCVAR_NOTIFY is changed on the server.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class server_cvar
-local server_cvar = {}
-
----The convar name. e.g "sv_cheats".
----@type string
-server_cvar.cvarname = nil
-
----The new value. Always a string. e.g "1".
----@type string
-server_cvar.cvarvalue = nil
-
----
---- 			Called when the player takes damage.
----
---- 		This is called after GM:EntityTakeDamage so you could just use that hook serverside.
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_hurt
-local player_hurt = {}
-
----The new health after being damaged.
----@type number
-player_hurt.health = nil
-
----Event priority number used by HLTV.
----@type number
-player_hurt.priority = nil
-
----The Player:UserID of the victim.
----@type number
-player_hurt.userid = nil
-
----The Player:UserID of the attacker.
----@type number
-player_hurt.attacker = nil
-
----
---- 			Called when the player say a message.
+--- 			Called when a player spawns.
 ---
 ---
---- 			This is called after GM:PlayerSay so you could just use that hook serverside.
----
---- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_say
-local player_say = {}
-
----Event priority number used by HLTV.
----@type number
-player_say.priority = nil
-
----The Player:UserID of the Player. For Console the UserID is 0.
----@type number
-player_say.userid = nil
-
----The text that was said.
----@type string
-player_say.text = nil
-
----
---- 		Called when a player disconnects from the server.
----
----
---- 			This is also called when a player cancels connecting to the server.
 --- 			This is not called clientside for the local player or in single-player.
---- 			When this gameevent is called on the client side, the player will be NULL!. so you cannot use `Player(data.userid)`!
 ---
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_disconnect
-local player_disconnect = {}
-
----0 if the player isn't a bot, 1 if they are.
----@type number
-player_disconnect.bot = nil
-
----The SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
----@type string
-player_disconnect.networkid = nil
-
----The Player:Nick the player has.
----@type string
-player_disconnect.name = nil
+---@class player_spawn
+local player_spawn = {}
 
 ---The Player:UserID the player has.
 ---@type number
-player_disconnect.userid = nil
-
----The disconnect reason.
----@type string
-player_disconnect.reason = nil
+player_spawn.userid = nil
 
 ---
---- 		Called when a Ragdoll is going to be Dissolved.
+--- 			Called when a player changes their Steam name.
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class ragdoll_dissolved
-local ragdoll_dissolved = {}
+---@class player_changename
+local player_changename = {}
 
----The Entity:EntIndex of the disolved Ragdoll.
+---The Player:UserID of the Player.
 ---@type number
-ragdoll_dissolved.entindex = nil
+player_changename.userid = nil
+
+---The old Name.
+---@type string
+player_changename.oldname = nil
+
+---The new Name.
+---@type string
+player_changename.newname = nil
+
+---
+--- 			Called when a player has entered the game (connected and loaded).
+--- 			From this point you can use Global.Player(userid) (serverside or in singleplayer)
+---
+--- 			This is called after GM:PlayerInitialSpawn so you could just use that hook serverside.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class player_activate
+local player_activate = {}
+
+---The Player:UserID of the Player.
+---@type number
+player_activate.userid = nil
+
+---
+--- 		Called when the freeze cam is started.
+--- 		Example cause:
+--- ```
+--- Player:Spectate(OBS_MODE_FREEZECAM)
+--- ```
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class show_freezepanel
+local show_freezepanel = {}
+
+---The Index of the Entity that is being spectated or `0`
+---@type number
+show_freezepanel.killer = nil
 
 ---
 --- 		Called when a player's info has changed over the network.
@@ -488,72 +423,40 @@ player_connect.index = nil
 player_connect.address = nil
 
 ---
---- 		Called when a Player is banned using Player:Ban, **banip** or the **banid** command.
+--- 			Called when the player say a message.
 ---
 ---
---- 			If **banip** was used the networkid will be an empty string.
---- 			If **banid** was used the ip will be an empty string.
+--- 			This is called after GM:PlayerSay so you could just use that hook serverside.
 ---
----
---- 		This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----
----@class server_addban
-local server_addban = {}
-
---- The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
----@type string
-server_addban.networkid = nil
-
----The Player:Nick the player has.
----@type string
-server_addban.name = nil
-
----The Player:UserID the player has.
----@type number
-server_addban.userid = nil
-
----The Player:IPAddress of the player.
----@type string
-server_addban.ip = nil
-
----The Duration of the Ban (in minutes).
----@type string
-server_addban.duration = nil
-
----The name of the Person who Banned the Player or Console.
----@type string
-server_addban.by = nil
-
----whether the player was also kicked.
----@type boolean
-server_addban.kicked = nil
-
----
---- 		Called when the freeze cam is started.
---- 		Example cause:
---- ```
---- Player:Spectate(OBS_MODE_FREEZECAM)
---- ```
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class show_freezepanel
-local show_freezepanel = {}
+---@class player_say
+local player_say = {}
 
----The Index of the Entity that is being spectated or `0`
+---Event priority number used by HLTV.
 ---@type number
-show_freezepanel.killer = nil
+player_say.priority = nil
+
+---The Player:UserID of the Player. For Console the UserID is 0.
+---@type number
+player_say.userid = nil
+
+---The text that was said.
+---@type string
+player_say.text = nil
 
 ---
---- 			Called when a player has entered the game (connected and loaded).
---- 			From this point you can use Global.Player(userid) (serverside or in singleplayer)
----
---- 			This is called after GM:PlayerInitialSpawn so you could just use that hook serverside.
+--- 		Called when a convar with FCVAR_NOTIFY is changed on the server.
 --- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
----@class player_activate
-local player_activate = {}
+---@class server_cvar
+local server_cvar = {}
 
----The Player:UserID of the Player.
----@type number
-player_activate.userid = nil
+---The convar name. e.g "sv_cheats".
+---@type string
+server_cvar.cvarname = nil
+
+---The new value. Always a string. e.g "1".
+---@type string
+server_cvar.cvarvalue = nil
 
 ---
 --- 		Called when a player connects to the server.
@@ -632,3 +535,100 @@ server_spawn.dedicated = nil
 ---true if the Server is password protected.
 ---@type boolean
 server_spawn.password = nil
+
+---
+--- 		Called when a player disconnects from the server.
+---
+---
+--- 			This is also called when a player cancels connecting to the server.
+--- 			This is not called clientside for the local player or in single-player.
+--- 			When this gameevent is called on the client side, the player will be NULL!. so you cannot use `Player(data.userid)`!
+---
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class player_disconnect
+local player_disconnect = {}
+
+---0 if the player isn't a bot, 1 if they are.
+---@type number
+player_disconnect.bot = nil
+
+---The SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
+---@type string
+player_disconnect.networkid = nil
+
+---The Player:Nick the player has.
+---@type string
+player_disconnect.name = nil
+
+---The Player:UserID the player has.
+---@type number
+player_disconnect.userid = nil
+
+---The disconnect reason.
+---@type string
+player_disconnect.reason = nil
+
+---
+--- 		Called when a Player is banned using Player:Ban, **banip** or the **banid** command.
+---
+---
+--- 			If **banip** was used the networkid will be an empty string.
+--- 			If **banid** was used the ip will be an empty string.
+---
+---
+--- 		This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---
+---@class server_addban
+local server_addban = {}
+
+--- The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
+---@type string
+server_addban.networkid = nil
+
+---The Player:Nick the player has.
+---@type string
+server_addban.name = nil
+
+---The Player:UserID the player has.
+---@type number
+server_addban.userid = nil
+
+---The Player:IPAddress of the player.
+---@type string
+server_addban.ip = nil
+
+---The Duration of the Ban (in minutes).
+---@type string
+server_addban.duration = nil
+
+---The name of the Person who Banned the Player or Console.
+---@type string
+server_addban.by = nil
+
+---whether the player was also kicked.
+---@type boolean
+server_addban.kicked = nil
+
+---
+--- 			Called when the player takes damage.
+---
+--- 		This is called after GM:EntityTakeDamage so you could just use that hook serverside.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class player_hurt
+local player_hurt = {}
+
+---The new health after being damaged.
+---@type number
+player_hurt.health = nil
+
+---Event priority number used by HLTV.
+---@type number
+player_hurt.priority = nil
+
+---The Player:UserID of the victim.
+---@type number
+player_hurt.userid = nil
+
+---The Player:UserID of the attacker.
+---@type number
+player_hurt.attacker = nil

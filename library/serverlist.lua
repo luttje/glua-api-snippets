@@ -3,11 +3,18 @@
 --- Menu state library to query the master server list.
 serverlist = {}
 
----[MENU] Adds the given server address to their favorites.
+---[MENU] Removes the given server address from their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddServerToFavorites)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.RemoveServerFromFavorites)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
-function serverlist.AddServerToFavorites(address) end
+function serverlist.RemoveServerFromFavorites(address) end
+
+---[MENU] Returns true if the given server address is in their favorites.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsServerFavorite)
+---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
+---@return boolean # true if the server address is in their favorites
+function serverlist.IsServerFavorite(address) end
 
 ---[MENU] Queries the master server for server list.
 ---
@@ -44,12 +51,11 @@ function serverlist.AddCurrentServerToFavorites() end
 ---@return boolean # true if the current server is in their favorites
 function serverlist.IsCurrentServerFavorite() end
 
----[MENU] Returns true if the given server address is in their favorites.
+---[MENU] Adds the given server address to their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsServerFavorite)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddServerToFavorites)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
----@return boolean # true if the server address is in their favorites
-function serverlist.IsServerFavorite(address) end
+function serverlist.AddServerToFavorites(address) end
 
 ---[MENU] Queries a server for its information/ping.
 ---
@@ -57,9 +63,3 @@ function serverlist.IsServerFavorite(address) end
 ---@param ip string The IP address of the server, including the port.
 ---@param callback function The function to be called if and when the request finishes. Function has the same arguments as the callback of serverlist.Query.
 function serverlist.PingServer(ip, callback) end
-
----[MENU] Removes the given server address from their favorites.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.RemoveServerFromFavorites)
----@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
-function serverlist.RemoveServerFromFavorites(address) end

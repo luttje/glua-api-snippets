@@ -3,6 +3,12 @@
 --- The menubar library.
 menubar = {}
 
+---[CLIENT] Parents the menubar to the panel and displays the menubar.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.ParentTo)
+---@param pnl Panel The panel to parent to
+function menubar.ParentTo(pnl) end
+
 ---[CLIENT] Creates the menu bar ( The bar at the top of the screen when holding C or Q in sandbox ) and docks it to the top of the screen. It will not appear.
 ---
 ---
@@ -10,12 +16,6 @@ menubar = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.Init)
 function menubar.Init() end
-
----[CLIENT] Parents the menubar to the panel and displays the menubar.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/menubar.ParentTo)
----@param pnl Panel The panel to parent to
-function menubar.ParentTo(pnl) end
 
 ---[CLIENT] Checks if the supplied panel is parent to the menubar
 ---

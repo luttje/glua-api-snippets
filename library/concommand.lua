@@ -3,6 +3,21 @@
 --- The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server.
 concommand = {}
 
+---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
+---@return table # Table of command callback functions.
+---@return table # Table of command autocomplete functions.
+function concommand.GetTable() end
+
+---[SHARED AND MENU] Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
+---@param command string Name of command
+---@param arguments string Arguments given to the command
+---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
+function concommand.AutoComplete(command, arguments) end
+
 ---[SHARED AND MENU] Removes a console command.
 ---
 --- concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa).
@@ -10,13 +25,6 @@ concommand = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Remove)
 ---@param name string The name of the command to be removed.
 function concommand.Remove(name) end
-
----[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
----@return table # Table of command callback functions.
----@return table # Table of command autocomplete functions.
-function concommand.GetTable() end
 
 ---[SHARED AND MENU] You might be looking for Global.RunConsoleCommand or Player:ConCommand.
 ---
@@ -32,14 +40,6 @@ function concommand.GetTable() end
 ---@param argumentString string string of all arguments sent to the command
 ---@return boolean # `true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end
-
----[SHARED AND MENU] Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
----@param command string Name of command
----@param arguments string Arguments given to the command
----@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
-function concommand.AutoComplete(command, arguments) end
 
 ---[SHARED AND MENU] Creates a console command that runs a function in lua with optional autocompletion function and help text.
 ---

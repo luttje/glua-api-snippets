@@ -4,18 +4,28 @@
 ---@class CNewParticleEffect
 local CNewParticleEffect = {}
 
+---[CLIENT] Forces the particle system to restart emitting particles.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:Restart)
+function CNewParticleEffect:Restart() end
+
 ---[CLIENT] Returns the owner of the particle system, the entity the particle system is attached to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetOwner)
 ---@return Entity # The owner of the particle system.
 function CNewParticleEffect:GetOwner() end
 
----[CLIENT] Sets the upward direction for given control point.
+---[CLIENT] Returns the name of the particle effect this system is set to emit.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointUpVector)
----@param cpID number The control point ID, 0 to 63.
----@param upward Vector The upward direction for given control point
-function CNewParticleEffect:SetControlPointUpVector(cpID, upward) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetEffectName)
+---@return string # The name of the particle effect.
+function CNewParticleEffect:GetEffectName() end
+
+---[CLIENT]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetAutoUpdateBBox)
+---@return boolean #
+function CNewParticleEffect:GetAutoUpdateBBox() end
 
 ---[CLIENT] Sets a value for given control point.
 ---
@@ -24,20 +34,11 @@ function CNewParticleEffect:SetControlPointUpVector(cpID, upward) end
 ---@param value Vector The value to set for given control point.
 function CNewParticleEffect:SetControlPoint(cpID, value) end
 
----[CLIENT] Forces the particle system to render using current rendering context.
+---[CLIENT] Returns the highest control point number for given particle system.
 ---
---- Can be used to render the particle system in vgui panels, etc.
----
---- Used in conjunction with CNewParticleEffect:SetShouldDraw.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:Render)
-function CNewParticleEffect:Render() end
-
----[CLIENT] Returns whether the particle system is valid or not.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsValid)
----@return boolean # Whether the particle system is valid or not.
-function CNewParticleEffect:IsValid() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetHighestControlPoint)
+---@return boolean # The highest control point number for given particle system, 0 to 63.
+function CNewParticleEffect:GetHighestControlPoint() end
 
 ---[CLIENT] Adds a control point to the particle system.
 ---
@@ -51,12 +52,11 @@ function CNewParticleEffect:IsValid() end
 ---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 function CNewParticleEffect:AddControlPoint(cpID, ent, partAttachment, entAttachment, offset) end
 
----[CLIENT] Sets an entity to given control point for particle to use.
+---[CLIENT] Starts the particle emission.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointEntity)
----@param child number The child control point ID, 0 to 63.
----@param parent Entity The entity to set.
-function CNewParticleEffect:SetControlPointEntity(child, parent) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StartEmission)
+---@param infiniteOnly? boolean
+function CNewParticleEffect:StartEmission(infiniteOnly) end
 
 ---[CLIENT] Forces the particle system to stop automatically rendering.
 ---
@@ -65,6 +65,44 @@ function CNewParticleEffect:SetControlPointEntity(child, parent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetShouldDraw)
 ---@param should boolean Whether to automatically draw the particle effect or not.
 function CNewParticleEffect:SetShouldDraw(should) end
+
+---[CLIENT] Returns whether the particle system is valid or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsValid)
+---@return boolean # Whether the particle system is valid or not.
+function CNewParticleEffect:IsValid() end
+
+---[CLIENT] Set whether this particle effect is a view model effect or not. This will have an effect on attachment positioning and other things.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetIsViewModelEffect)
+---@param isViewModel boolean Whether this particle effect is a view model effect or not.
+function CNewParticleEffect:SetIsViewModelEffect(isViewModel) end
+
+---[CLIENT] Sets the sort origin for given particle system. This is used as a helper to determine which particles are in front of which.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetSortOrigin)
+---@param origin Vector The new sort origin.
+function CNewParticleEffect:SetSortOrigin(origin) end
+
+---[CLIENT] Sets an entity to given control point for particle to use.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointEntity)
+---@param child number The child control point ID, 0 to 63.
+---@param parent Entity The entity to set.
+function CNewParticleEffect:SetControlPointEntity(child, parent) end
+
+---[CLIENT] Returns whether the particle system is intended to be used on a view model?
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsViewModelEffect)
+---@return boolean #
+function CNewParticleEffect:IsViewModelEffect() end
+
+---[CLIENT] Sets the upward direction for given control point.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointUpVector)
+---@param cpID number The control point ID, 0 to 63.
+---@param upward Vector The upward direction for given control point
+function CNewParticleEffect:SetControlPointUpVector(cpID, upward) end
 
 ---[CLIENT] Sets the orientation for given control point.
 ---
@@ -77,72 +115,20 @@ function CNewParticleEffect:SetShouldDraw(should) end
 ---@param up Vector The up direction for given control point
 function CNewParticleEffect:SetControlPointOrientation(cpID, forward, right, up) end
 
----[CLIENT]
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetAutoUpdateBBox)
----@return boolean #
-function CNewParticleEffect:GetAutoUpdateBBox() end
-
----[CLIENT] Sets the forward direction for given control point.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointForwardVector)
----@param cpID number The control point ID, 0 to 63.
----@param forward Vector The forward direction for given control point
-function CNewParticleEffect:SetControlPointForwardVector(cpID, forward) end
-
----[CLIENT] Forces the particle system to restart emitting particles.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:Restart)
-function CNewParticleEffect:Restart() end
-
----[CLIENT] Returns the name of the particle effect this system is set to emit.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetEffectName)
----@return string # The name of the particle effect.
-function CNewParticleEffect:GetEffectName() end
-
----[CLIENT] Returns the highest control point number for given particle system.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetHighestControlPoint)
----@return boolean # The highest control point number for given particle system, 0 to 63.
-function CNewParticleEffect:GetHighestControlPoint() end
-
----[CLIENT] Sets the sort origin for given particle system. This is used as a helper to determine which particles are in front of which.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetSortOrigin)
----@param origin Vector The new sort origin.
-function CNewParticleEffect:SetSortOrigin(origin) end
-
----[CLIENT] Sets the right direction for given control point.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointRightVector)
----@param cpID number The control point ID, 0 to 63.
----@param right Vector The right direction for given control point.
-function CNewParticleEffect:SetControlPointRightVector(cpID, right) end
-
----[CLIENT] Set whether this particle effect is a view model effect or not. This will have an effect on attachment positioning and other things.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetIsViewModelEffect)
----@param isViewModel boolean Whether this particle effect is a view model effect or not.
-function CNewParticleEffect:SetIsViewModelEffect(isViewModel) end
-
----[CLIENT] Returns whether the particle system is intended to be used on a view model?
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsViewModelEffect)
----@return boolean #
-function CNewParticleEffect:IsViewModelEffect() end
-
----[CLIENT] Starts the particle emission.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StartEmission)
----@param infiniteOnly? boolean
-function CNewParticleEffect:StartEmission(infiniteOnly) end
-
 ---[CLIENT] Returns whether the particle system has finished emitting particles or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsFinished)
 ---@return boolean # Whether the particle system has finished emitting particles or not.
 function CNewParticleEffect:IsFinished() end
+
+---[CLIENT] Forces the particle system to render using current rendering context.
+---
+--- Can be used to render the particle system in vgui panels, etc.
+---
+--- Used in conjunction with CNewParticleEffect:SetShouldDraw.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:Render)
+function CNewParticleEffect:Render() end
 
 ---[CLIENT] Essentially makes child control point follow the parent control point.
 ---
@@ -151,13 +137,19 @@ function CNewParticleEffect:IsFinished() end
 ---@param parent number The parent control point ID, 0 to 63.
 function CNewParticleEffect:SetControlPointParent(child, parent) end
 
----[CLIENT] Stops the particle emission.
+---[CLIENT] Sets the forward direction for given control point.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmission)
----@param infiniteOnly? boolean
----@param removeAllParticles? boolean
----@param wakeOnStop? boolean
-function CNewParticleEffect:StopEmission(infiniteOnly, removeAllParticles, wakeOnStop) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointForwardVector)
+---@param cpID number The control point ID, 0 to 63.
+---@param forward Vector The forward direction for given control point
+function CNewParticleEffect:SetControlPointForwardVector(cpID, forward) end
+
+---[CLIENT] Sets the right direction for given control point.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointRightVector)
+---@param cpID number The control point ID, 0 to 63.
+---@param right Vector The right direction for given control point.
+function CNewParticleEffect:SetControlPointRightVector(cpID, right) end
 
 ---[CLIENT] Stops particle emission and destroys all particles instantly. Also detaches the particle effect from the entity it was attached to.
 ---
@@ -167,3 +159,11 @@ function CNewParticleEffect:StopEmission(infiniteOnly, removeAllParticles, wakeO
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmissionAndDestroyImmediately)
 function CNewParticleEffect:StopEmissionAndDestroyImmediately() end
+
+---[CLIENT] Stops the particle emission.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:StopEmission)
+---@param infiniteOnly? boolean
+---@param removeAllParticles? boolean
+---@param wakeOnStop? boolean
+function CNewParticleEffect:StopEmission(infiniteOnly, removeAllParticles, wakeOnStop) end

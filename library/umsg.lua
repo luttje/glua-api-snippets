@@ -8,12 +8,25 @@
 ---@deprecated You should be using the net library instead
 umsg = {}
 
----[SERVER] Writes a signed int (32 bit) to the usermessage.
+---[SERVER] Dispatches the usermessage to the client(s).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Long)
----@param int number The int to be sent.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.End)
 ---@deprecated You should be using the net instead
-function umsg.Long(int) end
+function umsg.End() end
+
+---[SERVER] Writes an angle to the usermessage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Angle)
+---@param angle Angle The angle to be sent.
+---@deprecated You should be using the net instead
+function umsg.Angle(angle) end
+
+---[SERVER] The string specified will be networked to the client and receive a identifying number, which will be sent instead of the string to optimize networking.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.PoolString)
+---@param string string The string to be pooled.
+---@deprecated Inferior version of util.AddNetworkString
+function umsg.PoolString(string) end
 
 ---[SERVER] Writes a signed short (16 bit) to the usermessage.
 ---
@@ -22,18 +35,19 @@ function umsg.Long(int) end
 ---@deprecated You should be using the net instead
 function umsg.Short(short) end
 
----[SERVER] Dispatches the usermessage to the client(s).
+---[SERVER] Writes a signed char to the usermessage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.End)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Char)
+---@param char number The char to be sent.
 ---@deprecated You should be using the net instead
-function umsg.End() end
+function umsg.Char(char) end
 
----[SERVER] The string specified will be networked to the client and receive a identifying number, which will be sent instead of the string to optimize networking.
+---[SERVER] Writes a signed int (32 bit) to the usermessage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.PoolString)
----@param string string The string to be pooled.
----@deprecated Inferior version of util.AddNetworkString
-function umsg.PoolString(string) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Long)
+---@param int number The int to be sent.
+---@deprecated You should be using the net instead
+function umsg.Long(int) end
 
 ---[SERVER] Starts a new usermessage.
 ---
@@ -52,27 +66,6 @@ function umsg.Start(name, filter) end
 ---@deprecated You should be using the net instead
 function umsg.Bool(bool) end
 
----[SERVER] Writes an entity object to the usermessage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Entity)
----@param entity Entity The entity to be sent.
----@deprecated You should be using the net instead
-function umsg.Entity(entity) end
-
----[SERVER] Writes a null terminated string to the usermessage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.String)
----@param string string The string to be sent.
----@deprecated You should be using the net instead
-function umsg.String(string) end
-
----[SERVER] Writes an angle to the usermessage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Angle)
----@param angle Angle The angle to be sent.
----@deprecated You should be using the net instead
-function umsg.Angle(angle) end
-
 ---[SERVER] Writes a float to the usermessage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Float)
@@ -80,12 +73,12 @@ function umsg.Angle(angle) end
 ---@deprecated You should be using the net instead
 function umsg.Float(float) end
 
----[SERVER] Writes a signed char to the usermessage.
+---[SERVER] Writes an entity object to the usermessage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Char)
----@param char number The char to be sent.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Entity)
+---@param entity Entity The entity to be sent.
 ---@deprecated You should be using the net instead
-function umsg.Char(char) end
+function umsg.Entity(entity) end
 
 ---[SERVER] Writes a Vector to the usermessage.
 ---
@@ -100,3 +93,10 @@ function umsg.Vector(vector) end
 ---@param normal Vector The vector normal to be sent.
 ---@deprecated You should be using the net instead
 function umsg.VectorNormal(normal) end
+
+---[SERVER] Writes a null terminated string to the usermessage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.String)
+---@param string string The string to be sent.
+---@deprecated You should be using the net instead
+function umsg.String(string) end

@@ -3,6 +3,13 @@
 --- The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 hook = {}
 
+---[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Remove)
+---@param eventName string The event name.
+---@param identifier any The unique identifier of the hook to remove, usually a string.
+function hook.Remove(eventName, identifier) end
+
 ---[SHARED AND MENU] Returns a list of all the hooks registered with hook.Add.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.GetTable)
@@ -35,13 +42,6 @@ function hook.Add(eventName, identifier, func) end
 ---@param ... any The arguments to be passed to the hooks.
 ---@return any # Returned data from called hooks.
 function hook.Run(eventName, ...) end
-
----[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Remove)
----@param eventName string The event name.
----@param identifier any The unique identifier of the hook to remove, usually a string.
-function hook.Remove(eventName, identifier) end
 
 ---[SHARED AND MENU] Calls all hooks associated with the given event until one returns something other than `nil`, and then returns that data.
 ---

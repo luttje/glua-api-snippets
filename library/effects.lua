@@ -17,11 +17,16 @@ function effects.Create(name) end
 ---@param name string Effect name.
 function effects.Register(effect_table, name) end
 
----[CLIENT] Returns a list of all Lua-defined effects.
+---[SHARED] Creates a bunch of bubbles inside a defined box.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
----@return table # The effects table.
-function effects.GetList() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Bubbles)
+---@param mins Vector The lowest extents of the box.
+---@param maxs Vector The highest extents of the box.
+---@param count number How many bubbles to spawn. There's a hard limit of 500 tempents at any time.
+---@param height number How high the bubbles can fly up before disappearing.
+---@param speed? number How quickly the bubbles move.
+---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
+function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 
 ---[SHARED] Creates a bubble trail effect, the very same you get when shooting underwater.
 ---
@@ -33,17 +38,6 @@ function effects.GetList() end
 ---@param speed? number How quickly the bubbles move.
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
-
----[SHARED] Creates a bunch of bubbles inside a defined box.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Bubbles)
----@param mins Vector The lowest extents of the box.
----@param maxs Vector The highest extents of the box.
----@param count number How many bubbles to spawn. There's a hard limit of 500 tempents at any time.
----@param height number How high the bubbles can fly up before disappearing.
----@param speed? number How quickly the bubbles move.
----@param delay? number Delay in seconds after the function call and before the effect actually spawns.
-function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 
 ---[SHARED] Creates a "beam ring point" effect.
 ---
@@ -64,3 +58,9 @@ function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 --- * string material - The material to use instead of the default one.
 ---
 function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude, color, extra) end
+
+---[CLIENT] Returns a list of all Lua-defined effects.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
+---@return table # The effects table.
+function effects.GetList() end

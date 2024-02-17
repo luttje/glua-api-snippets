@@ -1,15 +1,10 @@
 ---@meta
 
----[CLIENT] Adds a panel to the notification
+---[CLIENT] Returns all the items added with DNotify:AddItem.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:AddItem)
----@param pnl Panel The panel to add
----@param lifeLength? number If set, overrides DNotify:SetLife for when the given panel should be removed.
-function DNotify:AddItem(pnl, lifeLength) end
-
---- A panel that fades its contents in and out once, like a notification.Creates a notification panel with a text label inside.Creates a notification panel of Dr. Kleiner reminding the player to wear their HEV suit.
----@class DNotify : Panel
-local DNotify = {}
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetItems)
+---@return table # A table of Panels.
+function DNotify:GetItems() end
 
 ---[CLIENT] Returns the current alignment of this notification panel. Set by DNotify:SetAlignment.
 ---
@@ -17,17 +12,21 @@ local DNotify = {}
 ---@return number # The numpad alignment
 function DNotify:GetAlignment() end
 
----[CLIENT] Sets the display time in seconds for the DNotify.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:SetLife)
----@param time number The time in seconds.
-function DNotify:SetLife(time) end
+--- A panel that fades its contents in and out once, like a notification.Creates a notification panel with a text label inside.Creates a notification panel of Dr. Kleiner reminding the player to wear their HEV suit.
+---@class DNotify : Panel
+local DNotify = {}
 
----[CLIENT] Returns the spacing between items set by DNotify:SetSpacing.
+---[CLIENT] Adds a panel to the notification
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetSpacing)
----@return number #
-function DNotify:GetSpacing() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:AddItem)
+---@param pnl Panel The panel to add
+---@param lifeLength? number If set, overrides DNotify:SetLife for when the given panel should be removed.
+function DNotify:AddItem(pnl, lifeLength) end
+
+---[CLIENT] Used internally to position and fade in/out its DNotify:GetItems.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:Shuffle)
+function DNotify:Shuffle() end
 
 ---[CLIENT] Sets the spacing between child elements of the notification panel.
 ---
@@ -41,20 +40,21 @@ function DNotify:SetSpacing(spacing) end
 ---@param alignment number It's the Numpad alignment, 6 is right, 9 is top left, etc.
 function DNotify:SetAlignment(alignment) end
 
----[CLIENT] Used internally to position and fade in/out its DNotify:GetItems.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:Shuffle)
-function DNotify:Shuffle() end
-
----[CLIENT] Returns all the items added with DNotify:AddItem.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetItems)
----@return table # A table of Panels.
-function DNotify:GetItems() end
-
 ---[CLIENT] Returns the display time in seconds of the DNotify. This is set with
 --- DNotify:SetLife.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetLife)
 ---@return number # The display time in seconds.
 function DNotify:GetLife() end
+
+---[CLIENT] Returns the spacing between items set by DNotify:SetSpacing.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetSpacing)
+---@return number #
+function DNotify:GetSpacing() end
+
+---[CLIENT] Sets the display time in seconds for the DNotify.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:SetLife)
+---@param time number The time in seconds.
+function DNotify:SetLife(time) end

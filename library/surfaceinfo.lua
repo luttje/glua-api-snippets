@@ -8,6 +8,12 @@
 ---@class SurfaceInfo
 local SurfaceInfo = {}
 
+---[SHARED] Returns the brush surface's material.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:GetMaterial)
+---@return IMaterial # Material of one portion of a brush model.
+function SurfaceInfo:GetMaterial() end
+
 ---[SHARED] Checks if the brush surface is displaying the skybox.
 ---
 --- This internally checks the SURFDRAW_SKY flag.
@@ -21,12 +27,6 @@ function SurfaceInfo:IsSky() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:GetVertices)
 ---@return table # A list of Vector points. This will usually be 4 corners of a quadrilateral in counter-clockwise order.
 function SurfaceInfo:GetVertices() end
-
----[SHARED] Returns the brush surface's material.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:GetMaterial)
----@return IMaterial # Material of one portion of a brush model.
-function SurfaceInfo:GetMaterial() end
 
 ---[SHARED] Checks if the brush surface is a nodraw surface, meaning it will not be drawn by the engine.
 ---

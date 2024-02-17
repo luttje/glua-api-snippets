@@ -3,12 +3,6 @@
 --- Used to display notifications on the screen (mid-right).
 notification = {}
 
----[CLIENT AND MENU] Removes the notification after 0.8 seconds.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/notification.Kill)
----@param uid any The unique ID of the notification
-function notification.Kill(uid) end
-
 ---[CLIENT AND MENU] Adds a standard notification to your screen.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/notification.AddLegacy)
@@ -24,3 +18,9 @@ function notification.AddLegacy(text, type, length) end
 ---@param strText string The text to show
 ---@param frac? number If set, overrides the progress bar animation with given percentage. Range is 0 to 1.
 function notification.AddProgress(id, strText, frac) end
+
+---[CLIENT AND MENU] Removes the notification after 0.8 seconds.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/notification.Kill)
+---@param uid any The unique ID of the notification
+function notification.Kill(uid) end

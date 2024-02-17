@@ -1,11 +1,5 @@
 ---@meta
 
----
---- 		A combination of DModelSelect and DPropertySheet.
----
----@class DModelSelectMulti : DPropertySheet
-local DModelSelectMulti = {}
-
 ---[CLIENT AND MENU] Adds a new tab of models.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelSelectMulti:AddModelList)
@@ -15,3 +9,9 @@ local DModelSelectMulti = {}
 ---@param dontSort boolean Do not sort the list. (by the `Model` member)
 ---@param dontCallListConVars boolean If set, only the `convar` from the 2nd argument will be set, not individual convars from the models list.
 function DModelSelectMulti:AddModelList(name, models, convar, dontSort, dontCallListConVars) end
+
+---
+--- 		A combination of DModelSelect and DPropertySheet.
+---
+---@class DModelSelectMulti : DPropertySheet
+local DModelSelectMulti = {}
