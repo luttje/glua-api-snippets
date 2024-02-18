@@ -1,29 +1,5 @@
 ---@meta
 
----@enum ANALOG
-ANALOG_MOUSE_X = 0
-ANALOG_MOUSE_Y = 1
-ANALOG_MOUSE_WHEEL = 3
-ANALOG_JOY_X = 4
-ANALOG_JOY_Y = 5
-ANALOG_JOY_Z = 6
-ANALOG_JOY_R = 7
-ANALOG_JOY_U = 8
-ANALOG_JOY_V = 9
-
----@enum BLEND
-BLEND_ZERO = 0
-BLEND_ONE = 1
-BLEND_DST_COLOR = 2
-BLEND_ONE_MINUS_DST_COLOR = 3
-BLEND_SRC_ALPHA = 4
-BLEND_ONE_MINUS_SRC_ALPHA = 5
-BLEND_DST_ALPHA = 6
-BLEND_ONE_MINUS_DST_ALPHA = 7
-BLEND_SRC_ALPHA_SATURATE = 8
-BLEND_SRC_COLOR = 9
-BLEND_ONE_MINUS_SRC_COLOR = 10
-
 ---@enum _USE
 --- Fire a Enums/USE signal every tick as long as the player holds their use key and aims at the target.
 CONTINUOUS_USE = 0
@@ -37,33 +13,6 @@ ONOFF_USE = 1
 DIRECTIONAL_USE = 2
 --- Fire a Enums/USE signal only once when player presses their use key while aiming at the target.
 SIMPLE_USE = 3
-
----@enum AIMR
---- Move is illegal for some reason.
-AIMR_ILLEGAL = -4
---- Move was blocked by an NPC.
-AIMR_BLOCKED_NPC = -3
---- Move was blocked by the world.
-AIMR_BLOCKED_WORLD = -2
---- Move was blocked by an entity.
-AIMR_BLOCKED_ENTITY = -1
---- Move op was ok.
-AIMR_OK = 0
---- Locomotion method has changed.
-AIMR_CHANGE_TYPE = 1
-
----@enum AMMO
---- Forces player to drop the object they are carrying if the object was hit by this ammo type.
-AMMO_FORCE_DROP_IF_CARRIED = 1
---- Uses Structures/AmmoData.plydmg of the ammo type as the damage to deal to shot players instead of Structures/Bullet.Damage.
-AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
-
----@enum BLENDFUNC
-BLENDFUNC_ADD = 0
-BLENDFUNC_SUBTRACT = 1
-BLENDFUNC_REVERSE_SUBTRACT = 2
-BLENDFUNC_MIN = 3
-BLENDFUNC_MAX = 4
 
 ---@enum ACT
 ACT_INVALID = -1
@@ -1665,6 +1614,57 @@ ACT_GMOD_SHOWOFF_DUCK_02 = 2044
 --- The largest activity number
 LAST_SHARED_ACTIVITY = 2045
 
+---@enum AIMR
+--- Move is illegal for some reason.
+AIMR_ILLEGAL = -4
+--- Move was blocked by an NPC.
+AIMR_BLOCKED_NPC = -3
+--- Move was blocked by the world.
+AIMR_BLOCKED_WORLD = -2
+--- Move was blocked by an entity.
+AIMR_BLOCKED_ENTITY = -1
+--- Move op was ok.
+AIMR_OK = 0
+--- Locomotion method has changed.
+AIMR_CHANGE_TYPE = 1
+
+---@enum AMMO
+--- Forces player to drop the object they are carrying if the object was hit by this ammo type.
+AMMO_FORCE_DROP_IF_CARRIED = 1
+--- Uses Structures/AmmoData.plydmg of the ammo type as the damage to deal to shot players instead of Structures/Bullet.Damage.
+AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
+
+---@enum ANALOG
+ANALOG_MOUSE_X = 0
+ANALOG_MOUSE_Y = 1
+ANALOG_MOUSE_WHEEL = 3
+ANALOG_JOY_X = 4
+ANALOG_JOY_Y = 5
+ANALOG_JOY_Z = 6
+ANALOG_JOY_R = 7
+ANALOG_JOY_U = 8
+ANALOG_JOY_V = 9
+
+---@enum BLEND
+BLEND_ZERO = 0
+BLEND_ONE = 1
+BLEND_DST_COLOR = 2
+BLEND_ONE_MINUS_DST_COLOR = 3
+BLEND_SRC_ALPHA = 4
+BLEND_ONE_MINUS_SRC_ALPHA = 5
+BLEND_DST_ALPHA = 6
+BLEND_ONE_MINUS_DST_ALPHA = 7
+BLEND_SRC_ALPHA_SATURATE = 8
+BLEND_SRC_COLOR = 9
+BLEND_ONE_MINUS_SRC_COLOR = 10
+
+---@enum BLENDFUNC
+BLENDFUNC_ADD = 0
+BLENDFUNC_SUBTRACT = 1
+BLENDFUNC_REVERSE_SUBTRACT = 2
+BLENDFUNC_MIN = 3
+BLENDFUNC_MAX = 4
+
 ---@enum BLOOD_COLOR
 --- No blood
 DONT_BLEED = -1
@@ -1682,74 +1682,6 @@ BLOOD_COLOR_ANTLION = 4
 BLOOD_COLOR_ZOMBIE = 5
 --- Bright green blood
 BLOOD_COLOR_ANTLION_WORKER = 6
-
----@enum DMG
---- Generic damage (used by weapon_fists)
-DMG_GENERIC = 0
---- Caused by physics interaction and ignored by airboat drivers. This is used by the Rollermine and an unused animation attack called 'Fireattack' by the Antlion Guard [ACT_RANGE_ATTACK1](https://wiki.facepunch.com/gmod/Enums/ACT)
-DMG_CRUSH = 1
---- Bullet damage from Ceiling Turrets, the Strider, Turrets and most guns.
-DMG_BULLET = 2
---- Used by the Stunstick, Manhacks, Antlions, Antlion Guards, Headcrabs, Fast Headcrabs, all Zombies types, Hunter, and potentially other NPCs attacks
-DMG_SLASH = 4
---- Damage from fire
-DMG_BURN = 8
---- Hit by a vehicle (This will need to be set for passengers of some vehicle to receive damage)
-DMG_VEHICLE = 16
---- Fall damage
-DMG_FALL = 32
---- Explosion damage like grenades, helicopter bombs, combine mines, Will be ignored by most vehicle passengers.
-DMG_BLAST = 64
---- Blunt attacks such as from the Crowbar, Antlion Guard & Hunter
-DMG_CLUB = 128
---- Electrical damage, shows smoke at the damage position and its used by Stalkers & Vortigaunts
-DMG_SHOCK = 256
---- Sonic damage, used by the Gargantua and Houndeye NPCs
-DMG_SONIC = 512
---- Laser damage
-DMG_ENERGYBEAM = 1024
---- Prevent a physics force.
-DMG_PREVENT_PHYSICS_FORCE = 2048
---- Crossbow damage, never creates gibs.
-DMG_NEVERGIB = 4096
---- Always create gibs
-DMG_ALWAYSGIB = 8192
---- Drown damage
-DMG_DROWN = 16384
---- Same as DMG_POISON
-DMG_PARALYZE = 32768
---- Neurotoxin damage
-DMG_NERVEGAS = 65536
---- Poison damage used by Antlion Workers & Poison Headcrabs.
-DMG_POISON = 131072
---- Radiation damage & it will be ignored by most vehicle passengers
-DMG_RADIATION = 262144
---- Damage applied to the player to restore health after drowning
-DMG_DROWNRECOVER = 524288
---- Toxic chemical or acid burn damage used by the Antlion Workers
-DMG_ACID = 1048576
---- In an oven
-DMG_SLOWBURN = 2097152
---- Don't create a ragdoll on death
-DMG_REMOVENORAGDOLL = 4194304
---- Damage done by the gravity gun.
-DMG_PHYSGUN = 8388608
---- Plasma damage
-DMG_PLASMA = 16777216
---- Airboat gun damage
-DMG_AIRBOAT = 33554432
---- Forces the entity to dissolve on death. This is what the combine ball uses when it hits a target.
-DMG_DISSOLVE = 67108864
---- This won't hurt the player underwater
-DMG_BLAST_SURFACE = 134217728
---- Direct damage to the entity that does not go through any damage value modifications
-DMG_DIRECT = 268435456
---- The pellets fired from a shotgun
-DMG_BUCKSHOT = 536870912
---- Damage from SniperRound/SniperPenetratedRound ammo types
-DMG_SNIPER = 1073741824
---- Damage from npc_missiledefense, npc_combinegunship, or monster_mortar
-DMG_MISSILEDEFENSE = 2147483648
 
 ---@enum BONE
 --- Bone is physically simulated when physics are active
@@ -1784,6 +1716,12 @@ BONE_USED_BY_BONE_MERGE = 262144
 BONE_USED_BY_ANYTHING = 524032
 BONE_USED_MASK = 524032
 
+---@enum BOUNDS
+--- Sets the bounds in relation to the entity's collision bounds.
+BOUNDS_COLLISION = 0
+--- Sets the bounds to fit all hitboxes of the entity's model.
+BOUNDS_HITBOXES = 2
+
 ---@enum BOX
 --- Place the light from the front
 BOX_FRONT = 0
@@ -1797,6 +1735,12 @@ BOX_LEFT = 3
 BOX_TOP = 4
 --- Place the light to the bottom
 BOX_BOTTOM = 5
+
+---@enum BUTTON_CODE
+BUTTON_CODE_INVALID = -1
+BUTTON_CODE_NONE = 0
+BUTTON_CODE_LAST = 171
+BUTTON_CODE_COUNT = 172
 
 ---@enum CAP
 --- When hit by an explosion, we'll simply block it instead of spilling it to entities behind us, the sv_robust_explosions cvar can also enable this globally when set to 0
@@ -1846,65 +1790,105 @@ CAP_NO_HIT_PLAYER = 268435456
 CAP_AIM_GUN = 536870912
 CAP_NO_HIT_SQUADMATES = 1073741824
 
----@enum CONTENTS
---- Things that are not solid
-CONTENTS_EMPTY = 0
---- Things that are solid
-CONTENTS_SOLID = 1
---- Glass
-CONTENTS_WINDOW = 2
-CONTENTS_AUX = 4
---- Bullets go through, solids don't
-CONTENTS_GRATE = 8
-CONTENTS_SLIME = 16
---- Hits world but not skybox
-CONTENTS_WATER = 32
---- Things that block line of sight
-CONTENTS_BLOCKLOS = 64
---- Things that block light
-CONTENTS_OPAQUE = 128
-CONTENTS_TESTFOGVOLUME = 256
-CONTENTS_TEAM4 = 512
-CONTENTS_TEAM3 = 1024
-CONTENTS_TEAM1 = 2048
-CONTENTS_TEAM2 = 4096
-CONTENTS_IGNORE_NODRAW_OPAQUE = 8192
-CONTENTS_MOVEABLE = 16384
-CONTENTS_AREAPORTAL = 32768
-CONTENTS_PLAYERCLIP = 65536
-CONTENTS_MONSTERCLIP = 131072
-CONTENTS_CURRENT_0 = 262144
-CONTENTS_CURRENT_180 = 1048576
-CONTENTS_CURRENT_270 = 2097152
-CONTENTS_CURRENT_90 = 524288
-CONTENTS_CURRENT_DOWN = 8388608
-CONTENTS_CURRENT_UP = 4194304
-CONTENTS_DEBRIS = 67108864
-CONTENTS_DETAIL = 134217728
---- Hitbox
-CONTENTS_HITBOX = 1073741824
---- Ladder
-CONTENTS_LADDER = 536870912
---- NPCs
-CONTENTS_MONSTER = 33554432
-CONTENTS_ORIGIN = 16777216
---- Hits world but not skybox
-CONTENTS_TRANSLUCENT = 268435456
---- Last visible contents enumeration
-LAST_VISIBLE_CONTENTS = 128
---- Sum of all the visible contents enumerations
-ALL_VISIBLE_CONTENTS = 255
+---@enum CHAN
+--- Used when playing sounds through console commands.
+CHAN_REPLACE = -1
+--- Automatic channel
+CHAN_AUTO = 0
+--- Channel for weapon sounds
+CHAN_WEAPON = 1
+--- Channel for NPC voices
+CHAN_VOICE = 2
+--- Channel for items ( Health kits, etc )
+CHAN_ITEM = 3
+--- Clothing, ragdoll impacts, footsteps, knocking/pounding/punching etc.
+CHAN_BODY = 4
+--- Stream channel from the static or dynamic area
+CHAN_STREAM = 5
+--- A constant/background sound that doesn't require any reaction.
+--- **This channel allows same sounds files to play multiple times without cutting out.**
+CHAN_STATIC = 6
+--- TF2s Announcer dialogue channel
+CHAN_VOICE2 = 7
+--- Channels 8-135 (128 channels) are allocated for player voice chat
+--- **This channel allows same sounds files to play multiple times without cutting out.**
+CHAN_VOICE_BASE = 8
+--- Channels from this and onwards are allocated to game code
+CHAN_USER_BASE = 136
 
----@enum DOF
-DOF_OFFSET = 256
-DOF_SPACING = 512
-
----@enum DISPSURF
-DISPSURF_SURFACE = 1
-DISPSURF_WALKABLE = 2
-DISPSURF_BUILDABLE = 4
-DISPSURF_SURFPROP1 = 8
-DISPSURF_SURFPROP2 = 16
+---@enum CLASS
+--- None - default class for entities.
+CLASS_NONE = 0
+--- Players.
+CLASS_PLAYER = 1
+--- HL2 player allies - monster_barney, npc_citizen, hacked npc_manhack, and friendly npc_turret_floor.
+CLASS_PLAYER_ALLY = 2
+--- HL2 vital player allies - npc_magnusson, npc_gman, npc_fisherman, npc_eli, npc_barney, npc_kleiner, npc_mossman, npc_alyx, npc_monk, npc_dog, and npc_vortigaunt at the end of EP2 (controlled by "MakeGameEndAlly" input).
+CLASS_PLAYER_ALLY_VITAL = 3
+--- HL2 antlions - npc_antlion, npc_antlionguard, and npc_ichthyosaur.
+CLASS_ANTLION = 4
+--- HL2 barnacles - npc_barnacle.
+CLASS_BARNACLE = 5
+--- HL2 bullseyes - npc_bullseye.
+CLASS_BULLSEYE = 6
+--- HL2 passive/non-rebel citizens - npc_citizen in the beginning of HL2.
+CLASS_CITIZEN_PASSIVE = 7
+--- HL2 unused.
+CLASS_CITIZEN_REBEL = 8
+--- HL2 combine troops - npc_combine, npc_advisor, apc_missile, npc_apcdriver, hostile npc_turret_floor, hostile npc_rollermine, npc_turret_ground when active, npc_turret_ceiling when active, and npc_strider when active (not being carried by the gunship).
+CLASS_COMBINE = 9
+--- HL2 combine aircrafts - npc_combinegunship, npc_combinedropship, and npc_helicopter.
+CLASS_COMBINE_GUNSHIP = 10
+--- HL2 unused.
+CLASS_CONSCRIPT = 11
+--- HL2 headcrabs - visible npc_headcrab.
+CLASS_HEADCRAB = 12
+--- HL2 manhacks - hostile npc_manhack not held by the gravity gun.
+CLASS_MANHACK = 13
+--- HL2 metro police - npc_metropolice and npc_vehicledriver.
+CLASS_METROPOLICE = 14
+--- HL2 combine military objects - func_guntarget, npc_spotlight, and active npc_combine_camera.
+CLASS_MILITARY = 15
+--- HL2 combine scanners - npc_cscanner and npc_clawscanner.
+CLASS_SCANNER = 16
+--- HL2 stalkers - npc_stalker.
+CLASS_STALKER = 17
+--- HL2 vortigaunts - npc_vortigaunt before the end of EP2 (controlled by "MakeGameEndAlly" input).
+CLASS_VORTIGAUNT = 18
+--- HL2 zombies - unslumped npc_zombie, npc_poisonzombie, npc_fastzombie, npc_fastzombie_torso, and npc_zombine.
+CLASS_ZOMBIE = 19
+--- HL2 snipers - npc_sniper and proto_sniper.
+CLASS_PROTOSNIPER = 20
+--- HL2 missiles - rpg_missile, apc_missile, and grenade_pathfollower.
+CLASS_MISSILE = 21
+--- HL2 flares - env_flare.
+CLASS_FLARE = 22
+--- HL2 animals - npc_crow, npc_seagull, and npc_pigeon.
+CLASS_EARTH_FAUNA = 23
+--- HL2 friendly rollermines - hacked npc_rollermine.
+CLASS_HACKED_ROLLERMINE = 24
+--- HL2 hunters - npc_hunter.
+CLASS_COMBINE_HUNTER = 25
+--- HL:S turrets - monster_turret, monster_miniturret, monster_sentry.
+CLASS_MACHINE = 26
+--- HL:S friendly humans - monster_scientist.
+CLASS_HUMAN_PASSIVE = 27
+--- HL:S human military - monster_human_grunt and monster_apache.
+CLASS_HUMAN_MILITARY = 28
+--- HL:S alien military - monster_alien_controller, monster_vortigaunt, monster_alien_grunt, monster_nihilanth, and monster_snark if it has an enemy of class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
+CLASS_ALIEN_MILITARY = 29
+--- HL:S monsters - monster_tentacle, monster_barnacle, monster_zombie, monster_gargantua, monster_houndeye, monster_ichthyosaur, and monster_bigmomma.
+CLASS_ALIEN_MONSTER = 30
+--- HL:S headcrabs - monster_headcrab.
+CLASS_ALIEN_PREY = 31
+--- HL:S alien predators - monster_bullsquid, xen_tree, and xen_hull.
+CLASS_ALIEN_PREDATOR = 32
+--- HL:S insects - montser_roach and monster_leech.
+CLASS_INSECT = 33
+--- HL:S player bioweapons - hornet fired by a player.
+CLASS_PLAYER_BIOWEAPON = 34
+--- HL:S enemy bioweapons - hornet fired by anyone but a player, or monster_snark with no enemy or an enemy without the class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
+CLASS_ALIEN_BIOWEAPON = 35
 
 ---@enum COLLISION_GROUP
 --- Normal
@@ -1948,111 +1932,6 @@ COLLISION_GROUP_NPC_SCRIPTED = 19
 COLLISION_GROUP_WORLD = 20
 --- Amount of COLLISION_GROUP_ enumerations
 LAST_SHARED_COLLISION_GROUP = 21
-
----@enum EFL
---- This entity is marked for death -- This allows the game to actually delete ents at a safe time.
---- You should never set this flag manually.
-EFL_KILLME = 1
---- Entity is dormant, no updates to client
-EFL_DORMANT = 2
---- Lets us know when the noclip command is active
-EFL_NOCLIP_ACTIVE = 4
---- Set while a model is setting up its bones
-EFL_SETTING_UP_BONES = 8
---- This is a special entity that should not be deleted when we respawn entities via game.CleanUpMap.
-EFL_KEEP_ON_RECREATE_ENTITIES = 16
---- One of the child entities is a player
-EFL_HAS_PLAYER_CHILD = 16
---- (Client only) need shadow manager to update the shadow
-EFL_DIRTY_SHADOWUPDATE = 32
---- Another entity is watching events on this entity (used by teleport)
-EFL_NOTIFY = 64
---- The default behavior in ShouldTransmit is to not send an entity if it doesn't have a model. Certain entities want to be sent anyway because all the drawing logic is in the client DLL. They can set this flag and the engine will transmit them even if they don't have model
-EFL_FORCE_CHECK_TRANSMIT = 128
---- This is set on bots that are frozen
-EFL_BOT_FROZEN = 256
---- Non-networked entity
-EFL_SERVER_ONLY = 512
---- Don't attach the edict
-EFL_NO_AUTO_EDICT_ATTACH = 1024
-EFL_DIRTY_ABSTRANSFORM = 2048
-EFL_DIRTY_ABSVELOCITY = 4096
---- Some dirty bits with respect to abs computations
-EFL_DIRTY_ABSANGVELOCITY = 8192
-EFL_DIRTY_SURROUNDING_COLLISION_BOUNDS = 16384
-EFL_DIRTY_SPATIAL_PARTITION = 32768
---- This is set if the entity detects that it's in the skybox. This forces it to pass the "in PVS" for transmission
-EFL_IN_SKYBOX = 131072
---- Entities with this flag set show up in the partition even when not solid
-EFL_USE_PARTITION_WHEN_NOT_SOLID = 262144
---- Used to determine if an entity is floating
-EFL_TOUCHING_FLUID = 524288
-EFL_IS_BEING_LIFTED_BY_BARNACLE = 1048576
-EFL_NO_ROTORWASH_PUSH = 2097152
---- Avoid executing the entity's Think
-EFL_NO_THINK_FUNCTION = 4194304
-EFL_NO_GAME_PHYSICS_SIMULATION = 8388608
-EFL_CHECK_UNTOUCH = 16777216
---- Entity shouldn't block NPC line-of-sight
-EFL_DONTBLOCKLOS = 33554432
---- NPCs should not walk on this entity
-EFL_DONTWALKON = 67108864
---- The entity shouldn't dissolve
-EFL_NO_DISSOLVE = 134217728
---- Mega physcannon can't ragdoll these guys
-EFL_NO_MEGAPHYSCANNON_RAGDOLL = 268435456
---- Don't adjust this entity's velocity when transitioning into water
-EFL_NO_WATER_VELOCITY_CHANGE = 536870912
---- Physcannon can't pick these up or punt them
-EFL_NO_PHYSCANNON_INTERACTION = 1073741824
---- Doesn't accept forces from physics damage
-EFL_NO_DAMAGE_FORCES = -2147483648
-
----@enum EF
---- Performs bone merge on client side
-EF_BONEMERGE = 1
---- For use with EF_BONEMERGE. If this is set, then it places this ents origin at its parent and uses the parent's bbox + the max extents of the aiment. Otherwise, it sets up the parent's bones every frame to figure out where to place the aiment, which is inefficient because it'll setup the parent's bones even if the parent is not in the PVS.
-EF_BONEMERGE_FASTCULL = 128
---- DLIGHT centered at entity origin
-EF_BRIGHTLIGHT = 2
---- Player flashlight
-EF_DIMLIGHT = 4
---- Don't interpolate the next frame
-EF_NOINTERP = 8
---- Disables shadow
-EF_NOSHADOW = 16
---- Prevents the entity from drawing and networking.
-EF_NODRAW = 32
---- Don't receive shadows
-EF_NORECEIVESHADOW = 64
---- Makes the entity blink
-EF_ITEM_BLINK = 256
---- Always assume that the parent entity is animating.
-EF_PARENT_ANIMATES = 512
---- Internal flag that is set by Entity:FollowBone.
-EF_FOLLOWBONE = 1024
---- Makes the entity not accept being lit by projected textures, including the player's flashlight.
-EF_NOFLASHLIGHT = 8192
-
----@enum BOUNDS
---- Sets the bounds in relation to the entity's collision bounds.
-BOUNDS_COLLISION = 0
---- Sets the bounds to fit all hitboxes of the entity's model.
-BOUNDS_HITBOXES = 2
-
----@enum DOCK
---- Don't dock
-NODOCK = 0
---- Fill parent
-FILL = 1
---- Dock to the left
-LEFT = 2
---- Dock to the right
-RIGHT = 3
---- Dock to the top
-TOP = 4
---- Dock to the bottom
-BOTTOM = 5
 
 ---@enum COND
 ---
@@ -2139,97 +2018,62 @@ COND = {
 	WEAPON_SIGHT_OCCLUDED = 45,
 }
 
----@enum CLASS
---- None - default class for entities.
-CLASS_NONE = 0
---- Players.
-CLASS_PLAYER = 1
---- HL2 player allies - monster_barney, npc_citizen, hacked npc_manhack, and friendly npc_turret_floor.
-CLASS_PLAYER_ALLY = 2
---- HL2 vital player allies - npc_magnusson, npc_gman, npc_fisherman, npc_eli, npc_barney, npc_kleiner, npc_mossman, npc_alyx, npc_monk, npc_dog, and npc_vortigaunt at the end of EP2 (controlled by "MakeGameEndAlly" input).
-CLASS_PLAYER_ALLY_VITAL = 3
---- HL2 antlions - npc_antlion, npc_antlionguard, and npc_ichthyosaur.
-CLASS_ANTLION = 4
---- HL2 barnacles - npc_barnacle.
-CLASS_BARNACLE = 5
---- HL2 bullseyes - npc_bullseye.
-CLASS_BULLSEYE = 6
---- HL2 passive/non-rebel citizens - npc_citizen in the beginning of HL2.
-CLASS_CITIZEN_PASSIVE = 7
---- HL2 unused.
-CLASS_CITIZEN_REBEL = 8
---- HL2 combine troops - npc_combine, npc_advisor, apc_missile, npc_apcdriver, hostile npc_turret_floor, hostile npc_rollermine, npc_turret_ground when active, npc_turret_ceiling when active, and npc_strider when active (not being carried by the gunship).
-CLASS_COMBINE = 9
---- HL2 combine aircrafts - npc_combinegunship, npc_combinedropship, and npc_helicopter.
-CLASS_COMBINE_GUNSHIP = 10
---- HL2 unused.
-CLASS_CONSCRIPT = 11
---- HL2 headcrabs - visible npc_headcrab.
-CLASS_HEADCRAB = 12
---- HL2 manhacks - hostile npc_manhack not held by the gravity gun.
-CLASS_MANHACK = 13
---- HL2 metro police - npc_metropolice and npc_vehicledriver.
-CLASS_METROPOLICE = 14
---- HL2 combine military objects - func_guntarget, npc_spotlight, and active npc_combine_camera.
-CLASS_MILITARY = 15
---- HL2 combine scanners - npc_cscanner and npc_clawscanner.
-CLASS_SCANNER = 16
---- HL2 stalkers - npc_stalker.
-CLASS_STALKER = 17
---- HL2 vortigaunts - npc_vortigaunt before the end of EP2 (controlled by "MakeGameEndAlly" input).
-CLASS_VORTIGAUNT = 18
---- HL2 zombies - unslumped npc_zombie, npc_poisonzombie, npc_fastzombie, npc_fastzombie_torso, and npc_zombine.
-CLASS_ZOMBIE = 19
---- HL2 snipers - npc_sniper and proto_sniper.
-CLASS_PROTOSNIPER = 20
---- HL2 missiles - rpg_missile, apc_missile, and grenade_pathfollower.
-CLASS_MISSILE = 21
---- HL2 flares - env_flare.
-CLASS_FLARE = 22
---- HL2 animals - npc_crow, npc_seagull, and npc_pigeon.
-CLASS_EARTH_FAUNA = 23
---- HL2 friendly rollermines - hacked npc_rollermine.
-CLASS_HACKED_ROLLERMINE = 24
---- HL2 hunters - npc_hunter.
-CLASS_COMBINE_HUNTER = 25
---- HL:S turrets - monster_turret, monster_miniturret, monster_sentry.
-CLASS_MACHINE = 26
---- HL:S friendly humans - monster_scientist.
-CLASS_HUMAN_PASSIVE = 27
---- HL:S human military - monster_human_grunt and monster_apache.
-CLASS_HUMAN_MILITARY = 28
---- HL:S alien military - monster_alien_controller, monster_vortigaunt, monster_alien_grunt, monster_nihilanth, and monster_snark if it has an enemy of class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
-CLASS_ALIEN_MILITARY = 29
---- HL:S monsters - monster_tentacle, monster_barnacle, monster_zombie, monster_gargantua, monster_houndeye, monster_ichthyosaur, and monster_bigmomma.
-CLASS_ALIEN_MONSTER = 30
---- HL:S headcrabs - monster_headcrab.
-CLASS_ALIEN_PREY = 31
---- HL:S alien predators - monster_bullsquid, xen_tree, and xen_hull.
-CLASS_ALIEN_PREDATOR = 32
---- HL:S insects - montser_roach and monster_leech.
-CLASS_INSECT = 33
---- HL:S player bioweapons - hornet fired by a player.
-CLASS_PLAYER_BIOWEAPON = 34
---- HL:S enemy bioweapons - hornet fired by anyone but a player, or monster_snark with no enemy or an enemy without the class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
-CLASS_ALIEN_BIOWEAPON = 35
+---@enum CONTENTS
+--- Things that are not solid
+CONTENTS_EMPTY = 0
+--- Things that are solid
+CONTENTS_SOLID = 1
+--- Glass
+CONTENTS_WINDOW = 2
+CONTENTS_AUX = 4
+--- Bullets go through, solids don't
+CONTENTS_GRATE = 8
+CONTENTS_SLIME = 16
+--- Hits world but not skybox
+CONTENTS_WATER = 32
+--- Things that block line of sight
+CONTENTS_BLOCKLOS = 64
+--- Things that block light
+CONTENTS_OPAQUE = 128
+CONTENTS_TESTFOGVOLUME = 256
+CONTENTS_TEAM4 = 512
+CONTENTS_TEAM3 = 1024
+CONTENTS_TEAM1 = 2048
+CONTENTS_TEAM2 = 4096
+CONTENTS_IGNORE_NODRAW_OPAQUE = 8192
+CONTENTS_MOVEABLE = 16384
+CONTENTS_AREAPORTAL = 32768
+CONTENTS_PLAYERCLIP = 65536
+CONTENTS_MONSTERCLIP = 131072
+CONTENTS_CURRENT_0 = 262144
+CONTENTS_CURRENT_180 = 1048576
+CONTENTS_CURRENT_270 = 2097152
+CONTENTS_CURRENT_90 = 524288
+CONTENTS_CURRENT_DOWN = 8388608
+CONTENTS_CURRENT_UP = 4194304
+CONTENTS_DEBRIS = 67108864
+CONTENTS_DETAIL = 134217728
+--- Hitbox
+CONTENTS_HITBOX = 1073741824
+--- Ladder
+CONTENTS_LADDER = 536870912
+--- NPCs
+CONTENTS_MONSTER = 33554432
+CONTENTS_ORIGIN = 16777216
+--- Hits world but not skybox
+CONTENTS_TRANSLUCENT = 268435456
+--- Last visible contents enumeration
+LAST_VISIBLE_CONTENTS = 128
+--- Sum of all the visible contents enumerations
+ALL_VISIBLE_CONTENTS = 255
 
----@enum BUTTON_CODE
-BUTTON_CODE_INVALID = -1
-BUTTON_CODE_NONE = 0
-BUTTON_CODE_LAST = 171
-BUTTON_CODE_COUNT = 172
-
----@enum D
---- Error
-D_ER = 0
---- Hate
-D_HT = 1
---- Frightened / Fear
-D_FR = 2
---- Like
-D_LI = 3
---- Neutral
-D_NU = 4
+---@enum CREATERENDERTARGETFLAGS
+--- Makes this render target an HDR render target if the current system supports HDR.
+CREATERENDERTARGETFLAGS_HDR = 1
+--- Does nothing.
+CREATERENDERTARGETFLAGS_AUTOMIPMAP = 2
+--- Does nothing
+CREATERENDERTARGETFLAGS_UNFILTERABLE_OK = 4
 
 ---@enum CT
 --- Default citizen
@@ -2243,31 +2087,195 @@ CT_REBEL = 3
 --- Odessa?
 CT_UNIQUE = 4
 
----@enum CHAN
---- Used when playing sounds through console commands.
-CHAN_REPLACE = -1
---- Automatic channel
-CHAN_AUTO = 0
---- Channel for weapon sounds
-CHAN_WEAPON = 1
---- Channel for NPC voices
-CHAN_VOICE = 2
---- Channel for items ( Health kits, etc )
-CHAN_ITEM = 3
---- Clothing, ragdoll impacts, footsteps, knocking/pounding/punching etc.
-CHAN_BODY = 4
---- Stream channel from the static or dynamic area
-CHAN_STREAM = 5
---- A constant/background sound that doesn't require any reaction.
---- **This channel allows same sounds files to play multiple times without cutting out.**
-CHAN_STATIC = 6
---- TF2s Announcer dialogue channel
-CHAN_VOICE2 = 7
---- Channels 8-135 (128 channels) are allocated for player voice chat
---- **This channel allows same sounds files to play multiple times without cutting out.**
-CHAN_VOICE_BASE = 8
---- Channels from this and onwards are allocated to game code
-CHAN_USER_BASE = 136
+---@enum D
+--- Error
+D_ER = 0
+--- Hate
+D_HT = 1
+--- Frightened / Fear
+D_FR = 2
+--- Like
+D_LI = 3
+--- Neutral
+D_NU = 4
+
+---@enum DISPSURF
+DISPSURF_SURFACE = 1
+DISPSURF_WALKABLE = 2
+DISPSURF_BUILDABLE = 4
+DISPSURF_SURFPROP1 = 8
+DISPSURF_SURFPROP2 = 16
+
+---@enum DMG
+--- Generic damage (used by weapon_fists)
+DMG_GENERIC = 0
+--- Caused by physics interaction and ignored by airboat drivers. This is used by the Rollermine and an unused animation attack called 'Fireattack' by the Antlion Guard [ACT_RANGE_ATTACK1](https://wiki.facepunch.com/gmod/Enums/ACT)
+DMG_CRUSH = 1
+--- Bullet damage from Ceiling Turrets, the Strider, Turrets and most guns.
+DMG_BULLET = 2
+--- Used by the Stunstick, Manhacks, Antlions, Antlion Guards, Headcrabs, Fast Headcrabs, all Zombies types, Hunter, and potentially other NPCs attacks
+DMG_SLASH = 4
+--- Damage from fire
+DMG_BURN = 8
+--- Hit by a vehicle (This will need to be set for passengers of some vehicle to receive damage)
+DMG_VEHICLE = 16
+--- Fall damage
+DMG_FALL = 32
+--- Explosion damage like grenades, helicopter bombs, combine mines, Will be ignored by most vehicle passengers.
+DMG_BLAST = 64
+--- Blunt attacks such as from the Crowbar, Antlion Guard & Hunter
+DMG_CLUB = 128
+--- Electrical damage, shows smoke at the damage position and its used by Stalkers & Vortigaunts
+DMG_SHOCK = 256
+--- Sonic damage, used by the Gargantua and Houndeye NPCs
+DMG_SONIC = 512
+--- Laser damage
+DMG_ENERGYBEAM = 1024
+--- Prevent a physics force.
+DMG_PREVENT_PHYSICS_FORCE = 2048
+--- Crossbow damage, never creates gibs.
+DMG_NEVERGIB = 4096
+--- Always create gibs
+DMG_ALWAYSGIB = 8192
+--- Drown damage
+DMG_DROWN = 16384
+--- Same as DMG_POISON
+DMG_PARALYZE = 32768
+--- Neurotoxin damage
+DMG_NERVEGAS = 65536
+--- Poison damage used by Antlion Workers & Poison Headcrabs.
+DMG_POISON = 131072
+--- Radiation damage & it will be ignored by most vehicle passengers
+DMG_RADIATION = 262144
+--- Damage applied to the player to restore health after drowning
+DMG_DROWNRECOVER = 524288
+--- Toxic chemical or acid burn damage used by the Antlion Workers
+DMG_ACID = 1048576
+--- In an oven
+DMG_SLOWBURN = 2097152
+--- Don't create a ragdoll on death
+DMG_REMOVENORAGDOLL = 4194304
+--- Damage done by the gravity gun.
+DMG_PHYSGUN = 8388608
+--- Plasma damage
+DMG_PLASMA = 16777216
+--- Airboat gun damage
+DMG_AIRBOAT = 33554432
+--- Forces the entity to dissolve on death. This is what the combine ball uses when it hits a target.
+DMG_DISSOLVE = 67108864
+--- This won't hurt the player underwater
+DMG_BLAST_SURFACE = 134217728
+--- Direct damage to the entity that does not go through any damage value modifications
+DMG_DIRECT = 268435456
+--- The pellets fired from a shotgun
+DMG_BUCKSHOT = 536870912
+--- Damage from SniperRound/SniperPenetratedRound ammo types
+DMG_SNIPER = 1073741824
+--- Damage from npc_missiledefense, npc_combinegunship, or monster_mortar
+DMG_MISSILEDEFENSE = 2147483648
+
+---@enum DOCK
+--- Don't dock
+NODOCK = 0
+--- Fill parent
+FILL = 1
+--- Dock to the left
+LEFT = 2
+--- Dock to the right
+RIGHT = 3
+--- Dock to the top
+TOP = 4
+--- Dock to the bottom
+BOTTOM = 5
+
+---@enum DOF
+DOF_OFFSET = 256
+DOF_SPACING = 512
+
+---@enum EF
+--- Performs bone merge on client side
+EF_BONEMERGE = 1
+--- For use with EF_BONEMERGE. If this is set, then it places this ents origin at its parent and uses the parent's bbox + the max extents of the aiment. Otherwise, it sets up the parent's bones every frame to figure out where to place the aiment, which is inefficient because it'll setup the parent's bones even if the parent is not in the PVS.
+EF_BONEMERGE_FASTCULL = 128
+--- DLIGHT centered at entity origin
+EF_BRIGHTLIGHT = 2
+--- Player flashlight
+EF_DIMLIGHT = 4
+--- Don't interpolate the next frame
+EF_NOINTERP = 8
+--- Disables shadow
+EF_NOSHADOW = 16
+--- Prevents the entity from drawing and networking.
+EF_NODRAW = 32
+--- Don't receive shadows
+EF_NORECEIVESHADOW = 64
+--- Makes the entity blink
+EF_ITEM_BLINK = 256
+--- Always assume that the parent entity is animating.
+EF_PARENT_ANIMATES = 512
+--- Internal flag that is set by Entity:FollowBone.
+EF_FOLLOWBONE = 1024
+--- Makes the entity not accept being lit by projected textures, including the player's flashlight.
+EF_NOFLASHLIGHT = 8192
+
+---@enum EFL
+--- This entity is marked for death -- This allows the game to actually delete ents at a safe time.
+--- You should never set this flag manually.
+EFL_KILLME = 1
+--- Entity is dormant, no updates to client
+EFL_DORMANT = 2
+--- Lets us know when the noclip command is active
+EFL_NOCLIP_ACTIVE = 4
+--- Set while a model is setting up its bones
+EFL_SETTING_UP_BONES = 8
+--- This is a special entity that should not be deleted when we respawn entities via game.CleanUpMap.
+EFL_KEEP_ON_RECREATE_ENTITIES = 16
+--- One of the child entities is a player
+EFL_HAS_PLAYER_CHILD = 16
+--- (Client only) need shadow manager to update the shadow
+EFL_DIRTY_SHADOWUPDATE = 32
+--- Another entity is watching events on this entity (used by teleport)
+EFL_NOTIFY = 64
+--- The default behavior in ShouldTransmit is to not send an entity if it doesn't have a model. Certain entities want to be sent anyway because all the drawing logic is in the client DLL. They can set this flag and the engine will transmit them even if they don't have model
+EFL_FORCE_CHECK_TRANSMIT = 128
+--- This is set on bots that are frozen
+EFL_BOT_FROZEN = 256
+--- Non-networked entity
+EFL_SERVER_ONLY = 512
+--- Don't attach the edict
+EFL_NO_AUTO_EDICT_ATTACH = 1024
+EFL_DIRTY_ABSTRANSFORM = 2048
+EFL_DIRTY_ABSVELOCITY = 4096
+--- Some dirty bits with respect to abs computations
+EFL_DIRTY_ABSANGVELOCITY = 8192
+EFL_DIRTY_SURROUNDING_COLLISION_BOUNDS = 16384
+EFL_DIRTY_SPATIAL_PARTITION = 32768
+--- This is set if the entity detects that it's in the skybox. This forces it to pass the "in PVS" for transmission
+EFL_IN_SKYBOX = 131072
+--- Entities with this flag set show up in the partition even when not solid
+EFL_USE_PARTITION_WHEN_NOT_SOLID = 262144
+--- Used to determine if an entity is floating
+EFL_TOUCHING_FLUID = 524288
+EFL_IS_BEING_LIFTED_BY_BARNACLE = 1048576
+EFL_NO_ROTORWASH_PUSH = 2097152
+--- Avoid executing the entity's Think
+EFL_NO_THINK_FUNCTION = 4194304
+EFL_NO_GAME_PHYSICS_SIMULATION = 8388608
+EFL_CHECK_UNTOUCH = 16777216
+--- Entity shouldn't block NPC line-of-sight
+EFL_DONTBLOCKLOS = 33554432
+--- NPCs should not walk on this entity
+EFL_DONTWALKON = 67108864
+--- The entity shouldn't dissolve
+EFL_NO_DISSOLVE = 134217728
+--- Mega physcannon can't ragdoll these guys
+EFL_NO_MEGAPHYSCANNON_RAGDOLL = 268435456
+--- Don't adjust this entity's velocity when transitioning into water
+EFL_NO_WATER_VELOCITY_CHANGE = 536870912
+--- Physcannon can't pick these up or punt them
+EFL_NO_PHYSCANNON_INTERACTION = 1073741824
+--- Doesn't accept forces from physics damage
+EFL_NO_DAMAGE_FORCES = -2147483648
 
 ---@enum FCVAR
 --- Save the ConVar value into client.vdf
@@ -2357,13 +2365,23 @@ FCVAR_UNREGISTERED = 1
 --- Reported as "user" by `cvarlist`
 FCVAR_USERINFO = 512
 
----@enum CREATERENDERTARGETFLAGS
---- Makes this render target an HDR render target if the current system supports HDR.
-CREATERENDERTARGETFLAGS_HDR = 1
---- Does nothing.
-CREATERENDERTARGETFLAGS_AUTOMIPMAP = 2
---- Does nothing
-CREATERENDERTARGETFLAGS_UNFILTERABLE_OK = 4
+---@enum FFT
+--- 128 levels
+FFT_256 = 0
+--- 256 levels
+FFT_512 = 1
+--- 512 levels
+FFT_1024 = 2
+--- 1024 levels
+FFT_2048 = 3
+--- 2048 levels
+FFT_4096 = 4
+--- 4096 levels
+FFT_8192 = 5
+--- 8192 levels
+FFT_16384 = 6
+--- 16384 levels
+FFT_32768 = 7
 
 ---@enum FL
 --- Is the entity on ground or not
@@ -2432,169 +2450,34 @@ FL_TRANSRAGDOLL = 1073741824
 --- This moving door can't be blocked by the player
 FL_UNBLOCKABLE_BY_PLAYER = -2147483648
 
----@enum GLOBAL
---- Initial state, the global state is off.
-GLOBAL_OFF = 0
---- The global state is enabled.
-GLOBAL_ON = 1
---- The global state is dead and is no longer active. It will be cleared.
-GLOBAL_DEAD = 2
+---@enum FORCE
+--- Forces the function to take strings only
+FORCE_STRING = 1
+--- Forces the function to take numbers only
+FORCE_NUMBER = 2
+--- Forces the function to take booleans only
+FORCE_BOOL = 3
+--- Forces the function to take Angles only
+FORCE_ANGLE = 4
+--- Forces the function to take Colors only
+FORCE_COLOR = 5
+--- Forces the function to take Vectors only
+FORCE_VECTOR = 6
 
----@enum FFT
---- 128 levels
-FFT_256 = 0
---- 256 levels
-FFT_512 = 1
---- 512 levels
-FFT_1024 = 2
---- 1024 levels
-FFT_2048 = 3
---- 2048 levels
-FFT_4096 = 4
---- 4096 levels
-FFT_8192 = 5
---- 8192 levels
-FFT_16384 = 6
---- 16384 levels
-FFT_32768 = 7
-
----@enum MASK
---- Anything that is not empty space
-MASK_ALL = 4294967295
---- Anything that blocks line of sight for AI
-MASK_BLOCKLOS = 16449
---- Anything that blocks line of sight for AI or NPCs
-MASK_BLOCKLOS_AND_NPCS = 33570881
---- Water that is moving (may not work)
-MASK_CURRENT = 16515072
---- Anything that blocks corpse movement
-MASK_DEADSOLID = 65547
---- Anything that blocks NPC movement
-MASK_NPCSOLID = 33701899
---- Anything that blocks NPC movement, except other NPCs
-MASK_NPCSOLID_BRUSHONLY = 147467
---- The world entity
-MASK_NPCWORLDSTATIC = 131083
---- Anything that blocks lighting
-MASK_OPAQUE = 16513
---- Anything that blocks lighting, including NPCs
-MASK_OPAQUE_AND_NPCS = 33570945
---- Anything that blocks player movement
-MASK_PLAYERSOLID = 33636363
---- World + Brushes + Player Clips
-MASK_PLAYERSOLID_BRUSHONLY = 81931
---- Anything that stops a bullet (including hitboxes)
-MASK_SHOT = 1174421507
---- Anything that stops a bullet (excluding hitboxes)
-MASK_SHOT_HULL = 100679691
---- Solids except for grates
-MASK_SHOT_PORTAL = 33570819
---- Anything that is (normally) solid
-MASK_SOLID = 33570827
---- World + Brushes
-MASK_SOLID_BRUSHONLY = 16395
---- Things that split area portals
-MASK_SPLITAREAPORTAL = 48
---- Anything that blocks line of sight for players
-MASK_VISIBLE = 24705
---- Anything that blocks line of sight for players, including NPCs
-MASK_VISIBLE_AND_NPCS = 33579137
---- Anything that has water-like physics
-MASK_WATER = 16432
-
----@enum HULL
---- Hull of a Citizen
-HULL_HUMAN = 0
-HULL_SMALL_CENTERED = 1
-HULL_WIDE_HUMAN = 2
-HULL_TINY = 3
-HULL_WIDE_SHORT = 4
-HULL_MEDIUM = 5
-HULL_TINY_CENTERED = 6
-HULL_LARGE = 7
-HULL_LARGE_CENTERED = 8
-HULL_MEDIUM_TALL = 9
-
----@enum MAT
---- Antlions
-MAT_ANTLION = 65
---- Similar to MAT_FLESH, only used by "bloodyflesh" surface property, has different impact sound
-MAT_BLOODYFLESH = 66
---- Concrete
-MAT_CONCRETE = 67
---- Dirt
-MAT_DIRT = 68
---- The egg sacs in the antlion tunnels in HL2: EP2
-MAT_EGGSHELL = 69
---- Flesh
-MAT_FLESH = 70
---- Grates, chainlink fences
-MAT_GRATE = 71
---- Alien flesh - headcrabs and vortigaunts
-MAT_ALIENFLESH = 72
---- Unused
-MAT_CLIP = 73
---- Snow
-MAT_SNOW = 74
---- Plastic
-MAT_PLASTIC = 76
---- Metal
-MAT_METAL = 77
---- Sand
-MAT_SAND = 78
---- Plants, only used by the "foliage" surface property
-MAT_FOLIAGE = 79
---- Electronics, only used by "computer" surface property
-MAT_COMPUTER = 80
---- Water, slime
-MAT_SLOSH = 83
---- Floor tiles
-MAT_TILE = 84
---- Grass
-MAT_GRASS = 85
---- Metallic vents
-MAT_VENT = 86
---- Wood
-MAT_WOOD = 87
---- Skybox or nodraw texture
-MAT_DEFAULT = 88
---- Glass
-MAT_GLASS = 89
---- "wierd-looking jello effect for advisor shield."
-MAT_WARPSHIELD = 90
-
----@enum JOYSTICK
-JOYSTICK_FIRST = 114
---- Joystick buttons are in this range, but don't have individual enum names.
-JOYSTICK_FIRST_BUTTON = 114
-JOYSTICK_LAST_BUTTON = 145
---- Joystick POV buttons are in this range, but don't have individual enum names.
-JOYSTICK_FIRST_POV_BUTTON = 146
-JOYSTICK_LAST_POV_BUTTON = 149
---- Joystick axis buttons are in this range, but don't have individual enum names.
-JOYSTICK_FIRST_AXIS_BUTTON = 150
-JOYSTICK_LAST_AXIS_BUTTON = 161
-JOYSTICK_LAST = 161
-
----@enum HUD
---- No longer works; now same as HUD_PRINTCONSOLE
-HUD_PRINTNOTIFY = 1
---- Console
-HUD_PRINTCONSOLE = 2
---- Chat, also prints to console
-HUD_PRINTTALK = 3
---- Center of the screen, nothing on client
-HUD_PRINTCENTER = 4
-
----@enum MATERIAL
-MATERIAL_LINES = 1
-MATERIAL_LINE_LOOP = 5
-MATERIAL_LINE_STRIP = 4
-MATERIAL_POINTS = 0
-MATERIAL_POLYGON = 6
-MATERIAL_QUADS = 7
-MATERIAL_TRIANGLES = 2
-MATERIAL_TRIANGLE_STRIP = 3
+---@enum FSASYNC
+FSASYNC_ERR_NOT_MINE = -8
+FSASYNC_ERR_RETRY_LATER = -7
+FSASYNC_ERR_ALIGNMENT = -6
+FSASYNC_ERR_FAILURE = -5
+FSASYNC_ERR_READING = -4
+FSASYNC_ERR_NOMEMORY = -3
+FSASYNC_ERR_UNKNOWNID = -2
+FSASYNC_ERR_FILEOPEN = -1
+FSASYNC_OK = 0
+FSASYNC_STATUS_PENDING = 1
+FSASYNC_STATUS_INPROGRESS = 2
+FSASYNC_STATUS_ABORTED = 3
+FSASYNC_STATUS_UNSERVICED = 4
 
 ---@enum FSOLID
 --- Ignore solid type + always call into the entity for ray tests
@@ -2620,6 +2503,34 @@ FSOLID_TRIGGER_TOUCH_DEBRIS = 512
 --- The amount of bits needed to store the all the flags in a variable/sent over network.
 FSOLID_MAX_BITS = 10
 
+---@enum FVPHYSICS
+--- Won't receive physics forces from collisions and won't collide with other PhysObj with the same flag set.
+FVPHYSICS_CONSTRAINT_STATIC = 2
+--- Colliding with entities will cause 1000 damage with DMG_DISSOLVE as the damage type, but only if EFL_NO_DISSOLVE is not set.
+FVPHYSICS_DMG_DISSOLVE = 512
+--- Does slice damage, not just blunt damage.
+FVPHYSICS_DMG_SLICE = 1
+--- Will deal high physics damage even with a small mass.
+FVPHYSICS_HEAVY_OBJECT = 32
+--- This PhysObj is part of an entity with multiple PhysObj , such as a ragdoll or a vehicle , and will be considered during collision damage events.
+FVPHYSICS_MULTIOBJECT_ENTITY = 16
+--- Colliding with entities won't cause physics damage.
+FVPHYSICS_NO_IMPACT_DMG = 1024
+--- Like FVPHYSICS_NO_NPC_IMPACT_DMG, but only checks for NPCs. Usually set on Combine Balls fired by Combine Soldiers.
+FVPHYSICS_NO_NPC_IMPACT_DMG = 2048
+--- Doesn't allow the player to pick this PhysObj with the Gravity Gun or +use pickup.
+FVPHYSICS_NO_PLAYER_PICKUP = 128
+--- We won't collide with other PhysObj associated to the same entity, only used for vehicles and ragdolls held by the Super Gravity Gun.
+FVPHYSICS_NO_SELF_COLLISIONS = 32768
+--- This PhysObj is part of a ragdoll.
+FVPHYSICS_PART_OF_RAGDOLL = 8
+--- Set by the physics engine when two PhysObj are penetrating each other. This is only automatically updated for non-static physics objects.
+FVPHYSICS_PENETRATING = 64
+--- Set when the player is holding this PhysObj with the Physics Gun, Gravity Gun or +use pickup.
+FVPHYSICS_PLAYER_HELD = 4
+--- This object was thrown by the Gravity Gun , stuns Antlion guards, Hunters, and squashes Antlion grubs.
+FVPHYSICS_WAS_THROWN = 256
+
 ---@enum GESTURE_SLOT
 --- Slot for weapon gestures
 GESTURE_SLOT_ATTACK_AND_RELOAD = 0
@@ -2634,57 +2545,43 @@ GESTURE_SLOT_VCD = 5
 --- Slot for custom gestures
 GESTURE_SLOT_CUSTOM = 6
 
----@enum kRenderFx
---- None. No change.
-kRenderFxNone = 0
---- Slowly pulses the entitys transparency, +-15 to the current alpha.
-kRenderFxPulseSlow = 1
---- Quickly pulses the entitys transparency, +-15 to the current alpha.
-kRenderFxPulseFast = 2
---- Slowly pulses the entitys transparency, +-60 to the current alpha.
-kRenderFxPulseSlowWide = 3
---- Quickly pulses the entitys transparency, +-60 to the current alpha.
-kRenderFxPulseFastWide = 4
---- Slowly fades away the entity, making it completely invisible.
----
---- Starts from whatever alpha the entity currently has set.
-kRenderFxFadeSlow = 5
---- Quickly fades away the entity, making it completely invisible.
----
---- Starts from whatever alpha the entity currently has set.
-kRenderFxFadeFast = 6
---- Slowly solidifies the entity, making it fully opaque.
----
---- Starts from whatever alpha the entity currently has set.
-kRenderFxSolidSlow = 7
---- Quickly solidifies the entity, making it fully opaque.
----
---- Starts from whatever alpha the entity currently has set.
-kRenderFxSolidFast = 8
---- Slowly switches the entitys transparency between its alpha and 0.
-kRenderFxStrobeSlow = 9
---- Quickly switches the entitys transparency between its alpha and 0.
-kRenderFxStrobeFast = 10
---- Very quickly switches the entitys transparency between its alpha and 0.
-kRenderFxStrobeFaster = 11
---- Same as Strobe Slow, but the interval is more randomized.
-kRenderFxFlickerSlow = 12
---- Same as Strobe Fast, but the interval is more randomized.
-kRenderFxFlickerFast = 13
-kRenderFxNoDissipation = 14
---- Flickers ( randomizes ) the entitys transparency
-kRenderFxDistort = 15
---- Same as Distort, but fades the entity away the farther you are from it.
-kRenderFxHologram = 16
-kRenderFxExplode = 17
-kRenderFxGlowShell = 18
-kRenderFxClampMinScale = 19
-kRenderFxEnvRain = 20
-kRenderFxEnvSnow = 21
-kRenderFxSpotlight = 22
-kRenderFxRagdoll = 23
---- Quickly pulses the entitys transparency, from 0 to 255.
-kRenderFxPulseFastWider = 24
+---@enum GLOBAL
+--- Initial state, the global state is off.
+GLOBAL_OFF = 0
+--- The global state is enabled.
+GLOBAL_ON = 1
+--- The global state is dead and is no longer active. It will be cleared.
+GLOBAL_DEAD = 2
+
+---@enum GMOD_CHANNEL
+--- The channel is stopped
+GMOD_CHANNEL_STOPPED = 0
+--- The channel is playing
+GMOD_CHANNEL_PLAYING = 1
+--- The channel is paused
+GMOD_CHANNEL_PAUSED = 2
+--- The channel is buffering
+GMOD_CHANNEL_STALLED = 3
+
+---@enum GOALTYPE
+--- No goal type.
+GOALTYPE_NONE = 0
+--- The goal type is an entity.
+GOALTYPE_TARGETENT = 1
+--- The goal type is the enemy entity.
+GOALTYPE_ENEMY = 2
+--- The goal type is a path corner.
+GOALTYPE_PATHCORNER = 3
+--- The goal type is a position.
+GOALTYPE_LOCATION = 4
+--- The goal type is a node nearest to a certain position.
+GOALTYPE_LOCATION_NEAREST_NODE = 5
+--- Goal type is a flank location.
+GOALTYPE_FLANK = 6
+--- Goal type is a cover spot.
+GOALTYPE_COVER = 7
+--- Invalid goal type.
+GOALTYPE_INVALID = 8
 
 ---@enum HITGROUP
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
@@ -2713,40 +2610,40 @@ HITGROUP_RIGHTLEG = 7
 --- Alerts NPC, but doesn't do damage or bleed (1/100th damage)
 HITGROUP_GEAR = 10
 
----@enum FSASYNC
-FSASYNC_ERR_NOT_MINE = -8
-FSASYNC_ERR_RETRY_LATER = -7
-FSASYNC_ERR_ALIGNMENT = -6
-FSASYNC_ERR_FAILURE = -5
-FSASYNC_ERR_READING = -4
-FSASYNC_ERR_NOMEMORY = -3
-FSASYNC_ERR_UNKNOWNID = -2
-FSASYNC_ERR_FILEOPEN = -1
-FSASYNC_OK = 0
-FSASYNC_STATUS_PENDING = 1
-FSASYNC_STATUS_INPROGRESS = 2
-FSASYNC_STATUS_ABORTED = 3
-FSASYNC_STATUS_UNSERVICED = 4
+---@enum HUD
+--- No longer works; now same as HUD_PRINTCONSOLE
+HUD_PRINTNOTIFY = 1
+--- Console
+HUD_PRINTCONSOLE = 2
+--- Chat, also prints to console
+HUD_PRINTTALK = 3
+--- Center of the screen, nothing on client
+HUD_PRINTCENTER = 4
 
----@enum GOALTYPE
---- No goal type.
-GOALTYPE_NONE = 0
---- The goal type is an entity.
-GOALTYPE_TARGETENT = 1
---- The goal type is the enemy entity.
-GOALTYPE_ENEMY = 2
---- The goal type is a path corner.
-GOALTYPE_PATHCORNER = 3
---- The goal type is a position.
-GOALTYPE_LOCATION = 4
---- The goal type is a node nearest to a certain position.
-GOALTYPE_LOCATION_NEAREST_NODE = 5
---- Goal type is a flank location.
-GOALTYPE_FLANK = 6
---- Goal type is a cover spot.
-GOALTYPE_COVER = 7
---- Invalid goal type.
-GOALTYPE_INVALID = 8
+---@enum HULL
+--- Hull of a Citizen
+HULL_HUMAN = 0
+HULL_SMALL_CENTERED = 1
+HULL_WIDE_HUMAN = 2
+HULL_TINY = 3
+HULL_WIDE_SHORT = 4
+HULL_MEDIUM = 5
+HULL_TINY_CENTERED = 6
+HULL_LARGE = 7
+HULL_LARGE_CENTERED = 8
+HULL_MEDIUM_TALL = 9
+
+---@enum IMAGE_FORMAT
+IMAGE_FORMAT_DEFAULT = -1
+IMAGE_FORMAT_RGBA8888 = 0
+IMAGE_FORMAT_ABGR8888 = 1
+IMAGE_FORMAT_RGB888 = 2
+IMAGE_FORMAT_BGR888 = 3
+IMAGE_FORMAT_RGB565 = 4
+IMAGE_FORMAT_ARGB8888 = 11
+IMAGE_FORMAT_BGRA8888 = 12
+IMAGE_FORMAT_RGBA16161616 = 25
+IMAGE_FORMAT_RGBA16161616F = 24
 
 ---@enum IN
 --- +attack bound key ( Default: Left Mouse Button )
@@ -2797,57 +2694,18 @@ IN_GRENADE1 = 8388608
 --- +grenade2 bound key
 IN_GRENADE2 = 16777216
 
----@enum FVPHYSICS
---- Won't receive physics forces from collisions and won't collide with other PhysObj with the same flag set.
-FVPHYSICS_CONSTRAINT_STATIC = 2
---- Colliding with entities will cause 1000 damage with DMG_DISSOLVE as the damage type, but only if EFL_NO_DISSOLVE is not set.
-FVPHYSICS_DMG_DISSOLVE = 512
---- Does slice damage, not just blunt damage.
-FVPHYSICS_DMG_SLICE = 1
---- Will deal high physics damage even with a small mass.
-FVPHYSICS_HEAVY_OBJECT = 32
---- This PhysObj is part of an entity with multiple PhysObj , such as a ragdoll or a vehicle , and will be considered during collision damage events.
-FVPHYSICS_MULTIOBJECT_ENTITY = 16
---- Colliding with entities won't cause physics damage.
-FVPHYSICS_NO_IMPACT_DMG = 1024
---- Like FVPHYSICS_NO_NPC_IMPACT_DMG, but only checks for NPCs. Usually set on Combine Balls fired by Combine Soldiers.
-FVPHYSICS_NO_NPC_IMPACT_DMG = 2048
---- Doesn't allow the player to pick this PhysObj with the Gravity Gun or +use pickup.
-FVPHYSICS_NO_PLAYER_PICKUP = 128
---- We won't collide with other PhysObj associated to the same entity, only used for vehicles and ragdolls held by the Super Gravity Gun.
-FVPHYSICS_NO_SELF_COLLISIONS = 32768
---- This PhysObj is part of a ragdoll.
-FVPHYSICS_PART_OF_RAGDOLL = 8
---- Set by the physics engine when two PhysObj are penetrating each other. This is only automatically updated for non-static physics objects.
-FVPHYSICS_PENETRATING = 64
---- Set when the player is holding this PhysObj with the Physics Gun, Gravity Gun or +use pickup.
-FVPHYSICS_PLAYER_HELD = 4
---- This object was thrown by the Gravity Gun , stuns Antlion guards, Hunters, and squashes Antlion grubs.
-FVPHYSICS_WAS_THROWN = 256
-
----@enum GMOD_CHANNEL
---- The channel is stopped
-GMOD_CHANNEL_STOPPED = 0
---- The channel is playing
-GMOD_CHANNEL_PLAYING = 1
---- The channel is paused
-GMOD_CHANNEL_PAUSED = 2
---- The channel is buffering
-GMOD_CHANNEL_STALLED = 3
-
----@enum FORCE
---- Forces the function to take strings only
-FORCE_STRING = 1
---- Forces the function to take numbers only
-FORCE_NUMBER = 2
---- Forces the function to take booleans only
-FORCE_BOOL = 3
---- Forces the function to take Angles only
-FORCE_ANGLE = 4
---- Forces the function to take Colors only
-FORCE_COLOR = 5
---- Forces the function to take Vectors only
-FORCE_VECTOR = 6
+---@enum JOYSTICK
+JOYSTICK_FIRST = 114
+--- Joystick buttons are in this range, but don't have individual enum names.
+JOYSTICK_FIRST_BUTTON = 114
+JOYSTICK_LAST_BUTTON = 145
+--- Joystick POV buttons are in this range, but don't have individual enum names.
+JOYSTICK_FIRST_POV_BUTTON = 146
+JOYSTICK_LAST_POV_BUTTON = 149
+--- Joystick axis buttons are in this range, but don't have individual enum names.
+JOYSTICK_FIRST_AXIS_BUTTON = 150
+JOYSTICK_LAST_AXIS_BUTTON = 161
+JOYSTICK_LAST = 161
 
 ---@enum KEY
 KEY_FIRST = 0
@@ -3014,17 +2872,165 @@ KEY_XSTICK2_LEFT = 157
 KEY_XSTICK2_DOWN = 158
 KEY_XSTICK2_UP = 159
 
----@enum IMAGE_FORMAT
-IMAGE_FORMAT_DEFAULT = -1
-IMAGE_FORMAT_RGBA8888 = 0
-IMAGE_FORMAT_ABGR8888 = 1
-IMAGE_FORMAT_RGB888 = 2
-IMAGE_FORMAT_BGR888 = 3
-IMAGE_FORMAT_RGB565 = 4
-IMAGE_FORMAT_ARGB8888 = 11
-IMAGE_FORMAT_BGRA8888 = 12
-IMAGE_FORMAT_RGBA16161616 = 25
-IMAGE_FORMAT_RGBA16161616F = 24
+---@enum kRenderFx
+--- None. No change.
+kRenderFxNone = 0
+--- Slowly pulses the entitys transparency, +-15 to the current alpha.
+kRenderFxPulseSlow = 1
+--- Quickly pulses the entitys transparency, +-15 to the current alpha.
+kRenderFxPulseFast = 2
+--- Slowly pulses the entitys transparency, +-60 to the current alpha.
+kRenderFxPulseSlowWide = 3
+--- Quickly pulses the entitys transparency, +-60 to the current alpha.
+kRenderFxPulseFastWide = 4
+--- Slowly fades away the entity, making it completely invisible.
+---
+--- Starts from whatever alpha the entity currently has set.
+kRenderFxFadeSlow = 5
+--- Quickly fades away the entity, making it completely invisible.
+---
+--- Starts from whatever alpha the entity currently has set.
+kRenderFxFadeFast = 6
+--- Slowly solidifies the entity, making it fully opaque.
+---
+--- Starts from whatever alpha the entity currently has set.
+kRenderFxSolidSlow = 7
+--- Quickly solidifies the entity, making it fully opaque.
+---
+--- Starts from whatever alpha the entity currently has set.
+kRenderFxSolidFast = 8
+--- Slowly switches the entitys transparency between its alpha and 0.
+kRenderFxStrobeSlow = 9
+--- Quickly switches the entitys transparency between its alpha and 0.
+kRenderFxStrobeFast = 10
+--- Very quickly switches the entitys transparency between its alpha and 0.
+kRenderFxStrobeFaster = 11
+--- Same as Strobe Slow, but the interval is more randomized.
+kRenderFxFlickerSlow = 12
+--- Same as Strobe Fast, but the interval is more randomized.
+kRenderFxFlickerFast = 13
+kRenderFxNoDissipation = 14
+--- Flickers ( randomizes ) the entitys transparency
+kRenderFxDistort = 15
+--- Same as Distort, but fades the entity away the farther you are from it.
+kRenderFxHologram = 16
+kRenderFxExplode = 17
+kRenderFxGlowShell = 18
+kRenderFxClampMinScale = 19
+kRenderFxEnvRain = 20
+kRenderFxEnvSnow = 21
+kRenderFxSpotlight = 22
+kRenderFxRagdoll = 23
+--- Quickly pulses the entitys transparency, from 0 to 255.
+kRenderFxPulseFastWider = 24
+
+---@enum MASK
+--- Anything that is not empty space
+MASK_ALL = 4294967295
+--- Anything that blocks line of sight for AI
+MASK_BLOCKLOS = 16449
+--- Anything that blocks line of sight for AI or NPCs
+MASK_BLOCKLOS_AND_NPCS = 33570881
+--- Water that is moving (may not work)
+MASK_CURRENT = 16515072
+--- Anything that blocks corpse movement
+MASK_DEADSOLID = 65547
+--- Anything that blocks NPC movement
+MASK_NPCSOLID = 33701899
+--- Anything that blocks NPC movement, except other NPCs
+MASK_NPCSOLID_BRUSHONLY = 147467
+--- The world entity
+MASK_NPCWORLDSTATIC = 131083
+--- Anything that blocks lighting
+MASK_OPAQUE = 16513
+--- Anything that blocks lighting, including NPCs
+MASK_OPAQUE_AND_NPCS = 33570945
+--- Anything that blocks player movement
+MASK_PLAYERSOLID = 33636363
+--- World + Brushes + Player Clips
+MASK_PLAYERSOLID_BRUSHONLY = 81931
+--- Anything that stops a bullet (including hitboxes)
+MASK_SHOT = 1174421507
+--- Anything that stops a bullet (excluding hitboxes)
+MASK_SHOT_HULL = 100679691
+--- Solids except for grates
+MASK_SHOT_PORTAL = 33570819
+--- Anything that is (normally) solid
+MASK_SOLID = 33570827
+--- World + Brushes
+MASK_SOLID_BRUSHONLY = 16395
+--- Things that split area portals
+MASK_SPLITAREAPORTAL = 48
+--- Anything that blocks line of sight for players
+MASK_VISIBLE = 24705
+--- Anything that blocks line of sight for players, including NPCs
+MASK_VISIBLE_AND_NPCS = 33579137
+--- Anything that has water-like physics
+MASK_WATER = 16432
+
+---@enum MAT
+--- Antlions
+MAT_ANTLION = 65
+--- Similar to MAT_FLESH, only used by "bloodyflesh" surface property, has different impact sound
+MAT_BLOODYFLESH = 66
+--- Concrete
+MAT_CONCRETE = 67
+--- Dirt
+MAT_DIRT = 68
+--- The egg sacs in the antlion tunnels in HL2: EP2
+MAT_EGGSHELL = 69
+--- Flesh
+MAT_FLESH = 70
+--- Grates, chainlink fences
+MAT_GRATE = 71
+--- Alien flesh - headcrabs and vortigaunts
+MAT_ALIENFLESH = 72
+--- Unused
+MAT_CLIP = 73
+--- Snow
+MAT_SNOW = 74
+--- Plastic
+MAT_PLASTIC = 76
+--- Metal
+MAT_METAL = 77
+--- Sand
+MAT_SAND = 78
+--- Plants, only used by the "foliage" surface property
+MAT_FOLIAGE = 79
+--- Electronics, only used by "computer" surface property
+MAT_COMPUTER = 80
+--- Water, slime
+MAT_SLOSH = 83
+--- Floor tiles
+MAT_TILE = 84
+--- Grass
+MAT_GRASS = 85
+--- Metallic vents
+MAT_VENT = 86
+--- Wood
+MAT_WOOD = 87
+--- Skybox or nodraw texture
+MAT_DEFAULT = 88
+--- Glass
+MAT_GLASS = 89
+--- "wierd-looking jello effect for advisor shield."
+MAT_WARPSHIELD = 90
+
+---@enum MATERIAL
+MATERIAL_LINES = 1
+MATERIAL_LINE_LOOP = 5
+MATERIAL_LINE_STRIP = 4
+MATERIAL_POINTS = 0
+MATERIAL_POLYGON = 6
+MATERIAL_QUADS = 7
+MATERIAL_TRIANGLES = 2
+MATERIAL_TRIANGLE_STRIP = 3
+
+---@enum MATERIAL_CULLMODE
+--- Cull back faces with counterclockwise vertices.
+MATERIAL_CULLMODE_CCW = 0
+--- Cull back faces with clockwise vertices.
+MATERIAL_CULLMODE_CW = 1
 
 ---@enum MATERIAL_FOG
 --- No fog
@@ -3033,36 +3039,6 @@ MATERIAL_FOG_NONE = 0
 MATERIAL_FOG_LINEAR = 1
 --- For use in conjunction with render.SetFogZ. Does not work if start distance is bigger than end distance. Ignores density setting. Seems to be broken? Used for underwater fog by the engine.
 MATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2
-
----@enum MATERIAL_CULLMODE
---- Cull back faces with counterclockwise vertices.
-MATERIAL_CULLMODE_CCW = 0
---- Cull back faces with clockwise vertices.
-MATERIAL_CULLMODE_CW = 1
-
----@enum NOTIFY
----  Generic notification
-NOTIFY_GENERIC = 0
----  Error notification
-NOTIFY_ERROR = 1
----  Undo notification
-NOTIFY_UNDO = 2
----  Hint notification
-NOTIFY_HINT = 3
----  Cleanup notification
-NOTIFY_CLEANUP = 4
-
----@enum NavCorner
---- North West Corner
-NORTH_WEST = 0
---- North East Corner
-NORTH_EAST = 1
---- South East Corner
-SOUTH_EAST = 2
---- South West Corner
-SOUTH_WEST = 3
---- Represents all corners, only applicable to certain functions, such as CNavArea:PlaceOnGround.
-NUM_CORNERS = 4
 
 ---@enum MATERIAL_LIGHT
 --- No light
@@ -3074,39 +3050,52 @@ MATERIAL_LIGHT_DIRECTIONAL = 2
 --- Spot light
 MATERIAL_LIGHT_SPOT = 3
 
----@enum NPC_STATE
---- Invalid state
-NPC_STATE_INVALID = -1
---- NPC default state
-NPC_STATE_NONE = 0
---- NPC is idle
-NPC_STATE_IDLE = 1
---- NPC is alert and searching for enemies
-NPC_STATE_ALERT = 2
---- NPC is in combat
-NPC_STATE_COMBAT = 3
---- NPC is executing scripted sequence
-NPC_STATE_SCRIPT = 4
---- NPC is playing dead (used for expressions)
-NPC_STATE_PLAYDEAD = 5
---- NPC is prone to death
-NPC_STATE_PRONE = 6
---- NPC is dead
-NPC_STATE_DEAD = 7
+---@enum MATERIAL_RT_DEPTH
+--- Do not create a depth-stencil buffer.Use the default depth-stencil buffer if used as render target 0.
+MATERIAL_RT_DEPTH_SHARED = 0
+--- Create a depth-stencil buffer.Use the created depth-stencil buffer if used as render target 0.
+MATERIAL_RT_DEPTH_SEPARATE = 1
+--- Do not create a depth-stencil buffer.Disable depth and stencil buffer usage if used as render target 0.
+MATERIAL_RT_DEPTH_NONE = 2
+--- Create a depth-stencil buffer.Use the created depth-stencil buffer if used as render target 0.
+---
+--- Creates a color texture despite the name.
+--- Seems to behave the same as MATERIAL_RT_DEPTH_SEPARATE.
+MATERIAL_RT_DEPTH_ONLY = 3
 
----@enum PLAYER
-PLAYER_IDLE = 0
-PLAYER_WALK = 1
-PLAYER_JUMP = 2
-PLAYER_SUPERJUMP = 3
-PLAYER_DIE = 4
---- Player attack according to current hold type, used in SWEPs
-PLAYER_ATTACK1 = 5
-PLAYER_IN_VEHICLE = 6
---- Player reload according to current hold type, used in SWEPs
-PLAYER_RELOAD = 7
-PLAYER_START_AIMING = 8
-PLAYER_LEAVE_AIMING = 9
+---@enum MOUSE
+--- First mouse button
+MOUSE_FIRST = 107
+--- Left mouse button
+MOUSE_LEFT = 107
+--- Right mouse button
+MOUSE_RIGHT = 108
+--- Middle mouse button, aka the wheel press
+MOUSE_MIDDLE = 109
+--- Mouse 4 button ( Sometimes, mouse wheel tilt left )
+MOUSE_4 = 110
+--- Mouse 5 button ( Sometimes, mouse wheel tilt right )
+MOUSE_5 = 111
+--- Mouse wheel scroll up
+MOUSE_WHEEL_UP = 112
+--- Mouse wheel scroll down
+MOUSE_WHEEL_DOWN = 113
+--- Last mouse button
+MOUSE_LAST = 113
+--- Mouse button count
+MOUSE_COUNT = 7
+
+---@enum MOVECOLLIDE
+--- Default behavior
+MOVECOLLIDE_DEFAULT = 0
+--- Entity bounces, reflects, based on elasticity of surface and object - applies friction (adjust velocity)
+MOVECOLLIDE_FLY_BOUNCE = 1
+--- ENTITY:Touch will modify the velocity however it likes
+MOVECOLLIDE_FLY_CUSTOM = 2
+--- Entity slides along surfaces (no bounce) - applies friciton (adjusts velocity)
+MOVECOLLIDE_FLY_SLIDE = 3
+--- Number of different movecollides
+MOVECOLLIDE_COUNT = 4
 
 ---@enum MOVETYPE
 --- Don't move
@@ -3134,17 +3123,17 @@ MOVETYPE_OBSERVER = 10
 --- Custom movetype, can be applied to the player to prevent the default movement code from running, while still calling the related hooks
 MOVETYPE_CUSTOM = 11
 
----@enum MOVECOLLIDE
---- Default behavior
-MOVECOLLIDE_DEFAULT = 0
---- Entity bounces, reflects, based on elasticity of surface and object - applies friction (adjust velocity)
-MOVECOLLIDE_FLY_BOUNCE = 1
---- ENTITY:Touch will modify the velocity however it likes
-MOVECOLLIDE_FLY_CUSTOM = 2
---- Entity slides along surfaces (no bounce) - applies friciton (adjusts velocity)
-MOVECOLLIDE_FLY_SLIDE = 3
---- Number of different movecollides
-MOVECOLLIDE_COUNT = 4
+---@enum NAV
+--- Error condition.
+NAV_NONE = -1
+--- walk/run
+NAV_GROUND = 0
+--- jump/leap
+NAV_JUMP = 1
+--- can fly, move all around
+NAV_FLY = 2
+--- climb ladders
+NAV_CLIMB = 3
 
 ---@enum NAV_MESH
 --- The nav area is invalid.
@@ -3190,44 +3179,119 @@ NAV_MESH_HAS_ELEVATOR = 1073741824
 --- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.
 NAV_MESH_NAV_BLOCKER = -2147483648
 
+---@enum NavCorner
+--- North West Corner
+NORTH_WEST = 0
+--- North East Corner
+NORTH_EAST = 1
+--- South East Corner
+SOUTH_EAST = 2
+--- South West Corner
+SOUTH_WEST = 3
+--- Represents all corners, only applicable to certain functions, such as CNavArea:PlaceOnGround.
+NUM_CORNERS = 4
+
+---@enum NavDir
+--- North from given CNavArea
+NORTH = 0
+--- East from given CNavArea
+EAST = 1
+--- South from given CNavArea
+SOUTH = 2
+--- West from given CNavArea
+WEST = 3
+
+---@enum NavTraverseType
+GO_NORTH = 0
+GO_EAST = 1
+GO_SOUTH = 2
+GO_WEST = 3
+GO_LADDER_UP = 4
+GO_LADDER_DOWN = 5
+GO_JUMP = 6
+GO_ELEVATOR_UP = 7
+GO_ELEVATOR_DOWN = 8
+
+---@enum NOTIFY
+---  Generic notification
+NOTIFY_GENERIC = 0
+---  Error notification
+NOTIFY_ERROR = 1
+---  Undo notification
+NOTIFY_UNDO = 2
+---  Hint notification
+NOTIFY_HINT = 3
+---  Cleanup notification
+NOTIFY_CLEANUP = 4
+
+---@enum NPC_STATE
+--- Invalid state
+NPC_STATE_INVALID = -1
+--- NPC default state
+NPC_STATE_NONE = 0
+--- NPC is idle
+NPC_STATE_IDLE = 1
+--- NPC is alert and searching for enemies
+NPC_STATE_ALERT = 2
+--- NPC is in combat
+NPC_STATE_COMBAT = 3
+--- NPC is executing scripted sequence
+NPC_STATE_SCRIPT = 4
+--- NPC is playing dead (used for expressions)
+NPC_STATE_PLAYDEAD = 5
+--- NPC is prone to death
+NPC_STATE_PRONE = 6
+--- NPC is dead
+NPC_STATE_DEAD = 7
+
 ---@enum NUM
 --- Amount of Enums/CLASS. Used by Global.Add_NPC_Class.
 NUM_AI_CLASSES = 36
 --- Amount of Enums/HULL.
 NUM_HULLS = 10
 
----@enum RENDERMODE
---- Default render mode. Transparently has no effect.
-RENDERMODE_NORMAL = 0
---- Supports transparency.
----
---- Use this to make alpha of Global.Color work for your entity. For players, it must be set for their active weapon aswell.
-RENDERMODE_TRANSCOLOR = 1
-RENDERMODE_TRANSTEXTURE = 2
---- Intended for glowing sprites. Allows transparency, and forces the sprite or model to be rendered unlit.
----
---- The size of a sprite rendered with Glow is consistent with the screen size (unlike the alternative World Space Glow), making it appear larger at a distance, in comparison to the world.
----
---- The GlowProxySize keyvalue affects this Render Mode on sprites.
-RENDERMODE_GLOW = 3
---- Enables Alphatesting. Legacy port from Goldsource. Obsolete in Source due to Alphatesting being handled in materials. Does not allow transparency.
-RENDERMODE_TRANSALPHA = 4
---- Add the material's color values to the existing image, instead of performing a multiplication. Sprites will appear through world geometry and the sprite/model will always brighten the world. Allows transparency.
-RENDERMODE_TRANSADD = 5
---- Causes the material to be not be drawn at all, similarly to Don't Render.
-RENDERMODE_ENVIROMENTAL = 6
---- Functions like Additive, but also blends between animation frames. Requires the material to have a functioning animating texture. Allows transparency.
-RENDERMODE_TRANSADDFRAMEBLEND = 7
---- Functions similarly to Additive, except that the alpha channel controls the opacity of the sprite. An example of use is for dark sprites, with an example material being sprites/strider_blackball.vmt.
-RENDERMODE_TRANSALPHADD = 8
---- Functions similarly to Glow, with the exception that the size of the sprite is relative to the world rather than the screen.
----
---- The GlowProxySize keyvalue affects this Render Mode on sprites.
-RENDERMODE_WORLDGLOW = 9
---- The entity is still being drawn and networked albeit invisible, therefore not making this Render Mode ideal for performance reasons.
----
---- To completely avoid drawing and networking an entity, see EF_NODRAW.
-RENDERMODE_NONE = 10
+---@enum OBS_MODE
+--- Not spectating
+OBS_MODE_NONE = 0
+OBS_MODE_DEATHCAM = 1
+--- TF2-like freezecam
+OBS_MODE_FREEZECAM = 2
+--- Same as OBS_MODE_CHASE, but you can't rotate the view
+OBS_MODE_FIXED = 3
+--- First person cam
+OBS_MODE_IN_EYE = 4
+--- Chase cam, 3rd person cam, free rotation around the spectated target
+OBS_MODE_CHASE = 5
+--- Free roam/noclip-alike. Does not work from GM:PlayerDeath
+OBS_MODE_ROAMING = 6
+
+---@enum PATTACH
+--- Particle spawns in entity's origin and does not follow it
+PATTACH_ABSORIGIN = 0
+--- Particle attaches to entity's origin and follows the entity
+PATTACH_ABSORIGIN_FOLLOW = 1
+--- Create at a custom origin, but don't follow
+PATTACH_CUSTOMORIGIN = 2
+--- Particle attaches to passed to Global.ParticleEffectAttach attachment id, but does not follow the entity
+PATTACH_POINT = 3
+--- Particle attaches to passed to Global.ParticleEffectAttach attachment id and follows the entity
+PATTACH_POINT_FOLLOW = 4
+--- Particle spawns in the beginning of coordinates ( Vector( 0, 0, 0 ) ), used for control points that don't attach to an entity
+PATTACH_WORLDORIGIN = 5
+
+---@enum PLAYER
+PLAYER_IDLE = 0
+PLAYER_WALK = 1
+PLAYER_JUMP = 2
+PLAYER_SUPERJUMP = 3
+PLAYER_DIE = 4
+--- Player attack according to current hold type, used in SWEPs
+PLAYER_ATTACK1 = 5
+PLAYER_IN_VEHICLE = 6
+--- Player reload according to current hold type, used in SWEPs
+PLAYER_RELOAD = 7
+PLAYER_START_AIMING = 8
+PLAYER_LEAVE_AIMING = 9
 
 ---@enum PLAYERANIMEVENT
 --- Primary attack
@@ -3270,32 +3334,6 @@ PLAYERANIMEVENT_CUSTOM_GESTURE_SEQUENCE = 22
 --- Cancel reload animation
 PLAYERANIMEVENT_CANCEL_RELOAD = 23
 
----@enum PATTACH
---- Particle spawns in entity's origin and does not follow it
-PATTACH_ABSORIGIN = 0
---- Particle attaches to entity's origin and follows the entity
-PATTACH_ABSORIGIN_FOLLOW = 1
---- Create at a custom origin, but don't follow
-PATTACH_CUSTOMORIGIN = 2
---- Particle attaches to passed to Global.ParticleEffectAttach attachment id, but does not follow the entity
-PATTACH_POINT = 3
---- Particle attaches to passed to Global.ParticleEffectAttach attachment id and follows the entity
-PATTACH_POINT_FOLLOW = 4
---- Particle spawns in the beginning of coordinates ( Vector( 0, 0, 0 ) ), used for control points that don't attach to an entity
-PATTACH_WORLDORIGIN = 5
-
----@enum NAV
---- Error condition.
-NAV_NONE = -1
---- walk/run
-NAV_GROUND = 0
---- jump/leap
-NAV_JUMP = 1
---- can fly, move all around
-NAV_FLY = 2
---- climb ladders
-NAV_CLIMB = 3
-
 ---@enum RENDERGROUP
 --- Huge static prop, possibly leftover from goldsrc
 RENDERGROUP_STATIC_HUGE = 0
@@ -3327,193 +3365,38 @@ RENDERGROUP_OPAQUE_BRUSH = 12
 --- Unclassfied. Won't get drawn.
 RENDERGROUP_OTHER = 13
 
----@enum MATERIAL_RT_DEPTH
---- Do not create a depth-stencil buffer.Use the default depth-stencil buffer if used as render target 0.
-MATERIAL_RT_DEPTH_SHARED = 0
---- Create a depth-stencil buffer.Use the created depth-stencil buffer if used as render target 0.
-MATERIAL_RT_DEPTH_SEPARATE = 1
---- Do not create a depth-stencil buffer.Disable depth and stencil buffer usage if used as render target 0.
-MATERIAL_RT_DEPTH_NONE = 2
---- Create a depth-stencil buffer.Use the created depth-stencil buffer if used as render target 0.
+---@enum RENDERMODE
+--- Default render mode. Transparently has no effect.
+RENDERMODE_NORMAL = 0
+--- Supports transparency.
 ---
---- Creates a color texture despite the name.
---- Seems to behave the same as MATERIAL_RT_DEPTH_SEPARATE.
-MATERIAL_RT_DEPTH_ONLY = 3
-
----@enum OBS_MODE
---- Not spectating
-OBS_MODE_NONE = 0
-OBS_MODE_DEATHCAM = 1
---- TF2-like freezecam
-OBS_MODE_FREEZECAM = 2
---- Same as OBS_MODE_CHASE, but you can't rotate the view
-OBS_MODE_FIXED = 3
---- First person cam
-OBS_MODE_IN_EYE = 4
---- Chase cam, 3rd person cam, free rotation around the spectated target
-OBS_MODE_CHASE = 5
---- Free roam/noclip-alike. Does not work from GM:PlayerDeath
-OBS_MODE_ROAMING = 6
-
----@enum NavDir
---- North from given CNavArea
-NORTH = 0
---- East from given CNavArea
-EAST = 1
---- South from given CNavArea
-SOUTH = 2
---- West from given CNavArea
-WEST = 3
-
----@enum NavTraverseType
-GO_NORTH = 0
-GO_EAST = 1
-GO_SOUTH = 2
-GO_WEST = 3
-GO_LADDER_UP = 4
-GO_LADDER_DOWN = 5
-GO_JUMP = 6
-GO_ELEVATOR_UP = 7
-GO_ELEVATOR_DOWN = 8
-
----@enum MOUSE
---- First mouse button
-MOUSE_FIRST = 107
---- Left mouse button
-MOUSE_LEFT = 107
---- Right mouse button
-MOUSE_RIGHT = 108
---- Middle mouse button, aka the wheel press
-MOUSE_MIDDLE = 109
---- Mouse 4 button ( Sometimes, mouse wheel tilt left )
-MOUSE_4 = 110
---- Mouse 5 button ( Sometimes, mouse wheel tilt right )
-MOUSE_5 = 111
---- Mouse wheel scroll up
-MOUSE_WHEEL_UP = 112
---- Mouse wheel scroll down
-MOUSE_WHEEL_DOWN = 113
---- Last mouse button
-MOUSE_LAST = 113
---- Mouse button count
-MOUSE_COUNT = 7
-
----@enum SOUND
-SOUND_NONE = 0
-SOUND_COMBAT = 1
-SOUND_WORLD = 2
-SOUND_PLAYER = 4
-SOUND_DANGER = 8
-SOUND_BULLET_IMPACT = 16
---- Considered a scent.
-SOUND_CARCASS = 32
---- Considered a scent.
-SOUND_MEAT = 64
---- Considered a scent.
-SOUND_GARBAGE = 128
---- Keeps certain creatures at bay, such as Antlions.
-SOUND_THUMPER = 256
---- Gets the antlion's attention.
-SOUND_BUGBAIT = 512
-SOUND_PHYSICS_DANGER = 1024
---- Only scares the sniper NPC.
-SOUND_DANGER_SNIPERONLY = 2048
-SOUND_MOVE_AWAY = 4096
-SOUND_PLAYER_VEHICLE = 8192
---- Changes listener's readiness (Player Companion only)
-SOUND_READINESS_LOW = 16384
-SOUND_READINESS_MEDIUM = 32768
-SOUND_READINESS_HIGH = 65536
---- Additional context for SOUND_DANGER
-SOUND_CONTEXT_FROM_SNIPER = 1048576
---- Added to SOUND_COMBAT
-SOUND_CONTEXT_GUNFIRE = 2097152
---- Explosion going to happen here.
-SOUND_CONTEXT_MORTAR = 4194304
---- Only combine can hear sounds marked this way.
-SOUND_CONTEXT_COMBINE_ONLY = 8388608
---- React to sound source's origin, not sound's location
-SOUND_CONTEXT_REACT_TO_SOURCE = 16777216
---- Context added to SOUND_COMBAT, usually.
-SOUND_CONTEXT_EXPLOSION = 33554432
---- Combine do NOT hear this
-SOUND_CONTEXT_EXCLUDE_COMBINE = 67108864
---- Treat as a normal danger sound if you see the source, otherwise turn to face source.
-SOUND_CONTEXT_DANGER_APPROACH = 134217728
---- Only player allies can hear this sound.
-SOUND_CONTEXT_ALLIES_ONLY = 268435456
---- HACK: need this because we're not treating the SOUND_xxx values as true bit values! See switch in OnListened.
-SOUND_CONTEXT_PLAYER_VEHICLE = 536870912
-
----@enum TASKSTATUS
---- Just started
-TASKSTATUS_NEW = 0
---- Running task & movement.
-TASKSTATUS_RUN_MOVE_AND_TASK = 1
---- Just running movement.
-TASKSTATUS_RUN_MOVE = 2
---- Just running task.
-TASKSTATUS_RUN_TASK = 3
---- Completed, get next task.
-TASKSTATUS_COMPLETE = 4
-
----@enum SCREENFADE
---- Enumerations used by Player:ScreenFade.
-SCREENFADE = {
-	IN = 1, --[[ Fade out after the hold time has passed ]]
-	OUT = 2, --[[ Fade in, hold time passes, disappear ]]
-	MODULATE = 4, --[[ With white color, turns the screen black ]]
-	STAYOUT = 8, --[[ No effects, never disappear ]]
-	PURGE = 16, --[[ Appear, Disappear, no effects ]]
-}
-
----@enum TEAM
---- Connecting team ID, set when player connects to the server
-TEAM_CONNECTING = 0
---- Unassigned team ID, set right after player connected
-TEAM_UNASSIGNED = 1001
---- Spectator team ID
-TEAM_SPECTATOR = 1002
-
----@enum STENCILCOMPARISONFUNCTION
---- Never passes.
-STENCILCOMPARISONFUNCTION_NEVER = 1
---- Passes where the reference value is less than the stencil value.
-STENCILCOMPARISONFUNCTION_LESS = 2
---- Passes where the reference value is equal to the stencil value.
-STENCILCOMPARISONFUNCTION_EQUAL = 3
---- Passes where the reference value is less than or equal to the stencil value.
-STENCILCOMPARISONFUNCTION_LESSEQUAL = 4
---- Passes where the reference value is greater than the stencil value.
-STENCILCOMPARISONFUNCTION_GREATER = 5
---- Passes where the reference value is not equal to the stencil value.
-STENCILCOMPARISONFUNCTION_NOTEQUAL = 6
---- Passes where the reference value is greater than or equal to the stencil value.
-STENCILCOMPARISONFUNCTION_GREATEREQUAL = 7
---- Always passes.
-STENCILCOMPARISONFUNCTION_ALWAYS = 8
-
----@enum SIM
---- Don't simulate physics
-SIM_NOTHING = 0
---- Vectors in local coordinate system
-SIM_LOCAL_ACCELERATION = 1
---- Vectors in local coordinate system
-SIM_LOCAL_FORCE = 2
---- Vectors in world coordinate system
-SIM_GLOBAL_ACCELERATION = 3
---- Vectors in world coordinate system
-SIM_GLOBAL_FORCE = 4
-
----@enum STEPSOUNDTIME
---- Normal step
-STEPSOUNDTIME_NORMAL = 0
---- Step on ladder
-STEPSOUNDTIME_ON_LADDER = 1
---- Step in water, with water reaching knee
-STEPSOUNDTIME_WATER_KNEE = 2
---- Step in water, with water reaching foot
-STEPSOUNDTIME_WATER_FOOT = 3
+--- Use this to make alpha of Global.Color work for your entity. For players, it must be set for their active weapon aswell.
+RENDERMODE_TRANSCOLOR = 1
+RENDERMODE_TRANSTEXTURE = 2
+--- Intended for glowing sprites. Allows transparency, and forces the sprite or model to be rendered unlit.
+---
+--- The size of a sprite rendered with Glow is consistent with the screen size (unlike the alternative World Space Glow), making it appear larger at a distance, in comparison to the world.
+---
+--- The GlowProxySize keyvalue affects this Render Mode on sprites.
+RENDERMODE_GLOW = 3
+--- Enables Alphatesting. Legacy port from Goldsource. Obsolete in Source due to Alphatesting being handled in materials. Does not allow transparency.
+RENDERMODE_TRANSALPHA = 4
+--- Add the material's color values to the existing image, instead of performing a multiplication. Sprites will appear through world geometry and the sprite/model will always brighten the world. Allows transparency.
+RENDERMODE_TRANSADD = 5
+--- Causes the material to be not be drawn at all, similarly to Don't Render.
+RENDERMODE_ENVIROMENTAL = 6
+--- Functions like Additive, but also blends between animation frames. Requires the material to have a functioning animating texture. Allows transparency.
+RENDERMODE_TRANSADDFRAMEBLEND = 7
+--- Functions similarly to Additive, except that the alpha channel controls the opacity of the sprite. An example of use is for dark sprites, with an example material being sprites/strider_blackball.vmt.
+RENDERMODE_TRANSALPHADD = 8
+--- Functions similarly to Glow, with the exception that the size of the sprite is relative to the world rather than the screen.
+---
+--- The GlowProxySize keyvalue affects this Render Mode on sprites.
+RENDERMODE_WORLDGLOW = 9
+--- The entity is still being drawn and networked albeit invisible, therefore not making this Render Mode ideal for performance reasons.
+---
+--- To completely avoid drawing and networking an entity, see EF_NODRAW.
+RENDERMODE_NONE = 10
 
 ---@enum RT_SIZE
 --- Only allowed for render targets that don't want a depth buffer (because if they have a depth buffer, the render target must be less than or equal to the size of the framebuffer).
@@ -3535,191 +3418,6 @@ RT_SIZE_REPLAY_SCREENSHOT = 7
 --- Use the size passed in. Don't clamp it to the frame buffer size. Really.
 RT_SIZE_LITERAL = 8
 RT_SIZE_LITERAL_PICMIP = 9
-
----@enum STENCILOPERATION
---- Preserves the existing stencil buffer value.
-STENCILOPERATION_KEEP = 1
---- Sets the value in the stencil buffer to 0.
-STENCILOPERATION_ZERO = 2
---- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
-STENCILOPERATION_REPLACE = 3
---- Increments the value in the stencil buffer by 1, clamping the result.
-STENCILOPERATION_INCRSAT = 4
---- Decrements the value in the stencil buffer by 1, clamping the result.
-STENCILOPERATION_DECRSAT = 5
---- Inverts the value in the stencil buffer.
-STENCILOPERATION_INVERT = 6
---- Increments the value in the stencil buffer by 1, wrapping around on overflow.
-STENCILOPERATION_INCR = 7
---- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
-STENCILOPERATION_DECR = 8
-
----@enum SND
---- To keep the compiler happy
-SND_NOFLAGS = 0
---- Change sound vol
-SND_CHANGE_VOL = 1
---- Change sound pitch
-SND_CHANGE_PITCH = 2
---- Stop the sound
-SND_STOP = 4
---- We're spawning, used in some cases for ambients. Not sent over net, only a param between dll and server.
-SND_SPAWNING = 8
---- Sound has an initial delay
-SND_DELAY = 16
---- Stop all looping sounds on the entity.
-SND_STOP_LOOPING = 32
---- This sound should be paused if the game is paused
-SND_SHOULDPAUSE = 128
-SND_IGNORE_PHONEMES = 256
---- Used to change all sounds emitted by an entity, regardless of scriptname
-SND_IGNORE_NAME = 512
-SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
-
----@enum STENCIL
---- Never passes.
-STENCIL_NEVER = 1
---- Passes where the reference value is less than the stencil value.
-STENCIL_LESS = 2
---- Passes where the reference value is equal to the stencil value.
-STENCIL_EQUAL = 3
---- Passes where the reference value is less than or equal to the stencil value.
-STENCIL_LESSEQUAL = 4
---- Passes where the reference value is greater than the stencil value.
-STENCIL_GREATER = 5
---- Passes where the reference value is not equal to the stencil value.
-STENCIL_NOTEQUAL = 6
---- Passes where the reference value is greater than or equal to the stencil value.
-STENCIL_GREATEREQUAL = 7
---- Always passes.
-STENCIL_ALWAYS = 8
---- Preserves the existing stencil buffer value.
-STENCIL_KEEP = 1
---- Sets the value in the stencil buffer to 0.
-STENCIL_ZERO = 2
---- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
-STENCIL_REPLACE = 3
---- Increments the value in the stencil buffer by 1, clamping the result.
-STENCIL_INCRSAT = 4
---- Decrements the value in the stencil buffer by 1, clamping the result.
-STENCIL_DECRSAT = 5
---- Inverts the value in the stencil buffer.
-STENCIL_INVERT = 6
---- Increments the value in the stencil buffer by 1, wrapping around on overflow.
-STENCIL_INCR = 7
---- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
-STENCIL_DECR = 8
-
----@enum SIGNONSTATE
-SIGNONSTATE_NONE = 0
-SIGNONSTATE_CHALLENGE = 1
-SIGNONSTATE_CONNECTED = 2
-SIGNONSTATE_NEW = 3
-SIGNONSTATE_PRESPAWN = 4
-SIGNONSTATE_SPAWN = 5
-SIGNONSTATE_FULL = 6
-SIGNONSTATE_CHANGELEVEL = 7
-
----@enum SF
---- Citizen that resupplies ammo
-SF_CITIZEN_AMMORESUPPLIER = 524288
---- "Follow the player as soon as I spawn"
-SF_CITIZEN_FOLLOW = 65536
---- "Work outside the speech semaphore system"
-SF_CITIZEN_IGNORE_SEMAPHORE = 2097152
---- Makes the citizen a medic
-SF_CITIZEN_MEDIC = 131072
---- Citizen cannot join players squad, and will not able to be commanded by the Half-Life 2 command system for Citizens
-SF_CITIZEN_NOT_COMMANDABLE = 1048576
---- Gives the citizen a random head
-SF_CITIZEN_RANDOM_HEAD = 262144
---- Gives the citizen a random female head
-SF_CITIZEN_RANDOM_HEAD_FEMALE = 8388608
---- Gives the citizen a random male head
-SF_CITIZEN_RANDOM_HEAD_MALE = 4194304
---- "Use render bounds instead of human hull for guys sitting in chairs, etc". Must be set before Spawn() is called to take effect
-SF_CITIZEN_USE_RENDER_BOUNDS = 16777216
---- Makes the floor turret friendly
-SF_FLOOR_TURRET_CITIZEN = 512
---- Do Alternate collision for this NPC (player avoidance)
-SF_NPC_ALTCOLLISION = 4096
---- [Think outside PVS](https://developer.valvesoftware.com/wiki/NPC_Sensing)
-SF_NPC_ALWAYSTHINK = 1024
---- NPC Drops health kit when it dies
-SF_NPC_DROP_HEALTHKIT = 8
---- Fade Corpse
-SF_NPC_FADE_CORPSE = 512
---- If not set, means *teleport* to ground
-SF_NPC_FALL_TO_GROUND = 4
---- No IDLE sounds until angry
-SF_NPC_GAG = 2
---- Long Visibility/Shoot
-SF_NPC_LONG_RANGE = 256
---- Ignore player push - Don't give way to player
-SF_NPC_NO_PLAYER_PUSHAWAY = 16384
---- NPC Doesn't drop weapon on death
-SF_NPC_NO_WEAPON_DROP = 8192
---- Don't acquire enemies or avoid obstacles
-SF_NPC_START_EFFICIENT = 16
---- This entity is a template for the [npc_template_maker](https://developer.valvesoftware.com/wiki/Npc_template_maker). It will not spawn automatically and cannot be used with [point_template](https://developer.valvesoftware.com/wiki/Point_template).
-SF_NPC_TEMPLATE = 2048
---- Wait for script
-SF_NPC_WAIT_FOR_SCRIPT = 128
---- Wait till seen
-SF_NPC_WAIT_TILL_SEEN = 1
---- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created
-SF_PHYSBOX_MOTIONDISABLED = 32768
---- Gravity gun is ALWAYS allowed to pick this up.
-SF_PHYSBOX_ALWAYS_PICK_UP = 1048576
---- Gravity gun is NOT allowed to pick this up.
-SF_PHYSBOX_NEVER_PICK_UP = 2097152
---- Gravity gun is NOT allowed to punt this entity.
-SF_PHYSBOX_NEVER_PUNT = 4194304
---- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created. See [Physics optimization](https://developer.valvesoftware.com/wiki/Physics_optimization).
-SF_PHYSPROP_MOTIONDISABLED = 8
---- Prevent that physbox from being picked up.
-SF_PHYSPROP_PREVENT_PICKUP = 512
---- This flag is set if the entity is gib.
-SF_PHYSPROP_IS_GIB = 4194304
---- Makes the rollermine friendly.
-SF_ROLLERMINE_FRIENDLY = 65536
---- If set before Entity:Spawn, the weapon will be constrained and will not simply fall to the ground.
-SF_WEAPON_START_CONSTRAINED = 1
---- Player is NOT allowed to pick this up.
-SF_WEAPON_NO_PLAYER_PICKUP = 2
---- Physgun is NOT allowed to pick this up.
-SF_WEAPON_NO_PHYSCANNON_PUNT = 4
-
----@enum SOLID
---- Does not collide with anything.
---- No physics object will be created when using this with Entity:PhysicsInit.
-SOLID_NONE = 0
---- The entity has a brush model defined by the map. Does not collide with other SOLID_BSP entities.
-SOLID_BSP = 1
---- Uses the entity's axis-aligned bounding box for collisions.
-SOLID_BBOX = 2
---- Uses the entity's object-aligned bounding box for collisions.
-SOLID_OBB = 3
---- Same as SOLID_OBB but restricts orientation to the Z-axis.
---- Seems to be broken.
-SOLID_OBB_YAW = 4
---- Always call the entity's `ICollideable::TestCollision` method for traces regardless of the presence of `FSOLID_CUSTOMRAYTEST` or `FSOLID_CUSTOMBOXTEST`. This will only be called back to Lua as ENTITY:TestCollision for `"anim"` type SENTs.
-SOLID_CUSTOM = 5
---- Uses the PhysObjects of the entity.
-SOLID_VPHYSICS = 6
-
----@enum TEXFILTER
----
---- Enumerations used by render.PushFilterMin and render.PushFilterMag.
----
---- See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
----
-TEXFILTER = {
-	NONE = 0,
-	POINT = 1,
-	LINEAR = 2,
-	ANISOTROPIC = 3,
-}
 
 ---@enum SCHED
 --- The schedule enum limit
@@ -3869,6 +3567,16 @@ SCHED_WAIT_FOR_SPEAK_FINISH = 67
 --- Spot an enemy and go from an idle state to combat state.
 SCHED_WAKE_ANGRY = 4
 
+---@enum SCREENFADE
+--- Enumerations used by Player:ScreenFade.
+SCREENFADE = {
+	IN = 1, --[[ Fade out after the hold time has passed ]]
+	OUT = 2, --[[ Fade in, hold time passes, disappear ]]
+	MODULATE = 4, --[[ With white color, turns the screen black ]]
+	STAYOUT = 8, --[[ No effects, never disappear ]]
+	PURGE = 16, --[[ Appear, Disappear, no effects ]]
+}
+
 ---@enum SENSORBONE
 --- Enumerations used by Kinect SDK bindings.
 SENSORBONE = {
@@ -3894,61 +3602,119 @@ SENSORBONE = {
 	HEAD = 3,
 }
 
----@enum SURF
---- Value will hold the light strength
-SURF_LIGHT = 1
---- The surface is a 2D skybox
-SURF_SKY2D = 2
---- This surface is a skybox, equivalent to HitSky in Structures/TraceResult
-SURF_SKY = 4
---- This surface is animated water
-SURF_WARP = 8
---- This surface is translucent
-SURF_TRANS = 16
---- This surface cannot have portals placed on, used by Portal's gun
-SURF_NOPORTAL = 32
---- This surface is a trigger
-SURF_TRIGGER = 64
---- This surface is an invisible entity, equivalent to HitNoDraw in Structures/TraceResult
-SURF_NODRAW = 128
---- Make a primary bsp splitter
-SURF_HINT = 256
---- This surface can be ignored by impact effects
-SURF_SKIP = 512
---- This surface has no lights calculated
-SURF_NOLIGHT = 1024
---- Calculate three lightmaps for the surface for bumpmapping
-SURF_BUMPLIGHT = 2048
---- No shadows are cast on this surface
-SURF_NOSHADOWS = 4096
---- No decals are applied to this surface
-SURF_NODECALS = 8192
---- Don't subdivide patches on this surface
-SURF_NOCHOP = 16384
---- This surface is part of an entity's hitbox
-SURF_HITBOX = 32768
+---@enum SF
+--- Citizen that resupplies ammo
+SF_CITIZEN_AMMORESUPPLIER = 524288
+--- "Follow the player as soon as I spawn"
+SF_CITIZEN_FOLLOW = 65536
+--- "Work outside the speech semaphore system"
+SF_CITIZEN_IGNORE_SEMAPHORE = 2097152
+--- Makes the citizen a medic
+SF_CITIZEN_MEDIC = 131072
+--- Citizen cannot join players squad, and will not able to be commanded by the Half-Life 2 command system for Citizens
+SF_CITIZEN_NOT_COMMANDABLE = 1048576
+--- Gives the citizen a random head
+SF_CITIZEN_RANDOM_HEAD = 262144
+--- Gives the citizen a random female head
+SF_CITIZEN_RANDOM_HEAD_FEMALE = 8388608
+--- Gives the citizen a random male head
+SF_CITIZEN_RANDOM_HEAD_MALE = 4194304
+--- "Use render bounds instead of human hull for guys sitting in chairs, etc". Must be set before Spawn() is called to take effect
+SF_CITIZEN_USE_RENDER_BOUNDS = 16777216
+--- Makes the floor turret friendly
+SF_FLOOR_TURRET_CITIZEN = 512
+--- Do Alternate collision for this NPC (player avoidance)
+SF_NPC_ALTCOLLISION = 4096
+--- [Think outside PVS](https://developer.valvesoftware.com/wiki/NPC_Sensing)
+SF_NPC_ALWAYSTHINK = 1024
+--- NPC Drops health kit when it dies
+SF_NPC_DROP_HEALTHKIT = 8
+--- Fade Corpse
+SF_NPC_FADE_CORPSE = 512
+--- If not set, means *teleport* to ground
+SF_NPC_FALL_TO_GROUND = 4
+--- No IDLE sounds until angry
+SF_NPC_GAG = 2
+--- Long Visibility/Shoot
+SF_NPC_LONG_RANGE = 256
+--- Ignore player push - Don't give way to player
+SF_NPC_NO_PLAYER_PUSHAWAY = 16384
+--- NPC Doesn't drop weapon on death
+SF_NPC_NO_WEAPON_DROP = 8192
+--- Don't acquire enemies or avoid obstacles
+SF_NPC_START_EFFICIENT = 16
+--- This entity is a template for the [npc_template_maker](https://developer.valvesoftware.com/wiki/Npc_template_maker). It will not spawn automatically and cannot be used with [point_template](https://developer.valvesoftware.com/wiki/Point_template).
+SF_NPC_TEMPLATE = 2048
+--- Wait for script
+SF_NPC_WAIT_FOR_SCRIPT = 128
+--- Wait till seen
+SF_NPC_WAIT_TILL_SEEN = 1
+--- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created
+SF_PHYSBOX_MOTIONDISABLED = 32768
+--- Gravity gun is ALWAYS allowed to pick this up.
+SF_PHYSBOX_ALWAYS_PICK_UP = 1048576
+--- Gravity gun is NOT allowed to pick this up.
+SF_PHYSBOX_NEVER_PICK_UP = 2097152
+--- Gravity gun is NOT allowed to punt this entity.
+SF_PHYSBOX_NEVER_PUNT = 4194304
+--- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created. See [Physics optimization](https://developer.valvesoftware.com/wiki/Physics_optimization).
+SF_PHYSPROP_MOTIONDISABLED = 8
+--- Prevent that physbox from being picked up.
+SF_PHYSPROP_PREVENT_PICKUP = 512
+--- This flag is set if the entity is gib.
+SF_PHYSPROP_IS_GIB = 4194304
+--- Makes the rollermine friendly.
+SF_ROLLERMINE_FRIENDLY = 65536
+--- If set before Entity:Spawn, the weapon will be constrained and will not simply fall to the ground.
+SF_WEAPON_START_CONSTRAINED = 1
+--- Player is NOT allowed to pick this up.
+SF_WEAPON_NO_PLAYER_PICKUP = 2
+--- Physgun is NOT allowed to pick this up.
+SF_WEAPON_NO_PHYSCANNON_PUNT = 4
 
----@enum STUDIO
---- The current render is for opaque renderables only
-STUDIO_RENDER = 1
-STUDIO_VIEWXFORMATTACHMENTS = 2
---- The current render is for translucent renderables only
-STUDIO_DRAWTRANSLUCENTSUBMODELS = 4
---- The current render is for both opaque and translucent renderables
-STUDIO_TWOPASS = 8
-STUDIO_STATIC_LIGHTING = 16
-STUDIO_WIREFRAME = 32
-STUDIO_ITEM_BLINK = 64
-STUDIO_NOSHADOWS = 128
-STUDIO_WIREFRAME_VCOLLIDE = 256
---- Not a studio flag, but used to flag when we want studio stats
-STUDIO_GENERATE_STATS = 16777216
---- Not a studio flag, but used to flag model as using shadow depth material override
-STUDIO_SSAODEPTHTEXTURE = 134217728
---- Not a studio flag, but used to flag model as using shadow depth material override
-STUDIO_SHADOWDEPTHTEXTURE = 1073741824
---- Not a studio flag, but used to flag model as a non-sorting brush model
-STUDIO_TRANSPARENCY = 2147483648
+---@enum SIGNONSTATE
+SIGNONSTATE_NONE = 0
+SIGNONSTATE_CHALLENGE = 1
+SIGNONSTATE_CONNECTED = 2
+SIGNONSTATE_NEW = 3
+SIGNONSTATE_PRESPAWN = 4
+SIGNONSTATE_SPAWN = 5
+SIGNONSTATE_FULL = 6
+SIGNONSTATE_CHANGELEVEL = 7
+
+---@enum SIM
+--- Don't simulate physics
+SIM_NOTHING = 0
+--- Vectors in local coordinate system
+SIM_LOCAL_ACCELERATION = 1
+--- Vectors in local coordinate system
+SIM_LOCAL_FORCE = 2
+--- Vectors in world coordinate system
+SIM_GLOBAL_ACCELERATION = 3
+--- Vectors in world coordinate system
+SIM_GLOBAL_FORCE = 4
+
+---@enum SND
+--- To keep the compiler happy
+SND_NOFLAGS = 0
+--- Change sound vol
+SND_CHANGE_VOL = 1
+--- Change sound pitch
+SND_CHANGE_PITCH = 2
+--- Stop the sound
+SND_STOP = 4
+--- We're spawning, used in some cases for ambients. Not sent over net, only a param between dll and server.
+SND_SPAWNING = 8
+--- Sound has an initial delay
+SND_DELAY = 16
+--- Stop all looping sounds on the entity.
+SND_STOP_LOOPING = 32
+--- This sound should be paused if the game is paused
+SND_SHOULDPAUSE = 128
+SND_IGNORE_PHONEMES = 256
+--- Used to change all sounds emitted by an entity, regardless of scriptname
+SND_IGNORE_NAME = 512
+SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 
 ---@enum SNDLVL
 --- Sound plays everywhere
@@ -4006,49 +3772,239 @@ SNDLVL_150dB = 150
 --- Rocket launching
 SNDLVL_180dB = 180
 
----@enum TRANSMIT
---- Always transmit the entity
-TRANSMIT_ALWAYS = 0
---- Never transmit the entity, default for point entities
-TRANSMIT_NEVER = 1
---- Transmit when entity is in players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community")
-TRANSMIT_PVS = 2
+---@enum SOLID
+--- Does not collide with anything.
+--- No physics object will be created when using this with Entity:PhysicsInit.
+SOLID_NONE = 0
+--- The entity has a brush model defined by the map. Does not collide with other SOLID_BSP entities.
+SOLID_BSP = 1
+--- Uses the entity's axis-aligned bounding box for collisions.
+SOLID_BBOX = 2
+--- Uses the entity's object-aligned bounding box for collisions.
+SOLID_OBB = 3
+--- Same as SOLID_OBB but restricts orientation to the Z-axis.
+--- Seems to be broken.
+SOLID_OBB_YAW = 4
+--- Always call the entity's `ICollideable::TestCollision` method for traces regardless of the presence of `FSOLID_CUSTOMRAYTEST` or `FSOLID_CUSTOMBOXTEST`. This will only be called back to Lua as ENTITY:TestCollision for `"anim"` type SENTs.
+SOLID_CUSTOM = 5
+--- Uses the PhysObjects of the entity.
+SOLID_VPHYSICS = 6
 
----@enum VIEW
---- Default value
-VIEW_MAIN = 0
---- 3D skybox
-VIEW_3DSKY = 1
---- Rendering for `_rt_Camera` base texture material (`func_monitor`, `info_camera_link`).
-VIEW_MONITOR = 2
---- Water reflection
-VIEW_REFLECTION = 3
---- Water refraction
-VIEW_REFRACTION = 4
---- Used by `script_intro` entity.
-VIEW_INTRO_PLAYER = 5
---- Used by `script_intro` entity.
-VIEW_INTRO_CAMERA = 6
---- Internally used for Global.ProjectedTexture and flashlight.
-VIEW_SHADOW_DEPTH_TEXTURE = 7
---- For SSAO depth. Can be accessed via render.GetResolvedFullFrameDepth.
-VIEW_SSAO = 8
+---@enum SOUND
+SOUND_NONE = 0
+SOUND_COMBAT = 1
+SOUND_WORLD = 2
+SOUND_PLAYER = 4
+SOUND_DANGER = 8
+SOUND_BULLET_IMPACT = 16
+--- Considered a scent.
+SOUND_CARCASS = 32
+--- Considered a scent.
+SOUND_MEAT = 64
+--- Considered a scent.
+SOUND_GARBAGE = 128
+--- Keeps certain creatures at bay, such as Antlions.
+SOUND_THUMPER = 256
+--- Gets the antlion's attention.
+SOUND_BUGBAIT = 512
+SOUND_PHYSICS_DANGER = 1024
+--- Only scares the sniper NPC.
+SOUND_DANGER_SNIPERONLY = 2048
+SOUND_MOVE_AWAY = 4096
+SOUND_PLAYER_VEHICLE = 8192
+--- Changes listener's readiness (Player Companion only)
+SOUND_READINESS_LOW = 16384
+SOUND_READINESS_MEDIUM = 32768
+SOUND_READINESS_HIGH = 65536
+--- Additional context for SOUND_DANGER
+SOUND_CONTEXT_FROM_SNIPER = 1048576
+--- Added to SOUND_COMBAT
+SOUND_CONTEXT_GUNFIRE = 2097152
+--- Explosion going to happen here.
+SOUND_CONTEXT_MORTAR = 4194304
+--- Only combine can hear sounds marked this way.
+SOUND_CONTEXT_COMBINE_ONLY = 8388608
+--- React to sound source's origin, not sound's location
+SOUND_CONTEXT_REACT_TO_SOURCE = 16777216
+--- Context added to SOUND_COMBAT, usually.
+SOUND_CONTEXT_EXPLOSION = 33554432
+--- Combine do NOT hear this
+SOUND_CONTEXT_EXCLUDE_COMBINE = 67108864
+--- Treat as a normal danger sound if you see the source, otherwise turn to face source.
+SOUND_CONTEXT_DANGER_APPROACH = 134217728
+--- Only player allies can hear this sound.
+SOUND_CONTEXT_ALLIES_ONLY = 268435456
+--- HACK: need this because we're not treating the SOUND_xxx values as true bit values! See switch in OnListened.
+SOUND_CONTEXT_PLAYER_VEHICLE = 536870912
 
----@enum TEXT_FILTER
---- Unknown context.
-TEXT_FILTER_UNKNOWN = 0
---- Game content, only legally required filtering is performed.
-TEXT_FILTER_GAME_CONTENT = 1
---- Chat from another player.
-TEXT_FILTER_CHAT = 2
---- Character or item name.
-TEXT_FILTER_NAME = 3
+---@enum STENCIL
+--- Never passes.
+STENCIL_NEVER = 1
+--- Passes where the reference value is less than the stencil value.
+STENCIL_LESS = 2
+--- Passes where the reference value is equal to the stencil value.
+STENCIL_EQUAL = 3
+--- Passes where the reference value is less than or equal to the stencil value.
+STENCIL_LESSEQUAL = 4
+--- Passes where the reference value is greater than the stencil value.
+STENCIL_GREATER = 5
+--- Passes where the reference value is not equal to the stencil value.
+STENCIL_NOTEQUAL = 6
+--- Passes where the reference value is greater than or equal to the stencil value.
+STENCIL_GREATEREQUAL = 7
+--- Always passes.
+STENCIL_ALWAYS = 8
+--- Preserves the existing stencil buffer value.
+STENCIL_KEEP = 1
+--- Sets the value in the stencil buffer to 0.
+STENCIL_ZERO = 2
+--- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
+STENCIL_REPLACE = 3
+--- Increments the value in the stencil buffer by 1, clamping the result.
+STENCIL_INCRSAT = 4
+--- Decrements the value in the stencil buffer by 1, clamping the result.
+STENCIL_DECRSAT = 5
+--- Inverts the value in the stencil buffer.
+STENCIL_INVERT = 6
+--- Increments the value in the stencil buffer by 1, wrapping around on overflow.
+STENCIL_INCR = 7
+--- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
+STENCIL_DECR = 8
 
----@enum USE
-USE_OFF = 0
-USE_ON = 1
-USE_SET = 2
-USE_TOGGLE = 3
+---@enum STENCILCOMPARISONFUNCTION
+--- Never passes.
+STENCILCOMPARISONFUNCTION_NEVER = 1
+--- Passes where the reference value is less than the stencil value.
+STENCILCOMPARISONFUNCTION_LESS = 2
+--- Passes where the reference value is equal to the stencil value.
+STENCILCOMPARISONFUNCTION_EQUAL = 3
+--- Passes where the reference value is less than or equal to the stencil value.
+STENCILCOMPARISONFUNCTION_LESSEQUAL = 4
+--- Passes where the reference value is greater than the stencil value.
+STENCILCOMPARISONFUNCTION_GREATER = 5
+--- Passes where the reference value is not equal to the stencil value.
+STENCILCOMPARISONFUNCTION_NOTEQUAL = 6
+--- Passes where the reference value is greater than or equal to the stencil value.
+STENCILCOMPARISONFUNCTION_GREATEREQUAL = 7
+--- Always passes.
+STENCILCOMPARISONFUNCTION_ALWAYS = 8
+
+---@enum STENCILOPERATION
+--- Preserves the existing stencil buffer value.
+STENCILOPERATION_KEEP = 1
+--- Sets the value in the stencil buffer to 0.
+STENCILOPERATION_ZERO = 2
+--- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
+STENCILOPERATION_REPLACE = 3
+--- Increments the value in the stencil buffer by 1, clamping the result.
+STENCILOPERATION_INCRSAT = 4
+--- Decrements the value in the stencil buffer by 1, clamping the result.
+STENCILOPERATION_DECRSAT = 5
+--- Inverts the value in the stencil buffer.
+STENCILOPERATION_INVERT = 6
+--- Increments the value in the stencil buffer by 1, wrapping around on overflow.
+STENCILOPERATION_INCR = 7
+--- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
+STENCILOPERATION_DECR = 8
+
+---@enum STEPSOUNDTIME
+--- Normal step
+STEPSOUNDTIME_NORMAL = 0
+--- Step on ladder
+STEPSOUNDTIME_ON_LADDER = 1
+--- Step in water, with water reaching knee
+STEPSOUNDTIME_WATER_KNEE = 2
+--- Step in water, with water reaching foot
+STEPSOUNDTIME_WATER_FOOT = 3
+
+---@enum STUDIO
+--- The current render is for opaque renderables only
+STUDIO_RENDER = 1
+STUDIO_VIEWXFORMATTACHMENTS = 2
+--- The current render is for translucent renderables only
+STUDIO_DRAWTRANSLUCENTSUBMODELS = 4
+--- The current render is for both opaque and translucent renderables
+STUDIO_TWOPASS = 8
+STUDIO_STATIC_LIGHTING = 16
+STUDIO_WIREFRAME = 32
+STUDIO_ITEM_BLINK = 64
+STUDIO_NOSHADOWS = 128
+STUDIO_WIREFRAME_VCOLLIDE = 256
+--- Not a studio flag, but used to flag when we want studio stats
+STUDIO_GENERATE_STATS = 16777216
+--- Not a studio flag, but used to flag model as using shadow depth material override
+STUDIO_SSAODEPTHTEXTURE = 134217728
+--- Not a studio flag, but used to flag model as using shadow depth material override
+STUDIO_SHADOWDEPTHTEXTURE = 1073741824
+--- Not a studio flag, but used to flag model as a non-sorting brush model
+STUDIO_TRANSPARENCY = 2147483648
+
+---@enum SURF
+--- Value will hold the light strength
+SURF_LIGHT = 1
+--- The surface is a 2D skybox
+SURF_SKY2D = 2
+--- This surface is a skybox, equivalent to HitSky in Structures/TraceResult
+SURF_SKY = 4
+--- This surface is animated water
+SURF_WARP = 8
+--- This surface is translucent
+SURF_TRANS = 16
+--- This surface cannot have portals placed on, used by Portal's gun
+SURF_NOPORTAL = 32
+--- This surface is a trigger
+SURF_TRIGGER = 64
+--- This surface is an invisible entity, equivalent to HitNoDraw in Structures/TraceResult
+SURF_NODRAW = 128
+--- Make a primary bsp splitter
+SURF_HINT = 256
+--- This surface can be ignored by impact effects
+SURF_SKIP = 512
+--- This surface has no lights calculated
+SURF_NOLIGHT = 1024
+--- Calculate three lightmaps for the surface for bumpmapping
+SURF_BUMPLIGHT = 2048
+--- No shadows are cast on this surface
+SURF_NOSHADOWS = 4096
+--- No decals are applied to this surface
+SURF_NODECALS = 8192
+--- Don't subdivide patches on this surface
+SURF_NOCHOP = 16384
+--- This surface is part of an entity's hitbox
+SURF_HITBOX = 32768
+
+---@enum TASKSTATUS
+--- Just started
+TASKSTATUS_NEW = 0
+--- Running task & movement.
+TASKSTATUS_RUN_MOVE_AND_TASK = 1
+--- Just running movement.
+TASKSTATUS_RUN_MOVE = 2
+--- Just running task.
+TASKSTATUS_RUN_TASK = 3
+--- Completed, get next task.
+TASKSTATUS_COMPLETE = 4
+
+---@enum TEAM
+--- Connecting team ID, set when player connects to the server
+TEAM_CONNECTING = 0
+--- Unassigned team ID, set right after player connected
+TEAM_UNASSIGNED = 1001
+--- Spectator team ID
+TEAM_SPECTATOR = 1002
+
+---@enum TEXFILTER
+---
+--- Enumerations used by render.PushFilterMin and render.PushFilterMag.
+---
+--- See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
+---
+TEXFILTER = {
+	NONE = 0,
+	POINT = 1,
+	LINEAR = 2,
+	ANISOTROPIC = 3,
+}
 
 ---@enum TEXT_ALIGN
 --- Align the text on the left
@@ -4061,6 +4017,16 @@ TEXT_ALIGN_RIGHT = 2
 TEXT_ALIGN_TOP = 3
 --- Align the text on the bottom
 TEXT_ALIGN_BOTTOM = 4
+
+---@enum TEXT_FILTER
+--- Unknown context.
+TEXT_FILTER_UNKNOWN = 0
+--- Game content, only legally required filtering is performed.
+TEXT_FILTER_GAME_CONTENT = 1
+--- Chat from another player.
+TEXT_FILTER_CHAT = 2
+--- Character or item name.
+TEXT_FILTER_NAME = 3
 
 ---@enum TEXTUREFLAGS
 --- Low quality, "pixel art" texture filtering.
@@ -4135,17 +4101,13 @@ TRACER_BEAM = 3
 --- Generates tracer and makes whizzing noises if the bullet flies past the player being shot at
 TRACER_LINE_AND_WHIZ = 4
 
----@enum WEAPON_PROFICIENCY
---- The NPC will miss a large majority of their shots.
-WEAPON_PROFICIENCY_POOR = 0
---- The NPC will miss about half of their shots.
-WEAPON_PROFICIENCY_AVERAGE = 1
---- The NPC will sometimes miss their shots.
-WEAPON_PROFICIENCY_GOOD = 2
---- The NPC will rarely miss their shots.
-WEAPON_PROFICIENCY_VERY_GOOD = 3
---- The NPC will almost never miss their shots.
-WEAPON_PROFICIENCY_PERFECT = 4
+---@enum TRANSMIT
+--- Always transmit the entity
+TRANSMIT_ALWAYS = 0
+--- Never transmit the entity, default for point entities
+TRANSMIT_NEVER = 1
+--- Transmit when entity is in players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community")
+TRANSMIT_PVS = 2
 
 ---@enum TYPE
 --- Invalid type
@@ -4248,3 +4210,41 @@ TYPE_COUNT = 44
 ---
 --- This doesn't actually represent a unique type returned by Global.TypeID, but instead is a hack for networking colors with net.WriteType.
 TYPE_COLOR = 255
+
+---@enum USE
+USE_OFF = 0
+USE_ON = 1
+USE_SET = 2
+USE_TOGGLE = 3
+
+---@enum VIEW
+--- Default value
+VIEW_MAIN = 0
+--- 3D skybox
+VIEW_3DSKY = 1
+--- Rendering for `_rt_Camera` base texture material (`func_monitor`, `info_camera_link`).
+VIEW_MONITOR = 2
+--- Water reflection
+VIEW_REFLECTION = 3
+--- Water refraction
+VIEW_REFRACTION = 4
+--- Used by `script_intro` entity.
+VIEW_INTRO_PLAYER = 5
+--- Used by `script_intro` entity.
+VIEW_INTRO_CAMERA = 6
+--- Internally used for Global.ProjectedTexture and flashlight.
+VIEW_SHADOW_DEPTH_TEXTURE = 7
+--- For SSAO depth. Can be accessed via render.GetResolvedFullFrameDepth.
+VIEW_SSAO = 8
+
+---@enum WEAPON_PROFICIENCY
+--- The NPC will miss a large majority of their shots.
+WEAPON_PROFICIENCY_POOR = 0
+--- The NPC will miss about half of their shots.
+WEAPON_PROFICIENCY_AVERAGE = 1
+--- The NPC will sometimes miss their shots.
+WEAPON_PROFICIENCY_GOOD = 2
+--- The NPC will rarely miss their shots.
+WEAPON_PROFICIENCY_VERY_GOOD = 3
+--- The NPC will almost never miss their shots.
+WEAPON_PROFICIENCY_PERFECT = 4

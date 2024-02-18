@@ -3,6 +3,13 @@
 --- Coroutines are similar to threads, however they do not run simultaneously. They offer a way to split up tasks and dynamically pause & resume functions.
 coroutine = {}
 
+---[SHARED AND MENU] Creates a coroutine of the given function.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.create)
+---@param func function The function for the coroutine to use.
+---@return thread # coroutine
+function coroutine.create(func) end
+
 ---[SHARED AND MENU] Returns whether the running coroutine can yield.
 --- 		A running coroutine is yieldable if it is not in the main thread, and it is not inside a non-yieldable C function.
 --- 		This is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](jit.version)
@@ -10,13 +17,6 @@ coroutine = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.isyieldable)
 ---@return boolean # Returns true when the running coroutine can yield.
 function coroutine.isyieldable() end
-
----[SHARED AND MENU] Creates a coroutine of the given function.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.create)
----@param func function The function for the coroutine to use.
----@return thread # coroutine
-function coroutine.create(func) end
 
 ---[SHARED AND MENU] Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
 ---
@@ -33,6 +33,13 @@ function coroutine.resume(coroutine, ...) end
 ---@return thread # coroutine
 function coroutine.running() end
 
+---[SHARED AND MENU] Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead".
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.status)
+---@param coroutine thread Coroutine to check the status of.
+---@return string # status
+function coroutine.status(coroutine) end
+
 ---[SHARED] Repeatedly yields the coroutine for the given duration before continuing.
 ---
 --- Only works inside a coroutine. Only useful in nextbot coroutine think function.
@@ -42,13 +49,6 @@ function coroutine.running() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.wait)
 ---@param duration number The number of seconds to wait
 function coroutine.wait(duration) end
-
----[SHARED AND MENU] Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead".
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.status)
----@param coroutine thread Coroutine to check the status of.
----@return string # status
-function coroutine.status(coroutine) end
 
 ---[SHARED AND MENU] Returns a function which calling is equivalent with calling coroutine.resume with the coroutine and all extra parameters.
 ---

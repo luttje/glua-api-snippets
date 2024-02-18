@@ -3,19 +3,6 @@
 --- The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 hook = {}
 
----[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Remove)
----@param eventName string The event name.
----@param identifier any The unique identifier of the hook to remove, usually a string.
-function hook.Remove(eventName, identifier) end
-
----[SHARED AND MENU] Returns a list of all the hooks registered with hook.Add.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/hook.GetTable)
----@return table # A table of tables. See below for output example.
-function hook.GetTable() end
-
 ---[SHARED AND MENU] Add a hook to be called upon the given event occurring.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Add)
@@ -31,6 +18,30 @@ function hook.GetTable() end
 --- It WILL break other addons.
 function hook.Add(eventName, identifier, func) end
 
+---[SHARED AND MENU] Calls all hooks associated with the given event until one returns something other than `nil`, and then returns that data.
+---
+--- In almost all cases, you should use hook.Run instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Call)
+---@param eventName string The event to call hooks for.
+---@param gamemodeTable? table If the gamemode is specified, the gamemode hook within will be called, otherwise not.
+---@param ...? any The arguments to be passed to the hooks.
+---@return any ... # Return data from called hooks. Limited to **6** return values.
+function hook.Call(eventName, gamemodeTable, ...) end
+
+---[SHARED AND MENU] Returns a list of all the hooks registered with hook.Add.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.GetTable)
+---@return table # A table of tables. See below for output example.
+function hook.GetTable() end
+
+---[SHARED AND MENU] Removes the hook with the supplied identifier from the given event.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Remove)
+---@param eventName string The event name.
+---@param identifier any The unique identifier of the hook to remove, usually a string.
+function hook.Remove(eventName, identifier) end
+
 ---[SHARED AND MENU] Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:`; alternative, if one exists.
 ---
 --- This function internally calls hook.Call.
@@ -42,14 +53,3 @@ function hook.Add(eventName, identifier, func) end
 ---@param ... any The arguments to be passed to the hooks.
 ---@return any # Returned data from called hooks.
 function hook.Run(eventName, ...) end
-
----[SHARED AND MENU] Calls all hooks associated with the given event until one returns something other than `nil`, and then returns that data.
----
---- In almost all cases, you should use hook.Run instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Call)
----@param eventName string The event to call hooks for.
----@param gamemodeTable? table If the gamemode is specified, the gamemode hook within will be called, otherwise not.
----@param ...? any The arguments to be passed to the hooks.
----@return any ... # Return data from called hooks. Limited to **6** return values.
-function hook.Call(eventName, gamemodeTable, ...) end

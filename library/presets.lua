@@ -3,18 +3,6 @@
 --- The presets library lets you add and modify the pre-set options for scripted tools (selected via the white bar at the top of each tools control panel).
 presets = {}
 
----[CLIENT] Returns a table with preset names and values from a single preset group.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.GetTable)
----@param groupname string Preset group name.
----@return table # All presets in specified group.
-function presets.GetTable(groupname) end
-
----[CLIENT] Used internally to tell the player that the name they tried to use in their preset is not acceptable.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.BadNameAlert)
-function presets.BadNameAlert() end
-
 ---[CLIENT] Adds preset to a preset group.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Add)
@@ -22,6 +10,11 @@ function presets.BadNameAlert() end
 ---@param name string Preset name, must be unique.
 ---@param values table A table of preset console commands.
 function presets.Add(groupname, name, values) end
+
+---[CLIENT] Used internally to tell the player that the name they tried to use in their preset is not acceptable.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.BadNameAlert)
+function presets.BadNameAlert() end
 
 ---[CLIENT] Returns whether a preset with given name exists or not
 ---
@@ -31,18 +24,25 @@ function presets.Add(groupname, name, values) end
 ---@return boolean # true if the preset does exist
 function presets.Exists(type, name) end
 
----[CLIENT] Removes a preset entry from a preset group.
+---[CLIENT] Returns a table with preset names and values from a single preset group.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Remove)
----@param groupname string Preset group to remove from
----@param name string Name of preset to remove
-function presets.Remove(groupname, name) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.GetTable)
+---@param groupname string Preset group name.
+---@return table # All presets in specified group.
+function presets.GetTable(groupname) end
 
 ---[CLIENT] Used internally to ask the player if they want to override an already existing preset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.OverwritePresetPrompt)
 ---@param callback function
 function presets.OverwritePresetPrompt(callback) end
+
+---[CLIENT] Removes a preset entry from a preset group.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.Remove)
+---@param groupname string Preset group to remove from
+---@param name string Name of preset to remove
+function presets.Remove(groupname, name) end
 
 ---[CLIENT] Renames preset.
 ---

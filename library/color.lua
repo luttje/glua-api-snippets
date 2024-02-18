@@ -7,12 +7,6 @@
 ---@field a number The alpha component of the color.
 local Color = {}
 
----[SHARED] Returns the color as a table with four elements.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToTable)
----@return table # The table with elements 1 = r, 2 = g, 3 = b, 4 = a.
-function Color:ToTable() end
-
 ---[SHARED] Sets the red, green, blue, and alpha of the color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:SetUnpacked)
@@ -37,6 +31,12 @@ function Color:ToHSL() end
 ---@return number # The saturation in range [0, 1].
 ---@return number # The value in range [0, 1].
 function Color:ToHSV() end
+
+---[SHARED] Returns the color as a table with four elements.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToTable)
+---@return table # The table with elements 1 = r, 2 = g, 3 = b, 4 = a.
+function Color:ToTable() end
 
 ---[SHARED] Translates the Color into a Vector, losing the alpha channel.
 --- This will also range the values from 0 - 255 to 0 - 1

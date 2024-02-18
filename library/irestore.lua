@@ -6,30 +6,6 @@
 ---@class IRestore
 local IRestore = {}
 
----[SHARED] Reads next bytes from the restore object as an Entity.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadEntity)
----@return Entity # The entity that has been read.
-function IRestore:ReadEntity() end
-
----[SHARED] Reads next bytes from the restore object as an Angle.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadAngle)
----@return Angle # The angle that has been read
-function IRestore:ReadAngle() end
-
----[SHARED] Reads next bytes from the restore object as a floating point number.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadFloat)
----@return number # The read floating point number.
-function IRestore:ReadFloat() end
-
----[SHARED] Reads next bytes from the restore object as a boolean.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadBool)
----@return boolean # The boolean that has been read
-function IRestore:ReadBool() end
-
 ---[SHARED] Ends current data block started with IRestore:StartBlock and returns to the parent block.
 ---
 --- To avoid all sorts of errors, you **must** end all blocks you start.
@@ -37,11 +13,35 @@ function IRestore:ReadBool() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:EndBlock)
 function IRestore:EndBlock() end
 
----[SHARED] Reads next bytes from the restore object as a Vector.
+---[SHARED] Reads next bytes from the restore object as an Angle.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadVector)
----@return Vector # The read vector.
-function IRestore:ReadVector() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadAngle)
+---@return Angle # The angle that has been read
+function IRestore:ReadAngle() end
+
+---[SHARED] Reads next bytes from the restore object as a boolean.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadBool)
+---@return boolean # The boolean that has been read
+function IRestore:ReadBool() end
+
+---[SHARED] Reads next bytes from the restore object as an Entity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadEntity)
+---@return Entity # The entity that has been read.
+function IRestore:ReadEntity() end
+
+---[SHARED] Reads next bytes from the restore object as a floating point number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadFloat)
+---@return number # The read floating point number.
+function IRestore:ReadFloat() end
+
+---[SHARED] Reads next bytes from the restore object as an integer number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadInt)
+---@return number # The read integer number.
+function IRestore:ReadInt() end
 
 ---[SHARED] Reads next bytes from the restore object as a string.
 ---
@@ -49,11 +49,11 @@ function IRestore:ReadVector() end
 ---@return string # The read string.
 function IRestore:ReadString() end
 
----[SHARED] Reads next bytes from the restore object as an integer number.
+---[SHARED] Reads next bytes from the restore object as a Vector.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadInt)
----@return number # The read integer number.
-function IRestore:ReadInt() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/IRestore:ReadVector)
+---@return Vector # The read vector.
+function IRestore:ReadVector() end
 
 ---[SHARED] Loads next block of data to be read inside current block. Blocks **must** be ended with IRestore:EndBlock.
 ---

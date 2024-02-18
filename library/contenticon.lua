@@ -1,5 +1,21 @@
 ---@meta
 
+---
+--- 		The spawn icon used for SWEPs and other SENTs, commonly featured as part of the spawn menu.
+--- 		Do note that at least one of your ContentIcon's parents must either be an EditablePanel or derived from it
+--- 		(like a DFrame, for example), else it won't be able to focus and thus be unclickable.
+---
+--- 		This control only exists in Sandbox derived gamemodes.
+--- 	Creates a button to spawn one or multiple pistols on top of a custom DFrame.
+---@class ContentIcon : DButton
+local ContentIcon = {}
+
+---[CLIENT] Returns the color set by ContentIcon:SetColor
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetColor)
+---@return table # See Color
+function ContentIcon:GetColor() end
+
 ---[CLIENT] Returns the content type used to save and restore the content icon in a spawnlist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetContentType)
@@ -12,33 +28,16 @@ function ContentIcon:GetContentType() end
 ---@return table # A table of weapon classes to be chosen from when user tries to spawn the NPC.
 function ContentIcon:GetNPCWeapon() end
 
----[CLIENT] Sets the color for the content icon. Currently is not used by the content icon panel.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetColor)
----@param clr table The color to set. See Color
-function ContentIcon:SetColor(clr) end
-
----[CLIENT] Returns the color set by ContentIcon:SetColor
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetColor)
----@return table # See Color
-function ContentIcon:GetColor() end
-
 ---[CLIENT] Returns the internal "name" for the content icon, usually a class name for an entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:GetSpawnName)
 ---@return string # Internal "name" to be used when user left clicks the icon.
 function ContentIcon:GetSpawnName() end
 
+---[CLIENT] A hook for override, by default does nothing. Called when user right clicks on the content icon, you are supposed to open a Global.DermaMenu here with additional options.
 ---
---- 		The spawn icon used for SWEPs and other SENTs, commonly featured as part of the spawn menu.
---- 		Do note that at least one of your ContentIcon's parents must either be an EditablePanel or derived from it
---- 		(like a DFrame, for example), else it won't be able to focus and thus be unclickable.
----
---- 		This control only exists in Sandbox derived gamemodes.
---- 	Creates a button to spawn one or multiple pistols on top of a custom DFrame.
----@class ContentIcon : DButton
-local ContentIcon = {}
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:OpenMenu)
+function ContentIcon:OpenMenu() end
 
 ---[CLIENT] Sets whether the content item is admin only. This makes the icon to display a admin icon in the top left corner of the icon.
 ---
@@ -46,10 +45,11 @@ local ContentIcon = {}
 ---@param adminOnly boolean Whether this content should be admin only or not
 function ContentIcon:SetAdminOnly(adminOnly) end
 
----[CLIENT] A hook for override, by default does nothing. Called when user right clicks on the content icon, you are supposed to open a Global.DermaMenu here with additional options.
+---[CLIENT] Sets the color for the content icon. Currently is not used by the content icon panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:OpenMenu)
-function ContentIcon:OpenMenu() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetColor)
+---@param clr table The color to set. See Color
+function ContentIcon:SetColor(clr) end
 
 ---[CLIENT] Sets the content type used to save and restore the content icon in a spawnlist.
 ---
@@ -57,17 +57,11 @@ function ContentIcon:OpenMenu() end
 ---@param type string The content type, for example "entity" or "weapon"
 function ContentIcon:SetContentType(type) end
 
----[CLIENT] Sets the internal "name" for the content icon, usually a class name for an entity.
+---[CLIENT] Sets the material to be displayed as the content icon.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetSpawnName)
----@param name string Internal "name" to be used when user left clicks the icon.
-function ContentIcon:SetSpawnName(name) end
-
----[CLIENT] Sets a table of weapon classes for the content icon with "NPC" content type to be randomly chosen from when user tries to spawn the NPC.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetNPCWeapon)
----@param weapons table A table of weapon classes to be chosen from when user tries to spawn the NPC.
-function ContentIcon:SetNPCWeapon(weapons) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetMaterial)
+---@param path string Path to the icon to use.
+function ContentIcon:SetMaterial(path) end
 
 ---[CLIENT] Sets the tool tip and the "nice" name to be displayed by the content icon.
 ---
@@ -75,8 +69,14 @@ function ContentIcon:SetNPCWeapon(weapons) end
 ---@param name string "Nice" name to display.
 function ContentIcon:SetName(name) end
 
----[CLIENT] Sets the material to be displayed as the content icon.
+---[CLIENT] Sets a table of weapon classes for the content icon with "NPC" content type to be randomly chosen from when user tries to spawn the NPC.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetMaterial)
----@param path string Path to the icon to use.
-function ContentIcon:SetMaterial(path) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetNPCWeapon)
+---@param weapons table A table of weapon classes to be chosen from when user tries to spawn the NPC.
+function ContentIcon:SetNPCWeapon(weapons) end
+
+---[CLIENT] Sets the internal "name" for the content icon, usually a class name for an entity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentIcon:SetSpawnName)
+---@param name string Internal "name" to be used when user left clicks the icon.
+function ContentIcon:SetSpawnName(name) end

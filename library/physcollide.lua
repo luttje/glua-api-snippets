@@ -6,6 +6,11 @@
 ---@class PhysCollide
 local PhysCollide = {}
 
+---[SHARED] Destroys the PhysCollide object.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysCollide:Destroy)
+function PhysCollide:Destroy() end
+
 ---[SHARED] Checks whether this PhysCollide object is valid or not.
 ---
 --- You should just use Global.IsValid instead.
@@ -27,8 +32,3 @@ function PhysCollide:IsValid() end
 ---@return Vector # Hit normal of the trace
 ---@return number # Fraction of the trace. This is calculated from the distance between startPos, hitPos, and endPos.
 function PhysCollide:TraceBox(origin, angles, rayStart, rayEnd, rayMins, rayMaxs) end
-
----[SHARED] Destroys the PhysCollide object.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/PhysCollide:Destroy)
-function PhysCollide:Destroy() end

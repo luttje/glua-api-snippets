@@ -18,6 +18,12 @@ function DTab:GetPanel() end
 ---@return Panel # The DPropertySheet this tab belongs to.
 function DTab:GetPropertySheet() end
 
+---[CLIENT AND MENU] Returns the target height of this tab. Used internally by DTab's PANEL:ApplySchemeSettings.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:GetTabHeight)
+---@return number # Either 20, or 28 if DTab:IsActive.
+function DTab:GetTabHeight() end
+
 ---[CLIENT AND MENU] Returns whether the tab is the currently selected tab of the associated DPropertySheet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:IsActive)
@@ -29,12 +35,6 @@ function DTab:IsActive() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:SetPanel)
 ---@param pnl Panel The contents of this tab.
 function DTab:SetPanel(pnl) end
-
----[CLIENT AND MENU] Returns the target height of this tab. Used internally by DTab's PANEL:ApplySchemeSettings.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:GetTabHeight)
----@return number # Either 20, or 28 if DTab:IsActive.
-function DTab:GetTabHeight() end
 
 ---[CLIENT AND MENU] Used internally by DTab:Setup.
 ---

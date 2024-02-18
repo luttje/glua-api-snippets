@@ -23,13 +23,35 @@
 ---@class CTakeDamageInfo
 local CTakeDamageInfo = {}
 
----[SHARED] Returns a bitflag which indicates the damage type(s) of the damage.
+---[SHARED] Increases the damage by damageIncrease.
 ---
---- Consider using CTakeDamageInfo:IsDamageType instead. Value returned by this function can contain multiple damage types.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:AddDamage)
+---@param damageIncrease number The damage to add.
+function CTakeDamageInfo:AddDamage(damageIncrease) end
+
+---[SHARED] Returns the ammo type used by the weapon that inflicted the damage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType)
----@return number # Damage type(s), a combination of Enums/DMG
-function CTakeDamageInfo:GetDamageType() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAmmoType)
+---@return number # Ammo type ID
+function CTakeDamageInfo:GetAmmoType() end
+
+---[SHARED] Returns the attacker ( character who originated the attack ), for example a player or an NPC that shot the weapon.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAttacker)
+---@return Entity # The attacker
+function CTakeDamageInfo:GetAttacker() end
+
+---[SHARED] Returns the initial unmodified by skill level ( game.GetSkillLevel ) damage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetBaseDamage)
+---@return number # baseDamage
+function CTakeDamageInfo:GetBaseDamage() end
+
+---[SHARED] Returns the total damage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamage)
+---@return number # damage
+function CTakeDamageInfo:GetDamage() end
 
 ---[SHARED] Gets the current bonus damage.
 ---
@@ -37,23 +59,19 @@ function CTakeDamageInfo:GetDamageType() end
 ---@return number # Bonus damage
 function CTakeDamageInfo:GetDamageBonus() end
 
----[SHARED] Increases the damage by damageIncrease.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:AddDamage)
----@param damageIncrease number The damage to add.
-function CTakeDamageInfo:AddDamage(damageIncrease) end
-
 ---[SHARED] Gets the custom damage type. This is used by Day of Defeat: Source and Team Fortress 2 for extended damage info, but isn't used in Garry's Mod by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageCustom)
 ---@return number # The custom damage type
 function CTakeDamageInfo:GetDamageCustom() end
 
----[SHARED] Returns the ammo type used by the weapon that inflicted the damage.
+---[SHARED] Returns a vector representing the damage force.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAmmoType)
----@return number # Ammo type ID
-function CTakeDamageInfo:GetAmmoType() end
+--- Can be set with CTakeDamageInfo:SetDamageForce.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageForce)
+---@return Vector # The damage force
+function CTakeDamageInfo:GetDamageForce() end
 
 ---[SHARED] Returns the position where the damage was or is going to be applied to.
 ---
@@ -63,11 +81,13 @@ function CTakeDamageInfo:GetAmmoType() end
 ---@return Vector # The damage position
 function CTakeDamageInfo:GetDamagePosition() end
 
----[SHARED] Returns the initial unmodified by skill level ( game.GetSkillLevel ) damage.
+---[SHARED] Returns a bitflag which indicates the damage type(s) of the damage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetBaseDamage)
----@return number # baseDamage
-function CTakeDamageInfo:GetBaseDamage() end
+--- Consider using CTakeDamageInfo:IsDamageType instead. Value returned by this function can contain multiple damage types.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType)
+---@return number # Damage type(s), a combination of Enums/DMG
+function CTakeDamageInfo:GetDamageType() end
 
 ---[SHARED] Returns the inflictor of the damage. This is not necessarily a weapon.
 ---
@@ -86,25 +106,36 @@ function CTakeDamageInfo:GetBaseDamage() end
 ---@return Entity # The inflictor
 function CTakeDamageInfo:GetInflictor() end
 
+---[SHARED] Returns the maximum damage. See CTakeDamageInfo:SetMaxDamage
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetMaxDamage)
+---@return number # maxDmg
+function CTakeDamageInfo:GetMaxDamage() end
+
 ---[SHARED] Returns the initial, unmodified position where the damage occured.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetReportedPosition)
 ---@return Vector # position
 function CTakeDamageInfo:GetReportedPosition() end
 
----[SHARED] Returns the total damage.
+---[SHARED] Returns true if the damage was caused by a bullet.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamage)
----@return number # damage
-function CTakeDamageInfo:GetDamage() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsBulletDamage)
+---@return boolean # isBulletDmg
+function CTakeDamageInfo:IsBulletDamage() end
 
----[SHARED] Returns a vector representing the damage force.
+---[SHARED] Returns whenever the damageinfo contains the damage type specified.
 ---
---- Can be set with CTakeDamageInfo:SetDamageForce.
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType)
+---@param dmgType number Damage type to test. See Enums/DMG.
+---@return boolean # Whether this damage contains specified damage type or not
+function CTakeDamageInfo:IsDamageType(dmgType) end
+
+---[SHARED] Returns whenever the damageinfo contains explosion damage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageForce)
----@return Vector # The damage force
-function CTakeDamageInfo:GetDamageForce() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsExplosionDamage)
+---@return boolean # isExplDamage
+function CTakeDamageInfo:IsExplosionDamage() end
 
 ---[SHARED] Returns whenever the damageinfo contains fall damage.
 ---
@@ -118,42 +149,23 @@ function CTakeDamageInfo:IsFallDamage() end
 ---@param scale number Value to scale the damage with.
 function CTakeDamageInfo:ScaleDamage(scale) end
 
----[SHARED] Returns whenever the damageinfo contains explosion damage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsExplosionDamage)
----@return boolean # isExplDamage
-function CTakeDamageInfo:IsExplosionDamage() end
-
----[SHARED] Returns the maximum damage. See CTakeDamageInfo:SetMaxDamage
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetMaxDamage)
----@return number # maxDmg
-function CTakeDamageInfo:GetMaxDamage() end
-
 ---[SHARED] Changes the ammo type used by the weapon that inflicted the damage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetAmmoType)
 ---@param ammoType number Ammo type ID
 function CTakeDamageInfo:SetAmmoType(ammoType) end
 
----[SHARED] Returns whenever the damageinfo contains the damage type specified.
+---[SHARED] Sets the attacker ( character who originated the attack ) of the damage, for example a player or an NPC.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType)
----@param dmgType number Damage type to test. See Enums/DMG.
----@return boolean # Whether this damage contains specified damage type or not
-function CTakeDamageInfo:IsDamageType(dmgType) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetAttacker)
+---@param ent Entity The entity to be set as the attacker.
+function CTakeDamageInfo:SetAttacker(ent) end
 
----[SHARED] Returns true if the damage was caused by a bullet.
+---[SHARED] Sets the initial unmodified by skill level ( game.GetSkillLevel ) damage. This function will not update or touch CTakeDamageInfo:GetDamage.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsBulletDamage)
----@return boolean # isBulletDmg
-function CTakeDamageInfo:IsBulletDamage() end
-
----[SHARED] Returns the attacker ( character who originated the attack ), for example a player or an NPC that shot the weapon.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAttacker)
----@return Entity # The attacker
-function CTakeDamageInfo:GetAttacker() end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetBaseDamage)
+---@param number number baseDamage
+function CTakeDamageInfo:SetBaseDamage(number) end
 
 ---[SHARED] Sets the amount of damage.
 ---
@@ -161,11 +173,25 @@ function CTakeDamageInfo:GetAttacker() end
 ---@param damage number The value to set the absolute damage to.
 function CTakeDamageInfo:SetDamage(damage) end
 
----[SHARED] Subtracts the specified amount from the damage.
+---[SHARED] Sets the bonus damage. Bonus damage isn't automatically applied, so this will have no outer effect by default.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SubtractDamage)
----@param damage number Value to subtract.
-function CTakeDamageInfo:SubtractDamage(damage) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageBonus)
+---@param damage number The extra damage to be added.
+function CTakeDamageInfo:SetDamageBonus(damage) end
+
+---[SHARED] Sets the custom damage type. This is used by Day of Defeat: Source and Team Fortress 2 for extended damage info, but isn't used in Garry's Mod by default.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageCustom)
+---@param DamageType number Any integer - can be based on your own custom enums.
+function CTakeDamageInfo:SetDamageCustom(DamageType) end
+
+---[SHARED] Sets the directional force of the damage.
+---
+--- 	This function seems to have no effect on player knockback. To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use workaround example below.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageForce)
+---@param force Vector The vector to set the force to.
+function CTakeDamageInfo:SetDamageForce(force) end
 
 ---[SHARED] Sets the position of where the damage gets applied to.
 ---
@@ -179,50 +205,6 @@ function CTakeDamageInfo:SetDamagePosition(pos) end
 ---@param type number The damage type, see Enums/DMG.
 function CTakeDamageInfo:SetDamageType(type) end
 
----[SHARED] Sets the maximum damage this damage event can cause.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
----@param maxDamage number Maximum damage value.
-function CTakeDamageInfo:SetMaxDamage(maxDamage) end
-
----[SHARED] Sets the attacker ( character who originated the attack ) of the damage, for example a player or an NPC.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetAttacker)
----@param ent Entity The entity to be set as the attacker.
-function CTakeDamageInfo:SetAttacker(ent) end
-
----[SHARED] Sets the custom damage type. This is used by Day of Defeat: Source and Team Fortress 2 for extended damage info, but isn't used in Garry's Mod by default.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageCustom)
----@param DamageType number Any integer - can be based on your own custom enums.
-function CTakeDamageInfo:SetDamageCustom(DamageType) end
-
----[SHARED] Sets the initial unmodified by skill level ( game.GetSkillLevel ) damage. This function will not update or touch CTakeDamageInfo:GetDamage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetBaseDamage)
----@param number number baseDamage
-function CTakeDamageInfo:SetBaseDamage(number) end
-
----[SHARED] Sets the bonus damage. Bonus damage isn't automatically applied, so this will have no outer effect by default.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageBonus)
----@param damage number The extra damage to be added.
-function CTakeDamageInfo:SetDamageBonus(damage) end
-
----[SHARED] Sets the origin of the damage.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetReportedPosition)
----@param pos Vector The location of where the damage is originating
-function CTakeDamageInfo:SetReportedPosition(pos) end
-
----[SHARED] Sets the directional force of the damage.
----
---- 	This function seems to have no effect on player knockback. To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use workaround example below.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageForce)
----@param force Vector The vector to set the force to.
-function CTakeDamageInfo:SetDamageForce(force) end
-
 ---[SHARED] Sets the inflictor of the damage for example a weapon.
 ---
 --- For hitscan/bullet weapons this should the weapon.
@@ -233,3 +215,21 @@ function CTakeDamageInfo:SetDamageForce(force) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetInflictor)
 ---@param inflictor Entity The new inflictor.
 function CTakeDamageInfo:SetInflictor(inflictor) end
+
+---[SHARED] Sets the maximum damage this damage event can cause.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
+---@param maxDamage number Maximum damage value.
+function CTakeDamageInfo:SetMaxDamage(maxDamage) end
+
+---[SHARED] Sets the origin of the damage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetReportedPosition)
+---@param pos Vector The location of where the damage is originating
+function CTakeDamageInfo:SetReportedPosition(pos) end
+
+---[SHARED] Subtracts the specified amount from the damage.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SubtractDamage)
+---@param damage number Value to subtract.
+function CTakeDamageInfo:SubtractDamage(damage) end

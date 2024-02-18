@@ -1,5 +1,9 @@
 ---@meta
 
+--- Material is a VGUI element that renders a VMT material.Creates a Material panel with TV static under a DModelPanel with a spinning Garry's Mod logo model.Creates a custom material (using existing textures) of a Portal background with scrolling scan lines, and then displays that material in a Material panel in the center of the screen.
+---@class Material : Button
+local Material = {}
+
 ---[CLIENT] Sets the alpha value of the Material panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Material:SetAlpha)
@@ -13,7 +17,3 @@ function Material:SetAlpha(alpha) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Material:SetMaterial)
 ---@param matname string The file path of the material to set (relative to "garrysmod/materials/").
 function Material:SetMaterial(matname) end
-
---- Material is a VGUI element that renders a VMT material.Creates a Material panel with TV static under a DModelPanel with a spinning Garry's Mod logo model.Creates a custom material (using existing textures) of a Portal background with scrolling scan lines, and then displays that material in a Material panel in the center of the screen.
----@class Material : Button
-local Material = {}

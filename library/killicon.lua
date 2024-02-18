@@ -11,6 +11,13 @@ killicon = {}
 ---@param color table Color of the kill icon
 function killicon.Add(class, texture, color) end
 
+---[CLIENT] Creates kill icon from existing one.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.AddAlias)
+---@param new_class string New class of the kill icon
+---@param existing_class string Already existing kill icon class
+function killicon.AddAlias(new_class, existing_class) end
+
 ---[CLIENT] Adds kill icon for given weapon/entity class using special font.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.AddFont)
@@ -21,12 +28,17 @@ function killicon.Add(class, texture, color) end
 ---@param heightScale? number Used internally to correct certain killicons to more closely match their visual size.
 function killicon.AddFont(class, font, symbol, color, heightScale) end
 
----[CLIENT] Creates kill icon from existing one.
+---[CLIENT] Creates new kill icon using a sub-rectangle of a texture.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.AddAlias)
----@param new_class string New class of the kill icon
----@param existing_class string Already existing kill icon class
-function killicon.AddAlias(new_class, existing_class) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.AddTexCoord)
+---@param class string Weapon or entity class this killicon is for.
+---@param texture string Path to the texture.
+---@param color table Color of the kill icon.
+---@param x number The start position (X axis) of the rectangle on the given texture. This is in texture coordinates.
+---@param y number The start position (Y axis) of the rectangle on the given texture. This is in texture coordinates.
+---@param w number The width of the rectangle on the given texture. This is in texture coordinates.
+---@param h number The height of the rectangle on the given texture. This is in texture coordinates.
+function killicon.AddTexCoord(class, texture, color, x, y, w, h) end
 
 ---[CLIENT] Draws a kill icon.
 ---
@@ -37,16 +49,6 @@ function killicon.AddAlias(new_class, existing_class) end
 ---@param alpha? number Alpha/transparency value ( 0 - 255 ) of the icon
 ---@deprecated This function applies unpredictable vertical offsets, you should use killicon.Render instead, which does not suffer from this issue.
 function killicon.Draw(x, y, name, alpha) end
-
----[CLIENT] Renders a kill icon.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.Render)
----@param x number X coordinate of the icon
----@param y number Y coordinate of the icon
----@param name string Classname of the kill icon
----@param alpha? number Alpha/transparency value ( 0 - 255 ) of the icon
----@param dontEqualizeHeight? number Do not rescale the icon to match the default kill icon font.
-function killicon.Render(x, y, name, alpha, dontEqualizeHeight) end
 
 ---[CLIENT] Checks if kill icon exists for given class.
 ---
@@ -64,14 +66,12 @@ function killicon.Exists(class) end
 ---@return number # Height of the kill icon
 function killicon.GetSize(name, dontEqualizeHeight) end
 
----[CLIENT] Creates new kill icon using a sub-rectangle of a texture.
+---[CLIENT] Renders a kill icon.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.AddTexCoord)
----@param class string Weapon or entity class this killicon is for.
----@param texture string Path to the texture.
----@param color table Color of the kill icon.
----@param x number The start position (X axis) of the rectangle on the given texture. This is in texture coordinates.
----@param y number The start position (Y axis) of the rectangle on the given texture. This is in texture coordinates.
----@param w number The width of the rectangle on the given texture. This is in texture coordinates.
----@param h number The height of the rectangle on the given texture. This is in texture coordinates.
-function killicon.AddTexCoord(class, texture, color, x, y, w, h) end
+---[(View on wiki)](https://wiki.facepunch.com/gmod/killicon.Render)
+---@param x number X coordinate of the icon
+---@param y number Y coordinate of the icon
+---@param name string Classname of the kill icon
+---@param alpha? number Alpha/transparency value ( 0 - 255 ) of the icon
+---@param dontEqualizeHeight? number Do not rescale the icon to match the default kill icon font.
+function killicon.Render(x, y, name, alpha, dontEqualizeHeight) end

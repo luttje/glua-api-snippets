@@ -26,39 +26,6 @@
 --- * No `LIMIT` and `ORDER BY` clauses in `DELETE` and `UPDATE` statements (`SQLITE_ENABLE_UPDATE_DELETE_LIMIT`)
 sql = {}
 
----[SHARED AND MENU] Performs the sql.Query and returns the n'th row.
----
---- This function is equivalent to safely returning
---- ```lua
---- sql.Query(query)[row]
---- ```
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sql.QueryRow)
----@param query string The query as used in sql.Query
----@param row? number The row number.
----@return table # The returned row.
-function sql.QueryRow(query, row) end
-
----[SHARED AND MENU] Returns the last error from a SQLite query.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sql.LastError)
----@return string # Last error from SQLite database.
-function sql.LastError() end
-
----[SHARED AND MENU] Performs a query on the local SQLite database, returns a table as result set, nil if result is empty and false on error.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sql.Query)
----@param query string The query to execute.
----@return table # false is returned if there is an error, nil if the query returned no data.
-function sql.Query(query) end
-
----[SHARED AND MENU] Performs the query like sql.QueryRow, but returns the first value found.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sql.QueryValue)
----@param query string The input query.
----@return string # The returned value.
-function sql.QueryValue(query) end
-
 ---[SHARED AND MENU] Tells the engine a set of queries is coming. Will wait until sql.Commit is called to run them.
 --- This is most useful when you run more than 100+ queries.
 --- This is equivalent to :
@@ -76,19 +43,45 @@ function sql.Begin() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.Commit)
 function sql.Commit() end
 
----[SHARED AND MENU] Returns true if the table with the specified name exists.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/sql.TableExists)
----@param tableName string The name of the table to check.
----@return boolean # exists
-function sql.TableExists(tableName) end
-
 ---[SHARED AND MENU] Returns true if the index with the specified name exists.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.IndexExists)
 ---@param indexName string The name of the index to check.
 ---@return boolean # exists
 function sql.IndexExists(indexName) end
+
+---[SHARED AND MENU] Returns the last error from a SQLite query.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.LastError)
+---@return string # Last error from SQLite database.
+function sql.LastError() end
+
+---[SHARED AND MENU] Performs a query on the local SQLite database, returns a table as result set, nil if result is empty and false on error.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.Query)
+---@param query string The query to execute.
+---@return table # false is returned if there is an error, nil if the query returned no data.
+function sql.Query(query) end
+
+---[SHARED AND MENU] Performs the sql.Query and returns the n'th row.
+---
+--- This function is equivalent to safely returning
+--- ```lua
+--- sql.Query(query)[row]
+--- ```
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.QueryRow)
+---@param query string The query as used in sql.Query
+---@param row? number The row number.
+---@return table # The returned row.
+function sql.QueryRow(query, row) end
+
+---[SHARED AND MENU] Performs the query like sql.QueryRow, but returns the first value found.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.QueryValue)
+---@param query string The input query.
+---@return string # The returned value.
+function sql.QueryValue(query) end
 
 ---[SHARED AND MENU] Escapes dangerous characters and symbols from user input used in an SQLite SQL Query.
 ---
@@ -99,3 +92,10 @@ function sql.IndexExists(indexName) end
 ---@param bNoQuotes? boolean Set this as `true`, and the function will not wrap the input string in apostrophes.
 ---@return string # The escaped input.
 function sql.SQLStr(string, bNoQuotes) end
+
+---[SHARED AND MENU] Returns true if the table with the specified name exists.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.TableExists)
+---@param tableName string The name of the table to check.
+---@return boolean # exists
+function sql.TableExists(tableName) end

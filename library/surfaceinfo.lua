@@ -14,14 +14,6 @@ local SurfaceInfo = {}
 ---@return IMaterial # Material of one portion of a brush model.
 function SurfaceInfo:GetMaterial() end
 
----[SHARED] Checks if the brush surface is displaying the skybox.
----
---- This internally checks the SURFDRAW_SKY flag.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsSky)
----@return boolean # Returns true if the surface is the sky.
-function SurfaceInfo:IsSky() end
-
 ---[SHARED] Returns a list of vertices the brush surface is built from.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:GetVertices)
@@ -35,6 +27,14 @@ function SurfaceInfo:GetVertices() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsNoDraw)
 ---@return boolean # Returns true if this surface won't be drawn.
 function SurfaceInfo:IsNoDraw() end
+
+---[SHARED] Checks if the brush surface is displaying the skybox.
+---
+--- This internally checks the SURFDRAW_SKY flag.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsSky)
+---@return boolean # Returns true if the surface is the sky.
+function SurfaceInfo:IsSky() end
 
 ---[SHARED] Checks if the brush surface is water.
 ---

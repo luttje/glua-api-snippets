@@ -9,10 +9,9 @@ local SpawnmenuContentPanel = {}
 
 ---[CLIENT] Changes the Spawnmenu category to search in
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableSearch)
----@param category string The category
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:CallPopulateHook)
 ---@param hookname string The Hook name
-function SpawnmenuContentPanel:EnableSearch(category, hookname) end
+function SpawnmenuContentPanel:CallPopulateHook(hookname) end
 
 ---[CLIENT] Allows the modification of the ContentSidebar
 ---
@@ -21,9 +20,10 @@ function SpawnmenuContentPanel:EnableModify() end
 
 ---[CLIENT] Changes the Spawnmenu category to search in
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:CallPopulateHook)
+---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnmenuContentPanel:EnableSearch)
+---@param category string The category
 ---@param hookname string The Hook name
-function SpawnmenuContentPanel:CallPopulateHook(hookname) end
+function SpawnmenuContentPanel:EnableSearch(category, hookname) end
 
 ---[CLIENT] Switches the current panel with the given panel
 ---

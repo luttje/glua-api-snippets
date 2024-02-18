@@ -4,22 +4,6 @@
 ---@class Task
 local Task = {}
 
----[SERVER] Determines if the task is an engine task (`TYPE_ENGINE`, 1).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsEngineType)
-function Task:IsEngineType() end
-
----[SERVER] Runs the AI task.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run)
----@param target NPC The NPC to run the task on.
-function Task:Run(target) end
-
----[SERVER] Determines if the task is an NPC method-based task (`TYPE_FNAME`, 2).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsFNameType)
-function Task:IsFNameType() end
-
 ---[SERVER] Initialises the AI task. Called by ai_task.New.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Init)
@@ -40,20 +24,36 @@ function Task:InitEngine(taskname, taskdata) end
 ---@param taskdata number
 function Task:InitFunctionName(startname, runname, taskdata) end
 
+---[SERVER] Determines if the task is an engine task (`TYPE_ENGINE`, 1).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsEngineType)
+function Task:IsEngineType() end
+
+---[SERVER] Determines if the task is an NPC method-based task (`TYPE_FNAME`, 2).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsFNameType)
+function Task:IsFNameType() end
+
+---[SERVER] Runs the AI task.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run)
+---@param target NPC The NPC to run the task on.
+function Task:Run(target) end
+
 ---[SERVER] Runs the AI task as an NPC method. This requires the task to be of type `TYPE_FNAME`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run_FName)
 ---@param target NPC The NPC to run the task on.
 function Task:Run_FName(target) end
 
----[SERVER] Starts the AI task as an NPC method.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start_FName)
----@param target NPC The NPC to start the task on.
-function Task:Start_FName(target) end
-
 ---[SERVER] Starts the AI task.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start)
 ---@param target NPC The NPC to start the task on.
 function Task:Start(target) end
+
+---[SERVER] Starts the AI task as an NPC method.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start_FName)
+---@param target NPC The NPC to start the task on.
+function Task:Start_FName(target) end
