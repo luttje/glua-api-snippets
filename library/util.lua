@@ -191,6 +191,13 @@ function util.FilterText(str, context, player) end
 ---@return string # The relative path to the GMA file.
 function util.FullPathToRelative_Menu(gma, gamePath) end
 
+---[SERVER] Returns a name for given automatically generated numerical animation event ID. This is useful for NPC models that define custom animation events.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetAnimEventNameByID)
+---@param id number The ID of an animation event, typically from ENTITY:HandleAnimEvent.
+---@return string # The associated name with given event ID.
+function util.GetAnimEventNameByID(id) end
+
 ---[SHARED] Returns a table containing the info about the model.
 ---
 --- This function will silently fail if used on models with following strings in them:
@@ -398,6 +405,18 @@ end
 ---@param coneLength number Length of the cone's axis.
 ---@return boolean # `true` if the point is within the cone, `false` otherwise.
 function util.IsPointInCone(point, coneOrigin, coneAxis, coneSine, coneLength) end
+
+---[SHARED] Performs a ray-ray intersection and returns whether there was an intersection or not.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IsRayIntersectingRay)
+---@param ray1Start Vector Start position of the first ray.
+---@param ray1End Vector End position of the first ray.
+---@param ray2Start Vector Start position of the second ray.
+---@param ray2End Vector End position of the second ray.
+---@return boolean # `true` if there is an intersection, `false` otherwise.
+---@return number # Distance from start of ray 1 to the intersection, if there was one.
+---@return number # Distance from start of ray 2 to the intersection, if there was one.
+function util.IsRayIntersectingRay(ray1Start, ray1End, ray2Start, ray2End) end
 
 ---[CLIENT] Check whether the skybox is visible from the point specified.
 ---
@@ -659,16 +678,21 @@ function util.RemovePData(steamID, name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.ScreenShake)
 ---@param pos Vector The origin of the effect.
---- 			Does nothing on client.
+---
+--- Used serverside only, to determine which clients the event should be networked to.
 ---
 ---@param amplitude number The strength of the effect. How far away from its origin the camera will move while shaking.
 ---@param frequency number How many times per second to change the direction of the camera wobble. 40 is generally enough; values higher are hardly distinguishable.
 ---@param duration number The duration of the effect in seconds.
 ---@param radius number The range from the origin within which views will be affected, in Hammer units.
---- 			Does nothing on client.
 ---
----@param airshake? boolean whether players in the air should also be affected.
-function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake) end
+--- This is used when networking the event to clients only.
+---
+---@param airshake? boolean Whether players in the air should also be affected.
+---
+--- Used serverside only to determine which clients to send the event to.
+---@param filter? CRecipientFilter If set, will only network the screen shake event to players present in the filter.
+function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake, filter) end
 
 ---[SHARED AND MENU] Sets persistent data for offline player using their SteamID.
 ---

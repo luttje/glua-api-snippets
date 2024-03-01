@@ -179,12 +179,15 @@ function ents.GetEdictCount() end
 ---@return Entity # Found entity
 function ents.GetMapCreatedEntity(id) end
 
----[SHARED] Returns an iterator for all existing entities.
+---[SHARED] Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all entities.
+--- 		Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
+--- 		See player.Iterator for a similar function for all players.
 ---
---- This will be quite a bit faster than ents.GetAll, especially when using the `break` keyword.
+--- 		Internally, this function uses cached values that exist entirely within lua, as opposed to ents.GetAll, which is a C++ function.
+--- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.Iterator)
----@return function # Iterator function
----@return table # Table of all existing Entitys.
----@return number # Will always be `0`. Start index?
+---@return function # The Iterator Function from Global.ipairs
+---@return table # Table of all existing Entity.  This is a cached copy of ents.GetAll
+---@return number #  			The starting index for the table of players.   			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function ents.Iterator() end

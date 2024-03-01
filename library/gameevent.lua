@@ -231,6 +231,176 @@ game_newmap.mapname = nil
 local hide_freezepanel = {}
 
 ---
+--- 			Called when a Client becomes the Cameraman
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_cameraman
+local hltv_cameraman = {}
+
+---The Entity:EntIndex of the new Cameraman.
+---@type number
+hltv_cameraman.index = nil
+
+---
+--- 			Called when the HLTV observer mode changes.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_changed_mode
+local hltv_changed_mode = {}
+
+---The new Enums/OBS_MODE.
+---@type number
+hltv_changed_mode.newmode = nil
+
+---The Entity:EntIndex of our Target.
+---@type number
+hltv_changed_mode.obs_target = nil
+
+---The old Enums/OBS_MODE.
+---@type number
+hltv_changed_mode.oldmode = nil
+
+---
+--- 			Called when the HLTV observer target changes.
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_changed_target
+local hltv_changed_target = {}
+
+---The Enums/OBS_MODE.
+---@type number
+hltv_changed_target.mode = nil
+
+---The Entity:EntIndex of the new Target.
+---@type number
+hltv_changed_target.obs_target = nil
+
+---The Entity:EntIndex of the old Target.
+---@type number
+hltv_changed_target.old_target = nil
+
+---
+--- 			Called when the view changes
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_chase
+local hltv_chase = {}
+
+---The distance from the Target.
+---@type number
+hltv_chase.distance = nil
+
+---The inertia.
+---@type number
+hltv_chase.inertia = nil
+
+---`1` if we should use Enums/OBS_MODE. else, we use Enums/OBS_MODE
+---@type number
+hltv_chase.ineye = nil
+
+---The phi.
+---@type number
+hltv_chase.phi = nil
+
+---The Entity:EntIndex of the Primary target.
+---@type number
+hltv_chase.target1 = nil
+
+---The Entity:EntIndex of the Secondary target.
+---@type number
+hltv_chase.target2 = nil
+
+---The theta.
+---@type number
+hltv_chase.theta = nil
+
+---
+--- 			Called when the fixed view changes
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_fixed
+local hltv_fixed = {}
+
+---The X position.
+---@type number
+hltv_fixed.posx = nil
+
+---The Y position.
+---@type number
+hltv_fixed.posy = nil
+
+---The Z position.
+---@type number
+hltv_fixed.posz = nil
+
+---The phi.
+---@type number
+hltv_fixed.phi = nil
+
+---The Entity:EntIndex of the target.
+---@type number
+hltv_fixed.target = nil
+
+---The theta.
+---@type number
+hltv_fixed.theta = nil
+
+---The FOV.
+---@type number
+hltv_fixed.fov = nil
+
+---
+--- 			Called when a message is sent with `tv_msg`
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_message
+local hltv_message = {}
+
+---The Text.
+---@type string
+hltv_message.text = nil
+
+---
+--- 			Called when the HLTV ranks all cameras
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_rank_camera
+local hltv_rank_camera = {}
+
+---The id of the Camera.
+---@type number
+hltv_rank_camera.index = nil
+
+---The rank.
+---@type number
+hltv_rank_camera.rank = nil
+
+---The Entity:EntIndex of the Target.
+---@type number
+hltv_rank_camera.target = nil
+
+---
+--- 			Called when the HLTV ranks all players
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_rank_entity
+local hltv_rank_entity = {}
+
+---The Entity:EntIndex of the Entity.
+---@type number
+hltv_rank_entity.index = nil
+
+---The rank.
+---@type number
+hltv_rank_entity.rank = nil
+
+---The Entity:EntIndex of the Target.
+---@type number
+hltv_rank_entity.target = nil
+
+---
+--- 			Called when the SourceTV client is spawned
+--- 	This is a basic template with the purpose of including all arguments / table variables to make it easily known which values can be accessed.
+---@class hltv_title
+local hltv_title = {}
+
+---The SourceTV Name.
+---@type string
+hltv_title.text = nil
+
+---
 --- 		Called **only** in the specific realm when the game is existing.
 ---
 --- 		This is not called reliable serverside.
@@ -466,6 +636,10 @@ player_say.userid = nil
 ---The text that was said.
 ---@type string
 player_say.text = nil
+
+---`1` If it's only for the team, else `0`. **(Added recently/Coming with the next update)**
+---@type number
+player_say.teamonly = nil
 
 ---
 --- 			Called when a player spawns.

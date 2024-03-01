@@ -1,8 +1,5 @@
 ---@meta
 
----@class ENTITY
-ENTITY = {}
-
 ---[SERVER] Called by the engine when NPC's state changes.
 ---
 --- This hook only exists for `ai` type SENTs.

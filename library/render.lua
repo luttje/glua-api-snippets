@@ -61,7 +61,7 @@ function render.CapturePixels() end
 ---@param clearStencil? boolean Clear the stencil.
 function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 
----[CLIENT AND MENU] Clears the current rendertarget for obeying the current stencil buffer conditions.
+---[CLIENT AND MENU] Clears the portion of the active Render Target that passes the current stencil buffer conditions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
 ---@param r number Value of the **red** channel to clear the current rt with.
@@ -128,12 +128,14 @@ function render.ComputeLighting(position, normal) end
 function render.ComputePixelDiameterOfSphere(point, radius) end
 
 ---[CLIENT] Copies the currently active Render Target to the specified texture.
+--- 		This does not copy the Depth buffer, no method for that is known at this moment so a common workaround is to store the source texture somewhere else, perform your drawing operations, save the result somewhere else and reapply the source texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.CopyRenderTargetToTexture)
 ---@param Target ITexture The texture to copy to
 function render.CopyRenderTargetToTexture(Target) end
 
 ---[CLIENT] Copies the contents of one texture to another. Only works with rendertargets.
+--- 		This does not copy the Depth buffer, no method for that is known at this moment so a common workaround is to store the source texture somewhere else, perform your drawing operations, save the result somewhere else and reapply the source texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.CopyTexture)
 ---@param texture_from ITexture

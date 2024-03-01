@@ -34,13 +34,21 @@ function DMenuOption:GetIsCheckable() end
 ---@return Panel # A DMenu to which this panel belongs.
 function DMenuOption:GetMenu() end
 
+---[CLIENT AND MENU] Returns whether this DMenuOption should act like a radio button, set by DMenuOption:SetRadio.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:GetRadio)
+---@return boolean # `true` to set as a radio button.
+function DMenuOption:GetRadio() end
+
 ---[CLIENT AND MENU] Called whenever the DMenuOption's checked state changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:OnChecked)
 ---@param checked boolean The new checked state
 function DMenuOption:OnChecked(checked) end
 
----[CLIENT AND MENU] Sets the checked state of the DMenuOption. Does not invoke DMenuOption:OnChecked.
+---[CLIENT AND MENU] Sets the checked state of the DMenuOption.
+---
+--- Does not invoke DMenuOption:OnChecked. This will be fixed in the next update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetChecked)
 ---@param checked boolean `true` to set as checked.
@@ -48,8 +56,10 @@ function DMenuOption:SetChecked(checked) end
 
 ---[CLIENT AND MENU] Sets whether the DMenuOption is a checkbox option or a normal button option.
 ---
+--- Enables automatic DMenuOption:GetChecked toggling with left/right clicks.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetIsCheckable)
----@param checkable boolean
+---@param checkable boolean Whether the menu option should allow the player to toggle itself.
 function DMenuOption:SetIsCheckable(checkable) end
 
 ---[CLIENT AND MENU] Used to set the DMenu for this option.
@@ -57,6 +67,14 @@ function DMenuOption:SetIsCheckable(checkable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetMenu)
 ---@param pnl Panel The DMenu for this option.
 function DMenuOption:SetMenu(pnl) end
+
+---[CLIENT AND MENU] Sets whether this DMenuOption should act like a radio button.
+---
+--- Checking a radio button automatically unchecks all adjacent radio buttons.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetRadio)
+---@param checked boolean `true` to set as a radio button.
+function DMenuOption:SetRadio(checked) end
 
 ---[CLIENT AND MENU] Used internally by DMenuOption:AddSubMenu to create the submenu arrow and assign the created submenu to be opened when this option is hovered.
 ---

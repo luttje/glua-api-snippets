@@ -195,7 +195,7 @@ function Panel:ChildCount() end
 ---@return number # The children size height.
 function Panel:ChildrenSize() end
 
----[CLIENT AND MENU] Marks all of the panel's children for deletion.
+---[CLIENT AND MENU] Removes all of the panel's children.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Clear)
 function Panel:Clear() end
@@ -1402,7 +1402,10 @@ function Panel:NewObjectCallback(objectName, callbackName) end
 
 ---[CLIENT AND MENU] Sets whether this panel's drawings should be clipped within the parent panel's bounds.
 ---
---- See also Global.DisableClipping.
+---
+--- This only disabled clipping for the Paint Related functions (as far as i can tell at the current moment, more testing should be done) so things like the text of a DLabel will still be clipped to the parent.
+---
+--- To fully disable the clipping of any children see Global.DisableClipping.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:NoClipping)
 ---@param clip boolean Whether to clip or not.
@@ -2073,8 +2076,8 @@ function Panel:SetHeight(height) end
 ---[CLIENT AND MENU] Allows you to set HTML code within a panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetHTML)
----@param hTMLCode string The code to set.
-function Panel:SetHTML(hTMLCode) end
+---@param HTML string The HTML code to set.
+function Panel:SetHTML(HTML) end
 
 ---[CLIENT AND MENU] Enables or disables the keyboard input for the panel.
 ---

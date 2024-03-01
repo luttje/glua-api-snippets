@@ -19,31 +19,33 @@ function debug.debug() end
 ---@return table # Environment
 function debug.getfenv(object) end
 
----[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html
+---[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html. This function will simply return the function, mask, and count of the last called debug.sethook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.gethook)
----@param thread? thread Which thread to retrieve its hook from
----@return function # Hook function
----@return string # Hook mask
----@return number # Hook count
+---@param thread? thread Which thread to retrieve it's hook from, doesn't seem to actually work.
+---@return function # Hook function.
+---@return string # Hook mask. This is reversed of the debug.sethook mask ("clr" would be "rlc").
+---@return number # Hook count.
 function debug.gethook(thread) end
 
 ---[SHARED AND MENU] Returns debug information about a function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getinfo)
----@param funcOrStackLevel function Takes either a function or a number representing the stack level as an argument. Stack level 0 always corresponds to the debug.getinfo call, 1 would be the function calling debug.getinfo, and so on.
+---@param funcOrStackLevel function Takes either a function or a number representing the stack level as an argument. Stack level 0 always corresponds to the debug.getinfo call, 1 would be the function calling debug.getinfo in most cases, and so on.
 ---
 --- Returns useful information about that function in a table.
 ---@param fields? string A string whose characters specify the information to be retrieved.
 ---
---- * f - Populates the func field.
---- * l - Populates the currentline field.
---- * L - Populates the activelines field.
---- * n - Populates the name and namewhat fields - only works if stack level is passed rather than function pointer.
---- * S - Populates the location fields (lastlinedefined, linedefined, short_src, source and what).
---- * u - Populates the argument and upvalue fields (isvararg, nparams, nups)
+--- * `f` - Populates the func field.
+--- * `l` - Populates the currentline field.
+--- * `L` - Populates the activelines field.
+--- * `n` - Populates the name and namewhat fields - only works if stack level is passed rather than function pointer.
+--- * `S` - Populates the location fields (lastlinedefined, linedefined, short_src, source and what).
+--- * `u` - Populates the argument and upvalue fields (isvararg, nparams, nups).
+--- * `>` - Causes this function to use the last argument to get the data from
+---@param _function function Function to use. (Only used by the `>` field)
 ---@return table # A table as a Structures/DebugInfo containing information about the function you passed. Can return nil if the stack level didn't point to a valid stack frame.
-function debug.getinfo(funcOrStackLevel, fields) end
+function debug.getinfo(funcOrStackLevel, fields, _function) end
 
 ---[SHARED AND MENU] Gets the name and value of a local variable indexed from the level.
 --- 	When a function has a tailcall return, you cannot access the locals of this function.

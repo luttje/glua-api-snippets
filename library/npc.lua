@@ -297,6 +297,12 @@ function NPC:GetIdealMoveAcceleration() end
 ---@return number # The ideal move speed.
 function NPC:GetIdealMoveSpeed() end
 
+---[SERVER] Returns the ideal sequence the NPC currently wants to achieve.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetIdealSequence)
+---@return number # The ideal sequence, specific to the NPCs model.
+function NPC:GetIdealSequence() end
+
 ---[SERVER] Returns the ideal yaw (left right rotation) for this NPC at this moment.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetIdealYaw)
@@ -959,7 +965,7 @@ function NPC:SetSchedule(schedule) end
 --- NPCs within the same squad are meant to function more effectively, tactics wise.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetSquad)
----@param name string The new squad name to set.
+---@param name? string The new squad name to set. Do not provide this argument to reset the squad.
 function NPC:SetSquad(name) end
 
 ---[SERVER] Sets the NPC's target. This is used in some engine schedules.

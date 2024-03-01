@@ -72,7 +72,8 @@ function sound.GetTable() end
 ---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
 ---@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
 ---@param volume? number Output volume of the sound in range 0 to 1.
-function sound.Play(snd, pos, level, pitch, volume) end
+---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
+function sound.Play(snd, pos, level, pitch, volume, dsp) end
 
 ---[CLIENT] Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---

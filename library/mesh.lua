@@ -3,7 +3,7 @@
 --- The mesh library allows you to create meshes. A mesh is a set of vertices that define a 3D shape, for constant meshes you should use the IMesh object instead.
 mesh = {}
 
----[CLIENT] Pushes the new vertex data onto the render stack.
+---[CLIENT] Pushes the currently set vertex data (via other `mesh.*` functions) into the mesh stack. See example on mesh.Begin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex)
 function mesh.AdvanceVertex() end
@@ -71,31 +71,27 @@ function mesh.QuadEasy(position, normal, sizeX, sizeY) end
 ---@param a number The alpha channel multiplier of the specular map.
 function mesh.Specular(r, g, b, a) end
 
----[CLIENT] Sets the s tangent to be used.
----
---- This function actually does nothing.
+---[CLIENT] Sets the "S" tangent to be used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentS)
----@param sTanger Vector The s tangent.
+---@param sTanger Vector The S tangent.
 function mesh.TangentS(sTanger) end
 
----[CLIENT] Sets the T tangent to be used.
----
---- This function actually does nothing.
+---[CLIENT] Sets the "T" tangent to be used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentT)
----@param tTanger Vector The t tangent.
+---@param tTanger Vector The T tangent.
 function mesh.TangentT(tTanger) end
 
 ---[CLIENT] Sets the texture coordinates for the next vertex.
 ---
---- Non-zero values of stage require the currently bound material to support it. For example, any LightmappedGeneric material supports stages 1 and 2 (lightmap texture coordinates).
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TexCoord)
----@param stage number The stage of the texture coordinate.
+---@param set number The texture coordinate set, 0 to 7.
+---
+--- Non-zero values require the currently bound material to support it. For example, any `LightmappedGeneric` material supports sets 1 and 2 (lightmap texture coordinates and bump map texture coords?).
 ---@param u number U coordinate.
 ---@param v number V coordinate.
-function mesh.TexCoord(stage, u, v) end
+function mesh.TexCoord(set, u, v) end
 
 ---[CLIENT] It is recommended to use IMesh:BuildFromTriangles instead of the mesh library.
 ---
@@ -108,8 +104,8 @@ function mesh.TexCoord(stage, u, v) end
 ---@param tangentHandedness number
 function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 
----[CLIENT] Returns the amount of vertex that have yet been pushed.
+---[CLIENT] Returns the amount of vertices that have been pushed via mesh.AdvanceVertex.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.VertexCount)
----@return number # vertexCount
+---@return number # The amount of vertices.
 function mesh.VertexCount() end

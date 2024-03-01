@@ -1073,15 +1073,15 @@ local MeshVertex = {}
 ---@type table
 MeshVertex.color = nil
 
----The triangles normal required to calculate lighting(optional).
+---The triangles normal required to calculate lighting (Optional).
 ---@type Vector
 MeshVertex.normal = nil
 
----The triangles tangent. Not used by the VertexLitGeneric shader.
+---The triangles tangent. Not used by the `VertexLitGeneric` shader.
 ---@type Vector
 MeshVertex.tangent = nil
 
----The triangles binormal. Not used by the VertexLitGeneric shader.
+---The triangles binormal. Not used by the `VertexLitGeneric` shader.
 ---@type Vector
 MeshVertex.binormal = nil
 
@@ -1089,13 +1089,21 @@ MeshVertex.binormal = nil
 ---@type Vector
 MeshVertex.pos = nil
 
----The u texture scale.
+---The U texture coordinate.
 ---@type number
 MeshVertex.u = nil
 
----The v texture scale.
+---The V texture coordinate.
 ---@type number
 MeshVertex.v = nil
+
+---The secondary U texture coordinate. Only works when passed to IMesh:BuildFromTriangles, Useful for `LightmappedGeneric` shader.
+---@type number
+MeshVertex.u1 = nil
+
+---The secondary V texture coordinate. Only works when passed to IMesh:BuildFromTriangles.
+---@type number
+MeshVertex.v1 = nil
 
 ---A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
 ---@type table

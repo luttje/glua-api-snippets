@@ -13,6 +13,7 @@
 --- `__mul` | VMatrix or Vector | Returns new VMatrix or Vector with the result of multiplication.
 --- `__sub` | VMatrix | Returns new VMatrix with the result of subtraction.
 --- `__tostring` |  | Returns a string in format `[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]`.
+--- `__unm` | | Returns new VMatrix with the result of negation.
 ---
 ---@class VMatrix
 local VMatrix = {}

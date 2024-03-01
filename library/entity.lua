@@ -7,6 +7,20 @@
 ---@class Entity
 local Entity = {}
 
+---
+--- A list of hooks **only** available for Scripted Entities.
+---
+--- The exceptions to this rule are documented at Custom Entity Fields, which can be applied to all entities.
+---
+--- Some more "hooks" are available for all entities (including engine entities) with the function Entity:AddCallback.
+---
+--- See also: Structures/ENT
+---
+--- The hooks listed here are also dependent on the scripted entity type. For instance, a base scripted entity will not use ENTITY:DoSchedule at all, that is only for scripted NPCs
+---
+---@class ENTITY : Entity
+ENTITY = {}
+
 ---[SERVER] Called when another entity fires an event to this entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:AcceptInput)
@@ -2765,10 +2779,10 @@ function Entity:IsWeapon() end
 ---@return boolean # Whether the entity is a widget or not.
 function Entity:IsWidget() end
 
----[SHARED] Returns if the entity is the map's Entity[0] worldspawn
+---[SHARED] Returns if this entity is the map entity `Entity[0] worldspawn`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:IsWorld)
----@return boolean # isWorld
+---@return boolean # Whether this entity is the world entity.
 function Entity:IsWorld() end
 
 ---[SERVER] Called when the engine sets a value for this scripted entity.
@@ -3406,7 +3420,7 @@ function ENTITY:PostEntityCopy() end
 
 ---[SERVER] Called after the duplicator pastes the entity, after the bone/entity modifiers have been applied to the entity.
 ---
---- This hook is called after ENTITY:OnDuplicated.
+--- This hook is called after ENTITY:OnDuplicated. See also ENTITY:PreEntityCopy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste)
 ---@param ply Player The player who pasted the entity.
@@ -3431,7 +3445,9 @@ function Entity:PrecacheGibs() end
 
 ---[SERVER] Called before the duplicator copies the entity.
 ---
---- If you are looking for a way to make the duplicator spawn another entity when duplicated. ( For example, you duplicate a "prop_physics", but you want the duplicator to spawn "prop_physics_my" ), you should add prop_physics.ClassOverride = "prop_physics_my". The duplication table should be also stored on that prop_physics, not on prop_physics_my.
+--- If you are looking for a way to make the duplicator spawn another entity when duplicated. (For example, you duplicate a `prop_physics`, but you want the duplicator to spawn `prop_physics_my`), you should add `prop_physics.ClassOverride = "prop_physics_my"`. The duplication table should be also stored on that `prop_physics`, not on `prop_physics_my`.
+---
+--- See also ENTITY:PostEntityCopy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:PreEntityCopy)
 function ENTITY:PreEntityCopy() end
@@ -5503,7 +5519,7 @@ function ENTITY:TriggerOutput(output, activator, data) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:UpdateBoneFollowers)
 function Entity:UpdateBoneFollowers() end
 
----[CLIENT] Updates the shadow of this entity.
+---[CLIENT] Marks the render-to-texture (RTT) shadow of this entity as dirty, as well as any potential projected texture shadows related to this entity, so they will be updated as soon as possible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:UpdateShadow)
 function Entity:UpdateShadow() end

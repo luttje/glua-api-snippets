@@ -62,7 +62,7 @@ function gui.InternalKeyCodeTyped(key) end
 --- Doesn't work while the main menu is open!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.InternalKeyTyped)
----@param code number ASCII code of symbol, see http://www.mikroe.com/img/publication/spa/pic-books/programming-in-basic/chapter/04/fig4-24.gif
+---@param code number ASCII code of symbol, see [this chart](https://files.facepunch.com/wiki/files/ab571/8dc389806d65b98.gif).
 function gui.InternalKeyTyped(code) end
 
 ---[CLIENT AND MENU] Simulates a double mouse key press for the given mouse key.

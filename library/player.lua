@@ -117,14 +117,17 @@ function player.GetCount() end
 ---@return table # A table containing all human (non-bot/AI) players.
 function player.GetHumans() end
 
----[SHARED] Returns an iterator for all players on the server.
+---[SHARED] Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all players on the server.
+--- 		Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
+--- 		See ents.Iterator for a similar function for all entities.
 ---
---- This will be quite a bit faster than player.GetAll, especially when using the `break` keyword.
+--- 		Internally, this function uses cached values that exist entirely within lua, as opposed to player.GetAll, which is a C++ function.
+--- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than player.GetAll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.Iterator)
----@return function # Iterator function
----@return table # Table of all existing Players.
----@return number # Will always be 0. Start index?
+---@return function # The Iterator Function from Global.ipairs
+---@return table # Table of all existing Player.  This is a cached copy of player.GetAll
+---@return number #  			The starting index for the table of players.   			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function player.Iterator() end
 
 ---[SHARED] Returns the player's AccountID part of their full SteamID.

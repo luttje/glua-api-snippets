@@ -96,21 +96,36 @@ function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 ---@param ent? Entity Which entity you want to associate with the World Tip. This argument is optional. If set to a valid entity, this will override the position set in `pos` with the Entity's position.
 function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 
----[SHARED AND MENU] Creates an Angle object.
---- 		This function is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the angle in a variable or to use the [default angle](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Angle:Add.
+---[SHARED AND MENU] Creates an Angle object, representing a [Euler Angle](https://en.wikipedia.org/wiki/Euler_angles) made up of pitch, yaw, and roll components.
+---
+---
+--- 			This function is relatively expensive, in terms of performance, in situations where it is being called multiple times every frame (Like a loop, for example.) This is due to the overhead associated with object creation and garbage collection.
+--- 			Where possible, it is generally better to store an Angle in a variable and re-use that variable rather than re-creating it repeatedly.
+--- 			In cases where an empty Angle is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch? number The pitch value of the angle.
+---@param pitch? number
+--- 			This is an [Overloaded Function](https://en.wikipedia.org/wiki/Function_overloading) with these available first arguments:
 ---
+--- 			Number **pitch** = 0
+--- 			The pitch value of the angle, in degrees.  Use this with the second and third arguments.
 ---
---- If this is an Angle, this function will return a copy of the given angle.
+--- 			Angle **angle**
+--- 			Creates a new Angle that is a copy of the Angle passed in.
 ---
+--- 			String **angleString**
+--- 			Attempts to parse the input String from the Global.Print format of an Angle.
+--- 			Returns an Angle with its pitch, yaw, and roll set to `0` if the String cannot be parsed.
 ---
---- If this is a string, this function will try to parse the string as a angle. If it fails, it returns a 0 angle.
---- (See examples)
----@param yaw? number The yaw value of the angle.
----@param roll? number The roll value of the angle.
----@return Angle # Created angle
+---@param yaw? number
+--- 			The yaw value of the angle, in degrees.
+--- 			**Note:** Only valid if the first argument is a Number.
+---
+---@param roll? number
+--- 			The roll value of the angle, in degrees.
+--- 			**Note:** Only valid if the first argument is a Number.
+---
+---@return Angle # The newly created Angle
 function _G.Angle(pitch, yaw, roll) end
 
 ---[SHARED AND MENU] Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
@@ -607,7 +622,7 @@ function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confi
 ---@return DMenu #The created DMenu.
 function _G.DermaMenu(keepOpen, parent) end
 
----[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not.
+---[CLIENT AND MENU] Sets whether rendering should be limited to being inside a panel or not. Needs to be used inside one of the 2d rendering hooks
 ---
 --- See also Panel:NoClipping.
 ---
@@ -1158,7 +1173,7 @@ function _G.GetDownloadables() end
 ---[SHARED AND MENU] Returns the environment table of either the stack level or the function specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.getfenv)
----@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
+---@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv. Level 0 is the base Garry's Mod environment (_G).
 ---@return table # The environment.
 function _G.getfenv(location) end
 
@@ -1361,6 +1376,7 @@ function _G.GetPredictionPlayer() end
 ---
 --- This crashes when used on a cubemap texture.
 --- Rendertargets are not garbage-collected, which means they will remain in memory until you disconnect. So make sure to avoid creating new ones unecessarily and re-use as many of your existing rendertargets as possible to avoid filling up all your memory.
+--- Drawing rendertargets on themself can produce odd and unexpected results.
 ---
 --- Calling this function is equivalent to
 --- ```lua
@@ -1505,7 +1521,7 @@ function _G.include(fileName) end
 ---@deprecated To send the target file to the client simply call AddCSLuaFile() in the target file itself.
 function _G.IncludeCS(filename) end
 
----[SHARED AND MENU] Returns an iterator function for a for loop, to return ordered key-value pairs from a table.
+---[SHARED AND MENU] Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for a [Generic For Loops](https://www.lua.org/pil/4.3.5.html), to return ordered key-value pairs from a table.
 ---
 --- This will only iterate though **numerical** keys, and these must also be **sequential**; starting at 1 with no gaps.
 ---

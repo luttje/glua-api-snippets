@@ -3,7 +3,7 @@
 ---
 --- A grid for editing the properties of something using names and values. Properties can be categorized and strongly typed.
 ---
---- ![](http://wiki.garrysmod.com/images/9/99/DProperties.png)
+---
 --- ##  Associated controls
 --- * DProperty_VectorColor
 --- * DProperty_Boolean

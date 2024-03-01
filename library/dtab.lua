@@ -1,7 +1,8 @@
 ---@meta
 
 ---
---- 		A tab for internal use on the DPropertySheet.
+---
+--- 		This element is created within and only used in the DPropertySheet file.
 ---
 ---@class DTab : DButton
 local DTab = {}

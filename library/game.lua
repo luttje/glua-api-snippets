@@ -230,7 +230,7 @@ function game.IsDedicated() end
 --- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~498. It is recommended to avoid going near the limit to avoid truncation.
 function game.KickID(id, reason) end
 
----[SERVER] Loads the next map according to the nextlevel convar, or from the current mapcycle file set by the respective convar.
+---[SERVER] Loads the next map according to the `nextlevel` convar, or from the current `mapcyclefile` set by the respective convar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.LoadNextMap)
 function game.LoadNextMap() end

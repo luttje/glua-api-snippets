@@ -6,7 +6,7 @@
 --- The keyboard keys W S A D Up Down Left Right Space and Ctrl can be used when the right mouse is held down, with Shift acting as a speed multiplier. When the left mouse is used, the Shift key holds the current `y` angle steady.
 ---
 --- This is used by IconEditor for modifying spawn icons.
---- 	Creates an Adjustable Model Panel
+--- 	 Code used to create the example for `derma_controls` concmd
 ---@class DAdjustableModelPanel : DModelPanel
 local DAdjustableModelPanel = {}
 

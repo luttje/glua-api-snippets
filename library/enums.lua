@@ -2244,11 +2244,15 @@ EFL_BOT_FROZEN = 256
 EFL_SERVER_ONLY = 512
 --- Don't attach the edict
 EFL_NO_AUTO_EDICT_ATTACH = 1024
+--- Some 'dirty' bits with respect to absolute computations. Used internally by the engine when an entity's absolute position needs to be recalculated.
 EFL_DIRTY_ABSTRANSFORM = 2048
+--- Some 'dirty' bits with respect to absolute computations. Used internally by the engine when an entity's absolute velocity needs to be recalculated.
 EFL_DIRTY_ABSVELOCITY = 4096
---- Some dirty bits with respect to abs computations
+--- Some 'dirty' bits with respect to absolute computations. Used internally by the engine when an entity's absolute angular velocity needs to be recalculated.
 EFL_DIRTY_ABSANGVELOCITY = 8192
+--- Marks the entity as having a 'dirty' surrounding box. Used internally by the engine to recompute the entity's collision bounds.
 EFL_DIRTY_SURROUNDING_COLLISION_BOUNDS = 16384
+--- Used internally by the engine when an entity's "spatial partition" needs to be recalculated.
 EFL_DIRTY_SPATIAL_PARTITION = 32768
 --- This is set if the entity detects that it's in the skybox. This forces it to pass the "in PVS" for transmission
 EFL_IN_SKYBOX = 131072
@@ -2256,11 +2260,15 @@ EFL_IN_SKYBOX = 131072
 EFL_USE_PARTITION_WHEN_NOT_SOLID = 262144
 --- Used to determine if an entity is floating
 EFL_TOUCHING_FLUID = 524288
+--- The entity is currently being lifted by a Barnacle.
 EFL_IS_BEING_LIFTED_BY_BARNACLE = 1048576
+--- The entity is not affected by 'rotorwash push'--the wind-push effect caused by helicopters close to the ground in Half-Life 2.
 EFL_NO_ROTORWASH_PUSH = 2097152
 --- Avoid executing the entity's Think
 EFL_NO_THINK_FUNCTION = 4194304
+--- The entity is currently not simulating any physics.
 EFL_NO_GAME_PHYSICS_SIMULATION = 8388608
+--- The entity is about to have its untouch callback checked, e.g. when this entity stops touching another entity.
 EFL_CHECK_UNTOUCH = 16777216
 --- Entity shouldn't block NPC line-of-sight
 EFL_DONTBLOCKLOS = 33554432
@@ -3253,6 +3261,7 @@ NUM_HULLS = 10
 ---@enum OBS_MODE
 --- Not spectating
 OBS_MODE_NONE = 0
+--- Camera doesn't move, but adjusts camera angles to follow the spectated target
 OBS_MODE_DEATHCAM = 1
 --- TF2-like freezecam
 OBS_MODE_FREEZECAM = 2
@@ -3417,6 +3426,7 @@ RT_SIZE_FULL_FRAME_BUFFER_ROUNDED_UP = 6
 RT_SIZE_REPLAY_SCREENSHOT = 7
 --- Use the size passed in. Don't clamp it to the frame buffer size. Really.
 RT_SIZE_LITERAL = 8
+--- Use the size passed in, don't clamp to the frame buffer size, but do apply picmip restrictions.
 RT_SIZE_LITERAL_PICMIP = 9
 
 ---@enum SCHED
@@ -3697,7 +3707,7 @@ SIM_GLOBAL_FORCE = 4
 ---@enum SND
 --- To keep the compiler happy
 SND_NOFLAGS = 0
---- Change sound vol
+--- Change sound volume
 SND_CHANGE_VOL = 1
 --- Change sound pitch
 SND_CHANGE_PITCH = 2
@@ -3711,9 +3721,11 @@ SND_DELAY = 16
 SND_STOP_LOOPING = 32
 --- This sound should be paused if the game is paused
 SND_SHOULDPAUSE = 128
+--- If the sound has any associated phoneme (character lip-sync) data, ignore it.
 SND_IGNORE_PHONEMES = 256
 --- Used to change all sounds emitted by an entity, regardless of scriptname
 SND_IGNORE_NAME = 512
+--- Unused/legacy; does nothing.
 SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 
 ---@enum SNDLVL
