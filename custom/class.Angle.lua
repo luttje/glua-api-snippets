@@ -1,0 +1,21 @@
+---@class Angle
+--- List of all possible functions to manipulate angles.
+---
+--- Created by Global.Angle.
+---@field p number
+---@field y number
+---@field r number
+---@field pitch number
+---@field yaw number
+---@field roll number
+---@field x number
+---@field z number
+---@field [1] number
+---@field [2] number
+---@field [3] number
+---@operator add(Angle): Angle
+---@operator div(number): Angle
+---@operator mul(number): Angle
+---@operator sub(Angle): Angle
+---@operator unm: Angle
+local Angle = {}

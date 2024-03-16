@@ -1,0 +1,16 @@
+---@class Vector
+--- List of all possible functions to manipulate vectors.
+---
+--- Created by Global.Vector.
+---@field x number
+---@field y number
+---@field z number
+---@field [1] number
+---@field [2] number
+---@field [3] number
+---@operator add(Vector): Vector
+---@operator div(number|Vector): Vector
+---@operator mul(number|Vector): Vector
+---@operator sub(Vector): Vector
+---@operator unm: Vector
+local Vector = {}

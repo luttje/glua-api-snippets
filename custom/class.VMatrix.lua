@@ -1,0 +1,12 @@
+---@class VMatrix
+--- A 4x4 matrix.
+---
+--- This page lists all possible functions to manipulate matrices.
+---
+--- This object can be created by Global.Matrix.
+---@operator add(VMatrix): VMatrix
+---@operator mul(Vector): Vector
+---@operator mul(VMatrix): VMatrix
+---@operator sub(VMatrix): VMatrix
+---@operator unm: VMatrix
+local VMatrix = {}
