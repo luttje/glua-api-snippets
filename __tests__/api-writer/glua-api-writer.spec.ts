@@ -107,11 +107,13 @@ describe('GLua API Writer', () => {
       url: 'na',
       arguments: [
         {
-          name: 'intensity',
-          type: 'number',
-          description: 'The intensity of the explosion.',
-          default: '1000',
-        },
+          args: [ {
+            name: 'intensity',
+            type: 'number',
+            description: 'The intensity of the explosion.',
+            default: '1000',
+          } ]
+        }
       ],
       returns: [
         {
