@@ -342,7 +342,10 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
+        let types = this.transformType(arg.type);
+        if (arg.altType) types += "|" + this.transformType(arg.altType);
+
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!)}\n`;
       });
     }
 

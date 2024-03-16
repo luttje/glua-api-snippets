@@ -22,6 +22,7 @@ export type WikiIdentifier = {
 
 export type FunctionArgument = WikiIdentifier & {
   default?: string;
+  altType?: string;
 };
 
 export type FunctionArgumentList = {
@@ -234,6 +235,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               const argument = <FunctionArgument> {
                 name: $el.attr('name')!,
                 type: $el.attr('type')!,
+                altType: $el.attr('alttype')!,
                 description: $el.text()
               };
 
