@@ -24,11 +24,15 @@ export type FunctionArgument = WikiIdentifier & {
   default?: string;
 };
 
+export type FunctionArgumentList = {
+  args?: FunctionArgument[];
+};
+
 export type FunctionReturn = WikiIdentifier & {};
 
 export type Function = CommonWikiProperties & {
   parent: string;
-  arguments?: FunctionArgument[];
+  arguments?: FunctionArgumentList[];
   returns?: FunctionReturn[];
 };
 
@@ -221,19 +225,26 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
           const isHookFunction = mainElement.attr('type') === 'hook';
           const isPanelFunction = mainElement.attr('type') === 'panelfunc';
 
-          const arguments_ = $('args arg').map(function() {
-            const $el = $(this);
-            const argument = <FunctionArgument> {
-              name: $el.attr('name')!,
-              type: $el.attr('type')!,
-              description: $el.text()
-            };
+          const argumentList: FunctionArgumentList[] = [];
+          for (const argSet of $('args')) {
+            const setArguments = $(argSet).find('arg');
 
-            if ($el.attr('default') != undefined)
-              argument.default = $el.attr('default')!;
+            const arguments_ = setArguments.map(function() {
+              const $el = $(this);
+              const argument = <FunctionArgument> {
+                name: $el.attr('name')!,
+                type: $el.attr('type')!,
+                description: $el.text()
+              };
 
-            return argument;
-          }).get();
+              if ($el.attr('default') != undefined)
+                argument.default = $el.attr('default')!;
+
+              return argument;
+            }).get();
+
+            argumentList.push({args: arguments_});
+          }
 
           const returns = $('rets ret').map(function() {
             const $el = $(this);
@@ -251,7 +262,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             address: address,
             description: $('description:first').text(),
             realm: $('realm:first').text() as Realm,
-            arguments: arguments_,
+            arguments: argumentList.length == 0 ? undefined : argumentList,
             returns,
             deprecated
           };
