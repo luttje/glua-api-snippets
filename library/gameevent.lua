@@ -637,7 +637,7 @@ player_say.userid = nil
 ---@type string
 player_say.text = nil
 
----`1` If it's only for the team, else `0`. **(Added recently/Coming with the next update)**
+---`1` If it's only for the team, else `0`.
 ---@type number
 player_say.teamonly = nil
 

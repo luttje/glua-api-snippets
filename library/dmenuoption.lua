@@ -48,7 +48,7 @@ function DMenuOption:OnChecked(checked) end
 
 ---[CLIENT AND MENU] Sets the checked state of the DMenuOption.
 ---
---- Does not invoke DMenuOption:OnChecked. This will be fixed in the next update.
+--- Invokes DMenuOption:OnChecked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOption:SetChecked)
 ---@param checked boolean `true` to set as checked.

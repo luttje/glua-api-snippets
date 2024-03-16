@@ -1,29 +1,25 @@
 ---@meta
 
+---@class Angle
 --- List of all possible functions to manipulate angles.
 ---
 --- Created by Global.Angle.
----
---- | Type                | Name                                 | Description                      |
---- | ------------------- | ------------------------------------ | -------------------------------- |
---- | number | `p` or `pitch` or `x` or `1` | The pitch component of the angle. |
---- | number | `y` or `yaw` or `y` or `2` | The yaw component of the angle. |
---- | number | `r` or `roll`  or `z` or `3` | The roll  component of the angle. |
----
---- Metamethod | Second Operand | Description
---- ---------- | -------------- | -----------
---- `__add` | Angle | Returns new Angle with the result of addition.
---- `__div` | number | Returns new Angle with the result of division.
---- `__eq` | any | Compares 2 operands, if they both are Angle, compares each individual component. Doesn't normalize the angles (360 is not equal to 0).
---- `__index` | number or string | Gets the component of the Angle. Returns a number.
---- `__mul` | number | Returns new Angle with the result of multiplication.
---- `__newindex` | number or string | Sets the component of the Angle. Accepts number and string.
---- `__sub` | Angle | Returns new Angle with the result of subtraction.
---- `__tostring` | | Returns `p y r`.
---- `__unm` | | Returns new Angle with the result of negation.
----
----
----@class Angle
+---@field p number
+---@field y number
+---@field r number
+---@field pitch number
+---@field yaw number
+---@field roll number
+---@field x number
+---@field z number
+---@field [1] number
+---@field [2] number
+---@field [3] number
+---@operator add(Angle): Angle
+---@operator div(number): Angle
+---@operator mul(number): Angle
+---@operator sub(Angle): Angle
+---@operator unm: Angle
 local Angle = {}
 
 ---[SHARED AND MENU] Adds the values of the argument angle to the orignal angle.

@@ -32,6 +32,7 @@ function ents.CreateClientProp(model) end
 function ents.CreateClientside(class) end
 
 ---[SHARED] Returns a table of all entities along the ray. The ray does not stop on collisions, meaning it will go through walls/entities.
+--- This internally uses a Spatial Partition to avoid looping through all entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindAlongRay)
 ---@param start Vector The start position of the ray
@@ -78,6 +79,8 @@ function ents.FindByName(name) end
 
 ---[SHARED] Returns all entities within the specified box.
 ---
+--- This internally uses a Spatial Partition to avoid looping through all entities.
+---
 --- Clientside entities will not be returned by this function.
 ---
 --- There is a limit of 512 entities for the output!
@@ -121,6 +124,7 @@ function ents.FindInPVS(viewPoint) end
 
 ---[SHARED] Gets all entities within the specified sphere.
 ---
+---     This internally uses a Spatial Partition to avoid looping through all entities.
 --- 	Clientside entities will not be returned by this function.
 --- 	This function internally calls ents.FindInBox with some [radius checks](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/collisionutils.cpp#L256-L301).
 ---
@@ -184,7 +188,7 @@ function ents.GetMapCreatedEntity(id) end
 --- 		See player.Iterator for a similar function for all players.
 ---
 --- 		Internally, this function uses cached values that exist entirely within lua, as opposed to ents.GetAll, which is a C++ function.
---- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than
+--- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than ents.GetAll.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.Iterator)
 ---@return function # The Iterator Function from Global.ipairs

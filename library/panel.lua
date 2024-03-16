@@ -1649,7 +1649,10 @@ function Panel:Paste() end
 --- * Panel:SetPos called more than once on the same panel ([Issue](https://github.com/Facepunch/garrysmod-issues/issues/5519))
 --- * A child element was added to this panel (TODO: Verify me)
 --- * The size of this panel has changed
---- Do **NOT** call this function directly. Use Panel:InvalidateLayout instead!
+---
+--- You should not call this function directly. Use Panel:InvalidateLayout instead.
+---
+--- You can use `vgui_visualizelayout 1` to visualize panel layouts as they happen for debugging purposes. Panels should not be doing this every frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:PerformLayout)
 ---@param width number The panels current width.

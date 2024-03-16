@@ -565,7 +565,7 @@ function ENTITY:EngineScheduleFinish() end
 --- Entity indices are marked as unused after deletion, and can be reused by newly-created entities
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:EntIndex)
----@return number # The index of the entity.  -1 for clientside-only or serverside-only entities.
+---@return number # The index of the entity.  -1 for clientside-only or 0 for serverside-only entities.
 function Entity:EntIndex() end
 
 ---[SERVER] Called when an NPC's expression has finished.
@@ -1409,7 +1409,7 @@ function Entity:GetManipulateBoneScale(boneID) end
 
 ---[SHARED] Returns the material override for this entity.
 ---
---- Returns an empty string if no material override exists. Use Entity:GetMaterials to list it's default materials.
+--- Returns an empty string if no material override exists. Use Entity:GetMaterials to list its default materials.
 ---
 --- The server's value takes priority on the client.
 ---
@@ -2963,6 +2963,8 @@ function Entity:NearestPoint(position) end
 ---@param slot number Each network variable has to have a unique slot. The slot is per type - so you can have an int in slot `0`, a bool in slot `0` and a float in slot `0` etc. You can't have two ints in slot `0`, instead you would do a int in slot `0` and another int in slot `1`.
 ---
 --- The max slots right now are `32` - so you should pick a number between `0` and `31`. An exception to this is strings which has a max slots of `4`.
+---
+--- This can be omitted entirely (arguments will shift) and it will use the next available slot.
 ---@param name string The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it `Pos` for example).
 ---@param extended? table A table of extended information.
 ---

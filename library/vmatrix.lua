@@ -1,21 +1,16 @@
 ---@meta
 
+---@class VMatrix
 --- A 4x4 matrix.
 ---
 --- This page lists all possible functions to manipulate matrices.
 ---
 --- This object can be created by Global.Matrix.
----
---- Metamethod | Second Operand | Description
---- ---------- | -------------- | -----------
---- `__add` | VMatrix | Returns new VMatrix with the result of addition.
---- `__eq` | any | Compares 2 operands, if they both are VMatrix, compares each individual component.
---- `__mul` | VMatrix or Vector | Returns new VMatrix or Vector with the result of multiplication.
---- `__sub` | VMatrix | Returns new VMatrix with the result of subtraction.
---- `__tostring` |  | Returns a string in format `[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]\n[%f,\t%f,\t%f,\t%f]`.
---- `__unm` | | Returns new VMatrix with the result of negation.
----
----@class VMatrix
+---@operator add(VMatrix): VMatrix
+---@operator mul(Vector): Vector
+---@operator mul(VMatrix): VMatrix
+---@operator sub(VMatrix): VMatrix
+---@operator unm: VMatrix
 local VMatrix = {}
 
 ---[SHARED] Adds given matrix to this matrix.

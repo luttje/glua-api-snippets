@@ -60,7 +60,7 @@ function DButton:SetIcon(img) end
 ---@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
 function DButton:SetImage(img) end
 
----[CLIENT AND MENU] Sets an image to be displayed as the button's background.
+---[ CLIENT AND MENU ] Sets an image to be displayed as the button's background.
 ---
 --- See DButton:SetImage for equivalent function that uses file paths instead. Also see DImageButton.
 ---

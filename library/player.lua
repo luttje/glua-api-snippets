@@ -449,7 +449,7 @@ function Player:DropObject() end
 function Player:DropWeapon(weapon, target, velocity) end
 
 ---[SERVER] Force puts the player into a specified vehicle.
---- This bypasses GM:CanPlayerEnterVehicle.
+--- This **does not** bypass GM:CanPlayerEnterVehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:EnterVehicle)
 ---@param vehicle Vehicle Vehicle the player will enter
@@ -467,7 +467,7 @@ function Player:EquipSuit() end
 
 ---[SERVER] Forces the player to exit the vehicle if they're in one.
 ---
---- This bypasses GM:CanExitVehicle.
+--- This function will bypass GM:CanExitVehicle. See also GM:PlayerLeaveVehicle
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ExitVehicle)
 function Player:ExitVehicle() end
@@ -808,7 +808,7 @@ function Player:GetObserverTarget() end
 ---
 --- Internally uses the sql library. See util.GetPData for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
 ---
 --- PData is not networked from servers to clients!
 ---
@@ -1465,7 +1465,8 @@ function Player:RemoveAmmo(ammoCount, ammoName) end
 ---
 --- Internally uses the sql library. See util.RemovePData for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
+--- PData is not networked from servers to clients!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:RemovePData)
 ---@param key string Key to remove

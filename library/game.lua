@@ -45,7 +45,7 @@ function game.BuildAmmoTypes() end
 ---
 --- This function calls GM:PreCleanupMap before cleaning up the map and GM:PostCleanupMap after cleaning up the map.
 ---
---- Calling this in a ENTITY:StartTouch or ENTITY:Touch hook will crash the game.
+--- Beware of calling this function in hooks that may be called on map clean up (such as ENTITY:StartTouch) to avoid infinite loops.
 ---
 --- Calling this destroys all BASS streams.
 ---

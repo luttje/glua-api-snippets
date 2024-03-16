@@ -29,7 +29,7 @@ function dragndrop.Drop() end
 ---@return table # A table of all panels that are being currently dragged, if any.
 function dragndrop.GetDroppable(name) end
 
----[CLIENT AND MENU] If returns true, calls dragndrop.StopDragging in dragndrop.Drop. Seems to be broken and does nothing. Is it for override?
+---[CLIENT AND MENU] Allows you to capture the panel that was dropped into the game (dropped onto the root panel). This function is meant to be overridden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.HandleDroppedInGame)
 function dragndrop.HandleDroppedInGame() end

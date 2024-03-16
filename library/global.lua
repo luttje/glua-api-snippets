@@ -105,28 +105,24 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
 ---@param pitch? number
---- 			This is an [Overloaded Function](https://en.wikipedia.org/wiki/Function_overloading) with these available first arguments:
----
---- 			Number **pitch** = 0
---- 			The pitch value of the angle, in degrees.  Use this with the second and third arguments.
----
---- 			Angle **angle**
---- 			Creates a new Angle that is a copy of the Angle passed in.
----
---- 			String **angleString**
---- 			Attempts to parse the input String from the Global.Print format of an Angle.
---- 			Returns an Angle with its pitch, yaw, and roll set to `0` if the String cannot be parsed.
+--- 			The pitch value of the angle, in degrees.
 ---
 ---@param yaw? number
 --- 			The yaw value of the angle, in degrees.
---- 			**Note:** Only valid if the first argument is a Number.
 ---
 ---@param roll? number
 --- 			The roll value of the angle, in degrees.
---- 			**Note:** Only valid if the first argument is a Number.
+---
+---@param angle Angle
+--- 			Creates a new Angle that is a copy of the Angle passed in.
+---
+---@param angleString string
+--- 			Attempts to parse the input string from the Global.print format of an Angle.
+---
+--- 			Returns an Angle with its pitch, yaw, and roll set to `0` if the string cannot be parsed.
 ---
 ---@return Angle # The newly created Angle
-function _G.Angle(pitch, yaw, roll) end
+function _G.Angle(pitch, yaw, roll, angle, angleString) end
 
 ---[SHARED AND MENU] Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
 ---
@@ -223,14 +219,12 @@ function _G.ClientsideModel(model, renderGroup) end
 ---
 --- There's no need to call Entity:Spawn on this entity.
 ---
---- The physics won't initialize at all if the model hasn't been precached serverside first.
+--- The Physics won't initialize at all if the model hasn't been precached or spawned serverside first on x86-64 (x86-64 does not use dynamic model indexes whereas main branch does).
 ---
 --- Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ClientsideRagdoll)
 ---@param model string The file path to the model.
----
---- Model must be precached with util.PrecacheModel on the server for physics to work. This will be fixed in the next update.
 ---@param renderGroup? number The Enums/RENDERGROUP to assign.
 ---@return CSEnt # The newly created client-side ragdoll. ( C_ClientRagdoll )
 function _G.ClientsideRagdoll(model, renderGroup) end
@@ -2533,12 +2527,14 @@ function _G.ScreenScale(size) end
 function _G.ScreenScaleH(size) end
 
 ---[CLIENT AND MENU] Gets the height of the game's window (in pixels).
+--- ScrH() returns the height from the current viewport, this can be changed via render.SetViewPort, inside Render Targets and cam.Start contexts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrH)
 ---@return number # The height of the game's window in pixels
 function _G.ScrH() end
 
 ---[CLIENT AND MENU] Gets the width of the game's window (in pixels).
+--- ScrW() returns the width from the current viewport, this can be changed via render.SetViewPort, inside Render Targets and cam.Start contexts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScrW)
 ---@return number # The width of the game's window in pixels
@@ -3071,17 +3067,18 @@ function _G.ValidPanel(panel) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Vector)
 ---@param x? number The x component of the vector.
----
----
---- If this is a Vector, this function will return a copy of the given vector.
----
----
---- If this is a string, this function will try to parse the string as a vector. If it fails, it returns a 0 vector.
---- (See examples)
 ---@param y? number The y component of the vector.
 ---@param z? number The z component of the vector.
+---@param vector Vector
+--- 			Creates a new Vector that is a copy of the given Vector.
+---
+---@param vectorString string
+--- 			Attempts to parse the input string from the Global.print format of an Vector.
+---
+--- 			Returns a Vector with its `x`, `y`, and `z` set to `0` if the string cannot be parsed.
+---
 ---@return Vector # The created vector object.
-function _G.Vector(x, y, z) end
+function _G.Vector(x, y, z, vector, vectorString) end
 
 ---[SHARED AND MENU] Returns a random vector whose components are each between min(inclusive), max(exclusive).
 ---

@@ -122,15 +122,18 @@ function GM:CanEditVariable(ent, ply, key, val, editor) end
 
 ---[SERVER] Determines if the player can exit the vehicle on their own. Player:ExitVehicle will bypass this hook.
 ---
+--- See GM:CanPlayerEnterVehicle for the opposite hook.
+--- See also GM:PlayerLeaveVehicle for a hook that will be called whenever a player exits any vehicle for any reason.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanExitVehicle)
 ---@param veh Vehicle The vehicle entity
 ---@param ply Player The player
 ---@return boolean # True if the player can exit the vehicle.
 function GM:CanExitVehicle(veh, ply) end
 
----[SERVER] Determines whether or not a given player player can enter the given vehicle. Player:EnterVehicle will bypass this hook.
+---[SERVER] Determines whether or not a given player player can enter the given vehicle. Player:EnterVehicle will still call this hook.
 ---
---- Called just before GM:PlayerEnteredVehicle.
+--- Called just before GM:PlayerEnteredVehicle. See also GM:CanExitVehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanPlayerEnterVehicle)
 ---@param player Player The player that wants to enter a vehicle.
@@ -937,7 +940,7 @@ function GM:OnGamemodeLoaded() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnLuaError)
 ---@param error string The error that occurred.
----@param realm number Where the Lua error took place
+---@param realm string Where the Lua error took place, "client", or "server"
 ---@param stack table The Lua error stack trace
 ---@param name string Title of the addon that is creating the Lua errors.
 ---@param id number Steam Workshop ID of the addon creating Lua errors, if it is an addon.
@@ -1439,7 +1442,9 @@ function GM:PlayerInitialSpawn(player, transition) end
 ---@param team number The team to put player into
 function GM:PlayerJoinTeam(ply, team) end
 
----[SERVER] Called when a player leaves a vehicle.
+---[SERVER] Called when a player leaves a vehicle for any reason, including Player:ExitVehicle.
+---
+--- See GM:PlayerEnteredVehicle for the opposite hook.
 ---
 --- For vehicles with exit animations, this will be called **at the end** of the animation, **not at the start**!
 ---
@@ -1558,7 +1563,7 @@ function GM:PlayerSilentDeath(ply) end
 ---
 --- See GM:PlayerInitialSpawn for a hook called only the first time a player spawns.
 ---
---- See the Game_Events for a shared version of this hook.
+--- See the gameevent/player_spawn for a shared version of this hook.
 ---
 --- By default, in "base" derived gamemodes, this hook will also call GM:PlayerLoadout and GM:PlayerSetModel, which may override your Entity:SetModel and Player:Give calls. Consider using the other hooks or a 0-second timer.
 ---
@@ -1589,6 +1594,7 @@ function GM:PlayerSpray(sprayer) end
 function GM:PlayerStartTaunt(ply, act, length) end
 
 ---[CLIENT] Called when a player starts using voice chat.
+--- Set mp_show_voice_icons to 0, if you want disable icons above player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice)
 ---@param ply Player Player who started using voice chat.
@@ -1959,7 +1965,7 @@ function GM:PreventScreenClicks() end
 ---[SHARED] Called when a prop has been destroyed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PropBreak)
----@param attacker Player The person who broke the prop.
+---@param attacker Player The person who broke the prop. This can be a NULL entity for cases where the prop was not broken by a player.
 ---@param prop Entity The entity that has been broken by the attacker.
 function GM:PropBreak(attacker, prop) end
 
@@ -2081,7 +2087,9 @@ function GM:SetupWorldFog() end
 ---
 --- Where applicable, consider using constraint.NoCollide or a [logic_collision_pair](https://developer.valvesoftware.com/wiki/Logic_collision_pair) entity instead - they are considerably easier to use and may be more appropriate in some situations.
 ---
---- This hook **must** return the same value consistently for the same pair of entities. If an entity changed in such a way that its collision rules change, you **must** call Entity:CollisionRulesChanged on that entity immediately - **not in this hook.**
+--- This hook **must** return the same value consistently for the same pair of entities. If an entity changed in such a way that its collision rules change, you **must** call Entity:CollisionRulesChanged on that entity immediately - **not in this hook and not in physics callbacks.**
+---
+--- The default Entity:CollisionRulesChanged has been found to be ineffective in preventing issues in this hook, a more reliable alternative can be found in the examples below. As long as you religiously follow the rules set by the examples this hook will work reliably without breaking, even a small mistake will break physics.
 ---
 --- This hook can cause all physics to break under certain conditions.
 ---

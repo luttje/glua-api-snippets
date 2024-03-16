@@ -1,29 +1,20 @@
 ---@meta
 
+---@class Vector
 --- List of all possible functions to manipulate vectors.
 ---
 --- Created by Global.Vector.
----
----  Type   | Name           | Description
----  ------ | -------------- | ------------------------------
----  number | `x` or `1` | The X component of the vector.
----  number | `y` or `2` | The Y component of the vector.
----  number | `z` or `3` | The Z component of the vector.
----
---- Metamethod | Second Operand | Description
---- ---------- | -------------- | -----------
---- `__add` | Vector | Returns new Vector with the result of addition.
---- `__div` | number or Vector | Returns new Vector with the result of division.
---- `__eq` | any | Compares 2 operands, if they both are Vector, compares each individual component.
---- `__index` | number or string | Gets the component of the Vector. Returns a number.
---- `__mul` | number or Vector| Returns new Vector with the result of multiplication.
---- `__newindex` | number or string | Sets the component of the Vector. Accepts number and string.
---- `__sub` | Vector | Returns new Vector with the result of subtraction.
---- `__tostring` | | Returns `x y z`.
---- `__unm` | | Returns new Vector with the result of negation.
----
----
----@class Vector
+---@field x number
+---@field y number
+---@field z number
+---@field [1] number
+---@field [2] number
+---@field [3] number
+---@operator add(Vector): Vector
+---@operator div(number|Vector): Vector
+---@operator mul(number|Vector): Vector
+---@operator sub(Vector): Vector
+---@operator unm: Vector
 local Vector = {}
 
 ---[SHARED AND MENU] Adds the values of the argument vector to the original vector. This function is the same as vector1 + vector2 without creating a new vector object, skipping object construction and garbage collection.

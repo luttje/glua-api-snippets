@@ -14,11 +14,27 @@ function PathFollower:Chase(bot, ent) end
 ---[SERVER] Compute shortest path from bot to 'goal' via A* algorithm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Compute)
----@param from NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
----@param to Vector To point
+---@param bot NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
+---@param goal Vector The target location, the goal.
 ---@param generator? function A funtion that allows you to alter the path generation. See example below for the default function.
+---
+---
+--- 	The area to move to.
+--- 	The area to move from.
+--- 	The ladder to move to or from (Validation required), if any.
+--- 	Will probably be always NULL
+--- 	Precomputed length between `area` and `fromArea`.
+--- 	The cost of movement between `area` and `fromArea`.
+---
+---
+---
+---@param area CNavArea The area to move to.
+---@param fromArea CNavArea The area to move from.
+---@param ladder CNavLadder The ladder to move to or from (Validation required), if any.
+---@param elevator Entity Will probably be always NULL
+---@param length number Precomputed length between `area` and `fromArea`.
 ---@return boolean # * If returns true, path was found to the goal position. * If returns false, path may either be invalid (use IsValid() to check), or valid but doesn't reach all the way to the goal.
-function PathFollower:Compute(from, to, generator) end
+function PathFollower:Compute(bot, goal, generator, area, fromArea, ladder, elevator, length) end
 
 ---[SERVER] Draws the path. This is meant for debugging - and uses debugoverlay.
 ---

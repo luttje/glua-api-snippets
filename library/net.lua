@@ -12,7 +12,7 @@ net = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Abort)
 function net.Abort() end
 
----[SERVER] Sends the currently built net message to all connected players.
+---[SERVER] Sends the currently built net message (see net.Start) to all connected players.
 --- More information can be found in Net Library Usage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Broadcast)
@@ -233,31 +233,31 @@ function net.ReadVector() end
 --- * Player ply - The player that sent the message, works **only** server-side.
 function net.Receive(messageName, callback) end
 
----[SERVER] Sends the current message to the specified player, or to all players listed in the table.
+---[SERVER] Sends the current net message (see net.Start) to the specified player, or to all players listed in the table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Send)
 ---@param ply Player The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
 function net.Send(ply) end
 
----[SERVER] Sends the current message to all except the specified, or to all except all players in the table.
+---[SERVER] Sends the current message (see net.Start) to all except the specified, or to all except all players in the table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendOmit)
 ---@param ply Player The player(s) to **NOT** send the message to. Can be a table of players.
 function net.SendOmit(ply) end
 
----[SERVER] Sends the message to all players that are in the same [Potentially Audible Set (PAS)](https://developer.valvesoftware.com/wiki/PAS) as the position, or simply said, it adds all players that can potentially hear sounds from this position.
+---[SERVER] Sends current net message (see net.Start) to all players that are in the same [Potentially Audible Set (PAS)](https://developer.valvesoftware.com/wiki/PAS) as the position, or simply said, it adds all players that can potentially hear sounds from this position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendPAS)
 ---@param position Vector PAS position.
 function net.SendPAS(position) end
 
----[SERVER] Sends the message to all players in the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") of the position, or, more simply said, sends the message to players that can potentially see this position.
+---[SERVER] Sends current net message (see net.Start) to all players in the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") of the position, or, more simply said, sends the message to players that can potentially see this position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendPVS)
 ---@param position Vector Position that must be in players' visibility set.
 function net.SendPVS(position) end
 
----[CLIENT] Sends the current message to the server.
+---[CLIENT] Sends the current net message (see net.Start) to the server.
 ---
 --- Each net message has a length limit of 65,533 bytes (approximately 64 KiB) and your net message will error and fail to send if it is larger than this.
 ---
@@ -268,7 +268,18 @@ function net.SendToServer() end
 
 ---[SHARED] Begins a new net message. If another net message is already started and hasn't been sent yet, it will be discarded.
 ---
+--- After calling this function, you will want to call `net.Write` functions to write your data, if any, and then finish with a call to one of the following functions:
+--- * net.Send
+--- * net.SendOmit
+--- * net.SendPAS
+--- * net.SendPVS
+--- * net.Broadcast
+--- * net.SendToServer
+---
+---
 --- Each net message has a length limit of 65,533 bytes (approximately 64 KiB) and your net message will error and fail to send if it is larger than this.
+---
+--- The net library has an internal buffer that sent messages are added to that is capable of holding roughly 256 kb at a time. Trying to send more will lead to the client being kicked because of a buffer overflow. Networking_Usage#netlimits
 ---
 --- The message name must be pooled with util.AddNetworkString beforehand!
 ---
@@ -443,7 +454,7 @@ function net.WriteType(Data) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteUInt)
 ---@param unsignedInteger number The unsigned integer to be sent.
----@param numberOfBits number The size of the integer to be sent, in bits. Acceptable values range from any number `1` to `32` inclusive.
+---@param bitCount number The size of the integer to be sent, in bits. Acceptable values range from any number `1` to `32` inclusive.
 ---
 --- For reference: `1` = bit, `4` = nibble, `8` = byte, `16` = short, `32` = long.
 ---
@@ -484,7 +495,7 @@ function net.WriteType(Data) end
 --- | 31 | 2147483647 |
 --- | 32 | 4294967295 |
 ---
-function net.WriteUInt(unsignedInteger, numberOfBits) end
+function net.WriteUInt(unsignedInteger, bitCount) end
 
 ---[SHARED] Appends an unsigned integer with 64 bits to the current net message.
 ---

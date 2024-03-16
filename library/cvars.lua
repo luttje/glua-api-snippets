@@ -42,7 +42,7 @@ function cvars.GetConVarCallbacks(name, createIfNotFound) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cvars.Number)
 ---@param cvar string Name of console variable
 ---@param default? any The value to return if the console variable does not exist
----@return number # Retrieved value
+---@return number # Retrieved value or the second argument if the console variable does not exist. Will return 0 if the console variable exists and has a string value.
 function cvars.Number(cvar, default) end
 
 ---[SHARED AND MENU] You are probably looking for cvars.AddChangeCallback.

@@ -177,11 +177,13 @@ function surface.GetAlphaMultiplier() end
 ---@return table # The color that drawing operations will use as a Color.
 function surface.GetDrawColor() end
 
----[CLIENT] Gets the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID with the specified name.
+---[CLIENT] Returns the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID of a texture with the specified name.
+---
+--- You probably want to use Global.Material and surface.SetMaterial.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetHUDTexture)
 ---@param name string The name of the texture.
----@return number #
+---@return number # The texture ID, for use with surface.SetTexture.
 function surface.GetHUDTexture(name) end
 
 ---[CLIENT AND MENU] Returns the current color affecting text draw operations.
@@ -276,17 +278,18 @@ function surface.ScreenWidth() end
 ---@param multiplier number The multiplier ranging from 0 to 1.
 function surface.SetAlphaMultiplier(multiplier) end
 
----[CLIENT AND MENU] Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a Color. Using a color structure is not recommended to be created procedurally.
---- 		Providing a Color structure is slower than providing four numbers. You may use Color:Unpack for this.
+---[CLIENT AND MENU] Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a Color.
+---
 --- 		The alpha value may not work properly if you're using a material without `$vertexalpha`.
 --- 		Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with surface.DrawTexturedRect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetDrawColor)
----@param r number The red value of color, or a Color.
----@param g number The green value of color. Unused if a Color was given.
----@param b number The blue value of color. Unused if a Color was given.
----@param a? number The alpha value of color. Unused if a Color was given.
-function surface.SetDrawColor(r, g, b, a) end
+---@param r number The red value of color.
+---@param g number The green value of color.
+---@param b number The blue value of color.
+---@param a? number The alpha value of color.
+---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+function surface.SetDrawColor(r, g, b, a, color) end
 
 ---[CLIENT AND MENU] Set the current font to be used for text operations later.
 ---
@@ -314,15 +317,13 @@ function surface.SetMaterial(material) end
 
 ---[CLIENT AND MENU] Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a Color.
 ---
---- Using a color structure is not recommended to be created procedurally.
---- Providing a Color structure is slower than providing four numbers. You may use Color:Unpack for this.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTextColor)
----@param r number The red value of color, or a Color.
+---@param r number The red value of color.
 ---@param g number The green value of color
 ---@param b number The blue value of color
 ---@param a? number The alpha value of color
-function surface.SetTextColor(r, g, b, a) end
+---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+function surface.SetTextColor(r, g, b, a, color) end
 
 ---[CLIENT AND MENU] Set the top-left position to draw any future text at.
 ---
@@ -333,9 +334,7 @@ function surface.SetTextPos(x, y) end
 
 ---[CLIENT AND MENU] Sets the texture to be used in all upcoming draw operations using the surface library.
 ---
---- See surface.SetMaterial for an IMaterial alternative.
----
---- It's probably best to use the alternative mentioned above.
+--- This is a legacy method, and should probably not be used, see surface.SetMaterial and IMaterial for a better alternative.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTexture)
 ---@param textureID number The ID of the texture to draw with returned by surface.GetTextureID.

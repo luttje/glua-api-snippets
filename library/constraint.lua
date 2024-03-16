@@ -391,8 +391,6 @@ end
 
 ---[SERVER] Creates a keep upright constraint.
 ---
---- This function only works on prop_physics or prop_ragdoll. This restriction will be lifted in the next update.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Keepupright)
 ---@param ent Entity The entity to keep upright
 ---@param ang Angle The angle defined as "upright"

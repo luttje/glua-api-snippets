@@ -3,7 +3,7 @@
 ---
 --- These hooks are used inside of a Lua effect. Lua effects are stored in either the `/lua/effects` directory or in a gamemode in `/gamemodes//entities/effects`.
 ---
---- Effects are entities with the class `CLuaEffect`, and as such, Entity functions are usable on them (using the `self` argument).
+--- Effects are entities with the classname `class CLuaEffect`, and as such, Entity functions are usable on them (using the `self` argument).
 ---
 --- An `EFFECT` is made using either a combination of the EFFECT:Init, EFFECT:Render and optionally the EFFECT:Think hook. Another way is to create all particles in one go in the `Init` hook and don't use the other hooks at all.
 ---

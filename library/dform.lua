@@ -48,13 +48,13 @@ function DForm:ComboBox(title, convar) end
 ---@return Panel # The created DLabel
 function DForm:ControlHelp(help) end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] An Accessor Function in DForm that does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetAutoSize)
 ---@return boolean #
 function DForm:GetAutoSize() end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] An Global.AccessorFunc that does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:GetSpacing)
 ---@return number #
@@ -129,7 +129,7 @@ function DForm:PropSelect(label, convar, models, height) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Rebuild)
 function DForm:Rebuild() end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] an Global.AccessorFunc that does nothing
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetAutoSize)
 ---@param boolean boolean
@@ -141,7 +141,7 @@ function DForm:SetAutoSize(boolean) end
 ---@param name string The new header name.
 function DForm:SetName(name) end
 
----[CLIENT AND MENU] Does nothing.
+---[CLIENT AND MENU] An Global.AccessorFunc that does nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetSpacing)
 ---@param number number

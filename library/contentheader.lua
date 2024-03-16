@@ -15,3 +15,9 @@ local ContentHeader = {}
 ---@param style string
 ---@param hookname? string A Populate Hook like PopulateEntities
 function ContentHeader:OpenMenu(style, hookname) end
+
+---[CLIENT]
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ContentHeader:ToTable)
+---@param bigtable table
+function ContentHeader:ToTable(bigtable) end

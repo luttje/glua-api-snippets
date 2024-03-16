@@ -1,6 +1,6 @@
 ---@meta
 
---- DModelPanel is a VGUI element that projects a 3D model onto a 2D plane.Creates a DModelPanel and sets its model to your playermodel.Creates a DModelPanel and sets its model to the Alyx playermodel, then changes its player color to red. Also disables default rotation animation.
+--- DModelPanel is a VGUI element that projects a 3D model onto a 2D plane. See also DAdjustableModelPanelCreates a DModelPanel and sets its model to your playermodel.Creates a DModelPanel and sets its model to the Alyx playermodel, then changes its player color to red. Also disables default rotation animation.
 ---@class DModelPanel : DButton
 local DModelPanel = {}
 

@@ -235,7 +235,7 @@ function util.GetModelMeshes(model, lod, bodygroupMask) end
 --- See also Player:GetPData for a more convenient version of this function for online players, util.RemovePData and
 ---  util.SetPData for the other accompanying functions.
 ---
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses util.SteamIDTo64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). This function now only uses the old method as a fallback if the name isn't found.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetPData)
 ---@param steamID string SteamID of the player, in the `STEAM_0:0:0` format. See Player:SteamID.
@@ -665,7 +665,7 @@ function util.RelativePathToGMA_Menu(gma) end
 --- See also Player:RemovePData for a more convenient version of this function for online players, util.SetPData and
 ---  util.GetPData for the other accompanying functions.
 ---
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses util.SteamIDTo64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). This function now tries to remove both old and new entries.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RemovePData)
 ---@param steamID string SteamID of the player to remove data of, in the `STEAM_0:0:0` format. See Player:SteamID.
@@ -698,7 +698,7 @@ function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake,
 ---
 --- See also Player:SetPData for a more convenient version of this function for online players, util.RemovePData and
 ---  util.GetPData for the other accompanying functions.
---- This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+--- This function internally uses util.SteamIDTo64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.SetPData)
 ---@param steamID string SteamID of the player, in the `STEAM_0:0:0` format. See Player:SteamID.

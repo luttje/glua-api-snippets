@@ -155,15 +155,17 @@ function render.CullMode(cullMode) end
 ---@param depthmax number The maximum depth of the upcoming render. `0.0` = render everything (through walls); `1.0` = render normally.
 function render.DepthRange(depthmin, depthmax) end
 
----[CLIENT] Draws textured beam.
+---[CLIENT] Draws a single-segment Beam made out of a textured, billboarded quad stretching between two points.
+---
+--- 		For more detailed information, including usage examples, see the [Beams Rendering Reference](https://wiki.facepunch.com/gmod/Beam_Rendering)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawBeam)
----@param startPos Vector Beam start position.
----@param endPos Vector Beam end position.
----@param width number The width of the beam.
----@param textureStart number The start coordinate of the texture used.
----@param textureEnd number The end coordinate of the texture used.
----@param color? table The color to be used. Uses the Color.
+---@param startPos Vector The Beam's start position.
+---@param endPos Vector The Beam's end position.
+---@param width number The width of the Beam.
+---@param textureStart number The starting coordinate of the Beam's texture.
+---@param textureEnd number The end coordinate of the Beam's texture.
+---@param color? Color What Color to tint the Beam.
 function render.DrawBeam(startPos, endPos, width, textureStart, textureEnd, color) end
 
 ---[CLIENT] Draws a box in 3D space.
@@ -662,16 +664,20 @@ function render.PerformFullScreenStencilOperation() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopCustomClipPlane)
 function render.PopCustomClipPlane() end
 
----[CLIENT AND MENU] Pops the current texture magnification filter from the filter stack.
+---[CLIENT AND MENU] Pops (Removes) the texture filter most recently pushed (Added) onto the magnification texture filter stack.
 ---
---- See render.PushFilterMag
+--- 		This function should only be called *after* a magnification filter has been pushed via render.PushFilterMag
+---
+--- 		For more detailed information and a usage example, see render_min_mag_filters
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopFilterMag)
 function render.PopFilterMag() end
 
----[CLIENT AND MENU] Pops the current texture minification filter from the filter stack.
+---[CLIENT AND MENU] Pops (Removes) the texture filter most recently pushed (Added) onto the minification texture filter stack.
 ---
---- See render.PushFilterMin
+--- 		This function should only be called *after* a minification filter has been pushed via render.PushFilterMin
+---
+--- 		For more detailed information and a usage example, see render_min_mag_filters
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PopFilterMin)
 function render.PopFilterMin() end
@@ -697,20 +703,28 @@ function render.PopRenderTarget() end
 ---@param distance number The distance of the plane from the world origin. You can use Vector:Dot between the normal and any point on the plane to find this.
 function render.PushCustomClipPlane(normal, distance) end
 
----[CLIENT AND MENU] Pushes a texture filter onto the magnification texture filter stack.
+---[CLIENT AND MENU] Pushes (Adds) a texture filter onto the magnification texture filter stack.
+--- 		This will modify how textures are stretched to sizes larger than their native resolution for upcoming rendering and drawing operations.
+--- 		For a version of this same function that modifies filtering for texture sizes smaller than their native resolution, see render.PushFilterMin
 ---
---- See also render.PushFilterMin and render.PopFilterMag.
+--- 		Always be sure to call render.PopFilterMag afterwards to avoid texture filtering problems.
+---
+--- 		For more detailed information and a usage example, see render_min_mag_filters
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFilterMag)
----@param texFilterType number The texture filter type, see Enums/TEXFILTER
+---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
 function render.PushFilterMag(texFilterType) end
 
----[CLIENT AND MENU] Pushes a texture filter onto the minification texture filter stack.
+---[CLIENT AND MENU] Pushes (Adds) a texture filter onto the minification texture filter stack.
+--- 		This will modify how textures are compressed to a lower resolution than their native resolution for upcoming rendering and drawing operations.
+--- 		For a version of this same function that modifies filtering for texture sizes larger than their native resolution, see render.PushFilterMag
 ---
---- See also render.PushFilterMag and render.PopFilterMin.
+--- 		Always be sure to call render.PopFilterMin afterwards to avoid texture filtering problems.
+---
+--- 		For more detailed information and a usage example, see render_min_mag_filters
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushFilterMin)
----@param texFilterType number The texture filter type, see Enums/TEXFILTER
+---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
 function render.PushFilterMin(texFilterType) end
 
 ---[CLIENT] Enables the flashlight projection for the upcoming rendering.
@@ -730,7 +744,10 @@ function render.PushFlashlightMode(enable) end
 --- If the render target is bigger than the screen, rendering done with the surface library will be clipped to the screen bounds unless you call Global.DisableClipping
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushRenderTarget)
----@param texture ITexture The new render target to be used.
+---@param texture ITexture
+--- 			The new render target to be used.
+--- 			Note: This should be `nil` to render to the main game view.
+---
 ---@param x? number X origin of the viewport.
 ---@param y? number Y origin of the viewport.
 ---@param w? number Width of the viewport.
@@ -1011,13 +1028,13 @@ function render.SetStencilPassOperation(passOperation) end
 ---@param referenceValue number Reference value.
 function render.SetStencilReferenceValue(referenceValue) end
 
----[CLIENT AND MENU] Sets the unsigned 8-bit test bitflag mask to be used for any stencil testing.
+---[CLIENT AND MENU] Sets the unsigned 8-bit test bitflag mask that will be bitwise ANDed with all values as they are read from the Stencil Buffer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilTestMask)
 ---@param mask number The mask bitflag.
 function render.SetStencilTestMask(mask) end
 
----[CLIENT AND MENU] Sets the unsigned 8-bit write bitflag mask to be used for any writes to the stencil buffer.
+---[CLIENT AND MENU] Sets the unsigned 8-bit write bitflag mask that will be bitwise ANDed with any value that is written to the Stencil Buffer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
 ---@param mask number The mask bitflag.
@@ -1061,10 +1078,12 @@ function render.SetWriteDepthToDestAlpha(enable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Spin)
 function render.Spin() end
 
----[CLIENT] Start a new beam draw operation.
+---[CLIENT] Begin drawing a multi-segment Beam.
+---
+--- 	For more detailed information, including usage examples, see the [Beams Rendering Reference](https://wiki.facepunch.com/gmod/Beam_Rendering)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.StartBeam)
----@param segmentCount number Amount of beam segments that are about to be drawn.
+---@param segmentCount number The number of Beam Segments that this multi-segment Beam will contain
 function render.StartBeam(segmentCount) end
 
 ---[CLIENT AND MENU] Returns whether the player's hardware supports HDR. (High Dynamic Range) HDR can still be disabled by the `mat_hdr_level` console variable or just not be supported by the map.
