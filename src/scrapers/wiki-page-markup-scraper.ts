@@ -1,5 +1,7 @@
 import { ScrapeCallback, Scraper } from './scraper.js';
 import { deserializeXml } from '../utils/xml.js';
+import { AnyNode, CheerioAPI } from 'cheerio';
+import { Element as DOMElement } from 'domhandler';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
 export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
@@ -20,9 +22,15 @@ export type WikiIdentifier = {
   description?: string;
 };
 
+export type FunctionCallback = {
+  arguments: FunctionArgument[];
+  returns: FunctionReturn[];
+};
+
 export type FunctionArgument = WikiIdentifier & {
   default?: string;
   altType?: string;
+  callback?: FunctionCallback;
 };
 
 export type FunctionArgumentList = {
@@ -128,6 +136,51 @@ export function isClass(page: WikiPage): page is TypePage {
   return page.type === 'class';
 }
 
+// Handle <callback> in a description of an argument/return
+function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, FunctionCallback?] {
+  let description: string = "";
+  let callback: FunctionCallback = undefined!;
+
+  for (const node of $(e).contents()) {
+    if ( (node as DOMElement).name?.toLowerCase() === "callback") {
+      callback = <FunctionCallback>{arguments: [], returns: []};
+      for (const arg of $(node).find("arg")) {
+        const $el = $(arg);
+        callback.arguments.push(<FunctionArgument> {
+          name: $el.attr('name')!,
+          type: $el.attr('type')!,
+          description: $el.text()
+        });
+      }
+      for (const ret of $(node).find("ret")) {
+        const $el = $(ret);
+        callback.returns.push(<FunctionReturn> {
+          name: $el.attr('name')!,
+          type: $el.attr('type')!,
+          description: $el.text()
+        });
+      }
+    } else {
+      description += $(node).text();
+    }
+  }
+
+  if (callback?.arguments.length > 0) {
+    description += "\n\nFunction callback arguments are:\n";
+    for (let arg of callback.arguments) {
+      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
+    }
+  }
+  if (callback?.returns.length > 0) {
+    description += "\nFunction callback return values are:\n";
+    for (let arg of callback.returns) {
+      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
+    }
+  }
+
+  return [description, callback]
+}
+
 /**
  * Scraper
  */
@@ -228,7 +281,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
           const argumentList: FunctionArgumentList[] = [];
           for (const argSet of $('args')) {
-            const setArguments = $(argSet).find('arg');
+            const setArguments = $(argSet).find('> arg');
 
             const arguments_ = setArguments.map(function() {
               const $el = $(this);
@@ -236,8 +289,11 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
                 name: $el.attr('name')!,
                 type: $el.attr('type')!,
                 altType: $el.attr('alttype')!,
-                description: $el.text()
               };
+
+              const callbackRes = handleCallbackInDescription($, this);
+              argument.description = callbackRes[0];
+              argument.callback = callbackRes[1];
 
               if ($el.attr('default') != undefined)
                 argument.default = $el.attr('default')!;

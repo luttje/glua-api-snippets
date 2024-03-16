@@ -1,4 +1,4 @@
-import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument } from '../scrapers/wiki-page-markup-scraper.js';
+import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
 import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
@@ -323,9 +323,27 @@ export class GluaApiWriter {
     });
   }
 
-  private transformType(type: string) {
+  private transformType(type: string, callback?: FunctionCallback) {
     if (type === 'vararg')
       return 'any';
+
+    //fun(cmd: string, args: string): string[]?
+    if (type === "function" && callback) {
+      let cbStr = `fun(`;
+
+      for (const arg of callback.arguments || []) {
+        cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}, `;
+      }
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      cbStr += ")";
+
+      if (callback.returns && callback.returns.length > 0) {
+        const ret = callback.returns[0];
+        cbStr += `: ${this.transformType(ret.type)}`;
+      }
+
+      return cbStr;
+    }
 
     return type;
   }
@@ -342,7 +360,7 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
 
-        let types = this.transformType(arg.type);
+        let types = this.transformType(arg.type, arg.callback);
         if (arg.altType) types += "|" + this.transformType(arg.altType);
 
         luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!)}\n`;
