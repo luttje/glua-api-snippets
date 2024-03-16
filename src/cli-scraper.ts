@@ -134,13 +134,19 @@ async function startScrape() {
 
     if (queue.length > 20)
     {
-      await Promise.allSettled(queue);
+      const results = await Promise.allSettled(queue);
+      for ( const result of results) {
+        if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
+      }
       queue = [];
     }
   }
 
   // Await any after the loop exits
-  await Promise.allSettled(queue);
+  const results = await Promise.allSettled(queue);
+  for ( const result of results) {
+    if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
+  }
 
   console.log(`Took ${Math.floor((performance.now()-scrape_start) / 100) / 10}s!`);
 
