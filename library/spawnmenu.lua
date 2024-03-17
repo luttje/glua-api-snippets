@@ -30,13 +30,13 @@ function spawnmenu.ActiveControlPanel() end
 ---@param name string An unique name of the content type.
 ---@param constructor fun(container: Panel, data: table) A function that is called whenever we need create a new panel for this content type.
 ---
---- It has two arguments:
 ---
 ---
---- Panel container - The container/parent of the new panel
 ---
+--- Function callback arguments are:
+--- * Panel **container** - The container/parent of the new panel from spawnmenu.CreateContentIcon
+--- * table **data** - Data for the content type passed from spawnmenu.CreateContentIcon.
 ---
---- table data - Data for the content type passed from spawnmenu.CreateContentIcon
 function spawnmenu.AddContentType(name, constructor) end
 
 ---[CLIENT] Inserts a new tab into the CreationMenus table, which will be used by the creation menu to generate its tabs (Spawnlists, Weapons, Entities, etc.)
@@ -69,10 +69,12 @@ function spawnmenu.AddCreationTab(name, _function, material, order, tooltip) end
 --- | ------------- | ---------- | ----------------- |
 --- | "header" | a simple header for organization | string text - The text that the header will display |
 --- | "model" | spawns a model where the player is looking | string model - The path to the model file 	 number skin - The skin for the model to use (optional)  string body - The bodygroups for the model (optional)  number wide - The width of the spawnicon (optional)  number tall - The height of the spawnicon (optional) |
---- | "entity" | spawns an entity where the player is looking(appears in the Entities tab by default) | string spawnname - The filename of the entity, for example "sent_ball"  string nicename - The name of the entity to display  string material - The icon to display, this should be set to "entities/.png" 	boolean admin - Whether the entity is only spawnable by admins (optional) |
+--- | "entity" | spawns an entity where the player is looking(appears in the Entities tab by default) | string spawnname - The filename of the entity, for example "sent_ball"  string nicename - The name of the entity to display  string material - The icon to display, this should be set to `entities/[sent_name].png` 	boolean admin - Whether the entity is only spawnable by admins (optional) |
 --- | "vehicle" | spawns a vehicle where the player is looking  (appears in the Vehicles tab by default) | string spawnname - The filename of the vehicle  string nicename - The name of the vehicle to display  string material - The icon to display  boolean admin - Whether the vehicle is only spawnable by admins (optional) |
 --- | "npc" | spawns an NPC where the player is looking  (appears in the NPCs tab by default) | string spawnname - The spawn name of the NPC 	string nicename - The name to display  string material - The icon to display  table weapon - A table of potential weapons (each a string) to give to the NPC. When spawned, one of these will be chosen randomly each time.  boolean admin - Whether the NPC is only spawnable by admins (optional) |
 --- | "weapon" | When clicked, gives the player a weapon;  When middle-clicked, spawns a weapon where the player is looking  (appears in the Weapons tab by default) |string spawnname - The spawn name of the weapon  string nicename - The name to display  string material - The icon to display  boolean admin - Whether the weapon is only spawnable by admins (optional) |
+---
+---
 ---
 ---@param icon string The icon to use in the tree.
 ---@param id? number The unique ID number for the spawnlist category. Used to make sub categories. See "parentID" parameter below. If not set, it will be automatically set to ever increasing number, starting with 1000.
@@ -191,10 +193,23 @@ function spawnmenu.GetTools() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.PopulateFromEngineTextFiles)
 function spawnmenu.PopulateFromEngineTextFiles() end
 
----[CLIENT] Loads spawnlists from text files.
+---[CLIENT] Loads spawnlists from text files. You probably are looking for spawnmenu.AddPropCategory.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/spawnmenu.PopulateFromTextFiles)
----@param callback fun(filename: string, name: string, contents: table, icon: string, id: integer, parentid: integer, needsapp: string) The function to call. Arguments are ( strFilename, strName, tabContents, icon, id, parentid, needsapp )
+---@param callback fun(strFilename: string, strName: string, tabContents: table, icon: string, id: number, parentid: number, needsapp: string) The function to call.
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * string **strFilename** - The file name for the spawnlist.
+--- * string **strName** - The "nice" title for the spawnlist.
+--- * table **tabContents** - The list of contents for this spawnlist.
+--- * string **icon** - Path to an `.png` icon of the spawnlist, should be 16x16 image.
+--- * number **id** - Unique ID of the spawnlist
+--- * number **parentid** - UniqueID of the parents spawnlist ID
+--- * string **needsapp** - If not empty, the internal folder name of an mountable game that is required for this spawnlist to show up.
+---
 function spawnmenu.PopulateFromTextFiles(callback) end
 
 ---[CLIENT] Saves a table of spawnlists to files.

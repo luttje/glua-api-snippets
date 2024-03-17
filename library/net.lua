@@ -218,8 +218,11 @@ function net.ReadUInt64() end
 function net.ReadVector() end
 
 ---[SHARED] Adds a net message handler. Only one receiver can be used to receive the net message.
+---
+--- You can use the `net.Read*` functions within the message handler callback.
+---
 --- The message-name is converted to lower-case so the message-names "`BigBlue`" and "`bigblue`" would be equal.
---- You **must** put this function **outside** of any other function or hook for it to work properly unless you know what you are doing!
+--- You **should** put this function **outside** of any other function or hook for it to work properly unless you know what you are doing!
 ---
 --- You **must** read information in the same order as you write it.
 ---
@@ -227,16 +230,21 @@ function net.ReadVector() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Receive)
 ---@param messageName string The message name to hook to.
----@param callback fun(len: integer, ply: Player) The function to be called if the specified message was received. Arguments are:
+---@param callback fun(len: number, ply: Player) The function to be called if the specified message was received.
 ---
---- * number len - Length of the message, in bits.
---- * Player ply - The player that sent the message, works **only** server-side.
+---
+---
+---
+--- Function callback arguments are:
+--- * number **len** - Length of the message, in bits.
+--- * Player **ply** - The player that sent the message, works **only** server-side.
+---
 function net.Receive(messageName, callback) end
 
 ---[SERVER] Sends the current net message (see net.Start) to the specified player, or to all players listed in the table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Send)
----@param ply Player The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
+---@param ply Player|CRecipientFilter The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
 function net.Send(ply) end
 
 ---[SERVER] Sends the current message (see net.Start) to all except the specified, or to all except all players in the table.

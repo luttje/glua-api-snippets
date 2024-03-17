@@ -36,7 +36,19 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
 ---@param length number The length in seconds of the sound to generate.
----@param callback fun(sample: integer): number A function which will be called to generate every sample on the sound. This function gets the current sample number passed as the first argument. The return value must be between `-1.0` and `1.0`. Other values will wrap back to the -1 to 1 range and basically clip. There are **65535** possible quantifiable values between -1 and 1.
+---@param callback fun(sampleIndex: number): number A function which will be called to generate every sample on the sound.
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * number **sampleIndex** - The current sample number.
+---
+--- Function callback return values are:
+--- * number **sampleValue** - The return value must be between `-1.0` and `1.0`.
+--- Other values will wrap back to the -1 to 1 range and basically clip.
+--- There are **65535** possible quantifiable values between -1 and 1.
+---
 function sound.Generate(indentifier, samplerate, length, callback) end
 
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
@@ -93,14 +105,17 @@ function sound.Play(snd, pos, level, pitch, volume, dsp) end
 --- * noplay - Forces the sound not to play as soon as this function is called
 --- * noblock - Disables streaming in blocks. It is more resource-intensive, but it is required for IGModAudioChannel:SetTime.
 ---
----
----
----
 --- If you don't want to use any of the above, you can just leave it as "".
----@param callback function Callback function that is called as soon as the the stream is loaded. It has next arguments:
---- * IGModAudioChannel soundchannel - The sound channel. Will be nil if an error occured.
---- * number errorID - ID of an error if an error has occured. Will be nil, otherwise.
---- * string errorName - Name of an error if an error has occured. Will be nil, otherwise.
+---@param callback fun(channel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded.
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * IGModAudioChannel **channel** - The sound channel. Will be nil if an error occurred.
+--- * number **errorID** - ID of an error if an error has occurred. Will be nil, otherwise.
+--- * string **errorName** - Name of an error if an error has occurred. Will be nil, otherwise.
+---
 function sound.PlayFile(path, flags, callback) end
 
 ---[CLIENT] Allows you to play external sound files, as well as online radio streams.
@@ -118,12 +133,14 @@ function sound.PlayFile(path, flags, callback) end
 --- * noplay - Forces the sound not to play as soon as this function is called
 --- * noblock - Disables streaming in blocks. It is more resource-intensive, but it is required for IGModAudioChannel:SetTime.
 ---
----
----
----
 --- If you don't want to use any of the above, you can just leave it as `""`.
----@param callback fun(soundchannel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded. It has the following arguments:
---- * IGModAudioChannel soundchannel - The sound channel
---- * number errorID - ID of an error, if an error has occured
---- * string errorName - Name of an error, if an error has occured
+---@param callback fun(channel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded.
+---
+---
+---
+--- Function callback arguments are:
+--- * IGModAudioChannel **channel** - The sound channel. Will be nil if an error occurred.
+--- * number **errorID** - ID of an error if an error has occurred. Will be nil, otherwise.
+--- * string **errorName** - Name of an error if an error has occurred. Will be nil, otherwise.
+---
 function sound.PlayURL(url, flags, callback) end

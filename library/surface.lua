@@ -288,8 +288,16 @@ function surface.SetAlphaMultiplier(multiplier) end
 ---@param g number The green value of color.
 ---@param b number The blue value of color.
 ---@param a? number The alpha value of color.
+function surface.SetDrawColor(r, g, b, a) end
+
+---[CLIENT AND MENU] Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a Color.
+---
+--- 		The alpha value may not work properly if you're using a material without `$vertexalpha`.
+--- 		Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with surface.DrawTexturedRect.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetDrawColor)
 ---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
-function surface.SetDrawColor(r, g, b, a, color) end
+function surface.SetDrawColor(color) end
 
 ---[CLIENT AND MENU] Set the current font to be used for text operations later.
 ---
@@ -322,8 +330,13 @@ function surface.SetMaterial(material) end
 ---@param g number The green value of color
 ---@param b number The blue value of color
 ---@param a? number The alpha value of color
+function surface.SetTextColor(r, g, b, a) end
+
+---[CLIENT AND MENU] Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a Color.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetTextColor)
 ---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
-function surface.SetTextColor(r, g, b, a, color) end
+function surface.SetTextColor(color) end
 
 ---[CLIENT AND MENU] Set the top-left position to draw any future text at.
 ---

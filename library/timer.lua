@@ -42,6 +42,13 @@ function timer.Destroy(identifier) end
 
 ---[SHARED AND MENU] Returns whenever the given timer exists or not.
 ---
+--- For debugging purposes you can use the following commands:
+--- * `lua_dumptimers_cl`
+--- * `lua_dumptimers_sv`
+--- * `lua_dumptimers_menu`
+---
+--- These will list all active timers in each realm.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/timer.Exists)
 ---@param identifier string Identifier of the timer.
 ---@return boolean # Returns true if the timer exists, false if it doesn't

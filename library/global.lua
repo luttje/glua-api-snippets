@@ -113,16 +113,38 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 ---@param roll? number
 --- 			The roll value of the angle, in degrees.
 ---
+---@return Angle # The newly created Angle
+function _G.Angle(pitch, yaw, roll) end
+
+---[SHARED AND MENU] Creates an Angle object, representing a [Euler Angle](https://en.wikipedia.org/wiki/Euler_angles) made up of pitch, yaw, and roll components.
+---
+---
+--- 			This function is relatively expensive, in terms of performance, in situations where it is being called multiple times every frame (Like a loop, for example.) This is due to the overhead associated with object creation and garbage collection.
+--- 			Where possible, it is generally better to store an Angle in a variable and re-use that variable rather than re-creating it repeatedly.
+--- 			In cases where an empty Angle is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
 ---@param angle Angle
 --- 			Creates a new Angle that is a copy of the Angle passed in.
 ---
+---@return Angle # The newly created Angle
+function _G.Angle(angle) end
+
+---[SHARED AND MENU] Creates an Angle object, representing a [Euler Angle](https://en.wikipedia.org/wiki/Euler_angles) made up of pitch, yaw, and roll components.
+---
+---
+--- 			This function is relatively expensive, in terms of performance, in situations where it is being called multiple times every frame (Like a loop, for example.) This is due to the overhead associated with object creation and garbage collection.
+--- 			Where possible, it is generally better to store an Angle in a variable and re-use that variable rather than re-creating it repeatedly.
+--- 			In cases where an empty Angle is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
 ---@param angleString string
 --- 			Attempts to parse the input string from the Global.print format of an Angle.
 ---
 --- 			Returns an Angle with its pitch, yaw, and roll set to `0` if the string cannot be parsed.
 ---
 ---@return Angle # The newly created Angle
-function _G.Angle(pitch, yaw, roll, angle, angleString) end
+function _G.Angle(angleString) end
 
 ---[SHARED AND MENU] Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
 ---
@@ -254,14 +276,14 @@ function _G.CloseDermaMenus() end
 function _G.collectgarbage(action, arg) end
 
 ---[SHARED AND MENU] Creates a Color.
---- 	This function is very expensive when used in rendering hooks or in operations requiring very frequent calls (like loops for example). It is better to store the color in a variable or to use the [default colors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
+--- 	This function is relatively expensive when used in rendering hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the color in a variable or to use the [default colors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Color)
 ---@param r number An integer from `0-255` describing the red value of the color.
 ---@param g number An integer from `0-255` describing the green value of the color.
 ---@param b number An integer from `0-255` describing the blue value of the color.
----@param a? number An integer from `0-255` describing the alpha (transparency) of the color.
----@return Color #The created Color. Is returned as a table without the Color metatable, [(See GitHub issue)](https://github.com/Facepunch/garrysmod-issues/issues/2407).
+---@param a? number An integer from `0-255` describing the alpha (transparency) of the color.(default 255)
+---@return Color # The created Color.
 function _G.Color(r, g, b, a) end
 
 ---[SHARED AND MENU] Returns a new Color with the RGB components of the given Color and the alpha value specified.
@@ -354,7 +376,7 @@ function _G.CreateContextMenu() end
 ---
 --- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
----@param flags?|table? number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param flags? number|table Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
 ---@param helptext? string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
@@ -3069,16 +3091,30 @@ function _G.ValidPanel(panel) end
 ---@param x? number The x component of the vector.
 ---@param y? number The y component of the vector.
 ---@param z? number The z component of the vector.
+---@return Vector # The created vector object.
+function _G.Vector(x, y, z) end
+
+---[SHARED AND MENU] Creates a Vector object.
+--- 		Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Vector:Add.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Vector)
 ---@param vector Vector
 --- 			Creates a new Vector that is a copy of the given Vector.
 ---
+---@return Vector # The created vector object.
+function _G.Vector(vector) end
+
+---[SHARED AND MENU] Creates a Vector object.
+--- 		Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See Vector:Add.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Vector)
 ---@param vectorString string
 --- 			Attempts to parse the input string from the Global.print format of an Vector.
 ---
 --- 			Returns a Vector with its `x`, `y`, and `z` set to `0` if the string cannot be parsed.
 ---
 ---@return Vector # The created vector object.
-function _G.Vector(x, y, z, vector, vectorString) end
+function _G.Vector(vectorString) end
 
 ---[SHARED AND MENU] Returns a random vector whose components are each between min(inclusive), max(exclusive).
 ---

@@ -193,15 +193,17 @@ function duplicator.Paste(Player, EntityList, ConstraintList) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterBoneModifier)
 ---@param key any The type of the key doesn't appear to matter, but it is preferable to use a string.
 ---@param boneModifier fun(ply: Player, ent: Entity, boneID: number, bone: PhysObj, data: table) Function called on each bone that an ent has. Called during duplicator.ApplyBoneModifiers.
---- Function parameters are:
---- * Player ply
---- * Entity ent
---- * number boneID
---- * PhysObj bone
---- * table data
 ---
 ---
---- The data table that is passed to boneModifier is set with duplicator.StoreBoneModifier
+---
+---
+--- Function callback arguments are:
+--- * Player **ply** - The player that is spawning the entity.
+--- * Entity **ent** - The entity being spawned in.
+--- * number **boneID** -
+--- * PhysObj **bone** -
+--- * table **data** - What you pass to duplicator.StoreBoneModifier.
+---
 function duplicator.RegisterBoneModifier(key, boneModifier) end
 
 ---[SHARED] Register a function used for creating a duplicated constraint.
@@ -218,7 +220,20 @@ function duplicator.RegisterConstraint(name, callback, ...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass)
 ---@param name string The ClassName of the entity you wish to register a factory for
----@param _function fun(ply: Player, ...) The factory function you want to have called. It should have the arguments (Player, ...) where ... is whatever arguments you request to be passed. It also should return the entity created, otherwise duplicator.Paste result will not include it!
+---@param _function fun(ply: Player, ...: any): Entity The factory function you want to have called.
+---
+---
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * Player **ply** - The player that is spawning the entity.
+--- * vararg **...** - Whatever arguments you request to be passed.
+---
+--- Function callback return values are:
+--- * Entity **ent** - It also should return the entity created, otherwise duplicator.Paste result will not include it!
+---
 ---@param ... any Strings of the names of arguments you want passed to function the from the Structures/EntityCopyData. As a special case, "Data" will pass the whole structure.
 function duplicator.RegisterEntityClass(name, _function, ...) end
 
@@ -230,7 +245,15 @@ function duplicator.RegisterEntityClass(name, _function, ...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityModifier)
 ---@param name string An identifier for your modification. This is not limited, so be verbose. `Person's 'Unbreakable' mod` is far less likely to cause conflicts than `unbreakable`
----@param func fun(ply: Player, ent: Entity, data: table) The function to be called for your modification. It should have the arguments (`Player`, `Entity`, `Data`), where data is what you pass to duplicator.StoreEntityModifier.
+---@param func fun(ply: Player, ent: Entity, data: table) The function to be called for your modification.
+---
+---
+---
+--- Function callback arguments are:
+--- * Player **ply** - The player that is spawning the entity.
+--- * Entity **ent** - The entity being spawned in.
+--- * table **data** - What you pass to duplicator.StoreEntityModifier.
+---
 function duplicator.RegisterEntityModifier(name, func) end
 
 ---[SERVER] Help to remove certain map created entities before creating the saved entities

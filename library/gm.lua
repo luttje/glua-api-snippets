@@ -373,7 +373,11 @@ function GM:EntityKeyValue(ent, key, value) end
 
 ---[SHARED] Called when an NW2Var is changed.
 --- If a NW2Var is set on an entity that is based on a Lua Entity could result in the NW2Var being mixed up with other ones and being updated multiple times.
---- This hook is fired before the client value is actually changed. Calling the GetNW2 function for the specified variable name within this hook will return the old value, not the current/updated one.
+---
+--- 	This hook is fired before the client value is actually changed. Calling the GetNW2 function for the specified variable name within this hook will return the old value, not the current/updated one.
+---
+--- 	This hook gets called for all NW2Vars on all Entities in a full update. The old value will be nil in this case.
+--- 	If this hook seems to be called for no apparent reason, check if it's caused by a full update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:EntityNetworkedVarChanged)
 ---@param ent Entity The owner entity of changed NW2Var

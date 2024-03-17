@@ -26,13 +26,23 @@ http = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
----@param onSuccess? fun(body: string, size: integer, headers: table<string, string>, code: integer) Function to be called on success. Arguments are
---- * string body
---- * number size - equal to string.len(body).
---- * table headers
---- * number code - The HTTP success code.
----@param onFailure? fun(error: string) Function to be called on failure. Arguments are
---- * string error - The error message.
+---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.
+---
+---
+---
+--- Function callback arguments are:
+--- * string **body** -
+--- * string **size** - equal to string.len(body).
+--- * table **headers** -
+--- * number **code** - The HTTP success code.
+---
+---@param onFailure? fun(error: string) Function to be called on failure.
+---
+---
+---
+--- Function callback arguments are:
+--- * string **error** - The error message.
+---
 ---@param headers? table KeyValue table for headers.
 function http.Fetch(url, onSuccess, onFailure, headers) end
 
@@ -52,12 +62,22 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Post)
 ---@param url string The url to of the website to post.
 ---@param parameters table The post parameters (x-www-form-urlencoded) to be send to the server. **Keys and values must be strings**.
----@param onSuccess? fun(body: string, size: integer, headers: table<string, string>, code: integer) Function to be called on success. Arguments are
---- * string body
---- * string size - equal to string.len(body).
---- * table headers
---- * number code - The HTTP success code.
----@param onFailure? fun(error: string) Function to be called on failure. Arguments are
---- * string error - The error message.
----@param headers? table<string, string> KeyValue table for headers.
+---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.
+---
+---
+---
+--- Function callback arguments are:
+--- * string **body** -
+--- * string **size** - equal to string.len(body).
+--- * table **headers** -
+--- * number **code** - The HTTP success code.
+---
+---@param onFailure? fun(error: string) Function to be called on failure.
+---
+---
+---
+--- Function callback arguments are:
+--- * string **error** - The error message.
+---
+---@param headers? table KeyValue table for headers.
 function http.Post(url, parameters, onSuccess, onFailure, headers) end

@@ -8,9 +8,11 @@ steamworks = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.ApplyAddons)
 function steamworks.ApplyAddons() end
 
----[CLIENT AND MENU] Downloads a file from the supplied addon and saves it as a .cache file in garrysmod/cache folder.
+---[CLIENT AND MENU] You really should be using steamworks.DownloadUGC. This is a legacy function.
 ---
---- This is mostly used to download the preview image of the addon, but the game seems to also use it to download replays and saves.
+--- Downloads a file from the supplied addon and saves it as a `.cache` file in `garrysmod/cache/` folder.
+---
+--- This is mostly used to download the preview image of the addon.
 ---
 --- In case the retrieved file is an image and you need the IMaterial, use Global.AddonMaterial with the path supplied from the callback.
 ---
@@ -18,16 +20,29 @@ function steamworks.ApplyAddons() end
 ---@param workshopPreviewID string The Preview ID of workshop item.
 ---@param uncompress boolean Whether to uncompress the file or not, assuming it was compressed with LZMA.
 --- You will usually want to set this to true.
----@param resultCallback fun(pathToSavedFile: string) The function to process retrieved data. The first and only argument is a string, containing path to the saved file.
+---@param resultCallback fun(path: string) The function to process retrieved data.
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * string **path** - Path to the downloaded file.
+---
 function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 
 ---[CLIENT AND MENU] Downloads a Steam Workshop file by its ID and returns a path to it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
 ---@param workshopID string The ID of workshop item to download. **NOT** a file ID.
----@param resultCallback fun(path: string, file: file_class) The function to process retrieved data. Arguments passed are:
---- * string path - Contains a path to the saved file, or nil if the download failed for any reason.
---- * file_class file - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
+---@param resultCallback fun(path: string, file: file_class) The function to process retrieved data.
+---
+---
+---
+---
+--- Function callback arguments are:
+--- * string **path** - Contains a path to the saved file, or nil if the download failed for any reason.
+--- * file_class **file** - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
+---
 function steamworks.DownloadUGC(workshopID, resultCallback) end
 
 ---[CLIENT AND MENU] Retrieves info about supplied Steam Workshop addon.

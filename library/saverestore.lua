@@ -7,50 +7,36 @@ saverestore = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddRestoreHook)
 ---@param identifier string The unique identifier for this hook.
----@param callback fun(save: IRestore) The function to be called when an engine save is being loaded. It has one argument:
----
----
---- IRestore save - The restore object to be used to read data from save file that is being loaded
----
----
+---@param callback fun(save: IRestore) The function to be called when an engine save is being loaded.
 ---
 ---
 ---
 --- You can also use those functions to read data:
+--- * saverestore.ReadVar
+--- * saverestore.ReadTable
+--- * saverestore.LoadEntity
 ---
+--- Function callback arguments are:
+--- * IRestore **save** - The restore object to be used to read data from save file that is being loaded.
 ---
---- saverestore.ReadVar
----
----
---- saverestore.ReadTable
----
----
---- saverestore.LoadEntity
 function saverestore.AddRestoreHook(identifier, callback) end
 
 ---[SHARED] Adds a save hook for the Half-Life 2 save system. You can this to carry data through level transitions in Half-Life 2.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.AddSaveHook)
 ---@param identifier string The unique identifier for this hook.
----@param callback fun(save: ISave) The function to be called when an engine save is being saved. It has one argument:
----
----
---- ISave save - The save object to be used to write data to the save file that is being saved
----
----
+---@param callback fun(save: ISave) The function to be called when an engine save is being saved.
 ---
 ---
 ---
 --- You can also use those functions to save data:
+--- * saverestore.WriteVar
+--- * saverestore.WriteTable
+--- * saverestore.SaveEntity
 ---
+--- Function callback arguments are:
+--- * ISave **save** - The save object to be used to write data to the save file that is being saved.
 ---
---- saverestore.WriteVar
----
----
---- saverestore.WriteTable
----
----
---- saverestore.SaveEntity
 function saverestore.AddSaveHook(identifier, callback) end
 
 ---[SHARED] Loads Entity:GetTable from the save game file that is being loaded and merges it with the given entitys Entity:GetTable.
