@@ -180,7 +180,8 @@ export class GluaApiWriter {
   private writeClassFunction(func: ClassFunction) {
     let api: string = this.writeClassStart(func.parent, undefined, func.deprecated);
 
-    for (const argSet of func.arguments ?? [{}]) {
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
       api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
       api += this.writeFunctionDeclaration(func, argSet.args, ':');
     }
@@ -191,7 +192,8 @@ export class GluaApiWriter {
   private writeLibraryFunction(func: LibraryFunction) {
     let api: string = this.writeLibraryGlobalFallback(func);
 
-    for (const argSet of func.arguments ?? [{}]) {
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
       api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
       api += this.writeFunctionDeclaration(func, argSet.args);
     }
@@ -212,7 +214,8 @@ export class GluaApiWriter {
   private writePanelFunction(func: PanelFunction) {
     let api: string = '';
 
-    for (const argSet of func.arguments ?? [{}]) {
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
       api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
       api += this.writeFunctionDeclaration(func, argSet.args, ':');
     }

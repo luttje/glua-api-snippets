@@ -128,7 +128,7 @@ net.Receive( "cool_addon_client_ready", function( len, ply )
 end )
 \`\`\`\n\n`,
   realm: 'Server',
-  arguments: [
+  arguments: [ { args: [
     {
       name: 'player',
       type: 'Player',
@@ -139,7 +139,7 @@ end )
       type: 'boolean',
       description: 'If `true`, the player just spawned from a map transition.',
     },
-  ],
+  ], } ],
   returns: [],
 };
 

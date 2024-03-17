@@ -320,7 +320,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             address: address,
             description: $('description:first').text(),
             realm: $('realm:first').text() as Realm,
-            arguments: argumentList.length == 0 ? undefined : argumentList,
+            arguments: argumentList,
             returns,
             deprecated
           };

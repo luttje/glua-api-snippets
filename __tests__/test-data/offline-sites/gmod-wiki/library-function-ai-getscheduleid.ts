@@ -18,11 +18,11 @@ export const json = {
   description: 'Translates a schedule name to its corresponding ID.',
   realm: 'Server',
   arguments: [
-    {
+    { args: [ {
       name: 'sched',
       type: 'string',
       description: 'Then schedule name. In most cases, this will be the same as the Enums/SCHED name.',
-    },
+    } ] },
   ],
   returns: [
     {
