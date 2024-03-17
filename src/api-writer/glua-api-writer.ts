@@ -1,4 +1,4 @@
-import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel } from '../scrapers/wiki-page-markup-scraper.js';
+import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
 import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
@@ -180,8 +180,11 @@ export class GluaApiWriter {
   private writeClassFunction(func: ClassFunction) {
     let api: string = this.writeClassStart(func.parent, undefined, func.deprecated);
 
-    api += this.writeFunctionLuaDocComment(func, func.realm);
-    api += this.writeFunctionDeclaration(func, func.realm, ':');
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
+      api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
+      api += this.writeFunctionDeclaration(func, argSet.args, ':');
+    }
 
     return api;
   }
@@ -189,8 +192,11 @@ export class GluaApiWriter {
   private writeLibraryFunction(func: LibraryFunction) {
     let api: string = this.writeLibraryGlobalFallback(func);
 
-    api += this.writeFunctionLuaDocComment(func, func.realm);
-    api += this.writeFunctionDeclaration(func, func.realm);
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
+      api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
+      api += this.writeFunctionDeclaration(func, argSet.args);
+    }
 
     return api;
   }
@@ -208,8 +214,11 @@ export class GluaApiWriter {
   private writePanelFunction(func: PanelFunction) {
     let api: string = '';
 
-    api += this.writeFunctionLuaDocComment(func, func.realm);
-    api += this.writeFunctionDeclaration(func, func.realm, ':');
+    if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
+    for (const argSet of func.arguments) {
+      api += this.writeFunctionLuaDocComment(func, argSet.args, func.realm);
+      api += this.writeFunctionDeclaration(func, argSet.args, ':');
+    }
 
     return api;
   }
@@ -317,26 +326,47 @@ export class GluaApiWriter {
     });
   }
 
-  private transformType(type: string) {
+  private transformType(type: string, callback?: FunctionCallback) {
     if (type === 'vararg')
       return 'any';
+
+    //fun(cmd: string, args: string): string[]?
+    if (type === "function" && callback) {
+      let cbStr = `fun(`;
+
+      for (const arg of callback.arguments || []) {
+        cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}, `;
+      }
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      cbStr += ")";
+
+      if (callback.returns && callback.returns.length > 0) {
+        const ret = callback.returns[0];
+        cbStr += `: ${this.transformType(ret.type)}`;
+      }
+
+      return cbStr;
+    }
 
     return type;
   }
 
-  private writeFunctionLuaDocComment(func: Function, realm: Realm) {
+  private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
     let luaDocComment = `---[${realm.toUpperCase()}] ${putCommentBeforeEachLine(func.description!.trim())}\n`;
     luaDocComment += `---\n---[(View on wiki)](${func.url})\n`;
 
-    if (func.arguments) {
-      func.arguments.forEach((arg, index) => {
+    if (args) {
+      args.forEach((arg, index) => {
         if (!arg.name)
           arg.name = arg.type;
 
         if (arg.type === 'vararg')
           arg.name = '...';
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${this.transformType(arg.type)} ${putCommentBeforeEachLine(arg.description!)}\n`;
+        let types = this.transformType(arg.type, arg.callback);
+        if (arg.altType) types += "|" + this.transformType(arg.altType);
+
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!)}\n`;
       });
     }
 
@@ -361,11 +391,11 @@ export class GluaApiWriter {
     return luaDocComment;
   }
 
-  private writeFunctionDeclaration(func: Function, realm: Realm, indexer: string = '.') {
+  private writeFunctionDeclaration(func: Function, args: FunctionArgument[] | undefined, indexer: string = '.') {
     let declaration = `function ${func.parent ? `${func.parent}${indexer}` : ''}${GluaApiWriter.safeName(func.name)}(`;
 
-    if (func.arguments) {
-      declaration += func.arguments.map(arg => {
+    if (args) {
+      declaration += args.map(arg => {
         if (arg.type === 'vararg')
           return '...';
 
