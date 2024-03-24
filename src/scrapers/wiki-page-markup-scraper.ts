@@ -267,7 +267,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             type: 'struct',
             name: address,
             address: address,
-            description: $('description').text(),
+            description: $('structure description').text(),
             realm: $('realm').text() as Realm,
             fields,
             deprecated
@@ -277,7 +277,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             type: 'panel',
             name: address,
             address: address,
-            description: $('description').text(),
+            description: $('panel description').text(),
             realm: $('realm').text() as Realm,
             parent: $('parent').text(),
             deprecated
