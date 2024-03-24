@@ -158,7 +158,7 @@ export class GluaApiWriter {
     if (!this.writtenLibraryGlobals.has(page.name)) {
       let api = '';
 
-      api += page.description ? `${putCommentBeforeEachLine(page.description, false)}\n` : '';
+      api += page.description ? `${putCommentBeforeEachLine(page.description.trim(), false)}\n` : '';
 
       if (page.deprecated)
         api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
@@ -232,9 +232,8 @@ export class GluaApiWriter {
 
     api += `---@enum ${_enum.name}\n`;
 
-    if (isContainedInTable)
-    {
-      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description, false)}\n` : '';
+    if (isContainedInTable) {
+      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description.trim(), false)}\n` : '';
       api += `${_enum.name} = {\n`;
     }
 
@@ -243,7 +242,7 @@ export class GluaApiWriter {
         key = key.split('.')[1];
         api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description, false)}\n` : '';
+        api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
@@ -278,7 +277,7 @@ export class GluaApiWriter {
       if (field.deprecated)
         api += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
-      api += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
+      api += `---${putCommentBeforeEachLine(field.description.trim())}\n`;
 
       const type = this.transformType(field.type, field.callback);
       api += `---@type ${type}\n`;
@@ -372,13 +371,13 @@ export class GluaApiWriter {
         let types = this.transformType(arg.type, arg.callback);
         if (arg.altType) types += "|" + this.transformType(arg.altType);
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!)}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
       });
     }
 
     if (func.returns) {
       func.returns.forEach(ret => {
-        const description = removeNewlines(ret.description ?? '');
+        const description = putCommentBeforeEachLine(ret.description!.trimEnd());
 
         luaDocComment += `---@return `;
 
