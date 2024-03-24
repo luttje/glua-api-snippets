@@ -37,7 +37,9 @@ export type FunctionArgumentList = {
   args?: FunctionArgument[];
 };
 
-export type FunctionReturn = WikiIdentifier & {};
+export type FunctionReturn = WikiIdentifier & {
+  callback?: FunctionCallback;
+};
 
 export type Function = CommonWikiProperties & {
   parent: string;
@@ -78,6 +80,7 @@ export type StructField = {
   default?: any;
   description: string;
   deprecated?: string;
+  callback?: FunctionCallback;
 };
 
 export type Struct = CommonWikiProperties & {
@@ -144,6 +147,7 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
   for (const node of $(e).contents()) {
     if ( (node as DOMElement).name?.toLowerCase() === "callback") {
       callback = <FunctionCallback>{arguments: [], returns: []};
+
       for (const arg of $(node).find("arg")) {
         const $el = $(arg);
         callback.arguments.push(<FunctionArgument> {
@@ -160,25 +164,25 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
           description: $el.text()
         });
       }
+
+      if (callback?.arguments.length > 0) {
+        description += "\n\nFunction argument(s):\n";
+        for (const arg of callback.arguments) {
+          description += `* ${arg.type} \`${arg.name}\` - ${arg.description}\n`;
+        }
+      }
+      if (callback?.returns.length > 0) {
+        description += "\nFunction return value(s):\n";
+        for (const ret of callback.returns) {
+          description += `* ${ret.type} \`${ret.name}\` - ${ret.description}\n`;
+        }
+      }
     } else {
       description += $(node).text();
     }
   }
 
-  if (callback?.arguments.length > 0) {
-    description += "\n\nFunction callback arguments are:\n";
-    for (let arg of callback.arguments) {
-      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
-    }
-  }
-  if (callback?.returns.length > 0) {
-    description += "\nFunction callback return values are:\n";
-    for (let arg of callback.returns) {
-      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
-    }
-  }
-
-  return [description, callback]
+  return [description, callback];
 }
 
 /**
@@ -245,13 +249,18 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               return $el.text().trim();
             }).get().join(' - ');
 
-            return <StructField>{
+            const structField = <StructField>{
               name: $el.attr('name')!,
               type: $el.attr('type')!,
               default: $el.attr('default'),
-              description: $el.text(),
               deprecated: deprecated || undefined,
             };
+
+            const callbackRes = handleCallbackInDescription($, this);
+            structField.description = callbackRes[0] ?? "";
+            structField.callback = callbackRes[1];
+
+            return structField;
           }).get();
 
           return <Struct>{
@@ -306,11 +315,16 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
           const returns = $('rets ret').map(function() {
             const $el = $(this);
-            return <FunctionReturn> {
+            const ret = <FunctionReturn> {
               name: $el.attr('name')!,
-              type: $el.attr('type')!,
-              description: $el.text()
+              type: $el.attr('type')!
             };
+
+            const callbackRes = handleCallbackInDescription($, this);
+            ret.description = callbackRes[0];
+            ret.callback = callbackRes[1];
+
+            return ret;
           }).get();
 
           const base = <Function> {

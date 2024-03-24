@@ -280,7 +280,7 @@ export class GluaApiWriter {
 
       api += `---${removeNewlines(field.description).replace(/\s+/g, ' ')}\n`;
 
-      const type = this.transformType(field.type)
+      const type = this.transformType(field.type, field.callback);
       api += `---@type ${type}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
@@ -379,7 +379,7 @@ export class GluaApiWriter {
         if (ret.type === 'vararg')
           luaDocComment += 'any ...';
         else
-          luaDocComment += `${this.transformType(ret.type)}`;
+          luaDocComment += `${this.transformType(ret.type, ret.callback)}`;
 
         luaDocComment += ` # ${description}\n`;
       });
