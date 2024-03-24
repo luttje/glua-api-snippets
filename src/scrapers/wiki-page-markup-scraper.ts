@@ -141,6 +141,7 @@ export function isClass(page: WikiPage): page is TypePage {
 }
 
 // Handle things like <page> tags, <warning>, etc.
+const classBlocks = ["internal", "note", "warning"];
 function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
   // <page> => markdown []()
   for (const page of $(e).find('page')) {
@@ -148,6 +149,15 @@ function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
     const url = $p.text();
     const text = $p.attr("text") || url;
     $p.replaceWith( `[${text}](${url})` );
+  }
+
+  for (const className of classBlocks) {
+    for (const block of $(e).find(className)) {
+      const $b = $(block);
+      let text = markdownifyDescription($, $b).trim();
+      if (className === 'internal' && text === '') text = `This is used internally - although you're able to use it you probably shouldn't.`;
+      $b.replaceWith( `**${className.toUpperCase()}**: ${text}\n` );
+    }
   }
 
   let description = $(e).text();
