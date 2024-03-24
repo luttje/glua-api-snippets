@@ -38,6 +38,7 @@ export type FunctionArgumentList = {
 };
 
 export type FunctionReturn = WikiIdentifier & {
+  default?: string;
   callback?: FunctionCallback;
 };
 
@@ -153,6 +154,7 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
         callback.arguments.push(<FunctionArgument> {
           name: $el.attr('name')!,
           type: $el.attr('type')!,
+          default: $el.attr('default')!,
           description: $el.text()
         });
       }
@@ -161,6 +163,7 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
         callback.returns.push(<FunctionReturn> {
           name: $el.attr('name')!,
           type: $el.attr('type')!,
+          default: $el.attr('default')!,
           description: $el.text()
         });
       }

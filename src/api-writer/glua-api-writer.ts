@@ -335,15 +335,21 @@ export class GluaApiWriter {
       let cbStr = `fun(`;
 
       for (const arg of callback.arguments || []) {
-        cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}, `;
+        if (!arg.name) arg.name = arg.type;
+        if (arg.type === 'vararg') arg.name = '...';
+  
+        cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
       if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
       cbStr += ")";
 
-      if (callback.returns && callback.returns.length > 0) {
-        const ret = callback.returns[0];
-        cbStr += `: ${this.transformType(ret.type)}`;
+      for (const ret of callback.returns || []) {
+        if (!ret.name) ret.name = ret.type;
+        if (ret.type === 'vararg') ret.name = '...';
+
+        cbStr += `: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
 
       return cbStr;
     }
