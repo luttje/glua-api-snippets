@@ -1,0 +1,11 @@
+---
+--- The **TOOL** table is used in Sandbox tool creation. You can find a list of callbacks on the  page and a list of methods on the  page. Do note that some of the fields below have no effect on server-side operations.
+---
+--- The tool information box drawn on the HUD while your tool is selected has 2 values that are set by [language.Add](https://wiki.facepunch.com/gmod/language.Add).
+--- * `tool.[tool mode].name` - The tool name (Note this is NOT the same as TOOL.Name)
+--- * `tool.[tool mode].desc` - The tool description
+---
+--- Ensure that all tool file names are entirely lowercase.  Including capital letters can lead to unintended behavior.
+---
+---@class TOOL : Tool
+TOOL = {}

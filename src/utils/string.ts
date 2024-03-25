@@ -22,6 +22,11 @@ export function removeNewlines(text: string) {
  * Puts a comment before each line in a string
  */
 export function putCommentBeforeEachLine(text: string, skipLineOne: boolean = true) {
+  // Remove duplicate consequitive new lines.
+  while (text.match(/\r?\n\r?\n\r?\n/g)) {
+    text = text.replace(/\r?\n\r?\n\r?\n/g, "\n\n");
+  }
+
   return text.split(/\r?\n/g).map((line, index) => {
     if (index === 0 && skipLineOne)
       return line;

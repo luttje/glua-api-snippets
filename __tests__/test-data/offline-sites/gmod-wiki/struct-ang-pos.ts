@@ -14,7 +14,7 @@ export const json = {
   type: 'struct',
   name: 'AngPos',
   address: 'AngPos',
-  description: 'Table used by various functions, such as Entity:GetAttachment.',
+  description: 'Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).',
   realm: 'Shared',
   fields: [
     {

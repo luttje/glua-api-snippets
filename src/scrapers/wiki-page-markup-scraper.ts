@@ -1,6 +1,6 @@
 import { ScrapeCallback, Scraper } from './scraper.js';
 import { deserializeXml } from '../utils/xml.js';
-import { AnyNode, CheerioAPI } from 'cheerio';
+import { AnyNode, Cheerio, CheerioAPI } from 'cheerio';
 import { Element as DOMElement } from 'domhandler';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
@@ -37,7 +37,10 @@ export type FunctionArgumentList = {
   args?: FunctionArgument[];
 };
 
-export type FunctionReturn = WikiIdentifier & {};
+export type FunctionReturn = WikiIdentifier & {
+  default?: string;
+  callback?: FunctionCallback;
+};
 
 export type Function = CommonWikiProperties & {
   parent: string;
@@ -78,6 +81,7 @@ export type StructField = {
   default?: any;
   description: string;
   deprecated?: string;
+  callback?: FunctionCallback;
 };
 
 export type Struct = CommonWikiProperties & {
@@ -136,7 +140,41 @@ export function isClass(page: WikiPage): page is TypePage {
   return page.type === 'class';
 }
 
-// Handle <callback> in a description of an argument/return
+// Handle things like <page> tags, <warning>, etc.
+const classBlocks = ["internal", "note", "warning"];
+function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
+  // <page> => markdown []()
+  for (const page of $(e).find('page')) {
+    const $p = $(page);
+    const url = $p.text();
+    const text = $p.attr("text") || url;
+    $p.replaceWith( `[${text}](${url})` );
+  }
+
+  for (const className of classBlocks) {
+    for (const block of $(e).find(className)) {
+      const $b = $(block);
+      let text = markdownifyDescription($, $b).trim();
+      if (className === 'internal' && text === '') text = `This is used internally - although you're able to use it you probably shouldn't.`;
+      $b.replaceWith( `**${className.toUpperCase()}**: ${text}\n` );
+    }
+  }
+
+  let description = $(e).text();
+
+  // Fixup []() that use local URLs. This is not exclusive to the result of <page> conversions
+  description = description.replace(/\[([^\]]+)\]\(([^)"]+)(?: \"([^\"]+)\")?\)/g, function(match, text, url) {
+    if (url.indexOf("://") == -1) {
+      return `[${text}](https://wiki.facepunch.com/gmod/${url})`;
+    }
+
+    return match;
+  });
+
+  return description;
+};
+
+// Extract <callback> in a description of an argument/return
 function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, FunctionCallback?] {
   let description: string = "";
   let callback: FunctionCallback = undefined!;
@@ -144,11 +182,13 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
   for (const node of $(e).contents()) {
     if ( (node as DOMElement).name?.toLowerCase() === "callback") {
       callback = <FunctionCallback>{arguments: [], returns: []};
+
       for (const arg of $(node).find("arg")) {
         const $el = $(arg);
         callback.arguments.push(<FunctionArgument> {
           name: $el.attr('name')!,
           type: $el.attr('type')!,
+          default: $el.attr('default'),
           description: $el.text()
         });
       }
@@ -157,28 +197,29 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
         callback.returns.push(<FunctionReturn> {
           name: $el.attr('name')!,
           type: $el.attr('type')!,
+          default: $el.attr('default'),
           description: $el.text()
         });
       }
+
+      if (callback?.arguments.length > 0) {
+        description += "\n\nFunction argument(s):\n";
+        for (const arg of callback.arguments) {
+          description += `* ${arg.type} \`${arg.name}\` - ${arg.description}\n`;
+        }
+      }
+      if (callback?.returns.length > 0) {
+        description += "\nFunction return value(s):\n";
+        for (const ret of callback.returns) {
+          description += `* ${ret.type} \`${ret.name}\` - ${ret.description}\n`;
+        }
+      }
     } else {
-      description += $(node).text();
+      description += markdownifyDescription($, $(node));
     }
   }
 
-  if (callback?.arguments.length > 0) {
-    description += "\n\nFunction callback arguments are:\n";
-    for (let arg of callback.arguments) {
-      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
-    }
-  }
-  if (callback?.returns.length > 0) {
-    description += "\nFunction callback return values are:\n";
-    for (let arg of callback.returns) {
-      description += `* ${arg.type} **${arg.name}** - ${arg.description}\n`;
-    }
-  }
-
-  return [description, callback]
+  return [description, callback];
 }
 
 /**
@@ -224,7 +265,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             return <EnumValue>{
               key: $el.attr('key')!,
               value: $el.attr('value')!,
-              description: $el.text(),
+              description: markdownifyDescription($, $el),
               deprecated: deprecated || undefined,
             };
           }).get();
@@ -233,7 +274,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             type: 'enum',
             name: address,
             address: address,
-            description: $('description').text(),
+            description: markdownifyDescription($, $('description')),
             realm: $('realm').text() as Realm,
             items
           };
@@ -245,20 +286,25 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               return $el.text().trim();
             }).get().join(' - ');
 
-            return <StructField>{
+            const structField = <StructField>{
               name: $el.attr('name')!,
               type: $el.attr('type')!,
               default: $el.attr('default'),
-              description: $el.text(),
               deprecated: deprecated || undefined,
             };
+
+            const callbackRes = handleCallbackInDescription($, this);
+            structField.description = callbackRes[0] ?? "";
+            structField.callback = callbackRes[1];
+
+            return structField;
           }).get();
 
           return <Struct>{
             type: 'struct',
             name: address,
             address: address,
-            description: $('description').text(),
+            description: markdownifyDescription($, $('structure description')),
             realm: $('realm').text() as Realm,
             fields,
             deprecated
@@ -268,7 +314,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             type: 'panel',
             name: address,
             address: address,
-            description: $('description').text(),
+            description: markdownifyDescription($, $('panel description')),
             realm: $('realm').text() as Realm,
             parent: $('parent').text(),
             deprecated
@@ -306,11 +352,16 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
           const returns = $('rets ret').map(function() {
             const $el = $(this);
-            return <FunctionReturn> {
+            const ret = <FunctionReturn> {
               name: $el.attr('name')!,
-              type: $el.attr('type')!,
-              description: $el.text()
+              type: $el.attr('type')!
             };
+
+            const callbackRes = handleCallbackInDescription($, this);
+            ret.description = callbackRes[0];
+            ret.callback = callbackRes[1];
+
+            return ret;
           }).get();
 
           const base = <Function> {
@@ -318,7 +369,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             parent: mainElement.attr('parent')!,
             name: mainElement.attr('name')!,
             address: address,
-            description: $('description:first').text(),
+            description: markdownifyDescription($, $('description:first')),
             realm: $('realm:first').text() as Realm,
             arguments: argumentList,
             returns,
@@ -361,7 +412,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             name: $el.attr('name'),
             parent: $el.attr('parent'),
             address: address,
-            description: $('type summary').text(),
+            description: markdownifyDescription($, $('type summary')),
             deprecated: deprecated
           };
         }

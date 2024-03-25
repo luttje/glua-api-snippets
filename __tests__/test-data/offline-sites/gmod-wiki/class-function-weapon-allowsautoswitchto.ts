@@ -12,7 +12,7 @@ export const json = {
   parent: 'Weapon',
   name: 'AllowsAutoSwitchTo',
   address: 'Weapon:AllowsAutoSwitchTo',
-  description: 'Returns whether the weapon allows to being switched to when a better ( Weapon:GetWeight ) weapon is being picked up.',
+  description: 'Returns whether the weapon allows to being switched to when a better ( [Weapon:GetWeight](https://wiki.facepunch.com/gmod/Weapon:GetWeight) ) weapon is being picked up.',
   realm: 'Shared',
   arguments: [],
   returns: [
