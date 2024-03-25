@@ -1,14 +1,16 @@
 ---@meta
 
 ---
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
----
---- 		A VGUI base panel providing drag/drop functionality. Used by DIconLayout, DListLayout and DTileLayout.
+--- 		A VGUI base panel providing drag/drop functionality. Used by [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout), [DListLayout](https://wiki.facepunch.com/gmod/DListLayout) and [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout).
 ---
 ---@class DDragBase : DPanel
 local DDragBase = {}
 
----[CLIENT AND MENU] Internal function used in DDragBase:MakeDroppable
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Internal function used in [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Copy)
 ---@param drops table
@@ -18,7 +20,9 @@ local DDragBase = {}
 ---@param x number
 function DDragBase:DropAction_Copy(drops, bDoDrop, command, y, x) end
 
----[CLIENT AND MENU] Internal function used in DDragBase:DropAction_Copy
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Internal function used in [DDragBase:DropAction_Copy](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Copy)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Normal)
 ---@param drops table
@@ -28,7 +32,9 @@ function DDragBase:DropAction_Copy(drops, bDoDrop, command, y, x) end
 ---@param x number
 function DDragBase:DropAction_Normal(drops, bDoDrop, command, y, x) end
 
----[CLIENT AND MENU] Internal function used in DDragBase:DropAction_Normal
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Internal function used in [DDragBase:DropAction_Normal](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Normal)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Simple)
 ---@param drops table
@@ -38,7 +44,7 @@ function DDragBase:DropAction_Normal(drops, bDoDrop, command, y, x) end
 ---@param x number
 function DDragBase:DropAction_Simple(drops, bDoDrop, command, y, x) end
 
----[CLIENT AND MENU] Returns the drag'n'drop group this panel belongs to. See DDragBase:MakeDroppable.
+---[CLIENT AND MENU] Returns the drag'n'drop group this panel belongs to. See [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetDnD)
 ---@return string # Name of the DnD family.
@@ -56,16 +62,17 @@ function DDragBase:GetReadOnly() end
 ---@return boolean #
 function DDragBase:GetUseLiveDrag() end
 
----[CLIENT AND MENU] Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls Panel:Receiver.
+---[CLIENT AND MENU] Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls [Panel:Receiver](https://wiki.facepunch.com/gmod/Panel:Receiver).
 ---
---- See Drag and Drop for VGUI.
+--- See [Drag and Drop for VGUI](https://wiki.facepunch.com/gmod/Drag and Drop for VGUI).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable)
 ---@param name string The unique name for the receiver slot. Only droppable panels with the same DnD name as this can be dropped on the panel.
 ---@param allowCopy boolean Whether or not to allow droppable panels to be copied when the Ctrl key is held down.
 function DDragBase:MakeDroppable(name, allowCopy) end
 
----[CLIENT AND MENU] Used internally by DDragBase:MakeDroppable.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Used internally by [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetDnD)
 ---@param name string Name of the DnD family.
@@ -94,7 +101,9 @@ function DDragBase:SetReadOnly(name) end
 ---@param newState boolean
 function DDragBase:SetUseLiveDrag(newState) end
 
----[CLIENT AND MENU] Internal function used in DDragBase:DropAction_Normal
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Internal function used in [DDragBase:DropAction_Normal](https://wiki.facepunch.com/gmod/DDragBase:DropAction_Normal)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:UpdateDropTarget)
 ---@param drop number

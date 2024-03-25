@@ -1,13 +1,15 @@
 ---@meta
 
 ---
---- 		Simply a DIconLayout which automatically displays all of the silkicons.
+--- 		Simply a [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) which automatically displays all of the [Silkicons](https://wiki.facepunch.com/gmod/silkicons).
 --- 		Used as a way to get the user to select an icon.
---- 	Creates a DIconBrowser which, when an icon is clicked, prints said icon's directory.
+---
 ---@class DIconBrowser : DScrollPanel
 local DIconBrowser = {}
 
----[CLIENT AND MENU] Automatically called to fill the browser with icons. Will not work if DIconBrowser:SetManual is set to true.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Automatically called to fill the browser with icons. Will not work if [DIconBrowser:SetManual](https://wiki.facepunch.com/gmod/DIconBrowser:SetManual) is set to true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:Fill)
 function DIconBrowser:Fill() end
@@ -30,12 +32,14 @@ function DIconBrowser:GetManual() end
 ---@return string # The currently selected icon's file path.
 function DIconBrowser:GetSelectedIcon() end
 
----[CLIENT AND MENU] Called when the selected icon was changed. Use DIconBrowser:GetSelectedIcon to get the selected icon's filepath.
+---[CLIENT AND MENU] Called when the selected icon was changed. Use [DIconBrowser:GetSelectedIcon](https://wiki.facepunch.com/gmod/DIconBrowser:GetSelectedIcon) to get the selected icon's filepath.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:OnChange)
 function DIconBrowser:OnChange() end
 
----[CLIENT AND MENU] Use DIconBrowser:OnChange instead
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Use [DIconBrowser:OnChange](https://wiki.facepunch.com/gmod/DIconBrowser:OnChange) instead
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:OnChangeInternal)
 function DIconBrowser:OnChangeInternal() end
@@ -57,7 +61,9 @@ function DIconBrowser:SelectIcon(icon) end
 ---@param manual boolean
 function DIconBrowser:SetManual(manual) end
 
----[CLIENT AND MENU] Set the currently selected file path. Do not use. Use DIconBrowser:SelectIcon instead.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Set the currently selected file path. Do not use. Use [DIconBrowser:SelectIcon](https://wiki.facepunch.com/gmod/DIconBrowser:SelectIcon) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconBrowser:SetSelectedIcon)
 ---@param str string

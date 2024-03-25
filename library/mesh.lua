@@ -1,14 +1,14 @@
 ---@meta
 
---- The mesh library allows you to create meshes. A mesh is a set of vertices that define a 3D shape, for constant meshes you should use the IMesh object instead.
+--- The mesh library allows you to create meshes. A mesh is a set of vertices that define a 3D shape, for constant meshes you should use the [IMesh](https://wiki.facepunch.com/gmod/IMesh) object instead.
 mesh = {}
 
----[CLIENT] Pushes the currently set vertex data (via other `mesh.*` functions) into the mesh stack. See example on mesh.Begin.
+---[CLIENT] Pushes the currently set vertex data (via other `mesh.*` functions) into the mesh stack. See example on [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex)
 function mesh.AdvanceVertex() end
 
----[CLIENT] Starts a new dynamic mesh. If an IMesh is passed, it will use that mesh instead.
+---[CLIENT] Starts a new dynamic mesh. If an [IMesh](https://wiki.facepunch.com/gmod/IMesh) is passed, it will use that mesh instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Begin)
 ---@param mesh? IMesh Mesh to build. This argument can be removed if you wish to build a "dynamic" mesh. See examples below.
@@ -93,7 +93,7 @@ function mesh.TangentT(tTanger) end
 ---@param v number V coordinate.
 function mesh.TexCoord(set, u, v) end
 
----[CLIENT] It is recommended to use IMesh:BuildFromTriangles instead of the mesh library.
+---[CLIENT] **NOTE**: It is recommended to use [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) instead of the mesh library.
 ---
 --- A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
 ---
@@ -104,7 +104,7 @@ function mesh.TexCoord(set, u, v) end
 ---@param tangentHandedness number
 function mesh.UserData(tangentX, tangentY, tangentZ, tangentHandedness) end
 
----[CLIENT] Returns the amount of vertices that have been pushed via mesh.AdvanceVertex.
+---[CLIENT] Returns the amount of vertices that have been pushed via [mesh.AdvanceVertex](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.VertexCount)
 ---@return number # The amount of vertices.

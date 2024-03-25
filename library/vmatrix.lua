@@ -45,7 +45,7 @@ function VMatrix:GetForward() end
 ---
 --- Inverting the matrix will fail if its [determinant](https://en.wikipedia.org/wiki/Determinant) is 0 or close to 0. (ie. its "scale" in any direction is 0.)
 ---
---- See also VMatrix:GetInverseTR.
+--- See also [VMatrix:GetInverseTR](https://wiki.facepunch.com/gmod/VMatrix:GetInverseTR).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverse)
 ---@return VMatrix # The inverted matrix if possible, nil otherwise
@@ -55,7 +55,7 @@ function VMatrix:GetInverse() end
 ---
 --- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
 ---
---- To get the inverse of a matrix that contains other modifications, see VMatrix:GetInverse.
+--- To get the inverse of a matrix that contains other modifications, see [VMatrix:GetInverse](https://wiki.facepunch.com/gmod/VMatrix:GetInverse).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:GetInverseTR)
 ---@return VMatrix # The inverted matrix.
@@ -106,7 +106,7 @@ function VMatrix:Identity() end
 ---
 --- If the matrix cannot be inverted, it does not get modified.
 ---
---- See also VMatrix:InvertTR.
+--- See also [VMatrix:InvertTR](https://wiki.facepunch.com/gmod/VMatrix:InvertTR).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:Invert)
 ---@return boolean # Whether the matrix was inverted or not
@@ -116,7 +116,7 @@ function VMatrix:Invert() end
 ---
 --- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
 ---
---- To invert a matrix that contains other modifications, see VMatrix:Invert.
+--- To invert a matrix that contains other modifications, see [VMatrix:Invert](https://wiki.facepunch.com/gmod/VMatrix:Invert).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:InvertTR)
 function VMatrix:InvertTR() end
@@ -252,7 +252,7 @@ function VMatrix:SetUp(forward) end
 ---@param input VMatrix The input matrix to subtract.
 function VMatrix:Sub(input) end
 
----[SHARED] Converts the matrix to a 4x4 table. See Global.Matrix function.
+---[SHARED] Converts the matrix to a 4x4 table. See [Global.Matrix](https://wiki.facepunch.com/gmod/Global.Matrix) function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/VMatrix:ToTable)
 ---@return table # The 4x4 table.

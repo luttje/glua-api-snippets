@@ -3,17 +3,20 @@
 ---
 --- Table structure that describes a Source Engine ammo type.
 ---
----
---- See game.AddAmmoType and game.GetAmmoData.
+--- See [game.AddAmmoType](https://wiki.facepunch.com/gmod/game.AddAmmoType) and [game.GetAmmoData](https://wiki.facepunch.com/gmod/game.GetAmmoData).
 ---
 ---@class AmmoData
 local AmmoData = {}
 
----Damage type using Enums/DMG. Related function is game.GetAmmoDamageType.
+---Damage type using Enums/DMG.
+---
+--- Related function is game.GetAmmoDamageType.
 ---@type number
 AmmoData.dmgtype = DMG_BULLET
 
----The force of the ammo. Related function is game.GetAmmoForce.
+---The force of the ammo.
+---
+--- Related function is game.GetAmmoForce.
 ---@type number
 AmmoData.force = 1000
 
@@ -25,15 +28,25 @@ AmmoData.maxsplash = 0
 ---@type number
 AmmoData.minsplash = 0
 
----Name of the ammo. Related functions are game.GetAmmoName and game.GetAmmoID.
+---Name of the ammo.
+---
+--- Related functions are game.GetAmmoName and game.GetAmmoID.
 ---@type string
 AmmoData.name = nil
 
----The damage dealt to NPCs. Related function is game.GetAmmoNPCDamage. Can also be a string pointing to a convar. The value will automatically update with the convar's.
+---The damage dealt to NPCs.
+---
+--- Related function is game.GetAmmoNPCDamage.
+---
+--- Can also be a string pointing to a convar. The value will automatically update with the convar's.
 ---@type number
 AmmoData.npcdmg = 10
 
----The damage dealt to players. Related function is game.GetAmmoPlayerDamage. Can also be a string pointing to a convar. The value will automatically update with the convar's.
+---The damage dealt to players.
+---
+--- Related function is game.GetAmmoPlayerDamage.
+---
+--- Can also be a string pointing to a convar. The value will automatically update with the convar's.
 ---@type number
 AmmoData.plydmg = 10
 
@@ -41,7 +54,12 @@ AmmoData.plydmg = 10
 ---@type number
 AmmoData.tracer = TRACER_NONE
 
----Maximum amount of ammo of this type the player should be able to carry in reserve. `-2` makes this ammo type infinite. Related function is game.GetAmmoMax. Can also be a string pointing to a convar. The value will automatically update with the convar's. `gmod_maxammo` convar will override this value if set to above 0, **which it is by default**.
+---Maximum amount of ammo of this type the player should be able to carry in reserve. `-2` makes this ammo type infinite.
+---
+--- Related function is game.GetAmmoMax.
+---
+--- Can also be a string pointing to a convar. The value will automatically update with the convar's.
+--- `gmod_maxammo` convar will override this value if set to above 0, **which it is by default**.
 ---@type number
 AmmoData.maxcarry = 9999
 
@@ -49,7 +67,7 @@ AmmoData.maxcarry = 9999
 ---@type number
 AmmoData.flags = 0
 
---- Table used by various functions, such as Entity:GetAttachment.
+--- Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).
 ---@class AngPos
 local AngPos = {}
 
@@ -65,7 +83,7 @@ AngPos.Pos = nil
 ---@type number
 AngPos.Bone = nil
 
---- Table used by panel animation methods, primarily Panel:AnimationThinkInternal, and returned by Panel:NewAnimation.
+--- Table used by panel animation methods, primarily [Panel:AnimationThinkInternal](https://wiki.facepunch.com/gmod/Panel:AnimationThinkInternal), and returned by [Panel:NewAnimation](https://wiki.facepunch.com/gmod/Panel:NewAnimation).
 ---@class AnimationData
 local AnimationData = {}
 
@@ -81,12 +99,22 @@ AnimationData.EndTime = nil
 ---@type number
 AnimationData.Ease = -1
 
----The callback function that will be called upon completion of the animation. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation was run on.
----@type function
+---The callback function that will be called upon completion of the animation.
+---
+--- Function argument(s):
+--- * table `animData` - This structure.
+--- * Panel `tgtPanel` - The panel the animation was run on.
+---@type fun(animData: table, tgtPanel: Panel)
 AnimationData.OnEnd = nil
 
----The `think` function called every frame that will animate the panel object. This varies based on the animation. You can create a custom function for this if you aren't using the stock panel methods. The arguments passed to it are: * table animData - This structure. * Panel tgtPanel - The panel the animation is being run on. * number fraction - The progress fraction of the animation, between 0 and 1. The change rate of this number will not be linear if you are easing.
----@type function
+---The `think` function called every frame that will animate the panel object. This varies based on the animation. You can create a custom function for this if you aren't using the stock panel methods.
+---
+--- Function argument(s):
+--- * table `animData` - This structure.
+--- * Panel `tgtPanel` - The panel the animation is being run on.
+---
+--- The progress fraction of the animation, between 0 and 1. The change rate of this number will not be linear if you are easing.
+---@type fun(animData: table, tgtPanel: Panel)
 AnimationData.Think = nil
 
 ---The target position, or target translation of the panel object. Used by Panel:MoveTo and Panel:MoveBy respectively.
@@ -137,7 +165,7 @@ AnimationData.Speed = nil
 ---@type boolean
 AnimationData.UseGravity = nil
 
---- Table returned by Entity:GetAttachments.
+--- Table returned by [Entity:GetAttachments](https://wiki.facepunch.com/gmod/Entity:GetAttachments).
 ---@class AttachmentData
 local AttachmentData = {}
 
@@ -149,7 +177,7 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
---- Table returned by Entity:GetBodyGroups.
+--- Table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
 ---@class BodyGroupData
 local BodyGroupData = {}
 
@@ -171,10 +199,10 @@ BodyGroupData.submodels = nil
 
 ---
 --- Structure used for storing/restoring bone manipulations.
---- Data is stored from Entity:GetManipulateBoneScale, Entity:GetManipulateBoneAngles, and Entity:GetManipulateBonePosition.
---- Data is restored using Entity:ManipulateBoneScale, Entity:ManipulateBoneAngles, and Entity:ManipulateBonePosition.
+--- Data is stored from [Entity:GetManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneScale), [Entity:GetManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneAngles), and [Entity:GetManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:GetManipulateBonePosition).
+--- Data is restored using [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale), [Entity:ManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles), and [Entity:ManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:ManipulateBonePosition).
 ---
---- The function duplicator.DoBoneManipulator and Structures/EntityCopyData use a table
+--- The function [duplicator.DoBoneManipulator](https://wiki.facepunch.com/gmod/duplicator.DoBoneManipulator) and [Structures/EntityCopyData](https://wiki.facepunch.com/gmod/Structures/EntityCopyData) use a table
 --- containing a BoneManipulationData structure for each bone (that has manipulations applied) with the bone ID as the struct index in the table.
 ---
 --- Fields **s**, **a**, and **p** are set if they don't equal **Vector( 1, 1, 1 )**, **Angle( 0, 0, 0 )**, and **Vector( 0, 0, 0 )** respectively.
@@ -194,19 +222,35 @@ BoneManipulationData.a = nil
 ---@type Vector
 BoneManipulationData.p = Vectornil
 
---- Tables used for bullets see Entity:FireBullets and GM:EntityFireBullets.
+--- Tables used for bullets see [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) and [GM:EntityFireBullets](https://wiki.facepunch.com/gmod/GM:EntityFireBullets).
 ---@class Bullet
 local Bullet = {}
 
----The entity that should be reported as attacker eg. a player By default this would be set to the entity Entity:FireBullets is called on.
+---The entity that should be reported as attacker eg. a player
+---
+--- By default this would be set to the entity Entity:FireBullets is called on.
 ---@type Entity
 Bullet.Attacker = self
 
----Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied). The arguments are: * Entity attacker * table tr - See Structures/TraceResult * CTakeDamageInfo dmgInfo The return value can be a table with following keys: * boolean effects - `false` to not do any of the effects. * boolean damage - `false` to not do any damage.
----@type function
+---Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied).
+---
+--- Function argument(s):
+--- * Entity `attacker` -
+--- * table `tr` - See Structures/TraceResult
+--- * CTakeDamageInfo `dmgInfo` -
+---
+--- Function return value(s):
+--- * table `undefined` -
+--- The return value can be a table with following keys:
+--- * boolean effects - `false` to not do any of the effects.
+--- * boolean damage - `false` to not do any damage.
+---@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo): table
 Bullet.Callback = nil
 
----The damage dealt by the bullet. If set to `0`, it means the damage should be calculated from the ammo type's ConVars if the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set. See Structures/AmmoData.
+---The damage dealt by the bullet.
+---
+--- If set to `0`, it means the damage should be calculated from the ammo type's ConVars if  the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set.
+--- See Structures/AmmoData.
 ---@type number
 Bullet.Damage = 1
 
@@ -254,7 +298,7 @@ Bullet.Src = VectorVector(0, 0, 0)
 ---@type Entity
 Bullet.IgnoreEntity = NULL
 
---- Table structure used GM:CalcView and GM:CalcVehicleView hook.
+--- Table structure used [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) and [GM:CalcVehicleView](https://wiki.facepunch.com/gmod/GM:CalcVehicleView) hook.
 ---@class CamData
 local CamData = {}
 
@@ -282,14 +326,20 @@ CamData.zfar = nil
 ---@type boolean
 CamData.drawviewer = false
 
----If set, enables orthographic mode. The table has following arguments: * number left * number right * number top * number bottom Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
+---If set, enables orthographic mode. The table has following arguments:
+--- * number left
+--- * number right
+--- * number top
+--- * number bottom
+---
+--- Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
 ---@type table
 CamData.ortho = nil
 
 ---
---- Passed as argument of ENTITY:PhysicsCollide, EFFECT:PhysicsCollide and used with Entity:AddCallback.
+--- Passed as argument of [ENTITY:PhysicsCollide](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide), [EFFECT:PhysicsCollide](https://wiki.facepunch.com/gmod/EFFECT:PhysicsCollide) and used with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
 ---
---- Sometimes, the value of `Speed` can be different from getting the length calculated from `OurOldVelocity`, even though they should be the same, or close to same. It's recommended to do `OurOldVelocity:Length()` instead.
+--- **NOTE**: Sometimes, the value of `Speed` can be different from getting the length calculated from `OurOldVelocity`, even though they should be the same, or close to same. It's recommended to do `OurOldVelocity:Length()` instead.
 ---
 --- ```
 --- function ENT:PhysicsCollide( colData, collider )
@@ -383,12 +433,15 @@ Color.b = nil
 ---@type number
 Color.a = nil
 
---- Table that maintains information on the creation menu tabs. Each key of the table represents the name of the tab. See spawnmenu.AddCreationTab and spawnmenu.GetCreationTabs.
+--- Table that maintains information on the creation menu tabs. Each key of the table represents the name of the tab. See [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab) and [spawnmenu.GetCreationTabs](https://wiki.facepunch.com/gmod/spawnmenu.GetCreationTabs).
 ---@class CreationMenus
 local CreationMenus = {}
 
 ---The function used to generate the content of the tab.
----@type function
+---
+--- Function return value(s):
+--- * Panel `content` - A container panel that holds all of the content for the new tab.
+---@type fun(): Panel
 CreationMenus.Function = nil
 
 ---The icon material that will accompany the title of the tab.
@@ -403,7 +456,7 @@ CreationMenus.Order = nil
 ---@type string
 CreationMenus.Tooltip = nil
 
---- Table returned by os.date and used by os.time.
+--- Table returned by [os.date](https://wiki.facepunch.com/gmod/os.date) and used by [os.time](https://wiki.facepunch.com/gmod/os.time).
 ---@class DateData
 local DateData = {}
 
@@ -423,7 +476,8 @@ DateData.isdst = nil
 ---@type number
 DateData.min = nil
 
----Month January: 1, December: 12
+---Month
+--- January: 1, December: 12
 ---@type number
 DateData.month = nil
 
@@ -431,7 +485,8 @@ DateData.month = nil
 ---@type number
 DateData.sec = nil
 
----Day of the week Sunday: 1, Saturday: 7
+---Day of the week
+--- Sunday: 1, Saturday: 7
 ---@type number
 DateData.wday = nil
 
@@ -444,9 +499,9 @@ DateData.yday = nil
 DateData.year = nil
 
 ---
---- Table returned by debug.getinfo.
+--- Table returned by [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo).
 ---
---- If a filter is applied to debug.getinfo, some members may not exist!
+--- **NOTE**: If a filter is applied to [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo), some members may not exist!
 ---
 --- For functions defined in C/C++, the following members will always have the given values:
 --- * what = "C"
@@ -462,63 +517,94 @@ DateData.year = nil
 ---@class DebugInfo
 local DebugInfo = {}
 
----Reference to the function that was passed in. If a stack level was specified, this will be the function at that stack level. 0 = debug.getinfo, 1 = function that called debug.getinfo, etc. **Option: f**
+---Reference to the function that was passed in. If a stack level was specified, this will be the function at that stack level. 0 = debug.getinfo, 1 = function that called debug.getinfo, etc.
+---
+--- **Option: f**
 ---@type function
 DebugInfo.func = nil
 
----The line where the function definiton starts (where "function" is located). **Option: S**
+---The line where the function definiton starts (where "function" is located).
+---
+--- **Option: S**
 ---@type number
 DebugInfo.linedefined = nil
 
----The line the function definition ended (where "end" is located). **Option: S**
+---The line the function definition ended (where "end" is located).
+---
+--- **Option: S**
 ---@type number
 DebugInfo.lastlinedefined = nil
 
----The path to the file where the passed function is defined prepended by an @ (ex. "@lua/autorun/mytestfile.lua"). This will be the Global.CompileString or Global.RunString identifier if the function wasn't defined in a file, also prepended by an @. **Option: S**
+---The path to the file where the passed function is defined prepended by an @ (ex. "@lua/autorun/mytestfile.lua"). This will be the Global.CompileString or Global.RunString identifier if the function wasn't defined in a file, also prepended by an @.
+---
+--- **Option: S**
 ---@type string
 DebugInfo.source = nil
 
----The shortened name of the source (without the @). May be truncated if the source path is long. **Option: S**
+---The shortened name of the source (without the @). May be truncated if the source path is long.
+---
+--- **Option: S**
 ---@type string
 DebugInfo.short_src = nil
 
----The language used. Either "Lua" or "C". **Option: S**
+---The language used. Either "Lua" or "C".
+---
+--- **Option: S**
 ---@type string
 DebugInfo.what = nil
 
----The current line. This will be -1 if the code is not executed from a file. **Option: l** (lowercase L)
+---The current line. This will be -1 if the code is not executed from a file.
+---
+--- **Option: l** (lowercase L)
 ---@type number
 DebugInfo.currentline = nil
 
----The function name. This will be nil if the name cannot be found. Only works if stack level is passed rather than function pointer. **Option: n**
+---The function name. This will be nil if the name cannot be found. Only works if stack level is passed rather than function pointer.
+---
+--- **Option: n**
 ---@type string
 DebugInfo.name = nil
 
----The function "type". This will be "global", "local", "method", "field". Can also be an empty string if the function name could not be found. Only works if stack level is passed rather than function pointer. **Option: n**
+---The function "type". This will be "global", "local", "method", "field". Can also be an empty string if the function name could not be found. Only works if stack level is passed rather than function pointer.
+---
+--- **Option: n**
 ---@type string
 DebugInfo.namewhat = nil
 
----Whether the function is variadic (has a `...` argument). **Option: u**
+---Whether the function is variadic (has a `...` argument).
+---
+--- **Option: u**
 ---@type boolean
 DebugInfo.isvararg = nil
 
----The number of arguments the function uses excluding varargs. **Option: u**
+---The number of arguments the function uses excluding varargs.
+---
+--- **Option: u**
 ---@type number
 DebugInfo.nparams = nil
 
----Upvalue count. Max index that can be used with debug.getupvalue. C functions can have upvalues but they cannot be accessed from Lua. **Option: u**
+---Upvalue count. Max index that can be used with debug.getupvalue. C functions can have upvalues but they cannot be accessed from Lua.
+---
+--- **Option: u**
 ---@type number
 DebugInfo.nups = nil
 
----A table of all the active lines in the function - that is, lines with code that actually does something (not blank lines or lines with comments only). The table keys will be line numbers, and their values will all be true. Lines that are inactive are simply not included in the table - they have the value nil. It doesn't check for activeline in subfunctions. **Option: L**
+---A table of all the active lines in the function - that is, lines with code that actually does something (not blank lines or lines with comments only).
+---
+--- The table keys will be line numbers, and their values will all be true. Lines that are inactive are simply not included in the table - they have the value nil.
+---
+--- It doesn't check for activeline in subfunctions.
+---
+--- **Option: L**
 ---@type table
 DebugInfo.activelines = nil
 
 ---
---- Structure for Global.DynamicLight.
+--- Structure for [Global.DynamicLight](https://wiki.facepunch.com/gmod/Global.DynamicLight).
 --- All members are case insensitive.
 ---
---- This is an actual class named **dlight_t**, not a table.
+--- **NOTE**: This is an actual class named **dlight_t**, not a table.
+---
 ---
 ---@class DynamicLight
 local DynamicLight = {}
@@ -527,11 +613,16 @@ local DynamicLight = {}
 ---@type number
 DynamicLight.brightness = nil
 
----Fade out speed. Here's a formula for calculating Decay for your light: 1000 / fadeOutTimeInSeconds. For example setting decay to 1000 would fade out the light in 1 second, 2000 - 0.5 seconds.
+---Fade out speed.
+--- Here's a formula for calculating Decay for your light: 1000 / fadeOutTimeInSeconds. For example setting decay to 1000 would fade out the light in 1 second, 2000 - 0.5 seconds.
 ---@type number
 DynamicLight.decay = nil
 
----Time after which light will be removed. This is relative to Global.CurTime. If you put in a value that is less than or equal to Global.CurTime, the light will not behave properly. Note, that it does not affect fading out. Light will be removed regardless of it being fully faded out or not.
+---Time after which light will be removed.
+---
+--- This is relative to Global.CurTime. If you put in a value that is less than or equal to Global.CurTime, the light will not behave properly.
+---
+--- Note, that it does not affect fading out. Light will be removed regardless of it being fully faded out or not.
 ---@type number
 DynamicLight.dietime = nil
 
@@ -587,27 +678,45 @@ DynamicLight.g = nil
 ---@type number
 DynamicLight.r = nil
 
---- Passed as argument of GM:EntityEmitSound.
+--- Passed as argument of [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
 ---@class EmitSoundInfo
 local EmitSoundInfo = {}
 
----The file path of the played sound. Sounds prefixed with ) tell the sound engine that it is a spatial sound; this allows the sound to emit from a specific location within the world. Sounds prefixed with ^ tell the sound engine that it is a distance based sound. The left channel of the .wav is the 'near' sound that will play when the sound originates close to you, and the right channel is the 'far' sound that will play when the sound originates far from you.
+---The file path of the played sound.
+---
+--- Sounds prefixed with ) tell the sound engine that it is a spatial sound; this allows the sound to emit from a specific location within the world.
+---
+--- Sounds prefixed with ^ tell the sound engine that it is a distance based sound. The left channel of the .wav is the 'near' sound that will play when the sound originates close to you, and the right channel is the 'far' sound that will play when the sound originates far from you.
 ---@type string
 EmitSoundInfo.SoundName = nil
 
----The original file path or soundscript name. Even if the SoundName value is changed, the OriginalSoundName value will remain the same. Sounds may be returned as soundscripts (for example, "Weapon_357.Single") instead of the sound's file path. You can use sound.GetProperties to retrieve the actual file path.
+---The original file path or soundscript name.
+---
+--- Even if the SoundName value is changed, the OriginalSoundName value will remain the same.
+---
+--- Sounds may be returned as soundscripts (for example, "Weapon_357.Single") instead of the sound's file path. You can use sound.GetProperties to retrieve the actual file path.
 ---@type string
 EmitSoundInfo.OriginalSoundName = nil
 
----The time at which the sound should be played. If equal to 0 or CurTime(), the sound is played immediately. If greater than CurTime(), the sound is played with a delay. If less than CurTime(), part of the sound is skipped.
+---The time at which the sound should be played.
+---
+--- If equal to 0 or CurTime(), the sound is played immediately. If greater than CurTime(), the sound is played with a delay. If less than CurTime(), part of the sound is skipped.
 ---@type number
 EmitSoundInfo.SoundTime = 0
 
----The DSP (digital signal processing) preset applied to the sound. There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments. [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---The DSP (digital signal processing) preset applied to the sound.
+---
+--- There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments.
+---
+--- [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
 ---@type number
 EmitSoundInfo.DSP = 0
 
----The sound's attenuation, a number between 0 (low) and 511 (high) This determines how fast the sound drops away. A higher value means the sound can be heard farther away. See Enums/SNDLVL.
+---The sound's attenuation, a number between 0 (low) and 511 (high)
+---
+--- This determines how fast the sound drops away. A higher value means the sound can be heard farther away.
+---
+--- See Enums/SNDLVL.
 ---@type number
 EmitSoundInfo.SoundLevel = 75
 
@@ -635,18 +744,27 @@ EmitSoundInfo.Entity = nil
 ---@type Vector
 EmitSoundInfo.Pos = nil
 
----@class ENT : Entity
+---@class ENT : ENTITY
 ENT = {}
 
 ---The base entity to derive from. This **must** be a valid Lua entity
 ---@type string
 ENT.Base = nil
 
----Type of the entity. This **must** be one of these: * **anim** * **brush** * **point** * **ai** * **nextbot** * **filter** See Scripted Entities for a more detailed explanation of what each one is.
+---Type of the entity. This **must** be one of these:
+--- * **anim**
+--- * **brush**
+--- * **point**
+--- * **ai**
+--- * **nextbot**
+--- * **filter**
+---
+--- See Scripted Entities for a more detailed explanation of what each one is.
 ---@type string
 ENT.Type = nil
 
----The class name of the entity (File or folder name of your entity). **This is set automatically _after_ the entity file is loaded.**
+---The class name of the entity (File or folder name of your entity).
+--- **This is set automatically _after_ the entity file is loaded.**
 ---@type string
 ENT.ClassName = nil
 
@@ -694,7 +812,7 @@ ENT.Contact = nil
 ---@type string
 ENT.Purpose = nil
 
---- How to use your entity
+---How to use your entity
 ---@type string
 ENT.Instructions = nil
 
@@ -706,7 +824,8 @@ ENT.RenderGroup = nil
 ---@type boolean
 ENT.DisableDuplicator = false
 
----Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information.
+---Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes.
+--- See spawnmenu.AddContentType for more information.
 ---@type string
 ENT.ScriptedEntityType = nil
 
@@ -723,16 +842,17 @@ ENT.IconOverride = "materials/entities/<ClassName>.png"
 ENT.PhysgunDisabled = false
 
 ---
---- Data structure used by the duplicator to store and load entity data.
+--- Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
 ---
---- It is created by duplicator.CopyEntTable and can be loaded by duplicator.CreateEntityFromTable.
+--- It is created by [duplicator.CopyEntTable](https://wiki.facepunch.com/gmod/duplicator.CopyEntTable) and can be loaded by [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable).
 ---
 --- It also shows up in several other contexts:
---- * duplicator.RegisterEntityClass
---- * ENTITY:OnEntityCopyTableFinish
---- * ENTITY:OnDuplicated
+--- * [duplicator.RegisterEntityClass](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass)
+--- * [ENTITY:OnEntityCopyTableFinish](https://wiki.facepunch.com/gmod/ENTITY:OnEntityCopyTableFinish)
+--- * [ENTITY:OnDuplicated](https://wiki.facepunch.com/gmod/ENTITY:OnDuplicated)
 ---
---- In addition to all fields listed here, any field saved on the entity will be saved as-is to this table. For example, if you set `ent.FavoriteFood = "Steak"` before duplicating it, this structure will also contain the field `FavoriteFood` with the value `"Steak"`.
+--- **NOTE**: In addition to all fields listed here, any field saved on the entity will be saved as-is to this table. For example, if you set `ent.FavoriteFood = "Steak"` before duplicating it, this structure will also contain the field `FavoriteFood` with the value `"Steak"`.
+---
 ---
 ---@class EntityCopyData
 local EntityCopyData = {}
@@ -809,11 +929,17 @@ EntityCopyData.MapCreationID = nil
 ---@type number
 EntityCopyData.WorkshopID = nil
 
---- Used for surface.CreateFont.
+--- Used for [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont).
 ---@class FontData
 local FontData = {}
 
----The font source. Custom font files are stored in resource/fonts/. The length is limited to 31 characters maximum. This must be the actual 'nice' font, not a file name. (Finding the Font Name) This also cannot be an already registered font, i.e. you cannot base your font from any of the Default_Fonts
+---The font source. Custom font files are stored in resource/fonts/.
+---
+--- The length is limited to 31 characters maximum.
+---
+--- This must be the actual 'nice' font, not a file name. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding the Font Name))
+---
+--- This also cannot be an already registered font, i.e. you cannot base your font from any of the [Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts)
 ---@type string
 FontData.font = "Arial"
 
@@ -821,7 +947,9 @@ FontData.font = "Arial"
 ---@type boolean
 FontData.extended = false
 
----The font height in pixels `Range:` 4 - 255
+---The font height in pixels
+---
+--- `Range:` 4 - 255
 ---@type number
 FontData.size = 13
 
@@ -829,11 +957,14 @@ FontData.size = 13
 ---@type number
 FontData.weight = 500
 
----The strength of the font blurring `Range:` 0 - 80
+---The strength of the font blurring
+---
+--- `Range:` 0 - 80
 ---@type number
 FontData.blursize = 0
 
----The "scanline" interval Must be > 1 to work. This setting is per blursize per font - so if you create a font using "Arial" without scanlines, you cannot create an Arial font using scanlines with the same blursize
+---The "scanline" interval
+--- Must be > 1 to work. This setting is per blursize per font - so if you create a font using "Arial" without scanlines, you cannot create an Arial font using scanlines with the same blursize
 ---@type number
 FontData.scanlines = 0
 
@@ -869,7 +1000,9 @@ FontData.shadow = false
 ---@type boolean
 FontData.additive = false
 
----Add a black outline to the font. This does not work well with antialias, and only allows black 1-pixel outlines. It may be preferable to not use this parameter, and instead use draw.SimpleTextOutlined when drawing text that you want outlined.
+---Add a black outline to the font.
+---
+--- This does not work well with antialias, and only allows black 1-pixel outlines. It may be preferable to not use this parameter, and instead use draw.SimpleTextOutlined when drawing text that you want outlined.
 ---@type boolean
 FontData.outline = false
 
@@ -909,23 +1042,42 @@ GM.IsSandboxDerived = nil
 ---@type string
 GM.ThisClass = nil
 
----The table of the base gamemode to derive from, set automatically by Global.DeriveGamemode. It is recommended to use Global.DEFINE_BASECLASS when referencing the gamemode's BaseClass to prevent unintended behavior Global.DeriveGamemode modifies the main gamemode's BaseClass, which is shared with parent gamemodes. Because of this, in parent gamemodes the BaseClass can be incorrect, so for instance you need to use `self.BaseClass.BaseClass` in the 1st parent instead
+---The table of the base gamemode to derive from, set automatically by Global.DeriveGamemode.
+---
+--- It is recommended to use [Global.DEFINE_BASECLASS](https://wiki.facepunch.com/gmod/Global.DEFINE_BASECLASS) when referencing the gamemode's BaseClass to prevent unintended behavior
+---
+--- [Global.DeriveGamemode](https://wiki.facepunch.com/gmod/Global.DeriveGamemode) modifies the main gamemode's BaseClass, which is shared with parent gamemodes. Because of this, in parent gamemodes the BaseClass can be incorrect, so for instance you need to use `self.BaseClass.BaseClass` in the 1st parent instead
 ---@type table
 GM.BaseClass = nil
 
---- Table used by Global.HTTP function.
+--- Table used by [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
 ---@class HTTPRequest
 local HTTPRequest = {}
 
----Function to be called on failure. Arguments are * string reason
----@type function
+---Function to be called on failure.
+---
+--- Function argument(s):
+--- * string `reason` - Reason for the failure.
+---@type fun(reason: string)
 HTTPRequest.failed = nil
 
----Function to be called on success. Arguments are * number code * string body * table headers
----@type function
+---Function to be called on success.
+---
+--- Function argument(s):
+--- * number `code` - The HTTP result code
+--- * string `body` - The document data, usually HTML or JSON contents.
+--- * table `headers` - List of headers the server provided.
+---@type fun(code: number, body: string, headers: table)
 HTTPRequest.success = nil
 
----Request method, case insensitive. Possible values are: * GET * POST * HEAD * PUT * DELETE * PATCH * OPTIONS
+---Request method, case insensitive. Possible values are:
+--- * GET
+--- * POST
+--- * HEAD
+--- * PUT
+--- * DELETE
+--- * PATCH
+--- * OPTIONS
 ---@type string
 HTTPRequest.method = nil
 
@@ -933,7 +1085,10 @@ HTTPRequest.method = nil
 ---@type string
 HTTPRequest.url = nil
 
----KeyValue table for parameters. This is only applicable to the following request methods: * GET * POST * HEAD
+---KeyValue table for parameters. This is only applicable to the following request methods:
+--- * GET
+--- * POST
+--- * HEAD
 ---@type table
 HTTPRequest.parameters = nil
 
@@ -953,7 +1108,7 @@ HTTPRequest.type = "text/plain; charset=utf-8"
 ---@type number
 HTTPRequest.timeout = 60
 
---- Table used by util.TraceHull.
+--- Table used by [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---@class HullTrace
 local HullTrace = {}
 
@@ -973,7 +1128,11 @@ HullTrace.maxs = nil
 ---@type Vector
 HullTrace.mins = nil
 
----Things the trace should not hit. Can also be a table of entities or a function with one argument: * Entity ent - The entity that the trace hit Using a function here is super slow. Try to avoid it.
+---Things the trace should not hit. Can also be a table of entities or a function with one argument:
+---
+--- * Entity ent - The entity that the trace hit
+---
+--- Using a function here is super slow. Try to avoid it.
 ---@type Entity
 HullTrace.filter = {}
 
@@ -993,7 +1152,7 @@ HullTrace.ignoreworld = false
 ---@type table
 HullTrace.output = nil
 
---- Table structure used for render.SetLocalModelLights.
+--- Table structure used for [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
 ---@class LocalLight
 local LocalLight = {}
 
@@ -1049,7 +1208,7 @@ LocalLight.linearFalloff = 0
 ---@type number
 LocalLight.constantFalloff = 1
 
---- Table structure used by matproxy.Add.
+--- Table structure used by [matproxy.Add](https://wiki.facepunch.com/gmod/matproxy.Add).
 ---@class MatProxyData
 local MatProxyData = {}
 
@@ -1057,15 +1216,25 @@ local MatProxyData = {}
 ---@type string
 MatProxyData.name = nil
 
----The function used to get variables from the ".vmt". Called once per each ".vmt". Arguments are: * table self * string materialName * table values
----@type function
+---The function used to get variables from the ".vmt". Called once per each ".vmt".
+---
+--- Function argument(s):
+--- * table `self` - The table structure itself
+--- * string `name` - The material name
+--- * table `values` - The material key values
+---@type fun(self: table, name: string, values: table)
 MatProxyData.init = nil
 
----The function used to apply the proxy. This is called every frame while any materials with this proxy are used in world. Arguments are: * table self * string materialName * Entity ent
----@type function
+---The function used to apply the proxy. This is called every frame while any materials with this proxy are used in world.
+---
+--- Function argument(s):
+--- * table `self` - The table structure itself.
+--- * string `name` - The material name.
+--- * Entity `ent` - The entity the material instance is applied to, if any.
+---@type fun(self: table, name: string, ent: Entity)
 MatProxyData.bind = nil
 
---- Table structure representing a mesh vertex used by various functions, such as IMesh:BuildFromTriangles and Entity:PhysicsFromMesh and returned by functions such as util.GetModelMeshes and  PhysObj:GetMesh.
+--- Table structure representing a mesh vertex used by various functions, such as [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) and [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh) and returned by functions such as [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) and  [PhysObj:GetMesh](https://wiki.facepunch.com/gmod/PhysObj:GetMesh).
 ---@class MeshVertex
 local MeshVertex = {}
 
@@ -1148,7 +1317,9 @@ NPCData.KeyValues = {}
 ---@type string
 NPCData.Model = "nil"
 
----Additional spawnflags for this NPC. See Entity:GetSpawnFlags. Ignored if `TotalSpawnFlags` key is present.
+---Additional spawnflags for this NPC. See Entity:GetSpawnFlags.
+---
+--- Ignored if `TotalSpawnFlags` key is present.
 ---@type number
 NPCData.SpawnFlags = 0
 
@@ -1192,7 +1363,7 @@ NPCData.Health = nil
 ---@type function
 NPCData.OnDuplicated = nil
 
---- The structure used by Vehicle:GetOperatingParams.
+--- The structure used by [Vehicle:GetOperatingParams](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams).
 ---@class OperatingParams
 local OperatingParams = {}
 
@@ -1220,7 +1391,7 @@ OperatingParams.steeringAngle = nil
 ---@type number
 OperatingParams.wheelsInContact = nil
 
---- Structure represents a path segment, returned by PathFollower:GetCurrentGoal, PathFollower:FirstSegment and PathFollower:LastSegment.
+--- Structure represents a path segment, returned by [PathFollower:GetCurrentGoal](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal), [PathFollower:FirstSegment](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment) and [PathFollower:LastSegment](https://wiki.facepunch.com/gmod/PathFollower:LastSegment).
 ---@class PathSegment
 local PathSegment = {}
 
@@ -1264,11 +1435,17 @@ PathSegment.m_portalHalfWidth = nil
 ---@type Vector
 PathSegment.pos = nil
 
----The movement type of this segment, indicating how bots are expected to move along this segment. * 0 is ground movement * 1 is falling down * 2 is climbing up or jumping * 3 is jumping over a gap * 4 is climbing a ladder up (unused) * 5 is climbing a ladder down (unused)
+---The movement type of this segment, indicating how bots are expected to move along this segment.
+--- * 0 is ground movement
+--- * 1 is falling down
+--- * 2 is climbing up or jumping
+--- * 3 is jumping over a gap
+--- * 4 is climbing a ladder up (unused)
+--- * 5 is climbing a ladder down (unused)
 ---@type number
 PathSegment.type = nil
 
---- Table used by physenv.SetPerformanceSettings and physenv.GetPerformanceSettings.
+--- Table used by [physenv.SetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings) and [physenv.GetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings).
 ---@class PhysEnvPerformanceSettings
 local PhysEnvPerformanceSettings = {}
 
@@ -1306,7 +1483,7 @@ PhysEnvPerformanceSettings.MinFrictionMass = nil
 
 ---
 --- Structure used in storing/restoring physics object attributes.
---- duplicator.GenericDuplicatorFunction and duplicator.DoGenericPhysics use a table of **PhysicsObjectSave**s with the struct's index in the table being the physics object ID.
+--- [duplicator.GenericDuplicatorFunction](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction) and [duplicator.DoGenericPhysics](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics) use a table of **PhysicsObjectSave**s with the struct's index in the table being the physics object ID.
 ---
 --- Pos and Angle are set by the following:
 ---
@@ -1338,7 +1515,7 @@ PhysicsObjectSave.NoGrav = nil
 ---@type boolean
 PhysicsObjectSave.Sleep = nil
 
---- Structure used by construct.SetPhysProp.
+--- Structure used by [construct.SetPhysProp](https://wiki.facepunch.com/gmod/construct.SetPhysProp).
 ---@class PhysProperties
 local PhysProperties = {}
 
@@ -1419,13 +1596,14 @@ PLAYER.AvoidPlayers = true
 PLAYER.UseVMHands = true
 
 ---
---- A structure containing vertex information for use with surface.DrawPoly.
+--- A structure containing vertex information for use with [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
 ---
 --- UV coordinates describe which part of a given texture should be drawn at a vertex - your graphics card's interpolator will fill in space between vertices. UV coords range from `0-1`, with `0` being top/left and `1` being bottom/right. If you're using a texture these are mandatory.
 ---
---- You must pass a table of tables with this structure to the function. **You need to pass at least 3 points.**
+--- **NOTE**: You must pass a table of tables with this structure to the function. **You need to pass at least 3 points.**
 ---
 --- Your points must be defined in a **clockwise order.** Otherwise, your shape will not render properly.
+---
 ---
 ---@class PolygonVertex
 local PolygonVertex = {}
@@ -1446,7 +1624,7 @@ PolygonVertex.u = nil
 ---@type number
 PolygonVertex.v = nil
 
---- The structure used by Global.CreateNewAddonPreset.
+--- The structure used by [Global.CreateNewAddonPreset](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset).
 ---@class Preset
 local Preset = {}
 
@@ -1466,7 +1644,7 @@ Preset.name = nil
 ---@type string
 Preset.newAction = nil
 
---- Table used by Global.FireProblem function.
+--- Table used by [Global.FireProblem](https://wiki.facepunch.com/gmod/Global.FireProblem) function.
 ---@class Problem
 local Problem = {}
 
@@ -1478,11 +1656,14 @@ Problem.id = nil
 ---@type string
 Problem.text = nil
 
---- The Problem severity.
+---The Problem severity.
 ---@type number
 Problem.severity = nil
 
----The Problem Type. Possible values are: * config * hardware * addons
+---The Problem Type. Possible values are:
+--- * config
+--- * hardware
+--- * addons
 ---@type string
 Problem.type = nil
 
@@ -1490,7 +1671,7 @@ Problem.type = nil
 ---@type function
 Problem.fix = nil
 
---- Structure used for properties.Add.
+--- Structure used for [properties.Add](https://wiki.facepunch.com/gmod/properties.Add).
 ---@class PropertyAdd
 local PropertyAdd = {}
 
@@ -1506,7 +1687,25 @@ PropertyAdd.MenuLabel = nil
 ---@type string
 PropertyAdd.MenuIcon = nil
 
----Where in the list should the property be positioned, relative to other properties. For reference, here are the default properties and their Order values: Property | Order | ---------|-------| | Bone Manipulate | 500 | | Bodygroups | 600 | | Skin | 601 | | Keep Upright | 900 | | Ignite/Extinguish | 999 | | Remove | 1000 | | Gravity | 1001 | | Drive | 1100 | | Collision | 1500 | | Statue | 1501 | | NPC Biggify/Smallify | 1799, 1800 | | Motion Control (Kinect) | 2500 | | Editable_Entities | 90001 |
+---Where in the list should the property be positioned, relative to other properties.
+---
+--- For reference, here are the default properties and their Order values:
+---
+--- Property |  Order |
+--- ---------|-------|
+--- | Bone Manipulate | 500 |
+--- | Bodygroups | 600 |
+--- | Skin | 601 |
+--- | Keep Upright | 900 |
+--- | Ignite/Extinguish | 999 |
+--- | Remove | 1000 |
+--- | Gravity | 1001 |
+--- | Drive | 1100 |
+--- | Collision | 1500 |
+--- | Statue | 1501 |
+--- | NPC Biggify/Smallify | 1799, 1800 |
+--- | Motion Control (Kinect) | 2500 |
+--- | Editable_Entities | 90001 |
 ---@type number
 PropertyAdd.structureFieldOrder = nil
 
@@ -1514,32 +1713,75 @@ PropertyAdd.structureFieldOrder = nil
 ---@type boolean
 PropertyAdd.PrependSpacer = false
 
----Used **clientside** to decide whether this property should be shown for an entity. Gets these arguments: * table self - the property table * Entity ent - the entity the player clicked * Global.LocalPlayer player - the localplayer Return true if the property should be shown for this entity. It's good practice to call SANDBOX:CanProperty in this hook via gamemode.Call or hook.Run.
----@type function
+---Used **clientside** to decide whether this property should be shown for an entity.
+---
+--- It's good practice to call GM:CanProperty in this hook via gamemode.Call or hook.Run.
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * Entity `ent` - the entity the player clicked
+--- * Global.LocalPlayer `player` - the localplayer
+---
+--- Function return value(s):
+--- * boolean `check` - Return true if the property should be shown for this entity.
+---@type fun(self: table, ent: Entity, player: Global.LocalPlayer): boolean
 PropertyAdd.Filter = nil
 
---- Required for toggle properties (clientside). Must return a boolean value to either check or uncheck the toggle property. * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace
----@type function
+---Required for toggle properties (clientside).
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * Entity `ent` - the entity the player clicked
+--- * table `tr` - the player's eye trace
+---
+--- Function return value(s):
+--- * boolean `check` - Return true if the property should appear checked in the UI.
+---@type fun(self: table, ent: Entity, tr: table): boolean
 PropertyAdd.Checked = nil
 
---- Called **clientside** when the property is clicked with these arguments: * table self - the property table * Entity ent - the entity the player clicked * table tr - the player's eye trace When appropriate, within this function you can call self:MsgStart(), write data with the net 'Write' functions, and finish with self:MsgEnd(). This will activate the 'Receive' function on the server. In most cases, you will want to send the entity to the server, as it's not done by default.
----@type function
+---Called **clientside** when the property is clicked
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * Entity `ent` - the entity the player clicked
+--- * table `tr` - the player's eye trace
+---
+--- When appropriate, within this function you can call `self:MsgStart()`, write data with the net.`Write*` functions, and finish with `self:MsgEnd()`. This will activate the `Receive` function on the server. In most cases, you will want to send the entity to the server, as it's not done by default.
+---@type fun(self: table, ent: Entity, tr: table)
 PropertyAdd.Action = nil
 
---- Called **serverside** if the client sends a message in the 'Action' function (see above). * table self - the property table * number len - the net message length, although this includes the property identifier used internally (the name of the property) * Player ply - the player who clicked the property You can read data received from the client with the net 'Read' functions. It's good practice to check SANDBOX:CanProperty here via gamemode.Call or hook.Run.
----@type function
+---Called **serverside** if the client sends a message in the `Action` function (see above).
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * number `len` - the net message length, although this includes the property identifier used internally (the name of the property)
+--- * Player `ply` - the player who clicked the property
+---
+--- You can read data received from the client with the net.`Read*` functions. It's good practice to check GM:CanProperty here via gamemode.Call or hook.Run.
+---@type fun(self: table, len: number, ply: Player)
 PropertyAdd.Receive = nil
 
---- Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties! * table self - the property table * DMenuOption option - the menu option * Entity ent - the entity the player right-clicked * table tr - the player's eye trace
----@type function
+---Called **clientside** when the property option has been created in the right-click menu. This is not called for toggle properties!
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * DMenuOption `option` - the menu option
+--- * Entity `ent` - the entity the player right-clicked
+--- * table `tr` - the player's eye trace
+---@type fun(self: table, option: DMenuOption, ent: Entity, tr: table)
 PropertyAdd.MenuOpen = nil
 
---- Same as MenuOpen, but also called for toggle properties and has different arguments. This is called immediately after MenuOpen, but nothing happens in between so you should only ever use one or the other. * table self - the property table * DMenu menu - the property menu * DMenuOption option - the menu option
----@type function
+---Same as `MenuOpen`, but also called for toggle properties and has different arguments. This is called immediately after `MenuOpen`, but nothing happens in between so you should only ever use one or the other.
+---
+--- Function argument(s):
+--- * table `self` - the property table
+--- * DMenu `menu` - the property menu
+--- * DMenuOption `option` - the menu option
+---@type fun(self: table, menu: DMenu, option: DMenuOption)
 PropertyAdd.OnCreate = nil
 
 ---
---- Used for cam.Start.
+--- Used for [cam.Start](https://wiki.facepunch.com/gmod/cam.Start).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's current `CViewSetup` and do not have static representations.
 ---
@@ -1562,7 +1804,9 @@ RenderCamData.w = nil
 ---@type number
 RenderCamData.h = nil
 
----The type of cam. Valid types are: * "2D" - No additional arguments are required * "3D" - Only origin and angles are needed, all other parameters are optional.
+---The type of cam. Valid types are:
+--- * "2D" - No additional arguments are required
+--- * "3D" - Only origin and angles are needed, all other parameters are optional.
 ---@type string
 RenderCamData.type = "3D"
 
@@ -1598,19 +1842,29 @@ RenderCamData.subrect = false
 ---@type boolean
 RenderCamData.bloomtone = false
 
----A table having these keys: ( all floats ) * left * right * bottom * top
+---A table having these keys: ( all floats )
+--- * left
+--- * right
+--- * bottom
+--- * top
 ---@type table
 RenderCamData.offcenter = nil
 
----If set, makes the view/camera orthogonal. A table having these keys: ( all floats ) * left * right * bottom * top
+---If set, makes the view/camera orthogonal. A table having these keys: ( all floats )
+--- * left
+--- * right
+--- * bottom
+--- * top
 ---@type table
 RenderCamData.ortho = nil
 
---- Used for render.Capture.
+--- Used for [render.Capture](https://wiki.facepunch.com/gmod/render.Capture).
 ---@class RenderCaptureData
 local RenderCaptureData = {}
 
----Format of the capture. Valid formats are: * `jpeg` or `jpg` * `png`
+---Format of the capture. Valid formats are:
+--- * `jpeg` or `jpg`
+--- * `png`
 ---@type string
 RenderCaptureData.format = nil
 
@@ -1638,7 +1892,7 @@ RenderCaptureData.quality = nil
 ---@type boolean
 RenderCaptureData.alpha = true
 
---- Used by Entity:GetSequenceInfo.
+--- Used by [Entity:GetSequenceInfo](https://wiki.facepunch.com/gmod/Entity:GetSequenceInfo).
 ---@class SequenceInfo
 local SequenceInfo = {}
 
@@ -1718,7 +1972,7 @@ SequenceInfo.cycleposeindex = nil
 ---@type table
 SequenceInfo.anims = nil
 
---- Used for serverlist.Query.
+--- Used for [serverlist.Query](https://wiki.facepunch.com/gmod/serverlist.Query).
 ---@class ServerQueryData
 local ServerQueryData = {}
 
@@ -1734,11 +1988,32 @@ ServerQueryData.Type = nil
 ---@type number
 ServerQueryData.AppID = 4000
 
----Called when a new server is found and queried. Arguments: number ping - Latency to the server. string name - Name of the server string desc - "Nice" gamemode name string map - Current map number players - Total player number ( bot + human ) number maxplayers - Maximum reported amount of players number botplayers - Amount of bots on the server boolean pass - Whether this server has password or not number lastplayed - Time when you last played on this server, as UNIX timestamp or 0 string address - IP Address of the server string gamemode - Gamemode folder name number workshopid - Gamemode Steam Workshop ID boolean isanon - Is the server signed into an anonymous account? string version - Version number, same format as jit.version_num string localization - Two digit country code, `us` if nil string gmcategory - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay` Return false to stop the query.
----@type function
+---Called when a new server is found and queried.
+---
+--- Function argument(s):
+--- * number `ping` - Latency to the server.
+--- * string `name` - Name of the server
+--- * string `desc` - "Nice" gamemode name
+--- * string `map` - Current map
+--- * number `players` - Total player number ( bot + human )
+--- * number `maxplayers` - Maximum reported amount of players
+--- * number `botplayers` - Amount of bots on the server
+--- * boolean `pass` - Whether this server has password or not
+--- * number `lastplayed` - Time when you last played on this server, as UNIX timestamp or 0
+--- * string `address` - IP Address of the server
+--- * string `gamemode` - Gamemode folder name
+--- * number `workshopid` - Gamemode Steam Workshop ID
+--- * boolean `isanon` - Is the server signed into an anonymous account?
+--- * string `version` - Version number, same format as jit.version_num
+--- * string `localization` - Two digit country code, `us` if nil
+--- * string `gmcategory` - Category of the gamemode, ex. `pvp`, `pve`, `rp` or `roleplay`
+---
+--- Function return value(s):
+--- * boolean `stop` - Return `false` to stop the query.
+---@type fun(ping: number, name: string, desc: string, map: string, players: number, maxplayers: number, botplayers: number, pass: boolean, lastplayed: number, address: string, gamemode: string, workshopid: number, isanon: boolean, version: string, localization: string, gmcategory: string): boolean
 ServerQueryData.Callback = nil
 
---- Called if the query has failed, called with the servers IP Address
+---Called if the query has failed, called with the servers IP Address
 ---@type function
 ServerQueryData.CallbackFailed = nil
 
@@ -1746,11 +2021,59 @@ ServerQueryData.CallbackFailed = nil
 ---@type function
 ServerQueryData.Finished = nil
 
---- Table used in sound.Add and sound.GetProperties.
+--- Table used by [PhysObj:ComputeShadowControl](https://wiki.facepunch.com/gmod/PhysObj:ComputeShadowControl). Default values are given if the table element is omitted.
+---@class ShadowControlParams
+local ShadowControlParams = {}
+
+---How long it takes to move to pos and rotate accordingly - only if it could move as fast as it want - damping and max speed/angular will make this invalid (Cannot be 0! Will give errors if you do)
+---@type number
+ShadowControlParams.secondstoarrive = TICK_INTERVAL * 2
+
+---The time it should use - just use the one from ENTITY:PhysicsSimulate.
+---@type number
+ShadowControlParams.delta = 0.1
+
+---Where you want to move to.
+---@type Vector
+ShadowControlParams.pos = Vectorvector_origin
+
+---Angle you want to move to.
+---@type Angle
+ShadowControlParams.angle = angle_zero
+
+---What should be the maximal angular force applied.
+---@type number
+ShadowControlParams.maxangular = 1
+
+---At which force/speed should it start damping the rotation.
+---@type number
+ShadowControlParams.maxangulardamp = 1
+
+---Maximum linear force applied
+---@type number
+ShadowControlParams.maxspeed = 1
+
+---Maximum linear force/speed before damping.
+---@type number
+ShadowControlParams.maxspeeddamp = 1
+
+---The percentage it should damp the linear/angular force if it reaches it's max amount
+---@type number
+ShadowControlParams.dampfactor = 1
+
+---If it's further away than this it'll teleport (Set to 0 to not teleport)
+---@type number
+ShadowControlParams.teleportdistance = 0
+
+--- Table used in [sound.Add](https://wiki.facepunch.com/gmod/sound.Add) and [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 ---@class SoundData
 local SoundData = {}
 
----Path to the sound file to be used in this sound effect, relative to `sound/` directory (so exclude the `sound/` part). Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list. Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
+---Path to the sound file to be used in this sound effect, relative to `sound/` directory (so exclude the `sound/` part).
+---
+--- Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list.
+---
+--- Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
 ---@type string
 SoundData.sound = nil
 
@@ -1766,7 +2089,9 @@ SoundData.channel = nil
 ---@type number
 SoundData.level = nil
 
----The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value. **Warning:** Volume of `0` will act as volume of `1`
+---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.
+---
+--- **Warning:** Volume of `0` will act as volume of `1`
 ---@type number
 SoundData.volume = 1.0
 
@@ -1774,15 +2099,17 @@ SoundData.volume = 1.0
 ---@type number
 SoundData.pitch = 100
 
----The initial pitch. Deprecated, use pitch.
+---The initial pitch.
+--- 	Deprecated, use pitch.
 ---@type number
 SoundData.pitchstart = nil
 
----The pitch end. Deprecated, use pitch.
+---The pitch end.
+--- Deprecated, use pitch.
 ---@type number
 SoundData.pitchend = nil
 
---- Table describing a sound hint, used by NPC:GetBestSoundHint and sound.GetLoudestSoundHint.
+--- Table describing a sound hint, used by [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint) and [sound.GetLoudestSoundHint](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint).
 ---@class SoundHintData
 local SoundHintData = {}
 
@@ -1818,7 +2145,7 @@ SoundHintData.expires = nil
 ---@type number
 SoundHintData.channel = nil
 
---- Returned by util.GetSunInfo.
+--- Returned by [util.GetSunInfo](https://wiki.facepunch.com/gmod/util.GetSunInfo).
 ---@class SunInfo
 local SunInfo = {}
 
@@ -1830,7 +2157,7 @@ SunInfo.direction = nil
 ---@type number
 SunInfo.obstruction = nil
 
---- Table returned by util.GetSurfaceData.
+--- Table returned by [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
 ---@class SurfacePropertyData
 local SurfacePropertyData = {}
 
@@ -1941,7 +2268,8 @@ SurfacePropertyData.strainSound = nil
 ---@class SWEP : WEAPON
 SWEP = {}
 
----Entity class name of the SWEP (file or folder name of your SWEP). This is set automatically
+---Entity class name of the SWEP (file or folder name of your SWEP). This is
+---             set automatically
 ---@type string
 SWEP.ClassName = nil
 
@@ -1949,15 +2277,18 @@ SWEP.ClassName = nil
 ---@type string
 SWEP.ClassNameOverride = nil
 
----The spawn menu category that this weapon resides in.
+---The spawn menu category that this weapon
+---             resides in.
 ---@type string
 SWEP.Category = "Other"
 
----Whether or not this weapon can be obtained through the spawn menu.
+---Whether or not this weapon can be obtained through the
+---             spawn menu.
 ---@type boolean
 SWEP.Spawnable = false
 
----If spawnable, this variable determines whether only administrators can use the button in the spawn menu.
+---If spawnable, this variable determines whether only
+---             administrators can use the button in the spawn menu.
 ---@type boolean
 SWEP.AdminOnly = false
 
@@ -1969,11 +2300,12 @@ SWEP.PrintName = "Scripted Weapon"
 ---@type string
 SWEP.Base = "weapon_base"
 
----The deploy speed multiplier. This does not change the internal deployment speed.
+---The deploy speed multiplier. This does not change the
+---             internal deployment speed.
 ---@type number
 SWEP.m_WeaponDeploySpeed = 1
 
---- Deprecated, use Entity:GetOwner() instead.
+---Deprecated, use [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner)() instead.
 ---@type Entity
 SWEP.Owner = nil
 
@@ -2017,31 +2349,39 @@ SWEP.ViewModelFOV = 62
 ---@type string
 SWEP.WorldModel = "models/weapons/w_357.mdl"
 
----Whether this weapon can be autoswitched away from when the player runs out of ammo in this weapon or picks up another weapon or ammo
+---Whether this weapon can be autoswitched
+---             away from when the player runs out of ammo in this weapon or picks up another weapon or ammo
 ---@type boolean
 SWEP.AutoSwitchFrom = true
 
----Whether this weapon can be autoswitched to when the player runs out of ammo in their current weapon or they pick this weapon up
+---Whether this weapon can be autoswitched to
+---             when the player runs out of ammo in their current weapon or they pick this weapon up
 ---@type boolean
 SWEP.AutoSwitchTo = true
 
----Determines the priority of the weapon when autoswitching. The weapon being autoswitched from will attempt to switch to a weapon with the same weight that has ammo, but if none exists, it will prioritise higher weight weapons.
+---Determines the priority of the weapon when
+---             autoswitching. The weapon being autoswitched from will attempt to switch to a weapon with the same weight
+---             that has ammo, but if none exists, it will prioritise higher weight weapons.
 ---@type number
 SWEP.Weight = 5
 
----The scale of the viewmodel bob (viewmodel movement from left to right when walking around)
+---The scale of the viewmodel bob (viewmodel movement
+---             from left to right when walking around)
 ---@type number
 SWEP.BobScale = 1
 
----The scale of the viewmodel sway (viewmodel position lerp when looking around).
+---The scale of the viewmodel sway (viewmodel
+---             position lerp when looking around).
 ---@type number
 SWEP.SwayScale = 1
 
----Should the weapon icon bounce in weapon selection?
+---Should the weapon icon bounce in weapon
+---             selection?
 ---@type boolean
 SWEP.BounceWeaponIcon = true
 
----Should draw the weapon selection info box, containing SWEP.Instructions, etc.
+---Should draw the weapon selection info
+---             box, containing SWEP.Instructions, etc.
 ---@type boolean
 SWEP.DrawWeaponInfoBox = true
 
@@ -2069,19 +2409,28 @@ SWEP.SlotPos = 10
 ---@type number
 SWEP.SpeechBubbleLid = surface.GetTextureID("gui/speech_lid")
 
----Path to an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID, see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
+---Path to
+---             an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,
+---             see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
 ---@type number
 SWEP.WepSelectIcon = surface.GetTextureID("weapons/swep")
 
----Should we use Counter-Strike muzzle flashes upon firing? This is required for DoD:S or CS:S view models to fix their muzzle flashes.
+---Should we use Counter-Strike muzzle
+---             flashes upon firing? This is required for DoD:S or CS:S view models to fix their muzzle flashes.
 ---@type boolean
 SWEP.CSMuzzleFlashes = false
 
----Use the X shape muzzle flash instead of the default Counter-Strike muzzle flash. Requires Structures/SWEP#CSMuzzleFlashes to be set to true.
+---Use the X shape muzzle flash instead of the
+---             default Counter-Strike muzzle flash. Requires Structures/SWEP#CSMuzzleFlashes to be set to true.
 ---@type boolean
 SWEP.CSMuzzleX = false
 
----Primary attack settings. The table contains these fields: * string `Ammo` - Ammo type (`Pistol`, `SMG1`, etc.) See game.AddAmmoType. * number `ClipSize` - The maximum amount of bullets one clip can hold. Setting it to `-1` means weapon uses no clips, like a grenade or a rocket launch. * number `DefaultClip` - Default ammo in the clip, making it higher than ClipSize will give player additional ammo on spawn * boolean `Automatic` - If true makes the weapon shoot automatically as long as the player has primary attack button held down
+---Primary attack settings. The table contains these fields:
+---
+--- * string `Ammo` - Ammo type (`Pistol`, `SMG1`, etc.) See game.AddAmmoType.
+--- * number `ClipSize` - The maximum amount of bullets one clip can hold. Setting it to `-1` means weapon uses no clips, like a grenade or a rocket launch.
+--- * number `DefaultClip` - Default ammo in the clip, making it higher than ClipSize will give player additional ammo on spawn
+--- * boolean `Automatic` - If true makes the weapon shoot automatically as long as the player has primary attack button held down
 ---@type table
 SWEP.Primary = nil
 
@@ -2089,35 +2438,48 @@ SWEP.Primary = nil
 ---@type table
 SWEP.Secondary = nil
 
----Makes the player models hands bonemerged onto the view model The gamemode and view models **must** support this feature for it to work! You can find more information here: Using_Viewmodel_Hands
+---Makes the player models hands bonemerged onto
+---             the view model
+---
+---             The gamemode and view models **must** support this feature for it to work!
+---                 You can find more information here: [Using Viewmodel Hands](https://wiki.facepunch.com/gmod/Using_Viewmodel_Hands)
 ---@type boolean
 SWEP.UseHands = false
 
----The folder from where the weapon was loaded. This should always be "weapons/weapon_myweapon", regardless whether your SWEP is stored as a file, or multiple files in a folder. It is set automatically on load
+---The folder from where the weapon was loaded. This should always be
+---             "weapons/weapon_myweapon", regardless whether your SWEP is stored as a file, or multiple files in a folder.
+---             It is set automatically on load
 ---@type string
 SWEP.Folder = nil
 
----Makes the default SWEP crosshair be positioned in 3D space where your aim actually is (like on Jeep), instead of simply sitting in the middle of the screen at all times
+---Makes the default SWEP crosshair be
+---             positioned in 3D space where your aim actually is (like on Jeep), instead of simply sitting in the middle of
+---             the screen at all times
 ---@type boolean
 SWEP.AccurateCrosshair = false
 
----Disable the ability for players to duplicate this SWEP
+---Disable the ability for players to duplicate this
+---             SWEP
 ---@type boolean
 SWEP.DisableDuplicator = false
 
----Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information.
+---Sets the spawnmenu content icon type
+---             for the entity, used by spawnmenu in the Sandbox-derived gamemodes.
+---             See spawnmenu.AddContentType for more information.
 ---@type string
 SWEP.ScriptedEntityType = "weapon"
 
----If set to false, the weapon will not play the weapon pick up sound when picked up.
+---If set to false, the weapon will not play the
+---             weapon pick up sound when picked up.
 ---@type boolean
 SWEP.m_bPlayPickupSound = true
 
----If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
+---If set,
+---             overrides the icon path to be displayed in the Spawnmenu for this entity.
 ---@type string
 SWEP.IconOverride = "materials/entities/<ClassName>.png"
 
---- Table is one element from team.GetAllTeams.
+--- Table is one element from [team.GetAllTeams](https://wiki.facepunch.com/gmod/team.GetAllTeams).
 ---@class TeamData
 local TeamData = {}
 
@@ -2137,7 +2499,7 @@ TeamData.Name = nil
 ---@type number
 TeamData.Score = nil
 
---- Used for draw.Text.
+--- Used for [draw.Text](https://wiki.facepunch.com/gmod/draw.Text).
 ---@class TextData
 local TextData = {}
 
@@ -2165,7 +2527,7 @@ TextData.yalign = TEXT_ALIGN_TOP
 ---@type table
 TextData.color = color_white
 
---- Used for draw.TexturedQuad.
+--- Used for [draw.TexturedQuad](https://wiki.facepunch.com/gmod/draw.TexturedQuad).
 ---@class TextureData
 local TextureData = {}
 
@@ -2196,13 +2558,13 @@ TextureData.color = color_white
 ---
 --- The **TOOL** table is used in Sandbox tool creation. You can find a list of callbacks on the  page and a list of methods on the  page. Do note that some of the fields below have no effect on server-side operations.
 ---
---- The tool information box drawn on the HUD while your tool is selected has 2 values that are set by language.Add.
+--- The tool information box drawn on the HUD while your tool is selected has 2 values that are set by [language.Add](https://wiki.facepunch.com/gmod/language.Add).
 --- * `tool.[tool mode].name` - The tool name (Note this is NOT the same as TOOL.Name)
 --- * `tool.[tool mode].desc` - The tool description
 ---
 --- Ensure that all tool file names are entirely lowercase.  Including capital letters can lead to unintended behavior.
 ---
----@class TOOL
+---@class TOOL : Tool
 TOOL = {}
 
 ---If set to false, the tool won't be added to the tool menu and players will have to access it by other means.
@@ -2217,11 +2579,13 @@ TOOL.Category = "New Category"
 ---@type string
 TOOL.Command = "gmod_toolmode [tool]"
 
----The name of the tool in the Q menu. Common practice is to set this to "#tool.[lua filename].name" to match the name displayed in the tool information box.
+---The name of the tool in the Q menu.
+--- Common practice is to set this to "#tool.[lua filename].name" to match the name displayed in the tool information box.
 ---@type string
 TOOL.Name = "#[tool mode]"
 
----A key-value ( convar name-default value ) table containing the client-side convars to create. All convars will be prefixed with the filename of the tool. You can later use Tool:GetClientNumber or Tool:GetClientInfo to retrieve these values.
+---A key-value ( convar name-default value ) table containing the client-side convars to create. All convars will be prefixed with the filename of the tool.
+--- You can later use Tool:GetClientNumber or Tool:GetClientInfo to retrieve these values.
 ---@type table
 TOOL.ClientConVar = nil
 
@@ -2237,15 +2601,20 @@ TOOL.ClientConVars = nil
 ---@type table
 TOOL.ServerConVars = nil
 
----The function that is called to build the context menu for your tool. It has one argument, namely the context menu's base panel to which all of your custom panels are going to be parented to. While it might sound like a hook, it isn't - you won't receive a `self` argument inside the function. See TOOL.BuildCPanel.
+---The function that is called to build the context menu for your tool. It has one argument, namely the context menu's base panel to which all of your custom panels are going to be parented to.
+---
+--- While it might sound like a hook, it isn't - you won't receive a `self` argument inside the function. See TOOL.BuildCPanel.
 ---@type function
 TOOL.BuildCPanel = nil
 
----Allows you to override the tool usage information shown when the tool is equipped. See Tool Information Display for more information.
+---Allows you to override the tool usage information shown when the tool is equipped.
+--- See Tool Information Display for more information.
 ---@type table
 TOOL.Information = nil
 
----Class name of the tool. (name of the .lua file) This is set automatically.
+---Class name of the tool. (name of the .lua file)
+---
+--- This is set automatically.
 ---@type string
 TOOL.Mode = nil
 
@@ -2261,7 +2630,7 @@ TOOL.LeftClickAutomatic = false
 ---@type boolean
 TOOL.RightClickAutomatic = false
 
---- Table returned by Vector:ToScreen.
+--- Table returned by [Vector:ToScreen](https://wiki.facepunch.com/gmod/Vector:ToScreen).
 ---@class ToScreenData
 local ToScreenData = {}
 
@@ -2277,7 +2646,7 @@ ToScreenData.y = nil
 ---@type boolean
 ToScreenData.visible = nil
 
---- Table structure used for util.TraceLine.
+--- Table structure used for [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine).
 ---@class Trace
 local Trace = {}
 
@@ -2289,7 +2658,13 @@ Trace.start = VectorVector(0, 0, 0)
 ---@type Vector
 Trace.endpos = VectorVector(0, 0, 0)
 
----Things the trace should not hit. Can also be a table of entities or a function with one argument: * Entity ent - The entity that the trace hit Return true in the function to hit the entity, false to skip it. Using a function here is super slow - try to avoid it.
+---Things the trace should not hit. Can also be a table of entities or a function with one argument:
+---
+--- * Entity ent - The entity that the trace hit
+---
+--- Return true in the function to hit the entity, false to skip it.
+---
+--- Using a function here is super slow - try to avoid it.
 ---@type Entity
 Trace.filter = {}
 
@@ -2369,11 +2744,15 @@ TraceResult.HitWorld = false
 ---@type number
 TraceResult.MatType = 0
 
----The direction of the trace as a normal vector (vector with Vector:Length of 1). Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()`
+---The direction of the trace as a normal vector (vector with Vector:Length of 1).
+---
+--- Equivalent to: `( traceRes.HitPos - traceRes.StartPos ):Normalize()`
 ---@type Vector
 TraceResult.Normal = nil
 
----The PhysObj ID that was hit. Used for Entity:GetPhysicsObjectNum.
+---The PhysObj ID that was hit.
+---
+--- Used for Entity:GetPhysicsObjectNum.
 ---@type number
 TraceResult.PhysicsBone = 0
 
@@ -2381,7 +2760,10 @@ TraceResult.PhysicsBone = 0
 ---@type Vector
 TraceResult.StartPos = nil
 
----ID of hit surface property from `scripts/surfaceproperties.txt`. You can get the name using util.GetSurfacePropName. Used for CEffectData:SetSurfaceProp.
+---ID of hit surface property from `scripts/surfaceproperties.txt`.
+--- You can get the name using util.GetSurfacePropName.
+---
+--- Used for CEffectData:SetSurfaceProp.
 ---@type number
 TraceResult.SurfaceProps = 0
 
@@ -2405,7 +2787,7 @@ TraceResult.DispFlags = 0
 ---@type number
 TraceResult.Contents = nil
 
---- Table structure used by steamworks.FileInfo.
+--- Table structure used by [steamworks.FileInfo](https://wiki.facepunch.com/gmod/steamworks.FileInfo).
 ---@class UGCFileInfo
 local UGCFileInfo = {}
 
@@ -2469,15 +2851,29 @@ UGCFileInfo.installed = nil
 ---@type boolean
 UGCFileInfo.disabled = nil
 
----A list of child Workshop Items for this item. For collections this will be sub-collections, for workshop items this will be the items they depend on.
+---A list of child Workshop Items for this item.
+---
+--- For collections this will be sub-collections, for workshop items this will be the items they depend on.
 ---@type table
 UGCFileInfo.children = nil
 
----We advise against using this. It may be changed or removed in a future update. The "nice" name of the Uploader, or "Unnammed Player" if we failed to get the data for some reason. Do not use this field as it will most likely not be updated in time. Use steamworks.RequestPlayerInfo instead.
+---We advise against using this. It may be changed or removed in a future update.
+---
+--- The "nice" name of the Uploader, or "Unnammed Player" if we failed to get the data for some reason.
+---
+--- Do not use this field as it will most likely not be updated in time. Use steamworks.RequestPlayerInfo instead.
 ---@type string
 UGCFileInfo.ownername = nil
 
----If this key is set, no other data will be present in the response. Values above 0 represent Steam Error codes, values below 0 mean the following: * -1 means Failed to create query * -2 means Failed to send query * -3 means Received 0 or more than 1 result * -4 means Failed to get item data from the response * -5 means Workshop item ID in the response is invalid * -6 means Workshop item ID in response is mismatching the requested file ID
+---If this key is set, no other data will be present in the response.
+---
+--- Values above 0 represent Steam Error codes, values below 0 mean the following:
+--- * -1 means Failed to create query
+--- * -2 means Failed to send query
+--- * -3 means Received 0 or more than 1 result
+--- * -4 means Failed to get item data from the response
+--- * -5 means Workshop item ID in the response is invalid
+--- * -6 means Workshop item ID in response is mismatching the requested file ID
 ---@type number
 UGCFileInfo.error = nil
 
@@ -2497,7 +2893,7 @@ UGCFileInfo.total = nil
 ---@type number
 UGCFileInfo.score = nil
 
---- Table structure used by undo.Do_Undo and GM:CanUndo.
+--- Table structure used by [undo.Do_Undo](https://wiki.facepunch.com/gmod/undo.Do_Undo) and [GM:CanUndo](https://wiki.facepunch.com/gmod/GM:CanUndo).
 ---@class Undo
 local Undo = {}
 
@@ -2525,7 +2921,7 @@ Undo.CustomUndoText = nil
 ---@type string
 Undo.NiceName = nil
 
---- The structure used by Vehicle:SetVehicleParams and Vehicle:GetVehicleParams.
+--- The structure used by [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) and [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams).
 ---@class VehicleParams
 local VehicleParams = {}
 
@@ -2553,7 +2949,7 @@ VehicleParams.engine = nil
 ---@type table
 VehicleParams.steering = nil
 
---- The structure used by Structures/VehicleParams.
+--- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
 ---@class VehicleParamsAxle
 local VehicleParamsAxle = {}
 
@@ -2641,7 +3037,7 @@ VehicleParamsAxle.wheels_skidMaterialIndex = nil
 ---@type number
 VehicleParamsAxle.wheels_springAdditionalLength = nil
 
---- The structure used by Structures/VehicleParams.
+--- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
 ---@class VehicleParamsBody
 local VehicleParamsBody = {}
 
@@ -2677,7 +3073,7 @@ VehicleParamsBody.tiltForce = nil
 ---@type number
 VehicleParamsBody.tiltForceHeight = nil
 
---- The structure used by Structures/VehicleParams.
+--- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
 ---@class VehicleParamsEngine
 local VehicleParamsEngine = {}
 
@@ -2689,7 +3085,9 @@ VehicleParamsEngine.autobrakeSpeedFactor = nil
 ---@type number
 VehicleParamsEngine.autobrakeSpeedGain = nil
 
----This acts as the final ratio of the gearbox. It's like a master coefficient of the gearbox.
+---This acts as the final ratio of the gearbox.
+---
+--- It's like a master coefficient of the gearbox.
 ---@type number
 VehicleParamsEngine.axleRatio = nil
 
@@ -2705,7 +3103,11 @@ VehicleParamsEngine.boostDuration = nil
 ---@type number
 VehicleParamsEngine.boostForce = nil
 
----Maximum speed while boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---Maximum speed while boosting
+---
+--- The [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) function takes this in **miles per hour**, but [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams) returns this in **hammer units per second**!
+---
+--- In this case HU = inches, so 1 MPH is 17.6 HU/s.
 ---@type number
 VehicleParamsEngine.boostMaxSpeed = nil
 
@@ -2713,11 +3115,15 @@ VehicleParamsEngine.boostMaxSpeed = nil
 ---@type number
 VehicleParamsEngine.gearCount = nil
 
----A table of numbers, of gear rations. Table length is equal to "gearCount" member of this table.
+---A table of numbers, of gear rations.
+---
+--- Table length is equal to "gearCount" member of this table.
 ---@type table
 VehicleParamsEngine.gearRatio = nil
 
----The HP amount of the vehicle This value is used to calculate the effectively applied torque, along with ratios and `maxRPM`.
+---The HP amount of the vehicle
+---
+--- This value is used to calculate the effectively applied torque, along with ratios and `maxRPM`.
 ---@type number
 VehicleParamsEngine.horsepower = nil
 
@@ -2725,15 +3131,27 @@ VehicleParamsEngine.horsepower = nil
 ---@type boolean
 VehicleParamsEngine.isAutoTransmission = nil
 
----Maximum RPM of the vehicle. Despite this being a maximum value, the vehicle can exceed it. Attempts to exceed the max RPM will force the active gear ratio to be that of the 1st gear, which will provide even more torque. This is the opposite of a rev limiter. This value is only used for the calculation of the effectively applied torque.
+---Maximum RPM of the vehicle.
+---
+--- Despite this being a maximum value, the vehicle can exceed it.
+---
+--- Attempts to exceed the max RPM will force the active gear ratio to be that of the 1st gear, which will provide even more torque. This is the opposite of a rev limiter. This value is only used for the calculation of the effectively applied torque.
 ---@type number
 VehicleParamsEngine.maxRPM = nil
 
----Maximum reverse speed of the vehicle The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---Maximum reverse speed of the vehicle
+---
+--- The [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) function takes this in **miles per hour**, but [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams) returns this in **hammer units per second**!
+---
+--- In this case HU = inches, so 1 MPH is 17.6 HU/s.
 ---@type number
 VehicleParamsEngine.maxRevSpeed = nil
 
----Maximum forward going speed of the vehicle without boosting The Vehicle:SetVehicleParams function takes this in **miles per hour**, but Vehicle:GetVehicleParams returns this in **hammer units per second**! In this case HU = inches, so 1 MPH is 17.6 HU/s.
+---Maximum forward going speed of the vehicle without boosting
+---
+--- The [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) function takes this in **miles per hour**, but [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams) returns this in **hammer units per second**!
+---
+--- In this case HU = inches, so 1 MPH is 17.6 HU/s.
 ---@type number
 VehicleParamsEngine.maxSpeed = nil
 
@@ -2753,7 +3171,7 @@ VehicleParamsEngine.throttleTime = nil
 ---@type boolean
 VehicleParamsEngine.torqueBoost = nil
 
---- The structure used by Structures/VehicleParams.
+--- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
 ---@class VehicleParamsSteering
 local VehicleParamsSteering = {}
 
@@ -2834,7 +3252,7 @@ VehicleParamsSteering.turnThrottleReduceFast = nil
 VehicleParamsSteering.turnThrottleReduceSlow = nil
 
 ---
---- Table structure passed to SANDBOX:PlayerSpawnVehicle, describing a spawnable Vehicle in Sandbox gamemode.
+--- Table structure passed to [SANDBOX:PlayerSpawnVehicle](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnVehicle), describing a spawnable Vehicle in Sandbox gamemode.
 ---
 --- Example usage in defined a custom spawnable vehicle:
 --- ```
@@ -2870,7 +3288,13 @@ VehicleTable.Name = nil
 ---@type string
 VehicleTable.Model = nil
 
----A list of key-value pairs to apply to the vehicle entity. Possible valid keys that can be set are: * `vehiclescript` * `limitview` * `vehiclelocked` * `cargovisible` * `enablegun`
+---A list of key-value pairs to apply to the vehicle entity.
+--- Possible valid keys that can be set are:
+--- * `vehiclescript`
+--- * `limitview`
+--- * `vehiclelocked`
+--- * `cargovisible`
+--- * `enablegun`
 ---@type table
 VehicleTable.KeyValues = nil
 
@@ -2894,19 +3318,25 @@ VehicleTable.Category = "Other"
 ---@type string
 VehicleTable.Information = nil
 
---- Table structure used by video.Record.
+--- Table structure used by [video.Record](https://wiki.facepunch.com/gmod/video.Record).
 ---@class VideoData
 local VideoData = {}
 
----The video container format. Valid options are: `webm`, `ogg`
+---The video container format.
+---
+--- Valid options are: `webm`, `ogg`
 ---@type string
 VideoData.container = nil
 
----The video codec. Valid options are: `vp8`, `theora`
+---The video codec.
+---
+--- Valid options are: `vp8`, `theora`
 ---@type string
 VideoData.video = nil
 
----The audio codec. Valid options are: `vorbis`
+---The audio codec.
+---
+--- Valid options are: `vorbis`
 ---@type string
 VideoData.audio = nil
 
@@ -2939,7 +3369,7 @@ VideoData.width = nil
 VideoData.height = nil
 
 ---
---- Table structure used for render.RenderView.
+--- Table structure used for [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's CViewSetup and do not have static representations.
 ---
@@ -2994,23 +3424,35 @@ ViewData.viewmodelfov = nil
 ---@type number
 ViewData.fov = nil
 
----If set, renders the view orthogonally. A table with these keys: * left * right * top * bottom
+---If set, renders the view orthogonally. A table with these keys:
+--- * left
+--- * right
+--- * top
+--- * bottom
 ---@type table
 ViewData.ortho = nil
 
----Coordinate for the left clipping plane. Requires `ortho` to be set to `true`. **Deprecated**: Use `ortho` table instead!
+---Coordinate for the left clipping plane. Requires `ortho` to be set to `true`.
+---
+--- **Deprecated**: Use `ortho` table instead!
 ---@type number
 ViewData.ortholeft = nil
 
----Coordinate for the right clipping plane. Requires `ortho` to be set to `true`. **Deprecated**: Use `ortho` table instead!
+---Coordinate for the right clipping plane. Requires `ortho` to be set to `true`.
+---
+--- **Deprecated**: Use `ortho` table instead!
 ---@type number
 ViewData.orthoright = nil
 
----Coordinate for the top clipping plane. Requires `ortho` to be set to `true`. **Deprecated**: Use `ortho` table instead!
+---Coordinate for the top clipping plane. Requires `ortho` to be set to `true`.
+---
+--- **Deprecated**: Use `ortho` table instead!
 ---@type number
 ViewData.orthotop = nil
 
----Coordinate for the bottom clipping plane. Requires `ortho` to be set to `true`. **Deprecated**: Use `ortho` table instead!
+---Coordinate for the bottom clipping plane. Requires `ortho` to be set to `true`.
+---
+--- **Deprecated**: Use `ortho` table instead!
 ---@type number
 ViewData.orthobottom = nil
 
@@ -3030,7 +3472,7 @@ ViewData.znearviewmodel = nil
 ---@type number
 ViewData.zfarviewmodel = nil
 
---- Currently works identically to the "bloomtone" option (it also overrides it if you set this to false).
+---Currently works identically to the "bloomtone" option (it also overrides it if you set this to false).
 ---@type boolean
 ViewData.dopostprocess = false
 
@@ -3042,12 +3484,22 @@ ViewData.bloomtone = true
 ---@type number
 ViewData.viewid = 0
 
----This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders. It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. Values outside the viewport are allowed, but not recommended - instead you should increase the view FOV.
+---This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders.
+---
+--- It's a table with 4 keys, controlling what portion of the screen to draw:
+--- * left - where the left edge starts. Natural value is 0.
+--- * right - where the right edge ends. Natural value is equal to w (the width of the viewport).
+--- * top - where the `bottom` edge starts. Natural value is 0.
+--- * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport).
+---
+--- Note that top and bottom are reversed.
+---
+--- Values outside the viewport are allowed, but not recommended - instead you should increase the view FOV.
 ---@type table
 ViewData.offcenter = nil
 
 ---
---- Table structure used for render.GetViewSetup.
+--- Table structure used for [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).
 ---
 ---@class ViewSetup
 local ViewSetup = {}
@@ -3096,7 +3548,13 @@ ViewSetup.fovviewmodel = nil
 ---@type number
 ViewSetup.fovviewmodel_unscaled = nil
 
----If the current view is orthogonal, a table with these keys: * left * right * top * bottom Will not be present if view is not orthagonal.
+---If the current view is orthogonal, a table with these keys:
+--- * left
+--- * right
+--- * top
+--- * bottom
+---
+--- Will not be present if view is not orthagonal.
 ---@type table
 ViewSetup.ortho = nil
 
@@ -3124,6 +3582,16 @@ ViewSetup.bloomtone = nil
 ---@type boolean
 ViewSetup.subrect = nil
 
---- It's a table with 4 keys, controlling what portion of the screen to draw: * left - where the left edge starts. Natural value is 0. * right - where the right edge ends. Natural value is equal to w (the width of the viewport). * top - where the `bottom` edge starts. Natural value is 0. * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport). Note that top and bottom are reversed. This will not be present if offscreen rendering is not enabled for this view. See Structures/ViewData for more info.
+---It's a table with 4 keys, controlling what portion of the screen to draw:
+--- * left - where the left edge starts. Natural value is 0.
+--- * right - where the right edge ends. Natural value is equal to w (the width of the viewport).
+--- * top - where the `bottom` edge starts. Natural value is 0.
+--- * bottom - where the `top` edge ends. Natural value is equal to h (the height of the viewport).
+---
+--- Note that top and bottom are reversed.
+---
+--- This will not be present if offscreen rendering is not enabled for this view.
+---
+--- See Structures/ViewData for more info.
 ---@type table
 ViewSetup.offcenter = nil

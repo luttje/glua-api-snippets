@@ -11,7 +11,8 @@ cleanup = {}
 ---@param ent Entity The entity to add to the player's cleanup list.
 function cleanup.Add(pl, type, ent) end
 
----[SERVER] Called by the `gmod_admin_cleanup` console command. Allows admins to clean up the server.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called by the `gmod_admin_cleanup` console command. Allows admins to clean up the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.CC_AdminCleanup)
 ---@param pl Player The player that called the console command.
@@ -19,7 +20,8 @@ function cleanup.Add(pl, type, ent) end
 ---@param args table First and only arg is the cleanup type.
 function cleanup.CC_AdminCleanup(pl, command, args) end
 
----[SERVER] Called by the `gmod_cleanup` console command. Allows players to cleanup their own props.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called by the `gmod_cleanup` console command. Allows players to cleanup their own props.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cleanup.CC_Cleanup)
 ---@param pl Player The player that called the console command.

@@ -1,10 +1,11 @@
 ---@meta
 
---- A single AI task. Returned by ai_task.New.
+--- A single AI task. Returned by [ai_task.New](https://wiki.facepunch.com/gmod/ai_task.New).
 ---@class Task
 local Task = {}
 
----[SERVER] Initialises the AI task. Called by ai_task.New.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Initialises the AI task. Called by [ai_task.New](https://wiki.facepunch.com/gmod/ai_task.New).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Init)
 function Task:Init() end
@@ -40,7 +41,8 @@ function Task:IsFNameType() end
 ---@param target NPC The NPC to run the task on.
 function Task:Run(target) end
 
----[SERVER] Runs the AI task as an NPC method. This requires the task to be of type `TYPE_FNAME`.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Runs the AI task as an NPC method. This requires the task to be of type `TYPE_FNAME`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run_FName)
 ---@param target NPC The NPC to run the task on.
@@ -52,7 +54,8 @@ function Task:Run_FName(target) end
 ---@param target NPC The NPC to start the task on.
 function Task:Start(target) end
 
----[SERVER] Starts the AI task as an NPC method.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Starts the AI task as an NPC method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start_FName)
 ---@param target NPC The NPC to start the task on.

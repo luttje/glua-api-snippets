@@ -22,7 +22,7 @@ function team.BestAutoJoinTeam() end
 ---@return table # Team info
 function team.GetAllTeams() end
 
----[SHARED] Returns the selectable classes for the given team. This can be added to with team.SetClass
+---[SHARED] Returns the selectable classes for the given team. This can be added to with [team.SetClass](https://wiki.facepunch.com/gmod/team.SetClass)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.GetClass)
 ---@param index number Index of the team
@@ -44,7 +44,7 @@ function team.GetColor(teamIndex) end
 function team.GetName(teamIndex) end
 
 ---[SHARED] Returns a table with all player of the specified team.
---- 		This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+--- 		**NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.GetPlayers)
 ---@param teamIndex number The team index.
@@ -58,21 +58,21 @@ function team.GetPlayers(teamIndex) end
 ---@return number # score
 function team.GetScore(teamIndex) end
 
----[SHARED] Returns a table of valid spawnpoint classes the team can use. These are set with team.SetSpawnPoint.
+---[SHARED] Returns a table of valid spawnpoint classes the team can use. These are set with [team.SetSpawnPoint](https://wiki.facepunch.com/gmod/team.SetSpawnPoint).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.GetSpawnPoint)
 ---@param index number Index of the team
 ---@return table # Valid spawnpoint classes
 function team.GetSpawnPoint(index) end
 
----[SHARED] Returns a table of valid spawnpoint entities the team can use. These are set with  team.SetSpawnPoint.
+---[SHARED] Returns a table of valid spawnpoint entities the team can use. These are set with  [team.SetSpawnPoint](https://wiki.facepunch.com/gmod/team.SetSpawnPoint).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.GetSpawnPoints)
 ---@param index number Index of the team
 ---@return table # Valid spawnpoint entities
 function team.GetSpawnPoints(index) end
 
----[SHARED] Returns if a team is joinable or not. This is set in team.SetUp.
+---[SHARED] Returns if a team is joinable or not. This is set in [team.SetUp](https://wiki.facepunch.com/gmod/team.SetUp).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.Joinable)
 ---@param index number The index of the team.
@@ -86,7 +86,7 @@ function team.Joinable(index) end
 ---@return number # playerCount
 function team.NumPlayers(teamIndex) end
 
----[SHARED] Sets valid classes for use by a team. Classes can be created using player_manager.RegisterClass
+---[SHARED] Sets valid classes for use by a team. Classes can be created using [player_manager.RegisterClass](https://wiki.facepunch.com/gmod/player_manager.RegisterClass)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.SetClass)
 ---@param index number Index of the team
@@ -109,7 +109,7 @@ function team.SetScore(index, score) end
 
 ---[SHARED] Sets valid spawnpoint classes for use by a team.
 ---
---- GM.TeamBased must be set to true for this to work
+--- **NOTE**: GM.TeamBased must be set to true for this to work
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.SetSpawnPoint)
 ---@param index number Index of the team

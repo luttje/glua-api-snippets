@@ -1,6 +1,6 @@
 ---@meta
 
---- This is a list of all methods only available for players. It is also possible to call Entity functions on the Player.
+--- This is a list of all methods only available for players. It is also possible to call [Entity](https://wiki.facepunch.com/gmod/Entity) functions on the Player.
 ---@class Player : Entity
 local Player = {}
 
@@ -11,9 +11,9 @@ player = {}
 --- Represents a player class.
 ---
 --- The player class hooks have one special field:
---- * Player **Player** - The player for which a hook is called.
+--- * [Player](https://wiki.facepunch.com/gmod/Player) **Player** - The player for which a hook is called.
 ---
---- These hooks are used in player_manager this can't be hook.Add
+--- **NOTE**: These hooks are used in [player_manager](https://wiki.facepunch.com/gmod/player_manager) this can't be [hooked](https://wiki.facepunch.com/gmod/hook.Add)
 ---
 ---
 ---@class PLAYER
@@ -21,12 +21,12 @@ PLAYER = {}
 
 ---[SERVER] Similar to the serverside command "bot", this function creates a new Player bot with the given name. This bot will not obey to the usual "bot_*" commands, and it's the same bot base used in TF2 and CS:S.
 ---
---- The best way to control the behaviour of a Player bot right now is to use the GM:StartCommand hook and modify its input serverside.
+--- The best way to control the behaviour of a Player bot right now is to use the [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand) hook and modify its input serverside.
 ---
---- Despite this Player being fake, it has to be removed from the server by using Player:Kick and **NOT** Entity:Remove.
+--- **NOTE**: Despite this Player being fake, it has to be removed from the server by using [Player:Kick](https://wiki.facepunch.com/gmod/Player:Kick) and **NOT** [Entity:Remove](https://wiki.facepunch.com/gmod/Entity:Remove).
 --- Also keep in mind that these bots still use player slots, so you won't be able to spawn them in singleplayer!
 ---
---- Any Bot created using this method will be considered UnAuthed by Garry's Mod
+--- **NOTE**: Any Bot created using this method will be considered UnAuthed by Garry's Mod
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.CreateNextBot)
 ---@param botName string The name of the bot, using an already existing name will append brackets at the end of it with a number pertaining it.
@@ -37,9 +37,9 @@ function player.CreateNextBot(botName) end
 
 ---[SHARED] Gets all the current players in the server (not including connecting clients).
 ---
---- This function returns bots as well as human players. See player.GetBots and  player.GetHumans.
+--- This function returns bots as well as human players. See [player.GetBots](https://wiki.facepunch.com/gmod/player.GetBots) and  [player.GetHumans](https://wiki.facepunch.com/gmod/player.GetHumans).
 ---
---- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+--- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetAll)
 ---@return table # All Players currently in the server.
@@ -51,8 +51,8 @@ function player.GetAll() end
 ---@return table # A table only containing bots ( AI / non human players )
 function player.GetBots() end
 
----[SHARED] Tried to get the player with the specified Player:AccountID.
---- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
+---[SHARED] Tried to get the player with the specified [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID).
+--- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByAccountID)
 ---@param accountID number The Player:AccountID to find the player by.
@@ -61,12 +61,11 @@ function player.GetByAccountID(accountID) end
 
 ---[SHARED] Gets the player with the specified connection ID.
 ---
---- Connection ID can be retrieved via gameevent.Listen events.
+--- Connection ID can be retrieved via [gameevent.Listen](https://wiki.facepunch.com/gmod/gameevent.Listen) events.
 ---
---- For a function that returns a player based on their Entity:EntIndex, see Global.Entity.
+--- For a function that returns a player based on their [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex), see [Global.Entity](https://wiki.facepunch.com/gmod/Global.Entity).
 ---
----
---- For a function that returns a player based on their Player:UserID, see Global.Player.
+--- For a function that returns a player based on their [Player:UserID](https://wiki.facepunch.com/gmod/Player:UserID), see [Global.Player](https://wiki.facepunch.com/gmod/Global.Player).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByID)
 ---@param connectionID number The connection ID to find the player by.
@@ -74,7 +73,7 @@ function player.GetByAccountID(accountID) end
 function player.GetByID(connectionID) end
 
 ---[SHARED] Gets the player with the specified SteamID.
---- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
+--- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
@@ -82,7 +81,7 @@ function player.GetByID(connectionID) end
 function player.GetBySteamID(steamID) end
 
 ---[SHARED] Gets the player with the specified SteamID64.
---- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
+--- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBySteamID64)
 ---@param steamID64 string The Player:SteamID64 to find the player by.
@@ -91,8 +90,9 @@ function player.GetBySteamID64(steamID64) end
 
 ---[SHARED] Gets the player with the specified uniqueID (not recommended way to identify players).
 ---
---- It is highly recommended to use player.GetByAccountID, player.GetBySteamID or player.GetBySteamID64 instead as this function can have collisions ( be same for different people ) while SteamID is guaranteed to unique to each player.
---- 	Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
+--- **WARNING**: It is highly recommended to use [player.GetByAccountID](https://wiki.facepunch.com/gmod/player.GetByAccountID), [player.GetBySteamID](https://wiki.facepunch.com/gmod/player.GetBySteamID) or [player.GetBySteamID64](https://wiki.facepunch.com/gmod/player.GetBySteamID64) instead as this function can have collisions ( be same for different people ) while SteamID is guaranteed to unique to each player.
+---
+--- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
@@ -102,7 +102,7 @@ function player.GetByUniqueID(uniqueID) end
 
 ---[SHARED] Gives you the player count.
 ---
---- Similar to **#**player.GetAll() but with better performance since the player table doesn't have to be generated. If player.GetAll is already being called for iteration, then using the **#** operator on the table will be faster than calling this function since it is JITted.
+--- **NOTE**: Similar to **#**[player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll)() but with better performance since the player table doesn't have to be generated. If [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll) is already being called for iteration, then using the **#** operator on the table will be faster than calling this function since it is JITted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetCount)
 ---@return number # Number of players
@@ -110,8 +110,8 @@ function player.GetCount() end
 
 ---[SHARED] Returns a table containing all human players (non-bot/AI).
 ---
---- Unlike player.GetAll, this does not include bots.
---- This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+--- Unlike [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), this does not include bots.
+--- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetHumans)
 ---@return table # A table containing all human (non-bot/AI) players.
@@ -119,25 +119,30 @@ function player.GetHumans() end
 
 ---[SHARED] Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all players on the server.
 --- 		Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
---- 		See ents.Iterator for a similar function for all entities.
+--- 		See [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) for a similar function for all entities.
 ---
---- 		Internally, this function uses cached values that exist entirely within lua, as opposed to player.GetAll, which is a C++ function.
---- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than player.GetAll.
+--- 		Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
+--- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
+--- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
+---
+--- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
 ---@return table # Table of all existing Player.  This is a cached copy of player.GetAll
----@return number #  			The starting index for the table of players.   			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
+---@return number #
+--- 			The starting index for the table of players.
+--- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function player.Iterator() end
 
 ---[SHARED] Returns the player's AccountID part of their full SteamID.
 ---
 --- Since this does not include other vital parts of the SteamID such as "Account Type" and "Account Instance", it should be avoided, as AccountIDs are finite, and can theoretically be the same for multiple valid accounts.
 ---
---- See Player:SteamID for the text representation of the full SteamID.
---- See Player:SteamID64 for a 64bit representation of the full SteamID.
+--- See [Player:SteamID](https://wiki.facepunch.com/gmod/Player:SteamID) for the text representation of the full SteamID.
+--- See [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) for a 64bit representation of the full SteamID.
 ---
---- In a `-multirun` environment, this will return `-1` for all "copies" of a player because they are not authenticated with Steam.
+--- **NOTE**: In a `-multirun` environment, this will return `-1` for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For bots this will return values starting with `0` for the first bot, `1` for the second bot and so on.
 ---
@@ -145,14 +150,16 @@ function player.Iterator() end
 ---@return number # The AccountID of Player's SteamID.
 function Player:AccountID() end
 
----[SHARED] This function is only available in Sandbox and its derivatives.Adds an entity to the player's clean up list. This uses cleanup.Add internally.
+---[SHARED] **NOTE**: This function is only available in Sandbox and its derivatives.
+--- Adds an entity to the player's clean up list. This uses [cleanup.Add](https://wiki.facepunch.com/gmod/cleanup.Add) internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AddCleanup)
 ---@param type string The Cleanup type for this Entity.
 ---@param ent Entity The Entity to add.
 function Player:AddCleanup(type, ent) end
 
----[SHARED] This function is only available in Sandbox and its derivatives.Adds an entity to the player's list of entities of the same type. See Player:GetCount to get the current count of entities of an entity type added with this function.
+---[SHARED] **NOTE**: This function is only available in Sandbox and its derivatives.
+--- Adds an entity to the player's list of entities of the same type. See [Player:GetCount](https://wiki.facepunch.com/gmod/Player:GetCount) to get the current count of entities of an entity type added with this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AddCount)
 ---@param str string The type of this Entity.
@@ -184,12 +191,18 @@ function Player:AddFrozenPhysicsObject(ent, physobj) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AddPlayerOption)
 ---@param name string Name of the vote
 ---@param timeout number Time until the vote expires
----@param vote_callback function The function to be run when the player presses 0-9 while a vote is active.
+---@param vote_callback fun(voteNum: number): boolean The function to be run when the player presses 0-9 while a vote is active.
+---
+--- Function argument(s):
+--- * number `voteNum` - Which option the player pressed, 1-9 and 0 being the very last option.
+---
+--- Function return value(s):
+--- * boolean `` - Return true to remove this option from the vote.
 ---@param draw_callback function Used to draw the vote panel.
 function Player:AddPlayerOption(name, timeout, vote_callback, draw_callback) end
 
----[SHARED] Plays a sequence directly from a sequence number, similar to Player:AnimRestartGesture. This function has the advantage to play sequences that haven't been bound to an existing Enums/ACT
---- This is not automatically networked. This function has to be called on the client to be seen by said client.
+---[SHARED] Plays a sequence directly from a sequence number, similar to [Player:AnimRestartGesture](https://wiki.facepunch.com/gmod/Player:AnimRestartGesture). This function has the advantage to play sequences that haven't been bound to an existing [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT)
+--- **WARNING**: This is not automatically networked. This function has to be called on the client to be seen by said client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AddVCDSequenceToGestureSlot)
 ---@param slot number Gesture slot using Enums/GESTURE_SLOT
@@ -224,7 +237,7 @@ function Player:AnimResetGestureSlot(slot) end
 
 ---[SHARED] Restart a gesture on a player, within a gesture slot.
 ---
---- This is not automatically networked. This function has to be called on the client to be seen by said client.
+--- **WARNING**: This is not automatically networked. This function has to be called on the client to be seen by said client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AnimRestartGesture)
 ---@param slot number Gesture slot using Enums/GESTURE_SLOT
@@ -232,7 +245,7 @@ function Player:AnimResetGestureSlot(slot) end
 ---@param autokill? boolean Whether the animation should be automatically stopped. true = stops the animation, false = the animation keeps playing/looping
 function Player:AnimRestartGesture(slot, activity, autokill) end
 
----[SHARED] Restarts the main animation on the player, has the same effect as calling Entity:SetCycle( 0 ).
+---[SHARED] Restarts the main animation on the player, has the same effect as calling [Entity:SetCycle](https://wiki.facepunch.com/gmod/Entity:SetCycle)( 0 ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:AnimRestartMainSequence)
 function Player:AnimRestartMainSequence() end
@@ -264,9 +277,9 @@ function Player:Armor() end
 ---@param kick? boolean Whether to kick the player after banning them or not
 function Player:Ban(minutes, kick) end
 
----[SHARED] Returns true if the player's flashlight hasn't been disabled by Player:AllowFlashlight.
+---[SHARED] Returns true if the player's flashlight hasn't been disabled by [Player:AllowFlashlight](https://wiki.facepunch.com/gmod/Player:AllowFlashlight).
 ---
---- This is not synchronized between clients and server automatically!
+--- **NOTE**: This is not synchronized between clients and server automatically!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight)
 ---@return boolean # Whether the player can use flashlight.
@@ -274,17 +287,17 @@ function Player:CanUseFlashlight() end
 
 ---[SHARED] Prints a string to the chatbox of the client.
 ---
---- Just like the usermessage, this function is affected by the 255 byte limit!
+--- **WARNING**: Just like the [usermessage](https://wiki.facepunch.com/gmod/usermessage), this function is affected by the 255 byte limit!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ChatPrint)
 ---@param message string String to be printed
 function Player:ChatPrint(message) end
 
----[SHARED] Checks if the limit of an entity type added by Player:AddCount is hit or not. If it's hit, it will call the GM:PlayerCheckLimit hook, and call Player:LimitHit if the hook doesn't return `false`.
+---[SHARED] Checks if the limit of an entity type added by [Player:AddCount](https://wiki.facepunch.com/gmod/Player:AddCount) is hit or not. If it's hit, it will call the [GM:PlayerCheckLimit](https://wiki.facepunch.com/gmod/GM:PlayerCheckLimit) hook, and call [Player:LimitHit](https://wiki.facepunch.com/gmod/Player:LimitHit) if the hook doesn't return `false`.
 ---
 --- This will always return `true` in singleplayer, as singleplayer does not have limits.
 ---
---- This function is only available in Sandbox and its derivatives.
+--- **NOTE**: This function is only available in Sandbox and its derivatives.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CheckLimit)
 ---@param str string The entity type to check the limit for. Default types:
@@ -314,9 +327,9 @@ function PLAYER:ClassChanged() end
 
 ---[SHARED] Runs the concommand on the player. This does not work on bots. If used clientside, always runs the command on the local player.
 ---
---- If you wish to directly modify the movement input of bots, use GM:StartCommand instead.
+--- If you wish to directly modify the movement input of bots, use [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand) instead.
 ---
---- Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
+--- **NOTE**: Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked ConCommands).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ConCommand)
 ---@param command string command to run
@@ -326,24 +339,24 @@ function Player:ConCommand(command) end
 ---
 --- This is normally used when a player dies, to create their death ragdoll.
 ---
---- The ragdoll will be created with the player's properties such as Entity:GetPos, Entity:GetAngles, Player:GetPlayerColor, Entity:GetVelocity and Entity:GetModel.
+--- The ragdoll will be created with the player's properties such as [Position](https://wiki.facepunch.com/gmod/Entity:GetPos), [Angles](https://wiki.facepunch.com/gmod/Entity:GetAngles), [PlayerColor](https://wiki.facepunch.com/gmod/Player:GetPlayerColor), [Velocity](https://wiki.facepunch.com/gmod/Entity:GetVelocity) and [Model](https://wiki.facepunch.com/gmod/Entity:GetModel).
 ---
---- You can retrieve the entity this creates with Player:GetRagdollEntity.
+--- You can retrieve the entity this creates with [Player:GetRagdollEntity](https://wiki.facepunch.com/gmod/Player:GetRagdollEntity).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CreateRagdoll)
 function Player:CreateRagdoll() end
 
----[SERVER] Disables the default player's crosshair. Can be reenabled with Player:CrosshairEnable. This will affect WEAPON:DoDrawCrosshair.
+---[SERVER] Disables the default player's crosshair. Can be reenabled with [Player:CrosshairEnable](https://wiki.facepunch.com/gmod/Player:CrosshairEnable). This will affect [WEAPON:DoDrawCrosshair](https://wiki.facepunch.com/gmod/WEAPON:DoDrawCrosshair).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CrosshairDisable)
 function Player:CrosshairDisable() end
 
----[SERVER] Enables the player's crosshair, if it was previously disabled via Player:CrosshairDisable.
+---[SERVER] Enables the player's crosshair, if it was previously disabled via [Player:CrosshairDisable](https://wiki.facepunch.com/gmod/Player:CrosshairDisable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:CrosshairEnable)
 function Player:CrosshairEnable() end
 
----[SHARED] Returns whether the player is crouching or not (Enums/FL flag).
+---[SHARED] Returns whether the player is crouching or not ([FL_DUCKING](https://wiki.facepunch.com/gmod/Enums/FL) flag).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Crouching)
 ---@return boolean # Whether the player is crouching.
@@ -370,7 +383,7 @@ function Player:DebugInfo() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DetonateTripmines)
 function Player:DetonateTripmines() end
 
----[SERVER] Disables world clicking for given player. See Panel:SetWorldClicker and Player:IsWorldClickingDisabled.
+---[SERVER] Disables world clicking for given player. See [Panel:SetWorldClicker](https://wiki.facepunch.com/gmod/Panel:SetWorldClicker) and [Player:IsWorldClickingDisabled](https://wiki.facepunch.com/gmod/Player:IsWorldClickingDisabled).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DisableWorldClicking)
 ---@param disable boolean Whether the world clicking should be disabled.
@@ -378,7 +391,7 @@ function Player:DisableWorldClicking(disable) end
 
 ---[SHARED] Sends a third person animation event to the player.
 ---
---- Calls GM:DoAnimationEvent with Enums/PLAYERANIMEVENT as the event, data as the given data.
+--- Calls [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) with [PLAYERANIMEVENT_CUSTOM_GESTURE](https://wiki.facepunch.com/gmod/Enums/PLAYERANIMEVENT) as the event, data as the given data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DoAnimationEvent)
 ---@param data number The data to send.
@@ -386,14 +399,14 @@ function Player:DoAnimationEvent(data) end
 
 ---[SHARED] Starts the player's attack animation. The attack animation is determined by the weapon's HoldType.
 ---
---- Similar to other animation event functions, calls GM:DoAnimationEvent with Enums/PLAYERANIMEVENT as the event and no extra data.
+--- Similar to other animation event functions, calls [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) with [PLAYERANIMEVENT_ATTACK_PRIMARY](https://wiki.facepunch.com/gmod/Enums/PLAYERANIMEVENT) as the event and no extra data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DoAttackEvent)
 function Player:DoAttackEvent() end
 
 ---[SHARED] Sends a specified third person animation event to the player.
 ---
---- Calls GM:DoAnimationEvent with specified arguments.
+--- Calls [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) with specified arguments.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DoCustomAnimEvent)
 ---@param event number The event to send. See Enums/PLAYERANIMEVENT.
@@ -402,14 +415,14 @@ function Player:DoCustomAnimEvent(event, data) end
 
 ---[SHARED] Sends a third person reload animation event to the player.
 ---
---- Similar to other animation event functions, calls GM:DoAnimationEvent with Enums/PLAYERANIMEVENT as the event and no extra data.
+--- Similar to other animation event functions, calls [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) with [PLAYERANIMEVENT_RELOAD](https://wiki.facepunch.com/gmod/Enums/PLAYERANIMEVENT) as the event and no extra data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DoReloadEvent)
 function Player:DoReloadEvent() end
 
 ---[SHARED] Sends a third person secondary fire animation event to the player.
 ---
---- Similar to other animation event functions, calls GM:DoAnimationEvent with Enums/PLAYERANIMEVENT as the event and no extra data.
+--- Similar to other animation event functions, calls [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) with [PLAYERANIMEVENT_ATTACK_SECONDARY](https://wiki.facepunch.com/gmod/Enums/PLAYERANIMEVENT) as the event and no extra data.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DoSecondaryAttack)
 function Player:DoSecondaryAttack() end
@@ -449,7 +462,7 @@ function Player:DropObject() end
 function Player:DropWeapon(weapon, target, velocity) end
 
 ---[SERVER] Force puts the player into a specified vehicle.
---- This **does not** bypass GM:CanPlayerEnterVehicle.
+--- This **does not** bypass [GM:CanPlayerEnterVehicle](https://wiki.facepunch.com/gmod/GM:CanPlayerEnterVehicle).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:EnterVehicle)
 ---@param vehicle Vehicle Vehicle the player will enter
@@ -458,32 +471,32 @@ function Player:EnterVehicle(vehicle) end
 ---[SERVER] Equips the player with the HEV suit.
 ---
 --- Allows the player to zoom, walk slowly, sprint, pickup armor batteries, use the health and armor stations and also shows the HUD.
---- The player also emits a flatline sound on death, which can be overridden with GM:PlayerDeathSound.
+--- The player also emits a flatline sound on death, which can be overridden with [GM:PlayerDeathSound](https://wiki.facepunch.com/gmod/GM:PlayerDeathSound).
 ---
---- The player is automatically equipped with the suit on spawn, if you wish to stop that, use Player:RemoveSuit.
+--- The player is automatically equipped with the suit on spawn, if you wish to stop that, use [Player:RemoveSuit](https://wiki.facepunch.com/gmod/Player:RemoveSuit).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:EquipSuit)
 function Player:EquipSuit() end
 
 ---[SERVER] Forces the player to exit the vehicle if they're in one.
 ---
---- This function will bypass GM:CanExitVehicle. See also GM:PlayerLeaveVehicle
+--- This function will bypass [GM:CanExitVehicle](https://wiki.facepunch.com/gmod/GM:CanExitVehicle). See also [GM:PlayerLeaveVehicle](https://wiki.facepunch.com/gmod/GM:PlayerLeaveVehicle)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ExitVehicle)
 function Player:ExitVehicle() end
 
----[CLIENT] Called from GM:FinishMove.
+---[CLIENT] Called from [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove).
 ---
---- This hook will not work if the current gamemode overrides GM:FinishMove and does not call this hook.
+--- **WARNING**: This hook will not work if the current gamemode overrides [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove) and does not call this hook.
 ---
---- This hook is run after the drive.FinishMove has been called.
+--- **NOTE**: This hook is run after the [drive.FinishMove](https://wiki.facepunch.com/gmod/drive.FinishMove) has been called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:FinishMove)
 ---@param mv CMoveData
 ---@return boolean # Return true to prevent default action
 function PLAYER:FinishMove(mv) end
 
----[SERVER] Enables/Disables the player's flashlight.Player:CanUseFlashlight must be true in order for the player's flashlight to be changed.
+---[SERVER] Enables/Disables the player's flashlight.[Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight) must be true in order for the player's flashlight to be changed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Flashlight)
 ---@param isOn boolean Turns the flashlight on/off
@@ -497,15 +510,15 @@ function Player:FlashlightIsOn() end
 
 ---[SHARED] Returns the amount of frags a player has.
 ---
---- The value will change depending on the player's kill or suicide: +1 for a kill, -1 for a suicide.
+--- **NOTE**: The value will change depending on the player's kill or suicide: +1 for a kill, -1 for a suicide.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Frags)
 ---@return number # frags
 function Player:Frags() end
 
----[SERVER] Freeze the player. Frozen players cannot move, look around, or attack. Key bindings are still called. Similar to Player:Lock but the player can still take damage.
+---[SERVER] Freeze the player. Frozen players cannot move, look around, or attack. Key bindings are still called. Similar to [Player:Lock](https://wiki.facepunch.com/gmod/Player:Lock) but the player can still take damage.
 ---
---- Adds or removes the Enums/FL flag from the player.
+--- Adds or removes the [FL_FROZEN](https://wiki.facepunch.com/gmod/Enums/FL) flag from the player.
 ---
 --- Frozen bots will still be able to look around.
 ---
@@ -515,7 +528,7 @@ function Player:Freeze(frozen) end
 
 ---[SHARED] Returns the player's active weapon.
 ---
---- If used on a Global.LocalPlayer() and the player is spectating another player with `OBS_MODE_IN_EYE`, the weapon returned will be of the spectated player.
+--- If used on a [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer)() and the player is spectating another player with `OBS_MODE_IN_EYE`, the weapon returned will be of the spectated player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetActiveWeapon)
 ---@return Weapon # The weapon the player currently has equipped or NULL if the player doesn't have an active weapon eg. when they're dead.
@@ -548,7 +561,9 @@ function Player:GetAllowWeaponsInVehicle() end
 ---[SHARED] Returns a table of all ammo the player has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetAmmo)
----@return table # A table with the following format * number Key - AmmoID to be used with functions like game.GetAmmoName. * number Value - Amount of ammo the player has of this kind.
+---@return table # A table with the following format
+--- * number Key - AmmoID to be used with functions like game.GetAmmoName.
+--- * number Value - Amount of ammo the player has of this kind.
 function Player:GetAmmo() end
 
 ---[SHARED] Gets the amount of ammo the player has.
@@ -582,7 +597,8 @@ function Player:GetCanZoom() end
 ---@return number # The player's class id.
 function Player:GetClassID() end
 
----[SHARED] This function is only available in Sandbox and its derivatives.Gets the total amount of entities of an entity type added by Player:AddCount.
+---[SHARED] **NOTE**: This function is only available in Sandbox and its derivatives.
+--- Gets the total amount of entities of an entity type added by [Player:AddCount](https://wiki.facepunch.com/gmod/Player:AddCount).
 ---
 --- Default types:
 --- ```
@@ -608,17 +624,17 @@ function Player:GetCount(type, minus) end
 
 ---[SHARED] Returns the crouched walk speed multiplier.
 ---
---- See also Player:GetWalkSpeed and Player:SetCrouchedWalkSpeed.
+--- See also [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed) and [Player:SetCrouchedWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetCrouchedWalkSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCrouchedWalkSpeed)
 ---@return number # The crouched walk speed multiplier.
 function Player:GetCrouchedWalkSpeed() end
 
----[SHARED] Returns the last command which was sent by the specified player. This can only be called on the player which Global.GetPredictionPlayer() returns.
+---[SHARED] Returns the last command which was sent by the specified player. This can only be called on the player which [Global.GetPredictionPlayer](https://wiki.facepunch.com/gmod/Global.GetPredictionPlayer)() returns.
 ---
---- When called clientside in singleplayer during WEAPON:Think, it will return nothing as the hook is not technically predicted in that instance. See the note on the page.
+--- **NOTE**: When called clientside in singleplayer during [WEAPON:Think](https://wiki.facepunch.com/gmod/WEAPON:Think), it will return nothing as the hook is not technically predicted in that instance. See the note on the page.
 ---
---- This will fail in GM:StartCommand.
+--- This will fail in [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCurrentCommand)
 ---@return CUserCmd # Last user commands
@@ -626,19 +642,19 @@ function Player:GetCurrentCommand() end
 
 ---[SHARED] Gets the **actual** view offset which equals the difference between the players actual position and their view when standing.
 ---
---- Do not confuse with Player:GetViewOffset and Player:GetViewOffsetDucked
+--- Do not confuse with [Player:GetViewOffset](https://wiki.facepunch.com/gmod/Player:GetViewOffset) and [Player:GetViewOffsetDucked](https://wiki.facepunch.com/gmod/Player:GetViewOffsetDucked)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetCurrentViewOffset)
 ---@return Vector # The actual view offset.
 function Player:GetCurrentViewOffset() end
 
----[SHARED] Gets the entity the player is currently driving via the drive library.
+---[SHARED] Gets the entity the player is currently driving via the [drive](https://wiki.facepunch.com/gmod/drive) library.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetDrivingEntity)
 ---@return Entity # The currently driven entity, or NULL entity
 function Player:GetDrivingEntity() end
 
----[SHARED] Returns driving mode of the player. See Entity Driving.
+---[SHARED] Returns driving mode of the player. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetDrivingMode)
 ---@return number # The drive mode ID or 0 if player doesn't use the drive system.
@@ -660,9 +676,9 @@ function Player:GetEntityInUse() end
 ---
 --- The results of this function are **cached** clientside every frame.
 ---
---- Uses util.GetPlayerTrace internally and is therefore bound by its limits.
+--- Uses [util.GetPlayerTrace](https://wiki.facepunch.com/gmod/util.GetPlayerTrace) internally and is therefore bound by its limits.
 ---
---- See also Player:GetEyeTraceNoCursor.
+--- See also [Player:GetEyeTraceNoCursor](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetEyeTrace)
 ---@return table # Trace information, see Structures/TraceResult.
@@ -672,9 +688,9 @@ function Player:GetEyeTrace() end
 ---
 --- The results of this function are **cached** clientside every frame.
 ---
---- Uses util.GetPlayerTrace internally and is therefore bound by its limits.
+--- Uses [util.GetPlayerTrace](https://wiki.facepunch.com/gmod/util.GetPlayerTrace) internally and is therefore bound by its limits.
 ---
---- See also Player:GetEyeTrace.
+--- See also [Player:GetEyeTrace](https://wiki.facepunch.com/gmod/Player:GetEyeTrace).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor)
 ---@return table # Trace result. See Structures/TraceResult.
@@ -724,17 +740,18 @@ function Player:GetHull() end
 ---@return Vector # Player's crouch hull top base size.
 function Player:GetHullDuck() end
 
----[SHARED] Retrieves the value of a client-side ConVar. The ConVar must have a Enums/FCVAR flag for this to work.
+---[SHARED] Retrieves the value of a client-side [ConVar](https://wiki.facepunch.com/gmod/ConVar). The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
 ---
---- The returned value is truncated to 31 bytes.
---- On client this function will return value of the local player, regardless of which player the function was called on!
+--- **WARNING**: The returned value is truncated to 31 bytes.
+---
+--- **WARNING**: On client this function will return value of the local player, regardless of which player the function was called on!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetInfo)
 ---@param cVarName string The name of the client-side ConVar.
 ---@return string # The value of the ConVar.
 function Player:GetInfo(cVarName) end
 
----[SHARED] Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The ConVar must have a Enums/FCVAR flag for this to work.
+---[SHARED] Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetInfoNum)
 ---@param cVarName string The name of the ConVar to query the value of
@@ -750,7 +767,7 @@ function Player:GetJumpPower() end
 
 ---[SHARED] Returns the player's ladder climbing speed.
 ---
---- See Player:GetWalkSpeed for normal walking speed, Player:GetRunSpeed for sprinting speed and Player:GetSlowWalkSpeed for slow walking speed.
+--- See [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed) for normal walking speed, [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed) for sprinting speed and [Player:GetSlowWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetSlowWalkSpeed) for slow walking speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetLadderClimbSpeed)
 ---@return number # The ladder climbing speed.
@@ -770,15 +787,15 @@ function Player:GetMaxArmor() end
 
 ---[SHARED] Returns the player's maximum movement speed.
 ---
---- See also Player:SetMaxSpeed, Player:GetWalkSpeed and Player:GetRunSpeed.
+--- See also [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed), [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed) and [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetMaxSpeed)
 ---@return number # The maximum movement speed the player can go at.
 function Player:GetMaxSpeed() end
 
----[SHARED] Returns the player's name, this is an alias of Player:Nick.
+---[SHARED] Returns the player's name, this is an alias of [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick).
 ---
---- This function overrides Entity:GetName (in the Lua metatable, not in c++), keep it in mind when dealing with ents.FindByName or any engine function which requires the mapping name.
+--- **NOTE**: This function overrides [Entity:GetName](https://wiki.facepunch.com/gmod/Entity:GetName) (in the Lua metatable, not in c++), keep it in mind when dealing with [ents.FindByName](https://wiki.facepunch.com/gmod/ents.FindByName) or any engine function which requires the mapping name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetName)
 ---@return string # The player's name.
@@ -798,7 +815,7 @@ function Player:GetObserverMode() end
 
 ---[SHARED] Returns the entity the player is currently observing.
 ---
---- Set using Player:SpectateEntity.
+--- Set using [Player:SpectateEntity](https://wiki.facepunch.com/gmod/Player:SpectateEntity).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetObserverTarget)
 ---@return Entity # The entity the player is currently spectating, or Global_Variables if the player has no target.
@@ -806,11 +823,11 @@ function Player:GetObserverTarget() end
 
 ---[SHARED] Returns a **P**ersistent **Data** key-value pair from the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql library. See util.GetPData for cases when the player is not currently on the server.
+--- Internally uses the [sql](https://wiki.facepunch.com/gmod/sql) library. See [util.GetPData](https://wiki.facepunch.com/gmod/util.GetPData) for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
+--- **NOTE**: This function internally uses [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which can cause collisions (two or more players sharing the same PData entry). [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) now replaces all instances of [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) when running [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData)
 ---
---- PData is not networked from servers to clients!
+--- **NOTE**: PData is not networked from servers to clients!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPData)
 ---@param key string Name of the PData key
@@ -832,7 +849,7 @@ function Player:GetPlayerInfo() end
 
 ---[SERVER] Returns the preferred carry angles of an object, if any are set.
 ---
---- Calls GM:GetPreferredCarryAngles with the target entity and returns the carry angles.
+--- Calls [GM:GetPreferredCarryAngles](https://wiki.facepunch.com/gmod/GM:GetPreferredCarryAngles) with the target entity and returns the carry angles.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPreferredCarryAngles)
 ---@param carryEnt Entity Entity to retrieve the carry angles of.
@@ -850,21 +867,25 @@ function Player:GetPressedWidget() end
 ---[SHARED] Returns the weapon the player previously had equipped.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPreviousWeapon)
----@return Entity # The previous weapon of the player.  This is not guaranteed to be a weapon entity so it should be checked with Entity:IsWeapon for safety.
+---@return Entity # The previous weapon of the player.
+---
+--- This is not guaranteed to be a weapon entity so it should be checked with [Entity:IsWeapon](https://wiki.facepunch.com/gmod/Entity:IsWeapon) for safety.
 function Player:GetPreviousWeapon() end
 
----[SHARED] Returns players screen punch effect angle. See Player:ViewPunch and Player:SetViewPunchAngles
+---[SHARED] Returns players screen punch effect angle. See [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch) and [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPunchAngle)
 ---@return Angle # The punch angle
 ---@deprecated You should use Player:GetViewPunchAngles instead.
 function Player:GetPunchAngle() end
 
----[SHARED] Returns players death ragdoll. The ragdoll is created by Player:CreateRagdoll.
---- Calling Entity:GetPos server-side with this function then will return the position when Player:CreateRagdoll was used.
+---[SHARED] Returns players death ragdoll. The ragdoll is created by [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll).
+--- Calling [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) server-side with this function then will return the position when [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll) was used.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRagdollEntity)
----@return Entity # The ragdoll.  Unlike normal clientside ragdolls (`C_ClientRagdoll`), this will be a `C_HL2MPRagdoll` on the client, and `hl2mp_ragdoll` on the server.
+---@return Entity # The ragdoll.
+---
+--- Unlike normal clientside ragdolls (`C_ClientRagdoll`), this will be a `C_HL2MPRagdoll` on the client, and `hl2mp_ragdoll` on the server.
 function Player:GetRagdollEntity() end
 
 ---[SHARED] Returns the render angles for the player.
@@ -875,7 +896,7 @@ function Player:GetRenderAngles() end
 
 ---[SHARED] Returns the player's sprint speed.
 ---
---- See also Player:SetRunSpeed, Player:GetWalkSpeed and Player:GetMaxSpeed.
+--- See also [Player:SetRunSpeed](https://wiki.facepunch.com/gmod/Player:SetRunSpeed), [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed) and [Player:GetMaxSpeed](https://wiki.facepunch.com/gmod/Player:GetMaxSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRunSpeed)
 ---@return number # The sprint speed
@@ -883,7 +904,7 @@ function Player:GetRunSpeed() end
 
 ---[SHARED] Returns the position of a Player's view
 ---
---- This is the same as calling Entity:EyePos on the player.
+--- **NOTE**: This is the same as calling [Entity:EyePos](https://wiki.facepunch.com/gmod/Entity:EyePos) on the player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetShootPos)
 ---@return Vector # The position of the player's view.
@@ -891,7 +912,7 @@ function Player:GetShootPos() end
 
 ---[SHARED] Returns the player's slow walking speed, which is activated via +WALK keybind.
 ---
---- See Player:GetWalkSpeed for normal walking speed, Player:GetRunSpeed for sprinting speed and Player:GetLadderClimbSpeed for ladder climb speed.
+--- See [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed) for normal walking speed, [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed) for sprinting speed and [Player:GetLadderClimbSpeed](https://wiki.facepunch.com/gmod/Player:GetLadderClimbSpeed) for ladder climb speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetSlowWalkSpeed)
 ---@return number # The new slow walking speed.
@@ -911,15 +932,15 @@ function Player:GetStepSize() end
 ---@return number # The current suit power.
 function Player:GetSuitPower() end
 
----[SERVER] Returns the number of seconds that the player has been timing out for. You can check if a player is timing out with Player:IsTimingOut.
+---[SERVER] Returns the number of seconds that the player has been timing out for. You can check if a player is timing out with [Player:IsTimingOut](https://wiki.facepunch.com/gmod/Player:IsTimingOut).
 ---
---- This function is relatively useless because it is tied to the value of the `sv_timeout` ConVar, which is irrelevant to the description above. [This is not considered as a bug](https://discord.com/channels/565105920414318602/567617926991970306/748970396224585738).
+--- **NOTE**: This function is relatively useless because it is tied to the value of the `sv_timeout` ConVar, which is irrelevant to the description above. [This is not considered as a bug](https://discord.com/channels/565105920414318602/567617926991970306/748970396224585738).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetTimeoutSeconds)
 ---@return number # Timeout seconds.
 function Player:GetTimeoutSeconds() end
 
----[SHARED] Returns Structures/TOOL table of players current tool, or of the one specified.
+---[SHARED] Returns [TOOL](https://wiki.facepunch.com/gmod/Structures/TOOL) table of players current tool, or of the one specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetTool)
 ---@param mode? string Classname of the tool to retrieve. ( Filename of the tool in gmod_tool/stools/ )
@@ -933,7 +954,7 @@ function Player:GetTool(mode) end
 function Player:GetUnDuckSpeed() end
 
 ---[SHARED] Returns the entity the player would use if they would press their `+use` keybind.
---- 	Because entity physics objects usually do not exist on the client, the client's use entity will resolve to whatever the crosshair is placed on within a little less than 72 units of the player's eye position. This differs from the entity returned by the server, which has fully physical use checking. See util.TraceHull.
+--- 	**NOTE**: Because entity physics objects usually do not exist on the client, the client's use entity will resolve to whatever the crosshair is placed on within a little less than 72 units of the player's eye position. This differs from the entity returned by the server, which has fully physical use checking. See [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---
 --- Issue tracker: [5027](https://github.com/Facepunch/garrysmod-issues/issues/5027)
 ---
@@ -954,7 +975,7 @@ function Player:GetUserGroup() end
 function Player:GetVehicle() end
 
 ---[SHARED] Returns the entity the player is using to see from (such as the player itself, the camera, or another entity).
---- 	This function will return a [NULL Entity] until Player:SetViewEntity has been used
+--- 	**NOTE**: This function will return a [NULL Entity] until [Player:SetViewEntity](https://wiki.facepunch.com/gmod/Player:SetViewEntity) has been used
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewEntity)
 ---@return Entity # The entity the player is using to see from
@@ -963,9 +984,9 @@ function Player:GetViewEntity() end
 ---[SHARED] Returns the player's view model entity by the index.
 --- Each player has 3 view models by default, but only the first one is used.
 ---
---- To use the other viewmodels in your SWEP, see Entity:SetWeaponModel.
+--- To use the other viewmodels in your SWEP, see [Entity:SetWeaponModel](https://wiki.facepunch.com/gmod/Entity:SetWeaponModel).
 ---
---- In the Client States, other players' viewmodels are not available unless they are being spectated.
+--- **NOTE**: In the Client [realm](https://wiki.facepunch.com/gmod/States), other players' viewmodels are not available unless they are being spectated.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewModel)
 ---@param index? number optional index of the view model to return, can range from 0 to 2
@@ -974,7 +995,7 @@ function Player:GetViewModel(index) end
 
 ---[SHARED] Returns the view offset of the player which equals the difference between the players actual position and their view.
 ---
---- See also Player:GetViewOffsetDucked.
+--- See also [Player:GetViewOffsetDucked](https://wiki.facepunch.com/gmod/Player:GetViewOffsetDucked).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewOffset)
 ---@return Vector # New view offset, must be local vector to players Entity:GetPos
@@ -982,7 +1003,7 @@ function Player:GetViewOffset() end
 
 ---[SHARED] Returns the view offset of the player which equals the difference between the players actual position and their view when ducked.
 ---
---- See also Player:GetViewOffset.
+--- See also [Player:GetViewOffset](https://wiki.facepunch.com/gmod/Player:GetViewOffset).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewOffsetDucked)
 ---@return Vector # New crouching view offset, must be local vector to players Entity:GetPos
@@ -994,7 +1015,7 @@ function Player:GetViewOffsetDucked() end
 ---@return Angle # The punch angle
 function Player:GetViewPunchAngles() end
 
----[SHARED] Returns client's view punch velocity. See Player:ViewPunch and Player:SetViewPunchVelocity
+---[SHARED] Returns client's view punch velocity. See [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch) and [Player:SetViewPunchVelocity](https://wiki.facepunch.com/gmod/Player:SetViewPunchVelocity)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetViewPunchVelocity)
 ---@return Angle # The current view punch angle velocity.
@@ -1008,7 +1029,7 @@ function Player:GetVoiceVolumeScale() end
 
 ---[SHARED] Returns the player's normal walking speed. Not sprinting, not slow walking. (+walk)
 ---
---- See also Player:SetWalkSpeed, Player:GetMaxSpeed and Player:GetRunSpeed.
+--- See also [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed), [Player:GetMaxSpeed](https://wiki.facepunch.com/gmod/Player:GetMaxSpeed) and [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed)
 ---@return number # The normal walking speed.
@@ -1028,8 +1049,7 @@ function Player:GetWeapon(className) end
 function Player:GetWeaponColor() end
 
 ---[SHARED] Returns a table of the player's weapons.
----
---- 			This function returns a sequential table, meaning it should be looped with Global.ipairs instead of Global.pairs for efficiency reasons.
+--- 		**NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapons)
 ---@return table # All the weapons the player currently has.
@@ -1037,7 +1057,7 @@ function Player:GetWeapons() end
 
 ---[SERVER] Gives the player a weapon.
 ---
---- While this function is meant for weapons/pickupables only, it is **not** restricted to weapons. Any entity can be spawned using this function, including NPCs and SENTs.
+--- **NOTE**: While this function is meant for weapons/pickupables only, it is **not** restricted to weapons. Any entity can be spawned using this function, including NPCs and SENTs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Give)
 ---@param weaponClassName string Class name of weapon to give the player
@@ -1067,7 +1087,7 @@ function Player:GodDisable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GodEnable)
 function Player:GodEnable() end
 
----[SHARED] Returns whether the player has god mode or not, contolled by Player:GodEnable and Player:GodDisable.
+---[SHARED] Returns whether the player has god mode or not, contolled by [Player:GodEnable](https://wiki.facepunch.com/gmod/Player:GodEnable) and [Player:GodDisable](https://wiki.facepunch.com/gmod/Player:GodDisable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:HasGodMode)
 ---@return boolean # Whether the player has god mode or not.
@@ -1092,15 +1112,15 @@ function PLAYER:Init() end
 function Player:InVehicle() end
 
 ---[SERVER] Returns the player's IP address and connection port in ip:port form
---- Returns `Error!` for bots.
+--- **NOTE**: Returns `Error!` for bots.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IPAddress)
 ---@return string # The player's IP address and connection port
 function Player:IPAddress() end
 
----[SHARED] Returns whether the player is an admin or not. It will also return `true` if the player is Player:IsSuperAdmin by default.
+---[SHARED] Returns whether the player is an admin or not. It will also return `true` if the player is [Player:IsSuperAdmin](https://wiki.facepunch.com/gmod/Player:IsSuperAdmin) by default.
 ---
---- Internally this is determined by Player:IsUserGroup.
+--- Internally this is determined by [Player:IsUserGroup](https://wiki.facepunch.com/gmod/Player:IsUserGroup).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsAdmin)
 ---@return boolean # True if the player is an admin or a super admin.
@@ -1124,7 +1144,7 @@ function Player:IsConnected() end
 ---@return boolean # A value representing whether or not the player is 'driving' an entity.
 function Player:IsDrivingEntity() end
 
----[SHARED] Returns whether the players movement is currently frozen, controlled by Player:Freeze.
+---[SHARED] Returns whether the players movement is currently frozen, controlled by [Player:Freeze](https://wiki.facepunch.com/gmod/Player:Freeze).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsFrozen)
 ---@return boolean # Whether the players movement is currently frozen or not.
@@ -1132,16 +1152,21 @@ function Player:IsFrozen() end
 
 ---[SERVER] Returns whether the player identity was confirmed by the steam network.
 ---
---- See also GM:PlayerAuthed.
+--- See also [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated)
----@return boolean # Whether the player has been fully authenticated or not.  This will always be true for singleplayer and the listen server host. This will always be false for bots.
+---@return boolean # Whether the player has been fully authenticated or not.
+---
+--- This will always be true for singleplayer and the listen server host.
+--- This will always be false for bots.
 function Player:IsFullyAuthenticated() end
 
 ---[SHARED] Returns if a player is the host of the current session.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsListenServerHost)
----@return boolean # `true` if the player is the listen server host, `false` otherwise.  This will always be `true` in single player, and `false` on a dedicated server.
+---@return boolean # `true` if the player is the listen server host, `false` otherwise.
+---
+--- This will always be `true` in single player, and `false` on a dedicated server.
 function Player:IsListenServerHost() end
 
 ---[CLIENT] Returns whether or not the player is muted locally.
@@ -1180,7 +1205,7 @@ function Player:IsSuitEquipped() end
 
 ---[SHARED] Returns whether the player is a super admin.
 ---
---- Internally this is determined by Player:IsUserGroup. See also Player:IsAdmin.
+--- Internally this is determined by [Player:IsUserGroup](https://wiki.facepunch.com/gmod/Player:IsUserGroup). See also [Player:IsAdmin](https://wiki.facepunch.com/gmod/Player:IsAdmin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsSuperAdmin)
 ---@return boolean # True if the player is a super admin.
@@ -1202,7 +1227,7 @@ function Player:IsTimingOut() end
 ---@return boolean # Whether the player is typing in their chat or not.
 function Player:IsTyping() end
 
----[SHARED] Returns true/false if the player is in specified group or not. See Player:GetUserGroup for a way to get player's usergroup.
+---[SHARED] Returns true/false if the player is in specified group or not. See [Player:GetUserGroup](https://wiki.facepunch.com/gmod/Player:GetUserGroup) for a way to get player's usergroup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsUserGroup)
 ---@param groupname string Group to check the player for.
@@ -1221,13 +1246,13 @@ function Player:IsVoiceAudible() end
 ---@return boolean # True if the player is currently walking.
 function Player:IsWalking() end
 
----[SHARED] Returns whether the player is using the world clicking feature, see Panel:SetWorldClicker
+---[SHARED] Returns whether the player is using the world clicking feature, see [Panel:SetWorldClicker](https://wiki.facepunch.com/gmod/Panel:SetWorldClicker)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClicking)
 ---@return boolean # Is the player world clicking or not.
 function Player:IsWorldClicking() end
 
----[SHARED] Returns whether the world clicking is disabled for given player or not. See Player:DisableWorldClicking.
+---[SHARED] Returns whether the world clicking is disabled for given player or not. See [Player:DisableWorldClicking](https://wiki.facepunch.com/gmod/Player:DisableWorldClicking).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsWorldClickingDisabled)
 ---@return boolean # Whether the world clicking is disabled or not.
@@ -1262,7 +1287,7 @@ function Player:KeyPressed(key) end
 function Player:KeyReleased(key) end
 
 ---[SERVER] Kicks the player from the server.
---- This can not be run before the player has fully joined in. Use game.KickID for that.
+--- **NOTE**: This can not be run before the player has fully joined in. Use [game.KickID](https://wiki.facepunch.com/gmod/game.KickID) for that.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Kick)
 ---@param reason? string Reason to show for disconnection.
@@ -1270,14 +1295,14 @@ function Player:KeyReleased(key) end
 --- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~498. It is recommended to avoid going near the limit to avoid truncation.
 function Player:Kick(reason) end
 
----[SERVER] Kills a player and calls GM:PlayerDeath.
+---[SERVER] Kills a player and calls [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Kill)
 function Player:Kill() end
 
 ---[SERVER] Kills a player without notifying the rest of the server.
 ---
---- This will call GM:PlayerSilentDeath instead of GM:PlayerDeath.
+--- This will call [GM:PlayerSilentDeath](https://wiki.facepunch.com/gmod/GM:PlayerSilentDeath) instead of [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KillSilent)
 function Player:KillSilent() end
@@ -1286,13 +1311,13 @@ function Player:KillSilent() end
 ---
 --- This technique is most commonly used on things that hit other entities instantaneously, such as traces.
 ---
---- Entity:FireBullets calls this function internally.
+--- **NOTE**: [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) calls this function internally.
 ---
---- Lag compensation only works for players and entities that have been enabled with Entity:SetLagCompensated
+--- Lag compensation only works for players and entities that have been enabled with [Entity:SetLagCompensated](https://wiki.facepunch.com/gmod/Entity:SetLagCompensated)
 ---
---- Despite being defined shared, it can only be used server-side in a ~search:%3Cpredicted%3EYes.
+--- Despite being defined shared, it can only be used server-side in a [Predicted Hook](https://wiki.facepunch.com/gmod/~search:%3Cpredicted%3EYes).
 ---
---- This function NEEDS to be disabled after you're done with it or it will break the movement of the entities affected!
+--- **WARNING**: This function NEEDS to be disabled after you're done with it or it will break the movement of the entities affected!
 ---
 --- Lag compensation does not support pose parameters.
 ---
@@ -1307,7 +1332,7 @@ function Player:LagCompensation(lagCompensation) end
 function Player:LastHitGroup() end
 
 ---[SHARED] Shows "limit hit" notification in sandbox.
---- This function is only available in Sandbox and its derivatives.
+--- **NOTE**: This function is only available in Sandbox and its derivatives.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:LimitHit)
 ---@param type string Type of hit limit.
@@ -1320,15 +1345,15 @@ function PLAYER:Loadout() end
 
 ---[SHARED] Returns the direction a player is looking as a entity/local-oriented angle.
 ---
---- Unlike Entity:EyeAngles, this function does not include angles of the Player's Entity:GetParent.
+--- Unlike [Entity:EyeAngles](https://wiki.facepunch.com/gmod/Entity:EyeAngles), this function does not include angles of the Player's [Entity:GetParent](https://wiki.facepunch.com/gmod/Entity:GetParent).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:LocalEyeAngles)
 ---@return Angle # local eye angles
 function Player:LocalEyeAngles() end
 
----[SERVER] Stops a player from using any inputs, such as moving, turning, or attacking. Key binds are still called. Similar to Player:Freeze but the player takes no damage.
+---[SERVER] Stops a player from using any inputs, such as moving, turning, or attacking. Key binds are still called. Similar to [Player:Freeze](https://wiki.facepunch.com/gmod/Player:Freeze) but the player takes no damage.
 ---
---- Adds the Enums/FL and Enums/FL flags to the player.
+--- Adds the [FL_FROZEN](https://wiki.facepunch.com/gmod/Enums/FL) and [FL_GODMODE](https://wiki.facepunch.com/gmod/Enums/FL) flags to the player.
 ---
 --- Frozen bots will still be able to look around.
 ---
@@ -1342,18 +1367,18 @@ function Player:Lock() end
 ---@return Vector # Position of the bone.
 function Player:MotionSensorPos(bone) end
 
----[CLIENT] Called from GM:Move.
+---[CLIENT] Called from [GM:Move](https://wiki.facepunch.com/gmod/GM:Move).
 ---
---- This hook will not work if the current gamemode overrides GM:Move and does not call this hook.
+--- **WARNING**: This hook will not work if the current gamemode overrides [GM:Move](https://wiki.facepunch.com/gmod/GM:Move) and does not call this hook.
 ---
---- This hook is run after the drive.Move has been called.
+--- **NOTE**: This hook is run after the [drive.Move](https://wiki.facepunch.com/gmod/drive.Move) has been called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:Move)
 ---@param mv CMoveData Movement information
 ---@return boolean # Return true to prevent default action
 function PLAYER:Move(mv) end
 
----[SHARED] Returns the players name. Identical to Player:Nick and Player:GetName.
+---[SHARED] Returns the players name. Identical to [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Name)
 ---@return string # Player's Steam name.
@@ -1369,7 +1394,7 @@ function Player:Nick() end
 ---
 --- If player is not using Steam Family Sharing, this will return the player's actual SteamID64().
 ---
---- This data will only be available after the player has fully authenticated with Steam. See Player:IsFullyAuthenticated.
+--- **NOTE**: This data will only be available after the player has fully authenticated with Steam. See [Player:IsFullyAuthenticated](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:OwnerSteamID64)
 ---@return string # The 64bit SteamID
@@ -1389,9 +1414,9 @@ function Player:PhysgunUnfreeze() end
 
 ---[SERVER] This makes the player hold ( same as pressing E on a small prop ) the provided entity.
 ---
---- Don't get this confused with picking up items like ammo or health kits
+--- **NOTE**: Don't get this confused with picking up items like ammo or health kits
 ---
---- This picks up the passed entity regardless of its mass or distance from the player
+--- **NOTE**: This picks up the passed entity regardless of its mass or distance from the player
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PickupObject)
 ---@param entity Entity Entity to pick up.
@@ -1399,7 +1424,7 @@ function Player:PickupObject(entity) end
 
 ---[SERVER] Forces the player to pickup an existing weapon entity. The player will not pick up the weapon if they already own a weapon of given type, or if the player could not normally have this weapon in their inventory.
 ---
---- This function **will** bypass GM:PlayerCanPickupWeapon.
+--- This function **will** bypass [GM:PlayerCanPickupWeapon](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PickupWeapon)
 ---@param wep Weapon The weapon to try to pick up.
@@ -1433,9 +1458,9 @@ function PLAYER:PostDrawViewModel(viewmodel, weapon) end
 ---@param weapon Entity The weapon
 function PLAYER:PreDrawViewModel(viewmodel, weapon) end
 
----[SHARED] Displays a message either in their chat, console, or center of the screen. See also Global.PrintMessage.
+---[SHARED] Displays a message either in their chat, console, or center of the screen. See also [Global.PrintMessage](https://wiki.facepunch.com/gmod/Global.PrintMessage).
 ---
---- When called serverside, this uses the archaic user message system (the umsg) and hence is limited to ≈250 characters.
+--- **NOTE**: When called serverside, this uses the archaic user message system (the [umsg](https://wiki.facepunch.com/gmod/umsg)) and hence is limited to ≈250 characters.
 ---
 --- `HUD_PRINTCENTER` will not work when this is called clientside.
 ---
@@ -1463,10 +1488,11 @@ function Player:RemoveAmmo(ammoCount, ammoName) end
 
 ---[SHARED] Removes a **P**ersistent **Data** key-value pair from the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql library. See util.RemovePData for cases when the player is not currently on the server.
+--- Internally uses the [sql](https://wiki.facepunch.com/gmod/sql) library. See [util.RemovePData](https://wiki.facepunch.com/gmod/util.RemovePData) for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
---- PData is not networked from servers to clients!
+--- **NOTE**: This function internally uses [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which can cause collisions (two or more players sharing the same PData entry). [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) now replaces all instances of [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) when running [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData)
+---
+--- **NOTE**: PData is not networked from servers to clients!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:RemovePData)
 ---@param key string Key to remove
@@ -1485,7 +1511,7 @@ function Player:ResetHull() end
 
 ---[SERVER] Forces the player to say whatever the first argument is. Works on bots too.
 ---
---- This function ignores the default chat message cooldown
+--- **NOTE**: This function ignores the default chat message cooldown
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:Say)
 ---@param text string The text to force the player to say.
@@ -1507,9 +1533,9 @@ function Player:ScreenFade(flags, clr, fadeTime, fadeHold) end
 
 ---[SERVER] Sets the active weapon of the player by its class name.
 ---
---- This will switch the weapon out of prediction, causing delay on the client and WEAPON:Deploy and WEAPON:Holster to be called out of prediction. Try using CUserCmd:SelectWeapon or input.SelectWeapon, instead.
+--- **WARNING**: This will switch the weapon out of prediction, causing delay on the client and [WEAPON:Deploy](https://wiki.facepunch.com/gmod/WEAPON:Deploy) and [WEAPON:Holster](https://wiki.facepunch.com/gmod/WEAPON:Holster) to be called out of prediction. Try using [CUserCmd:SelectWeapon](https://wiki.facepunch.com/gmod/CUserCmd:SelectWeapon) or [input.SelectWeapon](https://wiki.facepunch.com/gmod/input.SelectWeapon), instead.
 ---
---- This will trigger the weapon switch event and associated animations. To switch weapons silently, use Player:SetActiveWeapon.
+--- **NOTE**: This will trigger the weapon switch event and associated animations. To switch weapons silently, use [Player:SetActiveWeapon](https://wiki.facepunch.com/gmod/Player:SetActiveWeapon).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SelectWeapon)
 ---@param className string The class name of the weapon to switch to.
@@ -1519,7 +1545,7 @@ function Player:SelectWeapon(className) end
 
 ---[SERVER] Sends a hint to a player.
 ---
---- This function is only available in Sandbox and its derivatives. Since this adds `#Hint_` to the beginning of each message, you should only use it with default hint messages, or those cached with language.Add. For hints with custom text, look at notification.AddLegacy.
+--- **NOTE**: This function is only available in Sandbox and its derivatives. Since this adds `#Hint_` to the beginning of each message, you should only use it with default hint messages, or those cached with [language.Add](https://wiki.facepunch.com/gmod/language.Add). For hints with custom text, look at [notification.AddLegacy](https://wiki.facepunch.com/gmod/notification.AddLegacy).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SendHint)
 ---@param name string Name/class/index of the hint. You can find a list of hint names for this function List_of_Hint_Classes.
@@ -1527,18 +1553,18 @@ function Player:SelectWeapon(className) end
 function Player:SendHint(name, delay) end
 
 ---[SERVER] Executes a simple Lua string on the player.
---- If you need to use this function more than once consider using net library. Send net message and make the entire code you want to execute in net.Receive on client.
+--- **NOTE**: If you need to use this function more than once consider using [net](https://wiki.facepunch.com/gmod/net) library. Send net message and make the entire code you want to execute in [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on client.
 ---
---- The string is limited to 254 bytes. Consider using the Net_Library_Usage for more advanced server-client interaction.
+--- **NOTE**: The string is limited to 254 bytes. Consider using the [net library](https://wiki.facepunch.com/gmod/Net_Library_Usage) for more advanced server-client interaction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SendLua)
 ---@param script string The script to execute.
 function Player:SendLua(script) end
 
----[SERVER] Sets the player's active weapon. You should use CUserCmd:SelectWeapon or Player:SelectWeapon, instead in most cases.
+---[SERVER] Sets the player's active weapon. You should use [CUserCmd:SelectWeapon](https://wiki.facepunch.com/gmod/CUserCmd:SelectWeapon) or [Player:SelectWeapon](https://wiki.facepunch.com/gmod/Player:SelectWeapon), instead in most cases.
 ---
 --- This function will not trigger the weapon switch events or associated equip animations. It will bypass
----  GM:PlayerSwitchWeapon and the currently active weapon's WEAPON:Holster return value.
+---  [GM:PlayerSwitchWeapon](https://wiki.facepunch.com/gmod/GM:PlayerSwitchWeapon) and the currently active weapon's [WEAPON:Holster](https://wiki.facepunch.com/gmod/WEAPON:Holster) return value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetActiveWeapon)
 ---@param weapon Weapon The weapon to equip.
@@ -1605,7 +1631,7 @@ function Player:SetClassID(classID) end
 ---
 --- Doesn't work for values above 1.
 ---
---- See also Player:SetWalkSpeed and Player:GetCrouchedWalkSpeed.
+--- See also [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) and [Player:GetCrouchedWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetCrouchedWalkSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetCrouchedWalkSpeed)
 ---@param speed number The walk speed multiplier that crouch speed should be.
@@ -1613,7 +1639,7 @@ function Player:SetCrouchedWalkSpeed(speed) end
 
 ---[SHARED] Sets the **actual** view offset which equals the difference between the players actual position and their view when standing.
 ---
---- Do not confuse with Player:SetViewOffset and Player:SetViewOffsetDucked
+--- Do not confuse with [Player:SetViewOffset](https://wiki.facepunch.com/gmod/Player:SetViewOffset) and [Player:SetViewOffsetDucked](https://wiki.facepunch.com/gmod/Player:SetViewOffsetDucked)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetCurrentViewOffset)
 ---@param viewOffset Vector The new view offset.
@@ -1625,9 +1651,11 @@ function Player:SetCurrentViewOffset(viewOffset) end
 ---@param deathcount number Number of deaths (positive or negative)
 function Player:SetDeaths(deathcount) end
 
----[SHARED] Sets the driving entity and driving mode.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Use drive.PlayerStartDriving instead, see Entity Driving.
+--- Sets the driving entity and driving mode.
+---
+--- Use [drive.PlayerStartDriving](https://wiki.facepunch.com/gmod/drive.PlayerStartDriving) instead, see [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetDrivingEntity)
 ---@param drivingEntity? Entity The entity the player should drive.
@@ -1675,7 +1703,7 @@ function Player:SetFrags(fragcount) end
 ---[SHARED] Sets the hands entity of a player.
 ---
 --- The hands entity is an entity introduced in Garry's Mod 13 and it's used to show the player's hands attached to the viewmodel.
---- This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit Using Viewmodel Hands.
+--- This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit [Using Viewmodel Hands](https://wiki.facepunch.com/gmod/Using Viewmodel Hands).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHands)
 ---@param hands Entity The hands entity to set
@@ -1689,7 +1717,7 @@ function Player:SetHoveredWidget(widget) end
 
 ---[SHARED] Sets the mins and maxs of the AABB of the players collision.
 ---
---- See Player:SetHullDuck for the hull while crouching/ducking.
+--- See [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck) for the hull while crouching/ducking.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---@param hullMins Vector The min coordinates of the hull.
@@ -1698,7 +1726,7 @@ function Player:SetHull(hullMins, hullMaxs) end
 
 ---[SHARED] Sets the mins and maxs of the AABB of the players collision when ducked.
 ---
---- See Player:SetHull for setting the hull while standing.
+--- See [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull) for setting the hull while standing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHullDuck)
 ---@param hullMins Vector The min coordinates of the hull.
@@ -1713,7 +1741,7 @@ function Player:SetJumpPower(jumpPower) end
 
 ---[SHARED] Sets the player's ladder climbing speed.
 ---
---- See Player:SetWalkSpeed for normal walking speed, Player:SetRunSpeed for sprinting speed and Player:SetSlowWalkSpeed for slow walking speed.
+--- See [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) for normal walking speed, [Player:SetRunSpeed](https://wiki.facepunch.com/gmod/Player:SetRunSpeed) for sprinting speed and [Player:SetSlowWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetSlowWalkSpeed) for slow walking speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetLadderClimbSpeed)
 ---@param speed number The ladder climbing speed.
@@ -1721,11 +1749,11 @@ function Player:SetLadderClimbSpeed(speed) end
 
 ---[SERVER] Slows down the player movement simulation by the timescale, this is used internally in the HL2 weapon stripping sequence.
 ---
---- It achieves such behavior by multiplying the Global.FrameTime by the specified timescale at the start of the movement simulation and then restoring it afterwards.
+--- It achieves such behavior by multiplying the [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) by the specified timescale at the start of the movement simulation and then restoring it afterwards.
 ---
---- This is reset to 1 on spawn.
+--- **NOTE**: This is reset to 1 on spawn.
 ---
---- There is no weapon counterpart to this, you'll have to hardcode the multiplier in the weapon or call Weapon:SetNextPrimaryFire / Weapon:SetNextSecondaryFire manually.
+--- There is no weapon counterpart to this, you'll have to hardcode the multiplier in the weapon or call [Weapon:SetNextPrimaryFire](https://wiki.facepunch.com/gmod/Weapon:SetNextPrimaryFire) / [Weapon:SetNextSecondaryFire](https://wiki.facepunch.com/gmod/Weapon:SetNextSecondaryFire) manually.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetLaggedMovementValue)
 ---@param timescale number The timescale multiplier.
@@ -1737,7 +1765,7 @@ function Player:SetLaggedMovementValue(timescale) end
 ---@param hitgroup number The hitgroup to set as the "last hit", see Enums/HITGROUP.
 function Player:SetLastHitGroup(hitgroup) end
 
----[SERVER] Sets the maximum amount of armor the player should have. This affects default built-in armor pickups, but not Player:SetArmor.
+---[SERVER] Sets the maximum amount of armor the player should have. This affects default built-in armor pickups, but not [Player:SetArmor](https://wiki.facepunch.com/gmod/Player:SetArmor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetMaxArmor)
 ---@param maxarmor number The new max armor value.
@@ -1745,7 +1773,7 @@ function Player:SetMaxArmor(maxarmor) end
 
 ---[SHARED] Sets the maximum speed which the player can move at.
 ---
---- This is called automatically by the engine. If you wish to limit player speed without setting their run/sprint speeds, see CMoveData:SetMaxClientSpeed.
+--- **NOTE**: This is called automatically by the engine. If you wish to limit player speed without setting their run/sprint speeds, see [CMoveData:SetMaxClientSpeed](https://wiki.facepunch.com/gmod/CMoveData:SetMaxClientSpeed).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed)
 ---@param walkSpeed number The maximum speed.
@@ -1753,7 +1781,7 @@ function Player:SetMaxSpeed(walkSpeed) end
 
 ---[SERVER] Called when we need to set player model from the class.
 ---
---- This will only be called if you have not overridden GM:PlayerSetModel or call this function from it or anywhere else using player_manager.RunClass
+--- **NOTE**: This will only be called if you have not overridden [GM:PlayerSetModel](https://wiki.facepunch.com/gmod/GM:PlayerSetModel) or call this function from it or anywhere else using [player_manager.RunClass](https://wiki.facepunch.com/gmod/player_manager.RunClass)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:SetModel)
 function PLAYER:SetModel() end
@@ -1764,10 +1792,11 @@ function PLAYER:SetModel() end
 ---@param mute boolean Mute or unmute.
 function Player:SetMuted(mute) end
 
----[SHARED] Sets whenever the player should not collide with their teammates, based on their Player:Team.
+---[SHARED] Sets whenever the player should not collide with their teammates, based on their [Player:Team](https://wiki.facepunch.com/gmod/Player:Team).
 ---
---- This will only work for teams with ID 1 to 4 due to internal Engine limitations.
---- This causes traces with Enums/COLLISION_GROUP to pass through players.
+--- **NOTE**: This will only work for teams with ID 1 to 4 due to internal Engine limitations.
+---
+--- **NOTE**: This causes traces with [COLLISION_GROUP_PLAYER](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP) to pass through players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetNoCollideWithTeammates)
 ---@param shouldNotCollide boolean `true` to disable, `false` to enable collision.
@@ -1775,13 +1804,13 @@ function Player:SetNoCollideWithTeammates(shouldNotCollide) end
 
 ---[SERVER] Sets the players visibility towards NPCs.
 ---
---- Internally this toggles the Enums/FL flag, which you can manually test for using Entity:IsFlagSet
+--- Internally this toggles the [FL_NOTARGET](https://wiki.facepunch.com/gmod/Enums/FL) flag, which you can manually test for using [Entity:IsFlagSet](https://wiki.facepunch.com/gmod/Entity:IsFlagSet)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetNoTarget)
 ---@param visibility boolean The visibility.
 function Player:SetNoTarget(visibility) end
 
----[SHARED] Sets the players observer mode. You must start the spectating first with Player:Spectate.
+---[SHARED] Sets the players observer mode. You must start the spectating first with [Player:Spectate](https://wiki.facepunch.com/gmod/Player:Spectate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetObserverMode)
 ---@param mode number Spectator mode using Enums/OBS_MODE.
@@ -1789,11 +1818,11 @@ function Player:SetObserverMode(mode) end
 
 ---[SHARED] Writes a **P**ersistent **Data** key-value pair to the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
 ---
---- Internally uses the sql library. See util.SetPData for cases when the player is not currently on the server.
+--- Internally uses the [sql](https://wiki.facepunch.com/gmod/sql) library. See [util.SetPData](https://wiki.facepunch.com/gmod/util.SetPData) for cases when the player is not currently on the server.
 ---
---- This function internally uses Player:SteamID64, it previously utilized Player:UniqueID which can cause collisions (two or more players sharing the same PData entry). Player:SetPData now replaces all instances of Player:UniqueID with Player:SteamID64 when running Player:SetPData
+--- **NOTE**: This function internally uses [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which can cause collisions (two or more players sharing the same PData entry). [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) now replaces all instances of [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) when running [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData)
 ---
---- PData is not networked from servers to clients!
+--- **NOTE**: PData is not networked from servers to clients!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetPData)
 ---@param key string Name of the PData key
@@ -1815,7 +1844,7 @@ function Player:SetPlayerColor(Color) end
 ---@param pressedWidget? Entity The widget the player is currently using.
 function Player:SetPressedWidget(pressedWidget) end
 
----[SHARED] Sets the render angles of a player. Value set by this function is reset to player's angles (Entity:GetAngles) right after GM:UpdateAnimation.
+---[SHARED] Sets the render angles of a player. Value set by this function is reset to player's angles ([Entity:GetAngles](https://wiki.facepunch.com/gmod/Entity:GetAngles)) right after [GM:UpdateAnimation](https://wiki.facepunch.com/gmod/GM:UpdateAnimation).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetRenderAngles)
 ---@param ang Angle The new render angles to set
@@ -1823,8 +1852,8 @@ function Player:SetRenderAngles(ang) end
 
 ---[SHARED] Sets the player's sprint speed.
 ---
---- See also Player:GetRunSpeed, Player:SetWalkSpeed and Player:SetMaxSpeed.
---- player_default class run speed is: `600`
+--- See also [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed), [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) and [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed).
+--- **NOTE**: player_default class run speed is: `600`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetRunSpeed)
 ---@param runSpeed number The new sprint speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.
@@ -1834,7 +1863,7 @@ function Player:SetRunSpeed(runSpeed) end
 
 ---[SHARED] Sets the player's slow walking speed, which is activated via +WALK keybind.
 ---
---- See Player:SetWalkSpeed for normal walking speed, Player:SetRunSpeed for sprinting speed and Player:SetLadderClimbSpeed for ladder climb speed.
+--- See [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) for normal walking speed, [Player:SetRunSpeed](https://wiki.facepunch.com/gmod/Player:SetRunSpeed) for sprinting speed and [Player:SetLadderClimbSpeed](https://wiki.facepunch.com/gmod/Player:SetLadderClimbSpeed) for ladder climb speed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetSlowWalkSpeed)
 ---@param speed number The new slow walking speed.
@@ -1877,7 +1906,7 @@ function Player:SetUnDuckSpeed(UnDuckSpeed) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:SetupDataTables)
 function PLAYER:SetupDataTables() end
 
----[SERVER] Sets up the players view model hands. Calls GM:PlayerSetHandsModel to set the model of the hands.
+---[SERVER] Sets up the players view model hands. Calls [GM:PlayerSetHandsModel](https://wiki.facepunch.com/gmod/GM:PlayerSetHandsModel) to set the model of the hands.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetupHands)
 ---@param ent Entity If the player is spectating an entity, this should be the entity the player is spectating, so we can use its hands model instead.
@@ -1897,9 +1926,9 @@ function Player:SetViewEntity(viewEntity) end
 
 ---[SHARED] Sets the **desired** view offset which equals the difference between the players actual position and their view when standing.
 ---
---- If you want to set **actual** view offset, use Player:SetCurrentViewOffset
+--- If you want to set **actual** view offset, use [Player:SetCurrentViewOffset](https://wiki.facepunch.com/gmod/Player:SetCurrentViewOffset)
 ---
---- See also Player:SetViewOffsetDucked for **desired** view offset when crouching.
+--- See also [Player:SetViewOffsetDucked](https://wiki.facepunch.com/gmod/Player:SetViewOffsetDucked) for **desired** view offset when crouching.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetViewOffset)
 ---@param viewOffset Vector The new desired view offset when standing.
@@ -1907,21 +1936,21 @@ function Player:SetViewOffset(viewOffset) end
 
 ---[SHARED] Sets the **desired** view offset which equals the difference between the players actual position and their view when crouching.
 ---
---- If you want to set **actual** view offset, use Player:SetCurrentViewOffset
+--- If you want to set **actual** view offset, use [Player:SetCurrentViewOffset](https://wiki.facepunch.com/gmod/Player:SetCurrentViewOffset)
 ---
---- See also Player:SetViewOffset for **desired** view offset when standing.
+--- See also [Player:SetViewOffset](https://wiki.facepunch.com/gmod/Player:SetViewOffset) for **desired** view offset when standing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetViewOffsetDucked)
 ---@param viewOffset Vector The new desired view offset when crouching.
 function Player:SetViewOffsetDucked(viewOffset) end
 
----[SHARED] Sets client's view punch angle, but not the velocity. See Player:ViewPunch
+---[SHARED] Sets client's view punch angle, but not the velocity. See [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles)
 ---@param punchAngle Angle The angle to set.
 function Player:SetViewPunchAngles(punchAngle) end
 
----[SHARED] Sets client's view punch velocity. See Player:ViewPunch and Player:SetViewPunchAngles
+---[SHARED] Sets client's view punch velocity. See [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch) and [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetViewPunchVelocity)
 ---@param punchVel Angle The angle velocity to set.
@@ -1929,7 +1958,7 @@ function Player:SetViewPunchVelocity(punchVel) end
 
 ---[CLIENT] Sets the voice volume scale for given player on client. This value will persist from server to server, but will be reset when the game is shut down.
 ---
---- This doesn't work on bots, their scale will always be `1`.
+--- **NOTE**: This doesn't work on bots, their scale will always be `1`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetVoiceVolumeScale)
 ---@param number number The voice volume scale, where `0` is 0% and `1` is 100%.
@@ -1937,11 +1966,11 @@ function Player:SetVoiceVolumeScale(number) end
 
 ---[SHARED] Sets the player's normal walking speed. Not sprinting, not slow walking +walk.
 ---
---- See also Player:SetSlowWalkSpeed, Player:GetWalkSpeed, Player:SetCrouchedWalkSpeed, Player:SetMaxSpeed and Player:SetRunSpeed.
+--- See also [Player:SetSlowWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetSlowWalkSpeed), [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed), [Player:SetCrouchedWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetCrouchedWalkSpeed), [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed) and [Player:SetRunSpeed](https://wiki.facepunch.com/gmod/Player:SetRunSpeed).
 ---
 --- Using a speed of `0` can lead to prediction errors.
 ---
---- `player_default` class walk speed is: `400`.
+--- **NOTE**: `player_default` class walk speed is: `400`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed)
 ---@param walkSpeed number The new walk speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.
@@ -1963,7 +1992,7 @@ function Player:ShouldDrawLocalPlayer() end
 
 ---[SERVER] Sets whether the player's current weapon should drop on death.
 ---
---- This is reset on spawn to the Player_Classes's **DropWeaponOnDie** field by player_manager.OnPlayerSpawn.
+--- **NOTE**: This is reset on spawn to the [player class](https://wiki.facepunch.com/gmod/Player_Classes)'s **DropWeaponOnDie** field by [player_manager.OnPlayerSpawn](https://wiki.facepunch.com/gmod/player_manager.OnPlayerSpawn).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ShouldDropWeapon)
 ---@param drop boolean Whether to drop the player's current weapon or not
@@ -2000,7 +2029,7 @@ function Player:Spectate(mode) end
 
 ---[SERVER] Makes the player spectate the entity.
 ---
---- To get the applied spectated entity, use Player:GetObserverTarget.
+--- To get the applied spectated entity, use [Player:GetObserverTarget](https://wiki.facepunch.com/gmod/Player:GetObserverTarget).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SpectateEntity)
 ---@param entity Entity Entity to spectate.
@@ -2023,11 +2052,11 @@ function Player:SprintDisable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SprintEnable)
 function Player:SprintEnable() end
 
----[CLIENT] Called from GM:CreateMove.
+---[CLIENT] Called from [GM:CreateMove](https://wiki.facepunch.com/gmod/GM:CreateMove).
 ---
---- This hook will not work if the current gamemode overrides GM:SetupMove and does not call this hook.
+--- **WARNING**: This hook will not work if the current gamemode overrides [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) and does not call this hook.
 ---
---- This hook is run after the drive.StartMove has been called.
+--- **NOTE**: This hook is run after the [drive.StartMove](https://wiki.facepunch.com/gmod/drive.StartMove) has been called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:StartMove)
 ---@param mv CMoveData
@@ -2041,7 +2070,7 @@ function PLAYER:StartMove(mv, cmd) end
 ---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StartSprinting() end
 
----[SHARED] When used in a GM:SetupMove hook, this function will force the player to walk, as well as preventing the player from sprinting.
+---[SHARED] When used in a [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) hook, this function will force the player to walk, as well as preventing the player from sprinting.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StartWalking)
 ---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
@@ -2049,11 +2078,11 @@ function Player:StartWalking() end
 
 ---[SHARED] Returns the player's SteamID.
 ---
---- See Player:AccountID for a shorter version of the SteamID and Player:SteamID64 for the full SteamID.
+--- See [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID) for a shorter version of the SteamID and [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) for the full SteamID.
 ---
---- It is recommended to use Player:SteamID64 over the other SteamID formats whenever possible.
+--- It is recommended to use [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) over the other SteamID formats whenever possible.
 ---
---- In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
+--- **NOTE**: In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For Bots this will return `BOT`.
 ---
@@ -2063,19 +2092,21 @@ function Player:SteamID() end
 
 ---[SHARED] Returns the player's full **64-bit SteamID**, also known as **CommunityID**. Information on how data is packed into this value can be found [here](https://developer.valvesoftware.com/wiki/SteamID).
 ---
---- See Player:AccountID for a function that returns only the Account ID part of the SteamID and Player:SteamID for the text version of the SteamID.
+--- See [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID) for a function that returns only the Account ID part of the SteamID and [Player:SteamID](https://wiki.facepunch.com/gmod/Player:SteamID) for the text version of the SteamID.
 ---
---- In a `-multirun` environment, this will return `"0"` for all "copies" of a player because they are not authenticated with Steam.
+--- **NOTE**: In a `-multirun` environment, this will return `"0"` for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For bots, this will return `90071996842377216` (equivalent to `STEAM_0:0:0`) for the first bot to join.
 ---
 --- For each additional bot, the number increases by 1. So the next bot will be `90071996842377217` (`STEAM_0:1:0`) then `90071996842377218` (`STEAM_0:0:1`) and so on.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SteamID64)
----@return string # Player's 64-bit SteamID aka CommunityID.  The return value is a string, not a number, since Lua's numbers are unable to store the entire 64bit numbers without data loss.
+---@return string # Player's 64-bit SteamID aka CommunityID.
+---
+--- The return value is a string, not a number, since Lua's numbers are unable to store the entire 64bit numbers without data loss.
 function Player:SteamID64() end
 
----[SHARED] When used in a GM:SetupMove hook, this function will prevent the player from sprinting.
+---[SHARED] When used in a [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) hook, this function will prevent the player from sprinting.
 ---
 --- When +walk is engaged, the player will still be able to sprint to half speed (normal run speed) as opposed to full sprint speed without this function.
 ---
@@ -2083,7 +2114,7 @@ function Player:SteamID64() end
 ---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 function Player:StopSprinting() end
 
----[SHARED] When used in a GM:SetupMove hook, this function behaves unexpectedly by preventing the player from sprinting similar to Player:StopSprinting.
+---[SHARED] When used in a [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) hook, this function behaves unexpectedly by preventing the player from sprinting similar to [Player:StopSprinting](https://wiki.facepunch.com/gmod/Player:StopSprinting).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StopWalking)
 ---@deprecated This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
@@ -2103,7 +2134,7 @@ function Player:StopZooming() end
 function Player:StripAmmo() end
 
 ---[SERVER] Removes the specified weapon class from a certain player
---- 	this function will call the Entity:OnRemove but if you try use Entity:GetOwner it will return nil
+--- 	**NOTE**: this function will call the [Entity:OnRemove](https://wiki.facepunch.com/gmod/Entity:OnRemove) but if you try use [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner) it will return nil
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:StripWeapon)
 ---@param weapon string The weapon class to remove
@@ -2116,8 +2147,7 @@ function Player:StripWeapons() end
 
 ---[SERVER] Prevents a hint from showing up.
 ---
----
---- This function is only available in Sandbox and its derivatives
+--- **NOTE**: This function is only available in Sandbox and its derivatives
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SuppressHint)
 ---@param name string Hint name/class/index to prevent from showing up. You can find a list of hint names for this function List_of_Hint_Classes.
@@ -2125,7 +2155,7 @@ function Player:SuppressHint(name) end
 
 ---[SERVER] Attempts to switch the player weapon to the one specified in the "cl_defaultweapon" convar, if the player does not own the specified weapon nothing will happen.
 ---
---- If you want to switch to a specific weapon, use: Player:SetActiveWeapon
+--- If you want to switch to a specific weapon, use: [Player:SetActiveWeapon](https://wiki.facepunch.com/gmod/Player:SetActiveWeapon)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SwitchToDefaultWeapon)
 function Player:SwitchToDefaultWeapon() end
@@ -2139,7 +2169,7 @@ function Player:SwitchToDefaultWeapon() end
 function Player:Team() end
 
 ---[SERVER] Returns the time in seconds since the player connected.
---- Bots will always return value 0.
+--- **NOTE**: Bots will always return value 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:TimeConnected)
 ---@return number #
@@ -2147,7 +2177,7 @@ function Player:TimeConnected() end
 
 ---[SERVER] Performs a trace hull and applies damage to the entities hit, returns the first entity hit.
 ---
---- Hitting the victim entity with this function in ENTITY:OnTakeDamage can cause infinite loops.
+--- **WARNING**: Hitting the victim entity with this function in [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage) can cause infinite loops.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:TraceHullAttack)
 ---@param startPos Vector The start position of the hull trace.
@@ -2161,7 +2191,7 @@ function Player:TimeConnected() end
 ---@return Entity # The hit entity
 function Player:TraceHullAttack(startPos, endPos, mins, maxs, damage, damageFlags, damageForce, damageAllNPCs) end
 
----[SHARED] Translates Enums/ACT according to the holdtype of players currently held weapon.
+---[SHARED] Translates [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT) according to the holdtype of players currently held weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:TranslateWeaponActivity)
 ---@param act number The initial Enums/ACT
@@ -2175,7 +2205,7 @@ function Player:UnfreezePhysicsObjects() end
 
 ---[SHARED] Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key.
 ---
---- In Singleplayer, this function will always return 1.
+--- **NOTE**: In Singleplayer, this function will always return 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueID)
 ---@return number # The player's Unique ID
@@ -2184,7 +2214,7 @@ function Player:UniqueID() end
 
 ---[SHARED] Returns a table that will stay allocated for the specific player serveside between connects until the server shuts down. On client it has no such special behavior.
 ---
---- This table is not synchronized (networked) between client and server.
+--- **NOTE**: This table is not synchronized (networked) between client and server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UniqueIDTable)
 ---@param key any Unique table key.
@@ -2205,7 +2235,7 @@ function Player:UnLock() end
 function Player:UnSpectate() end
 
 ---[SHARED] Returns the player's ID.
---- You can use Global.Player() to get the player by their ID.
+--- You can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player)() to get the player by their ID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:UserID)
 ---@return number # The player's user ID
@@ -2219,13 +2249,13 @@ function Player:UserID() end
 ---@param new string The new model
 function PLAYER:ViewModelChanged(viewmodel, old, new) end
 
----[SHARED] Simulates a push on the client's screen. This **adds** view punch velocity, and does not touch the current view punch angle, for which you can use Player:SetViewPunchAngles.
+---[SHARED] Simulates a push on the client's screen. This **adds** view punch velocity, and does not touch the current view punch angle, for which you can use [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ViewPunch)
 ---@param PunchAngle Angle The angle in which to push the player's screen.
 function Player:ViewPunch(PunchAngle) end
 
----[SHARED] Resets the player's view punch (and the view punch velocity, read more at Player:ViewPunch) effect back to normal.
+---[SHARED] Resets the player's view punch (and the view punch velocity, read more at [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch)) effect back to normal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ViewPunchReset)
 ---@param tolerance? number Reset all ViewPunch below this threshold.

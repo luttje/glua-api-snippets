@@ -43,7 +43,7 @@ function physenv.GetPerformanceSettings() end
 function physenv.SetAirDensity(airDensity) end
 
 ---[SHARED] Sets the gravitational acceleration used for physics objects.
---- 		Does not work on players.
+--- 		**NOTE**: Does not work on players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetGravity)
 ---@param gravAccel Vector The new gravity in `source_unit/s^2`.

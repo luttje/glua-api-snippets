@@ -1,10 +1,10 @@
 ---@meta
 
 ---
---- A panel that draws a sprite on the player's HUD with the given IMaterial, Global.Color and rotation.
+--- A panel that draws a sprite on the player's HUD with the given [IMaterial](https://wiki.facepunch.com/gmod/IMaterial), [Global.Color](https://wiki.facepunch.com/gmod/Global.Color) and rotation.
 ---
---- A shortcut for this is Global.CreateSprite().
---- 	Creates a DSprite with the `sent_ball` material, and sets the color to cyan.
+--- A shortcut for this is [Global.CreateSprite](https://wiki.facepunch.com/gmod/Global.CreateSprite)().
+---
 ---@class DSprite : DPanel
 local DSprite = {}
 
@@ -14,7 +14,7 @@ local DSprite = {}
 ---@return table # The Global.Color being used.
 function DSprite:GetColor() end
 
----[CLIENT] Returns the value set by DSprite:SetHandle
+---[CLIENT] Returns the value set by [DSprite:SetHandle](https://wiki.facepunch.com/gmod/DSprite:SetHandle)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSprite:GetHandle)
 ---@return Vector #

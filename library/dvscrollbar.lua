@@ -1,9 +1,9 @@
 ---@meta
 
 ---
---- A generic vertical scrollbar, used in DScrollPanel. See the horizontal alternative [here](DHScrollBar).
+--- A generic vertical scrollbar, used in [DScrollPanel](https://wiki.facepunch.com/gmod/DScrollPanel). See the horizontal alternative [here](https://wiki.facepunch.com/gmod/DHScrollBar).
 ---
---- The scrollbar notably contains `DVScrollBar.btnUp`, `DVScrollBar.btnDown`, and `DVScrollBar.btnGrip` which are the up button, down button, and grip respectively. Editing the paint functions of these allows custom scrollbar styling (See DScrollPanel:GetVBar for an example), although it is a better idea to use [Derma Skins](Derma_Skin_Creation).
+--- The scrollbar notably contains `DVScrollBar.btnUp`, `DVScrollBar.btnDown`, and `DVScrollBar.btnGrip` which are the up button, down button, and grip respectively. Editing the paint functions of these allows custom scrollbar styling (See [DScrollPanel:GetVBar](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar) for an example), although it is a better idea to use [Derma Skins](https://wiki.facepunch.com/gmod/Derma_Skin_Creation).
 ---
 ---@class DVScrollBar : Panel
 local DVScrollBar = {}
@@ -24,19 +24,19 @@ function DVScrollBar:AddScroll(add) end
 ---@param ease? number See Panel:NewAnimation for explanation.
 function DVScrollBar:AnimateTo(scroll, length, delay, ease) end
 
----[CLIENT AND MENU] Returns the scale of the scroll bar based on the difference in size between the visible "window" into the canvas that is being scrolled. Should be used after DVScrollBar:SetUp.
+---[CLIENT AND MENU] Returns the scale of the scroll bar based on the difference in size between the visible "window" into the canvas that is being scrolled. Should be used after [DVScrollBar:SetUp](https://wiki.facepunch.com/gmod/DVScrollBar:SetUp).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:BarScale)
 ---@return number # The scale of the scrollbar.
 function DVScrollBar:BarScale() end
 
----[CLIENT AND MENU] Returns whether or not the manual up/down scroll buttons are visible or not. Set by DVScrollBar:SetHideButtons.
+---[CLIENT AND MENU] Returns whether or not the manual up/down scroll buttons are visible or not. Set by [DVScrollBar:SetHideButtons](https://wiki.facepunch.com/gmod/DVScrollBar:SetHideButtons).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:GetHideButtons)
 ---@return boolean # Whether or not the manual up/down scroll buttons are visible or not.
 function DVScrollBar:GetHideButtons() end
 
----[CLIENT AND MENU] Returns the negative of DVScrollBar:GetScroll.
+---[CLIENT AND MENU] Returns the negative of [DVScrollBar:GetScroll](https://wiki.facepunch.com/gmod/DVScrollBar:GetScroll).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:GetOffset)
 ---@return number # The scroll offset.
@@ -48,7 +48,9 @@ function DVScrollBar:GetOffset() end
 ---@return number # The amount of scroll level from the top
 function DVScrollBar:GetScroll() end
 
----[CLIENT AND MENU] Called from within DScrollBarGrip
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Called from within [DScrollBarGrip](https://wiki.facepunch.com/gmod/DScrollBarGrip)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DVScrollBar:Grip)
 function DVScrollBar:Grip() end

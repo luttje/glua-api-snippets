@@ -1,6 +1,6 @@
 ---@meta
 
---- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. See Default Lists for a page of default Sandbox lists.
+--- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. See [Default Lists](https://wiki.facepunch.com/gmod/Default Lists) for a page of default Sandbox lists.
 list = {}
 
 ---[SHARED AND MENU] Adds an item to a named list
@@ -13,7 +13,7 @@ function list.Add(identifier, item) end
 
 ---[SHARED AND MENU] Returns true if the list contains the value. (as a value - not a key)
 ---
---- For a function that looks for a key and not a value see list.HasEntry.
+--- For a function that looks for a key and not a value see [list.HasEntry](https://wiki.facepunch.com/gmod/list.HasEntry).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/list.Contains)
 ---@param list string List to search through
@@ -44,7 +44,7 @@ function list.GetTable() end
 
 ---[SHARED AND MENU] Returns true if the list contains the given key.
 ---
---- For a function that looks for values and not keys see list.Contains.
+--- For a function that looks for values and not keys see [list.Contains](https://wiki.facepunch.com/gmod/list.Contains).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/list.HasEntry)
 ---@param list string List to search through

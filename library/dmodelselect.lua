@@ -4,14 +4,14 @@
 ---
 ---
 --- 		A vertical list of models.
---- 	Creates a DModelSelect within a DFrame and adds four models.
+---
 ---@deprecated This is derived from the deprecated DPanelList.
 ---@class DModelSelect : DPanelSelect
 local DModelSelect = {}
 
 ---[CLIENT] Sets the height of the panel **in the amount of 64px spawnicons**.
 ---
---- Overrides Panel:SetHeight.
+--- Overrides [Panel:SetHeight](https://wiki.facepunch.com/gmod/Panel:SetHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DModelSelect:SetHeight)
 ---@param num? number Basically how many rows of 64x64 px spawnicons should fit in this DModelSelect

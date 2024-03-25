@@ -1,6 +1,6 @@
 ---@meta
 
---- A progressbar, works with a fraction between 0 and 1 where 0 is 0% and 1 is 100%.Creates a DProgress set to 75% (0.75 out of 1)
+--- A progressbar, works with a fraction between 0 and 1 where 0 is 0% and 1 is 100%.
 ---@class DProgress : Panel
 local DProgress = {}
 

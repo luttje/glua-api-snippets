@@ -1,6 +1,6 @@
 ---@meta
 
---- A sound channel returned by a callback of sound.PlayURL and sound.PlayFile.
+--- A sound channel returned by a callback of [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) and [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile).
 ---@class IGModAudioChannel
 local IGModAudioChannel = {}
 
@@ -20,7 +20,7 @@ function IGModAudioChannel:EnableLooping(enable) end
 ---
 --- **Visualization protip:** Sound energy is proportional to the square of the magnitudes. Adding magnitudes together makes no sense physically, but adding energies does.
 ---
---- **Visualization protip:** The human ear works on a logarithmic amplitude scale. You can convert to [decibels](https://en.wikipedia.org/wiki/Decibel) by taking 20 * math.log10 of frequency magnitudes, or 10 * math.log10 of energy. The decibel values will range from -infinity to 0.
+--- **Visualization protip:** The human ear works on a logarithmic amplitude scale. You can convert to [decibels](https://en.wikipedia.org/wiki/Decibel) by taking 20 * [math.log10](https://wiki.facepunch.com/gmod/math.log10) of frequency magnitudes, or 10 * [math.log10](https://wiki.facepunch.com/gmod/math.log10) of energy. The decibel values will range from -infinity to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT)
 ---@param tbl table The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
@@ -28,7 +28,7 @@ function IGModAudioChannel:EnableLooping(enable) end
 ---@return number # The number of frequency bins that have been filled in the output table.
 function IGModAudioChannel:FFT(tbl, size) end
 
----[CLIENT] Returns 3D cone of the sound channel. See IGModAudioChannel:Set3DCone.
+---[CLIENT] Returns 3D cone of the sound channel. See [IGModAudioChannel:Set3DCone](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DCone).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DCone)
 ---@return number # The angle of the inside projection cone in degrees.
@@ -36,7 +36,7 @@ function IGModAudioChannel:FFT(tbl, size) end
 ---@return number # The delta-volume outside the outer projection cone.
 function IGModAudioChannel:Get3DCone() end
 
----[CLIENT] Returns if the sound channel is currently in 3D mode or not. This value will be affected by IGModAudioChannel:Set3DEnabled.
+---[CLIENT] Returns if the sound channel is currently in 3D mode or not. This value will be affected by [IGModAudioChannel:Set3DEnabled](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DEnabled).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DEnabled)
 ---@return boolean # Is currently 3D or not.
@@ -63,9 +63,9 @@ function IGModAudioChannel:GetAverageBitRate() end
 ---@return number # Number of bits per sample, or 0 if unknown.
 function IGModAudioChannel:GetBitsPerSample() end
 
----[CLIENT] Returns the buffered time of the sound channel in seconds, for online streaming sound channels. (sound.PlayURL)
+---[CLIENT] Returns the buffered time of the sound channel in seconds, for online streaming sound channels. ([sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL))
 ---
---- For offline channels this will be equivalent to IGModAudioChannel:GetLength.
+--- For offline channels this will be equivalent to [IGModAudioChannel:GetLength](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetLength).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetBufferedTime)
 ---@return number # The current buffered time of the stream, in seconds.
@@ -120,36 +120,40 @@ function IGModAudioChannel:GetSamplingRate() end
 ---@return number # The state of the sound channel, see Enums/GMOD_CHANNEL
 function IGModAudioChannel:GetState() end
 
----[CLIENT] Retrieves HTTP headers from a bass stream channel created by sound.PlayURL, if available.
+---[CLIENT] Retrieves HTTP headers from a bass stream channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsHTTP)
 ---@return table # Returns a table of HTTP headers.Returns nil if no information is available.
 function IGModAudioChannel:GetTagsHTTP() end
 
----[CLIENT] Retrieves the ID3 version 1 info from a bass channel created by sound.PlayFile or sound.PlayURL, if available.
+---[CLIENT] Retrieves the ID3 version 1 info from a bass channel created by [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile) or [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
 ---
 --- ID3v2 is not supported.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsID3)
----@return table # Returns a table containing the information. Returns nil if no information is available.
+---@return table # Returns a table containing the information.
+--- Returns nil if no information is available.
 function IGModAudioChannel:GetTagsID3() end
 
----[CLIENT] Retrieves meta stream info from a bass stream channel created by sound.PlayURL, if available.
+---[CLIENT] Retrieves meta stream info from a bass stream channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsMeta)
----@return string # Returns a string containing the information. Returns nil if no information is available.
+---@return string # Returns a string containing the information.
+--- Returns nil if no information is available.
 function IGModAudioChannel:GetTagsMeta() end
 
----[CLIENT] Retrieves OGG media info tag, from a bass channel created by sound.PlayURL or sound.PlayFile, if available.
+---[CLIENT] Retrieves OGG media info tag, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsOGG)
----@return table # Returns a table containing the information. Returns nil if no information is available.
+---@return table # Returns a table containing the information.
+--- Returns nil if no information is available.
 function IGModAudioChannel:GetTagsOGG() end
 
----[CLIENT] Retrieves OGG Vendor tag, usually containing the application that created the file, from a bass channel created by sound.PlayURL or sound.PlayFile, if available.
+---[CLIENT] Retrieves OGG Vendor tag, usually containing the application that created the file, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsVendor)
----@return string # Returns a string containing the information. Returns nil if no information is available.
+---@return string # Returns a string containing the information.
+--- Returns nil if no information is available.
 function IGModAudioChannel:GetTagsVendor() end
 
 ---[CLIENT] Returns the current time of the sound channel in seconds
@@ -194,7 +198,7 @@ function IGModAudioChannel:IsOnline() end
 ---@return boolean # Is the sound channel valid or not
 function IGModAudioChannel:IsValid() end
 
----[CLIENT] Pauses the stream. It can be started again using IGModAudioChannel:Play
+---[CLIENT] Pauses the stream. It can be started again using [IGModAudioChannel:Play](https://wiki.facepunch.com/gmod/IGModAudioChannel:Play)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Pause)
 function IGModAudioChannel:Pause() end
@@ -209,27 +213,18 @@ function IGModAudioChannel:Play() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DCone)
 ---@param innerAngle number The angle of the inside projection cone in degrees.
 ---
----
----
----
 --- Range is from 0 (no cone) to 360 (sphere), -1 = leave current.
 ---@param outerAngle number The angle of the outside projection cone in degrees.
----
----
----
 ---
 --- Range is from 0 (no cone) to 360 (sphere), -1 = leave current.
 ---@param outerVolume number The delta-volume outside the outer projection cone.
 ---
----
----
----
 --- Range is from 0 (silent) to 1 (same as inside the cone), less than 0 = leave current.
 function IGModAudioChannel:Set3DCone(innerAngle, outerAngle, outerVolume) end
 
----[CLIENT] Sets the 3D mode of the channel. This will affect IGModAudioChannel:Get3DEnabled but not IGModAudioChannel:Is3D.
+---[CLIENT] Sets the 3D mode of the channel. This will affect [IGModAudioChannel:Get3DEnabled](https://wiki.facepunch.com/gmod/IGModAudioChannel:Get3DEnabled) but not [IGModAudioChannel:Is3D](https://wiki.facepunch.com/gmod/IGModAudioChannel:Is3D).
 ---
---- This feature **requires** the channel to be initially created in 3D mode, i.e. IGModAudioChannel:Is3D should return true or this function will do nothing.
+--- This feature **requires** the channel to be initially created in 3D mode, i.e. [IGModAudioChannel:Is3D](https://wiki.facepunch.com/gmod/IGModAudioChannel:Is3D) should return true or this function will do nothing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DEnabled)
 ---@param enable boolean true to enable, false to disable 3D.
@@ -240,14 +235,8 @@ function IGModAudioChannel:Set3DEnabled(enable) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:Set3DFadeDistance)
 ---@param min number The minimum distance. The channel's volume is at maximum when the listener is within this distance.
 ---
----
----
----
 --- 0 or less = leave current.
 ---@param max number The maximum distance. The channel's volume stops decreasing when the listener is beyond this distance.
----
----
----
 ---
 --- 0 or less = leave current.
 function IGModAudioChannel:Set3DFadeDistance(min, max) end
@@ -273,7 +262,7 @@ function IGModAudioChannel:SetPos(pos, dir) end
 
 ---[CLIENT] Sets the sound channel to specified time ( Rewind to that position of the song ). Does not work on online radio streams.
 ---
---- Streamed sounds must have "noblock" parameter for this to work and IGModAudioChannel:IsBlockStreamed must return false.
+--- Streamed sounds must have "noblock" parameter for this to work and [IGModAudioChannel:IsBlockStreamed](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsBlockStreamed) must return false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:SetTime)
 ---@param secs number The time to set the stream to, in seconds.
@@ -286,7 +275,7 @@ function IGModAudioChannel:SetTime(secs, dont_decode) end
 ---@param volume number Volume to set. 1 meaning 100% volume, 0.5 is 50% and 3 is 300%, etc.
 function IGModAudioChannel:SetVolume(volume) end
 
----[CLIENT] Stop the stream. It can be started again using IGModAudioChannel:Play.
+---[CLIENT] Stop the stream. It can be started again using [IGModAudioChannel:Play](https://wiki.facepunch.com/gmod/IGModAudioChannel:Play).
 ---
 --- Calling this invalidates the IGModAudioChannel object rendering it unusable for further functions.
 ---

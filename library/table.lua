@@ -7,9 +7,9 @@
 --- This category lists the functions available in the table `library`.
 table = {}
 
----[SHARED AND MENU] Adds all values from `source` table into the `target` table. This is most useful for sequential tables, not "dictionary" or "map" tables. See table.Merge if you want to merge 2 tables into one.
+---[SHARED AND MENU] Adds all values from `source` table into the `target` table. This is most useful for sequential tables, not "dictionary" or "map" tables. See [table.Merge](https://wiki.facepunch.com/gmod/table.Merge) if you want to merge 2 tables into one.
 ---
---- See table.insert for a function that adds a single value, and table.Inherit for a function that inherits keys from one table to another.
+--- See [table.insert](https://wiki.facepunch.com/gmod/table.insert) for a function that adds a single value, and [table.Inherit](https://wiki.facepunch.com/gmod/table.Inherit) for a function that inherits keys from one table to another.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Add)
 ---@param target table The table to insert the new values into.
@@ -44,7 +44,7 @@ function table.concat(tbl, concatenator, startPos, endPos) end
 
 ---[SHARED AND MENU] Creates a deep copy and returns that copy.
 ---
---- This function does NOT copy userdata, such as Vectors and Angles!
+--- **WARNING**: This function does NOT copy userdata, such as [Vector](https://wiki.facepunch.com/gmod/Vector)s and [Angle](https://wiki.facepunch.com/gmod/Angle)s!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Copy)
 ---@param originalTable table The table to be copied.
@@ -60,14 +60,14 @@ function table.CopyFromTo(source, target) end
 
 ---[SHARED AND MENU] Counts the amount of keys in a table. This should only be used when a table is not numerically and sequentially indexed. For those tables, consider the length (**#**) operator.
 ---
---- If you only want to test if the table is empty or not, use table.IsEmpty instead as it is a lot faster.
+--- If you only want to test if the table is empty or not, use [table.IsEmpty](https://wiki.facepunch.com/gmod/table.IsEmpty) instead as it is a lot faster.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Count)
 ---@param tbl table The table to count the keys of.
 ---@return number # The number of keyvalue pairs. This includes non-numeric and non-sequential keys, unlike the length (**#**) operator.
 function table.Count(tbl) end
 
----[SHARED AND MENU] Converts a table that has been sanitised with table.Sanitise back to its original form
+---[SHARED AND MENU] Converts a table that has been sanitised with [table.Sanitise](https://wiki.facepunch.com/gmod/table.Sanitise) back to its original form
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.DeSanitise)
 ---@param tbl table Table to be de-sanitised
@@ -100,7 +100,7 @@ function table.FindPrev(tbl, value) end
 
 ---[SHARED AND MENU] Flips key-value pairs of each element within a table, so that each value becomes the key, and each key becomes the value.
 ---
---- Take care when using this function, as a Lua table cannot contain multiple instances of the same key. As such, data loss is possible when using this function on tables with duplicate values.
+--- **WARNING**: Take care when using this function, as a Lua table cannot contain multiple instances of the same key. As such, data loss is possible when using this function on tables with duplicate values.
 ---
 --- ```
 --- local test = { test = 1, test2 = 1 }
@@ -124,17 +124,21 @@ function table.ForceInsert(tab, value) end
 
 ---[SHARED AND MENU] Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
 ---
---- The GLua interpretation of this is table.ForEach.
+--- The GLua interpretation of this is [table.ForEach](https://wiki.facepunch.com/gmod/table.ForEach).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreach)
 ---@param tbl table The table to iterate over.
----@param callback function The function to run for each key and value.
+---@param callback fun(key: any, val: any) The function to run for each key and value.
+---
+--- Function argument(s):
+--- * any `key` - The key of a key-value pair for this iteration.
+--- * any `val` - The value of a key-value pair for this iteration.
 ---@deprecated This was deprecated in Lua 5.1 and removed in 5.2. You should use Global.pairs instead.
 function table.foreach(tbl, callback) end
 
 ---[SHARED AND MENU] Iterates for each numeric index in the table in order.
 ---
---- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use Global.ipairs() instead.
+--- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs)() instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.foreachi)
 ---@param table table The table to iterate over.
@@ -197,8 +201,9 @@ function table.getn(tbl) end
 function table.GetWinningKey(inputTable) end
 
 ---[SHARED AND MENU] Checks if a table has a value.
---- This function is **very inefficient for large tables** (O(n)) and should probably not be called in things that run each frame. Instead, consider a table structure such as example 2 below. Also see: Tables: Bad Habits
---- For optimization, functions that look for a value by sorting the table should never be needed if you work on a table that you built yourself.
+--- **WARNING**: This function is **very inefficient for large tables** (O(n)) and should probably not be called in things that run each frame. Instead, consider a table structure such as example 2 below. Also see: [Tables: Bad Habits](https://wiki.facepunch.com/gmod/Tables: Bad Habits)
+---
+--- **NOTE**: For optimization, functions that look for a value by sorting the table should never be needed if you work on a table that you built yourself.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.HasValue)
 ---@param tbl table Table to check
@@ -208,10 +213,9 @@ function table.HasValue(tbl, value) end
 
 ---[SHARED AND MENU] Copies any missing data from `base` to `target`, and sets the `target`'s `BaseClass` member to the `base` table's pointer.
 ---
---- See table.Merge, which overrides existing values and doesn't add a BaseClass member.
+--- See [table.Merge](https://wiki.facepunch.com/gmod/table.Merge), which overrides existing values and doesn't add a BaseClass member.
 ---
----
---- See also table.Add, which simply adds values of one table to another.
+--- See also [table.Add](https://wiki.facepunch.com/gmod/table.Add), which simply adds values of one table to another.
 ---
 --- Sub-tables aren't inherited. The target's table value will take priority.
 ---
@@ -222,7 +226,7 @@ function table.HasValue(tbl, value) end
 function table.Inherit(target, base) end
 
 ---[SHARED AND MENU] Inserts a value into a table at the end of the table or at the given position.
---- 	This function does not call the `__newindex` [metamethod](Metamethods).
+--- 	**NOTE**: This function does not call the `__newindex` [metamethod](https://wiki.facepunch.com/gmod/Metamethods).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.insert)
 ---@param tbl table The table to insert the variable into.
@@ -280,7 +284,7 @@ function table.maxn(tbl) end
 
 ---[SHARED AND MENU] Returns an array of values of given with given key from each table of given table.
 ---
---- See also table.KeysFromValue.
+--- See also [table.KeysFromValue](https://wiki.facepunch.com/gmod/table.KeysFromValue).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.MemberValuesFromKey)
 ---@param inputTable table The table to search in.
@@ -290,11 +294,10 @@ function table.MemberValuesFromKey(inputTable, keyName) end
 
 ---[SHARED AND MENU] Recursively merges the key-value pairs of the `source` table with the key-value pairs in the `destination` table.
 ---
---- See table.Inherit, which doesn't override existing values.
+--- See [table.Inherit](https://wiki.facepunch.com/gmod/table.Inherit), which doesn't override existing values.
 ---
----
---- See also table.Add, which simply adds values of one table to another.
---- This function can cause a stack overflow under certain circumstances.
+--- See also [table.Add](https://wiki.facepunch.com/gmod/table.Add), which simply adds values of one table to another.
+--- **NOTE**: This function can cause a stack overflow under certain circumstances.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Merge)
 ---@param destination table The table you want the source table to merge with.
@@ -324,7 +327,7 @@ function table.Pack(...) end
 
 ---[SHARED AND MENU] Returns a random value from the supplied table.
 ---
---- This function iterates over the given table **twice**, therefore with sequential tables you should instead use following:
+--- **WARNING**: This function iterates over the given table **twice**, therefore with sequential tables you should instead use following:
 ---
 --- ```
 --- mytable[ math.random( #mytable ) ]
@@ -337,7 +340,7 @@ function table.Pack(...) end
 function table.Random(haystack) end
 
 ---[SHARED AND MENU] Removes a value from a table and shifts any other values down to fill the gap.
---- Does nothing if index is less than 1 or greater than `#tbl`
+--- **NOTE**: Does nothing if index is less than 1 or greater than `#tbl`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.remove)
 ---@param tbl table The table to remove the value from.
@@ -345,9 +348,9 @@ function table.Random(haystack) end
 ---@return any # The value that was removed.
 function table.remove(tbl, index) end
 
----[SHARED AND MENU] Removes the first instance of a given value from the specified table with table.remove, then returns the key that the value was found at.
+---[SHARED AND MENU] Removes the first instance of a given value from the specified table with [table.remove](https://wiki.facepunch.com/gmod/table.remove), then returns the key that the value was found at.
 ---
---- Avoid usage of this function. It does not remove all instances of given value in the table, only the first found, and it does not work with non sequential tables!
+--- **WARNING**: Avoid usage of this function. It does not remove all instances of given value in the table, only the first found, and it does not work with non sequential tables!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.RemoveByValue)
 ---@param tbl table The table that will be searched.
@@ -362,9 +365,9 @@ function table.RemoveByValue(tbl, val) end
 ---@return table # A reversed copy of the table.
 function table.Reverse(tbl) end
 
----[SHARED AND MENU] Converts Vectors, Angles and booleans to be able to be converted to and from key-values via util.TableToKeyValues.
+---[SHARED AND MENU] Converts [Vector](https://wiki.facepunch.com/gmod/Vector)s, [Angle](https://wiki.facepunch.com/gmod/Angle)s and [boolean](https://wiki.facepunch.com/gmod/boolean)s to be able to be converted to and from key-values via [util.TableToKeyValues](https://wiki.facepunch.com/gmod/util.TableToKeyValues).
 ---
---- table.DeSanitise performs the opposite transformation.
+--- [table.DeSanitise](https://wiki.facepunch.com/gmod/table.DeSanitise) performs the opposite transformation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.Sanitise)
 ---@param tab table Table to sanitise
@@ -378,17 +381,23 @@ function table.Sanitise(tab) end
 function table.Shuffle(target) end
 
 ---[SHARED AND MENU] Sorts a sequential table either ascending or by the given sort function.
---- This function modifies the table you give to it and internally uses the [quick sort algorithm](http://www.lua.org/source/5.2/ltablib.c.html#sort).
+--- **NOTE**: This function modifies the table you give to it and internally uses the [quick sort algorithm](http://www.lua.org/source/5.2/ltablib.c.html#sort).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.sort)
 ---@param tbl table The table to sort.
----@param sorter function If specified, the function will be called with 2 parameters each.
---- Return true in this function if you want the first parameter to come first in the sorted array.
+---@param sorter? fun(a: any, b: any): boolean If specified, the sorting function.
+---
+--- Function argument(s):
+--- * any `a` - Item A to test.
+--- * any `b` - Item B to test.
+---
+--- Function return value(s):
+--- * boolean `result` - Result of the comparison. Return true in this function if you want the first parameter to come first in the sorted array.
 function table.sort(tbl, sorter) end
 
 ---[SHARED AND MENU] Returns a list of keys sorted based on values of those keys.
 ---
---- For normal sorting see table.sort.
+--- For normal sorting see [table.sort](https://wiki.facepunch.com/gmod/table.sort).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.SortByKey)
 ---@param tab table Table to sort. All values of this table must be of same type.
@@ -404,8 +413,8 @@ function table.SortByKey(tab, descending) end
 ---@param ascending? boolean Whether or not the order should be ascending.
 function table.SortByMember(tab, memberKey, ascending) end
 
----[SHARED AND MENU] Sorts a table in reverse order from table.sort.
---- This function modifies the table you give to it. Like table.sort, it does not return anything.
+---[SHARED AND MENU] Sorts a table in reverse order from [table.sort](https://wiki.facepunch.com/gmod/table.sort).
+--- **NOTE**: This function modifies the table you give to it. Like table.sort, it does not return anything.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/table.SortDesc)
 ---@param tbl table The table to sort in descending order.

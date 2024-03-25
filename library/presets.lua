@@ -11,7 +11,9 @@ presets = {}
 ---@param values table A table of preset console commands.
 function presets.Add(groupname, name, values) end
 
----[CLIENT] Used internally to tell the player that the name they tried to use in their preset is not acceptable.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to tell the player that the name they tried to use in their preset is not acceptable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.BadNameAlert)
 function presets.BadNameAlert() end
@@ -31,7 +33,9 @@ function presets.Exists(type, name) end
 ---@return table # All presets in specified group.
 function presets.GetTable(groupname) end
 
----[CLIENT] Used internally to ask the player if they want to override an already existing preset.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to ask the player if they want to override an already existing preset.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/presets.OverwritePresetPrompt)
 ---@param callback function

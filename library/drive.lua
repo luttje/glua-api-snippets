@@ -1,9 +1,11 @@
 ---@meta
 
---- The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. See Entity Driving.
+--- The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
 drive = {}
 
----[SHARED] Optionally alter the view.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Optionally alter the view.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CalcView)
 ---@param ply Player The player
@@ -11,14 +13,18 @@ drive = {}
 ---@return boolean # true if succeeded
 function drive.CalcView(ply, view) end
 
----[SHARED] Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CreateMove)
 ---@param cmd CUserCmd The user command
 ---@return boolean # true if succeeded
 function drive.CreateMove(cmd) end
 
----[SHARED] Destroys players current driving method.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Destroys players current driving method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.DestroyMethod)
 ---@param ply Player The player to affect
@@ -31,7 +37,9 @@ function drive.DestroyMethod(ply) end
 ---@param ent Entity The entity
 function drive.End(ply, ent) end
 
----[SHARED] The move is finished. Copy mv back into the target.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- The move is finished. Copy mv back into the target.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.FinishMove)
 ---@param ply Player The player
@@ -39,14 +47,18 @@ function drive.End(ply, ent) end
 ---@return boolean # true if succeeded
 function drive.FinishMove(ply, mv) end
 
----[SHARED] Returns ( or creates if inexistent ) a driving method.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns ( or creates if inexistent ) a driving method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.GetMethod)
 ---@param ply Player The player
 ---@return table # A method object.
 function drive.GetMethod(ply) end
 
----[SHARED] The move is executed here.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- The move is executed here.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.Move)
 ---@param ply Player The player
@@ -83,7 +95,9 @@ function drive.Register(name, data, base) end
 ---@param ent Entity The entity
 function drive.Start(ply, ent) end
 
----[SHARED] The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.StartMove)
 ---@param ply Player The player

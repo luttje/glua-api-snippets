@@ -3,9 +3,9 @@
 --- The math library is a standard Lua library that provides functions for manipulating numbers. In Garry's Mod several additional math functions have been added.
 math = {}
 
---- An easing library that allows you to interpolate with various kinds of smoothing [functions](https://easings.net/). To use with Global.Lerp, input what you would to the fraction argument in one of these easing functions and then the output of that into the Global.Lerp fraction argument.
+--- An easing library that allows you to interpolate with various kinds of smoothing [functions](https://easings.net/). To use with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp), input what you would to the fraction argument in one of these easing functions and then the output of that into the [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) fraction argument.
 ---
---- 	Example usage with Lerp and math.ease.InSine
+--- 	Example usage with Lerp and [math.ease.InSine](https://wiki.facepunch.com/gmod/math.ease.InSine)
 ---
 --- -- Define a wrapper function to make it easier to work with
 --- local function easedLerp(fraction, from, to)
@@ -29,11 +29,7 @@ math = {}
 --- ```
 ---
 ---
----
----
 --- 	A brief visual example of different easing methods
----
----
 math.ease = {}
 
 ---[SHARED AND MENU] Calculates the absolute value of a number (effectively removes any negative sign).
@@ -47,7 +43,9 @@ function math.abs(x) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.acos)
 ---@param cos number Cosine value in range of -1 to 1.
----@return number # An angle in radians, between 0 and pi, which has the given cos value.  nan if the argument is out of range.
+---@return number # An angle in radians, between 0 and pi, which has the given cos value.
+---
+--- nan if the argument is out of range.
 function math.acos(cos) end
 
 ---[SHARED AND MENU] Calculates the difference between two angles.
@@ -69,7 +67,7 @@ function math.Approach(current, target, change) end
 
 ---[SHARED AND MENU] Increments an angle towards another by specified rate.
 ---
---- This function is for numbers representing angles (0-360), NOT Angle objects!
+--- **NOTE**: This function is for numbers representing angles (0-360), NOT [Angle](https://wiki.facepunch.com/gmod/Angle) objects!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ApproachAngle)
 ---@param currentAngle number The current angle to increase
@@ -82,7 +80,9 @@ function math.ApproachAngle(currentAngle, targetAngle, rate) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.asin)
 ---@param normal number Sine value in the range of -1 to 1.
----@return number # An angle in radians, in the range -pi/2 to pi/2, which has the given sine value.  nan if the argument is out of range.
+---@return number # An angle in radians, in the range -pi/2 to pi/2, which has the given sine value.
+---
+--- nan if the argument is out of range.
 function math.asin(normal) end
 
 ---[SHARED AND MENU] Returns the [arctangent](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions) of the given number.
@@ -92,9 +92,9 @@ function math.asin(normal) end
 ---@return number # An angle in radians, in the range -pi/2 to pi/2, which has the given tangent.
 function math.atan(normal) end
 
----[SHARED AND MENU] functions like math.atan(y / x), except it also takes into account the quadrant of the angle and so doesn't have a limited range of output.
+---[SHARED AND MENU] functions like [math.atan](https://wiki.facepunch.com/gmod/math.atan)(y / x), except it also takes into account the quadrant of the angle and so doesn't have a limited range of output.
 ---
---- The Y argument comes first!
+--- **NOTE**: The Y argument comes first!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.atan2)
 ---@param y number Y coordinate.
@@ -118,9 +118,9 @@ function math.BinToInt(string) end
 ---@return Vector # Point on Bezier curve, related to tDiff.
 function math.BSplinePoint(tDiff, tPoints, tMax) end
 
----[SHARED AND MENU] Use math.BSplinePoint instead.
+---[SHARED AND MENU] **INTERNAL**: Use [math.BSplinePoint](https://wiki.facepunch.com/gmod/math.BSplinePoint) instead.
 ---
---- Basic code for Bezier-Spline algorithm, helper function for math.BSplinePoint.
+--- Basic code for Bezier-Spline algorithm, helper function for [math.BSplinePoint](https://wiki.facepunch.com/gmod/math.BSplinePoint).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.calcBSplineN)
 ---@param i number
@@ -173,7 +173,7 @@ function math.cosh(number) end
 
 ---[SHARED AND MENU] Lerp point between 4 control points with cubic bezier.
 ---
---- See math.QuadraticBezier for a similar function which works with 3 control points.
+--- See [math.QuadraticBezier](https://wiki.facepunch.com/gmod/math.QuadraticBezier) for a similar function which works with 3 control points.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.CubicBezier)
 ---@param frac number The fraction for finding the result. This number is clamped between 0 and 1.
@@ -191,7 +191,7 @@ function math.CubicBezier(frac, p0, p1, p2, p3) end
 ---@return number # degrees
 function math.deg(radians) end
 
----[SHARED AND MENU] Returns the difference between two points in 2D space. Alias of math.Distance.
+---[SHARED AND MENU] Returns the difference between two points in 2D space. Alias of [math.Distance](https://wiki.facepunch.com/gmod/math.Distance).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Dist)
 ---@param x1 number X position of first point
@@ -212,7 +212,7 @@ function math.Dist(x1, y1, x2, y2) end
 ---@return number # Distance between the two points
 function math.Distance(x1, y1, x2, y2) end
 
----[SHARED AND MENU] Returns the squared difference between two points in 2D space. This is computationally faster than math.Distance.
+---[SHARED AND MENU] Returns the squared difference between two points in 2D space. This is computationally faster than [math.Distance](https://wiki.facepunch.com/gmod/math.Distance).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.DistanceSqr)
 ---@param x1 number X position of first point
@@ -223,7 +223,7 @@ function math.Distance(x1, y1, x2, y2) end
 function math.DistanceSqr(x1, y1, x2, y2) end
 
 ---[SHARED AND MENU] Eases in by reversing the direction of the ease slightly before returning.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InBack)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -231,7 +231,7 @@ function math.DistanceSqr(x1, y1, x2, y2) end
 function math.ease.InBack(fraction) end
 
 ---[SHARED AND MENU] Eases in like a bouncy ball.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InBounce)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -253,7 +253,7 @@ function math.ease.InCirc(fraction) end
 function math.ease.InCubic(fraction) end
 
 ---[SHARED AND MENU] Eases in like a rubber band.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InElastic)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -268,7 +268,7 @@ function math.ease.InElastic(fraction) end
 function math.ease.InExpo(fraction) end
 
 ---[SHARED AND MENU] Eases in and out by reversing the direction of the ease slightly before returning on both ends.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InOutBack)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -276,7 +276,7 @@ function math.ease.InExpo(fraction) end
 function math.ease.InOutBack(fraction) end
 
 ---[SHARED AND MENU] Eases in and out like a bouncy ball.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InOutBounce)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -298,7 +298,7 @@ function math.ease.InOutCirc(fraction) end
 function math.ease.InOutCubic(fraction) end
 
 ---[SHARED AND MENU] Eases in and out like a rubber band.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InOutElastic)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -333,7 +333,7 @@ function math.ease.InOutQuart(fraction) end
 ---@return number # "Eased" Value, from 0 to 1
 function math.ease.InOutQuint(fraction) end
 
----[SHARED AND MENU] Eases in and out using math.sin.
+---[SHARED AND MENU] Eases in and out using [math.sin](https://wiki.facepunch.com/gmod/math.sin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InOutSine)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -361,7 +361,7 @@ function math.ease.InQuart(fraction) end
 ---@return number # "Eased" Value, from 0 to 1
 function math.ease.InQuint(fraction) end
 
----[SHARED AND MENU] Eases in using math.sin.
+---[SHARED AND MENU] Eases in using [math.sin](https://wiki.facepunch.com/gmod/math.sin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.InSine)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -369,7 +369,7 @@ function math.ease.InQuint(fraction) end
 function math.ease.InSine(fraction) end
 
 ---[SHARED AND MENU] Eases out by reversing the direction of the ease slightly before finishing.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.OutBack)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -377,7 +377,7 @@ function math.ease.InSine(fraction) end
 function math.ease.OutBack(fraction) end
 
 ---[SHARED AND MENU] Eases out like a bouncy ball.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.OutBounce)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -399,7 +399,7 @@ function math.ease.OutCirc(fraction) end
 function math.ease.OutCubic(fraction) end
 
 ---[SHARED AND MENU] Eases out like a rubber band.
---- 	This doesn't work properly when used with Global.Lerp as it clamps the fraction between 0 and 1. Using your own version of Global.Lerp that is unclamped would be necessary instead.
+--- 	**NOTE**: This doesn't work properly when used with [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) as it clamps the fraction between 0 and 1. Using your own version of [Global.Lerp](https://wiki.facepunch.com/gmod/Global.Lerp) that is unclamped would be necessary instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.OutElastic)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -434,7 +434,7 @@ function math.ease.OutQuart(fraction) end
 ---@return number # "Eased" Value, from 0 to 1
 function math.ease.OutQuint(fraction) end
 
----[SHARED AND MENU] Eases out using math.sin.
+---[SHARED AND MENU] Eases out using [math.sin](https://wiki.facepunch.com/gmod/math.sin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ease.OutSine)
 ---@param fraction number Fraction of the progress to ease, from 0 to 1
@@ -539,7 +539,7 @@ function math.max(...) end
 ---@return number # The smallest number
 function math.min(...) end
 
----[SHARED AND MENU] Returns the modulus of the specified values. Same as math.fmod.
+---[SHARED AND MENU] Returns the modulus of the specified values. Same as [math.fmod](https://wiki.facepunch.com/gmod/math.fmod).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.mod)
 ---@param base number The base value
@@ -564,7 +564,7 @@ function math.modf(base) end
 function math.NormalizeAngle(angle) end
 
 ---[SHARED AND MENU] Returns x raised to the power y.
---- In particular, math.pow(1.0, x) and math.pow(x, 0.0) always return 1.0, even when x is a zero or a nan. If both x and y are finite, x is negative, and y is not an integer then math.pow(x, y) is undefined.
+--- In particular, math.pow(1.0, x) and math.pow(x, 0.0) always return 1.0, even when x is a zero or a [nan](https://wiki.facepunch.com/gmod/nan). If both x and y are finite, x is negative, and y is not an integer then math.pow(x, y) is undefined.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.pow)
 ---@param x number Base.
@@ -574,7 +574,7 @@ function math.pow(x, y) end
 
 ---[SHARED AND MENU] Lerp point between 3 control points with quadratic bezier.
 ---
---- See math.CubicBezier for a function which works with 4 control points.
+--- See [math.CubicBezier](https://wiki.facepunch.com/gmod/math.CubicBezier) for a function which works with 4 control points.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.QuadraticBezier)
 ---@param frac number The fraction for finding the result. This number is clamped between 0 and 1.
@@ -593,7 +593,7 @@ function math.rad(degrees) end
 
 ---[SHARED AND MENU] Returns a random float between min and max.
 ---
---- See also math.random
+--- See also [math.random](https://wiki.facepunch.com/gmod/math.random)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.Rand)
 ---@param min number The minimum value.
@@ -607,7 +607,7 @@ function math.Rand(min, max) end
 ---
 --- When called with two integer numbers m and n, returns a uniform pseudo-random integer in the range m to n inclusive.
 ---
---- See also math.Rand
+--- See also [math.Rand](https://wiki.facepunch.com/gmod/math.Rand)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.random)
 ---@param m? number
@@ -622,11 +622,11 @@ function math.Rand(min, max) end
 ---@return number # Random value
 function math.random(m, n) end
 
----[SHARED AND MENU] Seeds the random number generator. The same seed will guarantee the same sequence of numbers each time with math.random.
+---[SHARED AND MENU] Seeds the random number generator. The same seed will guarantee the same sequence of numbers each time with [math.random](https://wiki.facepunch.com/gmod/math.random).
 ---
---- For shared random values across predicted realms, use util.SharedRandom.
+--- For shared random values across predicted realms, use [util.SharedRandom](https://wiki.facepunch.com/gmod/util.SharedRandom).
 ---
---- Incorrect usage of this function will affect `all` random numbers in the game.
+--- **WARNING**: Incorrect usage of this function will affect `all` random numbers in the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.randomseed)
 ---@param seed number The new seed
@@ -665,7 +665,7 @@ function math.sin(number) end
 ---@return number # The hyperbolic sine of the given angle.
 function math.sinh(number) end
 
----[SHARED AND MENU] Snaps a number to the closest multiplicative of given number. See also Angle:SnapTo.
+---[SHARED AND MENU] Snaps a number to the closest multiplicative of given number. See also [Angle:SnapTo](https://wiki.facepunch.com/gmod/Angle:SnapTo).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.SnapTo)
 ---@param input number The number to snap.

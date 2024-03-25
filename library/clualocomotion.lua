@@ -1,14 +1,14 @@
 ---@meta
 
---- This class is essentially what controls a NextBot NPC. You can access it in a NextBot NPC by using **self.loco** variable.
+--- This class is essentially what controls a [NextBot](https://wiki.facepunch.com/gmod/NextBot) NPC. You can access it in a [NextBot](https://wiki.facepunch.com/gmod/NextBot) NPC by using **self.loco** variable.
 ---@class CLuaLocomotion
 local CLuaLocomotion = {}
 
 ---[SERVER] Sets the location we want to get to.
 ---
---- Each call of CLuaLocomotion:Approach moves the NextBot 1 unit towards the specified goal. The size of this unit is determined by CLuaLocomotion:SetDesiredSpeed; the default is `0` (each call of CLuaLocomotion:Approach moves the NextBot 0).
+--- Each call of [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach) moves the [NextBot](https://wiki.facepunch.com/gmod/NextBot) 1 unit towards the specified goal. The size of this unit is determined by [SetDesiredSpeed](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDesiredSpeed); the default is `0` (each call of [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach) moves the [NextBot](https://wiki.facepunch.com/gmod/NextBot) 0).
 ---
---- To achieve smooth movement with CLuaLocomotion:Approach, it should be called in a hook like ENTITY:Think, as shown in the example.
+--- To achieve smooth movement with [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach), it should be called in a hook like [Think](https://wiki.facepunch.com/gmod/ENTITY:Think), as shown in the example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach)
 ---@param goal Vector The vector we want to get to.
@@ -62,7 +62,7 @@ function CLuaLocomotion:GetDeathDropHeight() end
 ---@return number # Current deceleration speed
 function CLuaLocomotion:GetDeceleration() end
 
----[SERVER] Returns the desired movement speed set by CLuaLocomotion:SetDesiredSpeed
+---[SERVER] Returns the desired movement speed set by [CLuaLocomotion:SetDesiredSpeed](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDesiredSpeed)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetDesiredSpeed)
 ---@return number # The desired movement speed.
@@ -98,7 +98,7 @@ function CLuaLocomotion:GetJumpGapsAllowed() end
 ---@return number # Current jump height
 function CLuaLocomotion:GetJumpHeight() end
 
----[SERVER] Returns maximum jump height of this CLuaLocomotion.
+---[SERVER] Returns maximum jump height of this [CLuaLocomotion](https://wiki.facepunch.com/gmod/CLuaLocomotion).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetMaxJumpHeight)
 ---@return number # The maximum jump height.
@@ -110,7 +110,7 @@ function CLuaLocomotion:GetMaxJumpHeight() end
 ---@return number # Maximum yaw rate
 function CLuaLocomotion:GetMaxYawRate() end
 
----[SERVER] Returns the NextBot this locomotion is associated with.
+---[SERVER] Returns the [NextBot](https://wiki.facepunch.com/gmod/NextBot) this locomotion is associated with.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:GetNextBot)
 ---@return NextBot # The nextbot
@@ -128,7 +128,7 @@ function CLuaLocomotion:GetStepHeight() end
 ---@return Vector # Current velocity
 function CLuaLocomotion:GetVelocity() end
 
----[SERVER] Returns whether this CLuaLocomotion can reach and/or traverse/move in given CNavArea.
+---[SERVER] Returns whether this [CLuaLocomotion](https://wiki.facepunch.com/gmod/CLuaLocomotion) can reach and/or traverse/move in given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:IsAreaTraversable)
 ---@param area CNavArea The area to test
@@ -165,13 +165,13 @@ function CLuaLocomotion:IsStuck() end
 ---@return boolean # If the target is on a ladder or not.
 function CLuaLocomotion:IsUsingLadder() end
 
----[SERVER] Makes the bot jump. It must be on ground (Entity:IsOnGround) and its model must have `ACT_JUMP` activity.
+---[SERVER] Makes the bot jump. It must be on ground ([Entity:IsOnGround](https://wiki.facepunch.com/gmod/Entity:IsOnGround)) and its model must have `ACT_JUMP` activity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:Jump)
 ---@param act? number The activity to use as the jumping animation.
 function CLuaLocomotion:Jump(act) end
 
----[SERVER] Makes the bot jump across a gap. The bot must be on ground (Entity:IsOnGround) and its model must have `ACT_JUMP` activity.
+---[SERVER] Makes the bot jump across a gap. The bot must be on ground ([Entity:IsOnGround](https://wiki.facepunch.com/gmod/Entity:IsOnGround)) and its model must have `ACT_JUMP` activity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:JumpAcrossGap)
 ---@param landingGoal Vector
@@ -216,7 +216,7 @@ function CLuaLocomotion:SetDesiredSpeed(speed) end
 
 ---[SERVER] Sets the locomotion's gravity.
 ---
---- With values 0 or below, or even lower positive values, the nextbot will start to drift sideways, use CLuaLocomotion:SetVelocity to counteract this.
+--- **NOTE**: With values 0 or below, or even lower positive values, the nextbot will start to drift sideways, use [CLuaLocomotion:SetVelocity](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetVelocity) to counteract this.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetGravity)
 ---@param gravity number New gravity to set. Default is 1000.

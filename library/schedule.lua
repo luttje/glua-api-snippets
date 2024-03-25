@@ -1,12 +1,12 @@
 ---@meta
 
---- The object returned by ai_schedule.New.
+--- The object returned by [ai_schedule.New](https://wiki.facepunch.com/gmod/ai_schedule.New).
 ---@class Schedule
 local Schedule = {}
 
----[SERVER] Adds a task to the schedule. See also Schedule:AddTaskEx if you wish to customize task start and run function names.
+---[SERVER] Adds a task to the schedule. See also [Schedule:AddTaskEx](https://wiki.facepunch.com/gmod/Schedule:AddTaskEx) if you wish to customize task start and run function names.
 ---
---- See also ENTITY:StartSchedule, NPC:StartEngineTask, and NPC:RunEngineTask.
+--- See also [ENTITY:StartSchedule](https://wiki.facepunch.com/gmod/ENTITY:StartSchedule), [NPC:StartEngineTask](https://wiki.facepunch.com/gmod/NPC:StartEngineTask), and [NPC:RunEngineTask](https://wiki.facepunch.com/gmod/NPC:RunEngineTask).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTask)
 ---@param taskname string Custom task name
@@ -15,7 +15,7 @@ function Schedule:AddTask(taskname, taskdata) end
 
 ---[SERVER] Adds a task to the schedule with completely custom function names.
 ---
---- See also Schedule:AddTask.
+--- See also [Schedule:AddTask](https://wiki.facepunch.com/gmod/Schedule:AddTask).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:AddTaskEx)
 ---@param start string The full name of a function on the entity's table to be ran when the task is started.
@@ -36,7 +36,8 @@ function Schedule:EngTask(taskname, taskdata) end
 ---@param num number Task index.
 function Schedule:GetTask(num) end
 
----[SERVER] Initialises the Schedule. Called by ai_schedule.New when the Schedule is created.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Initialises the Schedule. Called by [ai_schedule.New](https://wiki.facepunch.com/gmod/ai_schedule.New) when the Schedule is created.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Schedule:Init)
 ---@param debugName string The name passed from ai_schedule.New.

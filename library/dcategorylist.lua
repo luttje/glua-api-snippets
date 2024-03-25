@@ -1,13 +1,13 @@
 ---@meta
 
 ---
---- 		A host for multiple DCollapsibleCategory panels.
+--- 		A host for multiple [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) panels.
 --- 		As the name suggests, each one of them can be collapsed or expanded on demand by the user.
---- 	Creates a DCategoryList with a category and a DFrame, as seen above.
+---
 ---@class DCategoryList : DScrollPanel
 local DCategoryList = {}
 
----[CLIENT AND MENU] Adds a DCollapsibleCategory to the list.
+---[CLIENT AND MENU] Adds a [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) to the list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:Add)
 ---@param categoryName string The name of the category to add.
@@ -20,7 +20,7 @@ function DCategoryList:Add(categoryName) end
 ---@param element Panel VGUI element to add to the list.
 function DCategoryList:AddItem(element) end
 
----[CLIENT AND MENU] Calls Panel:UnselectAll on all child elements, if they have it.
+---[CLIENT AND MENU] Calls [Panel:UnselectAll](https://wiki.facepunch.com/gmod/Panel:UnselectAll) on all child elements, if they have it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:UnselectAll)
 function DCategoryList:UnselectAll() end

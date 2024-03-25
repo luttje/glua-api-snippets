@@ -3,9 +3,9 @@
 ---
 --- These hooks are used inside of a Lua effect. Lua effects are stored in either the `/lua/effects` directory or in a gamemode in `/gamemodes//entities/effects`.
 ---
---- Effects are entities with the classname `class CLuaEffect`, and as such, Entity functions are usable on them (using the `self` argument).
+--- Effects are entities with the classname `class CLuaEffect`, and as such, [Entity](https://wiki.facepunch.com/gmod/Entity) functions are usable on them (using the `self` argument).
 ---
---- An `EFFECT` is made using either a combination of the EFFECT:Init, EFFECT:Render and optionally the EFFECT:Think hook. Another way is to create all particles in one go in the `Init` hook and don't use the other hooks at all.
+--- An `EFFECT` is made using either a combination of the [EFFECT:Init](https://wiki.facepunch.com/gmod/EFFECT:Init), [EFFECT:Render](https://wiki.facepunch.com/gmod/EFFECT:Render) and optionally the [EFFECT:Think](https://wiki.facepunch.com/gmod/EFFECT:Think) hook. Another way is to create all particles in one go in the `Init` hook and don't use the other hooks at all.
 ---
 --- 	Creates a particle effect using a combination of the Init and the Think hooks.
 ---
@@ -43,10 +43,6 @@
 --- end
 ---
 ---
----
----
----
----
 --- 	Creates a particle effect using only the Init hook. To use this effect in a loop one needs to create a new instance of this effect every drawn frame.
 ---
 --- function EFFECT:Init( data )
@@ -81,11 +77,10 @@
 ---
 ---
 ---
----
 ---@class EFFECT : Entity
 EFFECT = {}
 
----[CLIENT] Effect alternative to ENTITY:EndTouch.
+---[CLIENT] Effect alternative to [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:EndTouch)
 function EFFECT:EndTouch() end
@@ -121,7 +116,7 @@ function EFFECT:PhysicsCollide(colData, collider) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:Render)
 function EFFECT:Render() end
 
----[CLIENT] Effect alternative to ENTITY:StartTouch.
+---[CLIENT] Effect alternative to [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:StartTouch)
 function EFFECT:StartTouch() end
@@ -132,7 +127,7 @@ function EFFECT:StartTouch() end
 ---@return boolean # Return false to remove this effect.
 function EFFECT:Think() end
 
----[CLIENT] Effect alternative to ENTITY:Touch.
+---[CLIENT] Effect alternative to [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/EFFECT:Touch)
 function EFFECT:Touch() end

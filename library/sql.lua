@@ -2,7 +2,6 @@
 
 --- The SQL library allows you to access powerful database software included with Garry's Mod. It is the preferred and fastest method of storing large amounts of data. The database is located in sv.db serverside and cl.db clientside, both in the Garry's Mod base folder. SQL is a whole scripting language in itself although relatively simple, it's something you'll need to read up on before using this library.
 ---
----
 --- Example of using sql.
 --- ```
 --- -- Creating a table
@@ -26,7 +25,7 @@
 --- * No `LIMIT` and `ORDER BY` clauses in `DELETE` and `UPDATE` statements (`SQLITE_ENABLE_UPDATE_DELETE_LIMIT`)
 sql = {}
 
----[SHARED AND MENU] Tells the engine a set of queries is coming. Will wait until sql.Commit is called to run them.
+---[SHARED AND MENU] Tells the engine a set of queries is coming. Will wait until [sql.Commit](https://wiki.facepunch.com/gmod/sql.Commit) is called to run them.
 --- This is most useful when you run more than 100+ queries.
 --- This is equivalent to :
 --- ```
@@ -36,7 +35,7 @@ sql = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.Begin)
 function sql.Begin() end
 
----[SHARED AND MENU] Tells the engine to execute a series of queries queued for execution, must be preceded by sql.Begin.
+---[SHARED AND MENU] Tells the engine to execute a series of queries queued for execution, must be preceded by [sql.Begin](https://wiki.facepunch.com/gmod/sql.Begin).
 ---
 --- This is equivalent to `sql.Query( "COMMIT;" )`.
 ---
@@ -63,7 +62,7 @@ function sql.LastError() end
 ---@return table # false is returned if there is an error, nil if the query returned no data.
 function sql.Query(query) end
 
----[SHARED AND MENU] Performs the sql.Query and returns the n'th row.
+---[SHARED AND MENU] Performs the [sql.Query](https://wiki.facepunch.com/gmod/sql.Query) and returns the n'th row.
 ---
 --- This function is equivalent to safely returning
 --- ```lua
@@ -76,7 +75,7 @@ function sql.Query(query) end
 ---@return table # The returned row.
 function sql.QueryRow(query, row) end
 
----[SHARED AND MENU] Performs the query like sql.QueryRow, but returns the first value found.
+---[SHARED AND MENU] Performs the query like [sql.QueryRow](https://wiki.facepunch.com/gmod/sql.QueryRow), but returns the first value found.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.QueryValue)
 ---@param query string The input query.
@@ -85,7 +84,7 @@ function sql.QueryValue(query) end
 
 ---[SHARED AND MENU] Escapes dangerous characters and symbols from user input used in an SQLite SQL Query.
 ---
---- This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
+--- **NOTE**: This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sql.SQLStr)
 ---@param string string The string to be escaped.

@@ -29,7 +29,7 @@ function Vector:Add(vector) end
 ---@return Angle # The angle/direction of the vector.
 function Vector:Angle() end
 
----[SHARED AND MENU] Returns the angle of this vector (normalized), but instead of assuming that up is Global.Vector( 0, 0, 1 ) (Like Vector:Angle does) you can specify which direction is 'up' for the angle.
+---[SHARED AND MENU] Returns the angle of this vector (normalized), but instead of assuming that up is [Global.Vector](https://wiki.facepunch.com/gmod/Global.Vector)( 0, 0, 1 ) (Like [Vector:Angle](https://wiki.facepunch.com/gmod/Vector:Angle) does) you can specify which direction is 'up' for the angle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:AngleEx)
 ---@param up Vector The up direction vector
@@ -49,7 +49,7 @@ function Vector:Cross(otherVector) end
 
 ---[SHARED AND MENU] Returns the Euclidean distance between the vector and the other vector.
 ---
---- This function is more expensive than Vector:DistToSqr. However, please see the notes for Vector:DistToSqr before using it as squared distances are not the same as euclidean distances.
+--- **NOTE**: This function is more expensive than [Vector:DistToSqr](https://wiki.facepunch.com/gmod/Vector:DistToSqr). However, please see the notes for [Vector:DistToSqr](https://wiki.facepunch.com/gmod/Vector:DistToSqr) before using it as squared distances are not the same as euclidean distances.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Distance)
 ---@param otherVector Vector The vector to get the distance to.
@@ -58,16 +58,16 @@ function Vector:Distance(otherVector) end
 
 ---[SHARED AND MENU] Returns the Euclidean distance between the vector and the other vector in 2D space. The Z axis is ignored.
 ---
---- This function is more expensive than Vector:Distance2DSqr. However, please see the notes for Vector:Distance2DSqr before using it as squared distances are not the same as Euclidean distances.
+--- **NOTE**: This function is more expensive than [Vector:Distance2DSqr](https://wiki.facepunch.com/gmod/Vector:Distance2DSqr). However, please see the notes for [Vector:Distance2DSqr](https://wiki.facepunch.com/gmod/Vector:Distance2DSqr) before using it as squared distances are not the same as Euclidean distances.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Distance2D)
 ---@param otherVector Vector The vector to get the distance to.
 ---@return number # Distance between the vectors in 2D space.
 function Vector:Distance2D(otherVector) end
 
----[SHARED AND MENU] Returns the squared distance between 2 vectors in 2D space, ignoring the Z axis. This is faster than Vector:Distance2D as calculating the square root is an expensive process.
+---[SHARED AND MENU] Returns the squared distance between 2 vectors in 2D space, ignoring the Z axis. This is faster than [Vector:Distance2D](https://wiki.facepunch.com/gmod/Vector:Distance2D) as calculating the square root is an expensive process.
 ---
---- 	Squared distances should not be summed. If you need to sum distances, use Vector:Distance2D.
+--- 	**NOTE**: Squared distances should not be summed. If you need to sum distances, use [Vector:Distance2D](https://wiki.facepunch.com/gmod/Vector:Distance2D).
 ---
 --- When performing a distance check, ensure the distance being checked against is squared.
 ---
@@ -76,9 +76,9 @@ function Vector:Distance2D(otherVector) end
 ---@return number # Squared distance to the vector in 2D space.
 function Vector:Distance2DSqr(otherVec) end
 
----[SHARED AND MENU] Returns the squared distance of 2 vectors, this is quicker to call than Vector:Distance as DistToSqr does not need to calculate the square root, which is an expensive process.
+---[SHARED AND MENU] Returns the squared distance of 2 vectors, this is quicker to call than [Vector:Distance](https://wiki.facepunch.com/gmod/Vector:Distance) as DistToSqr does not need to calculate the square root, which is an expensive process.
 ---
---- 	Squared distances should not be summed. If you need to sum distances, use Vector:Distance.
+--- 	**NOTE**: Squared distances should not be summed. If you need to sum distances, use [Vector:Distance](https://wiki.facepunch.com/gmod/Vector:Distance).
 ---
 --- When performing a distance check, ensure the distance being checked against is squared. See example code below.
 ---
@@ -98,7 +98,7 @@ function Vector:Div(divisor) end
 --- The dot product of two vectors is the product of their magnitudes (lengths), and the cosine of the angle between them:
 --- **a · b** = |**a**| |**b**| cos(θ)
 --- where **a** and **b** are vectors.
---- See Vector:Length for obtaining magnitudes.
+--- See [Vector:Length](https://wiki.facepunch.com/gmod/Vector:Length) for obtaining magnitudes.
 ---
 --- A dot product returns just the cosine of the angle if both vectors are normalized, and zero if the vectors are at right angles to each other.
 ---
@@ -117,13 +117,13 @@ function Vector:DotProduct(Vector) end
 
 ---[SHARED AND MENU] Returns the negative version of this vector, i.e. a vector with every component to the negative value of itself.
 ---
---- See also Vector:Negate.
+--- See also [Vector:Negate](https://wiki.facepunch.com/gmod/Vector:Negate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNegated)
 ---@return Vector # The negative of this vector.
 function Vector:GetNegated() end
 
----[SHARED AND MENU] Returns a normalized version of the vector. This is a alias of Vector:GetNormalized.
+---[SHARED AND MENU] Returns a normalized version of the vector. This is a alias of [Vector:GetNormalized](https://wiki.facepunch.com/gmod/Vector:GetNormalized).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNormal)
 ---@return Vector # Normalized version of the vector.
@@ -132,7 +132,7 @@ function Vector:GetNormal() end
 
 ---[SHARED AND MENU] Returns a normalized version of the vector. Normalized means vector with same direction but with length of 1.
 ---
---- This does not affect the vector you call it on; to do this, use Vector:Normalize.
+--- This does not affect the vector you call it on; to do this, use [Vector:Normalize](https://wiki.facepunch.com/gmod/Vector:Normalize).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:GetNormalized)
 ---@return Vector # Normalized version of the vector.
@@ -154,8 +154,7 @@ function Vector:IsZero() end
 
 ---[SHARED AND MENU] Returns the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_vector#Length) of the vector: &radic;(x&sup2; + y&sup2; + z&sup2;).
 ---
----
---- 			This is a relatively expensive process since it uses the square root. It is recommended that you use Vector:LengthSqr whenever possible.
+--- 		**WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:LengthSqr](https://wiki.facepunch.com/gmod/Vector:LengthSqr) whenever possible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length)
 ---@return number # Length of the vector.
@@ -163,8 +162,7 @@ function Vector:Length() end
 
 ---[SHARED AND MENU] Returns the length of the vector in two dimensions, without the Z axis.
 ---
----
---- 			This is a relatively expensive process since it uses the square root. It is recommended that you use Vector:Length2DSqr whenever possible.
+--- 		**WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:Length2DSqr](https://wiki.facepunch.com/gmod/Vector:Length2DSqr) whenever possible.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length2D)
 ---@return number # Length of the vector in two dimensions, √(x² + y²)
@@ -172,7 +170,7 @@ function Vector:Length2D() end
 
 ---[SHARED AND MENU] Returns the squared length of the vectors x and y value, x&sup2; + y&sup2;.
 ---
---- This is faster than Vector:Length2D as calculating the square root is an expensive process.
+--- This is faster than [Vector:Length2D](https://wiki.facepunch.com/gmod/Vector:Length2D) as calculating the square root is an expensive process.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Length2DSqr)
 ---@return number # Squared length of the vector in two dimensions
@@ -180,13 +178,13 @@ function Vector:Length2DSqr() end
 
 ---[SHARED AND MENU] Returns the squared length of the vector, x&sup2; + y&sup2; + z&sup2;.
 ---
---- This is faster than Vector:Length as calculating the square root is an expensive process.
+--- This is faster than [Vector:Length](https://wiki.facepunch.com/gmod/Vector:Length) as calculating the square root is an expensive process.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:LengthSqr)
 ---@return number # Squared length of the vector
 function Vector:LengthSqr() end
 
----[SHARED AND MENU] Scales the vector by the given number (that means x, y and z are multiplied by that value), a Vector (X, Y, and Z of each vector are multiplied) or a VMatrix (Transforms the vector by the matrix's rotation/translation).
+---[SHARED AND MENU] Scales the vector by the given [number](https://wiki.facepunch.com/gmod/number) (that means x, y and z are multiplied by that value), a [Vector](https://wiki.facepunch.com/gmod/Vector) (X, Y, and Z of each vector are multiplied) or a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) (Transforms the vector by the matrix's rotation/translation).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Mul)
 ---@param multiplier number The value to scale the vector with.
@@ -197,7 +195,7 @@ function Vector:Mul(multiplier) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Negate)
 function Vector:Negate() end
 
----[SHARED AND MENU] Normalizes the given vector. This changes the vector you call it on, if you want to return a normalized copy without affecting the original, use Vector:GetNormalized.
+---[SHARED AND MENU] Normalizes the given vector. This changes the vector you call it on, if you want to return a normalized copy without affecting the original, use [Vector:GetNormalized](https://wiki.facepunch.com/gmod/Vector:GetNormalized).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:Normalize)
 function Vector:Normalize() end
@@ -236,25 +234,25 @@ function Vector:SetUnpacked(x, y, z) end
 ---@param vector Vector The other vector.
 function Vector:Sub(vector) end
 
----[SHARED] Translates the Vector (values ranging from 0 to 1) into a Color. This will also range the values from 0 - 1 to 0 - 255.
+---[SHARED] Translates the [Vector](https://wiki.facepunch.com/gmod/Vector) (values ranging from 0 to 1) into a [Color](https://wiki.facepunch.com/gmod/Color). This will also range the values from 0 - 1 to 0 - 255.
 ---
 --- x * 255 -> r
 --- y * 255 -> g
 --- z * 255 -> b
 ---
---- This is the opposite of Color:ToVector
+--- This is the opposite of [Color:ToVector](https://wiki.facepunch.com/gmod/Color:ToVector)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:ToColor)
 ---@return table # The created Color.
 function Vector:ToColor() end
 
----[CLIENT] Returns where on the screen the specified position vector would appear. A related function is gui.ScreenToVector, which converts a 2D coordinate to a 3D direction.
+---[CLIENT] Returns where on the screen the specified position vector would appear. A related function is [gui.ScreenToVector](https://wiki.facepunch.com/gmod/gui.ScreenToVector), which converts a 2D coordinate to a 3D direction.
 ---
---- Should be called from a 3D rendering environment or after cam.Start3D or it may not work correctly.
+--- **NOTE**: Should be called from a 3D rendering environment or after [cam.Start3D](https://wiki.facepunch.com/gmod/cam.Start3D) or it may not work correctly.
 ---
 --- Errors in a render hook can make this value incorrect until the player restarts their game.
 ---
---- cam.Start3D or 3D context cam.Start with non-default parameters incorrectly sets the reference FOV for this function, causing incorrect return values. This can be fixed by creating and ending a default 3D context (cam.Start3D with no arguments).
+--- [cam.Start3D](https://wiki.facepunch.com/gmod/cam.Start3D) or 3D context [cam.Start](https://wiki.facepunch.com/gmod/cam.Start) with non-default parameters incorrectly sets the reference FOV for this function, causing incorrect return values. This can be fixed by creating and ending a default 3D context ([cam.Start3D](https://wiki.facepunch.com/gmod/cam.Start3D) with no arguments).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:ToScreen)
 ---@return table # The created Structures/ToScreenData.

@@ -1,20 +1,24 @@
 ---@meta
 
---- Creates a slider that can be moved along the X and/or Y axisMake a slider at 50, 50 that can move 100 pixels on the X axis.
+--- Creates a slider that can be moved along the X and/or Y axis
 ---@class DSlider : Panel
 local DSlider = {}
 
----[CLIENT AND MENU] Used internally to set the X axis convar.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to set the X axis convar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarXNumberThink)
 function DSlider:ConVarXNumberThink() end
 
----[CLIENT AND MENU] Used internally to set the Y axis convar.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to set the Y axis convar.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarYNumberThink)
 function DSlider:ConVarYNumberThink() end
 
----[CLIENT AND MENU] Identical to DSlider:IsEditing
+---[CLIENT AND MENU] Identical to [DSlider:IsEditing](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetDragging)
 ---@return boolean #
@@ -22,7 +26,7 @@ function DSlider:GetDragging() end
 
 ---[CLIENT AND MENU] Returns the draggable panel's lock on the X axis.
 ---
---- See DSlider:SetLockX for more info.
+--- See [DSlider:SetLockX](https://wiki.facepunch.com/gmod/DSlider:SetLockX) for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockX)
 ---@return number #
@@ -30,20 +34,20 @@ function DSlider:GetLockX() end
 
 ---[CLIENT AND MENU] Returns the draggable panel's lock on the Y axis.
 ---
---- See DSlider:SetLockY for more info.
+--- See [DSlider:SetLockY](https://wiki.facepunch.com/gmod/DSlider:SetLockY) for more info.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockY)
 ---@return number #
 function DSlider:GetLockY() end
 
----[CLIENT AND MENU] Returns the current notch color, set by DSlider:SetNotchColor
+---[CLIENT AND MENU] Returns the current notch color, set by [DSlider:SetNotchColor](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
 ---@return Color # The current color
 ---@deprecated Does not affect anything by default.
 function DSlider:GetNotchColor() end
 
----[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as DNumSlider.
+---[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotches)
 ---@return number #
@@ -57,7 +61,7 @@ function DSlider:GetNumSlider() end
 
 ---[CLIENT AND MENU] Returns the target position of the draggable "knob" panel of the slider on the X axis.
 ---
---- Set by DSlider:SetSlideX.
+--- Set by [DSlider:SetSlideX](https://wiki.facepunch.com/gmod/DSlider:SetSlideX).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideX)
 ---@return number # The value range seems to be from 0 to 1
@@ -65,13 +69,13 @@ function DSlider:GetSlideX() end
 
 ---[CLIENT AND MENU] Returns the target position of the draggable "knob" panel of the slider on the Y axis.
 ---
---- Set by DSlider:SetSlideY.
+--- Set by [DSlider:SetSlideY](https://wiki.facepunch.com/gmod/DSlider:SetSlideY).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideY)
 ---@return number # The value range seems to be from 0 to 1
 function DSlider:GetSlideY() end
 
----[CLIENT AND MENU] Returns the value set by DSlider:SetTrapInside.
+---[CLIENT AND MENU] Returns the value set by [DSlider:SetTrapInside](https://wiki.facepunch.com/gmod/DSlider:SetTrapInside).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetTrapInside)
 ---@return boolean #
@@ -83,7 +87,9 @@ function DSlider:GetTrapInside() end
 ---@return boolean #
 function DSlider:IsEditing() end
 
----[CLIENT AND MENU] Used internally to fire DSlider:OnValueChanged
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to fire [DSlider:OnValueChanged](https://wiki.facepunch.com/gmod/DSlider:OnValueChanged)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:OnValuesChangedInternal)
 function DSlider:OnValuesChangedInternal() end
@@ -94,19 +100,21 @@ function DSlider:OnValuesChangedInternal() end
 ---@param path string Path to the image.
 function DSlider:SetBackground(path) end
 
----[CLIENT AND MENU] Sets the ConVar to be set when the slider changes on the X axis.
+---[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarX)
 ---@param convar string Name of the convar to set.
 function DSlider:SetConVarX(convar) end
 
----[CLIENT AND MENU] Sets the ConVar to be set when the slider changes on the Y axis.
+---[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarY)
 ---@param convar string Name of the convar to set.
 function DSlider:SetConVarY(convar) end
 
----[CLIENT AND MENU] Sets whether or not the slider is being dragged.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Sets whether or not the slider is being dragged.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetDragging)
 ---@param dragging boolean
@@ -149,7 +157,7 @@ function DSlider:SetLockY(lockY) end
 ---@deprecated Does not affect anything by default.
 function DSlider:SetNotchColor(clr) end
 
----[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as DNumSlider.
+---[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetNotches)
 ---@param notches number

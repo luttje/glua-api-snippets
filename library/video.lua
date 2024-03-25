@@ -3,7 +3,7 @@
 --- The video library.
 video = {}
 
----[CLIENT AND MENU] Attempts to create an IVideoWriter.
+---[CLIENT AND MENU] Attempts to create an [IVideoWriter](https://wiki.facepunch.com/gmod/IVideoWriter).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/video.Record)
 ---@param config table The video config. See Structures/VideoData.

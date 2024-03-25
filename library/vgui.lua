@@ -2,7 +2,7 @@
 
 --- The **vgui** library allows you to script and create your own panels using **V**alve's **G**raphical **U**ser **I**nterface (VGUI) system.
 ---
---- For an alphabetically ordered list of VGUI panels, see VGUI Element List.
+--- For an alphabetically ordered list of VGUI panels, see [VGUI Element List](https://wiki.facepunch.com/gmod/VGUI Element List).
 vgui = {}
 
 ---[CLIENT AND MENU] Creates a panel by the specified classname.
@@ -21,7 +21,7 @@ vgui = {}
 ---@return T #The created panel, or `nil` if creation failed for whatever reason.
 function vgui.Create(classname, parent, name) end
 
----[CLIENT AND MENU] Creates a panel from a table, used alongside vgui.RegisterFile and vgui.RegisterTable to efficiently define, register, and instantiate custom panels.
+---[CLIENT AND MENU] Creates a panel from a table, used alongside [vgui.RegisterFile](https://wiki.facepunch.com/gmod/vgui.RegisterFile) and [vgui.RegisterTable](https://wiki.facepunch.com/gmod/vgui.RegisterTable) to efficiently define, register, and instantiate custom panels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CreateFromTable)
 ---@param metatable table Your PANEL table.
@@ -30,7 +30,8 @@ function vgui.Create(classname, parent, name) end
 ---@return Panel # The created panel, or `nil` if creation failed for whatever reason.
 function vgui.CreateFromTable(metatable, parent, name) end
 
----[CLIENT AND MENU] Creates an engine panel.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Creates an engine panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.CreateX)
 ---@param class string Class of the panel to create
@@ -45,7 +46,7 @@ function vgui.CreateX(class, parent, name) end
 ---@return boolean # Whether the cursor is visible or not.
 function vgui.CursorVisible() end
 
----[CLIENT AND MENU] Returns true if Lua-defined panel exists by name. Uses vgui.GetControlTable internally.
+---[CLIENT AND MENU] Returns true if Lua-defined panel exists by name. Uses [vgui.GetControlTable](https://wiki.facepunch.com/gmod/vgui.GetControlTable) internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Exists)
 ---@param Panelname string The name of the panel to get test.
@@ -68,9 +69,9 @@ function vgui.GetControlTable(Panelname) end
 
 ---[CLIENT AND MENU] Returns the panel the cursor is hovering above.
 ---
---- This returns a cached value that is only updated after rendering and `before` the next VGUI Think/Layout pass.
+--- **WARNING**: This returns a cached value that is only updated after rendering and `before` the next VGUI Think/Layout pass.
 ---
---- ie. it lags one frame behind panel layout and is completely unhelpful for PANEL:Paint if your panels are moving around under the mouse a lot every frame.
+--- ie. it lags one frame behind panel layout and is completely unhelpful for [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) if your panels are moving around under the mouse a lot every frame.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetHoveredPanel)
 ---@return Panel # The panel that the user is currently hovering over with their cursor.
@@ -84,7 +85,7 @@ function vgui.GetKeyboardFocus() end
 
 ---[CLIENT AND MENU] Returns the global world panel which is the parent to all others, except for the HUD panel.
 ---
---- See also Global.GetHUDPanel.
+--- See also [Global.GetHUDPanel](https://wiki.facepunch.com/gmod/Global.GetHUDPanel).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetWorldPanel)
 ---@return Panel # The world panel
@@ -96,7 +97,7 @@ function vgui.GetWorldPanel() end
 ---@return boolean # isHoveringWorld
 function vgui.IsHoveringWorld() end
 
----[CLIENT AND MENU] Registers a panel for later creation via vgui.Create.
+---[CLIENT AND MENU] Registers a panel for later creation via [vgui.Create](https://wiki.facepunch.com/gmod/vgui.Create).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Register)
 ---@param classname string Classname of the panel to register. This is what you will need to pass to vgui.Create's first argument.
@@ -105,10 +106,9 @@ function vgui.IsHoveringWorld() end
 ---@return table # The given panel table from second argument
 function vgui.Register(classname, panelTable, baseName) end
 
----[CLIENT AND MENU] Registers a new VGUI panel from a file, to be used with vgui.CreateFromTable.
+---[CLIENT AND MENU] Registers a new [VGUI](https://wiki.facepunch.com/gmod/VGUI) panel from a file, to be used with [vgui.CreateFromTable](https://wiki.facepunch.com/gmod/vgui.CreateFromTable).
 ---
---- File file must use the `PANEL` global that is provided just before the file is Global.included, for example:
----
+--- File file must use the `PANEL` global that is provided just before the file is [Global.include](https://wiki.facepunch.com/gmod/Global.include)d, for example:
 ---
 --- ```
 --- PANEL.Base = "Panel"
@@ -127,7 +127,7 @@ function vgui.Register(classname, panelTable, baseName) end
 ---@return table # A table containing info about the panel.
 function vgui.RegisterFile(file) end
 
----[CLIENT AND MENU] Registers a table to use as a panel, to be used with vgui.CreateFromTable.
+---[CLIENT AND MENU] Registers a table to use as a panel, to be used with [vgui.CreateFromTable](https://wiki.facepunch.com/gmod/vgui.CreateFromTable).
 ---
 --- All this function does is assigns Base key to your table and returns the table.
 ---

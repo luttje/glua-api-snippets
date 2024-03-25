@@ -1,6 +1,6 @@
 ---@meta
 
---- The gui library is similar to the input but features functions that are more focused on the mouse's interaction with GUI panels.
+--- The gui library is similar to the [input](https://wiki.facepunch.com/gmod/input) but features functions that are more focused on the mouse's interaction with GUI panels.
 gui = {}
 
 ---[CLIENT AND MENU] Opens the game menu overlay.
@@ -18,10 +18,9 @@ function gui.ActivateGameUI() end
 --- This is used to give different colors to the caption to differentiate, for example, whether the SMG is fired by the player or NPC.
 function gui.AddCaption(text, duration, fromPlayer) end
 
----[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu. See vgui.CursorVisible for a function to see if the cursor is visible or not.
+---[CLIENT] Enables the mouse cursor without restricting player movement, like using Sandbox's context menu. See [vgui.CursorVisible](https://wiki.facepunch.com/gmod/vgui.CursorVisible) for a function to see if the cursor is visible or not.
 ---
----
---- 	Some CUserCmd functions will return incorrect values when this function is active because [the user input is getting overtaken by the vgui system](https://github.com/Facepunch/garrysmod-issues/issues/982#issuecomment-505671531).
+--- **NOTE**: Some [CUserCmd](https://wiki.facepunch.com/gmod/CUserCmd) functions will return incorrect values when this function is active because [the user input is getting overtaken by the vgui system](https://github.com/Facepunch/garrysmod-issues/issues/982#issuecomment-505671531).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.EnableScreenClicker)
 ---@param enabled boolean Whether the cursor should be enabled or not. (true = enable, false = disable)
@@ -123,15 +122,15 @@ function gui.MouseY() end
 
 ---[CLIENT AND MENU] Opens specified URL in the steam overlay browser.
 ---
---- When called clientside, user will be asked for confirmation before the website will open.
+--- **NOTE**: When called clientside, user will be asked for confirmation before the website will open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.OpenURL)
 ---@param url string URL to open, it has to start with either `http://` or `https://`.
 function gui.OpenURL(url) end
 
----[CLIENT] Converts the specified screen position to a **direction** vector local to the player's view. A related function is Vector:ToScreen, which translates a 3D position to a screen coordinate.
+---[CLIENT] Converts the specified screen position to a **direction** vector local to the player's view. A related function is [Vector:ToScreen](https://wiki.facepunch.com/gmod/Vector:ToScreen), which translates a 3D position to a screen coordinate.
 ---
---- util.AimVector is a more generic version of this, using a custom view instead of the player's current view.
+--- [util.AimVector](https://wiki.facepunch.com/gmod/util.AimVector) is a more generic version of this, using a custom view instead of the player's current view.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.ScreenToVector)
 ---@param x number X coordinate on the screen.

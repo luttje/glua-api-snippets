@@ -3,7 +3,8 @@
 --- Menu state library to query the master server list.
 serverlist = {}
 
----[MENU] Adds current server the player is on to their favorites.
+---[MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Adds current server the player is on to their favorites.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddCurrentServerToFavorites)
 function serverlist.AddCurrentServerToFavorites() end
@@ -31,25 +32,23 @@ function serverlist.IsServerFavorite(address) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.PingServer)
 ---@param ip string The IP address of the server, including the port.
----@param callback function The function to be called if and when the request finishes. Function has the same arguments as the callback of serverlist.Query.
+---@param callback function The function to be called if and when the request finishes.
+---
+--- Callback has arguments described here: Structures/ServerQueryData.
 function serverlist.PingServer(ip, callback) end
 
 ---[MENU] Queries a server for its player list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.PlayerList)
 ---@param ip string The IP address of the server, including the port.
----@param callback function The function to be called if and when the request finishes. Function has one argument, a table containing tables with player info.
+---@param callback fun(data: table) The function to be called if and when the request finishes.
 ---
---- Each table with player info has next fields:
----
----
---- number time - The amount of time the player is playing on the server, in seconds
----
----
---- string name - The player name
----
----
---- number score - The players score
+--- Function argument(s):
+--- * table `data` -
+--- A list of players and their info. Each entry has the following fields:
+---   * number **time** - The amount of time the player is playing on the server, in seconds
+---   * string **name** - The player name
+---   * number **score** - The players score
 function serverlist.PlayerList(ip, callback) end
 
 ---[MENU] Queries the master server for server list.

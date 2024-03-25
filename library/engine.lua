@@ -3,7 +3,7 @@
 --- The engine library provides functions to access various features in the game's engine, most are related to the demo and save systems.
 engine = {}
 
----[SHARED] Returns non paused Global.FrameTime.
+---[SHARED] Returns non paused [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.AbsoluteFrameTime)
 ---@return number # Frame time.
@@ -17,7 +17,9 @@ function engine.ActiveGamemode() end
 
 ---[SERVER] Closes the server and completely exits.
 ---
---- This is only functional when running in server test mode (launch option -systemtest). Server test mode is used internally at Facepunch as part of the build process to make sure that the dedicated servers aren't crashing on startup.
+--- This is only functional when running in server test mode (launch option `-systemtest`). Server test mode is used internally at Facepunch as part of the build process to make sure that the dedicated servers aren't crashing on startup.
+---
+--- You can also use `-allowquit` which will make this function run `quit keep_players`, which does not forcibly disconnect players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.CloseServer)
 function engine.CloseServer() end
@@ -30,7 +32,7 @@ function engine.CloseServer() end
 ---@return table # A table of tables containing 8 keys (downloaded, models, title, file, mounted, wsid, size, updated).
 function engine.GetAddons() end
 
----[CLIENT AND MENU] When starting playing a demo, engine.GetDemoPlaybackTick will be reset and its old value will be added to this functions return value.
+---[CLIENT AND MENU] When starting playing a demo, [engine.GetDemoPlaybackTick](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackTick) will be reset and its old value will be added to this functions return value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.GetDemoPlaybackStartTick)
 ---@return number #
@@ -93,7 +95,7 @@ function engine.IsPlayingDemo() end
 ---@return boolean # Whether the game is currently recording a demo or not.
 function engine.IsRecordingDemo() end
 
----[SERVER] This is a direct binding to the function `engine->LightStyle`. This function allows you to change the default light style of the map - so you can make lighting lighter or darker. You’ll need to call render.RedownloadAllLightmaps clientside to refresh the lightmaps to this new color.
+---[SERVER] This is a direct binding to the function `engine->LightStyle`. This function allows you to change the default light style of the map - so you can make lighting lighter or darker. You’ll need to call [render.RedownloadAllLightmaps](https://wiki.facepunch.com/gmod/render.RedownloadAllLightmaps) clientside to refresh the lightmaps to this new color.
 ---
 --- Calling this function with arguments 0 and "a" will cause dynamic lights such as those produced by the Light tool to stop working.
 ---
@@ -105,11 +107,12 @@ function engine.LightStyle(lightstyle, pattern) end
 ---[CLIENT] Loads a duplication from the local filesystem.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.OpenDupe)
----@param dupeName string Name of the file. e.g, engine.OpenDupe("dupes/8b809dd7a1a9a375e75be01cdc12e61f.dupe")
----@return string # Compressed dupeData. Use util.JSONToTable to make it into a format useable by the duplicator tool.
+---@param dupeName string Name of the file. e.g, `engine.OpenDupe("dupes/8b809dd7a1a9a375e75be01cdc12e61f.dupe")`
+---@return table # A table with a simple field:
+--- * string `data` - Compressed dupe data. Use util.JSONToTable to make it into a format useable by the duplicator tool.
 function engine.OpenDupe(dupeName) end
 
----[CLIENT AND MENU] Returns an estimate of the server's performance. Equivalent to calling Global.FrameTime from the server, according to source code.
+---[CLIENT AND MENU] Returns an estimate of the server's performance. Equivalent to calling [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) from the server, according to source code.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.ServerFrameTime)
 ---@return number # Frame time.
@@ -135,7 +138,9 @@ function engine.TickCount() end
 ---@return number # Number of seconds between each gametick.
 function engine.TickInterval() end
 
----[CLIENT] Returns video recording settings set by video.Record. Used by Demo-To-Video feature.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns video recording settings set by [video.Record](https://wiki.facepunch.com/gmod/video.Record). Used by Demo-To-Video feature.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.VideoSettings)
 ---@return table # The video recording settings, see Structures/VideoData.

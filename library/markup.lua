@@ -1,9 +1,9 @@
 ---@meta
 
---- The markup library only contains a single function to create a MarkupObject.
+--- The markup library only contains a single function to create a [MarkupObject](https://wiki.facepunch.com/gmod/MarkupObject).
 markup = {}
 
----[CLIENT AND MENU] A convenience function that converts a Color into its markup ready string representation.
+---[CLIENT AND MENU] A convenience function that converts a [Color](https://wiki.facepunch.com/gmod/Color) into its markup ready string representation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/markup.Color)
 ---@param col Color The Color to convert.
@@ -17,7 +17,7 @@ function markup.Color(col) end
 ---@return string # The parsed markup object ready to be drawn.
 function markup.Escape(text) end
 
----[CLIENT AND MENU] Parses markup into a MarkupObject. Currently, this only supports fonts and colors as demonstrated in the example.
+---[CLIENT AND MENU] Parses markup into a [MarkupObject](https://wiki.facepunch.com/gmod/MarkupObject). Currently, this only supports fonts and colors as demonstrated in the example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/markup.Parse)
 ---@param markup string The markup to be parsed.

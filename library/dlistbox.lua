@@ -4,7 +4,7 @@
 ---
 ---
 --- 		A simple list box with optional multi-select.
---- 		As this is deprecated, it is recommended that you use DListView, which contains the same functionality with multi-column options.
+--- 		As this is deprecated, it is recommended that you use [DListView](https://wiki.facepunch.com/gmod/DListView), which contains the same functionality with multi-column options.
 ---
 ---@deprecated Derived from the deprecated DPanelList.
 ---@class DListBox : DPanelList
@@ -28,13 +28,15 @@ function DListBox:GetSelectedItems() end
 ---@return table # The selected item values. A list of Panel:GetValue of each selected DListBoxItem.
 function DListBox:GetSelectedValues() end
 
----[CLIENT AND MENU] Select a DListBoxItem based on its value.
+---[CLIENT AND MENU] Select a [DListBoxItem](https://wiki.facepunch.com/gmod/DListBoxItem) based on its value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListBox:SelectByName)
 ---@param val string Panel:GetValue of a DListBoxItem to select.
 function DListBox:SelectByName(val) end
 
----[CLIENT AND MENU] Used internally to select a specific panel.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to select a specific panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListBox:SelectItem)
 ---@param item Panel DListBox to select.
@@ -47,7 +49,9 @@ function DListBox:SelectItem(item, onlyme) end
 ---@param multiple boolean Whether the list box can select multiple items.
 function DListBox:SetMultiple(multiple) end
 
----[CLIENT AND MENU] Sets selected items.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Sets selected items.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListBox:SetSelectedItems)
 ---@param items table The items to select. A list of DListBoxItem.

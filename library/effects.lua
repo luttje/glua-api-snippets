@@ -20,7 +20,6 @@ effects = {}
 --- * number flags- Beam flags.
 --- * number framerate - texture framerate.
 --- * string material - The material to use instead of the default one.
----
 function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude, color, extra) end
 
 ---[SHARED] Creates a bunch of bubbles inside a defined box.
@@ -45,20 +44,23 @@ function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 
----[CLIENT] You are looking for util.Effect.Returns the table of the effect specified.
+---[CLIENT] **INTERNAL**: You are looking for [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
+--- Returns the table of the effect specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Create)
 ---@param name string Effect name.
 ---@return table # Effect table.
 function effects.Create(name) end
 
----[CLIENT] Returns a list of all Lua-defined effects.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Returns a list of all Lua-defined effects.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
 ---@return table # The effects table.
 function effects.GetList() end
 
----[CLIENT] Registers a new effect.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Registers a new effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Register)
 ---@param effect_table table Effect table.

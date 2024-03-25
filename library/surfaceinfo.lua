@@ -1,10 +1,11 @@
 ---@meta
 
---- A brush surface object returned by Entity:GetBrushSurfaces.
+--- A brush surface object returned by [Entity:GetBrushSurfaces](https://wiki.facepunch.com/gmod/Entity:GetBrushSurfaces).
 ---
 --- Brush surfaces are a part of what makes up the map geometry aside from displacements. Any primitive brush model, including most breakable windows, can be represented by this object.
 ---
---- This object internally uses the `SurfaceHandle_t` class, which is an alias for `msurface2_t*`.
+--- **NOTE**: This object internally uses the `SurfaceHandle_t` class, which is an alias for `msurface2_t*`.
+---
 ---@class SurfaceInfo
 local SurfaceInfo = {}
 
@@ -22,7 +23,7 @@ function SurfaceInfo:GetVertices() end
 
 ---[SHARED] Checks if the brush surface is a nodraw surface, meaning it will not be drawn by the engine.
 ---
---- This internally checks the SURFDRAW_NODRAW flag.
+--- **NOTE**: This internally checks the SURFDRAW_NODRAW flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsNoDraw)
 ---@return boolean # Returns true if this surface won't be drawn.
@@ -30,7 +31,7 @@ function SurfaceInfo:IsNoDraw() end
 
 ---[SHARED] Checks if the brush surface is displaying the skybox.
 ---
---- This internally checks the SURFDRAW_SKY flag.
+--- **NOTE**: This internally checks the SURFDRAW_SKY flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsSky)
 ---@return boolean # Returns true if the surface is the sky.
@@ -38,7 +39,7 @@ function SurfaceInfo:IsSky() end
 
 ---[SHARED] Checks if the brush surface is water.
 ---
---- This internally checks the SURFDRAW_WATER flag.
+--- **NOTE**: This internally checks the SURFDRAW_WATER flag.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SurfaceInfo:IsWater)
 ---@return boolean # Returns true if the surface is water.

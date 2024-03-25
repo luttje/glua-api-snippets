@@ -7,7 +7,7 @@
 --- * `MOD` searches only the garrysmod folder.
 --- * `DATA` searches in the data folder.
 ---
---- See File Search Paths for the descriptive list of path values.
+--- See [File Search Paths](https://wiki.facepunch.com/gmod/File Search Paths) for the descriptive list of path values.
 --- For the full list of path values, type `path` in the console.
 file = {}
 
@@ -20,19 +20,20 @@ function file.Append(name, content) end
 
 ---[SHARED AND MENU] Returns the content of a file asynchronously.
 ---
---- All limitations of file.Read also apply.
---- This function is currently broken in the Menu State and won't be fixed. [Bug Report](https://github.com/Facepunch/garrysmod-issues/issues/5433)
+--- All limitations of [file.Read](https://wiki.facepunch.com/gmod/file.Read) also apply.
+--- **NOTE**: This function is currently broken in the Menu State and won't be fixed. [Bug Report](https://github.com/Facepunch/garrysmod-issues/issues/5433)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.AsyncRead)
 ---@param fileName string The name of the file.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@param callback function
---- A callback function that will be called when the file read operation finishes. Arguments are:
---- * string fileName - The `fileName` argument above.
---- * string gamePath - The `gamePath` argument above.
---- * number status - The status of the operation. The list can be found in Enums/FSASYNC.
---- * string data - The entirety of the data of the file.
+---@param callback fun(fileName: string, gamePath: string, status: number, data: string)
+--- A callback function that will be called when the file read operation finishes.
 ---
+--- Function argument(s):
+--- * string `fileName` - The `fileName` argument above.
+--- * string `gamePath` - The `gamePath` argument above.
+--- * number `status` - The status of the operation. The list can be found in Enums/FSASYNC.
+--- * string `data` - The entirety of the data of the file.
 ---@param sync? boolean If `true` the file will be read synchronously.
 ---@return number # Enums/FSASYNC on success, Enums/FSASYNC on failure.
 function file.AsyncRead(fileName, gamePath, callback, sync) end
@@ -44,7 +45,7 @@ function file.AsyncRead(fileName, gamePath, callback, sync) end
 function file.CreateDir(name) end
 
 ---[SHARED AND MENU] Deletes a file or `empty` folder that is relative to the **data** folder. You can't remove any files outside of **data** folder.
---- You are able to delete **any** file in the Menu state.
+--- **NOTE**: You are able to delete **any** file in the Menu state.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Delete)
 ---@param name string The file name.
@@ -61,7 +62,7 @@ function file.Delete(name, path) end
 function file.Exists(name, gamePath) end
 
 ---[SHARED AND MENU] Returns a list of files and directories inside a single folder.
---- 		It seems that paths with capital letters (e.g. lua/MyFolder/*) don't work as expected on Linux.
+--- 		**WARNING**: It seems that paths with capital letters (e.g. lua/MyFolder/*) don't work as expected on Linux.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Find)
 ---@param name string The wildcard to search for. `models/*.mdl` will list **.mdl** files in the `models/` folder.
@@ -72,7 +73,6 @@ function file.Exists(name, gamePath) end
 --- * `namedesc` sort the files descending by name.
 --- * `dateasc` sort the files ascending by date.
 --- * `datedesc` sort the files descending by date.
----
 ---@return table # A table of found files, or `nil` if the path is invalid
 ---@return table # A table of found directories, or `nil` if the path is invalid
 function file.Find(name, path, sorting) end
@@ -102,7 +102,7 @@ function file.Open(fileName, fileMode, gamePath) end
 
 ---[SHARED AND MENU] Returns the content of a file.
 ---
---- Beware of casing -- some filesystems are case-sensitive. SRCDS on Linux seems to force file/directory creation to lowercase, but will not modify read operations.
+--- **WARNING**: Beware of casing -- some filesystems are case-sensitive. SRCDS on Linux seems to force file/directory creation to lowercase, but will not modify read operations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Read)
 ---@param fileName string The name of the file.
@@ -139,7 +139,7 @@ function file.Size(fileName, gamePath) end
 ---@return number # Seconds passed since Unix epoch.
 function file.Time(path, gamePath) end
 
----[SHARED AND MENU] Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use file.Append.
+---[SHARED AND MENU] Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use [file.Append](https://wiki.facepunch.com/gmod/file.Append).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Write)
 ---@param fileName string The name of the file being written into. The path is relative to the **data/** folder.
@@ -165,7 +165,6 @@ function file.Time(path, gamePath) end
 --- * .gma
 ---
 --- Restricted symbols are: `" :`
----
 ---@param content string The content that will be written into the file.
 function file.Write(fileName, content) end
 
@@ -177,7 +176,7 @@ local File = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:Close)
 function File:Close() end
 
----[SHARED AND MENU] Returns whether the File object has reached the end of file or not.
+---[SHARED AND MENU] Returns whether the [File](https://wiki.facepunch.com/gmod/File) object has reached the end of file or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:EndOfFile)
 ---@return boolean # Whether the file has reached end or not.
@@ -221,8 +220,9 @@ function File:ReadFloat() end
 
 ---[SHARED AND MENU] Returns the contents of the file from the current position up until the end of the current line.
 ---
---- This function will look specifically for `Line Feed` characters `\n` and will **completely ignore `Carriage Return` characters** `\r`.
---- This function will not return more than 8192 characters. The return value will include the `\n` character.
+--- **NOTE**: This function will look specifically for `Line Feed` characters `\n` and will **completely ignore `Carriage Return` characters** `\r`.
+---
+--- **NOTE**: This function will not return more than 8192 characters. The return value will include the `\n` character.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadLine)
 ---@return string # The string of data from the read line.
@@ -243,7 +243,8 @@ function File:ReadShort() end
 ---[SHARED AND MENU] Reads an unsigned 64-bit integer from the file.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:ReadUInt64)
----@return string # An unsigned 64-bit integer. Since Lua cannot store full 64-bit integers, this function returns a string. It is mainly aimed at usage with Player:SteamID64.
+---@return string # An unsigned 64-bit integer.
+--- Since Lua cannot store full 64-bit integers, this function returns a string. It is mainly aimed at usage with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64).
 function File:ReadUInt64() end
 
 ---[SHARED AND MENU] Reads an unsigned little-endian 32-bit integer from the file.
@@ -330,8 +331,7 @@ function File:WriteShort(int16) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/File:WriteUInt64)
 ---@param uint64 string The unsigned 64-bit integer to be written to the file.
 ---
---- Since Lua cannot store full 64-bit integers, this function takes a string. It is mainly aimed at usage with Player:SteamID64.
----
+--- Since Lua cannot store full 64-bit integers, this function takes a string. It is mainly aimed at usage with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64).
 function File:WriteUInt64(uint64) end
 
 ---[SHARED AND MENU] Writes an unsigned little-endian 32-bit integer to the file.

@@ -4,13 +4,12 @@
 --- 		Choose a number from a number line, with zooming for precision.
 --- 		Zoom in by moving your mouse forward and moving back does the opposite. Looks like a blue circle until you click and hold on it
 ---
---- 	Create the Number Scratch with the minimum number
---- 	being 0 and the max being 20
----
 ---@class DNumberScratch : DImageButton
 local DNumberScratch = {}
 
----[CLIENT AND MENU] Used by DNumberScratch:DrawScreen.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used by [DNumberScratch:DrawScreen](https://wiki.facepunch.com/gmod/DNumberScratch:DrawScreen).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:DrawNotches)
 ---@param level number
@@ -24,7 +23,9 @@ local DNumberScratch = {}
 ---@param max number
 function DNumberScratch:DrawNotches(level, x, y, w, h, range, value, min, max) end
 
----[CLIENT AND MENU] Used by DNumberScratch:PaintScratchWindow.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used by [DNumberScratch:PaintScratchWindow](https://wiki.facepunch.com/gmod/DNumberScratch:PaintScratchWindow).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:DrawScreen)
 ---@param x number
@@ -45,20 +46,20 @@ function DNumberScratch:GetActive() end
 ---@return number # 0 for whole numbers only, 1 for one number after the decimal point, etc.
 function DNumberScratch:GetDecimals() end
 
----[CLIENT AND MENU] Returns the real value of the DNumberScratch as a number.
+---[CLIENT AND MENU] Returns the real value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch) as a number.
 ---
---- See also DNumberScratch:GetTextValue and DNumberScratch:GetFraction.
+--- See also [DNumberScratch:GetTextValue](https://wiki.facepunch.com/gmod/DNumberScratch:GetTextValue) and [DNumberScratch:GetFraction](https://wiki.facepunch.com/gmod/DNumberScratch:GetFraction).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetFloatValue)
 ---@return number # The real value of the DNumberScratch
 function DNumberScratch:GetFloatValue() end
 
----[CLIENT AND MENU] Returns the value of the DNumberScratch as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the DNumberScratch.
+---[CLIENT AND MENU] Returns the value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch) as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch).
 ---
 --- See also:
---- * DNumberScratch:GetTextValue
---- * DNumberScratch:GetFloatValue
---- * DNumberScratch:SetFraction
+--- * [DNumberScratch:GetTextValue](https://wiki.facepunch.com/gmod/DNumberScratch:GetTextValue)
+--- * [DNumberScratch:GetFloatValue](https://wiki.facepunch.com/gmod/DNumberScratch:GetFloatValue)
+--- * [DNumberScratch:SetFraction](https://wiki.facepunch.com/gmod/DNumberScratch:SetFraction)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetFraction)
 ---@return number # A value between 0 and 1
@@ -76,7 +77,7 @@ function DNumberScratch:GetMax() end
 ---@return number # The minimum value that can be selected on the number scratch
 function DNumberScratch:GetMin() end
 
----[CLIENT AND MENU] Returns the range of the DNumberScratch. Basically max value - min value.
+---[CLIENT AND MENU] Returns the range of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch). Basically max value - min value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetRange)
 ---@return number # The range of the DNumberScratch
@@ -88,9 +89,9 @@ function DNumberScratch:GetRange() end
 ---@return boolean #
 function DNumberScratch:GetShouldDrawScreen() end
 
----[CLIENT AND MENU] Returns the real value of the DNumberScratch as a string.
+---[CLIENT AND MENU] Returns the real value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch) as a string.
 ---
---- See also DNumberScratch:GetFloatValue and DNumberScratch:GetFraction.
+--- See also [DNumberScratch:GetFloatValue](https://wiki.facepunch.com/gmod/DNumberScratch:GetFloatValue) and [DNumberScratch:GetFraction](https://wiki.facepunch.com/gmod/DNumberScratch:GetFraction).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:GetTextValue)
 ---@return string # The real value of the DNumberScratch
@@ -102,29 +103,35 @@ function DNumberScratch:GetTextValue() end
 ---@return number #
 function DNumberScratch:GetZoom() end
 
----[CLIENT AND MENU] Returns the ideal zoom level for the panel based on the DNumberScratch:GetRange.
+---[CLIENT AND MENU] Returns the ideal zoom level for the panel based on the [DNumberScratch:GetRange](https://wiki.facepunch.com/gmod/DNumberScratch:GetRange).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:IdealZoom)
 ---@return number # The ideal zoom level for the panel based on the panels range.
 function DNumberScratch:IdealZoom() end
 
----[CLIENT AND MENU] Returns whether the player is currently editing the value of the DNumberScratch.
+---[CLIENT AND MENU] Returns whether the player is currently editing the value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:IsEditing)
 ---@return boolean #
 function DNumberScratch:IsEditing() end
 
----[CLIENT AND MENU] Used to lock the cursor in place.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used to lock the cursor in place.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:LockCursor)
 function DNumberScratch:LockCursor() end
 
----[CLIENT AND MENU] Used to paint the 'scratch' window.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used to paint the 'scratch' window.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:PaintScratchWindow)
 function DNumberScratch:PaintScratchWindow() end
 
----[CLIENT AND MENU] Sets whether or not the panel is 'active'.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Sets whether or not the panel is 'active'.
 ---
 --- Forcing this panel to be active may not work.
 ---
@@ -138,15 +145,17 @@ function DNumberScratch:SetActive(active) end
 ---@param decimals number 0 for whole numbers only, 1 for one number after the decimal point, etc.
 function DNumberScratch:SetDecimals(decimals) end
 
----[CLIENT AND MENU] Does not trigger DNumberScratch:OnValueChanged
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Use DNumberScratch:SetValue instead.
+--- Does not trigger [DNumberScratch:OnValueChanged](https://wiki.facepunch.com/gmod/DNumberScratch:OnValueChanged)
+---
+--- Use [DNumberScratch:SetValue](https://wiki.facepunch.com/gmod/DNumberScratch:SetValue) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:SetFloatValue)
 ---@param val number The value to set
 function DNumberScratch:SetFloatValue(val) end
 
----[CLIENT AND MENU] Sets the value of the DNumberScratch as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the DNumberScratch
+---[CLIENT AND MENU] Sets the value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch) as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:SetFraction)
 ---@param frac number A value between 0 and 1
@@ -164,13 +173,15 @@ function DNumberScratch:SetMax(max) end
 ---@param min number The minimum number
 function DNumberScratch:SetMin(min) end
 
----[CLIENT AND MENU] Sets if the scratch window should be drawn or not. Cannot be used to force it to draw, only to hide it, which will not stop the panel from working with invisible window.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Sets if the scratch window should be drawn or not. Cannot be used to force it to draw, only to hide it, which will not stop the panel from working with invisible window.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:SetShouldDrawScreen)
 ---@param shouldDraw boolean
 function DNumberScratch:SetShouldDrawScreen(shouldDraw) end
 
----[CLIENT AND MENU] Sets the value of the DNumberScratch and triggers DNumberScratch:OnValueChanged
+---[CLIENT AND MENU] Sets the value of the [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch) and triggers [DNumberScratch:OnValueChanged](https://wiki.facepunch.com/gmod/DNumberScratch:OnValueChanged)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:SetValue)
 ---@param val number The value to set.
@@ -182,7 +193,9 @@ function DNumberScratch:SetValue(val) end
 ---@param zoom number
 function DNumberScratch:SetZoom(zoom) end
 
----[CLIENT AND MENU] Forces the assigned ConVar to be updated to the value of this DNumberScratch
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Forces the assigned ConVar to be updated to the value of this [DNumberScratch](https://wiki.facepunch.com/gmod/DNumberScratch)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberScratch:UpdateConVar)
 function DNumberScratch:UpdateConVar() end

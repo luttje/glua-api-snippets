@@ -1,9 +1,9 @@
 ---@meta
 
 ---
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
----
---- 		DComboBox control for a DProperties panel.
+--- 		[DComboBox](https://wiki.facepunch.com/gmod/DComboBox) control for a [DProperties](https://wiki.facepunch.com/gmod/DProperties) panel.
 ---
 ---@class DProperty_Combo : DProperty_Generic
 local DProperty_Combo = {}
@@ -28,7 +28,9 @@ function DProperty_Combo:DataChanged(data) end
 ---@param Id number Id of the choice to be selected.
 function DProperty_Combo:SetSelected(Id) end
 
----[CLIENT] Sets up a combo control.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Sets up a combo control.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Combo:Setup)
 ---@param data? table Data to use to set up the combo box control. See Editable Entities.

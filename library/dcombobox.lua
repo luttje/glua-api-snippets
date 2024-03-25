@@ -2,7 +2,7 @@
 
 ---
 --- 		A field with multiple selectable values.
---- 	Creates a Combo Box.Create a Combo Box with all players.
+---
 ---@class DComboBox : DButton
 local DComboBox = {}
 
@@ -18,12 +18,13 @@ local DComboBox = {}
 ---@return number # The index of the new option.
 function DComboBox:AddChoice(value, data, select, icon) end
 
----[CLIENT AND MENU] Adds a spacer below the currently last item in the drop down. Recommended to use with DComboBox:SetSortItems set to `false`.
+---[CLIENT AND MENU] Adds a spacer below the currently last item in the drop down. Recommended to use with [DComboBox:SetSortItems](https://wiki.facepunch.com/gmod/DComboBox:SetSortItems) set to `false`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:AddSpacer)
 function DComboBox:AddSpacer() end
 
----[CLIENT AND MENU] Ran every frame to update the value of this panel to the value of the associated convar. See Panel:SetConvar.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Ran every frame to update the value of this panel to the value of the associated convar. See [Panel:SetConvar](https://wiki.facepunch.com/gmod/Panel:SetConvar).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:CheckConVarChanges)
 function DComboBox:CheckConVarChanges() end
@@ -71,7 +72,9 @@ function DComboBox:GetOptionText(index) end
 ---@param data string The data to look up the name of.
 ---
 --- If given a number and no matching data was found, the function will test given data against each Global.tonumber'd data entry.
----@return string # The option's text value.  If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
+---@return string # The option's text value.
+---
+--- If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
 function DComboBox:GetOptionTextByData(data) end
 
 ---[CLIENT AND MENU] Returns the currently selected option's text and data
@@ -89,7 +92,7 @@ function DComboBox:GetSelectedID() end
 
 ---[CLIENT AND MENU] Returns an whether the items in the dropdown will be alphabetically sorted or not.
 ---
---- See DComboBox:SetSortItems.
+--- See [DComboBox:SetSortItems](https://wiki.facepunch.com/gmod/DComboBox:SetSortItems).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:GetSortItems)
 ---@return boolean # True if enabled, false otherwise.
@@ -106,7 +109,7 @@ function DComboBox:IsMenuOpen() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:OpenMenu)
 function DComboBox:OpenMenu() end
 
----[CLIENT AND MENU] Removes a choice added with DComboBox:AddChoice
+---[CLIENT AND MENU] Removes a choice added with [DComboBox:AddChoice](https://wiki.facepunch.com/gmod/DComboBox:AddChoice)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DComboBox:RemoveChoice)
 ---@param index number The index of the option to remove.
@@ -114,7 +117,7 @@ function DComboBox:OpenMenu() end
 ---@return any # The data of the removed option that was provided.
 function DComboBox:RemoveChoice(index) end
 
----[CLIENT AND MENU] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls.
+---[CLIENT AND MENU] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the [DComboBox](https://wiki.facepunch.com/gmod/DComboBox). If set to false, items will appear in the order they were added by [DComboBox:AddChoice](https://wiki.facepunch.com/gmod/DComboBox:AddChoice) calls.
 ---
 --- This is enabled by default.
 ---

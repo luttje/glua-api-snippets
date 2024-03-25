@@ -1,10 +1,10 @@
 ---@meta
 
---- Object containing parsed markup for later rendering. Created by markup.Parse.
+--- Object containing parsed markup for later rendering. Created by [markup.Parse](https://wiki.facepunch.com/gmod/markup.Parse).
 ---@class MarkupObject
 local MarkupObject = {}
 
----[CLIENT AND MENU] Draws the computed markupobject to the screen. See markup.Parse.
+---[CLIENT AND MENU] Draws the computed markupobject to the screen. See [markup.Parse](https://wiki.facepunch.com/gmod/markup.Parse).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:Draw)
 ---@param xOffset number The X coordinate on the screen.
@@ -21,7 +21,7 @@ function MarkupObject:Draw(xOffset, yOffset, xAlign, yAlign, alphaoverride, text
 ---@return number # The computed height.
 function MarkupObject:GetHeight() end
 
----[CLIENT AND MENU] Gets maximum width for this markup object as defined in markup.Parse.
+---[CLIENT AND MENU] Gets maximum width for this markup object as defined in [markup.Parse](https://wiki.facepunch.com/gmod/markup.Parse).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MarkupObject:GetMaxWidth)
 ---@return number # The max width.

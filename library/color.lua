@@ -16,7 +16,7 @@ local Color = {}
 ---@param a number The alpha component
 function Color:SetUnpacked(r, g, b, a) end
 
----[SHARED AND MENU] Converts a Color into HSL color space. This calls Global.ColorToHSL internally.
+---[SHARED AND MENU] Converts a [Color](https://wiki.facepunch.com/gmod/Color) into HSL color space. This calls [Global.ColorToHSL](https://wiki.facepunch.com/gmod/Global.ColorToHSL) internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToHSL)
 ---@return number # The hue in degrees [0, 360).
@@ -24,7 +24,7 @@ function Color:SetUnpacked(r, g, b, a) end
 ---@return number # The lightness in the range [0, 1].
 function Color:ToHSL() end
 
----[SHARED AND MENU] Converts a Color into HSV color space. This calls Global.ColorToHSV internally.
+---[SHARED AND MENU] Converts a [Color](https://wiki.facepunch.com/gmod/Color) into HSV color space. This calls [Global.ColorToHSV](https://wiki.facepunch.com/gmod/Global.ColorToHSV) internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToHSV)
 ---@return number # The hue in degrees [0, 360).
@@ -38,14 +38,14 @@ function Color:ToHSV() end
 ---@return table # The table with elements 1 = r, 2 = g, 3 = b, 4 = a.
 function Color:ToTable() end
 
----[SHARED] Translates the Color into a Vector, losing the alpha channel.
+---[SHARED] Translates the [Color](https://wiki.facepunch.com/gmod/Color) into a [Vector](https://wiki.facepunch.com/gmod/Vector), losing the alpha channel.
 --- This will also range the values from 0 - 255 to 0 - 1
 ---
 --- r / 255 -> x
 --- g / 255 -> y
 --- b / 255 -> z
 ---
---- This is the opposite of Vector:ToColor
+--- This is the opposite of [Vector:ToColor](https://wiki.facepunch.com/gmod/Vector:ToColor)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToVector)
 ---@return Vector # The created Vector

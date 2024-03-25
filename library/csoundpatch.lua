@@ -2,13 +2,13 @@
 
 --- CSoundPatch class.
 ---
---- Created with Global.CreateSound
+--- Created with [Global.CreateSound](https://wiki.facepunch.com/gmod/Global.CreateSound)
 ---@class CSoundPatch
 local CSoundPatch = {}
 
 ---[SHARED] Adjust the pitch, alias the speed at which the sound is being played.
 ---
---- This invokes the GM:EntityEmitSound.
+--- This invokes the [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:ChangePitch)
 ---@param pitch number The pitch can range from 0-255. Where 100 is the original pitch.
@@ -32,7 +32,8 @@ function CSoundPatch:FadeOut(seconds) end
 ---[SHARED] Returns the DSP ( Digital Signal Processor ) effect for the sound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetDSP)
----@return number # The DSP effects of the sound List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
+---@return number # The DSP effects of the sound
+--- List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
 function CSoundPatch:GetDSP() end
 
 ---[SHARED] Returns the current pitch.
@@ -59,19 +60,19 @@ function CSoundPatch:GetVolume() end
 ---@return boolean # Is playing or not
 function CSoundPatch:IsPlaying() end
 
----[SHARED] Starts to play the sound. This will reset the sound's volume and pitch to their default values. See CSoundPatch:PlayEx
+---[SHARED] Starts to play the sound. This will reset the sound's volume and pitch to their default values. See [CSoundPatch:PlayEx](https://wiki.facepunch.com/gmod/CSoundPatch:PlayEx)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:Play)
 function CSoundPatch:Play() end
 
----[SHARED] Same as CSoundPatch:Play but with 2 extra arguments allowing to set volume and pitch directly.
+---[SHARED] Same as [CSoundPatch:Play](https://wiki.facepunch.com/gmod/CSoundPatch:Play) but with 2 extra arguments allowing to set volume and pitch directly.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:PlayEx)
 ---@param volume number The volume ranges from 0 to 1.
 ---@param pitch number The pitch can range from 0-255.
 function CSoundPatch:PlayEx(volume, pitch) end
 
----[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound. Similar to Player:SetDSP but for individual sounds.
+---[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound. Similar to [Player:SetDSP](https://wiki.facepunch.com/gmod/Player:SetDSP) but for individual sounds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
 ---@param dsp number The DSP effect to set.
@@ -86,7 +87,7 @@ function CSoundPatch:SetSoundLevel(level) end
 
 ---[SHARED] Stops the sound from being played.
 ---
---- This will not work if the entity attached to this sound patch (specified by Global.CreateSound) is invalid.
+--- This will not work if the entity attached to this sound patch (specified by [Global.CreateSound](https://wiki.facepunch.com/gmod/Global.CreateSound)) is invalid.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:Stop)
 function CSoundPatch:Stop() end

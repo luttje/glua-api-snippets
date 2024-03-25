@@ -19,7 +19,7 @@ function numpad.Activate(ply, key, isButton) end
 ---@param isButton? boolean Should this keypress pretend to be a from a `gmod_button`? (causes numpad.FromButton to return `true`)
 function numpad.Deactivate(ply, key, isButton) end
 
----[SERVER] Returns true during a function added with numpad.Register when the third argument to numpad.Activate is true.
+---[SERVER] Returns true during a function added with [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register) when the third argument to [numpad.Activate](https://wiki.facepunch.com/gmod/numpad.Activate) is true.
 ---
 --- This is caused when a numpad function is triggered by a button SENT being used.
 ---
@@ -27,9 +27,9 @@ function numpad.Deactivate(ply, key, isButton) end
 ---@return boolean # wasButton
 function numpad.FromButton() end
 
----[SERVER] Calls a function registered with numpad.Register when a player presses specified key.
+---[SERVER] Calls a function registered with [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register) when a player presses specified key.
 ---
---- See for key released action: numpad.OnUp
+--- See for key released action: [numpad.OnUp](https://wiki.facepunch.com/gmod/numpad.OnUp)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.OnDown)
 ---@param ply Player The player whose numpad should be watched
@@ -39,9 +39,9 @@ function numpad.FromButton() end
 ---@return number # The impulse ID
 function numpad.OnDown(ply, key, name, ...) end
 
----[SERVER] Calls a function registered with numpad.Register when a player releases specified key.
+---[SERVER] Calls a function registered with [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register) when a player releases specified key.
 ---
---- See for key pressed action: numpad.OnDown
+--- See for key pressed action: [numpad.OnDown](https://wiki.facepunch.com/gmod/numpad.OnDown)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.OnUp)
 ---@param ply Player The player whose numpad should be watched
@@ -51,28 +51,29 @@ function numpad.OnDown(ply, key, name, ...) end
 ---@return number # The impulse ID
 function numpad.OnUp(ply, key, name, ...) end
 
----[SERVER] Registers a numpad library action for use with numpad.OnDown and numpad.OnUp
+---[SERVER] Registers a numpad library action for use with [numpad.OnDown](https://wiki.facepunch.com/gmod/numpad.OnDown) and [numpad.OnUp](https://wiki.facepunch.com/gmod/numpad.OnUp)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.Register)
 ---@param id string The unique id of your action.
----@param func function The function to be executed.
+---@param func fun(ply: Player, ...: any): boolean? The function to be executed.
 ---
---- Arguments are:
+--- Function argument(s):
+--- * Player `ply` - The player who pressed the button
+--- * vararg `data` - The 4th and all subsequent arguments passed from numpad.OnDown and/or numpad.OnUp.
 ---
---- Player ply - The player who pressed the button
+--- Function return value(s):
+--- * boolean `data` - Returning `false` in this function will remove the listener which triggered this function
 ---
---- vararg ... - The 4th and all subsequent arguments passed from numpad.OnDown and/or numpad.OnUp
----
---- Returning **false** in this function will remove the listener which triggered this function (example: return false if one of your varargs is an entity which is no longer valid)
+--- (example: return `false` if one of your varargs is an entity which is no longer valid)
 function numpad.Register(id, func) end
 
----[SERVER] Removes a function added by either numpad.OnUp or numpad.OnDown
+---[SERVER] Removes a function added by either [numpad.OnUp](https://wiki.facepunch.com/gmod/numpad.OnUp) or [numpad.OnDown](https://wiki.facepunch.com/gmod/numpad.OnDown)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.Remove)
 ---@param ID number The impulse ID returned by numpad.OnUp or numpad.OnDown
 function numpad.Remove(ID) end
 
----[SERVER] Either runs numpad.Activate or numpad.Deactivate depending on the key's current state
+---[SERVER] Either runs [numpad.Activate](https://wiki.facepunch.com/gmod/numpad.Activate) or [numpad.Deactivate](https://wiki.facepunch.com/gmod/numpad.Deactivate) depending on the key's current state
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/numpad.Toggle)
 ---@param ply Player The player whose numpad should be simulated

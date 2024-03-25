@@ -3,17 +3,17 @@
 ---
 --- A form which may be used to display text the player is meant to select and copy or alternately allow them to enter some text of their own.
 ---
---- At least one of your `DTextEntry`'s parents must either be an EditablePanel or derived from it (like a DFrame, for example), else it won't be able to focus and thus be unselectable.
+--- **NOTE**: At least one of your `DTextEntry`'s parents must either be an [EditablePanel](https://wiki.facepunch.com/gmod/EditablePanel) or derived from it (like a [DFrame](https://wiki.facepunch.com/gmod/DFrame), for example), else it won't be able to focus and thus be unselectable.
 ---
---- You must also call Panel:MakePopup on said panel or the `DTextEntry` will not work.
---- 	Creates a text entry form that allows you to print messages into the local player's chat window.
---- 	Creates a text entry with a browse button.
+--- You must also call [Panel:MakePopup](https://wiki.facepunch.com/gmod/Panel:MakePopup) on said panel or the `DTextEntry` will not work.
+---
+---
 ---@class DTextEntry : TextEntry
 local DTextEntry = {}
 
----[CLIENT AND MENU] Adds an entry to DTextEntry's history.
+---[CLIENT AND MENU] Adds an entry to [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry)'s history.
 ---
---- See DTextEntry:SetHistoryEnabled.
+--- See [DTextEntry:SetHistoryEnabled](https://wiki.facepunch.com/gmod/DTextEntry:SetHistoryEnabled).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AddHistory)
 ---@param text string Text to add to the text entry's history.
@@ -21,13 +21,13 @@ function DTextEntry:AddHistory(text) end
 
 ---[CLIENT AND MENU] Called whenever the value of the panel has been updated (whether by user input or otherwise).
 ---
---- It allows you to determine whether a user can modify the TextEntry's text.
+--- It allows you to determine whether a user can modify the [TextEntry](https://wiki.facepunch.com/gmod/TextEntry)'s text.
 ---
 --- By default, this only checks whether the panel disallows numeric characters, preventing it from being edited if the value contains any.
 ---
---- This is actually an engine hook that only works on TextEntry derived elements.
+--- This is actually an engine hook that only works on [TextEntry](https://wiki.facepunch.com/gmod/TextEntry) derived elements.
 ---
---- If you are looking for a way to modify character limits, see Panel:SetMaximumCharCount
+--- If you are looking for a way to modify character limits, see [Panel:SetMaximumCharCount](https://wiki.facepunch.com/gmod/Panel:SetMaximumCharCount)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:AllowInput)
 ---@param char string The last character entered into the panel.
@@ -35,7 +35,7 @@ function DTextEntry:AddHistory(text) end
 function DTextEntry:AllowInput(char) end
 
 ---[CLIENT AND MENU] Returns whether a string is numeric or not.
---- Always returns false if the DTextEntry:SetNumeric is set to false.
+--- Always returns false if the [DTextEntry:SetNumeric](https://wiki.facepunch.com/gmod/DTextEntry:SetNumeric) is set to false.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:CheckNumeric)
 ---@param strValue string The string to check.
@@ -55,14 +55,14 @@ function DTextEntry:GetAutoComplete(inputText) end
 ---@return table # The color of the cursor as a Color.
 function DTextEntry:GetCursorColor() end
 
----[CLIENT AND MENU] Returns whether the textbox is disabled. Use Panel:IsEnabled instead.
+---[CLIENT AND MENU] Returns whether the textbox is disabled. Use [Panel:IsEnabled](https://wiki.facepunch.com/gmod/Panel:IsEnabled) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetDisabled)
 ---@return boolean # Whether the textbox is disabled.
 ---@deprecated Use Panel:IsEnabled instead.
 function DTextEntry:GetDisabled() end
 
----[CLIENT AND MENU] Alias of DTextEntry:GetPaintBackground. Use that instead.
+---[CLIENT AND MENU] Alias of [DTextEntry:GetPaintBackground](https://wiki.facepunch.com/gmod/DTextEntry:GetPaintBackground). Use that instead.
 ---
 --- Whether the background is displayed or not.
 ---
@@ -70,7 +70,7 @@ function DTextEntry:GetDisabled() end
 ---@return boolean #
 function DTextEntry:GetDrawBackground() end
 
----[CLIENT AND MENU] Returns the value set by DTextEntry:SetDrawBorder.
+---[CLIENT AND MENU] Returns the value set by [DTextEntry:SetDrawBorder](https://wiki.facepunch.com/gmod/DTextEntry:SetDrawBorder).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetDrawBorder)
 ---@return boolean #
@@ -94,13 +94,13 @@ function DTextEntry:GetFloat() end
 ---@return table # The highlight Global.Color.
 function DTextEntry:GetHighlightColor() end
 
----[CLIENT AND MENU] Returns whether the history functionality of  DTextEntry is enabled. See DTextEntry:AddHistory.
+---[CLIENT AND MENU] Returns whether the history functionality of  [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) is enabled. See [DTextEntry:AddHistory](https://wiki.facepunch.com/gmod/DTextEntry:AddHistory).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetHistoryEnabled)
 ---@return boolean # Whether the history is enabled or not.
 function DTextEntry:GetHistoryEnabled() end
 
----[CLIENT AND MENU] Similar to DTextEntry:GetFloat, but rounds the value to the nearest integer.
+---[CLIENT AND MENU] Similar to [DTextEntry:GetFloat](https://wiki.facepunch.com/gmod/DTextEntry:GetFloat), but rounds the value to the nearest integer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetInt)
 ---@return number # Text of the DTextEntry as a round number, or nil if it cannot be converted to a number.
@@ -124,7 +124,7 @@ function DTextEntry:GetPaintBackground() end
 ---@return table # Current placeholder color
 function DTextEntry:GetPlaceholderColor() end
 
----[CLIENT AND MENU] Returns the placeholder text set with DTextEntry:SetPlaceholderText.
+---[CLIENT AND MENU] Returns the placeholder text set with [DTextEntry:SetPlaceholderText](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderText).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetPlaceholderText)
 ---@return string #
@@ -142,7 +142,7 @@ function DTextEntry:GetTabbingDisabled() end
 ---@return table # The color of the text as a Color.
 function DTextEntry:GetTextColor() end
 
----[CLIENT AND MENU] Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed.
+---[CLIENT AND MENU] Returns whether the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) is set to run [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange) every time a character is typed or deleted or only when Enter is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:GetUpdateOnType)
 ---@return boolean #
@@ -154,16 +154,19 @@ function DTextEntry:GetUpdateOnType() end
 ---@return boolean # Whether this DTextEntry is being edited or not
 function DTextEntry:IsEditing() end
 
----[CLIENT AND MENU] Called internally when the text inside the DTextEntry changes. This is an implementation of TextEntry:OnTextChanged
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- You should not override this function. Use DTextEntry:OnValueChange instead.
+--- Called internally when the text inside the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) changes. This is an implementation of [TextEntry:OnTextChanged](https://wiki.facepunch.com/gmod/TextEntry:OnTextChanged)
+---
+--- You should not override this function. Use [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OnTextChanged)
 ---@param noMenuRemoval boolean Determines whether to remove the autocomplete menu (false) or not (true).
 function DTextEntry:OnTextChanged(noMenuRemoval) end
 
----[CLIENT AND MENU] You really should be using DTextEntry:GetAutoComplete instead.
---- Builds a DMenu for the DTextEntry based on the input table.
+---[CLIENT AND MENU] **INTERNAL**: You really should be using [DTextEntry:GetAutoComplete](https://wiki.facepunch.com/gmod/DTextEntry:GetAutoComplete) instead.
+---
+--- Builds a [DMenu](https://wiki.facepunch.com/gmod/DMenu) for the DTextEntry based on the input table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:OpenAutoComplete)
 ---@param tab table Table containing results from DTextEntry:GetAutoComplete.
@@ -175,14 +178,14 @@ function DTextEntry:OpenAutoComplete(tab) end
 ---@param color table The color to set the cursor to.
 function DTextEntry:SetCursorColor(color) end
 
----[CLIENT AND MENU] Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox.
+---[CLIENT AND MENU] Disables input on a DTextEntry and greys it out visually. This differs from [DTextEntry:SetEditable](https://wiki.facepunch.com/gmod/DTextEntry:SetEditable) which doesn't visually change the textbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetDisabled)
 ---@param disabled boolean Whether the textbox should be disabled
 ---@deprecated Use Panel:SetEnabled instead.
 function DTextEntry:SetDisabled(disabled) end
 
----[CLIENT AND MENU] Alias of DTextEntry:SetPaintBackground. Use that instead.
+---[CLIENT AND MENU] Alias of [DTextEntry:SetPaintBackground](https://wiki.facepunch.com/gmod/DTextEntry:SetPaintBackground). Use that instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetDrawBackground)
 ---@param show boolean
@@ -194,7 +197,7 @@ function DTextEntry:SetDrawBackground(show) end
 ---@param bool boolean
 function DTextEntry:SetDrawBorder(bool) end
 
----[CLIENT AND MENU] Disables Input on a DTextEntry. This differs from DTextEntry:SetDisabled - SetEditable will not affect the appearance of the textbox.
+---[CLIENT AND MENU] Disables Input on a DTextEntry. This differs from [DTextEntry:SetDisabled](https://wiki.facepunch.com/gmod/DTextEntry:SetDisabled) - SetEditable will not affect the appearance of the textbox.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetEditable)
 ---@param enabled boolean Whether the DTextEntry should be editable
@@ -218,9 +221,9 @@ function DTextEntry:SetFont(font) end
 ---@param color table The new highlight Global.Color.
 function DTextEntry:SetHighlightColor(color) end
 
----[CLIENT AND MENU] Enables or disables the history functionality of  DTextEntry. This allows the player to scroll through history elements using up and down arrow keys.
+---[CLIENT AND MENU] Enables or disables the history functionality of  [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry). This allows the player to scroll through history elements using up and down arrow keys.
 ---
---- See DTextEntry:AddHistory.
+--- See [DTextEntry:AddHistory](https://wiki.facepunch.com/gmod/DTextEntry:AddHistory).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetHistoryEnabled)
 ---@param enable boolean Whether to enable history or not.
@@ -253,45 +256,49 @@ function DTextEntry:SetPlaceholderColor(color) end
 function DTextEntry:SetPlaceholderText(text) end
 
 ---[CLIENT AND MENU] Sets whether or not the panel accepts tab key.
---- Disabling tab key prevents the panel from unfocusing by mouse, however, still works for focusing to other keyboard focus.
+--- **NOTE**: Disabling tab key prevents the panel from unfocusing by mouse, however, still works for focusing to other keyboard focus.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetTabbingDisabled)
 ---@param enabled boolean Whether the DTextEntry should ignore tab.
 function DTextEntry:SetTabbingDisabled(enabled) end
 
----[CLIENT AND MENU] Sets the text color of the DTextEntry.
+---[CLIENT AND MENU] Sets the text color of the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetTextColor)
 ---@param color table The text color. Uses the Color.
 function DTextEntry:SetTextColor(color) end
 
----[CLIENT AND MENU] Sets whether we should fire DTextEntry:OnValueChange every time we type or delete a character or only when Enter is pressed.
+---[CLIENT AND MENU] Sets whether we should fire [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange) every time we type or delete a character or only when Enter is pressed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetUpdateOnType)
 ---@param updateOnType boolean
 function DTextEntry:SetUpdateOnType(updateOnType) end
 
----[CLIENT AND MENU] Sets the text of the DTextEntry and calls DTextEntry:OnValueChange.
+---[CLIENT AND MENU] Sets the text of the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) and calls [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange).
 ---
----         The text of the DTextEntry only changes if it's not currently being typed in. If you would rather set the text regardless, use Panel:SetText.
+---         **NOTE**: The text of the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) only changes if it's not currently being typed in. If you would rather set the text regardless, use [Panel:SetText](https://wiki.facepunch.com/gmod/Panel:SetText).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:SetValue)
 ---@param text string The value to set.
 function DTextEntry:SetValue(text) end
 
----[CLIENT AND MENU] Used by DTextEntry:OnTextChanged, DTextEntry:OnEnter and DTextEntry:OnLoseFocus
+---[CLIENT AND MENU] **INTERNAL**: Used by [DTextEntry:OnTextChanged](https://wiki.facepunch.com/gmod/DTextEntry:OnTextChanged), [DTextEntry:OnEnter](https://wiki.facepunch.com/gmod/DTextEntry:OnEnter) and [DTextEntry:OnLoseFocus](https://wiki.facepunch.com/gmod/DTextEntry:OnLoseFocus)
 ---
 --- Updates the ConVar associated with the TextEntry to its new value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:UpdateConvarValue)
 function DTextEntry:UpdateConvarValue() end
 
----[CLIENT AND MENU] Used internally to set text from the history.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to set text from the history.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:UpdateFromHistory)
 function DTextEntry:UpdateFromHistory() end
 
----[CLIENT AND MENU] Used internally to set text from the autocomplete menu.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to set text from the autocomplete menu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTextEntry:UpdateFromMenu)
 function DTextEntry:UpdateFromMenu() end

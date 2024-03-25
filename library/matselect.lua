@@ -9,7 +9,7 @@ local MatSelect = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:Clear)
 function MatSelect:Clear() end
 
----[CLIENT] Find a DImageButton panel based on the input material path.
+---[CLIENT] Find a [DImageButton](https://wiki.facepunch.com/gmod/DImageButton) panel based on the input material path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:FindMaterialByValue)
 ---@param mat string The material to find within this MatSelect.

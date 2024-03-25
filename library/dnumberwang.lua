@@ -1,16 +1,16 @@
 ---@meta
 
---- DNumberWang is a VGUI element that allows you to input a numeric value using up and down arrows or direct entry.Create the Number Wang with the minimum number being 0 and the max being 100
+--- DNumberWang is a VGUI element that allows you to input a numeric value using up and down arrows or direct entry.
 ---@class DNumberWang : DTextEntry
 local DNumberWang = {}
 
----[CLIENT AND MENU] Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals
+---[CLIENT AND MENU] Returns the amount of decimal places allowed in the number selector, set by [DNumberWang:SetDecimals](https://wiki.facepunch.com/gmod/DNumberWang:SetDecimals)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetDecimals)
 ---@return number # The amount of decimal places allowed in the number selector.
 function DNumberWang:GetDecimals() end
 
----[CLIENT AND MENU] Returns whatever is set by DNumberWang:SetFloatValue or 0.
+---[CLIENT AND MENU] Returns whatever is set by [DNumberWang:SetFloatValue](https://wiki.facepunch.com/gmod/DNumberWang:SetFloatValue) or 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:GetFloatValue)
 ---@return number #
@@ -100,7 +100,7 @@ function DNumberWang:SetMin(min) end
 ---@param max number The maximum value.
 function DNumberWang:SetMinMax(min, max) end
 
----[CLIENT AND MENU] Sets the value of the DNumberWang and triggers DNumberWang:OnValueChanged
+---[CLIENT AND MENU] Sets the value of the [DNumberWang](https://wiki.facepunch.com/gmod/DNumberWang) and triggers [DNumberWang:OnValueChanged](https://wiki.facepunch.com/gmod/DNumberWang:OnValueChanged)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNumberWang:SetValue)
 ---@param val number The value to set.

@@ -1,10 +1,10 @@
 ---@meta
 
---- Path object for a NextBot NPC and bots created by player.CreateNextbot. Returned by Global.Path.
+--- Path object for a NextBot NPC and bots created by [player.CreateNextbot](https://wiki.facepunch.com/gmod/player.CreateNextbot). Returned by [Global.Path](https://wiki.facepunch.com/gmod/Global.Path).
 ---@class PathFollower
 local PathFollower = {}
 
----[SERVER] If you created your path with type "Chase" this functions should be used in place of PathFollower:Update to cause the bot to chase the specified entity.
+---[SERVER] If you created your path with type "Chase" this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
@@ -18,24 +18,20 @@ function PathFollower:Chase(bot, ent) end
 ---@param goal Vector The target location, the goal.
 ---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A funtion that allows you to alter the path generation. See example below for the default function.
 ---
+--- Function argument(s):
+--- * CNavArea `area` - The area to move to.
+--- * CNavArea `fromArea` - The area to move from.
+--- * CNavLadder `ladder` - The ladder to move to or from (Validation required), if any.
+--- * Entity `elevator` - Will probably be always NULL
+--- * number `length` - Precomputed length between `area` and `fromArea`.
 ---
----
----
----
---- Function callback arguments are:
---- * CNavArea **area** - The area to move to.
---- * CNavArea **fromArea** - The area to move from.
---- * CNavLadder **ladder** - The ladder to move to or from (Validation required), if any.
---- * Entity **elevator** - Will probably be always NULL
---- * number **length** - Precomputed length between `area` and `fromArea`.
----
---- Function callback return values are:
---- * number **cost** - The cost of movement between `area` and `fromArea`.
----
----@return boolean # * If returns true, path was found to the goal position. * If returns false, path may either be invalid (use IsValid() to check), or valid but doesn't reach all the way to the goal.
+--- Function return value(s):
+--- * number `cost` - The cost of movement between `area` and `fromArea`.
+---@return boolean # * If returns true, path was found to the goal position.
+--- * If returns false, path may either be invalid (use IsValid() to check), or valid but doesn't reach all the way to the goal.
 function PathFollower:Compute(bot, goal, generator) end
 
----[SERVER] Draws the path. This is meant for debugging - and uses debugoverlay.
+---[SERVER] Draws the path. This is meant for debugging - and uses [debugoverlay](https://wiki.facepunch.com/gmod/debugoverlay).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Draw)
 function PathFollower:Draw() end
@@ -65,7 +61,7 @@ function PathFollower:GetAllSegments() end
 ---@return Vector # The closest position on the path
 function PathFollower:GetClosestPosition(position) end
 
----[SERVER] Returns the current goal data. Can return nil if the current goal is invalid, for example immediately after PathFollower:Update.
+---[SERVER] Returns the current goal data. Can return nil if the current goal is invalid, for example immediately after [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal)
 ---@return table # A table with Structures/PathSegment.
@@ -74,7 +70,12 @@ function PathFollower:GetCurrentGoal() end
 ---[SERVER] Returns the cursor data
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetCursorData)
----@return table # A table with 3 keys: number curvature   Vector forward   Vector pos
+---@return table # A table with 3 keys:
+--- number curvature
+---
+--- Vector forward
+---
+--- Vector pos
 function PathFollower:GetCursorData() end
 
 ---[SERVER] Returns the current progress along the path
@@ -145,7 +146,7 @@ function PathFollower:LastSegment() end
 
 ---[SERVER] Moves the cursor by give distance.
 ---
---- For a function that sets the distance, see PathFollower:MoveCursorTo.
+--- For a function that sets the distance, see [PathFollower:MoveCursorTo](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor)
 ---@param distance number The distance to move the cursor (in relative world units)
@@ -153,7 +154,7 @@ function PathFollower:MoveCursor(distance) end
 
 ---[SERVER] Sets the cursor position to given distance.
 ---
---- For relative distance, see PathFollower:MoveCursor.
+--- For relative distance, see [PathFollower:MoveCursor](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo)
 ---@param distance number The distance to move the cursor (in world units)
@@ -165,12 +166,9 @@ function PathFollower:MoveCursorTo(distance) end
 ---@param pos Vector
 ---@param type? number Seek type
 ---
----
 --- 0 = SEEK_ENTIRE_PATH - Search the entire path length
 ---
----
 --- 1 = SEEK_AHEAD - Search from current cursor position forward toward end of path
----
 ---
 --- 2 = SEEK_BEHIND - Search from current cursor position backward toward path start
 ---@param alongLimit? number
@@ -198,7 +196,7 @@ function PathFollower:NextSegment() end
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:PriorSegment() end
 
----[SERVER] Resets the age which is retrieved by PathFollower:GetAge to 0.
+---[SERVER] Resets the age which is retrieved by [PathFollower:GetAge](https://wiki.facepunch.com/gmod/PathFollower:GetAge) to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:ResetAge)
 function PathFollower:ResetAge() end

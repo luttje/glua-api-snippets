@@ -1,8 +1,9 @@
 ---@meta
 
 ---
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		The little "+" button used by DProperties and DTree_Node.
+--- 		The little "+" button used by [DProperties](https://wiki.facepunch.com/gmod/DProperties) and [DTree_Node](https://wiki.facepunch.com/gmod/DTree_Node).
 ---
 ---@class DExpandButton : DButton
 local DExpandButton = {}

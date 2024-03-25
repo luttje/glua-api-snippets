@@ -3,22 +3,30 @@
 --- The frame blending library.
 frame_blend = {}
 
----[CLIENT] Adds a frame to the blend. Calls frame_blend.CompleteFrame once enough frames have passed since last frame_blend.CompleteFrame call.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Adds a frame to the blend. Calls [frame_blend.CompleteFrame](https://wiki.facepunch.com/gmod/frame_blend.CompleteFrame) once enough frames have passed since last [frame_blend.CompleteFrame](https://wiki.facepunch.com/gmod/frame_blend.CompleteFrame) call.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.AddFrame)
 function frame_blend.AddFrame() end
 
----[CLIENT] Blends the frame(s).
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Blends the frame(s).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.BlendFrame)
 function frame_blend.BlendFrame() end
 
----[CLIENT] Renders the frame onto internal render target.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Renders the frame onto internal render target.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.CompleteFrame)
 function frame_blend.CompleteFrame() end
 
----[CLIENT] Actually draws the frame blend effect.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Actually draws the frame blend effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.DrawPreview)
 function frame_blend.DrawPreview() end
@@ -29,13 +37,17 @@ function frame_blend.DrawPreview() end
 ---@return boolean # Is frame blend enabled or not
 function frame_blend.IsActive() end
 
----[CLIENT] Returns whether the current frame is the last frame?
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns whether the current frame is the last frame?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.IsLastFrame)
 ---@return boolean # Whether the current frame is the last frame?
 function frame_blend.IsLastFrame() end
 
----[CLIENT] Returns amount of frames needed to render?
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns amount of frames needed to render?
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/frame_blend.RenderableFrames)
 ---@return number # Amount of frames needed to render?

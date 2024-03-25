@@ -1,10 +1,10 @@
 ---@meta
 
---- A simple Derma DrawerCreates a DDrawer in a DFrame; set the open size and time; add a panel in the drawer; open the DDrawer.
+--- A simple Derma Drawer
 ---@class DDrawer : Panel
 local DDrawer = {}
 
----[CLIENT AND MENU] Closes the DDrawer.
+---[CLIENT AND MENU] Closes the [DDrawer](https://wiki.facepunch.com/gmod/DDrawer).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Close)
 function DDrawer:Close() end
@@ -21,7 +21,7 @@ function DDrawer:GetOpenSize() end
 ---@return number # Time in seconds.
 function DDrawer:GetOpenTime() end
 
----[CLIENT AND MENU] Opens the DDrawer.
+---[CLIENT AND MENU] Opens the [DDrawer](https://wiki.facepunch.com/gmod/DDrawer).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Open)
 function DDrawer:Open() end
@@ -38,7 +38,7 @@ function DDrawer:SetOpenSize(Value) end
 ---@param value number Length in seconds. Default is 0.3
 function DDrawer:SetOpenTime(value) end
 
----[CLIENT AND MENU] Toggles the DDrawer.
+---[CLIENT AND MENU] Toggles the [DDrawer](https://wiki.facepunch.com/gmod/DDrawer).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Toggle)
 function DDrawer:Toggle() end

@@ -1,6 +1,6 @@
 ---@meta
 
---- List of all possible functions available for effect data. This is the object returned by the Global.EffectData function and is required for util.Effect function.
+--- List of all possible functions available for effect data. This is the object returned by the [EffectData](https://wiki.facepunch.com/gmod/Global.EffectData) function and is required for [util.Effect](https://wiki.facepunch.com/gmod/util.Effect) function.
 ---@class CEffectData
 local CEffectData = {}
 
@@ -108,7 +108,7 @@ function CEffectData:SetAngles(ang) end
 
 ---[SHARED] Sets the attachment id of the effect to be created with this effect data.
 ---
---- This is internally stored as an integer, but only the first 5 bits will be networked, effectively limiting this function to 0-31 range.
+--- **NOTE**: This is internally stored as an integer, but only the first 5 bits will be networked, effectively limiting this function to 0-31 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetAttachment)
 ---@param attachment number New attachment ID of the effect.
@@ -118,7 +118,7 @@ function CEffectData:SetAttachment(attachment) end
 ---
 --- All this does is provide an addition 8 bits of data for the effect to use. What this will actually do will vary from effect to effect, depending on how a specific effect uses this given data, if at all.
 ---
---- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to 0-255 range.
+--- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to 0-255 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetColor)
 ---@param color number Color represented by a byte.
@@ -151,7 +151,7 @@ function CEffectData:SetEntity(entity) end
 --- 5 | Combine muzzleflash|
 --- 7 | Regular muzzle but bigger|
 ---
---- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `0-255` range.
+--- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `0-255` range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetFlags)
 ---@param flags number The flags of the effect. Each effect has their own flags.
@@ -159,14 +159,14 @@ function CEffectData:SetFlags(flags) end
 
 ---[SHARED] Sets the hit box index of the effect.
 ---
---- Internally stored as an integer, but only first 11 bits are networked, effectively limiting this function to 0-2047 range.
+--- **NOTE**: Internally stored as an integer, but only first 11 bits are networked, effectively limiting this function to 0-2047 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetHitBox)
 ---@param hitBoxIndex number The hit box index of the effect.
 function CEffectData:SetHitBox(hitBoxIndex) end
 
 ---[SHARED] Sets the magnitude of the effect.
---- Internally stored as a float with 12 bit precision for networking purposes, limited to range of 0-1023.
+--- **NOTE**: Internally stored as a float with 12 bit precision for networking purposes, limited to range of 0-1023.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetMagnitude)
 ---@param magnitude number The magnitude of the effect.
@@ -174,7 +174,7 @@ function CEffectData:SetMagnitude(magnitude) end
 
 ---[SHARED] Sets the material index of the effect.
 ---
---- Internally stored as an integer, but only first 12 bits are networked, effectively limiting this function to 0-4095 range.
+--- **NOTE**: Internally stored as an integer, but only first 12 bits are networked, effectively limiting this function to 0-4095 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetMaterialIndex)
 ---@param materialIndex number The material index of the effect.
@@ -187,7 +187,7 @@ function CEffectData:SetMaterialIndex(materialIndex) end
 function CEffectData:SetNormal(normal) end
 
 ---[SHARED] Sets the origin of the effect to be created with this effect data.
---- Limited to world bounds (+-16386 on every axis) and has horrible networking precision. (17 bit float per component)
+--- **NOTE**: Limited to world bounds (+-16386 on every axis) and has horrible networking precision. (17 bit float per component)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetOrigin)
 ---@param origin Vector Origin of the effect.
@@ -195,7 +195,7 @@ function CEffectData:SetOrigin(origin) end
 
 ---[SHARED] Sets the radius of the effect to be created with this effect data.
 ---
---- Internally stored as a float, but networked as a 10bit float, and is clamped to 0-1023 range.
+--- **NOTE**: Internally stored as a float, but networked as a 10bit float, and is clamped to 0-1023 range.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetRadius)
 ---@param radius number Radius of the effect.
@@ -208,14 +208,14 @@ function CEffectData:SetRadius(radius) end
 function CEffectData:SetScale(scale) end
 
 ---[SHARED] Sets the start of the effect to be created with this effect data.
---- Limited to world bounds (+-16386 on every axis) and has horrible networking precision. (17 bit float per component)
+--- **NOTE**: Limited to world bounds (+-16386 on every axis) and has horrible networking precision. (17 bit float per component)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetStart)
 ---@param start Vector Start of the effect.
 function CEffectData:SetStart(start) end
 
 ---[SHARED] Sets the surface property index of the effect.
---- Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `-1`-`254` range.(yes, that's not a mistake)
+--- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `-1`-`254` range.(yes, that's not a mistake)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CEffectData:SetSurfaceProp)
 ---@param surfaceProperties number The surface property index of the effect.

@@ -1,6 +1,6 @@
 ---@meta
 
---- A transparent gray speech bubble panel made up of a rounded box and point coming from the bottom.Creates a bubble container panel in the middle of the screen. The background DPanel is used to allow better control of the dialog point position.Creates a panel with Bill from Left 4 Dead talking through a speech bubble.
+--- A transparent gray speech bubble panel made up of a rounded box and point coming from the bottom.
 ---@class DBubbleContainer : DPanel
 local DBubbleContainer = {}
 

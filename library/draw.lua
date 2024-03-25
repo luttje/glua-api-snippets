@@ -1,13 +1,11 @@
 ---@meta
 
---- The draw library's purpose is to simplify the usage of the surface library.
+--- The draw library's purpose is to simplify the usage of the [surface](https://wiki.facepunch.com/gmod/surface) library.
 draw = {}
 
 ---[CLIENT AND MENU] Simple draw text at position, but this will expand newlines and tabs.
 ---
----
----
---- See also MarkupObject for limited width and markup support.
+--- See also [MarkupObject](https://wiki.facepunch.com/gmod/MarkupObject) for limited width and markup support.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.DrawText)
 ---@param text string Text to be drawn.
@@ -18,20 +16,20 @@ draw = {}
 ---@param xAlign? number Where to align the text horizontally. Uses the Enums/TEXT_ALIGN.
 function draw.DrawText(text, font, x, y, color, xAlign) end
 
----[CLIENT AND MENU] Returns the height of the specified font in pixels. This is equivalent to the height of the character `W`. See surface.GetTextSize.
+---[CLIENT AND MENU] Returns the height of the specified font in pixels. This is equivalent to the height of the character `W`. See [surface.GetTextSize](https://wiki.facepunch.com/gmod/surface.GetTextSize).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.GetFontHeight)
 ---@param font string Name of the font to get the height of.
 ---@return number # The font height
 function draw.GetFontHeight(font) end
 
----[CLIENT AND MENU] Sets drawing texture to a default white texture (vgui/white) via surface.SetMaterial. Useful for resetting the drawing texture.
+---[CLIENT AND MENU] Sets drawing texture to a default white texture (vgui/white) via [surface.SetMaterial](https://wiki.facepunch.com/gmod/surface.SetMaterial). Useful for resetting the drawing texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.NoTexture)
 function draw.NoTexture() end
 
 ---[CLIENT AND MENU] Draws a rounded rectangle.
---- If you do not define a cornerRadius, surface.DrawRect will be used instead for performance.
+--- **NOTE**: If you do not define a cornerRadius, [surface.DrawRect](https://wiki.facepunch.com/gmod/surface.DrawRect) will be used instead for performance.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.RoundedBox)
 ---@param cornerRadius number Radius of the rounded corners, works best with a multiple of 2.
@@ -70,7 +68,7 @@ function draw.RoundedBoxEx(
 end
 
 ---[CLIENT AND MENU] Draws text on the screen.
---- This function does not handle newlines properly. See draw.DrawText for a function that does.
+--- **NOTE**: This function does not handle newlines properly. See [draw.DrawText](https://wiki.facepunch.com/gmod/draw.DrawText) for a function that does.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.SimpleText)
 ---@param text string The text to be drawn.
@@ -100,7 +98,7 @@ function draw.SimpleText(text, font, x, y, color, xAlign, yAlign) end
 ---@return number # The height of the text. Same value as if you were calling surface.GetTextSize.
 function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlinewidth, outlinecolor) end
 
----[CLIENT AND MENU] Works like draw.SimpleText but uses a table structure instead.
+---[CLIENT AND MENU] Works like [draw.SimpleText](https://wiki.facepunch.com/gmod/draw.SimpleText) but uses a table structure instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.Text)
 ---@param textdata table The text properties. See the Structures/TextData
@@ -108,7 +106,7 @@ function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlin
 ---@return number # Height of drawn text
 function draw.Text(textdata) end
 
----[CLIENT AND MENU] Works like draw.Text, but draws the text as a shadow.
+---[CLIENT AND MENU] Works like [draw.Text](https://wiki.facepunch.com/gmod/draw.Text), but draws the text as a shadow.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.TextShadow)
 ---@param textdata table The text properties. See Structures/TextData

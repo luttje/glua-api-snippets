@@ -1,8 +1,8 @@
 ---@meta
 
---- A class used to store the inputs from CUserCmd and other information related to the current movement simulation, such as velocity, position and so on.
+--- A class used to store the inputs from [CUserCmd](https://wiki.facepunch.com/gmod/CUserCmd) and other information related to the current movement simulation, such as velocity, position and so on.
 ---
---- This can only be accessed during GM:SetupMove , GM:Move , GM:PlayerTick and GM:FinishMove.
+--- This can only be accessed during [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) , [GM:Move](https://wiki.facepunch.com/gmod/GM:Move) , [GM:PlayerTick](https://wiki.facepunch.com/gmod/GM:PlayerTick) and [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove).
 ---@class CMoveData
 local CMoveData = {}
 
@@ -12,13 +12,13 @@ local CMoveData = {}
 ---@param keys number Keys to add, see Enums/IN
 function CMoveData:AddKey(keys) end
 
----[SHARED] Gets the aim angle. Seems to be same as CMoveData:GetAngles.
+---[SHARED] Gets the aim angle. Seems to be same as [CMoveData:GetAngles](https://wiki.facepunch.com/gmod/CMoveData:GetAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetAbsMoveAngles)
 ---@return Angle # Aiming angle
 function CMoveData:GetAbsMoveAngles() end
 
----[SHARED] Gets the aim angle. On client is the same as Entity:GetAngles.
+---[SHARED] Gets the aim angle. On client is the same as [Entity:GetAngles](https://wiki.facepunch.com/gmod/Entity:GetAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetAngles)
 ---@return Angle # Aiming angle
@@ -30,19 +30,19 @@ function CMoveData:GetAngles() end
 ---@return number # An integer representing which buttons are down, see Enums/IN
 function CMoveData:GetButtons() end
 
----[SHARED] Returns the center of the player movement constraint. See CMoveData:SetConstraintCenter.
+---[SHARED] Returns the center of the player movement constraint. See [CMoveData:SetConstraintCenter](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintCenter).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintCenter)
 ---@return Vector # The constraint origin.
 function CMoveData:GetConstraintCenter() end
 
----[SHARED] Returns the radius that constrains the players movement. See CMoveData:SetConstraintRadius.
+---[SHARED] Returns the radius that constrains the players movement. See [CMoveData:SetConstraintRadius](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintRadius).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintRadius)
 ---@return number # The constraint radius
 function CMoveData:GetConstraintRadius() end
 
----[SHARED] Returns the player movement constraint speed scale. See CMoveData:SetConstraintSpeedScale.
+---[SHARED] Returns the player movement constraint speed scale. See [CMoveData:SetConstraintSpeedScale](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintSpeedScale).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetConstraintSpeedScale)
 ---@return number # The constraint speed scale
@@ -96,13 +96,13 @@ function CMoveData:GetMaxClientSpeed() end
 ---@return number # The maximum speed
 function CMoveData:GetMaxSpeed() end
 
----[SHARED] Returns the angle the player is moving at. For more info, see CMoveData:SetMoveAngles.
+---[SHARED] Returns the angle the player is moving at. For more info, see [CMoveData:SetMoveAngles](https://wiki.facepunch.com/gmod/CMoveData:SetMoveAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetMoveAngles)
 ---@return Angle # The move direction
 function CMoveData:GetMoveAngles() end
 
----[SHARED] Gets the aim angle. Only works clientside, server returns same as CMoveData:GetAngles.
+---[SHARED] Gets the aim angle. Only works clientside, server returns same as [CMoveData:GetAngles](https://wiki.facepunch.com/gmod/CMoveData:GetAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetOldAngles)
 ---@return Angle # The aim angle
@@ -126,7 +126,7 @@ function CMoveData:GetOrigin() end
 ---@return number # speed
 function CMoveData:GetSideSpeed() end
 
----[SHARED] Returns the vertical speed of the player. ( Z axis of CMoveData:GetVelocity )
+---[SHARED] Returns the vertical speed of the player. ( Z axis of [CMoveData:GetVelocity](https://wiki.facepunch.com/gmod/CMoveData:GetVelocity) )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:GetUpSpeed)
 ---@return number # Vertical speed
@@ -147,7 +147,7 @@ function CMoveData:GetVelocity() end
 ---@return boolean # Is the key down or not
 function CMoveData:KeyDown(key) end
 
----[SHARED] Returns whether the key was pressed. If you want to check if the key is held down, try CMoveData:KeyDown
+---[SHARED] Returns whether the key was pressed. If you want to check if the key is held down, try [CMoveData:KeyDown](https://wiki.facepunch.com/gmod/CMoveData:KeyDown)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyPressed)
 ---@param key number The key to test, see Enums/IN
@@ -163,10 +163,7 @@ function CMoveData:KeyReleased(key) end
 
 ---[SHARED] Returns whether the key was down or not.
 ---
----
----
----
---- Unlike CMoveData:KeyDown, it will return false if CMoveData:KeyPressed is true and it will return true if CMoveData:KeyReleased is true.
+--- Unlike [CMoveData:KeyDown](https://wiki.facepunch.com/gmod/CMoveData:KeyDown), it will return false if [CMoveData:KeyPressed](https://wiki.facepunch.com/gmod/CMoveData:KeyPressed) is true and it will return true if [CMoveData:KeyReleased](https://wiki.facepunch.com/gmod/CMoveData:KeyReleased) is true.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:KeyWasDown)
 ---@param key number The key to test, see Enums/IN
@@ -193,7 +190,7 @@ function CMoveData:SetAngles(ang) end
 ---@param buttons number A number representing which buttons are down, see Enums/IN
 function CMoveData:SetButtons(buttons) end
 
----[SHARED] Sets the center of the player movement constraint. See CMoveData:SetConstraintRadius.
+---[SHARED] Sets the center of the player movement constraint. See [CMoveData:SetConstraintRadius](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintRadius).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintCenter)
 ---@param pos Vector The constraint origin.
@@ -202,21 +199,21 @@ function CMoveData:SetConstraintCenter(pos) end
 ---[SHARED] Sets the radius that constrains the players movement.
 ---
 --- Works with conjunction of:
---- * CMoveData:SetConstraintWidth
---- * CMoveData:SetConstraintSpeedScale
---- * CMoveData:SetConstraintCenter
+--- * [CMoveData:SetConstraintWidth](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintWidth)
+--- * [CMoveData:SetConstraintSpeedScale](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintSpeedScale)
+--- * [CMoveData:SetConstraintCenter](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintCenter)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintRadius)
 ---@param radius number The new constraint radius
 function CMoveData:SetConstraintRadius(radius) end
 
----[SHARED] Sets the player movement constraint speed scale. This will be applied to the player within the CMoveData:SetConstraintRadius when approaching its edge.
+---[SHARED] Sets the player movement constraint speed scale. This will be applied to the player within the [constraint radius](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintRadius) when approaching its edge.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintSpeedScale)
 ---@param number number The constraint speed scale
 function CMoveData:SetConstraintSpeedScale(number) end
 
----[SHARED] Sets  the width (distance from the edge of the CMoveData:SetConstraintRadius, inward) where the actual movement constraint functions.
+---[SHARED] Sets  the width (distance from the edge of the [radius](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintRadius), inward) where the actual movement constraint functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetConstraintWidth)
 ---@param number number The constraint width
@@ -254,24 +251,20 @@ function CMoveData:SetImpulseCommand(impulse) end
 
 ---[SHARED] Sets the maximum player speed. Player won't be able to run or sprint faster then this value.
 ---
----
---- This also automatically sets CMoveData:SetMaxSpeed when used in the GM:SetupMove hook. You must set it manually in the GM:Move hook.
----
+--- This also automatically sets [CMoveData:SetMaxSpeed](https://wiki.facepunch.com/gmod/CMoveData:SetMaxSpeed) when used in the [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) hook. You must set it manually in the [GM:Move](https://wiki.facepunch.com/gmod/GM:Move) hook.
 ---
 --- This must be called on both client and server to avoid prediction errors.
 ---
----
 --- This will **not** reduce speed in air.
---- Setting this to 0 will not make the player stationary. It won't do anything.
+--- **NOTE**: Setting this to 0 will not make the player stationary. It won't do anything.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetMaxClientSpeed)
 ---@param maxSpeed number The new maximum speed
 function CMoveData:SetMaxClientSpeed(maxSpeed) end
 
----[SHARED] Sets the maximum speed of the player. This must match with CMoveData:SetMaxClientSpeed both, on server and client.
+---[SHARED] Sets the maximum speed of the player. This must match with [CMoveData:SetMaxClientSpeed](https://wiki.facepunch.com/gmod/CMoveData:SetMaxClientSpeed) both, on server and client.
 ---
----
---- Doesn't seem to be doing anything on it's own, use CMoveData:SetMaxClientSpeed instead.
+--- Doesn't seem to be doing anything on it's own, use [CMoveData:SetMaxClientSpeed](https://wiki.facepunch.com/gmod/CMoveData:SetMaxClientSpeed) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetMaxSpeed)
 ---@param maxSpeed number The new maximum speed
@@ -309,7 +302,7 @@ function CMoveData:SetOrigin(pos) end
 ---@param speed number Strafe speed
 function CMoveData:SetSideSpeed(speed) end
 
----[SHARED] Sets vertical speed of the player. ( Z axis of CMoveData:SetVelocity )
+---[SHARED] Sets vertical speed of the player. ( Z axis of [CMoveData:SetVelocity](https://wiki.facepunch.com/gmod/CMoveData:SetVelocity) )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CMoveData:SetUpSpeed)
 ---@param speed number Vertical speed to set

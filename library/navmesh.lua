@@ -1,11 +1,11 @@
 ---@meta
 
---- The navigation mesh library. To be used with CNavArea.
+--- The navigation mesh library. To be used with [CNavArea](https://wiki.facepunch.com/gmod/CNavArea).
 ---
---- The navigation mesh is used by NextBot to calculate path to its target.
+--- The navigation mesh is used by [NextBot](https://wiki.facepunch.com/gmod/NextBot) to calculate path to its target.
 navmesh = {}
 
----[SERVER] Add this position and normal to the list of walkable positions, used before map generation with navmesh.BeginGeneration
+---[SERVER] Add this position and normal to the list of walkable positions, used before map generation with [navmesh.BeginGeneration](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.AddWalkableSeed)
 ---@param pos Vector The terrain position.
@@ -14,17 +14,17 @@ function navmesh.AddWalkableSeed(pos, dir) end
 
 ---[SERVER] Starts the generation of a new navmesh.
 ---
---- This process is highly resource intensive and it's not wise to use during normal gameplay
+--- **NOTE**: This process is highly resource intensive and it's not wise to use during normal gameplay
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration)
 function navmesh.BeginGeneration() end
 
----[SERVER] Clears all the walkable positions, used before calling navmesh.BeginGeneration.
+---[SERVER] Clears all the walkable positions, used before calling [navmesh.BeginGeneration](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.ClearWalkableSeeds)
 function navmesh.ClearWalkableSeeds() end
 
----[SERVER] Creates a new CNavArea.
+---[SERVER] Creates a new [CNavArea](https://wiki.facepunch.com/gmod/CNavArea).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.CreateNavArea)
 ---@param corner Vector The first corner of the new CNavArea
@@ -32,7 +32,7 @@ function navmesh.ClearWalkableSeeds() end
 ---@return CNavArea # The new CNavArea or nil if we failed for some reason.
 function navmesh.CreateNavArea(corner, opposite_corner) end
 
----[SERVER] Creates a new CNavLadder.
+---[SERVER] Creates a new [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.CreateNavLadder)
 ---@param top Vector The top position of the ladder.
@@ -43,7 +43,7 @@ function navmesh.CreateNavArea(corner, opposite_corner) end
 ---@return CNavLadder # The new CNavLadder or nil if we failed for some reason.
 function navmesh.CreateNavLadder(top, bottom, width, dir, maxHeightAboveTopArea) end
 
----[SERVER] Returns a list of areas within distance, used to find hiding spots by NextBots for example.
+---[SERVER] Returns a list of areas within distance, used to find hiding spots by [NextBot](https://wiki.facepunch.com/gmod/NextBot)s for example.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.Find)
 ---@param pos Vector The position to search around. This position will be used to find the closest area to search from.
@@ -53,7 +53,7 @@ function navmesh.CreateNavLadder(top, bottom, width, dir, maxHeightAboveTopArea)
 ---@return table # A list of found CNavAreas.
 function navmesh.Find(pos, radius, stepHeight, dropHeight) end
 
----[SERVER] Returns a list of CNavAreas overlapping the given cube extents.
+---[SERVER] Returns a list of [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s overlapping the given cube extents.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.FindInBox)
 ---@param pos1 Vector The start position of the cube to search in.
@@ -61,13 +61,13 @@ function navmesh.Find(pos, radius, stepHeight, dropHeight) end
 ---@return table # A list of found CNavAreas.
 function navmesh.FindInBox(pos1, pos2) end
 
----[SERVER] Returns an integer indexed table of all CNavAreas on the current map. If the map doesn't have a navmesh generated then this will return an empty table.
+---[SERVER] Returns an integer indexed table of all [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s on the current map. If the map doesn't have a navmesh generated then this will return an empty table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetAllNavAreas)
 ---@return table # A table of all the CNavAreas on the current map.
 function navmesh.GetAllNavAreas() end
 
----[SERVER] Returns a table of all blocked CNavAreas on the current map. See CNavArea:MarkAsBlocked.
+---[SERVER] Returns a table of all blocked [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s on the current map. See [CNavArea:MarkAsBlocked](https://wiki.facepunch.com/gmod/CNavArea:MarkAsBlocked).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetBlockedAreas)
 ---@return table # A table of all the blocked CNavAreas on the current map.
@@ -81,7 +81,7 @@ function navmesh.GetEditCursorPosition() end
 
 ---[SERVER] Finds the closest standable ground at, above, or below the provided position.
 ---
---- The ground must have at least 32 units of empty space above it to be considered by this function, unless 16 layers are tested without finding valid ground.
+--- **NOTE**: The ground must have at least 32 units of empty space above it to be considered by this function, unless 16 layers are tested without finding valid ground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetGroundHeight)
 ---@param pos Vector Position to find the closest ground for.
@@ -89,13 +89,13 @@ function navmesh.GetEditCursorPosition() end
 ---@return Vector # The normal of the ground layer.
 function navmesh.GetGroundHeight(pos) end
 
----[SERVER] Returns the currently marked CNavArea, for use with editing console commands.
+---[SERVER] Returns the currently marked [CNavArea](https://wiki.facepunch.com/gmod/CNavArea), for use with editing console commands.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetMarkedArea)
 ---@return CNavArea # The currently marked CNavArea.
 function navmesh.GetMarkedArea() end
 
----[SERVER] Returns the currently marked CNavLadder, for use with editing console commands.
+---[SERVER] Returns the currently marked [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder), for use with editing console commands.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetMarkedLadder)
 ---@return CNavLadder # The currently marked CNavLadder.
@@ -103,7 +103,7 @@ function navmesh.GetMarkedLadder() end
 
 ---[SERVER] Returns the Nav Area contained in this position that also satisfies the elevation limit.
 ---
---- This function will properly see blocked CNavAreas. See navmesh.GetNearestNavArea.
+--- This function will properly see blocked [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s. See [navmesh.GetNearestNavArea](https://wiki.facepunch.com/gmod/navmesh.GetNearestNavArea).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavArea)
 ---@param pos Vector The position to search for.
@@ -111,31 +111,31 @@ function navmesh.GetMarkedLadder() end
 ---@return CNavArea # The nav area.
 function navmesh.GetNavArea(pos, beneathLimit) end
 
----[SERVER] Returns a CNavArea by the given ID.
+---[SERVER] Returns a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) by the given ID.
 ---
---- Avoid calling this function every frame, as internally it does a lookup trough all the CNavAreas, call this once and store the result
+--- **NOTE**: Avoid calling this function every frame, as internally it does a lookup trough all the [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s, call this once and store the result
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavAreaByID)
 ---@param id number ID of the CNavArea to get. Starts with 1.
 ---@return CNavArea # The CNavArea with given ID.
 function navmesh.GetNavAreaByID(id) end
 
----[SERVER] Returns the total count of nav areas on the map. If you want to get all nav areas, use navmesh.GetAllNavAreas instead as nav areas IDs are not always sequential.
+---[SERVER] Returns the total count of nav areas on the map. If you want to get all nav areas, use [navmesh.GetAllNavAreas](https://wiki.facepunch.com/gmod/navmesh.GetAllNavAreas) instead as nav areas IDs are not always sequential.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavAreaCount)
 ---@return number # The total count of nav areas on the map.
 function navmesh.GetNavAreaCount() end
 
----[SERVER] Returns a CNavLadder by the given ID.
+---[SERVER] Returns a [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder) by the given ID.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNavLadderByID)
 ---@param id number ID of the CNavLadder to get. Starts with 1.
 ---@return CNavLadder # The CNavLadder with given ID.
 function navmesh.GetNavLadderByID(id) end
 
----[SERVER] Returns the closest CNavArea to given position at the same height, or beneath it.
+---[SERVER] Returns the closest [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) to given position at the same height, or beneath it.
 ---
---- This function will ignore blocked CNavAreas. See navmesh.GetNavArea for a function that does see blocked areas.
+--- This function will ignore blocked [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s. See [navmesh.GetNavArea](https://wiki.facepunch.com/gmod/navmesh.GetNavArea) for a function that does see blocked areas.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.GetNearestNavArea)
 ---@param pos Vector The position to look from
@@ -155,7 +155,7 @@ function navmesh.GetNearestNavArea(pos, anyZ, maxDist, checkLOS, checkGround, te
 ---@return string # The classname of the spawn point entity. By default returns "info_player_start"
 function navmesh.GetPlayerSpawnName() end
 
----[SERVER] Whether we're currently generating a new navmesh with navmesh.BeginGeneration.
+---[SERVER] Whether we're currently generating a new navmesh with [navmesh.BeginGeneration](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.IsGenerating)
 ---@return boolean # Whether we're generating a nav mesh or not.
@@ -168,13 +168,12 @@ function navmesh.IsGenerating() end
 function navmesh.IsLoaded() end
 
 ---[SERVER] Loads a new navmesh from the .nav file for current map discarding any changes made to the navmesh previously.
----
---- 			Calling this function too soon, causes the Server to crash!
+--- 		**WARNING**: Calling this function too soon, causes the Server to crash!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.Load)
 function navmesh.Load() end
 
----[SERVER] Deletes every CNavArea and CNavLadder on the map **without saving the changes**.
+---[SERVER] Deletes every [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) and [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder) on the map **without saving the changes**.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.Reset)
 function navmesh.Reset() end
@@ -184,19 +183,19 @@ function navmesh.Reset() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.Save)
 function navmesh.Save() end
 
----[SERVER] Sets the CNavArea as marked, so it can be used with editing console commands.
+---[SERVER] Sets the [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) as marked, so it can be used with editing console commands.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.SetMarkedArea)
 ---@param area CNavArea The CNavArea to set as the marked area.
 function navmesh.SetMarkedArea(area) end
 
----[SERVER] Sets the CNavLadder as marked, so it can be used with editing console commands.
+---[SERVER] Sets the [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder) as marked, so it can be used with editing console commands.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.SetMarkedLadder)
 ---@param area CNavLadder The CNavLadder to set as the marked ladder.
 function navmesh.SetMarkedLadder(area) end
 
----[SERVER] Sets the classname of the default spawn point entity, used before generating a new navmesh with navmesh.BeginGeneration.
+---[SERVER] Sets the classname of the default spawn point entity, used before generating a new navmesh with [navmesh.BeginGeneration](https://wiki.facepunch.com/gmod/navmesh.BeginGeneration).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/navmesh.SetPlayerSpawnName)
 ---@param spawnPointClass string The classname of what the player uses to spawn, automatically adds it to the walkable positions during map generation.

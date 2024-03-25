@@ -2,7 +2,7 @@
 
 ---
 --- 		The DCheckBox is a checkbox. It allows you to get a boolean value from the user (true/false - yes/no)
---- 	Creates a DCheckBox and sets its initial value.
+---
 ---@class DCheckBox : DButton
 local DCheckBox = {}
 
@@ -18,19 +18,19 @@ function DCheckBox:GetChecked() end
 ---@return boolean # Whether the checkbox is being clicked.
 function DCheckBox:IsEditing() end
 
----[CLIENT AND MENU] Sets the checked state of the checkbox. Does not call the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods, unlike DCheckBox:SetValue.
+---[CLIENT AND MENU] Sets the checked state of the checkbox. Does not call the checkbox's [DCheckBox:OnChange](https://wiki.facepunch.com/gmod/DCheckBox:OnChange) and [Panel:ConVarChanged](https://wiki.facepunch.com/gmod/Panel:ConVarChanged) methods, unlike [DCheckBox:SetValue](https://wiki.facepunch.com/gmod/DCheckBox:SetValue).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:SetChecked)
 ---@param checked boolean Whether the box should be checked or not.
 function DCheckBox:SetChecked(checked) end
 
----[CLIENT AND MENU] Sets the checked state of the checkbox, and calls the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods.
+---[CLIENT AND MENU] Sets the checked state of the checkbox, and calls the checkbox's [DCheckBox:OnChange](https://wiki.facepunch.com/gmod/DCheckBox:OnChange) and [Panel:ConVarChanged](https://wiki.facepunch.com/gmod/Panel:ConVarChanged) methods.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:SetValue)
 ---@param checked boolean Whether the box should be checked or not.
 function DCheckBox:SetValue(checked) end
 
----[CLIENT AND MENU] Toggles the checked state of the checkbox, and calls the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods. This is called by DCheckBox:DoClick.
+---[CLIENT AND MENU] Toggles the checked state of the checkbox, and calls the checkbox's [DCheckBox:OnChange](https://wiki.facepunch.com/gmod/DCheckBox:OnChange) and [Panel:ConVarChanged](https://wiki.facepunch.com/gmod/Panel:ConVarChanged) methods. This is called by [DCheckBox:DoClick](https://wiki.facepunch.com/gmod/DCheckBox:DoClick).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBox:Toggle)
 function DCheckBox:Toggle() end

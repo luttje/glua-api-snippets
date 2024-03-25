@@ -18,7 +18,7 @@ function gmsave.LoadMap(mapData, ply, callback) end
 ---@param data table A table containing Origin and Angle keys for position and angles to set.
 function gmsave.PlayerLoad(ply, data) end
 
----[SERVER] Returns a table containing player position and angles. Used by gmsave.SaveMap.
+---[SERVER] Returns a table containing player position and angles. Used by [gmsave.SaveMap](https://wiki.facepunch.com/gmod/gmsave.SaveMap).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gmsave.PlayerSave)
 ---@param ply Player The player to "save"

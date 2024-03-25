@@ -1,6 +1,6 @@
 ---@meta
 
---- An object returned by util.Stack.
+--- An object returned by [util.Stack](https://wiki.facepunch.com/gmod/util.Stack).
 ---
 --- Like a Lua table, a Stack is a container. It follows the principle of LIFO (last in, first out).
 ---

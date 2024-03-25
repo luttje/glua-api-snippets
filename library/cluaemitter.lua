@@ -1,10 +1,10 @@
 ---@meta
 
---- List of all possible functions available for LuaEmitters. This is the object returned by the Global.ParticleEmitter function.
+--- List of all possible functions available for LuaEmitters. This is the object returned by the [Global.ParticleEmitter](https://wiki.facepunch.com/gmod/Global.ParticleEmitter) function.
 ---@class CLuaEmitter
 local CLuaEmitter = {}
 
----[CLIENT] Creates a new CLuaParticle with the given material and position.
+---[CLIENT] Creates a new [CLuaParticle](https://wiki.facepunch.com/gmod/CLuaParticle) with the given material and position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:Add)
 ---@param material string The particles material. Can also be an IMaterial.
@@ -28,19 +28,19 @@ function CLuaEmitter:Finish() end
 ---@return number # The amount of active particles of this emitter
 function CLuaEmitter:GetNumActiveParticles() end
 
----[CLIENT] Returns the position of this emitter. This is set when creating the emitter with Global.ParticleEmitter.
+---[CLIENT] Returns the position of this emitter. This is set when creating the emitter with [Global.ParticleEmitter](https://wiki.facepunch.com/gmod/Global.ParticleEmitter).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:GetPos)
 ---@return Vector # Position of this particle emitter.
 function CLuaEmitter:GetPos() end
 
----[CLIENT] Returns whether this emitter is 3D or not. This is set when creating the emitter with Global.ParticleEmitter.
+---[CLIENT] Returns whether this emitter is 3D or not. This is set when creating the emitter with [Global.ParticleEmitter](https://wiki.facepunch.com/gmod/Global.ParticleEmitter).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:Is3D)
 ---@return boolean # Whether this emitter is 3D or not.
 function CLuaEmitter:Is3D() end
 
----[CLIENT] Returns whether this CLuaEmitter is valid or not.
+---[CLIENT] Returns whether this [CLuaEmitter](https://wiki.facepunch.com/gmod/CLuaEmitter) is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaEmitter:IsValid)
 ---@return boolean # Whether this CLuaEmitter is valid or not.

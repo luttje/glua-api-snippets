@@ -4,8 +4,8 @@
 os = {}
 
 ---[SHARED AND MENU] Returns the approximate cpu time the application ran.
---- See also Global.SysTime
---- This function has different precision on Linux (1/100).
+--- See also [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime)
+--- **NOTE**: This function has different precision on Linux (1/100).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/os.clock)
 ---@return number # runtime
@@ -49,11 +49,9 @@ function os.clock() end
 --- | `%Y` | Full year | `1998` |
 --- | `%z` | Timezone | `-0300` |
 --- | `%%` | A percent sign | `%` |
----
----
----
 ---@param time? number Time to use for the format.
----@return string # Formatted date This will be a Structures/DateData if the first argument equals to `*t` or `!*t`
+---@return string # Formatted date
+--- This will be a [Structures/DateData](https://wiki.facepunch.com/gmod/Structures/DateData) if the first argument equals to `*t` or `!*t`
 function os.date(format, time) end
 
 ---[SHARED AND MENU] Subtracts the second from the first value and rounds the result.

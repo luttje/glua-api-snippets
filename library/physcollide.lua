@@ -2,18 +2,18 @@
 
 --- A PhysCollide holds collision data from VPhysics. These objects can be used to run (currently quite limited) collision tests, but do not represent actual physics objects.
 ---
---- Created by Global.CreatePhysCollideBox or Global.CreatePhysCollidesFromModel.
+--- Created by [Global.CreatePhysCollideBox](https://wiki.facepunch.com/gmod/Global.CreatePhysCollideBox) or [Global.CreatePhysCollidesFromModel](https://wiki.facepunch.com/gmod/Global.CreatePhysCollidesFromModel).
 ---@class PhysCollide
 local PhysCollide = {}
 
----[SHARED] Destroys the PhysCollide object.
+---[SHARED] Destroys the [PhysCollide](https://wiki.facepunch.com/gmod/PhysCollide) object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysCollide:Destroy)
 function PhysCollide:Destroy() end
 
----[SHARED] Checks whether this PhysCollide object is valid or not.
+---[SHARED] Checks whether this [PhysCollide](https://wiki.facepunch.com/gmod/PhysCollide) object is valid or not.
 ---
---- You should just use Global.IsValid instead.
+--- You should just use [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysCollide:IsValid)
 ---@return boolean # Is valid or not.

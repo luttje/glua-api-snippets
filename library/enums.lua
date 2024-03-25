@@ -1,17 +1,17 @@
 ---@meta
 
 ---@enum _USE
---- Fire a Enums/USE signal every tick as long as the player holds their use key and aims at the target.
+--- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal every tick as long as the player holds their use key and aims at the target.
 CONTINUOUS_USE = 0
---- Fires a Enums/USE signal when starting to use an entity, and a Enums/USE signal when letting go.
+--- Fires a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal when starting to use an entity, and a [USE_OFF](https://wiki.facepunch.com/gmod/Enums/USE) signal when letting go.
 ---
---- There is no guarantee to receive both ON and OFF signals. A signal will only be sent when pushing or letting go of the use key while actually aiming at the entity, so an ON signal might not be followed by an OFF signal if the player is aiming somewhere else when releasing the key, and similarly, an OFF signal may not be preceded by an ON signal if the player started aiming at the entity only after pressing the key.
+--- **WARNING**: There is no guarantee to receive both ON and OFF signals. A signal will only be sent when pushing or letting go of the use key while actually aiming at the entity, so an ON signal might not be followed by an OFF signal if the player is aiming somewhere else when releasing the key, and similarly, an OFF signal may not be preceded by an ON signal if the player started aiming at the entity only after pressing the key.
 ---
 --- Therefore, this method of input is unreliable and should not be used.
 ONOFF_USE = 1
 --- Like a wheel turning.
 DIRECTIONAL_USE = 2
---- Fire a Enums/USE signal only once when player presses their use key while aiming at the target.
+--- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal only once when player presses their use key while aiming at the target.
 SIMPLE_USE = 3
 
 ---@enum ACT
@@ -1631,7 +1631,7 @@ AIMR_CHANGE_TYPE = 1
 ---@enum AMMO
 --- Forces player to drop the object they are carrying if the object was hit by this ammo type.
 AMMO_FORCE_DROP_IF_CARRIED = 1
---- Uses Structures/AmmoData.plydmg of the ammo type as the damage to deal to shot players instead of Structures/Bullet.Damage.
+--- Uses [AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).plydmg of the ammo type as the damage to deal to shot players instead of [Bullet](https://wiki.facepunch.com/gmod/Structures/Bullet).Damage.
 AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
 
 ---@enum ANALOG
@@ -1934,16 +1934,12 @@ COLLISION_GROUP_WORLD = 20
 LAST_SHARED_COLLISION_GROUP = 21
 
 ---@enum COND
+--- Enumerations for NPC conditions, used by [NPC:SetCondition](https://wiki.facepunch.com/gmod/NPC:SetCondition). Serverside only.
 ---
---- Enumerations for NPC conditions, used by NPC:SetCondition. Serverside only.
----
----
---- 	Unlike other Enums `COND` is a table that contains all the enums.
+--- **NOTE**: Unlike other Enums `COND` is a table that contains all the enums.
 ---
 --- 	There are more conditions than listed here after **COND_NO_CUSTOM_INTERRUPTS**(70)
---- 	but the name depends on what's returned by NPC:ConditionName
----
----
+--- 	but the name depends on what's returned by [NPC:ConditionName](https://wiki.facepunch.com/gmod/NPC:ConditionName)
 COND = {
 	BEHIND_ENEMY = 29,
 	BETTER_WEAPON_AVAILABLE = 46,
@@ -2213,14 +2209,14 @@ EF_NORECEIVESHADOW = 64
 EF_ITEM_BLINK = 256
 --- Always assume that the parent entity is animating.
 EF_PARENT_ANIMATES = 512
---- Internal flag that is set by Entity:FollowBone.
+--- Internal flag that is set by [Entity:FollowBone](https://wiki.facepunch.com/gmod/Entity:FollowBone).
 EF_FOLLOWBONE = 1024
 --- Makes the entity not accept being lit by projected textures, including the player's flashlight.
 EF_NOFLASHLIGHT = 8192
 
 ---@enum EFL
 --- This entity is marked for death -- This allows the game to actually delete ents at a safe time.
---- You should never set this flag manually.
+--- **WARNING**: You should never set this flag manually.
 EFL_KILLME = 1
 --- Entity is dormant, no updates to client
 EFL_DORMANT = 2
@@ -2228,7 +2224,7 @@ EFL_DORMANT = 2
 EFL_NOCLIP_ACTIVE = 4
 --- Set while a model is setting up its bones
 EFL_SETTING_UP_BONES = 8
---- This is a special entity that should not be deleted when we respawn entities via game.CleanUpMap.
+--- This is a special entity that should not be deleted when we respawn entities via [game.CleanUpMap](https://wiki.facepunch.com/gmod/game.CleanUpMap).
 EFL_KEEP_ON_RECREATE_ENTITIES = 16
 --- One of the child entities is a player
 EFL_HAS_PLAYER_CHILD = 16
@@ -2286,13 +2282,13 @@ EFL_NO_PHYSCANNON_INTERACTION = 1073741824
 EFL_NO_DAMAGE_FORCES = -2147483648
 
 ---@enum FCVAR
---- Save the ConVar value into client.vdf
+--- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into client.vdf
 ---
---- Reported as "a" by `cvarlist`, except Lua ConVars
+--- Reported as "a" by `cvarlist`, except Lua [ConVar](https://wiki.facepunch.com/gmod/ConVar)s
 FCVAR_ARCHIVE = 128
---- Save the ConVar value into config.vdf on XBox
+--- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into config.vdf on XBox
 FCVAR_ARCHIVE_XBOX = 16777216
---- Requires sv_cheats to be enabled to change the ConVar or run the command
+--- Requires sv_cheats to be enabled to change the [ConVar](https://wiki.facepunch.com/gmod/ConVar) or run the command
 ---
 --- Reported as "cheat" by `cvarlist`
 FCVAR_CHEAT = 16384
@@ -2300,21 +2296,21 @@ FCVAR_CHEAT = 16384
 ---
 --- Reported as "clientcmd_can_execute" by `cvarlist`
 FCVAR_CLIENTCMD_CAN_EXECUTE = 1073741824
---- ConVar is defined by the client DLL.
+--- [ConVar](https://wiki.facepunch.com/gmod/ConVar) is defined by the client DLL.
 ---
 --- This flag is set automatically
 ---
 --- Reported as "cl" by `cvarlist`
 FCVAR_CLIENTDLL = 8
---- Force the ConVar to be recorded by demo recordings.
+--- Force the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be recorded by demo recordings.
 ---
 --- Reported as "demo" by `cvarlist`
 FCVAR_DEMO = 65536
---- Opposite of FCVAR_DEMO, ensures the ConVar is not recorded in demos
+--- Opposite of FCVAR_DEMO, ensures the [ConVar](https://wiki.facepunch.com/gmod/ConVar) is not recorded in demos
 ---
 --- Reported as "norecord" by `cvarlist`
 FCVAR_DONTRECORD = 131072
---- ConVar is defined by the game DLL.
+--- [ConVar](https://wiki.facepunch.com/gmod/ConVar) is defined by the game DLL.
 ---
 --- This flag is set automatically
 ---
@@ -2334,35 +2330,35 @@ FCVAR_LUA_SERVER = 524288
 FCVAR_NEVER_AS_STRING = 4096
 --- No flags
 FCVAR_NONE = 0
---- For serverside ConVars, notifies all players with blue chat text when the value gets changed
+--- For serverside [ConVar](https://wiki.facepunch.com/gmod/ConVar)s, notifies all players with blue chat text when the value gets changed
 ---
 --- Reported as "nf" by `cvarlist`
 FCVAR_NOTIFY = 256
---- Makes the ConVar not changeable while connected to a server or in singleplayer
+--- Makes the [ConVar](https://wiki.facepunch.com/gmod/ConVar) not changeable while connected to a server or in singleplayer
 FCVAR_NOT_CONNECTED = 4194304
---- Forces the ConVar to only have printable characters ( No control characters )
+--- Forces the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to only have printable characters ( No control characters )
 ---
 --- Reported as "print" by `cvarlist`
 FCVAR_PRINTABLEONLY = 1024
---- Makes the ConVar value hidden from all clients ( For example sv_password )
+--- Makes the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value hidden from all clients ( For example sv_password )
 ---
 --- Reported as "prot" by `cvarlist`
 FCVAR_PROTECTED = 32
---- For serverside ConVars, it will send its value to all clients. The ConVar with the same name must also exist on the client!
+--- For serverside [ConVar](https://wiki.facepunch.com/gmod/ConVar)s, it will send its value to all clients. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the same name must also exist on the client!
 ---
 --- Reported as "rep" by `cvarlist`
 FCVAR_REPLICATED = 8192
---- Prevents the server from querying value of this ConVar
+--- Prevents the server from querying value of this [ConVar](https://wiki.facepunch.com/gmod/ConVar)
 FCVAR_SERVER_CANNOT_QUERY = 536870912
 --- The server is allowed to execute this command on clients.
 ---
 --- Reported as "server_can_execute" by `cvarlist`
 FCVAR_SERVER_CAN_EXECUTE = 268435456
---- Executing the command or changing the ConVar is only allowed in singleplayer
+--- Executing the command or changing the [ConVar](https://wiki.facepunch.com/gmod/ConVar) is only allowed in singleplayer
 ---
 --- Reported as "sp" by `cvarlist`
 FCVAR_SPONLY = 64
---- Don't log the ConVar changes to console/log files/users
+--- Don't log the [ConVar](https://wiki.facepunch.com/gmod/ConVar) changes to console/log files/users
 ---
 --- Reported as "log" by `cvarlist`
 FCVAR_UNLOGGED = 2048
@@ -2439,7 +2435,7 @@ FL_GRAPHED = 1048576
 FL_GRENADE = 2097152
 --- Changes the SV_Movestep() behavior to not do any processing
 FL_STEPMOVEMENT = 4194304
---- Doesn't generate touch functions, calls ENTITY:EndTouch when this flag gets set during a touch callback
+--- Doesn't generate touch functions, calls [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch) when this flag gets set during a touch callback
 FL_DONTTOUCH = 8388608
 --- Base velocity has been applied this frame (used to convert base velocity into momentum)
 FL_BASEVELOCITY = 16777216
@@ -2459,17 +2455,17 @@ FL_TRANSRAGDOLL = 1073741824
 FL_UNBLOCKABLE_BY_PLAYER = -2147483648
 
 ---@enum FORCE
---- Forces the function to take strings only
+--- Forces the function to take [string](https://wiki.facepunch.com/gmod/string)s only
 FORCE_STRING = 1
---- Forces the function to take numbers only
+--- Forces the function to take [number](https://wiki.facepunch.com/gmod/number)s only
 FORCE_NUMBER = 2
---- Forces the function to take booleans only
+--- Forces the function to take [boolean](https://wiki.facepunch.com/gmod/boolean)s only
 FORCE_BOOL = 3
---- Forces the function to take Angles only
+--- Forces the function to take [Angle](https://wiki.facepunch.com/gmod/Angle)s only
 FORCE_ANGLE = 4
---- Forces the function to take Colors only
+--- Forces the function to take [Color](https://wiki.facepunch.com/gmod/Color)s only
 FORCE_COLOR = 5
---- Forces the function to take Vectors only
+--- Forces the function to take [Vector](https://wiki.facepunch.com/gmod/Vector)s only
 FORCE_VECTOR = 6
 
 ---@enum FSASYNC
@@ -2512,7 +2508,7 @@ FSOLID_TRIGGER_TOUCH_DEBRIS = 512
 FSOLID_MAX_BITS = 10
 
 ---@enum FVPHYSICS
---- Won't receive physics forces from collisions and won't collide with other PhysObj with the same flag set.
+--- Won't receive physics forces from collisions and won't collide with other [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the same flag set.
 FVPHYSICS_CONSTRAINT_STATIC = 2
 --- Colliding with entities will cause 1000 damage with DMG_DISSOLVE as the damage type, but only if EFL_NO_DISSOLVE is not set.
 FVPHYSICS_DMG_DISSOLVE = 512
@@ -2520,21 +2516,21 @@ FVPHYSICS_DMG_DISSOLVE = 512
 FVPHYSICS_DMG_SLICE = 1
 --- Will deal high physics damage even with a small mass.
 FVPHYSICS_HEAVY_OBJECT = 32
---- This PhysObj is part of an entity with multiple PhysObj , such as a ragdoll or a vehicle , and will be considered during collision damage events.
+--- This [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) is part of an entity with multiple [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) , such as a ragdoll or a vehicle , and will be considered during collision damage events.
 FVPHYSICS_MULTIOBJECT_ENTITY = 16
 --- Colliding with entities won't cause physics damage.
 FVPHYSICS_NO_IMPACT_DMG = 1024
 --- Like FVPHYSICS_NO_NPC_IMPACT_DMG, but only checks for NPCs. Usually set on Combine Balls fired by Combine Soldiers.
 FVPHYSICS_NO_NPC_IMPACT_DMG = 2048
---- Doesn't allow the player to pick this PhysObj with the Gravity Gun or +use pickup.
+--- Doesn't allow the player to pick this [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the Gravity Gun or +use pickup.
 FVPHYSICS_NO_PLAYER_PICKUP = 128
---- We won't collide with other PhysObj associated to the same entity, only used for vehicles and ragdolls held by the Super Gravity Gun.
+--- We won't collide with other [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) associated to the same entity, only used for vehicles and ragdolls held by the Super Gravity Gun.
 FVPHYSICS_NO_SELF_COLLISIONS = 32768
---- This PhysObj is part of a ragdoll.
+--- This [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) is part of a ragdoll.
 FVPHYSICS_PART_OF_RAGDOLL = 8
---- Set by the physics engine when two PhysObj are penetrating each other. This is only automatically updated for non-static physics objects.
+--- Set by the physics engine when two [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) are penetrating each other. This is only automatically updated for non-static physics objects.
 FVPHYSICS_PENETRATING = 64
---- Set when the player is holding this PhysObj with the Physics Gun, Gravity Gun or +use pickup.
+--- Set when the player is holding this [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the Physics Gun, Gravity Gun or +use pickup.
 FVPHYSICS_PLAYER_HELD = 4
 --- This object was thrown by the Gravity Gun , stuns Antlion guards, Hunters, and squashes Antlion grubs.
 FVPHYSICS_WAS_THROWN = 256
@@ -2595,7 +2591,7 @@ GOALTYPE_INVALID = 8
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
 --- This hitgroup is not present on default player models.
 ---
---- It is unknown how this is generated in GM:ScalePlayerDamage, but it occurs when shot by NPCs ( npc_combine_s ) for example.
+--- It is unknown how this is generated in [GM:ScalePlayerDamage](https://wiki.facepunch.com/gmod/GM:ScalePlayerDamage), but it occurs when shot by NPCs ( npc_combine_s ) for example.
 HITGROUP_GENERIC = 0
 --- Head
 HITGROUP_HEAD = 1
@@ -2822,7 +2818,7 @@ KEY_END = 75
 KEY_PAGEUP = 76
 KEY_PAGEDOWN = 77
 KEY_BREAK = 78
---- The left Shift key, has been seen to be triggered by Right Shift in PANEL:OnKeyCodePressed
+--- The left Shift key, has been seen to be triggered by Right Shift in [PANEL:OnKeyCodePressed](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodePressed)
 KEY_LSHIFT = 79
 KEY_RSHIFT = 80
 KEY_LALT = 81
@@ -3045,7 +3041,7 @@ MATERIAL_CULLMODE_CW = 1
 MATERIAL_FOG_NONE = 0
 --- Linear fog
 MATERIAL_FOG_LINEAR = 1
---- For use in conjunction with render.SetFogZ. Does not work if start distance is bigger than end distance. Ignores density setting. Seems to be broken? Used for underwater fog by the engine.
+--- For use in conjunction with [render.SetFogZ](https://wiki.facepunch.com/gmod/render.SetFogZ). Does not work if start distance is bigger than end distance. Ignores density setting. Seems to be broken? Used for underwater fog by the engine.
 MATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2
 
 ---@enum MATERIAL_LIGHT
@@ -3098,7 +3094,7 @@ MOUSE_COUNT = 7
 MOVECOLLIDE_DEFAULT = 0
 --- Entity bounces, reflects, based on elasticity of surface and object - applies friction (adjust velocity)
 MOVECOLLIDE_FLY_BOUNCE = 1
---- ENTITY:Touch will modify the velocity however it likes
+--- [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) will modify the velocity however it likes
 MOVECOLLIDE_FLY_CUSTOM = 2
 --- Entity slides along surfaces (no bounce) - applies friciton (adjusts velocity)
 MOVECOLLIDE_FLY_SLIDE = 3
@@ -3196,17 +3192,17 @@ NORTH_EAST = 1
 SOUTH_EAST = 2
 --- South West Corner
 SOUTH_WEST = 3
---- Represents all corners, only applicable to certain functions, such as CNavArea:PlaceOnGround.
+--- Represents all corners, only applicable to certain functions, such as [CNavArea:PlaceOnGround](https://wiki.facepunch.com/gmod/CNavArea:PlaceOnGround).
 NUM_CORNERS = 4
 
 ---@enum NavDir
---- North from given CNavArea
+--- North from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 NORTH = 0
---- East from given CNavArea
+--- East from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 EAST = 1
---- South from given CNavArea
+--- South from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 SOUTH = 2
---- West from given CNavArea
+--- West from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 WEST = 3
 
 ---@enum NavTraverseType
@@ -3221,15 +3217,15 @@ GO_ELEVATOR_UP = 7
 GO_ELEVATOR_DOWN = 8
 
 ---@enum NOTIFY
----  Generic notification
+--- Generic notification
 NOTIFY_GENERIC = 0
----  Error notification
+--- Error notification
 NOTIFY_ERROR = 1
----  Undo notification
+--- Undo notification
 NOTIFY_UNDO = 2
----  Hint notification
+--- Hint notification
 NOTIFY_HINT = 3
----  Cleanup notification
+--- Cleanup notification
 NOTIFY_CLEANUP = 4
 
 ---@enum NPC_STATE
@@ -3253,9 +3249,9 @@ NPC_STATE_PRONE = 6
 NPC_STATE_DEAD = 7
 
 ---@enum NUM
---- Amount of Enums/CLASS. Used by Global.Add_NPC_Class.
+--- Amount of [Enums/CLASS](https://wiki.facepunch.com/gmod/Enums/CLASS). Used by [Global.Add_NPC_Class](https://wiki.facepunch.com/gmod/Global.Add_NPC_Class).
 NUM_AI_CLASSES = 36
---- Amount of Enums/HULL.
+--- Amount of [Enums/HULL](https://wiki.facepunch.com/gmod/Enums/HULL).
 NUM_HULLS = 10
 
 ---@enum OBS_MODE
@@ -3271,7 +3267,7 @@ OBS_MODE_FIXED = 3
 OBS_MODE_IN_EYE = 4
 --- Chase cam, 3rd person cam, free rotation around the spectated target
 OBS_MODE_CHASE = 5
---- Free roam/noclip-alike. Does not work from GM:PlayerDeath
+--- Free roam/noclip-alike. Does not work from [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath)
 OBS_MODE_ROAMING = 6
 
 ---@enum PATTACH
@@ -3281,9 +3277,9 @@ PATTACH_ABSORIGIN = 0
 PATTACH_ABSORIGIN_FOLLOW = 1
 --- Create at a custom origin, but don't follow
 PATTACH_CUSTOMORIGIN = 2
---- Particle attaches to passed to Global.ParticleEffectAttach attachment id, but does not follow the entity
+--- Particle attaches to passed to [Global.ParticleEffectAttach](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach) attachment id, but does not follow the entity
 PATTACH_POINT = 3
---- Particle attaches to passed to Global.ParticleEffectAttach attachment id and follows the entity
+--- Particle attaches to passed to [Global.ParticleEffectAttach](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach) attachment id and follows the entity
 PATTACH_POINT_FOLLOW = 4
 --- Particle spawns in the beginning of coordinates ( Vector( 0, 0, 0 ) ), used for control points that don't attach to an entity
 PATTACH_WORLDORIGIN = 5
@@ -3352,18 +3348,15 @@ RENDERGROUP_OPAQUE_HUGE = 1
 RENDERGROUP_STATIC = 6
 --- For non transparent/solid entities.
 ---
----
---- For scripted entities, this will have ENTITY:Draw called
+--- For scripted entities, this will have [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw) called
 RENDERGROUP_OPAQUE = 7
 --- For translucent/transparent entities
 ---
----
---- For scripted entities, this will have ENTITY:DrawTranslucent called
+--- For scripted entities, this will have [ENTITY:DrawTranslucent](https://wiki.facepunch.com/gmod/ENTITY:DrawTranslucent) called
 RENDERGROUP_TRANSLUCENT = 8
 --- For both translucent/transparent and opaque/solid anim entities
 ---
----
---- For scripted entities, this will have both, ENTITY:Draw and ENTITY:DrawTranslucent called
+--- For scripted entities, this will have both, [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw) and [ENTITY:DrawTranslucent](https://wiki.facepunch.com/gmod/ENTITY:DrawTranslucent) called
 RENDERGROUP_BOTH = 9
 --- Solid weapon view models
 RENDERGROUP_VIEWMODEL = 10
@@ -3379,7 +3372,7 @@ RENDERGROUP_OTHER = 13
 RENDERMODE_NORMAL = 0
 --- Supports transparency.
 ---
---- Use this to make alpha of Global.Color work for your entity. For players, it must be set for their active weapon aswell.
+--- Use this to make alpha of [Global.Color](https://wiki.facepunch.com/gmod/Global.Color) work for your entity. For players, it must be set for their active weapon aswell.
 RENDERMODE_TRANSCOLOR = 1
 RENDERMODE_TRANSTEXTURE = 2
 --- Intended for glowing sprites. Allows transparency, and forces the sprite or model to be rendered unlit.
@@ -3578,7 +3571,7 @@ SCHED_WAIT_FOR_SPEAK_FINISH = 67
 SCHED_WAKE_ANGRY = 4
 
 ---@enum SCREENFADE
---- Enumerations used by Player:ScreenFade.
+--- Enumerations used by [Player:ScreenFade](https://wiki.facepunch.com/gmod/Player:ScreenFade).
 SCREENFADE = {
 	IN = 1, --[[ Fade out after the hold time has passed ]]
 	OUT = 2, --[[ Fade in, hold time passes, disappear ]]
@@ -3659,7 +3652,7 @@ SF_NPC_TEMPLATE = 2048
 SF_NPC_WAIT_FOR_SCRIPT = 128
 --- Wait till seen
 SF_NPC_WAIT_TILL_SEEN = 1
---- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created
+--- If set, calls [PhysObj:EnableMotion](https://wiki.facepunch.com/gmod/PhysObj:EnableMotion)( false ) on the func_physbox when the physics are created
 SF_PHYSBOX_MOTIONDISABLED = 32768
 --- Gravity gun is ALWAYS allowed to pick this up.
 SF_PHYSBOX_ALWAYS_PICK_UP = 1048576
@@ -3667,7 +3660,7 @@ SF_PHYSBOX_ALWAYS_PICK_UP = 1048576
 SF_PHYSBOX_NEVER_PICK_UP = 2097152
 --- Gravity gun is NOT allowed to punt this entity.
 SF_PHYSBOX_NEVER_PUNT = 4194304
---- If set, calls PhysObj:EnableMotion( false ) on the func_physbox when the physics are created. See [Physics optimization](https://developer.valvesoftware.com/wiki/Physics_optimization).
+--- If set, calls [PhysObj:EnableMotion](https://wiki.facepunch.com/gmod/PhysObj:EnableMotion)( false ) on the func_physbox when the physics are created. See [Physics optimization](https://developer.valvesoftware.com/wiki/Physics_optimization).
 SF_PHYSPROP_MOTIONDISABLED = 8
 --- Prevent that physbox from being picked up.
 SF_PHYSPROP_PREVENT_PICKUP = 512
@@ -3675,7 +3668,7 @@ SF_PHYSPROP_PREVENT_PICKUP = 512
 SF_PHYSPROP_IS_GIB = 4194304
 --- Makes the rollermine friendly.
 SF_ROLLERMINE_FRIENDLY = 65536
---- If set before Entity:Spawn, the weapon will be constrained and will not simply fall to the ground.
+--- If set before [Entity:Spawn](https://wiki.facepunch.com/gmod/Entity:Spawn), the weapon will be constrained and will not simply fall to the ground.
 SF_WEAPON_START_CONSTRAINED = 1
 --- Player is NOT allowed to pick this up.
 SF_WEAPON_NO_PLAYER_PICKUP = 2
@@ -3786,7 +3779,7 @@ SNDLVL_180dB = 180
 
 ---@enum SOLID
 --- Does not collide with anything.
---- No physics object will be created when using this with Entity:PhysicsInit.
+--- **NOTE**: No physics object will be created when using this with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit).
 SOLID_NONE = 0
 --- The entity has a brush model defined by the map. Does not collide with other SOLID_BSP entities.
 SOLID_BSP = 1
@@ -3795,11 +3788,11 @@ SOLID_BBOX = 2
 --- Uses the entity's object-aligned bounding box for collisions.
 SOLID_OBB = 3
 --- Same as SOLID_OBB but restricts orientation to the Z-axis.
---- Seems to be broken.
+--- **NOTE**: Seems to be broken.
 SOLID_OBB_YAW = 4
---- Always call the entity's `ICollideable::TestCollision` method for traces regardless of the presence of `FSOLID_CUSTOMRAYTEST` or `FSOLID_CUSTOMBOXTEST`. This will only be called back to Lua as ENTITY:TestCollision for `"anim"` type SENTs.
+--- Always call the entity's `ICollideable::TestCollision` method for traces regardless of the presence of `FSOLID_CUSTOMRAYTEST` or `FSOLID_CUSTOMBOXTEST`. This will only be called back to Lua as [ENTITY:TestCollision](https://wiki.facepunch.com/gmod/ENTITY:TestCollision) for `"anim"` type SENTs.
 SOLID_CUSTOM = 5
---- Uses the PhysObjects of the entity.
+--- Uses the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ects of the entity.
 SOLID_VPHYSICS = 6
 
 ---@enum SOUND
@@ -3870,7 +3863,7 @@ STENCIL_ALWAYS = 8
 STENCIL_KEEP = 1
 --- Sets the value in the stencil buffer to 0.
 STENCIL_ZERO = 2
---- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
+--- Sets the value in the stencil buffer to the reference value, set using [render.SetStencilReferenceValue](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue).
 STENCIL_REPLACE = 3
 --- Increments the value in the stencil buffer by 1, clamping the result.
 STENCIL_INCRSAT = 4
@@ -3906,7 +3899,7 @@ STENCILCOMPARISONFUNCTION_ALWAYS = 8
 STENCILOPERATION_KEEP = 1
 --- Sets the value in the stencil buffer to 0.
 STENCILOPERATION_ZERO = 2
---- Sets the value in the stencil buffer to the reference value, set using render.SetStencilReferenceValue.
+--- Sets the value in the stencil buffer to the reference value, set using [render.SetStencilReferenceValue](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue).
 STENCILOPERATION_REPLACE = 3
 --- Increments the value in the stencil buffer by 1, clamping the result.
 STENCILOPERATION_INCRSAT = 4
@@ -3956,7 +3949,7 @@ STUDIO_TRANSPARENCY = 2147483648
 SURF_LIGHT = 1
 --- The surface is a 2D skybox
 SURF_SKY2D = 2
---- This surface is a skybox, equivalent to HitSky in Structures/TraceResult
+--- This surface is a skybox, equivalent to HitSky in [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult)
 SURF_SKY = 4
 --- This surface is animated water
 SURF_WARP = 8
@@ -3966,7 +3959,7 @@ SURF_TRANS = 16
 SURF_NOPORTAL = 32
 --- This surface is a trigger
 SURF_TRIGGER = 64
---- This surface is an invisible entity, equivalent to HitNoDraw in Structures/TraceResult
+--- This surface is an invisible entity, equivalent to HitNoDraw in [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult)
 SURF_NODRAW = 128
 --- Make a primary bsp splitter
 SURF_HINT = 256
@@ -4006,11 +3999,9 @@ TEAM_UNASSIGNED = 1001
 TEAM_SPECTATOR = 1002
 
 ---@enum TEXFILTER
----
---- Enumerations used by render.PushFilterMin and render.PushFilterMag.
+--- Enumerations used by [render.PushFilterMin](https://wiki.facepunch.com/gmod/render.PushFilterMin) and [render.PushFilterMag](https://wiki.facepunch.com/gmod/render.PushFilterMag).
 ---
 --- See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
----
 TEXFILTER = {
 	NONE = 0,
 	POINT = 1,
@@ -4078,8 +4069,6 @@ TEXTUREFLAGS_DEPTHRENDERTARGET = 65536
 TEXTUREFLAGS_NODEBUGOVERRIDE = 131072
 TEXTUREFLAGS_SINGLECOPY = 262144
 TEXTUREFLAGS_UNUSED_00080000 = 524288
----
----
 --- Immediately destroy this texture when its reference count hits zero
 ---
 --- (aka TEXTUREFLAGS_UNUSED_00100000)
@@ -4127,100 +4116,100 @@ TYPE_NONE = -1
 --- Use TYPE_NONE
 ---@deprecated Use TYPE_NONE
 TYPE_INVALID = -1
---- nil
+--- [nil](https://wiki.facepunch.com/gmod/nil)
 TYPE_NIL = 0
---- boolean
+--- [boolean](https://wiki.facepunch.com/gmod/boolean)
 TYPE_BOOL = 1
---- light userdata
+--- [light userdata](https://wiki.facepunch.com/gmod/light userdata)
 TYPE_LIGHTUSERDATA = 2
---- number
+--- [number](https://wiki.facepunch.com/gmod/number)
 TYPE_NUMBER = 3
---- string
+--- [string](https://wiki.facepunch.com/gmod/string)
 TYPE_STRING = 4
---- table
+--- [table](https://wiki.facepunch.com/gmod/table)
 TYPE_TABLE = 5
---- function
+--- [function](https://wiki.facepunch.com/gmod/function)
 TYPE_FUNCTION = 6
---- userdata
+--- [userdata](https://wiki.facepunch.com/gmod/userdata)
 TYPE_USERDATA = 7
---- thread
+--- [thread](https://wiki.facepunch.com/gmod/thread)
 TYPE_THREAD = 8
---- Entity and entity sub-classes including Player, Weapon, NPC, Vehicle, CSEnt, and NextBot
+--- [Entity](https://wiki.facepunch.com/gmod/Entity) and entity sub-classes including [Player](https://wiki.facepunch.com/gmod/Player), [Weapon](https://wiki.facepunch.com/gmod/Weapon), [NPC](https://wiki.facepunch.com/gmod/NPC), [Vehicle](https://wiki.facepunch.com/gmod/Vehicle), [CSEnt](https://wiki.facepunch.com/gmod/CSEnt), and [NextBot](https://wiki.facepunch.com/gmod/NextBot)
 TYPE_ENTITY = 9
---- Vector
+--- [Vector](https://wiki.facepunch.com/gmod/Vector)
 TYPE_VECTOR = 10
---- Angle
+--- [Angle](https://wiki.facepunch.com/gmod/Angle)
 TYPE_ANGLE = 11
---- PhysObj
+--- [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)
 TYPE_PHYSOBJ = 12
---- ISave
+--- [ISave](https://wiki.facepunch.com/gmod/ISave)
 TYPE_SAVE = 13
---- IRestore
+--- [IRestore](https://wiki.facepunch.com/gmod/IRestore)
 TYPE_RESTORE = 14
---- CTakeDamageInfo
+--- [CTakeDamageInfo](https://wiki.facepunch.com/gmod/CTakeDamageInfo)
 TYPE_DAMAGEINFO = 15
---- CEffectData
+--- [CEffectData](https://wiki.facepunch.com/gmod/CEffectData)
 TYPE_EFFECTDATA = 16
---- CMoveData
+--- [CMoveData](https://wiki.facepunch.com/gmod/CMoveData)
 TYPE_MOVEDATA = 17
---- CRecipientFilter
+--- [CRecipientFilter](https://wiki.facepunch.com/gmod/CRecipientFilter)
 TYPE_RECIPIENTFILTER = 18
---- CUserCmd
+--- [CUserCmd](https://wiki.facepunch.com/gmod/CUserCmd)
 TYPE_USERCMD = 19
 --- Leftover from GMod 13 Beta
 ---@deprecated Leftover from GMod 13 Beta
 TYPE_SCRIPTEDVEHICLE = 20
---- IMaterial
+--- [IMaterial](https://wiki.facepunch.com/gmod/IMaterial)
 TYPE_MATERIAL = 21
---- Panel
+--- [Panel](https://wiki.facepunch.com/gmod/Panel)
 TYPE_PANEL = 22
---- CLuaParticle
+--- [CLuaParticle](https://wiki.facepunch.com/gmod/CLuaParticle)
 TYPE_PARTICLE = 23
---- CLuaEmitter
+--- [CLuaEmitter](https://wiki.facepunch.com/gmod/CLuaEmitter)
 TYPE_PARTICLEEMITTER = 24
---- ITexture
+--- [ITexture](https://wiki.facepunch.com/gmod/ITexture)
 TYPE_TEXTURE = 25
---- bf_read
+--- [bf_read](https://wiki.facepunch.com/gmod/bf_read)
 TYPE_USERMSG = 26
---- ConVar
+--- [ConVar](https://wiki.facepunch.com/gmod/ConVar)
 TYPE_CONVAR = 27
---- IMesh
+--- [IMesh](https://wiki.facepunch.com/gmod/IMesh)
 TYPE_IMESH = 28
---- VMatrix
+--- [VMatrix](https://wiki.facepunch.com/gmod/VMatrix)
 TYPE_MATRIX = 29
---- CSoundPatch
+--- [CSoundPatch](https://wiki.facepunch.com/gmod/CSoundPatch)
 TYPE_SOUND = 30
---- pixelvis_handle_t
+--- [pixelvis_handle_t](https://wiki.facepunch.com/gmod/pixelvis_handle_t)
 TYPE_PIXELVISHANDLE = 31
---- dlight_t. Metatable of a Structures/DynamicLight
+--- dlight_t. Metatable of a [Structures/DynamicLight](https://wiki.facepunch.com/gmod/Structures/DynamicLight)
 TYPE_DLIGHT = 32
---- IVideoWriter
+--- [IVideoWriter](https://wiki.facepunch.com/gmod/IVideoWriter)
 TYPE_VIDEO = 33
---- File
+--- [File](https://wiki.facepunch.com/gmod/File)
 TYPE_FILE = 34
---- CLuaLocomotion
+--- [CLuaLocomotion](https://wiki.facepunch.com/gmod/CLuaLocomotion)
 TYPE_LOCOMOTION = 35
---- PathFollower
+--- [PathFollower](https://wiki.facepunch.com/gmod/PathFollower)
 TYPE_PATH = 36
---- CNavArea
+--- [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 TYPE_NAVAREA = 37
---- IGModAudioChannel
+--- [IGModAudioChannel](https://wiki.facepunch.com/gmod/IGModAudioChannel)
 TYPE_SOUNDHANDLE = 38
---- CNavLadder
+--- [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder)
 TYPE_NAVLADDER = 39
---- CNewParticleEffect
+--- [CNewParticleEffect](https://wiki.facepunch.com/gmod/CNewParticleEffect)
 TYPE_PARTICLESYSTEM = 40
---- ProjectedTexture
+--- [ProjectedTexture](https://wiki.facepunch.com/gmod/ProjectedTexture)
 TYPE_PROJECTEDTEXTURE = 41
---- PhysCollide
+--- [PhysCollide](https://wiki.facepunch.com/gmod/PhysCollide)
 TYPE_PHYSCOLLIDE = 42
---- SurfaceInfo
+--- [SurfaceInfo](https://wiki.facepunch.com/gmod/SurfaceInfo)
 TYPE_SURFACEINFO = 43
 --- Amount of TYPE_* enums
 TYPE_COUNT = 44
---- Metatable of a Color.
+--- Metatable of a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
---- This doesn't actually represent a unique type returned by Global.TypeID, but instead is a hack for networking colors with net.WriteType.
+--- **NOTE**: This doesn't actually represent a unique type returned by [Global.TypeID](https://wiki.facepunch.com/gmod/Global.TypeID), but instead is a hack for networking colors with [net.WriteType](https://wiki.facepunch.com/gmod/net.WriteType).
 TYPE_COLOR = 255
 
 ---@enum USE
@@ -4244,9 +4233,9 @@ VIEW_REFRACTION = 4
 VIEW_INTRO_PLAYER = 5
 --- Used by `script_intro` entity.
 VIEW_INTRO_CAMERA = 6
---- Internally used for Global.ProjectedTexture and flashlight.
+--- Internally used for [Global.ProjectedTexture](https://wiki.facepunch.com/gmod/Global.ProjectedTexture) and flashlight.
 VIEW_SHADOW_DEPTH_TEXTURE = 7
---- For SSAO depth. Can be accessed via render.GetResolvedFullFrameDepth.
+--- For SSAO depth. Can be accessed via [render.GetResolvedFullFrameDepth](https://wiki.facepunch.com/gmod/render.GetResolvedFullFrameDepth).
 VIEW_SSAO = 8
 
 ---@enum WEAPON_PROFICIENCY

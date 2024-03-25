@@ -3,7 +3,7 @@
 ---
 --- 		Displays elements in a horizontal or vertical list. A scrollbar is automatically shown if necessary.
 --- 		You can get its vertical bar via `DPanelList.VBar`.
---- 		DPanelList was succeeded in version 13 by more specialised layout elements.
+--- 		[DPanelList](https://wiki.facepunch.com/gmod/DPanelList) was succeeded in version 13 by more specialised layout elements.
 ---
 ---
 ---
@@ -11,7 +11,7 @@
 ---@class DPanelList : DPanel
 local DPanelList = {}
 
----[CLIENT AND MENU] Adds a existing panel to the end of DPanelList.
+---[CLIENT AND MENU] Adds a existing panel to the end of [DPanelList](https://wiki.facepunch.com/gmod/DPanelList).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:AddItem)
 ---@param pnl Panel Panel to be used as element of list
@@ -28,19 +28,19 @@ function DPanelList:CleanList() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:EnableVerticalScrollbar)
 function DPanelList:EnableVerticalScrollbar() end
 
----[CLIENT AND MENU] Returns all panels has added by DPanelList:AddItem
+---[CLIENT AND MENU] Returns all panels has added by [DPanelList:AddItem](https://wiki.facepunch.com/gmod/DPanelList:AddItem)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetItems)
 ---@return table # A table of panels used as items of DPanelList.
 function DPanelList:GetItems() end
 
----[CLIENT AND MENU] Returns offset of list items from the panel borders set by DPanelList:SetPadding
+---[CLIENT AND MENU] Returns offset of list items from the panel borders set by [DPanelList:SetPadding](https://wiki.facepunch.com/gmod/DPanelList:SetPadding)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetPadding)
 ---@return number # Offset from panel borders
 function DPanelList:GetPadding() end
 
----[CLIENT AND MENU] Returns distance between list items set by DPanelList:SetSpacing
+---[CLIENT AND MENU] Returns distance between list items set by [DPanelList:SetSpacing](https://wiki.facepunch.com/gmod/DPanelList:SetSpacing)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:GetSpacing)
 ---@return number # Distance between panels
@@ -53,7 +53,9 @@ function DPanelList:GetSpacing() end
 ---@param strLineState string If set to "ownline", no other panels will be placed to the left or right of the panel we are inserting
 function DPanelList:InsertAtTop(insert, strLineState) end
 
----[CLIENT AND MENU] Used internally to rebuild the child panel positions.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to rebuild the child panel positions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPanelList:Rebuild)
 function DPanelList:Rebuild() end

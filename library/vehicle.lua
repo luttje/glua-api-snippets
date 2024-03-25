@@ -44,7 +44,7 @@ function Vehicle:GetCameraDistance() end
 ---@return Entity # The driver of the vehicle.
 function Vehicle:GetDriver() end
 
----[SERVER] Returns the current speed of the vehicle in Half-Life Hammer Units (in/s). Same as Entity:GetVelocity + Vector:Length.
+---[SERVER] Returns the current speed of the vehicle in Half-Life Hammer Units (in/s). Same as [Entity:GetVelocity](https://wiki.facepunch.com/gmod/Entity:GetVelocity) + [Vector:Length](https://wiki.facepunch.com/gmod/Vector:Length).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetHLSpeed)
 ---@return number # The speed of the vehicle
@@ -113,7 +113,7 @@ function Vehicle:GetThirdPersonMode() end
 ---@return number # The current throttle of the vehicle
 function Vehicle:GetThrottle() end
 
----[SHARED] Returns the vehicle class name. This is only useful for Sandbox spawned vehicles or any vehicle that properly sets the vehicle class with Vehicle:SetVehicleClass.
+---[SHARED] Returns the vehicle class name. This is only useful for Sandbox spawned vehicles or any vehicle that properly sets the vehicle class with [Vehicle:SetVehicleClass](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleClass).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleClass)
 ---@return string # The class name of the vehicle.
@@ -134,7 +134,7 @@ function Vehicle:GetVehicleParams() end
 ---@return number # The field of view, will be 0 on failure
 function Vehicle:GetVehicleViewPosition(role) end
 
----[SERVER] Returns the PhysObj of given wheel.
+---[SERVER] Returns the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) of given wheel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:GetWheel)
 ---@param wheel number The wheel to retrieve
@@ -176,7 +176,7 @@ function Vehicle:GetWheelTotalHeight(wheel) end
 ---@return boolean # Whether this vehicle has boost at all.
 function Vehicle:HasBoost() end
 
----[SERVER] Returns whether this vehicle has a brake pedal. See Vehicle:SetHasBrakePedal.
+---[SERVER] Returns whether this vehicle has a brake pedal. See [Vehicle:SetHasBrakePedal](https://wiki.facepunch.com/gmod/Vehicle:SetHasBrakePedal).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:HasBrakePedal)
 ---@return boolean # Whether this vehicle has a brake pedal or not.
@@ -200,7 +200,7 @@ function Vehicle:IsEngineEnabled() end
 ---@return boolean # Whether the engine is started or not.
 function Vehicle:IsEngineStarted() end
 
----[SHARED] Returns true if the vehicle object is a valid or not. This will return `false` when Vehicle functions are not usable on the vehicle.
+---[SHARED] Returns true if the vehicle object is a valid or not. This will return `false` when [Vehicle](https://wiki.facepunch.com/gmod/Vehicle) functions are not usable on the vehicle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle)
 ---@return boolean # Is the vehicle a valid vehicle or not
@@ -214,7 +214,7 @@ function Vehicle:IsVehicleBodyInWater() end
 
 ---[SERVER] Releases the vehicle's handbrake (Jeep) so it can roll without any passengers.
 ---
---- This will be overwritten if the vehicle has a driver. Same as Vehicle:SetHandbrake( false )
+--- This will be overwritten if the vehicle has a driver. Same as [Vehicle:SetHandbrake](https://wiki.facepunch.com/gmod/Vehicle:SetHandbrake)( false )
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:ReleaseHandbrake)
 function Vehicle:ReleaseHandbrake() end
@@ -290,7 +290,8 @@ function Vehicle:SetThirdPersonMode(enable) end
 ---@param throttle number The new throttle.
 function Vehicle:SetThrottle(throttle) end
 
----[SHARED] Sets the vehicle class name.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Sets the vehicle class name.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleClass)
 ---@param class string The vehicle class name to set
@@ -304,7 +305,7 @@ function Vehicle:SetVehicleEntryAnim(bOn) end
 
 ---[SERVER] Sets the vehicle parameters for given vehicle.
 ---
---- Not all variables from the Structures/VehicleParams can be set.
+--- **NOTE**: Not all variables from the [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams) can be set.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams)
 ---@param params table The new new vehicle parameters. See Structures/VehicleParams.

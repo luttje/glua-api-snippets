@@ -1,12 +1,12 @@
 ---@meta
 
---- Draw a shape on a derma panel. Only one kind of shape, a rectangle, is available for use.Creates the DShape rectangle within a small popup frame
+--- Draw a shape on a derma panel. Only one kind of shape, a rectangle, is available for use.
 ---@class DShape : DPanel
 local DShape = {}
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.
 ---
---- See DShape:SetBorderColor.
+--- See [DShape:SetBorderColor](https://wiki.facepunch.com/gmod/DShape:SetBorderColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetBorderColor)
 ---@return table # The border Color
@@ -20,7 +20,7 @@ function DShape:GetColor() end
 
 ---[CLIENT] Returns the current type of shape this panel is set to display.
 ---
---- See DShape:SetType.
+--- See [DShape:SetType](https://wiki.facepunch.com/gmod/DShape:SetType).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DShape:GetType)
 ---@return string # Current shape type.

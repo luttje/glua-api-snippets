@@ -3,12 +3,14 @@
 ---
 --- Information about custom fields **all** entities can have.
 ---
---- See also Structures/ENT
+--- See also [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT)
 ---
 ---@class Custom_Entity_Fields
 local Custom_Entity_Fields = {}
 
----`Serverside`, Sandbox and Sandbox derived only. Called by the Drive property to override the default drive type, which is `drive_sandbox`.
+---Sandbox and Sandbox derived only.
+---
+--- Called by the Drive property to override the default drive type, which is `drive_sandbox`.
 ---@type function
 Custom_Entity_Fields.GetEntityDriveMode = nil
 
@@ -32,15 +34,23 @@ Custom_Entity_Fields.PreEntityCopy = nil
 ---@type function
 Custom_Entity_Fields.OnDuplicated = nil
 
----`Shared`, Sandbox or Sandbox derived only. If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
+---Sandbox or Sandbox derived only.
+---
+--- If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
 ---@type boolean
 Custom_Entity_Fields.PhysgunDisabled = nil
 
----`Shared`, Sandbox or Sandbox derived only. Called from GM:PhysgunPickup, overrides `PhysgunDisabled`
+---Sandbox or Sandbox derived only.
+---
+--- Called from GM:PhysgunPickup, overrides `PhysgunDisabled`
 ---@type function
 Custom_Entity_Fields.PhysgunPickup = nil
 
----`Shared`, Sandbox or Sandbox derived only. Controls which tools **and** properties can be used on this entity. Format is a list of strings where each string is the tool or property classname. This can also be set from map, see Sandbox Specific Mapping
+---Sandbox or Sandbox derived only.
+---
+--- Controls which tools **and** properties can be used on this entity. Format is a list of strings where each string is the tool or property classname.
+---
+--- This can also be set from map, see Sandbox Specific Mapping
 ---@type table
 Custom_Entity_Fields.m_tblToolsAllowed = nil
 
@@ -68,10 +78,10 @@ Custom_Entity_Fields.CalcAbsolutePosition = nil
 ---@type function
 Custom_Entity_Fields.RenderOverride = nil
 
----(Clientside) Do not use.
+---Do not use.
 ---@type Vector
 Custom_Entity_Fields.m_RenderOrigin = nil
 
----(Clientside) Do not use.
+---Do not use.
 ---@type Angle
 Custom_Entity_Fields.m_RenderAngles = nil

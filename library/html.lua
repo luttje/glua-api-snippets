@@ -1,7 +1,7 @@
 ---@meta
 
 ---
---- The HTML control can be used to display HTML code just like an internet browser. Unlike DHTML, this control cannot accept user input or complex interaction, such as retrieving image data.
+--- The HTML control can be used to display HTML code just like an internet browser. Unlike [DHTML](https://wiki.facepunch.com/gmod/DHTML), this control cannot accept user input or complex interaction, such as retrieving image data.
 ---
 --- **Blocked URL Extentions**
 ---
@@ -12,6 +12,6 @@
 --- * .zip
 --- * .mp3
 --- * .swf
---- 	Creates an HTML control in the center of screen, and makes it display http://wiki.garrysmod.com/
+---
 ---@class HTML : Panel
 HTML = {}

@@ -1,6 +1,6 @@
 ---@meta
 
---- List of all possible functions available for Lua particles. This is the object returned by the CLuaEmitter:Add function.
+--- List of all possible functions available for Lua particles. This is the object returned by the [CLuaEmitter:Add](https://wiki.facepunch.com/gmod/CLuaEmitter:Add) function.
 ---@class CLuaParticle
 local CLuaParticle = {}
 
@@ -25,7 +25,13 @@ function CLuaParticle:GetAngleVelocity() end
 ---[CLIENT] Returns the 'bounciness' of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetBounce)
----@return number # The 'bounciness' of the particle  2 means it will gain 100% of its previous velocity,   1 means it will not lose velocity,   0.5 means it will lose half of its velocity with each bounce.
+---@return number # The 'bounciness' of the particle
+---
+--- 2 means it will gain 100% of its previous velocity,
+---
+--- 1 means it will not lose velocity,
+---
+--- 0.5 means it will lose half of its velocity with each bounce.
 function CLuaParticle:GetBounce() end
 
 ---[CLIENT] Returns the color of the particle.
@@ -68,15 +74,13 @@ function CLuaParticle:GetGravity() end
 
 ---[CLIENT] Returns the 'life time' of the particle, how long the particle existed since its creation.
 ---
---- This value will always be between 0 and CLuaParticle:GetDieTime.
----
+--- This value will always be between 0 and [CLuaParticle:GetDieTime](https://wiki.facepunch.com/gmod/CLuaParticle:GetDieTime).
 ---
 --- It changes automatically as time goes.
 ---
---- It can be manipulated using CLuaParticle:SetLifeTime.
+--- It can be manipulated using [CLuaParticle:SetLifeTime](https://wiki.facepunch.com/gmod/CLuaParticle:SetLifeTime).
 ---
----
---- If the life time of the particle will be more than CLuaParticle:GetDieTime, it will be removed.
+--- If the life time of the particle will be more than [CLuaParticle:GetDieTime](https://wiki.facepunch.com/gmod/CLuaParticle:GetDieTime), it will be removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:GetLifeTime)
 ---@return number # How long the particle existed, in seconds.
@@ -155,9 +159,7 @@ function CLuaParticle:SetAngleVelocity(angVel) end
 ---
 --- 2 means it will gain 100% of its previous velocity,
 ---
----
 --- 1 means it will not lose velocity,
----
 ---
 --- 0.5 means it will lose half of its velocity with each bounce.
 function CLuaParticle:SetBounce(bounce) end
@@ -171,16 +173,12 @@ function CLuaParticle:SetCollide(shouldCollide) end
 ---[CLIENT] Sets the function that gets called whenever the particle collides with the world.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetCollideCallback)
----@param collideFunc function Collide callback, the arguments are:
+---@param collideFunc fun(particle: CLuaParticle, hitPos: Vector, hitNormal: Vector) The collision callback.
 ---
----
----
----
---- CLuaParticle particle - The particle itself
----
---- Vector hitPos - Position of the collision
----
---- Vector hitNormal - Direction of the collision, perpendicular to the hit surface
+--- Function argument(s):
+--- * CLuaParticle `particle` - The particle itself
+--- * Vector `hitPos` - Position of the collision
+--- * Vector `hitNormal` - Direction of the collision, perpendicular to the hit surface
 function CLuaParticle:SetCollideCallback(collideFunc) end
 
 ---[CLIENT] Sets the color of the particle.
@@ -223,13 +221,11 @@ function CLuaParticle:SetGravity(gravity) end
 
 ---[CLIENT] Sets the 'life time' of the particle, how long the particle existed since its creation.
 ---
---- This value should always be between 0 and CLuaParticle:GetDieTime.
----
+--- This value should always be between 0 and [CLuaParticle:GetDieTime](https://wiki.facepunch.com/gmod/CLuaParticle:GetDieTime).
 ---
 --- It changes automatically as time goes.
 ---
----
---- If the life time of the particle will be more than CLuaParticle:GetDieTime, it will be removed.
+--- If the life time of the particle will be more than [CLuaParticle:GetDieTime](https://wiki.facepunch.com/gmod/CLuaParticle:GetDieTime), it will be removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetLifeTime)
 ---@param lifeTime number The new life time of the particle.
@@ -247,7 +243,7 @@ function CLuaParticle:SetLighting(useLighting) end
 ---@param mat IMaterial The new material to set. Can also be a string.
 function CLuaParticle:SetMaterial(mat) end
 
----[CLIENT] Sets when the particles think function should be called next, this uses the synchronized server time returned by Global.CurTime.
+---[CLIENT] Sets when the particles think function should be called next, this uses the synchronized server time returned by [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetNextThink)
 ---@param nextThink number Next think time.
@@ -292,10 +288,10 @@ function CLuaParticle:SetStartSize(startSize) end
 ---[CLIENT] Sets the think function of the particle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CLuaParticle:SetThinkFunction)
----@param thinkFunc function Think function. It has only one argument:
+---@param thinkFunc fun(particle: CLuaParticle) Think function.
 ---
----
---- CLuaParticle particle - The particle the think hook is set on
+--- Function argument(s):
+--- * CLuaParticle `particle` - The particle the think hook is set on
 function CLuaParticle:SetThinkFunction(thinkFunc) end
 
 ---[CLIENT] Sets the velocity of the particle.

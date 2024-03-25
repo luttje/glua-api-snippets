@@ -3,9 +3,10 @@
 ---
 --- 		A really simple grid layout panel.
 ---
---- 		This panel will set its size automatically based on set column count.
---- 		This makes it play badly with Panel:Dock and cause a PANEL:PerformLayout call every frame.
---- 	Creates a simple grid with numbered buttons.
+--- 		**NOTE**: This panel will set its size automatically based on set column count.
+--- 		This makes it play badly with [Panel:Dock](https://wiki.facepunch.com/gmod/Panel:Dock) and cause a [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout) call every frame.
+---
+---
 ---@class DGrid : Panel
 local DGrid = {}
 
@@ -15,13 +16,13 @@ local DGrid = {}
 ---@param item Panel The item to add. It will be forced visible and parented to the DGrid.
 function DGrid:AddItem(item) end
 
----[CLIENT AND MENU] Returns the number of columns of this DGrid. Set by DGrid:SetCols.
+---[CLIENT AND MENU] Returns the number of columns of this [DGrid](https://wiki.facepunch.com/gmod/DGrid). Set by [DGrid:SetCols](https://wiki.facepunch.com/gmod/DGrid:SetCols).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetCols)
 ---@return number # The number of columns of this DGrid
 function DGrid:GetCols() end
 
----[CLIENT AND MENU] Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
+---[CLIENT AND MENU] Returns the width of each column of the [DGrid](https://wiki.facepunch.com/gmod/DGrid), which is set by [DGrid:SetColWide](https://wiki.facepunch.com/gmod/DGrid:SetColWide).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetColWide)
 ---@return number # The width of each column
@@ -33,13 +34,13 @@ function DGrid:GetColWide() end
 ---@return table # A list of Panels.
 function DGrid:GetItems() end
 
----[CLIENT AND MENU] Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
+---[CLIENT AND MENU] Returns the height of each row of the [DGrid](https://wiki.facepunch.com/gmod/DGrid), which is set by [DGrid:SetRowHeight](https://wiki.facepunch.com/gmod/DGrid:SetRowHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:GetRowHeight)
 ---@return number # The height of each row
 function DGrid:GetRowHeight() end
 
----[CLIENT AND MENU] Removes given panel from the DGrid:GetItems.
+---[CLIENT AND MENU] Removes given panel from the [DGrid:GetItems](https://wiki.facepunch.com/gmod/DGrid:GetItems).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:RemoveItem)
 ---@param item Panel Item to remove from the grid
@@ -48,7 +49,7 @@ function DGrid:RemoveItem(item, bDontDelete) end
 
 ---[CLIENT AND MENU] Sets the number of columns this panel should have.
 ---
---- The DGrid will resize its width to match this value.
+--- The [DGrid](https://wiki.facepunch.com/gmod/DGrid) will resize its width to match this value.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SetCols)
 ---@param cols number The desired number of columns
@@ -70,7 +71,7 @@ function DGrid:SetColWide(colWidth) end
 ---@param rowHeight number The height of each row
 function DGrid:SetRowHeight(rowHeight) end
 
----[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
+---[CLIENT AND MENU] Sorts the items in the grid. Does not visually update the grid, use [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout) for that.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DGrid:SortByMember)
 ---@param key string A key in the panel from DGrid:GetItems. The key's value must be numeric.

@@ -13,11 +13,11 @@ function derma.Color(name, pnl, default) end
 
 ---[CLIENT AND MENU] Defines a new Derma control with an optional base.
 ---
---- This calls vgui.Register internally, but also does the following:
---- * Adds the control to derma.GetControlList
---- * Adds a key "Derma" - This is returned by derma.GetControlList
+--- This calls [vgui.Register](https://wiki.facepunch.com/gmod/vgui.Register) internally, but also does the following:
+--- * Adds the control to [derma.GetControlList](https://wiki.facepunch.com/gmod/derma.GetControlList)
+--- * Adds a key "Derma" - This is returned by [derma.GetControlList](https://wiki.facepunch.com/gmod/derma.GetControlList)
 --- * Makes a global table with the name of the control (This is technically deprecated and should not be relied upon)
---- * If reloading (i.e. called this function with name of an existing panel), updates all existing instances of panels with this name. (Updates functions, calls PANEL:PreAutoRefresh and PANEL:PostAutoRefresh, etc.)
+--- * If reloading (i.e. called this function with name of an existing panel), updates all existing instances of panels with this name. (Updates functions, calls [PANEL:PreAutoRefresh](https://wiki.facepunch.com/gmod/PANEL:PreAutoRefresh) and [PANEL:PostAutoRefresh](https://wiki.facepunch.com/gmod/PANEL:PostAutoRefresh), etc.)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.DefineControl)
 ---@param name string Name of the newly created control
@@ -35,13 +35,13 @@ function derma.DefineControl(name, description, tab, base) end
 ---@param skin table Table containing skin data
 function derma.DefineSkin(name, descriptions, skin) end
 
----[CLIENT AND MENU] Returns the derma.Controls table, a list of all derma controls registered with derma.DefineControl.
+---[CLIENT AND MENU] Returns the [derma.Controls](https://wiki.facepunch.com/gmod/derma.Controls) table, a list of all derma controls registered with [derma.DefineControl](https://wiki.facepunch.com/gmod/derma.DefineControl).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetControlList)
 ---@return table # A listing of all available derma-based controls. See derma.Controls for structure and contents.
 function derma.GetControlList() end
 
----[CLIENT AND MENU] Returns the default skin table, which can be changed with the hook GM:ForceDermaSkin
+---[CLIENT AND MENU] Returns the default skin table, which can be changed with the hook [GM:ForceDermaSkin](https://wiki.facepunch.com/gmod/GM:ForceDermaSkin)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.GetDefaultSkin)
 ---@return table # Skin table
@@ -65,7 +65,7 @@ function derma.GetSkinTable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.RefreshSkins)
 function derma.RefreshSkins() end
 
----[CLIENT AND MENU] Returns how many times derma.RefreshSkins has been called.
+---[CLIENT AND MENU] Returns how many times [derma.RefreshSkins](https://wiki.facepunch.com/gmod/derma.RefreshSkins) has been called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.SkinChangeIndex)
 ---@return number # Amount of times derma.RefreshSkins has been called.
@@ -86,9 +86,18 @@ function derma.SkinHook(type, name, panel, vararg1, vararg2, vararg3, vararg4) e
 
 ---[CLIENT AND MENU] Returns a function to draw a specified texture of panels skin.
 ---
+--- These are usually generated via [GWEN.CreateTextureBorder](https://wiki.facepunch.com/gmod/GWEN.CreateTextureBorder) and similar.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/derma.SkinTexture)
 ---@param name string The identifier of the texture
 ---@param pnl Panel Panel to get the skin of.
----@param fallback? any What to return if we failed to retrieve the texture
----@return function # A function that is created with the GWEN to draw a texture.
+---@param fallback? function|any What to return if we failed to retrieve the texture
+---@return fun(x: number, y: number, w: number, h: number, clr: table?) # A function that is created with the GWEN library to draw a texture.
+---
+--- Function argument(s):
+--- * number `x` - X coordinate for the box.
+--- * number `y` - Y coordinate for the box.
+--- * number `w` - Width of the box.
+--- * number `h` - Height of the box.
+--- * table `clr` - Optional color, default is white. Uses the Color.
 function derma.SkinTexture(name, pnl, fallback) end

@@ -1,10 +1,10 @@
 ---@meta
 
 ---
---- 		DIconLayout is what replaced DPanelList in Garry's Mod 13.
+--- 		DIconLayout is what replaced [DPanelList](https://wiki.facepunch.com/gmod/DPanelList) in Garry's Mod 13.
 --- 		DPanelList still exists in GMod but is deprecated and does not support the new GWEN skin.
 ---
---- 		DIconLayout is used to make a list of panels.
+--- 		[DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) is used to make a list of panels.
 --- 		Unlike DPanelList, DIconLayout does not automatically add a scroll bar - the example below shows you how you can do this.
 ---
 ---@class DIconLayout : DDragBase
@@ -16,7 +16,7 @@ local DIconLayout = {}
 ---@return Panel # The replica.
 function DIconLayout:Copy() end
 
----[CLIENT AND MENU] Copies the contents (Child elements) of another DIconLayout to itself.
+---[CLIENT AND MENU] Copies the contents (Child elements) of another [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) to itself.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:CopyContents)
 ---@param from Panel DIconLayout to copy from.
@@ -48,7 +48,7 @@ function DIconLayout:GetSpaceY() end
 
 ---[CLIENT AND MENU] Returns whether the icon layout will stretch its height to fit all the children.
 ---
---- See also DIconLayout:GetStretchWidth
+--- See also [DIconLayout:GetStretchWidth](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchWidth)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchHeight)
 ---@return boolean #
@@ -56,34 +56,38 @@ function DIconLayout:GetStretchHeight() end
 
 ---[CLIENT AND MENU] Returns whether the icon layout will stretch its width to fit all the children.
 ---
---- See also DIconLayout:GetStretchHeight
+--- See also [DIconLayout:GetStretchHeight](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchHeight)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:GetStretchWidth)
 ---@return boolean #
 function DIconLayout:GetStretchWidth() end
 
----[CLIENT AND MENU] Resets layout vars before calling Panel:InvalidateLayout. This is called when children are added or removed, and must be called when the spacing, border or layout direction is changed.
+---[CLIENT AND MENU] Resets layout vars before calling [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout). This is called when children are added or removed, and must be called when the spacing, border or layout direction is changed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:Layout)
 function DIconLayout:Layout() end
 
----[CLIENT AND MENU] Used internally to layout the child elements if the DIconLayout:SetLayoutDir is set to LEFT (See Enums/DOCK).
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to layout the child elements if the [DIconLayout:SetLayoutDir](https://wiki.facepunch.com/gmod/DIconLayout:SetLayoutDir) is set to LEFT (See [Enums/DOCK](https://wiki.facepunch.com/gmod/Enums/DOCK)).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:LayoutIcons_LEFT)
 function DIconLayout:LayoutIcons_LEFT() end
 
----[CLIENT AND MENU] Used internally to layout the child elements if the DIconLayout:SetLayoutDir is set to TOP (See Enums/DOCK).
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to layout the child elements if the [DIconLayout:SetLayoutDir](https://wiki.facepunch.com/gmod/DIconLayout:SetLayoutDir) is set to TOP (See [Enums/DOCK](https://wiki.facepunch.com/gmod/Enums/DOCK)).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:LayoutIcons_TOP)
 function DIconLayout:LayoutIcons_TOP() end
 
----[CLIENT AND MENU] Sets the internal border (padding) within the DIconLayout. This will not change its size, only the positioning of children. You must call DIconLayout:Layout in order for the changes to take effect.
+---[CLIENT AND MENU] Sets the internal border (padding) within the DIconLayout. This will not change its size, only the positioning of children. You must call [DIconLayout:Layout](https://wiki.facepunch.com/gmod/DIconLayout:Layout) in order for the changes to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetBorder)
 ---@param width number The border (padding) inside the DIconLayout.
 function DIconLayout:SetBorder(width) end
 
----[CLIENT AND MENU] Sets the direction that it will be layed out, using the Enums/DOCK.
+---[CLIENT AND MENU] Sets the direction that it will be layed out, using the [Enums/DOCK](https://wiki.facepunch.com/gmod/Enums/DOCK).
 ---
 --- Currently only TOP and LEFT are supported.
 ---
@@ -91,13 +95,13 @@ function DIconLayout:SetBorder(width) end
 ---@param direction number Enums/DOCK
 function DIconLayout:SetLayoutDir(direction) end
 
----[CLIENT AND MENU] Sets the horizontal (x) spacing between children within the DIconLayout. You must call DIconLayout:Layout in order for the changes to take effect.
+---[CLIENT AND MENU] Sets the horizontal (x) spacing between children within the DIconLayout. You must call [DIconLayout:Layout](https://wiki.facepunch.com/gmod/DIconLayout:Layout) in order for the changes to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetSpaceX)
 ---@param xSpacing number The width of the gap between child objects.
 function DIconLayout:SetSpaceX(xSpacing) end
 
----[CLIENT AND MENU] Sets the vertical (y) spacing between children within the DIconLayout. You must call DIconLayout:Layout in order for the changes to take effect.
+---[CLIENT AND MENU] Sets the vertical (y) spacing between children within the DIconLayout. You must call [DIconLayout:Layout](https://wiki.facepunch.com/gmod/DIconLayout:Layout) in order for the changes to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetSpaceY)
 ---@param ySpacing number The vertical gap between rows in the DIconLayout.
@@ -105,7 +109,7 @@ function DIconLayout:SetSpaceY(ySpacing) end
 
 ---[CLIENT AND MENU] If set to true, the icon layout will stretch its height to fit all the children.
 ---
---- See also DIconLayout:SetStretchWidth
+--- See also [DIconLayout:SetStretchWidth](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchWidth)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchHeight)
 ---@param do_stretch boolean
@@ -113,7 +117,7 @@ function DIconLayout:SetStretchHeight(do_stretch) end
 
 ---[CLIENT AND MENU] If set to true, the icon layout will stretch its width to fit all the children.
 ---
---- See also DIconLayout:SetStretchHeight
+--- See also [DIconLayout:SetStretchHeight](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchHeight)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DIconLayout:SetStretchWidth)
 ---@param stretchW boolean

@@ -20,7 +20,7 @@ function hook.Add(eventName, identifier, func) end
 
 ---[SHARED AND MENU] Calls all hooks associated with the given event until one returns something other than `nil`, and then returns that data.
 ---
---- In almost all cases, you should use hook.Run instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater.
+--- In almost all cases, you should use [hook.Run](https://wiki.facepunch.com/gmod/hook.Run) instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Call)
 ---@param eventName string The event to call hooks for.
@@ -29,7 +29,7 @@ function hook.Add(eventName, identifier, func) end
 ---@return any ... # Return data from called hooks. Limited to **6** return values.
 function hook.Call(eventName, gamemodeTable, ...) end
 
----[SHARED AND MENU] Returns a list of all the hooks registered with hook.Add.
+---[SHARED AND MENU] Returns a list of all the hooks registered with [hook.Add](https://wiki.facepunch.com/gmod/hook.Add).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.GetTable)
 ---@return table # A table of tables. See below for output example.
@@ -44,9 +44,9 @@ function hook.Remove(eventName, identifier) end
 
 ---[SHARED AND MENU] Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:`; alternative, if one exists.
 ---
---- This function internally calls hook.Call.
+--- This function internally calls [hook.Call](https://wiki.facepunch.com/gmod/hook.Call).
 ---
---- See also: gamemode.Call - same as this, but does not call hooks if the gamemode hasn't defined the function.
+--- See also: [gamemode.Call](https://wiki.facepunch.com/gmod/gamemode.Call) - same as this, but does not call hooks if the gamemode hasn't defined the function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Run)
 ---@param eventName string The event to call hooks for.

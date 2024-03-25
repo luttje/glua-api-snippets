@@ -3,7 +3,7 @@
 ---
 ---
 ---
---- 		A base panel for things like DModelSelect.
+--- 		A base panel for things like [DModelSelect](https://wiki.facepunch.com/gmod/DModelSelect).
 --- 		Basically, a list of panels that can be selected.
 --- 		Selected panel can be retrieved and has visual indication of being selected.
 ---

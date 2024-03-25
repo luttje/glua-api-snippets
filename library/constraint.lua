@@ -3,7 +3,9 @@
 --- The constraint library allows you to control the constraint system built into the physics engine (rope, weld, ballsockets, etc).
 constraint = {}
 
----[SERVER] Stores information about constraints in an entity's table.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Stores information about constraints in an entity's table.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable)
 ---@param ent1 Entity The entity to store the information on.
@@ -13,9 +15,11 @@ constraint = {}
 ---@param ent4? Entity Optional. Same as `ent2`.
 function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 
----[SERVER] Stores info about the constraints on the entity's table.
+---[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- The only difference between this and constraint.AddConstraintTable is that the constraint does not get deleted when the entity is removed.
+--- Stores info about the constraints on the entity's table.
+---
+--- The only difference between this and [constraint.AddConstraintTable](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable) is that the constraint does not get deleted when the entity is removed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AddConstraintTableNoDelete)
 ---@param ent1 Entity The entity to store the information on.
@@ -25,7 +29,7 @@ function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 ---@param ent4? Entity Optional. Same as `ent2`.
 function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) end
 
----[SERVER] Creates an advanced ballsocket (ragdoll) constraint. See constraint.Ballsocket for the simpler version.
+---[SERVER] Creates an advanced ballsocket (ragdoll) constraint. See [constraint.Ballsocket](https://wiki.facepunch.com/gmod/constraint.Ballsocket) for the simpler version.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket)
 ---@param ent1 Entity First entity.
@@ -39,7 +43,6 @@ function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) 
 ---@param localPos1 Vector Position relative to the the first physics object to constrain to.
 ---@param localPos2? Vector Position relative to the the second physics object to constrain to.
 --- 			Does nothing!
----
 ---@param forceLimit? number Amount of force until it breaks (0 = unbreakable)
 ---@param torqueLimit? number Amount of torque (rotation speed) until it breaks (0 = unbreakable)
 ---@param xMin number Minimum angle in rotations around the X axis local to the constraint.
@@ -113,7 +116,7 @@ function constraint.Axis(
 )
 end
 
----[SERVER] Creates a ballsocket joint. See See constraint.AdvBallsocket if you also wish to limit rotation angles in some way.
+---[SERVER] Creates a ballsocket joint. See See [constraint.AdvBallsocket](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket) if you also wish to limit rotation angles in some way.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Ballsocket)
 ---@param ent1 Entity First entity.
@@ -174,7 +177,7 @@ function constraint.CreateKeyframeRope(
 end
 
 ---[SERVER] Creates an invisible, non-moveable anchor point in the world to which things can be attached.
---- 		The entity used internally by this function (`gmod_anchor`) only exists in Sandbox derived gamemodes, meaning this function will only work in these gamemodes.
+--- 		**NOTE**: The entity used internally by this function (`gmod_anchor`) only exists in Sandbox derived gamemodes, meaning this function will only work in these gamemodes.
 ---
 --- 		To use this in other gamemodes, you may need to create your own [gmod_anchor](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/entities/entities/gmod_anchor.lua) entity.
 ---
@@ -344,7 +347,7 @@ function constraint.GetTable(ent) end
 ---@return boolean # Whether the entity has any constraints or not.
 function constraint.HasConstraints(ent) end
 
----[SERVER] Creates a controllable constraint.Elastic, aka a Hydraulic constraint.
+---[SERVER] Creates a controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), aka a Hydraulic constraint.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Hydraulic)
 ---@param player Player The player that will be able to control the constraint. Used to call numpad.OnDown.
@@ -365,6 +368,7 @@ function constraint.HasConstraints(ent) end
 ---@param slider number Whether the hydraulic is fixed, i.e. cannot bend. Must be `1` to act as `true`.
 ---@param speed number How fast it changes the length from `length1` to `length2` and backwards.
 ---@param material? string The material of the rope. If unset, will be solid black.
+---@param toggle? boolean Whether the hydraulic should be a toggle, not a "hold key to extend" action.
 ---@param color? table The color of the rope. See Global.Color.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Will return `false` if the constraint could not be created.
 ---@return Entity # The crated rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint could not be created.
@@ -385,6 +389,7 @@ function constraint.Hydraulic(
 	slider,
 	speed,
 	material,
+	toggle,
 	color
 )
 end
@@ -399,7 +404,7 @@ end
 ---@return Entity # The created constraint, if any or false if the constraint failed to set
 function constraint.Keepupright(ent, ang, bone, angularLimit) end
 
----[SERVER] Creates a motor constraint, a player controllable constraint.Axis.
+---[SERVER] Creates a motor constraint, a player controllable [constraint.Axis](https://wiki.facepunch.com/gmod/constraint.Axis).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Motor)
 ---@param ent1 Entity First entity.
@@ -423,8 +428,6 @@ function constraint.Keepupright(ent, ang, bone, angularLimit) end
 ---@param key_bwd? number The key binding for "backwards", corresponding to an Enums/KEY
 ---@param direction? number Either `1` or `-1` signifying which direction the motor should spin.
 ---@param localAxis? Vector Overrides axis of rotation?
----
----
 ---@return Entity # The created constraint. ([phys_torque](https://developer.valvesoftware.com/wiki/Phys_torque)) Will return `false` if the constraint could not be created.
 ---@return Entity # The created axis constraint. ([phys_hinge](https://developer.valvesoftware.com/wiki/Phys_hinge)) Will return `nil` if the constraint could not be created.
 function constraint.Motor(
@@ -450,7 +453,7 @@ end
 
 ---[SERVER] Creates a muscle constraint.
 ---
---- Very similar to constraint.Hydraulic, but instead of a toggle between fully expanded and contracted, it will continuously alternate between the 2 states while enabled.
+--- Very similar to [constraint.Hydraulic](https://wiki.facepunch.com/gmod/constraint.Hydraulic), but instead of a toggle between fully expanded and contracted, it will continuously alternate between the 2 states while enabled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Muscle)
 ---@param player Player The player that will be able to control the constraint. Used to call numpad.OnDown.
@@ -500,7 +503,7 @@ function constraint.Muscle(
 end
 
 ---[SERVER] Creates an no-collide "constraint". Disables collision between two entities.
---- Does not work with players.
+--- **NOTE**: Does not work with players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.NoCollide)
 ---@param ent1 Entity First entity.
@@ -602,7 +605,9 @@ function constraint.RemoveConstraints(ent, type) end
 ---@param material? string Material of the rope. If unset, will be solid black.
 ---@param rigid? boolean Whether the constraint is rigid.
 ---@param color? table The color of the rope. See Global.Color.
----@return Entity # The constraint entity ([phys_lengthconstraint](https://developer.valvesoftware.com/wiki/Phys_lengthconstraint)).  Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
+---@return Entity # The constraint entity ([phys_lengthconstraint](https://developer.valvesoftware.com/wiki/Phys_lengthconstraint)).
+---
+--- Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
 ---@return Entity # The rope entity. Will return `nil` if `constraint` return value is a [keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope) or if the constraint could not be created.
 function constraint.Rope(
 	ent1,
@@ -658,7 +663,7 @@ function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width
 ---@return Entity # The crated constraint entity. ([phys_constraint](https://developer.valvesoftware.com/wiki/Phys_constraint))
 function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, deleteEnt1OnBreak) end
 
----[SERVER] Creates a winch constraint, a player controllable constraint.Elastic, allowing gradually increasing or decreasing the length.
+---[SERVER] Creates a winch constraint, a player controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), allowing gradually increasing or decreasing the length.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Winch)
 ---@param player Player The player that will be used to call numpad.OnDown and numpad.OnUp.

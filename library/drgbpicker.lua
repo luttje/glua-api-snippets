@@ -3,14 +3,16 @@
 ---
 --- DRGBPicker is an interactive panel which can be used to select a color hue.
 ---
---- See DColorCube for a color picker which controls brightness and saturation.
+--- See [DColorCube](https://wiki.facepunch.com/gmod/DColorCube) for a color picker which controls brightness and saturation.
 ---
---- See DColorMixer for a color picker that allows control over hue, saturation, and brightness at once.
---- 	Creates a color picker which controls the color of the background panel it's parented to.Creates a DRGBPicker that controls the hue of  a DColorCube, which outputs the color to the background panel, label, and your copy/paste buffer.
+--- See [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer) for a color picker that allows control over hue, saturation, and brightness at once.
+---
 ---@class DRGBPicker : DPanel
 local DRGBPicker = {}
 
----[CLIENT AND MENU] Returns the color at given position on the internal texture.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns the color at given position on the internal texture.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:GetPosColor)
 ---@param x number The X coordinate on the texture to get the color from
@@ -28,7 +30,7 @@ function DRGBPicker:GetRGB() end
 
 ---[CLIENT AND MENU] Sets the color stored in the color picker.
 ---
---- This function is meant to be called internally and will not update the position of the color picker line or call DRGBPicker:OnChange
+--- **NOTE**: This function is meant to be called internally and will not update the position of the color picker line or call [DRGBPicker:OnChange](https://wiki.facepunch.com/gmod/DRGBPicker:OnChange)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DRGBPicker:SetRGB)
 ---@param color table The color to set, see Color.

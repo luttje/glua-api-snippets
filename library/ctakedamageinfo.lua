@@ -1,25 +1,25 @@
 ---@meta
 
 --- A class used to store and modify all the data concerning a damage event.
---- An empty CTakeDamageInfo object can be created with Global.DamageInfo
+--- An empty CTakeDamageInfo object can be created with [Global.DamageInfo](https://wiki.facepunch.com/gmod/Global.DamageInfo)
 ---
 --- List of hooks that this object is passed to:
---- * ENTITY:OnTakeDamage
---- * GM:DoPlayerDeath
---- * GM:EntityTakeDamage
---- * GM:PostEntityTakeDamage
---- * GM:OnDamagedByExplosion
---- * GM:ScaleNPCDamage
---- * GM:ScalePlayerDamage
---- * NEXTBOT:OnInjured
---- * NEXTBOT:OnKilled
---- * NEXTBOT:OnOtherKilled
+--- * [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage)
+--- * [GM:DoPlayerDeath](https://wiki.facepunch.com/gmod/GM:DoPlayerDeath)
+--- * [GM:EntityTakeDamage](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage)
+--- * [GM:PostEntityTakeDamage](https://wiki.facepunch.com/gmod/GM:PostEntityTakeDamage)
+--- * [GM:OnDamagedByExplosion](https://wiki.facepunch.com/gmod/GM:OnDamagedByExplosion)
+--- * [GM:ScaleNPCDamage](https://wiki.facepunch.com/gmod/GM:ScaleNPCDamage)
+--- * [GM:ScalePlayerDamage](https://wiki.facepunch.com/gmod/GM:ScalePlayerDamage)
+--- * [NEXTBOT:OnInjured](https://wiki.facepunch.com/gmod/NEXTBOT:OnInjured)
+--- * [NEXTBOT:OnKilled](https://wiki.facepunch.com/gmod/NEXTBOT:OnKilled)
+--- * [NEXTBOT:OnOtherKilled](https://wiki.facepunch.com/gmod/NEXTBOT:OnOtherKilled)
 ---
 --- List of functions that use this object:
---- * util.BlastDamageInfo
---- * Entity:TakeDamageInfo
---- * Entity:TakePhysicsDamage
---- * Entity:DispatchTraceAttack
+--- * [util.BlastDamageInfo](https://wiki.facepunch.com/gmod/util.BlastDamageInfo)
+--- * [Entity:TakeDamageInfo](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo)
+--- * [Entity:TakePhysicsDamage](https://wiki.facepunch.com/gmod/Entity:TakePhysicsDamage)
+--- * [Entity:DispatchTraceAttack](https://wiki.facepunch.com/gmod/Entity:DispatchTraceAttack)
 ---@class CTakeDamageInfo
 local CTakeDamageInfo = {}
 
@@ -41,7 +41,7 @@ function CTakeDamageInfo:GetAmmoType() end
 ---@return Entity # The attacker
 function CTakeDamageInfo:GetAttacker() end
 
----[SHARED] Returns the initial unmodified by skill level ( game.GetSkillLevel ) damage.
+---[SHARED] Returns the initial unmodified by skill level ( [game.GetSkillLevel](https://wiki.facepunch.com/gmod/game.GetSkillLevel) ) damage.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetBaseDamage)
 ---@return number # baseDamage
@@ -67,7 +67,7 @@ function CTakeDamageInfo:GetDamageCustom() end
 
 ---[SHARED] Returns a vector representing the damage force.
 ---
---- Can be set with CTakeDamageInfo:SetDamageForce.
+--- Can be set with [CTakeDamageInfo:SetDamageForce](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageForce).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageForce)
 ---@return Vector # The damage force
@@ -75,7 +75,7 @@ function CTakeDamageInfo:GetDamageForce() end
 
 ---[SHARED] Returns the position where the damage was or is going to be applied to.
 ---
---- Can be set using CTakeDamageInfo:SetDamagePosition.
+--- Can be set using [CTakeDamageInfo:SetDamagePosition](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamagePosition).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamagePosition)
 ---@return Vector # The damage position
@@ -83,7 +83,7 @@ function CTakeDamageInfo:GetDamagePosition() end
 
 ---[SHARED] Returns a bitflag which indicates the damage type(s) of the damage.
 ---
---- Consider using CTakeDamageInfo:IsDamageType instead. Value returned by this function can contain multiple damage types.
+--- Consider using [CTakeDamageInfo:IsDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType) instead. Value returned by this function can contain multiple damage types.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType)
 ---@return number # Damage type(s), a combination of Enums/DMG
@@ -93,20 +93,15 @@ function CTakeDamageInfo:GetDamageType() end
 ---
 --- For hitscan weapons this is the weapon.
 ---
----
 --- For projectile weapons this is the projectile.
 ---
----
----
----
----
---- For a more reliable method of getting the weapon that damaged an entity, use CTakeDamageInfo:GetAttacker with Player:GetActiveWeapon.
+--- For a more reliable method of getting the weapon that damaged an entity, use [GetAttacker](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAttacker) with [GetActiveWeapon](https://wiki.facepunch.com/gmod/Player:GetActiveWeapon).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetInflictor)
 ---@return Entity # The inflictor
 function CTakeDamageInfo:GetInflictor() end
 
----[SHARED] Returns the maximum damage. See CTakeDamageInfo:SetMaxDamage
+---[SHARED] Returns the maximum damage. See [CTakeDamageInfo:SetMaxDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetMaxDamage)
 ---@return number # maxDmg
@@ -161,7 +156,7 @@ function CTakeDamageInfo:SetAmmoType(ammoType) end
 ---@param ent Entity The entity to be set as the attacker.
 function CTakeDamageInfo:SetAttacker(ent) end
 
----[SHARED] Sets the initial unmodified by skill level ( game.GetSkillLevel ) damage. This function will not update or touch CTakeDamageInfo:GetDamage.
+---[SHARED] Sets the initial unmodified by skill level ( [game.GetSkillLevel](https://wiki.facepunch.com/gmod/game.GetSkillLevel) ) damage. This function will not update or touch [CTakeDamageInfo:GetDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamage).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetBaseDamage)
 ---@param number number baseDamage
@@ -186,8 +181,7 @@ function CTakeDamageInfo:SetDamageBonus(damage) end
 function CTakeDamageInfo:SetDamageCustom(DamageType) end
 
 ---[SHARED] Sets the directional force of the damage.
----
---- 	This function seems to have no effect on player knockback. To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use workaround example below.
+--- 	**NOTE**: This function seems to have no effect on player knockback. To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use workaround example below.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageForce)
 ---@param force Vector The vector to set the force to.
@@ -208,7 +202,6 @@ function CTakeDamageInfo:SetDamageType(type) end
 ---[SHARED] Sets the inflictor of the damage for example a weapon.
 ---
 --- For hitscan/bullet weapons this should the weapon.
----
 ---
 --- For projectile ( rockets, etc ) weapons this should be the projectile.
 ---

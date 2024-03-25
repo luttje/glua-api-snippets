@@ -12,17 +12,14 @@ function undo.AddEntity(ent) end
 ---[SERVER] Adds a function to call when the current undo block is undone. Note that if an undo has a function, the player will always be notified when this undo is performed, even if the entity it is meant to undo no longer exists.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.AddFunction)
----@param func fun(undo: table, ...: any): boolean The function to call.
+---@param func fun(undo: table, ...: any): boolean? The function to call.
 ---
+--- Function argument(s):
+--- * table `undo` - See Structures/Undo.
+--- * vararg `...` - What was passed after the function callback argument.
 ---
----
---- Function callback arguments are:
---- * table **undo** - See Structures/Undo.
---- * vararg **...** - What was passed after the function callback argument.
----
---- Function callback return values are:
---- * boolean **result** - Returning `false` will mark execution of this function as "failed", meaning that the undo might be skipped if no other entities are removed by it. This is useful when for example an entity you want to access is removed therefore there's nothing to do.
----
+--- Function return value(s):
+--- * boolean `result` - Returning `false` will mark execution of this function as "failed", meaning that the undo might be skipped if no other entities are removed by it. This is useful when for example an entity you want to access is removed therefore there's nothing to do.
 ---@param ... any Arguments to pass to the function (after the undo info table)
 function undo.AddFunction(func, ...) end
 
@@ -48,13 +45,15 @@ function undo.Do_Undo(tab) end
 function undo.Finish(NiceText) end
 
 ---[SHARED] Serverside, returns a table containing all undo blocks of all players. Clientside, returns a table of the local player's undo blocks.
---- 	Serverside, this table's keys use Player:UniqueID to store a player's undo blocks.
+--- 	**NOTE**: Serverside, this table's keys use [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) to store a player's undo blocks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.GetTable)
 ---@return table # The undo table.
 function undo.GetTable() end
 
----[CLIENT] Makes the UI dirty - it will re-create the controls the next time it is viewed.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Makes the UI dirty - it will re-create the controls the next time it is viewed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.MakeUIDirty)
 function undo.MakeUIDirty() end
@@ -79,7 +78,9 @@ function undo.SetCustomUndoText(customText) end
 ---@param ply Player The player responsible for undoing the block
 function undo.SetPlayer(ply) end
 
----[CLIENT] Adds a hook (CPanelPaint) to the control panel paint function so we can determine when it is being drawn.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Adds a hook (CPanelPaint) to the control panel paint function so we can determine when it is being drawn.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/undo.SetupUI)
 function undo.SetupUI() end

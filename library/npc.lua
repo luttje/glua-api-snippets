@@ -4,9 +4,9 @@
 ---@class NPC : Entity
 NPC = {}
 
----[SERVER] Makes the NPC like, hate, feel neutral towards, or fear the entity in question. If you want to setup relationship towards a certain entity `class`, use NPC:AddRelationship.
+---[SERVER] Makes the NPC like, hate, feel neutral towards, or fear the entity in question. If you want to setup relationship towards a certain entity `class`, use [NPC:AddRelationship](https://wiki.facepunch.com/gmod/NPC:AddRelationship).
 ---
---- NPCs do not see NextBots by default. This can be fixed by adding the Enums/FL flag to the NextBot.
+--- **NOTE**: NPCs do not see [NextBot](https://wiki.facepunch.com/gmod/NextBot)s by default. This can be fixed by adding the [FL_OBJECT](https://wiki.facepunch.com/gmod/Enums/FL) flag to the NextBot.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship)
 ---@param target Entity The entity for the relationship to be applied to.
@@ -14,9 +14,9 @@ NPC = {}
 ---@param priority? number How strong the relationship is. Higher values mean higher priority over relationships with lower priority.
 function NPC:AddEntityRelationship(target, disposition, priority) end
 
----[SERVER] Changes how an NPC feels towards another NPC.  If you want to setup relationship towards a certain `entity`, use NPC:AddEntityRelationship.
+---[SERVER] Changes how an NPC feels towards another NPC.  If you want to setup relationship towards a certain `entity`, use [NPC:AddEntityRelationship](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship).
 ---
---- Avoid using this in GM:OnEntityCreated to prevent crashing due to infinite loops. This function may create an entity with given class and delete it immediately after.
+--- **WARNING**: Avoid using this in [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) to prevent crashing due to infinite loops. This function may create an entity with given class and delete it immediately after.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:AddRelationship)
 ---@param relationstring string A string representing how the relationship should be set up.
@@ -55,7 +55,8 @@ function NPC:CapabilitiesClear() end
 ---[SERVER] Returns the NPC's capabilities along the ones defined on its weapon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:CapabilitiesGet)
----@return number # The capabilities as a bitflag. See Enums/CAP
+---@return number # The capabilities as a bitflag.
+--- See Enums/CAP
 function NPC:CapabilitiesGet() end
 
 ---[SERVER] Remove a certain capability.
@@ -64,30 +65,30 @@ function NPC:CapabilitiesGet() end
 ---@param capabilities number Capabilities to remove, see Enums/CAP
 function NPC:CapabilitiesRemove(capabilities) end
 
----[SERVER] Returns the NPC class. Do not confuse with Entity:GetClass!
+---[SERVER] Returns the NPC class. Do not confuse with [Entity:GetClass](https://wiki.facepunch.com/gmod/Entity:GetClass)!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:Classify)
 ---@return number # See Enums/CLASS
 function NPC:Classify() end
 
----[SERVER] Resets the NPC:GetBlockingEntity.
+---[SERVER] Resets the [NPC:GetBlockingEntity](https://wiki.facepunch.com/gmod/NPC:GetBlockingEntity).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ClearBlockingEntity)
 function NPC:ClearBlockingEntity() end
 
----[SERVER] Clears out the specified Enums/COND on this NPC.
+---[SERVER] Clears out the specified [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND) on this NPC.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ClearCondition)
 ---@param condition number The Enums/COND to clear out.
 function NPC:ClearCondition(condition) end
 
----[SERVER] Clears the Enemy from the NPC's memory, effectively forgetting it until met again with either the NPC vision or with NPC:UpdateEnemyMemory.
+---[SERVER] Clears the Enemy from the NPC's memory, effectively forgetting it until met again with either the NPC vision or with [NPC:UpdateEnemyMemory](https://wiki.facepunch.com/gmod/NPC:UpdateEnemyMemory).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ClearEnemyMemory)
 ---@param enemy? Entity The enemy to mark
 function NPC:ClearEnemyMemory(enemy) end
 
----[SERVER] Clears the NPC's current expression which can be set with NPC:SetExpression.
+---[SERVER] Clears the NPC's current expression which can be set with [NPC:SetExpression](https://wiki.facepunch.com/gmod/NPC:SetExpression).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ClearExpression)
 function NPC:ClearExpression() end
@@ -109,9 +110,9 @@ function NPC:ClearSchedule() end
 ---@return string # A human understandable string equivalent of that condition.
 function NPC:ConditionName(cond) end
 
----[SERVER] Returns the way the NPC "feels" about a given entity. See NPC:AddEntityRelationship.
+---[SERVER] Returns the way the NPC "feels" about a given entity. See [NPC:AddEntityRelationship](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship).
 ---
---- For `ai` type entities, this will return ENTITY:GetRelationship. If it returns `nil` or for engine NPCs, this will return whatever was last set by NPC:AddEntityRelationship. As a last resort, engine will decide on the disposition based on this NPC's NPC:Classify.
+--- **NOTE**: For `ai` type entities, this will return [ENTITY:GetRelationship](https://wiki.facepunch.com/gmod/ENTITY:GetRelationship). If it returns `nil` or for engine NPCs, this will return whatever was last set by [NPC:AddEntityRelationship](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship). As a last resort, engine will decide on the disposition based on this NPC's [NPC:Classify](https://wiki.facepunch.com/gmod/NPC:Classify).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:Disposition)
 ---@param ent Entity The entity to test our disposition towards.
@@ -142,7 +143,7 @@ function NPC:FearSound() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:FoundEnemySound)
 function NPC:FoundEnemySound() end
 
----[SHARED] Returns the weapon the NPC is currently carrying, or Global_Variables.
+---[SHARED] Returns the weapon the NPC is currently carrying, or [NULL](https://wiki.facepunch.com/gmod/Global_Variables).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetActiveWeapon)
 ---@return Entity # The NPCs current weapon
@@ -154,7 +155,7 @@ function NPC:GetActiveWeapon() end
 ---@return number # Current activity, see Enums/ACT.
 function NPC:GetActivity() end
 
----[SERVER] Returns the aim vector of the NPC. NPC alternative of Player:GetAimVector.
+---[SERVER] Returns the aim vector of the NPC. NPC alternative of [Player:GetAimVector](https://wiki.facepunch.com/gmod/Player:GetAimVector).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetAimVector)
 ---@return Vector # The aim direction of the NPC.
@@ -217,7 +218,7 @@ function NPC:GetCurWaypointPos() end
 
 ---[SERVER] Returns the entity that this NPC is trying to fight.
 ---
---- This returns nil if the NPC has no enemy. You should use Global.IsValid (which accounts for nil and NULL) on the return to verify validity of the enemy.
+--- This returns nil if the NPC has no enemy. You should use [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) (which accounts for nil and NULL) on the return to verify validity of the enemy.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetEnemy)
 ---@return NPC # Enemy NPC.
@@ -232,7 +233,7 @@ function NPC:GetEnemyFirstTimeSeen(enemy) end
 
 ---[SERVER] Returns the last known position of an NPC's enemy.
 ---
---- Similar to NPC:GetEnemyLastSeenPos, but the known position will be a few seconds ahead of the last seen position.
+--- Similar to [NPC:GetEnemyLastSeenPos](https://wiki.facepunch.com/gmod/NPC:GetEnemyLastSeenPos), but the known position will be a few seconds ahead of the last seen position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetEnemyLastKnownPos)
 ---@param enemy? Entity The enemy to check.
@@ -241,7 +242,7 @@ function NPC:GetEnemyLastKnownPos(enemy) end
 
 ---[SERVER] Returns the last seen position of an NPC's enemy.
 ---
---- Similar to NPC:GetEnemyLastKnownPos, but the known position will be a few seconds ahead of the last seen position.
+--- Similar to [NPC:GetEnemyLastKnownPos](https://wiki.facepunch.com/gmod/NPC:GetEnemyLastKnownPos), but the known position will be a few seconds ahead of the last seen position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetEnemyLastSeenPos)
 ---@param enemy? Entity The enemy to check.
@@ -273,7 +274,7 @@ function NPC:GetGoalPos() end
 ---@return Entity # The entity we are trying to reach, or `NULL`.
 function NPC:GetGoalTarget() end
 
----[SERVER] Returns NPCs hull type set by NPC:SetHullType.
+---[SERVER] Returns NPCs hull type set by [NPC:SetHullType](https://wiki.facepunch.com/gmod/NPC:SetHullType).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetHullType)
 ---@return number # Hull type, see Enums/HULL
@@ -311,7 +312,7 @@ function NPC:GetIdealYaw() end
 
 ---[SERVER] Returns all known enemies this NPC has.
 ---
---- See also NPC:GetKnownEnemyCount
+--- See also [NPC:GetKnownEnemyCount](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemyCount)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemies)
 ---@return table # Table of entities that this NPC knows as enemies.
@@ -319,13 +320,13 @@ function NPC:GetKnownEnemies() end
 
 ---[SERVER] Returns known enemy count of this NPC.
 ---
---- See also NPC:GetKnownEnemies
+--- See also [NPC:GetKnownEnemies](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemies)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetKnownEnemyCount)
 ---@return number # Amount of entities that this NPC knows as enemies.
 function NPC:GetKnownEnemyCount() end
 
----[SERVER] Returns Global.CurTime based time since this NPC last received damage from given enemy. The last damage time is set when NPC:MarkTookDamageFromEnemy is called.
+---[SERVER] Returns [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) based time since this NPC last received damage from given enemy. The last damage time is set when [NPC:MarkTookDamageFromEnemy](https://wiki.facepunch.com/gmod/NPC:MarkTookDamageFromEnemy) is called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetLastTimeTookDamageFromEnemy)
 ---@param enemy? Entity The enemy to test. Defaults to currently active enemy (NPC:GetEnemy)
@@ -413,21 +414,21 @@ function NPC:GetPathTimeToGoal() end
 
 ---[SERVER] Returns the shooting position of the NPC.
 ---
---- This only works properly when called on an NPC that can hold weapons, otherwise it will return the same value as Entity:GetPos.
+--- **NOTE**: This only works properly when called on an NPC that can hold weapons, otherwise it will return the same value as [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetShootPos)
 ---@return Vector # The NPC's shooting position.
 function NPC:GetShootPos() end
 
----[SERVER] Returns the current squad name of the NPC, as set via NPC:SetSquad.
+---[SERVER] Returns the current squad name of the NPC, as set via [NPC:SetSquad](https://wiki.facepunch.com/gmod/NPC:SetSquad).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetSquad)
 ---@return string # The new squad name to set.
 function NPC:GetSquad() end
 
----[SERVER] Returns the NPC's current target set by NPC:SetTarget.
+---[SERVER] Returns the NPC's current target set by [NPC:SetTarget](https://wiki.facepunch.com/gmod/NPC:SetTarget).
 ---
---- This returns nil if the NPC has no target. You should use Global.IsValid (which accounts for nil and NULL) on the return to verify validity of the target.
+--- This returns nil if the NPC has no target. You should use [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) (which accounts for nil and NULL) on the return to verify validity of the target.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetTarget)
 ---@return Entity # Target entity
@@ -439,14 +440,14 @@ function NPC:GetTarget() end
 ---@return number # The status. See Enums/TASKSTATUS.
 function NPC:GetTaskStatus() end
 
----[SERVER] Returns Global.CurTime based time since the enemy was reacquired, meaning it is currently in Line of Sight of the NPC.
+---[SERVER] Returns [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) based time since the enemy was reacquired, meaning it is currently in Line of Sight of the NPC.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetTimeEnemyLastReacquired)
 ---@param enemy? Entity The enemy to test. Defaults to currently active enemy (NPC:GetEnemy)
 ---@return number # Time enemy was last reacquired.
 function NPC:GetTimeEnemyLastReacquired(enemy) end
 
----[SERVER] Returns the view offset of the NPC. Set by NPC:SetViewOffset.
+---[SERVER] Returns the view offset of the NPC. Set by [NPC:SetViewOffset](https://wiki.facepunch.com/gmod/NPC:SetViewOffset).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetViewOffset)
 ---@return Vector # The view offset of the NPC.
@@ -493,7 +494,7 @@ function NPC:HasEnemyEluded(enemy) end
 ---@return boolean # If we have any memory on given enemy.
 function NPC:HasEnemyMemory(enemy) end
 
----[SERVER] Returns true if the current navigation has an obstacle, this is different from NPC:GetBlockingEntity, this is for virtual navigation obstacles put by AI's local navigation system to prevent movement to the marked area, forcing NPC to steer around, [for example](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/npc_playercompanion.cpp#L2897).
+---[SERVER] Returns true if the current navigation has an obstacle, this is different from [NPC:GetBlockingEntity](https://wiki.facepunch.com/gmod/NPC:GetBlockingEntity), this is for virtual navigation obstacles put by AI's local navigation system to prevent movement to the marked area, forcing NPC to steer around, [for example](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/npc_playercompanion.cpp#L2897).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:HasObstacles)
 ---@return boolean # `true` if the current navigation has an obstacle.
@@ -524,7 +525,7 @@ function NPC:IsCurrentSchedule(schedule) end
 ---@return boolean # Whether the current navigational waypoint is the final one.
 function NPC:IsCurWaypointGoal() end
 
----[SERVER] Returns whether the NPC is facing their ideal yaw. See NPC:SetIdealYaw, NPC:GetIdealYaw and NPC:SetIdealYawAndUpdate.
+---[SERVER] Returns whether the NPC is facing their ideal yaw. See [NPC:SetIdealYaw](https://wiki.facepunch.com/gmod/NPC:SetIdealYaw), [NPC:GetIdealYaw](https://wiki.facepunch.com/gmod/NPC:GetIdealYaw) and [NPC:SetIdealYawAndUpdate](https://wiki.facepunch.com/gmod/NPC:SetIdealYawAndUpdate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:IsFacingIdealYaw)
 ---@return boolean # Whether the NPC is facing their ideal yaw.
@@ -590,7 +591,7 @@ function NPC:MarkEnemyAsEluded(enemy) end
 
 ---[SERVER] Marks the NPC as took damage from given entity.
 ---
---- See also NPC:GetLastTimeTookDamageFromEnemy.
+--- See also [NPC:GetLastTimeTookDamageFromEnemy](https://wiki.facepunch.com/gmod/NPC:GetLastTimeTookDamageFromEnemy).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MarkTookDamageFromEnemy)
 ---@param enemy? Entity The enemy to mark. Defaults to currently active enemy (NPC:GetEnemy)
@@ -598,7 +599,7 @@ function NPC:MarkTookDamageFromEnemy(enemy) end
 
 ---[SERVER] Executes a climb move.
 ---
---- Related functions are NPC:MoveClimbStart and NPC:MoveClimbStop.
+--- Related functions are [NPC:MoveClimbStart](https://wiki.facepunch.com/gmod/NPC:MoveClimbStart) and [NPC:MoveClimbStop](https://wiki.facepunch.com/gmod/NPC:MoveClimbStop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveClimbExec)
 ---@param destination Vector The destination of the climb.
@@ -611,7 +612,7 @@ function NPC:MoveClimbExec(destination, dir, distance, yaw, left) end
 
 ---[SERVER] Starts a climb move.
 ---
---- Related functions are NPC:MoveClimbExec and NPC:MoveClimbStop.
+--- Related functions are [NPC:MoveClimbExec](https://wiki.facepunch.com/gmod/NPC:MoveClimbExec) and [NPC:MoveClimbStop](https://wiki.facepunch.com/gmod/NPC:MoveClimbStop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveClimbStart)
 ---@param destination Vector The destination of the climb.
@@ -622,14 +623,14 @@ function NPC:MoveClimbStart(destination, dir, distance, yaw) end
 
 ---[SERVER] Stops a climb move.
 ---
---- Related functions are NPC:MoveClimbExec and NPC:MoveClimbStart.
+--- Related functions are [NPC:MoveClimbExec](https://wiki.facepunch.com/gmod/NPC:MoveClimbExec) and [NPC:MoveClimbStart](https://wiki.facepunch.com/gmod/NPC:MoveClimbStart).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveClimbStop)
 function NPC:MoveClimbStop() end
 
 ---[SERVER] Executes a jump move.
 ---
---- Related functions are NPC:MoveJumpStart and NPC:MoveJumpStop.
+--- Related functions are [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart) and [NPC:MoveJumpStop](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec)
 ---@return number # The result. See Enums/AIMR.
@@ -637,7 +638,7 @@ function NPC:MoveJumpExec() end
 
 ---[SERVER] Starts a jump move.
 ---
---- Related functions are NPC:MoveJumpExec and NPC:MoveJumpStop.
+--- Related functions are [NPC:MoveJumpExec](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec) and [NPC:MoveJumpStop](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart)
 ---@param vel Vector The jump velocity.
@@ -645,13 +646,13 @@ function NPC:MoveJumpStart(vel) end
 
 ---[SERVER] Stops a jump move.
 ---
---- Related functions are NPC:MoveJumpExec and NPC:MoveJumpStart.
+--- Related functions are [NPC:MoveJumpExec](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec) and [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop)
 ---@return number # The result. See Enums/AIMR.
 function NPC:MoveJumpStop() end
 
----[SERVER] Makes the NPC walk toward the given position. The NPC will return to the player after amount of time set by **player_squad_autosummon_time** ConVar.
+---[SERVER] Makes the NPC walk toward the given position. The NPC will return to the player after amount of time set by **player_squad_autosummon_time** [ConVar](https://wiki.facepunch.com/gmod/ConVar).
 ---
 --- Only works on Citizens (npc_citizen) and is a part of the Half-Life 2 squad system.
 ---
@@ -663,26 +664,26 @@ function NPC:MoveOrder(position) end
 
 ---[SERVER] Pauses the NPC movement?
 ---
---- Related functions are NPC:MoveStart, NPC:MoveStop and NPC:ResetMoveCalc.
+--- Related functions are [NPC:MoveStart](https://wiki.facepunch.com/gmod/NPC:MoveStart), [NPC:MoveStop](https://wiki.facepunch.com/gmod/NPC:MoveStop) and [NPC:ResetMoveCalc](https://wiki.facepunch.com/gmod/NPC:ResetMoveCalc).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MovePause)
 function NPC:MovePause() end
 
 ---[SERVER] Starts NPC movement?
 ---
---- Related functions are NPC:MoveStop, NPC:MovePause and NPC:ResetMoveCalc.
+--- Related functions are [NPC:MoveStop](https://wiki.facepunch.com/gmod/NPC:MoveStop), [NPC:MovePause](https://wiki.facepunch.com/gmod/NPC:MovePause) and [NPC:ResetMoveCalc](https://wiki.facepunch.com/gmod/NPC:ResetMoveCalc).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveStart)
 function NPC:MoveStart() end
 
 ---[SERVER] Stops the NPC movement?
 ---
---- Related functions are NPC:MoveStart, NPC:MovePause and NPC:ResetMoveCalc.
+--- Related functions are [NPC:MoveStart](https://wiki.facepunch.com/gmod/NPC:MoveStart), [NPC:MovePause](https://wiki.facepunch.com/gmod/NPC:MovePause) and [NPC:ResetMoveCalc](https://wiki.facepunch.com/gmod/NPC:ResetMoveCalc).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:MoveStop)
 function NPC:MoveStop() end
 
----[SERVER] Works similarly to NPC:NavSetRandomGoal.
+---[SERVER] Works similarly to [NPC:NavSetRandomGoal](https://wiki.facepunch.com/gmod/NPC:NavSetRandomGoal).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:NavSetGoal)
 ---@param pos Vector The origin to calculate a path from.
@@ -693,8 +694,7 @@ function NPC:NavSetGoal(pos, length, dir) end
 
 ---[SERVER] Creates a path to closest node at given position. This won't actually force the NPC to move.
 ---
----
---- See also NPC:NavSetRandomGoal.
+--- See also [NPC:NavSetRandomGoal](https://wiki.facepunch.com/gmod/NPC:NavSetRandomGoal).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:NavSetGoalPos)
 ---@param pos Vector The position to calculate a path to.
@@ -741,7 +741,7 @@ function NPC:PickupWeapon(wep) end
 ---@return number # Returns the sentence index, -1 if the sentence couldn't be played.
 function NPC:PlaySentence(sentence, delay, volume) end
 
----[SERVER] Makes the NPC remember an entity or an enemy as unreachable, for a specified amount of time. Use NPC:IsUnreachable to check if an entity is still unreachable.
+---[SERVER] Makes the NPC remember an entity or an enemy as unreachable, for a specified amount of time. Use [NPC:IsUnreachable](https://wiki.facepunch.com/gmod/NPC:IsUnreachable) to check if an entity is still unreachable.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:RememberUnreachable)
 ---@param ent Entity The entity to mark as unreachable.
@@ -754,7 +754,7 @@ function NPC:RememberUnreachable(ent, time) end
 ---@param conditions? table Ignore conditions to remove, see Enums/COND. If omitted, removes all ignore conditions.
 function NPC:RemoveIgnoreConditions(conditions) end
 
----[SERVER] Resets the ideal activity of the NPC. See also NPC:SetIdealActivity.
+---[SERVER] Resets the ideal activity of the NPC. See also [NPC:SetIdealActivity](https://wiki.facepunch.com/gmod/NPC:SetIdealActivity).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ResetIdealActivity)
 ---@param act number The new activity. See Enums/ACT.
@@ -762,21 +762,21 @@ function NPC:ResetIdealActivity(act) end
 
 ---[SERVER] Resets all the movement calculations.
 ---
---- Related functions are NPC:MoveStart, NPC:MovePause and NPC:MoveStop.
+--- Related functions are [NPC:MoveStart](https://wiki.facepunch.com/gmod/NPC:MoveStart), [NPC:MovePause](https://wiki.facepunch.com/gmod/NPC:MovePause) and [NPC:MoveStop](https://wiki.facepunch.com/gmod/NPC:MoveStop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:ResetMoveCalc)
 function NPC:ResetMoveCalc() end
 
 ---[SERVER] Starts an engine task.
 ---
---- Used internally by the ai_task.
+--- Used internally by the [ai_task](https://wiki.facepunch.com/gmod/ai_task).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:RunEngineTask)
 ---@param taskID number The task ID, see [ai_task.h](https://github.com/ValveSoftware/source-sdk-2013/blob/55ed12f8d1eb6887d348be03aee5573d44177ffb/mp/src/game/server/ai_task.h#L89-L502)
 ---@param taskData number The task data.
 function NPC:RunEngineTask(taskID, taskData) end
 
----[SERVER] Forces the NPC to switch to a specific weapon the NPC owns. See NPC:GetWeapons.
+---[SERVER] Forces the NPC to switch to a specific weapon the NPC owns. See [NPC:GetWeapons](https://wiki.facepunch.com/gmod/NPC:GetWeapons).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SelectWeapon)
 ---@param class string A classname of the weapon or a Weapon entity to switch to.
@@ -844,14 +844,14 @@ function NPC:SetCurrentWeaponProficiency(proficiency) end
 ---@param newenemy? boolean Calls NPC:SetCondition(COND.NEW_ENEMY) if the new enemy is valid and not equal to the last enemy.
 function NPC:SetEnemy(enemy, newenemy) end
 
----[SERVER] Sets the NPC's .vcd expression. Similar to Entity:PlayScene except the scene is looped until it's interrupted by default NPC behavior or NPC:ClearExpression.
+---[SERVER] Sets the NPC's .vcd expression. Similar to [Entity:PlayScene](https://wiki.facepunch.com/gmod/Entity:PlayScene) except the scene is looped until it's interrupted by default NPC behavior or [NPC:ClearExpression](https://wiki.facepunch.com/gmod/NPC:ClearExpression).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetExpression)
 ---@param expression string The expression filepath.
 ---@return number #
 function NPC:SetExpression(expression) end
 
----[SERVER] Updates the NPC's hull and physics hull in order to match its model scale. Entity:SetModelScale seems to take care of this regardless.
+---[SERVER] Updates the NPC's hull and physics hull in order to match its model scale. [Entity:SetModelScale](https://wiki.facepunch.com/gmod/Entity:SetModelScale) seems to take care of this regardless.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetHullSizeNormal)
 function NPC:SetHullSizeNormal() end
@@ -868,7 +868,7 @@ function NPC:SetHullType(hullType) end
 ---@param number number The ideal activity to set. Enums/ACT.
 function NPC:SetIdealActivity(number) end
 
----[SERVER] Sets the ideal yaw angle (left-right rotation) for the NPC. Does not actually force the NPC to start turning in that direction. See NPC:UpdateYaw, NPC:GetIdealYaw and NPC:SetIdealYawAndUpdate.
+---[SERVER] Sets the ideal yaw angle (left-right rotation) for the NPC. Does not actually force the NPC to start turning in that direction. See [NPC:UpdateYaw](https://wiki.facepunch.com/gmod/NPC:UpdateYaw), [NPC:GetIdealYaw](https://wiki.facepunch.com/gmod/NPC:GetIdealYaw) and [NPC:SetIdealYawAndUpdate](https://wiki.facepunch.com/gmod/NPC:SetIdealYawAndUpdate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetIdealYaw)
 ---@param angle number The aim direction to set, the `yaw` component.
@@ -892,7 +892,7 @@ function NPC:SetIgnoreConditions(conditions, size) end
 
 ---[SERVER] Sets the last registered or memorized position for an npc. When using scheduling, the NPC will focus on navigating to the last position via nodes.
 ---
---- The navigation requires ground nodes to function properly, otherwise the NPC could only navigate in a small area. (https://developer.valvesoftware.com/wiki/Info_node)
+--- **NOTE**: The navigation requires ground nodes to function properly, otherwise the NPC could only navigate in a small area. (https://developer.valvesoftware.com/wiki/Info_node)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetLastPosition)
 ---@param Position Vector Where the NPC's last position will be set.
@@ -960,7 +960,7 @@ function NPC:SetSchedule(schedule) end
 
 ---[SERVER] Assigns the NPC to a new squad. A squad can have up to 16 NPCs. NPCs in a single squad should be friendly to each other.
 ---
---- See also ai.GetSquadMembers and NPC:GetSquad.
+--- See also [ai.GetSquadMembers](https://wiki.facepunch.com/gmod/ai.GetSquadMembers) and [NPC:GetSquad](https://wiki.facepunch.com/gmod/NPC:GetSquad).
 ---
 --- NPCs within the same squad are meant to function more effectively, tactics wise.
 ---
@@ -987,9 +987,9 @@ function NPC:SetTaskStatus(status) end
 ---@param set? boolean The entity to set.
 function NPC:SetUnforgettable(enemy, set) end
 
----[SERVER] Sets the view offset of the NPC. Player alternative of Player:SetViewOffset.
+---[SERVER] Sets the view offset of the NPC. Player alternative of [Player:SetViewOffset](https://wiki.facepunch.com/gmod/Player:SetViewOffset).
 ---
---- This affects NPC's NPC:GetShootPos.
+--- This affects NPC's [NPC:GetShootPos](https://wiki.facepunch.com/gmod/NPC:GetShootPos).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetViewOffset)
 ---@param Vector Vector The view offset to set.
@@ -1007,7 +1007,7 @@ function NPC:StartEngineTask(task, taskData) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:StopMoving)
 function NPC:StopMoving() end
 
----[SERVER] Cancels NPC:MoveOrder basically.
+---[SERVER] Cancels [NPC:MoveOrder](https://wiki.facepunch.com/gmod/NPC:MoveOrder) basically.
 ---
 --- Only works on Citizens (npc_citizen) and is a part of the Half-Life 2 squad system.
 ---
@@ -1019,14 +1019,14 @@ function NPC:TargetOrder(target) end
 
 ---[SERVER] Marks the current NPC task as completed.
 ---
---- This is meant to be used alongside NPC:TaskFail to complete or fail custom Lua defined tasks. (Schedule:AddTask)
+--- This is meant to be used alongside [NPC:TaskFail](https://wiki.facepunch.com/gmod/NPC:TaskFail) to complete or fail custom Lua defined tasks. ([Schedule:AddTask](https://wiki.facepunch.com/gmod/Schedule:AddTask))
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:TaskComplete)
 function NPC:TaskComplete() end
 
 ---[SERVER] Marks the current NPC task as failed.
 ---
---- This is meant to be used alongside NPC:TaskComplete to complete or fail custom Lua defined tasks. (Schedule:AddTask)
+--- This is meant to be used alongside [NPC:TaskComplete](https://wiki.facepunch.com/gmod/NPC:TaskComplete) to complete or fail custom Lua defined tasks. ([Schedule:AddTask](https://wiki.facepunch.com/gmod/Schedule:AddTask))
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:TaskFail)
 ---@param task string A string most likely defined as a Source Task, for more information on Tasks go to https://developer.valvesoftware.com/wiki/Task
@@ -1044,7 +1044,7 @@ function NPC:UpdateEnemyMemory(enemy, pos) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UpdateTurnActivity)
 function NPC:UpdateTurnActivity() end
 
----[SERVER] Forces the NPC to turn to their ideal yaw angle. See NPC:SetIdealYaw and NPC:SetIdealYawAndUpdate.
+---[SERVER] Forces the NPC to turn to their ideal yaw angle. See [NPC:SetIdealYaw](https://wiki.facepunch.com/gmod/NPC:SetIdealYaw) and [NPC:SetIdealYawAndUpdate](https://wiki.facepunch.com/gmod/NPC:SetIdealYawAndUpdate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UpdateYaw)
 ---@param speed? number The turn speed. Special values are:
@@ -1052,31 +1052,31 @@ function NPC:UpdateTurnActivity() end
 --- * `-2` - Keep the previous yaw speed
 function NPC:UpdateYaw(speed) end
 
----[SERVER] This function only works on `ai` type [SENTs](Scripted_Entities).
+---[SERVER] **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseActBusyBehavior)
 ---@return boolean # If we succeeded setting the behavior.
 function NPC:UseActBusyBehavior() end
 
----[SERVER] This function only works on `ai` type [SENTs](Scripted_Entities).
+---[SERVER] **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseAssaultBehavior)
 ---@return boolean # Whether the action succeeded.
 function NPC:UseAssaultBehavior() end
 
----[SERVER] This function only works on `ai` type [SENTs](Scripted_Entities).
+---[SERVER] **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseFollowBehavior)
 ---@return boolean # If we succeeded setting the behavior.
 function NPC:UseFollowBehavior() end
 
----[SERVER] This function only works on `ai` type [SENTs](Scripted_Entities).
+---[SERVER] **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseFuncTankBehavior)
 ---@return boolean # Whether the action succeeded.
 function NPC:UseFuncTankBehavior() end
 
----[SERVER] This function only works on `ai` type [SENTs](Scripted_Entities).
+---[SERVER] **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseLeadBehavior)
 ---@return boolean # Whether the action succeeded.
@@ -1084,7 +1084,7 @@ function NPC:UseLeadBehavior() end
 
 ---[SERVER] Undoes the other `Use*Behavior` functions.
 ---
---- This function only works on `ai` type [SENTs](Scripted_Entities).
+--- **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:UseNoBehavior)
 function NPC:UseNoBehavior() end

@@ -2,8 +2,9 @@
 
 ---
 --- 		The default SpawnmenuContentPanel
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 	How the SpawnmenuContentPanel is created
+---
 ---@class SpawnmenuContentPanel : DPanel
 local SpawnmenuContentPanel = {}
 

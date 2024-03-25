@@ -9,7 +9,7 @@ permissions = {}
 ---@param address string The address to ask to connect to. If a port is not given, the default `:27015` port will be added.
 function permissions.AskToConnect(address) end
 
----[MENU] Connects player to the server. This is what permissions.AskToConnect uses internally.
+---[MENU] Connects player to the server. This is what [permissions.AskToConnect](https://wiki.facepunch.com/gmod/permissions.AskToConnect) uses internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/permissions.Connect)
 ---@param ip string IP address to connect.
@@ -25,7 +25,17 @@ function permissions.EnableVoiceChat(enable) end
 ---[MENU] Returns all permissions per server. Permanent permissions are stored in `settings/permissions.bin`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/permissions.GetAll)
----@return table # A table of permanent and temporary permissions granted for servers.  		Example structure: ```lua permanent = { 	["123.123.123.123"] = "connect" -- this server has a permission to connect player to any server even after restarting the game }, temporary = { 	["111.111.111.111"] = "voicerecord" -- this server can enable voice activity on player during this game session } ```
+---@return table # A table of permanent and temporary permissions granted for servers.
+---
+--- 		Example structure:
+--- ```lua
+--- permanent = {
+--- 	["123.123.123.123"] = "connect" -- this server has a permission to connect player to any server even after restarting the game
+--- },
+--- temporary = {
+--- 	["111.111.111.111"] = "voicerecord" -- this server can enable voice activity on player during this game session
+--- }
+--- ```
 function permissions.GetAll() end
 
 ---[MENU] Grants permission to the current connected server.

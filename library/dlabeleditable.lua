@@ -1,10 +1,10 @@
 ---@meta
 
 ---
---- 		An editable DLabel, double click on it to edit.
+--- 		An editable [DLabel](https://wiki.facepunch.com/gmod/DLabel), double click on it to edit.
 ---
 --- 		This is used in the spawnmenu spawnlist headers.
---- 	Creates a DLabelEditable.
+---
 ---@class DLabelEditable : DLabel
 local DLabelEditable = {}
 
@@ -14,7 +14,7 @@ local DLabelEditable = {}
 ---@return boolean # Whether the editable label will stretch to the text entered or not.
 function DLabelEditable:GetAutoStretch() end
 
----[CLIENT AND MENU] Returns whether this DLabelEditable is being edited or not. (i.e. has focus)
+---[CLIENT AND MENU] Returns whether this [DLabelEditable](https://wiki.facepunch.com/gmod/DLabelEditable) is being edited or not. (i.e. has focus)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabelEditable:IsEditing)
 ---@return boolean # Whether this DLabelEditable is being edited or not

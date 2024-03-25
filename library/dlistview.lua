@@ -1,10 +1,6 @@
 ---@meta
 
 --- A data view with rows and columns.
---- Creates a DListView and populates it with two columns and three items, only one of which can be selected at a time.
----
---- Selecting a row will print a console message containing the text of the row and its index.
----
 ---@class DListView : DPanel
 local DListView = {}
 
@@ -48,7 +44,9 @@ function DListView:DataLayout() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:DisableScrollbar)
 function DListView:DisableScrollbar() end
 
----[CLIENT AND MENU] Internal helper function called from the PANEL:PerformLayout of DListView.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Internal helper function called from the [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout) of [DListView](https://wiki.facepunch.com/gmod/DListView).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:FixColumnsLayout)
 function DListView:FixColumnsLayout() end
@@ -59,23 +57,25 @@ function DListView:FixColumnsLayout() end
 ---@return Panel # The canvas.
 function DListView:GetCanvas() end
 
----[CLIENT AND MENU] Returns the height of the data of the DListView.
+---[CLIENT AND MENU] Returns the height of the data of the [DListView](https://wiki.facepunch.com/gmod/DListView).
 ---
---- See also DListView:SetDataHeight.
+--- See also [DListView:SetDataHeight](https://wiki.facepunch.com/gmod/DListView:SetDataHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetDataHeight)
 ---@return number # The height of the data of the DListView.
 function DListView:GetDataHeight() end
 
----[CLIENT AND MENU] See DListView:SetDirty.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- See [DListView:SetDirty](https://wiki.facepunch.com/gmod/DListView:SetDirty).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetDirty)
 ---@return boolean #
 function DListView:GetDirty() end
 
----[CLIENT AND MENU] Returns the height of the header of the DListView.
+---[CLIENT AND MENU] Returns the height of the header of the [DListView](https://wiki.facepunch.com/gmod/DListView).
 ---
---- See also DListView:SetHeaderHeight.
+--- See also [DListView:SetHeaderHeight](https://wiki.facepunch.com/gmod/DListView:SetHeaderHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetHeaderHeight)
 ---@return number # The height of the header of the DListView.
@@ -87,7 +87,7 @@ function DListView:GetHeaderHeight() end
 ---@return boolean # Whether the header line should be visible on not.
 function DListView:GetHideHeaders() end
 
----[CLIENT AND MENU] Returns the height of DListView:GetCanvas.
+---[CLIENT AND MENU] Returns the height of [DListView:GetCanvas](https://wiki.facepunch.com/gmod/DListView:GetCanvas).
 ---
 --- Intended to represent the height of all data lines.
 ---
@@ -95,7 +95,7 @@ function DListView:GetHideHeaders() end
 ---@return number # The height of DListView:GetCanvas.
 function DListView:GetInnerTall() end
 
----[CLIENT AND MENU] Gets the DListView_Line at the given index.
+---[CLIENT AND MENU] Gets the [DListView_Line](https://wiki.facepunch.com/gmod/DListView_Line) at the given index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetLine)
 ---@param id number The index of the line to get.
@@ -110,7 +110,7 @@ function DListView:GetLines() end
 
 ---[CLIENT AND MENU] Returns whether multiple lines can be selected or not.
 ---
---- See DListView:SetMultiSelect.
+--- See [DListView:SetMultiSelect](https://wiki.facepunch.com/gmod/DListView:SetMultiSelect).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetMultiSelect)
 ---@return boolean # Whether multiple lines can be selected or not.
@@ -122,9 +122,9 @@ function DListView:GetMultiSelect() end
 ---@return table # A table of DListView_Lines.
 function DListView:GetSelected() end
 
----[CLIENT AND MENU] Gets the currently selected DListView_Line index.
+---[CLIENT AND MENU] Gets the currently selected [DListView_Line](https://wiki.facepunch.com/gmod/DListView_Line) index.
 ---
---- If DListView:SetMultiSelect is set to true, only the first line of all selected lines will be returned. Use DListView:GetSelected instead to get all of the selected lines.
+--- If [DListView:SetMultiSelect](https://wiki.facepunch.com/gmod/DListView:SetMultiSelect) is set to true, only the first line of all selected lines will be returned. Use [DListView:GetSelected](https://wiki.facepunch.com/gmod/DListView:GetSelected) instead to get all of the selected lines.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetSelectedLine)
 ---@return number # The index of the currently selected line.
@@ -133,20 +133,22 @@ function DListView:GetSelectedLine() end
 
 ---[CLIENT AND MENU] Returns whether sorting of columns by clicking their headers is allowed or not.
 ---
---- See also DListView:SetSortable.
+--- See also [DListView:SetSortable](https://wiki.facepunch.com/gmod/DListView:SetSortable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetSortable)
 ---@return boolean # Whether sorting of columns by clicking their headers is allowed or not
 function DListView:GetSortable() end
 
----[CLIENT AND MENU] Converts LineID to SortedID
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Converts LineID to SortedID
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:GetSortedID)
 ---@param lineId number The DListView_Line:GetID of a line to look up
 ---@return number #
 function DListView:GetSortedID(lineId) end
 
----[CLIENT AND MENU] Use DListView:OnRowSelected instead!
+---[CLIENT AND MENU] **INTERNAL**: Use [DListView:OnRowSelected](https://wiki.facepunch.com/gmod/DListView:OnRowSelected) instead!
 ---
 --- Called whenever a line is clicked.
 ---
@@ -155,7 +157,9 @@ function DListView:GetSortedID(lineId) end
 ---@param isSelected boolean Boolean indicating whether the line is selected.
 function DListView:OnClickLine(line, isSelected) end
 
----[CLIENT AND MENU] Called from DListView_Column.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Called from [DListView_Column](https://wiki.facepunch.com/gmod/DListView_Column).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:OnRequestResize)
 ---@param column Panel The column which initialized the resize
@@ -179,23 +183,25 @@ function DListView:SelectFirstItem() end
 ---@param Line Panel The line to select.
 function DListView:SelectItem(Line) end
 
----[CLIENT AND MENU] Sets the height of all lines of the DListView except for the header line.
+---[CLIENT AND MENU] Sets the height of all lines of the [DListView](https://wiki.facepunch.com/gmod/DListView) except for the header line.
 ---
---- See also DListView:SetHeaderHeight.
+--- See also [DListView:SetHeaderHeight](https://wiki.facepunch.com/gmod/DListView:SetHeaderHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:SetDataHeight)
 ---@param height number The new height to set. Default value is 17.
 function DListView:SetDataHeight(height) end
 
----[CLIENT AND MENU] Used internally to signify if the DListView needs a rebuild.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Used internally to signify if the [DListView](https://wiki.facepunch.com/gmod/DListView) needs a rebuild.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:SetDirty)
 ---@param isDirty boolean
 function DListView:SetDirty(isDirty) end
 
----[CLIENT AND MENU] Sets the height of the header line of the DListView.
+---[CLIENT AND MENU] Sets the height of the header line of the [DListView](https://wiki.facepunch.com/gmod/DListView).
 ---
---- See also DListView:SetDataHeight.
+--- See also [DListView:SetDataHeight](https://wiki.facepunch.com/gmod/DListView:SetDataHeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:SetHeaderHeight)
 ---@param height number The new height to set. Default value is 16.
@@ -214,8 +220,7 @@ function DListView:SetHideHeaders(hide) end
 function DListView:SetMultiSelect(allowMultiSelect) end
 
 ---[CLIENT AND MENU] Enables/disables the sorting of columns by clicking.
----
---- 			This will only affect columns that are created after this function is called. Existing columns will be unaffected.
+--- 		**NOTE**: This will only affect columns that are created after this function is called. Existing columns will be unaffected.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DListView:SetSortable)
 ---@param isSortable boolean Whether sorting columns with clicking is allowed or not.

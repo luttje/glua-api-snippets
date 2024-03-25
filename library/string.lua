@@ -7,7 +7,7 @@
 --- In Garry's Mod there are several extra useful functions and features added to this library.
 --- Most notably all strings will access this library through the string metatable index function.[[2]](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/lua/includes/extensions/string.lua#L311-L322)
 ---
---- This means all strings are treated like table objects and the string library as its Meta_Tables
+--- This means all strings are treated like table objects and the string library as its [Meta Table](https://wiki.facepunch.com/gmod/Meta_Tables)
 ---
 --- ```lua
 --- local x = "Kittens"
@@ -16,11 +16,10 @@
 --- string.Right(x,4) == x:Right(4) == x:Foobar() == ("Kittens"):Right(4) == x[-4]..x[-3]..x[-2]..x[-1]
 --- ```
 ---
----
 --- The string *metatable* however is something else, and to access that you must use `getmetatable("")`.
 ---
---- The difference here is related to Metamethods, such as using (+) instead of (..) to concatenate strings.
---- Using `+` operator for concatenation breaks lua metamethod to sum string as numbers (Example: `"10" + "1"` return `11` (number)) and this is 400 times SLOWER!
+--- The difference here is related to [Metamethods](https://wiki.facepunch.com/gmod/Metamethods), such as using (+) instead of (..) to concatenate strings.
+--- **WARNING**: Using `+` operator for concatenation breaks lua metamethod to sum string as numbers (Example: `"10" + "1"` return `11` (number)) and this is 400 times SLOWER!
 ---
 --- ```lua
 --- local stringmeta = getmetatable("")
@@ -30,14 +29,14 @@
 --- print("Kittens" + " And " + "Puppies")
 --- ```
 ---
---- See Meta Tables and Metamethods for more information.
---- Making changes to the string *metatable* is not a good idea unless you know what you are doing. Use the string *library* instead.
+--- See [Meta Tables](https://wiki.facepunch.com/gmod/Meta Tables) and [Metamethods](https://wiki.facepunch.com/gmod/Metamethods) for more information.
+--- **WARNING**: Making changes to the string *metatable* is not a good idea unless you know what you are doing. Use the string *library* instead.
 ---
 --- This category lists functions available in the string *library*.
 string = {}
 
 ---[SHARED AND MENU] Returns the given string's characters in their numeric ASCII representation.
---- 		This function will throw an error if the slice length is greater than 8000 characters.
+--- 		**WARNING**: This function will throw an error if the slice length is greater than 8000 characters.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.byte)
 ---@param string string The string to get the chars from.
@@ -48,7 +47,7 @@ function string.byte(string, startPos, endPos) end
 
 ---[SHARED AND MENU] Converts a cardinal (`111`) number to its [ordinal/sequential variation](https://en.wikipedia.org/wiki/Ordinal_numeral) (`111th`).
 ---
---- See also Global.STNDRD for a function that returns just the suffix.
+--- See also [Global.STNDRD](https://wiki.facepunch.com/gmod/Global.STNDRD) for a function that returns just the suffix.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.CardinalToOrdinal)
 ---@param input number A number to convert to ordinal.
@@ -72,7 +71,7 @@ function string.Comma(value, separator) end
 
 ---[SHARED AND MENU] Returns the binary bytecode of the given function.
 ---
---- This does not work with functions created in C/C++. An error will be thrown if it is
+--- **NOTE**: This does not work with functions created in C/C++. An error will be thrown if it is
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.dump)
 ---@param func function The function to get the bytecode of
@@ -90,9 +89,9 @@ function string.EndsWith(str, _end) end
 
 ---[SHARED AND MENU] Splits a string up wherever it finds the given separator.
 ---
---- The function string.Split is an alias of this function, except that function doesn't support using patterns.
+--- The function [string.Split](https://wiki.facepunch.com/gmod/string.Split) is an alias of this function, except that function doesn't support using patterns.
 ---
---- See string.Implode for the reverse operation of this function.
+--- See [string.Implode](https://wiki.facepunch.com/gmod/string.Implode) for the reverse operation of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Explode)
 ---@param separator string The string will be separated wherever this sequence is found.
@@ -103,7 +102,7 @@ function string.Explode(separator, str, withpattern) end
 
 ---[SHARED AND MENU] Attempts to find the specified substring in a string.
 ---
---- This function uses Patterns by default.
+--- **WARNING**: This function uses [Lua Patterns](https://wiki.facepunch.com/gmod/Patterns) by default.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.find)
 ---@param haystack string The string to search in.
@@ -133,8 +132,6 @@ function string.find(haystack, needle, startPos, noPatterns) end
 --- |:------:|:-----------:|:---------------------:|
 --- | %p | Returns pointer to supplied structure (table/function) | `0xf20a8968` |
 --- | %q | Formats a string between double quotes, using escape sequences when necessary to ensure that it can safely be read back by the Lua interpreter | `"test\1\2test"` |
----
----
 ---@param ... any Values to be formatted into the string.
 ---@return string # The formatted string
 function string.format(format, ...) end
@@ -144,7 +141,13 @@ function string.format(format, ...) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.FormattedTime)
 ---@param float number The time in seconds to format.
 ---@param format? string An optional formatting to use. If no format it specified, a table will be returned instead.
----@return string # Returns the time as a formatted string only if a format was specified.  Returns a table only if no format was specified. The table will contain these fields: * number ms - milliseconds * number s - seconds * number m - minutes * number h - hours
+---@return string # Returns the time as a formatted string only if a format was specified.
+---
+--- Returns a table only if no format was specified. The table will contain these fields:
+--- * number ms - milliseconds
+--- * number s - seconds
+--- * number m - minutes
+--- * number h - hours
 function string.FormattedTime(float, format) end
 
 ---[SHARED AND MENU] Creates a string from a Color variable.
@@ -193,7 +196,7 @@ function string.GetPathFromFilename(path) end
 ---@deprecated This function is removed in Lua versions later than what GMod is currently using. Use string.gmatch instead.
 function string.gfind(data, pattern) end
 
----[SHARED AND MENU] Using Patterns, returns an iterator which will return either one value if no capture groups are defined, or any capture group matches.
+---[SHARED AND MENU] Using [Patterns](https://wiki.facepunch.com/gmod/Patterns), returns an iterator which will return either one value if no capture groups are defined, or any capture group matches.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.gmatch)
 ---@param data string The string to search in
@@ -201,7 +204,7 @@ function string.gfind(data, pattern) end
 ---@return function # The iterator function that can be used in a for-in loop
 function string.gmatch(data, pattern) end
 
----[SHARED AND MENU] This functions main purpose is to replace certain character sequences in a string using Patterns.
+---[SHARED AND MENU] This functions main purpose is to replace certain character sequences in a string using [Patterns](https://wiki.facepunch.com/gmod/Patterns).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.gsub)
 ---@param string string String which should be modified.
@@ -218,7 +221,7 @@ function string.gsub(string, pattern, replacement, maxReplaces) end
 
 ---[SHARED AND MENU] Joins the values of a table together to form a string.
 ---
---- This is the reverse of string.Explode and is functionally identical to table.concat, but with less features.
+--- This is the reverse of [string.Explode](https://wiki.facepunch.com/gmod/string.Explode) and is functionally identical to [table.concat](https://wiki.facepunch.com/gmod/table.concat), but with less features.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Implode)
 ---@param separator? string The separator to insert between each piece.
@@ -258,14 +261,14 @@ function string.Left(str, num) end
 function string.len(str) end
 
 ---[SHARED AND MENU] Changes any upper-case letters in a string to lower-case letters.
---- 		This function doesn't work on special non-English UTF-8 characters.
+--- 		**NOTE**: This function doesn't work on special non-English UTF-8 characters.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.lower)
 ---@param str string The string to convert.
 ---@return string # A string representing the value of a string converted to lower-case.
 function string.lower(str) end
 
----[SHARED AND MENU] Finds a Patterns in a string.
+---[SHARED AND MENU] Finds a [Pattern](https://wiki.facepunch.com/gmod/Patterns) in a string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.match)
 ---@param string string String which should be searched in for matches.
@@ -339,7 +342,7 @@ function string.SetChar(InputString, Index, ReplacementChar) end
 
 ---[SHARED AND MENU] Splits the string into a table of strings, separated by the second argument.
 ---
---- This is an alias of string.Explode, but with flipped arguments.
+--- This is an alias of [string.Explode](https://wiki.facepunch.com/gmod/string.Explode), but with flipped arguments.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.Split)
 ---@param Inputstring string String to split
@@ -355,7 +358,7 @@ function string.Split(Inputstring, Separator) end
 ---@return boolean # Whether the first string starts with the second.
 function string.StartsWith(inputStr, start) end
 
----[SHARED AND MENU] Returns whether or not the first string starts with the second. This is a alias of string.StartsWith.
+---[SHARED AND MENU] Returns whether or not the first string starts with the second. This is a alias of [string.StartsWith](https://wiki.facepunch.com/gmod/string.StartsWith).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.StartWith)
 ---@param inputStr string String to check.
@@ -403,7 +406,7 @@ function string.ToMinutesSecondsMilliseconds(time) end
 
 ---[SHARED AND MENU] Splits the string into characters and creates a sequential table of characters.
 ---
---- As a result of the  encoding, non-ASCII characters will be split into more than one character in the output table. Each character value in the output table will always be 1 byte.
+--- **WARNING**: As a result of the  encoding, non-ASCII characters will be split into more than one character in the output table. Each character value in the output table will always be 1 byte.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.ToTable)
 ---@param str string The string you'll turn into a table.
@@ -435,7 +438,7 @@ function string.TrimLeft(str, char) end
 function string.TrimRight(str, char) end
 
 ---[SHARED AND MENU] Changes any lower-case letters in a string to upper-case letters.
---- 		This function doesn't work on special non-English UTF-8 characters.
+--- 		**NOTE**: This function doesn't work on special non-English UTF-8 characters.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.upper)
 ---@param str string The string to convert.

@@ -1,11 +1,11 @@
 ---@meta
 
 --- Functions related to Kinect for Windows usage in GMod.
---- Kinect feature works only on 32-bit version of the game.
----
+--- **WARNING**: Kinect feature works only on 32-bit version of the game.
 motionsensor = {}
 
----[SHARED] Called to build the skeleton. See Using The Kinect and Kinect developing.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to build the skeleton. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
 ---@param translator table `list.Get( "SkeletonConvertor" )` and motionsensor.ChooseBuilderFromEntity.
@@ -29,7 +29,7 @@ function motionsensor.ChooseBuilderFromEntity(ent) end
 ---@return IMaterial # The material
 function motionsensor.GetColourMaterial() end
 
----[CLIENT] Returns players skeletal data if they are using Kinect. See Using The Kinect and Kinect developing.
+---[CLIENT] Returns players skeletal data if they are using Kinect. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.GetSkeleton)
 ---@return table # The skeleton data.
@@ -47,7 +47,8 @@ function motionsensor.IsActive() end
 ---@return boolean # Connected or not
 function motionsensor.IsAvailable() end
 
----[SHARED] Used internally by motionsensor.ProcessAnglesTable. See Using The Kinect and Kinect developing.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Used internally by [motionsensor.ProcessAnglesTable](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAngle)
 ---@param translator table
@@ -60,7 +61,8 @@ function motionsensor.IsAvailable() end
 ---@return boolean # Return nil on failure
 function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors, boneid, v) end
 
----[SHARED] Used internally by motionsensor.BuildSkeleton. See Using The Kinect and Kinect developing.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable)
 ---@param translator table
@@ -70,7 +72,8 @@ function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors
 ---@return table # Ang. If `!translator.AnglesTable` then `return {}`
 function motionsensor.ProcessAnglesTable(translator, sensor, pos, rotation) end
 
----[SHARED] Used internally by motionsensor.BuildSkeleton. See Using The Kinect and Kinect developing.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
 ---@param translator table

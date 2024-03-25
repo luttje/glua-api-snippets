@@ -5,71 +5,41 @@ jit = {}
 
 ---[SHARED AND MENU] You can attach callbacks to a number of compiler events with jit.attach. The callback can be called:
 ---
---- * when a function has been compiled to bytecode ("bc");
---- * when trace recording starts or stops ("trace");
---- * as a trace is being recorded ("record");
---- * or when a trace exits through a side exit ("texit").
+--- * when a function has been compiled to bytecode (`"bc"`);
+--- * when trace recording starts or stops (`"trace"`);
+--- * as a trace is being recorded (`"record"`);
+--- * or when a trace exits through a side exit (`"texit"`).
 ---
---- Set a callback with jit.attach(callback, "event") and clear the same callback with jit.attach(callback)
+--- Set a callback with `jit.attach(callback, "event")` and clear the same callback with `jit.attach(callback)`
 ---
---- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
---- Using these constantly (especially bytecode) can be very performance heavy due to the constant stream of data being compiled at a time.
+--- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
+---
+--- **WARNING**: Using these constantly (especially bytecode) can be very performance heavy due to the constant stream of data being compiled at a time.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.attach)
 ---@param callback function The callback function.
 ---
 --- The arguments passed to the callback depend on the event being reported:
 ---
---- * "bc":
---- function func - The function that's just been recorded
----
----
----
---- * "trace":
---- string what - description of the trace event: "flush", "start", "stop", "abort". Available for all events.
----
----
---- number tr - The trace number. Not available for flush.
----
----
---- function func - The function being traced. Available for start and abort.
----
----
---- number pc - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
----
----
---- number otr - start: the parent trace number if this is a side trace, abort: abort code
----
----
---- string oex - start: the exit number for the parent trace, abort: abort reason (string)
----
----
----
---- * "record":
---- number tr - The trace number. Not available for flush.
----
----
---- function func - The function being traced. Available for start and abort.
----
----
---- number pc - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
----
----
---- number depth  - The depth of the inlining of the current bytecode.
----
----
----
---- * "texit":
---- number tr - The trace number. Not available for flush.
----
----
---- number ex - The exit number
----
----
---- number ngpr - The number of general-purpose and floating point registers that are active at the exit.
----
----
---- number nfpr - The number of general-purpose and floating point registers that are active at the exit.
+--- * `"bc"`:
+---   * function **func** - The function that's just been recorded
+--- * `"trace"`:
+---   * string **what** - description of the trace event: "flush", "start", "stop", "abort". Available for all events.
+---   * number **tr** - The trace number. Not available for flush.
+---   * function **func** - The function being traced. Available for start and abort.
+---   * number **pc** - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
+---   * number **otr** - start: the parent trace number if this is a side trace, abort: abort code
+---   * string **oex** - start: the exit number for the parent trace, abort: abort reason (string)
+--- * `"record"`:
+---   * number **tr** - The trace number. Not available for flush.
+---   * function **func** - The function being traced. Available for start and abort.
+---   * number **pc** - The program counter - the bytecode number of the function being recorded (if this a Lua function). Available for start and abort.
+---   * number **depth** - The depth of the inlining of the current bytecode.
+--- * `"texit"`:
+---   * number **tr** - The trace number. Not available for flush.
+---   * number **ex** - The exit number
+---   * number **ngpr** - The number of general-purpose and floating point registers that are active at the exit.
+---   * number **nfpr** - The number of general-purpose and floating point registers that are active at the exit.
 ---@param event string The event to hook into.
 function jit.attach(callback, event) end
 
@@ -111,7 +81,7 @@ function jit.opt.start(...) end
 function jit.status() end
 
 ---[SHARED AND MENU] Returns bytecode of a function at a position.
---- 		This function only works for Lua defined functions.
+--- 		**NOTE**: This function only works for Lua defined functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcbc)
 ---@param func function Function to retrieve bytecode from.
@@ -120,9 +90,9 @@ function jit.status() end
 ---@return number # bytecode opcode
 function jit.util.funcbc(func, pos) end
 
----[SHARED AND MENU] Retrieves LuaJIT information about a given function, similarly to debug.getinfo. Possible table fields:
---- * linedefined: as for debug.getinfo
---- * lastlinedefined: as for debug.getinfo
+---[SHARED AND MENU] Retrieves LuaJIT information about a given function, similarly to [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo). Possible table fields:
+--- * linedefined: as for [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo)
+--- * lastlinedefined: as for [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo)
 --- * params: the number of parameters the function takes
 --- * stackslots: the number of stack slots the function's local variable use
 --- * upvalues: the number of upvalues the function uses
@@ -130,9 +100,9 @@ function jit.util.funcbc(func, pos) end
 --- * gcconsts: the number of garbage collectable constants
 --- * nconsts: the number of lua_Number (double) constants
 --- * children: Boolean representing whether the function creates closures
---- * currentline: as for debug.getinfo
+--- * currentline: as for [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo)
 --- * isvararg: if the function is a vararg function
---- * source: as for debug.getinfo
+--- * source: as for [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo)
 --- * loc: a string describing the source and currentline, like "<source>:<line>"
 --- * ffid: the fast function id of the function (if it is one). In this case only upvalues above and addr below are valid
 --- * addr: the address of the function (if it is not a Lua function). If it's a C function rather than a fast function, only upvalues above is valid*
@@ -145,20 +115,23 @@ function jit.util.funcinfo(func, pos) end
 
 ---[SHARED AND MENU] Gets a constant at a certain index in a function.
 ---
+--- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 ---
---- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
---- Numbers constants goes from 0 (included) to n-1, n being the value of nconsts in jit.util.funcinfo in other words, the consts goes from (nconsts-1) to -n
---- This function only works for Lua defined functions.
+--- **NOTE**: Numbers constants goes from 0 (included) to n-1, n being the value of nconsts in [jit.util.funcinfo](https://wiki.facepunch.com/gmod/jit.util.funcinfo) in other words, the consts goes from (nconsts-1) to -n
+---
+--- **NOTE**: This function only works for Lua defined functions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funck)
 ---@param func function Function to get constant from
 ---@param index number Constant index (counting down from the top of the function at -1)
----@return any # The constant found.  This will return a proto for functions that are created inside the target function - see Example 2.
+---@return any # The constant found.
+---
+--- This will return a [proto](https://wiki.facepunch.com/gmod/proto) for functions that are created inside the target function - see Example 2.
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.funck(func, index) end
 
 ---[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
---- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
+--- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcuvname)
 ---@param func function Function to get the upvalue indexed from
@@ -167,12 +140,16 @@ function jit.util.funck(func, index) end
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.funcuvname(func, index) end
 
----[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see Ircalladdr Functions
---- This function isn't officially documented on LuaJIT wiki, use it at your own risk.
+---[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see [Ircalladdr Functions](https://wiki.facepunch.com/gmod/Ircalladdr Functions)
+--- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
 ---@param index number The index of the function address to get from the ircalladdr func array (starting from 0)
----@return number # The address of the function. 			 				It will return `0` if the index is reserved.   				in the x86-64 versions the index is reserved up to 102.   				in all other versions it is reserved until 71.
+---@return number # The address of the function.
+---
+--- 				It will return `0` if the index is reserved.
+--- 				in the x86-64 versions the index is reserved up to 102.
+--- 				in all other versions it is reserved until 71.
 ---@deprecated This function was disabled due to security concerns. It will always return 0.
 function jit.util.ircalladdr(index) end
 
@@ -188,7 +165,7 @@ function jit.util.traceexitstub(exitno) end
 --- * nk (number): the lowest IR constant (???)
 --- * nins (number): the next IR instruction (???)
 --- * linktype (string): the link type (none, root, loop, tail-recursion, up-recursion, down-recursion, interpreter, return)
---- * nexit (number): number of snapshots (for use with jit.util.tracesnap)
+--- * nexit (number): number of snapshots (for use with [jit.util.tracesnap](https://wiki.facepunch.com/gmod/jit.util.tracesnap))
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceinfo)
 ---@param trace number trace index to retrieve info for (gotten via jit.attach)

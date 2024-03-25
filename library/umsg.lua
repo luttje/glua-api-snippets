@@ -1,10 +1,8 @@
 ---@meta
 
----
----
 --- The umsg (user message) library was previously the most common way of sending information from the server to the client.
 ---
---- Usermessages have a limit of only 256 bytes!
+--- **WARNING**: Usermessages have a limit of only 256 bytes!
 ---@deprecated You should be using the net library instead
 umsg = {}
 
@@ -72,7 +70,7 @@ function umsg.Short(short) end
 
 ---[SERVER] Starts a new usermessage.
 ---
---- Usermessages have a limit of only 256 bytes!
+--- **WARNING**: Usermessages have a limit of only 256 bytes!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Start)
 ---@param name string The name of the message to be sent.

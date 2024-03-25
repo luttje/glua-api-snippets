@@ -1,11 +1,11 @@
 ---@meta
 
 ---
---- 		Similarly to DIconLayout, this lays out panels in two dimensions as tiles.
+--- 		Similarly to [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout), this lays out panels in two dimensions as tiles.
 ---
---- 		The difference between this and DIconLayout is that DIconLayout items all have the same height while
---- 		DTileLayout items do not have this enforcement.
---- 		DTileLayout will find the best way to "pack" its children.
+--- 		The difference between this and [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) is that [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) items all have the same height while
+--- 		[DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout) items do not have this enforcement.
+--- 		[DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout) will find the best way to "pack" its children.
 --- 		For example, in a two column layout, a item of height 2 units will be placed in one column while
 --- 		two items of height 1 unit will be placed in the other column.
 ---
@@ -18,18 +18,20 @@
 --- 		The number of elements in each row is determined by the base size and width.
 ---
 --- 		It also optionally permits the rearrangement of these tiles.
---- 		To enable this functionality, call DDragBase:MakeDroppable on the DTileLayout with a unique identifier.
+--- 		To enable this functionality, call [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable) on the DTileLayout with a unique identifier.
 --- 		All panels added following this will be moveable.
---- 	Creates a DTileLayout within a DFrame, sets the base size and adds 32 DLabels.
+---
 ---@class DTileLayout : DDragBase
 local DTileLayout = {}
 
----[CLIENT] Clears the panel's tile table. Used by DTileLayout:LayoutTiles.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Clears the panel's tile table. Used by [DTileLayout:LayoutTiles](https://wiki.facepunch.com/gmod/DTileLayout:LayoutTiles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:ClearTiles)
 function DTileLayout:ClearTiles() end
 
----[CLIENT] Called to designate a range of tiles as occupied by a panel.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to designate a range of tiles as occupied by a panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:ConsumeTiles)
 ---@param x number The x coordinate of the top-left corner of the panel.
@@ -50,7 +52,8 @@ function DTileLayout:Copy() end
 ---@param source Panel The source panel from which to copy all children.
 function DTileLayout:CopyContents(source) end
 
----[CLIENT] Finds the coordinates of the first group of free tiles that fit the given size.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Finds the coordinates of the first group of free tiles that fit the given size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:FindFreeTile)
 ---@param x number The x coordinate to start looking from.
@@ -61,7 +64,8 @@ function DTileLayout:CopyContents(source) end
 ---@return number # The y coordinate of the found available space.
 function DTileLayout:FindFreeTile(x, y, w, h) end
 
----[CLIENT] Determines if a group of tiles is vacant.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Determines if a group of tiles is vacant.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:FitsInTile)
 ---@param x number The x coordinate of the first tile.
@@ -71,13 +75,13 @@ function DTileLayout:FindFreeTile(x, y, w, h) end
 ---@return boolean # Whether or not this group is available for occupation.
 function DTileLayout:FitsInTile(x, y, w, h) end
 
----[CLIENT] Returns the size of each single tile, set with DTileLayout:SetBaseSize.
+---[CLIENT] Returns the size of each single tile, set with [DTileLayout:SetBaseSize](https://wiki.facepunch.com/gmod/DTileLayout:SetBaseSize).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetBaseSize)
 ---@return number # Base tile size.
 function DTileLayout:GetBaseSize() end
 
----[CLIENT] Returns the border spacing set by DTileLayout:SetBorder.
+---[CLIENT] Returns the border spacing set by [DTileLayout:SetBorder](https://wiki.facepunch.com/gmod/DTileLayout:SetBorder).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetBorder)
 ---@return number # The border spacing
@@ -89,19 +93,20 @@ function DTileLayout:GetBorder() end
 ---@return number # The minimum height the panel can shrink to.
 function DTileLayout:GetMinHeight() end
 
----[CLIENT] Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX.
+---[CLIENT] Returns the X axis spacing between 2 elements set by [DTileLayout:SetSpaceX](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceX).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetSpaceX)
 ---@return number #
 function DTileLayout:GetSpaceX() end
 
----[CLIENT] Returns the Y axis spacing between 2 elements set by DTileLayout:SetSpaceY.
+---[CLIENT] Returns the Y axis spacing between 2 elements set by [DTileLayout:SetSpaceY](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceY).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetSpaceY)
 ---@return number #
 function DTileLayout:GetSpaceY() end
 
----[CLIENT] Gets the occupied state of a tile.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Gets the occupied state of a tile.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:GetTile)
 ---@param x number The x coordinate of the tile.
@@ -114,7 +119,8 @@ function DTileLayout:GetTile(x, y) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:Layout)
 function DTileLayout:Layout() end
 
----[CLIENT] Called by PANEL:PerformLayout to arrange and lay out the child panels, if it has changed in size.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called by [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout) to arrange and lay out the child panels, if it has changed in size.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:LayoutTiles)
 function DTileLayout:LayoutTiles() end
@@ -127,7 +133,7 @@ function DTileLayout:LayoutTiles() end
 ---@param size number The size of each tile. It is recommended you use `2ⁿ` (`16, 32, 64...`) numbers, and those above `4`, as numbers lower than this will result in many tiles being processed and therefore slow operation.
 function DTileLayout:SetBaseSize(size) end
 
----[CLIENT] Sets the spacing between the border/edge of the DTileLayout and all the elements inside.
+---[CLIENT] Sets the spacing between the border/edge of the [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout) and all the elements inside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetBorder)
 ---@param border number
@@ -139,19 +145,20 @@ function DTileLayout:SetBorder(border) end
 ---@param minH number The minimum height the panel can shrink to.
 function DTileLayout:SetMinHeight(minH) end
 
----[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the X axis.
+---[CLIENT] Sets the spacing between 2 elements in the [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout) on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceX)
 ---@param spacingX number New X axis spacing.
 function DTileLayout:SetSpaceX(spacingX) end
 
----[CLIENT] Sets the spacing between 2 elements in the DTileLayout on the Y axis.
+---[CLIENT] Sets the spacing between 2 elements in the [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout) on the Y axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetSpaceY)
 ---@param spaceY number New Y axis spacing.
 function DTileLayout:SetSpaceY(spaceY) end
 
----[CLIENT] Called to set the occupied state of a tile.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to set the occupied state of a tile.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTileLayout:SetTile)
 ---@param x number The x coordinate of the tile.

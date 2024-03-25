@@ -8,22 +8,16 @@ search = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/search.AddProvider)
 ---@param provider fun(searchQuery: string): table Provider function.
 ---
+--- Function argument(s):
+--- * string `searchQuery` - The search query user has inputed.
 ---
----
----
---- Function callback arguments are:
---- * string **searchQuery** - The search query user has inputed.
----
---- Function callback return values are:
---- * table **data** -
+--- Function return value(s):
+--- * table `data` -
 --- You must return a list of tables structured like this:
 ---   * string text - Text to "Copy to clipboard"
 ---   * function func - Function to use/spawn the item
 ---   * Panel icon - A panel to add to spawnmenu
 ---   * table words - A table of words?
----
----
----
 ---@param id? string If provided, ensures that only one provider exists with the given ID at a time.
 function search.AddProvider(provider, id) end
 

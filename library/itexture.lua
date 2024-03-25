@@ -1,6 +1,6 @@
 ---@meta
 
---- An object representing game texture, like a .vtf file. Do not confuse with IMaterial. Returned by IMaterial:GetTexture
+--- An object representing game texture, like a .vtf file. Do not confuse with [IMaterial](https://wiki.facepunch.com/gmod/IMaterial). Returned by [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)
 ---@class ITexture
 local ITexture = {}
 
@@ -51,7 +51,7 @@ function ITexture:Height() end
 
 ---[SHARED AND MENU] Returns whenever the texture is valid. (i.e. was loaded successfully or not)
 ---
---- The "error" texture is a valid texture, and therefore this function will return false when used on it. Use ITexture:IsErrorTexture, instead.
+--- **NOTE**: The "error" texture is a valid texture, and therefore this function will return false when used on it. Use [ITexture:IsErrorTexture](https://wiki.facepunch.com/gmod/ITexture:IsErrorTexture), instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ITexture:IsError)
 ---@return boolean # Whether the texture was loaded successfully or not.

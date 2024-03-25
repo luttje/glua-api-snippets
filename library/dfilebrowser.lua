@@ -3,13 +3,7 @@
 ---
 --- 		A tree and list-based file browser.
 ---
---- 		It allows filtering by folder (directory) name and file extension, and can display models as SpawnIcons.
---- 	Creates a DFileBrowser and displays the data/persist folder. Any file clicked is printed to the console.
---- Creates a DFileBrowser that can spawn models from `props_` folders.
----
---- Uses the same DFrame as above
---- 	Same as above, but enables model viewing. The following line is added to the above code.Same as above, but enables model viewing. The following line is added to the above code.
---- Creates a DFileBrowser for browsing and selecting sounds.
+--- 		It allows filtering by folder (directory) name and file extension, and can display models as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s.
 ---
 ---@class DFileBrowser : DPanel
 local DFileBrowser = {}
@@ -37,15 +31,15 @@ function DFileBrowser:GetCurrentFolder() end
 ---@return string # The current filter applied to the file list.
 function DFileBrowser:GetFileTypes() end
 
----[CLIENT] Returns the DTree Node that the file tree stems from.
+---[CLIENT] Returns the [DTree Node](https://wiki.facepunch.com/gmod/DTree Node) that the file tree stems from.
 ---
---- This is a child of the root node of the DTree.
+--- This is a child of the root node of the [DTree](https://wiki.facepunch.com/gmod/DTree).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetFolderNode)
 ---@return Panel # The DTree_Node used for the tree.
 function DFileBrowser:GetFolderNode() end
 
----[CLIENT] Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as SpawnIcons instead of a list.
+---[CLIENT] Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s instead of a list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetModels)
 ---@return boolean # Whether or not files will be displayed using SpawnIcons.
@@ -63,9 +57,9 @@ function DFileBrowser:GetName() end
 ---@return boolean # Whether or not the file tree is open.
 function DFileBrowser:GetOpen() end
 
----[CLIENT] Returns the access path of the file tree. This is `GAME` unless changed with DFileBrowser:SetPath.
+---[CLIENT] Returns the access path of the file tree. This is `GAME` unless changed with [DFileBrowser:SetPath](https://wiki.facepunch.com/gmod/DFileBrowser:SetPath).
 ---
---- See file.Read for how paths work.
+--- See [file.Read](https://wiki.facepunch.com/gmod/file.Read) for how paths work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetPath)
 ---@return string # The current access path i.e. "GAME", "LUA", "DATA" etc.
@@ -93,19 +87,18 @@ function DFileBrowser:SetCurrentFolder(currentDir) end
 
 ---[CLIENT] Sets the file type filter for the file list.
 ---
---- This accepts the same file extension wildcards as file.Find.
+--- This accepts the same file extension wildcards as [file.Find](https://wiki.facepunch.com/gmod/file.Find).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetFileTypes)
 ---@param fileTypes? string A list of file types to display, separated by spaces e.g.
 --- ```
 --- "*.lua *.txt *.mdl"
 --- ```
----
 function DFileBrowser:SetFileTypes(fileTypes) end
 
----[CLIENT] Enables or disables the model viewer mode. In this mode, files are displayed as SpawnIcons instead of a list.
+---[CLIENT] Enables or disables the model viewer mode. In this mode, files are displayed as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s instead of a list.
 ---
---- This should only be used for `.mdl` files; the spawn icons will display error models for others. See DFileBrowser:SetFileTypes
+--- **NOTE**: This should only be used for `.mdl` files; the spawn icons will display error models for others. See [DFileBrowser:SetFileTypes](https://wiki.facepunch.com/gmod/DFileBrowser:SetFileTypes)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetModels)
 ---@param showModels? boolean Whether or not to display files using SpawnIcons.
@@ -126,7 +119,7 @@ function DFileBrowser:SetOpen(open, useAnim) end
 
 ---[CLIENT] Sets the access path for the file tree. This is set to `GAME` by default.
 ---
---- See file.Read for how paths work.
+--- See [file.Read](https://wiki.facepunch.com/gmod/file.Read) for how paths work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetPath)
 ---@param path string The access path i.e. "GAME", "LUA", "DATA" etc.
@@ -134,37 +127,41 @@ function DFileBrowser:SetPath(path) end
 
 ---[CLIENT] Sets the search filter for the file tree.
 ---
---- This accepts the same wildcards as file.Find.
+--- This accepts the same wildcards as [file.Find](https://wiki.facepunch.com/gmod/file.Find).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetSearch)
 ---@param filter? string The filter to use on the file tree.
 function DFileBrowser:SetSearch(filter) end
 
----[CLIENT] Called to set up the DTree and file viewer when a base path has been set.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to set up the [DTree](https://wiki.facepunch.com/gmod/DTree) and file viewer when a base path has been set.
 ---
---- Calls DFileBrowser:SetupTree and DFileBrowser:SetupFiles.
+--- Calls [DFileBrowser:SetupTree](https://wiki.facepunch.com/gmod/DFileBrowser:SetupTree) and [DFileBrowser:SetupFiles](https://wiki.facepunch.com/gmod/DFileBrowser:SetupFiles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:Setup)
 ---@return boolean # Whether or not the variables needed to set up have been defined.
 function DFileBrowser:Setup() end
 
----[CLIENT] Called to set up the DListView or DIconBrowser by DFileBrowser:Setup.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to set up the [DListView](https://wiki.facepunch.com/gmod/DListView) or [DIconBrowser](https://wiki.facepunch.com/gmod/DIconBrowser) by [DFileBrowser:Setup](https://wiki.facepunch.com/gmod/DFileBrowser:Setup).
 ---
---- The icon browser is used when in models mode. See DFileBrowser:SetModels.
+--- The icon browser is used when in models mode. See [DFileBrowser:SetModels](https://wiki.facepunch.com/gmod/DFileBrowser:SetModels).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetupFiles)
 ---@return boolean # Whether or not the files pane was set up successfully.
 function DFileBrowser:SetupFiles() end
 
----[CLIENT] Called to set up the DTree by DFileBrowser:Setup.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Called to set up the [DTree](https://wiki.facepunch.com/gmod/DTree) by [DFileBrowser:Setup](https://wiki.facepunch.com/gmod/DFileBrowser:Setup).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetupTree)
 ---@return boolean # Whether or not the tree was set up successfully.
 function DFileBrowser:SetupTree() end
 
----[CLIENT] Builds the file or icon list for the current directory.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Builds the file or icon list for the current directory.
 ---
---- You should use DFileBrowser:SetCurrentFolder to change the directory.
+--- You should use [DFileBrowser:SetCurrentFolder](https://wiki.facepunch.com/gmod/DFileBrowser:SetCurrentFolder) to change the directory.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:ShowFolder)
 ---@param currentDir string The directory to populate the list from.
@@ -172,7 +169,7 @@ function DFileBrowser:ShowFolder(currentDir) end
 
 ---[CLIENT] Sorts the file list.
 ---
---- This is only functional when not using the model viewer. See DFileBrowser:SetModels
+--- **NOTE**: This is only functional when not using the model viewer. See [DFileBrowser:SetModels](https://wiki.facepunch.com/gmod/DFileBrowser:SetModels)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SortFiles)
 ---@param descending? boolean The sort order. `true` for descending (z-a), `false` for ascending (a-z).

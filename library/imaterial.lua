@@ -2,13 +2,13 @@
 
 --- A Material object. It represents a game material, similarly to how a .vmt file does.
 ---
---- It can be created with Global.Material or Global.CreateMaterial.
+--- It can be created with [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) or [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial).
 ---@class IMaterial
 local IMaterial = {}
 
 ---[SHARED AND MENU] Returns the color of the specified pixel of the $basetexture, only works for materials created from PNG files.
 ---
---- Basically identical to ITexture:GetColor used on IMaterial:GetTexture( "$basetexture" ).
+--- Basically identical to [ITexture:GetColor](https://wiki.facepunch.com/gmod/ITexture:GetColor) used on [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)( "$basetexture" ).
 ---
 --- The returned color will not have the color metatable.
 ---
@@ -27,7 +27,7 @@ function IMaterial:GetFloat(materialFloat) end
 
 ---[SHARED AND MENU] Returns the specified material value as a int, rounds the value if its a float, or nil if the value is not set.
 ---
---- Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly retrieved with this function. See the full list here: Material Flags
+--- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly retrieved with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material Flags)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetInt)
 ---@param materialInt string The name of the material integer.
@@ -68,7 +68,7 @@ function IMaterial:GetShader() end
 ---@return string # The value as a string
 function IMaterial:GetString(materialString) end
 
----[SHARED AND MENU] Returns an ITexture based on the passed shader parameter.
+---[SHARED AND MENU] Returns an [ITexture](https://wiki.facepunch.com/gmod/ITexture) based on the passed shader parameter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)
 ---@param param string The [shader parameter](https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters) to retrieve. This should normally be `$basetexture`.
@@ -77,7 +77,7 @@ function IMaterial:GetTexture(param) end
 
 ---[SHARED AND MENU] Returns the specified material vector, or nil if the value is not set.
 ---
---- See also IMaterial:GetVectorLinear
+--- See also [IMaterial:GetVectorLinear](https://wiki.facepunch.com/gmod/IMaterial:GetVectorLinear)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVector)
 ---@param materialVector string The name of the material vector.
@@ -98,7 +98,7 @@ function IMaterial:GetVector4D(name) end
 ---
 --- See https://en.wikipedia.org/wiki/Gamma_correction
 ---
---- See also IMaterial:GetVector
+--- See also [IMaterial:GetVector](https://wiki.facepunch.com/gmod/IMaterial:GetVector)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetVectorLinear)
 ---@param materialVector string The name of the material vector.
@@ -125,7 +125,7 @@ function IMaterial:IsError() end
 function IMaterial:Recompute() end
 
 ---[MENU] Changes the Material into the give Image.
---- 		This is used by the Background to change the Image.
+--- 		**INTERNAL**: This is used by the Background to change the Image.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:SetDynamicImage)
 ---@param path string The path to a Image.
@@ -140,7 +140,7 @@ function IMaterial:SetFloat(materialFloat, float) end
 
 ---[SHARED AND MENU] Sets the specified material value to the specified int, does nothing on a type mismatch.
 ---
---- Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: Material Flags
+--- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material Flags)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:SetInt)
 ---@param materialInt string The name of the material int.

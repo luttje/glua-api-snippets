@@ -13,7 +13,14 @@ function input.CheckKeyTrapping() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.GetAnalogValue)
 ---@param axis number The analog axis to poll. See Enums/ANALOG.
----@return number # The digital value.  A joystick axis returns `-32768` when it's pushed completely up/completely left, & returns `32767` when it's pushed completely down/completely right.  A mouse wheel starts @ `0` & increases by `1` for every unit of scroll up/decreases by `1` for every unit of scroll down.  A mouse axis is `0` when the arrow is @ the top or left of the screen; When the arrow is @ the bottom right of the screen, the mouse y axis is the height of the screen & the mouse x axis is the width of the screen (in pixels). Note that in game, the “arrow” stays near the middle of the screen.  Trigger axis always return `0` (verify).
+---@return number # The digital value.
+--- A joystick axis returns `-32768` when it's pushed completely up/completely left, & returns `32767` when it's pushed completely down/completely right.
+---
+--- A mouse wheel starts @ `0` & increases by `1` for every unit of scroll up/decreases by `1` for every unit of scroll down.
+---
+--- A mouse axis is `0` when the arrow is @ the top or left of the screen; When the arrow is @ the bottom right of the screen, the mouse y axis is the height of the screen & the mouse x axis is the width of the screen (in pixels). Note that in game, the “arrow” stays near the middle of the screen.
+---
+--- Trigger axis always return `0` (verify).
 function input.GetAnalogValue(axis) end
 
 ---[CLIENT AND MENU] Returns the cursor's position on the screen.
@@ -24,16 +31,16 @@ function input.GetAnalogValue(axis) end
 ---@return number # The cursors position on the Y axis.
 function input.GetCursorPos() end
 
----[CLIENT AND MENU] Gets the button code from a button name. This is opposite of input.GetKeyName.
+---[CLIENT AND MENU] Gets the button code from a button name. This is opposite of [input.GetKeyName](https://wiki.facepunch.com/gmod/input.GetKeyName).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.GetKeyCode)
 ---@param button string The internal button name, such as E or SHIFT.
 ---@return number # The button code, see Enums/BUTTON_CODE.
 function input.GetKeyCode(button) end
 
----[CLIENT AND MENU] Gets the button name from a numeric button code. The name needs to be translated with language.GetPhrase before being displayed.
+---[CLIENT AND MENU] Gets the button name from a numeric button code. The name needs to be translated with [language.GetPhrase](https://wiki.facepunch.com/gmod/language.GetPhrase) before being displayed.
 ---
---- Despite the name of the function, this also works for the full range of keys in Enums/BUTTON_CODE.
+--- **NOTE**: Despite the name of the function, this also works for the full range of keys in [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.GetKeyName)
 ---@param button number The button, see Enums/BUTTON_CODE.
@@ -42,7 +49,7 @@ function input.GetKeyName(button) end
 
 ---[CLIENT AND MENU] Gets whether the specified button code is down.
 ---
---- Unlike input.IsKeyDown this can also detect joystick presses from Enums/JOYSTICK
+--- Unlike [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown) this can also detect joystick presses from [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.IsButtonDown)
 ---@param button number The button, valid values are in the range of Enums/BUTTON_CODE.
@@ -86,7 +93,9 @@ function input.IsShiftDown() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.LookupBinding)
 ---@param binding string The binding name
 ---@param exact? boolean True if the binding should match exactly
----@return string # The first key found with that binding or no value if no key with given binding was found.  See also input.GetKeyCode.
+---@return string # The first key found with that binding or no value if no key with given binding was found.
+---
+--- See also input.GetKeyCode.
 function input.LookupBinding(binding, exact) end
 
 ---[CLIENT AND MENU] Returns the bind string that the given key is bound to.
@@ -109,7 +118,7 @@ function input.SelectWeapon(weapon) end
 ---@param mouseY number Y coordinate for mouse position
 function input.SetCursorPos(mouseX, mouseY) end
 
----[CLIENT AND MENU] Begins waiting for a key to be pressed so we can save it for input.CheckKeyTrapping. Used by the DBinder.
+---[CLIENT AND MENU] Begins waiting for a key to be pressed so we can save it for [input.CheckKeyTrapping](https://wiki.facepunch.com/gmod/input.CheckKeyTrapping). Used by the [DBinder](https://wiki.facepunch.com/gmod/DBinder).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.StartKeyTrapping)
 function input.StartKeyTrapping() end
@@ -150,8 +159,7 @@ function input.WasKeyTyped(key) end
 
 ---[CLIENT AND MENU] Returns whether a mouse key was double pressed in the same frame this function was called.
 ---
----
---- If this function returns true, input.WasMousePressed will return false.
+--- If this function returns true, [input.WasMousePressed](https://wiki.facepunch.com/gmod/input.WasMousePressed) will return false.
 ---
 --- This function only works in Move hooks, and will detect mouse events even in main menu or when a typing in a text field.
 ---
@@ -162,8 +170,7 @@ function input.WasMouseDoublePressed(button) end
 
 ---[CLIENT AND MENU] Returns whether a mouse key was initially pressed in the same frame this function was called.
 ---
----
---- If input.WasMouseDoublePressed returns true, this function will return false.
+--- If [input.WasMouseDoublePressed](https://wiki.facepunch.com/gmod/input.WasMouseDoublePressed) returns true, this function will return false.
 ---
 --- This function only works in Move hooks, and will detect mouse events even in main menu or when a typing in a text field.
 ---

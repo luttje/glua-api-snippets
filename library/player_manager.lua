@@ -16,7 +16,6 @@ function player_manager.AddValidHands(name, model, skin, bodygroups, matchBodySk
 
 ---[SHARED] Associates a simplified name with a path to a valid player model.
 ---
----
 --- Only used internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.AddValidModel)
@@ -51,7 +50,7 @@ function player_manager.GetPlayerClasses() end
 
 ---[SHARED] Applies basic class variables when the player spawns.
 ---
---- Called from GM:PlayerSpawn in the base gamemode.
+--- Called from [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) in the base gamemode.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.OnPlayerSpawn)
 ---@param ply Player Player to setup.
@@ -63,7 +62,7 @@ function player_manager.OnPlayerSpawn(ply, transiton) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RegisterClass)
 ---@param name string Class name
 ---@param table table Class metatable
----@param base string Base class name
+---@param base? string Base class name
 function player_manager.RegisterClass(name, table, base) end
 
 ---[SHARED] Execute a named function within the player's set class
@@ -84,11 +83,14 @@ function player_manager.SetPlayerClass(ply, classname) end
 
 ---[SHARED] Retrieves correct hands for given player model. By default returns citizen hands.
 ---
---- See player_manager.AddValidHands for defining/linking hands to a model - this must be defined somewhere otherwise the model will return citizen hands here.
+--- **NOTE**: See [player_manager.AddValidHands](https://wiki.facepunch.com/gmod/player_manager.AddValidHands) for defining/linking hands to a model - this must be defined somewhere otherwise the model will return citizen hands here.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerHands)
 ---@param name string Player model name
----@return table # A table with following contents: * string model - Model of hands * number skin - Skin of hands * string body - Bodygroups of hands
+---@return table # A table with following contents:
+--- * string model - Model of hands
+--- * number skin - Skin of hands
+--- * string body - Bodygroups of hands
 function player_manager.TranslatePlayerHands(name) end
 
 ---[SHARED] Returns the valid model path for a simplified name.
@@ -100,7 +102,7 @@ function player_manager.TranslatePlayerModel(shortName) end
 
 ---[SHARED] Returns the simplified name for a valid model path of a player model.
 ---
---- Opposite of player_manager.TranslatePlayerModel.
+--- Opposite of [player_manager.TranslatePlayerModel](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.TranslateToPlayerModelName)
 ---@param model string The model path to a player model

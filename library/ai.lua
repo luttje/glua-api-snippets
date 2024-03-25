@@ -17,14 +17,14 @@ function ai.GetScheduleID(sched) end
 ---@return NPC # The squad leader.
 function ai.GetSquadLeader(squad) end
 
----[SERVER] Returns the amount of members a given squad has. See also ai.GetSquadMembers.
+---[SERVER] Returns the amount of members a given squad has. See also [ai.GetSquadMembers](https://wiki.facepunch.com/gmod/ai.GetSquadMembers).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMemberCount)
 ---@param squad string The squad name.
 ---@return number # The member count.
 function ai.GetSquadMemberCount(squad) end
 
----[SERVER] Returns all members of a given squad. See also ai.GetSquadMemberCount and NPC:GetSquad.
+---[SERVER] Returns all members of a given squad. See also [ai.GetSquadMemberCount](https://wiki.facepunch.com/gmod/ai.GetSquadMemberCount) and [NPC:GetSquad](https://wiki.facepunch.com/gmod/NPC:GetSquad).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ai.GetSquadMembers)
 ---@param squad string The squad name.

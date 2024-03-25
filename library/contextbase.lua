@@ -14,13 +14,13 @@ local ContextBase = {}
 --- * string label - The text to display inside the control's label.
 function ContextBase:ControlValues(contextData) end
 
----[CLIENT] Returns the ConVar for the panel to change/handle, set by ContextBase:SetConVar
+---[CLIENT] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) for the panel to change/handle, set by [ContextBase:SetConVar](https://wiki.facepunch.com/gmod/ContextBase:SetConVar)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContextBase:ConVar)
 ---@return string # The ConVar for the panel to change.
 function ContextBase:ConVar() end
 
----[CLIENT] Sets the ConVar for the panel to change/handle.
+---[CLIENT] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) for the panel to change/handle.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ContextBase:SetConVar)
 ---@param cvar string The ConVar for the panel to change.

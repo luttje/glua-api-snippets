@@ -5,7 +5,8 @@
 --- Widgets allow the player to have mouse interaction with entities, such as being able to manipulate the [bones of an NPC](https://www.youtube.com/watch?v=O3gG0t39-pQ).
 widgets = {}
 
----[SHARED] Automatically called to update all widgets.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---  Automatically called to update all widgets.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/widgets.PlayerTick)
 ---@param ply Player The player

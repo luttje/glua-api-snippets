@@ -12,7 +12,7 @@ utf8 = {}
 ---@return string # UTF-8 string generated from given arguments.
 function utf8.char(...) end
 
----[SHARED AND MENU] Returns the codepoints (as numbers) from all characters in the given string that start between byte position startPos and endPos. It raises an error if it meets any invalid byte sequence. This functions similarly to string.byte.
+---[SHARED AND MENU] Returns the codepoints (as numbers) from all characters in the given string that start between byte position startPos and endPos. It raises an error if it meets any invalid byte sequence. This functions similarly to [string.byte](https://wiki.facepunch.com/gmod/string.byte).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/utf8.codepoint)
 ---@param string string The string that you will get the code(s) from.
@@ -21,7 +21,7 @@ function utf8.char(...) end
 ---@return any ... # The codepoint number(s).
 function utf8.codepoint(string, startPos, endPos) end
 
----[SHARED AND MENU] Returns an iterator (like string.gmatch) which returns both the position and codepoint of each utf8 character in the string. It raises an error if it meets any invalid byte sequence.
+---[SHARED AND MENU] Returns an iterator (like [string.gmatch](https://wiki.facepunch.com/gmod/string.gmatch)) which returns both the position and codepoint of each utf8 character in the string. It raises an error if it meets any invalid byte sequence.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/utf8.codes)
 ---@param string string The string that you will get the codes from.
@@ -37,7 +37,7 @@ function utf8.codes(string) end
 ---@return string # The UTF-8 string.
 function utf8.force(string) end
 
----[SHARED AND MENU] A UTF-8 compatible version of string.GetChar.
+---[SHARED AND MENU] A UTF-8 compatible version of [string.GetChar](https://wiki.facepunch.com/gmod/string.GetChar).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/utf8.GetChar)
 ---@param str string The string that you will be searching with the supplied index.
@@ -64,8 +64,8 @@ function utf8.len(string, startPos, endPos) end
 ---@return number # Starting byte-index of the given position.
 function utf8.offset(string, n, startPos) end
 
----[SHARED AND MENU] A UTF-8 compatible version of string.sub.
---- 	Avoid using this function on large strings every tick/frame, as it may cause lags.
+---[SHARED AND MENU] A UTF-8 compatible version of [string.sub](https://wiki.facepunch.com/gmod/string.sub).
+--- 	**WARNING**: Avoid using this function on large strings every tick/frame, as it may cause lags.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/utf8.sub)
 ---@param string string The string you'll take a sub-string out of.

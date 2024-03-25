@@ -1,6 +1,6 @@
 ---@meta
 
---- This is returned from video.Record.
+--- This is returned from [video.Record](https://wiki.facepunch.com/gmod/video.Record).
 ---@class IVideoWriter
 local IVideoWriter = {}
 

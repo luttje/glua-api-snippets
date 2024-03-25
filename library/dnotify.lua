@@ -1,6 +1,6 @@
 ---@meta
 
---- A panel that fades its contents in and out once, like a notification.Creates a notification panel with a text label inside.Creates a notification panel of Dr. Kleiner reminding the player to wear their HEV suit.
+--- A panel that fades its contents in and out once, like a notification.
 ---@class DNotify : Panel
 local DNotify = {}
 
@@ -11,26 +11,26 @@ local DNotify = {}
 ---@param lifeLength? number If set, overrides DNotify:SetLife for when the given panel should be removed.
 function DNotify:AddItem(pnl, lifeLength) end
 
----[CLIENT] Returns the current alignment of this notification panel. Set by DNotify:SetAlignment.
+---[CLIENT] Returns the current alignment of this notification panel. Set by [DNotify:SetAlignment](https://wiki.facepunch.com/gmod/DNotify:SetAlignment).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetAlignment)
 ---@return number # The numpad alignment
 function DNotify:GetAlignment() end
 
----[CLIENT] Returns all the items added with DNotify:AddItem.
+---[CLIENT] Returns all the items added with [DNotify:AddItem](https://wiki.facepunch.com/gmod/DNotify:AddItem).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetItems)
 ---@return table # A table of Panels.
 function DNotify:GetItems() end
 
 ---[CLIENT] Returns the display time in seconds of the DNotify. This is set with
---- DNotify:SetLife.
+--- [DNotify:SetLife](https://wiki.facepunch.com/gmod/DNotify:SetLife).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetLife)
 ---@return number # The display time in seconds.
 function DNotify:GetLife() end
 
----[CLIENT] Returns the spacing between items set by DNotify:SetSpacing.
+---[CLIENT] Returns the spacing between items set by [DNotify:SetSpacing](https://wiki.facepunch.com/gmod/DNotify:SetSpacing).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:GetSpacing)
 ---@return number #
@@ -54,7 +54,8 @@ function DNotify:SetLife(time) end
 ---@param spacing number
 function DNotify:SetSpacing(spacing) end
 
----[CLIENT] Used internally to position and fade in/out its DNotify:GetItems.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Used internally to position and fade in/out its [DNotify:GetItems](https://wiki.facepunch.com/gmod/DNotify:GetItems).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DNotify:Shuffle)
 function DNotify:Shuffle() end

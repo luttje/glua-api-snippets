@@ -2,11 +2,10 @@
 
 ---
 --- 		Renderable mesh object, can be used to create models on the fly.
---- 		The only way to create your own IMesh object is to call Global.Mesh.
+--- 		The only way to create your own IMesh object is to call [Global.Mesh](https://wiki.facepunch.com/gmod/Global.Mesh).
 ---
----
---- 			IMeshes only respond to one projected texture.
---- 			See the render.RenderFlashlights function and example that solves this problem.
+--- 		**NOTE**: IMeshes only respond to one projected texture.
+--- 			See the [render.RenderFlashlights](https://wiki.facepunch.com/gmod/render.RenderFlashlights) function and example that solves this problem.
 ---
 ---
 ---@class IMesh
@@ -16,9 +15,9 @@ local IMesh = {}
 ---
 --- When modifying a previously built mesh, your new mesh must match the vertex count!
 ---
---- See Global.Mesh and util.GetModelMeshes for examples.
+--- See [Global.Mesh](https://wiki.facepunch.com/gmod/Global.Mesh) and [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) for examples.
 ---
---- IMesh appears to have a limit of 65535 vertices. You should split your mesh into multiple meshes when above this limit.
+--- **WARNING**: [IMesh](https://wiki.facepunch.com/gmod/IMesh) appears to have a limit of 65535 vertices. You should split your mesh into multiple meshes when above this limit.
 ---
 --- Exceeding the limit may lead to undefined rendering behavior.
 ---
@@ -36,7 +35,7 @@ function IMesh:Destroy() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:Draw)
 function IMesh:Draw() end
 
----[CLIENT] Returns whether this IMesh is valid or not.
+---[CLIENT] Returns whether this [IMesh](https://wiki.facepunch.com/gmod/IMesh) is valid or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMesh:IsValid)
 ---@return boolean # Whether this IMesh is valid or not.

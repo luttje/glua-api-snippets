@@ -3,7 +3,9 @@
 --- The drag'n'drop library, used internally by certain base panels to allow for drag'n'drop functionality, like spawnmenu's customizations.
 dragndrop = {}
 
----[CLIENT AND MENU] Calls the receiver function of hovered panel.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Calls the receiver function of hovered panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.CallReceiverFunction)
 ---@param bDoDrop boolean true if the mouse was released, false if we right clicked.
@@ -17,7 +19,8 @@ function dragndrop.CallReceiverFunction(bDoDrop, command, mx, my) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Clear)
 function dragndrop.Clear() end
 
----[CLIENT AND MENU] Handles the drop action of drag'n'drop library.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Handles the drop action of drag'n'drop library.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Drop)
 function dragndrop.Drop() end
@@ -34,7 +37,9 @@ function dragndrop.GetDroppable(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.HandleDroppedInGame)
 function dragndrop.HandleDroppedInGame() end
 
----[CLIENT AND MENU] Handles the hover think. Called from dragndrop.Think.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Handles the hover think. Called from [dragndrop.Think](https://wiki.facepunch.com/gmod/dragndrop.Think).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.HoverThink)
 function dragndrop.HoverThink() end
@@ -45,22 +50,28 @@ function dragndrop.HoverThink() end
 ---@return boolean # True if the user is dragging something with the drag'n'drop system.
 function dragndrop.IsDragging() end
 
----[CLIENT AND MENU] Starts the drag'n'drop.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Starts the drag'n'drop.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.StartDragging)
 function dragndrop.StartDragging() end
 
----[CLIENT AND MENU] Stops the drag'n'drop and calls dragndrop.Clear.
+---[CLIENT AND MENU] Stops the drag'n'drop and calls [dragndrop.Clear](https://wiki.facepunch.com/gmod/dragndrop.Clear).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.StopDragging)
 function dragndrop.StopDragging() end
 
----[CLIENT AND MENU] Handles all the drag'n'drop processes. Calls dragndrop.UpdateReceiver and dragndrop.HoverThink.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Handles all the drag'n'drop processes. Calls [dragndrop.UpdateReceiver](https://wiki.facepunch.com/gmod/dragndrop.UpdateReceiver) and [dragndrop.HoverThink](https://wiki.facepunch.com/gmod/dragndrop.HoverThink).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.Think)
 function dragndrop.Think() end
 
----[CLIENT AND MENU] Updates the receiver to drop the panels onto. Called from dragndrop.Think.
+---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Updates the receiver to drop the panels onto. Called from [dragndrop.Think](https://wiki.facepunch.com/gmod/dragndrop.Think).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/dragndrop.UpdateReceiver)
 function dragndrop.UpdateReceiver() end

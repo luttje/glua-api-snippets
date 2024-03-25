@@ -12,14 +12,14 @@ debug = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.debug)
 function debug.debug() end
 
----[SHARED AND MENU] Returns the environment of the passed object. This can be set with debug.setfenv
+---[SHARED AND MENU] Returns the environment of the passed object. This can be set with [debug.setfenv](https://wiki.facepunch.com/gmod/debug.setfenv)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getfenv)
 ---@param object table Object to get environment of
 ---@return table # Environment
 function debug.getfenv(object) end
 
----[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html. This function will simply return the function, mask, and count of the last called debug.sethook.
+---[SHARED AND MENU] Returns the current hook settings of the passed thread. The thread argument can be omitted. This is completely different to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html. This function will simply return the function, mask, and count of the last called [debug.sethook](https://wiki.facepunch.com/gmod/debug.sethook).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.gethook)
 ---@param thread? thread Which thread to retrieve it's hook from, doesn't seem to actually work.
@@ -48,7 +48,7 @@ function debug.gethook(thread) end
 function debug.getinfo(funcOrStackLevel, fields, _function) end
 
 ---[SHARED AND MENU] Gets the name and value of a local variable indexed from the level.
---- 	When a function has a tailcall return, you cannot access the locals of this function.
+--- 	**WARNING**: When a function has a tailcall return, you cannot access the locals of this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getlocal)
 ---@param thread? thread The thread
@@ -62,8 +62,11 @@ function debug.getinfo(funcOrStackLevel, fields, _function) end
 --- * 1 = the first local defined in the thread
 --- * 2 = the second local defined in the thread
 --- * etc...
+---@return string # The name of the variable.
 ---
----@return string # The name of the variable.  Sometimes this will be `(*temporary)` if the local variable had no name.   Variables with names starting with **(** are **internal variables**.
+--- Sometimes this will be `(*temporary)` if the local variable had no name.
+---
+--- Variables with names starting with **(** are **internal variables**.
 ---@return any # The value of the local variable.
 function debug.getlocal(thread, level, index) end
 
@@ -78,7 +81,7 @@ function debug.getmetatable(object) end
 ---
 --- The Lua registry is used by the engine and binary modules to create references to Lua values. The registry contains every global ran and used in the Lua environment. Avoid creating entries into the registry with a number as the key, as they are reserved for the reference system.
 ---
---- Improper editing of the registry can result in unintended side effects, including crashing the game.
+--- **WARNING**: Improper editing of the registry can result in unintended side effects, including crashing the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.getregistry)
 ---@return table # The Lua registry
@@ -140,7 +143,7 @@ function debug.sethook(thread, hook, mask, count) end
 ---@return string # The name of the local variable if the local at the index exists, otherwise nil is returned.
 function debug.setlocal(thread, level, index, value) end
 
----[SHARED AND MENU] Sets the object's metatable. Unlike Global.setmetatable, this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil.
+---[SHARED AND MENU] Sets the object's metatable. Unlike [Global.setmetatable](https://wiki.facepunch.com/gmod/Global.setmetatable), this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.setmetatable)
 ---@param object any Object to set the metatable for.

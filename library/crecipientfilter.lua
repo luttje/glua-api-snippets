@@ -1,6 +1,6 @@
 ---@meta
 
---- List of all possible functions to manipulate Recipient Filters. Can be created with Global.RecipientFilter.
+--- List of all possible functions to manipulate Recipient Filters. Can be created with [Global.RecipientFilter](https://wiki.facepunch.com/gmod/Global.RecipientFilter).
 ---@class CRecipientFilter
 local CRecipientFilter = {}
 

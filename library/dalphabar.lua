@@ -1,6 +1,6 @@
 ---@meta
 
---- A bar to select the opacity (alpha level) of a color.Creates a DAlphaBar and sets its value to 25%.
+--- A bar to select the opacity (alpha level) of a color.
 ---@class DAlphaBar : DPanel
 local DAlphaBar = {}
 

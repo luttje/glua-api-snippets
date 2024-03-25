@@ -103,7 +103,7 @@ function Angle:SetUnpacked(p, y, r) end
 
 ---[SHARED] Snaps the angle to nearest interval of degrees.
 ---
---- This will modify the original angle too!
+--- **NOTE**: This will modify the original angle too!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:SnapTo)
 ---@param axis string The component/axis to snap. Can be either `p`/`pitch`, `y`/`yaw` or `r`/`roll`.

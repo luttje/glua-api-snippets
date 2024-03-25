@@ -5,7 +5,7 @@ sound = {}
 
 ---[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 ---
---- You can find a list of common sound scripts that are shipped with the game by default here: Common Sounds.
+--- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common Sounds).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
 ---@param soundData table The sounds properties. See Structures/SoundData
@@ -33,22 +33,17 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---@param indentifier string An unique identified for the sound.
 ---
 --- 			You cannot override already existing ones.
----
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
 ---@param length number The length in seconds of the sound to generate.
 ---@param callback fun(sampleIndex: number): number A function which will be called to generate every sample on the sound.
 ---
+--- Function argument(s):
+--- * number `sampleIndex` - The current sample number.
 ---
----
----
---- Function callback arguments are:
---- * number **sampleIndex** - The current sample number.
----
---- Function callback return values are:
---- * number **sampleValue** - The return value must be between `-1.0` and `1.0`.
+--- Function return value(s):
+--- * number `sampleValue` - The return value must be between `-1.0` and `1.0`.
 --- Other values will wrap back to the -1 to 1 range and basically clip.
 --- There are **65535** possible quantifiable values between -1 and 1.
----
 function sound.Generate(indentifier, samplerate, length, callback) end
 
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
@@ -73,13 +68,12 @@ function sound.GetProperties(name) end
 function sound.GetTable() end
 
 ---[SHARED] Plays a sound from the specified position in the world.
---- If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
+--- If you want to play a sound without a position, such as a UI sound, use [surface.PlaySound](https://wiki.facepunch.com/gmod/surface.PlaySound) instead.
 ---
---- This function is similar to Global.EmitSound, but with less options.
+--- This function is similar to [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound), but with less options.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
 ---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
----
 ---@param pos Vector Where the sound should play.
 ---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
 ---@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
@@ -89,7 +83,7 @@ function sound.Play(snd, pos, level, pitch, volume, dsp) end
 
 ---[CLIENT] Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
---- For external file/stream playback, see sound.PlayURL.
+--- For external file/stream playback, see [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL).
 ---
 --- This fails for looping .wav files in 3D mode.
 ---
@@ -108,20 +102,16 @@ function sound.Play(snd, pos, level, pitch, volume, dsp) end
 --- If you don't want to use any of the above, you can just leave it as "".
 ---@param callback fun(channel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded.
 ---
----
----
----
---- Function callback arguments are:
---- * IGModAudioChannel **channel** - The sound channel. Will be nil if an error occurred.
---- * number **errorID** - ID of an error if an error has occurred. Will be nil, otherwise.
---- * string **errorName** - Name of an error if an error has occurred. Will be nil, otherwise.
----
+--- Function argument(s):
+--- * IGModAudioChannel `channel` - The sound channel. Will be nil if an error occurred.
+--- * number `errorID` - ID of an error if an error has occurred. Will be nil, otherwise.
+--- * string `errorName` - Name of an error if an error has occurred. Will be nil, otherwise.
 function sound.PlayFile(path, flags, callback) end
 
 ---[CLIENT] Allows you to play external sound files, as well as online radio streams.
 --- You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
---- For offline file playback, see sound.PlayFile.
+--- For offline file playback, see [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile).
 ---
 --- Due to a bug with [BASS](http://www.un4seen.com/), AAC codec streams cannot be played in 3D mode.
 ---
@@ -136,11 +126,8 @@ function sound.PlayFile(path, flags, callback) end
 --- If you don't want to use any of the above, you can just leave it as `""`.
 ---@param callback fun(channel: IGModAudioChannel, errorID: number, errorName: string) Callback function that is called as soon as the the stream is loaded.
 ---
----
----
---- Function callback arguments are:
---- * IGModAudioChannel **channel** - The sound channel. Will be nil if an error occurred.
---- * number **errorID** - ID of an error if an error has occurred. Will be nil, otherwise.
---- * string **errorName** - Name of an error if an error has occurred. Will be nil, otherwise.
----
+--- Function argument(s):
+--- * IGModAudioChannel `channel` - The sound channel. Will be nil if an error occurred.
+--- * number `errorID` - ID of an error if an error has occurred. Will be nil, otherwise.
+--- * string `errorName` - Name of an error if an error has occurred. Will be nil, otherwise.
 function sound.PlayURL(url, flags, callback) end

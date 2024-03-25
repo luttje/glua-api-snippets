@@ -1,26 +1,27 @@
 ---@meta
 
 ---
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
+--- 		A base for other controls for [DProperties](https://wiki.facepunch.com/gmod/DProperties). Acts as a generic text input on its own.
 ---
---- 		A base for other controls for DProperties. Acts as a generic text input on its own.
---- 	Example usage of this control
 ---@class DProperty_Generic : Panel
 local DProperty_Generic = {}
 
----[CLIENT] Returns the internal row panel of a DProperties that this panel belongs to.
+---[CLIENT] Returns the internal row panel of a [DProperties](https://wiki.facepunch.com/gmod/DProperties) that this panel belongs to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Generic:GetRow)
 ---@return Panel # The row panel.
 function DProperty_Generic:GetRow() end
 
----[CLIENT] Called internally by DProperties.
+---[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Called internally by [DProperties](https://wiki.facepunch.com/gmod/DProperties).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Generic:SetRow)
 ---@param row Panel The new row panel.
 function DProperty_Generic:SetRow(row) end
 
----[CLIENT] Sets up a generic control for use by DProperties.
+---[CLIENT] Sets up a generic control for use by [DProperties](https://wiki.facepunch.com/gmod/DProperties).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DProperty_Generic:Setup)
 ---@param data table See Editable Entities.

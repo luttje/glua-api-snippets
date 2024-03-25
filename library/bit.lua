@@ -51,7 +51,7 @@ function bit.bswap(value) end
 function bit.bxor(value, otherValues) end
 
 ---[SHARED AND MENU] Returns the left shifted value.
---- 		The returned value will be clamped to a signed 32-bit integer, even on 64-bit builds.
+--- 		**NOTE**: The returned value will be clamped to a signed 32-bit integer, even on 64-bit builds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.lshift)
 ---@param value number The value to be manipulated.
@@ -76,7 +76,7 @@ function bit.rol(value, shiftCount) end
 function bit.ror(value, shiftCount) end
 
 ---[SHARED AND MENU] Returns the right shifted value.
---- 		The returned value will be clamped to a signed 32-bit integer, even on 64-bit builds.
+--- 		**NOTE**: The returned value will be clamped to a signed 32-bit integer, even on 64-bit builds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.rshift)
 ---@param value number The value to be manipulated.

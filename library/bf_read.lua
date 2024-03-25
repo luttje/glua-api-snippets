@@ -1,6 +1,6 @@
 ---@meta
 
---- This is the object passed to usermessage.Hook when a message is received. It contains each value stored in the message in sequential order. You should read values from it in the order you wrote them.
+--- This is the object passed to [usermessage.Hook](https://wiki.facepunch.com/gmod/usermessage.Hook) when a message is received. It contains each value stored in the message in sequential order. You should read values from it in the order you wrote them.
 ---
 ---
 ---@deprecated You should be using net instead

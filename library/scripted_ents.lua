@@ -11,6 +11,7 @@ scripted_ents = {}
 function scripted_ents.Alias(alias, classname) end
 
 ---[SHARED] Returns a copy of the ENT table for a class, including functions defined by the base class
+--- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.Get)
 ---@param classname string The classname of the ENT table to return, can be an alias
@@ -20,7 +21,11 @@ function scripted_ents.Get(classname) end
 ---[SHARED] Returns a copy of the list of all ENT tables registered
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.GetList)
----@return table # A table of all entities in the following format: (table keys are the classnames) * table t - The Structures/ENT table associated with the entity * boolean isBaseType - Always true * string Base - The entity base (note capital B in the key name) * string type - The entity type
+---@return table # A table of all entities in the following format: (table keys are the classnames)
+--- * table t - The Structures/ENT table associated with the entity
+--- * boolean isBaseType - Always true
+--- * string Base - The entity base (note capital B in the key name)
+--- * string type - The entity type
 function scripted_ents.GetList() end
 
 ---[SHARED] Retrieves a member of entity's table.
@@ -59,11 +64,13 @@ function scripted_ents.GetType(classname) end
 ---@return boolean # Returns true if class name is based on base, else false.
 function scripted_ents.IsBasedOn(name, base) end
 
----[SHARED] Called after all ENTS have been loaded and runs baseclass.Set on each one.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- You can retrieve all the currently registered ENTS with scripted_ents.GetList.
+--- Called after all ENTS have been loaded and runs [baseclass.Set](https://wiki.facepunch.com/gmod/baseclass.Set) on each one.
 ---
---- This is not called after an ENT auto refresh, and thus the inherited baseclass functions retrieved with baseclass.Get will not be updated
+--- You can retrieve all the currently registered ENTS with [scripted_ents.GetList](https://wiki.facepunch.com/gmod/scripted_ents.GetList).
+---
+--- **NOTE**: This is not called after an ENT auto refresh, and thus the inherited baseclass functions retrieved with [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) will not be updated
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/scripted_ents.OnLoaded)
 function scripted_ents.OnLoaded() end

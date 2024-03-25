@@ -9,16 +9,13 @@ saverestore = {}
 ---@param identifier string The unique identifier for this hook.
 ---@param callback fun(save: IRestore) The function to be called when an engine save is being loaded.
 ---
----
+--- Function argument(s):
+--- * IRestore `save` - The restore object to be used to read data from save file that is being loaded.
 ---
 --- You can also use those functions to read data:
 --- * saverestore.ReadVar
 --- * saverestore.ReadTable
 --- * saverestore.LoadEntity
----
---- Function callback arguments are:
---- * IRestore **save** - The restore object to be used to read data from save file that is being loaded.
----
 function saverestore.AddRestoreHook(identifier, callback) end
 
 ---[SHARED] Adds a save hook for the Half-Life 2 save system. You can this to carry data through level transitions in Half-Life 2.
@@ -27,39 +24,42 @@ function saverestore.AddRestoreHook(identifier, callback) end
 ---@param identifier string The unique identifier for this hook.
 ---@param callback fun(save: ISave) The function to be called when an engine save is being saved.
 ---
----
+--- Function argument(s):
+--- * ISave `save` - The save object to be used to write data to the save file that is being saved.
 ---
 --- You can also use those functions to save data:
 --- * saverestore.WriteVar
 --- * saverestore.WriteTable
 --- * saverestore.SaveEntity
----
---- Function callback arguments are:
---- * ISave **save** - The save object to be used to write data to the save file that is being saved.
----
 function saverestore.AddSaveHook(identifier, callback) end
 
----[SHARED] Loads Entity:GetTable from the save game file that is being loaded and merges it with the given entitys Entity:GetTable.
+---[SHARED] Loads [Entity:GetTable](https://wiki.facepunch.com/gmod/Entity:GetTable) from the save game file that is being loaded and merges it with the given entitys [Entity:GetTable](https://wiki.facepunch.com/gmod/Entity:GetTable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.LoadEntity)
 ---@param ent Entity The entity which will receive the loaded values from the save.
 ---@param save IRestore The restore object to read the Entity:GetTable from.
 function saverestore.LoadEntity(ent, save) end
 
----[SHARED] Called by engine when a save is being loaded.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- This handles loading gamemode and calls all of the hooks added with saverestore.AddRestoreHook.
+--- Called by engine when a save is being loaded.
+---
+--- This handles loading gamemode and calls all of the hooks added with [saverestore.AddRestoreHook](https://wiki.facepunch.com/gmod/saverestore.AddRestoreHook).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.LoadGlobal)
 ---@param save IRestore The restore object to read data from the save file with.
 function saverestore.LoadGlobal(save) end
 
----[SHARED] Called by the engine just before saverestore.LoadGlobal is.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Called by the engine just before [saverestore.LoadGlobal](https://wiki.facepunch.com/gmod/saverestore.LoadGlobal) is.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.PreRestore)
 function saverestore.PreRestore() end
 
----[SHARED] Called by the engine just before saverestore.SaveGlobal is.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Called by the engine just before [saverestore.SaveGlobal](https://wiki.facepunch.com/gmod/saverestore.SaveGlobal) is.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.PreSave)
 function saverestore.PreSave() end
@@ -80,16 +80,18 @@ function saverestore.ReadTable(save) end
 ---@return any # The variable that was read, if any.
 function saverestore.ReadVar(save) end
 
----[SHARED] Saves entitys Entity:GetTable to the save game file that is being saved.
+---[SHARED] Saves entitys [Entity:GetTable](https://wiki.facepunch.com/gmod/Entity:GetTable) to the save game file that is being saved.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.SaveEntity)
 ---@param ent Entity The entity to save Entity:GetTable of.
 ---@param save ISave The save object to save Entity:GetTable to.
 function saverestore.SaveEntity(ent, save) end
 
----[SHARED] Called by engine when a save is being saved.
+---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- This handles saving gamemode and calls all of the hooks added with saverestore.AddSaveHook.
+--- Called by engine when a save is being saved.
+---
+--- This handles saving gamemode and calls all of the hooks added with [saverestore.AddSaveHook](https://wiki.facepunch.com/gmod/saverestore.AddSaveHook).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/saverestore.SaveGlobal)
 ---@param save ISave The save object to write data into the save file.
