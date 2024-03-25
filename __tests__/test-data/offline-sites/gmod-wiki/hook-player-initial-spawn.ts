@@ -85,13 +85,15 @@ export const json = {
   description: `
 Called when the player spawns for the first time.
 
-See GM:PlayerSpawn for a hook called every player spawn.
+See [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) for a hook called every player spawn.
 
-This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the Entity:GetModel function will return the default model (\`models/player.mdl\`).
+**NOTE**: This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) function will return the default model (\`models/player.mdl\`).
 
-You can send net messages starting from the player_activate event (see Game_Events).
 
-Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
+**NOTE**: You can send [net](https://wiki.facepunch.com/gmod/net) messages starting from the player_activate event (see [Game_Events](https://wiki.facepunch.com/gmod/Game_Events)).
+
+
+**WARNING**: Due to the above note, sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
 
 Workaround without networking:
 \`\`\`
@@ -148,13 +150,13 @@ GM = {}
 
 ---[SERVER] Called when the player spawns for the first time.
 ---
---- See GM:PlayerSpawn for a hook called every player spawn.
+--- See [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) for a hook called every player spawn.
 ---
---- This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the Entity:GetModel function will return the default model (\`models/player.mdl\`).
+--- **NOTE**: This hook is called before the player has fully loaded, when the player is still in seeing the \`Starting Lua\` screen. For example, trying to use the [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) function will return the default model (\`models/player.mdl\`).
 ---
---- You can send net messages starting from the player_activate event (see Game_Events).
+--- **NOTE**: You can send [net](https://wiki.facepunch.com/gmod/net) messages starting from the player_activate event (see [Game_Events](https://wiki.facepunch.com/gmod/Game_Events)).
 ---
---- Due to the above note, sending net messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
+--- **WARNING**: Due to the above note, sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
 ---
 --- Workaround without networking:
 --- \`\`\`
@@ -172,7 +174,6 @@ GM = {}
 --- end
 --- end)
 --- \`\`\`
----
 ---
 --- With networking:
 --- \`\`\`
