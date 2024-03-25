@@ -1,2 +1,2 @@
----@class ENT : Entity
+---@class ENT : ENTITY
 ENT = {}
