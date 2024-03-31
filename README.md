@@ -30,15 +30,20 @@ This repository scrapes the Garry's Mod Lua API and generates snippets that will
 
 *Alternatively download the latest release and include or symlink it into your workspace. Get the release from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases) it's named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` .*
 
-## 📅 **Automatically up-to-date**
+## 📅 Automatically up-to-date
 
-Using GitHub Actions, this repository is automatically updated every first day of the month at around 00:00 UTC.
+Using GitHub Actions, this repository is automatically updated on the first day of every month at approximately 00:00 UTC.
 
 A workflow will automatically scrape the latest Garry's Mod Lua API from [the Garry's Mod Wiki](https://wiki.facepunch.com/gmod/) and package them into [🔗 a release](https://github.com/luttje/glua-api-snippets/releases).
 
-> **Note**
+> [!NOTE]
 >
-> The Lua Language Server addon may not be 100% up-to-date with the definitions in this repository. You can help us out by updating it for everyone. There are instructions on how to do this in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
+> The Lua Language Server addon might not be immediately updated to align with the definitions in this repository. This delay occurs because we must submit a pull request (PR) to the [Lua Language Server Addons repository (`LuaLS/LLS-Addons`)](https://github.com/LuaLS/LLS-Addons) to update the addon. Subsequently, a maintainer of the `LuaLS/LLS-Addons` repository needs to find time to review and merge the PR.
+>
+> Our schedule for updating our addon with `LuaLS/LLS-Addons` is set for the first day of each even month, specifically: February, April, June, August, October, and December.
+> This schedule is subject to change based on the availability of maintainers and the urgency of the update.
+>
+> If you urgently require the most current definitions from the addon, you can expedite the process by submitting a PR to update it. Instructions for doing so can be found in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
 
 ## 🤖 Advanced Usage
 
