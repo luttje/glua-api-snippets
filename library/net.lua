@@ -198,11 +198,11 @@ function net.ReadType(typeID) end
 --- **WARNING**: You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadUInt)
----@param numberOfBits number The size of the integer to be read, in bits.
+---@param bitCount number The size of the integer to be read, in bits.
 ---
 --- This must be set to what you set to net.WriteUInt. Read more information at net.WriteUInt.
 ---@return number # The unsigned integer read, or `0` if the integer could not be read.
-function net.ReadUInt(numberOfBits) end
+function net.ReadUInt(bitCount) end
 
 ---[SHARED] Reads a unsigned integer with 64 bits from the received net message.
 ---

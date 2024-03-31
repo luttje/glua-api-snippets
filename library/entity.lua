@@ -5548,9 +5548,11 @@ function ENTITY:TaskFinished() end
 ---@return number # How many seconds we've been doing this current task
 function ENTITY:TaskTime() end
 
----[SHARED] Allows you to override trace result when a trace hits the entitys Bounding Box.
+---[SHARED] Allows you to override trace result when a trace hits the entity.
 ---
---- **NOTE**: Your entity must have [Entity:EnableCustomCollisions](https://wiki.facepunch.com/gmod/Entity:EnableCustomCollisions) enabled for this hook to work.
+--- Your entity **must** have [Entity:EnableCustomCollisions](https://wiki.facepunch.com/gmod/Entity:EnableCustomCollisions) enabled for this hook to work.
+---
+--- Your entity must also be otherwise "hit-able" with a trace, so it should have [SOLID_OBB](https://wiki.facepunch.com/gmod/Enums/SOLID#SOLID_OBB) or [SOLID_VPHYSICS](https://wiki.facepunch.com/gmod/Enums/SOLID#SOLID_VPHYSICS) be set (as an example), and it must have its [collision bounds](https://wiki.facepunch.com/gmod/Entity:SetCollisionBounds) be set accordingly.
 ---
 --- **NOTE**: This hook is called for `anim` type only.
 ---
@@ -5558,14 +5560,16 @@ function ENTITY:TaskTime() end
 ---@param startpos Vector Start position of the trace.
 ---@param delta Vector Offset from startpos to the endpos of the trace.
 ---@param isbox boolean Is the trace a hull trace?
----@param extents Vector Size of the hull trace?
+---@param extents Vector Size of the hull trace, with the center of the Bounding Box being `0, 0, 0`, so mins are `-extents`, and maxs are `extents`.
 ---@param mask number The Enums/CONTENTS mask.
----@return table # Returning a `table` will allow you to override trace results. Table should contain the following keys, all optional:
---- * Vector `HitPos` - The new hitpos of the trace.
+---@return table #
+--- Returning a `table` will allow you to override trace results. Table should contain the following keys: (All keys fallback to the original trace value)
+--- * Vector `HitPos` - The new hit position of the trace.
 --- * number `Fraction` - A number from `0` to `1`, describing how far the trace went from its origin point, `1` = did not hit.
+---   * Could be calculated like so : `Fraction = ( startpos + delta ):Length() / myCustomHitPos:Length()`
 --- * Vector `Normal` - A unit vector (length=1) describing the direction perpendicular to the hit surface.
 ---
---- Returning `true` will allow "normal" collisions to happen for `SOLID_VPHYSICS` and `SOLID_BBOX` entities.
+--- Returning `true` will allow "normal" collisions to happen for `SOLID_VPHYSICS` and `SOLID_OBB` entities.
 --- Returning `nothing` or `false` allows the trace to ignore the entity completely.
 function ENTITY:TestCollision(startpos, delta, isbox, extents, mask) end
 

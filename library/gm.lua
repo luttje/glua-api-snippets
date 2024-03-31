@@ -1615,7 +1615,7 @@ function GM:PlayerSilentDeath(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSpawn)
 ---@param player Player The player who spawned.
----@param transition boolean If true, the player just spawned from a map transition. You probably want to not touch player's weapons or positiom if this is set to `true`.
+---@param transition boolean If true, the player just spawned from a map transition. You probably want to not touch player's weapons or position if this is set to `true`.
 function GM:PlayerSpawn(player, transition) end
 
 ---[SERVER] Called to spawn the player as a spectator.

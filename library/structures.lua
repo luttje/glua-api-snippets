@@ -820,6 +820,10 @@ ENT.Instructions = nil
 ---@type number
 ENT.RenderGroup = nil
 
+---If set and RenderGroup is not, will switch the render group to Enums/RENDERGROUP#RENDERGROUP_BOTH when appropriate.
+---@type boolean
+ENT.WantsTranslucency = false
+
 ---Disable the ability for players to duplicate this entity.
 ---@type boolean
 ENT.DisableDuplicator = false

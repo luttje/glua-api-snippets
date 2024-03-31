@@ -161,7 +161,7 @@ function math.Clamp(input, min, max) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.cos)
 ---@param number number Angle in radians
----@return number # Cosine of given angle
+---@return number # Cosine of given angle in the range (-1, 1)
 function math.cos(number) end
 
 ---[SHARED AND MENU] Returns the [hyperbolic cosine](https://en.wikipedia.org/wiki/Cosh_(mathematical_function)) of the given angle.
@@ -655,7 +655,7 @@ function math.Round(value, decimals) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.sin)
 ---@param number number Angle in radians
----@return number # Sine for given angle
+---@return number # Sine for given angle in the range (-1, 1)
 function math.sin(number) end
 
 ---[SHARED AND MENU] Returns the [hyperbolic sine](https://en.wikipedia.org/wiki/Hyperbolic_functions) of the given angle.

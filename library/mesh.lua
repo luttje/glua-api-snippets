@@ -13,8 +13,8 @@ function mesh.AdvanceVertex() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Begin)
 ---@param mesh? IMesh Mesh to build. This argument can be removed if you wish to build a "dynamic" mesh. See examples below.
 ---@param primitiveType number Primitive type, see Enums/MATERIAL.
----@param primiteCount number The amount of primitives.
-function mesh.Begin(mesh, primitiveType, primiteCount) end
+---@param primitiveCount number The amount of primitives this mesh will contain.
+function mesh.Begin(mesh, primitiveType, primitiveCount) end
 
 ---[CLIENT] Sets the color to be used for the next vertex.
 ---

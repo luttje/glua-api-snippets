@@ -1049,7 +1049,7 @@ function Player:GetWeapon(className) end
 function Player:GetWeaponColor() end
 
 ---[SHARED] Returns a table of the player's weapons.
---- 		**NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
+--- 		**NOTE**: This function returns a sequential table. Prefer to loop it with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of the [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapons)
 ---@return table # All the weapons the player currently has.

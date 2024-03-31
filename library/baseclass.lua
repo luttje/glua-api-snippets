@@ -13,6 +13,8 @@ baseclass = {}
 --- local BaseClass = baseclass.Get
 --- ```
 ---
+--- **NOTE**: You should prefer using this instead of `self.BaseClass` to avoid infinite recursion.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/baseclass.Get)
 ---@param name string The child class.
 ---@return table # The base class's meta table.

@@ -57,9 +57,9 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 ---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.
 ---
 --- Function argument(s):
---- * string `body` -
+--- * string `body` - The reponse body as a string.
 --- * string `size` - equal to string.len(body).
---- * table `headers` -
+--- * table `headers` - The response headers as a table.
 --- * number `code` - The HTTP success code.
 ---@param onFailure? fun(error: string) Function to be called on failure.
 ---

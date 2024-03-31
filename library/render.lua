@@ -3,7 +3,9 @@
 --- The render library is a powerful set of functions that let you control how the world and its contents are rendered. It can also be used to draw some 3D clientside effects such as beams, boxes and spheres.
 render = {}
 
----[CLIENT] Adds a beam segment to the beam started by [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
+---[CLIENT] Adds a Beam Segment to the Beam started by [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
+---
+--- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.AddBeam)
 ---@param startPos Vector Beam start position.
@@ -36,6 +38,8 @@ function render.BrushMaterialOverride(mat) end
 --- In PNG mode, this function can produce unexpected result where foreground is rendered as transparent.
 --- This is caused by [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true` when doing most of render operations, including rendering in `_rt_fullframefb`. If you want to capture render target's content as PNG image only for output quality, set [Structures/RenderCaptureData](https://wiki.facepunch.com/gmod/Structures/RenderCaptureData)'s `alpha` to `false` when capturing render targets with [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true`.
 ---
+--- **WARNING**: This function will return nil if escape menu is open
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.Capture)
 ---@param captureData table Parameters of the capture. See Structures/RenderCaptureData.
 ---@return string # binaryData
@@ -66,7 +70,7 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 --- 		**NOTE**: This function does **not** clear the Stencil Buffer on its own.
---- 			If you would like to clear the Stencil Buffer, you will need to set the [Pass Operation](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) to [STENCILOPERATION_ZERO](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION)
+--- 			If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
 ---@param red number
@@ -107,17 +111,23 @@ function render.ClearRenderTarget(texture, color) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearStencil)
 function render.ClearStencil() end
 
----[CLIENT AND MENU] Sets the stencil value in a specified rect.
+---[CLIENT AND MENU] Sets the Stencil Buffer value for every pixel in a given rectangle to a given value.
 ---
 --- This is **not** affected by [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
 ---
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ClearStencilBufferRectangle)
----@param originX number X origin of the rectangle.
----@param originY number Y origin of the rectangle.
----@param endX number The end X coordinate of the rectangle.
----@param endY number The end Y coordinate of the rectangle.
----@param stencilValue number Value to set cleared stencil buffer to.
-function render.ClearStencilBufferRectangle(originX, originY, endX, endY, stencilValue) end
+---@param startX number The X coordinate of the top left corner of the rectangle to be cleared.
+---@param startY number The Y coordinate of the top left corner of the rectangle to be cleared.
+---@param endX number
+--- 			The X coordinate of the bottom right corner of the rectangle to be cleared.
+--- 			**Note:** Unlike some other rectangle-based functions, this is **not** the width of the rectangle.
+---@param endY number
+--- 			The Y coordinate of the bottom right corner of the rectangle to be cleared.
+--- 			**Note:** Unlike some other rectangle-based functions, this is **not** the height of the rectangle.
+---@param stencilBufferValue number The Stencil Buffer value that all pixels within the rectangle will be set to.
+function render.ClearStencilBufferRectangle(startX, startY, endX, endY, stencilBufferValue) end
 
 ---[CLIENT] Calculates the lighting caused by dynamic lights for the specified surface.
 ---
@@ -316,6 +326,8 @@ function render.DrawWireframeSphere(position, radius, longitudeSteps, latitudeSt
 function render.EnableClipping(state) end
 
 ---[CLIENT] Ends the beam mesh of a beam started with [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
+---
+--- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.EndBeam)
 function render.EndBeam() end
@@ -671,7 +683,9 @@ function render.OverrideColorWriteEnable(enable, shouldWrite) end
 ---@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the depth buffer or not. Has no effect if the previous argument is false.
 function render.OverrideDepthEnable(enable, shouldWrite) end
 
----[CLIENT AND MENU] Perform stencil operations to every pixel on the screen.
+---[CLIENT AND MENU] Performs a Stencil operation on every pixel in the active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets) without performing a draw operation.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PerformFullScreenStencilOperation)
 function render.PerformFullScreenStencilOperation() end
@@ -1008,14 +1022,18 @@ function render.SetShadowDistance(shadowDistance) end
 ---@param newState boolean
 function render.SetShadowsDisabled(newState) end
 
----[CLIENT AND MENU] Sets the compare function of the stencil.
+---[CLIENT AND MENU] Sets the Compare Function that all pixels affected by a draw operation will have their Stencil Buffer value tested against.
 ---
---- Pixels which fail the stencil comparison function are not written to the render target. The operation to be performed on the stencil buffer values for these pixels can be set using [render.SetStencilFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation).
+--- When not set to a static value like NEVER or ALWAYS, the Stencil Buffer value corresponding to each affected pixel will be compared against the current [Reference Value](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue).
 ---
---- Pixels which pass the stencil comparison function are written to the render target unless they fail the depth buffer test (where applicable). The operation to perform on the stencil buffer values for these pixels can be set using [render.SetStencilPassOperation](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) and [render.SetStencilZFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation).
+--- Pixels that **Pass** the Compare Function check move on to the Depth Test, which determines if the draw operation will ultimately be allowed to overwrite the pixel's Color Channel, Stencil Buffer, and Depth Buffer values.
+---
+--- Pixels that **Fail** the Compare Function check have the [Fail Operation](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation) performed on their Stencil Buffer value and do **not** have any of their Render Target layers modified by the draw operation.
+---
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction)
----@param compareFunction number Compare function, see Enums/STENCILCOMPARISONFUNCTION, and Enums/STENCIL for short.
+---@param compareFunction Enums/STENCILCOMPARISONFUNCTION The Compare Function that each affected pixel's Stencil Buffer value will be evaluated against during a draw operation.
 function render.SetStencilCompareFunction(compareFunction) end
 
 ---[CLIENT AND MENU] Enables or disables the Stencil system for future draw operations.
@@ -1033,41 +1051,69 @@ function render.SetStencilCompareFunction(compareFunction) end
 ---@param newState boolean The new state.
 function render.SetStencilEnable(newState) end
 
----[CLIENT AND MENU] Sets the operation to be performed on the stencil buffer values if the compare function was not successful.
---- Note that this takes place **before** depth testing.
+---[CLIENT AND MENU] Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) did **not** [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) the pixel.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation)
----@param failOperation number Fail operation function, see Enums/STENCILOPERATION.
+---@param failOperation Enums/STENCILOPERATION
+--- 			The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
 function render.SetStencilFailOperation(failOperation) end
 
----[CLIENT AND MENU] Sets the operation to be performed on the stencil buffer values if the compare function was successful.
+---[CLIENT AND MENU] Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passes the pixel.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation)
----@param passOperation number Pass operation function, see Enums/STENCILOPERATION.
+---@param passOperation Enums/STENCILOPERATION
+--- 			The Stencil Operation to be performed if the Compare Function Passes a pixel.
 function render.SetStencilPassOperation(passOperation) end
 
----[CLIENT AND MENU] Sets the reference value which will be used for all stencil operations. This is an unsigned integer.
+---[CLIENT AND MENU] Sets the Stencil system's Reference Value which is compared against each pixel's corresponding Stencil Buffer value in the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) and can be used to modify the Stencil Buffer value of those same pixels in the [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [Fail](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation), and [Z Fail](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation) operations.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue)
----@param referenceValue number Reference value.
+---@param referenceValue number
+--- 			The value that the Compare function and the pass, fail, and z-fail operations will use.
+--- 			This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`]
 function render.SetStencilReferenceValue(referenceValue) end
 
----[CLIENT AND MENU] Sets the unsigned 8-bit test bitflag mask that will be bitwise ANDed with all values as they are read from the Stencil Buffer
+---[CLIENT AND MENU] Sets the unsigned 8-bit (`byte`) bitflag mask that will be bitwise ANDed with all values as they are read (tested) from the Stencil Buffer
+---
+--- 		This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
+---
+--- 		This is a companion function to [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask) which modifies Stencil Buffer values as they are written.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilTestMask)
----@param mask number The mask bitflag.
-function render.SetStencilTestMask(mask) end
+---@param bitMask number
+--- 			The 8-bit (`byte`) mask
+--- 			Set to `255` to make no change to read Stencil Buffer values.
+function render.SetStencilTestMask(bitMask) end
 
----[CLIENT AND MENU] Sets the unsigned 8-bit write bitflag mask that will be bitwise ANDed with any value that is written to the Stencil Buffer.
+---[CLIENT AND MENU] Sets the unsigned 8-bit (`byte`) bitflag mask that will be bitwise ANDed with all values as they are written to the Stencil Buffer
+---
+--- 		This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
+---
+--- 		This is a companion function to [render.SetStencilTestMask](https://wiki.facepunch.com/gmod/render.SetStencilTestMask) which modifies Stencil Buffer values as they are read.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
----@param mask number The mask bitflag.
-function render.SetStencilWriteMask(mask) end
+---@param bitMask number
+--- 			The 8-bit (`byte`) mask
+--- 			Set to `255` to make no change to written Stencil Buffer values.
+function render.SetStencilWriteMask(bitMask) end
 
----[CLIENT AND MENU] Sets the operation to be performed on the stencil buffer values if the stencil test is passed but the depth buffer test fails.
+---[CLIENT AND MENU] Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passed a given pixel, but it did **not** Pass the Depth Test.
+---
+--- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation)
----@param zFailOperation number Z fail operation function, see Enums/STENCILOPERATION
+---@param zFailOperation Enums/STENCILOPERATION
+--- 			The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
 function render.SetStencilZFailOperation(zFailOperation) end
 
 ---[CLIENT]
@@ -1104,7 +1150,7 @@ function render.Spin() end
 
 ---[CLIENT] Begin drawing a multi-segment Beam.
 ---
---- 	For more detailed information, including usage examples, see the [Beams Rendering Reference](https://wiki.facepunch.com/gmod/Beam_Rendering)
+--- 			For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.StartBeam)
 ---@param segmentCount number The number of Beam Segments that this multi-segment Beam will contain

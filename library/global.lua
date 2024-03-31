@@ -55,7 +55,9 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 --- Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
 function _G.AddCSLuaFile(file) end
 
----[CLIENT AND MENU] Loads the specified image from the `/cache` folder, used in combination [steamworks.Download](https://wiki.facepunch.com/gmod/steamworks.Download). Most addons will provide a 512x512 png image.
+---[CLIENT AND MENU] Loads the specified image from the `/cache` folder, used in combination with [steamworks.Download](https://wiki.facepunch.com/gmod/steamworks.Download). Most addons will provide a 512x512 png image.
+---
+--- **NOTE**: This works with any image file with the `.cache` file extension, even outside of the `/cache` folder.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.AddonMaterial)
 ---@param name string The name of the file.
@@ -1976,18 +1978,22 @@ function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 --- **WARNING**: This function is very expensive when used in rendering hooks or in operations requiring very frequent calls. It is better to store the Material in a variable (like in the examples).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Material)
----@param materialName string The material name or path. The path is relative to the `materials/` folder. You do not need to add `materials/` to your path.
+---@param materialName string The material name or path.
 ---
 --- To retrieve a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
 ---
---- Since paths are relative to the materials folder, resource paths like ../data/MyImage.jpg will work since `..` translates to moving up a parent directory in the file tree.
+--- You do not need to add `materials/` to your path if the material file is inside the `materials/` folder.
 ---
---- Note that the maps folder is excluded, so things like map thumbnails can't be made into materials.
+--- Paths outside the `materials/` folder like `data/MyImage.jpg` or `maps/thumb/gm_construct.png` will also work.
+---
+--- PNG, JPEG, GIF, and TGA files will work, but only if they have the `.png` or `.jpg` file extensions (even if the actual image format doesn't match the file extension)
+---
+--- Use [Global.AddonMaterial](https://wiki.facepunch.com/gmod/Global.AddonMaterial) for image files with the `.cache` file extension.
 ---@param pngParameters? string A string containing space separated keywords which will be used to add material parameters.
 ---
 --- See Material Parameters for more information.
 ---
---- This feature only works when importing .png or .jpeg image files.
+--- This feature only works when importing .png or .jpg image files.
 ---@return IMaterial # Generated material.
 ---@return number # How long it took for the function to run.
 function _G.Material(materialName, pngParameters) end
