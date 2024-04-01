@@ -127,6 +127,8 @@ function player.GetHumans() end
 ---
 --- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
+--- **WARNING**: Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your player.GetAll usages may come with unintended side effects because of this.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
 ---@return table # Table of all existing Player.  This is a cached copy of player.GetAll
