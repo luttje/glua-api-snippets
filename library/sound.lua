@@ -7,6 +7,8 @@ sound = {}
 ---
 --- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common Sounds).
 ---
+--- A list of sound scripts can be retrieved with [sound.GetTable](https://wiki.facepunch.com/gmod/sound.GetTable).
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
 ---@param soundData table The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
@@ -20,11 +22,11 @@ function sound.AddSoundOverrides(filepath) end
 ---[SERVER] Emits a sound hint to the game elements to react to, for example to repel or attract antlions.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.EmitHint)
----@param hint number The hint to emit. See Enums/SOUND
+---@param hint number The hint to emit. This can be a bit flag. See Enums/SOUND
 ---@param pos Vector The position to emit the hint at
 ---@param volume number The volume or radius of the hint
 ---@param duration number The duration of the hint in seconds
----@param owner? Entity
+---@param owner? Entity If set, the sound hint will be ignored/deleted when the given entity is destroyed.
 function sound.EmitHint(hint, pos, volume, duration, owner) end
 
 ---[CLIENT] Creates a sound from a function.
@@ -62,6 +64,8 @@ function sound.GetLoudestSoundHint(types, pos) end
 function sound.GetProperties(name) end
 
 ---[SHARED] Returns a list of all registered sound scripts.
+---
+--- New ones can be registered using [sound.Add](https://wiki.facepunch.com/gmod/sound.Add), and detailed information about each one can be retrieved via [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
 ---@return table # The list/array of all registered sound scripts ( No other information is provided )

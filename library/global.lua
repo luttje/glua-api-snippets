@@ -105,7 +105,7 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 --- 			In cases where an empty [Angle](https://wiki.facepunch.com/gmod/Angle) is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch? number
+---@param pitch number
 --- 			The pitch value of the angle, in degrees.
 ---@param yaw? number
 --- 			The yaw value of the angle, in degrees.
@@ -469,7 +469,7 @@ function _G.CreatePhysCollidesFromModel(modelName) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateSound)
 ---@param targetEnt Entity The target entity.
----@param soundName string The sound to play.
+---@param soundName string The sound to play. (Sound path or a sound.Add) [Soundscript Characters](https://developer.valvesoftware.com/wiki/Soundscripts/en#Sound_Characters) are supported.
 ---@param filter? CRecipientFilter A CRecipientFilter of the players that will have this sound networked to them.
 ---
 --- If not set, the default is a [CPASAttenuationFilter](https://developer.valvesoftware.com/wiki/CRecipientFilter#Derived_classes).
@@ -487,7 +487,7 @@ function _G.CreateSprite(material) end
 
 ---[SHARED AND MENU] Returns the uptime of the server in seconds (to at least 4 decimal places)
 ---
---- This is a synchronised value and affected by various factors such as host_timescale (or [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale)) and the server being paused - either by sv_pausable or all players disconnecting.
+--- This is a synchronised value and affected by various factors such as host_timescale (or [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale)) and the server being paused - either by `sv_pausable` or all players disconnecting.
 ---
 --- You should use this function for timing in-game events but not for real-world events.
 ---
@@ -518,16 +518,19 @@ function _G.DamageInfo() end
 ---@param info string The debugging information to be written to the screen
 function _G.DebugInfo(slot, info) end
 
----[SHARED AND MENU] This is not a function. This is a preprocessor keyword that translates to:
+---[SHARED AND MENU] A preprocessor keyword that is directly replaced with the following text:
+--- ```lua
+--- local BaseClass = baseclass.Get
 --- ```
---- local BaseClass = baseclass.Get( "my_weapon" )
---- ```
---- If you type `DEFINE_BASECLASS( "my_weapon" )` in your script.
+---
+--- Because this is a simple preprocessor keyword and not a function, it will cause problems if not used properly
 ---
 --- See [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) for more information.
 --- 	**WARNING**: The preprocessor is not smart enough to know when substitution doesn't make sense, such as: table keys and strings.
 ---
 --- Running `print("DEFINE_BASECLASS")` will result in `local BaseClass = baseclass.Get`
+---
+--- For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DEFINE_BASECLASS)
 ---@param value string Baseclass name
@@ -1001,11 +1004,15 @@ function _G.FindTooltip(panel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireAddonConflicts)
 function _G.FireAddonConflicts() end
 
----[MENU] Fires a Problem with the given Data.
+---[MENU] Creates a problem from the given definition.
+---
+--- 		**NOTE**: Existing problems with the same Id will be replaced / overridden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblem)
----@param prob table The Problem table. See Structures/Problem
-function _G.FireProblem(prob) end
+---@param problem Structures/Problem
+---
+--- 			The problem's definition.
+function _G.FireProblem(problem) end
 
 ---[MENU] **INTERNAL**: Internally uses [Global.FireProblem](https://wiki.facepunch.com/gmod/Global.FireProblem) to create / fire the Problem.
 ---
@@ -1971,29 +1978,30 @@ function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 
 ---[SHARED AND MENU] Either returns the material with the given name, or loads the material interpreting the first argument as the path.
 ---
---- **NOTE**: When using .png or .jpg textures, try to make their sizes Power Of 2 (1, 2, 4, 8, 16, 32, 64, etc). While images are no longer scaled to Power of 2 sizes since February 2019, it is a good practice for things like icons, etc.
+--- ## .png, .jpg and other image formats
 ---
---- **NOTE**: Server-side, the Material function can consistently return an invalid material (with '__error') depending on the file type loaded; however, .vtf and .vmt files appear unaffected.
----
---- **WARNING**: This function is very expensive when used in rendering hooks or in operations requiring very frequent calls. It is better to store the Material in a variable (like in the examples).
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Material)
----@param materialName string The material name or path.
----
---- To retrieve a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
----
---- You do not need to add `materials/` to your path if the material file is inside the `materials/` folder.
----
---- Paths outside the `materials/` folder like `data/MyImage.jpg` or `maps/thumb/gm_construct.png` will also work.
+--- This function is capable to loading `.png` or `.jpg` images, generating a texture and material for them on the fly.
 ---
 --- PNG, JPEG, GIF, and TGA files will work, but only if they have the `.png` or `.jpg` file extensions (even if the actual image format doesn't match the file extension)
 ---
---- Use [Global.AddonMaterial](https://wiki.facepunch.com/gmod/Global.AddonMaterial) for image files with the `.cache` file extension.
+--- Use [Global.AddonMaterial](https://wiki.facepunch.com/gmod/Global.AddonMaterial) for image files with the `.cache` file extension. (from [steamworks.Download](https://wiki.facepunch.com/gmod/steamworks.Download))
+---
+--- While images are no longer scaled to Power of 2 (sizes of 8, 16, 32, 64, 128, etc.) sizes since February 2019, it is still a good practice for things like icons, etc.
+---
+--- **WARNING**: Server-side, this function can consistently return an invalid material (with '__error') depending on the file type loaded.
+---
+--- **WARNING**: This function is very expensive when used in rendering hooks or in operations requiring very frequent calls. It is a good idea to cache the material in a variable (like in the examples).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Material)
+---@param materialName string The material name or path relative to the `materials/` folder.
+--- Paths outside the `materials/` folder like `data/MyImage.jpg` or `maps/thumb/gm_construct.png` will also work for when generating materials.
+---
+--- To retrieve a Lua material created with Global.CreateMaterial, just prepend a `!` to the material name.
 ---@param pngParameters? string A string containing space separated keywords which will be used to add material parameters.
 ---
 --- See Material Parameters for more information.
 ---
---- This feature only works when importing .png or .jpg image files.
+--- This feature only works when importing `.png` or `.jpg` image files.
 ---@return IMaterial # Generated material.
 ---@return number # How long it took for the function to run.
 function _G.Material(materialName, pngParameters) end
@@ -2320,8 +2328,9 @@ function _G.ProjectedTexture() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ProtectedCall)
 ---@param func function Function to run
+---@param ... any Arguments to call the function with.
 ---@return boolean # Whether the function executed successfully or not
-function _G.ProtectedCall(func) end
+function _G.ProtectedCall(func, ...) end
 
 ---[SHARED AND MENU] Returns an iterator function that can be used to loop through a table in random order
 ---
@@ -2503,7 +2512,7 @@ function _G.RestoreCursorPosition() end
 function _G.RunConsoleCommand(command, ...) end
 
 ---[MENU] Runs a menu command. Equivalent to [Global.RunConsoleCommand](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand)`( "gamemenucommand", command )` unless the command starts with the `"engine"` keyword in which case it is equivalent to [Global.RunConsoleCommand](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand)`( command )`.
---- **NOTE**: Invoking engine commands no longer works, prints out `Not running engine cmd 'concommand'`
+--- **WARNING**: Invoking engine commands no longer works, prints out `Not running engine cmd 'concommand'`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RunGameUICommand)
 ---@param command string The menu command to run

@@ -1,13 +1,30 @@
 ---@meta
 
---- Used to store permanent variables/settings on clients that will persist between servers. They are stored in the `cl.db`, `sv.db`, or `mn.db` SQLite databases depending on the realm, located in the root Garry's Mod folder.
+--- Functions to persist data on a user's computer.
+---
+--- 		The data will be read / written to / from a database
+--- 		corresponding to the realm the library was used in.
+---
+--- 		| Realm | Database File |
+--- 		|:-----:|:-----|
+--- 		| [Server] | `garrysmod/sv.db`
+--- 		| [Client] | `garrysmod/cl.db`
+--- 		|  [Menu]  | `garrysmod/mn.db`
+---
+--- 		[Server]: /gmod/States#server
+--- 		[Client]: /gmod/States#client
+--- 		[Menu]: /gmod/States#menu
 cookie = {}
 
----[SHARED AND MENU] Deletes a cookie on the client.
+---[SHARED AND MENU] Removes any cookie with the given name.
+---
+--- 		Does nothing if the cookie doesn't exist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cookie.Delete)
----@param name string The name of the cookie that you want to delete.
-function cookie.Delete(name) end
+---@param key string
+---
+--- 			The name of the cookie that you want to delete.
+function cookie.Delete(key) end
 
 ---[SHARED AND MENU] Gets the value of a cookie on the client as a number.
 ---
@@ -25,11 +42,13 @@ function cookie.GetNumber(name, default) end
 ---@return string # The cookie value
 function cookie.GetString(name, default) end
 
----[SHARED AND MENU] Sets the value of a cookie, which is saved automatically by the [sql](https://wiki.facepunch.com/gmod/sql).
----
---- These are stored in the *.db files - cl.db for clients, mn.db for menu state and sv.db for servers.
+---[SHARED AND MENU] Creates / updates a cookie in the [Database](https://wiki.facepunch.com/gmod/cookie).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cookie.Set)
----@param key string The name of the cookie that you want to set.
----@param value string Value to store in the cookie.
+---@param key string
+---
+--- 			The name of the cookie.
+---@param value string
+---
+--- 			The data stored in the cookie.
 function cookie.Set(key, value) end

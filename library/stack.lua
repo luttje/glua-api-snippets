@@ -12,7 +12,7 @@ local Stack = {}
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Stack:Pop)
 ---@param amount? number Amount of items you want to pop.
----@return number # New length of the stack.
+---@return any # Latest popped item.
 function Stack:Pop(amount) end
 
 ---[SHARED AND MENU] Pop an item from the stack

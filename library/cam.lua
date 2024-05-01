@@ -114,7 +114,7 @@ function cam.Start2D() end
 ---@param zFar? number Distance to far clipping plane.
 function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 
----[CLIENT] Sets up a new 2D rendering context. Must be finished by [cam.End3D2D](https://wiki.facepunch.com/gmod/cam.End3D2D). This function pushes a new matrix onto the stack. ([cam.PushModelMatrix](https://wiki.facepunch.com/gmod/cam.PushModelMatrix))
+---[CLIENT] Sets up the model transformation matrix to draw 2D content in 3D space and pushes it into the stack ([cam.PushModelMatrix](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)).
 ---
 --- Matrix formula:
 --- ```
@@ -123,8 +123,7 @@ function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 --- m:SetTranslation(pos)
 --- m:SetScale(Vector(scale, -scale, 1))
 --- ```
----
---- **WARNING**: This should be closed by [cam.End3D2D](https://wiki.facepunch.com/gmod/cam.End3D2D) otherwise the game crashes
+--- **WARNING**: This must be closed by [cam.End3D2D](https://wiki.facepunch.com/gmod/cam.End3D2D). If not done so, unexpected issues might arise.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.Start3D2D)
 ---@param pos Vector Origin of the 3D2D context, ie. the top left corner, (0, 0).

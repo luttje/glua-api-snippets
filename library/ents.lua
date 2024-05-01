@@ -192,11 +192,12 @@ function ents.GetMapCreatedEntity(id) end
 ---
 --- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
---- **WARNING**: Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your ents.GetAll usages may come with unintended side effects because of this.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
 ---@return table # Table of all existing Entity.  This is a cached copy of ents.GetAll
+--- This table is intended to be read-only.
+---
+--- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your ents.GetAll usages may come with unintended side effects because of this.
 ---@return number #
 --- 			The starting index for the table of players.
 --- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)

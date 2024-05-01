@@ -767,6 +767,8 @@ function GM:IsSpawnpointSuitable(ply, spawnpoint, makeSuitable) end
 ---
 --- For a more general purpose function that handles all kinds of input, see [GM:PlayerButtonDown](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown).
 ---
+--- Despite being a predicted hook, it will still be called in singleplayer for your convenience.
+---
 --- **WARNING**: Due to this being a predicted hook, [Global.ParticleEffect](https://wiki.facepunch.com/gmod/Global.ParticleEffect)s created only serverside from this hook will not be networked to the client, so make sure to do that on both realms.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:KeyPress)
@@ -777,6 +779,8 @@ function GM:KeyPress(ply, key) end
 ---[SHARED] Runs when a IN key was released by a player.
 ---
 --- For a more general purpose function that handles all kinds of input, see [GM:PlayerButtonUp](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp).
+---
+--- Despite being a predicted hook, it will still be called in singleplayer for your convenience.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:KeyRelease)
 ---@param ply Player The player releasing the key. If running client-side, this will always be Global.LocalPlayer.

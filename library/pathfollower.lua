@@ -16,7 +16,7 @@ function PathFollower:Chase(bot, ent) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Compute)
 ---@param bot NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
 ---@param goal Vector The target location, the goal.
----@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A funtion that allows you to alter the path generation. See example below for the default function.
+---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example below for the default function.
 ---
 --- Function argument(s):
 --- * CNavArea `area` - The area to move to.

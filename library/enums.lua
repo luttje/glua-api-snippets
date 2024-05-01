@@ -1819,75 +1819,162 @@ CHAN_USER_BASE = 136
 ---@enum CLASS
 --- None - default class for entities.
 CLASS_NONE = 0
---- Players.
+--- Players
 CLASS_PLAYER = 1
---- HL2 player allies - monster_barney, npc_citizen, hacked npc_manhack, and friendly npc_turret_floor.
+--- HL2 - **Allies**
+--- 			- `monster_barney`
+--- 			- `npc_citizen`
+--- 			- `npc_manhack` ( Hacked )
+--- 			- `npc_turret_floor` ( Friendly )
 CLASS_PLAYER_ALLY = 2
---- HL2 vital player allies - npc_magnusson, npc_gman, npc_fisherman, npc_eli, npc_barney, npc_kleiner, npc_mossman, npc_alyx, npc_monk, npc_dog, and npc_vortigaunt at the end of EP2 (controlled by "MakeGameEndAlly" input).
+--- HL2 - **Vital Allies**
+--- 			- `npc_magnusson`
+--- 			- `npc_gman`
+--- 			- `npc_fisherman`
+--- 			- `npc_eli`
+--- 			- `npc_barney`
+--- 			- `npc_kleiner`
+--- 			- `npc_mossman`
+--- 			- `npc_alyx`
+--- 			- `npc_monk`
+--- 			- `npc_dog`
+--- 			- `npc_vortigaunt` at the end of EP2 (controlled by `MakeGameEndAlly` input)
 CLASS_PLAYER_ALLY_VITAL = 3
---- HL2 antlions - npc_antlion, npc_antlionguard, and npc_ichthyosaur.
+--- HL2 - **Antlions**
+--- 			- `npc_antlion`
+--- 			- `npc_antlionguard`
+--- 			- `npc_antlionguard`
 CLASS_ANTLION = 4
---- HL2 barnacles - npc_barnacle.
+--- HL2 - **Barnacles**
+--- 			- `npc_barnacle`
 CLASS_BARNACLE = 5
---- HL2 bullseyes - npc_bullseye.
+--- HL2 - **Bullseyes**
+--- 			- `npc_bullseye`
 CLASS_BULLSEYE = 6
---- HL2 passive/non-rebel citizens - npc_citizen in the beginning of HL2.
+--- HL2 - **Passive / Non-Rebel Citizens**
+--- 			- `npc_citizen` in the beginning of HL2.
 CLASS_CITIZEN_PASSIVE = 7
---- HL2 unused.
+--- HL2 -  Unused
 CLASS_CITIZEN_REBEL = 8
---- HL2 combine troops - npc_combine, npc_advisor, apc_missile, npc_apcdriver, hostile npc_turret_floor, hostile npc_rollermine, npc_turret_ground when active, npc_turret_ceiling when active, and npc_strider when active (not being carried by the gunship).
+--- HL2 - **Combine Troops**
+--- 			- `npc_combine`
+--- 			- `npc_advisor`
+--- 			- `apc_missile`
+--- 			- `npc_apcdriver`
+--- 			- `npc_turret_floor` ( Hostile )
+--- 			- `npc_rollermine` ( Hostile )
+--- 			- `npc_turret_ground` ( Active )
+--- 			- `npc_turret_ceiling` ( Active )
+--- 			- `npc_strider` ( Active - Not being carried by the gunship )
 CLASS_COMBINE = 9
---- HL2 combine aircrafts - npc_combinegunship, npc_combinedropship, and npc_helicopter.
+--- HL2 - **Combine Aircrafts**
+--- 			- `npc_combinegunship`
+--- 			- `npc_combinedropship`
+--- 			- `npc_helicopter`
 CLASS_COMBINE_GUNSHIP = 10
---- HL2 unused.
+--- HL2 -  Unused
 CLASS_CONSCRIPT = 11
---- HL2 headcrabs - visible npc_headcrab.
+--- HL2 - **Headcrabs**
+--- 			- `npc_headcrab` ( Visible )
 CLASS_HEADCRAB = 12
---- HL2 manhacks - hostile npc_manhack not held by the gravity gun.
+--- HL2 - **Manhacks**
+--- 			- `npc_manhack` ( Hostile - Not held by the gravity gun )
 CLASS_MANHACK = 13
---- HL2 metro police - npc_metropolice and npc_vehicledriver.
+--- HL2 - **Metro Police**
+--- 			- `npc_metropolice`
+--- 			- `npc_vehicledriver`
 CLASS_METROPOLICE = 14
---- HL2 combine military objects - func_guntarget, npc_spotlight, and active npc_combine_camera.
+--- HL2 - **Combine Military Objects**
+--- 			- `func_guntarget`
+--- 			- `npc_spotlight`
+--- 			- `npc_combine_camera` ( Active )
 CLASS_MILITARY = 15
---- HL2 combine scanners - npc_cscanner and npc_clawscanner.
+--- HL2 - **Combine Scanners**
+--- 			- `npc_cscanner`
+--- 			- `npc_clawscanner`
 CLASS_SCANNER = 16
---- HL2 stalkers - npc_stalker.
+--- HL2 - **Stalkers**
+--- 			- `npc_stalker`
 CLASS_STALKER = 17
---- HL2 vortigaunts - npc_vortigaunt before the end of EP2 (controlled by "MakeGameEndAlly" input).
+--- HL2 - **Vortigaunts**
+--- 			- `npc_vortigaunt` before the end of EP2 ( Controlled by `MakeGameEndAlly` input )
 CLASS_VORTIGAUNT = 18
---- HL2 zombies - unslumped npc_zombie, npc_poisonzombie, npc_fastzombie, npc_fastzombie_torso, and npc_zombine.
+--- HL2 - **Zombies**
+--- 			- `npc_zombie` ( Unslumped )
+--- 			- `npc_poisonzombie`
+--- 			- `npc_fastzombie`
+--- 			- `npc_fastzombie_torso`
+--- 			- `npc_zombine`
 CLASS_ZOMBIE = 19
---- HL2 snipers - npc_sniper and proto_sniper.
+--- HL2 - **Snipers**
+--- 			- `npc_sniper`
+--- 			- `proto_sniper`
 CLASS_PROTOSNIPER = 20
---- HL2 missiles - rpg_missile, apc_missile, and grenade_pathfollower.
+--- HL2 - **Missiles**
+--- 			- `rpg_missile`
+--- 			- `apc_missile`
+--- 			- `grenade_pathfollower`
 CLASS_MISSILE = 21
---- HL2 flares - env_flare.
+--- HL2 - **Flares**
+--- 			- `env_flare`
 CLASS_FLARE = 22
---- HL2 animals - npc_crow, npc_seagull, and npc_pigeon.
+--- HL2 - **Animals**
+--- 			- `npc_crow`
+--- 			- `npc_seagull`
+--- 			- `npc_pigeon`
 CLASS_EARTH_FAUNA = 23
---- HL2 friendly rollermines - hacked npc_rollermine.
+--- HL2 - **Friendly Rollermines**
+--- 			- `npc_rollermine` ( Hacked )
 CLASS_HACKED_ROLLERMINE = 24
---- HL2 hunters - npc_hunter.
+--- HL2 - **Hunters**
+--- 			- `npc_hunter`
 CLASS_COMBINE_HUNTER = 25
---- HL:S turrets - monster_turret, monster_miniturret, monster_sentry.
+--- HL:S - **Turrets**
+--- 			- `monster_turret`
+--- 			- `monster_miniturret`
+--- 			- `monster_sentry`
 CLASS_MACHINE = 26
---- HL:S friendly humans - monster_scientist.
+--- HL:S - **Friendly Humans**
+--- 			- `monster_scientist`
 CLASS_HUMAN_PASSIVE = 27
---- HL:S human military - monster_human_grunt and monster_apache.
+--- HL:S - **Human Military**
+--- 			- `monster_human_grunt`
+--- 			- `monster_apache`
 CLASS_HUMAN_MILITARY = 28
---- HL:S alien military - monster_alien_controller, monster_vortigaunt, monster_alien_grunt, monster_nihilanth, and monster_snark if it has an enemy of class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
+--- HL:S - **Alien Military**
+--- 			- `monster_alien_controller`
+--- 			- `monster_vortigaunt`
+--- 			- `monster_alien_grunt`
+--- 			- `monster_nihilanth`
+--- 			- `monster_snark` if it has an enemy of class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
 CLASS_ALIEN_MILITARY = 29
---- HL:S monsters - monster_tentacle, monster_barnacle, monster_zombie, monster_gargantua, monster_houndeye, monster_ichthyosaur, and monster_bigmomma.
+--- HL:S - **Monsters**
+--- 			- `monster_tentacle`
+--- 			- `monster_barnacle`
+--- 			- `monster_zombie`
+--- 			- `monster_gargantua`
+--- 			- `monster_houndeye`
+--- 			- `monster_ichthyosaur`
+--- 			- `monster_bigmomma`
 CLASS_ALIEN_MONSTER = 30
---- HL:S headcrabs - monster_headcrab.
+--- HL:S - **Headcrabs**
+--- 			- `monster_headcrab`
 CLASS_ALIEN_PREY = 31
---- HL:S alien predators - monster_bullsquid, xen_tree, and xen_hull.
+--- HL:S - **Alien Predators**
+--- 			- `monster_bullsquid`
+--- 			- `xen_tree`
+--- 			- `xen_hull`
 CLASS_ALIEN_PREDATOR = 32
---- HL:S insects - montser_roach and monster_leech.
+--- HL:S - **Insects**
+--- 			- `montser_roach`
+--- 			- `monster_leech`
 CLASS_INSECT = 33
---- HL:S player bioweapons - hornet fired by a player.
+--- HL:S - **Player Bioweapons**
+--- 			- `hornet` fired by a player
 CLASS_PLAYER_BIOWEAPON = 34
---- HL:S enemy bioweapons - hornet fired by anyone but a player, or monster_snark with no enemy or an enemy without the class CLASS_PLAYER, CLASS_HUMAN_PASSIVE, or CLASS_HUMAN_MILITARY.
+--- HL:S - **Enemy Bioweapons**
+--- 			- `horne`t fired by anyone but a player
+--- 			- `monster_snark` with no enemy or an enemy without the class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
 CLASS_ALIEN_BIOWEAPON = 35
 
 ---@enum COLLISION_GROUP
@@ -3116,7 +3203,23 @@ MOVETYPE_FLY = 4
 MOVETYPE_FLYGRAVITY = 5
 --- Physics movetype
 MOVETYPE_VPHYSICS = 6
---- No clip to world, but pushes and crushes things. Need ent:SetSaveValue("m_flMoveDoneTime", somenumberbiggerthancurtime) or the entity won't move.
+--- Doesn't collide with the world, but does push and crush entities.
+--- 	This is what is used by the engine for elevators, trains, doors, moving water, etc.
+---
+--- 	In order to work properly, the entity needs to have specific Save Values/Internal Variables set which tell it how long it should be moving for.
+---
+--- 	**Note:** This same process can be done for both position and angle.
+---
+--- 	1. You'll need to [Get an existing Save Value](https://wiki.facepunch.com/gmod/Entity:GetInternalVariable) called `ltime`
+--- 	2. Calculate how long (in seconds) the entity will be moving before it reaches its destination.
+--- 	As a simple example, this can be done via `duration = distance / speed`
+--- 	3. [Set the Save Value](https://wiki.facepunch.com/gmod/Entity:SetSaveValue) for `m_flMoveDoneTime` to the value you retrieved for `ltime` plus the duration calculated in step 2.
+--- 	Put more simply: `m_flMoveDoneTime = ltime + duration`
+--- 	4. Set the entity's velocity to move it to the destination at the speed used in step 2.
+---
+--- 	Once the duration of the move has elapsed, the entity will stop moving.  If you have done your calculations correctly, it should stop exactly at the desired destination.
+---
+--- 	**NOTE**: MOVETYPE_PUSH entities only move during [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) so if you want smooth movement, you need to set [Entity:NextThink](https://wiki.facepunch.com/gmod/Entity:NextThink) to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime), which instructs the entity to execute [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) as quickly as possible.
 MOVETYPE_PUSH = 7
 --- Noclip
 MOVETYPE_NOCLIP = 8

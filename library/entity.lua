@@ -38,8 +38,6 @@ function ENTITY:AcceptInput(inputName, activator, caller, data) end
 ---
 --- Calling this method after [Entity:SetModelScale](https://wiki.facepunch.com/gmod/Entity:SetModelScale) will recreate a new scaled `SOLID_VPHYSICS` [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) on scripted entities. This can be a problem if you made a properly scaled [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) of another kind (using [Entity:PhysicsInitSphere](https://wiki.facepunch.com/gmod/Entity:PhysicsInitSphere) for instance) or if you edited the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)'s properties. This is especially the behavior of the Sandbox spawn menu.
 ---
---- This crashes the game with scaled vehicles.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:Activate)
 function Entity:Activate() end
 
@@ -872,7 +870,7 @@ function Entity:GetBoneName(index) end
 --- **NOTE**: Will return -1 for [Global.ClientsideModel](https://wiki.facepunch.com/gmod/Global.ClientsideModel) until [Entity:SetupBones](https://wiki.facepunch.com/gmod/Entity:SetupBones) is called on the entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBoneParent)
----@param bone number The bode ID of the bone to get parent of, starting at index 0.
+---@param bone number The bone ID of the bone to get parent of, starting at index 0.
 ---@return number # Parent bone ID or -1 if we failed for some reason.
 function Entity:GetBoneParent(bone) end
 
@@ -1753,7 +1751,7 @@ function Entity:GetNetworkOrigin() end
 
 ---[SHARED] Returns all network vars created by [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) and [Entity:NetworkVarElement](https://wiki.facepunch.com/gmod/Entity:NetworkVarElement) and their current values.
 ---
---- 		This is used internally by the duplicator.
+--- 		This is used internally by the duplicator. `Entity` type Network vars will not be returned!
 ---
 --- 		For NWVars see [Entity:GetNWVarTable](https://wiki.facepunch.com/gmod/Entity:GetNWVarTable).
 ---
@@ -1969,12 +1967,14 @@ function Entity:GetOwner() end
 ---@return Entity # parentEntity
 function Entity:GetParent() end
 
----[SHARED] Returns the attachment index of the entity's parent. Returns 0 if the entity is not parented to a specific attachment or if it isn't parented at all.
+---[SHARED] Returns the attachment/bone index of the entity's parent. Returns 0 if the entity is not parented to an attachment/bone or if it isn't parented at all.
 ---
 --- This is set by second argument of [Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent) or the **SetParentAttachment** input.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetParentAttachment)
----@return number # The parented attachment index
+---@return number #
+--- The parented attachment/bone index
+--- Will return bone index instead of attachment index if the **EF_FOLLOWBONE** effect is active on the entity. See [Entity:IsEffectActive](https://wiki.facepunch.com/gmod/Entity:IsEffectActive).
 function Entity:GetParentAttachment() end
 
 ---[SHARED] If the entity is parented to an entity that has a model with multiple physics objects (like a ragdoll), this is used to retrieve what physics object number the entity is parented to on it's parent.
@@ -4953,14 +4953,16 @@ function Entity:SetOwner(owner) end
 ---
 --- **NOTE**: This does not work on [the world](https://wiki.facepunch.com/gmod/game.GetWorld).
 ---
---- **WARNING**: This can cause undefined physics behaviour when used on entities that don't support parenting. See the [Valve developer wiki](https://developer.valvesoftware.com/wiki/Entity_Hierarchy_(parenting)) for more information.
+--- **WARNING**: This can cause undefined physics behavior when used on entities that don't support parenting. See the [Valve developer wiki](https://developer.valvesoftware.com/wiki/Entity_Hierarchy_(parenting)) for more information.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetParent)
 ---@param parent? Entity The entity to parent to. Setting this to nil will clear the parent.
----@param attachmentId? number The attachment id to use when parenting, defaults to -1 or whatever the parent had set previously.
+---@param attachmentOrBoneId? number The attachment or bone id to use when parenting. Defaults to -1 or whatever the parent had set previously.
+---
+--- Use Entity:AddEffects( EF_FOLLOWBONE ) to treat this argument as a Bone ID instead of an Attachment ID. Similar to Entity:FollowBone.
 ---
 --- You must call [Entity:SetMoveType](https://wiki.facepunch.com/gmod/Entity:SetMoveType)( MOVETYPE_NONE ) on the child for this argument to have any effect!
-function Entity:SetParent(parent, attachmentId) end
+function Entity:SetParent(parent, attachmentOrBoneId) end
 
 ---[SHARED] Sets the parent of an entity to another entity with the given physics bone number. Similar to [Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent), except it is parented to a physbone. This function is useful mainly for ragdolls.
 ---

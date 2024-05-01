@@ -105,10 +105,10 @@ function IMaterial:GetVector4D(name) end
 ---@return Vector # The linear color vector
 function IMaterial:GetVectorLinear(materialVector) end
 
----[SHARED AND MENU] Returns the height of the member texture set for $basetexture.
+---[SHARED AND MENU] Returns the height of the member texture set for `$basetexture`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Height)
----@return number # height
+---@return number # Height of the base texture.
 function IMaterial:Height() end
 
 ---[SHARED AND MENU] Returns whenever the material is valid, i.e. whether it was not loaded successfully from disk or not.
@@ -198,8 +198,8 @@ function IMaterial:SetVector(MaterialVector, vec) end
 ---@param w number The w component of the new vector.
 function IMaterial:SetVector4D(name, x, y, z, w) end
 
----[SHARED AND MENU] Returns the width of the member texture set for $basetexture.
+---[SHARED AND MENU] Returns the width of the member texture set for `$basetexture`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:Width)
----@return number # width
+---@return number # Width of the base texture.
 function IMaterial:Width() end

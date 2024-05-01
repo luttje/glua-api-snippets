@@ -127,11 +127,21 @@ function player.GetHumans() end
 ---
 --- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
---- **WARNING**: Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your player.GetAll usages may come with unintended side effects because of this.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
 ---@return table # Table of all existing Player.  This is a cached copy of player.GetAll
+--- This table is intended to be read-only.
+---
+--- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your player.GetAll usages may come with unintended side effects because of this.
+---
+--- Example of bad code:
+--- ```
+--- -- NEVER DO THIS!!!
+---
+--- local scan_ents = select(2, player.Iterator())
+---
+--- table.Add(scan_ents, ents.FindByClass("ttt_decoy"))
+--- ```
 ---@return number #
 --- 			The starting index for the table of players.
 --- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
@@ -1855,7 +1865,7 @@ function Player:SetRenderAngles(ang) end
 ---[SHARED] Sets the player's sprint speed.
 ---
 --- See also [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed), [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) and [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed).
---- **NOTE**: player_default class run speed is: `600`
+--- **NOTE**: player_default class run speed is: `240`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetRunSpeed)
 ---@param runSpeed number The new sprint speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.
@@ -1972,7 +1982,7 @@ function Player:SetVoiceVolumeScale(number) end
 ---
 --- Using a speed of `0` can lead to prediction errors.
 ---
---- **NOTE**: `player_default` class walk speed is: `400`.
+--- **NOTE**: `player_default` class walk speed is: `160`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed)
 ---@param walkSpeed number The new walk speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.

@@ -297,7 +297,9 @@ function constraint.FindConstraint(ent, type) end
 ---@return Entity # The other entity.
 function constraint.FindConstraintEntity(ent, type) end
 
----[SERVER] Returns a table of all constraints of a specific type directly connected to the entity
+---[SERVER] Returns a table of all constraints of a specific type directly connected to the entity.
+---
+--- If you are looking for a list of all constraints, use [constraint.GetTable](https://wiki.facepunch.com/gmod/constraint.GetTable).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.FindConstraints)
 ---@param ent Entity The entity to check
@@ -333,7 +335,9 @@ function constraint.ForgetConstraints(ent) end
 ---@return table # A table containing all of the constrained entities. This includes all entities constrained to entities constrained to the supplied entity, etc.
 function constraint.GetAllConstrainedEntities(ent, resultTable) end
 
----[SERVER] Returns a table of all constraints directly connected to the entity
+---[SERVER] Returns a table of all constraints directly connected to the entity.
+---
+--- If you are looking for a list of specific constraint(s), use [constraint.FindConstraints](https://wiki.facepunch.com/gmod/constraint.FindConstraints).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.GetTable)
 ---@param ent Entity The entity to check

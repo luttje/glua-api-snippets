@@ -24,12 +24,16 @@ function Color:SetUnpacked(r, g, b, a) end
 ---@return number # The lightness in the range [0, 1].
 function Color:ToHSL() end
 
----[SHARED AND MENU] Converts a [Color](https://wiki.facepunch.com/gmod/Color) into HSV color space. This calls [Global.ColorToHSV](https://wiki.facepunch.com/gmod/Global.ColorToHSV) internally.
+---[SHARED AND MENU] Encodes a RGB [Color](https://wiki.facepunch.com/gmod/Color) into the HSV color space.
+--- 		This function uses [Global.ColorToHSV](https://wiki.facepunch.com/gmod/Global.ColorToHSV) internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:ToHSV)
----@return number # The hue in degrees [0, 360).
----@return number # The saturation in range [0, 1].
----@return number # The value in range [0, 1].
+---@return number #
+--- 			Degrees in range [ 0 , 360 )
+---@return number #
+--- 			Range [ 0 , 1 ]
+---@return number #
+--- 			Range [ 0 , 1 ]
 function Color:ToHSV() end
 
 ---[SHARED] Returns the color as a table with four elements.

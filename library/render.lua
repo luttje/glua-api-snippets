@@ -776,9 +776,9 @@ function render.PushFlashlightMode(enable) end
 --- **NOTE**: If the render target is bigger than the screen, rendering done with the surface library will be clipped to the screen bounds unless you call [Global.DisableClipping](https://wiki.facepunch.com/gmod/Global.DisableClipping)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.PushRenderTarget)
----@param texture ITexture
+---@param texture? ITexture
 --- 			The new render target to be used.
---- 			Note: This should be `nil` to render to the main game view.
+--- 			Can be set to `nil` to push the main game frame buffer.
 ---@param x? number X origin of the viewport.
 ---@param y? number Y origin of the viewport.
 ---@param w? number Width of the viewport.
@@ -852,12 +852,18 @@ function render.ResetToneMappingScale(scale) end
 ---@param b number The blue part of the color, 0-1.
 function render.SetAmbientLight(r, g, b) end
 
----[CLIENT] Sets the alpha blending for every upcoming render operation.
+---[CLIENT] Sets the alpha blending (or transparency) for upcoming render operations.
 ---
---- This does not affect non-model `render.Draw*` functions.
+--- 		By itself, this will cause visible overlapping on parts of a model that are in front of other parts of the same model.
+--- 		For a solution to this, see the examples below.
+---
+--- 		This does not affect non-model `render.Draw*` functions.
+--- 		**NOTE**: If a material has the [$alphatest](https://developer.valvesoftware.com/wiki/$alphatest) flag enabled then this function might not behave as expected because alpha will be binary, this has a default cutoff of `0.7`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetBlend)
----@param blending number Blending value from `0-1`.
+---@param blending number
+--- 			The alpha (transparency) for upcoming draw operations.
+--- 			A value in the range `(0-1)` where `0` is fully transparent, `0.5` is 50% visible, and `1` is fully opaque.
 function render.SetBlend(blending) end
 
 ---[CLIENT] Sets the current drawing material to "color".
