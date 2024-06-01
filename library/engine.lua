@@ -17,9 +17,9 @@ function engine.ActiveGamemode() end
 
 ---[SERVER] Closes the server and completely exits.
 ---
---- This is only functional when running in server test mode (launch option `-systemtest`). Server test mode is used internally at Facepunch as part of the build process to make sure that the dedicated servers aren't crashing on startup.
+--- To enable this function for use on your server, add `-allowquit` to your commandline, which will make this function run `quit keep_players` when executed, this also does not forcibly disconnect players.
 ---
---- You can also use `-allowquit` which will make this function run `quit keep_players`, which does not forcibly disconnect players.
+--- This is also available when running in server test mode (launch option `-systemtest`). Server test mode is used internally at Facepunch as part of the build process to make sure that the dedicated servers aren't crashing on startup.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/engine.CloseServer)
 function engine.CloseServer() end

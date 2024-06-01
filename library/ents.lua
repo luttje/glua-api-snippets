@@ -31,7 +31,10 @@ function ents.CreateClientProp(model) end
 function ents.CreateClientside(class) end
 
 ---[SHARED] Returns a table of all entities along the ray. The ray does not stop on collisions, meaning it will go through walls/entities.
---- **NOTE**: This internally uses a Spatial Partition to avoid looping through all entities.
+---
+--- This function is capable of detecting clientside only entities.
+---
+--- This internally uses a Spatial Partition to avoid looping through all entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindAlongRay)
 ---@param start Vector The start position of the ray
@@ -41,11 +44,13 @@ function ents.CreateClientside(class) end
 ---@return table # Table of the found entities. There's a limit of 1024 entities.
 function ents.FindAlongRay(start, _end, mins, maxs) end
 
----[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll). Even if internally ents.GetAll is used, It is faster to use ents.FindByClass than ents.GetAll with a single class comparison.
+---[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll). ents.FindByClass is always faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) or [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator)(read the notes).
 ---
 --- **NOTE**: Asterisks (*) are the only wildcard supported.
 ---
 --- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
+---
+--- **NOTE**: [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) is faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) if it has already been used thanks to its caching/refresh system.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClass)
 ---@param class string The class of the entities to find.

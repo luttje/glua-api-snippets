@@ -1547,18 +1547,20 @@ function _G.HTTP(parameters) end
 
 ---[SHARED AND MENU] Executes a Lua script.
 ---
---- **NOTE**: Addon files (.gma files) do not support relative parent folders (`..` notation).
----
 --- This function will try to load local client file if `sv_allowcslua` is **1**.
 ---
---- **WARNING**: The file you are attempting to include **MUST NOT** be empty or the include will fail. Files over a certain size may fail as well.
+--- **WARNING**: The file you are attempting to include **MUST NOT** be empty or the include will fail. Files over a certain size (64KB compressed) may fail clientside as well.
 ---
 --- If the file you are including is clientside or shared, it **must** be [Global.AddCSLuaFile](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)'d or this function will error saying the file doesn't exist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.include)
 ---@param fileName string The name of the script to be executed. The path must be either relative to the current file, or be an absolute path (relative to and excluding the **lua/** folder).
 ---
---- Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
+--- Addon files (.gma files) and dedicated servers clientside do not support relative parent folders (`..` notation).
+---
+--- Absolute paths for gamemode files must include `/gamemode/`.
+---
+--- **NOTE**: Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
 ---@return any ... # Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
@@ -2221,7 +2223,7 @@ function _G.ParticleEmitter(position, use3D) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Path)
 ---@param type string The name of the path to create.
---- This is going to be "Follow" or "Chase" right now.
+--- This is going to be `"Follow"` or `"Chase"` right now.
 ---@return PathFollower # The path
 function _G.Path(type) end
 
@@ -3218,7 +3220,7 @@ function _G.Vector(vectorString) end
 ---@return Vector # The random direction vector.
 function _G.VectorRand(min, max) end
 
----[SHARED AND MENU] Returns the time in seconds it took to render the VGUI.
+---[SHARED AND MENU] Identical to [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.VGUIFrameTime)
 function _G.VGUIFrameTime() end

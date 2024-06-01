@@ -1450,40 +1450,62 @@ PathSegment.pos = nil
 PathSegment.type = nil
 
 --- Table used by [physenv.SetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings) and [physenv.GetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings).
+---
+--- When setting the settings, omitting any key will fallback to its current value. (can be retrieved via the get function)
 ---@class PhysEnvPerformanceSettings
 local PhysEnvPerformanceSettings = {}
 
 ---Maximum amount of seconds to precalculate collisions with objects.
+---
+--- Default value for this setting is `0.5`.
 ---@type number
 PhysEnvPerformanceSettings.LookAheadTimeObjectsVsObject = nil
 
 ---Maximum amount of seconds to precalculate collisions with world.
+---
+--- Default value for this setting is `1`.
 ---@type number
 PhysEnvPerformanceSettings.LookAheadTimeObjectsVsWorld = nil
 
----Maximum rotation velocity.
----@type number
-PhysEnvPerformanceSettings.MaxAngularVelocity = nil
-
 ---Maximum collision checks per tick.
+---
+--- Objects may penetrate after this many collision checks
+---
+--- Default value for this setting is `50000`.
 ---@type number
 PhysEnvPerformanceSettings.MaxCollisionChecksPerTimestep = nil
 
 ---Maximum collision per object per tick.
+---
+--- Object will be frozen after this many collisions (visual hitching vs. CPU cost)
+---
+--- Default value for this setting is `10`.
 ---@type number
 PhysEnvPerformanceSettings.MaxCollisionsPerObjectPerTimestep = nil
 
----Maximum mass of an object to be affected by friction.
----@type number
-PhysEnvPerformanceSettings.MaxFrictionMass = nil
-
----Maximum speed of an object.
+---Maximum world-space speed of an object in inches per second.
+---
+--- Default value for this setting is `4000`.
 ---@type number
 PhysEnvPerformanceSettings.MaxVelocity = nil
 
+---Maximum world-space rotational velocity in degrees per second.
+---
+--- Default value for this setting is `7200`.
+---@type number
+PhysEnvPerformanceSettings.MaxAngularVelocity = nil
+
 ---Minimum mass of an object to be affected by friction.
+---
+--- Default value for this setting is `10`.
 ---@type number
 PhysEnvPerformanceSettings.MinFrictionMass = nil
+
+---Maximum mass of an object to be affected by friction.
+---
+--- Default value for this setting is `2500`.
+---@type number
+PhysEnvPerformanceSettings.MaxFrictionMass = nil
 
 ---
 --- Structure used in storing/restoring physics object attributes.
@@ -1816,7 +1838,7 @@ RenderCamData.type = "3D"
 
 ---The position to render from
 ---@type Vector
-RenderCamData.origin = nil
+RenderCamData.origin = Vectornil
 
 ---The angles to render from
 ---@type Angle
@@ -1840,7 +1862,7 @@ RenderCamData.znear = nil
 
 ---Set to true if this is to draw into a subrect of the larger screen.
 ---@type boolean
-RenderCamData.subrect = false
+RenderCamData.subrect = nil
 
 ---m_bDoBloomAndToneMapping
 ---@type boolean

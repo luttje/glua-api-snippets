@@ -124,11 +124,12 @@ function file.Read(fileName, gamePath) end
 ---@return boolean # `true` on success, `false` otherwise.
 function file.Rename(orignalFileName, targetFileName) end
 
----[SHARED AND MENU] Returns the file's size in bytes. If the file is not found, returns `-1`.
+---[SHARED AND MENU] Returns the file's size in bytes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Size)
 ---@param fileName string The file's name.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
+---@return number # The file size in bytes, or `-1` if the file is not found.
 function file.Size(fileName, gamePath) end
 
 ---[SHARED AND MENU] Returns when the file or folder was last modified in Unix time.
@@ -136,7 +137,7 @@ function file.Size(fileName, gamePath) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Time)
 ---@param path string The **file** or **folder** path.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return number # Seconds passed since Unix epoch.
+---@return number # Seconds passed since Unix epoch, or `0` if the file is not found.
 function file.Time(path, gamePath) end
 
 ---[SHARED AND MENU] Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use [file.Append](https://wiki.facepunch.com/gmod/file.Append).

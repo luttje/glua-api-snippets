@@ -88,11 +88,11 @@ function input.IsMouseDown(mouseKey) end
 ---@return boolean # isDown
 function input.IsShiftDown() end
 
----[CLIENT AND MENU] Returns the client's bound key for the specified console command. If the player has multiple keys bound to a single command, there is no defined behavior of which key will be returned.
+---[CLIENT AND MENU] Returns the client's bound key for the specified console command. If the player has multiple keys bound to a single command, then the key with the lowest [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE) will be returned.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/input.LookupBinding)
 ---@param binding string The binding name
----@param exact? boolean True if the binding should match exactly
+---@param exact? boolean True to disable automatic stripping of a single leading `+` character
 ---@return string # The first key found with that binding or no value if no key with given binding was found.
 ---
 --- See also input.GetKeyCode.

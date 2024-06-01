@@ -318,6 +318,8 @@ function Entity:CollisionRulesChanged() end
 ---
 --- Bone followers are physics objects that follow the visual mesh. This is what is used by `prop_dynamic` for things like big combine doors for vehicles with multiple physics objects which follow the visual mesh of the door when it animates.
 ---
+--- Be mindful that bone followers create a separate entity (`phys_bone_follower`) for each physics object.
+---
 --- You must call [Entity:UpdateBoneFollowers](https://wiki.facepunch.com/gmod/Entity:UpdateBoneFollowers) every tick for bone followers to update their positions.
 ---
 --- **NOTE**: This function only works on `anim` type entities.
@@ -388,9 +390,10 @@ function Entity:DestroyShadow() end
 --- The only known matrix type is "RenderMultiply".
 function Entity:DisableMatrix(matrixType) end
 
----[SHARED] Performs a trace attack towards the entity this function is called on. Visually identical to [Entity:TakeDamageInfo](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo).
----
+---[SHARED] Performs a trace attack towards the entity this function is called on, as if an invisible bullet is shot towards it. Visually identical to [Entity:TakeDamageInfo](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo).
 --- **WARNING**: Calling this function on the victim entity in [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage) can cause infinite loops.
+---
+--- **NOTE**: This function correctly applies damage to [func_breakable_surf](https://developer.valvesoftware.com/wiki/Func_breakable_surf) entities, unlike [Entity:TakeDamageInfo](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:DispatchTraceAttack)
 ---@param damageInfo CTakeDamageInfo The damage to apply.
@@ -446,7 +449,7 @@ function ENTITY:Draw(flags) end
 ---
 --- If called outside of those hooks, it will call both of said hooks depending on [Entity:GetRenderGroup](https://wiki.facepunch.com/gmod/Entity:GetRenderGroup), drawing the entire entity again.
 ---
---- **NOTE**: When drawing an entity more than once per frame in different positions, you should call [Entity:SetupBones](https://wiki.facepunch.com/gmod/Entity:SetupBones) before each draw; Otherwise, the entity will retain its first drawn position.
+--- When drawing an entity more than once per frame in different positions, you should call [Entity:SetupBones](https://wiki.facepunch.com/gmod/Entity:SetupBones) before each draw; Otherwise, the entity will retain its first drawn position.
 ---
 --- Calling this on entities with [EF_BONEMERGE](https://wiki.facepunch.com/gmod/Enums/EF) and [EF_NODRAW](https://wiki.facepunch.com/gmod/Enums/EF) applied causes a crash.
 ---
@@ -998,7 +1001,7 @@ function Entity:GetColor() end
 
 ---[SHARED] Returns the color the entity is set to without using a color object.
 ---
---- Internally used to implement [Entity:GetColor](https://wiki.facepunch.com/gmod/Entity:GetColor).
+--- **INTERNAL**: Internally used to implement [Entity:GetColor](https://wiki.facepunch.com/gmod/Entity:GetColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetColor4Part)
 ---@return number #
@@ -3427,6 +3430,8 @@ function Entity:PhysicsInitMultiConvex(vertices, surfaceprop) end
 ---
 --- A physics shadow can be used to have static entities that never move by setting both arguments to false.
 ---
+--- The created physics object will depend on the entity's solidity `SOLID_NONE` will not create a physics object, `SOLID_BBOX` will create a Axis-Aligned BBox one, `SOLID_OBB` will create Orientated Bounding Box one, and anything else will use the models' physics mesh.
+---
 --- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
@@ -3910,7 +3915,7 @@ function Entity:SetColor(color) end
 
 ---[SHARED] Sets the color of an entity without usage of a [Global.Color](https://wiki.facepunch.com/gmod/Global.Color) object.
 ---
---- Used internally to implement [Entity:SetColor](https://wiki.facepunch.com/gmod/Entity:SetColor).
+--- **INTERNAL**: Used internally to implement [Entity:SetColor](https://wiki.facepunch.com/gmod/Entity:SetColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetColor4Part)
 ---@param r number
@@ -5058,7 +5063,7 @@ function Entity:SetPredictable(setPredictable) end
 --- When using this function, [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) will conflict with this function. Instead, consider using [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) on the client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetPreventTransmit)
----@param player Player The player to stop networking the entity to.
+---@param player Player|CRecipientFilter The player to stop networking the entity to. Can also be a CRecipientFilter as of March 2024 to affect multiple players at once.
 ---@param stopTransmitting boolean true to stop the entity from networking, false to make it network again.
 function Entity:SetPreventTransmit(player, stopTransmitting) end
 
@@ -5524,6 +5529,8 @@ function Entity:TakeDamage(damageAmount, attacker, inflictor) end
 --- **WARNING**: Calling this function on the victim entity in [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage) can cause infinite loops.
 ---
 --- **WARNING**: This function does not seem to do any damage if you apply it to a player who is driving a prop_vehicle_jeep or prop_vehicle_jeep_old vehicle. You need to call it on the vehicle instead.
+---
+--- **NOTE**: This function does not apply damage to [func_breakable_surf](https://developer.valvesoftware.com/wiki/Func_breakable_surf) entities correctly. To do this, you will need to use [Entity:DispatchTraceAttack](https://wiki.facepunch.com/gmod/Entity:DispatchTraceAttack) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo)
 ---@param damageInfo CTakeDamageInfo The damage to apply.

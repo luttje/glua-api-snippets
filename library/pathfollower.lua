@@ -4,7 +4,7 @@
 ---@class PathFollower
 local PathFollower = {}
 
----[SERVER] If you created your path with type "Chase" this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
+---[SERVER] If you created your path with type `"Chase"` this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
@@ -216,5 +216,5 @@ function PathFollower:SetMinLookAheadDistance(mindist) end
 ---[SERVER] Move the bot along the path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Update)
----@param bot NextBot The bot to update along the path
+---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
 function PathFollower:Update(bot) end

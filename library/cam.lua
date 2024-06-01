@@ -41,9 +41,7 @@ function cam.End3D2D() end
 function cam.EndOrthoView() end
 
 ---[CLIENT] Returns a copy of the model matrix that is at the top of the stack.
---- 	**NOTE**: Editing the matrix **will not** edit the current view. To do so, you will have to **push** it.
----
---- 	**NOTE**: This function essentially returns the copy of the last pushed model matrix.
+--- 	**NOTE**: Editing the matrix **will not** edit the current view. To do so, you will have to use [cam.PushModelMatrix](https://wiki.facepunch.com/gmod/cam.PushModelMatrix).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/cam.GetModelMatrix)
 ---@return VMatrix # The currently active matrix.
@@ -92,7 +90,7 @@ function cam.Start2D() end
 
 ---[CLIENT] Sets up a new 3D rendering context. Must be finished by [cam.End3D](https://wiki.facepunch.com/gmod/cam.End3D).
 ---
---- For more advanced settings such as an orthographic view, use [cam.Start](https://wiki.facepunch.com/gmod/cam.Start) instead.
+--- For more advanced settings such as an orthographic view, use [cam.Start](https://wiki.facepunch.com/gmod/cam.Start) instead, which this is an alias of basically.
 ---
 --- Negative x/y values won't work.
 ---
@@ -107,8 +105,7 @@ function cam.Start2D() end
 ---@param w? number Width of the new viewport.
 ---@param h? number Height of the new viewport.
 ---@param zNear? number Distance to near clipping plane.
----
---- Both zNear and zFar need a value before any of them work.
+--- Both `zNear` and `zFar` need a value before any of them work.
 ---
 --- zNear also requires a value higher than 0.
 ---@param zFar? number Distance to far clipping plane.

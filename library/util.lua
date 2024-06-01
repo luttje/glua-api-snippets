@@ -189,7 +189,38 @@ function util.FilterText(str, context, player) end
 ---@return string # The relative path to the GMA file.
 function util.FullPathToRelative_Menu(gma, gamePath) end
 
----[SERVER] Returns a name for given automatically generated numerical animation event ID. This is useful for NPC models that define custom animation events.
+---[SHARED] Returns the ID of a custom model activity. This is useful for models that define custom ones.
+---
+--- See [util.GetActivityNameByID](https://wiki.facepunch.com/gmod/util.GetActivityNameByID) for a function that does the opposite.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetActivityIDByName)
+---@param string string The name of an activity, as defined in the model's `.qc` at compile time.
+---@return number # The ID of the activity. See also Enums/ACT.
+function util.GetActivityIDByName(string) end
+
+---[SHARED ] Returns a name for given activity ID. This is useful for models that define custom animation events.
+---
+--- See [util.GetActivityIDByName](https://wiki.facepunch.com/gmod/util.GetActivityIDByName) for a function that does the opposite.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetActivityNameByID)
+---@param id number The ID of an activity from some hook. See also Enums/ACT.
+---@return string # The associated name with given activity ID.
+function util.GetActivityNameByID(id) end
+
+---[SHARED] Returns the ID of a custom model animation event. This is useful for models that define custom animation events.
+---
+--- See [util.GetAnimEventNameByID](https://wiki.facepunch.com/gmod/util.GetAnimEventNameByID) for a function that does the opposite.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetAnimEventIDByName)
+---@param string string The name of an model animation event, as defined in the model's `.qc` at compile time.
+---@return number # The ID of an animation event, typically for usage with ENTITY:HandleAnimEvent.
+function util.GetAnimEventNameByID(string) end
+
+---[SERVER] Returns a name for given automatically generated numerical animation event ID. This is useful for models that define custom animation events.
+---
+--- See [util.GetAnimEventIDByName](https://wiki.facepunch.com/gmod/util.GetAnimEventIDByName) for a function that does the opposite.
+---
+--- This function will be shared in the next update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetAnimEventNameByID)
 ---@param id number The ID of an animation event, typically from ENTITY:HandleAnimEvent.
@@ -265,9 +296,11 @@ function util.GetPixelVisibleHandle() end
 
 ---[SHARED AND MENU] Utility function to quickly generate a trace table that starts at the players view position, and ends `32768` units along a specified direction.
 ---
+--- For usage with [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine) and similar functions.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetPlayerTrace)
 ---@param ply Player The player the trace should be based on
----@param dir? Vector The direction of the trace
+---@param dir? Vector The direction of the trace. By default falls back to the direction the player is looking in.
 ---@return table # The trace data. See Structures/Trace
 function util.GetPlayerTrace(ply, dir) end
 
@@ -875,18 +908,26 @@ function util.TraceEntityHull(tracedata, ent) end
 ---@return table # Trace result. See Structures/TraceResult
 function util.TraceHull(TraceData) end
 
----[SHARED] Performs a trace with the given trace data.
+---[SHARED] Performs an infinitely thin, invisible Ray Trace (or "Trace") in a line based on an input [Trace Structure table](https://wiki.facepunch.com/gmod/Structures/Trace) and returns a [Trace Result table](https://wiki.facepunch.com/gmod/Structures/TraceResult) that contains information about what, if anything, the Trace line hit or intersected.
 ---
---- **NOTE**: Clientside entities will not be hit by traces.
+--- 		Traces intersect with the Physics Meshes of [Solid](https://wiki.facepunch.com/gmod/enums/SOLID), [Server-side](https://wiki.facepunch.com/gmod/States), [Entities](https://wiki.facepunch.com/gmod/Entity) (including the [Game World](https://wiki.facepunch.com/gmod/game.GetWorld)) but cannot detect Client-side-only Entities.
+--- 		For a way to detect Client-side Entities, see [ents.FindAlongRay](https://wiki.facepunch.com/gmod/ents.FindAlongRay).
 ---
---- When server side trace starts inside a solid, it will hit the most inner solid the beam start position is located in. Traces are triggered by change of boundary.
+--- 		Traces do not differentiate between the inside and the outside faces of Physics Meshes.  Because of this, if a Trace starts within a Solid Physics Mesh it will hit the inside faces of the Physics Mesh and may return unexpected values as a result.
+---
+--- 	See Also:
+--- 		[util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceLine)
----@param TraceData table The trace data to use. See Structures/Trace
----@return table # Trace result. See Structures/TraceResult.
+---@param traceConfig table
+--- 			A table of data that configures the Trace.
 ---
---- Can return `nil` if game.GetWorld or its Entity:GetPhysicsObject is invalid. This will be the case for any traces done before GM:InitPostEntity is called.
-function util.TraceLine(TraceData) end
+--- 			For the table's format and available options see the Structures/Trace page.
+---@return table #
+--- 			A table of information detailing where and what the Trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
+---
+--- 			For the table's format and available options see the Structures/TraceResult page.
+function util.TraceLine(traceConfig) end
 
 ---[SHARED AND MENU] Converts a type to a (nice, but still parsable) string
 ---

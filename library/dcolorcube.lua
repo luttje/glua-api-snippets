@@ -12,6 +12,12 @@ local DColorCube = {}
 ---@return table # A Color
 function DColorCube:GetBaseRGB() end
 
+---[CLIENT AND MENU] Returns the color cube's default color. By default, it is set to white. (255 255 255 RGB)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetDefaultColor)
+---@return table # The default Color.
+function DColorCube:GetDefaultColor() end
+
 ---[CLIENT AND MENU] Returns the value set by [DColorCube:SetHue](https://wiki.facepunch.com/gmod/DColorCube:SetHue).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:GetHue)
@@ -37,6 +43,12 @@ function DColorCube:SetBaseRGB(color) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetColor)
 ---@param color table The color to set, uses Color.
 function DColorCube:SetColor(color) end
+
+---[CLIENT AND MENU] Sets the color cube's default color. This value will be used to reset to on middle mouse click of the color cube's draggable slider.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCube:SetDefaultColor)
+---@param table table The new default Color.
+function DColorCube:SetDefaultColor(table) end
 
 ---[CLIENT AND MENU] Appears to do nothing and unused.
 ---

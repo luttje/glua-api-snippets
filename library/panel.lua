@@ -163,7 +163,9 @@ function Panel:ApplyGWEN(GWENTable) end
 
 ---[CLIENT] Called whenever the panel should apply its scheme (colors, fonts, style).
 ---
---- It is called a few frames after Panel's creation once.
+--- It is called a few frames after panel's creation once.
+---
+--- The engine will overwrite [Panel:SetFGColor](https://wiki.facepunch.com/gmod/Panel:SetFGColor) and [Panel:SetBGColor](https://wiki.facepunch.com/gmod/Panel:SetBGColor) (from the engine panel theme/scheme) for most panels just before this hook is called in Lua.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings)
 function PANEL:ApplySchemeSettings() end
@@ -1896,13 +1898,15 @@ function Panel:SetAnimationEnabled(enable) end
 ---@param autoDelete boolean Whenever to delete if the parent was removed or not.
 function Panel:SetAutoDelete(autoDelete) end
 
----[CLIENT AND MENU] Sets the background color of a panel such as a [RichText](https://wiki.facepunch.com/gmod/RichText), [Label](https://wiki.facepunch.com/gmod/Label) or [DColorCube](https://wiki.facepunch.com/gmod/DColorCube).
+---[CLIENT AND MENU] Sets the background color of a panel such as a [RichText](https://wiki.facepunch.com/gmod/RichText), [Label](https://wiki.facepunch.com/gmod/Label), [DColorCube](https://wiki.facepunch.com/gmod/DColorCube) or the base [Panel](https://wiki.facepunch.com/gmod/Panel).
+---
+--- For many panels, such as [DLabel](https://wiki.facepunch.com/gmod/DLabel) and [Panel](https://wiki.facepunch.com/gmod/Panel), you must use [Panel:SetPaintBackgroundEnabled](https://wiki.facepunch.com/gmod/Panel:SetPaintBackgroundEnabled)( true ) for the background to appear.
+---
+--- Please note that for most panels the engine will overwrite the foreground and background colors a frame after panel creation via the [PANEL:ApplySchemeSettings](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings) hook, so you may want to set the color in that hook instead.
+---
+--- See [Panel:SetFGColor](https://wiki.facepunch.com/gmod/Panel:SetFGColor) for the foreground color.
 ---
 --- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
----
---- For [DLabel](https://wiki.facepunch.com/gmod/DLabel) elements, you must use [Panel:SetPaintBackgroundEnabled](https://wiki.facepunch.com/gmod/Panel:SetPaintBackgroundEnabled)( true ) before applying the color.
----
---- This will not work on setup of the panel - you should use this function in a hook like [PANEL:ApplySchemeSettings](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings) or [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetBGColor)
 ---@param rOrColor number The red channel of the color, or a Color. If you pass the latter, the following three arguments are ignored.
@@ -1977,7 +1981,7 @@ function Panel:SetCookie(cookieName, value) end
 ---[CLIENT AND MENU] Sets the panel's cookie name. Calls [PANEL:LoadCookies](https://wiki.facepunch.com/gmod/PANEL:LoadCookies) if defined.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetCookieName)
----@param name string The panel's cookie name. Used as prefix for Panel:SetCookie
+---@param name string The panel's cookie name. Used as prefix for Panel:SetCookie, therefore should be a unique value.
 function Panel:SetCookieName(name) end
 
 ---[CLIENT AND MENU] Sets the appearance of the cursor. You can find a list of all available cursors with image previews [here](https://wiki.facepunch.com/gmod/Cursors).
@@ -2074,6 +2078,10 @@ function Panel:SetExpensiveShadow(distance, Color) end
 --- For a [Label](https://wiki.facepunch.com/gmod/Label) or [RichText](https://wiki.facepunch.com/gmod/RichText), this is the color of its text.
 ---
 --- This function calls [Panel:SetFGColorEx](https://wiki.facepunch.com/gmod/Panel:SetFGColorEx) internally.
+---
+--- Please note that for most panels the engine will overwrite the foreground and background colors a frame after panel creation via the [PANEL:ApplySchemeSettings](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings) hook, so you may want to set the color in that hook instead.
+---
+--- See [Panel:SetBGColor](https://wiki.facepunch.com/gmod/Panel:SetBGColor) for the background color.
 ---
 --- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
 ---
@@ -2202,16 +2210,16 @@ function Panel:SetName(name) end
 ---@param openExternally boolean
 function Panel:SetOpenLinksExternally(openExternally) end
 
----[CLIENT AND MENU] Sets whenever all the default background of the panel should be drawn or not.
+---[CLIENT AND MENU] Sets whether the default background of the panel should be drawn or not. It's color is usually set by [Panel:SetBGColor](https://wiki.facepunch.com/gmod/Panel:SetBGColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetPaintBackgroundEnabled)
----@param paintBackground boolean Whenever to draw the background or not.
+---@param paintBackground boolean Whether to draw the background or not.
 function Panel:SetPaintBackgroundEnabled(paintBackground) end
 
----[CLIENT AND MENU] Sets whenever all the default border of the panel should be drawn or not.
+---[CLIENT AND MENU] Sets whether the default border of the panel should be drawn or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetPaintBorderEnabled)
----@param paintBorder boolean Whenever to draw the border or not.
+---@param paintBorder boolean Whether to draw the border or not.
 function Panel:SetPaintBorderEnabled(paintBorder) end
 
 ---[CLIENT AND MENU] Enables or disables painting of the panel manually with [Panel:PaintManual](https://wiki.facepunch.com/gmod/Panel:PaintManual).

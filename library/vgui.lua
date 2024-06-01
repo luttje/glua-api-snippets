@@ -60,6 +60,14 @@ function vgui.Exists(Panelname) end
 ---@return boolean # Whether or not the focused panel is a child of the passed one.
 function vgui.FocusedHasParent(parent) end
 
+---[CLIENT AND MENU] Returns all Lua-created panels.
+---
+--- Used internally for [PANEL:PreAutoRefresh](https://wiki.facepunch.com/gmod/PANEL:PreAutoRefresh) and [PANEL:PostAutoRefresh](https://wiki.facepunch.com/gmod/PANEL:PostAutoRefresh).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetAll)
+---@return table # List of all Lua created panels.
+function vgui.GetAll() end
+
 ---[CLIENT AND MENU] Returns the table of a Lua-defined panel by name. Does not return parent members of the table!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.GetControlTable)

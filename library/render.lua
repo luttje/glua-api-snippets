@@ -612,10 +612,13 @@ function render.MaxTextureWidth() end
 ---@param ent? CSEnt If provided, this entity will be reused instead of creating a new one with Global.ClientsideModel. Note that the ent's model, position and angles will be changed, and Entity:SetNoDraw will be set to true.
 function render.Model(settings, ent) end
 
----[CLIENT] Sets a material to override a model's default material. Similar to [Entity:SetMaterial](https://wiki.facepunch.com/gmod/Entity:SetMaterial) except it uses an [IMaterial](https://wiki.facepunch.com/gmod/IMaterial) argument and it can be used to change materials on models which are part of the world geometry.
+---[CLIENT] Forces all future draw operations to use a specific [IMaterial](https://wiki.facepunch.com/gmod/IMaterial).
+---
+--- 		Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride)
----@param material IMaterial The material override.
+---@param material IMaterial
+--- 			The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
 function render.ModelMaterialOverride(material) end
 
 ---[CLIENT AND MENU] Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target.
@@ -992,7 +995,7 @@ function render.SetRenderTarget(texture) end
 ---@param texture ITexture The new render target to be used.
 function render.SetRenderTargetEx(rtIndex, texture) end
 
----[CLIENT AND MENU] Sets a scissoring rect which limits the drawing area.
+---[CLIENT AND MENU] Sets a scissoring rect which limits(otherwise known as clipping) the drawing area.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetScissorRect)
 ---@param startX number X start coordinate of the scissor rect.

@@ -8,15 +8,33 @@ mesh = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex)
 function mesh.AdvanceVertex() end
 
----[CLIENT] Starts a new dynamic mesh. If an [IMesh](https://wiki.facepunch.com/gmod/IMesh) is passed, it will use that mesh instead.
+---[CLIENT] Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
+---
+--- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Begin)
----@param mesh? IMesh Mesh to build. This argument can be removed if you wish to build a "dynamic" mesh. See examples below.
----@param primitiveType number Primitive type, see Enums/MATERIAL.
----@param primitiveCount number The amount of primitives this mesh will contain.
+---@param primitiveType number
+--- 			An enum that indicates what the format of the mesh's primitives will be.
+--- 			For a full list of the available options, see the Enums/MATERIAL.
+---@param primitiveCount number
+--- 			The quantity of primitives this mesh will contain as a whole integer number.
+function mesh.Begin(primitiveType, primitiveCount) end
+
+---[CLIENT] Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
+---
+--- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Begin)
+---@param mesh IMesh
+--- 			The IMesh that the created mesh will be stored in.
+---@param primitiveType number
+--- 			An enum that indicates what the format of the mesh's primitives will be.
+--- 			For a full list of the available options, see the Enums/MATERIAL.
+---@param primitiveCount number
+--- 			The quantity of primitives this mesh will contain, as a whole integer number.
 function mesh.Begin(mesh, primitiveType, primitiveCount) end
 
----[CLIENT] Sets the color to be used for the next vertex.
+---[CLIENT] Sets the color to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Color)
 ---@param r number Red component.
@@ -25,44 +43,48 @@ function mesh.Begin(mesh, primitiveType, primitiveCount) end
 ---@param a number Alpha component.
 function mesh.Color(r, g, b, a) end
 
----[CLIENT] Ends the mesh and renders it.
+---[CLIENT] Ends the mesh (Started with [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin)) and renders it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.End)
 function mesh.End() end
 
----[CLIENT] Sets the normal to be used for the next vertex.
+---[CLIENT] Sets the normal to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Normal)
 ---@param normal Vector The normal of the vertex.
 function mesh.Normal(normal) end
 
----[CLIENT] Sets the position to be used for the next vertex.
+---[CLIENT] Sets the position to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Position)
 ---@param position Vector The position of the vertex.
 function mesh.Position(position) end
 
----[CLIENT] Draws a quad using 4 vertices.
+---[CLIENT] Adds a quad (4 vertices) to the currently built mesh. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Quad)
 ---@param vertex1 Vector The first vertex.
 ---@param vertex2 Vector The second vertex.
 ---@param vertex3 Vector The third vertex.
 ---@param vertex4 Vector The fourth vertex.
-function mesh.Quad(vertex1, vertex2, vertex3, vertex4) end
+---@param color table The color for the vertices.
+function mesh.Quad(vertex1, vertex2, vertex3, vertex4, color) end
 
----[CLIENT] Draws a quad using a position, a normal and the size.
+---[CLIENT] Adds a quad (4 vertices) to the currently built mesh, by using position, normal and sizes. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---
+--- See also [mesh.Quad](https://wiki.facepunch.com/gmod/mesh.Quad).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.QuadEasy)
 ---@param position Vector The center of the quad.
 ---@param normal Vector The normal of the quad.
 ---@param sizeX number X size in pixels.
 ---@param sizeY number Y size in pixels.
-function mesh.QuadEasy(position, normal, sizeX, sizeY) end
+---@param color table The color for the vertices.
+function mesh.QuadEasy(position, normal, sizeX, sizeY, color) end
 
 ---[CLIENT] Sets the specular map values.
 ---
---- This function actually does nothing.
+--- There is no known use case for this function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Specular)
 ---@param r number The red channel multiplier of the specular map.
@@ -93,9 +115,8 @@ function mesh.TangentT(tTanger) end
 ---@param v number V coordinate.
 function mesh.TexCoord(set, u, v) end
 
----[CLIENT] **NOTE**: It is recommended to use [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) instead of the mesh library.
----
---- A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
+---[CLIENT] A set of four numbers that can be used for arbitrary purposes by [Material](https://wiki.facepunch.com/gmod/Material) shaders.
+--- 		This is most commonly used to provide tangent information about each vertex to the Material's shader.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.UserData)
 ---@param tangentX number

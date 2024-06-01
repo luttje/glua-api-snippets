@@ -81,15 +81,14 @@ function WEAPON:CalcView(ply, pos, ang, fov) end
 ---@return Angle # New angle
 function WEAPON:CalcViewModelView(ViewModel, OldEyePos, OldEyeAng, EyePos, EyeAng) end
 
----[SHARED] Calls a SWEP function on client.
+---[SHARED] Calls a SWEP function on client. Does nothing on client.
 ---
 --- **WARNING**: This uses the [usermessage](https://wiki.facepunch.com/gmod/usermessage) internally, because of that, the combined length of the arguments of this function may not exceed 254 bytes/characters or the function will cease to function!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:CallOnClient)
----@param functionName string Name of function to call. If you want to call SWEP:MyFunc() on client, you type in "MyFunc"
----@param arguments? string Arguments for the function, separated by spaces.
---- Only the second argument is passed as argument and must be a string
-function Weapon:CallOnClient(functionName, arguments) end
+---@param functionName string Name of function to call. If you want to call `SWEP:MyFunc()` on client, you type in `"MyFunc"`
+---@param data? string Custom data to be passed to the target SWEP function as the first argument.
+function Weapon:CallOnClient(functionName, data) end
 
 ---[SERVER] Called when a Citizen NPC is looking around to a (better) weapon to pickup.
 ---

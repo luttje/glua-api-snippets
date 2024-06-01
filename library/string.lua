@@ -313,7 +313,7 @@ function string.rep(str, repetitions, separator) end
 ---@param str string The string we are seeking to replace an occurrence(s).
 ---@param find string What we are seeking to replace.
 ---@param replace string What to replace find with.
----@return string # string
+---@return string # The processed string with replacements.
 function string.Replace(str, find, replace) end
 
 ---[SHARED AND MENU] Reverses a string.
