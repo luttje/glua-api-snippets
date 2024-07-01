@@ -130,7 +130,7 @@ function jit.util.funcinfo(func, pos) end
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.funck(func, index) end
 
----[SHARED AND MENU] Does the exact same thing as debug.getupvalue except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing jit.util.funcuvname(func, 0) will get you the same name as debug.getupvalue(func, 1)
+---[SHARED AND MENU] Does the exact same thing as [debug.getupvalue](https://wiki.facepunch.com/gmod/debug.getupvalue) except it only returns the name, not the name and the object. The upvalue indexes also start at 0 rather than 1, so doing `jit.util.funcuvname(func, 0)` will get you the same name as `debug.getupvalue(func, 1)`
 --- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.funcuvname)
@@ -140,24 +140,22 @@ function jit.util.funck(func, index) end
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.funcuvname(func, index) end
 
----[SHARED AND MENU] Gets the address of a function from a list of functions, for the list see [Ircalladdr Functions](https://wiki.facepunch.com/gmod/Ircalladdr Functions)
---- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
+---[SHARED AND MENU] Previously got the address of a function from a set list of functions, but now always returns `0` as it is deprecated.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
----@param index number The index of the function address to get from the ircalladdr func array (starting from 0)
----@return number # The address of the function.
----
---- 				It will return `0` if the index is reserved.
---- 				in the x86-64 versions the index is reserved up to 102.
---- 				in all other versions it is reserved until 71.
----@deprecated This function was disabled due to security concerns. It will always return 0.
+---@param index number
+--- 			This arugment is ignored.
+---@return number #
+--- 			Always returns `0`
+---@deprecated This function was disabled due to security concerns.
 function jit.util.ircalladdr(index) end
 
----[SHARED AND MENU]
+---[SHARED AND MENU] Grabs the address of a function based on it's trace exit number. Grabbed via [jit.attach](https://wiki.facepunch.com/gmod/jit.attach) (with the texit event).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/jit.util.traceexitstub)
 ---@param exitno number exit number to retrieve exit stub address from (gotten via jit.attach with the texit event)
 ---@return number # exitstub trace address
+---@deprecated This function was disabled due to security concerns. It will always return 0.
 function jit.util.traceexitstub(exitno) end
 
 ---[SHARED AND MENU] Return table fields:

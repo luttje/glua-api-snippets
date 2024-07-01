@@ -336,11 +336,11 @@ function _G.CompileFile(path) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CompileString)
 ---@param code string The code to compile.
 ---@param identifier string An identifier in case an error is thrown. (The same identifier can be used multiple times)
----@param HandleError? boolean If false this function will return an error string instead of throwing an error.
+---@param handleError? boolean If false this function will return an error string instead of throwing an error.
 ---@return function # A function that, when called, will execute the given code.
 ---
 --- Returns the error string if there was a Lua error and third argument is false.
-function _G.CompileString(code, identifier, HandleError) end
+function _G.CompileString(code, identifier, handleError) end
 
 ---[SHARED AND MENU] Returns whether a [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the given name exists or not
 ---
@@ -417,7 +417,7 @@ function _G.CreateMaterial(name, shaderName, materialData) end
 --- 			JSON structue should be Structures/Preset
 function _G.CreateNewAddonPreset(data) end
 
----[CLIENT] Creates a new particle system. See also [Entity:CreateParticleEffect](https://wiki.facepunch.com/gmod/Entity:CreateParticleEffect)
+---[CLIENT] Creates a new particle system. See also [Entity:CreateParticleEffect](https://wiki.facepunch.com/gmod/Entity:CreateParticleEffect), [Global.ParticleEffectAttach](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach) and [Global.CreateParticleSystemNoEntity](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity).
 ---
 --- **NOTE**: The particle effect must be precached with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
 ---
@@ -542,7 +542,7 @@ function _G.DEFINE_BASECLASS(value) end
 ---@param name string The name of the Preset to delete.
 function _G.DeleteAddonPreset(name) end
 
----[SHARED] Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for [gamemode.Register](https://wiki.facepunch.com/gmod/gamemode.Register).
+---[SHARED] Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for [gamemode.Register](https://wiki.facepunch.com/gmod/gamemode.Register). See  [Gamemode_Creation#derivinggamemodes](https://wiki.facepunch.com/gmod/Gamemode_Creation#derivinggamemodes) for more information about deriving gamemodes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DeriveGamemode)
 ---@param base string Gamemode name to derive from.
@@ -1172,7 +1172,7 @@ function _G.GetConVar(name) end
 
 ---[SHARED AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 	**WARNING**: This function is very slow and not recommended. See [Global.GetConVar](https://wiki.facepunch.com/gmod/Global.GetConVar) for an example on how to properly store the return of what your using so you can avoid using this function as much as possible.
+--- 	**WARNING**: This function is very slow and not recommended. See [Global.GetConVar](https://wiki.facepunch.com/gmod/Global.GetConVar) for an example on how to properly store the return of what you're using so you can avoid using this function as much as possible.
 ---
 --- 	Gets the ConVar with the specified name. This function doesn't cache the convar.
 ---
@@ -2194,7 +2194,7 @@ function _G.Particle(file) end
 ---@param parent? Entity If set, the particle will be parented to the entity.
 function _G.ParticleEffect(particleName, position, angles, parent) end
 
----[SHARED] Creates a particle effect with specialized parameters.
+---[SHARED] Creates a particle effect with specialized parameters. See also [Entity:CreateParticleEffect](https://wiki.facepunch.com/gmod/Entity:CreateParticleEffect) and [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem).
 ---
 --- **NOTE**: The particle effect must be precached **serverside** with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
 ---
@@ -3071,8 +3071,12 @@ function _G.type(var) end
 
 ---[SHARED] Gets the associated type ID of the variable. Unlike [Global.type](https://wiki.facepunch.com/gmod/Global.type), this does not work with [no value](https://wiki.facepunch.com/gmod/no value) - an argument must be provided.
 ---
+--- **WARNING**: This will return `TYPE_TABLE` for [Color](https://wiki.facepunch.com/gmod/Color) objects.
+---
+--- **WARNING**: This will return `TYPE_STRING` for [vararg](https://wiki.facepunch.com/gmod/vararg) objects.
+---
 --- This returns garbage for _LOADLIB objects.
---- This returns TYPE_NIL for [proto](https://wiki.facepunch.com/gmod/proto)s.
+--- This returns `TYPE_NIL` for [proto](https://wiki.facepunch.com/gmod/proto)s.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.TypeID)
 ---@param variable any The variable to get the type ID of.
@@ -3149,7 +3153,9 @@ function _G.UpdateServerSettings() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UpdateSubscribedAddons)
 function _G.UpdateSubscribedAddons() end
 
----[SHARED AND MENU] Returns whether or not a model is useless by checking that the file path is that of a proper model.
+---[SHARED AND MENU] This function is an alias of [Global.IsUselessModel](https://wiki.facepunch.com/gmod/Global.IsUselessModel).
+---
+--- Returns whether or not a model is useless by checking that the file path is that of a proper model.
 ---
 --- If the string ".mdl" is not found in the model name, the function will return true.
 ---

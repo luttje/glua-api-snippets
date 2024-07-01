@@ -3,7 +3,7 @@
 ---
 --- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		This element is created within and only used in the [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet) file.
+--- 		This element is created within and only used in the [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet) file. These can be elements are stored items are stored in the `Items` subtable of the [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet)
 ---
 ---@class DTab : DButton
 local DTab = {}

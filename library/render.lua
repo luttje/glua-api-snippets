@@ -183,7 +183,7 @@ function render.DepthRange(depthmin, depthmax) end
 
 ---[CLIENT] Draws a single-segment Beam made out of a textured, billboarded quad stretching between two points.
 ---
---- 		For more detailed information, including usage examples, see the [Beams Rendering Reference](https://wiki.facepunch.com/gmod/Beam_Rendering)
+--- 		For more detailed information, including usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.DrawBeam)
 ---@param startPos Vector The Beam's start position.

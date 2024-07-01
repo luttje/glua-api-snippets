@@ -401,6 +401,21 @@ function Entity:DisableMatrix(matrixType) end
 ---@param dir? Vector Direction of the attack.
 function Entity:DispatchTraceAttack(damageInfo, traceRes, dir) end
 
+---[SERVER] Dissolves the entity.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:Dissolve)
+---@param type? number Dissolve type. Should be one of the following values:
+---
+--- | ID | Description |
+--- |||
+--- | 0 | ENTITY_DISSOLVE_NORMAL |
+--- | 1 | ELECTRICAL|
+--- | 2 | ELECTRICAL_LIGHT |
+--- | 3 | ENTITY_DISSOLVE_CORE |
+---@param magnitude? number Magnitude of the dissolve effect, its effect depends on the dissolve type.
+---@param origin? Vector The origin for the dissolve effect, its effect depends on the dissolve type. Defaults to entity's origin.
+function Entity:Dissolve(type, magnitude, origin) end
+
 ---[SHARED] Called so the entity can override the bullet impact effects it makes. This is called when the entity itself fires bullets via [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets), not when it gets hit.
 ---
 --- **NOTE**: This hook only works for the "anim" type entities.
@@ -2393,10 +2408,13 @@ function Entity:GetSubModels() end
 ---@return Vector # The maximum vector for the entity's bounding box in world space.
 function Entity:GetSurroundingBounds() end
 
----[SHARED] Returns the table that contains all script values saved within the entity.
+---[SHARED] Returns a [table](https://wiki.facepunch.com/gmod/table) that contains all lua-based key-value pairs saved on the [Entity](https://wiki.facepunch.com/gmod/Entity).
+---
+--- 		For retrieving engine-based key-value pairs, see [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetTable)
----@return table # The entity's Lua table.
+---@return table #
+--- 			A table of the lua data stored on the Entity, or `nil` if the Entity is NULL.
 function Entity:GetTable() end
 
 ---[SHARED] Returns the last trace used in the collision callbacks such as [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch), [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) and [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch).
@@ -2886,7 +2904,7 @@ function Entity:LocalToWorldAngles(ang) end
 ---@return number # The attachment index, or 0 if the attachment does not exist and -1 if the model is invalid.
 function Entity:LookupAttachment(attachmentName) end
 
----[SHARED] Gets the bone index of the given bone name, returns nothing if the bone does not exist.
+---[SHARED] Gets the bone index of the given bone name, returns `nil` if the bone does not exist.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:LookupBone)
 ---@param boneName string The name of the bone.
@@ -2904,7 +2922,7 @@ function Entity:LookupAttachment(attachmentName) end
 --- * ValveBiped.Bip01_R_Calf
 --- * ValveBiped.Bip01_R_Shoulder
 --- * ValveBiped.Bip01_R_Elbow
----@return number # Index of the given bone name
+---@return number # Index of the given bone name, or `nil` if the bone doesn't exist on the Entity
 function Entity:LookupBone(boneName) end
 
 ---[SHARED] Returns pose parameter ID from its name.
@@ -3706,6 +3724,16 @@ function Entity:Respawn() end
 ---@param autokill? boolean
 function Entity:RestartGesture(activity, addIfMissing, autokill) end
 
+---[SHARED] Calls the associated `Entity:Set*` function for each network var provided.
+---
+--- 		**INTERNAL**: Used for the built-in duplicator, you do not need to call this yourself.
+---
+--- 		**NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:RestoreNetworkVars)
+---@param data table The data from Entity:GetNetworkVars.
+function Entity:RestoreNetworkVars(data) end
+
 ---[SERVER] Called from the engine every 0.1 seconds. Returning `true` inside this hook will allow `CAI_BaseNPC::MaintainSchedule` to also be called.
 ---
 --- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
@@ -3813,7 +3841,7 @@ function Entity:SetAnimTime(time) end
 
 ---[SHARED] Parents the sprite to an attachment on another model.
 ---
---- Works only on env_sprite.
+--- Works only on `env_sprite` entities.
 ---
 --- Despite existing on client, it doesn't actually do anything on client.
 ---
@@ -5056,11 +5084,11 @@ function Entity:SetPredictable(setPredictable) end
 
 ---[SERVER] Prevents the server from sending any further information about the entity to a player.
 ---
---- **NOTE**: You must also call this function on a player's children if you would like to prevent transmission for players. See [Entity:GetChildren](https://wiki.facepunch.com/gmod/Entity:GetChildren).
+--- **NOTE**: You must also call this function on all entity's children. See [Entity:GetChildren](https://wiki.facepunch.com/gmod/Entity:GetChildren).
 ---
---- This does not work for nextbots unless you recursively loop their children and update them too.
+--- [issue tracker](https://github.com/Facepunch/garrysmod-issues/issues/1736)
 ---
---- When using this function, [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) will conflict with this function. Instead, consider using [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) on the client.
+--- [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) and other flex/bone manipulation functions will create a child entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetPreventTransmit)
 ---@param player Player|CRecipientFilter The player to stop networking the entity to. Can also be a CRecipientFilter as of March 2024 to affect multiple players at once.

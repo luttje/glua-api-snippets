@@ -161,7 +161,7 @@ function GM:CanPlayerSuicide(player) end
 ---@return boolean # True if they can unfreeze.
 function GM:CanPlayerUnfreeze(player, entity, phys) end
 
----[SHARED] Controls if a property can be used or not.
+---[SHARED] Controls if a [property](https://wiki.facepunch.com/gmod/properties) can be used or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:CanProperty)
 ---@param ply Player Player, that tried to use the property
@@ -695,13 +695,12 @@ function GM:HUDItemPickedUp(itemName) end
 
 ---[CLIENT] Called whenever the HUD should be drawn.
 ---
---- Called right before [GM:HUDDrawScoreBoard](https://wiki.facepunch.com/gmod/GM:HUDDrawScoreBoard) and after [GM:HUDPaintBackground](https://wiki.facepunch.com/gmod/GM:HUDPaintBackground).
+--- 		This is the ideal place to draw custom HUD elements.
 ---
---- Not called when the Camera SWEP is equipped, or when the main menu is visible. [GM:PostDrawHUD](https://wiki.facepunch.com/gmod/GM:PostDrawHUD) does not have this behavior.
+--- 		To prevent the default game HUD from drawing, use [GM:HUDShouldDraw](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw).
 ---
---- See also [GM:DrawOverlay](https://wiki.facepunch.com/gmod/GM:DrawOverlay).
----
---- **NOTE**: Gets called only when r_drawvgui and [CHudGMod](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw) are enabled and the game is not paused
+--- 		This hook does **not** get called when the Camera SWEP is held, or when the esc menu is open.
+--- 		If you need to draw in those situations, use [GM:DrawOverlay](https://wiki.facepunch.com/gmod/GM:DrawOverlay) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HUDPaint)
 function GM:HUDPaint() end
@@ -951,7 +950,7 @@ function GM:OnEntityWaterLevelChanged(entity, old, new) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnGamemodeLoaded)
 function GM:OnGamemodeLoaded() end
 
----[SHARED AND MENU] Called when a Lua error occurs.
+---[SHARED AND MENU] Called when a Lua error occurs. Doesn't run for [Global.ErrorNoHalt](https://wiki.facepunch.com/gmod/Global.ErrorNoHalt) or [Global.Error](https://wiki.facepunch.com/gmod/Global.Error).
 --- **NOTE**: On the [server realm](https://wiki.facepunch.com/gmod/States), this hook will only account for server-side errors, not client-side ones.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnLuaError)
@@ -1257,6 +1256,8 @@ function GM:PlayerCanSeePlayersChat(text, teamOnly, listener, speaker) end
 ---[SERVER] Called when a player has changed team using [Player:SetTeam](https://wiki.facepunch.com/gmod/Player:SetTeam).
 --- 	**WARNING**: Avoid calling [Player:SetTeam](https://wiki.facepunch.com/gmod/Player:SetTeam) in this hook as it may cause an infinite loop!
 ---
+--- 	**WARNING**: [Player:Team](https://wiki.facepunch.com/gmod/Player:Team) inside this hook will return `oldTeam`.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerChangedTeam)
 ---@param ply Player Player whose team has changed.
 ---@param oldTeam number Index of the team the player was originally in. See team.GetName and the team library.
@@ -1285,7 +1286,7 @@ function GM:PlayerCheckLimit(ply, limitName, current, defaultMax) end
 --- Pass this into util.NetworkIDToString to retrieve the proper name of the player class.
 function GM:PlayerClassChanged(ply, newID) end
 
----[SHARED] Executes when a player connects to the server. Called before the player has been assigned a [UserID](https://wiki.facepunch.com/gmod/Player:UserID) and entity. See the [player_connect gameevent](https://wiki.facepunch.com/gmod/Game_Events) for a version of this hook called after the player entity has been created.
+---[SHARED] Executes when a player connects to the server. Called before the player has been assigned a [UserID](https://wiki.facepunch.com/gmod/Player:UserID) and entity. See the [player_connect](https://wiki.facepunch.com/gmod/gameevent/player_connect) gameevent for a version of this hook called after the player entity has been created.
 ---
 --- **NOTE**: This is only called clientside for listen server hosts.
 ---
@@ -1520,7 +1521,8 @@ function GM:PlayerLoadout(ply) end
 ---@return boolean # Return false to disallow the switch.
 function GM:PlayerNoClip(ply, desiredState) end
 
----[SHARED] Called after the player's think.
+---[SHARED] Called after the player's think, just after [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove).
+---
 --- 		**NOTE**: On the client side, it is only called for the local player.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerPostThink)

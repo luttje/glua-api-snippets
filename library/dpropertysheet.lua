@@ -31,7 +31,7 @@ function DPropertySheet:CloseTab(tab, removePanel) end
 
 ---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Internal function that handles the cross fade animation when the player switches tabs.
+--- 	Internal function that handles the cross fade animation when the player switches tabs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:CrossFade)
 ---@param anim table
@@ -47,7 +47,7 @@ function DPropertySheet:GetActiveTab() end
 
 ---[CLIENT AND MENU] Returns the amount of time (in seconds) it takes to fade between tabs.
 ---
---- Set by [DPropertySheet:SetFadeTime](https://wiki.facepunch.com/gmod/DPropertySheet:SetFadeTime)
+--- 	Set by [DPropertySheet:SetFadeTime](https://wiki.facepunch.com/gmod/DPropertySheet:SetFadeTime)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DPropertySheet:GetFadeTime)
 ---@return number # The amount of time (in seconds) it takes to fade between tabs.

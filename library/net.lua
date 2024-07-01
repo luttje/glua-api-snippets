@@ -422,10 +422,14 @@ function net.WriteNormal(normal) end
 ---@param ply Player The player to be sent.
 function net.WritePlayer(ply) end
 
----[SHARED] Appends a string to the current net message. The size of the string is 8 bits plus 8 bits for every ASCII character in the string. The maximum allowed length of a single written string is **65532 characters**.
+---[SHARED] Appends a string to the current net message. The size of the written data is 8 bits for every ASCII character in the string + 8 bits for the null terminator.
+---
+--- The maximum allowed length of a single written string is **65532 characters**. (aka the limit of the net message itself)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.WriteString)
 ---@param string string The string to be sent.
+---
+--- The input will be terminated at the first null byte if one is present. See net.WriteData if you wish to write binary data.
 function net.WriteString(string) end
 
 ---[SHARED] Appends a table to the current net message. Adds **16 extra bits** per key/value pair, so you're better off writing each individual key/value as the exact type if possible.
@@ -438,6 +442,8 @@ function net.WriteString(string) end
 --- If the table contains a `nil` key the table may not be read correctly.
 ---
 --- Not all objects can be sent over the network. Things like functions, [IMaterial](https://wiki.facepunch.com/gmod/IMaterial)s, etc will cause errors when reading the table from a net message.
+---
+--- Each element is also limited by the constraint of the `net.Write` function for the element type.
 ---@param sequential? boolean Set to `true` if the input table is sequential. This saves on bandwidth, adding **8 extra bits** per key/value pair instead of 16 bits.
 ---
 --- To read the table you need to give [net.ReadTable](https://wiki.facepunch.com/gmod/net.ReadTable) the same value!

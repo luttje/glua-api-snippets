@@ -153,17 +153,22 @@ function file.Time(path, gamePath) end
 --- * .json
 --- * .xml
 --- * .csv
---- * .jpg
---- * .jpeg
---- * .png
+--- * .dem
+--- * .vcd
+--- * .gma
+--- * .mdl
+--- * .phy
+--- * .vvd
+--- * .vtx
+--- * .ani
 --- * .vtf
 --- * .vmt
+--- * .png
+--- * .jpg
+--- * .jpeg
 --- * .mp3
 --- * .wav
 --- * .ogg
---- * .vcd
---- * .dem
---- * .gma
 ---
 --- Restricted symbols are: `" :`
 ---@param content string The content that will be written into the file.

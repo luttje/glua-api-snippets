@@ -552,7 +552,7 @@ function WEAPON:SecondaryAttack() end
 ---[SHARED] Forces weapon to play activity/animation.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Weapon:SendWeaponAnim)
----@param act number Activity to play. See the Enums/ACT (specifically ACT_VM_).
+---@param act number Activity to play. See the Enums/ACT (specifically `ACT_VM_`).
 function Weapon:SendWeaponAnim(act) end
 
 ---[SHARED] Sets the activity the weapon is playing.

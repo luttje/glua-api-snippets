@@ -3,7 +3,7 @@
 --- The properties library gives you access to the menu that shows up when right clicking entities while holding C.
 properties = {}
 
----[SHARED] Add properties to the properties module
+---[SHARED] Add properties to the properties module. Properties can be blocked via [GM:CanProperty](https://wiki.facepunch.com/gmod/GM:CanProperty).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.Add)
 ---@param name string A unique name used to identify the property

@@ -1,9 +1,9 @@
 ---@meta
 
 ---
---- 		**INTERNAL**: Used by [DListBox](https://wiki.facepunch.com/gmod/DListBox).
 ---
 ---
+---@deprecated Used Internally by DListBox.
 ---@class DListBoxItem : DLabel
 local DListBoxItem = {}
 

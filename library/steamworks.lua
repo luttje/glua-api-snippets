@@ -26,7 +26,9 @@ function steamworks.ApplyAddons() end
 --- * string `path` - Path to the downloaded file.
 function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 
----[CLIENT AND MENU] Downloads a Steam Workshop file by its ID and returns a path to it.
+---[CLIENT AND MENU] **NOTE**: A serverside implementation of this function can be provided by binary modules, such as [gmsv_workshop](https://github.com/WilliamVenner/gmsv_workshop).
+---
+--- 		Downloads a Steam Workshop file by its ID and returns a path to it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
 ---@param workshopID string The ID of workshop item to download. **NOT** a file ID.
@@ -37,7 +39,9 @@ function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 --- * file_class `file` - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
 function steamworks.DownloadUGC(workshopID, resultCallback) end
 
----[CLIENT AND MENU] Retrieves info about supplied Steam Workshop addon.
+---[CLIENT AND MENU] **NOTE**: A serverside implementation of this function can be provided by binary modules, such as [gmsv_workshop](https://github.com/WilliamVenner/gmsv_workshop).
+---
+--- 		Retrieves info about supplied Steam Workshop addon.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.FileInfo)
 ---@param workshopItemID string The ID of Steam Workshop item.

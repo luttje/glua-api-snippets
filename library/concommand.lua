@@ -60,9 +60,9 @@ function concommand.Remove(name) end
 
 ---[SHARED AND MENU] **INTERNAL**: You might be looking for [Global.RunConsoleCommand](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand) or [Player:ConCommand](https://wiki.facepunch.com/gmod/Player:ConCommand).
 ---
---- Used by the engine to run a console command's callback function. This will only be called for commands that were added with [Global.AddConsoleCommand](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand), which [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add) calls internally. An error is sent to the player's chat if no callback is found.
+--- Used by the engine to run a console command's callback function. This will only be called for commands that were added with [Global.AddConsoleCommand](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand), which [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add) calls internally. An error is sent to the player's console if no callback is found.
 ---
---- This will still be called for concommands removed with [concommand.Remove](https://wiki.facepunch.com/gmod/concommand.Remove) but will return false.
+--- This will still be called for concommands removed with [concommand.Remove](https://wiki.facepunch.com/gmod/concommand.Remove) but will return false. This will not be called for concommands added by the engine, only those made from Lua.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.Run)
 ---@param ply Player Player to run concommand on

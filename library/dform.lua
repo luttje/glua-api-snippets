@@ -137,6 +137,7 @@ function DForm:SetAutoSize(boolean) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:SetName)
 ---@param name string The new header name.
+---@deprecated This is an alias of derived DCollapsibleCategory:SetLabel
 function DForm:SetName(name) end
 
 ---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that does nothing.

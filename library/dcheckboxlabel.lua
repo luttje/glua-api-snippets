@@ -23,7 +23,6 @@ function DCheckBoxLabel:GetIndent() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetBright)
 ---@param bright boolean true makes the text bright.
----@deprecated You really should be using DCheckBoxLabel:SetTextColor instead
 function DCheckBoxLabel:SetBright(bright) end
 
 ---[CLIENT AND MENU] Sets the checked state of the checkbox. Does not call [DCheckBoxLabel:OnChange](https://wiki.facepunch.com/gmod/DCheckBoxLabel:OnChange) or [Panel:ConVarChanged](https://wiki.facepunch.com/gmod/Panel:ConVarChanged), unlike [DCheckBoxLabel:SetValue](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetValue).
@@ -38,11 +37,10 @@ function DCheckBoxLabel:SetChecked(checked) end
 ---@param convar string The name of the convar to set
 function DCheckBoxLabel:SetConVar(convar) end
 
----[CLIENT AND MENU] Sets the text of the [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel) to be dark colored.
+---[CLIENT AND MENU] Sets the text of the [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel) to be dark colored in accordance with the currently active Derma skin.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetDark)
 ---@param darkify boolean True to be dark, false to be default
----@deprecated You really should be using DCheckBoxLabel:SetTextColor instread
 function DCheckBoxLabel:SetDark(darkify) end
 
 ---[CLIENT AND MENU] Sets the font of the text part of the [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel).

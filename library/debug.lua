@@ -3,10 +3,11 @@
 --- The debug library is intended to help you debug your scripts, however it also has several other powerful uses. Some builtin debug function were removed in GMod due to security reasons
 debug = {}
 
----[SHARED AND MENU] Enters an interactive mode with the user, running each string that the user enters. Using simple commands and other debug facilities, the user can inspect global and local variables, change their values, evaluate expressions, and so on. A line containing only the word cont finishes this function, so that the caller continues its execution.
+---[SHARED AND MENU] **NOTE**: This only works on the source dedicated server.
+---
+--- Enters an interactive mode with the user, running each string that the user enters. Using simple commands and other debug facilities, the user can inspect global and local variables, change their values, evaluate expressions, and so on. A line containing only the word cont finishes this function, so that the caller continues its execution.
 ---
 --- * Commands for debug.debug are not lexically nested within any function, and so have no direct access to local variables.
---- * This only works on the source dedicated server.
 --- * To exit this interactive mode, you can press Ctrl + Z then Enter OR type the word 'cont' on a single line and press enter.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/debug.debug)

@@ -126,6 +126,8 @@ function util.DecalEx(material, ent, position, normal, color, w, h) end
 
 ---[SHARED] Gets the full material path by the decal name. Used with [util.DecalEx](https://wiki.facepunch.com/gmod/util.DecalEx).
 ---
+--- If decal specifies multiple materials, a random one will be chosen.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.DecalMaterial)
 ---@param decalName string Name of the decal.
 ---@return string # Material path of the decal.

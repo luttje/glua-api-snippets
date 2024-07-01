@@ -56,7 +56,9 @@ function game.BuildAmmoTypes() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.CleanUpMap)
 ---@param dontSendToClients? boolean If set to `true`, don't run this functions on all clients.
 ---@param extraFilters? table Entity classes not to reset during cleanup.
----@param callback? function If set, delays the map cleanup until the end of a server tick, allowing bypassing the entity limit on maps with large amounts of them. The callback function will be called after the map cleanup has been performed.
+---@param callback? function If set, delays the map cleanup until the end of a server tick, allowing bypassing the entity limit on maps with large amounts of them. Otherwise the entities will not be cleaned up until the end of the server tick.
+---
+--- The callback function will be called after the map cleanup has been performed.
 function game.CleanUpMap(dontSendToClients, extraFilters, callback) end
 
 ---[SERVER] Runs a console command.

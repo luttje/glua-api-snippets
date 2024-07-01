@@ -838,8 +838,10 @@ ENT.ScriptedEntityType = nil
 ENT.DoNotDuplicate = false
 
 ---If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
+---
+--- Like many functions, this expects a path relative to the `materials/` folder, do not include `materials/` in the provided string.
 ---@type string
-ENT.IconOverride = "materials/entities/<ClassName>.png"
+ENT.IconOverride = "entities/<ClassName>.png"
 
 ---If set, the entity forbid physgun interaction.
 ---@type boolean
@@ -2684,7 +2686,7 @@ Trace.start = VectorVector(0, 0, 0)
 ---@type Vector
 Trace.endpos = VectorVector(0, 0, 0)
 
----Things the trace should not hit. Can also be a table of entities or a function with one argument:
+---Things the trace should not hit. Can also be a table of entities and classname strings, or a function with one argument:
 ---
 --- * Entity ent - The entity that the trace hit
 ---
@@ -2705,6 +2707,14 @@ Trace.collisiongroup = COLLISION_GROUP_NONE
 ---Should the trace ignore world or not
 ---@type boolean
 Trace.ignoreworld = false
+
+---Should the trace hit clientside-only entities or not
+---@type boolean
+Trace.hitclientonly = false
+
+---Turns the filter field into a whitelist instead of an ignore list, does not affect function filters
+---@type boolean
+Trace.whitelist = false
 
 ---If set, the trace result will be written to the supplied table instead of returning a new table
 ---@type table

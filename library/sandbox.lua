@@ -168,9 +168,9 @@ function SANDBOX:PersistenceSave(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerGiveSWEP)
 ---@param ply Player The player who attempted to give themselves a weapon.
 ---@param weapon string Class name of the weapon the player tried to give themselves.
----@param swep table The swep table of this weapon, see Structures/SWEP
+---@param spawninfo table The weapon list table of this weapon, see https://github.com/Facepunch/garrysmod/blob/c3801c10e1aacc4c114d81331f301c57bdcf5a52/garrysmod/gamemodes/sandbox/gamemode/commands.lua#L893 and https://github.com/Facepunch/garrysmod/blob/c3801c10e1aacc4c114d81331f301c57bdcf5a52/garrysmod/lua/includes/modules/weapons.lua#L58
 ---@return boolean # Can the SWEP be given to the player
-function SANDBOX:PlayerGiveSWEP(ply, weapon, swep) end
+function SANDBOX:PlayerGiveSWEP(ply, weapon, spawninfo) end
 
 ---[SERVER] Called after the player spawned an effect.
 ---

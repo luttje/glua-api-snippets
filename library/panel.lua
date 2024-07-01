@@ -206,7 +206,8 @@ function Panel:ChildrenSize() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Clear)
 function Panel:Clear() end
 
----[CLIENT AND MENU] Fades panels color to specified one. It won't work unless panel has SetColor function.
+---[CLIENT AND MENU] Fades panels color to specified one.
+---        **NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:ColorTo)
 ---@param color table The color to fade to
@@ -1281,7 +1282,7 @@ function Panel:LoadTGAImage(imageName, strPath) end
 ---@return number # The y coordinate
 function Panel:LocalCursorPos() end
 
----[CLIENT AND MENU] Gets the absolute screen position of the position specified relative to the panel.
+---[CLIENT AND MENU] Takes X and Y coordinates relative to the panel and returns their corresponding positions relative to the screen.
 ---
 --- See also [Panel:ScreenToLocal](https://wiki.facepunch.com/gmod/Panel:ScreenToLocal).
 ---
@@ -1449,7 +1450,7 @@ function Panel:NewObjectCallback(objectName, callbackName) end
 --- To fully disable the clipping of any children see [Global.DisableClipping](https://wiki.facepunch.com/gmod/Global.DisableClipping).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:NoClipping)
----@param clip boolean Whether to clip or not.
+---@param clip boolean Whether to clip or not. True to enable, false to disable clipping.
 function Panel:NoClipping(clip) end
 
 ---[CLIENT AND MENU] Returns the number of children of the panel object that are selected. This is equivalent to calling [Panel:IsSelected](https://wiki.facepunch.com/gmod/Panel:IsSelected) on all child objects and counting the number of returns that are `true`.

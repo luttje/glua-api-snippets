@@ -142,13 +142,12 @@ function DLabel:SetAutoStretchVertical(stretch) end
 
 ---[CLIENT AND MENU] Sets the color of the text to the bright text color defined in the skin.
 ---
---- See also [DLabel:SetDark](https://wiki.facepunch.com/gmod/DLabel:SetDark) and [DLabel:SetHighlight](https://wiki.facepunch.com/gmod/DLabel:SetHighlight).
+--- Disables [DLabel:SetDark](https://wiki.facepunch.com/gmod/DLabel:SetDark). Gets overridden by [DLabel:SetHighlight](https://wiki.facepunch.com/gmod/DLabel:SetHighlight).
 ---
---- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
+--- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. Otherwise use [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetBright)
 ---@param bright boolean Whenever to set the text to bright or not.
----@deprecated You really should use DLabel:SetTextColor.
 function DLabel:SetBright(bright) end
 
 ---[CLIENT AND MENU] Changes color of label. Alias of [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
@@ -159,13 +158,12 @@ function DLabel:SetColor(color) end
 
 ---[CLIENT AND MENU] Sets the color of the text to the dark text color defined in the skin.
 ---
---- See also [DLabel:SetBright](https://wiki.facepunch.com/gmod/DLabel:SetBright) and [DLabel:SetHighlight](https://wiki.facepunch.com/gmod/DLabel:SetHighlight).
+--- Disables [DLabel:SetBright](https://wiki.facepunch.com/gmod/DLabel:SetBright). Gets overridden by [DLabel:SetHighlight](https://wiki.facepunch.com/gmod/DLabel:SetHighlight).
 ---
---- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
+--- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. Otherwise use [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetDark)
 ---@param dark boolean Whenever to set the text to dark or not.
----@deprecated You really should use DLabel:SetTextColor.
 function DLabel:SetDark(dark) end
 
 ---[CLIENT AND MENU] Sets the disabled state of the [DLabel](https://wiki.facepunch.com/gmod/DLabel).
@@ -205,13 +203,12 @@ function DLabel:SetFont(fontName) end
 ---
 --- For the default Derma skin this makes the label red.
 ---
---- See also [DLabel:SetBright](https://wiki.facepunch.com/gmod/DLabel:SetBright) and [DLabel:SetDark](https://wiki.facepunch.com/gmod/DLabel:SetDark).
+--- Overrides colors set by both [DLabel:SetBright](https://wiki.facepunch.com/gmod/DLabel:SetBright) and [DLabel:SetDark](https://wiki.facepunch.com/gmod/DLabel:SetDark) while active.
 ---
---- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
+--- You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. Otherwise use [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DLabel:SetHighlight)
 ---@param highlight boolean true to set the label's color to skins's text highlight color, false otherwise.
----@deprecated You really should use DLabel:SetTextColor.
 function DLabel:SetHighlight(highlight) end
 
 ---[CLIENT AND MENU] Used internally by [DComboBox](https://wiki.facepunch.com/gmod/DComboBox).

@@ -97,8 +97,7 @@ function surface.DrawText(text, forceAdditive) end
 ---[CLIENT AND MENU] Draw a textured rectangle with the given position and dimensions on the screen, using the current active texture set with [surface.SetMaterial](https://wiki.facepunch.com/gmod/surface.SetMaterial). It is also affected by [surface.SetDrawColor](https://wiki.facepunch.com/gmod/surface.SetDrawColor).
 ---
 --- See also [render.SetMaterial](https://wiki.facepunch.com/gmod/render.SetMaterial) and [render.DrawScreenQuadEx](https://wiki.facepunch.com/gmod/render.DrawScreenQuadEx).
----
---- See also [surface.DrawTexturedRectUV](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectUV).
+--- See also [surface.DrawTexturedRectUV](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectUV) and [surface.DrawTexturedRectRotated](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectRotated).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect)
 ---@param x number The X integer co-ordinate.
@@ -108,6 +107,8 @@ function surface.DrawText(text, forceAdditive) end
 function surface.DrawTexturedRect(x, y, width, height) end
 
 ---[CLIENT AND MENU] Draw a textured rotated rectangle with the given position and dimensions and angle on the screen, using the current active texture.
+---
+--- See also [surface.DrawTexturedRectUV](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectUV) and [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectRotated)
 ---@param x number The X integer co-ordinate, representing the center of the rectangle.
@@ -119,7 +120,7 @@ function surface.DrawTexturedRectRotated(x, y, width, height, rotation) end
 
 ---[CLIENT AND MENU] Draws a textured rectangle with a repeated or partial texture.
 ---
---- u and v refer to texture coordinates.
+--- `u` and `v` refer to texture coordinates.
 --- * (u, v) = (0, 0) is the top left
 --- * (u, v) = (1, 0) is the top right
 --- * (u, v) = (1, 1) is the bottom right
@@ -129,9 +130,11 @@ function surface.DrawTexturedRectRotated(x, y, width, height, rotation) end
 ---
 --- Here's a helper image:
 ---
+--- See also [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect) and [surface.DrawTexturedRectRotated](https://wiki.facepunch.com/gmod/surface.DrawTexturedRectRotated).
+---
 --- **NOTE**: If you are using a .png image, you need supply the "noclamp" flag as second parameter for [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) if you intend to use tiling.
 ---
---- **NOTE**: If you find that surface.DrawTexturedRectUV is getting your texture coordinates (u0, v0), (u1, v1) wrong and you're rendering with a material created with [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial), try adjusting them with the following code:
+--- **NOTE**: If you find that `surface.DrawTexturedRectUV` is getting your texture coordinates (u0, v0), (u1, v1) wrong and you're rendering with a material created with [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial), try adjusting them with the following code:
 ---
 --- ```
 --- local du = 0.5 / 32 -- half pixel anticorrection
@@ -141,7 +144,7 @@ function surface.DrawTexturedRectRotated(x, y, width, height, rotation) end
 --- ```
 ---
 --- **Explanation:**
---- surface.DrawTexturedRectUV tries to correct the texture coordinates by half a pixel (something to do with sampling) and computes the correction using IMaterial::GetMappingWidth()/GetMappingHeight(). If the material was created without a $basetexture, then GetMappingWidth()/GetMappingHeight() uses the width and height of the error material (which is 32x32).
+--- `surface.DrawTexturedRectUV` tries to correct the texture coordinates by half a pixel (something to do with sampling) and computes the correction using `IMaterial::GetMappingWidth()`/`GetMappingHeight()`. If the material was created without a `$basetexture`, then `GetMappingWidth()`/`GetMappingHeight()` uses the width and height of the error material (which is 32x32).
 ---
 --- The UV offsets might require (sub-)pixel correction for accurate tiling results.
 ---
@@ -306,13 +309,15 @@ function surface.SetFont(fontName) end
 ---
 --- **WARNING**: [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) function calls are expensive to be done inside this function or inside rendering context, you should be caching the results of [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) calls
 ---
---- **NOTE**: When using [render.PushRenderTarget](https://wiki.facepunch.com/gmod/render.PushRenderTarget) or [render.SetRenderTarget](https://wiki.facepunch.com/gmod/render.SetRenderTarget), `material` should have the `$ignorez` flag set to make it visible. If the material is not used in 3D rendering, it is probably safe to add it with this code:
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetMaterial)
+---@param material IMaterial The material to be used.
+---
+--- When using [render.PushRenderTarget](https://wiki.facepunch.com/gmod/render.PushRenderTarget) or [render.SetRenderTarget](https://wiki.facepunch.com/gmod/render.SetRenderTarget), the material should have the `$ignorez` flag set to make it visible. If the material is not used in 3D rendering, it is probably safe to add it with this code:
 --- ```lua
 --- material:SetInt( "$flags", bit.bor( material:GetInt( "$flags" ), 32768 ) )
 --- ```
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/surface.SetMaterial)
----@param material IMaterial The material to be used.
+--- If using [Global.Material](https://wiki.facepunch.com/gmod/Global.Material), simply use the `ignorez` parameter.
 function surface.SetMaterial(material) end
 
 ---[CLIENT AND MENU] Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a [Color](https://wiki.facepunch.com/gmod/Color).

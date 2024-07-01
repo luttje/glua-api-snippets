@@ -848,6 +848,7 @@ function Player:GetObserverTarget() end
 function Player:GetPData(key, default) end
 
 ---[SHARED] Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model.
+--- **NOTE**: Overide this function clientside on a Entity(not a player) with playermodel and return color will apply color on it
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetPlayerColor)
 ---@return Vector # The format is `Vector(r,g,b)`, and each color component should be between 0 and 1.
@@ -1606,7 +1607,7 @@ function Player:SetAllowWeaponsInVehicle(allow) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetAmmo)
 ---@param ammoCount number The amount of ammunition to set.
----@param ammoType any The ammunition type. Can be either number ammo ID or string ammo name.
+---@param ammoType any The ammunition type. Can be either number ammo ID or string ammo name. See Default Ammo Types for default values.
 function Player:SetAmmo(ammoCount, ammoType) end
 
 ---[SERVER] Sets the player armor to the argument.
@@ -1615,10 +1616,14 @@ function Player:SetAmmo(ammoCount, ammoType) end
 ---@param Amount number The amount that the player armor is going to be set to.
 function Player:SetArmor(Amount) end
 
----[SHARED] Pushes the player away from another player whenever it's inside the other players bounding box.
+---[SHARED] Pushes the player away from other players whenever the player inside another players' bounding box.
+---
+--- This avoidance is performed clientside by altering movement sent to server.
+---
+--- This applies to players within a single team. ([Player:Team](https://wiki.facepunch.com/gmod/Player:Team))
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetAvoidPlayers)
----@param avoidPlayers boolean Avoid or not avoid.
+---@param avoidPlayers boolean Whether to avoid teammates, or not.
 function Player:SetAvoidPlayers(avoidPlayers) end
 
 ---[SHARED] Set if the player should be allowed to walk using the (default) alt key.
@@ -1699,6 +1704,8 @@ function Player:SetDuckSpeed(duckSpeed) end
 function Player:SetEyeAngles(angle) end
 
 ---[SHARED] Set a player's FOV (Field Of View) over a certain amount of time.
+---
+--- This is meant to be called on the server or shared (for prediction), it will have no effect if called clientside only. You may want to use [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) for that instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetFOV)
 ---@param fov number the angle of perception (FOV). Set to 0 to return to default user FOV. ( Which is ranging from 75 to 90, depending on user settings )

@@ -82,9 +82,9 @@ function CNewParticleEffect:SetControlPoint(cpID, value) end
 ---[CLIENT] Sets an entity to given control point for particle to use.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointEntity)
----@param child number The child control point ID, 0 to 63.
+---@param cpID number The control point ID, 0 to 63.
 ---@param parent Entity The entity to set.
-function CNewParticleEffect:SetControlPointEntity(child, parent) end
+function CNewParticleEffect:SetControlPointEntity(cpID, parent) end
 
 ---[CLIENT] Sets the forward direction for given control point.
 ---
@@ -107,9 +107,9 @@ function CNewParticleEffect:SetControlPointOrientation(cpID, forward, right, up)
 ---[CLIENT] Essentially makes child control point follow the parent control point.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetControlPointParent)
----@param child number The child control point ID, 0 to 63.
----@param parent number The parent control point ID, 0 to 63.
-function CNewParticleEffect:SetControlPointParent(child, parent) end
+---@param childID number The child control point ID, 0 to 63.
+---@param parentID number The parent control point ID, 0 to 63.
+function CNewParticleEffect:SetControlPointParent(childID, parentID) end
 
 ---[CLIENT] Sets the right direction for given control point.
 ---
