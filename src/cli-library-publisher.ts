@@ -60,7 +60,7 @@ async function main() {
     libraryWordMatchers,
     libraryFileMatchers,
     {
-      "Lua.runtime.version": "Lua 5.1",
+      "Lua.runtime.version": "LuaJIT",
       "Lua.runtime.special": {
         "include": "dofile",
         "IncludeCS": "dofile",
