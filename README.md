@@ -81,6 +81,9 @@ The API is also available as JSON. You can find it with the Lua API package [on 
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/b0mbie"><img src="https://avatars.githubusercontent.com/u/69766525?v=4?s=100" width="100px;" alt="[aka]bomb"/><br /><sub><b>[aka]bomb</b></sub></a><br /><a href="#bug-b0mbie" title="Bug reports">🐛</a> <a href="#code-b0mbie" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://steamcommunity.com/id/Robotboy655"><img src="https://avatars.githubusercontent.com/u/3299036?v=4?s=100" width="100px;" alt="Rubat"/><br /><sub><b>Rubat</b></sub></a><br /><a href="#code-robotboy655" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Techbot121"><img src="https://avatars.githubusercontent.com/u/3000604?v=4?s=100" width="100px;" alt="Techbot121"/><br /><sub><b>Techbot121</b></sub></a><br /><a href="#bug-Techbot121" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
 </table>
 
