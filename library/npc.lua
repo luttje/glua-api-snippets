@@ -173,11 +173,23 @@ function NPC:GetArrivalActivity() end
 ---@return Vector # The arrival direction.
 function NPC:GetArrivalDirection() end
 
+---[SERVER] Returns NPC arrival distance, set by [NPC:SetArrivalDistance](https://wiki.facepunch.com/gmod/NPC:SetArrivalDistance).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetArrivalDistance)
+---@return number # The current arrival distance.
+function NPC:GetArrivalDistance() end
+
 ---[SERVER] Returns the sequence to be played when the NPC arrives at its goal.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetArrivalSequence)
 ---@return number # Sequence ID to be played, or -1 if there's no sequence.
 function NPC:GetArrivalSequence() end
+
+---[SERVER] Returns NPC arrival speed, set by [NPC:SetArrivalSpeed](https://wiki.facepunch.com/gmod/NPC:SetArrivalSpeed).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetArrivalSpeed)
+---@return number # The current arrival peed.
+function NPC:GetArrivalSpeed() end
 
 ---[SERVER] Returns the most dangerous/closest sound hint based on the NPCs location and the types of sounds it can sense.
 ---
@@ -425,6 +437,12 @@ function NPC:GetShootPos() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetSquad)
 ---@return string # The new squad name to set.
 function NPC:GetSquad() end
+
+---[SERVER] Returns NPC step height.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetStepHeight)
+---@return number # The current step height.
+function NPC:GetStepHeight() end
 
 ---[SERVER] Returns the NPC's current target set by [NPC:SetTarget](https://wiki.facepunch.com/gmod/NPC:SetTarget).
 ---
@@ -968,6 +986,14 @@ function NPC:SetSchedule(schedule) end
 ---@param name? string The new squad name to set. Do not provide this argument to reset the squad.
 function NPC:SetSquad(name) end
 
+---[SERVER] Sets the SNPC step height.
+---
+--- **NOTE**: This only works for [scripted NPCs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetStepHeight)
+---@param height number The new step height. Default is 18 Hammer Units.
+function NPC:SetStepHeight(height) end
+
 ---[SERVER] Sets the NPC's target. This is used in some engine schedules.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetTarget)
@@ -1005,7 +1031,8 @@ function NPC:StartEngineTask(task, taskData) end
 ---[SERVER] Resets the NPC's movement animation and velocity. Does not actually stop the NPC from moving.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:StopMoving)
-function NPC:StopMoving() end
+---@param immediate? boolean Whether to stop moving even when currently active goal doesn't want us to.
+function NPC:StopMoving(immediate) end
 
 ---[SERVER] Cancels [NPC:MoveOrder](https://wiki.facepunch.com/gmod/NPC:MoveOrder) basically.
 ---

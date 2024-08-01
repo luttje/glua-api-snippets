@@ -13,19 +13,19 @@ local DFileBrowser = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:Clear)
 function DFileBrowser:Clear() end
 
----[CLIENT] Returns the root directory/folder of the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the root directory/folder of the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetBaseFolder)
 ---@return string # The path to the root folder.
 function DFileBrowser:GetBaseFolder() end
 
----[CLIENT] Returns the current directory/folder being displayed.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the current directory/folder being displayed.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetCurrentFolder)
 ---@return string # The directory the file list is currently displaying.
 function DFileBrowser:GetCurrentFolder() end
 
----[CLIENT] Returns the current file type filter on the file list.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the current file type filter on the file list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetFileTypes)
 ---@return string # The current filter applied to the file list.
@@ -39,25 +39,25 @@ function DFileBrowser:GetFileTypes() end
 ---@return Panel # The DTree_Node used for the tree.
 function DFileBrowser:GetFolderNode() end
 
----[CLIENT] Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s instead of a list.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns whether or not the model viewer mode is enabled. In this mode, files are displayed as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s instead of a list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetModels)
 ---@return boolean # Whether or not files will be displayed using SpawnIcons.
 function DFileBrowser:GetModels() end
 
----[CLIENT] Returns the name being used for the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the name being used for the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetName)
 ---@return string # The name used for the root of the file tree.
 function DFileBrowser:GetName() end
 
----[CLIENT] Returns whether or not the file tree is open.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns whether or not the file tree is open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetOpen)
 ---@return boolean # Whether or not the file tree is open.
 function DFileBrowser:GetOpen() end
 
----[CLIENT] Returns the access path of the file tree. This is `GAME` unless changed with [DFileBrowser:SetPath](https://wiki.facepunch.com/gmod/DFileBrowser:SetPath).
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the access path of the file tree. This is `GAME` unless changed with [DFileBrowser:SetPath](https://wiki.facepunch.com/gmod/DFileBrowser:SetPath).
 ---
 --- See [file.Read](https://wiki.facepunch.com/gmod/file.Read) for how paths work.
 ---
@@ -65,13 +65,13 @@ function DFileBrowser:GetOpen() end
 ---@return string # The current access path i.e. "GAME", "LUA", "DATA" etc.
 function DFileBrowser:GetPath() end
 
----[CLIENT] Returns the current search filter on the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the current search filter on the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:GetSearch)
 ---@return string # The filter in use on the file tree.
 function DFileBrowser:GetSearch() end
 
----[CLIENT] Sets the root directory/folder of the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the root directory/folder of the file tree.
 ---
 --- This needs to be set for the file tree to be displayed.
 ---
@@ -79,13 +79,13 @@ function DFileBrowser:GetSearch() end
 ---@param baseDir string The path to the folder to use as the root.
 function DFileBrowser:SetBaseFolder(baseDir) end
 
----[CLIENT] Sets the directory/folder from which to display the file list.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the directory/folder from which to display the file list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetCurrentFolder)
 ---@param currentDir string The directory to display files from.
 function DFileBrowser:SetCurrentFolder(currentDir) end
 
----[CLIENT] Sets the file type filter for the file list.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the file type filter for the file list.
 ---
 --- This accepts the same file extension wildcards as [file.Find](https://wiki.facepunch.com/gmod/file.Find).
 ---
@@ -104,20 +104,20 @@ function DFileBrowser:SetFileTypes(fileTypes) end
 ---@param showModels? boolean Whether or not to display files using SpawnIcons.
 function DFileBrowser:SetModels(showModels) end
 
----[CLIENT] Sets the name to use for the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the name to use for the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetName)
 ---@param treeName? string The name for the root of the file tree. Passing no value causes this to be the base folder name. See DFileBrowser:SetBaseFolder.
 function DFileBrowser:SetName(treeName) end
 
----[CLIENT] Opens or closes the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that opens or closes the file tree.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DFileBrowser:SetOpen)
 ---@param open? boolean `true` to open the tree, `false` to close it.
 ---@param useAnim? boolean If `true`, the DTree's open/close animation is used.
 function DFileBrowser:SetOpen(open, useAnim) end
 
----[CLIENT] Sets the access path for the file tree. This is set to `GAME` by default.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the access path for the file tree. This is set to `GAME` by default.
 ---
 --- See [file.Read](https://wiki.facepunch.com/gmod/file.Read) for how paths work.
 ---
@@ -125,7 +125,7 @@ function DFileBrowser:SetOpen(open, useAnim) end
 ---@param path string The access path i.e. "GAME", "LUA", "DATA" etc.
 function DFileBrowser:SetPath(path) end
 
----[CLIENT] Sets the search filter for the file tree.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the search filter for the file tree.
 ---
 --- This accepts the same wildcards as [file.Find](https://wiki.facepunch.com/gmod/file.Find).
 ---

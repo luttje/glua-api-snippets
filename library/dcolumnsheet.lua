@@ -15,7 +15,7 @@ local DColumnSheet = {}
 --- * Panel Panel - The given panel to switch to when the button is pressed
 function DColumnSheet:AddSheet(name, pnl, icon) end
 
----[CLIENT AND MENU] Returns the active button of this [DColumnSheet](https://wiki.facepunch.com/gmod/DColumnSheet).
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the active button of this [DColumnSheet](https://wiki.facepunch.com/gmod/DColumnSheet).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:GetActiveButton)
 ---@return Panel # The active button
@@ -23,7 +23,7 @@ function DColumnSheet:GetActiveButton() end
 
 ---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Makes a button an active button for this [DColumnSheet](https://wiki.facepunch.com/gmod/DColumnSheet).
+--- An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that makes a button an active button for this [DColumnSheet](https://wiki.facepunch.com/gmod/DColumnSheet).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColumnSheet:SetActiveButton)
 ---@param active Panel The button to make active button

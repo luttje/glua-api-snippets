@@ -240,6 +240,8 @@ function Tool:RebuildControlPanel(...) end
 
 ---[SHARED] Removes any ghost entity created for this tool.
 ---
+--- This is called automatically at various points, including when changing tools, holstering the toolgun, therefore it is a very good idea to implement this callback in your custom tool to cleanup any custom ghost entities.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Tool:ReleaseGhostEntity)
 function Tool:ReleaseGhostEntity() end
 

@@ -10,18 +10,20 @@ local DColorPalette = {}
 
 ---[CLIENT AND MENU] Basically the same functionality as [DColorPalette:OnValueChanged](https://wiki.facepunch.com/gmod/DColorPalette:OnValueChanged), you should use that instead!
 ---
+--- For Override
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:DoClick)
 ---@param clr table The new color via the Color
 ---@param btn Panel The DColorButton that was pressed.
 function DColorPalette:DoClick(clr, btn) end
 
----[CLIENT AND MENU] Returns the size of each palette button. Set by [DColorPalette:SetButtonSize](https://wiki.facepunch.com/gmod/DColorPalette:SetButtonSize).
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the size of each palette button. Set by [DColorPalette:SetButtonSize](https://wiki.facepunch.com/gmod/DColorPalette:SetButtonSize).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetButtonSize)
 ---@return number # The size of each palette button
 function DColorPalette:GetButtonSize() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:GetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR) - For the red channel
@@ -32,7 +34,7 @@ function DColorPalette:GetButtonSize() end
 ---@return string # The ConVar name for the alpha channel of the color
 function DColorPalette:GetConVarA() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:GetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR) - For the red channel
@@ -43,7 +45,7 @@ function DColorPalette:GetConVarA() end
 ---@return string # The ConVar name for the blue channel of the color
 function DColorPalette:GetConVarB() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:GetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarR) - For the red channel
@@ -54,7 +56,7 @@ function DColorPalette:GetConVarB() end
 ---@return string # The ConVar name for the green channel of the color
 function DColorPalette:GetConVarG() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:GetConVarG](https://wiki.facepunch.com/gmod/DColorPalette:GetConVarG) - For the green channel
@@ -65,7 +67,7 @@ function DColorPalette:GetConVarG() end
 ---@return string # The ConVar name for the red channel of the color
 function DColorPalette:GetConVarR() end
 
----[CLIENT AND MENU] Returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:GetNumRows)
 ---@return number # Number of rows of the DColorPalette.
@@ -78,7 +80,7 @@ function DColorPalette:GetNumRows() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:NetworkColorChange)
 function DColorPalette:NetworkColorChange() end
 
----[CLIENT AND MENU] Called when a palette button has been pressed
+---[CLIENT AND MENU] Called when a palette button has been pressed. For Override
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:OnRightClickButton)
 ---@param pnl Panel The DColorButton that was pressed.
@@ -130,7 +132,7 @@ function DColorPalette:SetColor(clr) end
 ---@param tab table A number indexed table where each value is a Color
 function DColorPalette:SetColorButtons(tab) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:SetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarR) - For the red channel
@@ -141,7 +143,7 @@ function DColorPalette:SetColorButtons(tab) end
 ---@param convar string The ConVar name for the alpha channel of the color
 function DColorPalette:SetConVarA(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:SetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarR) - For the red channel
@@ -152,7 +154,7 @@ function DColorPalette:SetConVarA(convar) end
 ---@param convar string The ConVar name for the blue channel of the color
 function DColorPalette:SetConVarB(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:SetConVarR](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarR) - For the red channel
@@ -163,7 +165,7 @@ function DColorPalette:SetConVarB(convar) end
 ---@param convar string The ConVar name for the green channel of the color
 function DColorPalette:SetConVarG(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
 ---
 --- See also:
 --- * [DColorPalette:SetConVarG](https://wiki.facepunch.com/gmod/DColorPalette:SetConVarG) - For the green channel
@@ -174,7 +176,7 @@ function DColorPalette:SetConVarG(convar) end
 ---@param convar string The ConVar name for the red channel of the color
 function DColorPalette:SetConVarR(convar) end
 
----[CLIENT AND MENU] Roughly sets the number of colors that can be picked by the user. If the DColorPalette is exactly 6 rows tall, this function will set the number of colors shown per row in the palette.
+---[CLIENT AND MENU] Roughly sets the number of colors that can be picked by the user. If the DColorPalette is exactly 6 rows tall, this function will set the number of colors shown per row in the palette. This is an [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 --- **NOTE**: [DColorPalette:Reset](https://wiki.facepunch.com/gmod/DColorPalette:Reset) or [DColorPalette:ResetSavedColors](https://wiki.facepunch.com/gmod/DColorPalette:ResetSavedColors) must be called after this function to apply changes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorPalette:SetNumRows)

@@ -618,13 +618,17 @@ function Player:GetClassID() end
 --- buttons
 --- cameras
 --- dynamite
+--- effects
 --- emitters
 --- hoverballs
 --- lamps
 --- lights
+--- npcs
 --- props
 --- ragdolls
+--- sents
 --- thrusters
+--- vehicles
 --- wheels
 --- ```
 ---
@@ -1679,15 +1683,21 @@ function Player:SetDeaths(deathcount) end
 ---@param drivingMode number The driving mode index.
 function Player:SetDrivingEntity(drivingEntity, drivingMode) end
 
----[SHARED] Applies the specified sound filter to the player.
+---[SHARED] Activates a given DSP (Digital Signal Processor) effect on all sounds that the player hears.
+---
+--- 		To apply a DSP effect to individual sounds, see [CSoundPatch:SetDSP](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetDSP)
----@param soundFilter number The index of the sound filter to apply.
---- Pick from the [list of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets).
----@param fastReset boolean If set to true the sound filter will be removed faster.
+---@param dspEffectId number
+--- 			The index of the DSP sound filter to apply.
 ---
---- **This only works clientside**. If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
-function Player:SetDSP(soundFilter, fastReset) end
+--- 			For a list of the available IDs and their meaning, see DSP_Presets.
+---@param fastReset boolean
+--- 			If set to true the sound filter will be removed faster.
+---
+--- 				**This only works clientside**
+--- 				If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
+function Player:SetDSP(dspEffectId, fastReset) end
 
 ---[SHARED] Sets how quickly a player ducks.
 ---
@@ -1738,6 +1748,8 @@ function Player:SetHoveredWidget(widget) end
 ---
 --- See [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck) for the hull while crouching/ducking.
 ---
+--- 	**NOTE**: Not replicated, need to be call on server and client.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---@param hullMins Vector The min coordinates of the hull.
 ---@param hullMaxs Vector The max coordinates of the hull.
@@ -1746,6 +1758,7 @@ function Player:SetHull(hullMins, hullMaxs) end
 ---[SHARED] Sets the mins and maxs of the AABB of the players collision when ducked.
 ---
 --- See [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull) for setting the hull while standing.
+--- **NOTE**: Not replicated, need to be call on server and client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHullDuck)
 ---@param hullMins Vector The min coordinates of the hull.

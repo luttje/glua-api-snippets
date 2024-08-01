@@ -7,6 +7,15 @@
 ---@field a number The alpha component of the color.
 local Color = {}
 
+---[SHARED AND MENU] Performs linear interpolation between this and given colors.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:Lerp)
+---@param target Color The target color to interpolate towards.
+---@param fraction number The interpolation fraction. `0` means fully original color, `0.5` means in the middle between the 2 colors, `1` means fully target color, etc.
+---@return Color #
+--- 			The result of linear interpolation.
+function Color:Lerp(target, fraction) end
+
 ---[SHARED] Sets the red, green, blue, and alpha of the color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Color:SetUnpacked)

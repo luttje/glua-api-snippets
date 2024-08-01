@@ -17,19 +17,19 @@ function DColorMixer:ConVarThink() end
 ---@param cvar string
 function DColorMixer:DoConVarThink(cvar) end
 
----[CLIENT AND MENU] Return true if alpha bar is shown, false if not.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns true if alpha bar is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetAlphaBar)
 ---@return boolean # Return true if shown, false if not.
 function DColorMixer:GetAlphaBar() end
 
----[CLIENT AND MENU] Returns the current selected color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the current selected color.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
 ---@return table # The current selected color as a Color.
 function DColorMixer:GetColor() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:GetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarR) - For the red channel
@@ -40,7 +40,7 @@ function DColorMixer:GetColor() end
 ---@return string # The ConVar name for the alpha channel of the color
 function DColorMixer:GetConVarA() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:GetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarR) - For the red channel
@@ -51,7 +51,7 @@ function DColorMixer:GetConVarA() end
 ---@return string # The ConVar name for the blue channel of the color
 function DColorMixer:GetConVarB() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:GetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarR) - For the red channel
@@ -62,7 +62,7 @@ function DColorMixer:GetConVarB() end
 ---@return string # The ConVar name for the green channel of the color
 function DColorMixer:GetConVarG() end
 
----[CLIENT AND MENU] Returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:GetConVarG](https://wiki.facepunch.com/gmod/DColorMixer:GetConVarG) - For the green channel
@@ -73,7 +73,7 @@ function DColorMixer:GetConVarG() end
 ---@return string # The ConVar name for the red channel of the color
 function DColorMixer:GetConVarR() end
 
----[CLIENT AND MENU] Return true if palette is shown, false if not.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns true if palette is shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetPalette)
 ---@return boolean # Return true if shown, false if not.
@@ -85,13 +85,13 @@ function DColorMixer:GetPalette() end
 ---@return Vector # A vector representing the color of the DColorMixer, each value being in range of 0 to 1. Alpha is not included.
 function DColorMixer:GetVector() end
 
----[CLIENT AND MENU] Return true if the wangs are shown, false if not.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns true if the wangs are shown, false if not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:GetWangs)
 ---@return boolean # Return true if shown, false if not.
 function DColorMixer:GetWangs() end
 
----[CLIENT AND MENU] Show/Hide the alpha bar in DColorMixer
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that show/hide the alpha bar in DColorMixer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetAlphaBar)
 ---@param show boolean Show / Hide the alpha bar
@@ -105,13 +105,13 @@ function DColorMixer:SetAlphaBar(show) end
 ---@param clr table Color
 function DColorMixer:SetBaseColor(clr) end
 
----[CLIENT AND MENU] Sets the color of the [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer)
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the color of the [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer). See also [DColorMixer:GetColor](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:SetColor)
 ---@param color table The color to set. See Global.Color
 function DColorMixer:SetColor(color) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:SetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:SetConVarR) - For the red channel
@@ -122,7 +122,7 @@ function DColorMixer:SetColor(color) end
 ---@param convar string The ConVar name for the alpha channel of the color
 function DColorMixer:SetConVarA(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the blue channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:SetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:SetConVarR) - For the red channel
@@ -133,7 +133,7 @@ function DColorMixer:SetConVarA(convar) end
 ---@param convar string The ConVar name for the blue channel of the color
 function DColorMixer:SetConVarB(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the green channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:SetConVarR](https://wiki.facepunch.com/gmod/DColorMixer:SetConVarR) - For the red channel
@@ -144,7 +144,7 @@ function DColorMixer:SetConVarB(convar) end
 ---@param convar string The ConVar name for the green channel of the color
 function DColorMixer:SetConVarG(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the red channel of the color.
 ---
 --- See also:
 --- * [DColorMixer:SetConVarG](https://wiki.facepunch.com/gmod/DColorMixer:SetConVarG) - For the green channel
@@ -202,3 +202,8 @@ function DColorMixer:UpdateConVar(cvar, part, clr) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVars)
 ---@param clr table The Color
 function DColorMixer:UpdateConVars(clr) end
+
+---[CLIENT AND MENU] sets the default color of the element to the currently selected color
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorMixer:UpdateDefaultColor)
+function DColorMixer:UpdateDefaultColor() end

@@ -277,6 +277,15 @@ function string.lower(str) end
 ---@return any ... # Matched text(s)
 function string.match(string, pattern, startPosition) end
 
+---[SHARED AND MENU] Converts a `"string_likeThis"` to a more human-friendly `"String like This"`.
+---
+--- This is used internally by Faceposer and other code to transform flex and bodygroup names to a more friendly format.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/string.NiceName)
+---@param text string The name to transform.
+---@return string # The more human-friendly version of the input text.
+function string.NiceName(text) end
+
 ---[SHARED AND MENU] Converts a digital filesize to human-readable text.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/string.NiceSize)

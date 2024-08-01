@@ -1086,8 +1086,6 @@ function _G.GetAddonStatus() end
 
 ---[MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**NOTE**: All dates are in [WDDX](https://www.php.net/manual/en/datetime.formats.compound.php) format
----
 --- 		Gets miscellaneous information from Facepunches API.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetAPIManifest)
@@ -1097,12 +1095,12 @@ function _G.GetAddonStatus() end
 --- Function argument(s):
 --- * string `data` - JSON encoded data, see util.JSONToTable.
 ---
---- Example output:
+---
+--- Formatted output:
 --- ```js
 --- {
 --- 	"ManifestVersion": 	number - Version of the manifest
----
---- 	"Date": 			string - Date in WDDX format
+--- 	"Date": 			string - Date the data was retrieved
 ---
 --- 	// Contains all the blog posts, the things in the top right of the menu
 --- 	"News": {
@@ -1110,18 +1108,18 @@ function _G.GetAddonStatus() end
 ---
 --- 			// Structure of blog posts
 --- 			{
---- 				"Date": 		string - Date in WDDX format of the post
+--- 				"Date": 		string - Date the post was created
 --- 				"ShortName": 	string - Short name of the post, identifier of it on the blog website
 --- 				"Title": 		string - Title of the post
 --- 				"HeaderImage": 	string - Main image of the post, showed in the top right
---- 				"SummaryHtml": 	string - Summary of the blogpost, text thats shown
+--- 				"SummaryHtml": 	string - Summary of the blogpost, text thats shown to the user
 --- 				"Url": 			string - URL to the post on the blog
 --- 				"Tags": 		string - String of the posts tag
 --- 			}
 --- 		]
 --- 	}
 ---
---- 	// Array of Facepunches Mods, Admins and Devs
+--- 	// Array of Facepunches Mods, Admins and Developers
 --- 	"Administrators": [
 --- 		{
 --- 			"UserId": 		string - SteamID64 of the person
@@ -1561,7 +1559,7 @@ function _G.HTTP(parameters) end
 --- Absolute paths for gamemode files must include `/gamemode/`.
 ---
 --- **NOTE**: Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
----@return any ... # Anything that the executed Lua script returns.
+---@return table # Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
 ---[SHARED AND MENU] This function works exactly the same as [Global.include](https://wiki.facepunch.com/gmod/Global.include) both clientside and serverside.
@@ -2416,6 +2414,13 @@ function _G.RefreshAddonConflicts() end
 ---@param menu Panel Menu to be registered for closure
 function _G.RegisterDermaMenuForClose(menu) end
 
+---[SHARED AND MENU] Registers a given table as a metatable. It can then be accessed by other code/addons via [Global.FindMetaTable](https://wiki.facepunch.com/gmod/Global.FindMetaTable).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RegisterMetaTable)
+---@param metaName string The new metatable name. Cannot override existing types.
+---@param metaTable table The new metatable table. It will be given a `MetaID` and `MetaName` fields.
+function _G.RegisterMetaTable(metaName, metaTable) end
+
 ---[CLIENT AND MENU] Saves position of your cursor on screen. You can restore it by using
 --- [Global.RestoreCursorPosition](https://wiki.facepunch.com/gmod/Global.RestoreCursorPosition).
 ---
@@ -2936,9 +2941,7 @@ function _G.SortedPairsByValue(table, descending) end
 ---@return string # The string passed as the first argument.
 function _G.Sound(soundPath) end
 
----[SHARED] Returns the duration of the specified sound in seconds.
----
---- This function does not return the correct duration on MacOS and Linux, or if the file is a non-.wav file on Windows.
+---[SHARED] Returns the approximate duration of the specified sound in seconds, for `.wav` and `.mp3` sounds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SoundDuration)
 ---@param soundName string The sound file path.
@@ -3035,8 +3038,6 @@ function _G.ToggleFavourite(map) end
 
 ---[SHARED AND MENU] Attempts to convert the value to a number.
 ---
---- Returns nil on failure.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.tonumber)
 ---@param value any The value to convert. Can be a number or string.
 ---@param base? number The base used in the string. Can be any integer between 2 and 36, inclusive.
@@ -3072,8 +3073,6 @@ function _G.type(var) end
 ---[SHARED] Gets the associated type ID of the variable. Unlike [Global.type](https://wiki.facepunch.com/gmod/Global.type), this does not work with [no value](https://wiki.facepunch.com/gmod/no value) - an argument must be provided.
 ---
 --- **WARNING**: This will return `TYPE_TABLE` for [Color](https://wiki.facepunch.com/gmod/Color) objects.
----
---- **WARNING**: This will return `TYPE_STRING` for [vararg](https://wiki.facepunch.com/gmod/vararg) objects.
 ---
 --- This returns garbage for _LOADLIB objects.
 --- This returns `TYPE_NIL` for [proto](https://wiki.facepunch.com/gmod/proto)s.

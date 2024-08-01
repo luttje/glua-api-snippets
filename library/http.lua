@@ -22,6 +22,19 @@ http = {}
 ---
 --- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command Line Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
+--- **Not all headers are allowed in the client realm, here is a list of known blacklisted headers inside the client realm:**
+--- ```
+--- host
+--- expect
+--- content-length
+--- proxy-authenticate
+--- accept-charset
+--- connection
+--- accept-encoding
+--- origin
+--- date
+--- ```
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
 ---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.

@@ -51,5 +51,5 @@ function hook.Remove(eventName, identifier) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Run)
 ---@param eventName string The event to call hooks for.
 ---@param ... any The arguments to be passed to the hooks.
----@return any # Returned data from called hooks.
+---@return any ... # Return data from called hooks. Limited to **6** return values.
 function hook.Run(eventName, ...) end

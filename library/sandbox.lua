@@ -49,6 +49,7 @@ function SANDBOX:AddToolMenuTabs() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:CanArmDupe)
 ---@param ply Player The player who attempted to arm a dupe.
 ---@return boolean # Can the player arm a dupe or not.
+---@return string # If given and the return value above is `false`, overrides the error message displayed to the player.
 function SANDBOX:CanArmDupe(ply) end
 
 ---[SHARED] Called when a player attempts to drive a prop via Prop Drive

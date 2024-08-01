@@ -13,7 +13,7 @@ local DCheckBoxLabel = {}
 ---@return boolean # Whether the box is checked or not.
 function DCheckBoxLabel:GetChecked() end
 
----[CLIENT AND MENU] Gets the indentation of the element on the X axis.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that gets the indentation of the element on the X axis. See also [DCheckBoxLabel:SetIndent](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetIndent)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:GetIndent)
 ---@return number # How much the content is moved to the right in pixels
@@ -49,7 +49,7 @@ function DCheckBoxLabel:SetDark(darkify) end
 ---@param font string Font name
 function DCheckBoxLabel:SetFont(font) end
 
----[CLIENT AND MENU] Sets the indentation of the element on the X axis.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the indentation of the element on the X axis.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetIndent)
 ---@param ident number How much in pixels to move the content to the right
@@ -66,6 +66,11 @@ function DCheckBoxLabel:SetTextColor(color) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetValue)
 ---@param checked boolean Whether the box should be checked or not (1 or 0 can also be used).
 function DCheckBoxLabel:SetValue(checked) end
+
+---[CLIENT AND MENU] Sizes the panel to the size of the internal DLabel and DButton
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SizeToContents)
+function DCheckBoxLabel:SizeToContents() end
 
 ---[CLIENT AND MENU] Toggles the checked state of the [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel).
 ---

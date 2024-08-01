@@ -46,7 +46,7 @@ function UGCPublishWindow:OnPublishFinished(wsid, err) end
 ---[MENU] updated the Workshop items list.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/UGCPublishWindow:Setup)
----@param ugcType  The type / namespace of the WorkshopFileBase that created this panel
+---@param ugcType string The type / namespace of the WorkshopFileBase that created this panel
 ---@param file string The File to publish
 ---@param imageFile string The Image
 ---@param handler WorkshopFileBase The WorkshopFileBase that created this panel

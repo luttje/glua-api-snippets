@@ -845,12 +845,13 @@ function GM:NetworkEntityCreated(ent) end
 ---
 --- See also [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed).
 ---
---- **NOTE**: This hook doesn't work intentionally in singleplayer [because the SteamID is not validated](https://github.com/Facepunch/garrysmod-issues/issues/4906#issuecomment-819337130).
+--- **NOTE**: This hook doesn't work intentionally in singleplayer [because the SteamID is not validated](https://github.com/Facepunch/garrysmod-issues/issues/4906#issuecomment-819337130) in that case. This also applies to `sv_lan 1` servers for every duplicate `-multirun` client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:NetworkIDValidated)
 ---@param name string Player name
 ---@param steamID string Player SteamID
-function GM:NetworkIDValidated(name, steamID) end
+---@param ownerID string SteamID64 of the game license owner, in case Family Sharing is used. See also Player:OwnerSteamID64
+function GM:NetworkIDValidated(name, steamID, ownerID) end
 
 ---[CLIENT] Called whenever this entity changes its transmission state for this [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer), such as exiting or re entering the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
 ---
@@ -976,6 +977,19 @@ function GM:OnNotifyAddonConflict(addon1, addon2, fileName) end
 ---@param attacker Entity The NPCs attacker, the entity that gets the kill credit, for example a player or an NPC.
 ---@param inflictor Entity Death inflictor. The entity that did the killing. Not necessarily a weapon.
 function GM:OnNPCKilled(npc, attacker, inflictor) end
+
+---[MENU] Called when the main menu has been blocked by [GM:OnPauseMenuShow](https://wiki.facepunch.com/gmod/GM:OnPauseMenuShow) four times in a small interval. This is used internally to explain to the user that they can hold SHIFT to force open the main menu.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnPauseMenuBlockedTooManyTimes)
+function GM:OnPauseMenuBlockedTooManyTimes() end
+
+---[CLIENT] Called when the pause menu is attempting to be opened. Allows you to prevent the main menu from being opened that time.
+---
+--- 	The user can hold SHIFT to not call this hook. If the main menu is blocked multiple times in short succession, a warning will be displayed to the end user on how to bypass the hook.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnPauseMenuShow)
+---@return boolean # Should the menu be allowed to open?
+function GM:OnPauseMenuShow() end
 
 ---[MENU] Called when a permission gets Granted or Revoked.
 ---

@@ -39,7 +39,7 @@ function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 --- * file_class `file` - A file object pointing to the downloaded .gma file. The file handle will be closed after the function exits.
 function steamworks.DownloadUGC(workshopID, resultCallback) end
 
----[CLIENT AND MENU] **NOTE**: A serverside implementation of this function can be provided by binary modules, such as [gmsv_workshop](https://github.com/WilliamVenner/gmsv_workshop).
+---[SHARED AND MENU] **NOTE**: A serverside implementation of this function can be provided by binary modules, such as [gmsv_workshop](https://github.com/WilliamVenner/gmsv_workshop).
 ---
 --- 		Retrieves info about supplied Steam Workshop addon.
 ---
@@ -51,7 +51,7 @@ function steamworks.DownloadUGC(workshopID, resultCallback) end
 --- * table `data` - The data about the item, if the request succeeded, `nil` otherwise. See Structures/UGCFileInfo.
 function steamworks.FileInfo(workshopItemID, resultCallback) end
 
----[CLIENT AND MENU] Retrieves a customized list of Steam Workshop addons.
+---[SHARED AND MENU] Retrieves a customized list of Steam Workshop addons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/steamworks.GetList)
 ---@param type string The type of items to retrieve. Possible values include:

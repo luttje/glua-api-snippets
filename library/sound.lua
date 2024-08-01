@@ -37,16 +37,23 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 --- 			You cannot override already existing ones.
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
 ---@param length number The length in seconds of the sound to generate.
----@param callback fun(sampleIndex: number): number A function which will be called to generate every sample on the sound.
+---@param callbackOrData fun(sampleIndex: number): number|table
+--- 			A function which will be called to generate every sample on the sound.
+---
+---
 ---
 --- Function argument(s):
 --- * number `sampleIndex` - The current sample number.
 ---
 --- Function return value(s):
 --- * number `sampleValue` - The return value must be between `-1.0` and `1.0`.
---- Other values will wrap back to the -1 to 1 range and basically clip.
---- There are **65535** possible quantifiable values between -1 and 1.
-function sound.Generate(indentifier, samplerate, length, callback) end
+--- 			Other values will wrap back to the -1 to 1 range and basically clip.
+--- 			There are **65535** possible quantifiable values between `-1` and `1`.
+---
+--- 		This argument can also be given a table of samples, where values must range from `-1` to `1`.
+--- 		This argument can also be a string of raw 16bit binary data, (each sample is unsigned short).
+---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.
+function sound.Generate(indentifier, samplerate, length, callbackOrData, loopStart) end
 
 ---[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---
@@ -79,7 +86,7 @@ function sound.GetTable() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
 ---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 ---@param pos Vector Where the sound should play.
----@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard.
+---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard, see Enums/SNDLVL.
 ---@param pitch? number The sound pitch. Range is from 0 to 255. 100 is normal pitch.
 ---@param volume? number Output volume of the sound in range 0 to 1.
 ---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)

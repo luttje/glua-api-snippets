@@ -9,13 +9,13 @@ local DDrawer = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Close)
 function DDrawer:Close() end
 
----[CLIENT AND MENU] Return the Open Size of DDrawer.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the Open Size of DDrawer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:GetOpenSize)
 ---@return number # Open size.
 function DDrawer:GetOpenSize() end
 
----[CLIENT AND MENU] Return the Open Time of DDrawer.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the Open Time of DDrawer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:GetOpenTime)
 ---@return number # Time in seconds.
@@ -26,13 +26,13 @@ function DDrawer:GetOpenTime() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:Open)
 function DDrawer:Open() end
 
----[CLIENT AND MENU] Set the height of DDrawer
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the height of DDrawer
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:SetOpenSize)
 ---@param Value number Height of DDrawer. Default is `100`.
 function DDrawer:SetOpenSize(Value) end
 
----[CLIENT AND MENU] Set the time (in seconds) for DDrawer to open.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the time (in seconds) for DDrawer to open.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDrawer:SetOpenTime)
 ---@param value number Length in seconds. Default is 0.3

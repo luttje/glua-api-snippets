@@ -322,10 +322,11 @@ function Entity:CollisionRulesChanged() end
 ---
 --- You must call [Entity:UpdateBoneFollowers](https://wiki.facepunch.com/gmod/Entity:UpdateBoneFollowers) every tick for bone followers to update their positions.
 ---
---- **NOTE**: This function only works on `anim` type entities.
+--- **NOTE**: This function only works on `anim`, `nextbot` and `ai` type entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:CreateBoneFollowers)
-function Entity:CreateBoneFollowers() end
+---@param bone_whitelist? table If set, a whitelist of bone names to create bone followers for. If a models' bone name is not in this list, a bone follower entity will not be created for it.
+function Entity:CreateBoneFollowers(bone_whitelist) end
 
 ---[SHARED] Returns whether the entity was created by map or not.
 ---
@@ -1226,6 +1227,13 @@ function Entity:GetFlexNum() end
 ---@return number # The flex scale
 function Entity:GetFlexScale() end
 
+---[SHARED] Returns flex controller type or "category". Used internally by Faceposer to categorize flex controllers.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexType)
+---@param id number The flex index to look up type of. The range is between `0` and Entity:GetFlexNum - 1.
+---@return string # The flex type, or no value if the requested ID is out of bounds.
+function Entity:GetFlexType(id) end
+
 ---[SHARED] Returns current weight ( value ) of given flex controller. Please see [Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight) regarding limitations.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexWeight)
@@ -2065,7 +2073,7 @@ function Entity:GetPos() end
 ---[SHARED] Returns the pose parameter value
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetPoseParameter)
----@param name string Pose parameter name to look up
+---@param name string|number Pose parameter name to look up. Can also be a pose parameter ID.
 ---@return number # Value of given pose parameter.
 ---
 --- This value will be from 0 - 1 on the client and from minimum range to maximum range on the server! You'll have to [remap](https://wiki.facepunch.com/gmod/math.Remap) this value clientside to [Entity:GetPoseParameterRange](https://wiki.facepunch.com/gmod/Entity:GetPoseParameterRange)'s returns if you want get the actual pose parameter value. See [Entity:SetPoseParameter](https://wiki.facepunch.com/gmod/Entity:SetPoseParameter)'s example.
@@ -2081,7 +2089,7 @@ function Entity:GetPoseParameterName(id) end
 ---[SHARED] Returns pose parameter range
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetPoseParameterRange)
----@param id number Pose parameter ID to look up
+---@param id number|string Pose parameter ID to look up. Can also be a pose parameter name.
 ---@return number # The minimum value
 ---@return number # The maximum value
 function Entity:GetPoseParameterRange(id) end
@@ -3966,7 +3974,7 @@ function Entity:SetCustomCollisionCheck(enable) end
 
 ---[SHARED] Sets the progress of the current animation to a specific value between 0 and 1.
 ---
---- This does not work with viewmodels.
+--- Viewmodels overwrite their animation cycle every frame, for prediction/interpolation purposes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetCycle)
 ---@param value number The desired cycle value
@@ -4088,11 +4096,9 @@ function Entity:SetFlexWeight(flex, weight) end
 
 ---[SHARED] Sets friction multiplier for this entity when sliding against a surface. Entities default to 1 (100%) and can be higher.
 ---
---- For players, the range is 0 to 10.
+--- This may not affect all entities, but does work for players (the range is 0 to 10), as well as other entities using [MOVETYPE_STEP ](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_STEP )
 ---
---- **NOTE**: This only multiplies the friction of the entity, to change the value itself use [PhysObj:SetMaterial](https://wiki.facepunch.com/gmod/PhysObj:SetMaterial).
----
---- **NOTE**: Works only for MOVETYPE_STEP entities.
+--- This only multiplies the friction of the entity, to change the value itself use [PhysObj:SetMaterial](https://wiki.facepunch.com/gmod/PhysObj:SetMaterial).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFriction)
 ---@param friction number Friction multiplier
@@ -4100,12 +4106,13 @@ function Entity:SetFriction(friction) end
 
 ---[SHARED] Sets the gravity multiplier of the entity.
 ---
---- This function is not predicted.
---- **NOTE**: This only works on players
+--- This may not affect affect all entities, but does affect players, and entities with [MOVETYPE_FLYGRAVITY](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_FLYGRAVITY), such as projectiles.
+---
+--- This function is not predicted or networked.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetGravity)
----@param gravityMultiplier number Value which specifies the gravity multiplier.
-function Entity:SetGravity(gravityMultiplier) end
+---@param multiplier number By how much to multiply the gravity. `1` is normal gravity, `0.5` is half-gravity, etc.
+function Entity:SetGravity(multiplier) end
 
 ---[SHARED] Sets the ground the entity is standing on.
 ---
@@ -5060,7 +5067,9 @@ function Entity:SetPos(position) end
 --- **NOTE**: Avoid calling this in draw hooks, especially when animating things, as it might cause visual artifacts.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetPoseParameter)
----@param poseName string Name of the pose parameter. Entity:GetPoseParameterName might come in handy here.
+---@param poseName string|number Name of the pose parameter. Entity:GetPoseParameterName might come in handy here.
+---
+--- Can also be a pose parameter ID.
 ---@param poseValue number The value to set the pose to.
 function Entity:SetPoseParameter(poseName, poseValue) end
 
@@ -5091,7 +5100,7 @@ function Entity:SetPredictable(setPredictable) end
 --- [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) and other flex/bone manipulation functions will create a child entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetPreventTransmit)
----@param player Player|CRecipientFilter The player to stop networking the entity to. Can also be a CRecipientFilter as of March 2024 to affect multiple players at once.
+---@param player Player|CRecipientFilter The player to stop networking the entity to. Can also be a CRecipientFilter or a table as of March 2024 to affect multiple players at once.
 ---@param stopTransmitting boolean true to stop the entity from networking, false to make it network again.
 function Entity:SetPreventTransmit(player, stopTransmitting) end
 
@@ -5694,7 +5703,7 @@ function ENTITY:TriggerOutput(output, activator, data) end
 ---
 --- This should be called every tick.
 ---
---- **NOTE**: This function only works on `anim` type entities.
+--- **NOTE**: This function only works on `anim`, `nextbot` and `ai` type entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:UpdateBoneFollowers)
 function Entity:UpdateBoneFollowers() end

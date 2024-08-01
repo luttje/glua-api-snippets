@@ -29,11 +29,13 @@ function CSoundPatch:ChangeVolume(volume, deltaTime) end
 ---@param seconds number Fade time.
 function CSoundPatch:FadeOut(seconds) end
 
----[SHARED] Returns the DSP ( Digital Signal Processor ) effect for the sound.
+---[SHARED] Returns the DSP (Digital Signal Processor) effect ID for the sound.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:GetDSP)
----@return number # The DSP effects of the sound
---- List of DSP's are Pick from the [here](https://developer.valvesoftware.com/wiki/Dsp_presets).
+---@return number #
+--- 			The numerical ID for the DSP effect currently enabled on the sound.
+---
+--- 			For a list of the available IDs and their meaning, see DSP_Presets.
 function CSoundPatch:GetDSP() end
 
 ---[SHARED] Returns the current pitch.
@@ -72,12 +74,16 @@ function CSoundPatch:Play() end
 ---@param pitch number The pitch can range from 0-255.
 function CSoundPatch:PlayEx(volume, pitch) end
 
----[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound. Similar to [Player:SetDSP](https://wiki.facepunch.com/gmod/Player:SetDSP) but for individual sounds.
+---[SHARED] Sets the DSP (Digital Signal Processor) effect for the sound.
+---
+--- Similar to [Player:SetDSP](https://wiki.facepunch.com/gmod/Player:SetDSP) but for individual sounds.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
----@param dsp number The DSP effect to set.
---- Pick from the [list of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
-function CSoundPatch:SetDSP(dsp) end
+---@param dspEffectId number
+--- 			The numerical ID for the DSP effect to be enabled on the sound.
+---
+--- 			For a list of the available IDs and their meaning, see DSP_Presets.
+function CSoundPatch:SetDSP(dspEffectId) end
 
 ---[SHARED] Sets the sound level in decibel.
 ---

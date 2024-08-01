@@ -44,16 +44,16 @@ function ents.CreateClientside(class) end
 ---@return table # Table of the found entities. There's a limit of 1024 entities.
 function ents.FindAlongRay(start, _end, mins, maxs) end
 
----[SHARED] Gets all entities with the given class, supports wildcards. This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll). ents.FindByClass is always faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) or [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator)(read the notes).
+---[SHARED] Gets all entities with the given class, supports wildcards.
 ---
---- **NOTE**: Asterisks (*) are the only wildcard supported.
+--- This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
---- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
----
---- **NOTE**: [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) is faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) if it has already been used thanks to its caching/refresh system.
+--- This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll). `ents.FindByClass` is always faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) or [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClass)
----@param class string The class of the entities to find.
+---@param class string The class of the entities to find, supports wildcards.
+---
+--- Asterisks (`*`) are the only wildcard supported.
 ---@return table # A table containing all found entities
 function ents.FindByClass(class) end
 
@@ -66,7 +66,8 @@ function ents.FindByClass(class) end
 function ents.FindByClassAndParent(class, parent) end
 
 ---[SHARED] Gets all entities with the given model, supports wildcards.
---- 	**NOTE**: This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
+---
+--- This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByModel)
 ---@param model string The model of the entities to find.
@@ -84,11 +85,9 @@ function ents.FindByName(name) end
 
 ---[SHARED] Returns all entities within the specified box.
 ---
---- **NOTE**: This internally uses a Spatial Partition to avoid looping through all entities.
+--- This internally uses a Spatial Partition to avoid looping through all entities, so it is more efficient than using [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) for this purpose.
 ---
---- **NOTE**: Clientside entities will not be returned by this function.
----
---- **WARNING**: There is a limit of 512 entities for the output!
+--- **NOTE**: Clientside entities will not be returned by this function. Serverside only entities without networked edicts (entity indexes), such as point logic or Constraints are not returned either
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInBox)
 ---@param boxMins Vector The box minimum coordinates.
@@ -101,8 +100,6 @@ function ents.FindInBox(boxMins, boxMaxs) end
 --- The "cone" is actually a conical "slice" of an axis-aligned box (see: [ents.FindInBox](https://wiki.facepunch.com/gmod/ents.FindInBox)). The image to the right shows approximately how this function would look in 2D. Due to this, the entity may be farther than the specified range!
 ---
 --- **NOTE**: Clientside entities will not be returned by this function.
----
---- **WARNING**: If there are more than 512 entities in the axis-aligned box around the origin, then the result may be incomplete!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInCone)
 ---@param origin Vector The tip of the cone.
@@ -126,16 +123,14 @@ function ents.FindInPVS(viewPoint) end
 
 ---[SHARED] Gets all entities within the specified sphere.
 ---
----     **NOTE**: This internally uses a Spatial Partition to avoid looping through all entities.
+--- Serverside, this uses a Spatial Partition internally to avoid looping through all entities, so it is more efficient than using [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) for this purpose.
 ---
---- 	**NOTE**: Clientside entities will not be returned by this function.
----
---- 	**NOTE**: This function internally calls [ents.FindInBox](https://wiki.facepunch.com/gmod/ents.FindInBox) with some [radius checks](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/collisionutils.cpp#L256-L301).
+--- Clientside, this function internally calls [util.IsBoxIntersectingSphere](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingSphere)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindInSphere)
 ---@param origin Vector Center of the sphere.
 ---@param radius number Radius of the sphere.
----@return table # A table of all found Entitys. Has a limit of 1024 entities.
+---@return table # A table of all found Entitys.
 function ents.FindInSphere(origin, radius) end
 
 ---[SERVER] Fires a use event.
@@ -152,7 +147,7 @@ function ents.FireTargets(target, activator, caller, usetype, value) end
 ---
 --- Consider using [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) instead for better performance.
 ---
---- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
+--- This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetAll)
 ---@return table # Table of all existing Entitys.
@@ -167,7 +162,8 @@ function ents.GetByIndex(entIdx) end
 
 ---[SHARED] Gives you the amount of currently existing entities.
 ---
---- **NOTE**: Similar to **#**[ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll)() but with better performance since the entity table doesn't have to be generated. If [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) is already being called for iteration, than using the **#** operator on the table will be faster than calling this function since it is JITted.
+--- Similar to **#**[ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll)() but with better performance since the entity table doesn't have to be generated.
+--- If [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) is already being called for iteration, than using the **#** operator on the table will be faster than calling this function since it is JITted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.GetCount)
 ---@param IncludeKillMe? boolean Include entities with the FL_KILLME flag. This will skip an internal loop, and the function will be more efficient as a byproduct.

@@ -24,11 +24,15 @@ function DAdjustableModelPanel:FirstPersonControls() end
 
 ---[CLIENT] Gets whether mouse and keyboard-based adjustment of the perspective has been enabled. See [DAdjustableModelPanel:SetFirstPerson](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:SetFirstPerson) for more information.
 ---
+--- This is an [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:GetFirstPerson)
 ---@return boolean # Whether first person controls are enabled. See DAdjustableModelPanel:FirstPersonControls.
 function DAdjustableModelPanel:GetFirstPerson() end
 
 ---[CLIENT] Returns the movement speed multiplier set by [DAdjustableModelPanel:SetMovementScale](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:SetMovementScale).
+---
+--- 	An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:GetMovementScale)
 ---@return number # The movement scale, where `1` is normal, `2` is double, etc.
@@ -37,6 +41,8 @@ function DAdjustableModelPanel:GetMovementScale() end
 ---[CLIENT] Enables mouse and keyboard-based adjustment of the perspective.
 ---
 --- This is set to `true` automatically each time mouse capture is enabled, and hence doesn't serve as a usable setting, other than to disable this functionality after the [PANEL:OnMousePressed](https://wiki.facepunch.com/gmod/PANEL:OnMousePressed) event.
+---
+--- An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DAdjustableModelPanel:SetFirstPerson)
 ---@param enable boolean Whether to enable/disable first person controls. See DAdjustableModelPanel:FirstPersonControls.

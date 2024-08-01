@@ -1646,23 +1646,106 @@ ANALOG_JOY_U = 8
 ANALOG_JOY_V = 9
 
 ---@enum BLEND
+--- The Multiplier will be `r=0`, `g=0`, `b=0`, `a=0`
+---
+--- 			This is useful for removing the Source or Destination from the final pixel color.
 BLEND_ZERO = 0
+--- The Multiplier will be `r=1`, `g=1`, `b=1`, `a=1`
+---
+--- 			This is useful for keeping the Source or Destination as their starting values.
 BLEND_ONE = 1
+--- The Multiplier will be the same as the Destination color and alpha.
 BLEND_DST_COLOR = 2
+--- Each color and alpha channel value of the Destination is subtracted from `1`.
+---
+--- 			**Example:**
+--- 			If your Destination channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
+--- 			They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
+--- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_DST_COLOR = 3
+--- All color and alpha channels will be the same as the Source alpha value.
+---
+--- 			**Example:**
+--- 			If your Source channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
+--- 			The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
 BLEND_SRC_ALPHA = 4
+--- All color and alpha channels will be set to the Source alpha value subtracted from `1`.
+---
+--- 			**Example:**
+--- 			If your Source channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
+--- 			The alpha channel will be modified by `a=1-0.6`
+--- 			The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
 BLEND_ONE_MINUS_SRC_ALPHA = 5
+--- All color and alpha channels will be set to the the Destination alpha value.
+---
+--- 			**Example:**
+--- 			If your Destination channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
+--- 			The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
 BLEND_DST_ALPHA = 6
+--- All color and alpha channels will be set to the Destination alpha value subtracted from `1`.
+---
+--- 			**Example:**
+--- 			If your Destination channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
+--- 			The alpha channel will be modified by `a=1-0.6`
+--- 			The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
 BLEND_ONE_MINUS_DST_ALPHA = 7
+--- First, the Source alpha is compared against the Destination alpha value subtracted from `1` and the smaller of the two is kept.
+---
+--- 			Then, the Source color channels are multiplied by the value from the first step.
+---
+--- 			The Source alpha channel is multiplied by `1`.
+---
+--- 			**Example:**
+--- 			If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=0.6`
+--- 			and your Destination channels are: `r=0`, `g=1`, `b=0.5`, `a=0.75`
+---
+--- 			The Destination alpha value subtracted from `1` is calculated: `1-0.75` = `0.25`
+--- 			The Source alpha `0.6` is compared to the subtracted Destination alpha `0.25` and the smaller of the two is kept (`0.25`)
+---
+--- 			The color channels of the Source are multiplied by the smaller value: `r=1*0.25`, `g=0.25*0.25`, `b=0.1*0.25`
+---
+--- 			The final Multiplier value will be `r=0.25`, `g=0.0625`, `b=0.025`, `a=0.6`
 BLEND_SRC_ALPHA_SATURATE = 8
+--- The Multiplier will be the same as the Source color and alpha.
 BLEND_SRC_COLOR = 9
+--- Each color and alpha channel value of the Source is subtracted from `1`.
+---
+--- 			**Example:**
+--- 			If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
+--- 			They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
+--- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_SRC_COLOR = 10
 
 ---@enum BLENDFUNC
+--- **Source + Destination**
+--- 			Adds each channel of the Source with the same channel of the Destination.
+---
+--- 			**Example:**
+--- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=0.1`, `a=0.9`
+--- 			With Destination channels: `r=0.25`, `g=0.25`, `b=1.0`, `a=0.0`
+--- 			The final pixel channels are: `r=0.25`, `g=0.5`, `b=1.0`, `a=0.9`
 BLENDFUNC_ADD = 0
+--- **Source - Destination**
+--- 			Subtracts each channel of the Destination from the same channel of the Source.
+---
+--- 			**Example:**
+--- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
+--- 			With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
+--- 			The final pixel channels are: `r=0.0`, `g=0.0`, `b=0.6`, `a=0.9`
 BLENDFUNC_SUBTRACT = 1
+--- **Destination - Source**
+--- 			Subtracts each channel of the Source from the same channel of the Destination.
+---
+--- 			**Example:**
+--- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
+--- 			With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
+--- 			The final pixel channels are: `r=0.0`, `g=0.75`, `b=0.0`, `a=0.0`
 BLENDFUNC_REVERSE_SUBTRACT = 2
+--- **Min(Source, Destination**
+--- 			All of the Source channels are added together and compared to all of the Destination channels added together and the smaller of the two is used as the final pixel color.
 BLENDFUNC_MIN = 3
+--- **Max(Source, Destination**
+--- 			All of the Source channels are added together and compared to all of the Destination channels added together and the larger of the two is used as the final pixel color.
 BLENDFUNC_MAX = 4
 
 ---@enum BLOOD_COLOR
@@ -1973,9 +2056,14 @@ CLASS_INSECT = 33
 --- 			- `hornet` fired by a player
 CLASS_PLAYER_BIOWEAPON = 34
 --- HL:S - **Enemy Bioweapons**
---- 			- `horne`t fired by anyone but a player
+--- 			- `hornet` fired by anyone but a player
 --- 			- `monster_snark` with no enemy or an enemy without the class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
 CLASS_ALIEN_BIOWEAPON = 35
+--- Portal - **Portal rocket and normal turrets, and the camera**
+--- * `npc_portal_turret_floor`
+--- * `npc_rocket_turret`
+--- * `npc_security_camera`
+CLASS_PORTAL_TURRET = 36
 
 ---@enum COLLISION_GROUP
 --- Normal

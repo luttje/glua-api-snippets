@@ -90,7 +90,7 @@ function DComboBox:GetSelected() end
 ---@return number # The ID of the currently selected option.
 function DComboBox:GetSelectedID() end
 
----[CLIENT AND MENU] Returns an whether the items in the dropdown will be alphabetically sorted or not.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns an whether the items in the dropdown will be alphabetically sorted or not.
 ---
 --- See [DComboBox:SetSortItems](https://wiki.facepunch.com/gmod/DComboBox:SetSortItems).
 ---
@@ -117,7 +117,7 @@ function DComboBox:OpenMenu() end
 ---@return any # The data of the removed option that was provided.
 function DComboBox:RemoveChoice(index) end
 
----[CLIENT AND MENU] Sets whether or not the items should be sorted alphabetically in the dropdown menu of the [DComboBox](https://wiki.facepunch.com/gmod/DComboBox). If set to false, items will appear in the order they were added by [DComboBox:AddChoice](https://wiki.facepunch.com/gmod/DComboBox:AddChoice) calls.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets whether or not the items should be sorted alphabetically in the dropdown menu of the [DComboBox](https://wiki.facepunch.com/gmod/DComboBox). If set to false, items will appear in the order they were added by [DComboBox:AddChoice](https://wiki.facepunch.com/gmod/DComboBox:AddChoice) calls.
 ---
 --- This is enabled by default.
 ---

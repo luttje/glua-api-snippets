@@ -667,7 +667,7 @@ function Panel:GetFGColor() end
 --- **NOTE**: Only works on [Label](https://wiki.facepunch.com/gmod/Label) and [TextEntry](https://wiki.facepunch.com/gmod/TextEntry) and their derived panels by default (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel) and [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry)), and on any panel that manually implemented the [Panel:GetFont](https://wiki.facepunch.com/gmod/Panel:GetFont) method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetFont)
----@return string # fontName
+---@return string # The font name.
 function Panel:GetFont() end
 
 ---[CLIENT] Returns the panel's HTML material. Only works with [Awesomium](https://wiki.facepunch.com/gmod/Awesomium), [HTML](https://wiki.facepunch.com/gmod/HTML) and [DHTML](https://wiki.facepunch.com/gmod/DHTML) panels that have been fully loaded.

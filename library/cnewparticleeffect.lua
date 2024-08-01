@@ -40,6 +40,13 @@ function CNewParticleEffect:GetHighestControlPoint() end
 ---@return Entity # The owner of the particle system.
 function CNewParticleEffect:GetOwner() end
 
+---[CLIENT] Returns the bounding box of the particle effect, including all the particles it emitted.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetRenderBounds)
+---@return Vector # Mins of the bounding box.
+---@return Vector # Maxs of the bounding box.
+function CNewParticleEffect:GetRenderBounds() end
+
 ---[CLIENT] Returns whether the particle system has finished emitting particles or not.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsFinished)

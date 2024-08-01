@@ -632,30 +632,79 @@ function render.ModelMaterialOverride(material) end
 ---@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the alpha channel or not. Has no effect if the previous argument is false.
 function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 
----[CLIENT AND MENU] Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
+---[CLIENT AND MENU] Overrides the way that the final color and alpha is calculated for each pixel affected by upcoming draw operations.
 ---
---- See also [render.OverrideAlphaWriteEnable](https://wiki.facepunch.com/gmod/render.OverrideAlphaWriteEnable).
+--- When a draw operation is performed, the rendering system examines each pixel that is affected by the draw operation and determines its new color by combining (or "Blending") the pixel's current color (Called the "Destination" or "Dst" color) with the new color produced by the draw operation (Called the "Source" or "Src" color.)
 ---
---- **NOTE**: Doing [surface](https://wiki.facepunch.com/gmod/surface) draw calls with alpha set to 0 is a no-op and won't have an effect.
+--- This function allows you to control the way that those two colors (The Source and Destination) are combined to produce the final pixel color.
+---
+--- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideBlend)
----@param enabled boolean true to enable, false to disable. No other arguments are required when disabling.
----@param srcBlend number The source color blend function Enums/BLEND. Determines how a rendered texture's final color should be calculated.
----@param destBlend number The destination color blend function Enums/BLEND.
----@param blendFunc number The blend mode used for drawing the color layer Enums/BLENDFUNC.
----@param srcBlendAlpha? number The source alpha blend function Enums/BLEND. Determines how a rendered texture's final alpha should be calculated.
----@param destBlendAlpha? number The destination alpha blend function Enums/BLEND.
----@param blendFuncAlpha? number The blend mode used for drawing the alpha layer Enums/BLENDFUNC.
+---@param enabled boolean
+--- 			Set to `true` to enable Blend Overrides.
+---@param sourceMultiplier number
+--- 			This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param destinationMultiplier number
+--- 			This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param blendingFunction number
+--- 			After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
+--- 			One of the Enums/BLENDFUNC enums.
+function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, blendingFunction) end
+
+---[CLIENT AND MENU] Overrides the way that the final color and alpha is calculated for each pixel affected by upcoming draw operations.
+---
+--- When a draw operation is performed, the rendering system examines each pixel that is affected by the draw operation and determines its new color by combining (or "Blending") the pixel's current color (Called the "Destination" or "Dst" color) with the new color produced by the draw operation (Called the "Source" or "Src" color.)
+---
+--- This function allows you to control the way that those two colors (The Source and Destination) are combined to produce the final pixel color.
+---
+--- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideBlend)
+---@param enabled boolean
+--- 			Set to `true` to enable Blend Overrides.
+---@param sourceColorMultiplier number
+--- 			This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param destinationColorMultiplier number
+--- 			This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param colorBlendingFunction number
+--- 			After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
+--- 			One of the Enums/BLENDFUNC enums.
+---@param sourceAlphaMultiplier? number
+--- 			This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param destinationAlphaMultiplier? number
+--- 			This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+--- 			One of the Enums/BLEND enums.
+---@param alphaBlendingFunction? number
+--- 			After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
 function render.OverrideBlend(
 	enabled,
-	srcBlend,
-	destBlend,
-	blendFunc,
-	srcBlendAlpha,
-	destBlendAlpha,
-	blendFuncAlpha
+	sourceColorMultiplier,
+	destinationColorMultiplier,
+	colorBlendingFunction,
+	sourceAlphaMultiplier,
+	destinationAlphaMultiplier,
+	alphaBlendingFunction
 )
 end
+
+---[CLIENT AND MENU] Overrides the way that the final color and alpha is calculated for each pixel affected by upcoming draw operations.
+---
+--- When a draw operation is performed, the rendering system examines each pixel that is affected by the draw operation and determines its new color by combining (or "Blending") the pixel's current color (Called the "Destination" or "Dst" color) with the new color produced by the draw operation (Called the "Source" or "Src" color.)
+---
+--- This function allows you to control the way that those two colors (The Source and Destination) are combined to produce the final pixel color.
+---
+--- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/render.OverrideBlend)
+---@param enabled boolean
+--- 			Set to `false` to disable blend overrides.
+function render.OverrideBlend(enabled) end
 
 ---[CLIENT AND MENU] Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
 ---

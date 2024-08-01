@@ -54,11 +54,27 @@ function mesh.End() end
 ---@param normal Vector The normal of the vertex.
 function mesh.Normal(normal) end
 
+---[CLIENT] Sets the normal to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Normal)
+---@param x number The X part of the vertex normal.
+---@param y number The Y part of the vertex normal.
+---@param z number The Z part of the vertex normal.
+function mesh.Normal(x, y, z) end
+
 ---[CLIENT] Sets the position to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Position)
 ---@param position Vector The position of the vertex.
 function mesh.Position(position) end
+
+---[CLIENT] Sets the position to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.Position)
+---@param x number The X position of the vertex.
+---@param y number The Y position of the vertex.
+---@param z number The Z position of the vertex.
+function mesh.Position(x, y, z) end
 
 ---[CLIENT] Adds a quad (4 vertices) to the currently built mesh. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
@@ -93,17 +109,49 @@ function mesh.QuadEasy(position, normal, sizeX, sizeY, color) end
 ---@param a number The alpha channel multiplier of the specular map.
 function mesh.Specular(r, g, b, a) end
 
----[CLIENT] Sets the "S" tangent to be used.
+---[CLIENT] Sets the `S` tangent to be used, also known as "binormal".
+---
+--- Tangents and binormals are using in bumpmap rendering.
+---
+--- See also [mesh.TangentT](https://wiki.facepunch.com/gmod/mesh.TangentT) and [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentS)
----@param sTanger Vector The S tangent.
-function mesh.TangentS(sTanger) end
+---@param tangentS Vector The S tangent.
+function mesh.TangentS(tangentS) end
 
----[CLIENT] Sets the "T" tangent to be used.
+---[CLIENT] Sets the `S` tangent to be used, also known as "binormal".
+---
+--- Tangents and binormals are using in bumpmap rendering.
+---
+--- See also [mesh.TangentT](https://wiki.facepunch.com/gmod/mesh.TangentT) and [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentS)
+---@param x number The X part of the vertex' tangent S.
+---@param y number The Y part of the vertex' tangent S.
+---@param z number The Z part of the vertex' tangent S.
+function mesh.TangentS(x, y, z) end
+
+---[CLIENT] Sets the `T` tangent to be used.
+---
+--- Tangents and binormals are using in bumpmap rendering.
+---
+--- See also [mesh.TangentS](https://wiki.facepunch.com/gmod/mesh.TangentS) and [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentT)
----@param tTanger Vector The T tangent.
-function mesh.TangentT(tTanger) end
+---@param tangentT Vector The T tangent.
+function mesh.TangentT(tangentT) end
+
+---[CLIENT] Sets the `T` tangent to be used.
+---
+--- Tangents and binormals are using in bumpmap rendering.
+---
+--- See also [mesh.TangentS](https://wiki.facepunch.com/gmod/mesh.TangentS) and [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/mesh.TangentT)
+---@param x number The X part of the vertex' tangent T.
+---@param y number The Y part of the vertex' tangent T.
+---@param z number The Z part of the vertex' tangent T.
+function mesh.TangentT(x, y, z) end
 
 ---[CLIENT] Sets the texture coordinates for the next vertex.
 ---

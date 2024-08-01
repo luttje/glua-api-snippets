@@ -16,9 +16,9 @@ function bit.arshift(value, shiftCount) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.band)
 ---@param value number The value to be manipulated.
----@param otherValues? number Values bit to perform bitwise "and" with. Optional.
+---@param ... any Values bit to perform bitwise "and" with. Optional.
 ---@return number # Result of bitwise "and" operation.
-function bit.band(value, otherValues) end
+function bit.band(value, ...) end
 
 ---[SHARED AND MENU] Returns the bitwise not of the value.
 ---

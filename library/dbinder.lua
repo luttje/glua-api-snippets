@@ -4,7 +4,7 @@
 ---@class DBinder : DButton
 local DBinder = {}
 
----[CLIENT] Gets the code of the key currently bound by the DBinder. Same as [DBinder:GetValue](https://wiki.facepunch.com/gmod/DBinder:GetValue).
+---[CLIENT] Gets the code of the key currently bound by the DBinder. Same as [DBinder:GetValue](https://wiki.facepunch.com/gmod/DBinder:GetValue). An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DBinder:GetSelectedNumber)
 ---@return number # The key code of the bound key. See Enums/KEY.

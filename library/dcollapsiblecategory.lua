@@ -31,7 +31,7 @@ function DCollapsibleCategory:AnimSlide(anim, delta, data) end
 ---@param expand boolean True to open, false to collapse
 function DCollapsibleCategory:DoExpansion(expand) end
 
----[CLIENT AND MENU] Returns the expand/collapse animation time set by [DCollapsibleCategory:SetAnimTime](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetAnimTime).
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the expand/collapse animation time set by [DCollapsibleCategory:SetAnimTime](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetAnimTime).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetAnimTime)
 ---@return number # The animation time in seconds
@@ -74,7 +74,7 @@ function DCollapsibleCategory:GetList() end
 ---@return number #
 function DCollapsibleCategory:GetPadding() end
 
----[CLIENT AND MENU] Returns whether or not the background should be painted.
+---[CLIENT AND MENU] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns whether or not the background should be painted.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetPaintBackground)
 ---@return boolean # If the background is painted or not

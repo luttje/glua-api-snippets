@@ -14,7 +14,7 @@ local DColorCombo = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:BuildControls)
 function DColorCombo:BuildControls() end
 
----[CLIENT] Returns the color of the [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo).
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of the [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
 ---@return table # A Color
@@ -28,7 +28,7 @@ function DColorCombo:GetColor() end
 ---@return boolean #
 function DColorCombo:IsEditing() end
 
----[CLIENT] Sets the color of this panel.
+---[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of this panel. See also [DColorCombo:GetColor](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:SetColor)
 ---@param clr table A Color.

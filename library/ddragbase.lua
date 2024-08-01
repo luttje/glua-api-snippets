@@ -44,19 +44,19 @@ function DDragBase:DropAction_Normal(drops, bDoDrop, command, y, x) end
 ---@param x number
 function DDragBase:DropAction_Simple(drops, bDoDrop, command, y, x) end
 
----[CLIENT AND MENU] Returns the drag'n'drop group this panel belongs to. See [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable).
+---[CLIENT AND MENU] Returns the drag'n'drop group this panel belongs to. See [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable). An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetDnD)
 ---@return string # Name of the DnD family.
 function DDragBase:GetDnD() end
 
----[CLIENT AND MENU] Returns whether this panel is read only or not for drag'n'drop purposes.
+---[CLIENT AND MENU] Returns whether this panel is read only or not for drag'n'drop purposes. An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetReadOnly)
 ---@return boolean # Whether this panel is read only or not.
 function DDragBase:GetReadOnly() end
 
----[CLIENT AND MENU] Whether this panel uses live drag'n'drop previews.
+---[CLIENT AND MENU] Whether this panel uses live drag'n'drop previews. An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:GetUseLiveDrag)
 ---@return boolean #
@@ -74,6 +74,10 @@ function DDragBase:MakeDroppable(name, allowCopy) end
 ---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Used internally by [DDragBase:MakeDroppable](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable).
 ---
+--- See also [DDragBase:GetDnD](https://wiki.facepunch.com/gmod/DDragBase:GetDnD)
+---
+--- An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetDnD)
 ---@param name string Name of the DnD family.
 function DDragBase:SetDnD(name) end
@@ -89,13 +93,13 @@ function DDragBase:SetDnD(name) end
 ---@param pos? string Where you're allowed to drop things.
 function DDragBase:SetDropPos(pos) end
 
----[CLIENT AND MENU] Sets whether this panel is read only or not for drag'n'drop purposes. If set to `true`, you can only copy from this panel, and cannot modify its contents.
+---[CLIENT AND MENU] Sets whether this panel is read only or not for drag'n'drop purposes. If set to `true`, you can only copy from this panel, and cannot modify its contents. This is an [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetReadOnly)
 ---@param name boolean Whether this panel should be read only or not.
 function DDragBase:SetReadOnly(name) end
 
----[CLIENT AND MENU] Whether to use live drag'n'drop previews.
+---[CLIENT AND MENU] Whether to use live drag'n'drop previews. This is an [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DDragBase:SetUseLiveDrag)
 ---@param newState boolean

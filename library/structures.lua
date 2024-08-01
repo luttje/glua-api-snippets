@@ -847,6 +847,14 @@ ENT.IconOverride = "entities/<ClassName>.png"
 ---@type boolean
 ENT.PhysgunDisabled = false
 
+---If set, a bitflag for the physics solidity of the entity. See Enums/CONTENTS.
+---
+--- Can be used to make the entity pass though certain otherwise solid meshes, such as grates, or special clip brushes.
+---
+--- This only works for `nextbot`, `anim` and `ai` type SENTs.
+---@type number
+ENT.PhysicsSolidMask = nil
+
 ---
 --- Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
 ---
@@ -1134,13 +1142,19 @@ HullTrace.maxs = nil
 ---@type Vector
 HullTrace.mins = nil
 
----Things the trace should not hit. Can also be a table of entities or a function with one argument:
+---Things the trace should not hit. Can be an entity, a table of entities, a table of entity classes or a function:
 ---
---- * Entity ent - The entity that the trace hit
 ---
---- Using a function here is super slow. Try to avoid it.
+---
+--- Function argument(s):
+--- * Entity `ent` - The entity that the trace hit
+---
+--- Function return value(s):
+--- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+---
+--- 	Using a function here is super slow. Try to avoid it.
 ---@type Entity
-HullTrace.filter = {}
+HullTrace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit.
 ---@type number
@@ -1157,6 +1171,14 @@ HullTrace.ignoreworld = false
 ---If set, the trace result will be written to the supplied table instead of returning a new table
 ---@type table
 HullTrace.output = nil
+
+---Turns the `filter` field into a whitelist, if it is a table.
+---@type boolean
+HullTrace.whitelist = false
+
+---Enables traces to hit clientside only entities. Keep in mind that most naturally spawned entities are classified as debris, so extra `mask` values might be required.
+---@type boolean
+HullTrace.hitclientonly = false
 
 --- Table structure used for [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
 ---@class LocalLight
@@ -2686,15 +2708,19 @@ Trace.start = VectorVector(0, 0, 0)
 ---@type Vector
 Trace.endpos = VectorVector(0, 0, 0)
 
----Things the trace should not hit. Can also be a table of entities and classname strings, or a function with one argument:
+---Things the trace should not hit. Can be an entity, a table of entities, a table of entity classes or a function:
 ---
---- * Entity ent - The entity that the trace hit
 ---
---- Return true in the function to hit the entity, false to skip it.
 ---
---- Using a function here is super slow - try to avoid it.
+--- Function argument(s):
+--- * Entity `ent` - The entity that the trace hit
+---
+--- Function return value(s):
+--- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+---
+--- 	Using a function here is super slow. Try to avoid it.
 ---@type Entity
-Trace.filter = {}
+Trace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
 ---@type number
@@ -2708,19 +2734,22 @@ Trace.collisiongroup = COLLISION_GROUP_NONE
 ---@type boolean
 Trace.ignoreworld = false
 
----Should the trace hit clientside-only entities or not
----@type boolean
-Trace.hitclientonly = false
-
----Turns the filter field into a whitelist instead of an ignore list, does not affect function filters
----@type boolean
-Trace.whitelist = false
-
 ---If set, the trace result will be written to the supplied table instead of returning a new table
 ---@type table
 Trace.output = nil
 
+---Turns the `filter` field into a whitelist, if it is a table.
+---@type boolean
+Trace.whitelist = false
+
+---Enables traces to hit clientside only entities. Keep in mind that most naturally spawned entities are classified as debris, so extra `mask` values might be required.
+---@type boolean
+Trace.hitclientonly = false
+
 --- Table structure used as trace result. Default values are when the trace hits nothing.
+---
+--- See [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine) and [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
+---
 ---@class TraceResult
 local TraceResult = {}
 

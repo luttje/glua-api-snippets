@@ -9,7 +9,18 @@ local PathFollower = {}
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
 ---@param ent Entity The entity we want to chase
-function PathFollower:Chase(bot, ent) end
+---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example on PathFollower:Compute for the default function.
+---
+--- Function argument(s):
+--- * CNavArea `area` - The area to move to.
+--- * CNavArea `fromArea` - The area to move from.
+--- * CNavLadder `ladder` - The ladder to move to or from (Validation required), if any.
+--- * Entity `elevator` - Will probably be always NULL
+--- * number `length` - Precomputed length between `area` and `fromArea`.
+---
+--- Function return value(s):
+--- * number `cost` - The cost of movement between `area` and `fromArea`.
+function PathFollower:Chase(bot, ent, generator) end
 
 ---[SERVER] Compute shortest path from bot to 'goal' via A* algorithm.
 ---

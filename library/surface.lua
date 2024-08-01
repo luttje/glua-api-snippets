@@ -245,7 +245,6 @@ function surface.GetTextureSize(textureID) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.PlaySound)
 ---@param soundfile string The path to the sound file.
 ---
----  Currently does not work with sound scripts ([sound.Add](https://wiki.facepunch.com/gmod/sound.Add))
 --- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 function surface.PlaySound(soundfile) end
 

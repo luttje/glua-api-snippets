@@ -18,7 +18,7 @@ file = {}
 ---@param content string The content which should be appended to the file.
 function file.Append(name, content) end
 
----[SHARED AND MENU] Returns the content of a file asynchronously.
+---[SHARED] Returns the content of a file asynchronously.
 ---
 --- All limitations of [file.Read](https://wiki.facepunch.com/gmod/file.Read) also apply.
 --- **NOTE**: This function is currently broken in the Menu State and won't be fixed. [Bug Report](https://github.com/Facepunch/garrysmod-issues/issues/5433)
@@ -51,6 +51,7 @@ function file.CreateDir(name) end
 ---@param name string The file name.
 ---@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 --- This is only available in the menu state.
+---@return boolean #
 function file.Delete(name, path) end
 
 ---[SHARED AND MENU] Returns a boolean of whether the file or directory exists or not.

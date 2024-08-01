@@ -48,6 +48,13 @@ function player_manager.GetPlayerClass(ply) end
 ---@return table # A copy of all registered player classes.
 function player_manager.GetPlayerClasses() end
 
+---[SHARED] Gets a players' class table
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.GetPlayerClassTable)
+---@param ply Player Player to get class of
+---@return table # The players class table
+function player_manager.GetPlayerClassTable(ply) end
+
 ---[SHARED] Applies basic class variables when the player spawns.
 ---
 --- Called from [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) in the base gamemode.

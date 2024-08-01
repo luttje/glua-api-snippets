@@ -6,16 +6,14 @@
 ---@class IMaterial
 local IMaterial = {}
 
----[SHARED AND MENU] Returns the color of the specified pixel of the $basetexture, only works for materials created from PNG files.
+---[SHARED AND MENU] Returns the color of the specified pixel of the `$basetexture`, only works for materials created from PNG files.
 ---
---- Basically identical to [ITexture:GetColor](https://wiki.facepunch.com/gmod/ITexture:GetColor) used on [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)( "$basetexture" ).
----
---- The returned color will not have the color metatable.
+--- Basically identical to [ITexture:GetColor](https://wiki.facepunch.com/gmod/ITexture:GetColor) used on [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)`( "$basetexture" )`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetColor)
 ---@param x number The X coordinate.
 ---@param y number The Y coordinate.
----@return table # The color of the pixel as a Color.
+---@return Color # The color of the pixel as a Color.
 function IMaterial:GetColor(x, y) end
 
 ---[SHARED AND MENU] Returns the specified material value as a float, or nil if the value is not set.

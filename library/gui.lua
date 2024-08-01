@@ -30,6 +30,7 @@ function gui.EnableScreenClicker(enabled) end
 ---[CLIENT AND MENU] Hides the game menu overlay.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/gui.HideGameUI)
+---@deprecated Will be disabled in a future patch. Use GM:OnPauseMenuShow instead.
 function gui.HideGameUI() end
 
 ---[CLIENT AND MENU] Simulates a mouse move with the given deltas.

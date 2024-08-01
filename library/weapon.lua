@@ -668,15 +668,15 @@ function WEAPON:TakePrimaryAmmo(amount) end
 ---@param amount number How much of secondary ammo to remove
 function WEAPON:TakeSecondaryAmmo(amount) end
 
----[SHARED] Called when the swep thinks.
+---[SHARED] Called when the weapon thinks.
 ---
 --- This hook won't be called during the deploy animation and when using [Weapon:DefaultReload](https://wiki.facepunch.com/gmod/Weapon:DefaultReload).
 ---
---- **NOTE**: Works only in players hands. Doesn't work in NPCs hands.
+--- Despite being a predicted hook, this hook is called clientside in single player (for your convenience), however it will not be recognized as a predicted hook via [Player:GetCurrentCommand](https://wiki.facepunch.com/gmod/Player:GetCurrentCommand), and will run more often in this case.
 ---
---- **NOTE**: Despite being a predicted hook, this hook is called clientside in single player, however it will not be recognized as a predicted hook to [Player:GetCurrentCommand](https://wiki.facepunch.com/gmod/Player:GetCurrentCommand).
+--- This hook will be called before Player movement is processed on the client, and after on the server.
 ---
---- **NOTE**: This hook will be called before Player movement is processed on the client, and after on the server.
+--- **NOTE**: This hook only runs while the weapon is in players hands. It does not run while it is carried by an NPC.
 ---
 --- This will not be run during deploy animations after a serverside-only deploy. This usually happens after picking up and dropping an object with +use.
 ---

@@ -29,10 +29,13 @@ function draw.GetFontHeight(font) end
 function draw.NoTexture() end
 
 ---[CLIENT AND MENU] Draws a rounded rectangle.
---- **NOTE**: If you do not define a cornerRadius, [surface.DrawRect](https://wiki.facepunch.com/gmod/surface.DrawRect) will be used instead for performance.
+---
+--- **NOTE**: This function actually draws rectangles with 'gui/cornerX' textures applied to it's rounded corners. It means that this function will fail (or will be drawn not as expected) with any vertex operations, such as model matrices like [cam.Start3D2D](https://wiki.facepunch.com/gmod/cam.Start3D2D) (corners would be pixelated) or stencil operations. Consider using [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly) or [mesh](https://wiki.facepunch.com/gmod/mesh) library
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.RoundedBox)
 ---@param cornerRadius number Radius of the rounded corners, works best with a multiple of 2.
+---
+--- For values 0 or below, surface.DrawRect will be used instead for performance.
 ---@param x number The x coordinate of the top left of the rectangle.
 ---@param y number The y coordinate of the top left of the rectangle.
 ---@param width number The width of the rectangle.
@@ -41,6 +44,8 @@ function draw.NoTexture() end
 function draw.RoundedBox(cornerRadius, x, y, width, height, color) end
 
 ---[CLIENT AND MENU] Draws a rounded rectangle. This function also lets you specify which corners are drawn rounded.
+---
+--- **NOTE**: This function actually draws rectangles with 'gui/cornerX' textures applied to it's rounded corners. It means that this function will fail (or will be drawn not as expected) with any vertex operations, such as model matrices like [cam.Start3D2D](https://wiki.facepunch.com/gmod/cam.Start3D2D) (corners would be pixelated) or stencil operations. Consider using [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly) or [mesh](https://wiki.facepunch.com/gmod/mesh) library
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/draw.RoundedBoxEx)
 ---@param cornerRadius number Radius of the rounded corners, works best with a power of 2 number.

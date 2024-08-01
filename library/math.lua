@@ -502,6 +502,8 @@ function math.IntToBin(int) end
 
 ---[SHARED AND MENU] Takes a normalised number and returns the floating point representation.
 ---
+--- Effectively it returns the result of `normalizedFraction * 2.0 ^ exponent`. [math.frexp](https://wiki.facepunch.com/gmod/math.frexp) is the opposite function.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.ldexp)
 ---@param normalizedFraction number The value to get the normalized fraction and the exponent from.
 ---@param exponent number The value to get the normalized fraction and the exponent from.

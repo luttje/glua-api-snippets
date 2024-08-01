@@ -7,13 +7,13 @@
 ---@class bf_read
 local bf_read = {}
 
----[CLIENT] Reads an returns an angle object from the bitstream.
+---[CLIENT] Reads and returns an angle object from the bitstream.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bf_read:ReadAngle)
 ---@return Angle # The read angle
 function bf_read:ReadAngle() end
 
----[CLIENT] Reads 1 bit an returns a bool representing the bit.
+---[CLIENT] Reads 1 bit and returns a bool representing the bit.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bf_read:ReadBool)
 ---@return boolean # bit

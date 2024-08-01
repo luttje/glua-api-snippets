@@ -79,6 +79,10 @@ function util.BlastDamageInfo(dmg, damageOrigin, damageRadius) end
 ---
 --- Use with [net.WriteData](https://wiki.facepunch.com/gmod/net.WriteData) and [net.ReadData](https://wiki.facepunch.com/gmod/net.ReadData) for networking and  [util.Decompress](https://wiki.facepunch.com/gmod/util.Decompress) to decompress the data.
 ---
+--- **NOTE**: The output of this function will have the uncompressed size of the data prepended to it as an 8-byte little-endian integer. [Source](https://github.com/garrynewman/bootil/blob/beb4cec8ad29533965491b767b177dc549e62d23/src/Bootil/Utility/CompressionLZMA.cpp#L56-L63)
+---
+--- You may therefore experience issues using the output of this function **_outside of Garry's Mod_**. If you need to do this, you will need to manually strip the first 8 bytes from the compressed output, or use third-party tools such as [gmod-lzma](https://github.com/WilliamVenner/gmod-lzma-rs) to decompress the output instead.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Compress)
 ---@param str string String to compress.
 ---@return string # The compressed string, or an empty string if the input string was zero length ("").
@@ -134,6 +138,12 @@ function util.DecalEx(material, ent, position, normal, color, w, h) end
 function util.DecalMaterial(decalName) end
 
 ---[SHARED AND MENU] Decompresses the given string using [LZMA](https://en.wikipedia.org/wiki/LZMA) algorithm. Used to decompress strings previously compressed with [util.Compress](https://wiki.facepunch.com/gmod/util.Compress).
+---
+--- **NOTE**: This function expects the compressed input data to have the uncompressed size of the data prepended to it as an 8-byte little-endian integer. [Source](https://github.com/garrynewman/bootil/blob/beb4cec8ad29533965491b767b177dc549e62d23/src/Bootil/Utility/CompressionLZMA.cpp#L101)
+---
+--- If your compressed input data was compressed by [util.Compress](https://wiki.facepunch.com/gmod/util.Compress), you don't need to worry about this - the uncompressed size of the data is already prepended to its output.
+---
+--- However, if your compressed data was produced using standard tools **_outside of Garry's Mod_**, you will need to manually prepend the length of the uncompressed data to its compressed form as an 8-byte little endian integer, or use third-party tools such as [gmod-lzma](https://github.com/WilliamVenner/gmod-lzma-rs) to compress your data instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Decompress)
 ---@param compressedString string The compressed string to decompress.
@@ -218,11 +228,9 @@ function util.GetActivityNameByID(id) end
 ---@return number # The ID of an animation event, typically for usage with ENTITY:HandleAnimEvent.
 function util.GetAnimEventNameByID(string) end
 
----[SERVER] Returns a name for given automatically generated numerical animation event ID. This is useful for models that define custom animation events.
+---[SHARED] Returns a name for given automatically generated numerical animation event ID. This is useful for models that define custom animation events.
 ---
 --- See [util.GetAnimEventIDByName](https://wiki.facepunch.com/gmod/util.GetAnimEventIDByName) for a function that does the opposite.
----
---- This function will be shared in the next update.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetAnimEventNameByID)
 ---@param id number The ID of an animation event, typically from ENTITY:HandleAnimEvent.
@@ -247,9 +255,13 @@ function util.GetAnimEventNameByID(id) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetModelInfo)
 ---@param mdl string Model path
 ---@return table # The model info as a table with the following keys:
---- * number SkinCount - Identical to Entity:SkinCount.
---- * string KeyValues - Valve key-value formatted info about the model's physics (Constraint Info, etc). This is limited to 4096 characters.
---- * string ModelKeyValues - Valve key-value formatted info about the model ($keyvalues command in the .qc of the model), if present
+--- * number **SkinCount** - Identical to Entity:SkinCount.
+--- * string **KeyValues** - Valve key-value formatted info about the model's physics (Constraint Info, etc). This is limited to 4096 characters.
+--- * string **ModelKeyValues** - Valve key-value formatted info about the model ($keyvalues command in the .qc of the model), if present
+--- * number **MeshCount** - Number of meshes the model has
+--- * number **BoneCount** - Number of bones the model has
+--- * number **Flags** - Model flags
+--- * boolean **StaticProp** - Whether the model is meant to be a static prop (a specific flag)
 function util.GetModelInfo(mdl) end
 
 ---[SHARED] Returns a table of visual meshes of given model.
@@ -773,7 +785,7 @@ function util.SHA256(stringToHash) end
 
 ---[SHARED] Generates a random float value that should be the same on client and server.
 ---
---- **NOTE**: This function is best used in a Predicted Hook
+--- **NOTE**: This function is best used in a [predicted hook](https://wiki.facepunch.com/gmod/prediction)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.SharedRandom)
 ---@param uniqueName string The seed for the random value
@@ -826,7 +838,7 @@ function util.SteamIDTo64(id) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.StringToType)
 ---@param str string The string to convert
----@param typename string The type to attempt to convert the string to. This can be vector, angle, float, int, bool, or string (case insensitive).
+---@param typename string The type to attempt to convert the string to. This can be `vector`, `angle`, `float`, `int`, `bool`, or `string` (case insensitive).
 ---@return any # The result of the conversion, or nil if a bad type is specified.
 function util.StringToType(str, typename) end
 
@@ -900,8 +912,6 @@ function util.TraceEntity(tracedata, ent) end
 function util.TraceEntityHull(tracedata, ent) end
 
 ---[SHARED] Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
----
---- **NOTE**: Clientside entities will not be hit by traces.
 ---
 --- **NOTE**: This function may not always give desired results clientside due to certain physics mechanisms not existing on the client. Use it serverside for accurate results.
 ---
