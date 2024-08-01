@@ -1559,7 +1559,7 @@ function _G.HTTP(parameters) end
 --- Absolute paths for gamemode files must include `/gamemode/`.
 ---
 --- **NOTE**: Please make sure your file names are unique, the filesystem is shared across all addons, so a file named `lua/config.lua` in your addon may be overwritten by the same file in another addon.
----@return table # Anything that the executed Lua script returns.
+---@return any ... # Anything that the executed Lua script returns.
 function _G.include(fileName) end
 
 ---[SHARED AND MENU] This function works exactly the same as [Global.include](https://wiki.facepunch.com/gmod/Global.include) both clientside and serverside.
