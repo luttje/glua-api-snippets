@@ -86,14 +86,30 @@ jobs:
           TARGET_BRANCH: lua-language-server-addon
         run: |
           libraryPathFirstPart=`echo $LIBRARY_PATH | cut -d'/' -f1`
+
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          # git fetch
+
+          # Checkout the target branch, create it if it doesn't exist
           git checkout $TARGET_BRANCH 2>/dev/null || git checkout -b $TARGET_BRANCH
+
+          # Remove all files except .git and the library files
           rm -rf $(ls -A | grep -vE ".git$|^$libraryPathFirstPart$")
           mv $LIBRARY_PATH/* .
           rm -rf $libraryPathFirstPart
+
+          # Commit these changes
           git add -A
           git diff-index --quiet HEAD || git commit -am "🚀 Update ${{ fromJson(env.releaseJson).version }}"
-          git push origin $TARGET_BRANCH # push to remote branch
-        # From here on the workflow repo no longer contains the dist files, nor node_modules (removed when publishing branch)
+
+          # Increment the tag, based on the previous tag (v0001, v0002, ...)
+          lastTag=$(git tag -l --sort=-v:refname | grep -E "^v[0-9]{4}$" | head -n 1)
+          lastTagNumber=${lastTag:1}
+          newTagNumber=$((lastTagNumber + 1))
+          newTag="v$(printf "%04d" $newTagNumber)"
+          git tag $newTag
+
+          # Push the changes (including the tag)
+          git push origin $TARGET_BRANCH --follow-tags
+
+        # NOTE: From here on the workflow repo no longer contains the dist files, nor node_modules (removed when publishing branch)
