@@ -110,6 +110,6 @@ jobs:
           git tag $newTag
 
           # Push the changes (including the tag)
-          git push origin $TARGET_BRANCH --follow-tags
+          git push origin $newTag
 
         # NOTE: From here on the workflow repo no longer contains the dist files, nor node_modules (removed when publishing branch)
