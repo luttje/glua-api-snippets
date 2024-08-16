@@ -49,7 +49,7 @@ function file.CreateDir(name) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Delete)
 ---@param name string The file name.
----@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
+---@param path? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 --- This is only available in the menu state.
 ---@return boolean #
 function file.Delete(name, path) end

@@ -3547,7 +3547,7 @@ function Entity:PointAtEntity(target) end
 
 ---[SERVER] Called after the duplicator finished copying the entity.
 ---
---- See also [ENTITY:PreEntityCopy](https://wiki.facepunch.com/gmod/ENTITY:PreEntityCopy) and [ENTITY:PostEntityPaste](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste).
+--- See also [ENTITY:PreEntityCopy](https://wiki.facepunch.com/gmod/ENTITY:PreEntityCopy), [ENTITY:PostEntityPaste](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste) and [ENTITY:OnEntityCopyTableFinish](https://wiki.facepunch.com/gmod/ENTITY:OnEntityCopyTableFinish).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:PostEntityCopy)
 function ENTITY:PostEntityCopy() end

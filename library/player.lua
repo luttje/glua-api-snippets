@@ -1292,7 +1292,7 @@ function Player:KeyDownLast(key) end
 ---[SHARED] Gets whether a key was just pressed this tick.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:KeyPressed)
----@param key number Corresponds to an Enums/IN
+---@param key number Corresponds to an Enums/IN. You can use bit.bor here (see example 2)
 ---@return boolean # Was pressed or not
 function Player:KeyPressed(key) end
 

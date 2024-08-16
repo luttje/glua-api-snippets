@@ -951,7 +951,7 @@ local FontData = {}
 ---
 --- The length is limited to 31 characters maximum.
 ---
---- This must be the actual 'nice' font, not a file name. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding the Font Name))
+--- This must be the actual 'nice' font, not a file name. Unless the client is running Linux or macOS. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding the Font Name))
 ---
 --- This also cannot be an already registered font, i.e. you cannot base your font from any of the [Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts)
 ---@type string

@@ -990,12 +990,12 @@ function render.SetGoalToneMappingScale(scale) end
 --- * 2 - Increased brightness(?), models look fullbright
 function render.SetLightingMode(Mode) end
 
----[CLIENT] Sets the lighting origin.
+---[CLIENT] Sets lighting origin for the current model.
 ---
 --- This does not work for prop_physics.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetLightingOrigin)
----@param lightingOrigin Vector The position from which the light should be "emitted".
+---@param lightingOrigin Vector The position which will be used to calculate lighting for the current model.
 function render.SetLightingOrigin(lightingOrigin) end
 
 ---[CLIENT] Sets the texture to be used as the lightmap in upcoming rendering operations. This is required when rendering meshes using a material with a lightmapped shader such as LightmappedGeneric.

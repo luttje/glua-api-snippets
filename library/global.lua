@@ -3074,6 +3074,8 @@ function _G.type(var) end
 ---
 --- **WARNING**: This will return `TYPE_TABLE` for [Color](https://wiki.facepunch.com/gmod/Color) objects.
 ---
+--- **WARNING**: All subclasses of [Entity](https://wiki.facepunch.com/gmod/Entity) will return `TYPE_ENTITY`.
+---
 --- This returns garbage for _LOADLIB objects.
 --- This returns `TYPE_NIL` for [proto](https://wiki.facepunch.com/gmod/proto)s.
 ---
@@ -3091,7 +3093,7 @@ function _G.TypeID(variable) end
 ---@return any ... # Output values
 function _G.unpack(tbl, startIndex, endIndex) end
 
----[SHARED AND MENU] Returns the current asynchronous in-game time.
+---[SHARED AND MENU] Returns the current asynchronous in-game time. This will not be synced with the players current clock allowing you to get [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) without interference from [Prediction](https://wiki.facepunch.com/gmod/Prediction).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.UnPredictedCurTime)
 ---@return number # The asynchronous in-game time.

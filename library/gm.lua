@@ -936,6 +936,15 @@ function GM:OnDamagedByExplosion(ply, dmginfo) end
 function GM:OnEntityCreated(entity) end
 
 ---[SERVER] Called when the [Entity:WaterLevel](https://wiki.facepunch.com/gmod/Entity:WaterLevel) of an entity is changed.
+---
+---     0 - The entity isn't in water.
+---
+---     1 - Slightly submerged (at least to the feet).
+---
+---     2 - The majority of the entity is submerged (at least to the waist).
+---
+---     3 - Completely submerged.
+---
 --- 	**WARNING**: This hook can be considered a physics callback, so changing collision rules ([Entity:SetSolidFlags](https://wiki.facepunch.com/gmod/Entity:SetSolidFlags)) in it may lead to a crash!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnEntityWaterLevelChanged)
@@ -1345,7 +1354,10 @@ function GM:PlayerDeathSound(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerDeathThink)
 ---@param ply Player The player affected in the hook.
----@return boolean # Return a non-nil value to prevent respawn.
+---@return boolean #
+--- This hook does not define a return value. The description below just describes how the hook library works in general.
+---
+--- Return a non-nil value to prevent the current gamemode from handling this event. In the `base` gamemode, the gamemode handles player respawning in this hook. So blocking the gamemode hook will prevent player from respawning, in this specific case.
 function GM:PlayerDeathThink(ply) end
 
 ---[SERVER] Called when a player leaves the server. See the [player_disconnect gameevent](https://wiki.facepunch.com/gmod/gameevent/player_disconnect) for a shared version of this hook.
@@ -1555,6 +1567,8 @@ function GM:PlayerPostThink(ply) end
 function GM:PlayerRequestTeam(ply, team) end
 
 ---[SERVER] Called when a player dispatched a chat message. For the clientside equivalent, see [GM:OnPlayerChat](https://wiki.facepunch.com/gmod/GM:OnPlayerChat).
+---
+--- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside because addons commonly return values in this hook to change chat messages.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSay)
 ---@param sender Player The player which sent the message.

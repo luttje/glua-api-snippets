@@ -3,7 +3,7 @@
 --- The http library allows either the server or client to communicate with external websites via HTTP, both `GET` ([http.Fetch](https://wiki.facepunch.com/gmod/http.Fetch)) and `POST` ([http.Post](https://wiki.facepunch.com/gmod/http.Post)) are supported. A more powerful & advanced method can be used via the global [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
 http = {}
 
----[SHARED AND MENU] Launches an asynchronous **GET** request to a HTTP server.
+---[SHARED AND MENU] Launches an asynchronous **GET** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
 ---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the [onSuccess](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) callback.
 ---
@@ -51,7 +51,7 @@ http = {}
 ---@param headers? table KeyValue table for headers.
 function http.Fetch(url, onSuccess, onFailure, headers) end
 
----[SHARED AND MENU] Sends an asynchronous **POST** request to a HTTP server.
+---[SHARED AND MENU] Sends an asynchronous **POST** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
 ---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the [onSuccess](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) callback.
 ---

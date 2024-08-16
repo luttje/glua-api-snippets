@@ -1777,7 +1777,7 @@ function Panel:RebuildSpawnIconEx(data) end
 --- * number `menuIndex` - Index of clicked menu item from third argument of Panel:Receiver
 --- * number `x` - Cursor pos, relative to the receiver
 --- * number `y` - Cursor pos, relative to the receiver
----@param menu table A table of strings that will act as a menu if drag'n'drop was performed with a right click
+---@param menu? table A table of strings that will act as a menu if drag'n'drop was performed with a right click
 function Panel:Receiver(name, func, menu) end
 
 ---[CLIENT AND MENU] Refreshes the HTML panel's current page.
