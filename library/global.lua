@@ -413,7 +413,7 @@ function _G.CreateMaterial(name, shaderName, materialData) end
 ---[MENU] Creates a new Preset from the given JSON string.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset)
----@param data string A JSON string containing all necessary informations.
+---@param data string A JSON string containing all necessary information.
 --- 			JSON structue should be Structures/Preset
 function _G.CreateNewAddonPreset(data) end
 
@@ -775,10 +775,13 @@ function _G.DrawTexturize(Scale, BaseTexture) end
 ---@param Height number The amount of screen which should be blurred on the top and bottom.
 function _G.DrawToyTown(Passes, Height) end
 
----[SERVER] Drops the specified entity if it is being held by any player with Gravity Gun or +use pickup.
+---[SERVER] Drops the specified entity if it is being held by any player with Gravity Gun, Physics Gun or `+use` pickup.
+---
+--- See also [Player:DropObject](https://wiki.facepunch.com/gmod/Player:DropObject) and [Entity:ForcePlayerDrop](https://wiki.facepunch.com/gmod/Entity:ForcePlayerDrop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.DropEntityIfHeld)
 ---@param ent Entity The entity to drop.
+---@deprecated You really should be using Entity:ForcePlayerDrop, which does the same thing.
 function _G.DropEntityIfHeld(ent) end
 
 ---[SHARED] Calls all NetworkVarNotify functions of the given entity with the given new value, but doesn't change the real value.
@@ -2087,14 +2090,16 @@ function _G.MsgN(...) end
 ---@return table # A Color or nil
 function _G.NamedColor(name) end
 
----[SHARED AND MENU] Creates a new [userdata](https://wiki.facepunch.com/gmod/userdata) object.
+---[SHARED AND MENU] Fails under certain conditions when called in coroutines
+--- 		Creates a new [userdata](https://wiki.facepunch.com/gmod/userdata) object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.newproxy)
 ---@param addMetatable? boolean If true, the created userdata will be given its own metatable.
 ---@return userdata # The newly created userdata.
 function _G.newproxy(addMetatable) end
 
----[SHARED AND MENU] Creates a new [userdata](https://wiki.facepunch.com/gmod/userdata) object.
+---[SHARED AND MENU] Fails under certain conditions when called in coroutines
+--- 		Creates a new [userdata](https://wiki.facepunch.com/gmod/userdata) object.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.newproxy)
 ---@param userData userdata Creates a new userdata with the same metatable the userdata passed in had. The userdata passed in **must be** a userdata that has a metatable that was created from this function.
@@ -2187,8 +2192,10 @@ function _G.Particle(file) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ParticleEffect)
 ---@param particleName string The name of the particle effect.
----@param position Vector The start position of the effect.
----@param angles Angle The orientation of the effect.
+---@param position Vector The start position of Control Point 0 for the particle system.
+---@param angles Angle The orientation of Control Point 0 for the particle system.
+---
+--- You must provide the entity argument for the angles to take effect.
 ---@param parent? Entity If set, the particle will be parented to the entity.
 function _G.ParticleEffect(particleName, position, angles, parent) end
 

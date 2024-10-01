@@ -182,6 +182,17 @@ function surface.GetDrawColor() end
 ---@return number # The texture ID, for use with surface.SetTexture.
 function surface.GetHUDTexture(name) end
 
+---[CLIENT] Retrieves the position and [ScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) information for the [Panel](https://wiki.facepunch.com/gmod/Panel) that is currently being drawn.
+---
+--- When using the [surface](https://wiki.facepunch.com/gmod/surface) library (and, by extension, the [draw](https://wiki.facepunch.com/gmod/draw) library) inside of the [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) function, the origin (The on-screen position of `(0,0)`) is automatically shifted to the top-left corner of the panel to make it easier to draw the panel's contents.  Additionally, [render.SetScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) is used to clip (or "mask") all drawn content to within the boundaries of the panel.  This function returns the information used by the [surface](https://wiki.facepunch.com/gmod/surface) library about the current panel's origin and [ScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState)
+---@return table #
+--- 			A table containing the position and render.SetScissorRect boundaries for the Panel currently being drawn.
+---
+--- 			For the table's format and available options see the Structures/PanelPaintState page.
+function surface.GetPanelPaintState() end
+
 ---[CLIENT AND MENU] Returns the current color affecting text draw operations.
 ---
 --- The returned color will not have the color metatable.

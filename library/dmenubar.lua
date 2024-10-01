@@ -1,6 +1,6 @@
 ---@meta
 
---- A simple Derma MenuBar
+--- A simple menu bar.
 ---@class DMenuBar : DPanel
 local DMenuBar = {}
 

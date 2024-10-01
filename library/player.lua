@@ -460,7 +460,9 @@ function Player:DrawWorldModel(draw) end
 ---@param velocity? Vector If set and previous argument is unset, launches the weapon with given velocity. If the velocity is higher than 400, it will be clamped to 400.
 function Player:DropNamedWeapon(class, target, velocity) end
 
----[SERVER] Drops any object the player is currently holding with either gravitygun or +Use (E key)
+---[SERVER] Drops any object the player is currently holding with either Gravity Gun, Physics Gun or `+use` (E key)
+---
+--- See also [Entity:ForcePlayerDrop](https://wiki.facepunch.com/gmod/Entity:ForcePlayerDrop).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:DropObject)
 function Player:DropObject() end
@@ -1056,7 +1058,7 @@ function Player:GetWalkSpeed() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeapon)
 ---@param className string Class name of weapon
----@return Weapon # The weapon for the specified class.
+---@return Weapon # The weapon for the specified class, or NULL ENTITY if the player does not have this weapon.
 function Player:GetWeapon(className) end
 
 ---[SHARED] Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
@@ -1332,7 +1334,7 @@ function Player:KillSilent() end
 ---
 --- Lag compensation only works for players and entities that have been enabled with [Entity:SetLagCompensated](https://wiki.facepunch.com/gmod/Entity:SetLagCompensated)
 ---
---- Despite being defined shared, it can only be used server-side in a [Predicted Hook](https://wiki.facepunch.com/gmod/~search:%3Cpredicted%3EYes).
+--- Despite being defined shared, it can only be used server-side in a [Predicted Hook](https://wiki.facepunch.com/gmod/~search?q=%3Cpredicted%3EYes).
 ---
 --- **WARNING**: This function NEEDS to be disabled after you're done with it or it will break the movement of the entities affected!
 ---
@@ -1417,10 +1419,10 @@ function Player:Nick() end
 ---@return string # The 64bit SteamID
 function Player:OwnerSteamID64() end
 
----[SHARED] Returns the packet loss of the client. It is not networked so it only returns 0 when run clientside.
+---[SHARED] Returns the percentage of packets lost by the client. It is not networked so it only returns 0 when run clientside.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:PacketLoss)
----@return number # Packets lost
+---@return number # Percentage of packets lost (0-100)
 function Player:PacketLoss() end
 
 ---[SHARED] Unfreezes the props player is looking at. This is essentially the same as pressing reload with the physics gun, including double press for unfreeze all.
@@ -1615,6 +1617,9 @@ function Player:SetAllowWeaponsInVehicle(allow) end
 function Player:SetAmmo(ammoCount, ammoType) end
 
 ---[SERVER] Sets the player armor to the argument.
+--- 	Server
+---
+--- 		The amount that the player armor is going to be set to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetArmor)
 ---@param Amount number The amount that the player armor is going to be set to.
@@ -2282,6 +2287,8 @@ function Player:UserID() end
 function PLAYER:ViewModelChanged(viewmodel, old, new) end
 
 ---[SHARED] Simulates a push on the client's screen. This **adds** view punch velocity, and does not touch the current view punch angle, for which you can use [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles).
+---
+--- **NOTE**: Despite being defined shared, it only functions when called server-side.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:ViewPunch)
 ---@param PunchAngle Angle The angle in which to push the player's screen.

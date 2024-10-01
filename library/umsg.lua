@@ -74,7 +74,7 @@ function umsg.Short(short) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/umsg.Start)
 ---@param name string The name of the message to be sent.
----@param filter Player If passed a player object, it will only be sent to the player, if passed a CRecipientFilter of players, it will be sent to all specified players, if passed nil (or another invalid value), the message will be sent to all players.
+---@param filter? Player If passed a player object, it will only be sent to the player, if passed a CRecipientFilter of players, it will be sent to all specified players, if passed `nil` (or another invalid value), the message will be sent to all players.
 ---@deprecated You should be using net instead
 function umsg.Start(name, filter) end
 

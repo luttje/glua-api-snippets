@@ -52,6 +52,8 @@ function weapons.OnLoaded() end
 --- Sub-tables provided in the first argument will not carry over their metatable, and will receive a BaseClass key if the table was merged with the base's. Userdata references, which includes Vectors, Angles, Entities, etc. will not be copied.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/weapons.Register)
----@param swep_table table The SWEP table
+---@param ENT table
+--- 			The SWEP table to register.
+--- 			For the table's format and available options see the Structures/SWEP page.
 ---@param classname string Classname to assign to that swep
-function weapons.Register(swep_table, classname) end
+function weapons.Register(ENT, classname) end

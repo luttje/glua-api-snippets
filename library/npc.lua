@@ -886,6 +886,12 @@ function NPC:SetHullType(hullType) end
 ---@param number number The ideal activity to set. Enums/ACT.
 function NPC:SetIdealActivity(number) end
 
+---[SERVER] Sets the ideal sequence the NPC currently wants to achieve. This is most useful for custom SNPCs.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetIdealSequence)
+---@param sequenceId number The ideal sequence to set. Entity:LookupSequence.
+function NPC:SetIdealSequence(sequenceId) end
+
 ---[SERVER] Sets the ideal yaw angle (left-right rotation) for the NPC. Does not actually force the NPC to start turning in that direction. See [NPC:UpdateYaw](https://wiki.facepunch.com/gmod/NPC:UpdateYaw), [NPC:GetIdealYaw](https://wiki.facepunch.com/gmod/NPC:GetIdealYaw) and [NPC:SetIdealYawAndUpdate](https://wiki.facepunch.com/gmod/NPC:SetIdealYawAndUpdate).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetIdealYaw)
@@ -901,10 +907,10 @@ function NPC:SetIdealYaw(angle) end
 --- * `-2` - Keep the previous yaw speed
 function NPC:SetIdealYawAndUpdate(angle, speed) end
 
----[SERVER] Sets conditions to ignore for the this NPC.
+---[SERVER] Sets conditions to ignore, which would normally interrupt an Engine-based schedule. Specified conditions will still be set, will call [ENTITY:OnCondition](https://wiki.facepunch.com/gmod/ENTITY:OnCondition) and can be returned by [NPC:HasCondition](https://wiki.facepunch.com/gmod/NPC:HasCondition), but they will no longer interrupt the Engine schedule.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetIgnoreConditions)
----@param conditions table Conditions to ignore, see Enums/COND.
+---@param conditions table Conditions to ignore, see Enums/COND. The table must be sequential, numerical and values must correspond to condition enums.
 ---@param size number Number of conditions to include in the ignored conditions table. Set this to the size of ignored conditions table to ignore all specified conditions.
 function NPC:SetIgnoreConditions(conditions, size) end
 

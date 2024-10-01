@@ -201,7 +201,7 @@ function Panel:ChildCount() end
 ---@return number # The children size height.
 function Panel:ChildrenSize() end
 
----[CLIENT AND MENU] Removes all of the panel's children.
+---[CLIENT AND MENU] Removes all of the panel's children. Many panels also override this method to gracefully clear their contents without breaking themselves.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:Clear)
 function Panel:Clear() end
@@ -1634,13 +1634,15 @@ function PANEL:OnVScroll(offset) end
 --- * `chrome://credits/`
 function Panel:OpenURL(URL) end
 
----[CLIENT] Called whenever the panel should be drawn.
+---[CLIENT AND MENU] Called whenever the panel should be drawn.
 ---
---- You can create panels with a customized appearance by overriding their Paint() function, which will prevent the default appearance from being drawn.
+--- This hook will not run if the panel is completely off the screen, and will still run if any parts of the panel are still on screen.
 ---
---- **NOTE**: Render operations from the [surface](https://wiki.facepunch.com/gmod/surface) (and consequentially the [draw](https://wiki.facepunch.com/gmod/draw)) are always offset by the global position of this panel, as seen in the example below
+--- You can create panels with a customized appearance by overriding their `Paint()` function, which will prevent the default appearance from being drawn.
 ---
---- **NOTE**: This hook will not run if the panel is completely off the screen. The hook will still run however if any parts of the panel are still on screen.
+--- See also [PANEL:PaintOver](https://wiki.facepunch.com/gmod/PANEL:PaintOver).
+---
+--- **NOTE**: Render operations from the [surface](https://wiki.facepunch.com/gmod/surface) library (and consequentially the [draw](https://wiki.facepunch.com/gmod/draw) library) are always offset by the global position of this panel, as seen in the example below
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:Paint)
 ---@param width number The panel's width.
@@ -1662,7 +1664,9 @@ function Panel:PaintAt(posX, posY) end
 ---@param unclamp? boolean  If set, overrides panels' clipping so that it can render fully when its size is larger than the game's resolution.
 function Panel:PaintManual(unclamp) end
 
----[CLIENT] Called whenever the panel and all its children were drawn, return true to override the default drawing.
+---[CLIENT AND MENU] Called whenever the panel and all its children were drawn, return true to override the default drawing.
+---
+--- This is useful to draw content over the panel without having to overwrite it's [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) hook, for example as an indicator that a panel is selected in [PropSelect](https://wiki.facepunch.com/gmod/PropSelect)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PANEL:PaintOver)
 ---@param width number The panels current width.
@@ -1810,12 +1814,14 @@ function Panel:RequestFocus() end
 ---@param newSustain number The new sustain value of each faded text segment. Set to -1 to keep the old sustain value.
 function Panel:ResetAllFades(hold, expiredOnly, newSustain) end
 
----[CLIENT AND MENU] Runs/Executes a string as JavaScript code in a panel.
---- **NOTE**: This function does **NOT** evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context).Because a return value is nil/no value (a.k.a. void).If you wish to pass/return values from JS to Lua, you may want to use [DHTML:AddFunction](https://wiki.facepunch.com/gmod/DHTML:AddFunction) function to accomplish that job.
+---[CLIENT AND MENU] Executes a string as JavaScript code on a web document panel.
+---
+--- **NOTE**: This function does **NOT** allow you to pass variables from JavaScript (JS) to Lua context.
+--- If you wish to pass/return values from JS to Lua, you may want to use [DHTML:AddFunction](https://wiki.facepunch.com/gmod/DHTML:AddFunction) function to accomplish that job.
 ---
 --- **NOTE**: The Awesomium web renderer automatically delays the code execution if the document is not ready, but the Chromium web renderer does not!
 ---
---- This means that with Chromium, you cannot JavaScript run code immediatly after calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [DHTML:OpenURL](https://wiki.facepunch.com/gmod/DHTML:OpenURL). You should wait for the events [PANEL:OnDocumentReady](https://wiki.facepunch.com/gmod/PANEL:OnDocumentReady) or [PANEL:OnFinishLoadingDocument](https://wiki.facepunch.com/gmod/PANEL:OnFinishLoadingDocument) to be triggered before proceeding, otherwise you may manipulate an empty / incomplete document.
+--- This means that with Chromium, you cannot JavaScript run code immediatly after calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [Panel:OpenURL](https://wiki.facepunch.com/gmod/Panel:OpenURL). You should wait for the events [PANEL:OnDocumentReady](https://wiki.facepunch.com/gmod/PANEL:OnDocumentReady) or [PANEL:OnFinishLoadingDocument](https://wiki.facepunch.com/gmod/PANEL:OnFinishLoadingDocument) to be triggered before proceeding, otherwise you may manipulate an empty / incomplete document.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:RunJavascript)
 ---@param js string Specify JavaScript code to be executed.
@@ -2371,7 +2377,7 @@ function Panel:SetToFullHeight() end
 ---[CLIENT AND MENU] Sets the tooltip to be displayed when a player hovers over the panel object with their cursor.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetTooltip)
----@param str string The text to be displayed in the tooltip. Set false to disable it.
+---@param str? string The text to be displayed in the tooltip. Set `nil` to disable it.
 function Panel:SetTooltip(str) end
 
 ---[CLIENT AND MENU] Sets the tooltip delay. (time between hovering over the panel, and the tooltip showing up)

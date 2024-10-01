@@ -68,7 +68,7 @@ function player_manager.OnPlayerSpawn(ply, transiton) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.RegisterClass)
 ---@param name string Class name
----@param table table Class metatable
+---@param table table Class metatable, see Structures/PLAYER
 ---@param base? string Base class name
 function player_manager.RegisterClass(name, table, base) end
 

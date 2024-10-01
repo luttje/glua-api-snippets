@@ -55,9 +55,10 @@ function file.CreateDir(name) end
 function file.Delete(name, path) end
 
 ---[SHARED AND MENU] Returns a boolean of whether the file or directory exists or not.
+--- 		If you want to check for a directory, [file.IsDir](https://wiki.facepunch.com/gmod/file.IsDir) will be faster since it won't check for files.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Exists)
----@param name string The file or directory's name.
+---@param name string The file or directory's name. ( You must include the file extension for files, for example "data.txt" )
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@return boolean # Returns `true` if the file exists and `false` if it does not.
 function file.Exists(name, gamePath) end

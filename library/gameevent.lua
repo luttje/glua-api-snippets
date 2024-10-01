@@ -381,6 +381,30 @@ hltv_rank_entity.rank = nil
 hltv_rank_entity.target = nil
 
 ---
+--- 		Called when the HLTVServer stats are updated.
+--- 		They should be updated every 8 seconds.
+--- 		All of these stats are global and shared by the master server.
+---
+---@class hltv_status
+local hltv_status = {}
+
+---The address of the master.
+---@type string
+hltv_status.master = nil
+
+---The number of total clients.
+---@type number
+hltv_status.clients = nil
+
+---The number of total slots.
+---@type number
+hltv_status.slots = nil
+
+---The number of total proxies.
+---@type number
+hltv_status.proxies = nil
+
+---
 --- 			Called when the SourceTV client is spawned
 ---
 ---@class hltv_title
@@ -471,7 +495,8 @@ local player_connect = {}
 ---@type number
 player_connect.bot = nil
 
----The Player:SteamID the player has. Will be `BOT` for bots and `STEAM_0:0:0` in single-player.
+---The Player:SteamID the player has.
+--- 			Will be `BOT` for bots, `STEAM_0:0:0` or `STEAM_ID_PENDING` in single-player, and `STEAM_ID_LAN` when using the `-multirun` client option.
 ---@type string
 player_connect.networkid = nil
 
@@ -793,3 +818,11 @@ local show_freezepanel = {}
 ---The Index of the Entity that is being spectated or `0`
 ---@type number
 show_freezepanel.killer = nil
+
+---
+--- 		Called when the Achievement Manager received the steam user stat data.
+--- 		As soon as this is called, all achievement data should be valid
+--- 		Trying to access any achievement data before this may return in inaccurate data.
+---
+---@class user_data_downloaded
+local user_data_downloaded = {}

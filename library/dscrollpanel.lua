@@ -19,11 +19,6 @@ local DScrollPanel = {}
 ---@param pnl Panel The panel to add.
 function DScrollPanel:AddItem(pnl) end
 
----[CLIENT AND MENU] Clears the `DScrollPanel`'s canvas, removing all added items.
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:Clear)
-function DScrollPanel:Clear() end
-
 ---[CLIENT AND MENU] Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas)

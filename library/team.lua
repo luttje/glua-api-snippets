@@ -116,7 +116,7 @@ function team.SetScore(index, score) end
 ---@param classes any A spawnpoint classname or table of spawnpoint classnames
 function team.SetSpawnPoint(index, classes) end
 
----[SHARED] Creates a new team.
+---[SHARED] Creates a new team. See [GM:CreateTeams](https://wiki.facepunch.com/gmod/GM:CreateTeams) for the hook to call this in.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/team.SetUp)
 ---@param teamIndex number The team index.

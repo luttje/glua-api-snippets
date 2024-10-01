@@ -226,7 +226,7 @@ function util.GetActivityNameByID(id) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.GetAnimEventIDByName)
 ---@param string string The name of an model animation event, as defined in the model's `.qc` at compile time.
 ---@return number # The ID of an animation event, typically for usage with ENTITY:HandleAnimEvent.
-function util.GetAnimEventNameByID(string) end
+function util.GetAnimEventIDByName(string) end
 
 ---[SHARED] Returns a name for given automatically generated numerical animation event ID. This is useful for models that define custom animation events.
 ---
@@ -396,11 +396,11 @@ function util.IntersectRayWithPlane(rayOrigin, rayDirection, planePosition, plan
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.IntersectRayWithSphere)
 ---@param rayOrigin Vector Origin/start position of the ray.
 ---@param rayDelta Vector The end position of the ray relative to the start position. Equivalent of `direction * distance`.
----@param shperePosition Vector Any position of the sphere.
+---@param spherePosition Vector Any position of the sphere.
 ---@param sphereRadius number The radius of the sphere.
 ---@return number # The first intersection position along the ray, or `nil` if there is no intersection.
 ---@return number # The second intersection position along the ray, or `nil` if there is no intersection.
-function util.IntersectRayWithSphere(rayOrigin, rayDelta, shperePosition, sphereRadius) end
+function util.IntersectRayWithSphere(rayOrigin, rayDelta, spherePosition, sphereRadius) end
 
 ---[SHARED AND MENU] Returns whether a binary module is installed and is resolvable by [Global.require](https://wiki.facepunch.com/gmod/Global.require).
 ---
@@ -564,6 +564,9 @@ function util.IsValidProp(modelName) end
 function util.IsValidRagdoll(ragdollName) end
 
 ---[SHARED AND MENU] Converts a JSON string to a Lua table.
+---
+--- See [util.TableToJSON](https://wiki.facepunch.com/gmod/util.TableToJSON) for the opposite function.
+---
 --- This will attempt to cast the string keys `"inf"`, `"nan"`, `"true"`, and `"false"` to their respective Lua values. This completely ignores nulls in arrays.
 --- Colors will not have the color metatable.
 ---
@@ -844,9 +847,11 @@ function util.StringToType(str, typename) end
 
 ---[SHARED AND MENU] Converts a table to a JSON string.
 ---
---- **WARNING**: All keys are strings in the JSON format, so all keys will be converted to strings!
+--- See [util.JSONToTable](https://wiki.facepunch.com/gmod/util.JSONToTable) for the opposite function.
 ---
---- All integers will be converted to decimals (5 -> 5.0).
+--- **WARNING**: All keys are strings in the JSON format, so all keys of other types will be converted to strings!
+---
+--- All integers will be output as decimals (5 -> 5.0), since all numbers in Lua are internally floating point values.
 ---
 --- This will produce invalid JSON if the provided table contains nan or inf values.
 ---
@@ -868,16 +873,16 @@ function util.TableToJSON(table, prettyPrint) end
 ---@return string # The output.
 function util.TableToKeyValues(table, rootKey) end
 
----[SHARED AND MENU] Creates a timer object.
+---[SHARED AND MENU] Creates a timer object. The returned timer will be already started with given duration.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.Timer)
----@param startdelay? number How long you want the timer to be.
+---@param duration? number How long you want the timer to be. `Elapsed()` will return true only after this much time has passed.
 ---@return table # A timer object. It has the following methods:
---- * `Reset()` - Resets the timer to nothing
---- * `Start( time )` - Starts the timer, call with end time
---- * `Started()` - Returns true if the timer has been started
---- * `Elapsed()` - Returns true if the time has elapsed
-function util.Timer(startdelay) end
+--- * `Reset()` - Resets and stops the timer.
+--- * `Start( duration )` - (Re)starts the timer with given duration
+--- * `Started()` - Returns `true` if the timer has been started. It will continue to return true even after the duration has passed.
+--- * `Elapsed()` - Returns `true` if the timer duration has elapsed since its creation or the call to `Start()`
+function util.Timer(duration) end
 
 ---[SHARED AND MENU] Returns the time since this function has been last called
 ---
@@ -912,6 +917,8 @@ function util.TraceEntity(tracedata, ent) end
 function util.TraceEntityHull(tracedata, ent) end
 
 ---[SHARED] Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
+---
+--- This trace type cannot hit hitboxes.
 ---
 --- **NOTE**: This function may not always give desired results clientside due to certain physics mechanisms not existing on the client. Use it serverside for accurate results.
 ---

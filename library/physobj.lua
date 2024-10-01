@@ -58,7 +58,9 @@ function PhysObj:ApplyForceOffset(impulse, position) end
 --- 				The unit conversion between meters and source units in this case is `1 meter ≈ 39.37 source units (100/2.54 exactly)`
 function PhysObj:ApplyTorqueCenter(angularImpulse) end
 
----[SHARED] Calculates the linear and angular impulse on the object's center of mass for an offset impulse.The outputs can be used with [PhysObj:ApplyForceCenter](https://wiki.facepunch.com/gmod/PhysObj:ApplyForceCenter) and [PhysObj:ApplyTorqueCenter](https://wiki.facepunch.com/gmod/PhysObj:ApplyTorqueCenter), respectively. **Be careful to convert the angular impulse to world frame ([PhysObj:LocalToWorldVector](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)) if you are going to use it with ApplyTorqueCenter.**
+---[SHARED] Calculates the linear and angular impulse on the object's center of mass for an offset impulse.The outputs can be used with [PhysObj:ApplyForceCenter](https://wiki.facepunch.com/gmod/PhysObj:ApplyForceCenter) and [PhysObj:ApplyTorqueCenter](https://wiki.facepunch.com/gmod/PhysObj:ApplyTorqueCenter), respectively.
+---
+--- **Be careful to convert the angular impulse to world frame ([PhysObj:LocalToWorldVector](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)) if you are going to use it with ApplyTorqueCenter.**
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:CalculateForceOffset)
 ---@param impulse Vector The impulse acting on the object in `kg*source_unit/s`. (World frame)
@@ -84,7 +86,7 @@ function PhysObj:CalculateVelocityOffset(impulse, position) end
 ---@param flags number Bitflag, see Enums/FVPHYSICS.
 function PhysObj:ClearGameFlag(flags) end
 
----[SHARED] Allows you to move a PhysObj to a point and angle in 3D space.
+---[SHARED] Allows you to move a PhysObj to a point and angle in 3D space. Works with any PhysObj, not just physics shadows.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:ComputeShadowControl)
 ---@param shadowparams table The parameters for the shadow. See Structures/ShadowControlParams.
@@ -120,11 +122,11 @@ function PhysObj:EnableGravity(enable) end
 ---@param enable boolean True to enable, false to disable.
 function PhysObj:EnableMotion(enable) end
 
----[SHARED] Returns the mins and max of the physics object.
+---[SHARED] Returns the mins and max of the physics object Axis-Aligned Bounding Box.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetAABB)
----@return Vector # Mins
----@return Vector # Maxs
+---@return Vector # The minimum extents of the bounding box.
+---@return Vector # The maximum extents of the bounding box.
 function PhysObj:GetAABB() end
 
 ---[SHARED] Returns the angles of the physics object in degrees.
@@ -360,7 +362,7 @@ function PhysObj:IsPenetrating() end
 ---[SHARED] Returns if the physics object is valid/not NULL.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:IsValid)
----@return boolean # isValid
+---@return boolean # Whether the physics object is valid or not.
 function PhysObj:IsValid() end
 
 ---[SHARED] Mapping a vector in local frame of the physics object to world frame.

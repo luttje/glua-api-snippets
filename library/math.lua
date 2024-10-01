@@ -109,14 +109,21 @@ function math.atan2(y, x) end
 ---@return number # Base 10 number.
 function math.BinToInt(string) end
 
----[SHARED AND MENU] Basic code for Bezier-Spline algorithm.
+---[SHARED AND MENU] Basic code for Bézier-Spline algorithm.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.BSplinePoint)
----@param tDiff number From 0 to 1, where alongside the spline the point will be.
----@param tPoints table A table of Vectors. The amount cannot be less than 4.
----@param tMax number Just leave this at 1.
----@return Vector # Point on Bezier curve, related to tDiff.
-function math.BSplinePoint(tDiff, tPoints, tMax) end
+---@param fraction number
+--- 			A number in the range `[0,fractionMax]` which controls which location along the spline's length should be evaluated as the return value.
+---@param points table
+--- 			A table of Vector that form the spline.
+---
+--- 			There must be **at least** 4 points.
+---@param fractionMax number
+--- 			The maximum value of the `fraction` argument.
+---
+--- 			The most common value for this is `1`.
+---@return Vector # The point on the Bézier curve that corresponds to the given `fraction` argument.
+function math.BSplinePoint(fraction, points, fractionMax) end
 
 ---[SHARED AND MENU] **INTERNAL**: Use [math.BSplinePoint](https://wiki.facepunch.com/gmod/math.BSplinePoint) instead.
 ---
@@ -444,9 +451,9 @@ function math.ease.OutSine(fraction) end
 ---[SHARED AND MENU] Calculates the progress of a value fraction, taking in to account given easing fractions
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.EaseInOut)
----@param progress number Fraction of the progress to ease, from 0 to 1
----@param easeIn number Fraction of how much easing to begin with
----@param easeOut number Fraction of how much easing to end with
+---@param progress number Fraction of the progress to ease, from 0 to 1.
+---@param easeIn? number Fraction of how much easing to begin with, from 0 to 1.
+---@param easeOut? number Fraction of how much easing to end with, from 0 to 1.
 ---@return number # "Eased" Value, from 0 to 1
 function math.EaseInOut(progress, easeIn, easeOut) end
 
@@ -579,7 +586,7 @@ function math.pow(x, y) end
 --- See [math.CubicBezier](https://wiki.facepunch.com/gmod/math.CubicBezier) for a function which works with 4 control points.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/math.QuadraticBezier)
----@param frac number The fraction for finding the result. This number is clamped between 0 and 1.
+---@param frac number The fraction for finding the result.
 ---@param p0 Vector First control point
 ---@param p1 Vector Tangent
 ---@param p2 Vector Second control point

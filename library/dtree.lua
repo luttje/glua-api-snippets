@@ -49,7 +49,7 @@ function DTree:GetLineHeight() end
 ---[CLIENT AND MENU] Returns the currently selected node.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTree:GetSelectedItem)
----@return Panel # Curently selected node.
+---@return Panel # Curently selected DTree_Node.
 function DTree:GetSelectedItem() end
 
 ---[CLIENT AND MENU] Returns whether or not the [Silkicons](https://wiki.facepunch.com/gmod/Silkicons) next to each node of the DTree will be displayed.

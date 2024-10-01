@@ -691,7 +691,9 @@ function Entity:FireBullets(bulletInfo, suppressHostEvents) end
 ---@param boneid number The bone to follow
 function Entity:FollowBone(parent, boneid) end
 
----[SHARED] Forces the Entity to be dropped, when it is being held by a player's gravitygun or physgun.
+---[SHARED] Forces the entity to be dropped, if it is being held by a player's Gravity Gun, Physics Gun or `+use` pickup.
+---
+--- See also [Player:DropObject](https://wiki.facepunch.com/gmod/Player:DropObject).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ForcePlayerDrop)
 function Entity:ForcePlayerDrop() end
@@ -1439,7 +1441,7 @@ function Entity:GetManipulateBoneAngles(boneID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneJiggle)
 ---@param boneID number The bone ID
----@return number # Returns a value ranging from 0 to 255 depending on the value set with Entity:ManipulateBoneJiggle.
+---@return number # The jiggle bone type, as set by Entity:ManipulateBoneJiggle.
 function Entity:GetManipulateBoneJiggle(boneID) end
 
 ---[SHARED] Gets the entity's position manipulation of the given bone. This is relative to the default position, so it is zero when unmodified.
@@ -2104,7 +2106,7 @@ function Entity:GetPredictable() end
 
 ---[SERVER] Called to override the preferred carry angles of this object.
 ---
---- **NOTE**: This callback is only called for `anim` type entities.
+--- **NOTE**: This callback is only called for `anim` and `ai` type entities. For rest use [GM:GetPreferredCarryAngles](https://wiki.facepunch.com/gmod/GM:GetPreferredCarryAngles).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:GetPreferredCarryAngles)
 ---@param ply Player The player who is holding the object.
@@ -2550,6 +2552,7 @@ function ENTITY:GravGunPunt(ply) end
 ---@param cycle number The frame this event occurred as a number between 0 and 1.
 ---@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/shared/eventlist.h#L14-L23).
 ---@param options string Name or options of this event.
+---@return boolean # Return true to mark the event as handled
 function ENTITY:HandleAnimEvent(event, eventTime, cycle, type, options) end
 
 ---[SHARED] Returns whether or not the bone manipulation functions have ever been called on given  entity.
@@ -2977,10 +2980,11 @@ function Entity:ManipulateBoneAngles(boneID, ang, networking) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneJiggle)
 ---@param boneID number Index of the bone you want to manipulate.
----@param enabled number
---- * `0` = No Jiggle
---- * `1` = Jiggle
-function Entity:ManipulateBoneJiggle(boneID, enabled) end
+---@param type number The jiggle bone type. There are currently the following options:
+--- * `0` = No jiggle override, use model default
+--- * `1` = Force jiggle, with hardcoded settings
+--- * `2` = Force disable jiggle bone (currently also broken, but will be fixed in the next update)
+function Entity:ManipulateBoneJiggle(boneID, type) end
 
 ---[SHARED] Sets custom bone offsets.
 ---
@@ -3113,14 +3117,18 @@ function Entity:NetworkVarNotify(name, callback) end
 ---@param sched table The schedule to start next task in.
 function ENTITY:NextTask(sched) end
 
----[SHARED] In the case of a scripted entity, this will cause the next [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) event to be run at the given time.
+---[SHARED] Controls when, relative to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime), the [Entity](https://wiki.facepunch.com/gmod/Entity) will next run its Think function.
 ---
---- Does not work clientside! Use [Entity:SetNextClientThink](https://wiki.facepunch.com/gmod/Entity:SetNextClientThink) instead.
+--- For Scripted Entities, this is the [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) function.
+--- For engine Entities, this is an internal function whose behavior will depend on the specific Entity type.
+---
+--- For a Client-side equivalent, see [Entity:SetNextClientThink](https://wiki.facepunch.com/gmod/Entity:SetNextClientThink).
 ---
 --- This does not work with SWEPs or Nextbots.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:NextThink)
----@param timestamp number The relative to Global.CurTime timestamp, at which the next think should occur.
+---@param timestamp number
+--- 			The timestamp, relative to Global.CurTime, when the next think should occur.
 function Entity:NextThink(timestamp) end
 
 ---[SHARED] Returns the center of an entity's bounding box in local space.
@@ -3289,9 +3297,11 @@ function ENTITY:OnTaskFailed(failCode, failReason) end
 ---@return boolean # Return `true` to disable the default movement code.
 function ENTITY:OverrideMove(interval) end
 
----[SERVER] Called to completely override NPC movement facing.
+---[SERVER] Called to completely override the direction NPC will be facing during navigation.
 ---
 --- **NOTE**: This hook only exists for `ai` type SENTs.
+---
+--- **NOTE**: This hook is called by the default movement hook. Returning `true` inside [ENTITY:OverrideMove](https://wiki.facepunch.com/gmod/ENTITY:OverrideMove) will prevent engine from calling this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:OverrideMoveFacing)
 ---@param interval number Time interval for the movement, in seconds. Usually time since last movement.
@@ -3773,7 +3783,7 @@ function ENTITY:RunTask(task) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:ScheduleFinished)
 function ENTITY:ScheduleFinished() end
 
----[SERVER] Set the schedule we should be playing right now. Allows the NPC to start either a Lua schedule or an engine schedule. Despite sharing the same name as `CAI_BaseNPC::SelectSchedule()`, this isn't hooked to that function; this is called by Lua's [ENTITY:RunAI](https://wiki.facepunch.com/gmod/ENTITY:RunAI), doesn't return an engine function, returning an engine function doesn't help and doesn't make the NPC start an engine schedule. To alter initial engine schedule, it is recommended to use [ENT:TranslateSchedule](https://wiki.facepunch.com/gmod/ENT:TranslateSchedule).
+---[SERVER] Set the schedule we should be playing right now. Allows the NPC to start either a Lua schedule or an engine schedule. Despite sharing the same name as `CAI_BaseNPC::SelectSchedule()`, this isn't hooked to that function; this is called by Lua's [ENTITY:RunAI](https://wiki.facepunch.com/gmod/ENTITY:RunAI), doesn't return an engine function, returning an engine function doesn't help and doesn't make the NPC start an engine schedule. To alter initial engine schedule, it is recommended to use [ENTITY:TranslateSchedule](https://wiki.facepunch.com/gmod/ENTITY:TranslateSchedule).
 --- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:SelectSchedule)
@@ -3908,6 +3918,8 @@ function Entity:SetBoneController(boneControllerID, value) end
 function Entity:SetBoneMatrix(boneid, matrix) end
 
 ---[CLIENT] Sets the bone position and angles.
+---
+--- 	For changes to happen, this must be called in a [rendering](https://wiki.facepunch.com/gmod/Render_Order) hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetBonePosition)
 ---@param bone number The bone ID to manipulate
@@ -4155,7 +4167,7 @@ function Entity:SetIK(useIK) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetKeyValue)
 ---@param key string The internal key name
----@param value string The value to set
+---@param value string|number The value to set
 function Entity:SetKeyValue(key, value) end
 
 ---[SERVER] This allows the entity to be lag compensated during [Player:LagCompensation](https://wiki.facepunch.com/gmod/Player:LagCompensation).

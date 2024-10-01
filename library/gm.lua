@@ -922,7 +922,7 @@ function GM:OnCrazyPhysics(ent, physobj) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnDamagedByExplosion)
 ---@param ply Player Player who has been hurt
----@param dmginfo CTakeDamageInfo Damage info from explsion
+---@param dmginfo CTakeDamageInfo Damage info from explosion
 function GM:OnDamagedByExplosion(ply, dmginfo) end
 
 ---[SHARED] Called as soon as the entity is created. Very little of the entity's properties will be initialized at this stage. (keyvalues, classname, flags, anything), especially on the serverside.
@@ -968,7 +968,7 @@ function GM:OnGamemodeLoaded() end
 ---@param realm string Where the Lua error took place, "client", or "server"
 ---@param stack table The Lua error stack trace
 ---@param name string Title of the addon that is creating the Lua errors.
----@param id number Steam Workshop ID of the addon creating Lua errors, if it is an addon.
+---@param id string Steam Workshop ID of the addon creating Lua errors, if it is an addon.
 function GM:OnLuaError(error, realm, stack, name, id) end
 
 ---[MENU] Called when a Addon Conflict occurs, only works in the Menu realm.
@@ -1158,9 +1158,9 @@ function GM:OnViewModelChanged(viewmodel, oldModel, newModel) end
 --- See [GM:GravGunOnDropped](https://wiki.facepunch.com/gmod/GM:GravGunOnDropped) for the Gravity Gun drop variant.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PhysgunDrop)
----@param ply Player The player who dropped an entitiy
----@param ent Entity The dropped entity
-function GM:PhysgunDrop(ply, ent) end
+---@param player Player The player who dropped an entity
+---@param entity Entity The dropped entity
+function GM:PhysgunDrop(player, entity) end
 
 ---[SHARED] Called to determine if a player should be able to pick up an entity with the Physics Gun.
 ---
@@ -1187,6 +1187,7 @@ function GM:PlayerAmmoChanged(ply, ammoID, oldCount, newCount) end
 ---[SERVER] Called after the player is authenticated by Steam. This hook will also be called in singleplayer. See also [GM:NetworkIDValidated](https://wiki.facepunch.com/gmod/GM:NetworkIDValidated)
 ---
 --- [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) returns 0 in this hook.
+--- Calling [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) before [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed) causes [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed) to be triggered prematurely. As a result, [Player:IsFullyAuthenticated](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated) returns false when checked within this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerAuthed)
 ---@param ply Player The player
@@ -1361,7 +1362,6 @@ function GM:PlayerDeathSound(ply) end
 function GM:PlayerDeathThink(ply) end
 
 ---[SERVER] Called when a player leaves the server. See the [player_disconnect gameevent](https://wiki.facepunch.com/gmod/gameevent/player_disconnect) for a shared version of this hook.
---- [Player:SteamID](https://wiki.facepunch.com/gmod/Player:SteamID), [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), and the like can return nil here.
 ---
 --- This is not called in single-player or listen servers for the host.
 ---
@@ -1422,6 +1422,8 @@ function GM:PlayerEnteredVehicle(ply, veh, role) end
 function GM:PlayerFireAnimationEvent(ply, pos, ang, event, name) end
 
 ---[SHARED] Called whenever a player steps. Return true to mute the normal sound.
+---
+--- See [GM:PlayerStepSoundTime](https://wiki.facepunch.com/gmod/GM:PlayerStepSoundTime) for a related hook about footstep frequency.
 --- 		**NOTE**: This hook is called on all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerFootstep)
@@ -1682,6 +1684,8 @@ function GM:PlayerStartTaunt(ply, act, length) end
 function GM:PlayerStartVoice(ply) end
 
 ---[SHARED] Allows you to override the time between footsteps.
+---
+--- See [GM:PlayerFootstep](https://wiki.facepunch.com/gmod/GM:PlayerFootstep) for a related hook about footstep sounds themselves.
 --- 		**NOTE**: This hook is called on all clients.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerStepSoundTime)
@@ -2193,16 +2197,16 @@ function GM:ShouldDrawLocalPlayer(ply) end
 ---@param ply Player Player who executed the command
 function GM:ShowHelp(ply) end
 
----[SHARED] Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
+---[SERVER] Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ShowSpare1)
----@param ply Player Player who executed the command (or `nil` client-side).
+---@param ply Player Player who executed the command.
 function GM:ShowSpare1(ply) end
 
----[SHARED] Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
+---[SERVER] Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:ShowSpare2)
----@param ply Player Player who executed the command (or `nil` client-side).
+---@param ply Player Player who executed the command.
 function GM:ShowSpare2(ply) end
 
 ---[SERVER] Called when a player executes `gm_showteam` console command. ( Default bind is F2 )

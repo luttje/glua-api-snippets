@@ -104,7 +104,7 @@ function net.ReadDouble() end
 --- **WARNING**: You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadEntity)
----@return Entity # The entity, or `Entity(0)` if no entity could be read.
+---@return Entity # The entity, or `nil` if no entity could be read.
 function net.ReadEntity() end
 
 ---[SHARED] Reads a floating point number from the received net message.
@@ -156,7 +156,7 @@ function net.ReadNormal() end
 --- **WARNING**: You **must** read information in same order as you write it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.ReadPlayer)
----@return Player # The player, or `Entity(0)` if no entity could be read.
+---@return Player # The player, or `nil` if no entity could be read.
 function net.ReadPlayer() end
 
 ---[SHARED] Reads a [null-terminated string](https://en.wikipedia.org/wiki/Null-terminated_string) from the net stream. The size of the string is 8 bits plus 8 bits for every ASCII character in the string.
@@ -249,11 +249,17 @@ function net.Receive(messageName, callback) end
 ---@param ply Player|CRecipientFilter The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
 function net.Send(ply) end
 
----[SERVER] Sends the current message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all except the specified, or to all except all players in the table.
+---[SERVER] Sends the current message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all except the player or players specified.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendOmit)
----@param ply Player The player(s) to **NOT** send the message to. Can be a table of players.
+---@param ply Player The player to **NOT** send the message to.
 function net.SendOmit(ply) end
+
+---[SERVER] Sends the current message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all except the player or players specified.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.SendOmit)
+---@param plys table A table of players to **NOT** send the message to.
+function net.SendOmit(plys) end
 
 ---[SERVER] Sends current net message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all players that are in the same [Potentially Audible Set (PAS)](https://developer.valvesoftware.com/wiki/PAS) as the position, or simply said, it adds all players that can potentially hear sounds from this position.
 ---

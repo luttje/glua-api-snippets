@@ -164,7 +164,9 @@ function SANDBOX:PersistenceLoad(name) end
 ---@param name string Where to save. By default is convar "sbox_persist".
 function SANDBOX:PersistenceSave(name) end
 
----[SERVER] Called when a player attempts to give themselves a weapon from the Q menu. ( Left mouse clicks on an icon )
+---[SERVER] Called when a player attempts to give themselves a weapon from the Q menu. (Left mouse clicks on an icon)
+---
+--- Not to be confused with [SANDBOX:PlayerSpawnSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnSWEP), which is called when the weapon is spawned as entity on the ground.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerGiveSWEP)
 ---@param ply Player The player who attempted to give themselves a weapon.
@@ -277,7 +279,9 @@ function SANDBOX:PlayerSpawnRagdoll(ply, model) end
 ---@return boolean # Should the player be able to spawn the entity or not.
 function SANDBOX:PlayerSpawnSENT(ply, class) end
 
----[SERVER] Called when a player attempts to spawn a weapon from the Q menu. ( Mouse wheel clicks on an icon )
+---[SERVER] Called when a player attempts to spawn a weapon from the Q menu as an entity on the ground. (Mouse wheel clicks on an icon)
+---
+--- Not to be confused with [SANDBOX:PlayerGiveSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerGiveSWEP), which is called only when the weapon is given to the player directly, if they don't already have it.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnSWEP)
 ---@param ply Player The player who attempted to spawn a weapon.

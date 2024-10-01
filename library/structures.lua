@@ -1419,6 +1419,40 @@ OperatingParams.steeringAngle = nil
 ---@type number
 OperatingParams.wheelsInContact = nil
 
+---
+--- 		This table is returned by [surface.GetPanelPaintState](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState).
+---
+---@class PanelPaintState
+local PanelPaintState = {}
+
+---The X coordinate for the top-left corner of the Panel currently being drawn.
+---@type number
+PanelPaintState.translate_x = nil
+
+---The Y coordinate for the top-left corner of the Panel currently being drawn.
+---@type number
+PanelPaintState.translate_y = nil
+
+---The X coordinate for the left edge of the render.SetScissorRect that surrounds the Panel that is currently being drawn.
+---@type number
+PanelPaintState.scissor_left = nil
+
+---The Y coordinate for the top edge of the render.SetScissorRect that surrounds the Panel that is currently being drawn.
+---@type number
+PanelPaintState.scissor_top = nil
+
+---The X coordinate for the right edge of the render.SetScissorRect that surrounds the Panel that is currently being drawn.
+---@type number
+PanelPaintState.scissor_right = nil
+
+---The Y coordinate for the bottom edge of the render.SetScissorRect that surrounds the Panel that is currently being drawn.
+---@type number
+PanelPaintState.scissor_bottom = nil
+
+---Whether or not the Panel currently being drawn has render.SetScissorRect active.
+---@type boolean
+PanelPaintState.scissor_enabled = nil
+
 --- Structure represents a path segment, returned by [PathFollower:GetCurrentGoal](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal), [PathFollower:FirstSegment](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment) and [PathFollower:LastSegment](https://wiki.facepunch.com/gmod/PathFollower:LastSegment).
 ---@class PathSegment
 local PathSegment = {}
@@ -2075,7 +2109,8 @@ ServerQueryData.Finished = nil
 ---@class ShadowControlParams
 local ShadowControlParams = {}
 
----How long it takes to move to pos and rotate accordingly - only if it could move as fast as it want - damping and max speed/angular will make this invalid (Cannot be 0! Will give errors if you do)
+---How long it takes to move to the set pos and angle. Limited by max speed/damping.
+--- Cannot be 0! Will give errors if you do.
 ---@type number
 ShadowControlParams.secondstoarrive = TICK_INTERVAL * 2
 

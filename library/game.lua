@@ -40,10 +40,12 @@ function game.AddParticles(particleFileName) end
 ---@return table # All ammo types registered via game.AddAmmoType, sorted by its name value.
 function game.BuildAmmoTypes() end
 
----[SHARED] If called serverside it will remove **ALL** entities which were not created by the map (not players or weapons held by players).
---- It won't remove Entities who have the [EFL_KEEP_ON_RECREATE_ENTITIES](https://wiki.facepunch.com/gmod/enums/EFL) Flag set.
+---[SHARED] Removes most entities, and then respawns entities created by the map, as if the map was just loaded.
 ---
---- On the client it will remove decals, sounds, gibs, dead NPCs, and entities created via [ents.CreateClientProp](https://wiki.facepunch.com/gmod/ents.CreateClientProp).
+--- There are certain exclusions, such as players or weapons held by players, soundscapes and others.
+--- [EFL_KEEP_ON_RECREATE_ENTITIES](https://wiki.facepunch.com/gmod/enums/EFL) can be set on entities to preserve them through a map cleanup.
+---
+--- On the client it will remove decals, sounds, gibs, dead NPCs, and entities created via [ents.CreateClientProp](https://wiki.facepunch.com/gmod/ents.CreateClientProp). This function is ran on all clients from server automatically, when it is called on the server.
 ---
 --- This function calls [GM:PreCleanupMap](https://wiki.facepunch.com/gmod/GM:PreCleanupMap) before cleaning up the map and [GM:PostCleanupMap](https://wiki.facepunch.com/gmod/GM:PostCleanupMap) after cleaning up the map.
 ---
