@@ -12,7 +12,7 @@ local CNewParticleEffect = {}
 ---@param cpID number The control point ID, 0 to 63.
 ---@param ent Entity The entity to attach the control point to.
 ---@param partAttachment number See Enums/PATTACH.
----@param entAttachment? number The attachment ID on the entity to attach the particle system to
+---@param entAttachment? string The attachment name on the entity to attach the particle system to
 ---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 function CNewParticleEffect:AddControlPoint(cpID, ent, partAttachment, entAttachment, offset) end
 

@@ -8,10 +8,12 @@
 ---@class SpawnIcon : DButton
 local SpawnIcon = {}
 
----[CLIENT] Returns the currently set body groups of the spawn icon. This is set by [SpawnIcon:SetBodyGroup](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup).
+---[CLIENT] Returns the currently active [Sub Model IDs](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for each Body Group of the spawn icon.
+---
+--- 		This is set by [SpawnIcon:SetBodyGroup](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:GetBodyGroup)
----@return string # The bodygroups of the spawnicon
+---@return string # The Body Groups of the spawnicon
 function SpawnIcon:GetBodyGroup() end
 
 ---[CLIENT] Returns the currently set model name. This is set by [SpawnIcon:SetModelName](https://wiki.facepunch.com/gmod/SpawnIcon:SetModelName).
@@ -33,12 +35,18 @@ function SpawnIcon:OpenMenu() end
 
 ---[CLIENT] **INTERNAL**: This is done automatically by SpawnIcon. You do not need to call this. Doing so may cause unforeseen consequences.
 ---
---- Sets the bodygroups, so it can be retrieved with [SpawnIcon:GetBodyGroup](https://wiki.facepunch.com/gmod/SpawnIcon:GetBodyGroup). Use [Panel:SetModel](https://wiki.facepunch.com/gmod/Panel:SetModel) instead.
+--- 		Sets the active [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the given [Body Group 		ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id), so it can be retrieved with [SpawnIcon:GetBodyGroup](https://wiki.facepunch.com/gmod/SpawnIcon:GetBodyGroup).
+---
+--- 		Use [Panel:SetModel](https://wiki.facepunch.com/gmod/Panel:SetModel) instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup)
----@param bodygroup number The id of the bodygroup you're setting. Starts from 0.
----@param value number The value you're setting the bodygroup to. Starts from 0.
-function SpawnIcon:SetBodyGroup(bodygroup, value) end
+---@param bodyGroupId number
+--- 			The Body Group ID to set the active Sub Model ID for.
+--- 			Body Group IDs start at `0`.
+---@param activeSubModelId number
+--- 			The Sub Model ID to set as active.
+--- 			Sub Model IDs start at `0`.
+function SpawnIcon:SetBodyGroup(bodyGroupId, activeSubModelId) end
 
 ---[CLIENT] **INTERNAL**: This is done automatically by SpawnIcon. You do not need to call this. Doing so may cause unforeseen consequences.
 ---

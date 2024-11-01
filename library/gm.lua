@@ -612,7 +612,7 @@ function GM:HandlePlayerDriving(ply) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerDucking)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerDucking(ply, velocity) end
 
@@ -620,7 +620,7 @@ function GM:HandlePlayerDucking(ply, velocity) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerJumping)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerJumping(ply, velocity) end
 
@@ -628,7 +628,7 @@ function GM:HandlePlayerJumping(ply, velocity) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerLanding)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@param onGround boolean Was the player on ground?
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerLanding(ply, velocity, onGround) end
@@ -637,7 +637,7 @@ function GM:HandlePlayerLanding(ply, velocity, onGround) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerNoClipping)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerNoClipping(ply, velocity) end
 
@@ -645,7 +645,7 @@ function GM:HandlePlayerNoClipping(ply, velocity) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerSwimming)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerSwimming(ply, velocity) end
 
@@ -653,7 +653,7 @@ function GM:HandlePlayerSwimming(ply, velocity) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:HandlePlayerVaulting)
 ---@param ply Player The player
----@param velocity number Players velocity
+---@param velocity Vector Players velocity
 ---@return boolean # Return true if we've changed/set the animation, false otherwise
 function GM:HandlePlayerVaulting(ply, velocity) end
 
@@ -843,7 +843,7 @@ function GM:NetworkEntityCreated(ent) end
 
 ---[SERVER] Called when a player's SteamID has been validated by Steam.
 ---
---- See also [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed).
+--- See also [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed) and [Player:IsFullyAuthenticated](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated).
 ---
 --- **NOTE**: This hook doesn't work intentionally in singleplayer [because the SteamID is not validated](https://github.com/Facepunch/garrysmod-issues/issues/4906#issuecomment-819337130) in that case. This also applies to `sv_lan 1` servers for every duplicate `-multirun` client.
 ---
@@ -1184,10 +1184,9 @@ function GM:PhysgunPickup(player, entity) end
 ---@param newCount number The new ammo count.
 function GM:PlayerAmmoChanged(ply, ammoID, oldCount, newCount) end
 
----[SERVER] Called after the player is authenticated by Steam. This hook will also be called in singleplayer. See also [GM:NetworkIDValidated](https://wiki.facepunch.com/gmod/GM:NetworkIDValidated)
+---[SERVER] Called after the player gets their [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) set for the first time. This hook will also be called in singleplayer.
 ---
---- [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) returns 0 in this hook.
---- Calling [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) before [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed) causes [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed) to be triggered prematurely. As a result, [Player:IsFullyAuthenticated](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated) returns false when checked within this hook.
+--- See [GM:NetworkIDValidated](https://wiki.facepunch.com/gmod/GM:NetworkIDValidated) for a hook that is called with the player's SteamID is validated by Steam.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerAuthed)
 ---@param ply Player The player
@@ -1259,6 +1258,8 @@ function GM:PlayerCanJoinTeam(ply, team) end
 function GM:PlayerCanPickupItem(ply, item) end
 
 ---[SERVER] Returns whether or not a player is allowed to pick up a weapon.
+---
+---  	If this returns false, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon)
 ---@param ply Player The player attempting to pick up the weapon.

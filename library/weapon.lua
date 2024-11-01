@@ -211,7 +211,7 @@ function WEAPON:DrawWorldModelTranslucent(flags) end
 function WEAPON:Equip(NewOwner) end
 
 ---[SERVER] The player has picked up the weapon and has taken the ammo from it.
---- The weapon will be removed immidiately after this call.
+--- The weapon will be removed immediately after this call.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/WEAPON:EquipAmmo)
 ---@param ply Player The player who picked up the weapon

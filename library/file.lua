@@ -145,7 +145,7 @@ function file.Time(path, gamePath) end
 ---[SHARED AND MENU] Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use [file.Append](https://wiki.facepunch.com/gmod/file.Append).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/file.Write)
----@param fileName string The name of the file being written into. The path is relative to the **data/** folder.
+---@param fileName string The name of the file being written into. The path is relative to the `data/` folder.
 ---
 --- This argument will be forced lowercase.
 ---
@@ -172,7 +172,7 @@ function file.Time(path, gamePath) end
 --- * .wav
 --- * .ogg
 ---
---- Restricted symbols are: `" :`
+--- Restricted symbols are: `":`, and multiple consecutive spaces
 ---@param content string The content that will be written into the file.
 function file.Write(fileName, content) end
 

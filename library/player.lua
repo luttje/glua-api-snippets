@@ -744,18 +744,26 @@ function PLAYER:GetHandsModel() end
 ---@return Entity # The hovered widget.
 function Player:GetHoveredWidget() end
 
----[SHARED] Gets the bottom base and the top base size of the player's hull.
+---[SHARED] Retrieves the minimum and maximum [Vectors](https://wiki.facepunch.com/gmod/Vector) of the [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for the [Player's](https://wiki.facepunch.com/gmod/Player) physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull).
+---
+--- 		See also: [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHull)
----@return Vector # Player's hull bottom base size.
----@return Vector # Player's hull top base size.
+---@return Vector #
+--- 			The hull mins, the lowest corner of the Player's bounding box.
+---@return Vector #
+--- 			The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
 function Player:GetHull() end
 
----[SHARED] Gets the bottom base and the top base size of the player's crouch hull.
+---[SHARED] Retrieves the minimum and maximum [Vectors](https://wiki.facepunch.com/gmod/Vector) of the [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for the [Player's](https://wiki.facepunch.com/gmod/Player) physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
+---
+--- 		See also: [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
----@return Vector # Player's crouch hull bottom base size.
----@return Vector # Player's crouch hull top base size.
+---@return Vector #
+--- 			The hull mins, the lowest corner of the Player's bounding box while crouching.
+---@return Vector #
+--- 			The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
 function Player:GetHullDuck() end
 
 ---[SHARED] Retrieves the value of a client-side [ConVar](https://wiki.facepunch.com/gmod/ConVar). The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
@@ -1061,7 +1069,7 @@ function Player:GetWalkSpeed() end
 ---@return Weapon # The weapon for the specified class, or NULL ENTITY if the player does not have this weapon.
 function Player:GetWeapon(className) end
 
----[SHARED] Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
+---[SHARED] Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is `Vector(r,g,b)`, and each color should be between 0 and 1.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetWeaponColor)
 ---@return Vector # color
@@ -1169,9 +1177,9 @@ function Player:IsDrivingEntity() end
 ---@return boolean # Whether the players movement is currently frozen or not.
 function Player:IsFrozen() end
 
----[SERVER] Returns whether the player identity was confirmed by the steam network.
+---[SERVER] Returns whether the player identity was confirmed by the Steam network.
 ---
---- See also [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed).
+--- See also [GM:NetworkIDValidated](https://wiki.facepunch.com/gmod/GM:NetworkIDValidated).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:IsFullyAuthenticated)
 ---@return boolean # Whether the player has been fully authenticated or not.
@@ -1617,9 +1625,6 @@ function Player:SetAllowWeaponsInVehicle(allow) end
 function Player:SetAmmo(ammoCount, ammoType) end
 
 ---[SERVER] Sets the player armor to the argument.
---- 	Server
----
---- 		The amount that the player armor is going to be set to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetArmor)
 ---@param Amount number The amount that the player armor is going to be set to.
@@ -1749,26 +1754,31 @@ function Player:SetHands(hands) end
 ---@param widget? Entity The widget entity that the player is hovering.
 function Player:SetHoveredWidget(widget) end
 
----[SHARED] Sets the mins and maxs of the AABB of the players collision.
+---[SHARED] Sets the size of the [Player's](https://wiki.facepunch.com/gmod/Player) [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---
---- See [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck) for the hull while crouching/ducking.
+--- 		See also: [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---
---- 	**NOTE**: Not replicated, need to be call on server and client.
+--- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHull)
----@param hullMins Vector The min coordinates of the hull.
----@param hullMaxs Vector The max coordinates of the hull.
-function Player:SetHull(hullMins, hullMaxs) end
+---@param mins Vector
+--- 			The hull mins, the lowest corner of the Player's bounding box.
+---@param maxs Vector
+--- 			The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
+function Player:SetHull(mins, maxs) end
 
----[SHARED] Sets the mins and maxs of the AABB of the players collision when ducked.
+---[SHARED] Sets the size of the [Player's](https://wiki.facepunch.com/gmod/Player) [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
 ---
---- See [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull) for setting the hull while standing.
---- **NOTE**: Not replicated, need to be call on server and client.
+--- 		See also: [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
+---
+--- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetHullDuck)
----@param hullMins Vector The min coordinates of the hull.
----@param hullMaxs Vector The max coordinates of the hull.
-function Player:SetHullDuck(hullMins, hullMaxs) end
+---@param mins Vector
+--- 			The hull mins, the lowest corner of the Player's bounding box while crouching.
+---@param maxs Vector
+--- 			The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
+function Player:SetHullDuck(mins, maxs) end
 
 ---[SHARED] Sets the jump power, eg. the velocity that will be applied to the player when they jump.
 ---
@@ -1926,7 +1936,9 @@ function Player:SetSuitPower(power) end
 ---@param doSuppress boolean Whenever to suppress the notice or not.
 function Player:SetSuppressPickupNotices(doSuppress) end
 
----[SERVER] Sets the player to the chosen team.
+---[SERVER] Sets the player to the chosen team. The value is networked to clients at reduced bit count. (15 bits)
+---
+--- Can be retrieved via [Player:Team](https://wiki.facepunch.com/gmod/Player:Team)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetTeam)
 ---@param Team number The team that the player is being set to.
@@ -2197,7 +2209,7 @@ function Player:SuppressHint(name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SwitchToDefaultWeapon)
 function Player:SwitchToDefaultWeapon() end
 
----[SHARED] Returns the player's team ID.
+---[SHARED] Returns the player's team ID, set by [Player:SetTeam](https://wiki.facepunch.com/gmod/Player:SetTeam)
 ---
 --- Returns 0 clientside when the game is not fully loaded.
 ---

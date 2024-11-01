@@ -3,7 +3,7 @@
 --- The resource library is used to control what files are sent to clients who join a server, this includes models, materials, sounds, text files but not Lua files.
 resource = {}
 
----[SERVER] Adds the specified and all related files to the files the client should download.
+---[SERVER] Adds the specified and all related files to the files the client should download from the server.
 ---
 --- For convenience, this function will automatically add any other files that are related to the selected one, and throw an error if it can't find them. For example, a `.vmt` file will automatically add the `.vtf` with the same name, and a `.mdl` file will automatically add all `.vvd`, `.ani`, `.dx80.vtx`, `.dx90.vtx`, `.sw.vtx`, `.phy`, `.png` and `.jpg` files with the same name, with a separate error for each missing file.
 ---
@@ -19,7 +19,7 @@ resource = {}
 --- Do not put `gamemodes/*gamemodename*/content/` or `addons/*addonname*/` into the path.
 function resource.AddFile(path) end
 
----[SERVER] Adds the specified file to the files the client should download.
+---[SERVER] Adds the specified file to the files the client should download from the server.
 ---
 --- If you wish to add textures or models, consider using [resource.AddFile](https://wiki.facepunch.com/gmod/resource.AddFile) to add all the files required for a texture/model.
 ---

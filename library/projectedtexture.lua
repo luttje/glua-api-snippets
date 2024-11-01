@@ -66,6 +66,12 @@ function ProjectedTexture:GetLinearAttenuation() end
 ---@return number # NearZ of the ProjectedTexture.
 function ProjectedTexture:GetNearZ() end
 
+---[CLIENT] Returns the state of projected texture view-frustum culling. See [ProjectedTexture:SetNoCull](https://wiki.facepunch.com/gmod/ProjectedTexture:SetNoCull).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetNoCull)
+---@return boolean # `false` if culling is enabled (default), `true` if disabled.
+function ProjectedTexture:GetNoCull() end
+
 ---[CLIENT] Returns the current orthographic settings of the Projected Texture. To set these values, use [ProjectedTexture:SetOrthographic](https://wiki.facepunch.com/gmod/ProjectedTexture:SetOrthographic).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:GetOrthographic)
@@ -254,6 +260,12 @@ function ProjectedTexture:SetLinearAttenuation(linearAtten) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:SetNearZ)
 ---@param nearZ number
 function ProjectedTexture:SetNearZ(nearZ) end
+
+---[CLIENT] Allows disabling of projected texture view-frustum culling for cases where said culling creates unwanted side effects. Disabling culling will have a negative effect on performance.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:SetNoCull)
+---@param enable boolean `false` to enable culling (default), `true` to disable.
+function ProjectedTexture:SetNoCull(enable) end
 
 ---[CLIENT] Changes the current projected texture between orthographic and perspective projection.
 ---

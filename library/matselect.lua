@@ -24,6 +24,12 @@ function MatSelect:AddMaterial(label, path) end
 ---@param convars table A list of convar names (as keys) and their values to set when the user selects this material. ContextBase:SetConVar will be ignored.
 function MatSelect:AddMaterialEx(label, path, value, convars) end
 
+---[CLIENT] Find a material and selects it, if it exists in this panel.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:FindAndSelectMaterial)
+---@param mat string The material to find and select within this MatSelect.
+function MatSelect:FindAndSelectMaterial(mat) end
+
 ---[CLIENT] Find a [DImageButton](https://wiki.facepunch.com/gmod/DImageButton) panel based on the input material path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:FindMaterialByValue)
@@ -37,7 +43,9 @@ function MatSelect:FindMaterialByValue(mat) end
 ---@return boolean # `true` = auto size itself.
 function MatSelect:GetAutoHeight() end
 
----[CLIENT] Selects a given material panel.
+---[CLIENT] **INTERNAL**: Use [MatSelect:FindAndSelectMaterial](https://wiki.facepunch.com/gmod/MatSelect:FindAndSelectMaterial) instead.
+---
+--- Selects a given material panel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/MatSelect:SelectMaterial)
 ---@param mat DImageButton The material to select, found by MatSelect:FindMaterialByValue

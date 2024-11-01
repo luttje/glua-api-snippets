@@ -621,12 +621,14 @@ function Entity:EyeAngles() end
 ---@return Vector # View position of the entity.
 function Entity:EyePos() end
 
----[SHARED] Searches for bodygroup with given name.
---- **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
+---[SHARED] Searches the [Entity's](https://wiki.facepunch.com/gmod/Entity) model for a Body Group with a given name.
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:FindBodygroupByName)
----@param name string The bodygroup name to search for.
----@return number # Bodygroup ID, -1 if not found
+---@param name string
+--- 			The name to search for.
+---@return number #
+--- 			The Structures/BodyGroupData#id or `-1` if no Body Group has the provided name.
 function Entity:FindBodygroupByName(name) end
 
 ---[SHARED] Returns a transition from the given start and end sequence.
@@ -803,37 +805,46 @@ function Entity:GetBaseVelocity() end
 ---@return number # Color from Enums/BLOOD_COLOR
 function Entity:GetBloodColor() end
 
----[SHARED] Gets the exact value for specific bodygroup of given entity.
---- **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
+---[SHARED] Returns the [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the currently active [Sub Model](https://wiki.facepunch.com/gmod/Entity:GetSubModels) of the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id).
+---
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBodygroup)
----@param id number The id of bodygroup to get value of. Starts from 0.
----@return number # Current bodygroup. Starts from 0.
-function Entity:GetBodygroup(id) end
+---@param bodyGroupId number
+--- 			The Body Group ID to retrieve the active Sub Model ID for.
+--- 			Body Group IDs start at `0`.
+---@return number #
+--- 			The currently active Sub Model ID.
+--- 			Sub Model IDs start at `0`.
+function Entity:GetBodygroup(bodyGroupId) end
 
----[SHARED] Returns the count of possible values for this bodygroup.
----
---- This is **not** the maximum value, since the bodygroups start with 0, not 1.
----  **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
+---[SHARED] Returns the number of [Sub Models](https://wiki.facepunch.com/gmod/Entity:GetSubModels) in the Body Group corresponding to a given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBodygroupCount)
----@param bodygroup number The ID of bodygroup to retrieve count of.
----@return number # Count of values of passed bodygroup.
-function Entity:GetBodygroupCount(bodygroup) end
+---@param bodyGroupId number
+--- 			The Body Group ID to retrieve the Sub Model count of.
+--- 			Body Group IDs start at `0`.
+---@return number #
+--- 			The number of Sub Models in the Body Group.
+function Entity:GetBodygroupCount(bodyGroupId) end
 
----[SHARED] Gets the name of specific bodygroup for given entity.
---- 	**NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
+---[SHARED] Retrieves the name of the Body Group corresponding to a given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBodygroupName)
----@param id number The id of bodygroup to get the name of.
----@return string # The name of the bodygroup
-function Entity:GetBodygroupName(id) end
+---@param bodyGroupId number
+--- 			The Body Group ID to get the name of.
+---@return string #
+--- 				The name of the Body Group.
+function Entity:GetBodygroupName(bodyGroupId) end
 
----[SHARED] Returns a list of all body groups of the entity.
---- 	**NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return body groups form view model.
+---[SHARED] Returns a list of information about each Body Group present on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups)
----@return table # Bodygroups as a table of Structures/BodyGroupDatas if the entity can have bodygroups.
+---@return table #
+--- 			A table of Body Group information where each value is a Structures/BodyGroupData.
 function Entity:GetBodyGroups() end
 
 ---[SHARED] Returns the contents of the specified bone.
@@ -1422,7 +1433,9 @@ function Entity:GetLocalAngles() end
 ---@return Angle # The velocity
 function Entity:GetLocalAngularVelocity() end
 
----[SHARED] Returns entity's position relative to it's parent.
+---[SHARED] Returns entity's position relative to it's [Entity:GetParent](https://wiki.facepunch.com/gmod/Entity:GetParent).
+---
+--- See [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) for the absolute position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetLocalPos)
 ---@return Vector # Relative position
@@ -1495,6 +1508,8 @@ function Entity:GetMaxHealth() end
 ---[SHARED] Gets the model of given entity.
 ---
 --- This does not necessarily return the model's path, as is the case for brush and virtual models. This is intentional behaviour, however, there is currently no way to retrieve the actual file path.
+---
+--- This also affects certain models that are edited by 3rd party programs after being compiled.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetModel)
 ---@return string # The entity's model. Will be a filesystem path for most models.
@@ -1774,7 +1789,7 @@ function Entity:GetNetworkedVector(key, fallback) end
 ---[SHARED] Gets networked origin for entity.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNetworkOrigin)
----@return Vector # origin
+---@return Vector # The last received origin of the entity.
 function Entity:GetNetworkOrigin() end
 
 ---[SHARED] Returns all network vars created by [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) and [Entity:NetworkVarElement](https://wiki.facepunch.com/gmod/Entity:NetworkVarElement) and their current values.
@@ -1805,11 +1820,13 @@ function Entity:GetNoDraw() end
 ---@return number # See Enums/CLASS
 function ENTITY:GetNPCClass() end
 
----[SHARED] Returns the body group count of the entity.
---- **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model will return value form view model.
+---[SHARED] Returns the number of Body Groups that the [Entity's](https://wiki.facepunch.com/gmod/Entity) model contains.
+---
+--- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetNumBodyGroups)
----@return number # Amount of bodygroups the entitys model has
+---@return number #
+--- 			The amount of Body Groups on the Entity's model.
 function Entity:GetNumBodyGroups() end
 
 ---[SHARED] Returns the number of pose parameters this entity has.
@@ -2066,7 +2083,9 @@ function Entity:GetPhysicsObjectNum(physNum) end
 ---@return number # The playback rate.
 function Entity:GetPlaybackRate() end
 
----[SHARED] Gets the position of entity in world.
+---[SHARED] Gets the position of given entity in the world.
+---
+--- See [Entity:GetLocalPos](https://wiki.facepunch.com/gmod/Entity:GetLocalPos) for the position relative to the entity's [Entity:GetParent](https://wiki.facepunch.com/gmod/Entity:GetParent).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetPos)
 ---@return Vector # The position of the entity.
@@ -2966,7 +2985,9 @@ function Entity:MakePhysicsObjectAShadow(allowPhysicsMovement, allowPhysicsRotat
 
 ---[SHARED] Sets custom bone angles.
 ---
---- When used repeatedly serverside, this method is strongly discouraged due to the huge network traffic produced.
+--- When used repeatedly serverside, this method is strongly discouraged due to the huge network traffic produced
+---
+--- As of update `2024.10.29` this has been resolved. However, network traffic is still generated and should be taken into consideration.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles)
 ---@param boneID number Index of the bone you want to manipulate
@@ -3003,8 +3024,6 @@ function Entity:ManipulateBonePosition(boneID, pos, networking) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale)
 ---@param boneID number Index of the bone you want to manipulate
 ---@param scale Vector Scale vector to apply. Note that the scale is relative to the original bone scale, not relative to the world or the entity.
----
---- The vector will be normalised if its longer than 32 units.
 function Entity:ManipulateBoneScale(boneID, scale) end
 
 ---[SHARED] Returns entity's map creation ID. Unlike [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) or [Entity:GetCreationID](https://wiki.facepunch.com/gmod/Entity:GetCreationID), it will always be the same on same map, no matter how much you clean up or restart it.
@@ -3883,20 +3902,31 @@ function ENTITY:SetAutomaticFrameAdvance(enable) end
 ---@param bloodColor number An integer corresponding to Enums/BLOOD_COLOR.
 function Entity:SetBloodColor(bloodColor) end
 
----[SHARED] Sets an entities' bodygroup.
---- **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model, check will occur by view model.
+---[SHARED] Sets the currently active [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
+--- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetBodygroup)
----@param bodygroup number The id of the bodygroup you're setting. Starts from 0.
----@param value number The value you're setting the bodygroup to. Starts from 0.
-function Entity:SetBodygroup(bodygroup, value) end
+---@param bodyGroupId number
+--- 			The Body Group ID to set the Sub Model ID of.
+--- 			Body Group IDs start at `0`.
+---@param subModelId number
+--- 			The Sub Model ID to set as active for this Body Group.
+--- 			Sub Model IDs start at `0`.
+function Entity:SetBodygroup(bodyGroupId, subModelId) end
 
----[SHARED] Sets the bodygroups from a string. A convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
---- **NOTE**: If called for Weapon (after Initialize hook) with different body groups on world model and view model, check will occur by view model.
+---[SHARED] Sets the [Entity's](https://wiki.facepunch.com/gmod/Entity) active Sub Models via a string of [Sub Model IDs](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) in order from the first [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) to the last.
+---
+--- This is a convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
+--- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetBodyGroups)
----@param bodygroups string Body groups to set. Each character in the string represents a separate bodygroup. (`0` to `9`, `a` to `z` being (`10` to `35`))
-function Entity:SetBodyGroups(bodygroups) end
+---@param subModelIds string
+--- 			The Sub Model IDs to activate for each Body Group on the Entity's model.
+---
+--- 			The first character corresponds with Body Group ID `0`, the second character coressponds to Body Group ID `1`, etc.
+---
+--- 			To support Body Groups with more than `0`-`9` options, values above `9` are represented using alphabetical characters starting with `a` and ending with `z`.
+function Entity:SetBodyGroups(subModelIds) end
 
 ---[SHARED] Sets the specified value on the bone controller with the given ID of this entity, it's used in HL1 to change the head rotation of NPCs, turret aiming and so on.
 ---
@@ -5228,9 +5258,9 @@ function Entity:SetShouldPlayPickupSound(playsound) end
 
 ---[SHARED] Sets if entity should create a server ragdoll on death or a client one.
 ---
---- **NOTE**: Player ragdolls created with this enabled will have an owner set, see [Entity:SetOwner](https://wiki.facepunch.com/gmod/Entity:SetOwner) for more information on what effects this has.
+--- **NOTE**: This is reset for players when they respawn ([Entity:Spawn](https://wiki.facepunch.com/gmod/Entity:Spawn)).
 ---
---- This is reset for players when they respawn ([Entity:Spawn](https://wiki.facepunch.com/gmod/Entity:Spawn)).
+--- Player ragdolls created with this enabled will have an owner set, see [Entity:SetOwner](https://wiki.facepunch.com/gmod/Entity:SetOwner) for more information on what effects this has.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetShouldServerRagdoll)
 ---@param serverragdoll boolean Set `true` if ragdoll should be created on server, `false` if on client.
@@ -5839,8 +5869,8 @@ function Entity:Weapon_SetActivity(act, duration) end
 --- Despite existing on client, it doesn't actually do anything on client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:Weapon_TranslateActivity)
----@param act number The activity to translate
----@return number # The translated activity
+---@param act number The NPC activity to translate
+---@return number # The translated activity. Defaults to `act` input when a translation doesn't exist.
 function Entity:Weapon_TranslateActivity(act) end
 
 ---[SHARED] Returns two vectors representing the minimum and maximum extent of the entity's axis-aligned bounding box (which is calculated from entity's collision bounds.

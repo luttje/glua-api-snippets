@@ -203,7 +203,7 @@ function Tool:GetSWEP() end
 ---@return Weapon # The tool gun weapon. (`gmod_tool`)
 function Tool:GetWeapon() end
 
----[SHARED] Called when [WEAPON:Holster](https://wiki.facepunch.com/gmod/WEAPON:Holster) of the toolgun is called, as well as serverside when switching between different toolguns.
+---[SHARED] Called when [WEAPON:Holster](https://wiki.facepunch.com/gmod/WEAPON:Holster) of the toolgun is called, when switching between different toolguns.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/TOOL:Holster)
 function TOOL:Holster() end

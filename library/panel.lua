@@ -118,7 +118,7 @@ function Panel:AlignTop(offset) end
 --- * Panel `targetPanel` - The panel object that was animated.
 function Panel:AlphaTo(alpha, duration, delay, callback) end
 
----[CLIENT] Called every frame unless [Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible) is set to false. Similar to [PANEL:Think](https://wiki.facepunch.com/gmod/PANEL:Think), but can be disabled by [Panel:SetAnimationEnabled](https://wiki.facepunch.com/gmod/Panel:SetAnimationEnabled) as explained below.
+---[CLIENT] Called every frame unless the panel is not visible ([Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible)). Similar to [PANEL:Think](https://wiki.facepunch.com/gmod/PANEL:Think), but can be disabled by [Panel:SetAnimationEnabled](https://wiki.facepunch.com/gmod/Panel:SetAnimationEnabled) as explained below.
 ---
 --- If you are overriding this, you must call [Panel:AnimationThinkInternal](https://wiki.facepunch.com/gmod/Panel:AnimationThinkInternal) every frame, else animations will cease to work.
 ---
@@ -571,10 +571,10 @@ function Panel:GetChildren() end
 ---@return table # A table of panel objects that lie at least partially within the specified rectangle.
 function Panel:GetChildrenInRect(x, y, w, h) end
 
----[CLIENT AND MENU] Returns the class name of the panel.
+---[CLIENT AND MENU] Returns the class name of the panel. This would be the class name of the base engine-level panel, not Lua classname. The latter is stored usually in [Panel:GetName](https://wiki.facepunch.com/gmod/Panel:GetName).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:GetClassName)
----@return string # className
+---@return string # The panel's class name.
 function Panel:GetClassName() end
 
 ---[CLIENT AND MENU] Returns the child of this panel object that is closest to the specified point. The point is relative to the object on which the method is called. The distance the child is from this point is also returned.
@@ -2457,8 +2457,6 @@ function Panel:SetWide(width) end
 function Panel:SetWidth(width) end
 
 ---[CLIENT AND MENU] This makes it so that when you're hovering over this panel you can "click" on the world. Your weapon aim (and its viewmodel) will follow the cursor. This is primarily used for the Sandbox context menu.
----
---- This function doesn't scale with custom FOV specified by [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) or [WEAPON:TranslateFOV](https://wiki.facepunch.com/gmod/WEAPON:TranslateFOV).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetWorldClicker)
 ---@param enable boolean Whether to enable or disable the feature for this panel.

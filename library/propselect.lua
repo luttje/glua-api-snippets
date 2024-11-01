@@ -21,3 +21,16 @@ function PropSelect:AddModel(model, convars) end
 ---@param model string Model path, **including** `models/` and `.mdl`.
 ---@param skin number The skin number for this model. It will **not** be set to the convar, use the value argument to track skin-model combos.
 function PropSelect:AddModelEx(value, model, skin) end
+
+---[CLIENT] Find and select a [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon) panel based on the input model path.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/PropSelect:FindAndSelectButton)
+---@param mdl string The model to find and select within this PropSelect.
+function PropSelect:FindAndSelectButton(mdl) end
+
+---[CLIENT] Find a [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon) panel based on the input model path.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/PropSelect:FindModelByValue)
+---@param mdl string The model to find within this PropSelect.
+---@return SpawnIcon # The found spawnicon, or `nil`.
+function PropSelect:FindModelByValue(mdl) end

@@ -528,7 +528,7 @@ function _G.DebugInfo(slot, info) end
 --- See [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) for more information.
 --- 	**WARNING**: The preprocessor is not smart enough to know when substitution doesn't make sense, such as: table keys and strings.
 ---
---- Running `print("DEFINE_BASECLASS")` will result in `local BaseClass = baseclass.Get`
+--- Running `print("DEFINE_BASECLASS")` is the same as `print("local BaseClass = baseclass.Get")`
 ---
 --- For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---
@@ -2614,13 +2614,17 @@ function _G.SaveLastMap(map, category) end
 ---@param presets table Presets to be saved
 function _G.SavePresets(presets) end
 
----[CLIENT] Returns a number based on the `size` argument and the players' screen width. The width is scaled in relation to `640x480` resolution.  This function is primarily used for scaling font sizes.
+---[CLIENT] Returns a number based on the `size` argument and the players' screen width. This is used to scale user interface (UI) elements to be consistently sized and positioned across all screen resolutions.
+---
+--- The width is scaled in relation to `640x480` resolution, and does **not** take into account non the aspect ratio. See example below for how to adjust or that.
+---
+--- This function can also be used for scaling font sizes.
 ---
 --- See [Global.ScreenScaleH](https://wiki.facepunch.com/gmod/Global.ScreenScaleH) for a function that scales from height.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.ScreenScale)
----@param size number The number you want to scale.
----@return number # The scaled number based on your screen's width
+---@param size number The position or size you want to scale within 640 pixel wide screen.
+---@return number # The scaled number based on the player's screen width.
 function _G.ScreenScale(size) end
 
 ---[CLIENT] Returns a number based on the `size` argument and players' screen height. The height is scaled in relation to `640x480` resolution.  This function is primarily used for scaling font sizes.
@@ -2949,6 +2953,7 @@ function _G.SortedPairsByValue(table, descending) end
 function _G.Sound(soundPath) end
 
 ---[SHARED] Returns the approximate duration of the specified sound in seconds, for `.wav` and `.mp3` sounds.
+--- 	This function only works on mp3 files if the file is encoded with constant bitrate.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SoundDuration)
 ---@param soundName string The sound file path.

@@ -177,23 +177,27 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
---- Table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
+---
+--- 		The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
+---
 ---@class BodyGroupData
 local BodyGroupData = {}
 
----Index of the body group.
+---The Body Group's ID.
+--- 			Body Group IDs start at `0`.
 ---@type number
 BodyGroupData.id = nil
 
----Name of the body group.
+---The name of the Body Group.
 ---@type string
 BodyGroupData.name = nil
 
----Amount of subgroups.
+---The number of Sub Models in this Body Group, and the length of the `submodels` table.
 ---@type number
 BodyGroupData.num = nil
 
----A zero-indexed table that is of length _num_ with values being the name of the smd mesh file of the respective body group value.
+---A table of the names of the Sub Models within this Body Group.
+--- 			Sub Model IDs start at `0`.
 ---@type table
 BodyGroupData.submodels = nil
 
@@ -2560,9 +2564,9 @@ SWEP.ScriptedEntityType = "weapon"
 SWEP.m_bPlayPickupSound = true
 
 ---If set,
----             overrides the icon path to be displayed in the Spawnmenu for this entity.
+---             overrides the icon path to be displayed in the Spawnmenu for this entity. The path is relative to the `materials/` folder.
 ---@type string
-SWEP.IconOverride = "materials/entities/<ClassName>.png"
+SWEP.IconOverride = "entities/<ClassName>.png"
 
 --- Table is one element from [team.GetAllTeams](https://wiki.facepunch.com/gmod/team.GetAllTeams).
 ---@class TeamData

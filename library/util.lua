@@ -900,15 +900,13 @@ function util.tobool(input) end
 
 ---[SHARED] Runs a trace using the entity's collisionmodel between two points. This does not take the entity's angles into account and will trace its unrotated collisionmodel.
 ---
---- **NOTE**: Clientside entities will not be hit by traces.
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceEntity)
 ---@param tracedata table Trace data. See Structures/Trace
 ---@param ent Entity The entity to use
 ---@return table # Trace result. See Structures/TraceResult
 function util.TraceEntity(tracedata, ent) end
 
----[SHARED] Identical to [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) but uses an entity for `mins`/`maxs` inputs.
+---[SHARED] Identical to [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) but uses an entity's [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) for `mins`/`maxs` inputs. (These 2 keys will be ignored in the provided table)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceEntityHull)
 ---@param tracedata table Trace data. See Structures/Trace
@@ -919,6 +917,8 @@ function util.TraceEntityHull(tracedata, ent) end
 ---[SHARED] Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
 ---
 --- This trace type cannot hit hitboxes.
+---
+--- See [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine) for a simple line ("ray") trace.
 ---
 --- **NOTE**: This function may not always give desired results clientside due to certain physics mechanisms not existing on the client. Use it serverside for accurate results.
 ---
@@ -934,8 +934,9 @@ function util.TraceHull(TraceData) end
 ---
 --- 		Traces do not differentiate between the inside and the outside faces of Physics Meshes.  Because of this, if a Trace starts within a Solid Physics Mesh it will hit the inside faces of the Physics Mesh and may return unexpected values as a result.
 ---
---- 	See Also:
---- 		[util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull)
+--- See [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) for a "box" type trace.
+---
+--- You can use `r_visualizetraces` set to `1` (requires `sv_cheats` set to `1`) to visualize traces in real time for debugging purposes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceLine)
 ---@param traceConfig table

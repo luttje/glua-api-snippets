@@ -41,3 +41,9 @@ function properties.OnScreenClick(eyepos, eyevec) end
 ---@param ent Entity The entity to open menu for
 ---@param tr table The trace that is passed as second argument to Action callback of a property
 function properties.OpenEntityMenu(ent, tr) end
+
+---[SHARED] Remove an entity right-click property. See [properties.Add](https://wiki.facepunch.com/gmod/properties.Add) for details.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/properties.Remove)
+---@param name string A unique name used to identify the property to be removed.
+function properties.Remove(name) end

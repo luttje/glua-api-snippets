@@ -44,7 +44,7 @@ function os.clock() end
 --- | `%w` | Weekday [0-6 = Sunday-Saturday] | `3` |
 --- | `%W` | Week of the year [00-53] | `37` |
 --- | `%x` | Date (Same as `%m/%d/%y`) | `09/16/98` |
---- | `%X` | Time (Same as `%H:%M:%S`) | `24:48:10` |
+--- | `%X` | Time (Same as `%H:%M:%S`) | `23:48:10` |
 --- | `%y` | Two-digit year [00-99] | `98` |
 --- | `%Y` | Full year | `1998` |
 --- | `%z` | Timezone | `-0300` |
