@@ -774,7 +774,7 @@ function Player:GetHullDuck() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetInfo)
 ---@param cVarName string The name of the client-side ConVar.
----@return string # The value of the ConVar.
+---@return string # The value of the ConVar. Or an empty string if the convar doesn't exist.
 function Player:GetInfo(cVarName) end
 
 ---[SHARED] Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
@@ -1867,7 +1867,7 @@ function Player:SetObserverMode(mode) end
 ---
 --- Internally uses the [sql](https://wiki.facepunch.com/gmod/sql) library. See [util.SetPData](https://wiki.facepunch.com/gmod/util.SetPData) for cases when the player is not currently on the server.
 ---
---- **NOTE**: This function internally uses [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which can cause collisions (two or more players sharing the same PData entry). [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) now replaces all instances of [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) when running [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData)
+--- **NOTE**: This function internally uses [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which could have caused collisions (two or more players sharing the same PData entry). [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) now replaces all instances of [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) when running [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData)
 ---
 --- **NOTE**: PData is not networked from servers to clients!
 ---
@@ -1936,13 +1936,13 @@ function Player:SetSuitPower(power) end
 ---@param doSuppress boolean Whenever to suppress the notice or not.
 function Player:SetSuppressPickupNotices(doSuppress) end
 
----[SERVER] Sets the player to the chosen team. The value is networked to clients at reduced bit count. (15 bits)
+---[SERVER] Sets the player to the chosen team. The value is networked to clients at reduced bit count (16 bits) as as a signed value, so the real range is [-32768, 32767].
 ---
 --- Can be retrieved via [Player:Team](https://wiki.facepunch.com/gmod/Player:Team)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetTeam)
----@param Team number The team that the player is being set to.
-function Player:SetTeam(Team) end
+---@param team number The team that the player is being set to.
+function Player:SetTeam(team) end
 
 ---[SHARED] Sets how quickly a player un-ducks
 ---

@@ -264,6 +264,8 @@ function IGModAudioChannel:SetPos(pos, dir) end
 ---
 --- Streamed sounds must have "noblock" parameter for this to work and [IGModAudioChannel:IsBlockStreamed](https://wiki.facepunch.com/gmod/IGModAudioChannel:IsBlockStreamed) must return false.
 ---
+--- **NOTE**: Streamed sounds can only have their time set to up to the current [IGModAudioChannel:GetBufferedTime](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetBufferedTime).
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:SetTime)
 ---@param secs number The time to set the stream to, in seconds.
 ---@param dont_decode? boolean Set to true to skip decoding to set time, and instead just seek to it which is faster. Certain streams do not support seeking and have to decode to the given position.

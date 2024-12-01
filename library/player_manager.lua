@@ -85,8 +85,8 @@ function player_manager.RunClass(ply, funcName, ...) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player_manager.SetPlayerClass)
 ---@param ply Player Player to set class
----@param classname string Name of class to set
-function player_manager.SetPlayerClass(ply, classname) end
+---@param className string Name of class to set
+function player_manager.SetPlayerClass(ply, className) end
 
 ---[SHARED] Retrieves correct hands for given player model. By default returns citizen hands.
 ---

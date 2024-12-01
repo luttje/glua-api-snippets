@@ -3370,6 +3370,8 @@ NAV_MESH_CLIFF = 32768
 NAV_MESH_FUNC_COST = 536870912
 --- Whether the area has a `prop_door_rotating` that is blocking it (because the door is closed)
 NAV_MESH_BLOCKED_PROPDOOR = 268435456
+--- Whether the area is blocked via [CNavArea:MarkAsBlocked](https://wiki.facepunch.com/gmod/CNavArea:MarkAsBlocked).
+NAV_MESH_BLOCKED_LUA = TODO
 --- Area is in an elevator's path
 NAV_MESH_HAS_ELEVATOR = 1073741824
 --- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.

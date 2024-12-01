@@ -859,6 +859,10 @@ ENT.PhysgunDisabled = false
 ---@type number
 ENT.PhysicsSolidMask = nil
 
+---For `anim` type entities, if set, enables physics collision sounds.
+---@type boolean
+ENT.PhysicsSounds = false
+
 ---
 --- Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
 ---
@@ -946,6 +950,48 @@ EntityCopyData.MapCreationID = nil
 ---Deprecated, always 0. See Entity:GetWorkshopID.
 ---@type number
 EntityCopyData.WorkshopID = nil
+
+---
+--- 		The table structure used for bullets that have already been fired.
+---
+--- 		See [GM:PostEntityFireBullets](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets) for more information.
+---
+---@class FiredBullet
+local FiredBullet = {}
+
+---The type of ammo that was fired.
+---
+--- 			Should be one of the values from the game.GetAmmoTypes table.
+---@type string
+FiredBullet.AmmoType = "<Empty String>"
+
+---The Entity that fired the bullet.
+---
+--- 			This is usually the Player that is holding the Weapon.
+---@type Entity
+FiredBullet.Attacker = nil
+
+---The amount of damage dealt by the bullet.
+---
+--- 			When set to `0`, damage should be determined based on the values set in the Structures/AmmoData of the bullet's Ammo Type.
+---@type number
+FiredBullet.Damage = nil
+
+---The physics impact force of the bullet.
+---@type number
+FiredBullet.Force = nil
+
+---A whole integer number that controls the frequency of visible bullet tracers.
+---
+--- 			A tracer will be fired once after this many non-tracer bullets have been fired.
+---
+--- 			Set to `1` to always fire a tracer.
+---@type number
+FiredBullet.Tracer = nil
+
+---The Structures/TraceResult from the util.TraceLine that determined where and what the bullet hit.
+---@type table
+FiredBullet.Trace = nil
 
 --- Used for [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont).
 ---@class FontData

@@ -192,14 +192,14 @@ function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRe
 ---@return string # The filtered text based on given settings.
 function util.FilterText(str, context, player) end
 
----[MENU] Converts the Full path of the given GMA file to the Relative Path.
---- 		You can use [util.RelativePathToFull_Menu](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu) to convert the Relative path back to the Full Path.
+---[MENU] Converts the full path of the given file to a relative path.
+--- 		You can use [util.RelativePathToFull_Menu](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu) to convert the relative path back to the full path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu)
----@param gma string The **Full** path to the GMA file. **like: "[Steam folder]\common\garrysmod\garrysmod\addons\[Name].gma"**
----@param gamePath? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return string # The relative path to the GMA file.
-function util.FullPathToRelative_Menu(gma, gamePath) end
+---@param fullPath string The **full** path to a file.
+---@param fsPath? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
+---@return string # The relative path to the given file.
+function util.FullPathToRelative_Menu(fullPath, fsPath) end
 
 ---[SHARED] Returns the ID of a custom model activity. This is useful for models that define custom ones.
 ---
@@ -679,7 +679,7 @@ function util.PixelVisible(position, radius, PixVis) end
 function util.PointContents(position) end
 
 ---[SHARED] Precaches a model for later use. Model is cached after being loaded once.
---- 		**WARNING**: Modelprecache is limited to 4096 unique models. When it reaches the limit the game will crash.
+--- 		**WARNING**: Modelprecache is limited to 8192 unique models. When it reaches the limit the game will crash.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.PrecacheModel)
 ---@param modelName string The model to precache.
@@ -705,27 +705,27 @@ function util.PrecacheSound(soundName) end
 ---@return table # Trace result. See Structures/TraceResult.
 function util.QuickTrace(origin, dir, filter) end
 
----[MENU] Converts the relative path of the given GMA file to the Full Path.
---- 		You can use [util.FullPathToRelative_Menu](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu) to convert the Full path back to the Relative Path.
+---[MENU] Converts the relative path of a given file to the full path on disk.
+--- 		You can use [util.FullPathToRelative_Menu](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu) to convert the full path back to the relative path.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu)
----@param gma string The Relative path to the GMA file. **like: "addons/[Name].gma"**
----@param gamePath? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@return string # The full path to the GMA file.
-function util.RelativePathToFull_Menu(gma, gamePath) end
+---@param filePath string The relative path of a file, for example: `addons/[Name].gma`
+---@param mountPath? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
+---@return string # The full path to the file.
+function util.RelativePathToFull_Menu(filePath, mountPath) end
 
----[MENU] Returns the AddonInfo of the Addon the given file belongs to.
+---[MENU] Returns which Workshop addon the given file belongs to.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.RelativePathToGMA_Menu)
----@param gma string The **Full** path to the GMA file. **like: "[Steam folder]\common\garrysmod\garrysmod\addons\[Name].gma"**
----@return table # The AddonInfo of the GMA file. Will return nil if the File doesn't belongs to an addon. Table Structure:
+---@param filePath string The relative path to a file, such as `materials/myMaterial.vmt`.
+---@return table # The info about owner addon. Will return nil if the file doesn't belong to an addon. Table Structure:
 --- ```lua
 --- Author	=	[Addon Author]
 --- File	=	[Steam folder]\workshop\content\4000\[Addon ID]/[GMA Name].gma
 --- ID	=	[Addon ID]
 --- Title	=	[Addon Title]
 --- ```
-function util.RelativePathToGMA_Menu(gma) end
+function util.RelativePathToGMA_Menu(filePath) end
 
 ---[SHARED AND MENU] Removes persistent data of an offline player using their SteamID.
 ---
@@ -763,7 +763,7 @@ function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake,
 ---
 --- See also [Player:SetPData](https://wiki.facepunch.com/gmod/Player:SetPData) for a more convenient version of this function for online players, [util.RemovePData](https://wiki.facepunch.com/gmod/util.RemovePData) and
 ---  [util.GetPData](https://wiki.facepunch.com/gmod/util.GetPData) for the other accompanying functions.
---- **NOTE**: This function internally uses [util.SteamIDTo64](https://wiki.facepunch.com/gmod/util.SteamIDTo64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which can cause collisions (two or more players sharing the same PData entry).
+--- **NOTE**: This function internally uses [util.SteamIDTo64](https://wiki.facepunch.com/gmod/util.SteamIDTo64), it previously utilized [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) which could have caused collisions (two or more players sharing the same PData entry).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.SetPData)
 ---@param steamID string SteamID of the player, in the `STEAM_0:0:0` format. See Player:SteamID.
@@ -879,9 +879,10 @@ function util.TableToKeyValues(table, rootKey) end
 ---@param duration? number How long you want the timer to be. `Elapsed()` will return true only after this much time has passed.
 ---@return table # A timer object. It has the following methods:
 --- * `Reset()` - Resets and stops the timer.
---- * `Start( duration )` - (Re)starts the timer with given duration
+--- * `Start( duration = 0 )` - (Re)starts the timer with given duration
 --- * `Started()` - Returns `true` if the timer has been started. It will continue to return true even after the duration has passed.
 --- * `Elapsed()` - Returns `true` if the timer duration has elapsed since its creation or the call to `Start()`
+--- * `GetElaspedTime()` - Returns amount of time since timer started.
 function util.Timer(duration) end
 
 ---[SHARED AND MENU] Returns the time since this function has been last called

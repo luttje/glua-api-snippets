@@ -906,11 +906,13 @@ function render.SetAmbientLight(r, g, b) end
 
 ---[CLIENT] Sets the alpha blending (or transparency) for upcoming render operations.
 ---
---- 		By itself, this will cause visible overlapping on parts of a model that are in front of other parts of the same model.
---- 		For a solution to this, see the examples below.
+--- See [render.SetColorModulation](https://wiki.facepunch.com/gmod/render.SetColorModulation) for the function to affect RGB color channels.
 ---
---- 		This does not affect non-model `render.Draw*` functions.
---- 		**NOTE**: If a material has the [$alphatest](https://developer.valvesoftware.com/wiki/$alphatest) flag enabled then this function might not behave as expected because alpha will be binary, this has a default cutoff of `0.7`.
+--- By itself, this will cause visible overlapping on parts of a model that are in front of other parts of the same model.
+--- For a solution to this, see the examples below.
+---
+--- This does not affect non-model `render.Draw*` functions.
+--- **NOTE**: If a material has the [$alphatest](https://developer.valvesoftware.com/wiki/$alphatest) flag enabled then this function might not behave as expected because alpha will be binary, this has a default cutoff of `0.7`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetBlend)
 ---@param blending number
@@ -955,7 +957,11 @@ function render.SetColorMaterial() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetColorMaterialIgnoreZ)
 function render.SetColorMaterialIgnoreZ() end
 
----[CLIENT] Sets the color modulation.
+---[CLIENT] Sets the color modulation for upcoming render operations, such as rendering models.
+---
+--- The values can exceed 1 for stronger effect.
+---
+--- See [render.SetBlend](https://wiki.facepunch.com/gmod/render.SetBlend) for the function to affect alpha channel.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetColorModulation)
 ---@param r number The red channel multiplier normal ranging from 0-1.

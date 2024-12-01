@@ -1190,8 +1190,10 @@ function GM:PlayerAmmoChanged(ply, ammoID, oldCount, newCount) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerAuthed)
 ---@param ply Player The player
----@param steamid string The player's SteamID
----@param uniqueid string The player's UniqueID
+---@param steamid string The player's SteamID.
+--- This will always be an empty string `""` in singleplayer.
+---@param uniqueid string The player's UniqueID.
+--- This will always be `"1"` in singleplayer.
 function GM:PlayerAuthed(ply, steamid, uniqueid) end
 
 ---[CLIENT] Runs when a bind has been pressed. Allows to block commands.
@@ -1843,12 +1845,12 @@ function GM:PostDrawViewModel(viewmodel, player, weapon) end
 --- **WARNING**: This hook is called directly from [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets). Due to this, you cannot call [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) inside this hook or an infinite loop will occur crashing the game.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets)
----@param entity Entity The entity that fired the bullet
----@param data table The bullet data. Contains the following keys:
---- * table **Trace** - The bullet pellet trace result. See Structures/TraceResult
+---@param entity Entity
+--- 			The entity that fired the bullet
+---@param data table
+--- 			A table of data about the bullet that was fired.
 ---
---- From Structures/Bullet:
---- * `AmmoType`, `Tracer`, `Damage`, `Force`, `Attacker`, `TracerName`.
+--- 			See Structures/FiredBullet.
 ---@return boolean # Return `false` to suppress the bullet.
 function GM:PostEntityFireBullets(entity, data) end
 

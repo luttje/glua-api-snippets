@@ -438,8 +438,8 @@ function Panel:DrawOutlinedRect() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:DrawSelections)
 function Panel:DrawSelections() end
 
----[CLIENT AND MENU] Used to draw the text in a [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) within a derma skin. This should be called within the [SKIN:PaintTextEntry](https://wiki.facepunch.com/gmod/SKIN:PaintTextEntry) skin hook.
---- **NOTE**: Will silently fail if any of arguments are not [Color](https://wiki.facepunch.com/gmod/Color).
+---[CLIENT AND MENU] Used to draw the text in a [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) within a derma skin. This is usually called within the [SKIN:PaintTextEntry](https://wiki.facepunch.com/gmod/SKIN:PaintTextEntry) skin hook.
+--- **NOTE**: Will silently fail if any of arguments are not given.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:DrawTextEntryText)
 ---@param textCol table The colour of the main text.
@@ -1450,8 +1450,8 @@ function Panel:NewObjectCallback(objectName, callbackName) end
 --- To fully disable the clipping of any children see [Global.DisableClipping](https://wiki.facepunch.com/gmod/Global.DisableClipping).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:NoClipping)
----@param clip boolean Whether to clip or not. True to enable, false to disable clipping.
-function Panel:NoClipping(clip) end
+---@param noclip boolean Whether to disable clipping or not. True to disable clipping, false to enable clipping.
+function Panel:NoClipping(noclip) end
 
 ---[CLIENT AND MENU] Returns the number of children of the panel object that are selected. This is equivalent to calling [Panel:IsSelected](https://wiki.facepunch.com/gmod/Panel:IsSelected) on all child objects and counting the number of returns that are `true`.
 ---

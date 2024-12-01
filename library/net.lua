@@ -243,11 +243,23 @@ function net.ReadVector() end
 --- * Player `ply` - The player that sent the message, works **only** server-side.
 function net.Receive(messageName, callback) end
 
----[SERVER] Sends the current net message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to the specified player, or to all players listed in the table.
+---[SERVER] Sends the current net message to the specified player(s)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Send)
----@param ply Player|CRecipientFilter The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
+---@param ply Player The player to send the message to.
 function net.Send(ply) end
+
+---[SERVER] Sends the current net message to the specified player(s)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Send)
+---@param plys table A table of players to send the message to.
+function net.Send(plys) end
+
+---[SERVER] Sends the current net message to the specified player(s)
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/net.Send)
+---@param filter CRecipientFilter A recipient filter specifying message targets.
+function net.Send(filter) end
 
 ---[SERVER] Sends the current message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all except the player or players specified.
 ---

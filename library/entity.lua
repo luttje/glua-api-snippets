@@ -503,9 +503,10 @@ function Entity:DropToFloor() end
 ---@param Name string Name by which you will refer to DTVar. It must be a valid variable name. (No spaces!)
 function Entity:DTVar(Type, ID, Name) end
 
----[SHARED] Plays a sound on an entity. If run clientside, the sound will only be heard locally.
+---[SHARED] Plays a sound on an entity.
 ---
---- If used on a player or NPC character with the mouth rigged, the character will "lip-sync". This does not work with all sound files.
+--- If run clientside, the sound will only be heard locally.
+--- If used on a player or NPC character with the mouth rigged, the character will "lip-sync" if the sound file contains lipsync data. See [this page](https://developer.valvesoftware.com/wiki/Choreography_creation/Lip_syncing) for more information.
 ---
 --- **NOTE**: When using this function with weapons, use the [Weapon](https://wiki.facepunch.com/gmod/Weapon) itself as the entity, not its owner!
 ---
@@ -514,7 +515,7 @@ function Entity:DTVar(Type, ID, Name) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:EmitSound)
 ---@param soundName string The name of the sound to be played.
 ---
---- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
+--- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (so don't include `sound/`, and make note that it's not sound**s** when moving the sound file itself)
 ---
 --- The string cannot have whitespace at the start or end. You can remove this with [string.Trim](https://wiki.facepunch.com/gmod/string.Trim).
 ---@param soundLevel? number A modifier for the distance this sound will reach, acceptable range is 0 to 511. 100 means no adjustment to the level. See Enums/SNDLVL
@@ -3397,8 +3398,9 @@ function Entity:PhysicsDestroy() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh)
 ---@param vertices table A table consisting of Structures/MeshVertex (only the `pos` element is taken into account). Every 3 vertices define a triangle in the physics mesh.
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
+---@param massCenterOveride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `nil` otherwise.
-function Entity:PhysicsFromMesh(vertices, surfaceprop) end
+function Entity:PhysicsFromMesh(vertices, surfaceprop, massCenterOveride) end
 
 ---[SHARED] Initializes the [physics object](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObject) of the entity using its current [model](https://wiki.facepunch.com/gmod/Entity:GetModel). Deletes the previous physics object if it existed and the new object creation was successful.
 ---
@@ -3416,8 +3418,9 @@ function Entity:PhysicsFromMesh(vertices, surfaceprop) end
 ---@param solidType number The solid type of the physics object to create, see Enums/SOLID. Should be `SOLID_VPHYSICS` in most cases.
 ---
 --- 		Using `SOLID_NONE` will only delete the current physics object - it does not create a new one.
+---@param massCenterOverride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `false` otherwise.
-function Entity:PhysicsInit(solidType) end
+function Entity:PhysicsInit(solidType, massCenterOverride) end
 
 ---[SHARED] Makes the physics object of the entity a AABB.
 ---
@@ -3436,8 +3439,9 @@ function Entity:PhysicsInit(solidType) end
 ---@param mins Vector The minimum position of the box. This is automatically ordered with the maxs.
 ---@param maxs Vector The maximum position of the box. This is automatically ordered with the mins.
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
+---@param massCenterOverride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `nil` otherwise. This fails when the game cannot create any more PhysCollides.
-function Entity:PhysicsInitBox(mins, maxs, surfaceprop) end
+function Entity:PhysicsInitBox(mins, maxs, surfaceprop, massCenterOverride) end
 
 ---[SHARED] Initializes the physics mesh of the entity with a convex mesh defined by a table of points. The resulting mesh is the  of all the input points. If successful, the previous physics object will be removed.
 ---
@@ -3464,8 +3468,9 @@ function Entity:PhysicsInitBox(mins, maxs, surfaceprop) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex)
 ---@param points table A table of eight Vectors, in local coordinates, to be used in the computation of the convex mesh. Order does not matter.
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
+---@param massCenterOverride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `false` otherwise.
-function Entity:PhysicsInitConvex(points, surfaceprop) end
+function Entity:PhysicsInitConvex(points, surfaceprop, massCenterOverride) end
 
 ---[SHARED] An advanced version of [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) which initializes a physics object from multiple convex meshes. This should be used for physics objects with a custom shape which cannot be represented by a single convex mesh.
 ---
@@ -3478,8 +3483,9 @@ function Entity:PhysicsInitConvex(points, surfaceprop) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:PhysicsInitMultiConvex)
 ---@param vertices table A table consisting of tables of Vectors. Each sub-table defines a set of points to be used in the computation of one convex mesh.
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
+---@param massCenterOverride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `nil` otherwise.
-function Entity:PhysicsInitMultiConvex(vertices, surfaceprop) end
+function Entity:PhysicsInitMultiConvex(vertices, surfaceprop, massCenterOverride) end
 
 ---[SHARED] Initializes the entity's physics object as a physics shadow. Removes the previous physics object if successful. This is used internally for the Player's and NPC's physics object, and certain HL2 entities such as the crane.
 ---
@@ -3987,6 +3993,8 @@ function Entity:SetCollisionGroup(group) end
 --- Some entities may need a custom [render mode](https://wiki.facepunch.com/gmod/Enums/RENDERMODE) set for transparency to work. See example 2.
 --- Entities also must have a proper [render group](https://wiki.facepunch.com/gmod/Enums/RENDERGROUP) set for transparency to work.
 ---
+--- When rendering a model manually via [Entity:SetNoDraw](https://wiki.facepunch.com/gmod/Entity:SetNoDraw) inside [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw), you may need to use [render.SetColorModulation](https://wiki.facepunch.com/gmod/render.SetColorModulation) in the render hook (where you call [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel)) instead.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetColor)
 ---@param color? table The color to set. Uses the Color.
 function Entity:SetColor(color) end
@@ -4009,6 +4017,8 @@ function Entity:SetColor4Part(r, g, b, a) end
 function Entity:SetCreator(ply) end
 
 ---[SHARED] Marks the entity to call [GM:ShouldCollide](https://wiki.facepunch.com/gmod/GM:ShouldCollide). Not to be confused with [Entity:EnableCustomCollisions](https://wiki.facepunch.com/gmod/Entity:EnableCustomCollisions).
+--- 		**NOTE**: Make sure to use [Entity:CollisionRulesChanged](https://wiki.facepunch.com/gmod/Entity:CollisionRulesChanged) after changing this value.
+--- 			Otherwise it can cause crashes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetCustomCollisionCheck)
 ---@param enable boolean Enable or disable the custom collision check
@@ -4747,6 +4757,8 @@ function Entity:SetNextClientThink(nextthink) end
 ---[SHARED] Sets if the entity's model should render at all.
 ---
 --- If set on the server, this entity will no longer network to clients, and for all intents and purposes cease to exist clientside.
+---
+--- The entity can still be manually rendered via [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel) in appropriate hooks.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNoDraw)
 ---@param shouldNotDraw boolean true disables drawing
