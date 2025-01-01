@@ -2365,7 +2365,7 @@ DOF_OFFSET = 256
 DOF_SPACING = 512
 
 ---@enum EF
---- Performs bone merge on client side
+--- Performs bone merge on client side, merging bone positions of child entities ([Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent)) with those of the parent, by bone names. The skeletons should have identical proportions, however it is not a requirement.
 EF_BONEMERGE = 1
 --- For use with EF_BONEMERGE. If this is set, then it places this ents origin at its parent and uses the parent's bbox + the max extents of the aiment. Otherwise, it sets up the parent's bones every frame to figure out where to place the aiment, which is inefficient because it'll setup the parent's bones even if the parent is not in the PVS.
 EF_BONEMERGE_FASTCULL = 128
@@ -3197,13 +3197,49 @@ MAT_GLASS = 89
 MAT_WARPSHIELD = 90
 
 ---@enum MATERIAL
+--- **WARNING**: The primitive type `MATERIAL_POINTS` does not currently work and will not produce any visual effect if used.
+---
+--- 			For more information, see [Point Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#points)
 MATERIAL_POINTS = 0
+--- **WARNING**: The primitive type `MATERIAL_LINES` does not currently work and will not produce any visual effect if used.
+---
+--- 			For more information, see [Line Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lines)
 MATERIAL_LINES = 1
+--- Creates triangles from groupings of 3 vertices.
+---
+--- 			TThe `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
+--- E.g. `(vertexCount / 3)`
+---
+--- 			For more information, see [Triangle Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#triangles)
 MATERIAL_TRIANGLES = 2
+--- Creates a set of triangles that each share two vertices with the previous triangle in the sequence.
+---
+--- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
+--- 			E.g. `(vertexCount - 2)`
+---
+--- 			For more information, see [Triangle Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#trianglestrips)
 MATERIAL_TRIANGLE_STRIP = 3
+--- **WARNING**: The primitive type `MATERIAL_LINE_STRIP` does not currently work and will not produce any visual effect if used.
+---
+--- 			For more information, see [Line Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#linestrips)
 MATERIAL_LINE_STRIP = 4
+--- **WARNING**: The primitive type `MATERIAL_LINE_LOOP` does not currently work and will not produce any visual effect if used.
+---
+--- 			For more information, see [Line Loop Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lineloops)
 MATERIAL_LINE_LOOP = 5
+--- Creates a set of triangles that all share a single vertex and each share a vertex with the previous triangle.
+---
+--- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of vertices that the Mesh will contain.
+--- 			E.g. `(vertexCount)`
+---
+--- 			For more information, see [Polygon Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#polygons)
 MATERIAL_POLYGON = 6
+--- Creates pairs of triangles that share two vertices.
+---
+--- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of quads that the Mesh will contain.
+--- 			E.g. `(vertexCount / 4)`
+---
+--- 			For more information, see [Quad Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#quads)
 MATERIAL_QUADS = 7
 
 ---@enum MATERIAL_CULLMODE

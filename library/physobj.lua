@@ -180,6 +180,14 @@ function PhysObj:GetEntity() end
 --- * number MaterialOther - Surface Property ID of the physics obj we came in contact with
 function PhysObj:GetFrictionSnapshot() end
 
+---[SHARED] Returns the index this physics object is on its [PhysObj:GetEntity](https://wiki.facepunch.com/gmod/PhysObj:GetEntity).
+---
+--- Useful for [Entity:TranslateBoneToPhysBone](https://wiki.facepunch.com/gmod/Entity:TranslateBoneToPhysBone).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetIndex)
+---@return number # The physics object index on its parent entity.
+function PhysObj:GetIndex() end
+
 ---[SHARED] Returns the principal moments of inertia `(Ixx, Iyy, Izz)` of the physics object, in the local frame, with respect to the center of mass.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PhysObj:GetInertia)

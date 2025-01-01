@@ -19,7 +19,7 @@ function DForm:AddItem(left, right) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DForm:Button)
 ---@param text string The text on the button
 ---@param concommand string The concommand to run when the button is clicked
----@param ... any The arguments to pass on to the concommand when the button is clicked
+---@param ...? any The arguments to pass on to the concommand when the button is clicked
 ---@return Panel # The created DButton
 function DForm:Button(text, concommand, ...) end
 

@@ -7,7 +7,8 @@ serverlist = {}
 --- Adds current server the player is on to their favorites.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddCurrentServerToFavorites)
-function serverlist.AddCurrentServerToFavorites() end
+---@param addOrRemove boolean `true` if to add, or `false` if to remove from favorites.
+function serverlist.AddCurrentServerToFavorites(addOrRemove) end
 
 ---[MENU] Adds the given server address to their favorites.
 ---

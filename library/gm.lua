@@ -960,14 +960,14 @@ function GM:OnEntityWaterLevelChanged(entity, old, new) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnGamemodeLoaded)
 function GM:OnGamemodeLoaded() end
 
----[SHARED AND MENU] Called when a Lua error occurs. Doesn't run for [Global.ErrorNoHalt](https://wiki.facepunch.com/gmod/Global.ErrorNoHalt) or [Global.Error](https://wiki.facepunch.com/gmod/Global.Error).
+---[SHARED AND MENU] Called when a Lua error occurs.
 --- **NOTE**: On the [server realm](https://wiki.facepunch.com/gmod/States), this hook will only account for server-side errors, not client-side ones.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnLuaError)
 ---@param error string The error that occurred.
 ---@param realm string Where the Lua error took place, "client", or "server"
 ---@param stack table The Lua error stack trace
----@param name string Title of the addon that is creating the Lua errors.
+---@param name string Title of the addon that is creating the Lua errors, or nil if addon is not found.
 ---@param id string Steam Workshop ID of the addon creating Lua errors, if it is an addon.
 function GM:OnLuaError(error, realm, stack, name, id) end
 
@@ -1048,7 +1048,7 @@ function GM:OnPhysgunReload(physgun, ply) end
 function GM:OnPlayerChangedTeam(ply, oldTeam, newTeam) end
 
 ---[CLIENT] Called whenever a player sends a chat message. For the serverside equivalent, see [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay).
---- **NOTE**: The text input of this hook depends on [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay). If it is suppressed on the server, it will be suppressed on the client. This also means, that a message surpressed with this hook will be still visible to other clients.
+--- **NOTE**: The input (or suppression) of this hook is based on the output from [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay). Chat events suppressed serverside do not call this hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:OnPlayerChat)
 ---@param ply Player The player
@@ -1573,7 +1573,7 @@ function GM:PlayerRequestTeam(ply, team) end
 
 ---[SERVER] Called when a player dispatched a chat message. For the clientside equivalent, see [GM:OnPlayerChat](https://wiki.facepunch.com/gmod/GM:OnPlayerChat).
 ---
---- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside because addons commonly return values in this hook to change chat messages.
+--- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside--addons commonly return values in this hook to change chat messages.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSay)
 ---@param sender Player The player which sent the message.
@@ -2330,7 +2330,7 @@ function GM:VehicleMove(ply, veh, mv) end
 ---@return boolean # Return true if the mouse click should be ignored or not.
 function GM:VGUIMousePressAllowed(button) end
 
----[CLIENT] Called when a mouse button is pressed on a VGUI element or menu.
+---[CLIENT AND MENU] Called when a mouse button is pressed on a VGUI element or menu.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:VGUIMousePressed)
 ---@param pnl Panel Panel that currently has focus.

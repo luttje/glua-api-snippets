@@ -142,3 +142,16 @@ function sound.PlayFile(path, flags, callback) end
 --- * number `errorID` - ID of an error if an error has occurred. Will be nil, otherwise.
 --- * string `errorName` - Name of an error if an error has occurred. Will be nil, otherwise.
 function sound.PlayURL(url, flags, callback) end
+
+---[SHARED] Sets the gender of a specific actor (model). This is a system from [base Half-Life 2](https://developer.valvesoftware.com/wiki/Global_actors) - `global_actors.txt`.
+---
+--- This will affect what voice lines `npc_citizen` will use when they have the given model set.
+---
+--- It is not limited to `npc_citizens` - any sound played on any entity with given model can have gender specific sounds playing, including soundscripts, by including `$gender` token in the sound file path.
+---
+--- **WARNING**: Internally the gender is stored by model file name only (i.e. `models/alyx.mdl` would be stored as `alyx`), not the full path! Be aware of potential collisions.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/sound.SetActorGender)
+---@param modelPath string Path to the model file to set the gender of.
+---@param gender string Gender to set. Only 2 options are permitted: `female` and `male`. Any other option will be ignored.
+function sound.SetActorGender(modelPath, gender) end

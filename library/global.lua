@@ -982,8 +982,6 @@ function _G.EyeVector() end
 
 ---[SHARED AND MENU] Returns the meta table for the class with the matching name.
 ---
---- Internally returns [debug.getregistry](https://wiki.facepunch.com/gmod/debug.getregistry)()[metaName]
----
 --- You can learn more about meta tables on the [Meta Tables](https://wiki.facepunch.com/gmod/Meta Tables) page.
 ---
 --- You can find a list of meta tables that can be retrieved with this function on [Enums/TYPE](https://wiki.facepunch.com/gmod/Enums/TYPE). The name in the description is the string to use with this function.
@@ -2428,8 +2426,7 @@ function _G.RegisterDermaMenuForClose(menu) end
 ---@param metaTable table The new metatable table. It will be given a `MetaID` and `MetaName` fields.
 function _G.RegisterMetaTable(metaName, metaTable) end
 
----[CLIENT AND MENU] Saves position of your cursor on screen. You can restore it by using
---- [Global.RestoreCursorPosition](https://wiki.facepunch.com/gmod/Global.RestoreCursorPosition).
+---[CLIENT AND MENU] Saves position of your cursor on screen. You can restore it by using [Global.RestoreCursorPosition](https://wiki.facepunch.com/gmod/Global.RestoreCursorPosition). This is used internally by the spawn menu/context menu
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.RememberCursorPosition)
 function _G.RememberCursorPosition() end
@@ -2838,7 +2835,7 @@ function _G.SetGlobalFloat(index, float) end
 ---
 --- **NOTE**: Running this function clientside will only set it clientside for the client it is called on!
 ---
---- This function will not round decimal values as it actually networks a float internally.
+--- This function will not round decimal values as it actually networks a 64 bit float internally.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.SetGlobalInt)
 ---@param index string The unique index to identify the global value with.

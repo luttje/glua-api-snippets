@@ -456,6 +456,8 @@ OnRequestFullUpdate.index = nil
 ---
 --- 			**NOTE**: This is called after [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn) so you could just use that hook serverside.
 ---
+--- 			**NOTE**: Sending net messages to the player in this hook is reliable, unlike [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn)
+---
 ---
 ---@class player_activate
 local player_activate = {}
@@ -466,6 +468,8 @@ player_activate.userid = nil
 
 ---
 --- 			Called when a player changes their Steam name.
+--- 			**NOTE**: Functions like [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) return the old name here.
+---
 ---
 ---@class player_changename
 local player_changename = {}

@@ -21,7 +21,7 @@ function physenv.GetAirDensity() end
 ---[SHARED] Gets the gravitational acceleration used for physics objects in `source_unit/s^2`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetGravity)
----@return Vector # gravAccel
+---@return Vector # Gravity direction and strength.
 function physenv.GetGravity() end
 
 ---[SHARED] Returns the last simulation duration of the in-game physics.
@@ -36,14 +36,19 @@ function physenv.GetLastSimulationTime() end
 ---@return table # Performance settings. See Structures/PhysEnvPerformanceSettings
 function physenv.GetPerformanceSettings() end
 
+---[SHARED] Returns the pause status of global physics simulation. See [physenv.SetPhysicsPaused](https://wiki.facepunch.com/gmod/physenv.SetPhysicsPaused) for the setter.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.GetPhysicsPaused)
+---@return boolean # `true` if paused.
+function physenv.GetPhysicsPaused() end
+
 ---[SHARED] Sets the air density.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetAirDensity)
 ---@param airDensity number The new air density.
 function physenv.SetAirDensity(airDensity) end
 
----[SHARED] Sets the gravitational acceleration used for physics objects.
---- 		**NOTE**: Does not work on players.
+---[SHARED] Sets the gravitational acceleration used for physics objects. Does not affect players.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetGravity)
 ---@param gravAccel Vector The new gravity in `source_unit/s^2`.
@@ -54,3 +59,9 @@ function physenv.SetGravity(gravAccel) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings)
 ---@param performanceSettings table The new performance settings. See Structures/PhysEnvPerformanceSettings
 function physenv.SetPerformanceSettings(performanceSettings) end
+
+---[SHARED] Pauses or unpauses the physics simulation globally. See [physenv.GetPhysicsPaused](https://wiki.facepunch.com/gmod/physenv.GetPhysicsPaused) for the getter.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/physenv.SetPhysicsPaused)
+---@param pause boolean `true` to pause, `false` to unpause.
+function physenv.SetPhysicsPaused(pause) end

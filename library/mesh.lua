@@ -18,6 +18,9 @@ function mesh.AdvanceVertex() end
 --- 			For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number
 --- 			The quantity of primitives this mesh will contain as a whole integer number.
+---
+--- 			The expected value of this argument is dependent on the primitive type used.
+--- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
 function mesh.Begin(primitiveType, primitiveCount) end
 
 ---[CLIENT] Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
@@ -31,7 +34,10 @@ function mesh.Begin(primitiveType, primitiveCount) end
 --- 			An enum that indicates what the format of the mesh's primitives will be.
 --- 			For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number
---- 			The quantity of primitives this mesh will contain, as a whole integer number.
+--- 			The quantity of primitives this mesh will contain as a whole integer number.
+---
+--- 			The expected value of this argument is dependent on the primitive type used.
+--- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
 function mesh.Begin(mesh, primitiveType, primitiveCount) end
 
 ---[CLIENT] Sets the color to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).

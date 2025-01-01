@@ -3017,7 +3017,7 @@ UGCFileInfo.ownername = nil
 
 ---If this key is set, no other data will be present in the response.
 ---
---- Values above 0 represent Steam Error codes, values below 0 mean the following:
+--- Values above 0 represent Steam Error codes (https://steamerrors.com/), values below 0 mean the following:
 --- * -1 means Failed to create query
 --- * -2 means Failed to send query
 --- * -3 means Received 0 or more than 1 result

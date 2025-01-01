@@ -274,6 +274,12 @@ function NPC:GetEnemyLastTimeSeen(enemy) end
 ---@return string # The file path of the expression.
 function NPC:GetExpression() end
 
+---[SERVER] Returns the Field Of View of the NPC. See [NPC:SetFOV](https://wiki.facepunch.com/gmod/NPC:SetFOV).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetFOV)
+---@return number # The FOV for the NPC in degrees.
+function NPC:GetFOV() end
+
 ---[SERVER] Returns the position we are trying to reach, if any.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetGoalPos)
@@ -338,6 +344,14 @@ function NPC:GetKnownEnemies() end
 ---@return number # Amount of entities that this NPC knows as enemies.
 function NPC:GetKnownEnemyCount() end
 
+---[SERVER] Returns the last registered or memorized position of the NPC. When using scheduling, the NPC will focus on navigating to the last position via nodes.
+---
+--- See [NPC:SetLastPosition](https://wiki.facepunch.com/gmod/NPC:SetLastPosition).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetLastPosition)
+---@return Vector # Where the NPC's last position was set to.
+function NPC:GetLastPosition() end
+
 ---[SERVER] Returns [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) based time since this NPC last received damage from given enemy. The last damage time is set when [NPC:MarkTookDamageFromEnemy](https://wiki.facepunch.com/gmod/NPC:MarkTookDamageFromEnemy) is called.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetLastTimeTookDamageFromEnemy)
@@ -363,6 +377,14 @@ function NPC:GetMinMoveCheckDist() end
 ---@param minResult? number The minimum value that will be returned by this function.
 ---@return number # The minimum stop distance.
 function NPC:GetMinMoveStopDist(minResult) end
+
+---[SERVER] Returns the movement delay for given NPC.
+---
+--- See [NPC:SetMoveDelay](https://wiki.facepunch.com/gmod/NPC:SetMoveDelay).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetMoveDelay)
+---@return number # The movement delay.
+function NPC:GetMoveDelay() end
 
 ---[SERVER] Returns the current timestep the internal NPC motor is working on.
 ---
@@ -424,9 +446,9 @@ function NPC:GetPathDistanceToGoal() end
 ---@return number # The amount of time to get to the target goal.
 function NPC:GetPathTimeToGoal() end
 
----[SERVER] Returns the shooting position of the NPC.
+---[SERVER] Returns the shooting position of the NPC, i.e. where their bullets would come from, etc.
 ---
---- **NOTE**: This only works properly when called on an NPC that can hold weapons, otherwise it will return the same value as [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos).
+--- If the NPC does not overwrite this, it will return [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetShootPos)
 ---@return Vector # The NPC's shooting position.
@@ -554,6 +576,20 @@ function NPC:IsFacingIdealYaw() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:IsGoalActive)
 ---@return boolean # Whether the NPC has an active goal or not.
 function NPC:IsGoalActive() end
+
+---[SERVER] Tests whether a position or an NPC is in the view cone of the NPC.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:IsInViewCone)
+---@param position Vector The position to test.
+---@return boolean # If the given position is in the view cone.
+function NPC:IsInViewCone(position) end
+
+---[SERVER] Tests whether a position or an NPC is in the view cone of the NPC.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:IsInViewCone)
+---@param ent Entity The entity to test. Will use the entity's position.
+---@return boolean # If the given position is in the view cone.
+function NPC:IsInViewCone(ent) end
 
 ---[SERVER] Returns if the current movement is locked on the Yaw axis.
 ---
@@ -869,6 +905,12 @@ function NPC:SetEnemy(enemy, newenemy) end
 ---@return number #
 function NPC:SetExpression(expression) end
 
+---[SERVER] Sets the Field Of View of the NPC, for use with such functions as [NPC:IsInViewCone](https://wiki.facepunch.com/gmod/NPC:IsInViewCone). it is also used internally by the NPC for enemy detection, etc.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetFOV)
+---@param fov number The new FOV for the NPC in degrees.
+function NPC:SetFOV(fov) end
+
 ---[SERVER] Updates the NPC's hull and physics hull in order to match its model scale. [Entity:SetModelScale](https://wiki.facepunch.com/gmod/Entity:SetModelScale) seems to take care of this regardless.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetHullSizeNormal)
@@ -914,13 +956,13 @@ function NPC:SetIdealYawAndUpdate(angle, speed) end
 ---@param size number Number of conditions to include in the ignored conditions table. Set this to the size of ignored conditions table to ignore all specified conditions.
 function NPC:SetIgnoreConditions(conditions, size) end
 
----[SERVER] Sets the last registered or memorized position for an npc. When using scheduling, the NPC will focus on navigating to the last position via nodes.
+---[SERVER] Sets the last registered or memorized position for this NPC. When using scheduling, the NPC will focus on navigating to the last position via nodes.
 ---
 --- **NOTE**: The navigation requires ground nodes to function properly, otherwise the NPC could only navigate in a small area. (https://developer.valvesoftware.com/wiki/Info_node)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetLastPosition)
----@param Position Vector Where the NPC's last position will be set.
-function NPC:SetLastPosition(Position) end
+---@param position Vector Where the NPC's last position will be set.
+function NPC:SetLastPosition(position) end
 
 ---[SERVER] Sets NPC's max view distance. An NPC will not be able to see enemies outside of this distance.
 ---
@@ -933,6 +975,14 @@ function NPC:SetMaxLookDistance(dist) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetMaxRouteRebuildTime)
 ---@param time number How long to try rebuilding path before failing task
 function NPC:SetMaxRouteRebuildTime(time) end
+
+---[SERVER] Sets the movement delay for given NPC.
+---
+--- See [NPC:GetMoveDelay](https://wiki.facepunch.com/gmod/NPC:GetMoveDelay).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:SetMoveDelay)
+---@param delay number The amount of time in seconds to delay movement by.
+function NPC:SetMoveDelay(delay) end
 
 ---[SERVER] Sets the timestep the internal NPC motor is working on.
 ---

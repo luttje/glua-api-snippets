@@ -907,7 +907,7 @@ function Player:GetPreviousWeapon() end
 function Player:GetPunchAngle() end
 
 ---[SHARED] Returns players death ragdoll. The ragdoll is created by [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll).
---- Calling [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) server-side with this function then will return the position when [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll) was used.
+--- **NOTE**: Calling [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) server-side with this function then will return the position where [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll) was used, as it is a hl2mp_ragdoll which is a serverside point entity that creates a clientside ragdoll for everyone (opposed to prop_ragdoll that is serverside and networks).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GetRagdollEntity)
 ---@return Entity # The ragdoll.
@@ -1096,7 +1096,7 @@ function Player:Give(weaponClassName, bNoAmmo) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:GiveAmmo)
 ---@param amount number Amount of ammo
----@param type any Type of ammo.
+---@param type string|number Type of ammo.
 --- This is a string for named ammo types, and a number for ammo ID.
 ---
 --- You can find a list of default ammo types Default_Ammo_Types.
@@ -1510,7 +1510,7 @@ function Player:RemoveAllItems() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:RemoveAmmo)
 ---@param ammoCount number The amount of ammunition to remove.
----@param ammoName string The name of the ammunition to remove from. This can also be a number ammoID.
+---@param ammoName string|number The name of the ammunition to remove from. This can also be a number ammoID.
 function Player:RemoveAmmo(ammoCount, ammoName) end
 
 ---[SHARED] Removes a **P**ersistent **Data** key-value pair from the SQL database. (`sv.db` when called on server, `cl.db` when called on client)
@@ -1955,10 +1955,10 @@ function Player:SetUnDuckSpeed(UnDuckSpeed) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/PLAYER:SetupDataTables)
 function PLAYER:SetupDataTables() end
 
----[SERVER] Sets up the players view model hands. Calls [GM:PlayerSetHandsModel](https://wiki.facepunch.com/gmod/GM:PlayerSetHandsModel) to set the model of the hands.
+---[SERVER] Sets up the player's hands for the viewmodel. Calls [GM:PlayerSetHandsModel](https://wiki.facepunch.com/gmod/GM:PlayerSetHandsModel) to determine the model. If no entity is provided, uses the player's own hands model. If spectating another entity, pass that entity to use its hands model instead.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetupHands)
----@param ent Entity If the player is spectating an entity, this should be the entity the player is spectating, so we can use its hands model instead.
+---@param ent? Entity If the player is spectating an entity, this should be the entity the player is spectating, so we can use its hands model instead.
 function Player:SetupHands(ent) end
 
 ---[SERVER] Sets the usergroup of the player.
@@ -2019,7 +2019,7 @@ function Player:SetVoiceVolumeScale(number) end
 ---
 --- Using a speed of `0` can lead to prediction errors.
 ---
---- **NOTE**: `player_default` class walk speed is: `160`.
+--- **NOTE**: `player_default` class walk speed is: `200`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed)
 ---@param walkSpeed number The new walk speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.

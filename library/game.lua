@@ -52,8 +52,8 @@ function game.BuildAmmoTypes() end
 --- Beware of calling this function in hooks that may be called on map clean up (such as [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch)) to avoid infinite loops.
 ---
 --- Calling this destroys all BASS streams.
----
 --- This can crash when removing `_firesmoke` entities. **You can use the example below to workaround this issue.**
+--- The EFL_KEEP_ON_RECREATE_ENTITIES flag doesn't prevent an entity from being recreated, which means flagged entities will be duplicated since they are both kept and recreated.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.CleanUpMap)
 ---@param dontSendToClients? boolean If set to `true`, don't run this functions on all clients.
@@ -326,7 +326,7 @@ function game.SetTimeScale(timeScale) end
 ---@return boolean # isSinglePlayer
 function game.SinglePlayer() end
 
----[SHARED] Returns position the player should start from, this is not the same thing as spawn points, it is used to properly transit the player between maps.
+---[SERVER] Returns position the player should start from, this is not the same thing as spawn points, it is used to properly transit the player between maps.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.StartSpot)
 ---@return Vector # startSpot

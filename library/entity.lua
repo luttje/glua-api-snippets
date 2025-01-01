@@ -141,6 +141,18 @@ function ENTITY:AddOutputFromKeyValue(key, value) end
 ---@param flags number The flag(s) to apply, see Enums/FSOLID.
 function Entity:AddSolidFlags(flags) end
 
+---[SHARED] Adds onto the current SpawnFlags of an Entity.
+---
+--- SpawnFlags can easily be found on https://developer.valvesoftware.com/wiki/.
+---
+--- 	**NOTE**: See also [Entity:RemoveSpawnFlags](https://wiki.facepunch.com/gmod/Entity:RemoveSpawnFlags), [Entity:SetSpawnFlags](https://wiki.facepunch.com/gmod/Entity:SetSpawnFlags)
+---
+--- 	Using [SF Enumerations](https://wiki.facepunch.com/gmod/Enums/SF) won't work, if this function is ran clientside due to the enumerations being defined only Serverside. Use the actual SpawnFlag number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:AddSpawnFlags)
+---@param flag number The SpawnFlag to add to the Entity
+function Entity:AddSpawnFlags(flag) end
+
 ---[SHARED] Adds a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ect to the entity's motion controller so that [ENTITY:PhysicsSimulate](https://wiki.facepunch.com/gmod/ENTITY:PhysicsSimulate) will be called for given [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ect as well.
 ---
 --- You must first create a motion controller with [Entity:StartMotionController](https://wiki.facepunch.com/gmod/Entity:StartMotionController).
@@ -267,7 +279,7 @@ function Entity:CallOnRemove(identifier, removeFunc, ...) end
 
 ---[SHARED] Controls if a property can be used on this entity or not.
 ---
---- This hook will only work in Sandbox derived gamemodes that do not have [SANDBOX:CanProperty](https://wiki.facepunch.com/gmod/SANDBOX:CanProperty) overridden.
+--- This hook will only work in Sandbox derived gamemodes that do not have [GM:CanProperty](https://wiki.facepunch.com/gmod/GM:CanProperty) overridden.
 ---
 --- **NOTE**: This hook will work on ALL entities, not just the scripted ones (SENTs)
 ---
@@ -420,6 +432,8 @@ function Entity:Dissolve(type, magnitude, origin) end
 ---[SHARED] Called so the entity can override the bullet impact effects it makes. This is called when the entity itself fires bullets via [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets), not when it gets hit.
 ---
 --- **NOTE**: This hook only works for the "anim" type entities.
+---
+--- **NOTE**: Despite the hook being shared, this hook will be triggered only on the realm which fires the bullet.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:DoImpactEffect)
 ---@param tr table A Structures/TraceResult from the bullet's start point to the impact point
@@ -3029,7 +3043,7 @@ function Entity:ManipulateBoneScale(boneID, scale) end
 
 ---[SHARED] Returns entity's map creation ID. Unlike [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) or [Entity:GetCreationID](https://wiki.facepunch.com/gmod/Entity:GetCreationID), it will always be the same on same map, no matter how much you clean up or restart it.
 ---
---- To be used in conjunction with [ents.GetMapCreatedEntity](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity).
+--- To be used in conjunction with [ents.GetMapCreatedEntity](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity). See also [Entity:CreatedByMap](https://wiki.facepunch.com/gmod/Entity:CreatedByMap).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:MapCreationID)
 ---@return number # The map creation ID or -1 if the entity is not compiled into the map.
@@ -3713,6 +3727,18 @@ function Entity:RemoveInternalConstraint(num) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:RemoveSolidFlags)
 ---@param flags number The flag(s) to remove, see Enums/FSOLID.
 function Entity:RemoveSolidFlags(flags) end
+
+---[SHARED] Removes a SpawnFlag from the current SpawnFlags of an Entity.
+---
+--- SpawnFlags can easily be found on https://developer.valvesoftware.com/wiki/.
+---
+--- 	**NOTE**: See also [Entity:AddSpawnFlags](https://wiki.facepunch.com/gmod/Entity:AddSpawnFlags), [Entity:SetSpawnFlags](https://wiki.facepunch.com/gmod/Entity:SetSpawnFlags)
+---
+--- 	Using [SF Enumerations](https://wiki.facepunch.com/gmod/Enums/SF) won't work, if this function is ran clientside due to the enumerations being defined only Serverside. Use the actual SpawnFlag number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:RemoveSpawnFlags)
+---@param flag number The SpawnFlag to remove from the Entity
+function Entity:RemoveSpawnFlags(flag) end
 
 ---[CLIENT] Called instead of the engine drawing function of the entity. This hook works on any entity (scripted or not) it is applied on.
 ---
@@ -4742,7 +4768,8 @@ function Entity:SetNetworkedVarProxy(name, callback) end
 ---@deprecated You should use Entity:SetNWVector instead.
 function Entity:SetNetworkedVector(key, value) end
 
----[SHARED] Virtually changes entity position for clients. Does the same thing as [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) when used serverside.
+---[SHARED] Virtually changes entity position for clients. Does almost the same thing as [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) when used serverside.
+--- 		**NOTE**: Unlike [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) it directly changes the position without checking for any unreasonable position.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetNetworkOrigin)
 ---@param origin Vector The position to make clients think this entity is at.
@@ -5257,7 +5284,7 @@ function Entity:SetSaveValue(name, value) end
 --- For custom scripted entities you will want to apply example from [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) to make animations work.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetSequence)
----@param sequenceId number The sequence to play. Also accepts strings.
+---@param sequenceId number|string The sequence to play. Also accepts strings.
 ---
 --- If set to a string, the function will automatically call [Entity:LookupSequence](https://wiki.facepunch.com/gmod/Entity:LookupSequence) to retrieve the sequence ID as a number.
 function Entity:SetSequence(sequenceId) end
@@ -5307,6 +5334,18 @@ function Entity:SetSolidFlags(flags) end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetSpawnEffect)
 ---@param spawnEffect boolean Sets if we should show a spawn effect.
 function Entity:SetSpawnEffect(spawnEffect) end
+
+---[SHARED] Sets the SpawnFlags to set of an Entity
+---
+--- SpawnFlags can easily be found on https://developer.valvesoftware.com/wiki/.
+---
+--- 	**NOTE**: See also [Entity:RemoveSpawnFlags](https://wiki.facepunch.com/gmod/Entity:RemoveSpawnFlags), [Entity:AddSpawnFlags](https://wiki.facepunch.com/gmod/Entity:AddSpawnFlags)
+---
+--- 		Using [SF Enumerations](https://wiki.facepunch.com/gmod/Enums/SF) won't work, if this function is ran clientside due to the enumerations being defined only Serverside. Use the actual SpawnFlag number.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetSpawnFlags)
+---@param flags number The SpawnFlag to remove from the Entity
+function Entity:SetSpawnFlags(flags) end
 
 ---[SHARED] Overrides a single material on the model of this entity.
 ---
@@ -5724,6 +5763,30 @@ function ENTITY:TranslateActivity(act) end
 ---@param boneID number The ID of a bone to look up the "physics root" bone of.
 ---@return number # The PhysObj ID of the given bone to be used with Entity:GetPhysicsObjectNum or `-1` if we cannot translate for some reason, such as a model bone having no physics object associated with it.
 function Entity:TranslateBoneToPhysBone(boneID) end
+
+---[SERVER] Called by the engine to alter NPC's final position to reach its enemy or target.
+---
+--- **NOTE**: This hook only exists for `ai` type SENTs.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:TranslateNavGoal)
+---@param enemy? Entity The enemy being chased.
+---@param currentGoal? Vector The enemy's chase position.
+---@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
+---
+--- Do not return anything to not override.
+function ENTITY:TranslateNavGoal(enemy, currentGoal) end
+
+---[SERVER] Called by the engine to alter NPC's final position to reach its enemy or target.
+---
+--- **NOTE**: This hook only exists for `ai` type SENTs.
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:TranslateNavGoal)
+---@param target Entity The path_corner in query.
+---@param currentGoal Vector path_corner's origin.
+---@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
+---
+--- Do not return anything to not override.
+function ENTITY:TranslateNavGoal(target, currentGoal) end
 
 ---[SHARED] Returns the boneID of the bone the given [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) is attached to.
 ---
