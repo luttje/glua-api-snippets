@@ -57,7 +57,7 @@ function ents.FindAlongRay(start, _end, mins, maxs) end
 ---@return table # A table containing all found entities
 function ents.FindByClass(class) end
 
----[SHARED] Finds all entities that are of given class and are children of given entity. This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
+---[SHARED] Finds all entities that are of given class and are children of given entity. This works internally by iterating over [ents.FindByClass](https://wiki.facepunch.com/gmod/ents.FindByClass).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindByClassAndParent)
 ---@param class string The class of entities to search for
