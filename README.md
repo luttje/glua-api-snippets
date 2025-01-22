@@ -83,6 +83,7 @@ The API is also available as JSON. You can find it with the Lua API package [on 
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Techbot121"><img src="https://avatars.githubusercontent.com/u/3000604?v=4?s=100" width="100px;" alt="Techbot121"/><br /><sub><b>Techbot121</b></sub></a><br /><a href="#bug-Techbot121" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TIMONz1535"><img src="https://avatars.githubusercontent.com/u/7351599?v=4?s=100" width="100px;" alt="TIMON_Z1535"/><br /><sub><b>TIMON_Z1535</b></sub></a><br /><a href="#ideas-TIMONz1535" title="Ideas, Planning, & Feedback">🤔</a> <a href="#bug-TIMONz1535" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
