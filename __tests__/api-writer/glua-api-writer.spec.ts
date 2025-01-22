@@ -170,12 +170,17 @@ describe('GLua API Writer', () => {
         },
         {
           key: 'MATERIAL_FOG_LINEAR_BELOW_FOG_Z',
-          value: '2',
+          value: '-2147483648', // test large negative number
+        },
+        {
+          // Should be skipped
+          key: 'MATERIAL_FOG_NEW_FAKE',
+          value: 'TODO',
         }
       ],
     });
 
-    expect(api).toEqual(`---@alias MATERIAL_FOG 0|1|2\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2\n\n\n`);
+    expect(api).toEqual(`---@alias MATERIAL_FOG 0|1|-2147483648\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n\n`);
   });
 
   it('should create enums for table enumerations', () => {

@@ -240,7 +240,9 @@ export class GluaApiWriter {
     } else {
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
       // will use @alias as a workaround
-      const validEnumerations = _enum.items.map(item => item.value).join('|');
+      const validEnumerations = _enum.items.map(item => item.value)
+        .filter(value => !isNaN(Number(value)))
+        .join('|');
       api += `---@alias ${_enum.name} ${validEnumerations}\n`;
     }
 
@@ -252,6 +254,12 @@ export class GluaApiWriter {
     const writeItem = (key: string, item: typeof _enum.items[0]) => {
       if (key === '') {
         // Happens for SCREENFADE which has a blank key to describe what 0 does.
+        return;
+      }
+
+      if (isNaN(Number(item.value.trim()))) {
+        // Happens for TODO value in NAV_MESH_BLOCKED_LUA in https://wiki.facepunch.com/gmod/Enums/NAV_MESH
+        console.warn(`Enum ${_enum.name} has a TODO value for key ${key}. Skipping.`);
         return;
       }
 
