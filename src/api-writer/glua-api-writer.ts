@@ -358,6 +358,13 @@ export class GluaApiWriter {
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
 
       return `${innerType}[]`;
+    } else if (type.startsWith('table{')) {
+      // Convert table{ToScreenData} structures to ToScreenData class for LuaLS
+      let innerType = type.match(/{([^}]+)}/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid table type: ${type}`);
+
+      return innerType;
     }
 
     return type;

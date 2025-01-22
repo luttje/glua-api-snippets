@@ -297,6 +297,28 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
   });
 
+  it('should support structure table type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'ToScreen',
+      address: 'Vector.ToScreen',
+      parent: 'Vector',
+      dontDefineParent: true,
+      description: 'Returns where on the screen the specified position vector would appear.',
+      realm: 'Client',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table{ToScreenData}',
+          description: 'The created Structures/ToScreenData.',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[CLIENT] Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+  });
+
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
   //   fetchMock.mockResponseOnce(html, { url: baseUrl });
