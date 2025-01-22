@@ -180,7 +180,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) The fog mode.\n---@alias MATERIAL_FOG 0|1|-2147483648\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n\n`);
+    expect(api).toEqual(`--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n---@alias MATERIAL_FOG\n---| \`MATERIAL_FOG_NONE\`\n---| \`MATERIAL_FOG_LINEAR\`\n---| \`MATERIAL_FOG_LINEAR_BELOW_FOG_Z\`\n\n\n`);
   });
 
   it('should create enums for table enumerations', () => {

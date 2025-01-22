@@ -256,38 +256,52 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
         if (isEnum) {
           // Some pages like https://wiki.facepunch.com/gmod/Enums/STENCIL specify multiple enums.
-          // To handle this we loop through each enum and only select values from the current enum.
+          // To handle this we merge the items of all the enums into one array so they can be
+          // put into a single 'enum'. This is not ideal, as descriptions also need to be merged.
           // TODO: Are there other pages like this, like for structs?
-          const enumNodes = $('enum');
-
-          const enums = enumNodes.map(function () {
+          const items = $('items item').map(function () {
             const $el = $(this);
-            const items = $el.find('items item').map(function () {
+            const deprecated = $el.find('deprecated').map(function () {
               const $el = $(this);
-              const deprecated = $el.find('deprecated').map(function () {
-                const $el = $(this);
-                return $el.text().trim();
-              }).get().join(' - ');
+              return $el.text().trim();
+            }).get().join(' - ');
 
-              return <EnumValue>{
-                key: $el.attr('key')!,
-                value: $el.attr('value')!,
-                description: markdownifyDescription($, $el),
-                ...deprecated && { deprecated }
-              };
-            }).get();
-
-            return <Enum>{
-              type: 'enum',
-              name: address,
-              address: address,
-              description: markdownifyDescription($, $el.find('description')),
-              realm: $el.find('realm').text().toLowerCase() as Realm,
-              items
+            return <EnumValue>{
+              key: $el.attr('key')!,
+              value: $el.attr('value')!,
+              description: markdownifyDescription($, $el),
+              ...deprecated && { deprecated }
             };
           }).get();
 
-          return enums;
+          const $el = $('enum');
+
+          return <Enum>{
+            type: 'enum',
+            name: address,
+            address: address,
+            description: $el.length > 1
+              ? $el.map(function () {
+                return $(this).map(function () {
+                  const enumerations = $(this)
+                    .find('items item')
+                    .map(function () {
+                      return '`' + $(this).attr('key') + '`';
+                    })
+                    .get()
+                    .join(', ');
+
+                  return `### ${enumerations}\n${markdownifyDescription($, $el.find('description'))}`;
+                })
+                  .get()
+                  .join(', ');
+              })
+                .get()
+                .join('\n')
+              : markdownifyDescription($, $el.find('description')),
+            realm: $el.first().find('realm').text().toLowerCase() as Realm,
+            items
+          };
         } else if (isStruct) {
           const fields = $('fields item').map(function () {
             const $el = $(this);

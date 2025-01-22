@@ -45,7 +45,6 @@ type IndexedWikiPage = {
 
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
-  private readonly writtenEnums: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
   private readonly pageOverrides: Map<string, string> = new Map();
 
@@ -241,32 +240,12 @@ export class GluaApiWriter {
         ? _enum.items[1]?.key.includes('.')
         : _enum.items[0]?.key.includes('.');
 
-    api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
-
     if (_enum.deprecated)
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     if (isContainedInTable) {
+      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
       api += `---@enum ${_enum.name}\n`;
-    } else {
-      // TODO: Clean up this workaround when LuaLS supports global enumerations.
-      // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
-      // will use @alias as a workaround.
-      // However since https://wiki.facepunch.com/gmod/Enums/STENCIL defines multiple enums in one page, we need to
-      // be careful to only define an enum once.
-      // TODO: This only works because both enum definitions for STENCIL have the values 1-8. If the latter enum
-      // TODO: had different values, only the values of the first enum would be used.
-      if (!this.writtenEnums.has(_enum.name)) {
-        const validEnumerations = _enum.items.map(item => item.value)
-          .filter(value => !isNaN(Number(value)))
-          .join('|');
-        api += `---@alias ${_enum.name} ${validEnumerations}\n`;
-      }
-    }
-
-    this.writtenEnums.add(_enum.name);
-
-    if (isContainedInTable) {
       api += `${_enum.name} = {\n`;
     }
 
@@ -301,8 +280,22 @@ export class GluaApiWriter {
     for (const item of _enum.items)
       writeItem(item.key, item);
 
-    if (isContainedInTable)
+    if (isContainedInTable) {
       api += '}';
+    } else {
+      // TODO: Clean up this workaround when LuaLS supports global enumerations.
+      // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
+      // will use @alias as a workaround.
+      // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
+      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      api += `\n---@alias ${_enum.name}\n`;
+
+      for (const item of _enum.items) {
+        if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
+          api += `---| \`${item.key}\`\n`;
+        }
+      }
+    }
 
     api += `\n\n`;
 
