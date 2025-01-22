@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { escapeSingleQuotes, indentText, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -225,12 +225,24 @@ export class GluaApiWriter {
 
   private writeEnum(_enum: Enum) {
     let api: string = '';
-    const isContainedInTable = _enum.items[0]?.key.includes('.') ?? false;
+
+    // If the first key is empty (like SCREENFADE has), check the second key
+    const isContainedInTable =
+      _enum.items[0]?.key === ''
+        ? _enum.items[1]?.key.includes('.')
+        : _enum.items[0]?.key.includes('.');
 
     if (_enum.deprecated)
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
-    api += `---@enum ${_enum.name}\n`;
+    if (isContainedInTable) {
+      api += `---@enum ${_enum.name}\n`;
+    } else {
+      // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
+      // will use @alias as a workaround
+      const validEnumerations = _enum.items.map(item => item.value).join('|');
+      api += `---@alias ${_enum.name} ${validEnumerations}\n`;
+    }
 
     if (isContainedInTable) {
       api += _enum.description ? `${putCommentBeforeEachLine(_enum.description.trim(), false)}\n` : '';
@@ -238,9 +250,19 @@ export class GluaApiWriter {
     }
 
     const writeItem = (key: string, item: typeof _enum.items[0]) => {
+      if (key === '') {
+        // Happens for SCREENFADE which has a blank key to describe what 0 does.
+        return;
+      }
+
       if (isContainedInTable) {
         key = key.split('.')[1];
-        api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+
+        if (item.description?.trim()) {
+          api += `${indentText(putCommentBeforeEachLine(item.description.trim(), false), 2)}\n`;
+        }
+
+        api += `  ${key} = ${item.value},\n`;
       } else {
         api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
         if (item.deprecated)
@@ -363,6 +385,13 @@ export class GluaApiWriter {
       let innerType = type.match(/{([^}]+)}/)?.[1];
 
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
+
+      return innerType;
+    } else if (type.startsWith('number{')) {
+      // Convert number{MATERIAL_FOG} to MATERIAL_FOG enum for LuaLS
+      let innerType = type.match(/{([^}]+)}/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid number type: ${type}`);
 
       return innerType;
     }

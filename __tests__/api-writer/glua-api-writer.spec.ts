@@ -6,7 +6,7 @@ import { apiDefinition as structApiDefinition, markup as structMarkup, json as s
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
-import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { Enum, LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -147,6 +147,79 @@ describe('GLua API Writer', () => {
     const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
 
     expect(api).toMatch(new RegExp(`^${overrideStart}`));
+  });
+
+  it('should create aliasses for global enumerations', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<Enum>{
+      type: 'enum',
+      name: 'MATERIAL_FOG',
+      address: 'Enums/MATERIAL_FOG',
+      description: 'The fog mode.',
+      realm: 'Client',
+      items: [
+        {
+          key: 'MATERIAL_FOG_NONE',
+          value: '0',
+          description: 'No fog',
+        },
+        {
+          key: 'MATERIAL_FOG_LINEAR',
+          value: '1',
+          description: 'Linear fog',
+        },
+        {
+          key: 'MATERIAL_FOG_LINEAR_BELOW_FOG_Z',
+          value: '2',
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---@alias MATERIAL_FOG 0|1|2\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2\n\n\n`);
+  });
+
+  it('should create enums for table enumerations', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<Enum>{
+      type: 'enum',
+      name: 'SCREENFADE',
+      address: 'Enums/SCREENFADE',
+      description: 'The screen fade mode.',
+      realm: 'Client',
+      items: [
+        {
+          key: '',
+          value: '0',
+          description: 'Instant fade in',
+        },
+        {
+          key: 'SCREENFADE.IN',
+          value: '1',
+          description: 'Instant fade in',
+        },
+        {
+          key: 'SCREENFADE.OUT',
+          value: '2',
+          description: 'Slowly fade in',
+        },
+        {
+          key: 'SCREENFADE.MODULATE',
+          value: '4',
+        },
+        {
+          key: 'SCREENFADE.STAYOUT',
+          value: '8',
+          description: 'Never disappear',
+        },
+        {
+          key: 'SCREENFADE.PURGE',
+          value: '16',
+          description: 'Used to purge all currently active screen fade effects...\nMultiple\nLines',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---@enum SCREENFADE\n--- The screen fade mode.\nSCREENFADE = {\n  --- Instant fade in\n  IN = 1,\n  --- Slowly fade in\n  OUT = 2,\n  MODULATE = 4,\n  --- Never disappear\n  STAYOUT = 8,\n  --- Used to purge all currently active screen fade effects...\n  --- Multiple\n  --- Lines\n  PURGE = 16,\n}\n\n`);
   });
 
   it('should convert table<type> to type[]', () => {
@@ -317,6 +390,32 @@ describe('GLua API Writer', () => {
     });
 
     expect(api).toEqual(`---[CLIENT] Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+  });
+
+  // number{ENUM_NAME} -> ENUM_NAME
+  it('should support enum type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'FogMode',
+      address: 'render.FogMode',
+      parent: 'render',
+      dontDefineParent: true,
+      description: 'Sets the fog mode.',
+      realm: 'Client',
+      type: 'libraryfunc',
+      url: 'na',
+      arguments: [
+        {
+          args: [{
+            name: 'mode',
+            type: 'number{MATERIAL_FOG}',
+            description: 'The fog mode.',
+          }]
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---[CLIENT] Sets the fog mode.\n---\n---[(View on wiki)](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
   });
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
