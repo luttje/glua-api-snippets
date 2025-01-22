@@ -13,7 +13,7 @@ export const apiDefinition =
 `--- Missing description.
 concommand = {}
 
----[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
 ---@return table # Table of command callback functions.

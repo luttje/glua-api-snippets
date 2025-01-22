@@ -148,7 +148,7 @@ end )
 export const apiDefinition = `---@class GM
 GM = {}
 
----[SERVER] Called when the player spawns for the first time.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the player spawns for the first time.
 ---
 --- See [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) for a hook called every player spawn.
 ---

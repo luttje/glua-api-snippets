@@ -407,8 +407,28 @@ export class GluaApiWriter {
     return type;
   }
 
+  private formatRealm(realm: Realm) {
+    // Formats to show the image, with the realm as the alt text
+    switch (realm) {
+      case 'Menu':
+        return '![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9)';
+      case 'Client':
+        return '![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)';
+      case 'Server':
+        return '![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)';
+      case 'Shared':
+        return '![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)';
+      case 'Client and menu':
+        return '![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981)';
+      case 'Shared and Menu':
+        return '![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4)';
+      default:
+        throw new Error(`Unknown realm: ${realm}`);
+    }
+  }
+
   private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
-    let luaDocComment = `---[${realm.toUpperCase()}] ${putCommentBeforeEachLine(func.description!.trim())}\n`;
+    let luaDocComment = `---${this.formatRealm(realm)} ${putCommentBeforeEachLine(func.description!.trim())}\n`;
     luaDocComment += `---\n---[(View on wiki)](${func.url})\n`;
 
     if (args) {

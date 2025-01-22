@@ -4,7 +4,7 @@ import { AnyNode, Cheerio, CheerioAPI } from 'cheerio';
 import { Element as DOMElement } from 'domhandler';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
-export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu';
+export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu' | 'Shared and Menu';
 
 export type CommonWikiProperties = {
   type: WikiFunctionType | 'enum' | 'struct' | 'panel' | 'class' | 'library';

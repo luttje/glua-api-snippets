@@ -15,7 +15,7 @@ export const apiDefinition =
 `--- Missing description.
 coroutine = {}
 
----[SHARED AND MENU] Resumes the given coroutine and passes the given vararg to either the function arguments or the [coroutine.yield](https://wiki.facepunch.com/gmod/coroutine.yield) that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Resumes the given coroutine and passes the given vararg to either the function arguments or the [coroutine.yield](https://wiki.facepunch.com/gmod/coroutine.yield) that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/coroutine.resume)
 ---@param coroutine thread Coroutine to resume.

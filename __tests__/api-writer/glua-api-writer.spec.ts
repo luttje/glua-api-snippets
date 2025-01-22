@@ -123,7 +123,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[SHARED] Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number # The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number # The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
   });
 
   it('should allow overriding specific page addresses', () => {
@@ -246,7 +246,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
   });
 
   it('should not convert table<type,otherType> to type,otherType[]', () => {
@@ -268,7 +268,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
   });
 
   const testFuncPart = {
@@ -298,7 +298,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with pipes in the type (prefered in wiki)
     {
@@ -314,7 +314,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with pipes and table<x> conversion
     {
@@ -330,7 +330,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with table<x> conversion in both altType and type
     {
@@ -347,7 +347,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
   ])('should handle alternate types correctly', async ({ api, output }) => {
     const writer = new GluaApiWriter();
@@ -372,7 +372,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
   });
 
   it('should support structure table type', () => {
@@ -394,7 +394,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[CLIENT] Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
   });
 
   // number{ENUM_NAME} -> ENUM_NAME
@@ -420,7 +420,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---[CLIENT] Sets the fog mode.\n---\n---[(View on wiki)](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[(View on wiki)](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
   });
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
@@ -486,7 +486,7 @@ describe('GLua API Writer', () => {
   //   const writer = new GluaApiWriter();
   //   const api = writer.writePage(mockWikiPage);
 
-  //   expect(api).toEqual(`---[SHARED] Checks if the given object is valid.\n` +
+  //   expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the given object is valid.\n` +
   //     `---@param obj any The object to check.\n` +
   //     `---@return boolean If the object is valid.\n` +
   //     `function IsValid(obj) end\n\n`);
@@ -517,7 +517,7 @@ describe('GLua API Writer', () => {
   //   const api = writer.writePage(mockWikiPage);
 
   //   expect(api).toEqual(`ai = {}\n\n` +
-  //     `---[SERVER] Translates a schedule name to its corresponding ID.\n` +
+  //     `---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Translates a schedule name to its corresponding ID.\n` +
   //     `---@param sched string Then schedule name. In most cases, this will be the same as the Enums/SCHED name.\n` +
   //     `---@return number The schedule ID, see Enums/SCHED. Returns -1 if the schedule name isn't valid.\n` +
   //     `function ai.GetScheduleID(sched) end\n\n`);
@@ -548,7 +548,7 @@ describe('GLua API Writer', () => {
   //   const api = writer.writePage(mockWikiPage);
 
   //   expect(api).toEqual(`surface = {}\n\n` +
-  //     `---[CLIENT] Returns the texture id of the material with the given name/path, for use with surface.SetTexture.\n` +
+  //     `---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the texture id of the material with the given name/path, for use with surface.SetTexture.\n` +
   //     `---@param nameOrPath string Name or path of the texture.\n` +
   //     `---@return number The texture ID\n` +
   //     `function surface.GetTextureID(nameOrPath) end\n\n`);
@@ -601,7 +601,7 @@ describe('GLua API Writer', () => {
 
   //   expect(api).toEqual(`---@class ControlPanel\n` +
   //     `local ControlPanel = {}\n\n` +
-  //     `---[CLIENT] Creates a MatSelect panel and adds it as an item.\n` +
+  //     `---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a MatSelect panel and adds it as an item.\n` +
   //     `---@param convar string Calls MatSelect:SetConVar with this value.\n` +
   //     `---@param options table If specified, calls MatSelect:AddMaterial(key, value) for each table entry. If the table key is a number, the function will instead be called with the value as both arguments.\n` +
   //     `---@param autostretch boolean If specified, calls MatSelect:SetAutoHeight with this value.\n` +
@@ -672,7 +672,7 @@ describe('GLua API Writer', () => {
 
   //   expect(api).toEqual(`---@class CMoveData\n` +
   //     `local CMoveData = {}\n\n` +
-  //     `---[SHARED] Sets the player movement constraint speed scale. This will be applied to the player within the constraint radius when approaching its edge.\n` +
+  //     `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the player movement constraint speed scale. This will be applied to the player within the constraint radius when approaching its edge.\n` +
   //     `---@param number number The constraint speed scale\n` +
   //     `function CMoveData:SetConstraintSpeedScale(number) end\n\n`);
 
@@ -720,7 +720,7 @@ describe('GLua API Writer', () => {
   //   const writer = new GluaApiWriter();
   //   const api = writer.writePage(mockWikiPage);
 
-  //   expect(api).toEqual(`---[SHARED] If the result of the first argument is false or nil, an error is thrown with the second argument as the message.\n` +
+  //   expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) If the result of the first argument is false or nil, an error is thrown with the second argument as the message.\n` +
   //     `---@param expression any The expression to assert.\n` +
   //     `---@param errorMessage string The error message to throw when assertion fails. This is only type-checked if the assertion fails.\n` +
   //     `---@param ... ... Any arguments past the error message will be returned by a successful assert.\n` +
