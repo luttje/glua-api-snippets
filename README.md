@@ -6,29 +6,57 @@
 [![Test Coverage Status](https://coveralls.io/repos/github/luttje/glua-api-snippets/badge.svg?branch=main)](https://coveralls.io/github/luttje/glua-api-snippets?branch=main)
 [![All Contributors](https://img.shields.io/github/all-contributors/luttje/glua-api-snippets?color=ee8449&style=flat-square)](#contributors)
 
-This repository scrapes the Garry's Mod Lua API and generates snippets that will help provide autocompletion for Lua in editors like VSCode, NeoVim and more.
-
-## 🔨 Usage
-
-1. Install **Lua Language Server:** for your editor of choice:
-    * [Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
-    * [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
-  
-2. Open the **Lua Language Server Addon Manager** with the key combination `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) and search for *Addon*, then select **Lua: Open Addon Manager ...**:
-![VSCode editor command suggestion showing: Lua: Open Addon Manager ...](docs/lls-addon-manager-command.jpg)
-
-3. Search for the **Garry's Mod** addon and **Enable** it:
-![Lua Language Server Addon Manager showing the Garry's Mod addon](docs/lls-addon-manager-gmod.jpg)
-
-4. You will now get autocompletion for the Garry's Mod Lua API in your Garry's Mod projects.
+This repository scrapes the Garry's Mod Lua API and generates annotated code snippets that will help provide autocompletion for Lua in editors like VSCode, NeoVim and more.
 
 <div align="center">
 
-  ![VSCode showing autocomplete options from the GLua API while typing code with EmmyLua](docs/demo-autocompletion.gif)
+![VSCode showing autocomplete options from the GLua API while typing code with EmmyLua](docs/demo-autocompletion.gif)
 
 </div>
 
-*Alternatively download the latest release and include or symlink it into your workspace. Get the release from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases) it's named something like `YYYY-MM-DD_HH-MM-SS.lua.zip` .*
+## 🔨 Usage
+
+To get autocompletion for the Garry's Mod Lua API in your Garry's Mod projects, you need to install the Lua Language Server and our GLua API Definitions.
+
+**First** install **Lua Language Server (LuaLS):** for your editor of choice:
+
+  * [Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
+  
+  * [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
+  
+**Then** download/install our GLua API Definitions for the Lua Language Server. This process varies depending on your editor:
+
+  * [Visual Studio Code](#visual-studio-code)
+  
+  * [NeoVim](#neovim)
+
+### Visual Studio Code
+
+Installing our GLua API Definitions for the Lua Language Server in Visual Studio Code is easy thanks to the Lua Language Server Addon Manager built into the VSCode extension.
+
+1. In Visual Studio Code open the Command Palette with the key combination `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS)
+
+2. Search for *Addon*, then select **`Lua: Open Addon Manager ...`**:
+
+<div align="center">
+
+![VSCode editor command suggestion showing: Lua: Open Addon Manager ...](docs/lls-addon-manager-command.jpg)
+
+</div>
+    
+3. Search for the **Garry's Mod** addon and **`Enable`** it:
+
+<div align="center">
+
+![Lua Language Server Addon Manager showing the Garry's Mod addon](docs/lls-addon-manager-gmod.jpg)
+
+</div>
+
+### NeoVim
+
+1. Clone (or download and unzip) [our `lua-language-server-addon` branch](https://github.com/luttje/glua-api-snippets/tree/lua-language-server-addon)
+
+2. Follow [the instructions in the Lua Language Server documentation](https://luals.github.io/wiki/addons/#installing-addons) and point `workspace.userThirdParty` to where you placed the `lua-language-server-addon` branch
 
 ## 📅 Automatically up-to-date
 
@@ -40,10 +68,10 @@ A workflow will automatically scrape the latest Garry's Mod Lua API from [the Ga
 >
 > The Lua Language Server addon might not be immediately updated to align with the definitions in this repository. This delay occurs because we must submit a pull request (PR) to the [Lua Language Server Addons repository (`LuaLS/LLS-Addons`)](https://github.com/LuaLS/LLS-Addons) to update the addon. Subsequently, a maintainer of the `LuaLS/LLS-Addons` repository needs to find time to review and merge the PR.
 >
-> Our schedule for updating our addon with `LuaLS/LLS-Addons` is set for the first day of each even month, specifically: February, April, June, August, October, and December.
+> Our schedule for updating our addon with `LuaLS/LLS-Addons` is set for the first day of February, April, June, August, October, and December.
 > This schedule is subject to change based on the availability of maintainers and the urgency of the update.
 >
-> If you urgently require the most current definitions from the addon, you can expedite the process by submitting a PR to update it. Instructions for doing so can be found in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
+> If you urgently require the most current definitions from the addon, you can expedite the process by submitting a PR to update it yourself. Instructions for doing so can be found in [the `CONTRIBUTING.md` file](https://github.com/luttje/glua-api-snippets/blob/main/CONTRIBUTING.md#updating-the-addon-for-lua-language-server).
 
 ## 🤖 Advanced Usage
 
@@ -63,7 +91,15 @@ This project uses [Jest](https://jestjs.io/) to automate testing. You can run th
 
 ### API as JSON
 
-The API is also available as JSON. You can find it with the Lua API package [on the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DD_HH-MM-SS.json.zip`.
+The API is also available as JSON. You can find it with the Lua API package on [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases). It is named something like `YYYY-MM-DD_HH-MM-SS.json.zip`.
+
+### Manual Installation
+
+If you cannot or do not want to use Lua Language Server:
+
+1. Download and unzip the latest release from [🔗 the releases page](https://github.com/luttje/glua-api-snippets/releases), it's named something like `YYYY-MM-DD_HH-MM-SS.lua.zip`
+
+2. Include or symlink the unzipped directory into your workspace
 
 ## Contributors
 
