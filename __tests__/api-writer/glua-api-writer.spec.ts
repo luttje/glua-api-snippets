@@ -149,6 +149,27 @@ describe('GLua API Writer', () => {
     expect(api).toMatch(new RegExp(`^${overrideStart}`));
   });
 
+  it('should convert table<type> to type[]', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'GetBots',
+      address: 'player.GetBots',
+      parent: 'player',
+      dontDefineParent: true,
+      description: 'Returns a table of all bots on the server.',
+      realm: 'Shared',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table<Player>',
+          description: 'A table only containing bots ( AI / non human players )',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+  });
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';

@@ -329,17 +329,17 @@ export class GluaApiWriter {
     if (type === 'vararg')
       return 'any';
 
-    //fun(cmd: string, args: string): string[]?
+    // fun(cmd: string, args: string): string[]?
     if (type === "function" && callback) {
       let cbStr = `fun(`;
 
       for (const arg of callback.arguments || []) {
         if (!arg.name) arg.name = arg.type;
         if (arg.type === 'vararg') arg.name = '...';
-  
+
         cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
       cbStr += ")";
 
       for (const ret of callback.returns || []) {
@@ -348,9 +348,16 @@ export class GluaApiWriter {
 
         cbStr += `: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
 
       return cbStr;
+    } else if (type.startsWith('table<') && !type.includes(',')) {
+      // Convert table<Player> to Player[] for LuaLS (but leave table<x, y> untouched)
+      let innerType = type.match(/<([^>]+)>/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid table type: ${type}`);
+
+      return `${innerType}[]`;
     }
 
     return type;
