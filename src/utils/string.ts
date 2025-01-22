@@ -58,3 +58,13 @@ export function escapeSingleQuotes(str: string) {
   return str.replace(/'/g, '\\\'');
 }
 
+/**
+ * Indents all lines in a string by a given amount
+ *
+ * @param text The text to indent
+ * @param indent The amount of spaces to indent by
+ * @returns The indented text
+ */
+export function indentText(text: string, indent: number) {
+  return text.split('\n').map(line => ' '.repeat(indent) + line).join('\n');
+}

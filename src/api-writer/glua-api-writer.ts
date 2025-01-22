@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { escapeSingleQuotes, indentText, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -225,12 +225,26 @@ export class GluaApiWriter {
 
   private writeEnum(_enum: Enum) {
     let api: string = '';
-    const isContainedInTable = _enum.items[0]?.key.includes('.') ?? false;
+
+    // If the first key is empty (like SCREENFADE has), check the second key
+    const isContainedInTable =
+      _enum.items[0]?.key === ''
+        ? _enum.items[1]?.key.includes('.')
+        : _enum.items[0]?.key.includes('.');
 
     if (_enum.deprecated)
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
-    api += `---@enum ${_enum.name}\n`;
+    if (isContainedInTable) {
+      api += `---@enum ${_enum.name}\n`;
+    } else {
+      // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
+      // will use @alias as a workaround
+      const validEnumerations = _enum.items.map(item => item.value)
+        .filter(value => !isNaN(Number(value)))
+        .join('|');
+      api += `---@alias ${_enum.name} ${validEnumerations}\n`;
+    }
 
     if (isContainedInTable) {
       api += _enum.description ? `${putCommentBeforeEachLine(_enum.description.trim(), false)}\n` : '';
@@ -238,9 +252,25 @@ export class GluaApiWriter {
     }
 
     const writeItem = (key: string, item: typeof _enum.items[0]) => {
+      if (key === '') {
+        // Happens for SCREENFADE which has a blank key to describe what 0 does.
+        return;
+      }
+
+      if (isNaN(Number(item.value.trim()))) {
+        // Happens for TODO value in NAV_MESH_BLOCKED_LUA in https://wiki.facepunch.com/gmod/Enums/NAV_MESH
+        console.warn(`Enum ${_enum.name} has a TODO value for key ${key}. Skipping.`);
+        return;
+      }
+
       if (isContainedInTable) {
         key = key.split('.')[1];
-        api += `  ${key} = ${item.value}, ` + (item.description ? `--[[ ${item.description} ]]` : '') + '\n';
+
+        if (item.description?.trim()) {
+          api += `${indentText(putCommentBeforeEachLine(item.description.trim(), false), 2)}\n`;
+        }
+
+        api += `  ${key} = ${item.value},\n`;
       } else {
         api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
         if (item.deprecated)
@@ -329,17 +359,17 @@ export class GluaApiWriter {
     if (type === 'vararg')
       return 'any';
 
-    //fun(cmd: string, args: string): string[]?
+    // fun(cmd: string, args: string): string[]?
     if (type === "function" && callback) {
       let cbStr = `fun(`;
 
       for (const arg of callback.arguments || []) {
         if (!arg.name) arg.name = arg.type;
         if (arg.type === 'vararg') arg.name = '...';
-  
+
         cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
       cbStr += ")";
 
       for (const ret of callback.returns || []) {
@@ -348,9 +378,30 @@ export class GluaApiWriter {
 
         cbStr += `: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length-2);
+      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
 
       return cbStr;
+    } else if (type.startsWith('table<') && !type.includes(',')) {
+      // Convert table<Player> to Player[] for LuaLS (but leave table<x, y> untouched)
+      let innerType = type.match(/<([^>]+)>/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid table type: ${type}`);
+
+      return `${innerType}[]`;
+    } else if (type.startsWith('table{')) {
+      // Convert table{ToScreenData} structures to ToScreenData class for LuaLS
+      let innerType = type.match(/{([^}]+)}/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid table type: ${type}`);
+
+      return innerType;
+    } else if (type.startsWith('number{')) {
+      // Convert number{MATERIAL_FOG} to MATERIAL_FOG enum for LuaLS
+      let innerType = type.match(/{([^}]+)}/)?.[1];
+
+      if (!innerType) throw new Error(`Invalid number type: ${type}`);
+
+      return innerType;
     }
 
     return type;
@@ -368,10 +419,20 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
 
-        let types = this.transformType(arg.type, arg.callback);
-        if (arg.altType) types += "|" + this.transformType(arg.altType);
+        // TODO: This splitting will fail in complicated cases like `table<string|number>|string`.
+        // TODO: I'm assuming for now that there is no such case in the GMod API.
+        // Split any existing types, append the (deprecated) alt and join them back together
+        // while transforming each type to a LuaLS compatible type.
+        let types = arg.type.split("|");
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
+        if (arg.altType) {
+          types.push(arg.altType);
+        }
+
+        let typesString = types.map(type => this.transformType(type, arg.callback))
+          .join("|");
+
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
       });
     }
 

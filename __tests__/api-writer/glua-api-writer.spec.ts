@@ -6,7 +6,7 @@ import { apiDefinition as structApiDefinition, markup as structMarkup, json as s
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
-import { LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { Enum, LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -149,6 +149,279 @@ describe('GLua API Writer', () => {
     expect(api).toMatch(new RegExp(`^${overrideStart}`));
   });
 
+  it('should create aliasses for global enumerations', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<Enum>{
+      type: 'enum',
+      name: 'MATERIAL_FOG',
+      address: 'Enums/MATERIAL_FOG',
+      description: 'The fog mode.',
+      realm: 'Client',
+      items: [
+        {
+          key: 'MATERIAL_FOG_NONE',
+          value: '0',
+          description: 'No fog',
+        },
+        {
+          key: 'MATERIAL_FOG_LINEAR',
+          value: '1',
+          description: 'Linear fog',
+        },
+        {
+          key: 'MATERIAL_FOG_LINEAR_BELOW_FOG_Z',
+          value: '-2147483648', // test large negative number
+        },
+        {
+          // Should be skipped
+          key: 'MATERIAL_FOG_NEW_FAKE',
+          value: 'TODO',
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---@alias MATERIAL_FOG 0|1|-2147483648\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n\n`);
+  });
+
+  it('should create enums for table enumerations', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<Enum>{
+      type: 'enum',
+      name: 'SCREENFADE',
+      address: 'Enums/SCREENFADE',
+      description: 'The screen fade mode.',
+      realm: 'Client',
+      items: [
+        {
+          key: '',
+          value: '0',
+          description: 'Instant fade in',
+        },
+        {
+          key: 'SCREENFADE.IN',
+          value: '1',
+          description: 'Instant fade in',
+        },
+        {
+          key: 'SCREENFADE.OUT',
+          value: '2',
+          description: 'Slowly fade in',
+        },
+        {
+          key: 'SCREENFADE.MODULATE',
+          value: '4',
+        },
+        {
+          key: 'SCREENFADE.STAYOUT',
+          value: '8',
+          description: 'Never disappear',
+        },
+        {
+          key: 'SCREENFADE.PURGE',
+          value: '16',
+          description: 'Used to purge all currently active screen fade effects...\nMultiple\nLines',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---@enum SCREENFADE\n--- The screen fade mode.\nSCREENFADE = {\n  --- Instant fade in\n  IN = 1,\n  --- Slowly fade in\n  OUT = 2,\n  MODULATE = 4,\n  --- Never disappear\n  STAYOUT = 8,\n  --- Used to purge all currently active screen fade effects...\n  --- Multiple\n  --- Lines\n  PURGE = 16,\n}\n\n`);
+  });
+
+  it('should convert table<type> to type[]', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'GetBots',
+      address: 'player.GetBots',
+      parent: 'player',
+      dontDefineParent: true,
+      description: 'Returns a table of all bots on the server.',
+      realm: 'Shared',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table<Player>',
+          description: 'A table only containing bots ( AI / non human players )',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+  });
+
+  it('should not convert table<type,otherType> to type,otherType[]', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'GetBots',
+      address: 'player.GetBots',
+      parent: 'player',
+      dontDefineParent: true,
+      description: 'Returns a table of all bots on the server.',
+      realm: 'Shared',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table<number,Player>',
+          description: 'A table only containing bots ( AI / non human players )',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+  });
+
+  const testFuncPart = {
+    name: 'Fake',
+    address: 'test.Fake',
+    parent: 'test',
+    dontDefineParent: true,
+    description: 'Just for testing.',
+    realm: 'Shared',
+    type: 'libraryfunc',
+    url: 'na',
+  };
+
+  it.each([
+    // Simple case with an altType (deprecated in wiki)
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string',
+              description: 'The value to fake.',
+              altType: 'number',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with pipes in the type (prefered in wiki)
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string|number',
+              description: 'The value to fake.',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with pipes and table<x> conversion
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string|table<number,Player>',
+              description: 'The value to fake.',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with table<x> conversion in both altType and type
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'table<number,Player>',
+              description: 'The value to fake.',
+              altType: 'table<Entity,number>',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+  ])('should handle alternate types correctly', async ({ api, output }) => {
+    const writer = new GluaApiWriter();
+    const result = writer.writePage(api);
+
+    expect(result).toEqual(output);
+  });
+
+  // TODO: Currently unsupported. Remove 'failing' (and change test name) when supporting this. (low priority imo)
+  it.failing('should currently fail in complicated cases like `table<string|number>|string`.', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      ...testFuncPart,
+      arguments: [
+        {
+          args: [{
+            name: 'value',
+            type: 'table<string|number>|string',
+            description: 'The value to fake.',
+          }]
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
+  });
+
+  it('should support structure table type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'ToScreen',
+      address: 'Vector.ToScreen',
+      parent: 'Vector',
+      dontDefineParent: true,
+      description: 'Returns where on the screen the specified position vector would appear.',
+      realm: 'Client',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table{ToScreenData}',
+          description: 'The created Structures/ToScreenData.',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[CLIENT] Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+  });
+
+  // number{ENUM_NAME} -> ENUM_NAME
+  it('should support enum type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'FogMode',
+      address: 'render.FogMode',
+      parent: 'render',
+      dontDefineParent: true,
+      description: 'Sets the fog mode.',
+      realm: 'Client',
+      type: 'libraryfunc',
+      url: 'na',
+      arguments: [
+        {
+          args: [{
+            name: 'mode',
+            type: 'number{MATERIAL_FOG}',
+            description: 'The fog mode.',
+          }]
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---[CLIENT] Sets the fog mode.\n---\n---[(View on wiki)](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
+  });
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
