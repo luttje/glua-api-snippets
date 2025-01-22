@@ -429,7 +429,7 @@ export class GluaApiWriter {
 
   private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
     let luaDocComment = `---${this.formatRealm(realm)} ${putCommentBeforeEachLine(func.description!.trim())}\n`;
-    luaDocComment += `---\n---[(View on wiki)](${func.url})\n`;
+    luaDocComment += `---\n---[View wiki](${func.url})\n`;
 
     if (args) {
       args.forEach((arg, index) => {

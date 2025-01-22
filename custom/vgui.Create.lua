@@ -1,7 +1,7 @@
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Creates a panel by the specified classname.
 --- Custom VGUI elements are not loaded instantly. Use GM:OnGamemodeLoaded to create them on startup.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/vgui.Create)
+---[View wiki](https://wiki.facepunch.com/gmod/vgui.Create)
 ---@generic T: Panel
 ---@param classname `T` Classname of the panel to create.
 ---

@@ -123,7 +123,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Explodes with an optional intensity.\n---\n---[(View on wiki)](na)\n---@param intensity? number The intensity of the explosion.\n---@return number # The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Explodes with an optional intensity.\n---\n---[View wiki](na)\n---@param intensity? number The intensity of the explosion.\n---@return number # The amount of damage done.\nfunction _G.Explode(intensity) end\n\n`);
   });
 
   it('should allow overriding specific page addresses', () => {
@@ -246,7 +246,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[View wiki](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
   });
 
   it('should not convert table<type,otherType> to type,otherType[]', () => {
@@ -268,7 +268,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all bots on the server.\n---\n---[View wiki](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
   });
 
   const testFuncPart = {
@@ -298,7 +298,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[View wiki](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with pipes in the type (prefered in wiki)
     {
@@ -314,7 +314,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[View wiki](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with pipes and table<x> conversion
     {
@@ -330,7 +330,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[View wiki](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
     // Case with table<x> conversion in both altType and type
     {
@@ -347,7 +347,7 @@ describe('GLua API Writer', () => {
           }
         ],
       },
-      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
+      output: `---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[View wiki](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
     },
   ])('should handle alternate types correctly', async ({ api, output }) => {
     const writer = new GluaApiWriter();
@@ -372,7 +372,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
+    expect(api).toEqual(`---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Just for testing.\n---\n---[View wiki](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
   });
 
   it('should support structure table type', () => {
@@ -394,7 +394,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear.\n---\n---[(View on wiki)](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear.\n---\n---[View wiki](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
   });
 
   // number{ENUM_NAME} -> ENUM_NAME
@@ -420,7 +420,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[(View on wiki)](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[View wiki](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
   });
 
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
