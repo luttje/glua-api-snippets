@@ -375,10 +375,20 @@ export class GluaApiWriter {
         if (arg.type === 'vararg')
           arg.name = '...';
 
-        let types = this.transformType(arg.type, arg.callback);
-        if (arg.altType) types += "|" + this.transformType(arg.altType);
+        // TODO: This splitting will fail in complicated cases like `table<string|number>|string`.
+        // TODO: I'm assuming for now that there is no such case in the GMod API.
+        // Split any existing types, append the (deprecated) alt and join them back together
+        // while transforming each type to a LuaLS compatible type.
+        let types = arg.type.split("|");
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${types} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
+        if (arg.altType) {
+          types.push(arg.altType);
+        }
+
+        let typesString = types.map(type => this.transformType(type, arg.callback))
+          .join("|");
+
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
       });
     }
 

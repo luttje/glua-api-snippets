@@ -171,6 +171,132 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return Player[] # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
   });
 
+  it('should not convert table<type,otherType> to type,otherType[]', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'GetBots',
+      address: 'player.GetBots',
+      parent: 'player',
+      dontDefineParent: true,
+      description: 'Returns a table of all bots on the server.',
+      realm: 'Shared',
+      type: 'libraryfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'table<number,Player>',
+          description: 'A table only containing bots ( AI / non human players )',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Returns a table of all bots on the server.\n---\n---[(View on wiki)](na)\n---@return table<number,Player> # A table only containing bots ( AI / non human players )\nfunction player.GetBots() end\n\n`);
+  });
+
+  const testFuncPart = {
+    name: 'Fake',
+    address: 'test.Fake',
+    parent: 'test',
+    dontDefineParent: true,
+    description: 'Just for testing.',
+    realm: 'Shared',
+    type: 'libraryfunc',
+    url: 'na',
+  };
+
+  it.each([
+    // Simple case with an altType (deprecated in wiki)
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string',
+              description: 'The value to fake.',
+              altType: 'number',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with pipes in the type (prefered in wiki)
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string|number',
+              description: 'The value to fake.',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|number The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with pipes and table<x> conversion
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'string|table<number,Player>',
+              description: 'The value to fake.',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value string|table<number,Player> The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+    // Case with table<x> conversion in both altType and type
+    {
+      api: <LibraryFunction>{
+        ...testFuncPart,
+        arguments: [
+          {
+            args: [{
+              name: 'value',
+              type: 'table<number,Player>',
+              description: 'The value to fake.',
+              altType: 'table<Entity,number>',
+            }]
+          }
+        ],
+      },
+      output: `---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<number,Player>|table<Entity,number> The value to fake.\nfunction test.Fake(value) end\n\n`,
+    },
+  ])('should handle alternate types correctly', async ({ api, output }) => {
+    const writer = new GluaApiWriter();
+    const result = writer.writePage(api);
+
+    expect(result).toEqual(output);
+  });
+
+  // TODO: Currently unsupported. Remove 'failing' (and change test name) when supporting this. (low priority imo)
+  it.failing('should currently fail in complicated cases like `table<string|number>|string`.', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      ...testFuncPart,
+      arguments: [
+        {
+          args: [{
+            name: 'value',
+            type: 'table<string|number>|string',
+            description: 'The value to fake.',
+          }]
+        }
+      ],
+    });
+
+    expect(api).toEqual(`---[SHARED] Just for testing.\n---\n---[(View on wiki)](na)\n---@param value table<string|number>|string The value to fake.\nfunction test.Fake(value) end\n\n`);
+  });
+
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
   //   fetchMock.mockResponseOnce(html, { url: baseUrl });
