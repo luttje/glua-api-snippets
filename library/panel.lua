@@ -2349,6 +2349,8 @@ function Panel:SetTerm(delay) end
 ---
 --- **WARNING**: When used on a [Label](https://wiki.facepunch.com/gmod/Label) or its derivatives ( [DLabel](https://wiki.facepunch.com/gmod/DLabel) and [DButton](https://wiki.facepunch.com/gmod/DButton) ), it will automatically call [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout), meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 ---
+--- **WARNING**: [Label](https://wiki.facepunch.com/gmod/Label) & its derivatives has hard length limit, maximum 1023 ascii characters.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Panel:SetText)
 ---@param text string The text value to set.
 function Panel:SetText(text) end

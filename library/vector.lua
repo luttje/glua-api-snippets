@@ -255,7 +255,7 @@ function Vector:ToColor() end
 --- [cam.Start3D](https://wiki.facepunch.com/gmod/cam.Start3D) or 3D context [cam.Start](https://wiki.facepunch.com/gmod/cam.Start) with non-default parameters incorrectly sets the reference FOV for this function, causing incorrect return values. This can be fixed by creating and ending a default 3D context ([cam.Start3D](https://wiki.facepunch.com/gmod/cam.Start3D) with no arguments).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Vector:ToScreen)
----@return table # The created Structures/ToScreenData.
+---@return ToScreenData # The created Structures/ToScreenData.
 function Vector:ToScreen() end
 
 ---[SHARED AND MENU] Returns the vector as a table with three elements.

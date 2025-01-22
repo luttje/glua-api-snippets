@@ -280,7 +280,7 @@ function CNavArea:GetIncomingConnectionsAtSide(navDir) end
 --- See [CNavArea:GetLaddersAtSide](https://wiki.facepunch.com/gmod/CNavArea:GetLaddersAtSide) for a function that only returns [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder)s in given direction.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/CNavArea:GetLadders)
----@return table # The CNavLadders that have a ( one or two way ) connection **from** this CNavArea.
+---@return CNavLadder[] # The CNavLadders that have a ( one or two way ) connection **from** this CNavArea.
 function CNavArea:GetLadders() end
 
 ---[SERVER] Returns all [CNavLadder](https://wiki.facepunch.com/gmod/CNavLadder)s that have a ( one or two way ) connection **from** ( one and two way ) this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) in given direction.

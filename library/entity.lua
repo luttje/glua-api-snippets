@@ -303,6 +303,9 @@ function ENTITY:CanProperty(ply, property) end
 ---@param toolname string Class of the tool that is tried to use, for example - `weld`
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
+--- * 1 - left click
+--- * 2 - right click
+--- * 3 - reload
 ---@return boolean # Return `false` to disallow using that tool on this entity, return `true` to allow.
 function ENTITY:CanTool(ply, tr, toolname, tool, button) end
 
@@ -416,6 +419,8 @@ function Entity:DispatchTraceAttack(damageInfo, traceRes, dir) end
 
 ---[SERVER] Dissolves the entity.
 ---
+--- This function creates `env_entity_dissolver` entity internally.
+---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:Dissolve)
 ---@param type? number Dissolve type. Should be one of the following values:
 ---
@@ -431,14 +436,12 @@ function Entity:Dissolve(type, magnitude, origin) end
 
 ---[SHARED] Called so the entity can override the bullet impact effects it makes. This is called when the entity itself fires bullets via [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets), not when it gets hit.
 ---
---- **NOTE**: This hook only works for the "anim" type entities.
----
---- **NOTE**: Despite the hook being shared, this hook will be triggered only on the realm which fires the bullet.
+--- **NOTE**: This hook only works for the `anim` type entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ENTITY:DoImpactEffect)
 ---@param tr table A Structures/TraceResult from the bullet's start point to the impact point
 ---@param damageType number The damage type of bullet. See Enums/DMG
----@return boolean # Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
+---@return boolean # Return true to not do the default thing - which is to call `UTIL_ImpactTrace` in C++
 function ENTITY:DoImpactEffect(tr, damageType) end
 
 ---[SERVER] Called by the default `base_ai` SNPC, checking whether `ENT.bDoingEngineSchedule` is set by [ENTITY:StartEngineSchedule](https://wiki.facepunch.com/gmod/ENTITY:StartEngineSchedule)..
@@ -759,8 +762,14 @@ function Entity:GetAnimCount() end
 --- **NOTE**: Animation ID is not the same as sequence ID. See [Entity:GetAnimCount](https://wiki.facepunch.com/gmod/Entity:GetAnimCount)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetAnimInfo)
----@param animIndex number The animation ID to look up
----@return table # Information about the animation, or nil if the index is out of bounds
+---@param animIndex number The animation ID to look up, starting at 0.
+---@return table|nil # Information about the animation, or `nil` if the index is out of bounds.
+---
+--- A table with the following keys:
+--- * string label - Animation name
+--- * number fps - How many frames per second the animation should be played at
+--- * number flags - [STUDIO_](https://github.com/ZeqMacaw/Crowbar/blob/0d46f3b6a694b74453db407c72c12a9685d8eb1d/Crowbar/Core/GameModel/SourceCommon/SourceMdlFileData/SourceMdlAnimationDesc.vb#L181) flags, such as looping
+--- * number numframes - Number of frames the animation has
 function Entity:GetAnimInfo(animIndex) end
 
 ---[CLIENT] Returns the last time the entity had an animation update. Returns 0 if the entity doesn't animate.
@@ -1013,7 +1022,7 @@ function Entity:GetChildBones(boneid) end
 --- This also means that using this function on players will return their weapons on the client but not the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetChildren)
----@return table # A list of movement children entities
+---@return Entity[] # A list of movement children entities
 function Entity:GetChildren() end
 
 ---[SHARED] Returns the classname of a entity. This is often the name of the Lua file or folder containing the files for the entity
@@ -1218,7 +1227,9 @@ function Entity:GetElasticity() end
 ---@return number # Flags of given entity as a bitflag, see Enums/FL
 function Entity:GetFlags() end
 
----[SHARED] Returns acceptable value range for the flex.
+---[SHARED] Returns acceptable value range for the flex controller, as defined by the model.
+---
+--- Used with [Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexBounds)
 ---@param flex number The ID of the flex to look up bounds of
@@ -1234,7 +1245,7 @@ function Entity:GetFlexBounds(flex) end
 --- * `nil` if no flex with given name was found
 function Entity:GetFlexIDByName(name) end
 
----[SHARED] Returns flex name.
+---[SHARED] Returns the flex controller name at given index.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetFlexName)
 ---@param id number The flex index to look up name of. The range is between `0` and Entity:GetFlexNum - 1.
@@ -2356,7 +2367,7 @@ function Entity:GetSequenceMoveYaw(seq) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:GetSequenceName)
 ---@param index number The index of the sequence to look up.
----@return string # Name of the sequence.
+---@return string # Name of the sequence, or `"Unknown"` if it was out of bounds.
 function Entity:GetSequenceName(index) end
 
 ---[SHARED] Returns an entity's sequence velocity at given animation frame.
@@ -2697,7 +2708,11 @@ function Entity:InvalidateBoneCache() end
 ---@return boolean # Whether the entity is constrained or not.
 function Entity:IsConstrained() end
 
----[SERVER] Returns if entity is constraint or not
+---[SERVER] Returns if entity is constraint or not.
+---
+--- This also means that [Entity:GetConstrainedPhysObjects](https://wiki.facepunch.com/gmod/Entity:GetConstrainedPhysObjects). [Entity:GetConstrainedEntities](https://wiki.facepunch.com/gmod/Entity:GetConstrainedEntities) and  [Entity:SetPhysConstraintObjects](https://wiki.facepunch.com/gmod/Entity:SetPhysConstraintObjects) can be used on this entity.
+---
+--- **WARNING**: Some constraint entities, such as `phys_spring`, will return false!
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:IsConstraint)
 ---@return boolean # Is the entity a constraint or not
@@ -4169,7 +4184,7 @@ function Entity:SetFlexScale(scale) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight)
 ---@param flex number The ID of the flex to modify weight of.  The range is between `0` and Entity:GetFlexNum - 1.
----@param weight number The new weight to set
+---@param weight number The new weight to set. See Entity:GetFlexBounds for the model-defined input range.
 function Entity:SetFlexWeight(flex, weight) end
 
 ---[SHARED] Sets friction multiplier for this entity when sliding against a surface. Entities default to 1 (100%) and can be higher.
@@ -5243,7 +5258,7 @@ function Entity:SetRenderClipPlane(planeNormal, planePosition) end
 ---@param enabled boolean Enable or disable clipping planes
 function Entity:SetRenderClipPlaneEnabled(enabled) end
 
----[SHARED] Sets entity's render FX.
+---[SHARED] Sets entity's render FX. Requires the entitys rendermode to support transparency.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Entity:SetRenderFX)
 ---@param renderFX number The new render FX to set, see Enums/kRenderFx

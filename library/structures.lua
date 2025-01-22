@@ -837,19 +837,11 @@ ENT.DisableDuplicator = false
 ---@type string
 ENT.ScriptedEntityType = nil
 
----If set, the entity will not be duplicated via the built-in duplicator system.
----@type boolean
-ENT.DoNotDuplicate = false
-
 ---If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
 ---
 --- Like many functions, this expects a path relative to the `materials/` folder, do not include `materials/` in the provided string.
 ---@type string
 ENT.IconOverride = "entities/<ClassName>.png"
-
----If set, the entity forbid physgun interaction.
----@type boolean
-ENT.PhysgunDisabled = false
 
 ---If set, a bitflag for the physics solidity of the entity. See Enums/CONTENTS.
 ---
@@ -1854,11 +1846,11 @@ PropertyAdd.PrependSpacer = false
 --- Function argument(s):
 --- * table `self` - the property table
 --- * Entity `ent` - the entity the player clicked
---- * Global.LocalPlayer `player` - the localplayer
+--- * Player `player` - the Global.LocalPlayer
 ---
 --- Function return value(s):
 --- * boolean `check` - Return true if the property should be shown for this entity.
----@type fun(self: table, ent: Entity, player: Global.LocalPlayer): boolean
+---@type fun(self: table, ent: Entity, player: Player): boolean
 PropertyAdd.Filter = nil
 
 ---Required for toggle properties (clientside).

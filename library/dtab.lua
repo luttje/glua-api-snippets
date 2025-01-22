@@ -31,7 +31,7 @@ function DTab:GetTabHeight() end
 ---[CLIENT AND MENU] Returns whether the tab is the currently selected tab of the associated [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DTab:IsActive)
----@return Boolean # Currently selected tab.
+---@return boolean # Currently selected tab.
 function DTab:IsActive() end
 
 ---[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

@@ -32,9 +32,9 @@ function ents.CreateClientside(class) end
 
 ---[SHARED] Returns a table of all entities along the ray. The ray does not stop on collisions, meaning it will go through walls/entities.
 ---
---- This function is capable of detecting clientside only entities.
+--- This function is capable of detecting clientside only entities by default.
 ---
---- This internally uses a Spatial Partition to avoid looping through all entities.
+--- This internally uses [spatial partitioning](https://en.wikipedia.org/wiki/Space_partitioning) to avoid looping through all entities.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ents.FindAlongRay)
 ---@param start Vector The start position of the ray

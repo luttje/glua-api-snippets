@@ -174,7 +174,7 @@ function ProjectedTexture:SetAngles(angle) end
 --- You must call [ProjectedTexture:Update](https://wiki.facepunch.com/gmod/ProjectedTexture:Update) after using this function for it to take effect.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/ProjectedTexture:SetBrightness)
----@param brightness number The brightness to give the projected texture.
+---@param brightness number The brightness to give the projected texture. A float from 0 to 1, where 1 is 100% brightness. Can be higher.
 function ProjectedTexture:SetBrightness(brightness) end
 
 ---[CLIENT] Sets the color of the projected texture.

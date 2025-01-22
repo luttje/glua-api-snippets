@@ -357,7 +357,7 @@ function render.FogMaxDensity(maxDensity) end
 ---[CLIENT] Sets the mode of fog.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.FogMode)
----@param fogMode number Fog mode, see Enums/MATERIAL_FOG.
+---@param fogMode MATERIAL_FOG Fog mode, see Enums/MATERIAL_FOG.
 function render.FogMode(fogMode) end
 
 ---[CLIENT] Sets the distance at which the fog starts showing up.
@@ -969,7 +969,7 @@ function render.SetColorMaterialIgnoreZ() end
 ---@param b number The blue channel multiplier normal ranging from 0-1.
 function render.SetColorModulation(r, g, b) end
 
----[CLIENT] If the fog mode is set to [MATERIAL_FOG_LINEAR_BELOW_FOG_Z](https://wiki.facepunch.com/gmod/Enums/MATERIAL_FOG), the fog will only be rendered below the specified height.
+---[CLIENT] If the [fog mode](https://wiki.facepunch.com/gmod/render.FogMode) is set to [MATERIAL_FOG_LINEAR_BELOW_FOG_Z](https://wiki.facepunch.com/gmod/Enums/MATERIAL_FOG), the fog will only be rendered below the specified height.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetFogZ)
 ---@param fogZ number The fog Z.
@@ -1097,7 +1097,7 @@ function render.SetShadowsDisabled(newState) end
 --- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction)
----@param compareFunction Enums/STENCILCOMPARISONFUNCTION The Compare Function that each affected pixel's Stencil Buffer value will be evaluated against during a draw operation.
+---@param compareFunction STENCILCOMPARISONFUNCTION The Compare Function that each affected pixel's Stencil Buffer value will be evaluated against during a draw operation.
 function render.SetStencilCompareFunction(compareFunction) end
 
 ---[CLIENT AND MENU] Enables or disables the Stencil system for future draw operations.
@@ -1120,7 +1120,7 @@ function render.SetStencilEnable(newState) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation)
----@param failOperation Enums/STENCILOPERATION
+---@param failOperation STENCILOPERATION
 --- 			The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
 function render.SetStencilFailOperation(failOperation) end
 
@@ -1129,7 +1129,7 @@ function render.SetStencilFailOperation(failOperation) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation)
----@param passOperation Enums/STENCILOPERATION
+---@param passOperation STENCILOPERATION
 --- 			The Stencil Operation to be performed if the Compare Function Passes a pixel.
 function render.SetStencilPassOperation(passOperation) end
 
@@ -1176,7 +1176,7 @@ function render.SetStencilWriteMask(bitMask) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation)
----@param zFailOperation Enums/STENCILOPERATION
+---@param zFailOperation STENCILOPERATION
 --- 			The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
 function render.SetStencilZFailOperation(zFailOperation) end
 

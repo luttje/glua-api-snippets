@@ -3,13 +3,21 @@
 --- The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
 drive = {}
 
+---
+--- Represents a drive mode or "method" to be registered with [drive.Register](https://wiki.facepunch.com/gmod/drive.Register).
+---
+--- This page lists all possible fields and hooks a drive mode can have.
+---
+---@class DRIVE
+DRIVE = {}
+
 ---[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Optionally alter the view.
+--- Used internally to make [DRIVE_METHOD:CalcView](https://wiki.facepunch.com/gmod/DRIVE_METHOD:CalcView) work, called by default from `base` gamemode's [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) hook.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.CalcView)
 ---@param ply Player The player
----@param view table The view, see Structures/ViewData
+---@param view ViewData The view, see Structures/ViewData
 ---@return boolean # true if succeeded
 function drive.CalcView(ply, view) end
 
@@ -80,12 +88,12 @@ function drive.PlayerStartDriving(ply, ent, mode) end
 ---@param ply Player The player to affect
 function drive.PlayerStopDriving(ply) end
 
----[SHARED] Registers a new entity drive.
+---[SHARED] Registers a new entity drive mode/method.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/drive.Register)
----@param name string The name of the drive.
----@param data table The data required to create the drive. This includes the functions used by the drive.
----@param base? string The base of the drive.
+---@param name string The name of the drive mode/method.
+---@param data table The data required to create the drive mode/method. This includes the functions used by the drive. See DRIVE_METHOD.
+---@param base? string The name of a drive mode/method to inherit code from.
 function drive.Register(name, data, base) end
 
 ---[SHARED] Called when the player first starts driving this entity
@@ -105,3 +113,11 @@ function drive.Start(ply, ent) end
 ---@param cmd CUserCmd The user command
 ---@return boolean # true if succeeded
 function drive.StartMove(ply, mv, cmd) end
+
+---[CLIENT] Optionally alter the player's view if they are using this [drive](https://wiki.facepunch.com/gmod/drive) mode.
+---
+--- This hook is called from the default implementation of [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) which is [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/base/gamemode/cl_init.lua#L387-L395). Therefore, it will not be called if any other hook added to `CalcView` returns any value, or if the current gamemode overrides the default hook and does not call [drive.CalcView](https://wiki.facepunch.com/gmod/drive.CalcView).
+---
+---[(View on wiki)](https://wiki.facepunch.com/gmod/DRIVE:CalcView)
+---@param view_in ViewData The view, see Structures/ViewData. Modify this table.
+function DRIVE:CalcView(view_in) end

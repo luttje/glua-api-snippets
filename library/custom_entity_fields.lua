@@ -10,7 +10,7 @@ local Custom_Entity_Fields = {}
 
 ---Sandbox and Sandbox derived only.
 ---
---- Called by the Drive property to override the default drive type, which is `drive_sandbox`.
+--- Called by the [Drive property](https://wiki.facepunch.com/gmod/Entity_Driving) to override the default drive type, which is `drive_sandbox`.
 ---@type function
 Custom_Entity_Fields.GetEntityDriveMode = nil
 
@@ -38,7 +38,7 @@ Custom_Entity_Fields.OnDuplicated = nil
 ---
 --- If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
 ---@type boolean
-Custom_Entity_Fields.PhysgunDisabled = nil
+Custom_Entity_Fields.PhysgunDisabled = false
 
 ---Sandbox or Sandbox derived only.
 ---
@@ -70,6 +70,10 @@ Custom_Entity_Fields.CanProperty = nil
 ---@type function
 Custom_Entity_Fields.CanTool = nil
 
+---If set, the entity will not be duplicated via the built-in duplicator system.
+---@type boolean
+Custom_Entity_Fields.DoNotDuplicate = false
+
 ---Documented at ENTITY:CalcAbsolutePosition.
 ---@type function
 Custom_Entity_Fields.CalcAbsolutePosition = nil
@@ -78,10 +82,10 @@ Custom_Entity_Fields.CalcAbsolutePosition = nil
 ---@type function
 Custom_Entity_Fields.RenderOverride = nil
 
----Do not use.
+---Internal. Do not use. Use Entity:SetRenderOrigin instead.
 ---@type Vector
 Custom_Entity_Fields.m_RenderOrigin = nil
 
----Do not use.
+---Internal. Do not use. Use Entity:SetRenderAngles instead.
 ---@type Angle
 Custom_Entity_Fields.m_RenderAngles = nil

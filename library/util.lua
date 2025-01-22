@@ -928,24 +928,22 @@ function util.TraceEntityHull(tracedata, ent) end
 ---@return table # Trace result. See Structures/TraceResult
 function util.TraceHull(TraceData) end
 
----[SHARED] Performs an infinitely thin, invisible Ray Trace (or "Trace") in a line based on an input [Trace Structure table](https://wiki.facepunch.com/gmod/Structures/Trace) and returns a [Trace Result table](https://wiki.facepunch.com/gmod/Structures/TraceResult) that contains information about what, if anything, the Trace line hit or intersected.
+---[SHARED] Performs an infinitely thin, invisible ray trace (or "trace") in a line based on the input and returns a table that contains information about what, if anything, the trace line hit or intersected.
 ---
---- 		Traces intersect with the Physics Meshes of [Solid](https://wiki.facepunch.com/gmod/enums/SOLID), [Server-side](https://wiki.facepunch.com/gmod/States), [Entities](https://wiki.facepunch.com/gmod/Entity) (including the [Game World](https://wiki.facepunch.com/gmod/game.GetWorld)) but cannot detect Client-side-only Entities.
---- 		For a way to detect Client-side Entities, see [ents.FindAlongRay](https://wiki.facepunch.com/gmod/ents.FindAlongRay).
+--- Traces intersect with the physics meshes of [solid](https://wiki.facepunch.com/gmod/enums/SOLID), [server-side](https://wiki.facepunch.com/gmod/States), [entities](https://wiki.facepunch.com/gmod/Entity) (including the [game world](https://wiki.facepunch.com/gmod/game.GetWorld)) but cannot detect client-side only entities unless [hitclientonly](https://wiki.facepunch.com/gmod/Structures/Trace#hitclientonly) is set to true.
 ---
---- 		Traces do not differentiate between the inside and the outside faces of Physics Meshes.  Because of this, if a Trace starts within a Solid Physics Mesh it will hit the inside faces of the Physics Mesh and may return unexpected values as a result.
----
+--- See [ents.FindAlongRay](https://wiki.facepunch.com/gmod/ents.FindAlongRay) if you wish for the trace to not stop on first intersection.
 --- See [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) for a "box" type trace.
+---
+--- Traces do not differentiate between the inside and the outside faces of physics meshes. Because of this, if a trace starts within a solid physics mesh it will hit the inside faces of the physics mesh and may return unexpected values as a result.
 ---
 --- You can use `r_visualizetraces` set to `1` (requires `sv_cheats` set to `1`) to visualize traces in real time for debugging purposes.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/util.TraceLine)
----@param traceConfig table
---- 			A table of data that configures the Trace.
----
---- 			For the table's format and available options see the Structures/Trace page.
----@return table #
---- 			A table of information detailing where and what the Trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
+---@param traceConfig Trace
+--- 			A table of data that configures the trace. See Structures/Trace for available options.
+---@return TraceResult #
+--- 			A table of information detailing where and what the trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
 ---
 --- 			For the table's format and available options see the Structures/TraceResult page.
 function util.TraceLine(traceConfig) end

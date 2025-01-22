@@ -22,18 +22,6 @@ function DMenuBar:AddMenu(label) end
 ---@return Panel # The DMenu with the given label.
 function DMenuBar:AddOrGetMenu(label) end
 
----[CLIENT AND MENU] Returns the DMenuBar's background color
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetBackgroundColor)
----@return table # The background's color. See Color
-function DMenuBar:GetBackgroundColor() end
-
----[CLIENT AND MENU] Returns whether or not the DMenuBar is disabled
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDisabled)
----@return boolean # Is disabled
-function DMenuBar:GetDisabled() end
-
 ---[CLIENT AND MENU] Returns whether or not the background should be painted. Is the same as [DMenuBar:GetPaintBackground](https://wiki.facepunch.com/gmod/DMenuBar:GetPaintBackground)
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetDrawBackground)
@@ -58,18 +46,6 @@ function DMenuBar:GetOpenMenu() end
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:GetPaintBackground)
 ---@return boolean # Should the background be painted
 function DMenuBar:GetPaintBackground() end
-
----[CLIENT AND MENU] Sets the background color
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetBackgroundColor)
----@param color table See Color
-function DMenuBar:SetBackgroundColor(color) end
-
----[CLIENT AND MENU] Sets whether or not the panel is disabled
----
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuBar:SetDisabled)
----@param disable boolean Should be disabled or not
-function DMenuBar:SetDisabled(disable) end
 
 ---[CLIENT AND MENU] Sets whether or not the background should be painted. Is the same as [DMenuBar:SetPaintBackground](https://wiki.facepunch.com/gmod/DMenuBar:SetPaintBackground)
 ---

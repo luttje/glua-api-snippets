@@ -35,7 +35,7 @@ function IMaterial:GetInt(materialInt) end
 ---[SHARED] Gets all the key values defined for the material.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IMaterial:GetKeyValues)
----@return table # The material's key values.
+---@return table<string, any> # The material's key values.
 function IMaterial:GetKeyValues() end
 
 ---[SHARED] Returns the specified material matrix as a int, or nil if the value is not set or is not a matrix.

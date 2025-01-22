@@ -105,7 +105,7 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 --- 			In cases where an empty [Angle](https://wiki.facepunch.com/gmod/Angle) is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch number
+---@param pitch? number
 --- 			The pitch value of the angle, in degrees.
 ---@param yaw? number
 --- 			The yaw value of the angle, in degrees.
@@ -374,7 +374,10 @@ function _G.CreateClientConVar(name, default, shouldsave, userinfo, helptext, mi
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateContextMenu)
 function _G.CreateContextMenu() end
 
----[SHARED AND MENU] Creates a console variable ([ConVar](https://wiki.facepunch.com/gmod/ConVar)), in general these are for things like gamemode/server settings.
+---[SHARED AND MENU] Creates a console variable ([ConVar](https://wiki.facepunch.com/gmod/ConVar)).
+---
+--- Generally these are used for settings, which can be stored automatically across sessions if desired. They are usually set via an accompanying user interface clientside, or listed somewhere for dedicated server usage, in which case they might be set via `server.cfg` on server start up.
+---
 --- 		**WARNING**: Do not use the FCVAR_NEVER_AS_STRING and FCVAR_REPLICATED flags together, as this can cause the console variable to have strange values on the client.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.CreateConVar)
@@ -386,7 +389,9 @@ function _G.CreateContextMenu() end
 ---@param helptext? string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
----@return ConVar # The convar created.
+---@return ConVar # The convar created, or `nil` if convar could not be created. (such as when there's a console command with the same name)
+---
+--- If a ConVar already exists (including engine ones), it will simply return the already existing ConVar without modifying it in any way.
 function _G.CreateConVar(name, value, flags, helptext, min, max) end
 
 ---[CLIENT AND MENU] Creates a new material with the specified name and shader.
@@ -885,7 +890,7 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 
 ---[SHARED] Emits the specified sound at the specified position. See also [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound) if you wish to play sounds on a specific entity.
 ---
---- **NOTE**: Valid sample rates: **11025 Hz, 22050 Hz and 44100 Hz**, otherwise you may see this kind of message:
+--- **NOTE**: Valid 16 bit sample rates: **11025 Hz, 22050 Hz and 44100 Hz**, otherwise you may see this kind of message:
 ---
 --- `Unsupported 32-bit wave file your_sound.wav` and
 --- `Invalid sample rate (48000) for sound 'your_sound.wav'`
@@ -1010,7 +1015,7 @@ function _G.FireAddonConflicts() end
 --- 		**NOTE**: Existing problems with the same Id will be replaced / overridden.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.FireProblem)
----@param problem Structures/Problem
+---@param problem Problem
 ---
 --- 			The problem's definition.
 function _G.FireProblem(problem) end
@@ -1155,15 +1160,6 @@ function _G.GetAPIManifest(callback) end
 ---
 --- **NOTE**: This function uses [Global.GetConVar_Internal](https://wiki.facepunch.com/gmod/Global.GetConVar_Internal) internally, but caches the result in Lua for quicker lookups.
 ---
---- **WARNING**: Due to this function using [Global.GetConVar_Internal](https://wiki.facepunch.com/gmod/Global.GetConVar_Internal) internally it tends to be relatively slow. Please attempt to 'cache' the return of what you used to make it instead of using this function.
----
---- Example:
---- ```
---- local exampleConvar = CreateClientConVar("exampleConvar", "hi")
----
---- print(exampleConvar:GetString())
---- ```
----
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetConVar)
 ---@param name string Name of the ConVar to get
 ---@return ConVar # The ConVar object, or nil if no such ConVar was found.
@@ -1212,7 +1208,7 @@ function _G.GetDemoFileDetails(filename) end
 ---[MENU] Returns a table with the names of files needed from the server you are currently joining.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Global.GetDownloadables)
----@return table # table of file names
+---@return string[] # table of file names
 function _G.GetDownloadables() end
 
 ---[SHARED AND MENU] Returns the environment table of either the stack level or the function specified.
@@ -2296,7 +2292,7 @@ function _G.PrecacheSentenceGroup(group) end
 ---[SHARED AND MENU] Writes every given argument to the console.
 --- Automatically attempts to convert each argument to a string. (See [Global.tostring](https://wiki.facepunch.com/gmod/Global.tostring))
 ---
---- Seperates lines with a line break (`"\n"`)
+--- Separates lines with a line break (`"\n"`)
 ---
 --- Separates arguments with a tab character (`"\t"`).
 ---

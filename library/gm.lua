@@ -356,7 +356,9 @@ function GM:EndEntityDriving(ent, ply) end
 --- * Return `nil` or nothing to play the sound without altering it.
 function GM:EntityEmitSound(data) end
 
----[SHARED] Called every time a bullet is fired from an entity.
+---[SHARED] Called every time a bullet is about to be fired from an entity, which allows to completely modify the bullet structure before the bullet is actually fired.
+---
+--- See [GM:PostEntityFireBullets](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets) if you wish to hook the final bullet values, such as the aim direction post spread calculations.
 ---
 --- **WARNING**: This hook is called directly from [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets). Due to this, you cannot call [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) inside this hook or an infinite loop will occur crashing the game.
 ---
@@ -407,11 +409,13 @@ function GM:EntityRemoved(ent, fullUpdate) end
 
 ---[SERVER] Called when an entity takes damage. You can modify all parts of the damage info in this hook.
 ---
+--- See [GM:PostEntityTakeDamage](https://wiki.facepunch.com/gmod/GM:PostEntityTakeDamage) if you wish to hook the final damage event.
+---
 --- **WARNING**: Applying damage from this hook to the entity taking damage will lead to infinite loop/crash.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage)
 ---@param target Entity The entity taking damage
----@param dmg CTakeDamageInfo Damage info
+---@param dmg CTakeDamageInfo Detailed information about the damage event.
 ---@return boolean # Return true to completely block the damage event
 function GM:EntityTakeDamage(target, dmg) end
 
@@ -470,7 +474,7 @@ function GM:GetDeathNoticeEntityName(ent) end
 ---@return number # New fall damage
 function GM:GetFallDamage(ply, speed) end
 
----[SHARED] Called when the game(server) needs to update the text shown in the server browser as the gamemode.
+---[SHARED] Called when the game(server) needs to update the text shown in the server browser as the gamemode. Runs at a ~2s interval, runs even when the server is hibernating.
 ---
 --- **NOTE**: This hook (and the `sv_gamename_override` command) may not work on some popular gamemodes like DarkRP or Trouble Terrorist Town. This is not a bug, it's just how it works. See [here](https://github.com/Facepunch/garrysmod-issues/issues/4637#issuecomment-677884989) for more information.
 ---
@@ -1573,7 +1577,7 @@ function GM:PlayerRequestTeam(ply, team) end
 
 ---[SERVER] Called when a player dispatched a chat message. For the clientside equivalent, see [GM:OnPlayerChat](https://wiki.facepunch.com/gmod/GM:OnPlayerChat).
 ---
---- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside--addons commonly return values in this hook to change chat messages.
+--- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside because addons commonly return values in this hook to change chat messages.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PlayerSay)
 ---@param sender Player The player which sent the message.
@@ -1840,7 +1844,9 @@ function GM:PostDrawTranslucentRenderables(bDrawingDepth, bDrawingSkybox, isDraw
 ---@param weapon Weapon The weapon the player is currently holding
 function GM:PostDrawViewModel(viewmodel, player, weapon) end
 
----[SHARED] Called every time a bullet pellet is fired from an entity.
+---[SHARED] Called every time a bullet pellet (i.e. this hook is called multiple times for a shotgun shot) is fired from an entity. Notably this hook will have the final damage and aim direction for the bullet pellet.
+---
+--- See [GM:EntityFireBullets](https://wiki.facepunch.com/gmod/GM:EntityFireBullets) if you wish to modify the bullets before they are fired.
 ---
 --- **WARNING**: This hook is called directly from [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets). Due to this, you cannot call [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) inside this hook or an infinite loop will occur crashing the game.
 ---
@@ -1856,13 +1862,15 @@ function GM:PostEntityFireBullets(entity, data) end
 
 ---[SERVER] Called when an entity receives a damage event, after passing damage filters, etc.
 ---
+--- See [GM:EntityTakeDamage](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage) if you wish to prevent damage events, or otherwise alter them.
+---
 --- **WARNING**: Applying damage from this hook to the entity taking damage will lead to infinite loop/crash.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PostEntityTakeDamage)
 ---@param ent Entity The entity that took the damage.
----@param dmg CTakeDamageInfo
----@param took boolean Whether the entity actually took the damage. (For example, shooting a Strider will generate this event, but it won't take bullet damage).
-function GM:PostEntityTakeDamage(ent, dmg, took) end
+---@param dmginfo CTakeDamageInfo Detailed information about the damage event.
+---@param wasDamageTaken boolean Whether the entity actually took the damage. (For example, shooting a Strider will generate this event, but it won't take bullet damage).
+function GM:PostEntityTakeDamage(ent, dmginfo, wasDamageTaken) end
 
 ---[SHARED] Called after the gamemode has loaded.
 ---
@@ -1889,9 +1897,9 @@ function GM:PostPlayerDraw(ply, flags) end
 ---[CLIENT] Allows you to suppress post processing effect drawing.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/GM:PostProcessPermitted)
----@param ppeffect string The classname of Post Processing effect
+---@param effect_name string The classname of Post Processing effect
 ---@return boolean # Return true/false depending on whether this post process should be allowed
-function GM:PostProcessPermitted(ppeffect) end
+function GM:PostProcessPermitted(effect_name) end
 
 ---[CLIENT] Called after the frame has been rendered.
 ---

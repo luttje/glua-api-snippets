@@ -29,7 +29,8 @@ math = {}
 --- ```
 ---
 ---
---- 	A brief visual example of different easing methods
+---
+--- 		A brief visual example of different easing methods
 math.ease = {}
 
 ---[SHARED AND MENU] Calculates the absolute value of a number (effectively removes any negative sign).

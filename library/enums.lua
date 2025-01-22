@@ -1,6 +1,6 @@
 ---@meta
 
----@enum _USE
+---@alias _USE 0|1|2|3
 --- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal every tick as long as the player holds their use key and aims at the target.
 CONTINUOUS_USE = 0
 --- Fires a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal when starting to use an entity, and a [USE_OFF](https://wiki.facepunch.com/gmod/Enums/USE) signal when letting go.
@@ -14,7 +14,7 @@ DIRECTIONAL_USE = 2
 --- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal only once when player presses their use key while aiming at the target.
 SIMPLE_USE = 3
 
----@enum ACT
+---@alias ACT -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339|340|341|342|343|344|345|346|347|348|349|350|351|352|353|354|355|356|357|358|359|360|361|362|363|364|365|366|367|368|369|370|371|372|373|374|375|376|377|378|379|380|381|382|383|384|385|386|387|388|389|390|391|392|393|394|395|396|397|398|399|400|401|402|403|404|405|406|407|408|409|410|411|412|413|414|415|416|417|418|419|420|421|422|423|424|425|426|427|428|429|430|431|432|433|434|435|436|437|438|439|440|441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460|461|462|463|464|465|466|467|468|469|470|471|472|473|474|475|476|477|478|479|480|481|482|483|484|485|486|487|488|489|490|491|492|493|494|495|496|497|498|499|500|501|502|503|504|505|506|507|508|509|510|511|512|513|514|515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534|535|536|537|538|539|540|541|542|543|544|545|546|547|548|549|550|551|552|553|554|555|556|557|558|559|560|561|562|563|564|565|566|567|568|569|570|571|572|573|574|575|576|577|578|579|580|581|582|583|584|585|586|587|588|589|590|591|592|593|594|595|596|597|598|599|600|601|602|603|604|605|606|607|608|609|610|611|612|613|614|615|616|617|618|619|620|621|622|623|624|625|626|627|628|629|630|631|632|633|634|635|636|637|638|639|640|641|642|643|644|645|646|647|648|649|650|651|652|653|654|655|656|657|658|659|660|661|662|663|664|665|666|667|668|669|670|671|672|673|674|675|676|677|678|679|680|681|682|683|684|685|686|687|688|689|690|691|692|693|694|695|696|697|698|699|700|701|702|703|704|705|706|707|708|709|710|711|712|713|714|715|716|717|718|719|720|721|722|723|724|725|726|727|728|729|730|731|732|733|734|735|736|737|738|739|740|741|742|743|744|745|746|747|748|749|750|751|752|753|754|755|756|757|758|759|760|761|762|763|764|765|766|767|768|769|770|771|772|773|774|775|776|777|778|779|780|781|782|783|784|785|786|787|788|789|790|791|792|793|794|795|796|797|798|799|800|801|802|803|804|805|806|807|808|809|810|811|812|813|814|815|816|817|818|819|820|821|822|823|824|825|826|827|828|829|830|831|832|833|834|835|836|837|838|839|840|841|842|843|844|845|846|847|848|849|850|851|852|853|854|855|856|857|858|859|860|861|862|863|864|865|866|867|868|869|870|871|872|873|874|875|876|877|878|879|880|881|882|883|884|885|886|887|888|889|890|891|892|893|894|895|896|897|898|899|900|901|902|903|904|905|906|907|908|909|910|911|912|913|914|915|916|917|918|919|920|921|922|923|924|925|926|927|928|929|930|931|932|933|934|935|936|937|938|939|940|941|942|943|944|945|946|947|948|949|950|951|952|953|954|955|956|957|958|959|960|961|962|963|964|965|966|967|968|969|970|971|972|973|974|975|976|977|978|979|980|981|982|983|984|985|986|987|988|989|990|991|992|993|995|996|997|998|999|1000|1001|1002|1003|1004|1005|1006|1007|1008|1009|1010|1011|1012|1013|1014|1015|1016|1017|1018|1019|1020|1021|1022|1023|1024|1025|1026|1027|1028|1029|1030|1031|1032|1033|1034|1035|1036|1037|1038|1039|1040|1041|1042|1043|1044|1045|1046|1047|1048|1049|1050|1051|1052|1053|1054|1055|1056|1059|1060|1061|1062|1063|1064|1065|1066|1067|1068|1069|1070|1071|1072|1073|1074|1075|1076|1105|1106|1107|1108|1109|1110|1111|1112|1113|1114|1115|1116|1117|1118|1119|1120|1121|1122|1123|1124|1125|1126|1127|1128|1129|1130|1131|1132|1133|1134|1135|1140|1141|1142|1143|1171|1172|1173|1174|1175|1176|1177|1178|1179|1180|1181|1182|1183|1184|1185|1186|1187|1188|1189|1190|1191|1258|1259|1260|1261|1264|1265|1266|1267|1268|1269|1270|1271|1272|1273|1274|1275|1276|1277|1278|1279|1280|1281|1282|1283|1284|1285|1286|1287|1288|1289|1290|1291|1292|1293|1294|1307|1308|1309|1310|1311|1312|1313|1314|1315|1316|1317|1318|1319|1320|1321|1322|1323|1324|1325|1345|1346|1347|1348|1349|1350|1351|1352|1353|1354|1355|1356|1357|1377|1378|1379|1380|1381|1382|1383|1384|1385|1386|1387|1388|1389|1390|1391|1392|1393|1394|1395|1396|1397|1398|1399|1400|1413|1414|1415|1416|1417|1418|1419|1420|1421|1422|1423|1424|1428|1429|1430|1610|1611|1612|1613|1614|1615|1616|1617|1618|1619|1620|1621|1622|1623|1624|1625|1626|1627|1628|1629|1630|1631|1632|1633|1634|1635|1636|1637|1638|1639|1640|1641|1642|1643|1644|1645|1646|1647|1648|1649|1650|1651|1652|1653|1654|1655|1656|1657|1658|1659|1660|1661|1662|1663|1664|1665|1666|1667|1668|1669|1670|1671|1672|1673|1674|1675|1676|1677|1678|1679|1680|1681|1682|1683|1684|1685|1686|1687|1688|1689|1690|1691|1692|1693|1694|1695|1696|1697|1698|1699|1700|1701|1702|1703|1704|1705|1706|1707|1708|1709|1710|1711|1712|1713|1714|1715|1716|1717|1718|1719|1720|1721|1722|1777|1778|1779|1780|1781|1782|1783|1784|1786|1787|1788|1789|1790|1791|1792|1793|1794|1795|1796|1797|1798|1799|1800|1801|1802|1803|1804|1805|1806|1807|1808|1809|1810|1811|1812|1813|1814|1815|1816|1817|1818|1819|1820|1821|1822|1823|1824|1825|1826|1827|1828|1829|1830|1831|1832|1833|1834|1835|1836|1837|1838|1839|1840|1841|1842|1843|1844|1845|1846|1847|1848|1849|1850|1851|1852|1853|1854|1855|1856|1857|1858|1859|1860|1861|1862|1863|1864|1865|1866|1867|1868|1869|1870|1871|1872|1873|1874|1875|1876|1877|1878|1879|1880|1881|1882|1883|1884|1885|1886|1887|1888|1889|1890|1891|1892|1893|1894|1895|1896|1897|1898|1899|1900|1901|1902|1903|1904|1905|1906|1907|1908|1909|1910|1911|1912|1913|1914|1915|1916|1917|1918|1919|1920|1921|1922|1923|1924|1925|1926|1927|1928|1929|1930|1931|1932|1933|1934|1935|1936|1937|1938|1939|1940|1941|1942|1943|1944|1945|1946|1947|1948|1949|1950|1951|1952|1953|1954|1955|1956|1957|1958|1959|1960|1961|1962|1963|1964|1965|1966|1967|1968|1969|1970|1971|1972|1973|1974|1975|1976|1977|1978|1979|1980|1981|1982|1983|1984|1985|1986|1987|1988|1989|1990|1991|1992|1993|1994|1995|1996|1997|1998|1999|2000|2001|2002|2003|2004|2005|2006|2007|2008|2009|2010|2011|2012|2013|2014|2015|2019|2020|2021|2022|2023|2024|2025|2026|2027|2028|2029|2030|2031|2032|2033|2034|2035|2036|2037|2038|2039|2040|2041|2042|2043|2044|2045
 ACT_INVALID = -1
 ACT_RESET = 0
 ACT_IDLE = 1
@@ -1614,7 +1614,7 @@ ACT_GMOD_SHOWOFF_DUCK_02 = 2044
 --- The last shared activity number. IDs after this are "private" activities registered at runtime, and will have random IDs associated with specific ACTivities.
 LAST_SHARED_ACTIVITY = 2045
 
----@enum AIMR
+---@alias AIMR -4|-3|-2|-1|0|1
 --- Move is illegal for some reason.
 AIMR_ILLEGAL = -4
 --- Move was blocked by an NPC.
@@ -1628,13 +1628,13 @@ AIMR_OK = 0
 --- Locomotion method has changed.
 AIMR_CHANGE_TYPE = 1
 
----@enum AMMO
+---@alias AMMO 1|2
 --- Forces player to drop the object they are carrying if the object was hit by this ammo type.
 AMMO_FORCE_DROP_IF_CARRIED = 1
 --- Uses [AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).plydmg of the ammo type as the damage to deal to shot players instead of [Bullet](https://wiki.facepunch.com/gmod/Structures/Bullet).Damage.
 AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
 
----@enum ANALOG
+---@alias ANALOG 0|1|3|4|5|6|7|8|9
 ANALOG_MOUSE_X = 0
 ANALOG_MOUSE_Y = 1
 ANALOG_MOUSE_WHEEL = 3
@@ -1645,7 +1645,7 @@ ANALOG_JOY_R = 7
 ANALOG_JOY_U = 8
 ANALOG_JOY_V = 9
 
----@enum BLEND
+---@alias BLEND 0|1|2|3|4|5|6|7|8|9|10
 --- The Multiplier will be `r=0`, `g=0`, `b=0`, `a=0`
 ---
 --- 			This is useful for removing the Source or Destination from the final pixel color.
@@ -1716,7 +1716,7 @@ BLEND_SRC_COLOR = 9
 --- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_SRC_COLOR = 10
 
----@enum BLENDFUNC
+---@alias BLENDFUNC 0|1|2|3|4
 --- **Source + Destination**
 --- 			Adds each channel of the Source with the same channel of the Destination.
 ---
@@ -1748,7 +1748,7 @@ BLENDFUNC_MIN = 3
 --- 			All of the Source channels are added together and compared to all of the Destination channels added together and the larger of the two is used as the final pixel color.
 BLENDFUNC_MAX = 4
 
----@enum BLOOD_COLOR
+---@alias BLOOD_COLOR -1|0|1|2|3|4|5|6
 --- No blood
 DONT_BLEED = -1
 --- Normal red blood
@@ -1766,7 +1766,7 @@ BLOOD_COLOR_ZOMBIE = 5
 --- Bright green blood
 BLOOD_COLOR_ANTLION_WORKER = 6
 
----@enum BONE
+---@alias BONE 1|2|4|8|16|31|256|512|1024|2048|4096|8192|16384|32768|65536|131072|261120|262144|524032|524032
 --- Bone is physically simulated when physics are active
 BONE_PHYSICALLY_SIMULATED = 1
 --- Procedural when physics is active
@@ -1799,13 +1799,13 @@ BONE_USED_BY_BONE_MERGE = 262144
 BONE_USED_BY_ANYTHING = 524032
 BONE_USED_MASK = 524032
 
----@enum BOUNDS
+---@alias BOUNDS 0|2
 --- Sets the bounds in relation to the entity's collision bounds.
 BOUNDS_COLLISION = 0
 --- Sets the bounds to fit all hitboxes of the entity's model.
 BOUNDS_HITBOXES = 2
 
----@enum BOX
+---@alias BOX 0|1|2|3|4|5
 --- Place the light from the front
 BOX_FRONT = 0
 --- Place the light behind
@@ -1819,13 +1819,13 @@ BOX_TOP = 4
 --- Place the light to the bottom
 BOX_BOTTOM = 5
 
----@enum BUTTON_CODE
+---@alias BUTTON_CODE -1|0|171|172
 BUTTON_CODE_INVALID = -1
 BUTTON_CODE_NONE = 0
 BUTTON_CODE_LAST = 171
 BUTTON_CODE_COUNT = 172
 
----@enum CAP
+---@alias CAP -2147483648|1|2|4|8|16|32|64|128|256|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|16777216|8388608|33554432|67108864|134217728|268435456|536870912|1073741824
 --- When hit by an explosion, we'll simply block it instead of spilling it to entities behind us, the sv_robust_explosions cvar can also enable this globally when set to 0
 CAP_SIMPLE_RADIUS_DAMAGE = -2147483648
 --- Walk/Run
@@ -1873,7 +1873,7 @@ CAP_NO_HIT_PLAYER = 268435456
 CAP_AIM_GUN = 536870912
 CAP_NO_HIT_SQUADMATES = 1073741824
 
----@enum CHAN
+---@alias CHAN -1|0|1|2|3|4|5|6|7|8|136
 --- Used when playing sounds through console commands.
 CHAN_REPLACE = -1
 --- Automatic channel
@@ -1899,7 +1899,7 @@ CHAN_VOICE_BASE = 8
 --- Channels from this and onwards are allocated to game code
 CHAN_USER_BASE = 136
 
----@enum CLASS
+---@alias CLASS 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36
 --- None - default class for entities.
 CLASS_NONE = 0
 --- Players
@@ -2065,7 +2065,7 @@ CLASS_ALIEN_BIOWEAPON = 35
 --- * `npc_security_camera`
 CLASS_PORTAL_TURRET = 36
 
----@enum COLLISION_GROUP
+---@alias COLLISION_GROUP 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21
 --- Normal
 COLLISION_GROUP_NONE = 0
 --- Collides with nothing but world and static stuff
@@ -2157,10 +2157,13 @@ COND = {
 	NO_PRIMARY_AMMO = 4,
 	NO_SECONDARY_AMMO = 5,
 	NO_WEAPON = 6,
-	NONE = 0, --[[ No additional conditions are being played ]]
+	--- No additional conditions are being played
+	NONE = 0,
 	NOT_FACING_ATTACK = 40,
-	NPC_FREEZE = 67, --[[ Freezes NPC movement ]]
-	NPC_UNFREEZE = 68, --[[ Unfreezes NPC movement ]]
+	--- Freezes NPC movement
+	NPC_FREEZE = 67,
+	--- Unfreezes NPC movement
+	NPC_UNFREEZE = 68,
 	PHYSICS_DAMAGE = 19,
 	PLAYER_ADDED_TO_SQUAD = 64,
 	PLAYER_PUSHING = 66,
@@ -2189,7 +2192,7 @@ COND = {
 	WEAPON_SIGHT_OCCLUDED = 45,
 }
 
----@enum CONTENTS
+---@alias CONTENTS 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|1048576|2097152|524288|8388608|4194304|67108864|134217728|1073741824|536870912|33554432|16777216|268435456|128|255
 --- Things that are not solid
 CONTENTS_EMPTY = 0
 --- Things that are solid
@@ -2239,7 +2242,7 @@ LAST_VISIBLE_CONTENTS = 128
 --- Sum of all the visible contents enumerations
 ALL_VISIBLE_CONTENTS = 255
 
----@enum CREATERENDERTARGETFLAGS
+---@alias CREATERENDERTARGETFLAGS 1|2|4
 --- Makes this render target an HDR render target if the current system supports HDR.
 CREATERENDERTARGETFLAGS_HDR = 1
 --- Does nothing.
@@ -2247,7 +2250,7 @@ CREATERENDERTARGETFLAGS_AUTOMIPMAP = 2
 --- Does nothing
 CREATERENDERTARGETFLAGS_UNFILTERABLE_OK = 4
 
----@enum CT
+---@alias CT 0|1|2|3|4
 --- Default citizen
 CT_DEFAULT = 0
 --- Default citizen(?)
@@ -2259,7 +2262,7 @@ CT_REBEL = 3
 --- Odessa?
 CT_UNIQUE = 4
 
----@enum D
+---@alias D 0|1|2|3|4
 --- Error
 D_ER = 0
 --- Hate
@@ -2271,14 +2274,14 @@ D_LI = 3
 --- Neutral
 D_NU = 4
 
----@enum DISPSURF
+---@alias DISPSURF 1|2|4|8|16
 DISPSURF_SURFACE = 1
 DISPSURF_WALKABLE = 2
 DISPSURF_BUILDABLE = 4
 DISPSURF_SURFPROP1 = 8
 DISPSURF_SURFPROP2 = 16
 
----@enum DMG
+---@alias DMG 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|2147483648
 --- Generic damage (used by weapon_fists)
 DMG_GENERIC = 0
 --- Caused by physics interaction and ignored by airboat drivers. This is used by the Rollermine and an unused animation attack called 'Fireattack' by the Antlion Guard [ACT_RANGE_ATTACK1](https://wiki.facepunch.com/gmod/Enums/ACT)
@@ -2346,7 +2349,7 @@ DMG_SNIPER = 1073741824
 --- Damage from npc_missiledefense, npc_combinegunship, or monster_mortar
 DMG_MISSILEDEFENSE = 2147483648
 
----@enum DOCK
+---@alias DOCK 0|1|2|3|4|5
 --- Don't dock
 NODOCK = 0
 --- Fill parent
@@ -2360,11 +2363,11 @@ TOP = 4
 --- Dock to the bottom
 BOTTOM = 5
 
----@enum DOF
+---@alias DOF 256|512
 DOF_OFFSET = 256
 DOF_SPACING = 512
 
----@enum EF
+---@alias EF 1|128|2|4|8|16|32|64|256|512|1024|8192
 --- Performs bone merge on client side, merging bone positions of child entities ([Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent)) with those of the parent, by bone names. The skeletons should have identical proportions, however it is not a requirement.
 EF_BONEMERGE = 1
 --- For use with EF_BONEMERGE. If this is set, then it places this ents origin at its parent and uses the parent's bbox + the max extents of the aiment. Otherwise, it sets up the parent's bones every frame to figure out where to place the aiment, which is inefficient because it'll setup the parent's bones even if the parent is not in the PVS.
@@ -2390,7 +2393,7 @@ EF_FOLLOWBONE = 1024
 --- Makes the entity not accept being lit by projected textures, including the player's flashlight.
 EF_NOFLASHLIGHT = 8192
 
----@enum EFL
+---@alias EFL 1|2|4|8|16|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|-2147483648
 --- This entity is marked for death -- This allows the game to actually delete ents at a safe time.
 --- **WARNING**: You should never set this flag manually.
 EFL_KILLME = 1
@@ -2457,8 +2460,8 @@ EFL_NO_PHYSCANNON_INTERACTION = 1073741824
 --- Doesn't accept forces from physics damage
 EFL_NO_DAMAGE_FORCES = -2147483648
 
----@enum FCVAR
---- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into client.vdf
+---@alias FCVAR 128|16777216|16384|1073741824|8|65536|131072|4|262144|524288|4096|0|256|4194304|1024|32|8192|536870912|268435456|64|2048|1|512
+--- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into either client.vdf or server.vdf
 ---
 --- Reported as "a" by `cvarlist`, except Lua [ConVar](https://wiki.facepunch.com/gmod/ConVar)s
 FCVAR_ARCHIVE = 128
@@ -2545,7 +2548,7 @@ FCVAR_UNREGISTERED = 1
 --- Reported as "user" by `cvarlist`
 FCVAR_USERINFO = 512
 
----@enum FFT
+---@alias FFT 0|1|2|3|4|5|6|7
 --- 128 levels
 FFT_256 = 0
 --- 256 levels
@@ -2563,7 +2566,7 @@ FFT_16384 = 6
 --- 16384 levels
 FFT_32768 = 7
 
----@enum FL
+---@alias FL 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|-2147483648
 --- Is the entity on ground or not
 FL_ONGROUND = 1
 --- Is player ducking or not
@@ -2630,7 +2633,7 @@ FL_TRANSRAGDOLL = 1073741824
 --- This moving door can't be blocked by the player
 FL_UNBLOCKABLE_BY_PLAYER = -2147483648
 
----@enum FORCE
+---@alias FORCE 1|2|3|4|5|6
 --- Forces the function to take [string](https://wiki.facepunch.com/gmod/string)s only
 FORCE_STRING = 1
 --- Forces the function to take [number](https://wiki.facepunch.com/gmod/number)s only
@@ -2644,7 +2647,7 @@ FORCE_COLOR = 5
 --- Forces the function to take [Vector](https://wiki.facepunch.com/gmod/Vector)s only
 FORCE_VECTOR = 6
 
----@enum FSASYNC
+---@alias FSASYNC -8|-7|-6|-5|-4|-3|-2|-1|0|1|2|3|4
 FSASYNC_ERR_NOT_MINE = -8
 FSASYNC_ERR_RETRY_LATER = -7
 FSASYNC_ERR_ALIGNMENT = -6
@@ -2659,7 +2662,7 @@ FSASYNC_STATUS_INPROGRESS = 2
 FSASYNC_STATUS_ABORTED = 3
 FSASYNC_STATUS_UNSERVICED = 4
 
----@enum FSOLID
+---@alias FSOLID 1|2|4|8|16|32|64|128|256|512|10
 --- Ignore solid type + always call into the entity for ray tests
 FSOLID_CUSTOMRAYTEST = 1
 --- Ignore solid type + always call into the entity for swept box tests
@@ -2683,7 +2686,7 @@ FSOLID_TRIGGER_TOUCH_DEBRIS = 512
 --- The amount of bits needed to store the all the flags in a variable/sent over network.
 FSOLID_MAX_BITS = 10
 
----@enum FVPHYSICS
+---@alias FVPHYSICS 2|512|1|32|16|1024|2048|128|32768|8|64|4|256
 --- Won't receive physics forces from collisions and won't collide with other [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the same flag set.
 FVPHYSICS_CONSTRAINT_STATIC = 2
 --- Colliding with entities will cause 1000 damage with DMG_DISSOLVE as the damage type, but only if EFL_NO_DISSOLVE is not set.
@@ -2711,7 +2714,7 @@ FVPHYSICS_PLAYER_HELD = 4
 --- This object was thrown by the Gravity Gun , stuns Antlion guards, Hunters, and squashes Antlion grubs.
 FVPHYSICS_WAS_THROWN = 256
 
----@enum GESTURE_SLOT
+---@alias GESTURE_SLOT 0|1|2|3|4|5|6
 --- Slot for weapon gestures
 GESTURE_SLOT_ATTACK_AND_RELOAD = 0
 GESTURE_SLOT_GRENADE = 1
@@ -2725,7 +2728,7 @@ GESTURE_SLOT_VCD = 5
 --- Slot for custom gestures
 GESTURE_SLOT_CUSTOM = 6
 
----@enum GLOBAL
+---@alias GLOBAL 0|1|2
 --- Initial state, the global state is off.
 GLOBAL_OFF = 0
 --- The global state is enabled.
@@ -2733,7 +2736,7 @@ GLOBAL_ON = 1
 --- The global state is dead and is no longer active. It will be cleared.
 GLOBAL_DEAD = 2
 
----@enum GMOD_CHANNEL
+---@alias GMOD_CHANNEL 0|1|2|3
 --- The channel is stopped
 GMOD_CHANNEL_STOPPED = 0
 --- The channel is playing
@@ -2743,7 +2746,7 @@ GMOD_CHANNEL_PAUSED = 2
 --- The channel is buffering
 GMOD_CHANNEL_STALLED = 3
 
----@enum GOALTYPE
+---@alias GOALTYPE 0|1|2|3|4|5|6|7|8
 --- No goal type.
 GOALTYPE_NONE = 0
 --- The goal type is an entity.
@@ -2763,7 +2766,7 @@ GOALTYPE_COVER = 7
 --- Invalid goal type.
 GOALTYPE_INVALID = 8
 
----@enum HITGROUP
+---@alias HITGROUP 0|1|2|3|4|5|6|7|10
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
 --- This hitgroup is not present on default player models.
 ---
@@ -2790,7 +2793,7 @@ HITGROUP_RIGHTLEG = 7
 --- Alerts NPC, but doesn't do damage or bleed (1/100th damage)
 HITGROUP_GEAR = 10
 
----@enum HUD
+---@alias HUD 1|2|3|4
 --- No longer works; now same as HUD_PRINTCONSOLE
 HUD_PRINTNOTIFY = 1
 --- Console
@@ -2800,7 +2803,7 @@ HUD_PRINTTALK = 3
 --- Center of the screen, nothing on client
 HUD_PRINTCENTER = 4
 
----@enum HULL
+---@alias HULL 0|1|2|3|4|5|6|7|8|9
 --- Hull of a Citizen
 HULL_HUMAN = 0
 HULL_SMALL_CENTERED = 1
@@ -2813,7 +2816,7 @@ HULL_LARGE = 7
 HULL_LARGE_CENTERED = 8
 HULL_MEDIUM_TALL = 9
 
----@enum IMAGE_FORMAT
+---@alias IMAGE_FORMAT -1|0|1|2|3|4|11|12|25|24
 IMAGE_FORMAT_DEFAULT = -1
 IMAGE_FORMAT_RGBA8888 = 0
 IMAGE_FORMAT_ABGR8888 = 1
@@ -2825,7 +2828,7 @@ IMAGE_FORMAT_BGRA8888 = 12
 IMAGE_FORMAT_RGBA16161616 = 25
 IMAGE_FORMAT_RGBA16161616F = 24
 
----@enum IN
+---@alias IN 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216
 --- +attack bound key ( Default: Left Mouse Button )
 IN_ATTACK = 1
 --- +jump bound key ( Default: Space )
@@ -2874,7 +2877,7 @@ IN_GRENADE1 = 8388608
 --- +grenade2 bound key
 IN_GRENADE2 = 16777216
 
----@enum JOYSTICK
+---@alias JOYSTICK 114|114|145|146|149|150|161|161
 JOYSTICK_FIRST = 114
 --- Joystick buttons are in this range, but don't have individual enum names.
 JOYSTICK_FIRST_BUTTON = 114
@@ -2887,7 +2890,7 @@ JOYSTICK_FIRST_AXIS_BUTTON = 150
 JOYSTICK_LAST_AXIS_BUTTON = 161
 JOYSTICK_LAST = 161
 
----@enum KEY
+---@alias KEY 0|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|106|107|114|115|116|117|118|119|120|121|122|123|146|147|148|149|150|151|152|153|154|155|156|157|158|159
 KEY_FIRST = 0
 KEY_NONE = 0
 --- Normal number 0 key
@@ -3052,7 +3055,7 @@ KEY_XSTICK2_LEFT = 157
 KEY_XSTICK2_DOWN = 158
 KEY_XSTICK2_UP = 159
 
----@enum kRenderFx
+---@alias kRenderFx 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24
 --- None. No change.
 kRenderFxNone = 0
 --- Slowly pulses the entitys transparency, +-15 to the current alpha.
@@ -3104,7 +3107,7 @@ kRenderFxRagdoll = 23
 --- Quickly pulses the entitys transparency, from 0 to 255.
 kRenderFxPulseFastWider = 24
 
----@enum MASK
+---@alias MASK 4294967295|16449|33570881|16515072|65547|33701899|147467|131083|16513|33570945|33636363|81931|1174421507|100679691|33570819|33570827|16395|48|24705|33579137|16432
 --- Anything that is not empty space
 MASK_ALL = 4294967295
 --- Anything that blocks line of sight for AI
@@ -3148,7 +3151,7 @@ MASK_VISIBLE_AND_NPCS = 33579137
 --- Anything that has water-like physics
 MASK_WATER = 16432
 
----@enum MAT
+---@alias MAT 65|66|67|68|69|70|71|72|73|74|76|77|78|79|80|83|84|85|86|87|88|89|90
 --- Antlions
 MAT_ANTLION = 65
 --- Similar to MAT_FLESH, only used by "bloodyflesh" surface property, has different impact sound
@@ -3196,7 +3199,7 @@ MAT_GLASS = 89
 --- "wierd-looking jello effect for advisor shield."
 MAT_WARPSHIELD = 90
 
----@enum MATERIAL
+---@alias MATERIAL 0|1|2|3|4|5|6|7
 --- **WARNING**: The primitive type `MATERIAL_POINTS` does not currently work and will not produce any visual effect if used.
 ---
 --- 			For more information, see [Point Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#points)
@@ -3242,13 +3245,13 @@ MATERIAL_POLYGON = 6
 --- 			For more information, see [Quad Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#quads)
 MATERIAL_QUADS = 7
 
----@enum MATERIAL_CULLMODE
+---@alias MATERIAL_CULLMODE 0|1
 --- Cull back faces with counterclockwise vertices.
 MATERIAL_CULLMODE_CCW = 0
 --- Cull back faces with clockwise vertices.
 MATERIAL_CULLMODE_CW = 1
 
----@enum MATERIAL_FOG
+---@alias MATERIAL_FOG 0|1|2
 --- No fog
 MATERIAL_FOG_NONE = 0
 --- Linear fog
@@ -3256,7 +3259,7 @@ MATERIAL_FOG_LINEAR = 1
 --- For use in conjunction with [render.SetFogZ](https://wiki.facepunch.com/gmod/render.SetFogZ). Does not work if start distance is bigger than end distance. Ignores density setting. Seems to be broken? Used for underwater fog by the engine.
 MATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2
 
----@enum MATERIAL_LIGHT
+---@alias MATERIAL_LIGHT 0|1|2|3
 --- No light
 MATERIAL_LIGHT_DISABLE = 0
 --- Point light
@@ -3266,7 +3269,7 @@ MATERIAL_LIGHT_DIRECTIONAL = 2
 --- Spot light
 MATERIAL_LIGHT_SPOT = 3
 
----@enum MATERIAL_RT_DEPTH
+---@alias MATERIAL_RT_DEPTH 0|1|2|3
 --- Do not create a depth-stencil buffer.Use the default depth-stencil buffer if used as render target 0.
 MATERIAL_RT_DEPTH_SHARED = 0
 --- Create a depth-stencil buffer.Use the created depth-stencil buffer if used as render target 0.
@@ -3279,7 +3282,7 @@ MATERIAL_RT_DEPTH_NONE = 2
 --- Seems to behave the same as MATERIAL_RT_DEPTH_SEPARATE.
 MATERIAL_RT_DEPTH_ONLY = 3
 
----@enum MOUSE
+---@alias MOUSE 107|107|108|109|110|111|112|113|113|7
 --- First mouse button
 MOUSE_FIRST = 107
 --- Left mouse button
@@ -3301,7 +3304,7 @@ MOUSE_LAST = 113
 --- Mouse button count
 MOUSE_COUNT = 7
 
----@enum MOVECOLLIDE
+---@alias MOVECOLLIDE 0|1|2|3|4
 --- Default behavior
 MOVECOLLIDE_DEFAULT = 0
 --- Entity bounces, reflects, based on elasticity of surface and object - applies friction (adjust velocity)
@@ -3313,7 +3316,7 @@ MOVECOLLIDE_FLY_SLIDE = 3
 --- Number of different movecollides
 MOVECOLLIDE_COUNT = 4
 
----@enum MOVETYPE
+---@alias MOVETYPE 0|1|2|3|4|5|6|7|8|9|10|11
 --- Don't move
 MOVETYPE_NONE = 0
 --- For players, in TF2 commander view, etc
@@ -3355,7 +3358,7 @@ MOVETYPE_OBSERVER = 10
 --- Custom movetype, can be applied to the player to prevent the default movement code from running, while still calling the related hooks
 MOVETYPE_CUSTOM = 11
 
----@enum NAV
+---@alias NAV -1|0|1|2|3
 --- Error condition.
 NAV_NONE = -1
 --- walk/run
@@ -3367,7 +3370,7 @@ NAV_FLY = 2
 --- climb ladders
 NAV_CLIMB = 3
 
----@enum NAV_MESH
+---@alias NAV_MESH 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|536870912|268435456|1073741824|-2147483648
 --- The nav area is invalid.
 NAV_MESH_INVALID = 0
 --- Must crouch to use this node/area
@@ -3406,14 +3409,12 @@ NAV_MESH_CLIFF = 32768
 NAV_MESH_FUNC_COST = 536870912
 --- Whether the area has a `prop_door_rotating` that is blocking it (because the door is closed)
 NAV_MESH_BLOCKED_PROPDOOR = 268435456
---- Whether the area is blocked via [CNavArea:MarkAsBlocked](https://wiki.facepunch.com/gmod/CNavArea:MarkAsBlocked).
-NAV_MESH_BLOCKED_LUA = TODO
 --- Area is in an elevator's path
 NAV_MESH_HAS_ELEVATOR = 1073741824
 --- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.
 NAV_MESH_NAV_BLOCKER = -2147483648
 
----@enum NavCorner
+---@alias NavCorner 0|1|2|3|4
 --- North West Corner
 NORTH_WEST = 0
 --- North East Corner
@@ -3425,7 +3426,7 @@ SOUTH_WEST = 3
 --- Represents all corners, only applicable to certain functions, such as [CNavArea:PlaceOnGround](https://wiki.facepunch.com/gmod/CNavArea:PlaceOnGround).
 NUM_CORNERS = 4
 
----@enum NavDir
+---@alias NavDir 0|1|2|3
 --- North from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 NORTH = 0
 --- East from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
@@ -3435,7 +3436,7 @@ SOUTH = 2
 --- West from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 WEST = 3
 
----@enum NavTraverseType
+---@alias NavTraverseType 0|1|2|3|4|5|6|7|8
 GO_NORTH = 0
 GO_EAST = 1
 GO_SOUTH = 2
@@ -3446,7 +3447,7 @@ GO_JUMP = 6
 GO_ELEVATOR_UP = 7
 GO_ELEVATOR_DOWN = 8
 
----@enum NOTIFY
+---@alias NOTIFY 0|1|2|3|4
 --- Generic notification
 NOTIFY_GENERIC = 0
 --- Error notification
@@ -3458,7 +3459,7 @@ NOTIFY_HINT = 3
 --- Cleanup notification
 NOTIFY_CLEANUP = 4
 
----@enum NPC_STATE
+---@alias NPC_STATE -1|0|1|2|3|4|5|6|7
 --- Invalid state
 NPC_STATE_INVALID = -1
 --- NPC default state
@@ -3478,13 +3479,13 @@ NPC_STATE_PRONE = 6
 --- NPC is dead
 NPC_STATE_DEAD = 7
 
----@enum NUM
+---@alias NUM 36|10
 --- Amount of [Enums/CLASS](https://wiki.facepunch.com/gmod/Enums/CLASS). Used by [Global.Add_NPC_Class](https://wiki.facepunch.com/gmod/Global.Add_NPC_Class).
 NUM_AI_CLASSES = 36
 --- Amount of [Enums/HULL](https://wiki.facepunch.com/gmod/Enums/HULL).
 NUM_HULLS = 10
 
----@enum OBS_MODE
+---@alias OBS_MODE 0|1|2|3|4|5|6
 --- Not spectating
 OBS_MODE_NONE = 0
 --- Camera doesn't move, but adjusts camera angles to follow the spectated target
@@ -3500,7 +3501,7 @@ OBS_MODE_CHASE = 5
 --- Free roam/noclip-alike. Does not work from [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath)
 OBS_MODE_ROAMING = 6
 
----@enum PATTACH
+---@alias PATTACH 0|1|2|3|4|5
 --- Particle spawns in entity's origin and does not follow it
 PATTACH_ABSORIGIN = 0
 --- Particle attaches to entity's origin and follows the entity
@@ -3514,7 +3515,7 @@ PATTACH_POINT_FOLLOW = 4
 --- Particle spawns in the beginning of coordinates ( Vector( 0, 0, 0 ) ), used for control points that don't attach to an entity
 PATTACH_WORLDORIGIN = 5
 
----@enum PLAYER
+---@alias PLAYER 0|1|2|3|4|5|6|7|8|9
 PLAYER_IDLE = 0
 PLAYER_WALK = 1
 PLAYER_JUMP = 2
@@ -3528,7 +3529,7 @@ PLAYER_RELOAD = 7
 PLAYER_START_AIMING = 8
 PLAYER_LEAVE_AIMING = 9
 
----@enum PLAYERANIMEVENT
+---@alias PLAYERANIMEVENT 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23
 --- Primary attack
 PLAYERANIMEVENT_ATTACK_PRIMARY = 0
 --- Secondary attack
@@ -3569,7 +3570,7 @@ PLAYERANIMEVENT_CUSTOM_GESTURE_SEQUENCE = 22
 --- Cancel reload animation
 PLAYERANIMEVENT_CANCEL_RELOAD = 23
 
----@enum RENDERGROUP
+---@alias RENDERGROUP 0|1|6|7|8|9|10|11|12|13
 --- Huge static prop, possibly leftover from goldsrc
 RENDERGROUP_STATIC_HUGE = 0
 --- Huge opaque entity, possibly leftover from goldsrc
@@ -3597,7 +3598,7 @@ RENDERGROUP_OPAQUE_BRUSH = 12
 --- Unclassfied. Won't get drawn.
 RENDERGROUP_OTHER = 13
 
----@enum RENDERMODE
+---@alias RENDERMODE 0|1|2|3|4|5|6|7|8|9|10
 --- Default render mode. Transparently has no effect.
 RENDERMODE_NORMAL = 0
 --- Supports transparency.
@@ -3630,7 +3631,7 @@ RENDERMODE_WORLDGLOW = 9
 --- To completely avoid drawing and networking an entity, see EF_NODRAW.
 RENDERMODE_NONE = 10
 
----@enum RT_SIZE
+---@alias RT_SIZE 0|1|2|3|4|5|6|7|8|9
 --- Only allowed for render targets that don't want a depth buffer (because if they have a depth buffer, the render target must be less than or equal to the size of the framebuffer).
 RT_SIZE_NO_CHANGE = 0
 --- Don't play with the specified width and height other than making sure it fits in the framebuffer.
@@ -3652,7 +3653,7 @@ RT_SIZE_LITERAL = 8
 --- Use the size passed in, don't clamp to the frame buffer size, but do apply picmip restrictions.
 RT_SIZE_LITERAL_PICMIP = 9
 
----@enum SCHED
+---@alias SCHED 88|56|5|6|7|8|9|10|52|48|24|26|23|17|18|12|75|15|13|16|40|53|54|49|79|84|35|36|81|38|82|31|78|14|29|80|71|72|66|50|1|2|3|85|86|11|41|42|68|70|69|25|34|63|64|0|73|76|74|37|43|44|51|32|33|83|77|62|59|61|58|60|57|39|87|22|45|46|47|65|28|27|30|21|20|19|55|67|4
 --- The schedule enum limit
 LAST_SHARED_SCHEDULE = 88
 --- Begins AI script based on NPC's `m_hCine` save value.
@@ -3801,13 +3802,20 @@ SCHED_WAIT_FOR_SPEAK_FINISH = 67
 SCHED_WAKE_ANGRY = 4
 
 ---@enum SCREENFADE
---- Enumerations used by [Player:ScreenFade](https://wiki.facepunch.com/gmod/Player:ScreenFade).
+--- Bitflags used by [Player:ScreenFade](https://wiki.facepunch.com/gmod/Player:ScreenFade).
 SCREENFADE = {
-	IN = 1, --[[ Fade out after the hold time has passed ]]
-	OUT = 2, --[[ Fade in, hold time passes, disappear ]]
-	MODULATE = 4, --[[ With white color, turns the screen black ]]
-	STAYOUT = 8, --[[ No effects, never disappear ]]
-	PURGE = 16, --[[ Appear, Disappear, no effects ]]
+	--- Instant fade in, slowly fade out (based on fade time given) after the hold time has passed
+	IN = 1,
+	--- Slowly fade in (based on fade time given), hold time passes, instantly disappear
+	OUT = 2,
+	--- Instead of blending multiple active screen fades, modulate them. (TODO: What does this mean?) Internally this flag switches what material will be used to render the screen fade. Practically it forces the color to black.
+	MODULATE = 4,
+	--- Never disappear. Does nothing by itself, as if no flags were given.
+	STAYOUT = 8,
+	--- Used to purge all currently active screen fade effects, meant to be used in conjunction with flags above as a "priority effect".
+	---
+	--- Does nothing by itself, acts as if no flags were given
+	PURGE = 16,
 }
 
 ---@enum SENSORBONE
@@ -3835,7 +3843,7 @@ SENSORBONE = {
 	HEAD = 3,
 }
 
----@enum SF
+---@alias SF 524288|65536|2097152|131072|1048576|262144|8388608|4194304|16777216|512|4096|1024|8|512|4|2|256|16384|8192|16|2048|128|1|32768|1048576|2097152|4194304|8|512|4194304|65536|1|2|4
 --- Citizen that resupplies ammo
 SF_CITIZEN_AMMORESUPPLIER = 524288
 --- "Follow the player as soon as I spawn"
@@ -3905,7 +3913,7 @@ SF_WEAPON_NO_PLAYER_PICKUP = 2
 --- Physgun is NOT allowed to pick this up.
 SF_WEAPON_NO_PHYSCANNON_PUNT = 4
 
----@enum SIGNONSTATE
+---@alias SIGNONSTATE 0|1|2|3|4|5|6|7
 SIGNONSTATE_NONE = 0
 SIGNONSTATE_CHALLENGE = 1
 SIGNONSTATE_CONNECTED = 2
@@ -3915,7 +3923,7 @@ SIGNONSTATE_SPAWN = 5
 SIGNONSTATE_FULL = 6
 SIGNONSTATE_CHANGELEVEL = 7
 
----@enum SIM
+---@alias SIM 0|1|2|3|4
 --- Don't simulate physics
 SIM_NOTHING = 0
 --- Vectors in local coordinate system
@@ -3927,7 +3935,7 @@ SIM_GLOBAL_ACCELERATION = 3
 --- Vectors in world coordinate system
 SIM_GLOBAL_FORCE = 4
 
----@enum SND
+---@alias SND 0|1|2|4|8|16|32|128|256|512|1024
 --- To keep the compiler happy
 SND_NOFLAGS = 0
 --- Change sound volume
@@ -3951,7 +3959,7 @@ SND_IGNORE_NAME = 512
 --- Unused/legacy; does nothing.
 SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 
----@enum SNDLVL
+---@alias SNDLVL 0|20|25|30|35|40|45|50|55|60|60|65|66|70|75|75|80|80|85|90|95|100|105|110|120|130|140|140|150|180
 --- Sound plays everywhere
 SNDLVL_NONE = 0
 --- Rustling leaves
@@ -4007,7 +4015,7 @@ SNDLVL_150dB = 150
 --- Rocket launching
 SNDLVL_180dB = 180
 
----@enum SOLID
+---@alias SOLID 0|1|2|3|4|5|6
 --- Does not collide with anything.
 --- **NOTE**: No physics object will be created when using this with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit).
 SOLID_NONE = 0
@@ -4025,7 +4033,7 @@ SOLID_CUSTOM = 5
 --- Uses the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ects of the entity.
 SOLID_VPHYSICS = 6
 
----@enum SOUND
+---@alias SOUND 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912
 SOUND_NONE = 0
 SOUND_COMBAT = 1
 SOUND_WORLD = 2
@@ -4072,7 +4080,7 @@ SOUND_CONTEXT_ALLIES_ONLY = 268435456
 --- HACK: need this because we're not treating the SOUND_xxx values as true bit values! See switch in OnListened.
 SOUND_CONTEXT_PLAYER_VEHICLE = 536870912
 
----@enum STENCIL
+---@alias STENCIL 1|2|3|4|5|6|7|8|1|2|3|4|5|6|7|8
 --- Never passes.
 STENCIL_NEVER = 1
 --- Passes where the reference value is less than the stencil value.
@@ -4106,7 +4114,7 @@ STENCIL_INCR = 7
 --- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
 STENCIL_DECR = 8
 
----@enum STENCILCOMPARISONFUNCTION
+---@alias STENCILCOMPARISONFUNCTION 1|2|3|4|5|6|7|8
 --- Never passes.
 STENCILCOMPARISONFUNCTION_NEVER = 1
 --- Passes where the reference value is less than the stencil value.
@@ -4124,7 +4132,7 @@ STENCILCOMPARISONFUNCTION_GREATEREQUAL = 7
 --- Always passes.
 STENCILCOMPARISONFUNCTION_ALWAYS = 8
 
----@enum STENCILOPERATION
+---@alias STENCILOPERATION 1|2|3|4|5|6|7|8
 --- Preserves the existing stencil buffer value.
 STENCILOPERATION_KEEP = 1
 --- Sets the value in the stencil buffer to 0.
@@ -4142,7 +4150,7 @@ STENCILOPERATION_INCR = 7
 --- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
 STENCILOPERATION_DECR = 8
 
----@enum STEPSOUNDTIME
+---@alias STEPSOUNDTIME 0|1|2|3
 --- Normal step
 STEPSOUNDTIME_NORMAL = 0
 --- Step on ladder
@@ -4152,7 +4160,7 @@ STEPSOUNDTIME_WATER_KNEE = 2
 --- Step in water, with water reaching foot
 STEPSOUNDTIME_WATER_FOOT = 3
 
----@enum STUDIO
+---@alias STUDIO 1|2|4|8|16|32|64|128|256|16777216|134217728|1073741824|2147483648
 --- The current render is for opaque renderables only
 STUDIO_RENDER = 1
 STUDIO_VIEWXFORMATTACHMENTS = 2
@@ -4174,7 +4182,7 @@ STUDIO_SHADOWDEPTHTEXTURE = 1073741824
 --- Not a studio flag, but used to flag model as a non-sorting brush model
 STUDIO_TRANSPARENCY = 2147483648
 
----@enum SURF
+---@alias SURF 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768
 --- Value will hold the light strength
 SURF_LIGHT = 1
 --- The surface is a 2D skybox
@@ -4208,7 +4216,7 @@ SURF_NOCHOP = 16384
 --- This surface is part of an entity's hitbox
 SURF_HITBOX = 32768
 
----@enum TASKSTATUS
+---@alias TASKSTATUS 0|1|2|3|4
 --- Just started
 TASKSTATUS_NEW = 0
 --- Running task & movement.
@@ -4220,7 +4228,7 @@ TASKSTATUS_RUN_TASK = 3
 --- Completed, get next task.
 TASKSTATUS_COMPLETE = 4
 
----@enum TEAM
+---@alias TEAM 0|1001|1002
 --- Connecting team ID, set when player connects to the server
 TEAM_CONNECTING = 0
 --- Unassigned team ID, set right after player connected
@@ -4239,7 +4247,7 @@ TEXFILTER = {
 	ANISOTROPIC = 3,
 }
 
----@enum TEXT_ALIGN
+---@alias TEXT_ALIGN 0|1|2|3|4
 --- Align the text on the left
 TEXT_ALIGN_LEFT = 0
 --- Align the text in center
@@ -4251,7 +4259,7 @@ TEXT_ALIGN_TOP = 3
 --- Align the text on the bottom
 TEXT_ALIGN_BOTTOM = 4
 
----@enum TEXT_FILTER
+---@alias TEXT_FILTER 0|1|2|3
 --- Unknown context.
 TEXT_FILTER_UNKNOWN = 0
 --- Game content, only legally required filtering is performed.
@@ -4261,7 +4269,7 @@ TEXT_FILTER_CHAT = 2
 --- Character or item name.
 TEXT_FILTER_NAME = 3
 
----@enum TEXTUREFLAGS
+---@alias TEXTUREFLAGS 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|2147483648
 --- Low quality, "pixel art" texture filtering.
 TEXTUREFLAGS_POINTSAMPLE = 1
 --- Medium quality texture filtering.
@@ -4324,7 +4332,7 @@ TEXTUREFLAGS_STREAMABLE_COARSE = 1073741824
 --- Aka TEXTUREFLAGS_UNUSED_80000000
 TEXTUREFLAGS_STREAMABLE_FINE = 2147483648
 
----@enum TRACER
+---@alias TRACER 0|1|2|3|4
 --- Generates no tracer effects
 TRACER_NONE = 0
 --- Generates tracer effects
@@ -4336,7 +4344,7 @@ TRACER_BEAM = 3
 --- Generates tracer and makes whizzing noises if the bullet flies past the player being shot at
 TRACER_LINE_AND_WHIZ = 4
 
----@enum TRANSMIT
+---@alias TRANSMIT 0|1|2
 --- Always transmit the entity
 TRANSMIT_ALWAYS = 0
 --- Never transmit the entity, default for point entities
@@ -4344,7 +4352,7 @@ TRANSMIT_NEVER = 1
 --- Transmit when entity is in players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community")
 TRANSMIT_PVS = 2
 
----@enum TYPE
+---@alias TYPE -1|-1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|255
 --- Invalid type
 TYPE_NONE = -1
 --- Use TYPE_NONE
@@ -4446,13 +4454,13 @@ TYPE_COUNT = 44
 --- **NOTE**: This doesn't actually represent a unique type returned by [Global.TypeID](https://wiki.facepunch.com/gmod/Global.TypeID), but instead is a hack for networking colors with [net.WriteType](https://wiki.facepunch.com/gmod/net.WriteType).
 TYPE_COLOR = 255
 
----@enum USE
+---@alias USE 0|1|2|3
 USE_OFF = 0
 USE_ON = 1
 USE_SET = 2
 USE_TOGGLE = 3
 
----@enum VIEW
+---@alias VIEW 0|1|2|3|4|5|6|7|8
 --- Default value
 VIEW_MAIN = 0
 --- 3D skybox
@@ -4472,7 +4480,7 @@ VIEW_SHADOW_DEPTH_TEXTURE = 7
 --- For SSAO depth. Can be accessed via [render.GetResolvedFullFrameDepth](https://wiki.facepunch.com/gmod/render.GetResolvedFullFrameDepth).
 VIEW_SSAO = 8
 
----@enum WEAPON_PROFICIENCY
+---@alias WEAPON_PROFICIENCY 0|1|2|3|4
 --- The NPC will miss a large majority of their shots.
 WEAPON_PROFICIENCY_POOR = 0
 --- The NPC will miss about half of their shots.

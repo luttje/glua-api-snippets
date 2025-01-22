@@ -20,11 +20,11 @@ function bit.arshift(value, shiftCount) end
 ---@return number # Result of bitwise "and" operation.
 function bit.band(value, ...) end
 
----[SHARED AND MENU] Returns the bitwise not of the value.
+---[SHARED AND MENU] Returns the bitwise not of the value. Inverts every bit of the 32bit integer.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.bnot)
 ---@param value number The value to be inverted.
----@return number # bitwiseNot
+---@return number # The result of bitwise not. 0101 becomes 1010, etc.
 function bit.bnot(value) end
 
 ---[SHARED AND MENU] Returns the bitwise OR of all values specified.
@@ -88,13 +88,13 @@ function bit.rshift(value, shiftCount) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.tobit)
 ---@param value number The value to be normalized.
----@return number # swapped
+---@return number # The 32 bits of the provided value.
 function bit.tobit(value) end
 
----[SHARED AND MENU] Returns the hexadecimal representation of the number with the specified digits.
+---[SHARED AND MENU] Returns the hexadecimal representation of the number with the specified number of characters.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/bit.tohex)
 ---@param value number The value to be normalized.
----@param digits? number The number of digits. Optional
----@return string # hexString
-function bit.tohex(value, digits) end
+---@param characters? number Maximum number of characters, if set. The absolute maximum is 8.
+---@return string # The hexadecimal representation, such as "00000001".
+function bit.tohex(value, characters) end

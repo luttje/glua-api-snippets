@@ -32,7 +32,7 @@ concommand = {}
 --- Function return value(s):
 --- * table `tbl` - A table containing the autocomplete options to display.
 ---@param helpText? string The text to display should a user run 'help cmdName'.
----@param flags? number|table Console command modifier flags. Either a bitflag, or a table of enums. See Enums/FCVAR.
+---@param flags? FCVAR|number[] Console command modifier flags. Either a bitflag, or a table of enums. See Enums/FCVAR.
 function concommand.Add(name, callback, autoComplete, helpText, flags) end
 
 ---[SHARED AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -47,8 +47,8 @@ function concommand.AutoComplete(command, arguments) end
 ---[SHARED AND MENU] Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add).
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/concommand.GetTable)
----@return table # Table of command callback functions.
----@return table # Table of command autocomplete functions.
+---@return table<string,function> # Table of command callback functions.
+---@return table<string,function> # Table of command autocomplete functions.
 function concommand.GetTable() end
 
 ---[SHARED AND MENU] Removes a console command.

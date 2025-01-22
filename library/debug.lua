@@ -44,7 +44,7 @@ function debug.gethook(thread) end
 --- * `S` - Populates the location fields (lastlinedefined, linedefined, short_src, source and what).
 --- * `u` - Populates the argument and upvalue fields (isvararg, nparams, nups).
 --- * `>` - Causes this function to use the last argument to get the data from
----@param _function function Function to use. (Only used by the `>` field)
+---@param _function function|nil Function to use. (Only used by the `>` field)
 ---@return table # A table as a Structures/DebugInfo containing information about the function you passed. Can return nil if the stack level didn't point to a valid stack frame.
 function debug.getinfo(funcOrStackLevel, fields, _function) end
 

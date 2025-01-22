@@ -23,7 +23,7 @@ function IGModAudioChannel:EnableLooping(enable) end
 --- **Visualization protip:** The human ear works on a logarithmic amplitude scale. You can convert to [decibels](https://en.wikipedia.org/wiki/Decibel) by taking 20 * [math.log10](https://wiki.facepunch.com/gmod/math.log10) of frequency magnitudes, or 10 * [math.log10](https://wiki.facepunch.com/gmod/math.log10) of energy. The decibel values will range from -infinity to 0.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT)
----@param tbl table The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
+---@param tbl number[] The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
 ---@param size number The number of samples to use. See Enums/FFT
 ---@return number # The number of frequency bins that have been filled in the output table.
 function IGModAudioChannel:FFT(tbl, size) end

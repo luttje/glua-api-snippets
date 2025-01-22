@@ -3,19 +3,23 @@
 --- The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 hook = {}
 
----[SHARED AND MENU] Add a hook to be called upon the given event occurring.
+---[SHARED AND MENU] Registers a function (or "callback") with the [Hook](https://wiki.facepunch.com/gmod/Hook) system so that it will be called automatically whenever a specific event (or "hook") occurs.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/hook.Add)
----@param eventName string The event to hook on to. This can be any GM_Hooks hook, gameevent after using gameevent.Listen, or custom hook run with hook.Call or hook.Run.
----@param identifier any The unique identifier, usually a string. This can be used elsewhere in the code to replace or remove the hook. The identifier **should** be unique so that you do not accidentally override some other mods hook, unless that's what you are trying to do.
+---@param eventName string
+--- 			The event to hook on to. This can be any GM_Hooks hook, gameevent after using gameevent.Listen, or custom hook run with hook.Call or hook.Run.
+---@param identifier any
+--- 			The unique identifier, usually a string. This can be used elsewhere in the code to replace or remove the hook. The identifier **should** be unique so that you do not accidentally override some other mods hook, unless that's what you are trying to do.
 ---
---- The identifier can be either a string, or a table/object with an IsValid function defined such as an Entity or Panel. numbers and booleans, for example, are not allowed.
+--- 			The identifier can be either a string, or a table/object with an IsValid function defined such as an Entity or Panel. numbers and booleans, for example, are not allowed.
 ---
---- If the identifier is a table/object, it will be inserted in front of the other arguments in the callback and the hook will be called as long as it's valid. However, if IsValid( identifier ) returns false when **any** eventName hook is called, the hook will be removed.
----@param func function The function to be called, arguments given to it depend on the identifier used.
---- Returning any value besides nil from the hook's function will stop other hooks of the same event down the loop from being executed. Only return a value when absolutely necessary and when you know what you are doing.
+--- 			If the identifier is a table/object, it will be inserted in front of the other arguments in the callback and the hook will be called as long as it's valid. However, if IsValid( identifier ) returns false when **any** eventName hook is called, the hook will be removed.
+---@param func function
+--- 			The function to be called, arguments given to it depend on the identifier used.
 ---
---- It WILL break other addons.
+--- 				Returning any value besides nil from the hook's function will stop other hooks of the same event down the loop from being executed. Only return a value when absolutely necessary and when you know what you are doing.
+---
+--- 				It WILL break other addons.
 function hook.Add(eventName, identifier, func) end
 
 ---[SHARED AND MENU] Calls all hooks associated with the given event until one returns something other than `nil`, and then returns that data.

@@ -42,13 +42,13 @@ function player.CreateNextBot(botName) end
 --- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetAll)
----@return table # All Players currently in the server.
+---@return Player[] # All Players currently in the server.
 function player.GetAll() end
 
 ---[SHARED] Returns a table of all bots on the server.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBots)
----@return table # A table only containing bots ( AI / non human players )
+---@return Player[] # A table only containing bots ( AI / non human players )
 function player.GetBots() end
 
 ---[SHARED] Tried to get the player with the specified [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID).
@@ -77,7 +77,7 @@ function player.GetByID(connectionID) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
----@return Player # Player if one is found, false otherwise.
+---@return Player|boolean # Player if one is found, false otherwise.
 function player.GetBySteamID(steamID) end
 
 ---[SHARED] Gets the player with the specified SteamID64.

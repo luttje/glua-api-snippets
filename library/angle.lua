@@ -46,8 +46,8 @@ function Angle:Forward() end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/Angle:IsEqualTol)
 ---@param compare Angle The angle to compare to.
----@param tolerance number The tolerance range.
----@return boolean # Are the angles equal or not.
+---@param tolerance number The tolerance range for each component.
+---@return boolean # Are each of the the angle components equal or not within given tolerance.
 function Angle:IsEqualTol(compare, tolerance) end
 
 ---[SHARED AND MENU] Returns whether the pitch, yaw and roll are 0 or not.

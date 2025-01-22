@@ -230,7 +230,7 @@ function game.IsDedicated() end
 ---[SERVER] Kicks a player from the server. This can be ran before the player has spawned.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/game.KickID)
----@param id string UserID or SteamID of the player to kick.
+---@param id string UserID or SteamID of the player to kick. Uses SteamID32 eg STEAM_0:0:00000000
 ---@param reason? string Reason to display to the player. This can span across multiple lines.
 ---
 --- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~498. It is recommended to avoid going near the limit to avoid truncation.

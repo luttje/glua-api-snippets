@@ -503,7 +503,7 @@ function NPC:GetWeapon(class) end
 ---[SERVER] Returns a table of the NPC's weapons.
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/NPC:GetWeapons)
----@return table # A list of the weapons the NPC currently has.
+---@return Weapon[] # A list of the weapons the NPC currently has.
 function NPC:GetWeapons() end
 
 ---[SERVER] Used to give a weapon to an already spawned NPC.

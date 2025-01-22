@@ -291,6 +291,6 @@ function duplicator.StoreEntityModifier(entity, name, data) end
 ---
 ---[(View on wiki)](https://wiki.facepunch.com/gmod/duplicator.WorkoutSize)
 ---@param Ents table A table of entity duplication datums.
----@return vector # AABB mins vector
----@return vector # AABB maxs vector
+---@return Vector # AABB mins vector
+---@return Vector # AABB maxs vector
 function duplicator.WorkoutSize(Ents) end
