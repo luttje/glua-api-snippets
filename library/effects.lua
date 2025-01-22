@@ -3,9 +3,9 @@
 --- The effects library allows you to manually add scripted effects.
 effects = {}
 
----[SHARED] Creates a "beam ring point" effect.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a "beam ring point" effect.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.BeamRingPoint)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.BeamRingPoint)
 ---@param pos Vector The origin position of the effect.
 ---@param lifetime number How long the effect will be drawing for, in seconds.
 ---@param startRad number Initial radius of the effect.
@@ -22,9 +22,9 @@ effects = {}
 --- * string material - The material to use instead of the default one.
 function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude, color, extra) end
 
----[SHARED] Creates a bunch of bubbles inside a defined box.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a bunch of bubbles inside a defined box.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Bubbles)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.Bubbles)
 ---@param mins Vector The lowest extents of the box.
 ---@param maxs Vector The highest extents of the box.
 ---@param count number How many bubbles to spawn. There's a hard limit of 500 tempents at any time.
@@ -33,9 +33,9 @@ function effects.BeamRingPoint(pos, lifetime, startRad, endRad, width, amplitude
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 
----[SHARED] Creates a bubble trail effect, the very same you get when shooting underwater.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a bubble trail effect, the very same you get when shooting underwater.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.BubbleTrail)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.BubbleTrail)
 ---@param startPos Vector The start position of the effect.
 ---@param endPos Vector The end position of the effects.
 ---@param count number How many bubbles to spawn. There's a hard limit of 500 tempents at any time.
@@ -44,25 +44,25 @@ function effects.Bubbles(mins, maxs, count, height, speed, delay) end
 ---@param delay? number Delay in seconds after the function call and before the effect actually spawns.
 function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 
----[CLIENT] **INTERNAL**: You are looking for [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: You are looking for [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
 --- Returns the table of the effect specified.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Create)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.Create)
 ---@param name string Effect name.
 ---@return table # Effect table.
 function effects.Create(name) end
 
----[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Returns a list of all Lua-defined effects.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.GetList)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.GetList)
 ---@return table # The effects table.
 function effects.GetList() end
 
----[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Registers a new effect.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/effects.Register)
+---[View wiki](https://wiki.facepunch.com/gmod/effects.Register)
 ---@param effect_table table Effect table.
 ---@param name string Effect name.
 function effects.Register(effect_table, name) end

@@ -3,11 +3,11 @@
 --- The constraint library allows you to control the constraint system built into the physics engine (rope, weld, ballsockets, etc).
 constraint = {}
 
----[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Stores information about constraints in an entity's table.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable)
 ---@param ent1 Entity The entity to store the information on.
 ---@param constrt Entity The constraint to store in the entity's table.
 ---@param ent2? Entity Optional. If different from `ent1`, the info will also be stored in the table for this entity.
@@ -15,13 +15,13 @@ constraint = {}
 ---@param ent4? Entity Optional. Same as `ent2`.
 function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 
----[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Stores info about the constraints on the entity's table.
 ---
 --- The only difference between this and [constraint.AddConstraintTable](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable) is that the constraint does not get deleted when the entity is removed.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AddConstraintTableNoDelete)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.AddConstraintTableNoDelete)
 ---@param ent1 Entity The entity to store the information on.
 ---@param constrt Entity The constraint to store in the entity's table.
 ---@param ent2? Entity Optional. If different from `ent1`, the info will also be stored in the table for this entity.
@@ -29,9 +29,9 @@ function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 ---@param ent4? Entity Optional. Same as `ent2`.
 function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) end
 
----[SERVER] Creates an advanced ballsocket (ragdoll) constraint. See [constraint.Ballsocket](https://wiki.facepunch.com/gmod/constraint.Ballsocket) for the simpler version.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates an advanced ballsocket (ragdoll) constraint. See [constraint.Ballsocket](https://wiki.facepunch.com/gmod/constraint.Ballsocket) for the simpler version.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -80,9 +80,9 @@ function constraint.AdvBallsocket(
 )
 end
 
----[SERVER] Creates an axis constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates an axis constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Axis)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Axis)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -116,9 +116,9 @@ function constraint.Axis(
 )
 end
 
----[SERVER] Creates a ballsocket joint. See See [constraint.AdvBallsocket](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket) if you also wish to limit rotation angles in some way.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a ballsocket joint. See See [constraint.AdvBallsocket](https://wiki.facepunch.com/gmod/constraint.AdvBallsocket) if you also wish to limit rotation angles in some way.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Ballsocket)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Ballsocket)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -134,17 +134,17 @@ end
 ---@return Entity # The created constraint. ([phys_ballsocket](https://developer.valvesoftware.com/wiki/Phys_ballsocket)) Will return `false` if the constraint could not be created.
 function constraint.Ballsocket(ent1, ent2, bone1, bone2, localPos, forcelimit, torquelimit, nocollide) end
 
----[SERVER] Basic checks to make sure that the specified entity and bone are valid. Returns false if we should not be constraining the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Basic checks to make sure that the specified entity and bone are valid. Returns false if we should not be constraining the entity.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CanConstrain)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.CanConstrain)
 ---@param ent Entity The entity to check
 ---@param bone number The bone of the entity to check (use 0 for mono boned ents)
 ---@return boolean # Whether a constraint can or should be created.
 function constraint.CanConstrain(ent, bone) end
 
----[SERVER] Creates a rope without any constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a rope without any constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CreateKeyframeRope)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.CreateKeyframeRope)
 ---@param pos Vector Position for the rope entity. Unknown effect, probably none.
 ---@param width number Width of the rope.
 ---@param material? string Material of the rope. If unset, will be solid black.
@@ -176,12 +176,12 @@ function constraint.CreateKeyframeRope(
 )
 end
 
----[SERVER] Creates an invisible, non-moveable anchor point in the world to which things can be attached.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates an invisible, non-moveable anchor point in the world to which things can be attached.
 --- 		**NOTE**: The entity used internally by this function (`gmod_anchor`) only exists in Sandbox derived gamemodes, meaning this function will only work in these gamemodes.
 ---
 --- 		To use this in other gamemodes, you may need to create your own [gmod_anchor](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/entities/entities/gmod_anchor.lua) entity.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.CreateStaticAnchorPoint)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.CreateStaticAnchorPoint)
 ---@param pos Vector The position to spawn the anchor at
 ---@return Entity # The anchor entity. (`gmod_anchor`)
 ---@return PhysObj # The achor entity's physics object. (Entity:GetPhysicsObject)
@@ -189,9 +189,9 @@ end
 ---@return Vector # Always `vector_zero`.
 function constraint.CreateStaticAnchorPoint(pos) end
 
----[SERVER] Creates an elastic rope constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates an elastic rope constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Elastic)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Elastic)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -228,9 +228,9 @@ function constraint.Elastic(
 )
 end
 
----[SERVER] Returns the constraint of a specified type between two entities, if it exists
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the constraint of a specified type between two entities, if it exists
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Find)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Find)
 ---@param ent1 Entity The first entity to check
 ---@param ent2 Entity The second entity to check
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
@@ -253,9 +253,9 @@ end
 ---@return Entity # constraint
 function constraint.Find(ent1, ent2, type, bone1, bone2) end
 
----[SERVER] Returns the first constraint of a specific type directly connected to the entity found
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the first constraint of a specific type directly connected to the entity found
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.FindConstraint)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraint)
 ---@param ent Entity The entity to check
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
@@ -275,9 +275,9 @@ function constraint.Find(ent1, ent2, type, bone1, bone2) end
 ---@return table # The constraint table, set with constraint.AddConstraintTable
 function constraint.FindConstraint(ent, type) end
 
----[SERVER] Returns the other entity involved in the first constraint of a specific type directly connected to the entity
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the other entity involved in the first constraint of a specific type directly connected to the entity
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.FindConstraintEntity)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraintEntity)
 ---@param ent Entity The entity to check
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
@@ -297,11 +297,11 @@ function constraint.FindConstraint(ent, type) end
 ---@return Entity # The other entity.
 function constraint.FindConstraintEntity(ent, type) end
 
----[SERVER] Returns a table of all constraints of a specific type directly connected to the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all constraints of a specific type directly connected to the entity.
 ---
 --- If you are looking for a list of all constraints, use [constraint.GetTable](https://wiki.facepunch.com/gmod/constraint.GetTable).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.FindConstraints)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraints)
 ---@param ent Entity The entity to check
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
@@ -321,39 +321,39 @@ function constraint.FindConstraintEntity(ent, type) end
 ---@return table # All the constraints of this entity.
 function constraint.FindConstraints(ent, type) end
 
----[SERVER] Make this entity forget any constraints it knows about. Note that this will not actually remove the constraints.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Make this entity forget any constraints it knows about. Note that this will not actually remove the constraints.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.ForgetConstraints)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.ForgetConstraints)
 ---@param ent Entity The entity that will forget its constraints.
 function constraint.ForgetConstraints(ent) end
 
----[SERVER] Returns a table of all entities recursively constrained to an entitiy.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all entities recursively constrained to an entitiy.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.GetAllConstrainedEntities)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.GetAllConstrainedEntities)
 ---@param ent Entity The entity to check
 ---@param resultTable? table Table used to return result. Optional.
 ---@return table # A table containing all of the constrained entities. This includes all entities constrained to entities constrained to the supplied entity, etc.
 function constraint.GetAllConstrainedEntities(ent, resultTable) end
 
----[SERVER] Returns a table of all constraints directly connected to the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all constraints directly connected to the entity.
 ---
 --- If you are looking for a list of specific constraint(s), use [constraint.FindConstraints](https://wiki.facepunch.com/gmod/constraint.FindConstraints).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.GetTable)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.GetTable)
 ---@param ent Entity The entity to check
 ---@return table # A list of all constraints connected to the entity.
 function constraint.GetTable(ent) end
 
----[SERVER] Returns true if the entity has constraints attached to it
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns true if the entity has constraints attached to it
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.HasConstraints)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.HasConstraints)
 ---@param ent Entity The entity to check
 ---@return boolean # Whether the entity has any constraints or not.
 function constraint.HasConstraints(ent) end
 
----[SERVER] Creates a controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), aka a Hydraulic constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), aka a Hydraulic constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Hydraulic)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Hydraulic)
 ---@param player Player The player that will be able to control the constraint. Used to call numpad.OnDown.
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
@@ -398,9 +398,9 @@ function constraint.Hydraulic(
 )
 end
 
----[SERVER] Creates a keep upright constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a keep upright constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Keepupright)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Keepupright)
 ---@param ent Entity The entity to keep upright
 ---@param ang Angle The angle defined as "upright"
 ---@param bone number The bone of the entity to constrain (0 for boneless)
@@ -408,9 +408,9 @@ end
 ---@return Entity # The created constraint, if any or false if the constraint failed to set
 function constraint.Keepupright(ent, ang, bone, angularLimit) end
 
----[SERVER] Creates a motor constraint, a player controllable [constraint.Axis](https://wiki.facepunch.com/gmod/constraint.Axis).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a motor constraint, a player controllable [constraint.Axis](https://wiki.facepunch.com/gmod/constraint.Axis).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Motor)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Motor)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -455,11 +455,11 @@ function constraint.Motor(
 )
 end
 
----[SERVER] Creates a muscle constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a muscle constraint.
 ---
 --- Very similar to [constraint.Hydraulic](https://wiki.facepunch.com/gmod/constraint.Hydraulic), but instead of a toggle between fully expanded and contracted, it will continuously alternate between the 2 states while enabled.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Muscle)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Muscle)
 ---@param player Player The player that will be able to control the constraint. Used to call numpad.OnDown.
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
@@ -506,10 +506,10 @@ function constraint.Muscle(
 )
 end
 
----[SERVER] Creates an no-collide "constraint". Disables collision between two entities.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates an no-collide "constraint". Disables collision between two entities.
 --- **NOTE**: Does not work with players.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.NoCollide)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.NoCollide)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -522,7 +522,7 @@ end
 ---@return Entity # The created constraint. ([logic_collision_pair](https://developer.valvesoftware.com/wiki/Logic_collision_pair)) Will return `false` if the constraint could not be created.
 function constraint.NoCollide(ent1, ent2, bone1, bone2, disableOnRemove) end
 
----[SERVER] Creates a pulley constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a pulley constraint.
 ---
 --- It consists of 3 rope segments, 2 of which have variable length, visually connected by a 3rd. Reducing length of one end will increase the length of the other end.
 ---
@@ -534,7 +534,7 @@ function constraint.NoCollide(ent1, ent2, bone1, bone2, disableOnRemove) end
 ---  Ent1	   Ent4
 --- ```
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Pulley)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Pulley)
 ---@param ent1 Entity First entity to constrain.
 ---@param ent4 Entity The other entity to attach to.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -573,26 +573,26 @@ function constraint.Pulley(
 )
 end
 
----[SERVER] Attempts to remove all constraints associated with an entity
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attempts to remove all constraints associated with an entity
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.RemoveAll)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.RemoveAll)
 ---@param ent Entity The entity to remove constraints from
 ---@return boolean # Whether any constraints were removed
 ---@return number # Number of constraints removed
 function constraint.RemoveAll(ent) end
 
----[SERVER] Attempts to remove all constraints of a specified type associated with an entity
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attempts to remove all constraints of a specified type associated with an entity
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.RemoveConstraints)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.RemoveConstraints)
 ---@param ent Entity The entity to check
 ---@param type string The constraint type to remove (eg. `"Weld"`, `"Elastic"`, `"NoCollide"`)
 ---@return boolean # Whether we removed any constraints or not
 ---@return number # The amount of constraints removed
 function constraint.RemoveConstraints(ent, type) end
 
----[SERVER] Creates a simple rope (length) based constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a simple rope (length) based constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Rope)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Rope)
 ---@param ent1 Entity First entity
 ---@param ent2 Entity Second entity
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -631,9 +631,9 @@ function constraint.Rope(
 )
 end
 
----[SERVER] Creates a slider constraint. A slider is like a rope, but allows the constrained object to move only in 1 direction.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a slider constraint. A slider is like a rope, but allows the constrained object to move only in 1 direction.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Slider)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Slider)
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -651,9 +651,9 @@ end
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint or the rope could not be created.
 function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width, material, color) end
 
----[SERVER] Creates a weld constraint.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a weld constraint.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Weld)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Weld)
 ---@param ent1 Entity The first entity
 ---@param ent2 Entity The second entity
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
@@ -668,9 +668,9 @@ function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width
 ---@return Entity # The created constraint entity. ([phys_constraint](https://developer.valvesoftware.com/wiki/Phys_constraint))
 function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, deleteEnt1OnBreak) end
 
----[SERVER] Creates a winch constraint, a player controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), allowing gradually increasing or decreasing the length.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a winch constraint, a player controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), allowing gradually increasing or decreasing the length.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/constraint.Winch)
+---[View wiki](https://wiki.facepunch.com/gmod/constraint.Winch)
 ---@param player Player The player that will be used to call numpad.OnDown and numpad.OnUp.
 ---@param ent1 Entity First entity.
 ---@param ent2 Entity Second entity.

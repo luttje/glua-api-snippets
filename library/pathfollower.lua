@@ -1,12 +1,14 @@
 ---@meta
 
 --- Path object for a NextBot NPC and bots created by [player.CreateNextbot](https://wiki.facepunch.com/gmod/player.CreateNextbot). Returned by [Global.Path](https://wiki.facepunch.com/gmod/Global.Path).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower)
 ---@class PathFollower
 local PathFollower = {}
 
----[SERVER] If you created your path with type `"Chase"` this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) If you created your path with type `"Chase"` this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Chase)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
 ---@param ent Entity The entity we want to chase
 ---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example on PathFollower:Compute for the default function.
@@ -22,9 +24,9 @@ local PathFollower = {}
 --- * number `cost` - The cost of movement between `area` and `fromArea`.
 function PathFollower:Chase(bot, ent, generator) end
 
----[SERVER] Compute shortest path from bot to 'goal' via A* algorithm.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Compute shortest path from bot to 'goal' via A* algorithm.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Compute)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Compute)
 ---@param bot NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
 ---@param goal Vector The target location, the goal.
 ---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example below for the default function.
@@ -42,45 +44,45 @@ function PathFollower:Chase(bot, ent, generator) end
 --- * If returns false, path may either be invalid (use IsValid() to check), or valid but doesn't reach all the way to the goal.
 function PathFollower:Compute(bot, goal, generator) end
 
----[SERVER] Draws the path. This is meant for debugging - and uses [debugoverlay](https://wiki.facepunch.com/gmod/debugoverlay).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Draws the path. This is meant for debugging - and uses [debugoverlay](https://wiki.facepunch.com/gmod/debugoverlay).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Draw)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Draw)
 function PathFollower:Draw() end
 
----[SERVER] Returns the first segment of the path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the first segment of the path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment)
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:FirstSegment() end
 
----[SERVER] Returns the age since the path was built
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the age since the path was built
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetAge)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetAge)
 ---@return number # Path age
 function PathFollower:GetAge() end
 
----[SERVER] Returns all of the segments of the given path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns all of the segments of the given path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetAllSegments)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetAllSegments)
 ---@return table # A table of tables with Structures/PathSegment.
 function PathFollower:GetAllSegments() end
 
----[SERVER] The closest position along the path to a position
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The closest position along the path to a position
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetClosestPosition)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetClosestPosition)
 ---@param position Vector The point we're querying for
 ---@return Vector # The closest position on the path
 function PathFollower:GetClosestPosition(position) end
 
----[SERVER] Returns the current goal data. Can return nil if the current goal is invalid, for example immediately after [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the current goal data. Can return nil if the current goal is invalid, for example immediately after [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal)
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:GetCurrentGoal() end
 
----[SERVER] Returns the cursor data
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the cursor data
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetCursorData)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetCursorData)
 ---@return table # A table with 3 keys:
 --- number curvature
 ---
@@ -89,91 +91,91 @@ function PathFollower:GetCurrentGoal() end
 --- Vector pos
 function PathFollower:GetCursorData() end
 
----[SERVER] Returns the current progress along the path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the current progress along the path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetCursorPosition)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetCursorPosition)
 ---@return number # The current progress
 function PathFollower:GetCursorPosition() end
 
----[SERVER] Returns the path end position
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the path end position
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetEnd)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetEnd)
 ---@return Vector # The end position
 function PathFollower:GetEnd() end
 
----[SERVER] Returns how close we can get to the goal to call it done.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns how close we can get to the goal to call it done.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetGoalTolerance)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetGoalTolerance)
 ---@return number # The distance we're setting it to
 function PathFollower:GetGoalTolerance() end
 
----[SERVER]
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetHindrance)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetHindrance)
 ---@return Entity #
 function PathFollower:GetHindrance() end
 
----[SERVER] Returns the total length of the path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the total length of the path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetLength)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetLength)
 ---@return number # The length of the path
 function PathFollower:GetLength() end
 
----[SERVER] Returns the minimum range movement goal must be along path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the minimum range movement goal must be along path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetMinLookAheadDistance)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetMinLookAheadDistance)
 ---@return number # The minimum look ahead distance
 function PathFollower:GetMinLookAheadDistance() end
 
----[SERVER] Returns the vector position of distance along path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the vector position of distance along path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetPositionOnPath)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetPositionOnPath)
 ---@param distance number The distance along the path to query
 ---@return Vector # The position
 function PathFollower:GetPositionOnPath(distance) end
 
----[SERVER] Returns the path start position
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the path start position
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:GetStart)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetStart)
 ---@return Vector # The start position
 function PathFollower:GetStart() end
 
----[SERVER] Invalidates the current path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Invalidates the current path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Invalidate)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Invalidate)
 function PathFollower:Invalidate() end
 
----[SERVER] Returns true if the path is valid
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns true if the path is valid
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:IsValid)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:IsValid)
 ---@return boolean # Wether the path is valid or not.
 function PathFollower:IsValid() end
 
----[SERVER] Returns the last segment of the path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the last segment of the path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:LastSegment)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:LastSegment)
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:LastSegment() end
 
----[SERVER] Moves the cursor by give distance.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Moves the cursor by give distance.
 ---
 --- For a function that sets the distance, see [PathFollower:MoveCursorTo](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor)
 ---@param distance number The distance to move the cursor (in relative world units)
 function PathFollower:MoveCursor(distance) end
 
----[SERVER] Sets the cursor position to given distance.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the cursor position to given distance.
 ---
 --- For relative distance, see [PathFollower:MoveCursor](https://wiki.facepunch.com/gmod/PathFollower:MoveCursor).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorTo)
 ---@param distance number The distance to move the cursor (in world units)
 function PathFollower:MoveCursorTo(distance) end
 
----[SERVER] Moves the cursor of the path to the closest position compared to given vector.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Moves the cursor of the path to the closest position compared to given vector.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToClosestPosition)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToClosestPosition)
 ---@param pos Vector
 ---@param type? number Seek type
 ---
@@ -185,47 +187,47 @@ function PathFollower:MoveCursorTo(distance) end
 ---@param alongLimit? number
 function PathFollower:MoveCursorToClosestPosition(pos, type, alongLimit) end
 
----[SERVER] Moves the cursor to the end of the path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Moves the cursor to the end of the path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToEnd)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToEnd)
 function PathFollower:MoveCursorToEnd() end
 
----[SERVER] Moves the cursor to the end of the path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Moves the cursor to the end of the path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToStart)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:MoveCursorToStart)
 function PathFollower:MoveCursorToStart() end
 
----[SERVER] Returns the next segment of the path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the next segment of the path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:NextSegment)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:NextSegment)
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:NextSegment() end
 
----[SERVER] Returns the previous segment of the path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the previous segment of the path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:PriorSegment)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:PriorSegment)
 ---@return table # A table with Structures/PathSegment.
 function PathFollower:PriorSegment() end
 
----[SERVER] Resets the age which is retrieved by [PathFollower:GetAge](https://wiki.facepunch.com/gmod/PathFollower:GetAge) to 0.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Resets the age which is retrieved by [PathFollower:GetAge](https://wiki.facepunch.com/gmod/PathFollower:GetAge) to 0.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:ResetAge)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:ResetAge)
 function PathFollower:ResetAge() end
 
----[SERVER] How close we can get to the goal to call it done
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) How close we can get to the goal to call it done
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:SetGoalTolerance)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:SetGoalTolerance)
 ---@param distance number The distance we're setting it to
 function PathFollower:SetGoalTolerance(distance) end
 
----[SERVER] Sets minimum range movement goal must be along path
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets minimum range movement goal must be along path
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:SetMinLookAheadDistance)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:SetMinLookAheadDistance)
 ---@param mindist number The minimum look ahead distance
 function PathFollower:SetMinLookAheadDistance(mindist) end
 
----[SERVER] Move the bot along the path.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Move the bot along the path.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/PathFollower:Update)
+---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Update)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
 function PathFollower:Update(bot) end

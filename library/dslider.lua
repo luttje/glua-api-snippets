@@ -4,185 +4,185 @@
 ---@class DSlider : Panel
 local DSlider = {}
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Used internally to set the X axis convar.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarXNumberThink)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:ConVarXNumberThink)
 function DSlider:ConVarXNumberThink() end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Used internally to set the Y axis convar.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:ConVarYNumberThink)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:ConVarYNumberThink)
 function DSlider:ConVarYNumberThink() end
 
----[CLIENT AND MENU] Identical to [DSlider:IsEditing](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Identical to [DSlider:IsEditing](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetDragging)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetDragging)
 ---@return boolean #
 function DSlider:GetDragging() end
 
----[CLIENT AND MENU] Returns the draggable panel's lock on the X axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the draggable panel's lock on the X axis.
 ---
 --- See [DSlider:SetLockX](https://wiki.facepunch.com/gmod/DSlider:SetLockX) for more info.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetLockX)
 ---@return number #
 function DSlider:GetLockX() end
 
----[CLIENT AND MENU] Returns the draggable panel's lock on the Y axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the draggable panel's lock on the Y axis.
 ---
 --- See [DSlider:SetLockY](https://wiki.facepunch.com/gmod/DSlider:SetLockY) for more info.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetLockY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetLockY)
 ---@return number #
 function DSlider:GetLockY() end
 
----[CLIENT AND MENU] Returns the current notch color, set by [DSlider:SetNotchColor](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current notch color, set by [DSlider:SetNotchColor](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetNotchColor)
 ---@return Color # The current color
 ---@deprecated Does not affect anything by default.
 function DSlider:GetNotchColor() end
 
----[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNotches)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetNotches)
 ---@return number #
 function DSlider:GetNotches() end
 
----[CLIENT AND MENU] Does nothing.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetNumSlider)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetNumSlider)
 ---@return any #
 function DSlider:GetNumSlider() end
 
----[CLIENT AND MENU] Returns the target position of the draggable "knob" panel of the slider on the X axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the target position of the draggable "knob" panel of the slider on the X axis.
 ---
 --- Set by [DSlider:SetSlideX](https://wiki.facepunch.com/gmod/DSlider:SetSlideX).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetSlideX)
 ---@return number # The value range seems to be from 0 to 1
 function DSlider:GetSlideX() end
 
----[CLIENT AND MENU] Returns the target position of the draggable "knob" panel of the slider on the Y axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the target position of the draggable "knob" panel of the slider on the Y axis.
 ---
 --- Set by [DSlider:SetSlideY](https://wiki.facepunch.com/gmod/DSlider:SetSlideY).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetSlideY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetSlideY)
 ---@return number # The value range seems to be from 0 to 1
 function DSlider:GetSlideY() end
 
----[CLIENT AND MENU] Returns the value set by [DSlider:SetTrapInside](https://wiki.facepunch.com/gmod/DSlider:SetTrapInside).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the value set by [DSlider:SetTrapInside](https://wiki.facepunch.com/gmod/DSlider:SetTrapInside).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:GetTrapInside)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:GetTrapInside)
 ---@return boolean #
 function DSlider:GetTrapInside() end
 
----[CLIENT AND MENU] Returns true if this element is being edited by the player.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns true if this element is being edited by the player.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:IsEditing)
 ---@return boolean #
 function DSlider:IsEditing() end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Used internally to fire [DSlider:OnValueChanged](https://wiki.facepunch.com/gmod/DSlider:OnValueChanged)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:OnValuesChangedInternal)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:OnValuesChangedInternal)
 function DSlider:OnValuesChangedInternal() end
 
----[CLIENT AND MENU] Sets the background for the slider.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the background for the slider.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetBackground)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetBackground)
 ---@param path string Path to the image.
 function DSlider:SetBackground(path) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the X axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the X axis.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetConVarX)
 ---@param convar string Name of the convar to set.
 function DSlider:SetConVarX(convar) end
 
----[CLIENT AND MENU] Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the Y axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to be set when the slider changes on the Y axis.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetConVarY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetConVarY)
 ---@param convar string Name of the convar to set.
 function DSlider:SetConVarY(convar) end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Sets whether or not the slider is being dragged.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetDragging)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetDragging)
 ---@param dragging boolean
 function DSlider:SetDragging(dragging) end
 
----[CLIENT AND MENU] Does nothing.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetImage)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetImage)
 function DSlider:SetImage() end
 
----[CLIENT AND MENU] Does nothing.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetImageColor)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetImageColor)
 function DSlider:SetImageColor() end
 
----[CLIENT AND MENU] Sets the lock on the X axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the lock on the X axis.
 ---
 --- For example the value 0.5 will lock the draggable panel to half the width of the slider's panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetLockX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetLockX)
 ---@param lockX? number Set to nil to reset lock.
 ---
 --- The value range is from 0 to 1.
 function DSlider:SetLockX(lockX) end
 
----[CLIENT AND MENU] Sets the lock on the Y axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the lock on the Y axis.
 ---
 --- For example the value 0.5 will lock the draggable panel to half the height of the slider's panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetLockY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetLockY)
 ---@param lockY? number Set to nil to reset lock.
 ---
 --- The value range is from 0 to 1.
 function DSlider:SetLockY(lockY) end
 
----[CLIENT AND MENU] Sets the current notch color, overriding the color set by the derma skin.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the current notch color, overriding the color set by the derma skin.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetNotchColor)
 ---@param clr Color The new color to set
 ---@deprecated Does not affect anything by default.
 function DSlider:SetNotchColor(clr) end
 
----[CLIENT AND MENU] Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Appears to be non functioning, however is still used by panels such as [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetNotches)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetNotches)
 ---@param notches number
 function DSlider:SetNotches(notches) end
 
----[CLIENT AND MENU] Does nothing.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Does nothing.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetNumSlider)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetNumSlider)
 ---@param slider any
 function DSlider:SetNumSlider(slider) end
 
----[CLIENT AND MENU] Used to position the draggable panel of the slider on the X axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used to position the draggable panel of the slider on the X axis.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetSlideX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetSlideX)
 ---@param x number The value range seems to be from 0 to 1
 function DSlider:SetSlideX(x) end
 
----[CLIENT AND MENU] Used to position the draggable panel of the slider on the Y axis.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used to position the draggable panel of the slider on the Y axis.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetSlideY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetSlideY)
 ---@param y number The value range seems to be from 0 to 1
 function DSlider:SetSlideY(y) end
 
----[CLIENT AND MENU] Makes the slider itself, the "knob", trapped within the bounds of the slider panel. Example:
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Makes the slider itself, the "knob", trapped within the bounds of the slider panel. Example:
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSlider:SetTrapInside)
+---[View wiki](https://wiki.facepunch.com/gmod/DSlider:SetTrapInside)
 ---@param trap boolean
 function DSlider:SetTrapInside(trap) end

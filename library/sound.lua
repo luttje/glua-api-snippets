@@ -3,25 +3,25 @@
 --- Used primarily for adding new soundscript entries.
 sound = {}
 
----[SHARED] Creates a sound script. It can also override sounds, which seems to only work when set on the server.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 ---
 --- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common Sounds).
 ---
 --- A list of sound scripts can be retrieved with [sound.GetTable](https://wiki.facepunch.com/gmod/sound.GetTable).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Add)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.Add)
 ---@param soundData table The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
 
----[SHARED] Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
 ---@param filepath string Path to the script file to load.
 function sound.AddSoundOverrides(filepath) end
 
----[SERVER] Emits a sound hint to the game elements to react to, for example to repel or attract antlions.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Emits a sound hint to the game elements to react to, for example to repel or attract antlions.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.EmitHint)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.EmitHint)
 ---@param hint number The hint to emit. This can be a bit flag. See Enums/SOUND
 ---@param pos Vector The position to emit the hint at
 ---@param volume number The volume or radius of the hint
@@ -29,9 +29,9 @@ function sound.AddSoundOverrides(filepath) end
 ---@param owner? Entity If set, the sound hint will be ignored/deleted when the given entity is destroyed.
 function sound.EmitHint(hint, pos, volume, duration, owner) end
 
----[CLIENT] Creates a sound from a function.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a sound from a function.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Generate)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.Generate)
 ---@param indentifier string An unique identified for the sound.
 ---
 --- 			You cannot override already existing ones.
@@ -55,35 +55,35 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.
 function sound.Generate(indentifier, samplerate, length, callbackOrData, loopStart) end
 
----[SERVER] Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint)
 ---@param types number The types of sounds to choose from. See Enums/SOUND.
 ---@param pos Vector The position to sense sounds at.
 ---@return table # A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
 
----[SHARED] Returns properties of the soundscript.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns properties of the soundscript.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetProperties)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.GetProperties)
 ---@param name string The name of the sound script
 ---@return table # The properties of the soundscript. See Structures/SoundData
 function sound.GetProperties(name) end
 
----[SHARED] Returns a list of all registered sound scripts.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all registered sound scripts.
 ---
 --- New ones can be registered using [sound.Add](https://wiki.facepunch.com/gmod/sound.Add), and detailed information about each one can be retrieved via [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.GetTable)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.GetTable)
 ---@return table # The list/array of all registered sound scripts ( No other information is provided )
 function sound.GetTable() end
 
----[SHARED] Plays a sound from the specified position in the world.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound from the specified position in the world.
 --- If you want to play a sound without a position, such as a UI sound, use [surface.PlaySound](https://wiki.facepunch.com/gmod/surface.PlaySound) instead.
 ---
 --- This function is similar to [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound), but with less options.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.Play)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.Play)
 ---@param snd string The sound to play. This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 ---@param pos Vector Where the sound should play.
 ---@param level? number Sound level in decibels. 75 is normal. Ranges from 20 to 180, where 180 is super loud. This affects how far away the sound will be heard, see Enums/SNDLVL.
@@ -92,7 +92,7 @@ function sound.GetTable() end
 ---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
 function sound.Play(snd, pos, level, pitch, volume, dsp) end
 
----[CLIENT] Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Plays a file from GMod directory. You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
 --- For external file/stream playback, see [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL).
 ---
@@ -100,7 +100,7 @@ function sound.Play(snd, pos, level, pitch, volume, dsp) end
 ---
 --- This fails with unicode file names.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.PlayFile)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.PlayFile)
 ---@param path string The path to the file to play.
 ---
 --- Unlike other sound functions and structures, the path is relative to `garrysmod/` instead of `garrysmod/sound/`
@@ -119,14 +119,14 @@ function sound.Play(snd, pos, level, pitch, volume, dsp) end
 --- * string `errorName` - Name of an error if an error has occurred. Will be nil, otherwise.
 function sound.PlayFile(path, flags, callback) end
 
----[CLIENT] Allows you to play external sound files, as well as online radio streams.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to play external sound files, as well as online radio streams.
 --- You can find a list of all error codes [here](http://www.un4seen.com/doc/#bass/BASS_ErrorGetCode.html)
 ---
 --- For offline file playback, see [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile).
 ---
 --- Due to a bug with [BASS](http://www.un4seen.com/), AAC codec streams cannot be played in 3D mode.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.PlayURL)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.PlayURL)
 ---@param url string The URL of the sound to play
 ---@param flags string Flags for the sound. Can be one or more of following, separated by a space (`" "`):
 --- * 3d - Makes the sound 3D, so you can set its position
@@ -143,7 +143,7 @@ function sound.PlayFile(path, flags, callback) end
 --- * string `errorName` - Name of an error if an error has occurred. Will be nil, otherwise.
 function sound.PlayURL(url, flags, callback) end
 
----[SHARED] Sets the gender of a specific actor (model). This is a system from [base Half-Life 2](https://developer.valvesoftware.com/wiki/Global_actors) - `global_actors.txt`.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the gender of a specific actor (model). This is a system from [base Half-Life 2](https://developer.valvesoftware.com/wiki/Global_actors) - `global_actors.txt`.
 ---
 --- This will affect what voice lines `npc_citizen` will use when they have the given model set.
 ---
@@ -151,7 +151,7 @@ function sound.PlayURL(url, flags, callback) end
 ---
 --- **WARNING**: Internally the gender is stored by model file name only (i.e. `models/alyx.mdl` would be stored as `alyx`), not the full path! Be aware of potential collisions.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/sound.SetActorGender)
+---[View wiki](https://wiki.facepunch.com/gmod/sound.SetActorGender)
 ---@param modelPath string Path to the model file to set the gender of.
 ---@param gender string Gender to set. Only 2 options are permitted: `female` and `male`. Any other option will be ignored.
 function sound.SetActorGender(modelPath, gender) end

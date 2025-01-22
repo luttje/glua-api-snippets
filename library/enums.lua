@@ -1,5 +1,8 @@
 ---@meta
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetUseType](https://wiki.facepunch.com/gmod/Entity:SetUseType). Affects when [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use) is triggered.
+---
+--- Not to be confused with [Enums/USE](https://wiki.facepunch.com/gmod/Enums/USE) used for [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use) and others.
 ---@alias _USE 0|1|2|3
 --- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal every tick as long as the player holds their use key and aims at the target.
 CONTINUOUS_USE = 0
@@ -14,6 +17,11 @@ DIRECTIONAL_USE = 2
 --- Fire a [USE_ON](https://wiki.facepunch.com/gmod/Enums/USE) signal only once when player presses their use key while aiming at the target.
 SIMPLE_USE = 3
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by functions like [Weapon:SendWeaponAnim](https://wiki.facepunch.com/gmod/Weapon:SendWeaponAnim) & [Entity:SelectWeightedSequence](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence).
+---
+--- An activity is a code-friendly identifier for an animation, and can point to multiple sequences (animations) depending on the model.
+---
+--- See [$sequence](https://developer.valvesoftware.com/wiki/$sequence) `.qc` command documentation on Valve Developer Wiki, specifically the `activity` parameter.
 ---@alias ACT -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339|340|341|342|343|344|345|346|347|348|349|350|351|352|353|354|355|356|357|358|359|360|361|362|363|364|365|366|367|368|369|370|371|372|373|374|375|376|377|378|379|380|381|382|383|384|385|386|387|388|389|390|391|392|393|394|395|396|397|398|399|400|401|402|403|404|405|406|407|408|409|410|411|412|413|414|415|416|417|418|419|420|421|422|423|424|425|426|427|428|429|430|431|432|433|434|435|436|437|438|439|440|441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460|461|462|463|464|465|466|467|468|469|470|471|472|473|474|475|476|477|478|479|480|481|482|483|484|485|486|487|488|489|490|491|492|493|494|495|496|497|498|499|500|501|502|503|504|505|506|507|508|509|510|511|512|513|514|515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534|535|536|537|538|539|540|541|542|543|544|545|546|547|548|549|550|551|552|553|554|555|556|557|558|559|560|561|562|563|564|565|566|567|568|569|570|571|572|573|574|575|576|577|578|579|580|581|582|583|584|585|586|587|588|589|590|591|592|593|594|595|596|597|598|599|600|601|602|603|604|605|606|607|608|609|610|611|612|613|614|615|616|617|618|619|620|621|622|623|624|625|626|627|628|629|630|631|632|633|634|635|636|637|638|639|640|641|642|643|644|645|646|647|648|649|650|651|652|653|654|655|656|657|658|659|660|661|662|663|664|665|666|667|668|669|670|671|672|673|674|675|676|677|678|679|680|681|682|683|684|685|686|687|688|689|690|691|692|693|694|695|696|697|698|699|700|701|702|703|704|705|706|707|708|709|710|711|712|713|714|715|716|717|718|719|720|721|722|723|724|725|726|727|728|729|730|731|732|733|734|735|736|737|738|739|740|741|742|743|744|745|746|747|748|749|750|751|752|753|754|755|756|757|758|759|760|761|762|763|764|765|766|767|768|769|770|771|772|773|774|775|776|777|778|779|780|781|782|783|784|785|786|787|788|789|790|791|792|793|794|795|796|797|798|799|800|801|802|803|804|805|806|807|808|809|810|811|812|813|814|815|816|817|818|819|820|821|822|823|824|825|826|827|828|829|830|831|832|833|834|835|836|837|838|839|840|841|842|843|844|845|846|847|848|849|850|851|852|853|854|855|856|857|858|859|860|861|862|863|864|865|866|867|868|869|870|871|872|873|874|875|876|877|878|879|880|881|882|883|884|885|886|887|888|889|890|891|892|893|894|895|896|897|898|899|900|901|902|903|904|905|906|907|908|909|910|911|912|913|914|915|916|917|918|919|920|921|922|923|924|925|926|927|928|929|930|931|932|933|934|935|936|937|938|939|940|941|942|943|944|945|946|947|948|949|950|951|952|953|954|955|956|957|958|959|960|961|962|963|964|965|966|967|968|969|970|971|972|973|974|975|976|977|978|979|980|981|982|983|984|985|986|987|988|989|990|991|992|993|995|996|997|998|999|1000|1001|1002|1003|1004|1005|1006|1007|1008|1009|1010|1011|1012|1013|1014|1015|1016|1017|1018|1019|1020|1021|1022|1023|1024|1025|1026|1027|1028|1029|1030|1031|1032|1033|1034|1035|1036|1037|1038|1039|1040|1041|1042|1043|1044|1045|1046|1047|1048|1049|1050|1051|1052|1053|1054|1055|1056|1059|1060|1061|1062|1063|1064|1065|1066|1067|1068|1069|1070|1071|1072|1073|1074|1075|1076|1105|1106|1107|1108|1109|1110|1111|1112|1113|1114|1115|1116|1117|1118|1119|1120|1121|1122|1123|1124|1125|1126|1127|1128|1129|1130|1131|1132|1133|1134|1135|1140|1141|1142|1143|1171|1172|1173|1174|1175|1176|1177|1178|1179|1180|1181|1182|1183|1184|1185|1186|1187|1188|1189|1190|1191|1258|1259|1260|1261|1264|1265|1266|1267|1268|1269|1270|1271|1272|1273|1274|1275|1276|1277|1278|1279|1280|1281|1282|1283|1284|1285|1286|1287|1288|1289|1290|1291|1292|1293|1294|1307|1308|1309|1310|1311|1312|1313|1314|1315|1316|1317|1318|1319|1320|1321|1322|1323|1324|1325|1345|1346|1347|1348|1349|1350|1351|1352|1353|1354|1355|1356|1357|1377|1378|1379|1380|1381|1382|1383|1384|1385|1386|1387|1388|1389|1390|1391|1392|1393|1394|1395|1396|1397|1398|1399|1400|1413|1414|1415|1416|1417|1418|1419|1420|1421|1422|1423|1424|1428|1429|1430|1610|1611|1612|1613|1614|1615|1616|1617|1618|1619|1620|1621|1622|1623|1624|1625|1626|1627|1628|1629|1630|1631|1632|1633|1634|1635|1636|1637|1638|1639|1640|1641|1642|1643|1644|1645|1646|1647|1648|1649|1650|1651|1652|1653|1654|1655|1656|1657|1658|1659|1660|1661|1662|1663|1664|1665|1666|1667|1668|1669|1670|1671|1672|1673|1674|1675|1676|1677|1678|1679|1680|1681|1682|1683|1684|1685|1686|1687|1688|1689|1690|1691|1692|1693|1694|1695|1696|1697|1698|1699|1700|1701|1702|1703|1704|1705|1706|1707|1708|1709|1710|1711|1712|1713|1714|1715|1716|1717|1718|1719|1720|1721|1722|1777|1778|1779|1780|1781|1782|1783|1784|1786|1787|1788|1789|1790|1791|1792|1793|1794|1795|1796|1797|1798|1799|1800|1801|1802|1803|1804|1805|1806|1807|1808|1809|1810|1811|1812|1813|1814|1815|1816|1817|1818|1819|1820|1821|1822|1823|1824|1825|1826|1827|1828|1829|1830|1831|1832|1833|1834|1835|1836|1837|1838|1839|1840|1841|1842|1843|1844|1845|1846|1847|1848|1849|1850|1851|1852|1853|1854|1855|1856|1857|1858|1859|1860|1861|1862|1863|1864|1865|1866|1867|1868|1869|1870|1871|1872|1873|1874|1875|1876|1877|1878|1879|1880|1881|1882|1883|1884|1885|1886|1887|1888|1889|1890|1891|1892|1893|1894|1895|1896|1897|1898|1899|1900|1901|1902|1903|1904|1905|1906|1907|1908|1909|1910|1911|1912|1913|1914|1915|1916|1917|1918|1919|1920|1921|1922|1923|1924|1925|1926|1927|1928|1929|1930|1931|1932|1933|1934|1935|1936|1937|1938|1939|1940|1941|1942|1943|1944|1945|1946|1947|1948|1949|1950|1951|1952|1953|1954|1955|1956|1957|1958|1959|1960|1961|1962|1963|1964|1965|1966|1967|1968|1969|1970|1971|1972|1973|1974|1975|1976|1977|1978|1979|1980|1981|1982|1983|1984|1985|1986|1987|1988|1989|1990|1991|1992|1993|1994|1995|1996|1997|1998|1999|2000|2001|2002|2003|2004|2005|2006|2007|2008|2009|2010|2011|2012|2013|2014|2015|2019|2020|2021|2022|2023|2024|2025|2026|2027|2028|2029|2030|2031|2032|2033|2034|2035|2036|2037|2038|2039|2040|2041|2042|2043|2044|2045
 ACT_INVALID = -1
 ACT_RESET = 0
@@ -1614,6 +1622,7 @@ ACT_GMOD_SHOWOFF_DUCK_02 = 2044
 --- The last shared activity number. IDs after this are "private" activities registered at runtime, and will have random IDs associated with specific ACTivities.
 LAST_SHARED_ACTIVITY = 2045
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Used by [NPC:MoveClimbExec](https://wiki.facepunch.com/gmod/NPC:MoveClimbExec), [NPC:MoveJumpExec](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec) and [NPC:MoveJumpStop](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop).
 ---@alias AIMR -4|-3|-2|-1|0|1
 --- Move is illegal for some reason.
 AIMR_ILLEGAL = -4
@@ -1628,12 +1637,16 @@ AIMR_OK = 0
 --- Locomotion method has changed.
 AIMR_CHANGE_TYPE = 1
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [game.AddAmmoType](https://wiki.facepunch.com/gmod/game.AddAmmoType)'s input structure - the [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias AMMO 1|2
 --- Forces player to drop the object they are carrying if the object was hit by this ammo type.
 AMMO_FORCE_DROP_IF_CARRIED = 1
 --- Uses [AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).plydmg of the ammo type as the damage to deal to shot players instead of [Bullet](https://wiki.facepunch.com/gmod/Structures/Bullet).Damage.
 AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) The analog axis to get the value of via [input.GetAnalogValue](https://wiki.facepunch.com/gmod/input.GetAnalogValue).
 ---@alias ANALOG 0|1|3|4|5|6|7|8|9
 ANALOG_MOUSE_X = 0
 ANALOG_MOUSE_Y = 1
@@ -1645,6 +1658,9 @@ ANALOG_JOY_R = 7
 ANALOG_JOY_U = 8
 ANALOG_JOY_V = 9
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) These enums are used by [render.OverrideBlend](https://wiki.facepunch.com/gmod/render.OverrideBlend) to determine what the Source and Destination color and alpha channel values for a given pixel will be multiplied by before they are sent to the [Blend Function](https://wiki.facepunch.com/gmod/Enums/BLENDFUNC) to calculate the pixel's final color during draw operations.
+---
+--- For an interactive demonstration of how these enums behave, see [Anders Riggelsen's Visual glBlendFunc Tool here](https://www.andersriggelsen.dk/glblendfunc.php)
 ---@alias BLEND 0|1|2|3|4|5|6|7|8|9|10
 --- The Multiplier will be `r=0`, `g=0`, `b=0`, `a=0`
 ---
@@ -1716,6 +1732,11 @@ BLEND_SRC_COLOR = 9
 --- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_SRC_COLOR = 10
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) These enums are used by [render.OverrideBlend](https://wiki.facepunch.com/gmod/render.OverrideBlend) to combine the Source and Destination color and alpha into a final pixel color after they have been multiplied by their corresponding [Blend Multiplier](https://wiki.facepunch.com/gmod/Enums/BLEND).
+---
+--- All results will be clamped in the range `(0-1)` and will produce final pixel channel values in the range `(0-255)`.
+---
+--- For an interactive demonstration of how these enums behave, see [Anders Riggelsen's Visual glBlendFunc Tool here](https://www.andersriggelsen.dk/glblendfunc.php)
 ---@alias BLENDFUNC 0|1|2|3|4
 --- **Source + Destination**
 --- 			Adds each channel of the Source with the same channel of the Destination.
@@ -1748,6 +1769,7 @@ BLENDFUNC_MIN = 3
 --- 			All of the Source channels are added together and compared to all of the Destination channels added together and the larger of the two is used as the final pixel color.
 BLENDFUNC_MAX = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:GetBloodColor](https://wiki.facepunch.com/gmod/Entity:GetBloodColor) and [Entity:SetBloodColor](https://wiki.facepunch.com/gmod/Entity:SetBloodColor).
 ---@alias BLOOD_COLOR -1|0|1|2|3|4|5|6
 --- No blood
 DONT_BLEED = -1
@@ -1766,6 +1788,7 @@ BLOOD_COLOR_ZOMBIE = 5
 --- Bright green blood
 BLOOD_COLOR_ANTLION_WORKER = 6
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [Entity:BoneHasFlag](https://wiki.facepunch.com/gmod/Entity:BoneHasFlag).
 ---@alias BONE 1|2|4|8|16|31|256|512|1024|2048|4096|8192|16384|32768|65536|131072|261120|262144|524032|524032
 --- Bone is physically simulated when physics are active
 BONE_PHYSICALLY_SIMULATED = 1
@@ -1799,12 +1822,14 @@ BONE_USED_BY_BONE_MERGE = 262144
 BONE_USED_BY_ANYTHING = 524032
 BONE_USED_MASK = 524032
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetSurroundingBoundsType](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBoundsType).
 ---@alias BOUNDS 0|2
 --- Sets the bounds in relation to the entity's collision bounds.
 BOUNDS_COLLISION = 0
 --- Sets the bounds to fit all hitboxes of the entity's model.
 BOUNDS_HITBOXES = 2
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting).
 ---@alias BOX 0|1|2|3|4|5
 --- Place the light from the front
 BOX_FRONT = 0
@@ -1819,12 +1844,20 @@ BOX_TOP = 4
 --- Place the light to the bottom
 BOX_BOTTOM = 5
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Encompasses the range of [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY), [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE) and [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK), all of which can be used by:
+--- * [input.IsButtonDown](https://wiki.facepunch.com/gmod/input.IsButtonDown)
+--- * [input.LookupKeyBinding](https://wiki.facepunch.com/gmod/input.LookupKeyBinding)
+--- * [input.GetKeyName](https://wiki.facepunch.com/gmod/input.GetKeyName)
+--- * [input.GetKeyCode](https://wiki.facepunch.com/gmod/input.GetKeyCode)
+--- * [GM:PlayerButtonDown](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown)
+--- * [GM:PlayerButtonUp](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp)
 ---@alias BUTTON_CODE -1|0|171|172
 BUTTON_CODE_INVALID = -1
 BUTTON_CODE_NONE = 0
 BUTTON_CODE_LAST = 171
 BUTTON_CODE_COUNT = 172
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [NPC:CapabilitiesAdd](https://wiki.facepunch.com/gmod/NPC:CapabilitiesAdd), [WEAPON:GetCapabilities](https://wiki.facepunch.com/gmod/WEAPON:GetCapabilities) and [NPC:CapabilitiesGet](https://wiki.facepunch.com/gmod/NPC:CapabilitiesGet). Serverside only.
 ---@alias CAP -2147483648|1|2|4|8|16|32|64|128|256|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|16777216|8388608|33554432|67108864|134217728|268435456|536870912|1073741824
 --- When hit by an explosion, we'll simply block it instead of spilling it to entities behind us, the sv_robust_explosions cvar can also enable this globally when set to 0
 CAP_SIMPLE_RADIUS_DAMAGE = -2147483648
@@ -1873,6 +1906,7 @@ CAP_NO_HIT_PLAYER = 268435456
 CAP_AIM_GUN = 536870912
 CAP_NO_HIT_SQUADMATES = 1073741824
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) and [sound.Add](https://wiki.facepunch.com/gmod/sound.Add).
 ---@alias CHAN -1|0|1|2|3|4|5|6|7|8|136
 --- Used when playing sounds through console commands.
 CHAN_REPLACE = -1
@@ -1899,6 +1933,7 @@ CHAN_VOICE_BASE = 8
 --- Channels from this and onwards are allocated to game code
 CHAN_USER_BASE = 136
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [NPC:Classify](https://wiki.facepunch.com/gmod/NPC:Classify).
 ---@alias CLASS 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36
 --- None - default class for entities.
 CLASS_NONE = 0
@@ -2065,6 +2100,7 @@ CLASS_ALIEN_BIOWEAPON = 35
 --- * `npc_security_camera`
 CLASS_PORTAL_TURRET = 36
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetCollisionGroup](https://wiki.facepunch.com/gmod/Entity:SetCollisionGroup), [Entity:GetCollisionGroup](https://wiki.facepunch.com/gmod/Entity:GetCollisionGroup) and [Traces](https://wiki.facepunch.com/gmod/Structures/Trace#collisiongroup).
 ---@alias COLLISION_GROUP 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21
 --- Normal
 COLLISION_GROUP_NONE = 0
@@ -2108,13 +2144,13 @@ COLLISION_GROUP_WORLD = 20
 --- Amount of COLLISION_GROUP_ enumerations
 LAST_SHARED_COLLISION_GROUP = 21
 
----@enum COND
---- Enumerations for NPC conditions, used by [NPC:SetCondition](https://wiki.facepunch.com/gmod/NPC:SetCondition). Serverside only.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations for NPC conditions, used by [NPC:SetCondition](https://wiki.facepunch.com/gmod/NPC:SetCondition). Serverside only.
 ---
 --- **NOTE**: Unlike other Enums `COND` is a table that contains all the enums.
 ---
 --- 	There are more conditions than listed here after **COND_NO_CUSTOM_INTERRUPTS**(70)
 --- 	but the name depends on what's returned by [NPC:ConditionName](https://wiki.facepunch.com/gmod/NPC:ConditionName)
+---@enum COND
 COND = {
 	BEHIND_ENEMY = 29,
 	BETTER_WEAPON_AVAILABLE = 46,
@@ -2192,6 +2228,7 @@ COND = {
 	WEAPON_SIGHT_OCCLUDED = 45,
 }
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [util.PointContents](https://wiki.facepunch.com/gmod/util.PointContents) and [PhysObj:SetContents](https://wiki.facepunch.com/gmod/PhysObj:SetContents) as tracer masks, and by [ENT.PhysicsSolidMask](https://wiki.facepunch.com/gmod/Structures/ENT#PhysicsSolidMask) for collision masking.
 ---@alias CONTENTS 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|1048576|2097152|524288|8388608|4194304|67108864|134217728|1073741824|536870912|33554432|16777216|268435456|128|255
 --- Things that are not solid
 CONTENTS_EMPTY = 0
@@ -2242,6 +2279,7 @@ LAST_VISIBLE_CONTENTS = 128
 --- Sum of all the visible contents enumerations
 ALL_VISIBLE_CONTENTS = 255
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Clientside only.
 ---@alias CREATERENDERTARGETFLAGS 1|2|4
 --- Makes this render target an HDR render target if the current system supports HDR.
 CREATERENDERTARGETFLAGS_HDR = 1
@@ -2250,6 +2288,7 @@ CREATERENDERTARGETFLAGS_AUTOMIPMAP = 2
 --- Does nothing
 CREATERENDERTARGETFLAGS_UNFILTERABLE_OK = 4
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Citizen type, a KeyValue for npc_citizen( citizentype ), serverside only.
 ---@alias CT 0|1|2|3|4
 --- Default citizen
 CT_DEFAULT = 0
@@ -2262,6 +2301,7 @@ CT_REBEL = 3
 --- Odessa?
 CT_UNIQUE = 4
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [NPC:Disposition](https://wiki.facepunch.com/gmod/NPC:Disposition) and [ENTITY:GetRelationship](https://wiki.facepunch.com/gmod/ENTITY:GetRelationship).
 ---@alias D 0|1|2|3|4
 --- Error
 D_ER = 0
@@ -2274,6 +2314,7 @@ D_LI = 3
 --- Neutral
 D_NU = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displacement surface flags, used by the [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult).
 ---@alias DISPSURF 1|2|4|8|16
 DISPSURF_SURFACE = 1
 DISPSURF_WALKABLE = 2
@@ -2281,6 +2322,9 @@ DISPSURF_BUILDABLE = 4
 DISPSURF_SURFPROP1 = 8
 DISPSURF_SURFPROP2 = 16
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [CTakeDamageInfo:GetDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType), [CTakeDamageInfo:SetDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageType) and [CTakeDamageInfo:IsDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType).
+---
+--- This enumeration is a bit field/bitflag, which means that you can combine multiple damage types using the [bit](https://wiki.facepunch.com/gmod/bit) library. You can use [bit.band](https://wiki.facepunch.com/gmod/bit.band) to test if a specific damage type is set.
 ---@alias DMG 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|2147483648
 --- Generic damage (used by weapon_fists)
 DMG_GENERIC = 0
@@ -2349,6 +2393,8 @@ DMG_SNIPER = 1073741824
 --- Damage from npc_missiledefense, npc_combinegunship, or monster_mortar
 DMG_MISSILEDEFENSE = 2147483648
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enumerations used by [Panel:Dock](https://wiki.facepunch.com/gmod/Panel:Dock).
+--- **NOTE**: These enumerations doesn't have DOCK_ prefix, this is an exception from all other enumerations.
 ---@alias DOCK 0|1|2|3|4|5
 --- Don't dock
 NODOCK = 0
@@ -2363,10 +2409,12 @@ TOP = 4
 --- Dock to the bottom
 BOTTOM = 5
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Internal globals for SimpleDoF.
 ---@alias DOF 256|512
 DOF_OFFSET = 256
 DOF_SPACING = 512
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:AddEffects](https://wiki.facepunch.com/gmod/Entity:AddEffects),  [Entity:RemoveEffects](https://wiki.facepunch.com/gmod/Entity:RemoveEffects) and  [Entity:IsEffectActive](https://wiki.facepunch.com/gmod/Entity:IsEffectActive).
 ---@alias EF 1|128|2|4|8|16|32|64|256|512|1024|8192
 --- Performs bone merge on client side, merging bone positions of child entities ([Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent)) with those of the parent, by bone names. The skeletons should have identical proportions, however it is not a requirement.
 EF_BONEMERGE = 1
@@ -2393,6 +2441,7 @@ EF_FOLLOWBONE = 1024
 --- Makes the entity not accept being lit by projected textures, including the player's flashlight.
 EF_NOFLASHLIGHT = 8192
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:AddEFlags](https://wiki.facepunch.com/gmod/Entity:AddEFlags), [Entity:RemoveEFlags](https://wiki.facepunch.com/gmod/Entity:RemoveEFlags) and [Entity:IsEFlagSet](https://wiki.facepunch.com/gmod/Entity:IsEFlagSet).
 ---@alias EFL 1|2|4|8|16|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|-2147483648
 --- This entity is marked for death -- This allows the game to actually delete ents at a safe time.
 --- **WARNING**: You should never set this flag manually.
@@ -2460,6 +2509,7 @@ EFL_NO_PHYSCANNON_INTERACTION = 1073741824
 --- Doesn't accept forces from physics damage
 EFL_NO_DAMAGE_FORCES = -2147483648
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [Global.AddConsoleCommand](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand), [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add), [Global.CreateClientConVar](https://wiki.facepunch.com/gmod/Global.CreateClientConVar) and [Global.CreateConVar](https://wiki.facepunch.com/gmod/Global.CreateConVar).
 ---@alias FCVAR 128|16777216|16384|1073741824|8|65536|131072|4|262144|524288|4096|0|256|4194304|1024|32|8192|536870912|268435456|64|2048|1|512
 --- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into either client.vdf or server.vdf
 ---
@@ -2548,6 +2598,7 @@ FCVAR_UNREGISTERED = 1
 --- Reported as "user" by `cvarlist`
 FCVAR_USERINFO = 512
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [IGModAudioChannel:FFT](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT). Clientside only.
 ---@alias FFT 0|1|2|3|4|5|6|7
 --- 128 levels
 FFT_256 = 0
@@ -2566,6 +2617,7 @@ FFT_16384 = 6
 --- 16384 levels
 FFT_32768 = 7
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:AddFlags](https://wiki.facepunch.com/gmod/Entity:AddFlags), [Entity:RemoveFlags](https://wiki.facepunch.com/gmod/Entity:RemoveFlags) and [Entity:IsFlagSet](https://wiki.facepunch.com/gmod/Entity:IsFlagSet).
 ---@alias FL 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|-2147483648
 --- Is the entity on ground or not
 FL_ONGROUND = 1
@@ -2633,6 +2685,7 @@ FL_TRANSRAGDOLL = 1073741824
 --- This moving door can't be blocked by the player
 FL_UNBLOCKABLE_BY_PLAYER = -2147483648
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc).
 ---@alias FORCE 1|2|3|4|5|6
 --- Forces the function to take [string](https://wiki.facepunch.com/gmod/string)s only
 FORCE_STRING = 1
@@ -2647,6 +2700,7 @@ FORCE_COLOR = 5
 --- Forces the function to take [Vector](https://wiki.facepunch.com/gmod/Vector)s only
 FORCE_VECTOR = 6
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [file.AsyncRead](https://wiki.facepunch.com/gmod/file.AsyncRead).
 ---@alias FSASYNC -8|-7|-6|-5|-4|-3|-2|-1|0|1|2|3|4
 FSASYNC_ERR_NOT_MINE = -8
 FSASYNC_ERR_RETRY_LATER = -7
@@ -2662,6 +2716,7 @@ FSASYNC_STATUS_INPROGRESS = 2
 FSASYNC_STATUS_ABORTED = 3
 FSASYNC_STATUS_UNSERVICED = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetSolidFlags](https://wiki.facepunch.com/gmod/Entity:SetSolidFlags) and [Entity:GetSolidFlags](https://wiki.facepunch.com/gmod/Entity:GetSolidFlags).
 ---@alias FSOLID 1|2|4|8|16|32|64|128|256|512|10
 --- Ignore solid type + always call into the entity for ray tests
 FSOLID_CUSTOMRAYTEST = 1
@@ -2686,6 +2741,7 @@ FSOLID_TRIGGER_TOUCH_DEBRIS = 512
 --- The amount of bits needed to store the all the flags in a variable/sent over network.
 FSOLID_MAX_BITS = 10
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [PhysObj:AddGameFlag](https://wiki.facepunch.com/gmod/PhysObj:AddGameFlag), [PhysObj:HasGameFlag](https://wiki.facepunch.com/gmod/PhysObj:HasGameFlag) and [PhysObj:ClearGameFlag](https://wiki.facepunch.com/gmod/PhysObj:ClearGameFlag).
 ---@alias FVPHYSICS 2|512|1|32|16|1024|2048|128|32768|8|64|4|256
 --- Won't receive physics forces from collisions and won't collide with other [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the same flag set.
 FVPHYSICS_CONSTRAINT_STATIC = 2
@@ -2714,6 +2770,7 @@ FVPHYSICS_PLAYER_HELD = 4
 --- This object was thrown by the Gravity Gun , stuns Antlion guards, Hunters, and squashes Antlion grubs.
 FVPHYSICS_WAS_THROWN = 256
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Player:AddVCDSequenceToGestureSlot](https://wiki.facepunch.com/gmod/Player:AddVCDSequenceToGestureSlot), [Player:AnimResetGestureSlot](https://wiki.facepunch.com/gmod/Player:AnimResetGestureSlot) and [Player:AnimRestartGesture](https://wiki.facepunch.com/gmod/Player:AnimRestartGesture).
 ---@alias GESTURE_SLOT 0|1|2|3|4|5|6
 --- Slot for weapon gestures
 GESTURE_SLOT_ATTACK_AND_RELOAD = 0
@@ -2728,6 +2785,9 @@ GESTURE_SLOT_VCD = 5
 --- Slot for custom gestures
 GESTURE_SLOT_CUSTOM = 6
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [game.SetGlobalState](https://wiki.facepunch.com/gmod/game.SetGlobalState) and [game.GetGlobalState](https://wiki.facepunch.com/gmod/game.GetGlobalState).
+---
+--- Serverside only.
 ---@alias GLOBAL 0|1|2
 --- Initial state, the global state is off.
 GLOBAL_OFF = 0
@@ -2736,6 +2796,7 @@ GLOBAL_ON = 1
 --- The global state is dead and is no longer active. It will be cleared.
 GLOBAL_DEAD = 2
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [IGModAudioChannel:GetState](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetState). Clientside only.
 ---@alias GMOD_CHANNEL 0|1|2|3
 --- The channel is stopped
 GMOD_CHANNEL_STOPPED = 0
@@ -2746,6 +2807,9 @@ GMOD_CHANNEL_PAUSED = 2
 --- The channel is buffering
 GMOD_CHANNEL_STALLED = 3
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Used by [NPC:GetCurGoalType](https://wiki.facepunch.com/gmod/NPC:GetCurGoalType).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias GOALTYPE 0|1|2|3|4|5|6|7|8
 --- No goal type.
 GOALTYPE_NONE = 0
@@ -2766,6 +2830,7 @@ GOALTYPE_COVER = 7
 --- Invalid goal type.
 GOALTYPE_INVALID = 8
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [GM:ScalePlayerDamage](https://wiki.facepunch.com/gmod/GM:ScalePlayerDamage) and [GM:ScaleNPCDamage](https://wiki.facepunch.com/gmod/GM:ScaleNPCDamage) and returned by [Player:LastHitGroup](https://wiki.facepunch.com/gmod/Player:LastHitGroup).
 ---@alias HITGROUP 0|1|2|3|4|5|6|7|10
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
 --- This hitgroup is not present on default player models.
@@ -2793,6 +2858,7 @@ HITGROUP_RIGHTLEG = 7
 --- Alerts NPC, but doesn't do damage or bleed (1/100th damage)
 HITGROUP_GEAR = 10
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Player:PrintMessage](https://wiki.facepunch.com/gmod/Player:PrintMessage) and [Global.PrintMessage](https://wiki.facepunch.com/gmod/Global.PrintMessage).
 ---@alias HUD 1|2|3|4
 --- No longer works; now same as HUD_PRINTCONSOLE
 HUD_PRINTNOTIFY = 1
@@ -2803,6 +2869,7 @@ HUD_PRINTTALK = 3
 --- Center of the screen, nothing on client
 HUD_PRINTCENTER = 4
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [NPC:SetHullType](https://wiki.facepunch.com/gmod/NPC:SetHullType) and  [NPC:GetHullType](https://wiki.facepunch.com/gmod/NPC:GetHullType). Serverside only.
 ---@alias HULL 0|1|2|3|4|5|6|7|8|9
 --- Hull of a Citizen
 HULL_HUMAN = 0
@@ -2816,6 +2883,8 @@ HULL_LARGE = 7
 HULL_LARGE_CENTERED = 8
 HULL_MEDIUM_TALL = 9
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Clientside only.
+--- 	**NOTE**: Some additional image formats are accepted by GetRenderTargetEx, but don't currently have enums in Lua and aren't listed here. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
 ---@alias IMAGE_FORMAT -1|0|1|2|3|4|11|12|25|24
 IMAGE_FORMAT_DEFAULT = -1
 IMAGE_FORMAT_RGBA8888 = 0
@@ -2828,6 +2897,30 @@ IMAGE_FORMAT_BGRA8888 = 12
 IMAGE_FORMAT_RGBA16161616 = 25
 IMAGE_FORMAT_RGBA16161616F = 24
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Unlike [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE), these enums are abstracted to allow the user to bind actions to any key they might prefer.
+---
+--- Keybinds using these actions work with two console commands, one starting with a plus and one with a minus symbol. A key press or release will call either the plus or minus command, adding or removing the corresponding enum in the current [CUserCmd](https://wiki.facepunch.com/gmod/CUserCmd).
+---
+--- Enumerations used by:
+--- * [Player:KeyDown](https://wiki.facepunch.com/gmod/Player:KeyDown)
+--- * [Player:KeyDownLast](https://wiki.facepunch.com/gmod/Player:KeyDownLast)
+--- * [Player:KeyPressed](https://wiki.facepunch.com/gmod/Player:KeyPressed)
+--- * [Player:KeyReleased](https://wiki.facepunch.com/gmod/Player:KeyReleased)
+--- * [CMoveData:AddKey](https://wiki.facepunch.com/gmod/CMoveData:AddKey)
+--- * [CMoveData:GetButtons](https://wiki.facepunch.com/gmod/CMoveData:GetButtons)
+--- * [CMoveData:GetOldButtons](https://wiki.facepunch.com/gmod/CMoveData:GetOldButtons)
+--- * [CMoveData:KeyDown](https://wiki.facepunch.com/gmod/CMoveData:KeyDown)
+--- * [CMoveData:KeyPressed](https://wiki.facepunch.com/gmod/CMoveData:KeyPressed)
+--- * [CMoveData:KeyReleased](https://wiki.facepunch.com/gmod/CMoveData:KeyReleased)
+--- * [CMoveData:KeyWasDown](https://wiki.facepunch.com/gmod/CMoveData:KeyWasDown)
+--- * [CMoveData:SetButtons](https://wiki.facepunch.com/gmod/CMoveData:SetButtons)
+--- * [CMoveData:SetOldButtons](https://wiki.facepunch.com/gmod/CMoveData:SetOldButtons)
+--- * [CUserCmd:GetButtons](https://wiki.facepunch.com/gmod/CUserCmd:GetButtons)
+--- * [CUserCmd:KeyDown](https://wiki.facepunch.com/gmod/CUserCmd:KeyDown)
+--- * [CUserCmd:RemoveKey](https://wiki.facepunch.com/gmod/CUserCmd:RemoveKey)
+--- * [CUserCmd:SetButtons](https://wiki.facepunch.com/gmod/CUserCmd:SetButtons)
+--- * [GM:KeyPress](https://wiki.facepunch.com/gmod/GM:KeyPress)
+--- * [GM:KeyRelease](https://wiki.facepunch.com/gmod/GM:KeyRelease)
 ---@alias IN 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216
 --- +attack bound key ( Default: Left Mouse Button )
 IN_ATTACK = 1
@@ -2877,6 +2970,9 @@ IN_GRENADE1 = 8388608
 --- +grenade2 bound key
 IN_GRENADE2 = 16777216
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [input.IsButtonDown](https://wiki.facepunch.com/gmod/input.IsButtonDown).
+---
+--- It's also part of the [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
 ---@alias JOYSTICK 114|114|145|146|149|150|161|161
 JOYSTICK_FIRST = 114
 --- Joystick buttons are in this range, but don't have individual enum names.
@@ -2890,6 +2986,18 @@ JOYSTICK_FIRST_AXIS_BUTTON = 150
 JOYSTICK_LAST_AXIS_BUTTON = 161
 JOYSTICK_LAST = 161
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by:
+--- * [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown)
+--- * [input.WasKeyPressed](https://wiki.facepunch.com/gmod/input.WasKeyPressed)
+--- * [input.WasKeyReleased](https://wiki.facepunch.com/gmod/input.WasKeyReleased)
+--- * [input.WasKeyTyped](https://wiki.facepunch.com/gmod/input.WasKeyTyped)
+--- * [input.IsKeyTrapping](https://wiki.facepunch.com/gmod/input.IsKeyTrapping)
+--- * [input.GetKeyName](https://wiki.facepunch.com/gmod/input.GetKeyName)
+--- * [input.LookupBinding](https://wiki.facepunch.com/gmod/input.LookupBinding)
+--- * [PANEL:OnKeyCodePressed](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodePressed)
+--- * [PANEL:OnKeyCodeReleased](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodeReleased)
+---
+--- It's also part of the [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
 ---@alias KEY 0|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|106|107|114|115|116|117|118|119|120|121|122|123|146|147|148|149|150|151|152|153|154|155|156|157|158|159
 KEY_FIRST = 0
 KEY_NONE = 0
@@ -3055,6 +3163,9 @@ KEY_XSTICK2_LEFT = 157
 KEY_XSTICK2_DOWN = 158
 KEY_XSTICK2_UP = 159
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [Entity:SetRenderFX](https://wiki.facepunch.com/gmod/Entity:SetRenderFX) and returned by [Entity:GetRenderFX](https://wiki.facepunch.com/gmod/Entity:GetRenderFX).
+---
+--- Most of these require alpha value of entitys color to be less than 255 to have any visible effect.
 ---@alias kRenderFx 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24
 --- None. No change.
 kRenderFxNone = 0
@@ -3107,6 +3218,7 @@ kRenderFxRagdoll = 23
 --- Quickly pulses the entitys transparency, from 0 to 255.
 kRenderFxPulseFastWider = 24
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used as trace masks in [Structures/Trace](https://wiki.facepunch.com/gmod/Structures/Trace) and [Structures/HullTrace](https://wiki.facepunch.com/gmod/Structures/HullTrace). These enumerations are simply combinations of [Enums/CONTENTS](https://wiki.facepunch.com/gmod/Enums/CONTENTS).
 ---@alias MASK 4294967295|16449|33570881|16515072|65547|33701899|147467|131083|16513|33570945|33636363|81931|1174421507|100679691|33570819|33570827|16395|48|24705|33579137|16432
 --- Anything that is not empty space
 MASK_ALL = 4294967295
@@ -3151,6 +3263,7 @@ MASK_VISIBLE_AND_NPCS = 33579137
 --- Anything that has water-like physics
 MASK_WATER = 16432
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used in [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult) and by [Entity:GetMaterialType](https://wiki.facepunch.com/gmod/Entity:GetMaterialType).
 ---@alias MAT 65|66|67|68|69|70|71|72|73|74|76|77|78|79|80|83|84|85|86|87|88|89|90
 --- Antlions
 MAT_ANTLION = 65
@@ -3199,6 +3312,9 @@ MAT_GLASS = 89
 --- "wierd-looking jello effect for advisor shield."
 MAT_WARPSHIELD = 90
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) to control what type of vertex information it should expect. Clientside only.
+---
+--- 		For more information, see the [Mesh Primitives](https://wiki.facepunch.com/gmod/mesh_primitives) reference page.
 ---@alias MATERIAL 0|1|2|3|4|5|6|7
 --- **WARNING**: The primitive type `MATERIAL_POINTS` does not currently work and will not produce any visual effect if used.
 ---
@@ -3245,12 +3361,14 @@ MATERIAL_POLYGON = 6
 --- 			For more information, see [Quad Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#quads)
 MATERIAL_QUADS = 7
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [render.CullMode](https://wiki.facepunch.com/gmod/render.CullMode). Clientside only.
 ---@alias MATERIAL_CULLMODE 0|1
 --- Cull back faces with counterclockwise vertices.
 MATERIAL_CULLMODE_CCW = 0
 --- Cull back faces with clockwise vertices.
 MATERIAL_CULLMODE_CW = 1
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [render.GetFogMode](https://wiki.facepunch.com/gmod/render.GetFogMode) and [render.FogMode](https://wiki.facepunch.com/gmod/render.FogMode). Clientside only.
 ---@alias MATERIAL_FOG 0|1|2
 --- No fog
 MATERIAL_FOG_NONE = 0
@@ -3259,6 +3377,7 @@ MATERIAL_FOG_LINEAR = 1
 --- For use in conjunction with [render.SetFogZ](https://wiki.facepunch.com/gmod/render.SetFogZ). Does not work if start distance is bigger than end distance. Ignores density setting. Seems to be broken? Used for underwater fog by the engine.
 MATERIAL_FOG_LINEAR_BELOW_FOG_Z = 2
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights). Clientside only.
 ---@alias MATERIAL_LIGHT 0|1|2|3
 --- No light
 MATERIAL_LIGHT_DISABLE = 0
@@ -3269,6 +3388,8 @@ MATERIAL_LIGHT_DIRECTIONAL = 2
 --- Spot light
 MATERIAL_LIGHT_SPOT = 3
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Clientside only.
+--- 	**WARNING**: When Anti Aliasing is enabled then `MATERIAL_RT_DEPTH_SHARED` and `MATERIAL_RT_DEPTH_SEPARATE` will always create a new depth-stencil buffer because Render Targets do not have Anti Aliasing.
 ---@alias MATERIAL_RT_DEPTH 0|1|2|3
 --- Do not create a depth-stencil buffer.Use the default depth-stencil buffer if used as render target 0.
 MATERIAL_RT_DEPTH_SHARED = 0
@@ -3282,6 +3403,21 @@ MATERIAL_RT_DEPTH_NONE = 2
 --- Seems to behave the same as MATERIAL_RT_DEPTH_SEPARATE.
 MATERIAL_RT_DEPTH_ONLY = 3
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by:
+--- * [input.IsMouseDown](https://wiki.facepunch.com/gmod/input.IsMouseDown)
+--- * [input.WasMousePressed](https://wiki.facepunch.com/gmod/input.WasMousePressed)
+--- * [input.WasMouseDoublePressed](https://wiki.facepunch.com/gmod/input.WasMouseDoublePressed)
+---
+--- It's also part of the [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
+--- # Catch mouse wheel
+--- You can catch the mouse wheel's value by:
+--- ```
+--- local testVal = 0
+--- hook.Add("InputMouseApply", "testMouseWheel", function(cmd, x, y, ang)
+---     testVal = testVal + cmd:GetMouseWheel() * 2 --any scale number you want to use
+---     print(testVal)
+--- end)
+--- ```
 ---@alias MOUSE 107|107|108|109|110|111|112|113|113|7
 --- First mouse button
 MOUSE_FIRST = 107
@@ -3304,6 +3440,7 @@ MOUSE_LAST = 113
 --- Mouse button count
 MOUSE_COUNT = 7
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetMoveCollide](https://wiki.facepunch.com/gmod/Entity:SetMoveCollide) and [Entity:GetMoveCollide](https://wiki.facepunch.com/gmod/Entity:GetMoveCollide).
 ---@alias MOVECOLLIDE 0|1|2|3|4
 --- Default behavior
 MOVECOLLIDE_DEFAULT = 0
@@ -3316,6 +3453,7 @@ MOVECOLLIDE_FLY_SLIDE = 3
 --- Number of different movecollides
 MOVECOLLIDE_COUNT = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetMoveType](https://wiki.facepunch.com/gmod/Entity:SetMoveType) and [Entity:GetMoveType](https://wiki.facepunch.com/gmod/Entity:GetMoveType).
 ---@alias MOVETYPE 0|1|2|3|4|5|6|7|8|9|10|11
 --- Don't move
 MOVETYPE_NONE = 0
@@ -3358,6 +3496,7 @@ MOVETYPE_OBSERVER = 10
 --- Custom movetype, can be applied to the player to prevent the default movement code from running, while still calling the related hooks
 MOVETYPE_CUSTOM = 11
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Used by [NPC:SetNavType](https://wiki.facepunch.com/gmod/NPC:SetNavType) and [NPC:GetNavType](https://wiki.facepunch.com/gmod/NPC:GetNavType).
 ---@alias NAV -1|0|1|2|3
 --- Error condition.
 NAV_NONE = -1
@@ -3370,6 +3509,7 @@ NAV_FLY = 2
 --- climb ladders
 NAV_CLIMB = 3
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea:GetAttributes](https://wiki.facepunch.com/gmod/CNavArea:GetAttributes) and [CNavArea:HasAttributes](https://wiki.facepunch.com/gmod/CNavArea:HasAttributes).
 ---@alias NAV_MESH 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|536870912|268435456|1073741824|-2147483648
 --- The nav area is invalid.
 NAV_MESH_INVALID = 0
@@ -3414,6 +3554,10 @@ NAV_MESH_HAS_ELEVATOR = 1073741824
 --- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.
 NAV_MESH_NAV_BLOCKER = -2147483648
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) methods.
+--- These Enums correspond to each corner of a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias NavCorner 0|1|2|3|4
 --- North West Corner
 NORTH_WEST = 0
@@ -3426,6 +3570,10 @@ SOUTH_WEST = 3
 --- Represents all corners, only applicable to certain functions, such as [CNavArea:PlaceOnGround](https://wiki.facepunch.com/gmod/CNavArea:PlaceOnGround).
 NUM_CORNERS = 4
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) methods.
+--- These Enums correspond to each side of a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias NavDir 0|1|2|3
 --- North from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 NORTH = 0
@@ -3436,6 +3584,9 @@ SOUTH = 2
 --- West from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
 WEST = 3
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea:GetParentHow](https://wiki.facepunch.com/gmod/CNavArea:GetParentHow).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias NavTraverseType 0|1|2|3|4|5|6|7|8
 GO_NORTH = 0
 GO_EAST = 1
@@ -3447,6 +3598,7 @@ GO_JUMP = 6
 GO_ELEVATOR_UP = 7
 GO_ELEVATOR_DOWN = 8
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enumerations used by [notification.AddLegacy](https://wiki.facepunch.com/gmod/notification.AddLegacy). Clientside & Menu only.
 ---@alias NOTIFY 0|1|2|3|4
 --- Generic notification
 NOTIFY_GENERIC = 0
@@ -3459,6 +3611,7 @@ NOTIFY_HINT = 3
 --- Cleanup notification
 NOTIFY_CLEANUP = 4
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [NPC:SetNPCState](https://wiki.facepunch.com/gmod/NPC:SetNPCState). Serverside only.
 ---@alias NPC_STATE -1|0|1|2|3|4|5|6|7
 --- Invalid state
 NPC_STATE_INVALID = -1
@@ -3479,12 +3632,14 @@ NPC_STATE_PRONE = 6
 --- NPC is dead
 NPC_STATE_DEAD = 7
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Various count enums.
 ---@alias NUM 36|10
 --- Amount of [Enums/CLASS](https://wiki.facepunch.com/gmod/Enums/CLASS). Used by [Global.Add_NPC_Class](https://wiki.facepunch.com/gmod/Global.Add_NPC_Class).
 NUM_AI_CLASSES = 36
 --- Amount of [Enums/HULL](https://wiki.facepunch.com/gmod/Enums/HULL).
 NUM_HULLS = 10
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Player:SetObserverMode](https://wiki.facepunch.com/gmod/Player:SetObserverMode), [Player:GetObserverMode](https://wiki.facepunch.com/gmod/Player:GetObserverMode) and [Player:Spectate](https://wiki.facepunch.com/gmod/Player:Spectate).
 ---@alias OBS_MODE 0|1|2|3|4|5|6
 --- Not spectating
 OBS_MODE_NONE = 0
@@ -3501,6 +3656,7 @@ OBS_MODE_CHASE = 5
 --- Free roam/noclip-alike. Does not work from [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath)
 OBS_MODE_ROAMING = 6
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Global.ParticleEffectAttach](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach).
 ---@alias PATTACH 0|1|2|3|4|5
 --- Particle spawns in entity's origin and does not follow it
 PATTACH_ABSORIGIN = 0
@@ -3515,6 +3671,7 @@ PATTACH_POINT_FOLLOW = 4
 --- Particle spawns in the beginning of coordinates ( Vector( 0, 0, 0 ) ), used for control points that don't attach to an entity
 PATTACH_WORLDORIGIN = 5
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetAnimation](https://wiki.facepunch.com/gmod/Entity:SetAnimation)
 ---@alias PLAYER 0|1|2|3|4|5|6|7|8|9
 PLAYER_IDLE = 0
 PLAYER_WALK = 1
@@ -3529,6 +3686,7 @@ PLAYER_RELOAD = 7
 PLAYER_START_AIMING = 8
 PLAYER_LEAVE_AIMING = 9
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [GM:DoAnimationEvent](https://wiki.facepunch.com/gmod/GM:DoAnimationEvent) and [Player:DoCustomAnimEvent](https://wiki.facepunch.com/gmod/Player:DoCustomAnimEvent).
 ---@alias PLAYERANIMEVENT 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23
 --- Primary attack
 PLAYERANIMEVENT_ATTACK_PRIMARY = 0
@@ -3570,6 +3728,7 @@ PLAYERANIMEVENT_CUSTOM_GESTURE_SEQUENCE = 22
 --- Cancel reload animation
 PLAYERANIMEVENT_CANCEL_RELOAD = 23
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Global.ClientsideModel](https://wiki.facepunch.com/gmod/Global.ClientsideModel), `ENT.RenderGroup` in [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT) and [Entity:GetRenderGroup](https://wiki.facepunch.com/gmod/Entity:GetRenderGroup).
 ---@alias RENDERGROUP 0|1|6|7|8|9|10|11|12|13
 --- Huge static prop, possibly leftover from goldsrc
 RENDERGROUP_STATIC_HUGE = 0
@@ -3598,6 +3757,7 @@ RENDERGROUP_OPAQUE_BRUSH = 12
 --- Unclassfied. Won't get drawn.
 RENDERGROUP_OTHER = 13
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Entity:SetRenderMode](https://wiki.facepunch.com/gmod/Entity:SetRenderMode) and [Entity:GetRenderMode](https://wiki.facepunch.com/gmod/Entity:GetRenderMode).
 ---@alias RENDERMODE 0|1|2|3|4|5|6|7|8|9|10
 --- Default render mode. Transparently has no effect.
 RENDERMODE_NORMAL = 0
@@ -3631,6 +3791,7 @@ RENDERMODE_WORLDGLOW = 9
 --- To completely avoid drawing and networking an entity, see EF_NODRAW.
 RENDERMODE_NONE = 10
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Clientside only.
 ---@alias RT_SIZE 0|1|2|3|4|5|6|7|8|9
 --- Only allowed for render targets that don't want a depth buffer (because if they have a depth buffer, the render target must be less than or equal to the size of the framebuffer).
 RT_SIZE_NO_CHANGE = 0
@@ -3653,6 +3814,7 @@ RT_SIZE_LITERAL = 8
 --- Use the size passed in, don't clamp to the frame buffer size, but do apply picmip restrictions.
 RT_SIZE_LITERAL_PICMIP = 9
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations for NPC schedules, used by [ENTITY:StartEngineSchedule](https://wiki.facepunch.com/gmod/ENTITY:StartEngineSchedule) and [NPC:SetSchedule](https://wiki.facepunch.com/gmod/NPC:SetSchedule). Serverside only.
 ---@alias SCHED 88|56|5|6|7|8|9|10|52|48|24|26|23|17|18|12|75|15|13|16|40|53|54|49|79|84|35|36|81|38|82|31|78|14|29|80|71|72|66|50|1|2|3|85|86|11|41|42|68|70|69|25|34|63|64|0|73|76|74|37|43|44|51|32|33|83|77|62|59|61|58|60|57|39|87|22|45|46|47|65|28|27|30|21|20|19|55|67|4
 --- The schedule enum limit
 LAST_SHARED_SCHEDULE = 88
@@ -3801,8 +3963,8 @@ SCHED_WAIT_FOR_SPEAK_FINISH = 67
 --- Spot an enemy and go from an idle state to combat state.
 SCHED_WAKE_ANGRY = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Bitflags used by [Player:ScreenFade](https://wiki.facepunch.com/gmod/Player:ScreenFade).
 ---@enum SCREENFADE
---- Bitflags used by [Player:ScreenFade](https://wiki.facepunch.com/gmod/Player:ScreenFade).
 SCREENFADE = {
 	--- Instant fade in, slowly fade out (based on fade time given) after the hold time has passed
 	IN = 1,
@@ -3818,8 +3980,8 @@ SCREENFADE = {
 	PURGE = 16,
 }
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by Kinect SDK bindings.
 ---@enum SENSORBONE
---- Enumerations used by Kinect SDK bindings.
 SENSORBONE = {
 	SHOULDER_RIGHT = 8,
 	SHOULDER_LEFT = 4,
@@ -3843,6 +4005,17 @@ SENSORBONE = {
 	HEAD = 3,
 }
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations describing certain spawnflags. Everything except for SF_PHYS* and SF_WEAPON* is serverside only.
+---
+--- Spawnflags are set using [Entity:SetKeyValue](https://wiki.facepunch.com/gmod/Entity:SetKeyValue) with **"spawnflags"** as the key.
+---
+--- * SF_CITIZEN_* spawnflags represent spawnflags only usable on [npc_citizen](https://developer.valvesoftware.com/wiki/Npc_citizen).
+--- * SF_NPC_* - Usable on all NPCs
+--- * SF_PHYSBOX_* - Usable on [func_physbox](https://developer.valvesoftware.com/wiki/Func_physbox)
+--- * SF_PHYSPROP_* - Usable on [prop_physics](https://developer.valvesoftware.com/wiki/Prop_physics) entities
+--- * SF_WEAPON_* - Usable on [Weapons](https://wiki.facepunch.com/gmod/Weapon)
+---
+--- **NOTE**: This is not a full list of available spawnflags, there are `a lot` more, each unique to each entity, you can find out more on the [Valve Developer Community](https://developer.valvesoftware.com/wiki/Main_Page) website for the entities in question.
 ---@alias SF 524288|65536|2097152|131072|1048576|262144|8388608|4194304|16777216|512|4096|1024|8|512|4|2|256|16384|8192|16|2048|128|1|32768|1048576|2097152|4194304|8|512|4194304|65536|1|2|4
 --- Citizen that resupplies ammo
 SF_CITIZEN_AMMORESUPPLIER = 524288
@@ -3913,6 +4086,7 @@ SF_WEAPON_NO_PLAYER_PICKUP = 2
 --- Physgun is NOT allowed to pick this up.
 SF_WEAPON_NO_PHYSCANNON_PUNT = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [GM:ClientSignOnStateChanged](https://wiki.facepunch.com/gmod/GM:ClientSignOnStateChanged).
 ---@alias SIGNONSTATE 0|1|2|3|4|5|6|7
 SIGNONSTATE_NONE = 0
 SIGNONSTATE_CHALLENGE = 1
@@ -3923,6 +4097,7 @@ SIGNONSTATE_SPAWN = 5
 SIGNONSTATE_FULL = 6
 SIGNONSTATE_CHANGELEVEL = 7
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [ENTITY:PhysicsSimulate](https://wiki.facepunch.com/gmod/ENTITY:PhysicsSimulate).
 ---@alias SIM 0|1|2|3|4
 --- Don't simulate physics
 SIM_NOTHING = 0
@@ -3935,6 +4110,7 @@ SIM_GLOBAL_ACCELERATION = 3
 --- Vectors in world coordinate system
 SIM_GLOBAL_FORCE = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sound flags used by [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) and [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound).
 ---@alias SND 0|1|2|4|8|16|32|128|256|512|1024
 --- To keep the compiler happy
 SND_NOFLAGS = 0
@@ -3959,6 +4135,11 @@ SND_IGNORE_NAME = 512
 --- Unused/legacy; does nothing.
 SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The sound's attenuation; how fast it drops away, enumerations used by [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) and [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound).
+---
+--- The engine starts running into trouble below 60dB.
+---
+--- **WARNING**: These enumerations do not exist in Lua and are listed here only for reference. These values and descriptions are taken from [soundflags.h in Source SDK 2013](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/soundflags.h#L53)
 ---@alias SNDLVL 0|20|25|30|35|40|45|50|55|60|60|65|66|70|75|75|80|80|85|90|95|100|105|110|120|130|140|140|150|180
 --- Sound plays everywhere
 SNDLVL_NONE = 0
@@ -4015,6 +4196,7 @@ SNDLVL_150dB = 150
 --- Rocket launching
 SNDLVL_180dB = 180
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) For use with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit), [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid) and [Entity:GetSolid](https://wiki.facepunch.com/gmod/Entity:GetSolid).
 ---@alias SOLID 0|1|2|3|4|5|6
 --- Does not collide with anything.
 --- **NOTE**: No physics object will be created when using this with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit).
@@ -4033,6 +4215,7 @@ SOLID_CUSTOM = 5
 --- Uses the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ects of the entity.
 SOLID_VPHYSICS = 6
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [sound.EmitHint](https://wiki.facepunch.com/gmod/sound.EmitHint).
 ---@alias SOUND 0|1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912
 SOUND_NONE = 0
 SOUND_COMBAT = 1
@@ -4080,7 +4263,14 @@ SOUND_CONTEXT_ALLIES_ONLY = 268435456
 --- HACK: need this because we're not treating the SOUND_xxx values as true bit values! See switch in OnListened.
 SOUND_CONTEXT_PLAYER_VEHICLE = 536870912
 
----@alias STENCIL 1|2|3|4|5|6|7|8|1|2|3|4|5|6|7|8
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations for use with [render.SetStencilCompareFunction](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction).
+---
+--- The comparison is between the reference value set by [render.SetStencilReferenceValue](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue), and the value of each pixel in the stencil buffer.
+---
+--- These enumerations are mirrors of [Enums/STENCILCOMPARISONFUNCTION](https://wiki.facepunch.com/gmod/Enums/STENCILCOMPARISONFUNCTION).
+---
+--- Also see this corresponding MSDN entry: https://msdn.microsoft.com/en-us/library/windows/desktop/ff476101%28v=vs.85%29.aspx.
+---@alias STENCIL 1|2|3|4|5|6|7|8
 --- Never passes.
 STENCIL_NEVER = 1
 --- Passes where the reference value is less than the stencil value.
@@ -4097,6 +4287,10 @@ STENCIL_NOTEQUAL = 6
 STENCIL_GREATEREQUAL = 7
 --- Always passes.
 STENCIL_ALWAYS = 8
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations for use with [render.SetStencilPassOperation](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [render.SetStencilFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation) and [render.SetStencilZFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation).
+---
+--- These enumerations are mirrors of [Enums/STENCILOPERATION](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION).
 --- Preserves the existing stencil buffer value.
 STENCIL_KEEP = 1
 --- Sets the value in the stencil buffer to 0.
@@ -4114,6 +4308,14 @@ STENCIL_INCR = 7
 --- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
 STENCIL_DECR = 8
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations for use with [render.SetStencilCompareFunction](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction).
+---
+--- The comparison is between the reference value set by [render.SetStencilReferenceValue](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue), and the value of each pixel in the stencil buffer.
+---
+--- Clientside only.
+--- **NOTE**: These enumerations are also mirrored as [Enums/STENCIL](https://wiki.facepunch.com/gmod/Enums/STENCIL).
+---
+--- Also see this corresponding MSDN entry: http://msdn.microsoft.com/en-us/library/windows/desktop/ff476101%28v=vs.85%29.aspx.
 ---@alias STENCILCOMPARISONFUNCTION 1|2|3|4|5|6|7|8
 --- Never passes.
 STENCILCOMPARISONFUNCTION_NEVER = 1
@@ -4132,6 +4334,10 @@ STENCILCOMPARISONFUNCTION_GREATEREQUAL = 7
 --- Always passes.
 STENCILCOMPARISONFUNCTION_ALWAYS = 8
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations for use with [render.SetStencilPassOperation](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [render.SetStencilFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation) and [render.SetStencilZFailOperation](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation). Clientside only.
+--- **NOTE**: These enumerations are also mirrored as [Enums/STENCIL](https://wiki.facepunch.com/gmod/Enums/STENCIL).
+---
+--- Also see this corresponding MSDN entry: http://msdn.microsoft.com/en-us/library/windows/desktop/ff476219%28v=vs.85%29.aspx.
 ---@alias STENCILOPERATION 1|2|3|4|5|6|7|8
 --- Preserves the existing stencil buffer value.
 STENCILOPERATION_KEEP = 1
@@ -4150,6 +4356,7 @@ STENCILOPERATION_INCR = 7
 --- Decrements the value in the stencil buffer by 1, wrapping around on overflow.
 STENCILOPERATION_DECR = 8
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used in [GM:PlayerStepSoundTime](https://wiki.facepunch.com/gmod/GM:PlayerStepSoundTime) hook.
 ---@alias STEPSOUNDTIME 0|1|2|3
 --- Normal step
 STEPSOUNDTIME_NORMAL = 0
@@ -4160,6 +4367,7 @@ STEPSOUNDTIME_WATER_KNEE = 2
 --- Step in water, with water reaching foot
 STEPSOUNDTIME_WATER_FOOT = 3
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used by [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw), [ENTITY:DrawTranslucent](https://wiki.facepunch.com/gmod/ENTITY:DrawTranslucent), [GM:PostPlayerDraw](https://wiki.facepunch.com/gmod/GM:PostPlayerDraw), [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw) and [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel).
 ---@alias STUDIO 1|2|4|8|16|32|64|128|256|16777216|134217728|1073741824|2147483648
 --- The current render is for opaque renderables only
 STUDIO_RENDER = 1
@@ -4182,6 +4390,7 @@ STUDIO_SHADOWDEPTHTEXTURE = 1073741824
 --- Not a studio flag, but used to flag model as a non-sorting brush model
 STUDIO_TRANSPARENCY = 2147483648
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Surface flags, used by the [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult).
 ---@alias SURF 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768
 --- Value will hold the light strength
 SURF_LIGHT = 1
@@ -4216,6 +4425,7 @@ SURF_NOCHOP = 16384
 --- This surface is part of an entity's hitbox
 SURF_HITBOX = 32768
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Used by [NPC:GetTaskStatus](https://wiki.facepunch.com/gmod/NPC:GetTaskStatus) and [NPC:SetTaskStatus](https://wiki.facepunch.com/gmod/NPC:SetTaskStatus).
 ---@alias TASKSTATUS 0|1|2|3|4
 --- Just started
 TASKSTATUS_NEW = 0
@@ -4228,6 +4438,7 @@ TASKSTATUS_RUN_TASK = 3
 --- Completed, get next task.
 TASKSTATUS_COMPLETE = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Default defined teams in Garry's Mod. This does not include any custom teams created in custom gamemodes. Enumerations to use with [Player:Team](https://wiki.facepunch.com/gmod/Player:Team)
 ---@alias TEAM 0|1001|1002
 --- Connecting team ID, set when player connects to the server
 TEAM_CONNECTING = 0
@@ -4236,10 +4447,10 @@ TEAM_UNASSIGNED = 1001
 --- Spectator team ID
 TEAM_SPECTATOR = 1002
 
----@enum TEXFILTER
---- Enumerations used by [render.PushFilterMin](https://wiki.facepunch.com/gmod/render.PushFilterMin) and [render.PushFilterMag](https://wiki.facepunch.com/gmod/render.PushFilterMag).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [render.PushFilterMin](https://wiki.facepunch.com/gmod/render.PushFilterMin) and [render.PushFilterMag](https://wiki.facepunch.com/gmod/render.PushFilterMag).
 ---
 --- See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
+---@enum TEXFILTER
 TEXFILTER = {
 	NONE = 0,
 	POINT = 1,
@@ -4247,6 +4458,7 @@ TEXFILTER = {
 	ANISOTROPIC = 3,
 }
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [draw.SimpleText](https://wiki.facepunch.com/gmod/draw.SimpleText), [draw.DrawText](https://wiki.facepunch.com/gmod/draw.DrawText) and in [Structures/TextData](https://wiki.facepunch.com/gmod/Structures/TextData).
 ---@alias TEXT_ALIGN 0|1|2|3|4
 --- Align the text on the left
 TEXT_ALIGN_LEFT = 0
@@ -4259,6 +4471,7 @@ TEXT_ALIGN_TOP = 3
 --- Align the text on the bottom
 TEXT_ALIGN_BOTTOM = 4
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used by [util.FilterText](https://wiki.facepunch.com/gmod/util.FilterText).
 ---@alias TEXT_FILTER 0|1|2|3
 --- Unknown context.
 TEXT_FILTER_UNKNOWN = 0
@@ -4269,6 +4482,9 @@ TEXT_FILTER_CHAT = 2
 --- Character or item name.
 TEXT_FILTER_NAME = 3
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Bit flags used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Information taken from [here](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#Image_flags)
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
 ---@alias TEXTUREFLAGS 1|2|4|8|16|32|64|128|256|512|1024|2048|4096|8192|16384|32768|65536|131072|262144|524288|1048576|2097152|4194304|8388608|16777216|33554432|67108864|134217728|268435456|536870912|1073741824|2147483648
 --- Low quality, "pixel art" texture filtering.
 TEXTUREFLAGS_POINTSAMPLE = 1
@@ -4332,6 +4548,7 @@ TEXTUREFLAGS_STREAMABLE_COARSE = 1073741824
 --- Aka TEXTUREFLAGS_UNUSED_80000000
 TEXTUREFLAGS_STREAMABLE_FINE = 2147483648
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).
 ---@alias TRACER 0|1|2|3|4
 --- Generates no tracer effects
 TRACER_NONE = 0
@@ -4344,6 +4561,7 @@ TRACER_BEAM = 3
 --- Generates tracer and makes whizzing noises if the bullet flies past the player being shot at
 TRACER_LINE_AND_WHIZ = 4
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used in [ENTITY:UpdateTransmitState](https://wiki.facepunch.com/gmod/ENTITY:UpdateTransmitState) hook.
 ---@alias TRANSMIT 0|1|2
 --- Always transmit the entity
 TRANSMIT_ALWAYS = 0
@@ -4352,6 +4570,7 @@ TRANSMIT_NEVER = 1
 --- Transmit when entity is in players [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community")
 TRANSMIT_PVS = 2
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Enumerations used by [net.ReadType](https://wiki.facepunch.com/gmod/net.ReadType) and returned by [Global.TypeID](https://wiki.facepunch.com/gmod/Global.TypeID)
 ---@alias TYPE -1|-1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|255
 --- Invalid type
 TYPE_NONE = -1
@@ -4454,12 +4673,16 @@ TYPE_COUNT = 44
 --- **NOTE**: This doesn't actually represent a unique type returned by [Global.TypeID](https://wiki.facepunch.com/gmod/Global.TypeID), but instead is a hack for networking colors with [net.WriteType](https://wiki.facepunch.com/gmod/net.WriteType).
 TYPE_COLOR = 255
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use).
+---
+--- Not to be confused with [Enums/_USE](https://wiki.facepunch.com/gmod/Enums/_USE) used by [Entity:SetUseType](https://wiki.facepunch.com/gmod/Entity:SetUseType).
 ---@alias USE 0|1|2|3
 USE_OFF = 0
 USE_ON = 1
 USE_SET = 2
 USE_TOGGLE = 3
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enumerations used by [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView) inside of [Structures/ViewData](https://wiki.facepunch.com/gmod/Structures/ViewData).
 ---@alias VIEW 0|1|2|3|4|5|6|7|8
 --- Default value
 VIEW_MAIN = 0
@@ -4480,6 +4703,8 @@ VIEW_SHADOW_DEPTH_TEXTURE = 7
 --- For SSAO depth. Can be accessed via [render.GetResolvedFullFrameDepth](https://wiki.facepunch.com/gmod/render.GetResolvedFullFrameDepth).
 VIEW_SSAO = 8
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enumerations used by [NPC:SetCurrentWeaponProficiency](https://wiki.facepunch.com/gmod/NPC:SetCurrentWeaponProficiency) and
+--- [NPC:GetCurrentWeaponProficiency](https://wiki.facepunch.com/gmod/NPC:GetCurrentWeaponProficiency).
 ---@alias WEAPON_PROFICIENCY 0|1|2|3|4
 --- The NPC will miss a large majority of their shots.
 WEAPON_PROFICIENCY_POOR = 0

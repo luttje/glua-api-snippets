@@ -6,26 +6,26 @@
 ---@class DSizeToContents : Panel
 local DSizeToContents = {}
 
----[CLIENT AND MENU] Returns whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents horizontally.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents horizontally.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeX)
 ---@return boolean # Whether the panel should size to contents horizontally.
 function DSizeToContents:GetSizeX() end
 
----[CLIENT AND MENU] Returns whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents vertically.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents vertically.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSizeToContents:GetSizeY)
 ---@return boolean # Whether the panel should size to contents vertically.
 function DSizeToContents:GetSizeY() end
 
----[CLIENT AND MENU] Sets whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents horizontally. This is `true` by default.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents horizontally. This is `true` by default.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:SetSizeX)
+---[View wiki](https://wiki.facepunch.com/gmod/DSizeToContents:SetSizeX)
 ---@param sizeX boolean Whether the panel should size to contents horizontally.
 function DSizeToContents:SetSizeX(sizeX) end
 
----[CLIENT AND MENU] Sets whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents vertically. This is `true` by default.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether the [DSizeToContents](https://wiki.facepunch.com/gmod/DSizeToContents) panel should size to contents vertically. This is `true` by default.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DSizeToContents:SetSizeY)
+---[View wiki](https://wiki.facepunch.com/gmod/DSizeToContents:SetSizeY)
 ---@param sizeY boolean Whether the panel should size to contents vertically.
 function DSizeToContents:SetSizeY(sizeY) end

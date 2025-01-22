@@ -7,29 +7,29 @@
 ---@class DColorCombo : DPropertySheet
 local DColorCombo = {}
 
----[CLIENT] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Called internally to create panels necessary for this panel to work.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:BuildControls)
+---[View wiki](https://wiki.facepunch.com/gmod/DColorCombo:BuildControls)
 function DColorCombo:BuildControls() end
 
----[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of the [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of the [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
+---[View wiki](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
 ---@return table # A Color
 function DColorCombo:GetColor() end
 
----[CLIENT] Returns true if the panel is currently being edited
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns true if the panel is currently being edited
 ---
 --- More of a internal method, it technically should only ever work (i.e. return true) inside [DColorCombo:OnValueChanged](https://wiki.facepunch.com/gmod/DColorCombo:OnValueChanged).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:IsEditing)
+---[View wiki](https://wiki.facepunch.com/gmod/DColorCombo:IsEditing)
 ---@return boolean #
 function DColorCombo:IsEditing() end
 
----[CLIENT] An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of this panel. See also [DColorCombo:GetColor](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of this panel. See also [DColorCombo:GetColor](https://wiki.facepunch.com/gmod/DColorCombo:GetColor)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DColorCombo:SetColor)
+---[View wiki](https://wiki.facepunch.com/gmod/DColorCombo:SetColor)
 ---@param clr table A Color.
 function DColorCombo:SetColor(clr) end

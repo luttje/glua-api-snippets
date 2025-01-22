@@ -3,9 +3,9 @@
 --- The construct library is used to control the physical properties of entities.
 construct = {}
 
----[SERVER] Creates a magnet.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a magnet.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/construct.Magnet)
+---[View wiki](https://wiki.facepunch.com/gmod/construct.Magnet)
 ---@param ply Player Player that will have the numpad control over the magnet
 ---@param pos Vector The position of the magnet
 ---@param ang Angle The angles of the magnet
@@ -41,9 +41,9 @@ function construct.Magnet(
 )
 end
 
----[SERVER] Sets props physical properties.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets props physical properties.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/construct.SetPhysProp)
+---[View wiki](https://wiki.facepunch.com/gmod/construct.SetPhysProp)
 ---@param ply Player The player. This variable is not used and can be left out.
 ---@param ent Entity The entity to apply properties to
 ---@param physObjID number You can use this or the argument below. This will be used in case you don't provide argument below.

@@ -1,10 +1,13 @@
 ---@meta
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- Table structure that describes a Source Engine ammo type.
 ---
 --- See [game.AddAmmoType](https://wiki.facepunch.com/gmod/game.AddAmmoType) and [game.GetAmmoData](https://wiki.facepunch.com/gmod/game.GetAmmoData).
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/AmmoData)
 ---@class AmmoData
 local AmmoData = {}
 
@@ -67,7 +70,10 @@ AmmoData.maxcarry = 9999
 ---@type number
 AmmoData.flags = 0
 
---- Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/AngPos)
 ---@class AngPos
 local AngPos = {}
 
@@ -83,7 +89,10 @@ AngPos.Pos = nil
 ---@type number
 AngPos.Bone = nil
 
---- Table used by panel animation methods, primarily [Panel:AnimationThinkInternal](https://wiki.facepunch.com/gmod/Panel:AnimationThinkInternal), and returned by [Panel:NewAnimation](https://wiki.facepunch.com/gmod/Panel:NewAnimation).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table used by panel animation methods, primarily [Panel:AnimationThinkInternal](https://wiki.facepunch.com/gmod/Panel:AnimationThinkInternal), and returned by [Panel:NewAnimation](https://wiki.facepunch.com/gmod/Panel:NewAnimation).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/AnimationData)
 ---@class AnimationData
 local AnimationData = {}
 
@@ -165,7 +174,10 @@ AnimationData.Speed = nil
 ---@type boolean
 AnimationData.UseGravity = nil
 
---- Table returned by [Entity:GetAttachments](https://wiki.facepunch.com/gmod/Entity:GetAttachments).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table returned by [Entity:GetAttachments](https://wiki.facepunch.com/gmod/Entity:GetAttachments).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/AttachmentData)
 ---@class AttachmentData
 local AttachmentData = {}
 
@@ -177,9 +189,12 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- 		The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/BodyGroupData)
 ---@class BodyGroupData
 local BodyGroupData = {}
 
@@ -201,7 +216,7 @@ BodyGroupData.num = nil
 ---@type table
 BodyGroupData.submodels = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- Structure used for storing/restoring bone manipulations.
 --- Data is stored from [Entity:GetManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneScale), [Entity:GetManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneAngles), and [Entity:GetManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:GetManipulateBonePosition).
 --- Data is restored using [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale), [Entity:ManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles), and [Entity:ManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:ManipulateBonePosition).
@@ -211,6 +226,9 @@ BodyGroupData.submodels = nil
 ---
 --- Fields **s**, **a**, and **p** are set if they don't equal **Vector( 1, 1, 1 )**, **Angle( 0, 0, 0 )**, and **Vector( 0, 0, 0 )** respectively.
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneManipulationData)
 ---@class BoneManipulationData
 local BoneManipulationData = {}
 
@@ -226,7 +244,10 @@ BoneManipulationData.a = nil
 ---@type Vector
 BoneManipulationData.p = Vectornil
 
---- Tables used for bullets see [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) and [GM:EntityFireBullets](https://wiki.facepunch.com/gmod/GM:EntityFireBullets).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Tables used for bullets see [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) and [GM:EntityFireBullets](https://wiki.facepunch.com/gmod/GM:EntityFireBullets).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Bullet)
 ---@class Bullet
 local Bullet = {}
 
@@ -302,7 +323,10 @@ Bullet.Src = VectorVector(0, 0, 0)
 ---@type Entity
 Bullet.IgnoreEntity = NULL
 
---- Table structure used [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) and [GM:CalcVehicleView](https://wiki.facepunch.com/gmod/GM:CalcVehicleView) hook.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) and [GM:CalcVehicleView](https://wiki.facepunch.com/gmod/GM:CalcVehicleView) hook.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/CamData)
 ---@class CamData
 local CamData = {}
 
@@ -340,7 +364,7 @@ CamData.drawviewer = false
 ---@type table
 CamData.ortho = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- Passed as argument of [ENTITY:PhysicsCollide](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide), [EFFECT:PhysicsCollide](https://wiki.facepunch.com/gmod/EFFECT:PhysicsCollide) and used with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
 ---
 --- **NOTE**: Sometimes, the value of `Speed` can be different from getting the length calculated from `OurOldVelocity`, even though they should be the same, or close to same. It's recommended to do `OurOldVelocity:Length()` instead.
@@ -354,6 +378,9 @@ CamData.ortho = nil
 --- ```
 ---
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/CollisionData)
 ---@class CollisionData
 local CollisionData = {}
 
@@ -437,7 +464,10 @@ Color.b = nil
 ---@type number
 Color.a = nil
 
---- Table that maintains information on the creation menu tabs. Each key of the table represents the name of the tab. See [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab) and [spawnmenu.GetCreationTabs](https://wiki.facepunch.com/gmod/spawnmenu.GetCreationTabs).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table that maintains information on the creation menu tabs. Each key of the table represents the name of the tab. See [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab) and [spawnmenu.GetCreationTabs](https://wiki.facepunch.com/gmod/spawnmenu.GetCreationTabs).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/CreationMenus)
 ---@class CreationMenus
 local CreationMenus = {}
 
@@ -460,7 +490,10 @@ CreationMenus.Order = nil
 ---@type string
 CreationMenus.Tooltip = nil
 
---- Table returned by [os.date](https://wiki.facepunch.com/gmod/os.date) and used by [os.time](https://wiki.facepunch.com/gmod/os.time).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table returned by [os.date](https://wiki.facepunch.com/gmod/os.date) and used by [os.time](https://wiki.facepunch.com/gmod/os.time).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/DateData)
 ---@class DateData
 local DateData = {}
 
@@ -502,7 +535,7 @@ DateData.yday = nil
 ---@type number
 DateData.year = nil
 
----
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4)
 --- Table returned by [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo).
 ---
 --- **NOTE**: If a filter is applied to [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo), some members may not exist!
@@ -518,6 +551,9 @@ DateData.year = nil
 --- * currentline = -1
 --- * lastlinedefined = -1
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/DebugInfo)
 ---@class DebugInfo
 local DebugInfo = {}
 
@@ -603,13 +639,16 @@ DebugInfo.nups = nil
 ---@type table
 DebugInfo.activelines = nil
 
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 --- Structure for [Global.DynamicLight](https://wiki.facepunch.com/gmod/Global.DynamicLight).
 --- All members are case insensitive.
 ---
 --- **NOTE**: This is an actual class named **dlight_t**, not a table.
 ---
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/DynamicLight)
 ---@class DynamicLight
 local DynamicLight = {}
 
@@ -682,7 +721,10 @@ DynamicLight.g = nil
 ---@type number
 DynamicLight.r = nil
 
---- Passed as argument of [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Passed as argument of [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/EmitSoundInfo)
 ---@class EmitSoundInfo
 local EmitSoundInfo = {}
 
@@ -855,7 +897,7 @@ ENT.PhysicsSolidMask = nil
 ---@type boolean
 ENT.PhysicsSounds = false
 
----
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)
 --- Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
 ---
 --- It is created by [duplicator.CopyEntTable](https://wiki.facepunch.com/gmod/duplicator.CopyEntTable) and can be loaded by [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable).
@@ -868,6 +910,9 @@ ENT.PhysicsSounds = false
 --- **NOTE**: In addition to all fields listed here, any field saved on the entity will be saved as-is to this table. For example, if you set `ent.FavoriteFood = "Steak"` before duplicating it, this structure will also contain the field `FavoriteFood` with the value `"Steak"`.
 ---
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/EntityCopyData)
 ---@class EntityCopyData
 local EntityCopyData = {}
 
@@ -943,11 +988,14 @@ EntityCopyData.MapCreationID = nil
 ---@type number
 EntityCopyData.WorkshopID = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- 		The table structure used for bullets that have already been fired.
 ---
 --- 		See [GM:PostEntityFireBullets](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets) for more information.
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/FiredBullet)
 ---@class FiredBullet
 local FiredBullet = {}
 
@@ -985,7 +1033,10 @@ FiredBullet.Tracer = nil
 ---@type table
 FiredBullet.Trace = nil
 
---- Used for [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/FontData)
 ---@class FontData
 local FontData = {}
 
@@ -1106,7 +1157,10 @@ GM.ThisClass = nil
 ---@type table
 GM.BaseClass = nil
 
---- Table used by [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table used by [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/HTTPRequest)
 ---@class HTTPRequest
 local HTTPRequest = {}
 
@@ -1164,7 +1218,10 @@ HTTPRequest.type = "text/plain; charset=utf-8"
 ---@type number
 HTTPRequest.timeout = 60
 
---- Table used by [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/HullTrace)
 ---@class HullTrace
 local HullTrace = {}
 
@@ -1222,7 +1279,10 @@ HullTrace.whitelist = false
 ---@type boolean
 HullTrace.hitclientonly = false
 
---- Table structure used for [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used for [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/LocalLight)
 ---@class LocalLight
 local LocalLight = {}
 
@@ -1278,7 +1338,10 @@ LocalLight.linearFalloff = 0
 ---@type number
 LocalLight.constantFalloff = 1
 
---- Table structure used by [matproxy.Add](https://wiki.facepunch.com/gmod/matproxy.Add).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used by [matproxy.Add](https://wiki.facepunch.com/gmod/matproxy.Add).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/MatProxyData)
 ---@class MatProxyData
 local MatProxyData = {}
 
@@ -1304,7 +1367,10 @@ MatProxyData.init = nil
 ---@type fun(self: table, name: string, ent: Entity)
 MatProxyData.bind = nil
 
---- Table structure representing a mesh vertex used by various functions, such as [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) and [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh) and returned by functions such as [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) and  [PhysObj:GetMesh](https://wiki.facepunch.com/gmod/PhysObj:GetMesh).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure representing a mesh vertex used by various functions, such as [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) and [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh) and returned by functions such as [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) and  [PhysObj:GetMesh](https://wiki.facepunch.com/gmod/PhysObj:GetMesh).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/MeshVertex)
 ---@class MeshVertex
 local MeshVertex = {}
 
@@ -1348,7 +1414,7 @@ MeshVertex.v1 = nil
 ---@type table
 MeshVertex.userdata = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- Information about the NPC data structure, used to define spawnable NPCs for the Sandbox gamemode.
 ---
 --- Example usage:
@@ -1360,6 +1426,9 @@ MeshVertex.userdata = nil
 --- } )
 --- ```
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/NPCData)
 ---@class NPCData
 local NPCData = {}
 
@@ -1433,7 +1502,10 @@ NPCData.Health = nil
 ---@type function
 NPCData.OnDuplicated = nil
 
---- The structure used by [Vehicle:GetOperatingParams](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Vehicle:GetOperatingParams](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/OperatingParams)
 ---@class OperatingParams
 local OperatingParams = {}
 
@@ -1461,9 +1533,12 @@ OperatingParams.steeringAngle = nil
 ---@type number
 OperatingParams.wheelsInContact = nil
 
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 --- 		This table is returned by [surface.GetPanelPaintState](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState).
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PanelPaintState)
 ---@class PanelPaintState
 local PanelPaintState = {}
 
@@ -1495,7 +1570,10 @@ PanelPaintState.scissor_bottom = nil
 ---@type boolean
 PanelPaintState.scissor_enabled = nil
 
---- Structure represents a path segment, returned by [PathFollower:GetCurrentGoal](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal), [PathFollower:FirstSegment](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment) and [PathFollower:LastSegment](https://wiki.facepunch.com/gmod/PathFollower:LastSegment).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Structure represents a path segment, returned by [PathFollower:GetCurrentGoal](https://wiki.facepunch.com/gmod/PathFollower:GetCurrentGoal), [PathFollower:FirstSegment](https://wiki.facepunch.com/gmod/PathFollower:FirstSegment) and [PathFollower:LastSegment](https://wiki.facepunch.com/gmod/PathFollower:LastSegment).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PathSegment)
 ---@class PathSegment
 local PathSegment = {}
 
@@ -1549,9 +1627,12 @@ PathSegment.pos = nil
 ---@type number
 PathSegment.type = nil
 
---- Table used by [physenv.SetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings) and [physenv.GetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by [physenv.SetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.SetPerformanceSettings) and [physenv.GetPerformanceSettings](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings).
 ---
 --- When setting the settings, omitting any key will fallback to its current value. (can be retrieved via the get function)
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PhysEnvPerformanceSettings)
 ---@class PhysEnvPerformanceSettings
 local PhysEnvPerformanceSettings = {}
 
@@ -1607,7 +1688,7 @@ PhysEnvPerformanceSettings.MinFrictionMass = nil
 ---@type number
 PhysEnvPerformanceSettings.MaxFrictionMass = nil
 
----
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)
 --- Structure used in storing/restoring physics object attributes.
 --- [duplicator.GenericDuplicatorFunction](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction) and [duplicator.DoGenericPhysics](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics) use a table of **PhysicsObjectSave**s with the struct's index in the table being the physics object ID.
 ---
@@ -1618,6 +1699,9 @@ PhysEnvPerformanceSettings.MaxFrictionMass = nil
 --- ```
 ---
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PhysicsObjectSave)
 ---@class PhysicsObjectSave
 local PhysicsObjectSave = {}
 
@@ -1641,7 +1725,10 @@ PhysicsObjectSave.NoGrav = nil
 ---@type boolean
 PhysicsObjectSave.Sleep = nil
 
---- Structure used by [construct.SetPhysProp](https://wiki.facepunch.com/gmod/construct.SetPhysProp).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Structure used by [construct.SetPhysProp](https://wiki.facepunch.com/gmod/construct.SetPhysProp).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PhysProperties)
 ---@class PhysProperties
 local PhysProperties = {}
 
@@ -1721,7 +1808,7 @@ PLAYER.AvoidPlayers = true
 ---@type boolean
 PLAYER.UseVMHands = true
 
----
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981)
 --- A structure containing vertex information for use with [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
 ---
 --- UV coordinates describe which part of a given texture should be drawn at a vertex - your graphics card's interpolator will fill in space between vertices. UV coords range from `0-1`, with `0` being top/left and `1` being bottom/right. If you're using a texture these are mandatory.
@@ -1731,6 +1818,9 @@ PLAYER.UseVMHands = true
 --- Your points must be defined in a **clockwise order.** Otherwise, your shape will not render properly.
 ---
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PolygonVertex)
 ---@class PolygonVertex
 local PolygonVertex = {}
 
@@ -1750,7 +1840,10 @@ PolygonVertex.u = nil
 ---@type number
 PolygonVertex.v = nil
 
---- The structure used by [Global.CreateNewAddonPreset](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset).
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) The structure used by [Global.CreateNewAddonPreset](https://wiki.facepunch.com/gmod/Global.CreateNewAddonPreset).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Preset)
 ---@class Preset
 local Preset = {}
 
@@ -1770,7 +1863,10 @@ Preset.name = nil
 ---@type string
 Preset.newAction = nil
 
---- Table used by [Global.FireProblem](https://wiki.facepunch.com/gmod/Global.FireProblem) function.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Table used by [Global.FireProblem](https://wiki.facepunch.com/gmod/Global.FireProblem) function.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Problem)
 ---@class Problem
 local Problem = {}
 
@@ -1797,7 +1893,10 @@ Problem.type = nil
 ---@type function
 Problem.fix = nil
 
---- Structure used for [properties.Add](https://wiki.facepunch.com/gmod/properties.Add).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Structure used for [properties.Add](https://wiki.facepunch.com/gmod/properties.Add).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/PropertyAdd)
 ---@class PropertyAdd
 local PropertyAdd = {}
 
@@ -1906,11 +2005,14 @@ PropertyAdd.MenuOpen = nil
 ---@type fun(self: table, menu: DMenu, option: DMenuOption)
 PropertyAdd.OnCreate = nil
 
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 --- Used for [cam.Start](https://wiki.facepunch.com/gmod/cam.Start).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's current `CViewSetup` and do not have static representations.
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/RenderCamData)
 ---@class RenderCamData
 local RenderCamData = {}
 
@@ -1984,7 +2086,10 @@ RenderCamData.offcenter = nil
 ---@type table
 RenderCamData.ortho = nil
 
---- Used for [render.Capture](https://wiki.facepunch.com/gmod/render.Capture).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used for [render.Capture](https://wiki.facepunch.com/gmod/render.Capture).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/RenderCaptureData)
 ---@class RenderCaptureData
 local RenderCaptureData = {}
 
@@ -2018,7 +2123,10 @@ RenderCaptureData.quality = nil
 ---@type boolean
 RenderCaptureData.alpha = true
 
---- Used by [Entity:GetSequenceInfo](https://wiki.facepunch.com/gmod/Entity:GetSequenceInfo).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [Entity:GetSequenceInfo](https://wiki.facepunch.com/gmod/Entity:GetSequenceInfo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/SequenceInfo)
 ---@class SequenceInfo
 local SequenceInfo = {}
 
@@ -2098,7 +2206,10 @@ SequenceInfo.cycleposeindex = nil
 ---@type table
 SequenceInfo.anims = nil
 
---- Used for [serverlist.Query](https://wiki.facepunch.com/gmod/serverlist.Query).
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Used for [serverlist.Query](https://wiki.facepunch.com/gmod/serverlist.Query).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ServerQueryData)
 ---@class ServerQueryData
 local ServerQueryData = {}
 
@@ -2147,7 +2258,10 @@ ServerQueryData.CallbackFailed = nil
 ---@type function
 ServerQueryData.Finished = nil
 
---- Table used by [PhysObj:ComputeShadowControl](https://wiki.facepunch.com/gmod/PhysObj:ComputeShadowControl). Default values are given if the table element is omitted.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by [PhysObj:ComputeShadowControl](https://wiki.facepunch.com/gmod/PhysObj:ComputeShadowControl). Default values are given if the table element is omitted.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ShadowControlParams)
 ---@class ShadowControlParams
 local ShadowControlParams = {}
 
@@ -2192,7 +2306,10 @@ ShadowControlParams.dampfactor = 1
 ---@type number
 ShadowControlParams.teleportdistance = 0
 
---- Table used in [sound.Add](https://wiki.facepunch.com/gmod/sound.Add) and [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used in [sound.Add](https://wiki.facepunch.com/gmod/sound.Add) and [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/SoundData)
 ---@class SoundData
 local SoundData = {}
 
@@ -2236,7 +2353,10 @@ SoundData.pitchstart = nil
 ---@type number
 SoundData.pitchend = nil
 
---- Table describing a sound hint, used by [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint) and [sound.GetLoudestSoundHint](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table describing a sound hint, used by [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint) and [sound.GetLoudestSoundHint](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/SoundHintData)
 ---@class SoundHintData
 local SoundHintData = {}
 
@@ -2272,7 +2392,10 @@ SoundHintData.expires = nil
 ---@type number
 SoundHintData.channel = nil
 
---- Returned by [util.GetSunInfo](https://wiki.facepunch.com/gmod/util.GetSunInfo).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returned by [util.GetSunInfo](https://wiki.facepunch.com/gmod/util.GetSunInfo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/SunInfo)
 ---@class SunInfo
 local SunInfo = {}
 
@@ -2284,7 +2407,10 @@ SunInfo.direction = nil
 ---@type number
 SunInfo.obstruction = nil
 
---- Table returned by [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table returned by [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/SurfacePropertyData)
 ---@class SurfacePropertyData
 local SurfacePropertyData = {}
 
@@ -2606,7 +2732,10 @@ SWEP.m_bPlayPickupSound = true
 ---@type string
 SWEP.IconOverride = "entities/<ClassName>.png"
 
---- Table is one element from [team.GetAllTeams](https://wiki.facepunch.com/gmod/team.GetAllTeams).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table is one element from [team.GetAllTeams](https://wiki.facepunch.com/gmod/team.GetAllTeams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/TeamData)
 ---@class TeamData
 local TeamData = {}
 
@@ -2626,7 +2755,10 @@ TeamData.Name = nil
 ---@type number
 TeamData.Score = nil
 
---- Used for [draw.Text](https://wiki.facepunch.com/gmod/draw.Text).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [draw.Text](https://wiki.facepunch.com/gmod/draw.Text).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/TextData)
 ---@class TextData
 local TextData = {}
 
@@ -2654,7 +2786,10 @@ TextData.yalign = TEXT_ALIGN_TOP
 ---@type table
 TextData.color = color_white
 
---- Used for [draw.TexturedQuad](https://wiki.facepunch.com/gmod/draw.TexturedQuad).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [draw.TexturedQuad](https://wiki.facepunch.com/gmod/draw.TexturedQuad).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/TextureData)
 ---@class TextureData
 local TextureData = {}
 
@@ -2757,7 +2892,10 @@ TOOL.LeftClickAutomatic = false
 ---@type boolean
 TOOL.RightClickAutomatic = false
 
---- Table returned by [Vector:ToScreen](https://wiki.facepunch.com/gmod/Vector:ToScreen).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table returned by [Vector:ToScreen](https://wiki.facepunch.com/gmod/Vector:ToScreen).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ToScreenData)
 ---@class ToScreenData
 local ToScreenData = {}
 
@@ -2773,7 +2911,10 @@ ToScreenData.y = nil
 ---@type boolean
 ToScreenData.visible = nil
 
---- Table structure used for [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure used for [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Trace)
 ---@class Trace
 local Trace = {}
 
@@ -2823,10 +2964,13 @@ Trace.whitelist = false
 ---@type boolean
 Trace.hitclientonly = false
 
---- Table structure used as trace result. Default values are when the trace hits nothing.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure used as trace result. Default values are when the trace hits nothing.
 ---
 --- See [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine) and [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/TraceResult)
 ---@class TraceResult
 local TraceResult = {}
 
@@ -2929,7 +3073,10 @@ TraceResult.DispFlags = 0
 ---@type number
 TraceResult.Contents = nil
 
---- Table structure used by [steamworks.FileInfo](https://wiki.facepunch.com/gmod/steamworks.FileInfo).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Table structure used by [steamworks.FileInfo](https://wiki.facepunch.com/gmod/steamworks.FileInfo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/UGCFileInfo)
 ---@class UGCFileInfo
 local UGCFileInfo = {}
 
@@ -3035,7 +3182,10 @@ UGCFileInfo.total = nil
 ---@type number
 UGCFileInfo.score = nil
 
---- Table structure used by [undo.Do_Undo](https://wiki.facepunch.com/gmod/undo.Do_Undo) and [GM:CanUndo](https://wiki.facepunch.com/gmod/GM:CanUndo).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table structure used by [undo.Do_Undo](https://wiki.facepunch.com/gmod/undo.Do_Undo) and [GM:CanUndo](https://wiki.facepunch.com/gmod/GM:CanUndo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Undo)
 ---@class Undo
 local Undo = {}
 
@@ -3063,7 +3213,10 @@ Undo.CustomUndoText = nil
 ---@type string
 Undo.NiceName = nil
 
---- The structure used by [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) and [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) and [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleParams)
 ---@class VehicleParams
 local VehicleParams = {}
 
@@ -3091,7 +3244,10 @@ VehicleParams.engine = nil
 ---@type table
 VehicleParams.steering = nil
 
---- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleParamsAxle)
 ---@class VehicleParamsAxle
 local VehicleParamsAxle = {}
 
@@ -3179,7 +3335,10 @@ VehicleParamsAxle.wheels_skidMaterialIndex = nil
 ---@type number
 VehicleParamsAxle.wheels_springAdditionalLength = nil
 
---- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleParamsBody)
 ---@class VehicleParamsBody
 local VehicleParamsBody = {}
 
@@ -3215,7 +3374,10 @@ VehicleParamsBody.tiltForce = nil
 ---@type number
 VehicleParamsBody.tiltForceHeight = nil
 
---- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleParamsEngine)
 ---@class VehicleParamsEngine
 local VehicleParamsEngine = {}
 
@@ -3313,7 +3475,10 @@ VehicleParamsEngine.throttleTime = nil
 ---@type boolean
 VehicleParamsEngine.torqueBoost = nil
 
---- The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleParamsSteering)
 ---@class VehicleParamsSteering
 local VehicleParamsSteering = {}
 
@@ -3393,7 +3558,7 @@ VehicleParamsSteering.turnThrottleReduceFast = nil
 ---@type number
 VehicleParamsSteering.turnThrottleReduceSlow = nil
 
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 --- Table structure passed to [SANDBOX:PlayerSpawnVehicle](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnVehicle), describing a spawnable Vehicle in Sandbox gamemode.
 ---
 --- Example usage in defined a custom spawnable vehicle:
@@ -3415,6 +3580,9 @@ VehicleParamsSteering.turnThrottleReduceSlow = nil
 --- } )
 --- ```
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleTable)
 ---@class VehicleTable
 local VehicleTable = {}
 
@@ -3460,7 +3628,10 @@ VehicleTable.Category = "Other"
 ---@type string
 VehicleTable.Information = nil
 
---- Table structure used by [video.Record](https://wiki.facepunch.com/gmod/video.Record).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Table structure used by [video.Record](https://wiki.facepunch.com/gmod/video.Record).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/VideoData)
 ---@class VideoData
 local VideoData = {}
 
@@ -3510,11 +3681,14 @@ VideoData.width = nil
 ---@type number
 VideoData.height = nil
 
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 --- Table structure used for [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's CViewSetup and do not have static representations.
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ViewData)
 ---@class ViewData
 local ViewData = {}
 
@@ -3640,9 +3814,12 @@ ViewData.viewid = 0
 ---@type table
 ViewData.offcenter = nil
 
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 --- Table structure used for [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).
 ---
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ViewSetup)
 ---@class ViewSetup
 local ViewSetup = {}
 

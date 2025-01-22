@@ -7,9 +7,9 @@
 ---@class DModelSelectMulti : DPropertySheet
 local DModelSelectMulti = {}
 
----[CLIENT AND MENU] Adds a new tab of models.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds a new tab of models.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DModelSelectMulti:AddModelList)
+---[View wiki](https://wiki.facepunch.com/gmod/DModelSelectMulti:AddModelList)
 ---@param name string Name of the tab to add.
 ---@param models table Models list for this tab. See DModelSelect:SetModelList.
 ---@param convar string ConVar to set when a model from this list is selected.

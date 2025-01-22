@@ -3,44 +3,44 @@
 --- Menu state library to query the master server list.
 serverlist = {}
 
----[MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Adds current server the player is on to their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddCurrentServerToFavorites)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.AddCurrentServerToFavorites)
 ---@param addOrRemove boolean `true` if to add, or `false` if to remove from favorites.
 function serverlist.AddCurrentServerToFavorites(addOrRemove) end
 
----[MENU] Adds the given server address to their favorites.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Adds the given server address to their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.AddServerToFavorites)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.AddServerToFavorites)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
 function serverlist.AddServerToFavorites(address) end
 
----[MENU] Returns true if the current server address is in their favorites.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns true if the current server address is in their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsCurrentServerFavorite)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.IsCurrentServerFavorite)
 ---@return boolean # true if the current server is in their favorites
 function serverlist.IsCurrentServerFavorite() end
 
----[MENU] Returns true if the given server address is in their favorites.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns true if the given server address is in their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.IsServerFavorite)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.IsServerFavorite)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
 ---@return boolean # true if the server address is in their favorites
 function serverlist.IsServerFavorite(address) end
 
----[MENU] Queries a server for its information/ping.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Queries a server for its information/ping.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.PingServer)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.PingServer)
 ---@param ip string The IP address of the server, including the port.
 ---@param callback function The function to be called if and when the request finishes.
 ---
 --- Callback has arguments described here: Structures/ServerQueryData.
 function serverlist.PingServer(ip, callback) end
 
----[MENU] Queries a server for its player list.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Queries a server for its player list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.PlayerList)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.PlayerList)
 ---@param ip string The IP address of the server, including the port.
 ---@param callback fun(data: table) The function to be called if and when the request finishes.
 ---
@@ -52,14 +52,14 @@ function serverlist.PingServer(ip, callback) end
 ---   * number **score** - The players score
 function serverlist.PlayerList(ip, callback) end
 
----[MENU] Queries the master server for server list.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Queries the master server for server list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.Query)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.Query)
 ---@param data table The information about what kind of servers we want. See Structures/ServerQueryData.
 function serverlist.Query(data) end
 
----[MENU] Removes the given server address from their favorites.
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Removes the given server address from their favorites.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/serverlist.RemoveServerFromFavorites)
+---[View wiki](https://wiki.facepunch.com/gmod/serverlist.RemoveServerFromFavorites)
 ---@param address string Server Address. **IP:Port like "127.0.0.1:27015"**
 function serverlist.RemoveServerFromFavorites(address) end

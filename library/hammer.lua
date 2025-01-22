@@ -3,9 +3,9 @@
 --- The hammer library.
 hammer = {}
 
----[SERVER] Sends command to Hammer, if Hammer is running with the current map loaded.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends command to Hammer, if Hammer is running with the current map loaded.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/hammer.SendCommand)
+---[View wiki](https://wiki.facepunch.com/gmod/hammer.SendCommand)
 ---@param cmd string Command to send including arguments
 ---
 --- All commands are in the format "command var1 var2 etc"

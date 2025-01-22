@@ -13,65 +13,66 @@
 ---@class DScrollPanel : DPanel
 local DScrollPanel = {}
 
----[CLIENT AND MENU] Parents the passed panel to the DScrollPanel's canvas.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Parents the passed panel to the DScrollPanel's canvas.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:AddItem)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:AddItem)
 ---@param pnl Panel The panel to add.
 function DScrollPanel:AddItem(pnl) end
 
----[CLIENT AND MENU] Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas)
 ---@return Panel # The canvas
 function DScrollPanel:GetCanvas() end
 
----[CLIENT AND MENU] Gets the [DScrollPanel](https://wiki.facepunch.com/gmod/DScrollPanel)s padding, set by [DScrollPanel:SetPadding](https://wiki.facepunch.com/gmod/DScrollPanel:SetPadding).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets the [DScrollPanel](https://wiki.facepunch.com/gmod/DScrollPanel)s padding, set by [DScrollPanel:SetPadding](https://wiki.facepunch.com/gmod/DScrollPanel:SetPadding).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetPadding)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:GetPadding)
 ---@return number # DScrollPanels padding
 function DScrollPanel:GetPadding() end
 
----[CLIENT AND MENU] Returns the vertical scroll bar of the panel.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the vertical scroll bar of the panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
 ---@return Panel # The DVScrollBar.
 function DScrollPanel:GetVBar() end
 
----[CLIENT AND MENU] Return the width of the DScrollPanel's canvas.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Return the width of the DScrollPanel's canvas.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:InnerWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:InnerWidth)
 ---@return number # The width of the DScrollPanel's canvas
 function DScrollPanel:InnerWidth() end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Used internally to rebuild the panel's children positioning. You should use [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout) instead.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:PerformLayoutInternal)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:PerformLayoutInternal)
 function DScrollPanel:PerformLayoutInternal() end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- Used internally to rebuild the panel's children positioning. You should use [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout) instead.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:Rebuild)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:Rebuild)
 function DScrollPanel:Rebuild() end
 
----[CLIENT AND MENU] Scrolls to the given child
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Scrolls to the given child
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:ScrollToChild)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:ScrollToChild)
 ---@param panel Panel The panel to scroll to, must be a child of the DScrollPanel.
 function DScrollPanel:ScrollToChild(panel) end
 
----[] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
---- Sets the canvas of the DScrollPanel.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:SetCanvas)
+--- 		Sets the canvas of the DScrollPanel.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:SetCanvas)
 ---@param canvas Panel The new canvas
 function DScrollPanel:SetCanvas(canvas) end
 
----[CLIENT AND MENU] Sets the DScrollPanel's padding. This function appears to be unused.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the DScrollPanel's padding. This function appears to be unused.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DScrollPanel:SetPadding)
+---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:SetPadding)
 ---@param padding number The padding of the DScrollPanel.
 function DScrollPanel:SetPadding(padding) end

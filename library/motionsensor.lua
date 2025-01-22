@@ -4,10 +4,10 @@
 --- **WARNING**: Kinect feature works only on 32-bit version of the game.
 motionsensor = {}
 
----[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Called to build the skeleton. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
 ---@param translator table `list.Get( "SkeletonConvertor" )` and motionsensor.ChooseBuilderFromEntity.
 ---@param player Player The player to get motion sensor positions from.
 ---@param rotation Angle Global rotation of the player?
@@ -16,41 +16,41 @@ motionsensor = {}
 ---@return table # Sensor
 function motionsensor.BuildSkeleton(translator, player, rotation) end
 
----[SHARED]
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ChooseBuilderFromEntity)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ChooseBuilderFromEntity)
 ---@param ent Entity Entity to choose builder for
 ---@return string # Chosen builder. The builders are stored in `list.Get( "SkeletonConvertor" )`
 function motionsensor.ChooseBuilderFromEntity(ent) end
 
----[CLIENT AND MENU] Returns the depth map material.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the depth map material.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.GetColourMaterial)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.GetColourMaterial)
 ---@return IMaterial # The material
 function motionsensor.GetColourMaterial() end
 
----[CLIENT] Returns players skeletal data if they are using Kinect. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns players skeletal data if they are using Kinect. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.GetSkeleton)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.GetSkeleton)
 ---@return table # The skeleton data.
 function motionsensor.GetSkeleton() end
 
----[CLIENT] Return whether a kinect is connected - and active (ie - Start has been called).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Return whether a kinect is connected - and active (ie - Start has been called).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.IsActive)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.IsActive)
 ---@return boolean # Connected and active or not
 function motionsensor.IsActive() end
 
----[CLIENT AND MENU] Returns true if we have detected that there's a kinect connected to the PC
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns true if we have detected that there's a kinect connected to the PC
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.IsAvailable)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.IsAvailable)
 ---@return boolean # Connected or not
 function motionsensor.IsAvailable() end
 
----[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Used internally by [motionsensor.ProcessAnglesTable](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAngle)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessAngle)
 ---@param translator table
 ---@param sensor table
 ---@param pos Vector
@@ -61,10 +61,10 @@ function motionsensor.IsAvailable() end
 ---@return boolean # Return nil on failure
 function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors, boneid, v) end
 
----[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable)
 ---@param translator table
 ---@param sensor table
 ---@param pos Vector
@@ -72,22 +72,22 @@ function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors
 ---@return table # Ang. If `!translator.AnglesTable` then `return {}`
 function motionsensor.ProcessAnglesTable(translator, sensor, pos, rotation) end
 
----[SHARED] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
 ---@param translator table
 ---@param sensor table
 ---@return table # Positions. if `!translator.PositionTable` then return - `{}`
 function motionsensor.ProcessPositionTable(translator, sensor) end
 
----[CLIENT AND MENU] This starts access to the kinect sensor. Note that this usually freezes the game for a couple of seconds.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) This starts access to the kinect sensor. Note that this usually freezes the game for a couple of seconds.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Start)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.Start)
 ---@return boolean # `true` if the access has been started
 function motionsensor.Start() end
 
----[CLIENT] Stops the motion capture.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Stops the motion capture.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/motionsensor.Stop)
+---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.Stop)
 function motionsensor.Stop() end

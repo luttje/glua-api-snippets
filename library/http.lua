@@ -3,7 +3,7 @@
 --- The http library allows either the server or client to communicate with external websites via HTTP, both `GET` ([http.Fetch](https://wiki.facepunch.com/gmod/http.Fetch)) and `POST` ([http.Post](https://wiki.facepunch.com/gmod/http.Post)) are supported. A more powerful & advanced method can be used via the global [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
 http = {}
 
----[SHARED AND MENU] Launches an asynchronous **GET** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Launches an asynchronous **GET** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
 ---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the [onSuccess](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) callback.
 ---
@@ -35,7 +35,7 @@ http = {}
 --- date
 --- ```
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/http.Fetch)
+---[View wiki](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
 ---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.
 ---
@@ -51,7 +51,7 @@ http = {}
 ---@param headers? table KeyValue table for headers.
 function http.Fetch(url, onSuccess, onFailure, headers) end
 
----[SHARED AND MENU] Sends an asynchronous **POST** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sends an asynchronous **POST** request to an HTTP server. Internally calls [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP).
 ---
 --- HTTP requests returning a status code >= `400` are still considered a success and will call the [onSuccess](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) callback.
 ---
@@ -64,7 +64,7 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 ---
 --- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command Line Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/http.Post)
+---[View wiki](https://wiki.facepunch.com/gmod/http.Post)
 ---@param url string The url to of the website to post.
 ---@param parameters table The post parameters (x-www-form-urlencoded) to be send to the server. **Keys and values must be strings**.
 ---@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.

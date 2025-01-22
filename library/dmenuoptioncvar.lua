@@ -14,38 +14,38 @@
 ---@class DMenuOptionCVar : DMenuOption
 local DMenuOptionCVar = {}
 
----[CLIENT] Returns the [console variable](https://wiki.facepunch.com/gmod/ConVars) used by the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the [console variable](https://wiki.facepunch.com/gmod/ConVars) used by the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetConVar)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetConVar)
 ---@return string # The ConVars used
 function DMenuOptionCVar:GetConVar() end
 
----[CLIENT] Returns the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is not checked.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is not checked.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOff)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOff)
 ---@return string # The value
 function DMenuOptionCVar:GetValueOff() end
 
----[CLIENT] Return the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is checked.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Return the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is checked.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOn)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:GetValueOn)
 ---@return string # The value
 function DMenuOptionCVar:GetValueOn() end
 
----[CLIENT] Sets the [console variable](https://wiki.facepunch.com/gmod/ConVars) to be used by [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the [console variable](https://wiki.facepunch.com/gmod/ConVars) to be used by [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetConVar)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetConVar)
 ---@param cvar string The ConVars name to set
 function DMenuOptionCVar:SetConVar(cvar) end
 
----[CLIENT] Sets the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is not checked.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is not checked.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOff)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOff)
 ---@param value string The value
 function DMenuOptionCVar:SetValueOff(value) end
 
----[CLIENT] Sets the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is checked.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the value of the [console variable](https://wiki.facepunch.com/gmod/ConVars) when the [DMenuOptionCVar](https://wiki.facepunch.com/gmod/DMenuOptionCVar) is checked.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOn)
+---[View wiki](https://wiki.facepunch.com/gmod/DMenuOptionCVar:SetValueOn)
 ---@param value string The value
 function DMenuOptionCVar:SetValueOn(value) end

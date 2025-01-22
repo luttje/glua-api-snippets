@@ -3,7 +3,7 @@
 --- The baseclass library. Used to lookup a field from a metatable.
 baseclass = {}
 
----[SHARED AND MENU] Gets the base class of an an object.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the base class of an an object.
 ---
 --- 	This is used not just by entities, but also by widgets, panels, drive modes, weapons and gamemodes (with "gamemode_" prefix).
 ---
@@ -17,12 +17,12 @@ baseclass = {}
 ---
 --- 	For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/baseclass.Get)
+---[View wiki](https://wiki.facepunch.com/gmod/baseclass.Get)
 ---@param name string The child class.
 ---@return table # The base class's meta table.
 function baseclass.Get(name) end
 
----[SHARED AND MENU] Add a new base class that can be derived by others. This is done automatically for:
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Add a new base class that can be derived by others. This is done automatically for:
 --- * widgets
 --- * panels
 --- * drive modes
@@ -32,7 +32,7 @@ function baseclass.Get(name) end
 ---
 --- For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/baseclass.Set)
+---[View wiki](https://wiki.facepunch.com/gmod/baseclass.Set)
 ---@param name string The name of this base class. Must be completely unique.
 ---@param tab table The base class.
 function baseclass.Set(name, tab) end

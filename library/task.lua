@@ -1,62 +1,64 @@
 ---@meta
 
 --- A single AI task. Returned by [ai_task.New](https://wiki.facepunch.com/gmod/ai_task.New).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Task)
 ---@class Task
 local Task = {}
 
----[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Initialises the AI task. Called by [ai_task.New](https://wiki.facepunch.com/gmod/ai_task.New).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Init)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:Init)
 function Task:Init() end
 
----[SERVER] Initialises the AI task as an engine task.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Initialises the AI task as an engine task.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:InitEngine)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:InitEngine)
 ---@param taskname string The name of the task.
 ---@param taskdata number
 function Task:InitEngine(taskname, taskdata) end
 
----[SERVER] Initialises the AI task as NPC method-based.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Initialises the AI task as NPC method-based.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:InitFunctionName)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:InitFunctionName)
 ---@param startname string The name of the NPC method to call on task start.
 ---@param runname string The name of the NPC method to call on task run.
 ---@param taskdata number
 function Task:InitFunctionName(startname, runname, taskdata) end
 
----[SERVER] Determines if the task is an engine task (`TYPE_ENGINE`, 1).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the task is an engine task (`TYPE_ENGINE`, 1).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsEngineType)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:IsEngineType)
 function Task:IsEngineType() end
 
----[SERVER] Determines if the task is an NPC method-based task (`TYPE_FNAME`, 2).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the task is an NPC method-based task (`TYPE_FNAME`, 2).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:IsFNameType)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:IsFNameType)
 function Task:IsFNameType() end
 
----[SERVER] Runs the AI task.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Runs the AI task.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:Run)
 ---@param target NPC The NPC to run the task on.
 function Task:Run(target) end
 
----[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Runs the AI task as an NPC method. This requires the task to be of type `TYPE_FNAME`.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Run_FName)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:Run_FName)
 ---@param target NPC The NPC to run the task on.
 function Task:Run_FName(target) end
 
----[SERVER] Starts the AI task.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Starts the AI task.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:Start)
 ---@param target NPC The NPC to start the task on.
 function Task:Start(target) end
 
----[SERVER] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Starts the AI task as an NPC method.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/Task:Start_FName)
+---[View wiki](https://wiki.facepunch.com/gmod/Task:Start_FName)
 ---@param target NPC The NPC to start the task on.
 function Task:Start_FName(target) end

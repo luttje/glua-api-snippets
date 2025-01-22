@@ -10,21 +10,21 @@
 ---@class ContentSidebar : DPanel
 local ContentSidebar = {}
 
----[CLIENT] Creates a Save Notification which will be shown when [SANDBOX:SpawnlistContentChanged](https://wiki.facepunch.com/gmod/SANDBOX:SpawnlistContentChanged) has been called.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a Save Notification which will be shown when [SANDBOX:SpawnlistContentChanged](https://wiki.facepunch.com/gmod/SANDBOX:SpawnlistContentChanged) has been called.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentSidebar:CreateSaveNotification)
+---[View wiki](https://wiki.facepunch.com/gmod/ContentSidebar:CreateSaveNotification)
 ---@param style string
 ---@param hookname? string A Populate Hook like PopulateEntities
 function ContentSidebar:CreateSaveNotification(style, hookname) end
 
----[CLIENT] Internally calls [ContentSidebar:EnableSearch](https://wiki.facepunch.com/gmod/ContentSidebar:EnableSearch), [ContentSidebar:CreateSaveNotification](https://wiki.facepunch.com/gmod/ContentSidebar:CreateSaveNotification) and creates a ContentSidebarToolbox which is accessible under ContentSidebar.Toolbox. Call the Hook [SANDBOX:OpenToolbox](https://wiki.facepunch.com/gmod/SANDBOX:OpenToolbox) to open the created Toolbox
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Internally calls [ContentSidebar:EnableSearch](https://wiki.facepunch.com/gmod/ContentSidebar:EnableSearch), [ContentSidebar:CreateSaveNotification](https://wiki.facepunch.com/gmod/ContentSidebar:CreateSaveNotification) and creates a ContentSidebarToolbox which is accessible under ContentSidebar.Toolbox. Call the Hook [SANDBOX:OpenToolbox](https://wiki.facepunch.com/gmod/SANDBOX:OpenToolbox) to open the created Toolbox
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify)
+---[View wiki](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify)
 function ContentSidebar:EnableModify() end
 
----[CLIENT] Creates a search bar which will be displayed over the Nodes.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a search bar which will be displayed over the Nodes.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentSidebar:EnableSearch)
+---[View wiki](https://wiki.facepunch.com/gmod/ContentSidebar:EnableSearch)
 ---@param style string
 ---@param hookname? string A Populate Hook like PopulateEntities
 function ContentSidebar:EnableSearch(style, hookname) end

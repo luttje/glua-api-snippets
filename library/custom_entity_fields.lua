@@ -5,6 +5,8 @@
 ---
 --- See also [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT)
 ---
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Custom_Entity_Fields)
 ---@class Custom_Entity_Fields
 local Custom_Entity_Fields = {}
 

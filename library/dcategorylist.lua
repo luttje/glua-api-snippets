@@ -7,20 +7,20 @@
 ---@class DCategoryList : DScrollPanel
 local DCategoryList = {}
 
----[CLIENT AND MENU] Adds a [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) to the list.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds a [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) to the list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:Add)
+---[View wiki](https://wiki.facepunch.com/gmod/DCategoryList:Add)
 ---@param categoryName string The name of the category to add.
 ---@return Panel # The created DCollapsibleCategory
 function DCategoryList:Add(categoryName) end
 
----[CLIENT AND MENU] Adds an element to the list.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds an element to the list.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:AddItem)
+---[View wiki](https://wiki.facepunch.com/gmod/DCategoryList:AddItem)
 ---@param element Panel VGUI element to add to the list.
 function DCategoryList:AddItem(element) end
 
----[CLIENT AND MENU] Calls [Panel:UnselectAll](https://wiki.facepunch.com/gmod/Panel:UnselectAll) on all child elements, if they have it.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Calls [Panel:UnselectAll](https://wiki.facepunch.com/gmod/Panel:UnselectAll) on all child elements, if they have it.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DCategoryList:UnselectAll)
+---[View wiki](https://wiki.facepunch.com/gmod/DCategoryList:UnselectAll)
 function DCategoryList:UnselectAll() end

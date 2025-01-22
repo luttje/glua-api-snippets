@@ -9,15 +9,15 @@
 ---@class ContentHeader : DLabelEditable
 local ContentHeader = {}
 
----[CLIENT] Creates a [Global.DermaMenu](https://wiki.facepunch.com/gmod/Global.DermaMenu) and adds a delete option before opening the menu
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a [Global.DermaMenu](https://wiki.facepunch.com/gmod/Global.DermaMenu) and adds a delete option before opening the menu
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentHeader:OpenMenu)
+---[View wiki](https://wiki.facepunch.com/gmod/ContentHeader:OpenMenu)
 ---@param style string
 ---@param hookname? string A Populate Hook like PopulateEntities
 function ContentHeader:OpenMenu(style, hookname) end
 
----[CLIENT]
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/ContentHeader:ToTable)
+---[View wiki](https://wiki.facepunch.com/gmod/ContentHeader:ToTable)
 ---@param bigtable table
 function ContentHeader:ToTable(bigtable) end

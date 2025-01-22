@@ -8,92 +8,92 @@
 ---@class DListView_Column : Panel
 local DListView_Column = {}
 
----[CLIENT AND MENU] Gets the index used for this column.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets the index used for this column.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetColumnID)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetColumnID)
 ---@return number # The column index of the DListView_Column.
 function DListView_Column:GetColumnID() end
 
----[CLIENT AND MENU] Returns whether the column is sorted in descending order or not.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the column is sorted in descending order or not.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetDescending)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetDescending)
 ---@return boolean # Whether the column is sorted in descending order or not.
 function DListView_Column:GetDescending() end
 
----[CLIENT AND MENU] Returns the fixed width of this column.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the fixed width of this column.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetFixedWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetFixedWidth)
 ---@return number # The fixed width.
 function DListView_Column:GetFixedWidth() end
 
----[CLIENT AND MENU] Returns the maximum width set with [DListView_Column:SetMaxWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMaxWidth).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the maximum width set with [DListView_Column:SetMaxWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMaxWidth).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetMaxWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetMaxWidth)
 ---@return number # The maximum width
 function DListView_Column:GetMaxWidth() end
 
----[CLIENT AND MENU] Returns the minimum width set with [DListView_Column:SetMinWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMinWidth).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the minimum width set with [DListView_Column:SetMinWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMinWidth).
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetMinWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetMinWidth)
 ---@return number # The minimum width
 function DListView_Column:GetMinWidth() end
 
----[CLIENT AND MENU] Returns the text alignment for the column
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the text alignment for the column
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:GetTextAlign)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetTextAlign)
 ---@return number # The direction of the content, based on the number pad. See DListView_Column:SetTextAlign.
 function DListView_Column:GetTextAlign() end
 
----[CLIENT AND MENU] Resizes the column, additionally adjusting the size of the column to the right, if any.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Resizes the column, additionally adjusting the size of the column to the right, if any.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:ResizeColumn)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:ResizeColumn)
 ---@param size number
 --- 			The amount to add to the current column's width.
 ---
 --- 			Positive values will make it wider, and negative values will make it thinner.
 function DListView_Column:ResizeColumn(size) end
 
----[CLIENT AND MENU] **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Sets the index used for this column.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetColumnID)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetColumnID)
 ---@param index number The column index of the DListView_Column.
 function DListView_Column:SetColumnID(index) end
 
----[CLIENT AND MENU] Sets whether the column is sorted in descending order or not.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether the column is sorted in descending order or not.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetDescending)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetDescending)
 ---@param desc boolean Whether the column is sorted in descending order or not.
 function DListView_Column:SetDescending(desc) end
 
----[CLIENT AND MENU] Sets the fixed width of the column.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the fixed width of the column.
 --- 		**NOTE**: Internally this will set [SetMinWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMinWidth) and [SetMaxWidth](https://wiki.facepunch.com/gmod/DListView_Column:SetMaxWidth) to the value provided
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetFixedWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetFixedWidth)
 ---@param width number The number value which will determine a fixed width.
 function DListView_Column:SetFixedWidth(width) end
 
----[CLIENT AND MENU] Sets the maximum width of a column.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the maximum width of a column.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetMaxWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetMaxWidth)
 ---@param width number The number value which will determine a maximum width.
 function DListView_Column:SetMaxWidth(width) end
 
----[CLIENT AND MENU] Sets the minimum width of a column.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the minimum width of a column.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetMinWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetMinWidth)
 ---@param width number The number value which will determine a minimum width.
 function DListView_Column:SetMinWidth(width) end
 
----[CLIENT AND MENU] Sets the text in the column's header.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text in the column's header.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetName)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetName)
 ---@param name string The new name that the column's header will use.
 function DListView_Column:SetName(name) end
 
----[CLIENT AND MENU] Sets the text alignment for the column
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text alignment for the column
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetTextAlign)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetTextAlign)
 ---@param alignment number The direction of the content, based on the number pad.
 ---
 --- |   |   |   |
@@ -103,8 +103,8 @@ function DListView_Column:SetName(name) end
 --- | 1: **bottom-left** | 2: **bottom-center** | 3: **bottom-right** |
 function DListView_Column:SetTextAlign(alignment) end
 
----[CLIENT AND MENU] Sets the width of the panel.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the width of the panel.
 ---
----[(View on wiki)](https://wiki.facepunch.com/gmod/DListView_Column:SetWidth)
+---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetWidth)
 ---@param width number The number value which will determine panel width.
 function DListView_Column:SetWidth(width) end
