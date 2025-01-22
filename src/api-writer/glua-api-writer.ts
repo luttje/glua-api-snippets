@@ -45,6 +45,7 @@ type IndexedWikiPage = {
 
 export class GluaApiWriter {
   private readonly writtenClasses: Set<string> = new Set();
+  private readonly writtenEnums: Set<string> = new Set();
   private readonly writtenLibraryGlobals: Set<string> = new Set();
   private readonly pageOverrides: Map<string, string> = new Map();
 
@@ -81,7 +82,7 @@ export class GluaApiWriter {
       let api = '';
 
       if (isClassFunction(page))
-        api += this.writeClassStart(page.parent, undefined, page.deprecated);
+        api += this.writeClassStart(page.parent, undefined, undefined, undefined, page.deprecated);
       else if (isLibraryFunction(page))
         api += this.writeLibraryGlobalFallback(page);
 
@@ -108,7 +109,7 @@ export class GluaApiWriter {
       return this.writeClassGlobal(page);
   }
 
-  private writeClassStart(className: string, parent?: string, deprecated?: string, description?: string) {
+  private writeClassStart(className: string, realm?: Realm, url?: string, parent?: string, deprecated?: string, description?: string) {
     let api: string = '';
 
     if (!this.writtenClasses.has(className)) {
@@ -116,7 +117,15 @@ export class GluaApiWriter {
       if (this.pageOverrides.has(classOverride)) {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
-        api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+        if (realm) {
+          api += `---${this.formatRealm(realm)} ${description ? `${putCommentBeforeEachLine(description)}\n` : ''}\n`;
+        } else {
+          api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+        }
+
+        if (url) {
+          api += `---\n---[View wiki](${url})\n`;
+        }
 
         if (deprecated)
           api += `---@deprecated ${removeNewlines(deprecated)}\n`;
@@ -174,11 +183,11 @@ export class GluaApiWriter {
   }
 
   private writeClassGlobal(page: TypePage) {
-    return this.writeClassStart(page.name, page.parent, page.deprecated, page.description);
+    return this.writeClassStart(page.name, page.realm, page.url, page.parent, page.deprecated, page.description);
   }
 
   private writeClassFunction(func: ClassFunction) {
-    let api: string = this.writeClassStart(func.parent, undefined, func.deprecated);
+    let api: string = this.writeClassStart(func.parent, undefined, undefined, undefined, func.deprecated);
 
     if (!func.arguments || func.arguments.length === 0) func.arguments = [{}];
     for (const argSet of func.arguments) {
@@ -206,7 +215,7 @@ export class GluaApiWriter {
   }
 
   private writePanel(panel: Panel) {
-    let api: string = this.writeClassStart(panel.name, panel.parent, panel.deprecated, panel.description);
+    let api: string = this.writeClassStart(panel.name, undefined, undefined, panel.parent, panel.deprecated, panel.description);
 
     return api;
   }
@@ -232,22 +241,32 @@ export class GluaApiWriter {
         ? _enum.items[1]?.key.includes('.')
         : _enum.items[0]?.key.includes('.');
 
+    api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+
     if (_enum.deprecated)
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     if (isContainedInTable) {
       api += `---@enum ${_enum.name}\n`;
     } else {
+      // TODO: Clean up this workaround when LuaLS supports global enumerations.
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
-      // will use @alias as a workaround
-      const validEnumerations = _enum.items.map(item => item.value)
-        .filter(value => !isNaN(Number(value)))
-        .join('|');
-      api += `---@alias ${_enum.name} ${validEnumerations}\n`;
+      // will use @alias as a workaround.
+      // However since https://wiki.facepunch.com/gmod/Enums/STENCIL defines multiple enums in one page, we need to
+      // be careful to only define an enum once.
+      // TODO: This only works because both enum definitions for STENCIL have the values 1-8. If the latter enum
+      // TODO: had different values, only the values of the first enum would be used.
+      if (!this.writtenEnums.has(_enum.name)) {
+        const validEnumerations = _enum.items.map(item => item.value)
+          .filter(value => !isNaN(Number(value)))
+          .join('|');
+        api += `---@alias ${_enum.name} ${validEnumerations}\n`;
+      }
     }
 
+    this.writtenEnums.add(_enum.name);
+
     if (isContainedInTable) {
-      api += _enum.description ? `${putCommentBeforeEachLine(_enum.description.trim(), false)}\n` : '';
       api += `${_enum.name} = {\n`;
     }
 
@@ -301,7 +320,7 @@ export class GluaApiWriter {
   }
 
   private writeStruct(struct: Struct) {
-    let api: string = this.writeClassStart(struct.name, undefined, struct.deprecated, struct.description);
+    let api: string = this.writeClassStart(struct.name, struct.realm, struct.url, undefined, struct.deprecated, struct.description);
 
     for (const field of struct.fields) {
       if (field.deprecated)
@@ -321,7 +340,7 @@ export class GluaApiWriter {
     if (!this.files.has(filePath)) this.files.set(filePath, []);
 
     pages.forEach(page => {
-      this.files.get(filePath)!.push({index: index, page: page});
+      this.files.get(filePath)!.push({ index: index, page: page });
     });
   }
 
@@ -334,13 +353,22 @@ export class GluaApiWriter {
 
     pages.sort((a, b) => a.index - b.index);
 
-      // First we write the "header" types
-      for (const page of pages.filter(x => isClass(x.page) || isLibrary(x.page) || isPanel(x.page))) {
+    // First we write the "header" types
+    for (const page of pages.filter(x => isClass(x.page) || isLibrary(x.page) || isPanel(x.page))) {
+      try {
         api += this.writePage(page.page);
+      } catch (e) {
+        console.error(`Failed to write 'header' page ${page.page.address}: ${e}`);
       }
-      for (const page of pages.filter(x => !isClass(x.page) && !isLibrary(x.page) && !isPanel(x.page))) {
+    }
+
+    for (const page of pages.filter(x => !isClass(x.page) && !isLibrary(x.page) && !isPanel(x.page))) {
+      try {
         api += this.writePage(page.page);
+      } catch (e) {
+        console.error(`Failed to write page ${page.page.address}: ${e}`);
       }
+    }
 
     return api;
   }
@@ -410,17 +438,17 @@ export class GluaApiWriter {
   private formatRealm(realm: Realm) {
     // Formats to show the image, with the realm as the alt text
     switch (realm) {
-      case 'Menu':
+      case 'menu':
         return '![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9)';
-      case 'Client':
+      case 'client':
         return '![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)';
-      case 'Server':
+      case 'server':
         return '![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)';
-      case 'Shared':
+      case 'shared':
         return '![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)';
-      case 'Client and menu':
+      case 'client and menu':
         return '![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981)';
-      case 'Shared and Menu':
+      case 'shared and menu':
         return '![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4)';
       default:
         throw new Error(`Unknown realm: ${realm}`);

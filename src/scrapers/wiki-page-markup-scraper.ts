@@ -4,7 +4,7 @@ import { AnyNode, Cheerio, CheerioAPI } from 'cheerio';
 import { Element as DOMElement } from 'domhandler';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
-export type Realm = 'Menu' | 'Client' | 'Server' | 'Shared' | 'Client and menu' | 'Shared and Menu';
+export type Realm = 'menu' | 'client' | 'server' | 'shared' | 'client and menu' | 'shared and menu';
 
 export type CommonWikiProperties = {
   type: WikiFunctionType | 'enum' | 'struct' | 'panel' | 'class' | 'library';
@@ -148,7 +148,7 @@ function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
     const $p = $(page);
     const url = $p.text();
     const text = $p.attr("text") || url;
-    $p.replaceWith( `[${text}](${url})` );
+    $p.replaceWith(`[${text}](${url})`);
   }
 
   for (const className of classBlocks) {
@@ -156,14 +156,14 @@ function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
       const $b = $(block);
       let text = markdownifyDescription($, $b).trim();
       if (className === 'internal' && text === '') text = `This is used internally - although you're able to use it you probably shouldn't.`;
-      $b.replaceWith( `**${className.toUpperCase()}**: ${text}\n` );
+      $b.replaceWith(`**${className.toUpperCase()}**: ${text}\n`);
     }
   }
 
   let description = $(e).text();
 
   // Fixup []() that use local URLs. This is not exclusive to the result of <page> conversions
-  description = description.replace(/\[([^\]]+)\]\(([^)"]+)(?: \"([^\"]+)\")?\)/g, function(match, text, url) {
+  description = description.replace(/\[([^\]]+)\]\(([^)"]+)(?: \"([^\"]+)\")?\)/g, function (match, text, url) {
     if (url.indexOf("://") == -1) {
       return `[${text}](https://wiki.facepunch.com/gmod/${url})`;
     }
@@ -180,12 +180,12 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
   let callback: FunctionCallback = undefined!;
 
   for (const node of $(e).contents()) {
-    if ( (node as DOMElement).name?.toLowerCase() === "callback") {
-      callback = <FunctionCallback>{arguments: [], returns: []};
+    if ((node as DOMElement).name?.toLowerCase() === "callback") {
+      callback = <FunctionCallback>{ arguments: [], returns: [] };
 
       for (const arg of $(node).find("arg")) {
         const $el = $(arg);
-        callback.arguments.push(<FunctionArgument> {
+        callback.arguments.push(<FunctionArgument>{
           name: $el.attr('name')!,
           type: $el.attr('type')!,
           default: $el.attr('default'),
@@ -194,7 +194,7 @@ function handleCallbackInDescription($: CheerioAPI, e: AnyNode): [string?, Funct
       }
       for (const ret of $(node).find("ret")) {
         const $el = $(ret);
-        callback.returns.push(<FunctionReturn> {
+        callback.returns.push(<FunctionReturn>{
           name: $el.attr('name')!,
           type: $el.attr('type')!,
           default: $el.attr('default'),
@@ -234,7 +234,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
    */
   public getScrapeCallback(): ScrapeCallback<WikiPage> {
     return (response: Response, content: string): WikiPage[] => {
-      const page = deserializeXml<WikiPage | null>(content, ($) => {
+      const pageOrPages = deserializeXml<WikiPage | WikiPage[] | null>(content, ($) => {
         const isEnum = $('enum').length > 0;
         const isStruct = $('structure').length > 0;
         const isFunction = $('function').length > 0;
@@ -246,7 +246,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
 
         let deprecated: string | undefined = undefined;
         if (isDeprecated && !isEnum && !isStruct) {
-          deprecated = $('deprecated').map(function() {
+          deprecated = $('deprecated').map(function () {
             const $el = $(this);
             return $el.text().trim();
           }).get().join(' - ');
@@ -255,33 +255,43 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         }
 
         if (isEnum) {
-          const items = $('items item').map(function () {
-            const $el = $(this);
-            const deprecated = $el.find('deprecated').map(function() {
-              const $el = $(this);
-              return $el.text().trim();
-            }).get().join(' - ');
+          // Some pages like https://wiki.facepunch.com/gmod/Enums/STENCIL specify multiple enums.
+          // To handle this we loop through each enum and only select values from the current enum.
+          // TODO: Are there other pages like this, like for structs?
+          const enumNodes = $('enum');
 
-            return <EnumValue>{
-              key: $el.attr('key')!,
-              value: $el.attr('value')!,
-              description: markdownifyDescription($, $el),
-              deprecated: deprecated || undefined,
+          const enums = enumNodes.map(function () {
+            const $el = $(this);
+            const items = $el.find('items item').map(function () {
+              const $el = $(this);
+              const deprecated = $el.find('deprecated').map(function () {
+                const $el = $(this);
+                return $el.text().trim();
+              }).get().join(' - ');
+
+              return <EnumValue>{
+                key: $el.attr('key')!,
+                value: $el.attr('value')!,
+                description: markdownifyDescription($, $el),
+                ...deprecated && { deprecated }
+              };
+            }).get();
+
+            return <Enum>{
+              type: 'enum',
+              name: address,
+              address: address,
+              description: markdownifyDescription($, $el.find('description')),
+              realm: $el.find('realm').text().toLowerCase() as Realm,
+              items
             };
           }).get();
 
-          return <Enum>{
-            type: 'enum',
-            name: address,
-            address: address,
-            description: markdownifyDescription($, $('description')),
-            realm: $('realm').text() as Realm,
-            items
-          };
+          return enums;
         } else if (isStruct) {
           const fields = $('fields item').map(function () {
             const $el = $(this);
-            const deprecated = $el.find('deprecated').map(function() {
+            const deprecated = $el.find('deprecated').map(function () {
               const $el = $(this);
               return $el.text().trim();
             }).get().join(' - ');
@@ -305,7 +315,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             name: address,
             address: address,
             description: markdownifyDescription($, $('structure description')),
-            realm: $('realm').text() as Realm,
+            realm: $('realm').text().toLowerCase() as Realm,
             fields,
             deprecated
           };
@@ -315,7 +325,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             name: address,
             address: address,
             description: markdownifyDescription($, $('panel description')),
-            realm: $('realm').text() as Realm,
+            realm: $('realm').text().toLowerCase() as Realm,
             parent: $('parent').text(),
             deprecated
           };
@@ -329,9 +339,9 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
           for (const argSet of $('args')) {
             const setArguments = $(argSet).find('> arg');
 
-            const arguments_ = setArguments.map(function() {
+            const arguments_ = setArguments.map(function () {
               const $el = $(this);
-              const argument = <FunctionArgument> {
+              const argument = <FunctionArgument>{
                 name: $el.attr('name')!,
                 type: $el.attr('type')!,
                 altType: $el.attr('alttype')!,
@@ -347,12 +357,12 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               return argument;
             }).get();
 
-            argumentList.push({args: arguments_});
+            argumentList.push({ args: arguments_ });
           }
 
-          const returns = $('rets ret').map(function() {
+          const returns = $('rets ret').map(function () {
             const $el = $(this);
-            const ret = <FunctionReturn> {
+            const ret = <FunctionReturn>{
               name: $el.attr('name')!,
               type: $el.attr('type')!
             };
@@ -364,20 +374,21 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             return ret;
           }).get();
 
-          const base = <Function> {
+          const realm = $('realm').text().toLowerCase().trim() as Realm;
+          const base = <Function>{
             type: mainElement.attr('type')!,
             parent: mainElement.attr('parent')!,
             name: mainElement.attr('name')!,
             address: address,
             description: markdownifyDescription($, $('description:first')),
-            realm: $('realm:first').text() as Realm,
+            realm: realm,
             arguments: argumentList,
             returns,
             deprecated
           };
 
           if (isClassFunction) {
-            return <ClassFunction> {
+            return <ClassFunction>{
               ...base,
               type: 'classfunc'
             };
@@ -387,18 +398,18 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
               (<LibraryFunction>base).dontDefineParent = true;
             }
 
-            return <LibraryFunction> {
+            return <LibraryFunction>{
               ...base,
               type: 'libraryfunc'
             };
           } else if (isHookFunction) {
-            return <HookFunction> {
+            return <HookFunction>{
               ...base,
               type: 'hook',
               isHook: 'yes'
             };
           } else if (isPanelFunction) {
-            return <PanelFunction> {
+            return <PanelFunction>{
               ...base,
               type: 'panelfunc',
               isPanelFunction: 'yes'
@@ -420,12 +431,16 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
         return null;
       });
 
-      if (!page)
+      if (!pageOrPages)
         return [];
 
-      page.url = response.url.replace(/\?format=text$/, '');
+      const pages = Array.isArray(pageOrPages) ? pageOrPages : [pageOrPages];
 
-      return [page];
+      for (const page of pages) {
+        page.url = response.url.replace(/\?format=text$/, '');
+      }
+
+      return pages;
     };
   }
 }

@@ -129,7 +129,7 @@ net.Receive( "cool_addon_client_ready", function( len, ply )
 -- Send what you need here!
 end )
 \`\`\`\n\n`,
-  realm: 'Server',
+  realm: 'server',
   arguments: [ { args: [
     {
       name: 'player',

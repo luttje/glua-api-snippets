@@ -16,7 +16,7 @@ export const json = {
   name: 'GetScheduleID',
   address: 'ai.GetScheduleID',
   description: 'Translates a schedule name to its corresponding ID.',
-  realm: 'Server',
+  realm: 'server',
   arguments: [
     { args: [ {
       name: 'sched',

@@ -15,7 +15,7 @@ export const json = {
   name: 'USE',
   address: 'USE',
   description: `\nEnumerations used by [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use).\n\nNot to be confused with [Enums/_USE](https://wiki.facepunch.com/gmod/Enums/_USE) used by [Entity:SetUseType](https://wiki.facepunch.com/gmod/Entity:SetUseType).\n`,
-  realm: 'Shared',
+  realm: 'shared',
   items: [
     {
       key: 'USE_OFF',

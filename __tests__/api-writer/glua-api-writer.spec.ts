@@ -102,7 +102,7 @@ describe('GLua API Writer', () => {
       parent: '_G',
       dontDefineParent: true,
       description: 'Explodes with an optional intensity.',
-      realm: 'Shared',
+      realm: 'shared',
       type: 'libraryfunc',
       url: 'na',
       arguments: [
@@ -156,7 +156,7 @@ describe('GLua API Writer', () => {
       name: 'MATERIAL_FOG',
       address: 'Enums/MATERIAL_FOG',
       description: 'The fog mode.',
-      realm: 'Client',
+      realm: 'client',
       items: [
         {
           key: 'MATERIAL_FOG_NONE',
@@ -180,7 +180,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---@alias MATERIAL_FOG 0|1|-2147483648\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) The fog mode.\n---@alias MATERIAL_FOG 0|1|-2147483648\n--- No fog\nMATERIAL_FOG_NONE = 0\n--- Linear fog\nMATERIAL_FOG_LINEAR = 1\nMATERIAL_FOG_LINEAR_BELOW_FOG_Z = -2147483648\n\n\n`);
   });
 
   it('should create enums for table enumerations', () => {
@@ -190,7 +190,7 @@ describe('GLua API Writer', () => {
       name: 'SCREENFADE',
       address: 'Enums/SCREENFADE',
       description: 'The screen fade mode.',
-      realm: 'Client',
+      realm: 'client',
       items: [
         {
           key: '',
@@ -224,7 +224,7 @@ describe('GLua API Writer', () => {
       ],
     });
 
-    expect(api).toEqual(`---@enum SCREENFADE\n--- The screen fade mode.\nSCREENFADE = {\n  --- Instant fade in\n  IN = 1,\n  --- Slowly fade in\n  OUT = 2,\n  MODULATE = 4,\n  --- Never disappear\n  STAYOUT = 8,\n  --- Used to purge all currently active screen fade effects...\n  --- Multiple\n  --- Lines\n  PURGE = 16,\n}\n\n`);
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) The screen fade mode.\n---@enum SCREENFADE\nSCREENFADE = {\n  --- Instant fade in\n  IN = 1,\n  --- Slowly fade in\n  OUT = 2,\n  MODULATE = 4,\n  --- Never disappear\n  STAYOUT = 8,\n  --- Used to purge all currently active screen fade effects...\n  --- Multiple\n  --- Lines\n  PURGE = 16,\n}\n\n`);
   });
 
   it('should convert table<type> to type[]', () => {
@@ -235,7 +235,7 @@ describe('GLua API Writer', () => {
       parent: 'player',
       dontDefineParent: true,
       description: 'Returns a table of all bots on the server.',
-      realm: 'Shared',
+      realm: 'shared',
       type: 'libraryfunc',
       url: 'na',
       returns: [
@@ -257,7 +257,7 @@ describe('GLua API Writer', () => {
       parent: 'player',
       dontDefineParent: true,
       description: 'Returns a table of all bots on the server.',
-      realm: 'Shared',
+      realm: 'shared',
       type: 'libraryfunc',
       url: 'na',
       returns: [
@@ -277,7 +277,7 @@ describe('GLua API Writer', () => {
     parent: 'test',
     dontDefineParent: true,
     description: 'Just for testing.',
-    realm: 'Shared',
+    realm: 'shared',
     type: 'libraryfunc',
     url: 'na',
   };
@@ -383,7 +383,7 @@ describe('GLua API Writer', () => {
       parent: 'Vector',
       dontDefineParent: true,
       description: 'Returns where on the screen the specified position vector would appear.',
-      realm: 'Client',
+      realm: 'client',
       type: 'libraryfunc',
       url: 'na',
       returns: [
@@ -406,7 +406,7 @@ describe('GLua API Writer', () => {
       parent: 'render',
       dontDefineParent: true,
       description: 'Sets the fog mode.',
-      realm: 'Client',
+      realm: 'client',
       type: 'libraryfunc',
       url: 'na',
       arguments: [
