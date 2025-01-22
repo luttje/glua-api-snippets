@@ -4,6 +4,7 @@ import { ClassFunction, Enum, HookFunction, LibraryFunction, Struct, WikiPageMar
 import { markup as hookMarkup, json as hookJson } from '../test-data/offline-sites/gmod-wiki/hook-player-initial-spawn';
 import { markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-ang-pos';
 import { markup as enumMarkup, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
+import { markup as callbackInDescriptionMarkup, json as callbackInDescriptionJson } from '../test-data/offline-sites/gmod-wiki/library-function-spawnmenu-getcontenttype';
 import fetchMock from "jest-fetch-mock";
 
 describe('GMod Wiki Page Markup Parse', () => {
@@ -64,5 +65,16 @@ describe('GMod Wiki Page Markup Parse', () => {
     const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
 
     expect(scrapeCallback(responseMock, structMarkup)).toEqual([<Struct>structJson]);
+  });
+
+  it('should handle callbacks in description', async () => {
+    fetchMock.mockResponseOnce(callbackInDescriptionMarkup);
+
+    const responseMock = <Response>{
+      url: callbackInDescriptionJson.url,
+    };
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+
+    expect(scrapeCallback(responseMock, callbackInDescriptionMarkup)).toEqual([<LibraryFunction>callbackInDescriptionJson]);
   });
 });

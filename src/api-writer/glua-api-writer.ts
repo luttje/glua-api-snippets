@@ -342,7 +342,7 @@ export class GluaApiWriter {
   }
 
   public makeApiFromPages(pages: IndexedWikiPage[]) {
-    let api = "";
+    let api = '';
 
     pages.sort((a, b) => a.index - b.index);
 
@@ -371,7 +371,7 @@ export class GluaApiWriter {
       let api = this.makeApiFromPages(pages);
 
       if (api.length > 0) {
-        fs.appendFileSync(filePath, "---@meta\n\n" + api);
+        fs.appendFileSync(filePath, '---@meta\n\n' + api);
       }
     });
   }
@@ -380,44 +380,59 @@ export class GluaApiWriter {
     if (type === 'vararg')
       return 'any';
 
-    // fun(cmd: string, args: string): string[]?
-    if (type === "function" && callback) {
-      let cbStr = `fun(`;
+    // Convert `function` type to `fun(cmd: string, args: string):(returnValueName: string[]?)`
+    if (type === 'function' && callback) {
+      let callbackString = `fun(`;
 
       for (const arg of callback.arguments || []) {
         if (!arg.name) arg.name = arg.type;
         if (arg.type === 'vararg') arg.name = '...';
 
-        cbStr += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
+        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
-      cbStr += ")";
+
+      // Remove trailing comma and space
+      if (callbackString.endsWith(', '))
+        callbackString = callbackString.substring(0, callbackString.length - 2);
+
+      callbackString += ')';
+
+      if (callback.returns?.length) {
+        callbackString += ':(';
+      }
 
       for (const ret of callback.returns || []) {
         if (!ret.name) ret.name = ret.type;
         if (ret.type === 'vararg') ret.name = '...';
 
-        cbStr += `: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
+        callbackString += `${ret.name}: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
-      if (cbStr.endsWith(", ")) cbStr = cbStr.substring(0, cbStr.length - 2);
 
-      return cbStr;
+      // Remove trailing comma and space
+      if (callbackString.endsWith(', '))
+        callbackString = callbackString.substring(0, callbackString.length - 2);
+
+      if (callback.returns?.length) {
+        callbackString += ')';
+      }
+
+      return callbackString;
     } else if (type.startsWith('table<') && !type.includes(',')) {
-      // Convert table<Player> to Player[] for LuaLS (but leave table<x, y> untouched)
+      // Convert `table<Player>` to `Player[]` for LuaLS (but leave table<x, y> untouched)
       let innerType = type.match(/<([^>]+)>/)?.[1];
 
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
 
       return `${innerType}[]`;
     } else if (type.startsWith('table{')) {
-      // Convert table{ToScreenData} structures to ToScreenData class for LuaLS
+      // Convert `table{ToScreenData}` structures to `ToScreenData` class for LuaLS
       let innerType = type.match(/{([^}]+)}/)?.[1];
 
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
 
       return innerType;
     } else if (type.startsWith('number{')) {
-      // Convert number{MATERIAL_FOG} to MATERIAL_FOG enum for LuaLS
+      // Convert `number{MATERIAL_FOG}` to `MATERIAL_FOG` enum for LuaLS
       let innerType = type.match(/{([^}]+)}/)?.[1];
 
       if (!innerType) throw new Error(`Invalid number type: ${type}`);
@@ -464,22 +479,22 @@ export class GluaApiWriter {
         // TODO: I'm assuming for now that there is no such case in the GMod API.
         // Split any existing types, append the (deprecated) alt and join them back together
         // while transforming each type to a LuaLS compatible type.
-        let types = arg.type.split("|");
+        let types = arg.type.split('|');
 
         if (arg.altType) {
           types.push(arg.altType);
         }
 
         let typesString = types.map(type => this.transformType(type, arg.callback))
-          .join("|");
+          .join('|');
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trimEnd())}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trim())}\n`;
       });
     }
 
     if (func.returns) {
       func.returns.forEach(ret => {
-        const description = putCommentBeforeEachLine(ret.description!.trimEnd());
+        const description = putCommentBeforeEachLine(ret.description!.trim());
 
         luaDocComment += `---@return `;
 

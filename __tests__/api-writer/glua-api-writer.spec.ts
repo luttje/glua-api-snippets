@@ -423,6 +423,76 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[View wiki](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
   });
 
+  it('should parse functions with callbacks correctly', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'Generate',
+      address: 'sound.Generate',
+      parent: 'sound',
+      dontDefineParent: true,
+      description: 'Creates a sound from a function.',
+      realm: 'client',
+      type: 'libraryfunc',
+      url: 'na',
+      arguments: [
+        {
+          args: [
+            {
+              name: 'indentifier',
+              type: 'string',
+              description: 'An unique identified for the sound.'
+            },
+            {
+              name: 'samplerate',
+              type: 'number',
+              description: 'The sample rate of the sound. Must be `11025`, `22050` or `44100`.'
+            },
+            {
+              name: 'length',
+              type: 'number',
+              description: 'The length in seconds of the sound to generate.'
+            },
+            {
+              name: 'callbackOrData',
+              type: 'function',
+              altType: 'table',
+              description: "A function which will be called to generate every sample on the sound.",
+              callback: {
+                arguments: [
+                  {
+                    name: 'sampleIndex',
+                    type: 'number',
+                    description: 'The current sample number.'
+                  }
+                ],
+                returns: [
+                  {
+                    name: 'sampleValue',
+                    type: 'number',
+                    description: 'The return value must be between `-1.0` and `1.0`.'
+                  },
+                  {
+                    name: 'fake',
+                    type: 'string',
+                  },
+                ],
+              },
+            },
+            {
+              name: 'loopStart',
+              type: 'number',
+              description: 'Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.',
+              default: 'nil'
+            },
+          ],
+        },
+      ],
+      returns: [],
+    });
+
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a sound from a function.\n---\n---[View wiki](na)\n---@param indentifier string An unique identified for the sound.\n---@param samplerate number The sample rate of the sound. Must be \`11025\`, \`22050\` or \`44100\`.\n---@param length number The length in seconds of the sound to generate.\n---@param callbackOrData fun(sampleIndex: number):(sampleValue: number, fake: string)|table A function which will be called to generate every sample on the sound.\n---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.\nfunction sound.Generate(indentifier, samplerate, length, callbackOrData, loopStart) end\n\n`);
+  });
+
   // it('should be able to write Annotated API files directly from wiki pages', async () => {
   //   const baseUrl = 'https://wiki.facepunch.com/gmod/GM:AcceptInput';
   //   fetchMock.mockResponseOnce(html, { url: baseUrl });

@@ -374,7 +374,7 @@ export class WikiPageMarkupScraper extends Scraper<WikiPage> {
             argumentList.push({ args: arguments_ });
           }
 
-          const returns = $('rets ret').map(function () {
+          const returns = $('rets > ret').map(function () {
             const $el = $(this);
             const ret = <FunctionReturn>{
               name: $el.attr('name')!,
