@@ -61,7 +61,7 @@ function Vehicle:GetMaxSpeed() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns some info about the vehicle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams)
----@return table # The operating params. See Structures/OperatingParams.
+---@return OperatingParams # The operating parameters.
 function Vehicle:GetOperatingParams() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the passenger of the vehicle, returns NULL if no drivers is present.
@@ -124,7 +124,7 @@ function Vehicle:GetVehicleClass() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the vehicle parameters of given vehicle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams)
----@return table # The vehicle parameters. See Structures/VehicleParams
+---@return VehicleParams # The vehicle parameters.
 function Vehicle:GetVehicleParams() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the view position and forward angle of a given passenger seat.

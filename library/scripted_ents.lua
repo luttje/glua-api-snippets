@@ -80,8 +80,7 @@ function scripted_ents.OnLoaded() end
 --- Sub-tables provided in the first argument will not carry over their metatable, and will receive a BaseClass key if the table was merged with the base's. Userdata references, which includes Vectors, Angles, Entities, etc. will not be copied.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Register)
----@param ENT table
---- 			The ENT table to register.
+---@param ENT table The ENT table to register.
 --- 			For the table's format and available options see the Structures/ENT page.
 ---@param classname string The classname to register.
 function scripted_ents.Register(ENT, classname) end

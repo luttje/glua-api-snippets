@@ -73,7 +73,7 @@ function DTree:LayoutTree() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTree:MoveChildTo)
 ---@param child Panel The node to move
----@param pos number  Unused, does nothing.
+---@param pos number Unused, does nothing.
 function DTree:MoveChildTo(child, pos) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the root [DTree_Node](https://wiki.facepunch.com/gmod/DTree_Node), the node that is the parent to all other nodes of the DTree.

@@ -85,7 +85,7 @@ function game.GetAmmoDamageType(id) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoData)
 ---@param id number ID of the ammo type to look up the data for
----@return table # The Structures/AmmoData containing all ammo data
+---@return AmmoData # The Structures/AmmoData containing all ammo data
 function game.GetAmmoData(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the ammo bullet force that is applied when an entity is hit by a bullet of given ammo type.
@@ -137,7 +137,7 @@ function game.GetAmmoPlayerDamage(id) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all ammo types currently registered.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoTypes)
----@return table # A table containing all ammo types. The keys are ammo IDs, the values are the names associated with those IDs.
+---@return table<number,string> # A table containing all ammo types. The keys are ammo IDs, the values are the names associated with those IDs.
 function game.GetAmmoTypes() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the counter of a Global State.

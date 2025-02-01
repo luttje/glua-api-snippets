@@ -11,7 +11,7 @@ local PathFollower = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
 ---@param ent Entity The entity we want to chase
----@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example on PathFollower:Compute for the default function.
+---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number):(cost: number) A function that allows you to alter the path generation. See example on PathFollower:Compute for the default function.
 ---
 --- Function argument(s):
 --- * CNavArea `area` - The area to move to.
@@ -29,7 +29,7 @@ function PathFollower:Chase(bot, ent, generator) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Compute)
 ---@param bot NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
 ---@param goal Vector The target location, the goal.
----@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number): number A function that allows you to alter the path generation. See example below for the default function.
+---@param generator? fun(area: CNavArea, fromArea: CNavArea, ladder: CNavLadder, elevator: Entity, length: number):(cost: number) A function that allows you to alter the path generation. See example below for the default function.
 ---
 --- Function argument(s):
 --- * CNavArea `area` - The area to move to.
@@ -64,7 +64,7 @@ function PathFollower:GetAge() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns all of the segments of the given path.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:GetAllSegments)
----@return table # A table of tables with Structures/PathSegment.
+---@return PathSegment # A table of tables with Structures/PathSegment.
 function PathFollower:GetAllSegments() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The closest position along the path to a position

@@ -25,8 +25,7 @@ local WorkshopFileBase = {}
 ---@param extratags table additional tags to filter the results.
 ---@param searchText string text that needs to be in the addon title. Use an empty string for none
 ---@param filter? number The filter for the results. (`enabledonly`, `disabledonly`)
----@param sort? string
---- 			How it should be sorted. If set to `nil`, it will fallback to `timeadded`. (`title`, `size`, `updated`)
+---@param sort? string How it should be sorted. If set to `nil`, it will fallback to `timeadded`. (`title`, `size`, `updated`)
 function WorkshopFileBase:Fetch(type, offset, perpage, extratags, searchText, filter, sort) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Fetches all subscriptions for the set namespace and passes the result to [WorkshopFileBase:FillFileInfo](https://wiki.facepunch.com/gmod/WorkshopFileBase:FillFileInfo).
@@ -36,11 +35,9 @@ function WorkshopFileBase:Fetch(type, offset, perpage, extratags, searchText, fi
 ---@param perpage number How many results per page should be returned.
 ---@param tags table additional tags to filter the results.
 ---@param searchText string text that needs to be in the addon title. Use an empty string for none
----@param isUGC? boolean
---- 			if true it will use engine.GetUserContent instead of engine.GetAddons
+---@param isUGC? boolean if true it will use engine.GetUserContent instead of engine.GetAddons
 ---@param filter? number The filter for the results. (`enabledonly`, `disabledonly`)
----@param sort? string
---- 			How it should be sorted. If set to `nil`, it will fallback to `timeadded`. (`title`, `size`, `updated`)
+---@param sort? string How it should be sorted. If set to `nil`, it will fallback to `timeadded`. (`title`, `size`, `updated`)
 function WorkshopFileBase:FetchSubscribed(offset, perpage, tags, searchText, isUGC, filter, sort) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Updates the set HTML panel with the newly fetched results

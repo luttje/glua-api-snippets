@@ -148,7 +148,7 @@ function util.DecalMaterial(decalName) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.Decompress)
 ---@param compressedString string The compressed string to decompress.
 ---@param maxSize? number The maximum size of uncompressed data in bytes, if greater it fails.
----@return string # The original, decompressed string or `nil` on failure or invalid input. Also returns empty string if the input string was zero length ("").
+---@return string|nil # The original, decompressed string or `nil` on failure or invalid input. Also returns empty string if the input string was zero length ("").
 function util.Decompress(compressedString, maxSize) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the distance between a line and a point in 3d space.
@@ -273,8 +273,7 @@ function util.GetModelInfo(mdl) end
 ---@param model string The full path to a model to get the visual meshes of.
 ---@param lod? number Which LOD to retrieve. 0 is the best quality, increasing the number lowers the model quaility.
 ---@param bodygroupMask? number Bodygroup combination for the model. This can be in format of `"000000"` where each number represents a bodygroup option.
----@return table #
---- 			A table of tables with the following format:
+---@return table # A table of tables with the following format:
 --- * string material - The material of the specific mesh
 --- * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
 --- * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
@@ -282,8 +281,7 @@ function util.GetModelInfo(mdl) end
 --- Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
 --- * number bone - The bone this vertex is attached to
 --- * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
----@return table #
---- 			A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents:
+---@return table # A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents:
 --- * number parent - The ID of the parent bone.
 --- * VMatrix matrix - The bone's bind transform in model (not bone) space.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
@@ -572,14 +570,12 @@ function util.IsValidRagdoll(ragdollName) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.JSONToTable)
 ---@param json string The JSON string to convert.
----@param ignoreLimits? boolean
---- 			ignore the depth and breadth limits, **use at your own risk!**.
+---@param ignoreLimits? boolean ignore the depth and breadth limits, **use at your own risk!**.
 --- 			If this is false, there is a limit of 15,000 keys total.
----@param ignoreConversions? boolean
---- 			ignore string to number conversions for table keys.
+---@param ignoreConversions? boolean ignore string to number conversions for table keys.
 ---
 --- 				if this is false, keys are converted to numbers wherever possible. This means using [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) as keys won't work.
----@return table # The table containing converted information. Returns nothing on failure.
+---@return table|nil # The table containing converted information. Returns `nil` on failure.
 function util.JSONToTable(json, ignoreLimits, ignoreConversions) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a Valve KeyValue string (typically from [util.TableToKeyValues](https://wiki.facepunch.com/gmod/util.TableToKeyValues)) to a Lua table.
@@ -850,6 +846,7 @@ function util.StringToType(str, typename) end
 --- See [util.JSONToTable](https://wiki.facepunch.com/gmod/util.JSONToTable) for the opposite function.
 ---
 --- **WARNING**: All keys are strings in the JSON format, so all keys of other types will be converted to strings!
+--- This can lead to loss of data where a number key could be converted into an already existing string key! (for example in a table like this: `{["5"] = "ok", [5] = "BBB"}`)
 ---
 --- All integers will be output as decimals (5 -> 5.0), since all numbers in Lua are internally floating point values.
 ---
@@ -940,10 +937,8 @@ function util.TraceHull(TraceData) end
 --- You can use `r_visualizetraces` set to `1` (requires `sv_cheats` set to `1`) to visualize traces in real time for debugging purposes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.TraceLine)
----@param traceConfig Trace
---- 			A table of data that configures the trace. See Structures/Trace for available options.
----@return TraceResult #
---- 			A table of information detailing where and what the trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
+---@param traceConfig Trace A table of data that configures the trace. See Structures/Trace for available options.
+---@return TraceResult # A table of information detailing where and what the trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
 ---
 --- 			For the table's format and available options see the Structures/TraceResult page.
 function util.TraceLine(traceConfig) end

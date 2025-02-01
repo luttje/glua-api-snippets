@@ -55,7 +55,7 @@ function numpad.OnUp(ply, key, name, ...) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/numpad.Register)
 ---@param id string The unique id of your action.
----@param func fun(ply: Player, ...: any): boolean? The function to be executed.
+---@param func fun(ply: Player, ...: any):(data: boolean?) The function to be executed.
 ---
 --- Function argument(s):
 --- * Player `ply` - The player who pressed the button

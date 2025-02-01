@@ -64,7 +64,7 @@ function navmesh.FindInBox(pos1, pos2) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns an integer indexed table of all [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s on the current map. If the map doesn't have a navmesh generated then this will return an empty table.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/navmesh.GetAllNavAreas)
----@return table # A table of all the CNavAreas on the current map.
+---@return CNavArea[] # A table of all the CNavAreas on the current map.
 function navmesh.GetAllNavAreas() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all blocked [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s on the current map. See [CNavArea:MarkAsBlocked](https://wiki.facepunch.com/gmod/CNavArea:MarkAsBlocked).

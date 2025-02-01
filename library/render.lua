@@ -73,20 +73,15 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 --- 			If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
----@param red number
---- 			The red Color Channel value for each pixel that is cleared.
+---@param red number The red Color Channel value for each pixel that is cleared.
 --- 			Must be an integer value in the range 0-255 (`byte`)
----@param green number
---- 			The green Color Channel value for each pixel that is cleared.
+---@param green number The green Color Channel value for each pixel that is cleared.
 --- 			Must be an integer value in the range 0-255 (`byte`)
----@param blue number
---- 			The blue Color Channel value for each pixel that is cleared.
+---@param blue number The blue Color Channel value for each pixel that is cleared.
 --- 			Must be an integer value in the range 0-255 (`byte`)
----@param alpha number
---- 			The alpha (translucency) Color Channel value for each pixel that is cleared.
+---@param alpha number The alpha (translucency) Color Channel value for each pixel that is cleared.
 --- 			Must be an integer value in the range 0-255 (`byte`)
----@param clearDepth boolean
---- 			If true, reset the Depth Buffer values.
+---@param clearDepth boolean If true, reset the Depth Buffer values.
 function render.ClearBuffersObeyStencil(red, green, blue, alpha, clearDepth) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Resets the depth buffer.
@@ -120,11 +115,9 @@ function render.ClearStencil() end
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearStencilBufferRectangle)
 ---@param startX number The X coordinate of the top left corner of the rectangle to be cleared.
 ---@param startY number The Y coordinate of the top left corner of the rectangle to be cleared.
----@param endX number
---- 			The X coordinate of the bottom right corner of the rectangle to be cleared.
+---@param endX number The X coordinate of the bottom right corner of the rectangle to be cleared.
 --- 			**Note:** Unlike some other rectangle-based functions, this is **not** the width of the rectangle.
----@param endY number
---- 			The Y coordinate of the bottom right corner of the rectangle to be cleared.
+---@param endY number The Y coordinate of the bottom right corner of the rectangle to be cleared.
 --- 			**Note:** Unlike some other rectangle-based functions, this is **not** the height of the rectangle.
 ---@param stencilBufferValue number The Stencil Buffer value that all pixels within the rectangle will be set to.
 function render.ClearStencilBufferRectangle(startX, startY, endX, endY, stencilBufferValue) end
@@ -617,8 +610,7 @@ function render.Model(settings, ent) end
 --- 		Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride)
----@param material IMaterial
---- 			The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
+---@param material IMaterial The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
 function render.ModelMaterialOverride(material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target.
@@ -641,16 +633,12 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 --- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
----@param enabled boolean
---- 			Set to `true` to enable Blend Overrides.
----@param sourceMultiplier number
---- 			This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
+---@param enabled boolean Set to `true` to enable Blend Overrides.
+---@param sourceMultiplier number This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationMultiplier number
---- 			This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
+---@param destinationMultiplier number This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param blendingFunction number
---- 			After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
+---@param blendingFunction number After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
 --- 			One of the Enums/BLENDFUNC enums.
 function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, blendingFunction) end
 
@@ -663,25 +651,18 @@ function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, 
 --- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
----@param enabled boolean
---- 			Set to `true` to enable Blend Overrides.
----@param sourceColorMultiplier number
---- 			This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
+---@param enabled boolean Set to `true` to enable Blend Overrides.
+---@param sourceColorMultiplier number This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationColorMultiplier number
---- 			This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
+---@param destinationColorMultiplier number This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param colorBlendingFunction number
---- 			After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
+---@param colorBlendingFunction number After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
 --- 			One of the Enums/BLENDFUNC enums.
----@param sourceAlphaMultiplier? number
---- 			This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+---@param sourceAlphaMultiplier? number This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationAlphaMultiplier? number
---- 			This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+---@param destinationAlphaMultiplier? number This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param alphaBlendingFunction? number
---- 			After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
+---@param alphaBlendingFunction? number After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
 function render.OverrideBlend(
 	enabled,
 	sourceColorMultiplier,
@@ -702,8 +683,7 @@ end
 --- It's important to know that while [Colors](https://wiki.facepunch.com/gmod/Global.Color) use values in the range `(0-255)`, the color and alpha values used here are normalized to the range `(0-1)` so that they can be multiplied together to produce a value that is still in the range `(0-1)`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
----@param enabled boolean
---- 			Set to `false` to disable blend overrides.
+---@param enabled boolean Set to `false` to disable blend overrides.
 function render.OverrideBlend(enabled) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture.
@@ -828,8 +808,7 @@ function render.PushFlashlightMode(enable) end
 --- **NOTE**: If the render target is bigger than the screen, rendering done with the surface library will be clipped to the screen bounds unless you call [Global.DisableClipping](https://wiki.facepunch.com/gmod/Global.DisableClipping)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushRenderTarget)
----@param texture? ITexture
---- 			The new render target to be used.
+---@param texture? ITexture The new render target to be used.
 --- 			Can be set to `nil` to push the main game frame buffer.
 ---@param x? number X origin of the viewport.
 ---@param y? number Y origin of the viewport.
@@ -915,8 +894,7 @@ function render.SetAmbientLight(r, g, b) end
 --- **NOTE**: If a material has the [$alphatest](https://developer.valvesoftware.com/wiki/$alphatest) flag enabled then this function might not behave as expected because alpha will be binary, this has a default cutoff of `0.7`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetBlend)
----@param blending number
---- 			The alpha (transparency) for upcoming draw operations.
+---@param blending number The alpha (transparency) for upcoming draw operations.
 --- 			A value in the range `(0-1)` where `0` is fully transparent, `0.5` is 50% visible, and `1` is fully opaque.
 function render.SetBlend(blending) end
 
@@ -1120,8 +1098,7 @@ function render.SetStencilEnable(newState) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation)
----@param failOperation STENCILOPERATION
---- 			The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
+---@param failOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
 function render.SetStencilFailOperation(failOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passes the pixel.
@@ -1129,8 +1106,7 @@ function render.SetStencilFailOperation(failOperation) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation)
----@param passOperation STENCILOPERATION
---- 			The Stencil Operation to be performed if the Compare Function Passes a pixel.
+---@param passOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel.
 function render.SetStencilPassOperation(passOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil system's Reference Value which is compared against each pixel's corresponding Stencil Buffer value in the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) and can be used to modify the Stencil Buffer value of those same pixels in the [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [Fail](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation), and [Z Fail](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation) operations.
@@ -1138,8 +1114,7 @@ function render.SetStencilPassOperation(passOperation) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue)
----@param referenceValue number
---- 			The value that the Compare function and the pass, fail, and z-fail operations will use.
+---@param referenceValue number The value that the Compare function and the pass, fail, and z-fail operations will use.
 --- 			This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`]
 function render.SetStencilReferenceValue(referenceValue) end
 
@@ -1152,8 +1127,7 @@ function render.SetStencilReferenceValue(referenceValue) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilTestMask)
----@param bitMask number
---- 			The 8-bit (`byte`) mask
+---@param bitMask number The 8-bit (`byte`) mask
 --- 			Set to `255` to make no change to read Stencil Buffer values.
 function render.SetStencilTestMask(bitMask) end
 
@@ -1166,8 +1140,7 @@ function render.SetStencilTestMask(bitMask) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
----@param bitMask number
---- 			The 8-bit (`byte`) mask
+---@param bitMask number The 8-bit (`byte`) mask
 --- 			Set to `255` to make no change to written Stencil Buffer values.
 function render.SetStencilWriteMask(bitMask) end
 
@@ -1176,8 +1149,7 @@ function render.SetStencilWriteMask(bitMask) end
 --- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation)
----@param zFailOperation STENCILOPERATION
---- 			The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
+---@param zFailOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
 function render.SetStencilZFailOperation(zFailOperation) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)

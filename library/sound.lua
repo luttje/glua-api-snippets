@@ -37,8 +37,7 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 --- 			You cannot override already existing ones.
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
 ---@param length number The length in seconds of the sound to generate.
----@param callbackOrData fun(sampleIndex: number): number|table
---- 			A function which will be called to generate every sample on the sound.
+---@param callbackOrData fun(sampleIndex: number):(sampleValue: number)|table A function which will be called to generate every sample on the sound.
 ---
 ---
 ---

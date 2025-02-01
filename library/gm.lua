@@ -352,8 +352,7 @@ function GM:EndEntityDriving(ent, ply) end
 ---@param data table Information about the played sound. Changes done to this table can be applied by returning `true` from this hook.
 ---
 --- See Structures/EmitSoundInfo.
----@return boolean #
---- * Return `true` to apply all changes done to the data table.
+---@return boolean # * Return `true` to apply all changes done to the data table.
 --- * Return `false` to prevent the sound from playing.
 --- * Return `nil` or nothing to play the sound without altering it.
 function GM:EntityEmitSound(data) end
@@ -367,8 +366,7 @@ function GM:EntityEmitSound(data) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityFireBullets)
 ---@param entity Entity The entity that fired the bullet
 ---@param data table The bullet data. See Structures/Bullet.
----@return boolean #
---- * Return `true` to apply all changes done to the bullet table.
+---@return boolean # * Return `true` to apply all changes done to the bullet table.
 --- * Return `false` to suppress the bullet.
 function GM:EntityFireBullets(entity, data) end
 
@@ -1364,8 +1362,7 @@ function GM:PlayerDeathSound(ply) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerDeathThink)
 ---@param ply Player The player affected in the hook.
----@return boolean #
---- This hook does not define a return value. The description below just describes how the hook library works in general.
+---@return boolean # This hook does not define a return value. The description below just describes how the hook library works in general.
 ---
 --- Return a non-nil value to prevent the current gamemode from handling this event. In the `base` gamemode, the gamemode handles player respawning in this hook. So blocking the gamemode hook will prevent player from respawning, in this specific case.
 function GM:PlayerDeathThink(ply) end
@@ -1853,10 +1850,8 @@ function GM:PostDrawViewModel(viewmodel, player, weapon) end
 --- **WARNING**: This hook is called directly from [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets). Due to this, you cannot call [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) inside this hook or an infinite loop will occur crashing the game.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets)
----@param entity Entity
---- 			The entity that fired the bullet
----@param data table
---- 			A table of data about the bullet that was fired.
+---@param entity Entity The entity that fired the bullet
+---@param data table A table of data about the bullet that was fired.
 ---
 --- 			See Structures/FiredBullet.
 ---@return boolean # Return `false` to suppress the bullet.

@@ -28,7 +28,7 @@ function spawnmenu.ActiveControlPanel() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.AddContentType)
 ---@param name string An unique name of the content type.
----@param constructor fun(container: Panel, data: table): Panel A function that is called whenever we need create a new panel for this content type.
+---@param constructor fun(container: Panel, data: table):(pnl: Panel) A function that is called whenever we need create a new panel for this content type.
 ---
 --- Function argument(s):
 --- * Panel `container` - The container/parent of the new panel from spawnmenu.CreateContentIcon
@@ -162,7 +162,7 @@ function spawnmenu.DoSaveToTextFiles(spawnlists) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.GetContentType)
 ---@param contentType string The content type name.
----@return fun(container: Panel, data: table): Panel # The panel creation function.
+---@return fun(container: Panel, data: table):(pnl: Panel) # The panel creation function.
 ---
 --- Function argument(s):
 --- * Panel `container` - The container panel to parent the created icon to.
@@ -170,7 +170,6 @@ function spawnmenu.DoSaveToTextFiles(spawnlists) end
 ---
 --- Function return value(s):
 --- * Panel `pnl` - The created panel
----@return Panel # The created panel
 function spawnmenu.GetContentType(contentType) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the list of Creation tabs. Creation tabs are added via [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab).

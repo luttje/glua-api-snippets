@@ -226,8 +226,6 @@ function net.ReadVector() end
 ---
 --- You can use the `net.Read*` functions within the message handler callback.
 ---
---- **NOTE**: The message-name is converted to lower-case so the message-names "`BigBlue`" and "`bigblue`" would be equal.
----
 --- **WARNING**: You **should** put this function **outside** of any other function or hook for it to work properly unless you know what you are doing!
 ---
 --- You **must** read information in the same order as you write it.
@@ -236,6 +234,8 @@ function net.ReadVector() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Receive)
 ---@param messageName string The message name to hook to.
+---
+--- The message-name is converted to lower-case so the message-names "`BigBlue`" and "`bigblue`" would be equal.
 ---@param callback fun(len: number, ply: Player) The function to be called if the specified message was received.
 ---
 --- Function argument(s):
@@ -252,7 +252,7 @@ function net.Send(ply) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Send)
----@param plys table A table of players to send the message to.
+---@param plys Player[] A table of players to send the message to.
 function net.Send(plys) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s)
@@ -270,7 +270,7 @@ function net.SendOmit(ply) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all except the player or players specified.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.SendOmit)
----@param plys table A table of players to **NOT** send the message to.
+---@param plys Player[] A table of players to **NOT** send the message to.
 function net.SendOmit(plys) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends current net message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all players that are in the same [Potentially Audible Set (PAS)](https://developer.valvesoftware.com/wiki/PAS) as the position, or simply said, it adds all players that can potentially hear sounds from this position.

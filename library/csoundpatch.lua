@@ -34,8 +34,7 @@ function CSoundPatch:FadeOut(seconds) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the DSP (Digital Signal Processor) effect ID for the sound.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CSoundPatch:GetDSP)
----@return number #
---- 			The numerical ID for the DSP effect currently enabled on the sound.
+---@return number # The numerical ID for the DSP effect currently enabled on the sound.
 ---
 --- 			For a list of the available IDs and their meaning, see DSP_Presets.
 function CSoundPatch:GetDSP() end
@@ -81,8 +80,7 @@ function CSoundPatch:PlayEx(volume, pitch) end
 --- Similar to [Player:SetDSP](https://wiki.facepunch.com/gmod/Player:SetDSP) but for individual sounds.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
----@param dspEffectId number
---- 			The numerical ID for the DSP effect to be enabled on the sound.
+---@param dspEffectId number The numerical ID for the DSP effect to be enabled on the sound.
 ---
 --- 			For a list of the available IDs and their meaning, see DSP_Presets.
 function CSoundPatch:SetDSP(dspEffectId) end

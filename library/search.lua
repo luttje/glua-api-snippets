@@ -6,7 +6,7 @@ search = {}
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a search result provider. For examples, see [gamemodes/sandbox/gamemode/cl_search_models.lua](https://github.com/Facepunch/garrysmod/blob/7c23addd2c35d3d046c80e3d0cb6052055eca3e2/garrysmod/gamemodes/sandbox/gamemode/cl_search_models.lua)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/search.AddProvider)
----@param provider fun(searchQuery: string): table Provider function.
+---@param provider fun(searchQuery: string):(data: table) Provider function.
 ---
 --- Function argument(s):
 --- * string `searchQuery` - The search query user has inputed.

@@ -50,7 +50,7 @@ function CRecipientFilter:GetCount() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all valid players currently in the recipient filter.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CRecipientFilter:GetPlayers)
----@return table # A table of all valid players currently in the recipient filter.
+---@return Player[] # A table of all valid players currently in the recipient filter.
 function CRecipientFilter:GetPlayers() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes all players from the recipient filter.

@@ -21,9 +21,7 @@ cookie = {}
 --- 		Does nothing if the cookie doesn't exist.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cookie.Delete)
----@param key string
----
---- 			The name of the cookie that you want to delete.
+---@param key string The name of the cookie that you want to delete.
 function cookie.Delete(key) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the value of a cookie on the client as a number.
@@ -45,10 +43,6 @@ function cookie.GetString(name, default) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates / updates a cookie in the [Database](https://wiki.facepunch.com/gmod/cookie).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cookie.Set)
----@param key string
----
---- 			The name of the cookie.
----@param value string
----
---- 			The data stored in the cookie.
+---@param key string The name of the cookie.
+---@param value string The data stored in the cookie.
 function cookie.Set(key, value) end

@@ -259,7 +259,7 @@ function CNavArea:GetIncomingConnectionDistances(dir) end
 --- See [CNavArea:GetIncomingConnectionsAtSide](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionsAtSide) for a function that returns one-way incoming connections from  only one side/direction.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnections)
----@return table # A table of all CNavAreas with one-way connection **to** this CNavArea.
+---@return CNavArea[] # A table of all CNavAreas with one-way connection **to** this CNavArea.
 ---
 --- Returns an empty table if there are no one-way incoming connections **to** this CNavArea.
 function CNavArea:GetIncomingConnections() end
@@ -369,8 +369,7 @@ function CNavArea:GetTotalCost() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns all [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s that are visible from this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetVisibleAreas)
----@return table #
---- 			A sequential table containing all CNavAreas that are visible from this CNavArea.
+---@return table # A sequential table containing all CNavAreas that are visible from this CNavArea.
 function CNavArea:GetVisibleAreas() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the elevation of this Nav Area at the given position.

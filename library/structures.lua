@@ -269,7 +269,7 @@ Bullet.Attacker = self
 --- The return value can be a table with following keys:
 --- * boolean effects - `false` to not do any of the effects.
 --- * boolean damage - `false` to not do any damage.
----@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo): table
+---@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo):(table: table)
 Bullet.Callback = nil
 
 ---The damage dealt by the bullet.
@@ -475,7 +475,7 @@ local CreationMenus = {}
 ---
 --- Function return value(s):
 --- * Panel `content` - A container panel that holds all of the content for the new tab.
----@type fun(): Panel
+---@type fun():(content: Panel)
 CreationMenus.Function = nil
 
 ---The icon material that will accompany the title of the tab.
@@ -1949,7 +1949,7 @@ PropertyAdd.PrependSpacer = false
 ---
 --- Function return value(s):
 --- * boolean `check` - Return true if the property should be shown for this entity.
----@type fun(self: table, ent: Entity, player: Player): boolean
+---@type fun(self: table, ent: Entity, player: Player):(check: boolean)
 PropertyAdd.Filter = nil
 
 ---Required for toggle properties (clientside).
@@ -1961,7 +1961,7 @@ PropertyAdd.Filter = nil
 ---
 --- Function return value(s):
 --- * boolean `check` - Return true if the property should appear checked in the UI.
----@type fun(self: table, ent: Entity, tr: table): boolean
+---@type fun(self: table, ent: Entity, tr: table):(check: boolean)
 PropertyAdd.Checked = nil
 
 ---Called **clientside** when the property is clicked
@@ -2247,7 +2247,7 @@ ServerQueryData.AppID = 4000
 ---
 --- Function return value(s):
 --- * boolean `stop` - Return `false` to stop the query.
----@type fun(ping: number, name: string, desc: string, map: string, players: number, maxplayers: number, botplayers: number, pass: boolean, lastplayed: number, address: string, gamemode: string, workshopid: number, isanon: boolean, version: string, localization: string, gmcategory: string): boolean
+---@type fun(ping: number, name: string, desc: string, map: string, players: number, maxplayers: number, botplayers: number, pass: boolean, lastplayed: number, address: string, gamemode: string, workshopid: number, isanon: boolean, version: string, localization: string, gmcategory: string):(stop: boolean)
 ServerQueryData.Callback = nil
 
 ---Called if the query has failed, called with the servers IP Address

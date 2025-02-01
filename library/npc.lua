@@ -750,6 +750,8 @@ function NPC:NavSetGoal(pos, length, dir) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a path to closest node at given position. This won't actually force the NPC to move.
 ---
+--- **NOTE**: This will call either [NPC:TaskComplete](https://wiki.facepunch.com/gmod/NPC:TaskComplete) or [NPC:TaskFail](https://wiki.facepunch.com/gmod/NPC:TaskFail) for the current schedule and task, forcing the current task to progress to next task or fail.
+---
 --- See also [NPC:NavSetRandomGoal](https://wiki.facepunch.com/gmod/NPC:NavSetRandomGoal).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:NavSetGoalPos)
@@ -758,6 +760,8 @@ function NPC:NavSetGoal(pos, length, dir) end
 function NPC:NavSetGoalPos(pos) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Set the goal target for an NPC.
+---
+--- This will call either [NPC:TaskComplete](https://wiki.facepunch.com/gmod/NPC:TaskComplete) or [NPC:TaskFail](https://wiki.facepunch.com/gmod/NPC:TaskFail) for the current schedule and task, forcing the current task to progress to next task or fail.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:NavSetGoalTarget)
 ---@param target Entity The targeted entity to set the goal to.

@@ -25,7 +25,7 @@ function permissions.EnableVoiceChat(enable) end
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns all permissions per server. Permanent permissions are stored in `settings/permissions.bin`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/permissions.GetAll)
----@return table # A table of permanent and temporary permissions granted for servers.
+---@return table<string,table> # A table of permanent and temporary permissions granted for servers.
 ---
 --- 		Example structure:
 --- ```lua

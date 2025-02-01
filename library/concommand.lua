@@ -19,8 +19,7 @@ concommand = {}
 --- * string `cmd` - The concommand string (if one callback is used for several concommands).
 --- * table `args` - A table of all string arguments.
 --- * string `argStr` - The arguments as a string.
----@param autoComplete? fun(cmd: string, argStr: string, args: table): table
---- The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
+---@param autoComplete? fun(cmd: string, argStr: string, args: table):(tbl: table) The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
 ---
 --- This only properly works on the client since it is **not** networked.
 ---

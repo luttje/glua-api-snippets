@@ -26,8 +26,7 @@ function file.Append(name, content) end
 ---[View wiki](https://wiki.facepunch.com/gmod/file.AsyncRead)
 ---@param fileName string The name of the file.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@param callback fun(fileName: string, gamePath: string, status: number, data: string)
---- A callback function that will be called when the file read operation finishes.
+---@param callback fun(fileName: string, gamePath: string, status: number, data: string) A callback function that will be called when the file read operation finishes.
 ---
 --- Function argument(s):
 --- * string `fileName` - The `fileName` argument above.

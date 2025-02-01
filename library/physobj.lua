@@ -294,7 +294,7 @@ function PhysObj:GetStress() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the surface area of the physics object in source-units². Or nil if the PhysObj is a generated sphere or box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:GetSurfaceArea)
----@return number # The surface area or nil if the PhysObj is a generated sphere or box.
+---@return number|nil # The surface area or `nil` if the PhysObj is a generated sphere or box.
 function PhysObj:GetSurfaceArea() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the absolute directional velocity of the physobject.
@@ -313,7 +313,7 @@ function PhysObj:GetVelocityAtPoint(point) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the volume in source units³. Or nil if the PhysObj is a generated sphere or box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:GetVolume)
----@return number # The volume or nil if the PhysObj is a generated sphere or box.
+---@return number|nil # The volume or `nil` if the PhysObj is a generated sphere or box.
 function PhysObj:GetVolume() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whenever the specified flag(s) is/are set.

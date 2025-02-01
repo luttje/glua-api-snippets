@@ -60,7 +60,7 @@ function player.GetBots() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByAccountID)
 ---@param accountID number The Player:AccountID to find the player by.
----@return Player # Player if one is found, false otherwise.
+---@return Player|boolean # Player if one is found, `false` otherwise.
 function player.GetByAccountID(accountID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified connection ID.
@@ -73,7 +73,7 @@ function player.GetByAccountID(accountID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByID)
 ---@param connectionID number The connection ID to find the player by.
----@return Player # Player if one is found, nil otherwise
+---@return Player|nil # Player if one is found, `nil` otherwise
 function player.GetByID(connectionID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID.
@@ -81,7 +81,7 @@ function player.GetByID(connectionID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
----@return Player|boolean # Player if one is found, false otherwise.
+---@return Player|boolean # Player if one is found, `false` otherwise.
 function player.GetBySteamID(steamID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID64.
@@ -89,7 +89,7 @@ function player.GetBySteamID(steamID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID64)
 ---@param steamID64 string The Player:SteamID64 to find the player by.
----@return Player # Player if one is found, false otherwise.
+---@return Player|boolean # Player if one is found, `false` otherwise.
 function player.GetBySteamID64(steamID64) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified uniqueID (not recommended way to identify players).
@@ -100,7 +100,7 @@ function player.GetBySteamID64(steamID64) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
----@return Player # Player if one is found, false otherwise.
+---@return Player|boolean # Player if one is found, `false` otherwise.
 ---@deprecated Use player.GetBySteamID64, player.GetBySteamID or player.GetByAccountID to get a player by a unique identifier instead.
 function player.GetByUniqueID(uniqueID) end
 
@@ -118,7 +118,7 @@ function player.GetCount() end
 --- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetHumans)
----@return table # A table containing all human (non-bot/AI) players.
+---@return Player[] # A table containing all human (non-bot/AI) players.
 function player.GetHumans() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all players on the server.
@@ -133,7 +133,7 @@ function player.GetHumans() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
----@return table # Table of all existing Player.  This is a cached copy of player.GetAll
+---@return Player[] # Table of all existing Player.  This is a cached copy of player.GetAll
 --- This table is intended to be read-only.
 ---
 --- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your player.GetAll usages may come with unintended side effects because of this.
@@ -146,8 +146,7 @@ function player.GetHumans() end
 ---
 --- table.Add(scan_ents, ents.FindByClass("ttt_decoy"))
 --- ```
----@return number #
---- 			The starting index for the table of players.
+---@return number # The starting index for the table of players.
 --- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function player.Iterator() end
 
@@ -207,7 +206,7 @@ function Player:AddFrozenPhysicsObject(ent, physobj) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:AddPlayerOption)
 ---@param name string Name of the vote
 ---@param timeout number Time until the vote expires
----@param vote_callback fun(voteNum: number): boolean The function to be run when the player presses 0-9 while a vote is active.
+---@param vote_callback fun(voteNum: number):(boolean: boolean) The function to be run when the player presses 0-9 while a vote is active.
 ---
 --- Function argument(s):
 --- * number `voteNum` - Which option the player pressed, 1-9 and 0 being the very last option.
@@ -228,6 +227,8 @@ function Player:AddPlayerOption(name, timeout, vote_callback, draw_callback) end
 function Player:AddVCDSequenceToGestureSlot(slot, sequenceId, cycle, autokill) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the player is alive.
+---
+--- Player specific implementation of [Entity:Alive](https://wiki.facepunch.com/gmod/Entity:Alive), the value is synchronized to the client.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Alive)
 ---@return boolean # Whether the player is alive
@@ -753,10 +754,8 @@ function Player:GetHoveredWidget() end
 --- 		See also: [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetHull)
----@return Vector #
---- 			The hull mins, the lowest corner of the Player's bounding box.
----@return Vector #
---- 			The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
+---@return Vector # The hull mins, the lowest corner of the Player's bounding box.
+---@return Vector # The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
 function Player:GetHull() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the minimum and maximum [Vectors](https://wiki.facepunch.com/gmod/Vector) of the [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for the [Player's](https://wiki.facepunch.com/gmod/Player) physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
@@ -764,21 +763,21 @@ function Player:GetHull() end
 --- 		See also: [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
----@return Vector #
---- 			The hull mins, the lowest corner of the Player's bounding box while crouching.
----@return Vector #
---- 			The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
+---@return Vector # The hull mins, the lowest corner of the Player's bounding box while crouching.
+---@return Vector # The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
 function Player:GetHullDuck() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the value of a client-side [ConVar](https://wiki.facepunch.com/gmod/ConVar). The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
 ---
---- **WARNING**: The returned value is truncated to 31 bytes.
+--- On client this function will return value of the local player, regardless of which player the function was called on!
 ---
---- **WARNING**: On client this function will return value of the local player, regardless of which player the function was called on!
+--- See [Player:GetInfoNum](https://wiki.facepunch.com/gmod/Player:GetInfoNum) for the same function that automatically converts the string to a number.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetInfo)
 ---@param cVarName string The name of the client-side ConVar.
 ---@return string # The value of the ConVar. Or an empty string if the convar doesn't exist.
+---
+--- The returned value is truncated to 31 bytes.
 function Player:GetInfo(cVarName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
@@ -996,13 +995,15 @@ function Player:GetUseEntity() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's user group. By default, player user groups are loaded from `garrysmod/settings/users.txt`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetUserGroup)
----@return string # The user group of the player. This will return "user" if player has no user group.
+---@return string # The user group of the player. This will return `"user"` if player has no user group.
 function Player:GetUserGroup() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the vehicle the player is driving, returns NULL ENTITY if the player is not driving.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the vehicle the player is driving.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetVehicle)
----@return Vehicle # vehicle
+---@return Vehicle # The vehicle the player is currently driving, if any.
+---
+--- Returns NULL entity if the player is not driving.
 function Player:GetVehicle() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity the player is using to see from (such as the player itself, the camera, or another entity).
@@ -1160,7 +1161,7 @@ function Player:IsAdmin() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if the player is an bot or not
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:IsBot)
----@return boolean # True if the player is a bot.
+---@return boolean # `true` if the player is a bot.
 function Player:IsBot() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns true from the point when the player is sending client info but not fully in the game until they disconnect.
@@ -1258,12 +1259,12 @@ function Player:IsTimingOut() end
 ---@return boolean # Whether the player is typing in their chat or not.
 function Player:IsTyping() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns true/false if the player is in specified group or not. See [Player:GetUserGroup](https://wiki.facepunch.com/gmod/Player:GetUserGroup) for a way to get player's usergroup.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the player is in specified group or not. See [Player:GetUserGroup](https://wiki.facepunch.com/gmod/Player:GetUserGroup) for a way to get player's user group.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:IsUserGroup)
----@param groupname string Group to check the player for.
----@return boolean # isInUserGroup
-function Player:IsUserGroup(groupname) end
+---@param groupName string Group to check the player for.
+---@return boolean # `true` if the player has the given user group.
+function Player:IsUserGroup(groupName) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns if the player can be heard by the local player.
 ---
@@ -1274,7 +1275,7 @@ function Player:IsVoiceAudible() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if the player currently walking. (`+walk` keybind)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:IsWalking)
----@return boolean # True if the player is currently walking.
+---@return boolean # `true` if the player is currently walking.
 function Player:IsWalking() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the player is using the world clicking feature, see [Panel:SetWorldClicker](https://wiki.facepunch.com/gmod/Panel:SetWorldClicker)
@@ -1362,7 +1363,7 @@ function Player:LagCompensation(lagCompensation) end
 ---@return number # Hitgroup, see Enums/HITGROUP
 function Player:LastHitGroup() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Shows "limit hit" notification in sandbox.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Shows "limit hit" notification in sandbox.
 --- **NOTE**: This function is only available in Sandbox and its derivatives.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:LimitHit)
@@ -1628,11 +1629,13 @@ function Player:SetAllowWeaponsInVehicle(allow) end
 ---@param ammoType any The ammunition type. Can be either number ammo ID or string ammo name. See Default Ammo Types for default values.
 function Player:SetAmmo(ammoCount, ammoType) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the player armor to the argument.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the player armor value.
+---
+--- See [GM:HandlePlayerArmorReduction](https://wiki.facepunch.com/gmod/GM:HandlePlayerArmorReduction) for a hook that allows manipulating what armor does.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetArmor)
----@param Amount number The amount that the player armor is going to be set to.
-function Player:SetArmor(Amount) end
+---@param amount number The amount to set the armor value of the player to.
+function Player:SetArmor(amount) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Pushes the player away from other players whenever the player inside another players' bounding box.
 ---
@@ -1644,19 +1647,21 @@ function Player:SetArmor(Amount) end
 ---@param avoidPlayers boolean Whether to avoid teammates, or not.
 function Player:SetAvoidPlayers(avoidPlayers) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Set if the player should be allowed to walk using the (default) alt key.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Set if the player should be allowed to walk using the (default) alt key. (`+walk` keybind)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetCanWalk)
----@param abletowalk boolean True allows the player to walk.
-function Player:SetCanWalk(abletowalk) end
+---@param canWalk boolean `true` allows the player to walk.
+function Player:SetCanWalk(canWalk) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets whether the player can use the HL2 suit zoom ("+zoom" bind) or not.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets whether the player can use the HL2 suit zoom (`+zoom` bind) or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetCanZoom)
 ---@param canZoom boolean Whether to make the player able or unable to zoom.
 function Player:SetCanZoom(canZoom) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the player's class id.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: Use [player_manager.SetPlayerClass](https://wiki.facepunch.com/gmod/player_manager.SetPlayerClass) instead.
+---
+--- Sets the player's class id.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetClassID)
 ---@param classID number The class id the player is being set with.
@@ -1664,7 +1669,7 @@ function Player:SetClassID(classID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the crouched walk speed multiplier.
 ---
---- Doesn't work for values above 1.
+--- Has no effect for values above 1.
 ---
 --- See also [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) and [Player:GetCrouchedWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetCrouchedWalkSpeed).
 ---
@@ -1683,8 +1688,8 @@ function Player:SetCurrentViewOffset(viewOffset) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets a player's death count
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetDeaths)
----@param deathcount number Number of deaths (positive or negative)
-function Player:SetDeaths(deathcount) end
+---@param deathCount number Number of deaths (positive or negative)
+function Player:SetDeaths(deathCount) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
@@ -1702,12 +1707,10 @@ function Player:SetDrivingEntity(drivingEntity, drivingMode) end
 --- 		To apply a DSP effect to individual sounds, see [CSoundPatch:SetDSP](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetDSP)
----@param dspEffectId number
---- 			The index of the DSP sound filter to apply.
+---@param dspEffectId number The index of the DSP sound filter to apply.
 ---
 --- 			For a list of the available IDs and their meaning, see DSP_Presets.
----@param fastReset boolean
---- 			If set to true the sound filter will be removed faster.
+---@param fastReset boolean If set to true the sound filter will be removed faster.
 ---
 --- 				**This only works clientside**
 --- 				If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
@@ -1740,8 +1743,8 @@ function Player:SetFOV(fov, time, requester) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets a player's frags (kills)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetFrags)
----@param fragcount number Number of frags (positive or negative)
-function Player:SetFrags(fragcount) end
+---@param fragCount number Number of frags (positive or negative)
+function Player:SetFrags(fragCount) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the hands entity of a player.
 ---
@@ -1765,10 +1768,8 @@ function Player:SetHoveredWidget(widget) end
 --- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetHull)
----@param mins Vector
---- 			The hull mins, the lowest corner of the Player's bounding box.
----@param maxs Vector
---- 			The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
+---@param mins Vector The hull mins, the lowest corner of the Player's bounding box.
+---@param maxs Vector The hull maxs, the highest corner of the Player's bounding box, opposite of the mins.
 function Player:SetHull(mins, maxs) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the size of the [Player's](https://wiki.facepunch.com/gmod/Player) [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
@@ -1778,10 +1779,8 @@ function Player:SetHull(mins, maxs) end
 --- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetHullDuck)
----@param mins Vector
---- 			The hull mins, the lowest corner of the Player's bounding box while crouching.
----@param maxs Vector
---- 			The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
+---@param mins Vector The hull mins, the lowest corner of the Player's bounding box while crouching.
+---@param maxs Vector The hull maxs, the highest corner of the Player's crouching bounding box, opposite of the mins.
 function Player:SetHullDuck(mins, maxs) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the jump power, eg. the velocity that will be applied to the player when they jump.
@@ -2222,10 +2221,11 @@ function Player:SwitchToDefaultWeapon() end
 function Player:Team() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the time in seconds since the player connected.
---- **NOTE**: Bots will always return value 0.
+---
+--- Bots will always return value 0.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:TimeConnected)
----@return number #
+---@return number # How long this player was connected to the server for, in seconds.
 function Player:TimeConnected() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Performs a trace hull and applies damage to the entities hit, returns the first entity hit.
@@ -2287,8 +2287,9 @@ function Player:UnLock() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UnSpectate)
 function Player:UnSpectate() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's ID.
---- You can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player)() to get the player by their ID.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's user ID. This number will always be unique, but will reset if the player reconnects. (Always increments for each connecting player)
+---
+--- You can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player) global function to get a player by their user ID.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UserID)
 ---@return number # The player's user ID
@@ -2302,13 +2303,13 @@ function Player:UserID() end
 ---@param new string The new model
 function PLAYER:ViewModelChanged(viewmodel, old, new) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Simulates a push on the client's screen. This **adds** view punch velocity, and does not touch the current view punch angle, for which you can use [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Simulates a push on the client's screen. This **adds** view punch velocity, and does not reset the current view punch angle, for which you can use [Player:SetViewPunchAngles](https://wiki.facepunch.com/gmod/Player:SetViewPunchAngles).
 ---
 --- **NOTE**: Despite being defined shared, it only functions when called server-side.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ViewPunch)
----@param PunchAngle Angle The angle in which to push the player's screen.
-function Player:ViewPunch(PunchAngle) end
+---@param punchAngle Angle The angle in which to push the player's screen.
+function Player:ViewPunch(punchAngle) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Resets the player's view punch (and the view punch velocity, read more at [Player:ViewPunch](https://wiki.facepunch.com/gmod/Player:ViewPunch)) effect back to normal.
 ---
@@ -2316,7 +2317,9 @@ function Player:ViewPunch(PunchAngle) end
 ---@param tolerance? number Reset all ViewPunch below this threshold.
 function Player:ViewPunchReset(tolerance) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the players voice volume, how loud the player's voice communication currently is, as a normal number. Doesn't work on local player unless the voice_loopback convar is set to 1.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the players voice volume, how loud the player's voice communication currently is, as a normal number.
+---
+--- Doesn't work on local player unless the `voice_loopback` convar is set to `1`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:VoiceVolume)
 ---@return number # The voice volume.

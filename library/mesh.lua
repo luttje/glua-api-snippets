@@ -13,11 +13,9 @@ function mesh.AdvanceVertex() end
 --- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
----@param primitiveType number
---- 			An enum that indicates what the format of the mesh's primitives will be.
+---@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
 --- 			For a full list of the available options, see the Enums/MATERIAL.
----@param primitiveCount number
---- 			The quantity of primitives this mesh will contain as a whole integer number.
+---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
 --- 			The expected value of this argument is dependent on the primitive type used.
 --- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
@@ -28,13 +26,10 @@ function mesh.Begin(primitiveType, primitiveCount) end
 --- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
----@param mesh IMesh
---- 			The IMesh that the created mesh will be stored in.
----@param primitiveType number
---- 			An enum that indicates what the format of the mesh's primitives will be.
+---@param mesh IMesh The IMesh that the created mesh will be stored in.
+---@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
 --- 			For a full list of the available options, see the Enums/MATERIAL.
----@param primitiveCount number
---- 			The quantity of primitives this mesh will contain as a whole integer number.
+---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
 --- 			The expected value of this argument is dependent on the primitive type used.
 --- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.

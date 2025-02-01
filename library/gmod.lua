@@ -6,5 +6,5 @@ gmod = {}
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns [GAMEMODE](https://wiki.facepunch.com/gmod/GAMEMODE).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gmod.GetGamemode)
----@return table # GAMEMODE
+---@return GM # GAMEMODE
 function gmod.GetGamemode() end

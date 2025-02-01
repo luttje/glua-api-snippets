@@ -143,10 +143,8 @@ function jit.util.funcuvname(func, index) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Previously got the address of a function from a set list of functions, but now always returns `0` as it is deprecated.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
----@param index number
---- 			This arugment is ignored.
----@return number #
---- 			Always returns `0`
+---@param index number This arugment is ignored.
+---@return number # Always returns `0`
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.ircalladdr(index) end
 

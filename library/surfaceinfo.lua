@@ -20,7 +20,7 @@ function SurfaceInfo:GetMaterial() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of vertices the brush surface is built from.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SurfaceInfo:GetVertices)
----@return table # A list of Vector points. This will usually be 4 corners of a quadrilateral in counter-clockwise order.
+---@return Vector[] # A list of Vector points. This will usually be 4 corners of a quadrilateral in counter-clockwise order.
 function SurfaceInfo:GetVertices() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the brush surface is a nodraw surface, meaning it will not be drawn by the engine.

@@ -97,10 +97,10 @@ function CTakeDamageInfo:GetDamageType() end
 ---
 --- For projectile weapons this is the projectile.
 ---
---- For a more reliable method of getting the weapon that damaged an entity, use [GetAttacker](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAttacker) with [GetActiveWeapon](https://wiki.facepunch.com/gmod/Player:GetActiveWeapon).
+--- For a more reliable method of getting the weapon that damaged an entity, use [CTakeDamageInfo:GetWeapon](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetWeapon) or [GetAttacker](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetAttacker) with [GetActiveWeapon](https://wiki.facepunch.com/gmod/Player:GetActiveWeapon).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetInflictor)
----@return Entity # The inflictor
+---@return Entity # The inflictor entity.
 function CTakeDamageInfo:GetInflictor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the maximum damage. See [CTakeDamageInfo:SetMaxDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
@@ -114,6 +114,16 @@ function CTakeDamageInfo:GetMaxDamage() end
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetReportedPosition)
 ---@return Vector # position
 function CTakeDamageInfo:GetReportedPosition() end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the inflicting weapon of the damage event, if there is any.
+---
+--- This is not necessarily a [Weapon](https://wiki.facepunch.com/gmod/Weapon) entity, but it is very likely to be one.
+---
+--- See [CTakeDamageInfo:GetInflictor](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetInflictor) for the actual entity that did the damage.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetWeapon)
+---@return Entity # The damage-inflicting weapon or NULL.
+function CTakeDamageInfo:GetWeapon() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns true if the damage was caused by a bullet.
 ---
@@ -205,7 +215,7 @@ function CTakeDamageInfo:SetDamageType(type) end
 ---
 --- For hitscan/bullet weapons this should the weapon.
 ---
---- For projectile ( rockets, etc ) weapons this should be the projectile.
+--- For projectile (rocket launchers, grenades, etc) weapons this should be the projectile and [CTakeDamageInfo:SetWeapon](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetWeapon) should be the weapon.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetInflictor)
 ---@param inflictor Entity The new inflictor.
@@ -222,6 +232,14 @@ function CTakeDamageInfo:SetMaxDamage(maxDamage) end
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetReportedPosition)
 ---@param pos Vector The location of where the damage is originating
 function CTakeDamageInfo:SetReportedPosition(pos) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the damage-inflicting weapon of the damage event.
+---
+--- This should be a [Weapon](https://wiki.facepunch.com/gmod/Weapon) entity, not a projectile. See also [CTakeDamageInfo:SetInflictor](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetInflictor).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetWeapon)
+---@param Entity Entity The damage-inflicting weapon or NULL.
+function CTakeDamageInfo:SetWeapon(Entity) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Subtracts the specified amount from the damage.
 ---

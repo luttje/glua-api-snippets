@@ -40,11 +40,9 @@ function SpawnIcon:OpenMenu() end
 --- 		Use [Panel:SetModel](https://wiki.facepunch.com/gmod/Panel:SetModel) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup)
----@param bodyGroupId number
---- 			The Body Group ID to set the active Sub Model ID for.
+---@param bodyGroupId number The Body Group ID to set the active Sub Model ID for.
 --- 			Body Group IDs start at `0`.
----@param activeSubModelId number
---- 			The Sub Model ID to set as active.
+---@param activeSubModelId number The Sub Model ID to set as active.
 --- 			Sub Model IDs start at `0`.
 function SpawnIcon:SetBodyGroup(bodyGroupId, activeSubModelId) end
 

@@ -199,7 +199,6 @@ function ents.GetMapCreatedEntity(id) end
 --- This table is intended to be read-only.
 ---
 --- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your ents.GetAll usages may come with unintended side effects because of this.
----@return number #
---- 			The starting index for the table of players.
+---@return number # The starting index for the table of players.
 --- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function ents.Iterator() end

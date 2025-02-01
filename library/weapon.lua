@@ -691,6 +691,12 @@ function WEAPON:TakeSecondaryAmmo(amount) end
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:Think)
 function WEAPON:Think() end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Alias of [Weapon:Think](https://wiki.facepunch.com/gmod/Weapon:Think).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:Tick)
+---@deprecated Use Weapon:Think instead.
+function WEAPON:Tick() end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translate a player's Activity into a weapon's activity, depending on how you want the player to be holding the weapon.
 ---
 --- For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL.

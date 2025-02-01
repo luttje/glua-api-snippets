@@ -105,12 +105,9 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 --- 			In cases where an empty [Angle](https://wiki.facepunch.com/gmod/Angle) is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Angle)
----@param pitch? number
---- 			The pitch value of the angle, in degrees.
----@param yaw? number
---- 			The yaw value of the angle, in degrees.
----@param roll? number
---- 			The roll value of the angle, in degrees.
+---@param pitch? number The pitch value of the angle, in degrees.
+---@param yaw? number The yaw value of the angle, in degrees.
+---@param roll? number The roll value of the angle, in degrees.
 ---@return Angle # The newly created Angle
 function _G.Angle(pitch, yaw, roll) end
 
@@ -121,8 +118,7 @@ function _G.Angle(pitch, yaw, roll) end
 --- 			In cases where an empty [Angle](https://wiki.facepunch.com/gmod/Angle) is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Angle)
----@param angle Angle
---- 			Creates a new Angle that is a copy of the Angle passed in.
+---@param angle Angle Creates a new Angle that is a copy of the Angle passed in.
 ---@return Angle # The newly created Angle
 function _G.Angle(angle) end
 
@@ -133,8 +129,7 @@ function _G.Angle(angle) end
 --- 			In cases where an empty [Angle](https://wiki.facepunch.com/gmod/Angle) is needed, the global variable `angle_zero` is the preferred solution instead of `Angle( 0, 0, 0 )`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Angle)
----@param angleString string
---- 			Attempts to parse the input string from the Global.print format of an Angle.
+---@param angleString string Attempts to parse the input string from the Global.print format of an Angle.
 ---
 --- 			Returns an Angle with its pitch, yaw, and roll set to `0` if the string cannot be parsed.
 ---@return Angle # The newly created Angle
@@ -460,7 +455,7 @@ function _G.CreatePhysCollideBox(mins, maxs) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CreatePhysCollidesFromModel)
 ---@param modelName string Model path to get the collision objects of.
----@return table # Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity:GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
+---@return PhysCollide[] # Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity:GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
 function _G.CreatePhysCollidesFromModel(modelName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a sound parented to the specified entity.
@@ -501,8 +496,6 @@ function _G.CreateSprite(material) end
 --- **NOTE**: This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary).
 ---
 --- This is **NOT** easy as it sounds to fix in the engine, so please refrain from posting issues about this
----
---- This returns 0 in [GM:PlayerAuthed](https://wiki.facepunch.com/gmod/GM:PlayerAuthed).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CurTime)
 ---@return number # Time synced with the game server.
@@ -991,9 +984,11 @@ function _G.EyeVector() end
 ---
 --- You can find a list of meta tables that can be retrieved with this function on [Enums/TYPE](https://wiki.facepunch.com/gmod/Enums/TYPE). The name in the description is the string to use with this function.
 ---
+--- Custom meta tables should be registered via [Global.RegisterMetaTable](https://wiki.facepunch.com/gmod/Global.RegisterMetaTable).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.FindMetaTable)
 ---@param metaName string The object type to retrieve the meta table of.
----@return table # The corresponding meta table.
+---@return table|nil # The corresponding meta table or `nil` if it doesn't exist.
 function _G.FindMetaTable(metaName) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself
@@ -1015,9 +1010,7 @@ function _G.FireAddonConflicts() end
 --- 		**NOTE**: Existing problems with the same Id will be replaced / overridden.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.FireProblem)
----@param problem Problem
----
---- 			The problem's definition.
+---@param problem Problem The problem's definition.
 function _G.FireProblem(problem) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) **INTERNAL**: Internally uses [Global.FireProblem](https://wiki.facepunch.com/gmod/Global.FireProblem) to create / fire the Problem.
@@ -1095,8 +1088,7 @@ function _G.GetAddonStatus() end
 --- 		Gets miscellaneous information from Facepunches API.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetAPIManifest)
----@param callback fun(data: string)
---- 			Callback to be called when the API request is done.
+---@param callback fun(data: string) Callback to be called when the API request is done.
 ---
 --- Function argument(s):
 --- * string `data` - JSON encoded data, see util.JSONToTable.
@@ -1452,8 +1444,7 @@ function _G.GetRenderTarget(name, width, height) end
 ---@param width number The width of the render target, must be power of 2.
 ---@param height number The height of the render target, must be power of 2.
 ---@param sizeMode number Bitflag that influences the sizing of the render target, see Enums/RT_SIZE.
----@param depthMode number
---- 	Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
+---@param depthMode number Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
 ---
 --- 		PNG's may not render to non MATERIAL_RT_DEPTH_NONE RenderTargets
 ---@param textureFlags number Bitflag that configurates the texture, see Enums/TEXTUREFLAGS.
@@ -1539,6 +1530,15 @@ function _G.HSVToColor(hue, saturation, value) end
 ---@param parameters table The request parameters. See Structures/HTTPRequest.
 ---@return boolean # `true` if we made a request, `nil` if we failed.
 function _G.HTTP(parameters) end
+
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HWB color space](https://en.wikipedia.org/wiki/HWB_color_model) (Hue-Whiteness-Blackness) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Global.HWBToColor)
+---@param hue number The hue of the color in degrees from 0-360.
+---@param whiteness number The whiteness of the color from 0-1.
+---@param blackness number The blackness of the color from 0-1.
+---@return Color # The Color created from the HWB color space.
+function _G.HWBToColor(hue, whiteness, blackness) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Executes a Lua script.
 ---
@@ -2077,7 +2077,7 @@ function _G.MsgC(...) end
 ---@param ... any List of values to print. They can be of any type and will be converted to strings with Global.tostring.
 function _G.MsgN(...) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns named color defined in resource/ClientScheme.res.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns named color defined in `resource/ClientScheme.res`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.NamedColor)
 ---@param name string Name of color
@@ -2310,6 +2310,8 @@ function _G.print(...) end
 function _G.PrintMessage(type, message) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Recursively prints the contents of a table to the console.
+---
+--- The table keys will be sorted alphabetically or numerically when printed to the console.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.PrintTable)
 ---@param tableToPrint table The table to be printed
@@ -3026,8 +3028,7 @@ function _G.TimedSin(frequency, origin, max, offset) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.tobool)
 ---@param input any The object to be converted to a boolean
----@return boolean #
---- * `false` for the boolean `false`.
+---@return boolean # * `false` for the boolean `false`.
 --- * `false` for `"false"`.
 --- * `false` for `"0"`.
 --- * `false` for numeric `0`.
@@ -3208,8 +3209,7 @@ function _G.Vector(x, y, z) end
 --- 		**WARNING**: Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See [Vector:Add](https://wiki.facepunch.com/gmod/Vector:Add).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Vector)
----@param vector Vector
---- 			Creates a new Vector that is a copy of the given Vector.
+---@param vector Vector Creates a new Vector that is a copy of the given Vector.
 ---@return Vector # The created vector object.
 function _G.Vector(vector) end
 
@@ -3217,8 +3217,7 @@ function _G.Vector(vector) end
 --- 		**WARNING**: Creating Vectors is relatively expensive when used in often running hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the vector in a variable or to use the [default vectors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available. See [Vector:Add](https://wiki.facepunch.com/gmod/Vector:Add).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Vector)
----@param vectorString string
---- 			Attempts to parse the input string from the Global.print format of an Vector.
+---@param vectorString string Attempts to parse the input string from the Global.print format of an Vector.
 ---
 --- 			Returns a Vector with its `x`, `y`, and `z` set to `0` if the string cannot be parsed.
 ---@return Vector # The created vector object.

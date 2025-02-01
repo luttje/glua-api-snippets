@@ -113,14 +113,11 @@ function math.BinToInt(string) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Basic code for Bézier-Spline algorithm.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.BSplinePoint)
----@param fraction number
---- 			A number in the range `[0,fractionMax]` which controls which location along the spline's length should be evaluated as the return value.
----@param points table
---- 			A table of Vector that form the spline.
+---@param fraction number A number in the range `[0,fractionMax]` which controls which location along the spline's length should be evaluated as the return value.
+---@param points table A table of Vector that form the spline.
 ---
 --- 			There must be **at least** 4 points.
----@param fractionMax number
---- 			The maximum value of the `fraction` argument.
+---@param fractionMax number The maximum value of the `fraction` argument.
 ---
 --- 			The most common value for this is `1`.
 ---@return Vector # The point on the Bézier curve that corresponds to the given `fraction` argument.
@@ -481,7 +478,9 @@ function math.floor(number) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the modulus of the specified values.
 ---
---- While this is similar to the % operator, **it will return a negative value if the first argument is negative**, whereas the % operator will return a `positive` value **even if the first operand is negative**.
+--- While this is similar to the `%` operator, **it will return a negative value if the first argument is negative**, whereas the % operator will return a **positive** value **even if the first operand is negative**.
+---
+--- This function is also slower than the `%` operator.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.fmod)
 ---@param base number The base value.
@@ -507,6 +506,17 @@ function math.frexp(x) end
 ---@param int number Number to be converted.
 ---@return string # Binary number string. The length of this will always be a multiple of 3.
 function math.IntToBin(int) end
+
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Checks if two floating point numbers are nearly equal.
+---
+--- This is useful to mitigate  [accuracy issues in floating point numbers](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problems). See examples below.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/math.IsNearlyEqual)
+---@param a number The first number to compare.
+---@param b number The second number to compare.
+---@param tolerance? number The maximum difference between the two numbers to consider them equal.
+---@return boolean # True if the difference between the two numbers is less than or equal to the tolerance.
+function math.IsNearlyEqual(a, b, tolerance) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Takes a normalised number and returns the floating point representation.
 ---
@@ -620,8 +630,7 @@ function math.Rand(min, max) end
 --- See also [math.Rand](https://wiki.facepunch.com/gmod/math.Rand)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.random)
----@param m? number
---- If m is the only parameter: upper limit.
+---@param m? number If m is the only parameter: upper limit.
 ---
 --- If n is also provided: lower limit.
 ---

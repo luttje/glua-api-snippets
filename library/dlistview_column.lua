@@ -47,8 +47,7 @@ function DListView_Column:GetTextAlign() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Resizes the column, additionally adjusting the size of the column to the right, if any.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:ResizeColumn)
----@param size number
---- 			The amount to add to the current column's width.
+---@param size number The amount to add to the current column's width.
 ---
 --- 			Positive values will make it wider, and negative values will make it thinner.
 function DListView_Column:ResizeColumn(size) end

@@ -243,7 +243,7 @@ function Vector:Sub(vector) end
 --- This is the opposite of [Color:ToVector](https://wiki.facepunch.com/gmod/Color:ToVector)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vector:ToColor)
----@return table # The created Color.
+---@return Color # The created Color.
 function Vector:ToColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear. A related function is [gui.ScreenToVector](https://wiki.facepunch.com/gmod/gui.ScreenToVector), which converts a 2D coordinate to a 3D direction.

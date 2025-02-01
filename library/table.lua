@@ -387,7 +387,7 @@ function table.Shuffle(target) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.sort)
 ---@param tbl table The table to sort.
----@param sorter? fun(a: any, b: any): boolean If specified, the sorting function.
+---@param sorter? fun(a: any, b: any):(result: boolean) If specified, the sorting function.
 ---
 --- Function argument(s):
 --- * any `a` - Item A to test.

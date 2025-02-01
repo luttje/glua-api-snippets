@@ -221,7 +221,7 @@ function duplicator.RegisterConstraint(name, callback, ...) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass)
 ---@param name string The ClassName of the entity you wish to register a factory for
----@param _function fun(ply: Player, ...: any): Entity The factory function you want to have called.
+---@param _function fun(ply: Player, ...: any):(ent: Entity) The factory function you want to have called.
 ---
 --- Function argument(s):
 --- * Player `ply` - The player that is spawning the entity.

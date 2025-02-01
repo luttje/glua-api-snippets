@@ -1665,7 +1665,7 @@ function Panel:PaintAt(posX, posY) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Paints the panel at its current position. To use this you must call [Panel:SetPaintedManually](https://wiki.facepunch.com/gmod/Panel:SetPaintedManually)(true).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:PaintManual)
----@param unclamp? boolean  If set, overrides panels' clipping so that it can render fully when its size is larger than the game's resolution.
+---@param unclamp? boolean If set, overrides panels' clipping so that it can render fully when its size is larger than the game's resolution.
 function Panel:PaintManual(unclamp) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called whenever the panel and all its children were drawn, return true to override the default drawing.

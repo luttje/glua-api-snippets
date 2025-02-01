@@ -179,6 +179,14 @@ function Entity:AddToMotionController(physObj) end
 ---@return Angle # The resulting aligned angle
 function Entity:AlignAngles(from, to) end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is considered alive.
+---
+--- Checks entity's internal life state variable. Does not check health, but it is generally expected the health to be 0 or below at the point of an entity being considered dead.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:Alive)
+---@return boolean # Whether the entity is considered alive.
+function Entity:Alive() end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Spawns a clientside ragdoll for the entity, positioning it in place of the original entity, and makes the entity invisible. It doesn't preserve flex values (face posing) as CSRagdolls don't support flex.
 ---
 --- It does not work on players. Use [Player:CreateRagdoll](https://wiki.facepunch.com/gmod/Player:CreateRagdoll) instead.
@@ -255,17 +263,18 @@ function ENTITY:CalcAbsolutePosition(pos, ang) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Calls all [Entity:NetworkVarNotify](https://wiki.facepunch.com/gmod/Entity:NetworkVarNotify) functions with the given new value, but doesn't change the real value.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:CallDTVarProxies)
----@param Type string The NetworkVar Type.
---- * `String`
+---@param type string The NetworkVar Type. Supported choices:
+---
+--- * `String` (up to 511 characters)
 --- * `Bool`
 --- * `Float`
 --- * `Int` (32-bit signed integer)
 --- * `Vector`
 --- * `Angle`
 --- * `Entity`
----@param index number The NetworkVar index.
+---@param slot number The NetworkVar slot. See Entity:NetworkVar for more detailed explanation.
 ---@param newValue any The new value.
-function Entity:CallDTVarProxies(Type, index, newValue) end
+function Entity:CallDTVarProxies(type, slot, newValue) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Causes a specified function to be run if the entity is removed by any means. This can later be undone by [Entity:RemoveCallOnRemove](https://wiki.facepunch.com/gmod/Entity:RemoveCallOnRemove) if you need it to not run.
 ---
@@ -519,10 +528,37 @@ function Entity:DropToFloor() end
 --- Sets up a self.dt.NAME alias for a Data Table variable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DTVar)
----@param Type string The type of the DTVar being set up. It can be one of the following: 'Int', 'Float', 'Vector', 'Angle', 'Bool', 'Entity' or 'String'
----@param ID number The ID of the DTVar. Can be between 0 and 3 for strings, 0 and 31 for everything else.
----@param Name string Name by which you will refer to DTVar. It must be a valid variable name. (No spaces!)
-function Entity:DTVar(Type, ID, Name) end
+---@param type string The type of the DTVar being set up. Supported choices:
+---
+--- * `String` (up to 511 characters)
+--- * `Bool`
+--- * `Float`
+--- * `Int` (32-bit signed integer)
+--- * `Vector`
+--- * `Angle`
+--- * `Entity`
+---@param slot number The ID of the DTVar. Can be between `0` and `3` for strings, `0` and `31` for everything else.
+---
+--- This can be omitted entirely (arguments will shift) and it will use the next available slot.
+---@param name string Name by which you will refer to DTVar. It must be a valid variable name. (No spaces!)
+function Entity:DTVar(type, slot, name) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: You should use [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) instead
+---
+--- Sets up a self.dt.NAME alias for a Data Table variable.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:DTVar)
+---@param type string The type of the DTVar being set up. Supported choices:
+---
+--- * `String` (up to 511 characters)
+--- * `Bool`
+--- * `Float`
+--- * `Int` (32-bit signed integer)
+--- * `Vector`
+--- * `Angle`
+--- * `Entity`
+---@param name string Name by which you will refer to DTVar. It must be a valid variable name. (No spaces!)
+function Entity:DTVar(type, name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound on an entity.
 ---
@@ -647,10 +683,8 @@ function Entity:EyePos() end
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:FindBodygroupByName)
----@param name string
---- 			The name to search for.
----@return number #
---- 			The Structures/BodyGroupData#id or `-1` if no Body Group has the provided name.
+---@param name string The name to search for.
+---@return number # The Structures/BodyGroupData#id or `-1` if no Body Group has the provided name.
 function Entity:FindBodygroupByName(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a transition from the given start and end sequence.
@@ -838,11 +872,9 @@ function Entity:GetBloodColor() end
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroup)
----@param bodyGroupId number
---- 			The Body Group ID to retrieve the active Sub Model ID for.
+---@param bodyGroupId number The Body Group ID to retrieve the active Sub Model ID for.
 --- 			Body Group IDs start at `0`.
----@return number #
---- 			The currently active Sub Model ID.
+---@return number # The currently active Sub Model ID.
 --- 			Sub Model IDs start at `0`.
 function Entity:GetBodygroup(bodyGroupId) end
 
@@ -850,29 +882,24 @@ function Entity:GetBodygroup(bodyGroupId) end
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroupCount)
----@param bodyGroupId number
---- 			The Body Group ID to retrieve the Sub Model count of.
+---@param bodyGroupId number The Body Group ID to retrieve the Sub Model count of.
 --- 			Body Group IDs start at `0`.
----@return number #
---- 			The number of Sub Models in the Body Group.
+---@return number # The number of Sub Models in the Body Group.
 function Entity:GetBodygroupCount(bodyGroupId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the name of the Body Group corresponding to a given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroupName)
----@param bodyGroupId number
---- 			The Body Group ID to get the name of.
----@return string #
---- 				The name of the Body Group.
+---@param bodyGroupId number The Body Group ID to get the name of.
+---@return string # The name of the Body Group.
 function Entity:GetBodygroupName(bodyGroupId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of information about each Body Group present on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups)
----@return table #
---- 			A table of Body Group information where each value is a Structures/BodyGroupData.
+---@return table # A table of Body Group information where each value is a Structures/BodyGroupData.
 function Entity:GetBodyGroups() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the contents of the specified bone.
@@ -1542,7 +1569,7 @@ function Entity:GetMaxHealth() end
 --- This also affects certain models that are edited by 3rd party programs after being compiled.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetModel)
----@return string # The entity's model. Will be a filesystem path for most models.
+---@return string|nil # The entity's model. Will be a filesystem path for most models.
 ---
 --- This will be nil for entities which cannot have models, such as point entities.
 function Entity:GetModel() end
@@ -1574,8 +1601,7 @@ function Entity:GetModelPhysBoneCount() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the models radius.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetModelRadius)
----@return number #
---- 			The radius of the model.
+---@return number # The radius of the model.
 --- 			This can return [nil](https://wiki.facepunch.com/gmod/nil) instead of a [number](https://wiki.facepunch.com/gmod/number) in some cases.
 function Entity:GetModelRadius() end
 
@@ -1803,7 +1829,7 @@ function Entity:GetNetworkedVarProxy(name) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns all the networked variables in an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNetworkedVarTable)
----@return table # Key-Value table of all networked variables.
+---@return table<string,any> # Key-Value table of all networked variables.
 ---@deprecated You should be using Entity:GetNWVarTable instead.
 function Entity:GetNetworkedVarTable() end
 
@@ -1855,8 +1881,7 @@ function ENTITY:GetNPCClass() end
 --- 		**NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNumBodyGroups)
----@return number #
---- 			The amount of Body Groups on the Entity's model.
+---@return number # The amount of Body Groups on the Entity's model.
 function Entity:GetNumBodyGroups() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the number of pose parameters this entity has.
@@ -2017,7 +2042,7 @@ function Entity:GetNWVarProxy(key) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns all the networked variables in an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNWVarTable)
----@return table # Key-Value table of all networked variables.
+---@return table<string,any> # Key-Value table of all networked variables.
 function Entity:GetNWVarTable() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves a networked vector value at specified index on the entity that is set by [Entity:SetNWVector](https://wiki.facepunch.com/gmod/Entity:SetNWVector).
@@ -2047,8 +2072,7 @@ function Entity:GetParent() end
 --- This is set by second argument of [Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent) or the **SetParentAttachment** input.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetParentAttachment)
----@return number #
---- The parented attachment/bone index
+---@return number # The parented attachment/bone index
 --- Will return bone index instead of attachment index if the **EF_FOLLOWBONE** effect is active on the entity. See [Entity:IsEffectActive](https://wiki.facepunch.com/gmod/Entity:IsEffectActive).
 function Entity:GetParentAttachment() end
 
@@ -2457,7 +2481,7 @@ function Entity:GetSubMaterial(index) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of models included into the entity's model in the .qc file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetSubModels)
----@return table # The list of models included into the entity's model in the .qc file.
+---@return table[] # The list of models included into the entity's model in the .qc file.
 function Entity:GetSubModels() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns two vectors representing the minimum and maximum extent of the entity's axis-aligned bounding box for hitbox detection. In most cases, this will return the same bounding box as [Entity:WorldSpaceAABB](https://wiki.facepunch.com/gmod/Entity:WorldSpaceAABB) unless it was changed by [Entity:SetSurroundingBounds](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBounds) or [Entity:SetSurroundingBoundsType](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBoundsType).
@@ -2472,8 +2496,7 @@ function Entity:GetSurroundingBounds() end
 --- 		For retrieving engine-based key-value pairs, see [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetTable)
----@return table #
---- 			A table of the lua data stored on the Entity, or `nil` if the Entity is NULL.
+---@return table # A table of the lua data stored on the Entity, or `nil` if the Entity is NULL.
 function Entity:GetTable() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the last trace used in the collision callbacks such as [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch), [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) and [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch).
@@ -2680,7 +2703,7 @@ function Entity:InitializeAsClientEntity() end
 ---
 --- You should only use this function over [Entity:Fire](https://wiki.facepunch.com/gmod/Entity:Fire) if you know what you are doing.
 ---
---- See also [Entity:Fire](https://wiki.facepunch.com/gmod/Entity:Fire) for a function that conforms to the internal map IO event queue and [GM:AcceptInput](https://wiki.facepunch.com/gmod/GM:AcceptInput) for a hook that can intercept inputs.
+--- See [Entity:Fire](https://wiki.facepunch.com/gmod/Entity:Fire) for a function that conforms to the internal map IO event queue and [GM:AcceptInput](https://wiki.facepunch.com/gmod/GM:AcceptInput) for a hook that can intercept inputs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Input)
 ---@param input string The name of the input to fire
@@ -3110,7 +3133,9 @@ function Entity:NearestPoint(position) end
 --- * `Entity`
 ---@param slot number Each network variable has to have a unique slot. The slot is per type - so you can have an int in slot `0`, a bool in slot `0` and a float in slot `0` etc. You can't have two ints in slot `0`, instead you would do a int in slot `0` and another int in slot `1`.
 ---
---- The max slots right now are `32` - so you should pick a number between `0` and `31`. An exception to this is strings which has a max slots of `4`.
+--- The max slots for strings `4` - so you should pick a number between `0` and `3`.
+---
+--- The max slots for everything else `32` - so you should pick a number between `0` and `31`.
 ---
 --- This can be omitted entirely (arguments will shift) and it will use the next available slot.
 ---@param name string The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it `Pos` for example).
@@ -3123,6 +3148,37 @@ function Entity:NearestPoint(position) end
 --- * The edit key lets you mark this variable as editable. See Editable Entities for more information.
 function Entity:NetworkVar(type, slot, name, extended) end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a network variable on the entity and adds Set/Get functions for it. This function should only be called in [ENTITY:SetupDataTables](https://wiki.facepunch.com/gmod/ENTITY:SetupDataTables).
+---
+--- See [Entity:NetworkVarNotify](https://wiki.facepunch.com/gmod/Entity:NetworkVarNotify) for a function to hook NetworkVar changes.
+---
+--- **NOTE**: Entity NetworkVars are influenced by the return value of [ENTITY:UpdateTransmitState](https://wiki.facepunch.com/gmod/ENTITY:UpdateTransmitState).
+--- 	So if you use the **PVS**(**default**), then the NetworkVars can be different for each client.
+---
+--- **WARNING**: Make sure to not call the SetDT* and your custom set methods on the client realm unless you know exactly what you are doing.
+---
+--- Combining this function with [util.TableToJSON](https://wiki.facepunch.com/gmod/util.TableToJSON) can also provide a way to network tables as serialized strings.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:NetworkVar)
+---@param type string Supported choices:
+---
+--- * `String` (up to 511 characters)
+--- * `Bool`
+--- * `Float`
+--- * `Int` (32-bit signed integer)
+--- * `Vector`
+--- * `Angle`
+--- * `Entity`
+---@param name string The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it `Pos` for example).
+---@param extended? table A table of extended information.
+---
+--- `KeyName`
+--- * Allows the NetworkVar to be set using Entity:SetKeyValue. This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
+---
+--- `Edit`
+--- * The edit key lets you mark this variable as editable. See Editable Entities for more information.
+function Entity:NetworkVar(type, name, extended) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Similarly to [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar), creates a network variable on the entity and adds Set/Get functions for it. This method stores it's value as a member value of a vector or an angle. This allows to go beyond the normal variable limit of [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) for `Int` and `Float` types, at the expense of `Vector` and `Angle` limit.
 ---
 --- This function should only be called in [ENTITY:SetupDataTables](https://wiki.facepunch.com/gmod/ENTITY:SetupDataTables).
@@ -3134,11 +3190,27 @@ function Entity:NetworkVar(type, slot, name, extended) end
 --- * `Vector`
 --- * `Angle`
 ---@param slot number The slot for this `Vector` or `Angle`, from `0` to `31`. See Entity:NetworkVar for more detailed explanation.
----@param element string
---- 			Which element of a `Vector` or an `Angle` to store the value on. This can be `p`, `y`, `r` for Angles, and `x`, `y`, `z` for Vectors
+---
+--- This can be omitted entirely (arguments will shift) and it will use the next available slot.
+---@param element string Which element of a `Vector` or an `Angle` to store the value on. This can be `p`, `y`, `r` for Angles, and `x`, `y`, `z` for Vectors
 ---@param name string The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it "Pos" for example).
 ---@param extended? table A table of extra information. See Entity:NetworkVar for details.
 function Entity:NetworkVarElement(type, slot, element, name, extended) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Similarly to [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar), creates a network variable on the entity and adds Set/Get functions for it. This method stores it's value as a member value of a vector or an angle. This allows to go beyond the normal variable limit of [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) for `Int` and `Float` types, at the expense of `Vector` and `Angle` limit.
+---
+--- This function should only be called in [ENTITY:SetupDataTables](https://wiki.facepunch.com/gmod/ENTITY:SetupDataTables).
+---
+--- **WARNING**: Make sure to not call the SetDT* and your custom set methods on the client realm unless you know exactly what you are doing.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:NetworkVarElement)
+---@param type string Supported choices:
+--- * `Vector`
+--- * `Angle`
+---@param element string Which element of a `Vector` or an `Angle` to store the value on. This can be `p`, `y`, `r` for Angles, and `x`, `y`, `z` for Vectors
+---@param name string The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it "Pos" for example).
+---@param extended? table A table of extra information. See Entity:NetworkVar for details.
+function Entity:NetworkVarElement(type, element, name, extended) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a callback that will execute when the given network variable changes - that is, when the `Set()` function is run.
 ---
@@ -3180,8 +3252,7 @@ function ENTITY:NextTask(sched) end
 --- This does not work with SWEPs or Nextbots.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:NextThink)
----@param timestamp number
---- 			The timestamp, relative to Global.CurTime, when the next think should occur.
+---@param timestamp number The timestamp, relative to Global.CurTime, when the next think should occur.
 function Entity:NextThink(timestamp) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the center of an entity's bounding box in local space.
@@ -3957,11 +4028,9 @@ function Entity:SetBloodColor(bloodColor) end
 --- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodygroup)
----@param bodyGroupId number
---- 			The Body Group ID to set the Sub Model ID of.
+---@param bodyGroupId number The Body Group ID to set the Sub Model ID of.
 --- 			Body Group IDs start at `0`.
----@param subModelId number
---- 			The Sub Model ID to set as active for this Body Group.
+---@param subModelId number The Sub Model ID to set as active for this Body Group.
 --- 			Sub Model IDs start at `0`.
 function Entity:SetBodygroup(bodyGroupId, subModelId) end
 
@@ -3971,8 +4040,7 @@ function Entity:SetBodygroup(bodyGroupId, subModelId) end
 --- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodyGroups)
----@param subModelIds string
---- 			The Sub Model IDs to activate for each Body Group on the Entity's model.
+---@param subModelIds string The Sub Model IDs to activate for each Body Group on the Entity's model.
 ---
 --- 			The first character corresponds with Body Group ID `0`, the second character coressponds to Body Group ID `1`, etc.
 ---
@@ -4055,7 +4123,7 @@ function Entity:SetColor(color) end
 ---@param a number
 function Entity:SetColor4Part(r, g, b, a) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the creator of the Entity. This is set automatically in Sandbox gamemode when spawning SENTs, but is never used/read by default.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the creator of this entity. This is set automatically in Sandbox gamemode when spawning SENTs, but is never used/read by default.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetCreator)
 ---@param ply Player The creator
@@ -5200,7 +5268,7 @@ function Entity:SetPredictable(setPredictable) end
 --- [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale) and other flex/bone manipulation functions will create a child entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetPreventTransmit)
----@param player Player|CRecipientFilter The player to stop networking the entity to. Can also be a CRecipientFilter or a table as of March 2024 to affect multiple players at once.
+---@param player Player|CRecipientFilter|Player[] The player to stop networking the entity to. Can also be a CRecipientFilter or a table as of March 2024 to affect multiple players at once.
 ---@param stopTransmitting boolean true to stop the entity from networking, false to make it network again.
 function Entity:SetPreventTransmit(player, stopTransmitting) end
 
@@ -5720,8 +5788,7 @@ function ENTITY:TaskTime() end
 ---@param isbox boolean Is the trace a hull trace?
 ---@param extents Vector Size of the hull trace, with the center of the Bounding Box being `0, 0, 0`, so mins are `-extents`, and maxs are `extents`.
 ---@param mask number The Enums/CONTENTS mask.
----@return table #
---- Returning a `table` will allow you to override trace results. Table should contain the following keys: (All keys fallback to the original trace value)
+---@return table # Returning a `table` will allow you to override trace results. Table should contain the following keys: (All keys fallback to the original trace value)
 --- * Vector `HitPos` - The new hit position of the trace.
 --- * number `Fraction` - A number from `0` to `1`, describing how far the trace went from its origin point, `1` = did not hit.
 ---   * Could be calculated like so : `Fraction = ( startpos + delta ):Length() / myCustomHitPos:Length()`
@@ -5783,25 +5850,13 @@ function ENTITY:TranslateActivity(act) end
 ---@return number # The PhysObj ID of the given bone to be used with Entity:GetPhysicsObjectNum or `-1` if we cannot translate for some reason, such as a model bone having no physics object associated with it.
 function Entity:TranslateBoneToPhysBone(boneID) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called by the engine to alter NPC's final position to reach its enemy or target.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called by the engine to alter NPC's final position to reach its enemy or target. This is called twice for `GOALTYPE_PATHCORNER`; first is for the first path_corner and second for the next connected path_corner.
 ---
 --- **NOTE**: This hook only exists for `ai` type SENTs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:TranslateNavGoal)
----@param enemy? Entity The enemy being chased.
----@param currentGoal? Vector The enemy's chase position.
----@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
----
---- Do not return anything to not override.
-function ENTITY:TranslateNavGoal(enemy, currentGoal) end
-
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called by the engine to alter NPC's final position to reach its enemy or target.
----
---- **NOTE**: This hook only exists for `ai` type SENTs.
----
----[View wiki](https://wiki.facepunch.com/gmod/ENTITY:TranslateNavGoal)
----@param target Entity The path_corner in query.
----@param currentGoal Vector path_corner's origin.
+---@param target? NPC|Entity The enemy being chased or the path_corner in query.
+---@param currentGoal? Vector The target's origin.
 ---@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
 ---
 --- Do not return anything to not override.
