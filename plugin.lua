@@ -44,16 +44,7 @@ function OnSetText(uri, text)
 	---@type diff[]
 	local diffs = {}
 
-	-- Replace preprocessor keyword DEFINE_BASECLASS. The preprocessor is not smart enough, so this is text patching.
-	for start, finish in text:gmatch("()DEFINE_BASECLASS()") do
-		diffs[#diffs+1] = {
-			---@cast start integer
-			start = start,
-			finish = finish - 1,
-			text = "local BaseClass = baseclass.Get",
-		}
-	end
-
+	-- This should be the first diff, so that when the start positions match, it doesn't break the entire file.
 	-- TODO: Do real line insert if its possible, instead of text patching.
 	-- Detect "scripted" scope by folder and localize its global table to @class annotation.
 	local global = GetScopedClass(uri)
@@ -62,6 +53,16 @@ function OnSetText(uri, text)
 			start = 1,
 			finish = 0,
 			text = "local " .. global .. "\n\n"
+		}
+	end
+
+	-- Replace preprocessor keyword DEFINE_BASECLASS. The preprocessor is not smart enough, so this is text patching.
+	for start, finish in text:gmatch("()DEFINE_BASECLASS()") do
+		diffs[#diffs+1] = {
+			---@cast start integer
+			start = start,
+			finish = finish - 1,
+			text = "local BaseClass = baseclass.Get",
 		}
 	end
 
