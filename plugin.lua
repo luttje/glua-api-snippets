@@ -7,7 +7,8 @@ local helper = require "plugins.astHelper"
 local scriptedScopes = {
 	{ global = "ENT",    folder = "entities" },
 	{ global = "SWEP",   folder = "weapons" },
-	{ global = "EFFECT", folder = "effects" }
+	{ global = "EFFECT", folder = "effects" },
+	{ global = "TOOL",   folder = "weapons/gmod_tool/stools" }
 }
 
 ---@param uri string
