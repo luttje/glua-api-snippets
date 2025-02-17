@@ -6,7 +6,7 @@
 [![Test Coverage Status](https://coveralls.io/repos/github/luttje/glua-api-snippets/badge.svg?branch=main)](https://coveralls.io/github/luttje/glua-api-snippets?branch=main)
 [![All Contributors](https://img.shields.io/github/all-contributors/luttje/glua-api-snippets?color=ee8449&style=flat-square)](#contributors)
 
-This repository scrapes the Garry's Mod Lua API and generates annotated code snippets that will help provide autocompletion for Lua in editors like VSCode, NeoVim and more.
+This repository scrapes the Garry's Mod Lua API and generates annotated code snippets that will help provide autocompletion for Lua in editors like VSCode, Neovim and more.
 
 <div align="center">
 
@@ -22,13 +22,9 @@ To get autocompletion for the Garry's Mod Lua API in your Garry's Mod projects, 
 
   * [Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
   
-  * [NeoVim Configuration](https://github.com/LuaLS/lua-language-server#neovim)
+  * [Neovim Configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
   
 **Then** download/install our GLua API Definitions for the Lua Language Server. This process varies depending on your editor:
-
-  * [Visual Studio Code](#visual-studio-code)
-  
-  * [NeoVim](#neovim)
 
 ### Visual Studio Code
 
@@ -43,7 +39,7 @@ Installing our GLua API Definitions for the Lua Language Server in Visual Studio
 ![VSCode editor command suggestion showing: Lua: Open Addon Manager ...](docs/lls-addon-manager-command.jpg)
 
 </div>
-    
+
 3. Search for the **Garry's Mod** addon and **`Enable`** it:
 
 <div align="center">
@@ -52,11 +48,44 @@ Installing our GLua API Definitions for the Lua Language Server in Visual Studio
 
 </div>
 
-### NeoVim
+### Neovim
 
-1. Clone (or download and unzip) [our `lua-language-server-addon` branch](https://github.com/luttje/glua-api-snippets/tree/lua-language-server-addon)
+1. Setup a folder for storing Lua Language Server addons (e.g. `~/.cache/luals/`) and create `addonManager/addons/garrysmod/module` folders inside it
 
-2. Follow [the instructions in the Lua Language Server documentation](https://luals.github.io/wiki/addons/#installing-addons) and point `workspace.userThirdParty` to where you placed the `lua-language-server-addon` branch
+> [!NOTE]
+>
+> If you switch between Neovim and VSCode regularly, you probably want to use VSCode's directory, which is `~/AppData/Roaming/Code/User/globalStorage/sumneko.lua` on Windows and `~/.config/Code/User/globalStorage/sumneko.lua` on Linux
+
+2. Clone (or download and unzip) [our `lua-language-server-addon` branch](https://github.com/luttje/glua-api-snippets/tree/lua-language-server-addon) into the `garrysmod/module` folder
+
+3. In your Neovim config where you call `lspconfig.lua_ls.setup`, add the following to the table
+
+```lua
+before_init = function(init_params, config)
+    init_params.initializationOptions = init_params.initializationOptions or {}
+    init_params.initializationOptions.storagePath = "~/.cache/luals"
+end
+```
+
+### Example `.luarc.json` for projects
+
+```json
+{
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "runtime.version": "LuaJIT",
+    "runtime.special": {
+        "IncludeCS": "dofile",
+        "include": "dofile"
+    },
+    "runtime.nonstandardSymbol": ["!", "!=", "&&", "||", "//", "/**/", "continue"],
+    "workspace.library": ["${addons}/garrysmod/module/library"],
+    "workspace.checkThirdParty": false
+}
+```
+
+> [!WARNING]
+>
+> The VSCode extension [currently does not automatically install addons](https://github.com/LuaLS/vscode-lua/issues/159). If a user that does not have this addon installed already opens a project that has this `.luarc.json` present, they will have to open the Addon Manager and click Disable and Enable on this addon for it to install the addon properly.
 
 ## 📅 Automatically up-to-date
 
