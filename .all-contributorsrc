@@ -90,6 +90,15 @@
         "ideas",
         "bug"
       ]
+    },
+    {
+      "login": "Cynosphere",
+      "name": "Cynthia Foxwell",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1606710?v=4",
+      "profile": "https://c7.pm",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }
