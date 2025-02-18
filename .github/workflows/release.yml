@@ -106,7 +106,8 @@ jobs:
           # Increment the tag, based on the previous tag (v0001, v0002, ...)
           lastTag=$(git tag -l --sort=-v:refname | grep -E "^v[0-9]{4}$" | head -n 1)
           lastTagNumber=${lastTag:1}
-          newTagNumber=$((lastTagNumber + 1))
+          # Force base 10 for numbers, even if they lead with zero (which would normally be considered octal)
+          newTagNumber=$(( 10#$lastTagNumber + 1 ))
           newTag="v$(printf "%04d" $newTagNumber)"
           git tag $newTag
 
