@@ -644,7 +644,7 @@ function ENTITY:EngineScheduleFinish() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:EntIndex)
 ---@return number # The index of the entity.
 ---
---- -1 for clientside-only or 0 for serverside-only entities.
+--- `-1` for clientside-only or `0` for serverside-only entities.
 function Entity:EntIndex() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when an NPC's expression has finished.
@@ -718,7 +718,7 @@ function Entity:Fire(input, param, delay, activator, caller) end
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:FireAnimationEvent)
 ---@param pos Vector Position of the effect
 ---@param ang Angle Angle of the effect
----@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
+---@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events). Only event IDs above 5000 will appear in this hook. (Are considered the "new" system in-engine)
 ---@param name string Name of the event
 ---@return boolean # Return true to disable the effect
 function ENTITY:FireAnimationEvent(pos, ang, event, name) end
@@ -850,8 +850,8 @@ function Entity:GetAttachments() end
 --- **NOTE**: "ai" base only
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:GetAttackSpread)
----@param wep Entity The weapon being used by the NPC.
----@param target Entity The target the NPC is attacking
+---@param wep Weapon The weapon being used by the NPC.
+---@param target NPC The target the NPC is attacking
 ---@return number # The number of degrees of inaccuracy in the NPC's attack.
 function ENTITY:GetAttackSpread(wep, target) end
 
@@ -943,6 +943,8 @@ function Entity:GetBoneCount() end
 function Entity:GetBoneMatrix(boneID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns name of given bone id.
+---
+--- 	See [Entity:LookupBone](https://wiki.facepunch.com/gmod/Entity:LookupBone) for the inverse of this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBoneName)
 ---@param index number ID of bone to lookup name of, starting at index 0.
@@ -1080,7 +1082,7 @@ function Entity:GetCollisionGroup() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the color the entity is set to.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetColor)
----@return table # The color of the entity as a Color.
+---@return Color # The color of the entity as a Color.
 function Entity:GetColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the color the entity is set to without using a color object.
@@ -1843,6 +1845,7 @@ function Entity:GetNetworkedVarTable() end
 function Entity:GetNetworkedVector(key, fallback) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets networked origin for entity.
+--- 		**NOTE**: On the Client, this seems to return the position relative to the parent (if it has one). On the server-side this will return what you expect even if it has a parent.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNetworkOrigin)
 ---@return Vector # The last received origin of the entity.
@@ -2792,7 +2795,7 @@ function Entity:IsInWorld() end
 ---@param endPos Vector The landing position
 ---@return boolean # Return true if this jump should be allowed to be performed, false otherwise.
 ---
---- Not returning anything, or returning a non boolean will perform the default action.
+--- Not returning anything, or returning a non boolean will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc_movement.cpp#L319).
 function ENTITY:IsJumpLegal(startPos, apex, endPos) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether the entity is lag compensated or not.
@@ -2992,6 +2995,8 @@ function Entity:LocalToWorldAngles(ang) end
 function Entity:LookupAttachment(attachmentName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the bone index of the given bone name, returns `nil` if the bone does not exist.
+---
+--- See [Entity:GetBoneName](https://wiki.facepunch.com/gmod/Entity:GetBoneName) for the inverse of this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LookupBone)
 ---@param boneName string The name of the bone.
@@ -4109,7 +4114,7 @@ function Entity:SetCollisionGroup(group) end
 --- When rendering a model manually via [Entity:SetNoDraw](https://wiki.facepunch.com/gmod/Entity:SetNoDraw) inside [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw), you may need to use [render.SetColorModulation](https://wiki.facepunch.com/gmod/render.SetColorModulation) in the render hook (where you call [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel)) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetColor)
----@param color? table The color to set. Uses the Color.
+---@param color? Color The color to set. Uses the Color.
 function Entity:SetColor(color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the color of an entity without usage of a [Global.Color](https://wiki.facepunch.com/gmod/Global.Color) object.
@@ -4251,6 +4256,8 @@ function Entity:SetEyeTarget(pos) end
 function Entity:SetFlexScale(scale) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the weight/value of given flex controller.
+---
+--- Setting flex weights spawns an internal networked entity (one per entity face posed) to accommodate networking to clients.
 ---
 --- **NOTE**: Only `96` flex controllers can be set! Flex controllers on models with higher amounts will not be accessible.
 ---
@@ -5371,10 +5378,11 @@ function Entity:SetSaveValue(name, value) end
 --- For custom scripted entities you will want to apply example from [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) to make animations work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSequence)
----@param sequenceId number|string The sequence to play. Also accepts strings.
+---@param sequence number|string The sequence to play.
 ---
---- If set to a string, the function will automatically call [Entity:LookupSequence](https://wiki.facepunch.com/gmod/Entity:LookupSequence) to retrieve the sequence ID as a number.
-function Entity:SetSequence(sequenceId) end
+--- If set to a number, the input is treated as the sequence ID.
+--- If set to a string, the function will automatically call Entity:LookupSequence to retrieve the sequence ID.
+function Entity:SetSequence(sequence) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets whether or not the entity should make a physics contact sound when it's been picked up by a player.
 ---
@@ -5530,7 +5538,7 @@ function Entity:SetupPhonemeMappings(fileRoot) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the use type of an entity, affecting how often [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use) will be called for Lua entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetUseType)
----@param useType number The use type to apply to the entity. Uses Enums/_USE.
+---@param useType _USE The use type to apply to the entity. Uses Enums/_USE.
 function Entity:SetUseType(useType) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows to quickly set variable to entity's [Entity:GetTable](https://wiki.facepunch.com/gmod/Entity:GetTable).
@@ -5835,11 +5843,11 @@ function ENTITY:Touch(entity) end
 --- **NOTE**: This hook only exists for `ai` type SENTs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:TranslateActivity)
----@param act number The activity to translate. See Enums/ACT.
----@return number # The activity that should override the incoming activity. See Enums/ACT.
+---@param oldAct ACT The activity to translate.
+---@return ACT # The activity that should override the incoming activity.
 ---
---- Do not return anything to not override.
-function ENTITY:TranslateActivity(act) end
+--- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc.cpp#L5976).
+function ENTITY:TranslateActivity(oldAct) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the ID of a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) attached to the given bone.
 ---
@@ -5859,7 +5867,7 @@ function Entity:TranslateBoneToPhysBone(boneID) end
 ---@param currentGoal? Vector The target's origin.
 ---@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
 ---
---- Do not return anything to not override.
+--- Not returning anything, or returning a non vector will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc_schedule.cpp#L4251).
 function ENTITY:TranslateNavGoal(target, currentGoal) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the boneID of the bone the given [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) is attached to.
@@ -5876,10 +5884,10 @@ function Entity:TranslatePhysBoneToBone(physNum) end
 --- **NOTE**: This hook only exists for `ai` type SENTs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:TranslateSchedule)
----@param schedule number The schedule to translate. See Enums/SCHED.
----@return number # The schedule that should override the incoming schedule. See Enums/SCHED.
+---@param schedule SCHED The schedule to translate. See Enums/SCHED.
+---@return SCHED # The schedule that should override the incoming schedule.
 ---
---- Do not return anything to not override.
+--- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_default.cpp#L253).
 function ENTITY:TranslateSchedule(schedule) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Triggers all outputs stored using [ENTITY:StoreOutput](https://wiki.facepunch.com/gmod/ENTITY:StoreOutput).
@@ -5918,8 +5926,8 @@ function ENTITY:UpdateTransmitState() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:Use)
 ---@param activator Entity The entity that caused this input. This will usually be the player who pressed their use key.
----@param caller Entity The entity responsible for the input. This will typically be the same as `activator` unless some other entity is acting as a proxy
----@param useType number Use type, see Enums/USE.
+---@param caller Entity The entity responsible for the input. This will typically be the same as `activator` unless some other entity is acting as a proxy.
+---@param useType USE Use type, see Enums/USE.
 ---@param value number Any passed value.
 function ENTITY:Use(activator, caller, useType, value) end
 
@@ -5928,7 +5936,7 @@ function ENTITY:Use(activator, caller, useType, value) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Use(function))
 ---@param activator Entity The entity that caused this input. This will usually be the player who pressed their use key
 ---@param caller? Entity The entity responsible for the input. This will typically be the same as `activator` unless some other entity is acting as a proxy
----@param useType? number Use type, see Enums/USE.
+---@param useType? USE Use type, see Enums/USE.
 ---@param value? number Any value.
 function Entity:Use(activator, caller, useType, value) end
 

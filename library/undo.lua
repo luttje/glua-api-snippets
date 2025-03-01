@@ -58,12 +58,14 @@ function undo.GetTable() end
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.MakeUIDirty)
 function undo.MakeUIDirty() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Replaces any instance of the "from" reference with the "to" reference, in any existing undo block. Returns true if something was replaced
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Replaces any instance of the "from" reference with the "to" reference, in any existing undo block.
+---
+--- You very likely want to call [cleanup.ReplaceEntity](https://wiki.facepunch.com/gmod/cleanup.ReplaceEntity) with the same entities as well.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.ReplaceEntity)
 ---@param from Entity The old entity
----@param to Entity The new entity to replace the old one
----@return boolean # somethingReplaced
+---@param to Entity The new entity to replace the old one. Can also be a `NULL` to remove the entity from the undo system.
+---@return boolean # Whether the entity was replaced
 function undo.ReplaceEntity(from, to) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets a custom undo text for the current undo block

@@ -16,12 +16,12 @@ file = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Append)
 ---@param name string The file's name.
 ---@param content string The content which should be appended to the file.
+---@return boolean # If the operation was successful
 function file.Append(name, content) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the content of a file asynchronously.
 ---
 --- All limitations of [file.Read](https://wiki.facepunch.com/gmod/file.Read) also apply.
---- **NOTE**: This function is currently broken in the Menu State and won't be fixed. [Bug Report](https://github.com/Facepunch/garrysmod-issues/issues/5433)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.AsyncRead)
 ---@param fileName string The name of the file.
@@ -173,6 +173,7 @@ function file.Time(path, gamePath) end
 ---
 --- Restricted symbols are: `":`, and multiple consecutive spaces
 ---@param content string The content that will be written into the file.
+---@return boolean # If the operation was successful
 function file.Write(fileName, content) end
 
 ---@class File

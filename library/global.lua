@@ -321,8 +321,9 @@ function _G.ColorToHSV(color) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CompileFile)
 ---@param path string Path to the file, relative to the `garrysmod/lua/` directory.
+---@param showError? boolean Decides whether or not a non-halting error should be thrown on compile failure.
 ---@return function # The function which executes the script.
-function _G.CompileFile(path) end
+function _G.CompileFile(path, showError) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) This function will compile the code argument as lua code and return a function that will execute that code.
 ---
@@ -920,7 +921,7 @@ function _G.EndTooltip(panel) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Entity)
 ---@param entityIndex number The entity index.
----@return Entity # The entity if it exists, or NULL if it doesn't.
+---@return Entity # The entity if it exists, or `NULL` if it doesn't.
 function _G.Entity(entityIndex) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Throws an error. This is currently an alias of [Global.ErrorNoHalt](https://wiki.facepunch.com/gmod/Global.ErrorNoHalt) despite it once throwing a halting error like [error](https://wiki.facepunch.com/gmod/Global.error(lowercase)) without the stack trace appended.

@@ -2224,7 +2224,6 @@ function GM:ShowSpare2(ply) end
 function GM:ShowTeam(ply) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever the Lua environment is about to be shut down, for example on map change, or when the server is going to shut down.
---- **WARNING**: [Player:SteamID](https://wiki.facepunch.com/gmod/Player:SteamID), [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64), and the like will return nil for the listen host here but work fine for other players.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShutDown)
 function GM:ShutDown() end

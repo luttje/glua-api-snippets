@@ -176,7 +176,7 @@ function util.DistanceToLine(lineStart, lineEnd, pointPos) end
 --- You can find a list of Default_Effects. You can create your own, [example effects can be found here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
 ---@param effectData CEffectData The effect data describing the effect.
 ---@param allowOverride? boolean Whether Lua-defined effects should override engine-defined effects with the same name for this/single function call.
----@param ignorePredictionOrRecipientFilter? any Can either be a boolean to ignore the prediction filter or a CRecipientFilter.
+---@param ignorePredictionOrRecipientFilter? boolean|CRecipientFilter Can either be a boolean to ignore the prediction filter or a CRecipientFilter.
 ---
 --- Set this to true if you wish to call this function in multiplayer from server.
 function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRecipientFilter) end

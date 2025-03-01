@@ -32,7 +32,7 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a sound from a function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.Generate)
----@param indentifier string An unique identified for the sound.
+---@param identifier string A unique identifier for the sound.
 ---
 --- 			You cannot override already existing ones.
 ---@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
@@ -52,7 +52,7 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 --- 		This argument can also be given a table of samples, where values must range from `-1` to `1`.
 --- 		This argument can also be a string of raw 16bit binary data, (each sample is unsigned short).
 ---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.
-function sound.Generate(indentifier, samplerate, length, callbackOrData, loopStart) end
+function sound.Generate(identifier, samplerate, length, callbackOrData, loopStart) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---

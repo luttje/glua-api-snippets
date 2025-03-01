@@ -60,6 +60,12 @@ function DPanelList:InsertAtTop(insert, strLineState) end
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:Rebuild)
 function DPanelList:Rebuild() end
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [DPanelList](https://wiki.facepunch.com/gmod/DPanelList) to size its height to its contents. This is set to false by default.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:SetAutoSize)
+---@param shouldSizeToContents boolean Whether to size to the height of the DPanelList contents.
+function DPanelList:SetAutoSize(shouldSizeToContents) end
+
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the offset of the lists items from the panel borders
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:SetPadding)

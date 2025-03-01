@@ -567,7 +567,7 @@ function render.GetViewSetup(noPlayer) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render material override for all next calls of [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel). Also overrides [render.MaterialOverrideByIndex](https://wiki.facepunch.com/gmod/render.MaterialOverrideByIndex).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.MaterialOverride)
----@param material? IMaterial The material to use as override, use nil to disable.
+---@param material? IMaterial|nil The material to use as override, use `nil` to disable.
 function render.MaterialOverride(material) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Similar to [render.MaterialOverride](https://wiki.facepunch.com/gmod/render.MaterialOverride), but overrides the materials per index. Similar to [Entity:SetSubMaterial](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial)
@@ -1028,13 +1028,13 @@ function render.SetRenderTarget(texture) end
 ---@param texture ITexture The new render target to be used.
 function render.SetRenderTargetEx(rtIndex, texture) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets a scissoring rect which limits(otherwise known as clipping) the drawing area.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets a scissoring rectangle which limits the drawing area. (otherwise known as clipping)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetScissorRect)
----@param startX number X start coordinate of the scissor rect.
----@param startY number Y start coordinate of the scissor rect.
----@param endX number X end coordinate of the scissor rect.
----@param endY number Y end coordinate of the scissor rect.
+---@param startX number X start coordinate of the scissor rectangle in screen-space coordinates.
+---@param startY number Y start coordinate of the scissor rectangle in screen-space coordinates.
+---@param endX number X end coordinate of the scissor rectangle in screen-space coordinates.
+---@param endY number Y end coordinate of the scissor rectangle in screen-space coordinates.
 ---@param enable boolean Enable or disable the scissor rect.
 function render.SetScissorRect(startX, startY, endX, endY, enable) end
 

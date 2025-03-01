@@ -8,7 +8,9 @@ mesh = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex)
 function mesh.AdvanceVertex() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **WARNING**: Maximum of 32768 vertices.
+---
+--- 		Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
 ---
 --- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---
@@ -21,7 +23,9 @@ function mesh.AdvanceVertex() end
 --- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
 function mesh.Begin(primitiveType, primitiveCount) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **WARNING**: Maximum of 32768 vertices.
+---
+--- 		Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
 ---
 --- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---

@@ -1449,13 +1449,15 @@ function Panel:NewObjectCallback(objectName, callbackName) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether this panel's drawings should be clipped within the parent panel's bounds.
 ---
+--- See [render.SetScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) if you wish to set the clipping rect instead.
+---
 --- **NOTE**: This only disabled clipping for the Paint Related functions (as far as i can tell at the current moment, more testing should be done) so things like the text of a [DLabel](https://wiki.facepunch.com/gmod/DLabel) will still be clipped to the parent.
 ---
 --- To fully disable the clipping of any children see [Global.DisableClipping](https://wiki.facepunch.com/gmod/Global.DisableClipping).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:NoClipping)
----@param noclip boolean Whether to disable clipping or not. True to disable clipping, false to enable clipping.
-function Panel:NoClipping(noclip) end
+---@param disableClipping boolean Whether to disable clipping or not. `true` to disable clipping, `false` to enable clipping.
+function Panel:NoClipping(disableClipping) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the number of children of the panel object that are selected. This is equivalent to calling [Panel:IsSelected](https://wiki.facepunch.com/gmod/Panel:IsSelected) on all child objects and counting the number of returns that are `true`.
 ---

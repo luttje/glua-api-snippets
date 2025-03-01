@@ -18,7 +18,7 @@ function ITexture:Download() end
 ---[View wiki](https://wiki.facepunch.com/gmod/ITexture:GetColor)
 ---@param x number The X coordinate.
 ---@param y number The Y coordinate.
----@return table # The color of the pixel as a Color.
+---@return Color # The color of the pixel as a Color.
 function ITexture:GetColor(x, y) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the true unmodified height of the texture.

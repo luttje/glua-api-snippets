@@ -73,7 +73,7 @@ function player.GetByAccountID(accountID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByID)
 ---@param connectionID number The connection ID to find the player by.
----@return Player|nil # Player if one is found, `nil` otherwise
+---@return Player|nil # Player if one is found, `nil` otherwise.
 function player.GetByID(connectionID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID.
@@ -346,7 +346,7 @@ function PLAYER:ClassChanged() end
 ---
 --- If you wish to directly modify the movement input of bots, use [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand) instead.
 ---
---- **NOTE**: Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked ConCommands).
+--- **NOTE**: Some commands/convars are blocked from being run/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked ConCommands).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ConCommand)
 ---@param command string command to run
@@ -496,6 +496,11 @@ function Player:EnterVehicle(vehicle) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:EquipSuit)
 function Player:EquipSuit() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player off the current ladder they are climbing if they are on one.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Player:ExitLadder)
+function Player:ExitLadder() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player to exit the vehicle if they're in one.
 ---
@@ -1554,14 +1559,14 @@ function Player:Say(text, teamOnly) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ScreenFade)
 ---@param flags number Fade flags defined with Enums/SCREENFADE.
----@param clr? number The color of the screenfade
+---@param color? Color The color of the screenfade
 ---@param fadeTime number Fade(in/out) effect transition time ( From no fade to full fade and vice versa ).
 ---
 --- This is limited to 7 bits integer part and 9 bits fractional part.
 ---@param fadeHold number Fade effect hold time.
 ---
 --- This is limited to 7 bits integer part and 9 bits fractional part.
-function Player:ScreenFade(flags, clr, fadeTime, fadeHold) end
+function Player:ScreenFade(flags, color, fadeTime, fadeHold) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the active weapon of the player by its class name.
 ---
@@ -2265,14 +2270,13 @@ function Player:UnfreezePhysicsObjects() end
 ---@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
 function Player:UniqueID() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table that will stay allocated for the specific player serveside between connects until the server shuts down. On client it has no such special behavior.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table that will stay allocated for the specific player serverside between connects until the server shuts down. On client it has no such special behavior.
 ---
 --- **NOTE**: This table is not synchronized (networked) between client and server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UniqueIDTable)
 ---@param key any Unique table key.
 ---@return table # The table that contains any info you have put in it.
----@deprecated This is based on Player:UniqueID which is deprecated and vulnerable to collisions.
 function Player:UniqueIDTable(key) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Unlocks the player movement if locked previously.

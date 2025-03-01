@@ -15,7 +15,7 @@ DRIVE = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Used internally to make [DRIVE_METHOD:CalcView](https://wiki.facepunch.com/gmod/DRIVE_METHOD:CalcView) work, called by default from `base` gamemode's [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) hook.
+--- Used internally to make [DRIVE:CalcView](https://wiki.facepunch.com/gmod/DRIVE:CalcView) work, called by default from `base` gamemode's [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/drive.CalcView)
 ---@param ply Player The player
@@ -94,7 +94,7 @@ function drive.PlayerStopDriving(ply) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/drive.Register)
 ---@param name string The name of the drive mode/method.
----@param data table The data required to create the drive mode/method. This includes the functions used by the drive. See DRIVE_METHOD.
+---@param data table The data required to create the drive mode/method. This includes the functions used by the drive. See DRIVE_Hooks.
 ---@param base? string The name of a drive mode/method to inherit code from.
 function drive.Register(name, data, base) end
 

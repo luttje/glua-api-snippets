@@ -23,12 +23,11 @@ baseclass = {}
 function baseclass.Get(name) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Add a new base class that can be derived by others. This is done automatically for:
---- * widgets
---- * panels
---- * drive modes
---- * entities
---- * weapons
---- * gamemodes (with prefix "gamemode_")
+--- * [panels](https://wiki.facepunch.com/gmod/vgui.Register)
+--- * [drive modes](https://wiki.facepunch.com/gmod/drive.Register)
+--- * [entities and widgets](https://wiki.facepunch.com/gmod/scripted_ents.Register)
+--- * [weapons](https://wiki.facepunch.com/gmod/weapons.Register)
+--- * [gamemodes](https://wiki.facepunch.com/gmod/gamemode.Register) (with prefix "gamemode_")
 ---
 --- For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---

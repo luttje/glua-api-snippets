@@ -41,7 +41,7 @@ function WEAPON:AdjustMouseSensitivity() end
 ---@return boolean # Whether the weapon allows to being switched from.
 function Weapon:AllowsAutoSwitchFrom() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the weapon allows to being switched to when a better ( [Weapon:GetWeight](https://wiki.facepunch.com/gmod/Weapon:GetWeight) ) weapon is being picked up.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the weapon allows to being switched to when a better ([Weapon:GetWeight](https://wiki.facepunch.com/gmod/Weapon:GetWeight)) weapon is being picked up.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Weapon:AllowsAutoSwitchTo)
 ---@return boolean # Whether the weapon allows to being switched to.
@@ -467,7 +467,8 @@ function Weapon:LastShootTime() end
 --- See also [WEAPON:OwnerChanged](https://wiki.facepunch.com/gmod/WEAPON:OwnerChanged).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:OnDrop)
-function WEAPON:OnDrop() end
+---@param owner Entity The entity that dropped the weapon.
+function WEAPON:OnDrop(owner) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever the weapons Lua script is reloaded.
 ---

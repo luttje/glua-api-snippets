@@ -74,7 +74,7 @@ function table.Count(tbl) end
 ---@return table # De-sanitised table
 function table.DeSanitise(tbl) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes all values from a table.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes all values from a table. If your table is not a metatable, it is almost always better to use `tab = {}` to preserve performance.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.Empty)
 ---@param tbl table The table to empty.

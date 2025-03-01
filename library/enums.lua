@@ -5822,10 +5822,12 @@ NAV_MESH_NO_MERGE = 8192
 NAV_MESH_OBSTACLE_TOP = 16384
 --- This nav area is adjacent to a drop of at least `CliffHeight` (300 hammer units). Unused by base game.
 NAV_MESH_CLIFF = 32768
---- Area has designer specified cost controlled by `func_nav_cost` entities
-NAV_MESH_FUNC_COST = 536870912
+--- Whether the area is blocked via [CNavArea:MarkAsBlocked](https://wiki.facepunch.com/gmod/CNavArea:MarkAsBlocked).
+NAV_MESH_BLOCKED_LUA = 65536
 --- Whether the area has a `prop_door_rotating` that is blocking it (because the door is closed)
 NAV_MESH_BLOCKED_PROPDOOR = 268435456
+--- Area has designer specified cost controlled by `func_nav_cost` entities
+NAV_MESH_FUNC_COST = 536870912
 --- Area is in an elevator's path
 NAV_MESH_HAS_ELEVATOR = 1073741824
 --- Whether the area is blocked by a `func_nav_blocker` entity and is impassible.
@@ -5849,8 +5851,9 @@ NAV_MESH_NAV_BLOCKER = -2147483648
 ---| `NAV_MESH_NO_MERGE`
 ---| `NAV_MESH_OBSTACLE_TOP`
 ---| `NAV_MESH_CLIFF`
----| `NAV_MESH_FUNC_COST`
+---| `NAV_MESH_BLOCKED_LUA`
 ---| `NAV_MESH_BLOCKED_PROPDOOR`
+---| `NAV_MESH_FUNC_COST`
 ---| `NAV_MESH_HAS_ELEVATOR`
 ---| `NAV_MESH_NAV_BLOCKER`
 

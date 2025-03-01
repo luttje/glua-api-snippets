@@ -109,6 +109,8 @@ function vgui.IsHoveringWorld() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/vgui.Register)
 ---@param classname string Classname of the panel to register. This is what you will need to pass to vgui.Create's first argument.
+---
+--- This must be unique, including classnames of entities due to internal usage of baseclass.Set.
 ---@param panelTable table The table containing the panel information.
 ---@param baseName? string Classname of a panel to inherit functionality from. Functions with same names will be overwritten preferring the panel that is being registered.
 ---@return table # The given panel table from second argument

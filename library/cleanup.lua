@@ -46,11 +46,13 @@ function cleanup.GetTable() end
 ---@param type string Name of type.
 function cleanup.Register(type) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Replaces one entity in the cleanup module with another
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Replaces one entity in the cleanup module with another.
+---
+--- You very likely want to call [undo.ReplaceEntity](https://wiki.facepunch.com/gmod/undo.ReplaceEntity) with the same entities as well.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.ReplaceEntity)
 ---@param from Entity Old entity
----@param to Entity New entity
+---@param to Entity New entity. Can be a `NULL` entity to remove the old entity from the cleanup system.
 ---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
 

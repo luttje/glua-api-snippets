@@ -112,7 +112,7 @@ function CNavArea:DrawSpots() end
 --- If an area has a one-way incoming connection to this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea), then it will **not** be returned from this function, use [CNavArea:GetIncomingConnectionDistances](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionDistances) to get all one-way incoming connections.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentAreaDistances)
----@param dir? number If set, will only return areas in the specified direction. See Enums/NAVDIR.
+---@param dir? number If set, will only return areas in the specified direction. See Enums/NavDir.
 ---@return table # A list of tables in the following format:
 --- * CNavArea **area** - the area that is connected to this area.
 --- * number **dist** - Distance from the area to this area.
@@ -245,7 +245,7 @@ function CNavArea:GetID() end
 --- If a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) has a two-way connection **to or from** this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) then it will not be returned from this function, use [CNavArea:GetAdjacentAreaDistances](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentAreaDistances) to get outgoing (one and two way) connections.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionDistances)
----@param dir? number If set, will only return areas in the specified direction. See Enums/NAVDIR.
+---@param dir? number If set, will only return areas in the specified direction. See Enums/NavDir.
 ---@return table # A list of tables in the following format:
 --- * CNavArea **area** - the area that is connected to this area.
 --- * number **dist** - Distance from the area to this area.
@@ -346,10 +346,10 @@ function CNavArea:GetSizeY() end
 ---@return table # A sequential list of spot encounters in the following format:
 --- * CNavArea **from** - What CNavArea the path segment is coming from
 --- * Vector **from_pos** - Origin position of the path segment
---- * number **from_dir** - Source [Enums/NavDir](https://wiki.facepunch.com/gmod/NavDir) direction of the path segment
---- * CNavArea **to** - What [CNavArea]() the path segment is going towards
+--- * number **from_dir** - Source Enums/NavDir direction of the path segment
+--- * CNavArea **to** - What CNavArea the path segment is going towards
 --- * Vector **to_pos** - Target position of the path segment
---- * number **to_dir** - Target [Enums/NavDir](https://wiki.facepunch.com/gmod/NavDir) direction of the path segment
+--- * number **to_dir** - Target Enums/NavDir direction of the path segment
 --- * table **spots** - List of spots to look at, a sequential list of the following structures:
 ---   * Vector **pos** - Position of the spot
 ---   * table **flags** - Type of spot this is

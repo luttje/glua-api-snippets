@@ -112,7 +112,7 @@ function engine.LightStyle(lightstyle, pattern) end
 --- * string `data` - Compressed dupe data. Use util.JSONToTable to make it into a format useable by the duplicator tool.
 function engine.OpenDupe(dupeName) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns an estimate of the server's performance. Equivalent to calling [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) from the server, according to source code.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns an estimate of the server's performance. Equivalent to calling [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) from the server, according to source code.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/engine.ServerFrameTime)
 ---@return number # Frame time.

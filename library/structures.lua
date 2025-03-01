@@ -41,7 +41,7 @@ AmmoData.name = nil
 ---
 --- Related function is game.GetAmmoNPCDamage.
 ---
---- Can also be a string pointing to a convar. The value will automatically update with the convar's.
+--- Can also be a string with the name of a convar. The value will automatically update with the convar's.
 ---@type number
 AmmoData.npcdmg = 10
 
@@ -49,7 +49,7 @@ AmmoData.npcdmg = 10
 ---
 --- Related function is game.GetAmmoPlayerDamage.
 ---
---- Can also be a string pointing to a convar. The value will automatically update with the convar's.
+--- Can also be a string with the name of a convar. The value will automatically update with the convar's.
 ---@type number
 AmmoData.plydmg = 10
 
@@ -61,7 +61,7 @@ AmmoData.tracer = TRACER_NONE
 ---
 --- Related function is game.GetAmmoMax.
 ---
---- Can also be a string pointing to a convar. The value will automatically update with the convar's.
+--- Can also be a string with the name of a convar. The value will automatically update with the convar's.
 --- `gmod_maxammo` convar will override this value if set to above 0, **which it is by default**.
 ---@type number
 AmmoData.maxcarry = 9999
@@ -1141,10 +1141,6 @@ GM.Folder = nil
 ---@type boolean
 GM.TeamBased = nil
 
----True if the gamemode is derived from sandbox.
----@type boolean
-GM.IsSandboxDerived = nil
-
 ---The name of the gamemode folder prepended with "gamemode_" (such as "gamemode_sandbox"), automatically set.
 ---@type string
 GM.ThisClass = nil
@@ -1156,6 +1152,10 @@ GM.ThisClass = nil
 --- [Global.DeriveGamemode](https://wiki.facepunch.com/gmod/Global.DeriveGamemode) modifies the main gamemode's BaseClass, which is shared with parent gamemodes. Because of this, in parent gamemodes the BaseClass can be incorrect, so for instance you need to use `self.BaseClass.BaseClass` in the 1st parent instead
 ---@type table
 GM.BaseClass = nil
+
+---Whether the gamemode is Sandbox, or derived from Sandbox. This is not really part of the `GM` structure, and listed here only for convenience.
+---@type boolean
+GM.IsSandboxDerived = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table used by [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
 
@@ -3211,7 +3211,7 @@ Undo.CustomUndoText = nil
 
 ---A "nice" name of the undo, which will be used for the UI
 ---@type string
-Undo.NiceName = nil
+Undo.NiceText = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Vehicle:SetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:SetVehicleParams) and [Vehicle:GetVehicleParams](https://wiki.facepunch.com/gmod/Vehicle:GetVehicleParams).
 
@@ -3822,6 +3822,10 @@ ViewData.offcenter = nil
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/ViewSetup)
 ---@class ViewSetup
 local ViewSetup = {}
+
+---The view's id
+---@type number
+ViewSetup.viewid = nil
 
 ---The view's origin/position
 ---@type Vector
