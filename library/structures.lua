@@ -1932,7 +1932,7 @@ PropertyAdd.MenuIcon = nil
 --- | Motion Control (Kinect) | 2500 |
 --- | Editable_Entities | 90001 |
 ---@type number
-PropertyAdd.structureFieldOrder = nil
+PropertyAdd.Order = nil
 
 ---Whether to add a spacer before this property. This should generally be true for the first property in a group of properties.
 ---@type boolean
@@ -2343,15 +2343,17 @@ SoundData.volume = 1.0
 ---@type number
 SoundData.pitch = 100
 
+---@deprecated Use pitch instead.
 ---The initial pitch.
---- 	Deprecated, use pitch.
+--- 	Use pitch instead.
 ---@type number
-SoundData.pitchstart = nil
+SoundData.pitchstart = 100
 
+---@deprecated Use pitch instead.
 ---The pitch end.
---- Deprecated, use pitch.
+--- Use pitch instead.
 ---@type number
-SoundData.pitchend = nil
+SoundData.pitchend = 100
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table describing a sound hint, used by [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint) and [sound.GetLoudestSoundHint](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint).
 
@@ -3124,11 +3126,11 @@ UGCFileInfo.banned = nil
 ---@type string
 UGCFileInfo.tags = nil
 
----File size of the workshop item contents
+---File size of the workshop item contents in bytes
 ---@type number
 UGCFileInfo.size = nil
 
----Filesize of the preview file
+---Filesize of the preview file in bytes
 ---@type number
 UGCFileInfo.previewsize = nil
 
@@ -3732,6 +3734,10 @@ ViewData.drawmonitors = false
 ---@type boolean
 ViewData.drawviewmodel = true
 
+---Whether to force draw the local player or not.
+---@type boolean
+ViewData.drawviewer = false
+
 ---The viewmodel's FOV
 ---@type number
 ViewData.viewmodelfov = nil
@@ -3823,7 +3829,7 @@ ViewData.offcenter = nil
 ---@class ViewSetup
 local ViewSetup = {}
 
----The view's id
+---The current view id. See Enums/VIEW.
 ---@type number
 ViewSetup.viewid = nil
 

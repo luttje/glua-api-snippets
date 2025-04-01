@@ -10,7 +10,7 @@ sound = {}
 --- A list of sound scripts can be retrieved with [sound.GetTable](https://wiki.facepunch.com/gmod/sound.GetTable).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.Add)
----@param soundData table The sounds properties. See Structures/SoundData
+---@param soundData SoundData The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
@@ -66,7 +66,7 @@ function sound.GetLoudestSoundHint(types, pos) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.GetProperties)
 ---@param name string The name of the sound script
----@return table # The properties of the soundscript. See Structures/SoundData
+---@return SoundData # The properties of the soundscript. See Structures/SoundData
 function sound.GetProperties(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all registered sound scripts.
@@ -74,7 +74,7 @@ function sound.GetProperties(name) end
 --- New ones can be registered using [sound.Add](https://wiki.facepunch.com/gmod/sound.Add), and detailed information about each one can be retrieved via [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.GetTable)
----@return table # The list/array of all registered sound scripts ( No other information is provided )
+---@return string[] # The list/array of all registered sound scripts ( No other information is provided )
 function sound.GetTable() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound from the specified position in the world.

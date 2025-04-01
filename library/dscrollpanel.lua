@@ -34,7 +34,7 @@ function DScrollPanel:GetPadding() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the vertical scroll bar of the panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
----@return Panel # The DVScrollBar.
+---@return Panel{DVScrollBar} # The DVScrollBar.
 function DScrollPanel:GetVBar() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Return the width of the DScrollPanel's canvas.

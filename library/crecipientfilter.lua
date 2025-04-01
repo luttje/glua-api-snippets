@@ -26,7 +26,7 @@ function CRecipientFilter:AddPlayer(Player) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds players to the recipient filter from a given table or another recipient filter.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CRecipientFilter:AddPlayers)
----@param input CRecipientFilter The filter to add players from. This can also be a sequential table of players. Non player entities or duplicate players will be ignored.
+---@param input CRecipientFilter|Player[] The filter to add players from. This can also be a sequential table of players. Non player entities or duplicate players will be ignored.
 function CRecipientFilter:AddPlayers(input) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds all players that are in the same [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") as this position.

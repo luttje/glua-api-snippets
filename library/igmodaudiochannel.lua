@@ -26,7 +26,7 @@ function IGModAudioChannel:EnableLooping(enable) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:FFT)
 ---@param tbl number[] The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
----@param size number The number of samples to use. See Enums/FFT
+---@param size FFT The number of samples to use. See Enums/FFT
 ---@return number # The number of frequency bins that have been filled in the output table.
 function IGModAudioChannel:FFT(tbl, size) end
 

@@ -634,11 +634,11 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
 ---@param enabled boolean Set to `true` to enable Blend Overrides.
----@param sourceMultiplier number This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
+---@param sourceMultiplier BLEND This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationMultiplier number This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
+---@param destinationMultiplier BLEND This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param blendingFunction number After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
+---@param blendingFunction BLENDFUNC After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
 --- 			One of the Enums/BLENDFUNC enums.
 function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, blendingFunction) end
 
@@ -652,17 +652,17 @@ function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
 ---@param enabled boolean Set to `true` to enable Blend Overrides.
----@param sourceColorMultiplier number This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
+---@param sourceColorMultiplier BLEND This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationColorMultiplier number This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
+---@param destinationColorMultiplier BLEND This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param colorBlendingFunction number After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
+---@param colorBlendingFunction BLENDFUNC After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
 --- 			One of the Enums/BLENDFUNC enums.
----@param sourceAlphaMultiplier? number This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+---@param sourceAlphaMultiplier? BLEND This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param destinationAlphaMultiplier? number This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
+---@param destinationAlphaMultiplier? BLEND This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
 --- 			One of the Enums/BLEND enums.
----@param alphaBlendingFunction? number After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
+---@param alphaBlendingFunction? BLENDFUNC After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
 function render.OverrideBlend(
 	enabled,
 	sourceColorMultiplier,
@@ -1009,7 +1009,7 @@ function render.SetMaterial(mat) end
 --- Light color components are not restricted to a specific range (i.e. 0-255), instead, higher values will result in a brighter light.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetModelLighting)
----@param lightDirection number The light source to edit, see Enums/BOX.
+---@param lightDirection BOX The light source to edit, see Enums/BOX.
 ---@param red number The red component of the light color.
 ---@param green number The green component of the light color.
 ---@param blue number The blue component of the light color.

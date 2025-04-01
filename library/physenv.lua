@@ -3,12 +3,14 @@
 --- The physenv library allows you to control the physics environment created by the engine, and lets you modify constants such as gravity and maximum velocity.
 physenv = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds surface properties to the game's physics environment.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds a [material surface property](https://developer.valvesoftware.com/wiki/Material_surface_properties) type to the game's physics environment.
+---
+--- See [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) for the opposite function.
 ---
 --- The game has a limit of 128 surface properties - this includes properties loaded automatically from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt). Due to this, there's only a small amount of open slots that can be registered with GMod's provided surfaceproperties.txt.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData)
----@param properties string The properties to add. Each one should include "base" or the game will crash due to some values being missing.
+---@param properties string The properties to add. Each one should include `"base"` or the game will crash due to some values being missing.
 function physenv.AddSurfaceData(properties) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the air density used to calculate drag on physics objects.

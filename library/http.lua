@@ -37,11 +37,11 @@ http = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/http.Fetch)
 ---@param url string The URL of the website to fetch.
----@param onSuccess? fun(body: string, size: string, headers: table, code: number) Function to be called on success.
+---@param onSuccess? fun(body: string, size: number, headers: table, code: number) Function to be called on success.
 ---
 --- Function argument(s):
 --- * string `body` -
---- * string `size` - equal to string.len(body).
+--- * number `size` - equal to string.len(body).
 --- * table `headers` -
 --- * number `code` - The HTTP success code.
 ---@param onFailure? fun(error: string) Function to be called on failure.

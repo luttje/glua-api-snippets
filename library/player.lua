@@ -165,7 +165,7 @@ function player.Iterator() end
 ---@return number # The AccountID of Player's SteamID.
 function Player:AccountID() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: This function is only available in Sandbox and its derivatives.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **NOTE**: This function is only available in Sandbox and its derivatives.
 --- Adds an entity to the player's clean up list. This uses [cleanup.Add](https://wiki.facepunch.com/gmod/cleanup.Add) internally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:AddCleanup)
@@ -497,7 +497,7 @@ function Player:EnterVehicle(vehicle) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:EquipSuit)
 function Player:EquipSuit() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player off the current ladder they are climbing if they are on one.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player off the current ladder if they are on one.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ExitLadder)
 function Player:ExitLadder() end
@@ -709,7 +709,7 @@ function Player:GetEntityInUse() end
 --- See also [Player:GetEyeTraceNoCursor](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetEyeTrace)
----@return table # Trace information, see Structures/TraceResult.
+---@return TraceResult # Trace information, see Structures/TraceResult.
 function Player:GetEyeTrace() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the trace according to the players view direction, ignoring their mouse (holding C and moving the mouse in Sandbox).
@@ -721,7 +721,7 @@ function Player:GetEyeTrace() end
 --- See also [Player:GetEyeTrace](https://wiki.facepunch.com/gmod/Player:GetEyeTrace).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor)
----@return table # Trace result. See Structures/TraceResult.
+---@return TraceResult # Trace result. See Structures/TraceResult.
 function Player:GetEyeTraceNoCursor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the FOV of the player.
@@ -1415,16 +1415,16 @@ function Player:MotionSensorPos(bone) end
 ---@return boolean # Return true to prevent default action
 function PLAYER:Move(mv) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the players name. Identical to [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's name. Identical to [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Name)
----@return string # Player's Steam name.
+---@return string # Player's name.
 function Player:Name() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's nickname.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's name. Identical to [Player:Name](https://wiki.facepunch.com/gmod/Player:Name) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Nick)
----@return string # Player's Steam name
+---@return string # Player's name
 function Player:Nick() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the 64-bit SteamID aka CommunityID of the Steam Account that owns the Garry's Mod license this player is using. This is useful for detecting players using Steam Family Sharing.

@@ -34,7 +34,7 @@ function undo.Create(name) end
 --- You should use `gm_undo` or `gm_undonum *num*` console commands instead of calling this function directly.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.Do_Undo)
----@param tab table The undo block to process as an Structures/Undo
+---@param tab Undo The undo block to process as an Structures/Undo
 ---@return number # Number of removed entities
 function undo.Do_Undo(tab) end
 
@@ -48,7 +48,7 @@ function undo.Finish(NiceText) end
 --- 	**NOTE**: Serverside, this table's keys use [Player:UniqueID](https://wiki.facepunch.com/gmod/Player:UniqueID) to store a player's undo blocks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.GetTable)
----@return table # The undo table.
+---@return table{Undo}[] # The undo table.
 function undo.GetTable() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

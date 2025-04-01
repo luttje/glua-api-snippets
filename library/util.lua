@@ -313,7 +313,7 @@ function util.GetPixelVisibleHandle() end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetPlayerTrace)
 ---@param ply Player The player the trace should be based on
 ---@param dir? Vector The direction of the trace. By default falls back to the direction the player is looking in.
----@return table # The trace data. See Structures/Trace
+---@return Trace # The trace data. See Structures/Trace
 function util.GetPlayerTrace(ply, dir) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Gets information about the sun position and obstruction or nil if there is no sun.
@@ -322,13 +322,11 @@ function util.GetPlayerTrace(ply, dir) end
 ---@return table # The sun info. See Structures/SunInfo
 function util.GetSunInfo() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns data of a surface property at given ID.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns data of a [surface property](https://developer.valvesoftware.com/wiki/Material_surface_properties) at given ID. New surface properties can be added via [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetSurfaceData)
----@param id number Surface property ID. You can get it from Structures/TraceResult.
----@return table # The data or no value if there is no valid surface property at given index.
----
---- See Structures/SurfacePropertyData
+---@param id number Surface property ID. You can get it from Structures/TraceResult or using util.GetSurfaceIndex.
+---@return SurfacePropertyData # The data or no value if there is no valid surface property at given index.
 function util.GetSurfaceData(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the matching surface property index for the given surface property name.
@@ -671,7 +669,7 @@ function util.PixelVisible(position, radius, PixVis) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.PointContents)
 ---@param position Vector Position to get the contents sample from.
----@return number # Contents bitflag, see Enums/CONTENTS
+---@return CONTENTS # Contents bitflag, see Enums/CONTENTS
 function util.PointContents(position) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Precaches a model for later use. Model is cached after being loaded once.
@@ -697,8 +695,8 @@ function util.PrecacheSound(soundName) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.QuickTrace)
 ---@param origin Vector The origin of the trace.
 ---@param dir Vector The direction of the trace times the distance of the trace. This is added to the origin to determine the endpos.
----@param filter? Entity Entity which should be ignored by the trace. Can also be a table of entities or a function - see Structures/Trace.
----@return table # Trace result. See Structures/TraceResult.
+---@param filter? Entity|Entity[]|string[]|function Entity which should be ignored by the trace. Can also be a table of entities or a function - see Structures/Trace.
+---@return TraceResult # Trace result. See Structures/TraceResult.
 function util.QuickTrace(origin, dir, filter) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Converts the relative path of a given file to the full path on disk.
@@ -722,6 +720,17 @@ function util.RelativePathToFull_Menu(filePath, mountPath) end
 --- Title	=	[Addon Title]
 --- ```
 function util.RelativePathToGMA_Menu(filePath) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Removes world decals at given position, in given radius. Does not remove decals on models!
+---
+---[View wiki](https://wiki.facepunch.com/gmod/util.RemoveDecalsAt)
+---@param pos Vector The position at which to remove decals.
+---@param distance number Radius of the sphere to remove decals in.
+---@param limit? number If set to above 0, only remove this many decals.
+---@param permanent? boolean Whether to remove map-spawned decals (`true`), or only gameplay-spawned decals
+---  such as bullet holes or anything placed by util.Decal and similar(`false`)
+---@return number # How many decals were removed.
+function util.RemoveDecalsAt(pos, distance, limit, permanent) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes persistent data of an offline player using their SteamID.
 ---
@@ -899,17 +908,17 @@ function util.tobool(input) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Runs a trace using the entity's collisionmodel between two points. This does not take the entity's angles into account and will trace its unrotated collisionmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.TraceEntity)
----@param tracedata table Trace data. See Structures/Trace
+---@param tracedata Trace Trace data. See Structures/Trace
 ---@param ent Entity The entity to use
----@return table # Trace result. See Structures/TraceResult
+---@return TraceResult # Trace result. See Structures/TraceResult
 function util.TraceEntity(tracedata, ent) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Identical to [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) but uses an entity's [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) for `mins`/`maxs` inputs. (These 2 keys will be ignored in the provided table)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.TraceEntityHull)
----@param tracedata table Trace data. See Structures/Trace
+---@param tracedata HullTrace Trace data. See Structures/HullTrace
 ---@param ent Entity The entity to use mins/maxs of for the hull trace.
----@return table # Trace result. See Structures/TraceResult
+---@return TraceResult # Trace result. See Structures/TraceResult
 function util.TraceEntityHull(tracedata, ent) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs an AABB hull (axis-aligned bounding box, aka not rotated) trace with the given trace data.
@@ -921,8 +930,8 @@ function util.TraceEntityHull(tracedata, ent) end
 --- **NOTE**: This function may not always give desired results clientside due to certain physics mechanisms not existing on the client. Use it serverside for accurate results.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.TraceHull)
----@param TraceData table The trace data to use. See Structures/HullTrace
----@return table # Trace result. See Structures/TraceResult
+---@param TraceData HullTrace The trace data to use. See Structures/HullTrace
+---@return TraceResult # Trace result. See Structures/TraceResult
 function util.TraceHull(TraceData) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs an infinitely thin, invisible ray trace (or "trace") in a line based on the input and returns a table that contains information about what, if anything, the trace line hit or intersected.

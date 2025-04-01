@@ -34,7 +34,7 @@ function file.Append(name, content) end
 --- * number `status` - The status of the operation. The list can be found in Enums/FSASYNC.
 --- * string `data` - The entirety of the data of the file.
 ---@param sync? boolean If `true` the file will be read synchronously.
----@return number # Enums/FSASYNC on success, Enums/FSASYNC on failure.
+---@return FSASYNC # Enums/FSASYNC on success, Enums/FSASYNC on failure.
 function file.AsyncRead(fileName, gamePath, callback, sync) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a directory that is relative to the `data` folder.

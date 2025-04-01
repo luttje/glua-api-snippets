@@ -342,7 +342,7 @@ function Panel:DistanceFrom(posX, posY) end
 --- **NOTE**: After using this function, if you want to get the correct panel's bounds (position, size), use [Panel:InvalidateParent](https://wiki.facepunch.com/gmod/Panel:InvalidateParent) (use `true` as argument if you need to update immediately)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:Dock)
----@param dockType number Dock type using Enums/DOCK.
+---@param dockType DOCK Dock type using Enums/DOCK.
 function Panel:Dock(dockType) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the dock margin of the panel.
@@ -749,10 +749,12 @@ function Panel:GetSelectedChildren() end
 ---@return number # The end of the range. If no text is selected it may be 0 and/or equal to the start range.
 function Panel:GetSelectedTextRange() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the panel object (`self`) if it has been enabled as a selection canvas. This is achieved using [Panel:SetSelectionCanvas](https://wiki.facepunch.com/gmod/Panel:SetSelectionCanvas).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the selection canvas for this panel. This will be the first parent that has [Panel:SetSelectionCanvas](https://wiki.facepunch.com/gmod/Panel:SetSelectionCanvas) set to true (or `self` if this panel is the selection canvas)
+---
+--- A selection canvas would be the panel that contains a bunch of selectable panels ([Panel:SetSelectable](https://wiki.facepunch.com/gmod/Panel:SetSelectable)), usually for the drag'n'drop system. Calling this function on any of the selectable items, or any of their children, will return the first parent that can contain selectable panels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetSelectionCanvas)
----@return Panel # The panel object this method was called on if enabled as a selection canvas, otherwise `nil`.
+---@return Panel # The selection canvas, otherwise `nil`.
 function Panel:GetSelectionCanvas() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the size of the panel.

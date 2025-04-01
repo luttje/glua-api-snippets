@@ -26,9 +26,7 @@ function steamworks.ApplyAddons() end
 --- * string `path` - Path to the downloaded file.
 function steamworks.Download(workshopPreviewID, uncompress, resultCallback) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **NOTE**: A serverside implementation of this function can be provided by binary modules, such as [gmsv_workshop](https://github.com/WilliamVenner/gmsv_workshop).
----
---- 		Downloads a Steam Workshop file by its ID and returns a path to it.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Downloads the Fire Extinguisher addon from Steam Workshop prints path to its .gma file to be used with [game.MountGMA](https://wiki.facepunch.com/gmod/game.MountGMA).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
 ---@param workshopID string The ID of workshop item to download. **NOT** a file ID.

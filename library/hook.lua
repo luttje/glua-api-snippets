@@ -16,6 +16,8 @@ hook = {}
 ---
 --- 				Returning any value besides nil from the hook's function will stop other hooks of the same event down the loop from being executed. Only return a value when absolutely necessary and when you know what you are doing.
 ---
+--- 				It will also prevent the associated `GM:*` hook from being called on the gamemode.
+---
 --- 				It WILL break other addons.
 function hook.Add(eventName, identifier, func) end
 

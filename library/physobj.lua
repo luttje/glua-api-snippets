@@ -224,10 +224,12 @@ function PhysObj:GetMass() end
 ---@return Vector # The center of mass of the physics object.
 function PhysObj:GetMassCenter() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the physical material of the physics object.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the [physical material](https://developer.valvesoftware.com/wiki/Material_surface_properties) of the physics object.
+---
+--- See [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) for a function that adds these types as well as further explanation of what they are.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:GetMaterial)
----@return string # The physical material
+---@return string # The physical material name.
 function PhysObj:GetMaterial() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the physics mesh of the object which is used for physobj-on-physobj collision.
@@ -445,7 +447,7 @@ function PhysObj:SetBuoyancyRatio(buoyancy) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the contents flag of the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:SetContents)
----@param contents number The Enums/CONTENTS.
+---@param contents CONTENTS The Enums/CONTENTS.
 function PhysObj:SetContents(contents) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the linear and angular damping of the physics object.

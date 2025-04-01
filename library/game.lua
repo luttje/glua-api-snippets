@@ -12,7 +12,7 @@ game = {}
 --- **NOTE**: There is a limit of 256 ammo types, including the default ones.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.AddAmmoType)
----@param ammoData table The attributes of the ammo. See the Structures/AmmoData.
+---@param ammoData AmmoData The attributes of the ammo. See the Structures/AmmoData.
 function game.AddAmmoType(ammoData) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Registers a new decal.
@@ -186,7 +186,7 @@ function game.GetMap() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the next map that would be loaded according to the file that is set by the mapcyclefile convar.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetMapNext)
----@return string # nextMap
+---@return string # nextMap or nil if called too early
 function game.GetMapNext() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the revision (Not to be confused with [VBSP Version](https://developer.valvesoftware.com/wiki/Source_BSP_File_Format#Versions)) of the current map.
@@ -268,7 +268,7 @@ function game.MaxPlayers() end
 ---@return table # If successful, a table of files that have been mounted
 function game.MountGMA(path) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes all the clientside ragdolls.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes all the clientside ragdolls. On server, it will remove all `prop_ragdolls` that have the `SF_RAGDOLLPROP_USE_LRU_RETIREMENT` (4096) spawnflag.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.RemoveRagdolls)
 function game.RemoveRagdolls() end
@@ -314,7 +314,8 @@ function game.SetSkillLevel(level) end
 --- To slow down or speed up the movement of a specific player, use [Player:SetLaggedMovementValue](https://wiki.facepunch.com/gmod/Player:SetLaggedMovementValue) instead.
 ---
 --- **NOTE**: Like host_timescale, this method does not affect sounds, if you wish to change that, look into [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
---- 	The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale)
+---
+--- **NOTE**: The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SetTimeScale)
 ---@param timeScale number The new timescale, minimum value is 0.001 and maximum is 5.
@@ -326,8 +327,10 @@ function game.SetTimeScale(timeScale) end
 ---@return boolean # isSinglePlayer
 function game.SinglePlayer() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns position the player should start from, this is not the same thing as spawn points, it is used to properly transit the player between maps.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the name of the entity that should be used as player start position.
+---
+--- This is not the same thing as spawn points (See [GM:PlayerSelectSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSelectSpawn) for that), this is used to properly transit the player between maps, and therefore will only be set after a level change via `trigger_changelevel` entity in singleplayer.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.StartSpot)
----@return Vector # startSpot
+---@return string # The name of the entity that should be used as start position.
 function game.StartSpot() end

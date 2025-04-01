@@ -178,7 +178,7 @@ function GM:CanProperty(ply, property, ent) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:CanUndo)
 ---@param ply Player The player who tried to undo something.
----@param undo table The undo table as a Structures/Undo.
+---@param undo Undo The undo table as a Structures/Undo.
 ---@return boolean # Return false to disallow the undo.
 function GM:CanUndo(ply, undo) end
 
@@ -365,7 +365,7 @@ function GM:EntityEmitSound(data) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityFireBullets)
 ---@param entity Entity The entity that fired the bullet
----@param data table The bullet data. See Structures/Bullet.
+---@param data Bullet The bullet data. See Structures/Bullet.
 ---@return boolean # * Return `true` to apply all changes done to the bullet table.
 --- * Return `false` to suppress the bullet.
 function GM:EntityFireBullets(entity, data) end
@@ -462,9 +462,9 @@ function GM:GameContentChanged() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) An internal function used to get an untranslated string to show in the kill feed as the entity's name. See [GM:SendDeathNotice](https://wiki.facepunch.com/gmod/GM:SendDeathNotice)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:GetDeathNoticeEntityName)
----@param ent Entity The entity to get a name of.
+---@param name String The name of the entity.
 ---@return string # The untranslated name for given NPC. The translation/localization would happen on the client.
-function GM:GetDeathNoticeEntityName(ent) end
+function GM:GetDeathNoticeEntityName(name) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player takes damage from falling, allows to override the damage.
 ---
@@ -811,7 +811,7 @@ function GM:LoadGModSaveFailed() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:MenuStart)
 function GM:MenuStart() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Override this gamemode function to disable mouth movement when talking on voice chat.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Override this gamemode function to disable mouth movement when talking on voice chat. By default, it is not called anywhere on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:MouthMoveAnimation)
 ---@param ply Player Player in question
@@ -889,7 +889,7 @@ function GM:OnChatTab(text) end
 ---@return boolean # Return false to suppress the cleanup notification.
 function GM:OnCleanup(name) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when a caption has been emitted to the closed caption box.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when a caption/subtitle has been emitted to the closed caption box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnCloseCaptionEmit)
 ---@param soundScript string The name of the soundscript, or `customLuaToken` if it's from gui.AddCaption
@@ -1224,7 +1224,7 @@ function GM:PlayerBindPress(ply, bind, pressed, code) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown)
 ---@param ply Player Player who pressed the button
----@param button number The button, see Enums/BUTTON_CODE
+---@param button BUTTON_CODE The button, see Enums/BUTTON_CODE
 function GM:PlayerButtonDown(ply, button) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player releases a button.
@@ -1233,7 +1233,7 @@ function GM:PlayerButtonDown(ply, button) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp)
 ---@param ply Player Player who released the button
----@param button number The button, see Enums/BUTTON_CODE
+---@param button BUTTON_CODE The button, see Enums/BUTTON_CODE
 function GM:PlayerButtonUp(ply, button) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Decides whether a player can hear another player using voice chat.
@@ -1248,6 +1248,7 @@ function GM:PlayerButtonUp(ply, button) end
 function GM:PlayerCanHearPlayersVoice(listener, talker) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not a player is allowed to join a team
+--- 		**WARNING**: This hook will not work with [hook.Add](https://wiki.facepunch.com/gmod/hook.Add) and it is only called manually from [GM:PlayerJoinTeam](https://wiki.facepunch.com/gmod/GM:PlayerJoinTeam) by the base gamemode
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanJoinTeam)
 ---@param ply Player Player attempting to switch teams
@@ -1610,7 +1611,7 @@ function GM:PlayerSelectTeamSpawn(team, ply) end
 function GM:PlayerSetHandsModel(ply, ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever a player spawns and must choose a model. A good place to assign a model to a player.
---- **NOTE**: This function may not work in your custom gamemode if you have overridden your [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) and you do not use self.BaseClass.PlayerSpawn or [hook.Call](https://wiki.facepunch.com/gmod/hook.Call).
+--- **NOTE**: This function may not work in your custom gamemode if you have overridden your [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) and you do not use [self.BaseClass.PlayerSpawn](https://wiki.facepunch.com/gmod/Global.DEFINE_BASECLASS) in it, or [hook.Call](https://wiki.facepunch.com/gmod/hook.Call) this hook from [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerSetModel)
 ---@param ply Player The player being chosen
@@ -1738,7 +1739,7 @@ function GM:PlayerTick(player, mv) end
 ---@param ply Player The player that has been hit
 ---@param dmginfo CTakeDamageInfo The damage info of the bullet
 ---@param dir Vector Normalized vector direction of the bullet's path
----@param trace table The trace of the bullet's path, see Structures/TraceResult
+---@param trace TraceResult The trace of the bullet's path, see Structures/TraceResult
 ---@return boolean # Override engine handling
 function GM:PlayerTraceAttack(ply, dmginfo, dir, trace) end
 
@@ -1851,7 +1852,7 @@ function GM:PostDrawViewModel(viewmodel, player, weapon) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets)
 ---@param entity Entity The entity that fired the bullet
----@param data table A table of data about the bullet that was fired.
+---@param data FiredBullet A table of data about the bullet that was fired.
 ---
 --- 			See Structures/FiredBullet.
 ---@return boolean # Return `false` to suppress the bullet.
@@ -2125,9 +2126,9 @@ function GM:ScoreboardShow() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) An internal function used to send a death notice event to all clients.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:SendDeathNotice)
----@param attacker Entity The entity that caused the death.
----@param inflictor Entity The attacker's weapon or the attacker itself if no weapon was equipped.
----@param victim Entity The entity that died.
+---@param attacker Entity|string|nil The entity that caused the death.
+---@param inflictor string The attacker's weapon class name or the attacker itself if no weapon was equipped.
+---@param victim Entity|string The entity that died.
 ---@param flags number Death notice flags. 1 = Friendly victim (to the player), 2 = friendly attacker (to the player)
 function GM:SendDeathNotice(attacker, inflictor, victim, flags) end
 
@@ -2176,9 +2177,9 @@ function GM:SetupWorldFog() end
 ---
 --- Where applicable, consider using [constraint.NoCollide](https://wiki.facepunch.com/gmod/constraint.NoCollide) or a [logic_collision_pair](https://developer.valvesoftware.com/wiki/Logic_collision_pair) entity instead - they are considerably easier to use and may be more appropriate in some situations.
 ---
---- **WARNING**: This hook **must** return the same value consistently for the same pair of entities. If an entity changed in such a way that its collision rules change, you **must** call [Entity:CollisionRulesChanged](https://wiki.facepunch.com/gmod/Entity:CollisionRulesChanged) on that entity immediately - **not in this hook and not in physics callbacks.**
----
---- **WARNING**: The default [Entity:CollisionRulesChanged](https://wiki.facepunch.com/gmod/Entity:CollisionRulesChanged) has been found to be ineffective in preventing issues in this hook, a more reliable alternative can be found in the examples below. As long as you religiously follow the rules set by the examples this hook will work reliably without breaking, even a small mistake will break physics.
+--- **WARNING**: This hook **must** return the same value consistently for the same pair of entities.
+--- 	If an entity changed in such a way that its collision rules change, you **must** call [Entity:CollisionRulesChanged](https://wiki.facepunch.com/gmod/Entity:CollisionRulesChanged) on that entity immediately - **not in this hook and not in physics callbacks.**
+--- 	As long as you religiously follow the rules set by the examples this hook will work reliably without breaking, even a small mistake might break physics.
 ---
 --- This hook can cause all physics to break under certain conditions.
 ---
@@ -2243,7 +2244,7 @@ function GM:SpawnMenuCreated() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Runs when the user tries to open the chat box.
 ---
---- Returning true won't stop the chatbox from taking VGUI focus.
+--- **WARNING**: Returning `true` won't stop the chatbox from taking VGUI focus. [chat.Close](https://wiki.facepunch.com/gmod/chat.Close) may be of use to mitigate that, or usage of [GM:PlayerBindPress](https://wiki.facepunch.com/gmod/GM:PlayerBindPress).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:StartChat)
 ---@param isTeamChat boolean Whether the message was sent through team chat.
@@ -2308,6 +2309,8 @@ function GM:TranslateActivity(ply, act) end
 function GM:UpdateAnimation(ply, velocity, maxSeqGroundSpeed) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a variable is edited on an Entity (called by Edit Properties... menu). See [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) for more information.
+---
+--- 		**WARNING**: This hook is called to change a variable and not after a variable was changed
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:VariableEdited)
 ---@param ent Entity The entity being edited

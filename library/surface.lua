@@ -17,7 +17,7 @@ surface = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.CreateFont)
 ---@param fontName string The new font name.
----@param fontData table The font properties. See the Structures/FontData.
+---@param fontData FontData The font properties. See the Structures/FontData.
 function surface.CreateFont(fontName, fontData) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enables or disables the clipping used by the VGUI that limits the drawing operations to a panels bounds.
@@ -329,7 +329,7 @@ function surface.SetFont(fontName) end
 --- If using [Global.Material](https://wiki.facepunch.com/gmod/Global.Material), simply use the `ignorez` parameter.
 function surface.SetMaterial(material) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a [Color](https://wiki.facepunch.com/gmod/Color).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetTextColor)
 ---@param r number The red value of color.
@@ -337,12 +337,6 @@ function surface.SetMaterial(material) end
 ---@param b number The blue value of color
 ---@param a? number The alpha value of color
 function surface.SetTextColor(r, g, b, a) end
-
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by a [Color](https://wiki.facepunch.com/gmod/Color).
----
----[View wiki](https://wiki.facepunch.com/gmod/surface.SetTextColor)
----@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
-function surface.SetTextColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the top-left position to draw any future text at.
 ---

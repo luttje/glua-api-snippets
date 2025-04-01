@@ -256,7 +256,7 @@ function Weapon:GetActivity() end
 --- 	**WARNING**: Calling [NPC:CapabilitiesGet](https://wiki.facepunch.com/gmod/NPC:CapabilitiesGet) in this hook on the same entity can cause infinite loops since that function adds the result of [WEAPON:GetCapabilities](https://wiki.facepunch.com/gmod/WEAPON:GetCapabilities) on top of the return value.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:GetCapabilities)
----@return number # A number defining what NPC should do with the weapon. Use the Enums/CAP.
+---@return CAP # A number defining what NPC should do with the weapon. Use the Enums/CAP.
 function WEAPON:GetCapabilities() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the weapon deploy speed, as set by [Weapon:SetDeploySpeed](https://wiki.facepunch.com/gmod/Weapon:SetDeploySpeed). If not previously set, the value will be polled from the `sv_defaultdeployspeed` [ConVar](https://wiki.facepunch.com/gmod/ConVar).
@@ -703,8 +703,8 @@ function WEAPON:Tick() end
 --- For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity)
----@param act number The activity to translate
----@return number # The translated activity
+---@param act ACT The activity to translate
+---@return ACT # The translated activity
 function WEAPON:TranslateActivity(act) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows to change players field of view while player holds the weapon.

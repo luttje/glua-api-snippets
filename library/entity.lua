@@ -30,11 +30,13 @@ ENTITY = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:AcceptInput)
 ---@param inputName string The name of the input that was triggered.
----@param activator Entity The initial cause for the input getting triggered. (EG the player who pushed a button)
----@param caller Entity The entity that directly triggered the input. (EG the button that was pushed)
----@param data string The data passed.
+---@param activator Entity The initial cause for the input getting triggered. (e.g. the player who pushed a button)
+---@param caller Entity The entity that directly triggered the input. (e.g. the button that was pushed)
+---@param param string The input parameter.
 ---@return boolean # Should we suppress the default action for this input?
-function ENTITY:AcceptInput(inputName, activator, caller, data) end
+---
+--- Returning `true` for unknown inputs will also prevent the game complaining about the unknown input in console with `developer 2`.
+function ENTITY:AcceptInput(inputName, activator, caller, param) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Activates the entity. This needs to be used on some entities (like constraints) after being spawned.
 ---
@@ -64,19 +66,19 @@ function Entity:AddCallback(hook, func) end
 --- See also [Entity:IsEffectActive](https://wiki.facepunch.com/gmod/Entity:IsEffectActive) and  [Entity:RemoveEffects](https://wiki.facepunch.com/gmod/Entity:RemoveEffects).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:AddEffects)
----@param effect number The effect to apply, see Enums/EF.
+---@param effect EF The effect to apply, see Enums/EF.
 function Entity:AddEffects(effect) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds engine flags.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:AddEFlags)
----@param flag number Engine flag to add, see Enums/EFL
+---@param flag EFL Engine flag to add, see Enums/EFL
 function Entity:AddEFlags(flag) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds flags to the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:AddFlags)
----@param flag number Flag to add, see Enums/FL
+---@param flag FL Flag to add, see Enums/FL
 function Entity:AddFlags(flag) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a gesture animation to the entity and plays it.
@@ -228,7 +230,7 @@ function Entity:BodyTarget(origin, noisy) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:BoneHasFlag)
 ---@param boneID number Bone ID to test flag of.
----@param flag number The flag to test, see Enums/BONE
+---@param flag BONE The flag to test, see Enums/BONE
 ---@return boolean # Whether the bone has that flag or not
 function Entity:BoneHasFlag(boneID, flag) end
 
@@ -732,7 +734,7 @@ function ENTITY:FireAnimationEvent(pos, ang, event, name) end
 --- **NOTE**: Due to how FireBullets is set up internally, bullet tracers will always originate from attachment 1.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:FireBullets)
----@param bulletInfo table The bullet data to be used. See the Structures/Bullet.
+---@param bulletInfo Bullet The bullet data to be used. See the Structures/Bullet.
 ---@param suppressHostEvents? boolean Has the effect of encasing the FireBullets call in Global.SuppressHostEvents, only works in multiplayer.
 function Entity:FireBullets(bulletInfo, suppressHostEvents) end
 
@@ -864,7 +866,7 @@ function Entity:GetBaseVelocity() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the blood color of this entity. This can be set with [Entity:SetBloodColor](https://wiki.facepunch.com/gmod/Entity:SetBloodColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBloodColor)
----@return number # Color from Enums/BLOOD_COLOR
+---@return BLOOD_COLOR # Color from Enums/BLOOD_COLOR
 function Entity:GetBloodColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the currently active [Sub Model](https://wiki.facepunch.com/gmod/Entity:GetSubModels) of the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id).
@@ -1076,7 +1078,7 @@ function Entity:GetCollisionBounds() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's collision group
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetCollisionGroup)
----@return number # The collision group. See Enums/COLLISION_GROUP
+---@return COLLISION_GROUP # The collision group. See Enums/COLLISION_GROUP
 function Entity:GetCollisionGroup() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the color the entity is set to.
@@ -1552,10 +1554,14 @@ function Entity:GetMaterial() end
 --- For models, it's limited to 128 materials.
 function Entity:GetMaterials() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the surface material of this entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the [surface material type](https://developer.valvesoftware.com/wiki/Material_Types) of this entity.
+---
+--- This can be approximated clientside via [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
+---
+--- Internally, all this does is return `gamematerial` of the surface property on the first physics object of the entity. You can do this yourself using [PhysObj:GetMaterial](https://wiki.facepunch.com/gmod/PhysObj:GetMaterial) and [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetMaterialType)
----@return number # Surface material. See Enums/MAT
+---@return MAT # Surface material type.
 function Entity:GetMaterialType() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the max health that the entity was given. It can be set via [Entity:SetMaxHealth](https://wiki.facepunch.com/gmod/Entity:SetMaxHealth).
@@ -2199,7 +2205,7 @@ function Entity:GetRagdollOwner() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:GetRelationship)
 ---@param ent Entity The entity in question
----@return number # How our scripter NPC "feels" towards the entity in question. See Enums/D. Not returning any value will make NPC:Disposition return the default disposition for this SNPC's given `m_iClass` by the engine.
+---@return D # How our scripter NPC "feels" towards the entity in question. See Enums/D. Not returning any value will make NPC:Disposition return the default disposition for this SNPC's given `m_iClass` by the engine.
 function ENTITY:GetRelationship(ent) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the entity's render angles, set by [Entity:SetRenderAngles](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles) in a drawing hook.
@@ -2448,7 +2454,7 @@ function Entity:GetSolid() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns solid flag(s) of an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetSolidFlags)
----@return number # The flag(s) of the entity, see Enums/FSOLID.
+---@return FSOLID # The flag(s) of the entity, see Enums/FSOLID.
 function Entity:GetSolidFlags() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called every second to poll the sound hint interests of this SNPC. This is used in conjunction with other sound hint functions, such as [sound.EmitHint](https://wiki.facepunch.com/gmod/sound.EmitHint) and [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint).
@@ -2507,7 +2513,7 @@ function Entity:GetTable() end
 --- **NOTE**: This returns the last collision trace used, regardless of the entity that caused it. As such, it's only reliable when used in the hooks mentioned above
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetTouchTrace)
----@return table # The Structures/TraceResult
+---@return TraceResult # The Structures/TraceResult
 function Entity:GetTouchTrace() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns true if the TransmitWithParent flag is set or not.
@@ -2538,7 +2544,9 @@ function Entity:GetVar(key, default) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's velocity.
 ---
---- **NOTE**: Actually binds to `CBaseEntity::GetAbsVelocity()` on the server and `C_BaseEntity::EstimateAbsVelocity()` on the client. This returns the total velocity of the entity and is equal to local velocity + base velocity.
+--- This returns the total velocity of the entity and is equal to local velocity + base velocity.
+---
+--- Clientside the velocity may be estimated for certain entities, such as physics based entities, instead of returning the "real" velocity from the server.
 ---
 --- This can become out-of-sync on the client if the server has been up for a long time.
 ---
@@ -2587,7 +2595,7 @@ function Entity:GibBreakClient(force, clr) end
 ---
 --- Note, that this function will not remove or hide the entity it is called on.
 ---
---- This function is affected by `props_break_max_pieces_perframe` and `props_break_max_pieces` console variables.
+--- This function is affected by `props_break_max_pieces_perframe`, `props_break_max_pieces`, `prop_active_gib_limit` and `prop_active_gib_max_fade_time` console variables.
 ---
 --- **WARNING**: Large numbers of serverside gibs will cause lag.
 ---
@@ -2760,21 +2768,21 @@ function Entity:IsDormant() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether an entity has engine effect applied or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsEffectActive)
----@param effect number The effect to check for, see Enums/EF.
+---@param effect EF The effect to check for, see Enums/EF.
 ---@return boolean # Whether the entity has the engine effect applied or not.
 function Entity:IsEffectActive(effect) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if given flag is set or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsEFlagSet)
----@param flag number The engine flag to test, see Enums/EFL
+---@param flag EFL The engine flag to test, see Enums/EFL
 ---@return boolean # Is set or not
 function Entity:IsEFlagSet(flag) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if given flag(s) is set or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsFlagSet)
----@param flag number The engine flag(s) to test, see Enums/FL
+---@param flag FL The engine flag(s) to test, see Enums/FL
 ---@return boolean # Is set or not
 function Entity:IsFlagSet(flag) end
 
@@ -3776,19 +3784,19 @@ function Entity:RemoveCallOnRemove(identifier) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes an engine effect applied to an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveEffects)
----@param effect number The effect to remove, see Enums/EF.
+---@param effect EF The effect to remove, see Enums/EF.
 function Entity:RemoveEffects(effect) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes specified engine flag
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveEFlags)
----@param flag number The flag to remove, see Enums/EFL
+---@param flag EFL The flag to remove, see Enums/EFL
 function Entity:RemoveEFlags(flag) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes specified flag(s) from the entity
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveFlags)
----@param flag number The flag(s) to remove, see Enums/FL
+---@param flag FL The flag(s) to remove, see Enums/FL
 function Entity:RemoveFlags(flag) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ect from the entity's motion controller so that [ENTITY:PhysicsSimulate](https://wiki.facepunch.com/gmod/ENTITY:PhysicsSimulate) will no longer be called for given [PhysObj](https://wiki.facepunch.com/gmod/PhysObj)ect.
@@ -4026,7 +4034,7 @@ function ENTITY:SetAutomaticFrameAdvance(enable) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the blood color this entity uses.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBloodColor)
----@param bloodColor number An integer corresponding to Enums/BLOOD_COLOR.
+---@param bloodColor BLOOD_COLOR An integer corresponding to Enums/BLOOD_COLOR.
 function Entity:SetBloodColor(bloodColor) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the currently active [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
@@ -4103,7 +4111,7 @@ function Entity:SetCollisionBoundsWS(vec1, vec2) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the entity's collision group.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetCollisionGroup)
----@param group number Collision group of the entity, see Enums/COLLISION_GROUP
+---@param group COLLISION_GROUP Collision group of the entity, see Enums/COLLISION_GROUP
 function Entity:SetCollisionGroup(group) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the color of an entity.
@@ -4862,12 +4870,40 @@ function Entity:SetNetworkedVarProxy(name, callback) end
 ---@deprecated You should use Entity:SetNWVector instead.
 function Entity:SetNetworkedVector(key, value) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function to allow setting [Network Variables](https://wiki.facepunch.com/gmod/Networking_Entities) via [Entity:SetKeyValue](https://wiki.facepunch.com/gmod/Entity:SetKeyValue), primarily to allow mappers to set them from Hammer.
+---
+--- Meant to be called from [ENTITY:KeyValue](https://wiki.facepunch.com/gmod/ENTITY:KeyValue), see example.
+---
+--- See also [Entity:SetNetworkVarsFromMapInput](https://wiki.facepunch.com/gmod/Entity:SetNetworkVarsFromMapInput) for a function that does similar thing for map inputs instead.
+---
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkKeyValue)
+---@param key string The key-value name, or simply the "key".
+---@param value string The key-value value.
+---@return boolean # Whether a network variable was set successfully
+function Entity:SetNetworkKeyValue(key, value) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Virtually changes entity position for clients. Does almost the same thing as [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) when used serverside.
 --- 		**NOTE**: Unlike [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) it directly changes the position without checking for any unreasonable position.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkOrigin)
 ---@param origin Vector The position to make clients think this entity is at.
 function Entity:SetNetworkOrigin(origin) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function to allow setting [Network Variables](https://wiki.facepunch.com/gmod/Networking_Entities) via [Entity:Fire](https://wiki.facepunch.com/gmod/Entity:Fire), primarily to allow mappers to set them from Hammer via Map I/O logic.
+---
+--- Meant to be called from [ENTITY:AcceptInput](https://wiki.facepunch.com/gmod/ENTITY:AcceptInput), see example.
+---
+--- See also [Entity:SetNetworkKeyValue](https://wiki.facepunch.com/gmod/Entity:SetNetworkKeyValue) for a function that does similar thing, but for entity key-values in Hammer instead.
+---
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkVarsFromMapInput)
+---@param name string The name of the Map I/O input, including the `Set` prefix.
+---@param param string The input parameter.
+---@return boolean # Whether a network variable was set successfully
+function Entity:SetNetworkVarsFromMapInput(name, param) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the next time the clientside [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) is called.
 ---
@@ -5417,7 +5453,7 @@ function Entity:SetSolid(solid_type) end
 --- This overrides any other flags the entity might have had. See [Entity:AddSolidFlags](https://wiki.facepunch.com/gmod/Entity:AddSolidFlags) for adding flags.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSolidFlags)
----@param flags number The flag(s) to set, see Enums/FSOLID.
+---@param flags FSOLID The flag(s) to set, see Enums/FSOLID.
 function Entity:SetSolidFlags(flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets whether the entity should use a spawn effect when it is created on the client.
@@ -5471,7 +5507,7 @@ function Entity:SetSurroundingBounds(min, max) end
 --- 	See also [Entity:SetSurroundingBounds](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBounds) (mutually exclusive).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBoundsType)
----@param bounds number Bounds type of the entity, see Enums/BOUNDS
+---@param bounds BOUNDS Bounds type of the entity, see Enums/BOUNDS
 function Entity:SetSurroundingBoundsType(bounds) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -5867,7 +5903,7 @@ function Entity:TranslateBoneToPhysBone(boneID) end
 ---@param currentGoal? Vector The target's origin.
 ---@return Vector # The actual point that NPC will move to reach its enemy or target. For the path to get updated, the new move path must be away from the current NPC:GetGoalPos by 120 units.
 ---
---- Not returning anything, or returning a non vector will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc_schedule.cpp#L4251).
+--- Not returning anything, or returning a non vector will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc_schedule.cpp#L4251).
 function ENTITY:TranslateNavGoal(target, currentGoal) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the boneID of the bone the given [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) is attached to.

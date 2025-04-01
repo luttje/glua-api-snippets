@@ -12,7 +12,7 @@ function input.CheckKeyTrapping() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the digital value of an analog stick on the current (set up via convars) controller.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.GetAnalogValue)
----@param axis number The analog axis to poll. See Enums/ANALOG.
+---@param axis ANALOG The analog axis to poll. See Enums/ANALOG.
 ---@return number # The digital value.
 --- A joystick axis returns `-32768` when it's pushed completely up/completely left, & returns `32767` when it's pushed completely down/completely right.
 ---
@@ -35,7 +35,7 @@ function input.GetCursorPos() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.GetKeyCode)
 ---@param button string The internal button name, such as E or SHIFT.
----@return number # The button code, see Enums/BUTTON_CODE.
+---@return BUTTON_CODE # The button code, see Enums/BUTTON_CODE.
 function input.GetKeyCode(button) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets the button name from a numeric button code. The name needs to be translated with [language.GetPhrase](https://wiki.facepunch.com/gmod/language.GetPhrase) before being displayed.
@@ -43,7 +43,7 @@ function input.GetKeyCode(button) end
 --- **NOTE**: Despite the name of the function, this also works for the full range of keys in [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.GetKeyName)
----@param button number The button, see Enums/BUTTON_CODE.
+---@param button BUTTON_CODE The button, see Enums/BUTTON_CODE.
 ---@return string # Button name.
 function input.GetKeyName(button) end
 
@@ -52,7 +52,7 @@ function input.GetKeyName(button) end
 --- Unlike [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown) this can also detect joystick presses from [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsButtonDown)
----@param button number The button, valid values are in the range of Enums/BUTTON_CODE.
+---@param button BUTTON_CODE The button, valid values are in the range of Enums/BUTTON_CODE.
 ---@return boolean # Is the button down
 function input.IsButtonDown(button) end
 
@@ -101,7 +101,7 @@ function input.LookupBinding(binding, exact) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the bind string that the given key is bound to.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.LookupKeyBinding)
----@param key number Key from Enums/BUTTON_CODE
+---@param key BUTTON_CODE Key from Enums/BUTTON_CODE
 ---@return string # The bind string of the given key.
 function input.LookupKeyBinding(key) end
 

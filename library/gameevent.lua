@@ -743,7 +743,7 @@ player_info.networkid = nil
 ---@class player_say
 local player_say = {}
 
----Event priority number used by HLTV.
+---Event priority number used by HLTV. Hardcoded to be 1
 ---@type number
 player_say.priority = nil
 

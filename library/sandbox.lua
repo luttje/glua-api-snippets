@@ -386,7 +386,7 @@ function SANDBOX:SpawnlistContentChanged() end
 --- Called when there's one or more items selected in the spawnmenu by the player, to open the multi selection right click menu ([DMenu](https://wiki.facepunch.com/gmod/DMenu))
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:SpawnlistOpenGenericMenu)
----@param canvas Panel The canvas that has the selection. (SANDBOX:SpawnlistOpenGenericMenu)
+---@param canvas Panel The canvas that has the selection. (Panel:GetSelectionCanvas)
 function SANDBOX:SpawnlistOpenGenericMenu(canvas) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) If false is returned then the spawn menu is never created. This saves load times if your mod doesn't actually use the spawn menu for any reason.
@@ -394,6 +394,25 @@ function SANDBOX:SpawnlistOpenGenericMenu(canvas) end
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:SpawnMenuEnabled)
 ---@return boolean # Whether to create spawnmenu or not.
 function SANDBOX:SpawnMenuEnabled() end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the player opens a context menu by right clicking one of the spawnmenu icons. Either [ContentIcon](https://wiki.facepunch.com/gmod/ContentIcon) or [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon).
+---
+--- This hook can be used to add new custom menu options to the context menu.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:SpawnmenuIconMenuOpen)
+---@param menu Panel The DMenu to add options to.
+---@param icon Panel The ContentIcon or SpawnIcon that was right clicked. It will be a `SpawnIcon` for `model` content type, and a `ContentIcon` for all others.
+---@param contentType string The content type, such as:
+--- * `weapon`
+--- * `entity`
+--- * `vehicle`
+--- * `npc`
+--- * `model`
+--- * `tool`
+--- * `postprocess`
+---
+--- Addon related icons may have different types.
+function SANDBOX:SpawnmenuIconMenuOpen(menu, icon, contentType) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when spawnmenu is trying to be opened.
 ---

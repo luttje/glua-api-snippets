@@ -88,7 +88,7 @@ function CTakeDamageInfo:GetDamagePosition() end
 --- Consider using [CTakeDamageInfo:IsDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType) instead. Value returned by this function can contain multiple damage types.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamageType)
----@return number # Damage type(s), a combination of Enums/DMG
+---@return DMG # Damage type(s), a combination of Enums/DMG
 function CTakeDamageInfo:GetDamageType() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the inflictor of the damage. This is not necessarily a weapon.
@@ -134,7 +134,7 @@ function CTakeDamageInfo:IsBulletDamage() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whenever the damageinfo contains the damage type specified.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType)
----@param dmgType number Damage type to test. See Enums/DMG.
+---@param dmgType DMG Damage type to test. See Enums/DMG.
 ---@return boolean # Whether this damage contains specified damage type or not
 function CTakeDamageInfo:IsDamageType(dmgType) end
 
@@ -208,7 +208,7 @@ function CTakeDamageInfo:SetDamagePosition(pos) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the damage type.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamageType)
----@param type number The damage type, see Enums/DMG.
+---@param type DMG The damage type, see Enums/DMG.
 function CTakeDamageInfo:SetDamageType(type) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the inflictor of the damage for example a weapon.

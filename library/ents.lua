@@ -123,9 +123,7 @@ function ents.FindInPVS(viewPoint) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets all entities within the specified sphere.
 ---
---- Serverside, this uses a Spatial Partition internally to avoid looping through all entities, so it is more efficient than using [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) for this purpose.
----
---- Clientside, this function internally calls [util.IsBoxIntersectingSphere](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingSphere)
+--- This function internally calls [util.IsBoxIntersectingSphere](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingSphere) for every entity on the map based on their Orientated Bounding Box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindInSphere)
 ---@param origin Vector Center of the sphere.

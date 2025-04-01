@@ -46,7 +46,7 @@ function NPC:AutoMovement(interval, target) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a capability to the NPC.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:CapabilitiesAdd)
----@param capabilities number Capabilities to add, see Enums/CAP.
+---@param capabilities CAP Capabilities to add, see Enums/CAP.
 function NPC:CapabilitiesAdd(capabilities) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes all of Capabilities the NPC has.
@@ -57,7 +57,7 @@ function NPC:CapabilitiesClear() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the NPC's capabilities along the ones defined on its weapon.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:CapabilitiesGet)
----@return number # The capabilities as a bitflag.
+---@return CAP # The capabilities as a bitflag.
 --- See Enums/CAP
 function NPC:CapabilitiesGet() end
 
@@ -70,7 +70,7 @@ function NPC:CapabilitiesRemove(capabilities) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the NPC class. Do not confuse with [Entity:GetClass](https://wiki.facepunch.com/gmod/Entity:GetClass)!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:Classify)
----@return number # See Enums/CLASS
+---@return CLASS # See Enums/CLASS
 function NPC:Classify() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Resets the [NPC:GetBlockingEntity](https://wiki.facepunch.com/gmod/NPC:GetBlockingEntity).
@@ -118,7 +118,7 @@ function NPC:ConditionName(cond) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:Disposition)
 ---@param ent Entity The entity to test our disposition towards.
----@return number # The NPCs disposition, see Enums/D.
+---@return D # The NPCs disposition, see Enums/D.
 ---@return number # The NPCs disposition priority.
 function NPC:Disposition(ent) end
 
@@ -276,6 +276,12 @@ function NPC:GetEnemyLastTimeSeen(enemy) end
 ---@return string # The file path of the expression.
 function NPC:GetExpression() end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the eye direction of the NPC.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetEyeDirection)
+---@return Vector # The eye direction.
+function NPC:GetEyeDirection() end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the Field Of View of the NPC. See [NPC:SetFOV](https://wiki.facepunch.com/gmod/NPC:SetFOV).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetFOV)
@@ -293,6 +299,12 @@ function NPC:GetGoalPos() end
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetGoalTarget)
 ---@return Entity # The entity we are trying to reach, or `NULL`.
 function NPC:GetGoalTarget() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the 2D head direction of the NPC.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetHeadDirection)
+---@return Vector # The head direction.
+function NPC:GetHeadDirection() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns NPCs hull type set by [NPC:SetHullType](https://wiki.facepunch.com/gmod/NPC:SetHullType).
 ---
@@ -663,7 +675,7 @@ function NPC:MarkTookDamageFromEnemy(enemy) end
 ---@param distance number The distance.
 ---@param yaw number The yaw angle.
 ---@param left number Amount of climb nodes left?
----@return number # The result. See Enums/AIMR.
+---@return AIMR # The result. See Enums/AIMR.
 function NPC:MoveClimbExec(destination, dir, distance, yaw, left) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Starts a climb move.
@@ -689,7 +701,7 @@ function NPC:MoveClimbStop() end
 --- Related functions are [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart) and [NPC:MoveJumpStop](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec)
----@return number # The result. See Enums/AIMR.
+---@return AIMR # The result. See Enums/AIMR.
 function NPC:MoveJumpExec() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Starts a jump move.
@@ -705,7 +717,7 @@ function NPC:MoveJumpStart(vel) end
 --- Related functions are [NPC:MoveJumpExec](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec) and [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop)
----@return number # The result. See Enums/AIMR.
+---@return AIMR # The result. See Enums/AIMR.
 function NPC:MoveJumpStop() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the NPC walk toward the given position. The NPC will return to the player after amount of time set by **player_squad_autosummon_time** [ConVar](https://wiki.facepunch.com/gmod/ConVar).
@@ -888,7 +900,7 @@ function NPC:SetArrivalSpeed(speed) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets an NPC condition.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:SetCondition)
----@param condition number The condition index, see Enums/COND.
+---@param condition COND The condition index, see Enums/COND.
 function NPC:SetCondition(condition) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the weapon proficiency of an NPC (how skilled an NPC is with its current weapon).

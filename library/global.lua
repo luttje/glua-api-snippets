@@ -7,7 +7,7 @@
 ---@param tab table The table to add the accessor functions to.
 ---@param key any The key of the table to be get/set.
 ---@param name string The name of the functions (will be prefixed with Get and Set).
----@param force? number The type the setter should force to (uses Enums/FORCE).
+---@param force? FORCE The type the setter should force to (uses Enums/FORCE).
 function _G.AccessorFunc(tab, key, name, force) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Defines a global entity class variable with an automatic value. In order to prevent collisions with other [Enums/CLASS](https://wiki.facepunch.com/gmod/Enums/CLASS). You should prefix your variable with CLASS_ for consistency.
@@ -28,7 +28,7 @@ function _G.AddBackgroundImage(path) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand)
 ---@param name string The name of the console command to add.
 ---@param helpText string The help text.
----@param flags number Concommand flags using Enums/FCVAR
+---@param flags FCVAR Concommand flags using Enums/FCVAR
 function _G.AddConsoleCommand(name, helpText, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems.
@@ -381,7 +381,7 @@ function _G.CreateContextMenu() end
 ---
 --- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
----@param flags? number|table Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param flags? FCVAR|number[] Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
 ---@param helptext? string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.
@@ -674,6 +674,8 @@ function _G.DOF_Start() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) A hacky method used to fix some bugs regarding DoF. What this basically does it force all `C_BaseAnimating` entities to have the translucent [rendergroup](https://wiki.facepunch.com/gmod/Enums/RENDERGROUP), even if they use opaque or two-pass models.
 ---
+--- This is specifically to do with [GM:NeedsDepthPass](https://wiki.facepunch.com/gmod/GM:NeedsDepthPass)
+---
 --- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.DOFModeHack)
@@ -898,10 +900,10 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 --- * `0` - Plays sound on the world (position set to `0,0,0`)
 --- * `-1` - Plays sound on the local player (on server acts as `0`)
 --- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
----@param channel? number The sound channel, see Enums/CHAN.
+---@param channel? CHAN The sound channel, see Enums/CHAN.
 ---@param volume? number The volume of the sound, from 0 to 1
----@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
----@param soundFlags? number The flags of the sound, see Enums/SND
+---@param soundLevel? SNDLVL The sound level of the sound, see Enums/SNDLVL
+---@param soundFlags? SND The flags of the sound, see Enums/SND
 ---@param pitch? number The pitch of the sound, 0-255
 ---@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
 ---@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
@@ -1444,15 +1446,15 @@ function _G.GetRenderTarget(name, width, height) end
 --- The name is treated like a path and gets its extension discarded."name.1" and "name.2" are considered the same name and will result in the same render target being reused.
 ---@param width number The width of the render target, must be power of 2.
 ---@param height number The height of the render target, must be power of 2.
----@param sizeMode number Bitflag that influences the sizing of the render target, see Enums/RT_SIZE.
----@param depthMode number Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
+---@param sizeMode RT_SIZE Bitflag that influences the sizing of the render target, see Enums/RT_SIZE.
+---@param depthMode MATERIAL_RT_DEPTH Bitflag that determines the depth buffer usage of the render target Enums/MATERIAL_RT_DEPTH.
 ---
 --- 		PNG's may not render to non MATERIAL_RT_DEPTH_NONE RenderTargets
----@param textureFlags number Bitflag that configurates the texture, see Enums/TEXTUREFLAGS.
+---@param textureFlags TEXTUREFLAGS Bitflag that configures the texture, see Enums/TEXTUREFLAGS.
 ---
 --- List of flags can also be found on the Valve's Developer Wiki:
 --- https://developer.valvesoftware.com/wiki/Valve_Texture_Format
----@param rtFlags number Flags that controll the HDR behaviour of the render target, see Enums/CREATERENDERTARGETFLAGS.
+---@param rtFlags CREATERENDERTARGETFLAGS Flags that control the HDR behaviour of the render target, see Enums/CREATERENDERTARGETFLAGS.
 ---@param imageFormat number Image format, see Enums/IMAGE_FORMAT.
 --- Some additional image formats are accepted, but don't have enums. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
 ---@return ITexture # The new render target.
@@ -1498,8 +1500,6 @@ function _G.GMOD_OpenURLNoOverlay(url) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HSL color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
---- The returned color will not have the color metatable.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HSLToColor)
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
@@ -1508,8 +1508,6 @@ function _G.GMOD_OpenURLNoOverlay(url) end
 function _G.HSLToColor(hue, saturation, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
----
---- The returned color will not have the color metatable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HSVToColor)
 ---@param hue number The hue in degrees from 0-360.
@@ -1528,8 +1526,8 @@ function _G.HSVToColor(hue, saturation, value) end
 --- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command Line Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HTTP)
----@param parameters table The request parameters. See Structures/HTTPRequest.
----@return boolean # `true` if we made a request, `nil` if we failed.
+---@param parameters HTTPRequest The request parameters. See Structures/HTTPRequest.
+---@return boolean # `true` if a request is queued, `false` if a request could not be queued. (i.e. When not giving a `table` or the game is ran with `-disablehttp`)
 function _G.HTTP(parameters) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HWB color space](https://en.wikipedia.org/wiki/HWB_color_model) (Hue-Whiteness-Blackness) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
@@ -1572,7 +1570,7 @@ function _G.IncludeCS(filename) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for a [Generic For Loops](https://www.lua.org/pil/4.3.5.html), to return ordered key-value pairs from a table.
 ---
---- This will only iterate though **numerical** keys, and these must also be **sequential**; starting at 1 with no gaps.
+--- This will only iterate through **numerical** keys, and these must also be **sequential**; starting at 1 with no gaps.
 ---
 --- For unordered pairs, see [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs).
 ---
@@ -3081,7 +3079,7 @@ function _G.type(var) end
 ---
 --- **WARNING**: This will return `TYPE_TABLE` for [Color](https://wiki.facepunch.com/gmod/Color) objects.
 ---
---- **WARNING**: All subclasses of [Entity](https://wiki.facepunch.com/gmod/Entity) will return `TYPE_ENTITY`.
+--- All subclasses of [Entity](https://wiki.facepunch.com/gmod/Entity) will return `TYPE_ENTITY`.
 ---
 --- This returns garbage for _LOADLIB objects.
 --- This returns `TYPE_NIL` for [proto](https://wiki.facepunch.com/gmod/proto)s.
