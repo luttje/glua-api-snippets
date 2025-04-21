@@ -1,10 +1,8 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
---- 		A panel used by [DListView](https://wiki.facepunch.com/gmod/DListView)
----
+--- A panel used by [DListView](https://wiki.facepunch.com/gmod/DListView)
 ---@class DListView_Line : Panel
 local DListView_Line = {}
 
@@ -83,7 +81,7 @@ function DListView_Line:SetColumnText(column, value) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		Sets the ID of this line, used internally by [DListView:AddLine](https://wiki.facepunch.com/gmod/DListView:AddLine).
+--- Sets the ID of this line, used internally by [DListView:AddLine](https://wiki.facepunch.com/gmod/DListView:AddLine).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListView_Line:SetID)
 ---@param id number The ID for this line.

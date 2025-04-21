@@ -124,7 +124,7 @@ function table.ForceInsert(tab, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
 ---
---- The GLua interpretation of this is [table.ForEach](https://wiki.facepunch.com/gmod/table.ForEach).
+--- he GLua interpretation of this is [table.ForEach](https://wiki.facepunch.com/gmod/table.ForEach).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.foreach)
 ---@param tbl table The table to iterate over.
@@ -138,7 +138,7 @@ function table.foreach(tbl, callback) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Iterates for each numeric index in the table in order.
 ---
---- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs)() instead.
+--- his is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs)() instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.foreachi)
 ---@param table table The table to iterate over.
@@ -201,7 +201,7 @@ function table.getn(tbl) end
 function table.GetWinningKey(inputTable) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Checks if a table has a value.
---- **WARNING**: This function is **very inefficient for large tables** (O(n)) and should probably not be called in things that run each frame. Instead, consider a table structure such as example 2 below. Also see: [Tables: Bad Habits](https://wiki.facepunch.com/gmod/Tables: Bad Habits)
+--- **WARNING**: This function is **very inefficient for large tables** (O(n)) and should probably not be called in things that run each frame. Instead, consider a table structure such as example 2 below. Also see: [Tables: Bad Habits](https://wiki.facepunch.com/gmod/Tables:_Bad_Habits)
 ---
 --- **NOTE**: For optimization, functions that look for a value by sorting the table should never be needed if you work on a table that you built yourself.
 ---
@@ -294,12 +294,13 @@ function table.maxn(tbl) end
 ---@return table # A list of found values, or an empty table.
 function table.MemberValuesFromKey(inputTable, keyName) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Recursively merges the key-value pairs of the `source` table with the key-value pairs in the `destination` table.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) **NOTE**: This function can cause a stack overflow under certain circumstances.
+---
+--- Recursively merges the key-value pairs of the `source` table with the key-value pairs in the `destination` table.
 ---
 --- See [table.Inherit](https://wiki.facepunch.com/gmod/table.Inherit), which doesn't override existing values.
 ---
 --- See also [table.Add](https://wiki.facepunch.com/gmod/table.Add), which simply adds values of one table to another.
---- **NOTE**: This function can cause a stack overflow under certain circumstances.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.Merge)
 ---@param destination table The table you want the source table to merge with.
@@ -416,7 +417,7 @@ function table.SortByKey(tab, descending) end
 function table.SortByMember(tab, memberKey, ascending) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sorts a table in reverse order from [table.sort](https://wiki.facepunch.com/gmod/table.sort).
---- **NOTE**: This function modifies the table you give to it. Like table.sort, it does not return anything.
+--- NOTE**: This function modifies the table you give to it. Like table.sort, it does not return anything.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.SortDesc)
 ---@param tbl table The table to sort in descending order.

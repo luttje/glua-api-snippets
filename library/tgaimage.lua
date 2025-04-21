@@ -1,7 +1,5 @@
 ---@meta
 
----
---- 		A panel capable of loading `.tga` images.
----
+--- A panel capable of loading `.tga` images.
 ---@class TGAImage : Panel
 local TGAImage = {}

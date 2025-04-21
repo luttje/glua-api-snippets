@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		The DFrame is the moma of basically all VGUI elements. 98% of the time you will parent your element to this.
----
+--- The DFrame is the moma of basically all VGUI elements. 98% of the time you will parent your element to this.
 ---@class DFrame : EditablePanel
 local DFrame = {}
 

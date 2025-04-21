@@ -4,7 +4,7 @@
 ---
 --- The major advantages of the net library are the large size limit (64kb/message) and the ability to send data backwards - from the client to the server.
 ---
---- Refer to [Net Library Usage](https://wiki.facepunch.com/gmod/Net Library Usage) for a short introduction.
+--- Refer to [Net Library Usage](https://wiki.facepunch.com/gmod/Net_Library_Usage) for a short introduction.
 net = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Cancels a net message started by [net.Start](https://wiki.facepunch.com/gmod/net.Start), so you can immediately start a new one without any errors.
@@ -13,14 +13,14 @@ net = {}
 function net.Abort() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the currently built net message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all connected players.
---- More information can be found in [Net Library Usage](https://wiki.facepunch.com/gmod/Net Library Usage).
+--- More information can be found in [Net Library Usage](https://wiki.facepunch.com/gmod/Net_Library_Usage).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Broadcast)
 function net.Broadcast() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of data left to read in the current message. Does nothing when sending data.
 ---
---- 		**NOTE**: This will include 6 extra bits (or 1 byte rounded-up) used by the engine internally.
+--- **NOTE**: This will include 6 extra bits (or 1 byte rounded-up) used by the engine internally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.BytesLeft)
 ---@return number # The amount of data left to read in the current net message in **bytes**.
@@ -379,43 +379,45 @@ function net.WriteFloat(float) end
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteInt)
 ---@param integer number The integer to be sent.
 ---@param bitCount number The amount of bits the number consists of. This must be **32** or less.
----
---- If you are unsure what to set, just set it to `32`.
----
---- Consult the table below to determine the bit count you need:
----
---- | Bit Count |  Minimum value |  Maximum value |
---- |-----------|:--------------:|:--------------:|
---- | 3 | -4 | 3 |
---- | 4 | -8 | 7 |
---- | 5 | -16 | 15 |
---- | 6 | -32 | 31 |
---- | 7 | -64 | 63 |
---- | 8 | -128 | 127 |
---- | 9 | -256 | 255 |
---- | 10 | -512 | 511 |
---- | 11 | -1,024 | 1,023 |
---- | 12 | -2,048 | 2,047 |
---- | 13 | -4,096 | 4,095 |
---- | 14 | -8,192 | 8,191 |
---- | 15 | -16,384 | 16,383 |
---- | 16 | -32,768 | 32,767 |
---- | 17 | -65,536 | 65,535 |
---- | 18 | -131,072 | 131,071 |
---- | 19 | -262,144 | 262,143 |
---- | 20 | -524,288 | 524,287 |
---- | 21 | -1,048,576 | 1,048,575 |
---- | 22 | -2,097,152 | 2,097,151 |
---- | 23 | -4,194,304 | 4,194,303 |
---- | 24 | -8,388,608 | 8,388,607 |
---- | 25 | -16,777,216 | 16,777,215 |
---- | 26 | -33,554,432 | 33,554,431 |
---- | 27 | -67,108,864 | 67,108,863 |
---- | 28 | -134,217,728 | 134,217,727 |
---- | 29 | -268,435,456 | 268,435,455 |
---- | 30 | -536,870,912 | 536,870,911 |
---- | 31 | -1,073,741,824 | 1,073,741,823 |
---- | 32 | -2,147,483,648 | 2,147,483,647 |
+--[[
+
+If you are unsure what to set, just set it to `32`.
+
+Consult the table below to determine the bit count you need:
+
+| Bit Count |  Minimum value |  Maximum value |
+|-----------|:--------------:|:--------------:|
+| 3 | -4 | 3 |
+| 4 | -8 | 7 |
+| 5 | -16 | 15 |
+| 6 | -32 | 31 |
+| 7 | -64 | 63 |
+| 8 | -128 | 127 |
+| 9 | -256 | 255 |
+| 10 | -512 | 511 |
+| 11 | -1,024 | 1,023 |
+| 12 | -2,048 | 2,047 |
+| 13 | -4,096 | 4,095 |
+| 14 | -8,192 | 8,191 |
+| 15 | -16,384 | 16,383 |
+| 16 | -32,768 | 32,767 |
+| 17 | -65,536 | 65,535 |
+| 18 | -131,072 | 131,071 |
+| 19 | -262,144 | 262,143 |
+| 20 | -524,288 | 524,287 |
+| 21 | -1,048,576 | 1,048,575 |
+| 22 | -2,097,152 | 2,097,151 |
+| 23 | -4,194,304 | 4,194,303 |
+| 24 | -8,388,608 | 8,388,607 |
+| 25 | -16,777,216 | 16,777,215 |
+| 26 | -33,554,432 | 33,554,431 |
+| 27 | -67,108,864 | 67,108,863 |
+| 28 | -134,217,728 | 134,217,727 |
+| 29 | -268,435,456 | 268,435,455 |
+| 30 | -536,870,912 | 536,870,911 |
+| 31 | -1,073,741,824 | 1,073,741,823 |
+| 32 | -2,147,483,648 | 2,147,483,647 |
+--]]
 function net.WriteInt(integer, bitCount) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) to the current net message.
@@ -486,53 +488,55 @@ function net.WriteType(Data) end
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteUInt)
 ---@param unsignedInteger number The unsigned integer to be sent.
 ---@param bitCount number The size of the integer to be sent, in bits. Acceptable values range from any number `1` to `32` inclusive.
----
---- For reference: `1` = bit, `4` = nibble, `8` = byte, `16` = short, `32` = long.
----
---- Consult the table below to determine the bit count you need. The minimum value for all bit counts is `0`.
----
---- | Bit Count |  Maximum value |
---- |-----------|:--------------:|
---- | 1 | 1  |
---- | 2 | 3  |
---- | 3 | 7  |
---- | 4 | 15 |
---- | 5 | 31 |
---- | 6 | 63 |
---- | 7 | 127 |
---- | 8 | 255 |
---- | 9 | 511 |
---- | 10 | 1,023 |
---- | 11 | 2,047 |
---- | 12 | 4,095 |
---- | 13 | 8,191 |
---- | 14 | 16,383 |
---- | 15 | 32,767 |
---- | 16 | 65,535 |
---- | 17 | 131,071 |
---- | 18 | 262,143 |
---- | 19 | 524,287  |
---- | 20 | 1,048,575  |
---- | 21 | 2,097,151  |
---- | 22 | 4,194,303  |
---- | 23 | 8,388,607  |
---- | 24 | 16,777,215  |
---- | 25 | 33,554,431  |
---- | 26 | 67,108,863  |
---- | 27 | 134,217,727  |
---- | 28 | 268,435,455  |
---- | 29 | 536,870,911  |
---- | 30 | 1,073,741,823 |
---- | 31 | 2,147,483,647 |
---- | 32 | 4,294,967,295 |
+--[[
+
+For reference: `1` = bit, `4` = nibble, `8` = byte, `16` = short, `32` = long.
+
+Consult the table below to determine the bit count you need. The minimum value for all bit counts is `0`.
+
+| Bit Count |  Maximum value |
+|-----------|:--------------:|
+| 1 | 1  |
+| 2 | 3  |
+| 3 | 7  |
+| 4 | 15 |
+| 5 | 31 |
+| 6 | 63 |
+| 7 | 127 |
+| 8 | 255 |
+| 9 | 511 |
+| 10 | 1,023 |
+| 11 | 2,047 |
+| 12 | 4,095 |
+| 13 | 8,191 |
+| 14 | 16,383 |
+| 15 | 32,767 |
+| 16 | 65,535 |
+| 17 | 131,071 |
+| 18 | 262,143 |
+| 19 | 524,287  |
+| 20 | 1,048,575  |
+| 21 | 2,097,151  |
+| 22 | 4,194,303  |
+| 23 | 8,388,607  |
+| 24 | 16,777,215  |
+| 25 | 33,554,431  |
+| 26 | 67,108,863  |
+| 27 | 134,217,727  |
+| 28 | 268,435,455  |
+| 29 | 536,870,911  |
+| 30 | 1,073,741,823 |
+| 31 | 2,147,483,647 |
+| 32 | 4,294,967,295 |
+--]]
 function net.WriteUInt(unsignedInteger, bitCount) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Appends an unsigned integer with 64 bits to the current net message.
 ---
---- 		The limit for an uint64 is 18'446'744'073'709'551'615.
---- 		Everything above the limit will be set to the limit.
+--- The limit for an uint64 is 18'446'744'073'709'551'615.
+--- Everything above the limit will be set to the limit.
 ---
---- 		Unsigned numbers **do not** support negative numbers.
+--- Unsigned numbers **do not** support negative numbers.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteUInt64)
 ---@param uint64 string The 64 bit value to be sent. Can be a number.

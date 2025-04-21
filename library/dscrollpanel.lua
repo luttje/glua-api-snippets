@@ -1,6 +1,5 @@
 ---@meta
 
----
 --- DScrollPanel is a VGUI Element similar to DPanel however it has a vertical scrollbar docked to the right which can be used to put more content in a smaller area. DScrollPanels are essentially [DPanel](https://wiki.facepunch.com/gmod/DPanel)s with the Scroll Bar.
 ---
 --- This can be used to replace the [DPanelList](https://wiki.facepunch.com/gmod/DPanelList) with [DPanelList:EnableVerticalScrollbar](https://wiki.facepunch.com/gmod/DPanelList:EnableVerticalScrollbar) and get similar functionality as well as using a non-deprecated element.
@@ -8,8 +7,6 @@
 --- If you would like to paint or edit the elements of the scrollbar use [DScrollPanel:GetVBar](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar). If you want to see if the scrollbar is visible then use the VBar.Enabled variable on the scrollbar's VBar.
 ---
 --- **NOTE**: [Panel:DockPadding](https://wiki.facepunch.com/gmod/Panel:DockPadding) will not have an effect on children of this panel. Use the function on [DScrollPanel:GetCanvas](https://wiki.facepunch.com/gmod/DScrollPanel:GetCanvas) instead.
----
----
 ---@class DScrollPanel : DPanel
 local DScrollPanel = {}
 
@@ -34,7 +31,7 @@ function DScrollPanel:GetPadding() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the vertical scroll bar of the panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:GetVBar)
----@return Panel{DVScrollBar} # The DVScrollBar.
+---@return DVScrollBar # The DVScrollBar.
 function DScrollPanel:GetVBar() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Return the width of the DScrollPanel's canvas.
@@ -65,7 +62,7 @@ function DScrollPanel:ScrollToChild(panel) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		Sets the canvas of the DScrollPanel.
+--- Sets the canvas of the DScrollPanel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DScrollPanel:SetCanvas)
 ---@param canvas Panel The new canvas

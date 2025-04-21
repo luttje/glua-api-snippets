@@ -1,6 +1,6 @@
 ---@meta
 
---- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. See [Default Lists](https://wiki.facepunch.com/gmod/Default Lists) for a page of default Sandbox lists.
+--- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. See [Default Lists](https://wiki.facepunch.com/gmod/Default_Lists) for a page of default Sandbox lists.
 list = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Adds an item to a named list

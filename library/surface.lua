@@ -9,7 +9,7 @@ surface = {}
 ---
 --- Be sure to check the [List of Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts) first! Those fonts can be used without using this function.
 ---
---- See Also: [Finding the Font Name](https://wiki.facepunch.com/gmod/Finding the Font Name).
+--- See Also: [Finding the Font Name](https://wiki.facepunch.com/gmod/Finding_the_Font_Name).
 ---
 --- **WARNING**: Due to the static nature of fonts, do **NOT** create the font more than once. You should only be creating them once, it is recommended to create them at the top of your script. Do not use this function within [GM:HUDPaint](https://wiki.facepunch.com/gmod/GM:HUDPaint) or any other hook!
 ---
@@ -184,12 +184,12 @@ function surface.GetHUDTexture(name) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves the position and [ScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) information for the [Panel](https://wiki.facepunch.com/gmod/Panel) that is currently being drawn.
 ---
---- When using the [surface](https://wiki.facepunch.com/gmod/surface) library (and, by extension, the [draw](https://wiki.facepunch.com/gmod/draw) library) inside of the [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) function, the origin (The on-screen position of `(0,0)`) is automatically shifted to the top-left corner of the panel to make it easier to draw the panel's contents.  Additionally, [render.SetScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) is used to clip (or "mask") all drawn content to within the boundaries of the panel.  This function returns the information used by the [surface](https://wiki.facepunch.com/gmod/surface) library about the current panel's origin and [ScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect).
+--- en using the [surface](https://wiki.facepunch.com/gmod/surface) library (and, by extension, the [draw](https://wiki.facepunch.com/gmod/draw) library) inside of the [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) function, the origin (The on-screen position of `(0,0)`) is automatically shifted to the top-left corner of the panel to make it easier to draw the panel's contents.  Additionally, [render.SetScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect) is used to clip (or "mask") all drawn content to within the boundaries of the panel.  This function returns the information used by the [surface](https://wiki.facepunch.com/gmod/surface) library about the current panel's origin and [ScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState)
 ---@return table # A table containing the position and render.SetScissorRect boundaries for the Panel currently being drawn.
 ---
---- 			For the table's format and available options see the Structures/PanelPaintState page.
+--- For the table's format and available options see the Structures/PanelPaintState page.
 function surface.GetPanelPaintState() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting text draw operations.
@@ -281,9 +281,9 @@ function surface.SetAlphaMultiplier(multiplier) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
---- 		**NOTE**: The alpha value may not work properly if you're using a material without `$vertexalpha`.
+--- **NOTE**: The alpha value may not work properly if you're using a material without `$vertexalpha`.
 ---
---- 		**NOTE**: Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
+--- **NOTE**: Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetDrawColor)
 ---@param r number The red value of color.
@@ -294,9 +294,9 @@ function surface.SetDrawColor(r, g, b, a) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future shapes to be drawn, can be set by either using R, G, B, A as separate values or by a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
---- 		**NOTE**: The alpha value may not work properly if you're using a material without `$vertexalpha`.
+--- **NOTE**: The alpha value may not work properly if you're using a material without `$vertexalpha`.
 ---
---- 		**NOTE**: Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
+--- **NOTE**: Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetDrawColor)
 ---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
@@ -304,7 +304,7 @@ function surface.SetDrawColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the current font to be used for text operations later.
 ---
---- The fonts must first be created with [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont) or be one of the [Default Fonts](https://wiki.facepunch.com/gmod/Default Fonts).
+--- The fonts must first be created with [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont) or be one of the [Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetFont)
 ---@param fontName string The name of the font to use.

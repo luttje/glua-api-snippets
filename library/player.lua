@@ -9,15 +9,12 @@ local Player = {}
 --- The player library is used to get the Lua objects that represent players in-game.
 player = {}
 
----
 --- Represents a player class.
 ---
 --- The player class hooks have one special field:
 --- * [Player](https://wiki.facepunch.com/gmod/Player) **Player** - The player for which a hook is called.
 ---
 --- **NOTE**: These hooks are used in [player_manager](https://wiki.facepunch.com/gmod/player_manager) this can't be [hooked](https://wiki.facepunch.com/gmod/hook.Add)
----
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER_Hooks)
 ---@class PLAYER
@@ -122,14 +119,14 @@ function player.GetCount() end
 function player.GetHumans() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all players on the server.
---- 		Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
---- 		See [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) for a similar function for all entities.
+--- Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
+--- See [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) for a similar function for all entities.
 ---
---- 		Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
---- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
---- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
+--- Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
+--- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
+--- NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
 ---
---- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
+--- WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
@@ -147,7 +144,7 @@ function player.GetHumans() end
 --- table.Add(scan_ents, ents.FindByClass("ttt_decoy"))
 --- ```
 ---@return number # The starting index for the table of players.
---- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
+--- This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function player.Iterator() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's AccountID part of their full SteamID.
@@ -206,7 +203,7 @@ function Player:AddFrozenPhysicsObject(ent, physobj) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:AddPlayerOption)
 ---@param name string Name of the vote
 ---@param timeout number Time until the vote expires
----@param vote_callback fun(voteNum: number):(boolean: boolean) The function to be run when the player presses 0-9 while a vote is active.
+---@param vote_callback fun(voteNum: number):(ret0: boolean) The function to be run when the player presses 0-9 while a vote is active.
 ---
 --- Function argument(s):
 --- * number `voteNum` - Which option the player pressed, 1-9 and 0 being the very last option.
@@ -346,7 +343,7 @@ function PLAYER:ClassChanged() end
 ---
 --- If you wish to directly modify the movement input of bots, use [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand) instead.
 ---
---- **NOTE**: Some commands/convars are blocked from being run/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked ConCommands).
+--- **NOTE**: Some commands/convars are blocked from being run/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked_ConCommands).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ConCommand)
 ---@param command string command to run
@@ -682,7 +679,7 @@ function Player:GetCurrentViewOffset() end
 ---@return Entity # The currently driven entity, or NULL entity
 function Player:GetDrivingEntity() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns driving mode of the player. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns driving mode of the player. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity_Driving).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetDrivingMode)
 ---@return number # The drive mode ID or 0 if player doesn't use the drive system.
@@ -756,7 +753,7 @@ function Player:GetHoveredWidget() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the minimum and maximum [Vectors](https://wiki.facepunch.com/gmod/Vector) of the [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for the [Player's](https://wiki.facepunch.com/gmod/Player) physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---
---- 		See also: [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
+--- See also: [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetHull)
 ---@return Vector # The hull mins, the lowest corner of the Player's bounding box.
@@ -765,7 +762,7 @@ function Player:GetHull() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the minimum and maximum [Vectors](https://wiki.facepunch.com/gmod/Vector) of the [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for the [Player's](https://wiki.facepunch.com/gmod/Player) physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
 ---
---- 		See also: [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
+--- See also: [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---@return Vector # The hull mins, the lowest corner of the Player's bounding box while crouching.
@@ -1086,7 +1083,7 @@ function Player:GetWeapon(className) end
 function Player:GetWeaponColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of the player's weapons.
---- 		**NOTE**: This function returns a sequential table. Prefer to loop it with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of the [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) function.
+--- **NOTE**: This function returns a sequential table. Prefer to loop it with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of the [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetWeapons)
 ---@return table # All the weapons the player currently has.
@@ -1700,7 +1697,7 @@ function Player:SetDeaths(deathCount) end
 ---
 --- Sets the driving entity and driving mode.
 ---
---- Use [drive.PlayerStartDriving](https://wiki.facepunch.com/gmod/drive.PlayerStartDriving) instead, see [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
+--- Use [drive.PlayerStartDriving](https://wiki.facepunch.com/gmod/drive.PlayerStartDriving) instead, see [Entity Driving](https://wiki.facepunch.com/gmod/Entity_Driving).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetDrivingEntity)
 ---@param drivingEntity? Entity The entity the player should drive.
@@ -1709,16 +1706,16 @@ function Player:SetDrivingEntity(drivingEntity, drivingMode) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Activates a given DSP (Digital Signal Processor) effect on all sounds that the player hears.
 ---
---- 		To apply a DSP effect to individual sounds, see [CSoundPatch:SetDSP](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
+--- To apply a DSP effect to individual sounds, see [CSoundPatch:SetDSP](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetDSP)
 ---@param dspEffectId number The index of the DSP sound filter to apply.
 ---
---- 			For a list of the available IDs and their meaning, see DSP_Presets.
+--- For a list of the available IDs and their meaning, see DSP_Presets.
 ---@param fastReset boolean If set to true the sound filter will be removed faster.
 ---
---- 				**This only works clientside**
---- 				If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
+--- 	**This only works clientside**
+--- 	If used serverside, a message will be displayed (`SetPlayerDSP: fastReset only valid from client`) in the server console.
 function Player:SetDSP(dspEffectId, fastReset) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets how quickly a player ducks.
@@ -1754,7 +1751,7 @@ function Player:SetFrags(fragCount) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the hands entity of a player.
 ---
 --- The hands entity is an entity introduced in Garry's Mod 13 and it's used to show the player's hands attached to the viewmodel.
---- This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit [Using Viewmodel Hands](https://wiki.facepunch.com/gmod/Using Viewmodel Hands).
+--- This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit [Using Viewmodel Hands](https://wiki.facepunch.com/gmod/Using_Viewmodel_Hands).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetHands)
 ---@param hands Entity The hands entity to set
@@ -1768,9 +1765,9 @@ function Player:SetHoveredWidget(widget) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the size of the [Player's](https://wiki.facepunch.com/gmod/Player) [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull).
 ---
---- 		See also: [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
+--- See also: [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHullDuck](https://wiki.facepunch.com/gmod/Player:SetHullDuck), [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck)
 ---
---- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
+--- **NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---@param mins Vector The hull mins, the lowest corner of the Player's bounding box.
@@ -1779,9 +1776,9 @@ function Player:SetHull(mins, maxs) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the size of the [Player's](https://wiki.facepunch.com/gmod/Player) [Axis-Aligned Bounding Box (AABB)](https://en.wikipedia.org/wiki/Minimum_bounding_box) used for physics and movement [Hull Traces](https://wiki.facepunch.com/gmod/util.TraceHull) while they are crouching (or "Ducking").
 ---
---- 		See also: [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
+--- See also: [Player:GetHullDuck](https://wiki.facepunch.com/gmod/Player:GetHullDuck), [Player:GetHull](https://wiki.facepunch.com/gmod/Player:GetHull), [Player:SetHull](https://wiki.facepunch.com/gmod/Player:SetHull)
 ---
---- 		**NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
+--- **NOTE**: This value is **not** replicated automatically to clients and must be manually called in both the Server and Client [Realms](https://wiki.facepunch.com/gmod/States).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetHullDuck)
 ---@param mins Vector The hull mins, the lowest corner of the Player's bounding box while crouching.

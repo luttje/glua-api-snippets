@@ -1,9 +1,7 @@
 ---@meta
 
+--- **INTERNAL**: Use [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel) instead.
 ---
---- 		**INTERNAL**: Use [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel) instead.
----
---- 		Engine checkbox
----
+--- Engine checkbox
 ---@class CheckButton
 local CheckButton = {}

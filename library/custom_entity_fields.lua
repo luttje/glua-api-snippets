@@ -1,10 +1,8 @@
 ---@meta
 
----
---- Information about custom fields that are not exclusive to [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities), fields that have an effect on any entity.
+--- Information about custom fields that are not exclusive to [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities), fields that have an effect on any entity.
 ---
 --- See also [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT)
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Custom_Entity_Fields)
 ---@class Custom_Entity_Fields

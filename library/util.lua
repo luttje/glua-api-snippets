@@ -90,7 +90,7 @@ function util.Compress(str) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [CRC Checksum](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) of the specified string.
 ---
---- 		**WARNING**: This is NOT a hashing function. It is a checksum, typically used for error detection/data corruption detection. It is possible for this function to generate "collisions", where two different strings will produce the same CRC. If you need a hashing function, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
+--- **WARNING**: This is NOT a hashing function. It is a checksum, typically used for error detection/data corruption detection. It is possible for this function to generate "collisions", where two different strings will produce the same CRC. If you need a hashing function, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.CRC)
 ---@param stringToChecksum string The string to calculate the checksum of.
@@ -143,7 +143,7 @@ function util.DecalMaterial(decalName) end
 ---
 --- If your compressed input data was compressed by [util.Compress](https://wiki.facepunch.com/gmod/util.Compress), you don't need to worry about this - the uncompressed size of the data is already prepended to its output.
 ---
---- However, if your compressed data was produced using standard tools **_outside of Garry's Mod_**, you will need to manually prepend the length of the uncompressed data to its compressed form as an 8-byte little endian integer, or use third-party tools such as [gmod-lzma](https://github.com/WilliamVenner/gmod-lzma-rs) to compress your data instead.
+--- However, if your compressed data was produced using standard tools **_outside of Garry's Mod_**, you will need to manually prepend the length of the uncompressed data to its compressed form as an 8-byte little endian integer.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.Decompress)
 ---@param compressedString string The compressed string to decompress.
@@ -193,7 +193,7 @@ function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRe
 function util.FilterText(str, context, player) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Converts the full path of the given file to a relative path.
---- 		You can use [util.RelativePathToFull_Menu](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu) to convert the relative path back to the full path.
+--- You can use [util.RelativePathToFull_Menu](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu) to convert the relative path back to the full path.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu)
 ---@param fullPath string The **full** path to a file.
@@ -237,7 +237,7 @@ function util.GetAnimEventIDByName(string) end
 ---@return string # The associated name with given event ID.
 function util.GetAnimEventNameByID(id) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table containing the info about the model.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table containing the info about the model. The model will be loaded and cached if it was not previously.
 ---
 --- **NOTE**: This function will silently fail if used on models with following strings in them:
 --- * _shared
@@ -253,37 +253,30 @@ function util.GetAnimEventNameByID(id) end
 --- * _include
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetModelInfo)
----@param mdl string Model path
----@return table # The model info as a table with the following keys:
---- * number **SkinCount** - Identical to Entity:SkinCount.
---- * string **KeyValues** - Valve key-value formatted info about the model's physics (Constraint Info, etc). This is limited to 4096 characters.
---- * string **ModelKeyValues** - Valve key-value formatted info about the model ($keyvalues command in the .qc of the model), if present
---- * number **MeshCount** - Number of meshes the model has
---- * number **BoneCount** - Number of bones the model has
---- * number **Flags** - Model flags
---- * boolean **StaticProp** - Whether the model is meant to be a static prop (a specific flag)
+---@param mdl string The model path to retrieve information about.
+---@return ModelInfo # The model info. See Structures/ModelInfo for details.
 function util.GetModelInfo(mdl) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of visual meshes of given model.
---- 		**NOTE**: This does not work on brush models (`*number` models)
+--- **NOTE**: This does not work on brush models (`*number` models)
 ---
---- 		See also [ENTITY:GetRenderMesh](https://wiki.facepunch.com/gmod/ENTITY:GetRenderMesh).
+--- See also [ENTITY:GetRenderMesh](https://wiki.facepunch.com/gmod/ENTITY:GetRenderMesh).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
 ---@param model string The full path to a model to get the visual meshes of.
 ---@param lod? number Which LOD to retrieve. 0 is the best quality, increasing the number lowers the model quaility.
 ---@param bodygroupMask? number Bodygroup combination for the model. This can be in format of `"000000"` where each number represents a bodygroup option.
 ---@return table # A table of tables with the following format:
---- * string material - The material of the specific mesh
---- * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
---- * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
+--- tring material - The material of the specific mesh
+--- able triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
+--- able verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
 ---
---- Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
---- * number bone - The bone this vertex is attached to
---- * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
+--- h Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
+--- umber bone - The bone this vertex is attached to
+--- umber weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
 ---@return table # A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents:
---- * number parent - The ID of the parent bone.
---- * VMatrix matrix - The bone's bind transform in model (not bone) space.
+--- umber parent - The ID of the parent bone.
+--- Matrix matrix - The bone's bind transform in model (not bone) space.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets persistent data of an offline player using their SteamID.
@@ -563,16 +556,15 @@ function util.IsValidRagdoll(ragdollName) end
 ---
 --- See [util.TableToJSON](https://wiki.facepunch.com/gmod/util.TableToJSON) for the opposite function.
 ---
---- This will attempt to cast the string keys `"inf"`, `"nan"`, `"true"`, and `"false"` to their respective Lua values. This completely ignores nulls in arrays.
 --- Colors will not have the color metatable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.JSONToTable)
 ---@param json string The JSON string to convert.
 ---@param ignoreLimits? boolean ignore the depth and breadth limits, **use at your own risk!**.
---- 			If this is false, there is a limit of 15,000 keys total.
+--- If this is false, there is a limit of 15,000 keys total.
 ---@param ignoreConversions? boolean ignore string to number conversions for table keys.
 ---
---- 				if this is false, keys are converted to numbers wherever possible. This means using [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) as keys won't work.
+--- 	if this is false, keys are converted to numbers wherever possible. This means using [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) as keys won't work.
 ---@return table|nil # The table containing converted information. Returns `nil` on failure.
 function util.JSONToTable(json, ignoreLimits, ignoreConversions) end
 
@@ -606,7 +598,7 @@ function util.KeyValuesToTablePreserveOrder(keyvals, usesEscapeSequences, preser
 function util.LocalToWorld(ent, lpos, bonenum) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the specified string.
---- 		**WARNING**: MD5 is considered cryptographically broken and is known to be vulnerable to a variety of attacks including duplicate return values. If security or duplicate returns is a concern, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
+--- **WARNING**: MD5 is considered cryptographically broken and is known to be vulnerable to a variety of attacks including duplicate return values. If security or duplicate returns is a concern, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.MD5)
 ---@param stringToHash string The string to calculate the MD5 hash of.
@@ -665,7 +657,7 @@ function util.ParticleTracerEx(name, startPos, endPos, doWhiz, entityIndex, atta
 function util.PixelVisible(position, radius, PixVis) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the contents of the position specified.
---- 		**NOTE**: This function will sample only the world environments. It can be used to check if [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) is underwater for example unlike [Entity:WaterLevel](https://wiki.facepunch.com/gmod/Entity:WaterLevel) which works for players only.
+--- **NOTE**: This function will sample only the world environments. It can be used to check if [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) is underwater for example unlike [Entity:WaterLevel](https://wiki.facepunch.com/gmod/Entity:WaterLevel) which works for players only.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.PointContents)
 ---@param position Vector Position to get the contents sample from.
@@ -673,7 +665,7 @@ function util.PixelVisible(position, radius, PixVis) end
 function util.PointContents(position) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Precaches a model for later use. Model is cached after being loaded once.
---- 		**WARNING**: Modelprecache is limited to 8192 unique models. When it reaches the limit the game will crash.
+--- 	**WARNING**: Modelprecache is limited to 8192 unique models. When it reaches the limit the game will crash.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.PrecacheModel)
 ---@param modelName string The model to precache.
@@ -700,7 +692,7 @@ function util.PrecacheSound(soundName) end
 function util.QuickTrace(origin, dir, filter) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Converts the relative path of a given file to the full path on disk.
---- 		You can use [util.FullPathToRelative_Menu](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu) to convert the full path back to the relative path.
+--- You can use [util.FullPathToRelative_Menu](https://wiki.facepunch.com/gmod/util.FullPathToRelative_Menu) to convert the full path back to the relative path.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.RelativePathToFull_Menu)
 ---@param filePath string The relative path of a file, for example: `addons/[Name].gma`
@@ -777,7 +769,7 @@ function util.ScreenShake(pos, amplitude, frequency, duration, radius, airshake,
 function util.SetPData(steamID, name, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of the specified string.
---- 		**WARNING**: SHA-1 is considered cryptographically broken and is known to be vulnerable to a variety of attacks. If security is a concern, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
+--- **WARNING**: SHA-1 is considered cryptographically broken and is known to be vulnerable to a variety of attacks. If security is a concern, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.SHA1)
 ---@param stringToHash string The string to calculate the SHA-1 hash of.
@@ -826,7 +818,7 @@ function util.Stack() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Given a [64bit SteamID](https://wiki.facepunch.com/gmod/Player:SteamID64) will return a [STEAM_0:0:0](https://wiki.facepunch.com/gmod/Player:SteamID) style Steam ID.
 ---
---- **NOTE**: This operation induces data loss. Not all fields of a 64bit SteamID can be represented using the `STEAM_0:0:0` format.
+--- **NOTE**: This operation induces data loss. Not all fields of a [64bit SteamID](https://developer.valvesoftware.com/wiki/SteamID) can be represented using the `STEAM_0:0:0` format, specifically the "account type" and "account instance" fields.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.SteamIDFrom64)
 ---@param id string The 64 bit Steam ID
@@ -856,10 +848,6 @@ function util.StringToType(str, typename) end
 ---
 --- **WARNING**: All keys are strings in the JSON format, so all keys of other types will be converted to strings!
 --- This can lead to loss of data where a number key could be converted into an already existing string key! (for example in a table like this: `{["5"] = "ok", [5] = "BBB"}`)
----
---- All integers will be output as decimals (5 -> 5.0), since all numbers in Lua are internally floating point values.
----
---- This will produce invalid JSON if the provided table contains nan or inf values.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.TableToJSON)
 ---@param table table Table to convert.
@@ -949,7 +937,7 @@ function util.TraceHull(TraceData) end
 ---@param traceConfig Trace A table of data that configures the trace. See Structures/Trace for available options.
 ---@return TraceResult # A table of information detailing where and what the trace line intersected, or `nil` if the trace is being done before the GM:InitPostEntity hook.
 ---
---- 			For the table's format and available options see the Structures/TraceResult page.
+--- For the table's format and available options see the Structures/TraceResult page.
 function util.TraceLine(traceConfig) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a type to a (nice, but still parsable) string

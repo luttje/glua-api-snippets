@@ -220,7 +220,7 @@ function DListView:SetHideHeaders(hide) end
 function DListView:SetMultiSelect(allowMultiSelect) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enables/disables the sorting of columns by clicking.
---- 		**NOTE**: This will only affect columns that are created after this function is called. Existing columns will be unaffected.
+--- **NOTE**: This will only affect columns that are created after this function is called. Existing columns will be unaffected.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListView:SetSortable)
 ---@param isSortable boolean Whether sorting columns with clicking is allowed or not.

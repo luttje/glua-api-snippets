@@ -1,10 +1,8 @@
 ---@meta
 
+--- A very basic horizontal scrollable panel, similar to [DScrollPanel](https://wiki.facepunch.com/gmod/DScrollPanel).
 ---
---- 		A very basic horizontal scrollable panel, similar to [DScrollPanel](https://wiki.facepunch.com/gmod/DScrollPanel).
----
---- 		Used internally in [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet).
----
+--- Used internally in [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet).
 ---@class DHorizontalScroller : Panel
 local DHorizontalScroller = {}
 

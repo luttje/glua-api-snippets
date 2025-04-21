@@ -5,7 +5,7 @@ render = {}
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a Beam Segment to the Beam started by [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
 ---
---- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.AddBeam)
 ---@param startPos Vector Beam start position.
@@ -16,7 +16,7 @@ function render.AddBeam(startPos, width, textureEnd, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Blurs the render target ( or a given texture )
 ---
---- 		**WARNING**: Calling this on a RenderTarget created with TEXTUREFLAGS_POINTSAMPLE will result in strange visual glitching.
+--- **WARNING**: Calling this on a RenderTarget created with TEXTUREFLAGS_POINTSAMPLE will result in strange visual glitching.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.BlurRenderTarget)
 ---@param rendertarget ITexture The texture to blur
@@ -47,7 +47,7 @@ function render.Capture(captureData) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Dumps the current render target and allows the pixels to be accessed by [render.ReadPixel](https://wiki.facepunch.com/gmod/render.ReadPixel).
 ---
---- 	Capturing outside a render hook will return 0 0 0 255
+--- Capturing outside a render hook will return 0 0 0 255
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CapturePixels)
 function render.CapturePixels() end
@@ -67,20 +67,20 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Tests every pixel of the active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets) against the current Stencil configuration and sets the Color Channel values and, optionally, the Depth Buffer values for every pixel that passes.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
---- 		**NOTE**: This function does **not** clear the Stencil Buffer on its own.
---- 			If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil)
+--- **NOTE**: This function does **not** clear the Stencil Buffer on its own.
+--- 	If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
 ---@param red number The red Color Channel value for each pixel that is cleared.
---- 			Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`)
 ---@param green number The green Color Channel value for each pixel that is cleared.
---- 			Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`)
 ---@param blue number The blue Color Channel value for each pixel that is cleared.
---- 			Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`)
 ---@param alpha number The alpha (translucency) Color Channel value for each pixel that is cleared.
---- 			Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`)
 ---@param clearDepth boolean If true, reset the Depth Buffer values.
 function render.ClearBuffersObeyStencil(red, green, blue, alpha, clearDepth) end
 
@@ -101,7 +101,7 @@ function render.ClearRenderTarget(texture, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil Buffer value to `0` for all pixels in the currently active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets).
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearStencil)
 function render.ClearStencil() end
@@ -116,9 +116,9 @@ function render.ClearStencil() end
 ---@param startX number The X coordinate of the top left corner of the rectangle to be cleared.
 ---@param startY number The Y coordinate of the top left corner of the rectangle to be cleared.
 ---@param endX number The X coordinate of the bottom right corner of the rectangle to be cleared.
---- 			**Note:** Unlike some other rectangle-based functions, this is **not** the width of the rectangle.
+--- **Note:** Unlike some other rectangle-based functions, this is **not** the width of the rectangle.
 ---@param endY number The Y coordinate of the bottom right corner of the rectangle to be cleared.
---- 			**Note:** Unlike some other rectangle-based functions, this is **not** the height of the rectangle.
+--- **Note:** Unlike some other rectangle-based functions, this is **not** the height of the rectangle.
 ---@param stencilBufferValue number The Stencil Buffer value that all pixels within the rectangle will be set to.
 function render.ClearStencilBufferRectangle(startX, startY, endX, endY, stencilBufferValue) end
 
@@ -176,7 +176,7 @@ function render.DepthRange(depthmin, depthmax) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a single-segment Beam made out of a textured, billboarded quad stretching between two points.
 ---
---- 		For more detailed information, including usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information, including usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawBeam)
 ---@param startPos Vector The Beam's start position.
@@ -320,7 +320,7 @@ function render.EnableClipping(state) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Ends the beam mesh of a beam started with [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
 ---
---- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.EndBeam)
 function render.EndBeam() end
@@ -607,7 +607,7 @@ function render.Model(settings, ent) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Forces all future draw operations to use a specific [IMaterial](https://wiki.facepunch.com/gmod/IMaterial).
 ---
---- 		Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
+--- Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride)
 ---@param material IMaterial The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
@@ -635,11 +635,11 @@ function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
 ---@param enabled boolean Set to `true` to enable Blend Overrides.
 ---@param sourceMultiplier BLEND This determines which value each affected pixel's **Source color and alpha** will be multiplied by before they are sent to the Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param destinationMultiplier BLEND This determines which value each affected pixel's **Destination color and alpha** will be multiplied by before they are sent to the Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param blendingFunction BLENDFUNC After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.
---- 			One of the Enums/BLENDFUNC enums.
+--- One of the Enums/BLENDFUNC enums.
 function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, blendingFunction) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the way that the final color and alpha is calculated for each pixel affected by upcoming draw operations.
@@ -653,15 +653,15 @@ function render.OverrideBlend(enabled, sourceMultiplier, destinationMultiplier, 
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideBlend)
 ---@param enabled boolean Set to `true` to enable Blend Overrides.
 ---@param sourceColorMultiplier BLEND This determines which value each affected pixel's **Source color** will be multiplied by before they are sent to the Color Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param destinationColorMultiplier BLEND This determines which value each affected pixel's **Destination color** will be multiplied by before they are sent to the Color Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param colorBlendingFunction BLENDFUNC After the Source and Destination colors have been multiplied against their corresponding multipliers, they are passed to the Color Blending Function which combines them into the final color and alpha for the pixel.
---- 			One of the Enums/BLENDFUNC enums.
+--- One of the Enums/BLENDFUNC enums.
 ---@param sourceAlphaMultiplier? BLEND This determines which value each affected pixel's **Source alpha** will be multiplied by before they are sent to the Alpha Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param destinationAlphaMultiplier? BLEND This determines which value each affected pixel's **Destination alpha** will be multiplied by before they are sent to the Alpha Blending Function.
---- 			One of the Enums/BLEND enums.
+--- One of the Enums/BLEND enums.
 ---@param alphaBlendingFunction? BLENDFUNC After the Source and Destination alphas have been multiplied against their corresponding multipliers, they are passed to the Alpha Blending Function which combines them into the final alpha for the pixel.
 function render.OverrideBlend(
 	enabled,
@@ -717,7 +717,7 @@ function render.OverrideDepthEnable(enable, shouldWrite) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Performs a Stencil operation on every pixel in the active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets) without performing a draw operation.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PerformFullScreenStencilOperation)
 function render.PerformFullScreenStencilOperation() end
@@ -729,18 +729,18 @@ function render.PopCustomClipPlane() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pops (Removes) the texture filter most recently pushed (Added) onto the magnification texture filter stack.
 ---
---- 		This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag)
+--- This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag)
 ---
---- 		For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
+--- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PopFilterMag)
 function render.PopFilterMag() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pops (Removes) the texture filter most recently pushed (Added) onto the minification texture filter stack.
 ---
---- 		This function should only be called *after* a minification filter has been pushed via [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
+--- This function should only be called *after* a minification filter has been pushed via [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
 ---
---- 		For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
+--- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PopFilterMin)
 function render.PopFilterMin() end
@@ -767,24 +767,24 @@ function render.PopRenderTarget() end
 function render.PushCustomClipPlane(normal, distance) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pushes (Adds) a texture filter onto the magnification texture filter stack.
---- 		This will modify how textures are stretched to sizes larger than their native resolution for upcoming rendering and drawing operations.
---- 		For a version of this same function that modifies filtering for texture sizes smaller than their native resolution, see [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
+--- This will modify how textures are stretched to sizes larger than their native resolution for upcoming rendering and drawing operations.
+--- For a version of this same function that modifies filtering for texture sizes smaller than their native resolution, see [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
 ---
---- 		Always be sure to call [render.PopFilterMag()](https://wiki.facepunch.com/gmod/render.PopFilterMag) afterwards to avoid texture filtering problems.
+--- Always be sure to call [render.PopFilterMag()](https://wiki.facepunch.com/gmod/render.PopFilterMag) afterwards to avoid texture filtering problems.
 ---
---- 		For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
+--- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushFilterMag)
 ---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
 function render.PushFilterMag(texFilterType) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pushes (Adds) a texture filter onto the minification texture filter stack.
---- 		This will modify how textures are compressed to a lower resolution than their native resolution for upcoming rendering and drawing operations.
---- 		For a version of this same function that modifies filtering for texture sizes larger than their native resolution, see [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag)
+--- This will modify how textures are compressed to a lower resolution than their native resolution for upcoming rendering and drawing operations.
+--- For a version of this same function that modifies filtering for texture sizes larger than their native resolution, see [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag)
 ---
---- 		Always be sure to call [render.PopFilterMin()](https://wiki.facepunch.com/gmod/render.PopFilterMin) afterwards to avoid texture filtering problems.
+--- Always be sure to call [render.PopFilterMin()](https://wiki.facepunch.com/gmod/render.PopFilterMin) afterwards to avoid texture filtering problems.
 ---
---- 		For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
+--- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushFilterMin)
 ---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
@@ -809,7 +809,7 @@ function render.PushFlashlightMode(enable) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushRenderTarget)
 ---@param texture? ITexture The new render target to be used.
---- 			Can be set to `nil` to push the main game frame buffer.
+--- Can be set to `nil` to push the main game frame buffer.
 ---@param x? number X origin of the viewport.
 ---@param y? number Y origin of the viewport.
 ---@param w? number Width of the viewport.
@@ -895,7 +895,7 @@ function render.SetAmbientLight(r, g, b) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetBlend)
 ---@param blending number The alpha (transparency) for upcoming draw operations.
---- 			A value in the range `(0-1)` where `0` is fully transparent, `0.5` is 50% visible, and `1` is fully opaque.
+--- A value in the range `(0-1)` where `0` is fully transparent, `0.5` is 50% visible, and `1` is fully opaque.
 function render.SetBlend(blending) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the current drawing material to "color".
@@ -1095,7 +1095,7 @@ function render.SetStencilEnable(newState) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) did **not** [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) the pixel.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation)
 ---@param failOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
@@ -1103,7 +1103,7 @@ function render.SetStencilFailOperation(failOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passes the pixel.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation)
 ---@param passOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel.
@@ -1111,42 +1111,42 @@ function render.SetStencilPassOperation(passOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil system's Reference Value which is compared against each pixel's corresponding Stencil Buffer value in the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) and can be used to modify the Stencil Buffer value of those same pixels in the [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [Fail](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation), and [Z Fail](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation) operations.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue)
 ---@param referenceValue number The value that the Compare function and the pass, fail, and z-fail operations will use.
---- 			This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`]
+--- This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`]
 function render.SetStencilReferenceValue(referenceValue) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the unsigned 8-bit (`byte`) bitflag mask that will be bitwise ANDed with all values as they are read (tested) from the Stencil Buffer
 ---
---- 		This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
+--- This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
 ---
---- 		This is a companion function to [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask) which modifies Stencil Buffer values as they are written.
+--- This is a companion function to [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask) which modifies Stencil Buffer values as they are written.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilTestMask)
 ---@param bitMask number The 8-bit (`byte`) mask
---- 			Set to `255` to make no change to read Stencil Buffer values.
+--- Set to `255` to make no change to read Stencil Buffer values.
 function render.SetStencilTestMask(bitMask) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the unsigned 8-bit (`byte`) bitflag mask that will be bitwise ANDed with all values as they are written to the Stencil Buffer
 ---
---- 		This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
+--- This can be considered a "niche" Stencil function as it is not required for many Stencil use-cases.
 ---
---- 		This is a companion function to [render.SetStencilTestMask](https://wiki.facepunch.com/gmod/render.SetStencilTestMask) which modifies Stencil Buffer values as they are read.
+--- This is a companion function to [render.SetStencilTestMask](https://wiki.facepunch.com/gmod/render.SetStencilTestMask) which modifies Stencil Buffer values as they are read.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
 ---@param bitMask number The 8-bit (`byte`) mask
---- 			Set to `255` to make no change to written Stencil Buffer values.
+--- Set to `255` to make no change to written Stencil Buffer values.
 function render.SetStencilWriteMask(bitMask) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passed a given pixel, but it did **not** Pass the Depth Test.
 ---
---- 		For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation)
 ---@param zFailOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
@@ -1186,7 +1186,7 @@ function render.Spin() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Begin drawing a multi-segment Beam.
 ---
---- 			For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.StartBeam)
 ---@param segmentCount number The number of Beam Segments that this multi-segment Beam will contain

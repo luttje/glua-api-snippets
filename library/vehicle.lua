@@ -74,7 +74,7 @@ function Vehicle:GetPassenger(passenger) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the seat position and angle of a given passenger seat.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetPassengerSeatPoint)
----@param role number The passenger role. ( 1 is the driver )
+---@param role number The passenger role. ( 0 is the driver )
 ---@return Vector # The seat position
 ---@return Angle # The seat angle
 function Vehicle:GetPassengerSeatPoint(role) end

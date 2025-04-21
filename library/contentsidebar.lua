@@ -1,12 +1,10 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
---- 		The ContentSidebar is internally used by the spawnmenu and manages things like the Spawnmenu Toolbar.
---- 		It internally uses a DTree which is accessible with ContentSidebar .Tree.
---- 		When [ContentSidebar:EnableModify](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify) has been called ContentSidebar.Toolbox will return a [ContentSidebarToolbox](https://wiki.facepunch.com/gmod/ContentSidebarToolbox)
----
+--- The ContentSidebar is internally used by the spawnmenu and manages things like the Spawnmenu Toolbar.
+--- It internally uses a DTree which is accessible with ContentSidebar .Tree.
+--- When [ContentSidebar:EnableModify](https://wiki.facepunch.com/gmod/ContentSidebar:EnableModify) has been called ContentSidebar.Toolbox will return a [ContentSidebarToolbox](https://wiki.facepunch.com/gmod/ContentSidebarToolbox)
 ---@class ContentSidebar : DPanel
 local ContentSidebar = {}
 

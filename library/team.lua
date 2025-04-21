@@ -44,7 +44,7 @@ function team.GetColor(teamIndex) end
 function team.GetName(teamIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table with all player of the specified team.
---- 		**NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
+--- **NOTE**: This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/team.GetPlayers)
 ---@param teamIndex number The team index.

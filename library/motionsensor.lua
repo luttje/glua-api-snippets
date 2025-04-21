@@ -5,7 +5,7 @@
 motionsensor = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Called to build the skeleton. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---  Called to build the skeleton. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using_The_Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect_developing).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton)
 ---@param translator table `list.Get( "SkeletonConvertor" )` and motionsensor.ChooseBuilderFromEntity.
@@ -29,7 +29,7 @@ function motionsensor.ChooseBuilderFromEntity(ent) end
 ---@return IMaterial # The material
 function motionsensor.GetColourMaterial() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns players skeletal data if they are using Kinect. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns players skeletal data if they are using Kinect. See [Using The Kinect](https://wiki.facepunch.com/gmod/Using_The_Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect_developing).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.GetSkeleton)
 ---@return table # The skeleton data.
@@ -48,7 +48,7 @@ function motionsensor.IsActive() end
 function motionsensor.IsAvailable() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Used internally by [motionsensor.ProcessAnglesTable](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---  Used internally by [motionsensor.ProcessAnglesTable](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using_The_Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect_developing).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessAngle)
 ---@param translator table
@@ -62,7 +62,7 @@ function motionsensor.IsAvailable() end
 function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors, boneid, v) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using_The_Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect_developing).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessAnglesTable)
 ---@param translator table
@@ -73,7 +73,7 @@ function motionsensor.ProcessAngle(translator, sensor, pos, ang, special_vectors
 function motionsensor.ProcessAnglesTable(translator, sensor, pos, rotation) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using The Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect developing).
+---  Used internally by [motionsensor.BuildSkeleton](https://wiki.facepunch.com/gmod/motionsensor.BuildSkeleton). See [Using The Kinect](https://wiki.facepunch.com/gmod/Using_The_Kinect) and [Kinect developing](https://wiki.facepunch.com/gmod/Kinect_developing).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/motionsensor.ProcessPositionTable)
 ---@param translator table

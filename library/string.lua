@@ -29,14 +29,14 @@
 --- print("Kittens" + " And " + "Puppies")
 --- ```
 ---
---- See [Meta Tables](https://wiki.facepunch.com/gmod/Meta Tables) and [Metamethods](https://wiki.facepunch.com/gmod/Metamethods) for more information.
+--- See [Meta Tables](https://wiki.facepunch.com/gmod/Meta_Tables) and [Metamethods](https://wiki.facepunch.com/gmod/Metamethods) for more information.
 --- **WARNING**: Making changes to the string *metatable* is not a good idea unless you know what you are doing. Use the string *library* instead.
 ---
 --- This category lists functions available in the string *library*.
 string = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the given string's characters in their numeric ASCII representation.
---- 		**WARNING**: This function will throw an error if the slice length is greater than 8000 characters.
+--- **WARNING**: This function will throw an error if the slice length is greater than 8000 characters.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.byte)
 ---@param string string The string to get the chars from.
@@ -118,20 +118,22 @@ function string.find(haystack, needle, startPos, noPatterns) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.format)
 ---@param format string The string to be formatted.
---- Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
----
---- The following features are not supported in Lua:
---- * The `n` specifier
---- * The `*` width modifier
---- * The `.*` precision modifier
---- * All length modifiers
----
---- The following specifiers are exclusive to LuaJIT:
----
---- | Format | Description | Example of the output |
---- |:------:|:-----------:|:---------------------:|
---- | %p | Returns pointer to supplied structure (table/function) | `0xf20a8968` |
---- | %q | Formats a string between double quotes, using escape sequences when necessary to ensure that it can safely be read back by the Lua interpreter | `"test\1\2test"` |
+--[[
+Follows this format: http://www.cplusplus.com/reference/cstdio/printf/
+
+The following features are not supported in Lua:
+* The `n` specifier
+* The `*` width modifier
+* The `.*` precision modifier
+* All length modifiers
+
+The following specifiers are exclusive to LuaJIT:
+
+| Format | Description | Example of the output |
+|:------:|:-----------:|:---------------------:|
+| %p | Returns pointer to supplied structure (table/function) | `0xf20a8968` |
+| %q | Formats a string between double quotes, using escape sequences when necessary to ensure that it can safely be read back by the Lua interpreter | `"test\1\2test"` |
+--]]
 ---@param ... any Values to be formatted into the string.
 ---@return string # The formatted string
 function string.format(format, ...) end
@@ -261,7 +263,7 @@ function string.Left(str, num) end
 function string.len(str) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Changes any upper-case letters in a string to lower-case letters.
---- 		**NOTE**: This function doesn't work on special non-English UTF-8 characters.
+--- **NOTE**: This function doesn't work on special non-English UTF-8 characters.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.lower)
 ---@param str string The string to convert.
@@ -447,7 +449,7 @@ function string.TrimLeft(str, char) end
 function string.TrimRight(str, char) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Changes any lower-case letters in a string to upper-case letters.
---- 		**NOTE**: This function doesn't work on special non-English UTF-8 characters.
+--- **NOTE**: This function doesn't work on special non-English UTF-8 characters.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.upper)
 ---@param str string The string to convert.

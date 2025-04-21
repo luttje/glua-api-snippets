@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		A standard Derma color mixer
----
+--- A standard Derma color mixer
 ---@class DColorMixer : DPanel
 local DColorMixer = {}
 

@@ -1,10 +1,8 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
---- 		Internal subpanel that represents an option used by [DMenu](https://wiki.facepunch.com/gmod/DMenu).
----
+--- Internal subpanel that represents an option used by [DMenu](https://wiki.facepunch.com/gmod/DMenu).
 ---@class DMenuOption : DButton
 local DMenuOption = {}
 

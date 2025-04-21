@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		The DCheckBox is a checkbox. It allows you to get a boolean value from the user (true/false - yes/no)
----
+--- The DCheckBox is a checkbox. It allows you to get a boolean value from the user (true/false - yes/no)
 ---@class DCheckBox : DButton
 local DCheckBox = {}
 

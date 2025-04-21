@@ -1,6 +1,5 @@
 ---@meta
 
----
 --- A grid for editing the properties of something using names and values. Properties can be categorized and strongly typed.
 ---
 --- ##  Associated controls
@@ -10,7 +9,6 @@
 --- * [DProperty_Combo](https://wiki.facepunch.com/gmod/DProperty_Combo)
 --- * [DProperty_Float](https://wiki.facepunch.com/gmod/DProperty_Float)
 --- * [DProperty_Int](https://wiki.facepunch.com/gmod/DProperty_Int)
----
 ---@class DProperties : Panel
 local DProperties = {}
 

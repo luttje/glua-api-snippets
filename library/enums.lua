@@ -3270,72 +3270,72 @@ ANALOG_JOY_V = 9
 
 --- The Multiplier will be `r=0`, `g=0`, `b=0`, `a=0`
 ---
---- 			This is useful for removing the Source or Destination from the final pixel color.
+--- This is useful for removing the Source or Destination from the final pixel color.
 BLEND_ZERO = 0
 --- The Multiplier will be `r=1`, `g=1`, `b=1`, `a=1`
 ---
---- 			This is useful for keeping the Source or Destination as their starting values.
+--- This is useful for keeping the Source or Destination as their starting values.
 BLEND_ONE = 1
 --- The Multiplier will be the same as the Destination color and alpha.
 BLEND_DST_COLOR = 2
 --- Each color and alpha channel value of the Destination is subtracted from `1`.
 ---
---- 			**Example:**
---- 			If your Destination channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
---- 			They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
---- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
+--- **Example:**
+--- If your Destination channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
+--- They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
+--- The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_DST_COLOR = 3
 --- All color and alpha channels will be the same as the Source alpha value.
 ---
---- 			**Example:**
---- 			If your Source channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
---- 			The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
+--- **Example:**
+--- If your Source channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
+--- The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
 BLEND_SRC_ALPHA = 4
 --- All color and alpha channels will be set to the Source alpha value subtracted from `1`.
 ---
---- 			**Example:**
---- 			If your Source channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
---- 			The alpha channel will be modified by `a=1-0.6`
---- 			The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
+--- **Example:**
+--- If your Source channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
+--- The alpha channel will be modified by `a=1-0.6`
+--- The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
 BLEND_ONE_MINUS_SRC_ALPHA = 5
 --- All color and alpha channels will be set to the the Destination alpha value.
 ---
---- 			**Example:**
---- 			If your Destination channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
---- 			The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
+--- **Example:**
+--- If your Destination channels are: `r=0.1`, `g=0`, `b=1`, `a=0.5`
+--- The final Multiplier value will be: `r=0.5`, `g=0.5`, `b=0.5`, `a=0.5`
 BLEND_DST_ALPHA = 6
 --- All color and alpha channels will be set to the Destination alpha value subtracted from `1`.
 ---
---- 			**Example:**
---- 			If your Destination channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
---- 			The alpha channel will be modified by `a=1-0.6`
---- 			The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
+--- **Example:**
+--- If your Destination channels are: `r=0`, `g=0.23`, `b=1`, `a=0.6`
+--- The alpha channel will be modified by `a=1-0.6`
+--- The final Multiplier value will be: `r=0.4`, `g=0.4`, `b=0.4`, `a=0.4`
 BLEND_ONE_MINUS_DST_ALPHA = 7
 --- First, the Source alpha is compared against the Destination alpha value subtracted from `1` and the smaller of the two is kept.
 ---
---- 			Then, the Source color channels are multiplied by the value from the first step.
+--- Then, the Source color channels are multiplied by the value from the first step.
 ---
---- 			The Source alpha channel is multiplied by `1`.
+--- The Source alpha channel is multiplied by `1`.
 ---
---- 			**Example:**
---- 			If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=0.6`
---- 			and your Destination channels are: `r=0`, `g=1`, `b=0.5`, `a=0.75`
+--- **Example:**
+--- If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=0.6`
+--- and your Destination channels are: `r=0`, `g=1`, `b=0.5`, `a=0.75`
 ---
---- 			The Destination alpha value subtracted from `1` is calculated: `1-0.75` = `0.25`
---- 			The Source alpha `0.6` is compared to the subtracted Destination alpha `0.25` and the smaller of the two is kept (`0.25`)
+--- The Destination alpha value subtracted from `1` is calculated: `1-0.75` = `0.25`
+--- The Source alpha `0.6` is compared to the subtracted Destination alpha `0.25` and the smaller of the two is kept (`0.25`)
 ---
---- 			The color channels of the Source are multiplied by the smaller value: `r=1*0.25`, `g=0.25*0.25`, `b=0.1*0.25`
+--- The color channels of the Source are multiplied by the smaller value: `r=1*0.25`, `g=0.25*0.25`, `b=0.1*0.25`
 ---
---- 			The final Multiplier value will be `r=0.25`, `g=0.0625`, `b=0.025`, `a=0.6`
+--- The final Multiplier value will be `r=0.25`, `g=0.0625`, `b=0.025`, `a=0.6`
 BLEND_SRC_ALPHA_SATURATE = 8
 --- The Multiplier will be the same as the Source color and alpha.
 BLEND_SRC_COLOR = 9
 --- Each color and alpha channel value of the Source is subtracted from `1`.
 ---
---- 			**Example:**
---- 			If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
---- 			They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
---- 			The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
+--- **Example:**
+--- If your Source channels are: `r=1`, `g=0.25`, `b=0.1`, `a=1`
+--- They will be modified by: `r=1-1`, `g=1-0.25`, `b=1-0.1`, `a=1-1`
+--- The final Multiplier value will be: `r=0`, `g=0.75`, `b=0.9`, `a=0`
 BLEND_ONE_MINUS_SRC_COLOR = 10
 
 ---@alias BLEND
@@ -3352,34 +3352,34 @@ BLEND_ONE_MINUS_SRC_COLOR = 10
 ---| `BLEND_ONE_MINUS_SRC_COLOR`
 
 --- **Source + Destination**
---- 			Adds each channel of the Source with the same channel of the Destination.
+--- Adds each channel of the Source with the same channel of the Destination.
 ---
---- 			**Example:**
---- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=0.1`, `a=0.9`
---- 			With Destination channels: `r=0.25`, `g=0.25`, `b=1.0`, `a=0.0`
---- 			The final pixel channels are: `r=0.25`, `g=0.5`, `b=1.0`, `a=0.9`
+--- **Example:**
+--- Using the Source channels: `r=0.0`, `g=0.25`, `b=0.1`, `a=0.9`
+--- With Destination channels: `r=0.25`, `g=0.25`, `b=1.0`, `a=0.0`
+--- The final pixel channels are: `r=0.25`, `g=0.5`, `b=1.0`, `a=0.9`
 BLENDFUNC_ADD = 0
 --- **Source - Destination**
---- 			Subtracts each channel of the Destination from the same channel of the Source.
+--- Subtracts each channel of the Destination from the same channel of the Source.
 ---
---- 			**Example:**
---- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
---- 			With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
---- 			The final pixel channels are: `r=0.0`, `g=0.0`, `b=0.6`, `a=0.9`
+--- **Example:**
+--- Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
+--- With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
+--- The final pixel channels are: `r=0.0`, `g=0.0`, `b=0.6`, `a=0.9`
 BLENDFUNC_SUBTRACT = 1
 --- **Destination - Source**
---- 			Subtracts each channel of the Source from the same channel of the Destination.
+--- Subtracts each channel of the Source from the same channel of the Destination.
 ---
---- 			**Example:**
---- 			Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
---- 			With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
---- 			The final pixel channels are: `r=0.0`, `g=0.75`, `b=0.0`, `a=0.0`
+--- **Example:**
+--- Using the Source channels: `r=0.0`, `g=0.25`, `b=1.0`, `a=0.9`
+--- With Destination channels: `r=0.25`, `g=0.1`, `b=0.4`, `a=0.0`
+--- The final pixel channels are: `r=0.0`, `g=0.75`, `b=0.0`, `a=0.0`
 BLENDFUNC_REVERSE_SUBTRACT = 2
 --- **Min(Source, Destination**
---- 			All of the Source channels are added together and compared to all of the Destination channels added together and the smaller of the two is used as the final pixel color.
+--- All of the Source channels are added together and compared to all of the Destination channels added together and the smaller of the two is used as the final pixel color.
 BLENDFUNC_MIN = 3
 --- **Max(Source, Destination**
---- 			All of the Source channels are added together and compared to all of the Destination channels added together and the larger of the two is used as the final pixel color.
+--- All of the Source channels are added together and compared to all of the Destination channels added together and the larger of the two is used as the final pixel color.
 BLENDFUNC_MAX = 4
 
 ---@alias BLENDFUNC
@@ -3633,159 +3633,159 @@ CLASS_NONE = 0
 --- Players
 CLASS_PLAYER = 1
 --- HL2 - **Allies**
---- 			- `monster_barney`
---- 			- `npc_citizen`
---- 			- `npc_manhack` ( Hacked )
---- 			- `npc_turret_floor` ( Friendly )
+--- - `monster_barney`
+--- - `npc_citizen`
+--- - `npc_manhack` ( Hacked )
+--- - `npc_turret_floor` ( Friendly )
 CLASS_PLAYER_ALLY = 2
 --- HL2 - **Vital Allies**
---- 			- `npc_magnusson`
---- 			- `npc_gman`
---- 			- `npc_fisherman`
---- 			- `npc_eli`
---- 			- `npc_barney`
---- 			- `npc_kleiner`
---- 			- `npc_mossman`
---- 			- `npc_alyx`
---- 			- `npc_monk`
---- 			- `npc_dog`
---- 			- `npc_vortigaunt` at the end of EP2 (controlled by `MakeGameEndAlly` input)
+--- - `npc_magnusson`
+--- - `npc_gman`
+--- - `npc_fisherman`
+--- - `npc_eli`
+--- - `npc_barney`
+--- - `npc_kleiner`
+--- - `npc_mossman`
+--- - `npc_alyx`
+--- - `npc_monk`
+--- - `npc_dog`
+--- - `npc_vortigaunt` at the end of EP2 (controlled by `MakeGameEndAlly` input)
 CLASS_PLAYER_ALLY_VITAL = 3
 --- HL2 - **Antlions**
---- 			- `npc_antlion`
---- 			- `npc_antlionguard`
---- 			- `npc_antlionguard`
+--- - `npc_antlion`
+--- - `npc_antlionguard`
+--- - `npc_antlionguard`
 CLASS_ANTLION = 4
 --- HL2 - **Barnacles**
---- 			- `npc_barnacle`
+--- - `npc_barnacle`
 CLASS_BARNACLE = 5
 --- HL2 - **Bullseyes**
---- 			- `npc_bullseye`
+--- - `npc_bullseye`
 CLASS_BULLSEYE = 6
 --- HL2 - **Passive / Non-Rebel Citizens**
---- 			- `npc_citizen` in the beginning of HL2.
+--- - `npc_citizen` in the beginning of HL2.
 CLASS_CITIZEN_PASSIVE = 7
 --- HL2 -  Unused
 CLASS_CITIZEN_REBEL = 8
 --- HL2 - **Combine Troops**
---- 			- `npc_combine`
---- 			- `npc_advisor`
---- 			- `apc_missile`
---- 			- `npc_apcdriver`
---- 			- `npc_turret_floor` ( Hostile )
---- 			- `npc_rollermine` ( Hostile )
---- 			- `npc_turret_ground` ( Active )
---- 			- `npc_turret_ceiling` ( Active )
---- 			- `npc_strider` ( Active - Not being carried by the gunship )
+--- - `npc_combine`
+--- - `npc_advisor`
+--- - `apc_missile`
+--- - `npc_apcdriver`
+--- - `npc_turret_floor` ( Hostile )
+--- - `npc_rollermine` ( Hostile )
+--- - `npc_turret_ground` ( Active )
+--- - `npc_turret_ceiling` ( Active )
+--- - `npc_strider` ( Active - Not being carried by the gunship )
 CLASS_COMBINE = 9
 --- HL2 - **Combine Aircrafts**
---- 			- `npc_combinegunship`
---- 			- `npc_combinedropship`
---- 			- `npc_helicopter`
+--- - `npc_combinegunship`
+--- - `npc_combinedropship`
+--- - `npc_helicopter`
 CLASS_COMBINE_GUNSHIP = 10
 --- HL2 -  Unused
 CLASS_CONSCRIPT = 11
 --- HL2 - **Headcrabs**
---- 			- `npc_headcrab` ( Visible )
+--- - `npc_headcrab` ( Visible )
 CLASS_HEADCRAB = 12
 --- HL2 - **Manhacks**
---- 			- `npc_manhack` ( Hostile - Not held by the gravity gun )
+--- - `npc_manhack` ( Hostile - Not held by the gravity gun )
 CLASS_MANHACK = 13
 --- HL2 - **Metro Police**
---- 			- `npc_metropolice`
---- 			- `npc_vehicledriver`
+--- - `npc_metropolice`
+--- - `npc_vehicledriver`
 CLASS_METROPOLICE = 14
 --- HL2 - **Combine Military Objects**
---- 			- `func_guntarget`
---- 			- `npc_spotlight`
---- 			- `npc_combine_camera` ( Active )
+--- - `func_guntarget`
+--- - `npc_spotlight`
+--- - `npc_combine_camera` ( Active )
 CLASS_MILITARY = 15
 --- HL2 - **Combine Scanners**
---- 			- `npc_cscanner`
---- 			- `npc_clawscanner`
+--- - `npc_cscanner`
+--- - `npc_clawscanner`
 CLASS_SCANNER = 16
 --- HL2 - **Stalkers**
---- 			- `npc_stalker`
+--- - `npc_stalker`
 CLASS_STALKER = 17
 --- HL2 - **Vortigaunts**
---- 			- `npc_vortigaunt` before the end of EP2 ( Controlled by `MakeGameEndAlly` input )
+--- - `npc_vortigaunt` before the end of EP2 ( Controlled by `MakeGameEndAlly` input )
 CLASS_VORTIGAUNT = 18
 --- HL2 - **Zombies**
---- 			- `npc_zombie` ( Unslumped )
---- 			- `npc_poisonzombie`
---- 			- `npc_fastzombie`
---- 			- `npc_fastzombie_torso`
---- 			- `npc_zombine`
+--- - `npc_zombie` ( Unslumped )
+--- - `npc_poisonzombie`
+--- - `npc_fastzombie`
+--- - `npc_fastzombie_torso`
+--- - `npc_zombine`
 CLASS_ZOMBIE = 19
 --- HL2 - **Snipers**
---- 			- `npc_sniper`
---- 			- `proto_sniper`
+--- - `npc_sniper`
+--- - `proto_sniper`
 CLASS_PROTOSNIPER = 20
 --- HL2 - **Missiles**
---- 			- `rpg_missile`
---- 			- `apc_missile`
---- 			- `grenade_pathfollower`
+--- - `rpg_missile`
+--- - `apc_missile`
+--- - `grenade_pathfollower`
 CLASS_MISSILE = 21
 --- HL2 - **Flares**
---- 			- `env_flare`
+--- - `env_flare`
 CLASS_FLARE = 22
 --- HL2 - **Animals**
---- 			- `npc_crow`
---- 			- `npc_seagull`
---- 			- `npc_pigeon`
+--- - `npc_crow`
+--- - `npc_seagull`
+--- - `npc_pigeon`
 CLASS_EARTH_FAUNA = 23
 --- HL2 - **Friendly Rollermines**
---- 			- `npc_rollermine` ( Hacked )
+--- - `npc_rollermine` ( Hacked )
 CLASS_HACKED_ROLLERMINE = 24
 --- HL2 - **Hunters**
---- 			- `npc_hunter`
+--- - `npc_hunter`
 CLASS_COMBINE_HUNTER = 25
 --- HL:S - **Turrets**
---- 			- `monster_turret`
---- 			- `monster_miniturret`
---- 			- `monster_sentry`
+--- - `monster_turret`
+--- - `monster_miniturret`
+--- - `monster_sentry`
 CLASS_MACHINE = 26
 --- HL:S - **Friendly Humans**
---- 			- `monster_scientist`
+--- - `monster_scientist`
 CLASS_HUMAN_PASSIVE = 27
 --- HL:S - **Human Military**
---- 			- `monster_human_grunt`
---- 			- `monster_apache`
+--- - `monster_human_grunt`
+--- - `monster_apache`
 CLASS_HUMAN_MILITARY = 28
 --- HL:S - **Alien Military**
---- 			- `monster_alien_controller`
---- 			- `monster_vortigaunt`
---- 			- `monster_alien_grunt`
---- 			- `monster_nihilanth`
---- 			- `monster_snark` if it has an enemy of class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
+--- - `monster_alien_controller`
+--- - `monster_vortigaunt`
+--- - `monster_alien_grunt`
+--- - `monster_nihilanth`
+--- - `monster_snark` if it has an enemy of class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
 CLASS_ALIEN_MILITARY = 29
 --- HL:S - **Monsters**
---- 			- `monster_tentacle`
---- 			- `monster_barnacle`
---- 			- `monster_zombie`
---- 			- `monster_gargantua`
---- 			- `monster_houndeye`
---- 			- `monster_ichthyosaur`
---- 			- `monster_bigmomma`
+--- - `monster_tentacle`
+--- - `monster_barnacle`
+--- - `monster_zombie`
+--- - `monster_gargantua`
+--- - `monster_houndeye`
+--- - `monster_ichthyosaur`
+--- - `monster_bigmomma`
 CLASS_ALIEN_MONSTER = 30
 --- HL:S - **Headcrabs**
---- 			- `monster_headcrab`
+--- - `monster_headcrab`
 CLASS_ALIEN_PREY = 31
 --- HL:S - **Alien Predators**
---- 			- `monster_bullsquid`
---- 			- `xen_tree`
---- 			- `xen_hull`
+--- - `monster_bullsquid`
+--- - `xen_tree`
+--- - `xen_hull`
 CLASS_ALIEN_PREDATOR = 32
 --- HL:S - **Insects**
---- 			- `montser_roach`
---- 			- `monster_leech`
+--- - `montser_roach`
+--- - `monster_leech`
 CLASS_INSECT = 33
 --- HL:S - **Player Bioweapons**
---- 			- `hornet` fired by a player
+--- - `hornet` fired by a player
 CLASS_PLAYER_BIOWEAPON = 34
 --- HL:S - **Enemy Bioweapons**
---- 			- `hornet` fired by anyone but a player
---- 			- `monster_snark` with no enemy or an enemy without the class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
+--- - `hornet` fired by anyone but a player
+--- - `monster_snark` with no enemy or an enemy without the class  `CLASS_PLAYER` , `CLASS_HUMAN_PASSIVE` or `CLASS_HUMAN_MILITARY`
 CLASS_ALIEN_BIOWEAPON = 35
 --- Portal - **Portal rocket and normal turrets, and the camera**
 --- * `npc_portal_turret_floor`
@@ -5557,47 +5557,47 @@ MAT_WARPSHIELD = 90
 
 --- **WARNING**: The primitive type `MATERIAL_POINTS` does not currently work and will not produce any visual effect if used.
 ---
---- 			For more information, see [Point Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#points)
+--- For more information, see [Point Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#points)
 MATERIAL_POINTS = 0
 --- **WARNING**: The primitive type `MATERIAL_LINES` does not currently work and will not produce any visual effect if used.
 ---
---- 			For more information, see [Line Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lines)
+--- For more information, see [Line Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lines)
 MATERIAL_LINES = 1
 --- Creates triangles from groupings of 3 vertices.
 ---
---- 			TThe `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
---- E.g. `(vertexCount / 3)`
+--- TThe `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
+--- . `(vertexCount / 3)`
 ---
---- 			For more information, see [Triangle Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#triangles)
+--- For more information, see [Triangle Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#triangles)
 MATERIAL_TRIANGLES = 2
 --- Creates a set of triangles that each share two vertices with the previous triangle in the sequence.
 ---
---- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
---- 			E.g. `(vertexCount - 2)`
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
+--- E.g. `(vertexCount - 2)`
 ---
---- 			For more information, see [Triangle Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#trianglestrips)
+--- For more information, see [Triangle Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#trianglestrips)
 MATERIAL_TRIANGLE_STRIP = 3
 --- **WARNING**: The primitive type `MATERIAL_LINE_STRIP` does not currently work and will not produce any visual effect if used.
 ---
---- 			For more information, see [Line Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#linestrips)
+--- For more information, see [Line Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#linestrips)
 MATERIAL_LINE_STRIP = 4
 --- **WARNING**: The primitive type `MATERIAL_LINE_LOOP` does not currently work and will not produce any visual effect if used.
 ---
---- 			For more information, see [Line Loop Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lineloops)
+--- For more information, see [Line Loop Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lineloops)
 MATERIAL_LINE_LOOP = 5
 --- Creates a set of triangles that all share a single vertex and each share a vertex with the previous triangle.
 ---
---- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of vertices that the Mesh will contain.
---- 			E.g. `(vertexCount)`
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of vertices that the Mesh will contain.
+--- E.g. `(vertexCount)`
 ---
---- 			For more information, see [Polygon Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#polygons)
+--- For more information, see [Polygon Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#polygons)
 MATERIAL_POLYGON = 6
 --- Creates pairs of triangles that share two vertices.
 ---
---- 			The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of quads that the Mesh will contain.
---- 			E.g. `(vertexCount / 4)`
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of quads that the Mesh will contain.
+--- E.g. `(vertexCount / 4)`
 ---
---- 			For more information, see [Quad Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#quads)
+--- For more information, see [Quad Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#quads)
 MATERIAL_QUADS = 7
 
 ---@alias MATERIAL
@@ -5730,22 +5730,22 @@ MOVETYPE_FLYGRAVITY = 5
 --- Physics movetype
 MOVETYPE_VPHYSICS = 6
 --- Doesn't collide with the world, but does push and crush entities.
---- 	This is what is used by the engine for elevators, trains, doors, moving water, etc.
+--- This is what is used by the engine for elevators, trains, doors, moving water, etc.
 ---
---- 	In order to work properly, the entity needs to have specific Save Values/Internal Variables set which tell it how long it should be moving for.
+--- In order to work properly, the entity needs to have specific Save Values/Internal Variables set which tell it how long it should be moving for.
 ---
---- 	**Note:** This same process can be done for both position and angle.
+--- **Note:** This same process can be done for both position and angle.
 ---
---- 	1. You'll need to [Get an existing Save Value](https://wiki.facepunch.com/gmod/Entity:GetInternalVariable) called `ltime`
---- 	2. Calculate how long (in seconds) the entity will be moving before it reaches its destination.
---- 	As a simple example, this can be done via `duration = distance / speed`
---- 	3. [Set the Save Value](https://wiki.facepunch.com/gmod/Entity:SetSaveValue) for `m_flMoveDoneTime` to the value you retrieved for `ltime` plus the duration calculated in step 2.
---- 	Put more simply: `m_flMoveDoneTime = ltime + duration`
---- 	4. Set the entity's velocity to move it to the destination at the speed used in step 2.
+--- 1. You'll need to [Get an existing Save Value](https://wiki.facepunch.com/gmod/Entity:GetInternalVariable) called `ltime`
+--- 2. Calculate how long (in seconds) the entity will be moving before it reaches its destination.
+--- As a simple example, this can be done via `duration = distance / speed`
+--- 3. [Set the Save Value](https://wiki.facepunch.com/gmod/Entity:SetSaveValue) for `m_flMoveDoneTime` to the value you retrieved for `ltime` plus the duration calculated in step 2.
+--- Put more simply: `m_flMoveDoneTime = ltime + duration`
+--- 4. Set the entity's velocity to move it to the destination at the speed used in step 2.
 ---
---- 	Once the duration of the move has elapsed, the entity will stop moving.  If you have done your calculations correctly, it should stop exactly at the desired destination.
+--- Once the duration of the move has elapsed, the entity will stop moving.  If you have done your calculations correctly, it should stop exactly at the desired destination.
 ---
---- 	**NOTE**: MOVETYPE_PUSH entities only move during [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) so if you want smooth movement, you need to set [Entity:NextThink](https://wiki.facepunch.com/gmod/Entity:NextThink) to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime), which instructs the entity to execute [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) as quickly as possible.
+--- **NOTE**: MOVETYPE_PUSH entities only move during [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) so if you want smooth movement, you need to set [Entity:NextThink](https://wiki.facepunch.com/gmod/Entity:NextThink) to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime), which instructs the entity to execute [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) as quickly as possible.
 MOVETYPE_PUSH = 7
 --- Noclip
 MOVETYPE_NOCLIP = 8

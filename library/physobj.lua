@@ -4,7 +4,6 @@
 ---
 --- It represents a physics object.
 ---
----
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj)
 ---@class PhysObj
 local PhysObj = {}

@@ -13,7 +13,6 @@
 --- end
 --- ```
 ---
----
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX_Hooks)
 ---@class SANDBOX : GM
 SANDBOX = {}

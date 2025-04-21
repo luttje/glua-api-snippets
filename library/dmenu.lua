@@ -133,7 +133,7 @@ function DMenu:Hide() end
 ---@param item Panel The item to highlight.
 function DMenu:HighlightItem(item) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Opens the DMenu at the current mouse position
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Opens the [DMenu](https://wiki.facepunch.com/gmod/DMenu) at given position.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenu:Open)
 ---@param x? number Position (X coordinate) to open the menu at.

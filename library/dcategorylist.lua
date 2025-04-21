@@ -1,9 +1,7 @@
 ---@meta
 
----
---- 		A host for multiple [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) panels.
---- 		As the name suggests, each one of them can be collapsed or expanded on demand by the user.
----
+--- A host for multiple [DCollapsibleCategory](https://wiki.facepunch.com/gmod/DCollapsibleCategory) panels.
+--- As the name suggests, each one of them can be collapsed or expanded on demand by the user.
 ---@class DCategoryList : DScrollPanel
 local DCategoryList = {}
 

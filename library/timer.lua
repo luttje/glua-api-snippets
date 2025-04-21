@@ -24,7 +24,7 @@ function timer.Check() end
 ---
 --- For a simple one-time timer with no identifiers, see [timer.Simple](https://wiki.facepunch.com/gmod/timer.Simple).
 ---
---- **WARNING**: Timers use [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1`).
+--- **WARNING**: Timers use [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1` or `delay` is set to `0` ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.Create)
 ---@param identifier string Identifier of the timer to create. Must be unique. If a timer already exists with the same identifier, that timer will be updated to the new settings and reset.
@@ -69,6 +69,7 @@ function timer.Pause(identifier) end
 function timer.Remove(identifier) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns amount of repetitions/executions left before the timer destroys itself.
+--- **NOTE**: The last execution of the timer returns 1, not 0.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.RepsLeft)
 ---@param identifier any Identifier of the timer.

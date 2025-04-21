@@ -1,6 +1,5 @@
 ---@meta
 
----
 --- These hooks are used inside of a Lua effect. Lua effects are stored in either the `/lua/effects` directory or in a gamemode in `/gamemodes//entities/effects`.
 ---
 --- Effects are entities with the classname `class CLuaEffect`, and as such, [Entity](https://wiki.facepunch.com/gmod/Entity) functions are usable on them (using the `self` argument).
@@ -74,9 +73,6 @@
 ---
 --- function EFFECT:Render()
 --- end
----
----
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/EFFECT_Hooks)
 ---@class EFFECT : Entity

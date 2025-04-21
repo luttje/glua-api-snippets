@@ -1,11 +1,9 @@
 ---@meta
 
----
 --- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 --- This panel is created whenever you add a node to a [DTree](https://wiki.facepunch.com/gmod/DTree).
 --- The root node of a [DTree](https://wiki.facepunch.com/gmod/DTree) is also a [DTree_Node](https://wiki.facepunch.com/gmod/DTree_Node) and controls much of its action. it can be accessed with [DTree:Root](https://wiki.facepunch.com/gmod/DTree:Root).
----
 ---@class DTree_Node : DPanel
 local DTree_Node = {}
 
@@ -246,7 +244,7 @@ function DTree_Node:GetNeedsPopulating() end
 ---@return Panel # The parent node.
 function DTree_Node:GetParentNode() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the path ID ([File Search Paths](https://wiki.facepunch.com/gmod/File Search Paths)) used in populating the [DTree](https://wiki.facepunch.com/gmod/DTree) from the filesystem.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the path ID ([File Search Paths](https://wiki.facepunch.com/gmod/File_Search_Paths)) used in populating the [DTree](https://wiki.facepunch.com/gmod/DTree) from the filesystem.
 ---
 --- See [DTree_Node:SetPathID](https://wiki.facepunch.com/gmod/DTree_Node:SetPathID) and [DTree_Node:MakeFolder](https://wiki.facepunch.com/gmod/DTree_Node:MakeFolder).
 ---
@@ -486,7 +484,7 @@ function DTree_Node:SetParentNode(parent) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Sets the path ID ([File Search Paths](https://wiki.facepunch.com/gmod/File Search Paths)) for populating the tree from the filesystem.
+--- Sets the path ID ([File Search Paths](https://wiki.facepunch.com/gmod/File_Search_Paths)) for populating the tree from the filesystem.
 ---
 --- Use [DTree_Node:MakeFolder](https://wiki.facepunch.com/gmod/DTree_Node:MakeFolder) instead.
 ---

@@ -1,13 +1,10 @@
 ---@meta
 
+--- Renderable mesh object, can be used to create models on the fly.
+--- The only way to create your own IMesh object is to call [Global.Mesh](https://wiki.facepunch.com/gmod/Global.Mesh).
 ---
---- 		Renderable mesh object, can be used to create models on the fly.
---- 		The only way to create your own IMesh object is to call [Global.Mesh](https://wiki.facepunch.com/gmod/Global.Mesh).
----
---- 		**NOTE**: IMeshes only respond to one projected texture.
---- 			See the [render.RenderFlashlights](https://wiki.facepunch.com/gmod/render.RenderFlashlights) function and example that solves this problem.
----
----
+--- **NOTE**: IMeshes only respond to one projected texture.
+--- 	See the [render.RenderFlashlights](https://wiki.facepunch.com/gmod/render.RenderFlashlights) function and example that solves this problem.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMesh)
 ---@class IMesh

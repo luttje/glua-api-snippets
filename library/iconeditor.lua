@@ -1,13 +1,10 @@
 ---@meta
 
----
 --- An icon editor that permits a user to modify a [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon) and re-render it. This is used by the spawn menu and is what is shown when you right-click an icon and select `Edit Icon`.
 ---
 --- This makes use of the [DAdjustableModelPanel](https://wiki.facepunch.com/gmod/DAdjustableModelPanel) element.
 ---
 --- **NOTE**: This panel is only available in Sandbox and Sandbox derived gamemodes!
----
----
 ---@class IconEditor : DFrame
 local IconEditor = {}
 

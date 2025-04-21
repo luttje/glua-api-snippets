@@ -3,8 +3,6 @@
 --- The panel used by Material & Lamp Sandbox tools for texture selection. Despite being only used in Sandbox, it is **not** exclusive to that gamemode.
 ---
 --- See also [PropSelect](https://wiki.facepunch.com/gmod/PropSelect) for the prop selecting alternative.
----
----
 ---@class MatSelect : ContextBase
 local MatSelect = {}
 

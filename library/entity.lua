@@ -2,25 +2,21 @@
 
 --- This is a list of all available methods for all entities, which includes [Players](https://wiki.facepunch.com/gmod/Player), [Weapons](https://wiki.facepunch.com/gmod/Weapon), [NPCs](https://wiki.facepunch.com/gmod/NPC) and [Vehicles](https://wiki.facepunch.com/gmod/Vehicle).
 ---
---- For a list of possible members of [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities) see [ENT Structure](https://wiki.facepunch.com/gmod/Structures/ENT)
----
+--- For a list of possible members of [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities) see [ENT Structure](https://wiki.facepunch.com/gmod/Structures/ENT)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity)
 ---@class Entity
 local Entity = {}
 
+--- A list of hooks **only** available for [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
---- A list of hooks **only** available for [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
----
---- The exceptions to this rule are documented at [Custom Entity Fields](https://wiki.facepunch.com/gmod/Custom Entity Fields), which can be applied to all entities.
+--- The exceptions to this rule are documented at [Custom Entity Fields](https://wiki.facepunch.com/gmod/Custom_Entity_Fields), which can be applied to all entities.
 ---
 --- Some more "hooks" are available for all entities (including engine entities) with the function [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
 ---
 --- See also: [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT)
 ---
 --- **NOTE**: The hooks listed here are also dependent on the scripted entity type. For instance, a base scripted entity will not use [ENTITY:DoSchedule](https://wiki.facepunch.com/gmod/ENTITY:DoSchedule) at all, that is only for scripted NPCs
----
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY_Hooks)
 ---@class ENTITY : Entity
@@ -121,7 +117,7 @@ function Entity:AddGestureSequence(sequence, autokill) end
 ---@return number # Layer ID of created layer
 function Entity:AddLayeredSequence(sequence, priority) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function for creating [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function for creating [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 --- Similar to [ENTITY:AddOutputFromKeyValue](https://wiki.facepunch.com/gmod/ENTITY:AddOutputFromKeyValue), call it from [ENTITY:AcceptInput](https://wiki.facepunch.com/gmod/ENTITY:AcceptInput) and it'll return true if it successfully added an output from the passed input data.
 ---
@@ -131,7 +127,7 @@ function Entity:AddLayeredSequence(sequence, priority) end
 ---@return boolean # Whether any outputs were added or not.
 function ENTITY:AddOutputFromAcceptInput(name, data) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function for creating [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A helper function for creating [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 --- Call it from [ENTITY:KeyValue](https://wiki.facepunch.com/gmod/ENTITY:KeyValue) and it'll return true if it successfully added an output from the passed KV pair.
 ---
@@ -484,8 +480,7 @@ function ENTITY:DoSchedule(sched) end
 ---
 --- See also [ENTITY:DrawTranslucent](https://wiki.facepunch.com/gmod/ENTITY:DrawTranslucent).
 ---
---- **NOTE**: This function is not called by the game whenever the player looks away from the entity due to optimizations. To change that,
---- you must define an empty [Entity:Think](https://wiki.facepunch.com/gmod/Entity:Think) method client-side!
+--- **NOTE**: This function will not called if the entity's render bounds are not in player's view. See [Entity:SetRenderBounds](https://wiki.facepunch.com/gmod/Entity:SetRenderBounds).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:Draw)
 ---@param flags number The bit flags from Enums/STUDIO
@@ -514,6 +509,8 @@ function Entity:DrawModel(flags) end
 function Entity:DrawShadow(shouldDraw) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the entity should be drawn translucently. If your scripted entity has a translucent model, it will be invisible unless it is drawn here.
+---
+--- See [ENTITY:Draw](https://wiki.facepunch.com/gmod/ENTITY:Draw) for the opaque rendering alternative to this hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:DrawTranslucent)
 ---@param flags number The bit flags from Enums/STUDIO
@@ -682,7 +679,7 @@ function Entity:EyeAngles() end
 function Entity:EyePos() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Searches the [Entity's](https://wiki.facepunch.com/gmod/Entity) model for a Body Group with a given name.
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:FindBodygroupByName)
 ---@param name string The name to search for.
@@ -729,9 +726,11 @@ function ENTITY:FireAnimationEvent(pos, ang, event, name) end
 ---
 --- When used in a  hook such as [WEAPON:Think](https://wiki.facepunch.com/gmod/WEAPON:Think) or [WEAPON:PrimaryAttack](https://wiki.facepunch.com/gmod/WEAPON:PrimaryAttack), it will use [Player:LagCompensation](https://wiki.facepunch.com/gmod/Player:LagCompensation) internally.
 ---
---- **NOTE**: Lag compensation will not work if this function is called in a timer, regardless if the timer was made in a  hook.
+--- Lag compensation will not work if this function is called in a timer, regardless if the timer was made in a predicted hook.
 ---
---- **NOTE**: Due to how FireBullets is set up internally, bullet tracers will always originate from attachment 1.
+--- Due to how `Entity:FireBullets` is set up internally, bullet tracers will always originate from attachment 1. This can be avoided by supplying your own tracer effect.
+---
+--- When firing bullets from a [Weapon](https://wiki.facepunch.com/gmod/Weapon), it is recommended to fire bullets from the weapon owner entity ([Player](https://wiki.facepunch.com/gmod/Player) or [NPC](https://wiki.facepunch.com/gmod/NPC)), not the [Weapon](https://wiki.facepunch.com/gmod/Weapon) itself.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:FireBullets)
 ---@param bulletInfo Bullet The bullet data to be used. See the Structures/Bullet.
@@ -828,7 +827,7 @@ function Entity:GetAnimTimeInterval() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the orientation and position of the attachment by its ID, returns nothing if the attachment does not exist.
 ---
---- **NOTE**: The update rate of this function is limited by the setting of ENT.AutomaticFrameAdvance for [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities)!
+--- **NOTE**: The update rate of this function is limited by the setting of ENT.AutomaticFrameAdvance for [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities)!
 ---
 --- This will return improper values for viewmodels if used in [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView).
 ---
@@ -871,26 +870,26 @@ function Entity:GetBloodColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the currently active [Sub Model](https://wiki.facepunch.com/gmod/Entity:GetSubModels) of the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id).
 ---
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroup)
 ---@param bodyGroupId number The Body Group ID to retrieve the active Sub Model ID for.
---- 			Body Group IDs start at `0`.
+--- Body Group IDs start at `0`.
 ---@return number # The currently active Sub Model ID.
---- 			Sub Model IDs start at `0`.
+--- Sub Model IDs start at `0`.
 function Entity:GetBodygroup(bodyGroupId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the number of [Sub Models](https://wiki.facepunch.com/gmod/Entity:GetSubModels) in the Body Group corresponding to a given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroupCount)
 ---@param bodyGroupId number The Body Group ID to retrieve the Sub Model count of.
---- 			Body Group IDs start at `0`.
+--- Body Group IDs start at `0`.
 ---@return number # The number of Sub Models in the Body Group.
 function Entity:GetBodygroupCount(bodyGroupId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the name of the Body Group corresponding to a given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodygroupName)
 ---@param bodyGroupId number The Body Group ID to get the name of.
@@ -898,7 +897,7 @@ function Entity:GetBodygroupCount(bodyGroupId) end
 function Entity:GetBodygroupName(bodyGroupId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of information about each Body Group present on the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups)
 ---@return table # A table of Body Group information where each value is a Structures/BodyGroupData.
@@ -996,7 +995,7 @@ function Entity:GetBoneParent(bone) end
 ---@return Angle # The bone's angle relative to the world.
 function Entity:GetBonePosition(boneIndex) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the surface property of the specified bone.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the surface property of the specified bone. See [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) for more details about what they are.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBoneSurfaceProp)
 ---@param bone number The bone id, starting at index 0. See Entity:LookupBone.
@@ -1230,9 +1229,9 @@ function Entity:GetDTVector(key) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns internal data about editable [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar)s.
 ---
---- 		This is used internally by [DEntityProperties](https://wiki.facepunch.com/gmod/DEntityProperties) and [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) system.
+--- This is used internally by [DEntityProperties](https://wiki.facepunch.com/gmod/DEntityProperties) and [Editable Entities](https://wiki.facepunch.com/gmod/Editable_Entities) system.
 ---
---- 		**NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities)
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetEditingData)
 ---@return table # The internal data
@@ -1600,7 +1599,7 @@ function Entity:GetModelBounds() end
 ---@return number # The contents of the entity's model. See Enums/CONTENTS.
 function Entity:GetModelContents() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Gets the physics bone count of the entity's model. This is only applicable to `anim` type [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities) with ragdoll models.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Gets the physics bone count of the entity's model. This is only applicable to `anim` type [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities) with ragdoll models.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetModelPhysBoneCount)
 ---@return number # How many physics bones exist on the model.
@@ -1610,7 +1609,7 @@ function Entity:GetModelPhysBoneCount() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetModelRadius)
 ---@return number # The radius of the model.
---- 			This can return [nil](https://wiki.facepunch.com/gmod/nil) instead of a [number](https://wiki.facepunch.com/gmod/number) in some cases.
+--- This can return [nil](https://wiki.facepunch.com/gmod/nil) instead of a [number](https://wiki.facepunch.com/gmod/number) in some cases.
 function Entity:GetModelRadius() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's model render bounds. Unlike [Entity:GetModelBounds](https://wiki.facepunch.com/gmod/Entity:GetModelBounds), bounds returning by this function will not be affected by animations (at compile time).
@@ -1859,11 +1858,11 @@ function Entity:GetNetworkOrigin() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns all network vars created by [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) and [Entity:NetworkVarElement](https://wiki.facepunch.com/gmod/Entity:NetworkVarElement) and their current values.
 ---
---- 		This is used internally by the duplicator. `Entity` type Network vars will not be returned!
+--- This is used internally by the duplicator. `Entity` type Network vars will not be returned!
 ---
---- 		For NWVars see [Entity:GetNWVarTable](https://wiki.facepunch.com/gmod/Entity:GetNWVarTable).
+--- For NWVars see [Entity:GetNWVarTable](https://wiki.facepunch.com/gmod/Entity:GetNWVarTable).
 ---
---- 		**NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities)
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNetworkVars)
 ---@return table # The Key-Value formatted table of network var names and their current values
@@ -1887,7 +1886,7 @@ function ENTITY:GetNPCClass() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the number of Body Groups that the [Entity's](https://wiki.facepunch.com/gmod/Entity) model contains.
 ---
---- 		**NOTE**: Weapons will return results from their viewmodels.
+--- **NOTE**: Weapons will return results from their viewmodels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNumBodyGroups)
 ---@return number # The amount of Body Groups on the Entity's model.
@@ -1970,7 +1969,7 @@ function Entity:GetNW2Var(key, fallback) end
 function Entity:GetNW2VarProxy(key) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns all the NW2 variables in an entity.
---- 		This function will return keys with empty tables if the NW2Var is nil.
+--- This function will return keys with empty tables if the NW2Var is nil.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetNW2VarTable)
 ---@return table # Key-Value table of all NW2 variables.
@@ -2502,7 +2501,7 @@ function Entity:GetSurroundingBounds() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a [table](https://wiki.facepunch.com/gmod/table) that contains all lua-based key-value pairs saved on the [Entity](https://wiki.facepunch.com/gmod/Entity).
 ---
---- 		For retrieving engine-based key-value pairs, see [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)
+--- For retrieving engine-based key-value pairs, see [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetTable)
 ---@return table # A table of the lua data stored on the Entity, or `nil` if the Entity is NULL.
@@ -3086,9 +3085,6 @@ function Entity:ManipulateBoneJiggle(boneID, type) end
 function Entity:ManipulateBonePosition(boneID, pos, networking) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets custom bone scale.
----
---- When used repeatedly serverside, this method is strongly discouraged due to the huge network traffic produced.
----
 --- This does not scale procedural bones.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale)
@@ -3898,9 +3894,9 @@ function Entity:RestartGesture(activity, addIfMissing, autokill) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Calls the associated `Entity:Set*` function for each network var provided.
 ---
---- 		**INTERNAL**: Used for the built-in duplicator, you do not need to call this yourself.
+--- **INTERNAL**: Used for the built-in duplicator, you do not need to call this yourself.
 ---
---- 		**NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities)
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RestoreNetworkVars)
 ---@param data table The data from Entity:GetNetworkVars.
@@ -4038,26 +4034,26 @@ function ENTITY:SetAutomaticFrameAdvance(enable) end
 function Entity:SetBloodColor(bloodColor) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the currently active [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
---- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
+--- **NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodygroup)
 ---@param bodyGroupId number The Body Group ID to set the Sub Model ID of.
---- 			Body Group IDs start at `0`.
+--- Body Group IDs start at `0`.
 ---@param subModelId number The Sub Model ID to set as active for this Body Group.
---- 			Sub Model IDs start at `0`.
+--- Sub Model IDs start at `0`.
 function Entity:SetBodygroup(bodyGroupId, subModelId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the [Entity's](https://wiki.facepunch.com/gmod/Entity) active Sub Models via a string of [Sub Model IDs](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) in order from the first [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) to the last.
 ---
---- This is a convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
---- 		**NOTE**: When used on a Weapon, this will modify its viewmodel.
+--- is is a convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
+--- **NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodyGroups)
 ---@param subModelIds string The Sub Model IDs to activate for each Body Group on the Entity's model.
 ---
---- 			The first character corresponds with Body Group ID `0`, the second character coressponds to Body Group ID `1`, etc.
+--- The first character corresponds with Body Group ID `0`, the second character coressponds to Body Group ID `1`, etc.
 ---
---- 			To support Body Groups with more than `0`-`9` options, values above `9` are represented using alphabetical characters starting with `a` and ending with `z`.
+--- To support Body Groups with more than `0`-`9` options, values above `9` are represented using alphabetical characters starting with `a` and ending with `z`.
 function Entity:SetBodyGroups(subModelIds) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the specified value on the bone controller with the given ID of this entity, it's used in HL1 to change the head rotation of NPCs, turret aiming and so on.
@@ -4276,7 +4272,7 @@ function Entity:SetFlexWeight(flex, weight) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets friction multiplier for this entity when sliding against a surface. Entities default to 1 (100%) and can be higher.
 ---
---- This may not affect all entities, but does work for players (the range is 0 to 10), as well as other entities using [MOVETYPE_STEP ](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_STEP )
+--- This may not affect all entities, but does work for players (the range is 0 to 10), as well as other entities using [MOVETYPE_STEP ](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_STEP_)
 ---
 --- This only multiplies the friction of the entity, to change the value itself use [PhysObj:SetMaterial](https://wiki.facepunch.com/gmod/PhysObj:SetMaterial).
 ---
@@ -4680,24 +4676,26 @@ function Entity:SetNetworked2Int(key, value) end
 function Entity:SetNetworked2String(key, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a networked value on the entity.
----
---- The value can then be accessed with [Entity:GetNetworked2Var](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Var) both from client and server.
----
---- | Allowed Types   |
---- | --------------- |
---- | Angle           |
---- | Boolean         |
---- | Entity          |
---- | Float           |
---- | Int             |
---- | String          |
---- | Vector          |
----
---- **WARNING**: Trying to network a type that is not listed above leads to the value not being networked!
----
---- **NOTE**: Running this function clientside will only set it for the client it is called on.
---- The value will only be networked if it isn't the same as the current value and unlike SetNW*
---- the value will only ne networked once and not every 10 seconds.
+--[[
+
+The value can then be accessed with [Entity:GetNetworked2Var](https://wiki.facepunch.com/gmod/Entity:GetNetworked2Var) both from client and server.
+
+| Allowed Types   |  
+| --------------- |  
+| Angle           |  
+| Boolean         |  
+| Entity          |  
+| Float           |  
+| Int             |  
+| String          |  
+| Vector          |  
+
+**WARNING**: Trying to network a type that is not listed above leads to the value not being networked!
+
+**NOTE**: Running this function clientside will only set it for the client it is called on.  
+The value will only be networked if it isn't the same as the current value and unlike SetNW*
+the value will only ne networked once and not every 10 seconds.
+--]]
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworked2Var)
 ---@param key string The key to associate the value with
@@ -4819,25 +4817,27 @@ function Entity:SetNetworkedNumber(index, number) end
 function Entity:SetNetworkedString(key, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a networked value on the entity.
----
---- The value can then be accessed with [Entity:GetNetworkedVar](https://wiki.facepunch.com/gmod/Entity:GetNetworkedVar) both from client and server.
----
---- | Allowed Types   |
---- | --------------- |
---- | Angle           |
---- | Boolean         |
---- | Entity          |
---- | Float           |
---- | Int             |
---- | String          |
---- | Vector          |
----
---- **WARNING**: Trying to network a type that is not listed above leads to the value not being networked!
---- the value will only be updated clientside if the entity is or enters the clients PVS.
----
---- **NOTE**: Running this function clientside will only set it for the client it is called on.
---- The value will only be networked if it isn't the same as the current value and unlike SetNW*
---- the value will only be networked once and not every 10 seconds.
+--[[
+
+The value can then be accessed with [Entity:GetNetworkedVar](https://wiki.facepunch.com/gmod/Entity:GetNetworkedVar) both from client and server.
+
+| Allowed Types   |  
+| --------------- |  
+| Angle           |  
+| Boolean         |  
+| Entity          |  
+| Float           |  
+| Int             |  
+| String          |  
+| Vector          |  
+
+**WARNING**: Trying to network a type that is not listed above leads to the value not being networked!  
+the value will only be updated clientside if the entity is or enters the clients PVS.
+
+**NOTE**: Running this function clientside will only set it for the client it is called on.  
+The value will only be networked if it isn't the same as the current value and unlike SetNW*
+the value will only be networked once and not every 10 seconds.
+--]]
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkedVar)
 ---@param key string The key to associate the value with
@@ -4876,7 +4876,7 @@ function Entity:SetNetworkedVector(key, value) end
 ---
 --- See also [Entity:SetNetworkVarsFromMapInput](https://wiki.facepunch.com/gmod/Entity:SetNetworkVarsFromMapInput) for a function that does similar thing for map inputs instead.
 ---
---- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkKeyValue)
 ---@param key string The key-value name, or simply the "key".
@@ -4885,7 +4885,7 @@ function Entity:SetNetworkedVector(key, value) end
 function Entity:SetNetworkKeyValue(key, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Virtually changes entity position for clients. Does almost the same thing as [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) when used serverside.
---- 		**NOTE**: Unlike [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) it directly changes the position without checking for any unreasonable position.
+--- **NOTE**: Unlike [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) it directly changes the position without checking for any unreasonable position.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkOrigin)
 ---@param origin Vector The position to make clients think this entity is at.
@@ -4897,7 +4897,7 @@ function Entity:SetNetworkOrigin(origin) end
 ---
 --- See also [Entity:SetNetworkKeyValue](https://wiki.facepunch.com/gmod/Entity:SetNetworkKeyValue) for a function that does similar thing, but for entity key-values in Hammer instead.
 ---
---- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted Entities).
+--- **NOTE**: This function will only work on entities which had [Entity:InstallDataTable](https://wiki.facepunch.com/gmod/Entity:InstallDataTable) called on them, which is done automatically for players and all [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNetworkVarsFromMapInput)
 ---@param name string The name of the Map I/O input, including the `Set` prefix.
@@ -5030,26 +5030,28 @@ function Entity:SetNW2Int(key, value) end
 function Entity:SetNW2String(key, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a networked value on the entity.
----
---- The value can then be accessed with [Entity:GetNW2Var](https://wiki.facepunch.com/gmod/Entity:GetNW2Var) both from client and server.
----
---- | Allowed Types   |
---- | --------------- |
---- | Angle           |
---- | Boolean         |
---- | Entity          |
---- | Float           |
---- | Int             |
---- | String          |
---- | Vector          |
---- **WARNING**: Trying to network a type that is not listed above leads to the value not being networked!
---- the value will only be updated clientside if the entity is or enters the clients PVS.
----
---- You should not use the NW2 System on entities that are based on a Lua Entity or else NW2Vars could get mixed up, updated multiple times or not be set.
----
---- **NOTE**: Running this function clientside will only set it for the client it is called on.
---- The value will only be networked if it isn't the same as the current value and unlike SetNW*
---- the value will only be networked once and not every 10 seconds.
+--[[
+
+The value can then be accessed with [Entity:GetNW2Var](https://wiki.facepunch.com/gmod/Entity:GetNW2Var) both from client and server.
+
+| Allowed Types   |  
+| --------------- |  
+| Angle           |  
+| Boolean         |  
+| Entity          |  
+| Float           |  
+| Int             |  
+| String          |  
+| Vector          |  
+**WARNING**: Trying to network a type that is not listed above leads to the value not being networked!  
+the value will only be updated clientside if the entity is or enters the clients PVS.
+
+You should not use the NW2 System on entities that are based on a Lua Entity or else NW2Vars could get mixed up, updated multiple times or not be set.
+
+**NOTE**: Running this function clientside will only set it for the client it is called on.  
+The value will only be networked if it isn't the same as the current value and unlike SetNW*
+the value will only be networked once and not every 10 seconds.
+--]]
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNW2Var)
 ---@param key string The key to associate the value with
@@ -5344,7 +5346,9 @@ function Entity:SetRagdollPos(boneid, pos) end
 ---@param newAngles? Angle The new render angles to be set to. To disable the override, set to nil.
 function Entity:SetRenderAngles(newAngles) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render bounds for the entity. For world space coordinates see [Entity:SetRenderBoundsWS](https://wiki.facepunch.com/gmod/Entity:SetRenderBoundsWS).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render bounds for the entity.
+---
+--- For world space coordinate alternative see [Entity:SetRenderBoundsWS](https://wiki.facepunch.com/gmod/Entity:SetRenderBoundsWS).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetRenderBounds)
 ---@param mins Vector The minimum corner of the bounds, relative to origin of the entity.

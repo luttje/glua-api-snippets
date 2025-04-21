@@ -31,7 +31,7 @@ function resource.AddFile(path) end
 ---@param path string Path of the file to be added, relative to garrysmod/
 function resource.AddSingleFile(path) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a workshop addon for the client to download before entering the server. This will not "install" the addon on your server, see [Workshop for Dedicated Servers](https://wiki.facepunch.com/gmod/Workshop for Dedicated Servers) for installing Steam Workshop addons onto your servers.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a workshop addon for the client to download before entering the server. This will not "install" the addon on your server, see [Workshop for Dedicated Servers](https://wiki.facepunch.com/gmod/Workshop_for_Dedicated_Servers) for installing Steam Workshop addons onto your servers.
 ---
 --- Having the raw files from a workshop item does not count as having already downloaded it.
 --- So players who previously downloaded a map through Fast Download will have to re-download it if it is part of a workshop addon.

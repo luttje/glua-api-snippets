@@ -168,7 +168,7 @@ function navmesh.IsGenerating() end
 function navmesh.IsLoaded() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Loads a new navmesh from the .nav file for current map discarding any changes made to the navmesh previously.
---- 		**WARNING**: Calling this function too soon, causes the Server to crash!
+--- **WARNING**: Calling this function too soon, causes the Server to crash!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/navmesh.Load)
 function navmesh.Load() end

@@ -1,12 +1,10 @@
 ---@meta
 
----
 --- DRGBPicker is an interactive panel which can be used to select a color hue.
 ---
 --- See [DColorCube](https://wiki.facepunch.com/gmod/DColorCube) for a color picker which controls brightness and saturation.
 ---
 --- See [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer) for a color picker that allows control over hue, saturation, and brightness at once.
----
 ---@class DRGBPicker : DPanel
 local DRGBPicker = {}
 

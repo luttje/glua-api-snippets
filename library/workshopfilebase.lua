@@ -1,22 +1,19 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- This object is created by [Global.WorkshopFileBase](https://wiki.facepunch.com/gmod/Global.WorkshopFileBase) which is used internally to fetch data of the specific namespace
+--- or to publish saves and dupes.
 ---
---- 		This object is created by [Global.WorkshopFileBase](https://wiki.facepunch.com/gmod/Global.WorkshopFileBase) which is used internally to fetch data of the specific namespace
---- 		or to publish saves and dupes.
----
---- 		This also exists on the Server but most functions may throw an error. It's meant to be used clientside.
---- 		**NOTE**: You need to set the `HTML` field to a [DHTML](https://wiki.facepunch.com/gmod/DHTML) panel that is set up correctly like [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/gamemode/spawnmenu/creationmenu/content/contenttypes/dupes.lua#L12), or else you might get errors.
----
----
+--- This also exists on the Server but most functions may throw an error. It's meant to be used clientside.
+--- **NOTE**: You need to set the `HTML` field to a [DHTML](https://wiki.facepunch.com/gmod/DHTML) panel that is set up correctly like [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/sandbox/gamemode/spawnmenu/creationmenu/content/contenttypes/dupes.lua#L12), or else you might get errors.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WorkshopFileBase)
 ---@class WorkshopFileBase
 local WorkshopFileBase = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Fetches all subscriptions for the set namespace and type
---- 		**NOTE**: If you want to use the type `local` you need to implement the `:FetchLocal(offset, perpage)` function!
+--- **NOTE**: If you want to use the type `local` you need to implement the `:FetchLocal(offset, perpage)` function!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WorkshopFileBase:Fetch)
 ---@param type string The type to search for. (`local`, `subscribed`, `subscribed_ugc`, `mine`, `favorite`)

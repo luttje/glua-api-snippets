@@ -1,10 +1,8 @@
 ---@meta
 
+--- **INTERNAL**: Unless you know what you are doing and you benefit from this panel, you should be using the [DProperties](https://wiki.facepunch.com/gmod/DProperties) instead.
 ---
---- 		**INTERNAL**: Unless you know what you are doing and you benefit from this panel, you should be using the [DProperties](https://wiki.facepunch.com/gmod/DProperties) instead.
----
---- 		A panel used by the [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) system.
----
+--- A panel used by the [Editable Entities](https://wiki.facepunch.com/gmod/Editable_Entities) system.
 ---@class DEntityProperties : DProperties
 local DEntityProperties = {}
 
@@ -33,7 +31,7 @@ function DEntityProperties:EntityLost() end
 ---[View wiki](https://wiki.facepunch.com/gmod/DEntityProperties:RebuildControls)
 function DEntityProperties:RebuildControls() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the entity to be edited by this panel. The entity must support the [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) system or nothing will happen.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the entity to be edited by this panel. The entity must support the [Editable Entities](https://wiki.facepunch.com/gmod/Editable_Entities) system or nothing will happen.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DEntityProperties:SetEntity)
 ---@param ent Entity The entity to edit

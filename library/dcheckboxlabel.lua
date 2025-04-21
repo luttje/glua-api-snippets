@@ -1,9 +1,7 @@
 ---@meta
 
----
---- 		The **DCheckBoxLabel** is a [DCheckBox](https://wiki.facepunch.com/gmod/DCheckBox) with a [DLabel](https://wiki.facepunch.com/gmod/DLabel) next to it.
---- 		It allows you to get a boolean value from the user (true/false - yes/no)
----
+--- The **DCheckBoxLabel** is a [DCheckBox](https://wiki.facepunch.com/gmod/DCheckBox) with a [DLabel](https://wiki.facepunch.com/gmod/DLabel) next to it.
+--- It allows you to get a boolean value from the user (true/false - yes/no)
 ---@class DCheckBoxLabel : DPanel
 local DCheckBoxLabel = {}
 

@@ -6,7 +6,6 @@
 ---
 --- **NOTE**: This object internally uses the `SurfaceHandle_t` class, which is an alias for `msurface2_t*`.
 ---
----
 ---[View wiki](https://wiki.facepunch.com/gmod/SurfaceInfo)
 ---@class SurfaceInfo
 local SurfaceInfo = {}

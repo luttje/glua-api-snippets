@@ -11,7 +11,7 @@ scripted_ents = {}
 function scripted_ents.Alias(alias, classname) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the ENT table for a class, including functions defined by the base class
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Get)
 ---@param classname string The classname of the ENT table to return, can be an alias
@@ -66,11 +66,11 @@ function scripted_ents.IsBasedOn(name, base) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Called after all ENTS have been loaded and runs [baseclass.Set](https://wiki.facepunch.com/gmod/baseclass.Set) on each one.
+--- alled after all ENTS have been loaded and runs [baseclass.Set](https://wiki.facepunch.com/gmod/baseclass.Set) on each one.
 ---
---- You can retrieve all the currently registered ENTS with [scripted_ents.GetList](https://wiki.facepunch.com/gmod/scripted_ents.GetList).
+--- ou can retrieve all the currently registered ENTS with [scripted_ents.GetList](https://wiki.facepunch.com/gmod/scripted_ents.GetList).
 ---
---- **NOTE**: This is not called after an ENT auto refresh, and thus the inherited baseclass functions retrieved with [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) will not be updated
+--- *NOTE**: This is not called after an ENT auto refresh, and thus the inherited baseclass functions retrieved with [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) will not be updated
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.OnLoaded)
 function scripted_ents.OnLoaded() end
@@ -81,6 +81,6 @@ function scripted_ents.OnLoaded() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Register)
 ---@param ENT table The ENT table to register.
---- 			For the table's format and available options see the Structures/ENT page.
+--- For the table's format and available options see the Structures/ENT page.
 ---@param classname string The classname to register.
 function scripted_ents.Register(ENT, classname) end

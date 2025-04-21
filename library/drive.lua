@@ -1,13 +1,11 @@
 ---@meta
 
---- The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity Driving).
+--- The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. See [Entity Driving](https://wiki.facepunch.com/gmod/Entity_Driving).
 drive = {}
 
----
 --- Represents a drive mode or "method" to be registered with [drive.Register](https://wiki.facepunch.com/gmod/drive.Register).
 ---
 --- This page lists all possible fields and hooks a drive mode can have.
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DRIVE_Hooks)
 ---@class DRIVE

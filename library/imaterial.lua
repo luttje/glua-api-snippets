@@ -27,7 +27,7 @@ function IMaterial:GetFloat(materialFloat) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the specified material value as a int, rounds the value if its a float, or nil if the value is not set.
 ---
---- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly retrieved with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material Flags)
+--- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly retrieved with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material_Flags)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:GetInt)
 ---@param materialInt string The name of the material integer.
@@ -125,7 +125,7 @@ function IMaterial:IsError() end
 function IMaterial:Recompute() end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Changes the Material into the give Image.
---- 		**INTERNAL**: This is used by the Background to change the Image.
+--- **INTERNAL**: This is used by the Background to change the Image.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:SetDynamicImage)
 ---@param path string The path to a Image.
@@ -140,7 +140,7 @@ function IMaterial:SetFloat(materialFloat, float) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets the specified material value to the specified int, does nothing on a type mismatch.
 ---
---- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material Flags)
+--- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material_Flags)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:SetInt)
 ---@param materialInt string The name of the material int.

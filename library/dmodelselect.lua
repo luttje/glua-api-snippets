@@ -1,10 +1,6 @@
 ---@meta
 
----
----
----
---- 		A vertical list of models.
----
+--- A vertical list of models.
 ---@deprecated This is derived from the deprecated DPanelList.
 ---@class DModelSelect : DPanelSelect
 local DModelSelect = {}

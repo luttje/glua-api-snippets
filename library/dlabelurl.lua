@@ -1,10 +1,8 @@
 ---@meta
 
----
 --- Underlined link label without a DoClick function. When a valid URL is set and the label is clicked, it will open a browser window and navigate to the address.
 ---
 --- This panel uses [gui.OpenURL](https://wiki.facepunch.com/gmod/gui.OpenURL) internally and its restrictions apply.
----
 ---@class DLabelURL : URLLabel
 local DLabelURL = {}
 

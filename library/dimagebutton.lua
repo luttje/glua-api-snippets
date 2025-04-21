@@ -1,10 +1,8 @@
 ---@meta
 
+--- An image button.
 ---
---- 		An image button.
----
---- 		This panel inherits all methods of [DButton](https://wiki.facepunch.com/gmod/DButton), such as [DLabel:DoClick](https://wiki.facepunch.com/gmod/DLabel:DoClick).
----
+--- This panel inherits all methods of [DButton](https://wiki.facepunch.com/gmod/DButton), such as [DLabel:DoClick](https://wiki.facepunch.com/gmod/DLabel:DoClick).
 ---@class DImageButton : DButton
 local DImageButton = {}
 

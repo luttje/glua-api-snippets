@@ -1,10 +1,8 @@
 ---@meta
 
+--- A standard Derma text label. A lot of this panels functionality is a base for button elements, such as [DButton](https://wiki.facepunch.com/gmod/DButton)
 ---
---- 		A standard Derma text label. A lot of this panels functionality is a base for button elements, such as [DButton](https://wiki.facepunch.com/gmod/DButton)
----
---- Does not support multiline text.
----
+--- es not support multiline text.
 ---@class DLabel : Label
 local DLabel = {}
 

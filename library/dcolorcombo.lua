@@ -1,9 +1,7 @@
 ---@meta
 
----
---- 		The **DColorCombo** allows the user to choose color, without alpha,
---- 		using [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer) or [DColorPalette](https://wiki.facepunch.com/gmod/DColorPalette) in a tabbed view.
----
+--- The **DColorCombo** allows the user to choose color, without alpha,
+--- using [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer) or [DColorPalette](https://wiki.facepunch.com/gmod/DColorPalette) in a tabbed view.
 ---@class DColorCombo : DPropertySheet
 local DColorCombo = {}
 

@@ -1,9 +1,7 @@
 ---@meta
 
----
---- 		Simply a [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) which automatically displays all of the [Silkicons](https://wiki.facepunch.com/gmod/silkicons).
---- 		Used as a way to get the user to select an icon.
----
+--- Simply a [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout) which automatically displays all of the [Silkicons](https://wiki.facepunch.com/gmod/silkicons).
+--- Used as a way to get the user to select an icon.
 ---@class DIconBrowser : DScrollPanel
 local DIconBrowser = {}
 

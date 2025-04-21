@@ -1,16 +1,14 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- An internal panel used by [DMenu](https://wiki.facepunch.com/gmod/DMenu).
+--- It acts as a menu option that can be checked.
+--- It automatically sets and reads the given console variable.
 ---
---- 		An internal panel used by [DMenu](https://wiki.facepunch.com/gmod/DMenu).
---- 		It acts as a menu option that can be checked.
---- 		It automatically sets and reads the given console variable.
+--- It can be right clicked to toggle without closing the [DMenu](https://wiki.facepunch.com/gmod/DMenu).
 ---
---- 		It can be right clicked to toggle without closing the [DMenu](https://wiki.facepunch.com/gmod/DMenu).
----
---- 		Use [DMenu:AddCVar](https://wiki.facepunch.com/gmod/DMenu:AddCVar) instead.
----
+--- Use [DMenu:AddCVar](https://wiki.facepunch.com/gmod/DMenu:AddCVar) instead.
 ---@class DMenuOptionCVar : DMenuOption
 local DMenuOptionCVar = {}
 

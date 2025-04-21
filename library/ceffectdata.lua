@@ -96,10 +96,12 @@ function CEffectData:GetScale() end
 ---@return Vector # The start position of the effect
 function CEffectData:GetStart() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the surface property index of the effect.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the surface property index of the effect. See [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) for more details about what they are.
+---
+--- See [CEffectData:SetSurfaceProp](https://wiki.facepunch.com/gmod/CEffectData:SetSurfaceProp) for details about limitations of this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CEffectData:GetSurfaceProp)
----@return number # The surface property index of the effect
+---@return number # The surface property index of the effect.
 function CEffectData:GetSurfaceProp() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the angles of the effect.
@@ -216,8 +218,9 @@ function CEffectData:SetScale(scale) end
 ---@param start Vector Start of the effect.
 function CEffectData:SetStart(start) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the surface property index of the effect.
---- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `-1`-`254` range.(yes, that's not a mistake)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the surface property index of the effect. See [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) for more details about what they are.
+---
+--- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `-1`-`254` range. (Yes, that's not a mistake, `-1` signifying an invalid value.)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CEffectData:SetSurfaceProp)
 ---@param surfaceProperties number The surface property index of the effect.

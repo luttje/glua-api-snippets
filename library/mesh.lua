@@ -8,36 +8,40 @@ mesh = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.AdvanceVertex)
 function mesh.AdvanceVertex() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **WARNING**: Maximum of 32768 vertices.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Begins creating or modifying a 3D mesh constructed from a given quantity and type of primitive 3D shapes such as triangles and quads.
 ---
---- 		Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
----
---- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
----
----[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
----@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
---- 			For a full list of the available options, see the Enums/MATERIAL.
----@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
----
---- 			The expected value of this argument is dependent on the primitive type used.
---- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
-function mesh.Begin(primitiveType, primitiveCount) end
-
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **WARNING**: Maximum of 32768 vertices.
----
---- 		Starts constructing a new 3D mesh constructed from a given number of primitives in a given primitive format.
----
---- 		The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
+--- The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
 ---@param mesh IMesh The IMesh that the created mesh will be stored in.
+---
+--- If the mesh has already been built, it will instead have its existing verticies modified but cannot have the quantity of vertices changed.
 ---@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
---- 			For a full list of the available options, see the Enums/MATERIAL.
+--- For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
---- 			The expected value of this argument is dependent on the primitive type used.
---- 			For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
+--- The total number of vertices must not exceed the limit of `32768`.
+--- The number of vertices created by each primitive will depend on the type of primitive used to construct the mesh.
+---
+--- The expected value of this argument is dependent on the primitive type used.
+--- For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
 function mesh.Begin(mesh, primitiveType, primitiveCount) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Begins creating or modifying a 3D mesh constructed from a given quantity and type of primitive 3D shapes such as triangles and quads.
+---
+--- The resulting mesh can be stored in an [IMesh](https://wiki.facepunch.com/gmod/IMesh) if it is intended to be drawn multiple times or on multiple frames.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
+---@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
+--- For a full list of the available options, see the Enums/MATERIAL.
+---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
+---
+--- The total number of vertices must not exceed the limit of `32768`.
+--- The number of vertices created by each primitive will depend on the type of primitive used to construct the mesh.
+---
+--- The expected value of this argument is dependent on the primitive type used.
+--- For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
+function mesh.Begin(primitiveType, primitiveCount) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
@@ -169,7 +173,7 @@ function mesh.TangentT(x, y, z) end
 function mesh.TexCoord(set, u, v) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) A set of four numbers that can be used for arbitrary purposes by [Material](https://wiki.facepunch.com/gmod/Material) shaders.
---- 		This is most commonly used to provide tangent information about each vertex to the Material's shader.
+--- This is most commonly used to provide tangent information about each vertex to the Material's shader.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.UserData)
 ---@param tangentX number

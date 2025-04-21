@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		The DColorCube allows a user to select saturation and value but not hue. Uses HSV colors
----
+--- The DColorCube allows a user to select saturation and value but not hue. Uses HSV colors
 ---@class DColorCube : DSlider
 local DColorCube = {}
 

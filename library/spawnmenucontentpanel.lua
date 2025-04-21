@@ -1,10 +1,7 @@
 ---@meta
 
----
---- 		The default SpawnmenuContentPanel
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
----
+--- The default SpawnmenuContentPanel
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---@class SpawnmenuContentPanel : DPanel
 local SpawnmenuContentPanel = {}
 

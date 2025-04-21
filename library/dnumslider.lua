@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		The **DNumSlider** allows you to create a slider, allowing the user to slide it to set a value, or changing the value in the box.
----
+--- The **DNumSlider** allows you to create a slider, allowing the user to slide it to set a value, or changing the value in the box.
 ---@class DNumSlider : Panel
 local DNumSlider = {}
 

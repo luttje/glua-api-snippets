@@ -1,12 +1,9 @@
 ---@meta
 
+--- A really simple grid layout panel.
 ---
---- 		A really simple grid layout panel.
----
---- 		**NOTE**: This panel will set its size automatically based on set column count.
---- 		This makes it play badly with [Panel:Dock](https://wiki.facepunch.com/gmod/Panel:Dock) and cause a [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout) call every frame.
----
----
+--- **NOTE**: This panel will set its size automatically based on set column count.
+--- This makes it play badly with [Panel:Dock](https://wiki.facepunch.com/gmod/Panel:Dock) and cause a [PANEL:PerformLayout](https://wiki.facepunch.com/gmod/PANEL:PerformLayout) call every frame.
 ---@class DGrid : Panel
 local DGrid = {}
 

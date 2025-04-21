@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		A field with multiple selectable values.
----
+--- A field with multiple selectable values.
 ---@class DComboBox : DButton
 local DComboBox = {}
 

@@ -116,10 +116,10 @@ function math.BinToInt(string) end
 ---@param fraction number A number in the range `[0,fractionMax]` which controls which location along the spline's length should be evaluated as the return value.
 ---@param points table A table of Vector that form the spline.
 ---
---- 			There must be **at least** 4 points.
+--- There must be **at least** 4 points.
 ---@param fractionMax number The maximum value of the `fraction` argument.
 ---
---- 			The most common value for this is `1`.
+--- The most common value for this is `1`.
 ---@return Vector # The point on the Bézier curve that corresponds to the given `fraction` argument.
 function math.BSplinePoint(fraction, points, fractionMax) end
 

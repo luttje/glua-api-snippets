@@ -3,7 +3,6 @@
 --- Used in Sandbox tools to allow the player to select models out of a list. Despite being only used in Sandbox, it is **not** exclusive to that gamemode.
 ---
 --- See also [MatSelect](https://wiki.facepunch.com/gmod/MatSelect) for the material selecting alternative.
----
 ---@class PropSelect : ContextBase
 local PropSelect = {}
 

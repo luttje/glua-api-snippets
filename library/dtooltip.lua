@@ -1,10 +1,8 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
---- 		The panel used internally for tool tips. See [Panel:SetTooltip](https://wiki.facepunch.com/gmod/Panel:SetTooltip).
----
+--- The panel used internally for tool tips. See [Panel:SetTooltip](https://wiki.facepunch.com/gmod/Panel:SetTooltip).
 ---@class DTooltip : DLabel
 local DTooltip = {}
 

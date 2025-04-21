@@ -1,12 +1,10 @@
 ---@meta
 
----
 --- A derivative of the DModelPanel in which the user may modify the perspective of the model with their mouse and keyboard by clicking and dragging.
 ---
 --- The keyboard keys W S A D Up Down Left Right Space and Ctrl can be used when the right mouse is held down, with Shift acting as a speed multiplier. When the left mouse is used, the Shift key holds the current `y` angle steady.
 ---
 --- This is used by [IconEditor](https://wiki.facepunch.com/gmod/IconEditor) for modifying spawn icons.
----
 ---@class DAdjustableModelPanel : DModelPanel
 local DAdjustableModelPanel = {}
 

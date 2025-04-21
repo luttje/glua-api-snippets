@@ -4,16 +4,13 @@
 ---
 --- **NOTE**: A list of available methods has been expanded in your navigation bar.
 ---
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Weapon)
 ---@class Weapon : Entity
 local Weapon = {}
 
----
 --- Default weapon methods, that are available for use in SWEPs. These hooks **will not work** on non-scripted weapons, such as the Half-Life 2 weapons.
 ---
 --- You can find all available SWEP fields here: [Structures/SWEP](https://wiki.facepunch.com/gmod/Structures/SWEP)
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON_Hooks)
 ---@class WEAPON : Weapon

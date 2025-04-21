@@ -32,7 +32,7 @@ function CNavArea:AddHidingSpot(pos, flags) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:AddToClosedList)
 function CNavArea:AddToClosedList() end
@@ -41,7 +41,7 @@ function CNavArea:AddToClosedList() end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:AddToOpenList)
 function CNavArea:AddToOpenList() end
@@ -50,7 +50,7 @@ function CNavArea:AddToOpenList() end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:ClearSearchLists)
 function CNavArea:ClearSearchLists() end
@@ -193,7 +193,7 @@ function CNavArea:GetCorner(cornerid) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetCostSoFar)
 ---@return number # The cost so far.
@@ -360,7 +360,7 @@ function CNavArea:GetSpotEncounters() end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:GetTotalCost)
 ---@return number # The total cost
@@ -400,7 +400,7 @@ function CNavArea:IsBlocked(teamID, ignoreNavBlockers) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:IsClosed)
 ---@return boolean # Whether this node is in the Closed List.
@@ -455,7 +455,7 @@ function CNavArea:IsFlat() end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:IsOpen)
 ---@return boolean # Whether this area is in the Open List.
@@ -465,7 +465,7 @@ function CNavArea:IsOpen() end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:IsOpenListEmpty)
 ---@return boolean # Whether the Open List is empty or not.
@@ -555,7 +555,7 @@ function CNavArea:PlaceOnGround(corner) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:PopOpenList)
 ---@return CNavArea # The CNavArea from the Open List with the lowest cost to traverse to from the starting node.
@@ -576,7 +576,7 @@ function CNavArea:RemoveAttributes(attribs) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:RemoveFromClosedList)
 ---@deprecated Does nothing
@@ -599,7 +599,7 @@ function CNavArea:SetCorner(corner, position) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:SetCostSoFar)
 ---@param cost number The cost so far
@@ -625,7 +625,7 @@ function CNavArea:SetPlace(place) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:SetTotalCost)
 ---@param cost number The total cost of the path to set.
@@ -637,7 +637,7 @@ function CNavArea:SetTotalCost(cost) end
 ---
 --- Used in pathfinding via the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 ---
---- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple Pathfinding) page.
+--- More information can be found on the [Simple Pathfinding](https://wiki.facepunch.com/gmod/Simple_Pathfinding) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:UpdateOnOpenList)
 function CNavArea:UpdateOnOpenList() end

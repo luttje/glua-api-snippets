@@ -154,7 +154,7 @@ function Vector:IsZero() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_vector#Length) of the vector: &radic;(x&sup2; + y&sup2; + z&sup2;).
 ---
---- 		**WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:LengthSqr](https://wiki.facepunch.com/gmod/Vector:LengthSqr) whenever possible.
+--- **WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:LengthSqr](https://wiki.facepunch.com/gmod/Vector:LengthSqr) whenever possible.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vector:Length)
 ---@return number # Length of the vector.
@@ -162,7 +162,7 @@ function Vector:Length() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the length of the vector in two dimensions, without the Z axis.
 ---
---- 		**WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:Length2DSqr](https://wiki.facepunch.com/gmod/Vector:Length2DSqr) whenever possible.
+--- **WARNING**: This is a relatively expensive process since it uses the square root. It is recommended that you use [Vector:Length2DSqr](https://wiki.facepunch.com/gmod/Vector:Length2DSqr) whenever possible.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vector:Length2D)
 ---@return number # Length of the vector in two dimensions, √(x² + y²)

@@ -184,7 +184,7 @@ function Color:ToHSL() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Encodes a RGB [Color](https://wiki.facepunch.com/gmod/Color) into the [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV).
 ---
---- 		This function uses [Global.ColorToHSV](https://wiki.facepunch.com/gmod/Global.ColorToHSV) internally.
+--- This function uses [Global.ColorToHSV](https://wiki.facepunch.com/gmod/Global.ColorToHSV) internally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Color:ToHSV)
 ---@return number # Hue in degrees in range [0, 360)

@@ -1,10 +1,8 @@
 ---@meta
 
----
---- 		The **DColorPalette** allows the player to select a color from a list of given colors.
---- 		This panel supports saving across sessions via the panel cookie system.
---- 		Use [Panel:SetCookieName](https://wiki.facepunch.com/gmod/Panel:SetCookieName) to change "save files".
----
+--- The **DColorPalette** allows the player to select a color from a list of given colors.
+--- This panel supports saving across sessions via the panel cookie system.
+--- Use [Panel:SetCookieName](https://wiki.facepunch.com/gmod/Panel:SetCookieName) to change "save files".
 ---@class DColorPalette : DIconLayout
 local DColorPalette = {}
 

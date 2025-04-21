@@ -20,7 +20,7 @@ http = {}
 ---
 --- **NOTE**: HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command Line Parameters) `-allowlocalhttp`. (Dedicated servers only)
+--- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command_Line_Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
 --- **Not all headers are allowed in the client realm, here is a list of known blacklisted headers inside the client realm:**
 --- ```
@@ -62,7 +62,7 @@ function http.Fetch(url, onSuccess, onFailure, headers) end
 ---
 --- **NOTE**: HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command Line Parameters) `-allowlocalhttp`. (Dedicated servers only)
+--- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command_Line_Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/http.Post)
 ---@param url string The url to of the website to post.

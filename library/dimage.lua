@@ -1,10 +1,8 @@
 ---@meta
 
+--- [DImage](https://wiki.facepunch.com/gmod/DImage) is an advanced, more robust version of the [Material](https://wiki.facepunch.com/gmod/Material) panel.
 ---
---- 		[DImage](https://wiki.facepunch.com/gmod/DImage) is an advanced, more robust version of the [Material](https://wiki.facepunch.com/gmod/Material) panel.
----
---- 		See [DImageButton](https://wiki.facepunch.com/gmod/DImageButton) for a click-able version of this panel.
----
+--- See [DImageButton](https://wiki.facepunch.com/gmod/DImageButton) for a click-able version of this panel.
 ---@class DImage : DPanel
 local DImage = {}
 

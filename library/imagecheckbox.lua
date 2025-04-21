@@ -1,13 +1,10 @@
 ---@meta
 
----
 --- A checkbox panel similar to [DCheckBox](https://wiki.facepunch.com/gmod/DCheckBox) and [DImageButton](https://wiki.facepunch.com/gmod/DImageButton) with customizable checked state image.
 ---
 --- Uses the [Material](https://wiki.facepunch.com/gmod/Material) panel internally. Can't have a label.
 ---
 --- **NOTE**: Will error if no material was set.
----
----
 ---@class ImageCheckBox : Button
 local ImageCheckBox = {}
 

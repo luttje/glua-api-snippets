@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		A base for all context menu panels ( The ones used for tool options in sandbox )
----
+--- A base for all context menu panels ( The ones used for tool options in sandbox )
 ---@class ContextBase : Panel
 local ContextBase = {}
 

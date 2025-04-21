@@ -1,10 +1,8 @@
 ---@meta
 
+--- The collapsible category allows you to create numerous sections of controls, and have the ability to contract/expand them.
 ---
---- 		The collapsible category allows you to create numerous sections of controls, and have the ability to contract/expand them.
----
---- 		Consider using [DCategoryList](https://wiki.facepunch.com/gmod/DCategoryList) if you plan on using more than 1 of these.
----
+--- Consider using [DCategoryList](https://wiki.facepunch.com/gmod/DCategoryList) if you plan on using more than 1 of these.
 ---@class DCollapsibleCategory : Panel
 local DCollapsibleCategory = {}
 

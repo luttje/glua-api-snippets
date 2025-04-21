@@ -1,11 +1,7 @@
 ---@meta
 
----
----
----
---- 		A simple list box with optional multi-select.
---- 		As this is deprecated, it is recommended that you use [DListView](https://wiki.facepunch.com/gmod/DListView), which contains the same functionality with multi-column options.
----
+--- A simple list box with optional multi-select.
+--- As this is deprecated, it is recommended that you use [DListView](https://wiki.facepunch.com/gmod/DListView), which contains the same functionality with multi-column options.
 ---@deprecated Derived from the deprecated DPanelList.
 ---@class DListBox : DPanelList
 local DListBox = {}

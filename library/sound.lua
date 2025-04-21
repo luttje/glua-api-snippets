@@ -5,7 +5,7 @@ sound = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 ---
---- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common Sounds).
+--- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common_Sounds).
 ---
 --- A list of sound scripts can be retrieved with [sound.GetTable](https://wiki.facepunch.com/gmod/sound.GetTable).
 ---
@@ -41,16 +41,16 @@ function sound.EmitHint(hint, pos, volume, duration, owner) end
 ---
 ---
 ---
---- Function argument(s):
---- * number `sampleIndex` - The current sample number.
+--- ction argument(s):
+--- umber `sampleIndex` - The current sample number.
 ---
---- Function return value(s):
---- * number `sampleValue` - The return value must be between `-1.0` and `1.0`.
---- 			Other values will wrap back to the -1 to 1 range and basically clip.
---- 			There are **65535** possible quantifiable values between `-1` and `1`.
+--- ction return value(s):
+--- umber `sampleValue` - The return value must be between `-1.0` and `1.0`.
+--- Other values will wrap back to the -1 to 1 range and basically clip.
+--- There are **65535** possible quantifiable values between `-1` and `1`.
 ---
---- 		This argument can also be given a table of samples, where values must range from `-1` to `1`.
---- 		This argument can also be a string of raw 16bit binary data, (each sample is unsigned short).
+--- his argument can also be given a table of samples, where values must range from `-1` to `1`.
+--- his argument can also be a string of raw 16bit binary data, (each sample is unsigned short).
 ---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.
 function sound.Generate(identifier, samplerate, length, callbackOrData, loopStart) end
 

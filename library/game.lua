@@ -142,7 +142,7 @@ function game.GetAmmoTypes() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the counter of a Global State.
 ---
---- See [Global States](https://wiki.facepunch.com/gmod/Global States) for more information.
+--- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetGlobalCounter)
 ---@param name string The name of the Global State to set.
@@ -155,7 +155,7 @@ function game.GetGlobalCounter(name) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether a Global State is off, active or dead ( inactive )
 ---
---- See [Global States](https://wiki.facepunch.com/gmod/Global States) for more information.
+--- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetGlobalState)
 ---@param name string The name of the Global State to retrieve the state of.
@@ -206,10 +206,10 @@ function game.GetMapVersion() end
 function game.GetSkillLevel() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the time scale set with [game.SetTimeScale](https://wiki.facepunch.com/gmod/game.SetTimeScale).
---- 		If you want to get the value of `host_timescale` use
---- 		```lua
---- local timescale = GetConVar( "host_timescale" ):GetFloat()
---- 		```
+--- If you want to get the value of `host_timescale` use
+--- ```lua
+--- cal timescale = GetConVar( "host_timescale" ):GetFloat()
+--- ```
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetTimeScale)
 ---@return number # The time scale
@@ -275,7 +275,7 @@ function game.RemoveRagdolls() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the counter of a Global State.
 ---
---- See [Global States](https://wiki.facepunch.com/gmod/Global States) for more information.
+--- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SetGlobalCounter)
 ---@param name string The name of the Global State to set.
@@ -288,7 +288,7 @@ function game.SetGlobalCounter(name, count) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets whether a Global State is off, active or dead ( inactive )
 ---
---- See [Global States](https://wiki.facepunch.com/gmod/Global States) for more information.
+--- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SetGlobalState)
 ---@param name string The name of the Global State to set.

@@ -143,9 +143,9 @@ function ents.FireTargets(target, activator, caller, usetype, value) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of all existing entities.
 ---
---- Consider using [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) instead for better performance.
+--- nsider using [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) instead for better performance.
 ---
---- This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
+--- is function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.GetAll)
 ---@return Entity[] # Table of all existing Entitys.
@@ -182,14 +182,14 @@ function ents.GetEdictCount() end
 function ents.GetMapCreatedEntity(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all entities.
---- 		Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
---- 		See [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator) for a similar function for all players.
+--- Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
+--- See [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator) for a similar function for all players.
 ---
---- 		Internally, this function uses cached values that exist entirely within lua, as opposed to [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll), which is a C++ function.
---- 		Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
---- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
+--- Internally, this function uses cached values that exist entirely within lua, as opposed to [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll), which is a C++ function.
+--- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
+--- NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
 ---
---- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
+--- WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
@@ -198,5 +198,5 @@ function ents.GetMapCreatedEntity(id) end
 ---
 --- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your ents.GetAll usages may come with unintended side effects because of this.
 ---@return number # The starting index for the table of players.
---- 			This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
+--- This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
 function ents.Iterator() end

@@ -1,8 +1,6 @@
 ---@meta
 
----
---- 		Colorful buttons. Used internally by [DColorPalette](https://wiki.facepunch.com/gmod/DColorPalette).
----
+--- Colorful buttons. Used internally by [DColorPalette](https://wiki.facepunch.com/gmod/DColorPalette).
 ---@class DColorButton : DLabel
 local DColorButton = {}
 

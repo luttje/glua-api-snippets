@@ -4,15 +4,13 @@
 ---
 --- This page lists all possible functions usable with NextBots.
 ---
---- See [NextBot NPC Creation](https://wiki.facepunch.com/gmod/NextBot NPC Creation) for more information on how to create NextBot NPCs.
+--- See [NextBot NPC Creation](https://wiki.facepunch.com/gmod/NextBot_NPC_Creation) for more information on how to create NextBot NPCs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NextBot)
 ---@class NextBot : Entity
 local NextBot = {}
 
----
 --- The list of hooks for nextbot NPCs.
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NEXTBOT_Hooks)
 ---@class NEXTBOT : NextBot
@@ -27,9 +25,9 @@ function NextBot:BecomeRagdoll(info) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to initialize the behaviour.
 ---
---- 		This is called automatically when the NextBot is created, you should not call it manually.
+--- This is called automatically when the NextBot is created, you should not call it manually.
 ---
---- 		**NOTE**: You shouldn't override this unless you know what you are doing - it's used to kick off the [coroutine](https://wiki.facepunch.com/gmod/coroutine) that runs the bot's behaviour. See [NEXTBOT:RunBehaviour](https://wiki.facepunch.com/gmod/NEXTBOT:RunBehaviour) instead.
+--- **NOTE**: You shouldn't override this unless you know what you are doing - it's used to kick off the [coroutine](https://wiki.facepunch.com/gmod/coroutine) that runs the bot's behaviour. See [NEXTBOT:RunBehaviour](https://wiki.facepunch.com/gmod/NEXTBOT:RunBehaviour) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NEXTBOT:BehaveStart)
 function NEXTBOT:BehaveStart() end

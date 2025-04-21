@@ -2,8 +2,6 @@
 
 --- This is the object passed to [usermessage.Hook](https://wiki.facepunch.com/gmod/usermessage.Hook) when a message is received. It contains each value stored in the message in sequential order. You should read values from it in the order you wrote them.
 ---
----
----
 ---[View wiki](https://wiki.facepunch.com/gmod/bf_read)
 ---@deprecated You should be using net instead
 ---@class bf_read

@@ -4,7 +4,6 @@
 ---
 --- 	See also: [Structures/GM](https://wiki.facepunch.com/gmod/Structures/GM).
 ---
----
 ---[View wiki](https://wiki.facepunch.com/gmod/GM_Hooks)
 ---@class GM
 GM = {}
@@ -38,11 +37,13 @@ function GM:AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam
 ---@param defaultSensitivity number The old sensitivity
 ---
 --- In general it will be 0, which is equivalent to a sensitivity of 1.
+---@param localFOV number Player's current FOV.
+---@param defaultFOV number Default FOV.
 ---@return number # A fraction of the normal sensitivity (0.5 would be half as sensitive).
 ---
 --- Return -1 to not override and prevent subsequent hooks and WEAPON:AdjustMouseSensitivity from running.
 --- Return nil to not override and allow subsequent hooks and WEAPON:AdjustMouseSensitivity to run.
-function GM:AdjustMouseSensitivity(defaultSensitivity) end
+function GM:AdjustMouseSensitivity(defaultSensitivity, localFOV, defaultFOV) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player tries to pick up something using the "use" key, return to override.
 ---
@@ -261,7 +262,7 @@ function GM:CreateEntityRagdoll(owner, ragdoll) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to change the players movements before they're sent to the server.
 ---
---- See [Game Movement](https://wiki.facepunch.com/gmod/Game Movement) for an explanation on the move system.
+--- See [Game Movement](https://wiki.facepunch.com/gmod/Game_Movement) for an explanation on the move system.
 ---
 --- **NOTE**: Due to this hook being clientside only, it could be overridden by the user allowing them to completely skip your logic, it is recommended to use [GM:StartCommand](https://wiki.facepunch.com/gmod/GM:StartCommand) in a shared file instead.
 ---
@@ -372,7 +373,7 @@ function GM:EntityFireBullets(entity, data) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a key-value pair is set on an entity on map spawn. Is **not** called by [Entity:SetKeyValue](https://wiki.facepunch.com/gmod/Entity:SetKeyValue).
 ---
---- See [ENTITY:KeyValue](https://wiki.facepunch.com/gmod/ENTITY:KeyValue) for a [scripted entities](https://wiki.facepunch.com/gmod/scripted entities) hook, and its scripted weapon alternative: [WEAPON:KeyValue](https://wiki.facepunch.com/gmod/WEAPON:KeyValue).
+--- See [ENTITY:KeyValue](https://wiki.facepunch.com/gmod/ENTITY:KeyValue) for a [scripted entities](https://wiki.facepunch.com/gmod/scripted_entities) hook, and its scripted weapon alternative: [WEAPON:KeyValue](https://wiki.facepunch.com/gmod/WEAPON:KeyValue).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityKeyValue)
 ---@param ent Entity Entity that the keyvalue is being set on
@@ -396,9 +397,9 @@ function GM:EntityKeyValue(ent, key, value) end
 function GM:EntityNetworkedVarChanged(ent, name, oldval, newval) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called right before removal of an entity.
---- 		**WARNING**: This hook is called clientside during full updates due to how networking works in the Source Engine.
+--- **WARNING**: This hook is called clientside during full updates due to how networking works in the Source Engine.
 ---
---- This can happen when the client briefly loses connection to the server, and can be simulated via `cl_fullupdate` for testing purposes.
+--- is can happen when the client briefly loses connection to the server, and can be simulated via `cl_fullupdate` for testing purposes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityRemoved)
 ---@param ent Entity Entity being removed
@@ -436,7 +437,7 @@ function GM:FinishChat() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called after [GM:Move](https://wiki.facepunch.com/gmod/GM:Move), applies all the changes from the [CMoveData](https://wiki.facepunch.com/gmod/CMoveData) to the player.
 ---
---- See [Game Movement](https://wiki.facepunch.com/gmod/Game Movement) for an explanation on the move system.
+--- See [Game Movement](https://wiki.facepunch.com/gmod/Game_Movement) for an explanation on the move system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:FinishMove)
 ---@param ply Player Player
@@ -523,7 +524,7 @@ function GM:GetTeamColor(ent) end
 ---@return table # Team Global.Color
 function GM:GetTeamNumColor(team) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Override this hook to disable/change ear-grabbing in your gamemode.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Override this hook to disable/change ear-grabbing in your gamemode. By default, it is not called anywhere on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:GrabEarAnimation)
 ---@param ply Player Player
@@ -699,12 +700,12 @@ function GM:HUDItemPickedUp(itemName) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called whenever the HUD should be drawn.
 ---
---- 		This is the ideal place to draw custom HUD elements.
+--- This is the ideal place to draw custom HUD elements.
 ---
---- 		To prevent the default game HUD from drawing, use [GM:HUDShouldDraw](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw).
+--- To prevent the default game HUD from drawing, use [GM:HUDShouldDraw](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw).
 ---
---- 		This hook does **not** get called when the Camera SWEP is held, or when the esc menu is open.
---- 		If you need to draw in those situations, use [GM:DrawOverlay](https://wiki.facepunch.com/gmod/GM:DrawOverlay) instead.
+--- This hook does **not** get called when the Camera SWEP is held, or when the esc menu is open.
+--- If you need to draw in those situations, use [GM:DrawOverlay](https://wiki.facepunch.com/gmod/GM:DrawOverlay) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:HUDPaint)
 function GM:HUDPaint() end
@@ -825,7 +826,7 @@ function GM:MouthMoveAnimation(ply) end
 ---
 --- This hook is called after [GM:PlayerTick](https://wiki.facepunch.com/gmod/GM:PlayerTick).
 ---
---- See [Game Movement](https://wiki.facepunch.com/gmod/Game Movement) for an explanation on the move system.
+--- See [Game Movement](https://wiki.facepunch.com/gmod/Game_Movement) for an explanation on the move system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:Move)
 ---@param ply Player Player
@@ -998,7 +999,7 @@ function GM:OnPauseMenuBlockedTooManyTimes() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the pause menu is attempting to be opened. Allows you to prevent the main menu from being opened that time.
 ---
---- 	The user can hold SHIFT to not call this hook. If the main menu is blocked multiple times in short succession, a warning will be displayed to the end user on how to bypass the hook.
+--- The user can hold SHIFT to not call this hook. If the main menu is blocked multiple times in short succession, a warning will be displayed to the end user on how to bypass the hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnPauseMenuShow)
 ---@return boolean # Should the menu be allowed to open?
@@ -1248,7 +1249,7 @@ function GM:PlayerButtonUp(ply, button) end
 function GM:PlayerCanHearPlayersVoice(listener, talker) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not a player is allowed to join a team
---- 		**WARNING**: This hook will not work with [hook.Add](https://wiki.facepunch.com/gmod/hook.Add) and it is only called manually from [GM:PlayerJoinTeam](https://wiki.facepunch.com/gmod/GM:PlayerJoinTeam) by the base gamemode
+--- **WARNING**: This hook will not work with [hook.Add](https://wiki.facepunch.com/gmod/hook.Add) and it is only called manually from [GM:PlayerJoinTeam](https://wiki.facepunch.com/gmod/GM:PlayerJoinTeam) by the base gamemode
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanJoinTeam)
 ---@param ply Player Player attempting to switch teams
@@ -1266,7 +1267,7 @@ function GM:PlayerCanPickupItem(ply, item) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not a player is allowed to pick up a weapon.
 ---
----  	If this returns false, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
+--- 	If this returns false, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon)
 ---@param ply Player The player attempting to pick up the weapon.
@@ -1577,7 +1578,7 @@ function GM:PlayerRequestTeam(ply, team) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player dispatched a chat message. For the clientside equivalent, see [GM:OnPlayerChat](https://wiki.facepunch.com/gmod/GM:OnPlayerChat).
 ---
---- 		**NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside because addons commonly return values in this hook to change chat messages.
+--- **NOTE**: It may be more reliable to use [gameevent/player_say](https://wiki.facepunch.com/gmod/gameevent/player_say) to read messages serverside because addons commonly return values in this hook to change chat messages.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerSay)
 ---@param sender Player The player which sent the message.
@@ -1587,7 +1588,7 @@ function GM:PlayerRequestTeam(ply, team) end
 function GM:PlayerSay(sender, text, teamChat) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to determine a spawn point for a player to spawn at.
---- 		**NOTE**: The spawn point entity will also impact the player's eye angle. For example, if the entity is upside down, the player's view will be as well.
+--- **NOTE**: The spawn point entity will also impact the player's eye angle. For example, if the entity is upside down, the player's view will be as well.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerSelectSpawn)
 ---@param ply Player The player who needs a spawn point
@@ -1687,8 +1688,9 @@ function GM:PlayerStartTaunt(ply, act, length) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice)
 ---@param ply Player Player who started using voice chat.
+---@param plyIndex number The player index. Only appears when non-local player speaks for the first time.
 ---@return boolean # Set true to hide player's `CHudVoiceStatus`.
-function GM:PlayerStartVoice(ply) end
+function GM:PlayerStartVoice(ply, plyIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to override the time between footsteps.
 ---
@@ -1854,7 +1856,7 @@ function GM:PostDrawViewModel(viewmodel, player, weapon) end
 ---@param entity Entity The entity that fired the bullet
 ---@param data FiredBullet A table of data about the bullet that was fired.
 ---
---- 			See Structures/FiredBullet.
+--- See Structures/FiredBullet.
 ---@return boolean # Return `false` to suppress the bullet.
 function GM:PostEntityFireBullets(entity, data) end
 
@@ -2144,7 +2146,7 @@ function GM:SetPlayerSpeed(ply, walkSpeed, runSpeed) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) SetupMove is called before the engine process movements. This allows us to override the players movement.
 ---
---- See [Game Movement](https://wiki.facepunch.com/gmod/Game Movement) for an explanation on the move system.
+--- See [Game Movement](https://wiki.facepunch.com/gmod/Game_Movement) for an explanation on the move system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:SetupMove)
 ---@param ply Player The player whose movement we are about to process
@@ -2160,7 +2162,7 @@ function GM:SetupMove(ply, mv, cmd) end
 function GM:SetupPlayerVisibility(ply, viewEntity) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to use render.Fog* functions to manipulate skybox fog.
---- 		This will not be called for maps with no 3D skybox, or when the 3d skybox is disabled. (`r_3dsky 0`)
+--- This will not be called for maps with no 3D skybox, or when the 3d skybox is disabled. (`r_3dsky 0`)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:SetupSkyboxFog)
 ---@param scale number The scale of 3D skybox
@@ -2292,7 +2294,7 @@ function GM:Tick() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: Isn't call when CalcMainActivity return a valid override sequence id
 ---
---- 		Allows you to translate player activities.
+--- Allows you to translate player activities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:TranslateActivity)
 ---@param ply Player The player
@@ -2308,9 +2310,9 @@ function GM:TranslateActivity(ply, act) end
 ---@param maxSeqGroundSpeed number Speed of the animation - used for playback rate scaling.
 function GM:UpdateAnimation(ply, velocity, maxSeqGroundSpeed) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a variable is edited on an Entity (called by Edit Properties... menu). See [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) for more information.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a variable is edited on an Entity (called by Edit Properties... menu). See [Editable Entities](https://wiki.facepunch.com/gmod/Editable_Entities) for more information.
 ---
---- 		**WARNING**: This hook is called to change a variable and not after a variable was changed
+--- **WARNING**: This hook is called to change a variable and not after a variable was changed
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:VariableEdited)
 ---@param ent Entity The entity being edited
@@ -2448,7 +2450,7 @@ function GM:WorkshopStart() end
 function GM:WorkshopSubscriptionsChanged() end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called when a Workshop Message is received?. Currently, it seems like the message will be **#ugc.mounting** every time.
---- 		When does this exactly get called?. If an addon is subscribed, unsubscribed, error occurs or on any event?
+--- When does this exactly get called?. If an addon is subscribed, unsubscribed, error occurs or on any event?
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:WorkshopSubscriptionsMessage)
 ---@param message string The Message from the Workshop. Will be a phrase that needs to be translated.

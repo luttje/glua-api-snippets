@@ -1,9 +1,7 @@
 ---@meta
 
----
---- 		The DHTML control wraps the internal Awesomium framework, supports calling Javascript functions from Lua,
---- 		as well as running Lua from within the HTML. Running Lua code is disabled by default.
----
+--- The DHTML control wraps the internal Awesomium framework, supports calling Javascript functions from Lua,
+--- as well as running Lua from within the HTML. Running Lua code is disabled by default.
 ---@class DHTML : Awesomium
 DHTML = {}
 
@@ -48,9 +46,9 @@ function DHTML:GetScrollbars() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Runs/Executes a string as JavaScript code in a panel.
 ---
---- 		**NOTE**: This function does **NOT** evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context).Because a return value is nil/no value (a.k.a. void).If you wish to pass/return values from JS to Lua, you may want to use [DHTML:AddFunction](https://wiki.facepunch.com/gmod/DHTML:AddFunction) function to accomplish that job.
+--- **NOTE**: This function does **NOT** evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context).Because a return value is nil/no value (a.k.a. void).If you wish to pass/return values from JS to Lua, you may want to use [DHTML:AddFunction](https://wiki.facepunch.com/gmod/DHTML:AddFunction) function to accomplish that job.
 ---
---- 		**NOTE**: If [Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible) is `false`, [PANEL:Think](https://wiki.facepunch.com/gmod/PANEL:Think) will **NOT** run, meaning the Javascript Queue will not be processed.Consider overriding [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) to stop the panel from drawing instead.
+--- **NOTE**: If [Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible) is `false`, [PANEL:Think](https://wiki.facepunch.com/gmod/PANEL:Think) will **NOT** run, meaning the Javascript Queue will not be processed.Consider overriding [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint) to stop the panel from drawing instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DHTML:QueueJavascript)
 ---@param js string Specify JavaScript code to be executed.

@@ -1,8 +1,6 @@
 ---@meta
 
 ---
----
----
 ---@deprecated Used Internally by DListBox.
 ---@class DListBoxItem : DLabel
 local DListBoxItem = {}

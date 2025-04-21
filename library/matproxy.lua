@@ -6,7 +6,7 @@
 matproxy = {}
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Register a material proxy. See [matproxy](https://wiki.facepunch.com/gmod/matproxy) for more general explanation of what they are.
---- 		**NOTE**: The `bind` function is required. The `init` function won't run without it set.
+--- **NOTE**: The `bind` function is required. The `init` function won't run without it set.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/matproxy.Add)
 ---@param matProxyData table The information about the proxy. See Structures/MatProxyData

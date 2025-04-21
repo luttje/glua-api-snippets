@@ -1,12 +1,10 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+--- Color picker control for a DProperties panel. Opens a [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo) if the color preview is clicked.
 ---
---- 		Color picker control for a DProperties panel. Opens a [DColorCombo](https://wiki.facepunch.com/gmod/DColorCombo) if the color preview is clicked.
----
---- 		See [Editable Entities](https://wiki.facepunch.com/gmod/Editable Entities) for how this is used ingame.
----
+--- See [Editable Entities](https://wiki.facepunch.com/gmod/Editable_Entities) for how this is used ingame.
 ---@class DProperty_VectorColor : DProperty_Generic
 local DProperty_VectorColor = {}
 

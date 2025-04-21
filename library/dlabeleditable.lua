@@ -1,10 +1,8 @@
 ---@meta
 
+--- An editable [DLabel](https://wiki.facepunch.com/gmod/DLabel), double click on it to edit.
 ---
---- 		An editable [DLabel](https://wiki.facepunch.com/gmod/DLabel), double click on it to edit.
----
---- 		This is used in the spawnmenu spawnlist headers.
----
+--- This is used in the spawnmenu spawnlist headers.
 ---@class DLabelEditable : DLabel
 local DLabelEditable = {}
 

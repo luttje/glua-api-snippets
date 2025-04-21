@@ -53,6 +53,6 @@ function weapons.OnLoaded() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/weapons.Register)
 ---@param ENT table The SWEP table to register.
---- 			For the table's format and available options see the Structures/SWEP page.
+--- For the table's format and available options see the Structures/SWEP page.
 ---@param classname string Classname to assign to that swep
 function weapons.Register(ENT, classname) end

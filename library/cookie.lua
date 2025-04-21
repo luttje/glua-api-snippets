@@ -1,24 +1,26 @@
 ---@meta
 
---- Functions to persist data on a user's computer.
----
---- 		The data will be read / written to / from a database
---- 		corresponding to the realm the library was used in.
----
---- 		| Realm | Database File |
---- 		|:-----:|:-----|
---- 		| [Server] | `garrysmod/sv.db`
---- 		| [Client] | `garrysmod/cl.db`
---- 		|  [Menu]  | `garrysmod/mn.db`
----
---- 		[Server]: /gmod/States#server
---- 		[Client]: /gmod/States#client
---- 		[Menu]: /gmod/States#menu
+--[[
+Functions to persist data on a user's computer.
+
+The data will be read / written to / from a database  
+corresponding to the realm the library was used in.
+
+| Realm | Database File | 
+|:-----:|:-----|
+| [Server] | `garrysmod/sv.db`
+| [Client] | `garrysmod/cl.db`
+|  [Menu]  | `garrysmod/mn.db`
+
+[Server]: /gmod/States#server
+[Client]: /gmod/States#client
+[Menu]: /gmod/States#menu
+--]]
 cookie = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes any cookie with the given name.
 ---
---- 		Does nothing if the cookie doesn't exist.
+--- Does nothing if the cookie doesn't exist.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cookie.Delete)
 ---@param key string The name of the cookie that you want to delete.

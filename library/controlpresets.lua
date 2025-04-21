@@ -1,10 +1,8 @@
 ---@meta
 
+--- A preset manager, found at the top of almost every default tool's C-menu.
 ---
---- 		A preset manager, found at the top of almost every default tool's C-menu.
----
---- 		This control only exists in Sandbox derived gamemodes.
----
+--- This control only exists in Sandbox derived gamemodes.
 ---@class ControlPresets : Panel
 local ControlPresets = {}
 

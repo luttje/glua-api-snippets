@@ -1,12 +1,8 @@
 ---@meta
 
----
---- 		Displays elements in a horizontal or vertical list. A scrollbar is automatically shown if necessary.
---- 		You can get its vertical bar via `DPanelList.VBar`.
---- 		[DPanelList](https://wiki.facepunch.com/gmod/DPanelList) was succeeded in version 13 by more specialised layout elements.
----
----
----
+--- Displays elements in a horizontal or vertical list. A scrollbar is automatically shown if necessary.
+--- You can get its vertical bar via `DPanelList.VBar`.
+--- [DPanelList](https://wiki.facepunch.com/gmod/DPanelList) was succeeded in version 13 by more specialised layout elements.
 ---@deprecated Use a combination of DIconLayout, DListLayout and DScrollPanel instead.
 ---@class DPanelList : DPanel
 local DPanelList = {}

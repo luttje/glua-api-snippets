@@ -1,10 +1,8 @@
 ---@meta
 
+--- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- 		**INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----
---- 		A VGUI base panel providing drag/drop functionality. Used by [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout), [DListLayout](https://wiki.facepunch.com/gmod/DListLayout) and [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout).
----
+--- A VGUI base panel providing drag/drop functionality. Used by [DIconLayout](https://wiki.facepunch.com/gmod/DIconLayout), [DListLayout](https://wiki.facepunch.com/gmod/DListLayout) and [DTileLayout](https://wiki.facepunch.com/gmod/DTileLayout).
 ---@class DDragBase : DPanel
 local DDragBase = {}
 
@@ -64,7 +62,7 @@ function DDragBase:GetUseLiveDrag() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls [Panel:Receiver](https://wiki.facepunch.com/gmod/Panel:Receiver).
 ---
---- See [Drag and Drop for VGUI](https://wiki.facepunch.com/gmod/Drag and Drop for VGUI).
+--- See [Drag and Drop for VGUI](https://wiki.facepunch.com/gmod/Drag_and_Drop_for_VGUI).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DDragBase:MakeDroppable)
 ---@param name string The unique name for the receiver slot. Only droppable panels with the same DnD name as this can be dropped on the panel.

@@ -11,8 +11,8 @@ coroutine = {}
 function coroutine.create(func) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether the running coroutine can yield.
---- 		A running coroutine is yieldable if it is not in the main thread, and it is not inside a non-yieldable C function.
---- 		**NOTE**: This is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](https://wiki.facepunch.com/gmod/jit.version)
+--- A running coroutine is yieldable if it is not in the main thread, and it is not inside a non-yieldable C function.
+--- **NOTE**: This is only available on the x86-64 versions, because of the difference in the LuaJIT version. [See here](https://wiki.facepunch.com/gmod/jit.version)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/coroutine.isyieldable)
 ---@return boolean # Returns true when the running coroutine can yield.

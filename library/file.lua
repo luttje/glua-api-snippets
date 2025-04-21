@@ -7,7 +7,7 @@
 --- * `MOD` searches only the garrysmod folder.
 --- * `DATA` searches in the data folder.
 ---
---- See [File Search Paths](https://wiki.facepunch.com/gmod/File Search Paths) for the descriptive list of path values.
+--- See [File Search Paths](https://wiki.facepunch.com/gmod/File_Search_Paths) for the descriptive list of path values.
 --- For the full list of path values, type `path` in the console.
 file = {}
 
@@ -54,7 +54,7 @@ function file.CreateDir(name) end
 function file.Delete(name, path) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a boolean of whether the file or directory exists or not.
---- 		If you want to check for a directory, [file.IsDir](https://wiki.facepunch.com/gmod/file.IsDir) will be faster since it won't check for files.
+--- If you want to check for a directory, [file.IsDir](https://wiki.facepunch.com/gmod/file.IsDir) will be faster since it won't check for files.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Exists)
 ---@param name string The file or directory's name. ( You must include the file extension for files, for example "data.txt" )
@@ -63,7 +63,7 @@ function file.Delete(name, path) end
 function file.Exists(name, gamePath) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a list of files and directories inside a single folder.
---- 		**WARNING**: It seems that paths with capital letters (e.g. lua/MyFolder/*) don't work as expected on Linux.
+--- **WARNING**: It seems that paths with capital letters (e.g. lua/MyFolder/*) don't work as expected on Linux.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Find)
 ---@param name string The wildcard to search for. `models/*.mdl` will list **.mdl** files in the `models/` folder.

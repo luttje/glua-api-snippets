@@ -1,10 +1,8 @@
 ---@meta
 
----
 --- A tree view element for Derma.
 ---
 --- See also [DTree_Node](https://wiki.facepunch.com/gmod/DTree_Node).
----
 ---@class DTree : DScrollPanel
 local DTree = {}
 

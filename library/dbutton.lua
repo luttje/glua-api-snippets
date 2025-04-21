@@ -1,10 +1,8 @@
 ---@meta
 
----
 --- A standard Derma button.
 ---
 --- By default, a [DButton](https://wiki.facepunch.com/gmod/DButton) is 22px tall.
----
 ---@class DButton : DLabel
 local DButton = {}
 

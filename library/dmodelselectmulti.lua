@@ -1,9 +1,6 @@
 ---@meta
 
----
----
---- 		A combination of [DModelSelect](https://wiki.facepunch.com/gmod/DModelSelect) and [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet).
----
+--- A combination of [DModelSelect](https://wiki.facepunch.com/gmod/DModelSelect) and [DPropertySheet](https://wiki.facepunch.com/gmod/DPropertySheet).
 ---@class DModelSelectMulti : DPropertySheet
 local DModelSelectMulti = {}
 

@@ -1,10 +1,8 @@
 ---@meta
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- Table structure that describes a Source Engine ammo type.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure that describes a Source Engine ammo type.
 ---
 --- See [game.AddAmmoType](https://wiki.facepunch.com/gmod/game.AddAmmoType) and [game.GetAmmoData](https://wiki.facepunch.com/gmod/game.GetAmmoData).
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/AmmoData)
@@ -189,9 +187,7 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- 		The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
----
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/BodyGroupData)
@@ -199,7 +195,7 @@ AttachmentData.name = nil
 local BodyGroupData = {}
 
 ---The Body Group's ID.
---- 			Body Group IDs start at `0`.
+--- Body Group IDs start at `0`.
 ---@type number
 BodyGroupData.id = nil
 
@@ -212,12 +208,11 @@ BodyGroupData.name = nil
 BodyGroupData.num = nil
 
 ---A table of the names of the Sub Models within this Body Group.
---- 			Sub Model IDs start at `0`.
+--- Sub Model IDs start at `0`.
 ---@type table
 BodyGroupData.submodels = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- Structure used for storing/restoring bone manipulations.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Structure used for storing/restoring bone manipulations.
 --- Data is stored from [Entity:GetManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneScale), [Entity:GetManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneAngles), and [Entity:GetManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:GetManipulateBonePosition).
 --- Data is restored using [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale), [Entity:ManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles), and [Entity:ManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:ManipulateBonePosition).
 ---
@@ -225,7 +220,6 @@ BodyGroupData.submodels = nil
 --- containing a BoneManipulationData structure for each bone (that has manipulations applied) with the bone ID as the struct index in the table.
 ---
 --- Fields **s**, **a**, and **p** are set if they don't equal **Vector( 1, 1, 1 )**, **Angle( 0, 0, 0 )**, and **Vector( 0, 0, 0 )** respectively.
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneManipulationData)
@@ -257,6 +251,12 @@ local Bullet = {}
 ---@type Entity
 Bullet.Attacker = self
 
+---The entity that should be reported as inflictor eg. a weapon or something similar
+---
+--- Also defines CTakeDamageInfo:GetWeapon for Weapon.
+---@type Entity
+Bullet.Inflictor = NULL
+
 ---Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied).
 ---
 --- Function argument(s):
@@ -269,7 +269,7 @@ Bullet.Attacker = self
 --- The return value can be a table with following keys:
 --- * boolean effects - `false` to not do any of the effects.
 --- * boolean damage - `false` to not do any damage.
----@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo):(table: table)
+---@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo):(ret0: table)
 Bullet.Callback = nil
 
 ---The damage dealt by the bullet.
@@ -364,8 +364,7 @@ CamData.drawviewer = false
 ---@type table
 CamData.ortho = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- Passed as argument of [ENTITY:PhysicsCollide](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide), [EFFECT:PhysicsCollide](https://wiki.facepunch.com/gmod/EFFECT:PhysicsCollide) and used with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Passed as argument of [ENTITY:PhysicsCollide](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide), [EFFECT:PhysicsCollide](https://wiki.facepunch.com/gmod/EFFECT:PhysicsCollide) and used with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
 ---
 --- **NOTE**: Sometimes, the value of `Speed` can be different from getting the length calculated from `OurOldVelocity`, even though they should be the same, or close to same. It's recommended to do `OurOldVelocity:Length()` instead.
 ---
@@ -376,8 +375,6 @@ CamData.ortho = nil
 ---     print(colData.OurOldVelocity:Length())
 --- end
 --- ```
----
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/CollisionData)
@@ -535,8 +532,7 @@ DateData.yday = nil
 ---@type number
 DateData.year = nil
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4)
---- Table returned by [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table returned by [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo).
 ---
 --- **NOTE**: If a filter is applied to [debug.getinfo](https://wiki.facepunch.com/gmod/debug.getinfo), some members may not exist!
 ---
@@ -550,7 +546,6 @@ DateData.year = nil
 --- * linedefined = -1
 --- * currentline = -1
 --- * lastlinedefined = -1
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/DebugInfo)
@@ -639,13 +634,10 @@ DebugInfo.nups = nil
 ---@type table
 DebugInfo.activelines = nil
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
---- Structure for [Global.DynamicLight](https://wiki.facepunch.com/gmod/Global.DynamicLight).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Structure for [Global.DynamicLight](https://wiki.facepunch.com/gmod/Global.DynamicLight).
 --- All members are case insensitive.
 ---
 --- **NOTE**: This is an actual class named **dlight_t**, not a table.
----
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/DynamicLight)
@@ -897,8 +889,7 @@ ENT.PhysicsSolidMask = nil
 ---@type boolean
 ENT.PhysicsSounds = false
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)
---- Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
 ---
 --- It is created by [duplicator.CopyEntTable](https://wiki.facepunch.com/gmod/duplicator.CopyEntTable) and can be loaded by [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable).
 ---
@@ -908,8 +899,6 @@ ENT.PhysicsSounds = false
 --- * [ENTITY:OnDuplicated](https://wiki.facepunch.com/gmod/ENTITY:OnDuplicated)
 ---
 --- **NOTE**: In addition to all fields listed here, any field saved on the entity will be saved as-is to this table. For example, if you set `ent.FavoriteFood = "Steak"` before duplicating it, this structure will also contain the field `FavoriteFood` with the value `"Steak"`.
----
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/EntityCopyData)
@@ -988,11 +977,9 @@ EntityCopyData.MapCreationID = nil
 ---@type number
 EntityCopyData.WorkshopID = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- 		The table structure used for bullets that have already been fired.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The table structure used for bullets that have already been fired.
 ---
---- 		See [GM:PostEntityFireBullets](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets) for more information.
----
+--- See [GM:PostEntityFireBullets](https://wiki.facepunch.com/gmod/GM:PostEntityFireBullets) for more information.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/FiredBullet)
@@ -1001,19 +988,19 @@ local FiredBullet = {}
 
 ---The type of ammo that was fired.
 ---
---- 			Should be one of the values from the game.GetAmmoTypes table.
+--- Should be one of the values from the game.GetAmmoTypes table.
 ---@type string
 FiredBullet.AmmoType = "<Empty String>"
 
 ---The Entity that fired the bullet.
 ---
---- 			This is usually the Player that is holding the Weapon.
+--- This is usually the Player that is holding the Weapon.
 ---@type Entity
 FiredBullet.Attacker = nil
 
 ---The amount of damage dealt by the bullet.
 ---
---- 			When set to `0`, damage should be determined based on the values set in the Structures/AmmoData of the bullet's Ammo Type.
+--- When set to `0`, damage should be determined based on the values set in the Structures/AmmoData of the bullet's Ammo Type.
 ---@type number
 FiredBullet.Damage = nil
 
@@ -1023,9 +1010,9 @@ FiredBullet.Force = nil
 
 ---A whole integer number that controls the frequency of visible bullet tracers.
 ---
---- 			A tracer will be fired once after this many non-tracer bullets have been fired.
+--- A tracer will be fired once after this many non-tracer bullets have been fired.
 ---
---- 			Set to `1` to always fire a tracer.
+--- Set to `1` to always fire a tracer.
 ---@type number
 FiredBullet.Tracer = nil
 
@@ -1040,11 +1027,11 @@ FiredBullet.Trace = nil
 ---@class FontData
 local FontData = {}
 
----The font source. Custom font files are stored in resource/fonts/.
+---The font source. Custom font files are stored in `resource/fonts/`.
 ---
 --- The length is limited to 31 characters maximum.
 ---
---- This must be the actual 'nice' font, not a file name. Unless the client is running Linux or macOS. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding the Font Name))
+--- This must be the actual 'nice' font, not a file name. Unless the client is running Linux or macOS. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding_the_Font_Name))
 ---
 --- This also cannot be an already registered font, i.e. you cannot base your font from any of the [Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts)
 ---@type string
@@ -1245,13 +1232,13 @@ HullTrace.mins = nil
 ---
 ---
 ---
---- Function argument(s):
---- * Entity `ent` - The entity that the trace hit
+--- unction argument(s):
+---  Entity `ent` - The entity that the trace hit
 ---
---- Function return value(s):
---- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+--- unction return value(s):
+---  boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
---- 	Using a function here is super slow. Try to avoid it.
+--- Using a function here is super slow. Try to avoid it.
 ---@type Entity
 HullTrace.filter = nil
 
@@ -1414,8 +1401,128 @@ MeshVertex.v1 = nil
 ---@type table
 MeshVertex.userdata = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- Information about the NPC data structure, used to define spawnable NPCs for the Sandbox gamemode.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table returned by [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ModelInfo)
+---@class ModelInfo
+local ModelInfo = {}
+
+---Identical to Entity:SkinCount.
+---@type number
+ModelInfo.SkinCount = nil
+
+---Valve key-value formatted info about the model's physics (Constraint Info, etc). This is limited to 4096 characters.
+---
+--- This data can be parsed into a Lua table via util.KeyValuesToTablePreserveOrder
+---@type string
+ModelInfo.KeyValues = nil
+
+---Valve key-value formatted info about the model (`$keyvalues` command in the `.qc` of the model), if present.
+---
+--- Can describe things like health of a prop, flammability, etc.
+---@type string
+ModelInfo.ModelKeyValues = nil
+
+---Number of meshes the model has. This could be 0 for animation only models.
+---@type number
+ModelInfo.MeshCount = nil
+
+---Number of bones the model has.
+---@type number
+ModelInfo.BoneCount = nil
+
+---Model flags. See [this page on Valve Developer Wiki](https://developer.valvesoftware.com/wiki/MDL#Model_flags) for explanation of each one.
+---@type number
+ModelInfo.Flags = nil
+
+---Whether the model is meant to be a static prop (checks a specific model flag)
+---@type boolean
+ModelInfo.StaticProp = nil
+
+---Number of materials used by this model.
+---@type number
+ModelInfo.MaterialCount = nil
+
+---Number of sequences the model has.
+---@type number
+ModelInfo.SequenceCount = nil
+
+---Number of attachments the model has.
+---@type number
+ModelInfo.AttachmentCount = nil
+
+---Name of the model, as embedded in the model file itself. This may be different from the model path of the model on disk.
+---@type string
+ModelInfo.ModelName = nil
+
+---Model version. This should be 48 most of the time, but can be different from mountable games.
+---@type number
+ModelInfo.Version = nil
+
+---Checksum (CRC32) of the model. This value should be identical across all files for the same model. (.vtx, .mdl, .vvd, etc.)
+---@type number
+ModelInfo.Checksum = nil
+
+---Name of the surface property for this model. See util.GetSurfaceData for more details about what they are.
+---@type string
+ModelInfo.SurfacePropName = nil
+
+---If present, position of the eyes of the model, for NPCs.
+---@type Vector
+ModelInfo.EyePosition = nil
+
+---Illumination position for the model, for cases where the model root would be potentially outside of the world.
+---@type Vector
+ModelInfo.IllumPosition = nil
+
+---Mins of the model's bounding box.
+---@type Vector
+ModelInfo.HullMin = nil
+
+---Maxs of the model's bounding box.
+---@type Vector
+ModelInfo.HullMax = nil
+
+---A list of attachments the model has.
+---
+--- Each attachment is a table with the following info:
+--- * Name
+--- * Bone
+--- * Offset
+---@type table
+ModelInfo.Attachments = nil
+
+---A list of bones the model has. Please node that the keys of this table are **not** bone IDs, it's just a list, but it might be safe to assume the keys are (BoneID-1) due to Lua table indexes starting at 1..
+---
+--- Each bone in the list has the following fields:
+--- * Name
+--- * Parent
+--- * Flags
+--- * PhysObj
+--- * SurfacePropName
+--- * Position
+--- * Angle
+---@type table
+ModelInfo.Bones = nil
+
+---A list of sequences the model has, including the ones from `$includemodel`s.
+---
+--- Each sequence is a table with the following info:
+--- * Name
+--- * Activity
+---@type table
+ModelInfo.Sequences = nil
+
+---A list of materials the model uses, across all its meshes.
+---@type string[]
+ModelInfo.Materials = nil
+
+---A list of folders the game will look in for the **Materials**.
+---@type string[]
+ModelInfo.MaterialDirectories = nil
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Information about the NPC data structure, used to define spawnable NPCs for the Sandbox gamemode.
 ---
 --- Example usage:
 --- ```
@@ -1425,7 +1532,6 @@ MeshVertex.userdata = nil
 --- 	Category = "Nextbot"
 --- } )
 --- ```
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/NPCData)
@@ -1533,9 +1639,7 @@ OperatingParams.steeringAngle = nil
 ---@type number
 OperatingParams.wheelsInContact = nil
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
---- 		This table is returned by [surface.GetPanelPaintState](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState).
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This table is returned by [surface.GetPanelPaintState](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/PanelPaintState)
@@ -1688,8 +1792,7 @@ PhysEnvPerformanceSettings.MinFrictionMass = nil
 ---@type number
 PhysEnvPerformanceSettings.MaxFrictionMass = nil
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1)
---- Structure used in storing/restoring physics object attributes.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Structure used in storing/restoring physics object attributes.
 --- [duplicator.GenericDuplicatorFunction](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction) and [duplicator.DoGenericPhysics](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics) use a table of **PhysicsObjectSave**s with the struct's index in the table being the physics object ID.
 ---
 --- Pos and Angle are set by the following:
@@ -1697,8 +1800,6 @@ PhysEnvPerformanceSettings.MaxFrictionMass = nil
 --- ```
 --- Pos, Angle = WorldToLocal(phys:GetPos(), phys:GetAngle(), Vector( 0, 0, 0 ), Angle( 0, 0, 0 ))
 --- ```
----
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/PhysicsObjectSave)
@@ -1808,16 +1909,13 @@ PLAYER.AvoidPlayers = true
 ---@type boolean
 PLAYER.UseVMHands = true
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981)
---- A structure containing vertex information for use with [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) A structure containing vertex information for use with [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
 ---
 --- UV coordinates describe which part of a given texture should be drawn at a vertex - your graphics card's interpolator will fill in space between vertices. UV coords range from `0-1`, with `0` being top/left and `1` being bottom/right. If you're using a texture these are mandatory.
 ---
 --- **NOTE**: You must pass a table of tables with this structure to the function. **You need to pass at least 3 points.**
 ---
 --- Your points must be defined in a **clockwise order.** Otherwise, your shape will not render properly.
----
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/PolygonVertex)
@@ -2005,11 +2103,9 @@ PropertyAdd.MenuOpen = nil
 ---@type fun(self: table, menu: DMenu, option: DMenuOption)
 PropertyAdd.OnCreate = nil
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
---- Used for [cam.Start](https://wiki.facepunch.com/gmod/cam.Start).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used for [cam.Start](https://wiki.facepunch.com/gmod/cam.Start).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's current `CViewSetup` and do not have static representations.
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/RenderCamData)
@@ -2564,6 +2660,10 @@ SWEP.m_WeaponDeploySpeed = 1
 ---@type Entity
 SWEP.Owner = nil
 
+---Deprecated, use `SWEP` instead. However, if called in a method; use `self` instead.
+---@type Weapon
+SWEP.Weapon = nil
+
 ---The SWEP's author.
 ---@type string
 SWEP.Author = nil
@@ -2932,13 +3032,13 @@ Trace.endpos = VectorVector(0, 0, 0)
 ---
 ---
 ---
---- Function argument(s):
---- * Entity `ent` - The entity that the trace hit
+--- unction argument(s):
+---  Entity `ent` - The entity that the trace hit
 ---
---- Function return value(s):
---- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+--- unction return value(s):
+---  boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
---- 	Using a function here is super slow. Try to avoid it.
+--- Using a function here is super slow. Try to avoid it.
 ---@type Entity
 Trace.filter = nil
 
@@ -2969,7 +3069,6 @@ Trace.hitclientonly = false
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure used as trace result. Default values are when the trace hits nothing.
 ---
 --- See [util.TraceLine](https://wiki.facepunch.com/gmod/util.TraceLine) and [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/TraceResult)
@@ -3560,8 +3659,7 @@ VehicleParamsSteering.turnThrottleReduceFast = nil
 ---@type number
 VehicleParamsSteering.turnThrottleReduceSlow = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc)
---- Table structure passed to [SANDBOX:PlayerSpawnVehicle](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnVehicle), describing a spawnable Vehicle in Sandbox gamemode.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure passed to [SANDBOX:PlayerSpawnVehicle](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnVehicle), describing a spawnable Vehicle in Sandbox gamemode.
 ---
 --- Example usage in defined a custom spawnable vehicle:
 --- ```
@@ -3581,7 +3679,6 @@ VehicleParamsSteering.turnThrottleReduceSlow = nil
 --- 	}
 --- } )
 --- ```
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/VehicleTable)
@@ -3683,11 +3780,9 @@ VideoData.width = nil
 ---@type number
 VideoData.height = nil
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
---- Table structure used for [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used for [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
 ---
 --- Unless stated otherwise, the default values for all these keys would be inherited from the engine's CViewSetup and do not have static representations.
----
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/ViewData)
@@ -3820,9 +3915,7 @@ ViewData.viewid = 0
 ---@type table
 ViewData.offcenter = nil
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
---- Table structure used for [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used for [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/ViewSetup)

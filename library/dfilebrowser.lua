@@ -1,10 +1,8 @@
 ---@meta
 
+--- A tree and list-based file browser.
 ---
---- 		A tree and list-based file browser.
----
---- 		It allows filtering by folder (directory) name and file extension, and can display models as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s.
----
+--- It allows filtering by folder (directory) name and file extension, and can display models as [SpawnIcon](https://wiki.facepunch.com/gmod/SpawnIcon)s.
 ---@class DFileBrowser : DPanel
 local DFileBrowser = {}
 
@@ -31,7 +29,7 @@ function DFileBrowser:GetCurrentFolder() end
 ---@return string # The current filter applied to the file list.
 function DFileBrowser:GetFileTypes() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the [DTree Node](https://wiki.facepunch.com/gmod/DTree Node) that the file tree stems from.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the [DTree Node](https://wiki.facepunch.com/gmod/DTree_Node) that the file tree stems from.
 ---
 --- This is a child of the root node of the [DTree](https://wiki.facepunch.com/gmod/DTree).
 ---

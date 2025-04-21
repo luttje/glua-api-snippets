@@ -1,9 +1,8 @@
 ---@meta
 
----
 --- This is the base panel for every other [VGUI](https://wiki.facepunch.com/gmod/vgui) panel.
 ---
---- It contains all of the basic methods, some of which may only work on certain VGUI elements. See also [Panel Hooks](https://wiki.facepunch.com/gmod/Panel Hooks).
+--- It contains all of the basic methods, some of which may only work on certain VGUI elements. See also [Panel Hooks](https://wiki.facepunch.com/gmod/Panel_Hooks).
 ---
 --- As their functionality is provided at the game's C/C++ level rather than by its Lua script extension, they are unfortunately unavailable for most practical purposes, however, they can still be obtained in a way similar to that provided by the [baseclass](https://wiki.facepunch.com/gmod/baseclass) library:
 ---
@@ -51,19 +50,14 @@
 --- vgui.Register( "NewPanel", PANEL, "DLabel" )
 --- ```
 ---
----
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel)
 ---@class Panel
 local Panel = {}
 
----
 --- This is a list of hooks that are available on all panels.
 ---
 --- Specific panels can have their own hooks, they are listed on their category.
 --- **NOTE**: These hooks are called on your panel. They can't be [hooked](https://wiki.facepunch.com/gmod/hook.Add)
----
----
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL_Hooks)
 ---@class PANEL : Panel
@@ -211,7 +205,7 @@ function Panel:ChildrenSize() end
 function Panel:Clear() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Fades panels color to specified one.
----        **NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
+--- *NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:ColorTo)
 ---@param color table The color to fade to
@@ -589,6 +583,24 @@ function Panel:GetClassName() end
 ---@return Panel # The child object that was closest to the specified point.
 ---@return number # The distance that this child was from the point.
 function Panel:GetClosestChild(x, y) end
+
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the alignment of the text of a [Label](https://wiki.facepunch.com/gmod/Label).
+---
+--- **NOTE**: This function only works on [Label](https://wiki.facepunch.com/gmod/Label) panels and its derivatives.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetContentAlignment)
+---@return number # The direction of the content, based on the number pad.
+---
+--- 1: **bottom-left**
+--- 2: **bottom-center**
+--- 3: **bottom-right**
+--- 4: **middle-left**
+--- 5: **center**
+--- 6: **middle-right**
+--- 7: **top-left**
+--- 8: **top-center**
+--- 9: **top-right**
+function Panel:GetContentAlignment() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets the size of the content/children within a panel object.
 ---
@@ -1659,7 +1671,7 @@ function Panel:OpenURL(URL) end
 function PANEL:Paint(width, height) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Paints a ghost copy of the panel at the given position.
---- 		**WARNING**: This function sets Z pos of panel's children ([PANEL:SetZPos](https://wiki.facepunch.com/gmod/PANEL:SetZPos))
+--- **WARNING**: This function sets Z pos of panel's children ([PANEL:SetZPos](https://wiki.facepunch.com/gmod/PANEL:SetZPos)). It also briefly unparents and reparents the panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:PaintAt)
 ---@param posX number The x coordinate to draw the panel from.
@@ -1968,7 +1980,7 @@ function Panel:SetContentAlignment(alignment) end
 ---
 --- **WARNING**: This function cannot interact with serverside convars unless you are host
 ---
---- **NOTE**: Blocked convars will not work with this, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked ConCommands)
+--- **NOTE**: Blocked convars will not work with this, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked_ConCommands)
 ---
 --- Sets this panel's convar. When the convar changes this panel will update automatically.
 ---
@@ -2032,7 +2044,7 @@ function Panel:SetDragParent(parent) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the visibility of the language selection box when typing in non-English mode.
 ---
---- 		See [Panel:SetDrawLanguageIDAtLeft](https://wiki.facepunch.com/gmod/Panel:SetDrawLanguageIDAtLeft) for a function that changes the position of the language selection box.
+--- See [Panel:SetDrawLanguageIDAtLeft](https://wiki.facepunch.com/gmod/Panel:SetDrawLanguageIDAtLeft) for a function that changes the position of the language selection box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetDrawLanguageID)
 ---@param visible boolean true to make it visible, false to hide it.

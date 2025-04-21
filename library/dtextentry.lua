@@ -1,13 +1,10 @@
 ---@meta
 
----
 --- A form which may be used to display text the player is meant to select and copy or alternately allow them to enter some text of their own.
 ---
 --- **NOTE**: At least one of your `DTextEntry`'s parents must either be an [EditablePanel](https://wiki.facepunch.com/gmod/EditablePanel) or derived from it (like a [DFrame](https://wiki.facepunch.com/gmod/DFrame), for example), else it won't be able to focus and thus be unselectable.
 ---
 --- You must also call [Panel:MakePopup](https://wiki.facepunch.com/gmod/Panel:MakePopup) on said panel or the `DTextEntry` will not work.
----
----
 ---@class DTextEntry : TextEntry
 local DTextEntry = {}
 
@@ -64,7 +61,7 @@ function DTextEntry:GetDisabled() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Alias of [DTextEntry:GetPaintBackground](https://wiki.facepunch.com/gmod/DTextEntry:GetPaintBackground). Use that instead.
 ---
---- Whether the background is displayed or not.
+--- hether the background is displayed or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetDrawBackground)
 ---@return boolean #
