@@ -1,4 +1,3 @@
-import { WikiPage } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 
 describe('writeType', () => {

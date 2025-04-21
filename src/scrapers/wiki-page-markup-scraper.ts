@@ -142,7 +142,7 @@ export function isClass(page: WikiPage): page is TypePage {
 
 // Handle things like <page> tags, <warning>, etc.
 const classBlocks = ["internal", "note", "warning"];
-function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
+export function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
   // <page> => markdown []()
   for (const page of $(e).find('page')) {
     const $p = $(page);
@@ -165,6 +165,7 @@ function markdownifyDescription($: CheerioAPI, e: Cheerio<AnyNode>): string {
   // Fixup []() that use local URLs. This is not exclusive to the result of <page> conversions
   description = description.replace(/\[([^\]]+)\]\(([^)"]+)(?: \"([^\"]+)\")?\)/g, function (match, text, url) {
     if (url.indexOf("://") == -1) {
+      url = url.replace(/ /g, "_");
       return `[${text}](https://wiki.facepunch.com/gmod/${url})`;
     }
 
