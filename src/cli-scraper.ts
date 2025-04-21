@@ -32,11 +32,11 @@ async function startScrape() {
   const customDirectory = options.customOverrides?.replace(/\/$/, '') ?? null;
   const baseUrl = options.url.replace(/\/$/, '');
   const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
-  const writer = new GluaApiWriter();
+  const writer = new GluaApiWriter(baseDirectory);
 
   const retryOptions: RequestInitWithRetry = {
     retries: 5,
-    retryDelay: function(attempt, error, response) {
+    retryDelay: function (attempt, error, response) {
       return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
     }
   }
@@ -85,7 +85,7 @@ async function startScrape() {
 
   const pageIndexes = await scrapeAndCollect(pageListScraper);
 
-  console.log(`Took ${Math.floor((performance.now()-collect_start) / 100) / 10}s!\n`);
+  console.log(`Took ${Math.floor((performance.now() - collect_start) / 100) / 10}s!\n`);
 
   console.log('Scraping all pages...');
   let scrape_start = performance.now();
@@ -109,7 +109,7 @@ async function startScrape() {
       }
 
       fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-    
+
       // Make sure modules like Entity and ENTITY are placed in the same file.
       moduleName = moduleName.toLowerCase();
 
@@ -132,10 +132,9 @@ async function startScrape() {
 
     queue.push(pageMarkupScraper.scrape());
 
-    if (queue.length > 20)
-    {
+    if (queue.length > 20) {
       const results = await Promise.allSettled(queue);
-      for ( const result of results) {
+      for (const result of results) {
         if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
       }
       queue = [];
@@ -144,11 +143,11 @@ async function startScrape() {
 
   // Await any after the loop exits
   const results = await Promise.allSettled(queue);
-  for ( const result of results) {
+  for (const result of results) {
     if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
   }
 
-  console.log(`Took ${Math.floor((performance.now()-scrape_start) / 100) / 10}s!`);
+  console.log(`Took ${Math.floor((performance.now() - scrape_start) / 100) / 10}s!`);
 
   writer.writeToDisk();
 

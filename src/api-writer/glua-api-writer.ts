@@ -10,6 +10,7 @@ import {
   isStruct,
   isEnum,
 } from '../scrapers/wiki-page-markup-scraper.js';
+import customPluginHookAdd from '../../custom/plugins/hook-add.js';
 import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -50,7 +51,9 @@ export class GluaApiWriter {
 
   private readonly files: Map<string, IndexedWikiPage[]> = new Map();
 
-  constructor() { }
+  constructor(
+    public readonly outputDirectory: string = './output',
+  ) { }
 
   public static safeName(name: string) {
     if (name.includes('/'))
@@ -526,6 +529,12 @@ export class GluaApiWriter {
 
     if (func.deprecated)
       luaDocComment += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
+
+    // TODO: Write a nice API to allow customizing API output from custom/
+    // See https://github.com/luttje/glua-api-snippets/issues/65
+    if (func.address === 'hook.Add') {
+      luaDocComment += customPluginHookAdd(this, func);
+    }
 
     return luaDocComment;
   }
