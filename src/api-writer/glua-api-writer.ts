@@ -321,7 +321,7 @@ export class GluaApiWriter {
 
       api += `---${putCommentBeforeEachLine(field.description.trim())}\n`;
 
-      const type = this.transformType(field.type, field.callback);
+      const type = GluaApiWriter.transformType(field.type, field.callback);
       api += `---@type ${type}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
@@ -376,7 +376,7 @@ export class GluaApiWriter {
     });
   }
 
-  private transformType(type: string, callback?: FunctionCallback) {
+  public static transformType(type: string, callback?: FunctionCallback) {
     if (type === 'vararg')
       return 'any';
 
@@ -384,11 +384,19 @@ export class GluaApiWriter {
     if (type === 'function' && callback) {
       let callbackString = `fun(`;
 
-      for (const arg of callback.arguments || []) {
-        if (!arg.name) arg.name = arg.type;
-        if (arg.type === 'vararg') arg.name = '...';
+      const callbackArgsLength = callback.arguments?.length || 0;
 
-        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
+      for (let i = 0; i < callbackArgsLength; i++) {
+        const arg = callback.arguments![i];
+
+        if (!arg.name) {
+          arg.name = `arg${i}`;
+        }
+
+        if (arg.type === 'vararg')
+          arg.name = '...';
+
+        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${GluaApiWriter.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
 
       // Remove trailing comma and space
@@ -401,9 +409,17 @@ export class GluaApiWriter {
         callbackString += ':(';
       }
 
-      for (const ret of callback.returns || []) {
-        if (!ret.name) ret.name = ret.type;
-        if (ret.type === 'vararg') ret.name = '...';
+      const callbackReturnsLength = callback.returns?.length || 0;
+
+      for (let i = 0; i < callbackReturnsLength; i++) {
+        const ret = callback.returns![i];
+
+        if (!ret.name) {
+          ret.name = `ret${i}`;
+        }
+
+        if (ret.type === 'vararg')
+          ret.name = '...';
 
         callbackString += `${ret.name}: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
@@ -485,7 +501,7 @@ export class GluaApiWriter {
           types.push(arg.altType);
         }
 
-        let typesString = types.map(type => this.transformType(type, arg.callback))
+        let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))
           .join('|');
 
         luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trim())}\n`;
@@ -501,7 +517,7 @@ export class GluaApiWriter {
         if (ret.type === 'vararg')
           luaDocComment += 'any ...';
         else
-          luaDocComment += `${this.transformType(ret.type, ret.callback)}`;
+          luaDocComment += `${GluaApiWriter.transformType(ret.type, ret.callback)}`;
 
         luaDocComment += ` # ${description}\n`;
       });
