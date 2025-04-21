@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, indentText, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { escapeSingleQuotes, indentText, wrapInComment, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -117,9 +117,9 @@ export class GluaApiWriter {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
         if (realm) {
-          api += `---${this.formatRealm(realm)} ${description ? `${putCommentBeforeEachLine(description)}\n` : ''}\n`;
+          api += `---${this.formatRealm(realm)} ${description ? `${wrapInComment(description)}\n` : ''}\n`;
         } else {
-          api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+          api += description ? `${wrapInComment(description, false)}\n` : '';
         }
 
         if (url) {
@@ -166,7 +166,7 @@ export class GluaApiWriter {
     if (!this.writtenLibraryGlobals.has(page.name)) {
       let api = '';
 
-      api += page.description ? `${putCommentBeforeEachLine(page.description.trim(), false)}\n` : '';
+      api += page.description ? `${wrapInComment(page.description, false)}\n` : '';
 
       if (page.deprecated)
         api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
@@ -244,7 +244,7 @@ export class GluaApiWriter {
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     if (isContainedInTable) {
-      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
       api += `---@enum ${_enum.name}\n`;
       api += `${_enum.name} = {\n`;
     }
@@ -265,12 +265,12 @@ export class GluaApiWriter {
         key = key.split('.')[1];
 
         if (item.description?.trim()) {
-          api += `${indentText(putCommentBeforeEachLine(item.description.trim(), false), 2)}\n`;
+          api += `${indentText(wrapInComment(item.description, false), 2)}\n`;
         }
 
         api += `  ${key} = ${item.value},\n`;
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
+        api += item.description ? `${wrapInComment(item.description, false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
@@ -287,7 +287,7 @@ export class GluaApiWriter {
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
       // will use @alias as a workaround.
       // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
-      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
       api += `\n---@alias ${_enum.name}\n`;
 
       for (const item of _enum.items) {
@@ -319,7 +319,7 @@ export class GluaApiWriter {
       if (field.deprecated)
         api += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
-      api += `---${putCommentBeforeEachLine(field.description.trim())}\n`;
+      api += `---${wrapInComment(field.description)}\n`;
 
       const type = GluaApiWriter.transformType(field.type, field.callback);
       api += `---@type ${type}\n`;
@@ -480,7 +480,7 @@ export class GluaApiWriter {
   }
 
   private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
-    let luaDocComment = `---${this.formatRealm(realm)} ${putCommentBeforeEachLine(func.description!.trim())}\n`;
+    let luaDocComment = `---${this.formatRealm(realm)} ${wrapInComment(func.description!)}\n`;
     luaDocComment += `---\n---[View wiki](${func.url})\n`;
 
     if (args) {
@@ -504,13 +504,13 @@ export class GluaApiWriter {
         let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))
           .join('|');
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trim())}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${wrapInComment(arg.description!)}\n`;
       });
     }
 
     if (func.returns) {
       func.returns.forEach(ret => {
-        const description = putCommentBeforeEachLine(ret.description!.trim());
+        const description = wrapInComment(ret.description!);
 
         luaDocComment += `---@return `;
 
