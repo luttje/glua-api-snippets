@@ -100,7 +100,7 @@ describe('unindentText', () => {
     ['  hello\n  world', 'hello\nworld'],
     ['    hello\n    world', 'hello\nworld'],
     ['\thello\n\tworld', 'hello\nworld'],
-    ['\thello\n\t world', 'hello\n world'],
+    ['\thello\n\t world\nyo', 'hello\n world\nyo'],
     ['\t\thello\n\t\tworld', 'hello\nworld'],
   ])('should unindent text by the given amount', (input, expected) => {
     expect(unindentText(input)).toBe(expected);

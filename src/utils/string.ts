@@ -126,5 +126,14 @@ export function unindentText(text: string, indent: number = 0) {
   const firstLineIndent = lines[0].search(/\S/);
   const unindentAmount = indent > 0 ? indent : firstLineIndent;
 
-  return lines.map(line => line.slice(unindentAmount)).join('\n');
+  // Only unindent the line if it has at least the same amount of indent as the first line.
+  return lines.map(line => {
+    const lineIndent = line.search(/\S/);
+
+    if (lineIndent >= unindentAmount) {
+      return line.slice(unindentAmount);
+    } else {
+      return line;
+    }
+  }).join('\n');
 }
