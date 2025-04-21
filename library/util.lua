@@ -267,16 +267,16 @@ function util.GetModelInfo(mdl) end
 ---@param lod? number Which LOD to retrieve. 0 is the best quality, increasing the number lowers the model quaility.
 ---@param bodygroupMask? number Bodygroup combination for the model. This can be in format of `"000000"` where each number represents a bodygroup option.
 ---@return table # A table of tables with the following format:
---- tring material - The material of the specific mesh
---- able triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
---- able verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
+--- * string material - The material of the specific mesh
+--- * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
+--- * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
 ---
---- h Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
---- umber bone - The bone this vertex is attached to
---- umber weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
+--- Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
+--- * number bone - The bone this vertex is attached to
+--- * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
 ---@return table # A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents:
---- umber parent - The ID of the parent bone.
---- Matrix matrix - The bone's bind transform in model (not bone) space.
+--- * number parent - The ID of the parent bone.
+--- * VMatrix matrix - The bone's bind transform in model (not bone) space.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets persistent data of an offline player using their SteamID.

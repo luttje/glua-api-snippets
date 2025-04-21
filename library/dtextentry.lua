@@ -61,7 +61,7 @@ function DTextEntry:GetDisabled() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Alias of [DTextEntry:GetPaintBackground](https://wiki.facepunch.com/gmod/DTextEntry:GetPaintBackground). Use that instead.
 ---
---- hether the background is displayed or not.
+--- Whether the background is displayed or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetDrawBackground)
 ---@return boolean #

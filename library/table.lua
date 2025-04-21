@@ -124,7 +124,7 @@ function table.ForceInsert(tab, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken.
 ---
---- he GLua interpretation of this is [table.ForEach](https://wiki.facepunch.com/gmod/table.ForEach).
+--- The GLua interpretation of this is [table.ForEach](https://wiki.facepunch.com/gmod/table.ForEach).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.foreach)
 ---@param tbl table The table to iterate over.
@@ -138,7 +138,7 @@ function table.foreach(tbl, callback) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Iterates for each numeric index in the table in order.
 ---
---- his is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs)() instead.
+--- This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see [here](http://lua-users.org/wiki/TableLibraryTutorial). You should use [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs)() instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.foreachi)
 ---@param table table The table to iterate over.
@@ -417,7 +417,7 @@ function table.SortByKey(tab, descending) end
 function table.SortByMember(tab, memberKey, ascending) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sorts a table in reverse order from [table.sort](https://wiki.facepunch.com/gmod/table.sort).
---- NOTE**: This function modifies the table you give to it. Like table.sort, it does not return anything.
+--- **NOTE**: This function modifies the table you give to it. Like table.sort, it does not return anything.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.SortDesc)
 ---@param tbl table The table to sort in descending order.

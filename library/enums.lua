@@ -5566,7 +5566,7 @@ MATERIAL_LINES = 1
 --- Creates triangles from groupings of 3 vertices.
 ---
 --- TThe `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
---- . `(vertexCount / 3)`
+--- E.g. `(vertexCount / 3)`
 ---
 --- For more information, see [Triangle Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#triangles)
 MATERIAL_TRIANGLES = 2

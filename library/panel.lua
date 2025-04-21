@@ -205,7 +205,7 @@ function Panel:ChildrenSize() end
 function Panel:Clear() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Fades panels color to specified one.
---- *NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
+---        **NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:ColorTo)
 ---@param color table The color to fade to

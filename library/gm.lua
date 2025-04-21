@@ -399,7 +399,7 @@ function GM:EntityNetworkedVarChanged(ent, name, oldval, newval) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called right before removal of an entity.
 --- **WARNING**: This hook is called clientside during full updates due to how networking works in the Source Engine.
 ---
---- is can happen when the client briefly loses connection to the server, and can be simulated via `cl_fullupdate` for testing purposes.
+--- This can happen when the client briefly loses connection to the server, and can be simulated via `cl_fullupdate` for testing purposes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityRemoved)
 ---@param ent Entity Entity being removed

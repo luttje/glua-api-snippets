@@ -185,12 +185,12 @@ flare_ignite_npc.entindex = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the freeze cam starts spectating something.
 --- Example cause:
---- `
---- cal ply = Entity( 1 )
---- y:Spectate( OBS_MODE_FREEZECAM )
+--- ```
+--- local ply = Entity( 1 )
+--- ply:Spectate( OBS_MODE_FREEZECAM )
 ---
---- y:SpectateEntity( ply )
---- `
+--- ply:SpectateEntity( ply )
+--- ```
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/freezecam_started)
@@ -212,14 +212,14 @@ game_newmap.mapname = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the freeze cam is finished.
 --- Example cause:
---- `
---- cal ply = Entity( 1 )
---- y:Spectate( OBS_MODE_FREEZECAM )
+--- ```
+--- local ply = Entity( 1 )
+--- ply:Spectate( OBS_MODE_FREEZECAM )
 ---
---- mer.Simple( 1, function()
---- ly:UnSpectate()
---- d )
---- `
+--- timer.Simple( 1, function()
+--- 	ply:UnSpectate()
+--- end )
+--- ```
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hide_freezepanel)
@@ -599,7 +599,7 @@ player_disconnect.reason = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when the player takes damage.
 ---
---- *NOTE**: This is called after [GM:EntityTakeDamage](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage) so you could just use that hook serverside.
+--- 		**NOTE**: This is called after [GM:EntityTakeDamage](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage) so you could just use that hook serverside.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/player_hurt)
@@ -657,7 +657,7 @@ player_info.networkid = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when the player say a message.
 ---
---- *NOTE**: This is called after [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay) so you could just use that hook serverside.
+--- 		**NOTE**: This is called after [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay) so you could just use that hook serverside.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/player_say)
@@ -682,7 +682,7 @@ player_say.teamonly = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when a player spawns.
 ---
---- *NOTE**: This is not called clientside for the local player or in single-player.
+--- 		**NOTE**: This is not called clientside for the local player or in single-player.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/player_spawn)
@@ -830,9 +830,9 @@ server_spawn.password = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the freeze cam is started.
 --- Example cause:
---- `
---- ayer:Spectate(OBS_MODE_FREEZECAM)
---- `
+--- ```
+--- Player:Spectate(OBS_MODE_FREEZECAM)
+--- ```
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/show_freezepanel)

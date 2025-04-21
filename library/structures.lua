@@ -1232,11 +1232,11 @@ HullTrace.mins = nil
 ---
 ---
 ---
---- unction argument(s):
----  Entity `ent` - The entity that the trace hit
+--- Function argument(s):
+--- * Entity `ent` - The entity that the trace hit
 ---
---- unction return value(s):
----  boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+--- Function return value(s):
+--- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
 ---@type Entity
@@ -2656,11 +2656,13 @@ SWEP.Base = "weapon_base"
 ---@type number
 SWEP.m_WeaponDeploySpeed = 1
 
----Deprecated, use [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner)() instead.
+---@deprecated Use Entity:GetOwner() instead.
+---Use [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner)() instead.
 ---@type Entity
 SWEP.Owner = nil
 
----Deprecated, use `SWEP` instead. However, if called in a method; use `self` instead.
+---@deprecated Use `SWEP` instead. However, if called in a SWEP method; use `self` instead.
+---Use `SWEP` instead. However, if called in a SWEP method; use `self` instead.
 ---@type Weapon
 SWEP.Weapon = nil
 
@@ -3032,11 +3034,11 @@ Trace.endpos = VectorVector(0, 0, 0)
 ---
 ---
 ---
---- unction argument(s):
----  Entity `ent` - The entity that the trace hit
+--- Function argument(s):
+--- * Entity `ent` - The entity that the trace hit
 ---
---- unction return value(s):
----  boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
+--- Function return value(s):
+--- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
 ---@type Entity

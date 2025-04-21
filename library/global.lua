@@ -518,18 +518,18 @@ function _G.DamageInfo() end
 function _G.DebugInfo(slot, info) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) A preprocessor keyword that is directly replaced with the following text:
---- `lua
---- cal BaseClass = baseclass.Get
---- `
+--- ```lua
+--- local BaseClass = baseclass.Get
+--- ```
 ---
---- cause this is a simple preprocessor keyword and not a function, it will cause problems if not used properly
+--- Because this is a simple preprocessor keyword and not a function, it will cause problems if not used properly
 ---
---- e [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) for more information.
---- *WARNING**: The preprocessor is not smart enough to know when substitution doesn't make sense, such as: table keys and strings.
+--- See [baseclass.Get](https://wiki.facepunch.com/gmod/baseclass.Get) for more information.
+--- 	**WARNING**: The preprocessor is not smart enough to know when substitution doesn't make sense, such as: table keys and strings.
 ---
---- nning `print("DEFINE_BASECLASS")` is the same as `print("local BaseClass = baseclass.Get")`
+--- Running `print("DEFINE_BASECLASS")` is the same as `print("local BaseClass = baseclass.Get")`
 ---
---- r more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
+--- For more information, including usage examples, see the [BaseClasses](https://wiki.facepunch.com/gmod/BaseClasses) reference page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.DEFINE_BASECLASS)
 ---@param value string Baseclass name
@@ -1093,19 +1093,19 @@ function _G.GetAddonStatus() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetAPIManifest)
 ---@param callback fun(data: string) Callback to be called when the API request is done.
 ---
---- ction argument(s):
---- tring `data` - JSON encoded data, see util.JSONToTable.
+--- Function argument(s):
+--- * string `data` - JSON encoded data, see util.JSONToTable.
 ---
 ---
---- matted output:
---- js
+--- Formatted output:
+--- ```js
+--- {
+--- 	"ManifestVersion": 	number - Version of the manifest
+--- 	"Date": 			string - Date the data was retrieved
 ---
---- anifestVersion": 	number - Version of the manifest
---- ate": 			string - Date the data was retrieved
----
----  Contains all the blog posts, the things in the top right of the menu
---- ews": {
---- Blogs": [
+--- 	// Contains all the blog posts, the things in the top right of the menu
+--- 	"News": {
+--- 		"Blogs": [
 ---
 --- // Structure of blog posts
 --- {
@@ -1117,38 +1117,38 @@ function _G.GetAddonStatus() end
 --- 	"Url": 			string - URL to the post on the blog
 --- 	"Tags": 		string - String of the posts tag
 --- }
+--- 		]
+--- 	}
 ---
----
----
----  Array of Facepunches Mods, Admins and Developers
---- dministrators": [
----
+--- 	// Array of Facepunches Mods, Admins and Developers
+--- 	"Administrators": [
+--- 		{
 --- "UserId": 		string - SteamID64 of the person
 --- "Level": 		string - Level of the user (Administrator, Developer or Moderator)
+--- 		}
+--- 	]
 ---
+--- 	// Unused and contains nothing useful
+--- 	"Heroes": {}
 ---
+--- 	"SentryUrl": 		string - Nothing
+--- 	"DatabaseUrl" 		string - URL to the Facepunch API (/database/{action}/)
+--- 	"FeedbackUrl" 		string - URL to the Facepunch API (/feedback/add/)
+--- 	"ReportUrl" 		string - URL to the Facepunch API (/feedback/report/)
+--- 	"LeaderboardUrl" 	string - URL to the Facepunch API (/leaderboard/{action}/)
+--- 	"BenchmarkUrl" 		string - URL to the Facepunch API (/benchmark/add/)
+--- 	"AccountUrl" 		string - URL to the Facepunch API (/account/{action}/)
 ---
----  Unused and contains nothing useful
---- eroes": {}
+--- 	"Servers": {
+--- 		"Official": [] // Nothing
 ---
---- entryUrl": 		string - Nothing
---- atabaseUrl" 		string - URL to the Facepunch API (/database/{action}/)
---- eedbackUrl" 		string - URL to the Facepunch API (/feedback/add/)
---- eportUrl" 		string - URL to the Facepunch API (/feedback/report/)
---- eaderboardUrl" 	string - URL to the Facepunch API (/leaderboard/{action}/)
---- enchmarkUrl" 		string - URL to the Facepunch API (/benchmark/add/)
---- ccountUrl" 		string - URL to the Facepunch API (/account/{action}/)
----
---- ervers": {
---- Official": [] // Nothing
----
---- / List of blacklisted servers
---- Banned": [
+--- 		// List of blacklisted servers
+--- 		"Banned": [
 --- string 	- IP of the blacklisted server
----
----
----
----
+--- 		]
+--- 	}
+--- }
+--- ```
 function _G.GetAPIManifest(callback) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the specified name.
@@ -1521,9 +1521,9 @@ function _G.HSVToColor(hue, saturation, value) end
 --- This cannot send or receive multiple headers with the same name.
 --- **NOTE**: HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.
 ---
---- NOTE**: HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
+--- **NOTE**: HTTP-requests to destinations on private networks (such as `192.168.0.1`, or `127.0.0.1`) won't work.
 ---
---- o enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command_Line_Parameters) `-allowlocalhttp`. (Dedicated servers only)
+--- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command_Line_Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HTTP)
 ---@param parameters HTTPRequest The request parameters. See Structures/HTTPRequest.
@@ -1541,11 +1541,11 @@ function _G.HWBToColor(hue, whiteness, blackness) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Executes a Lua script.
 ---
---- is function will try to load local client file if `sv_allowcslua` is **1**.
+--- This function will try to load local client file if `sv_allowcslua` is **1**.
 ---
---- WARNING**: The file you are attempting to include **MUST NOT** be empty or the include will fail. Files over a certain size (64KB compressed) may fail clientside as well.
+--- **WARNING**: The file you are attempting to include **MUST NOT** be empty or the include will fail. Files over a certain size (64KB compressed) may fail clientside as well.
 ---
----  the file you are including is clientside or shared, it **must** be [Global.AddCSLuaFile](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)'d or this function will error saying the file doesn't exist.
+--- If the file you are including is clientside or shared, it **must** be [Global.AddCSLuaFile](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)'d or this function will error saying the file doesn't exist.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.include)
 ---@param fileName string The name of the script to be executed. The path must be either relative to the current file, or be an absolute path (relative to and excluding the **lua/** folder).
@@ -2473,7 +2473,7 @@ function _G.RenderSuperDoF(viewOrigin, viewAngles, viewFOV) end
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) **INTERNAL**: Called by [permissions.AskToConnect](https://wiki.facepunch.com/gmod/permissions.AskToConnect)
 ---
 --- If the server has the permission "connect" granted, it will instantly connect you to the server.
----  the permission is not granted it will, it opens a confirmation window to connect to the server.
+--- If the permission is not granted it will, it opens a confirmation window to connect to the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.RequestConnectToServer)
 ---@param serverip string The server ip to connect to

@@ -4045,7 +4045,7 @@ function Entity:SetBodygroup(bodyGroupId, subModelId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the [Entity's](https://wiki.facepunch.com/gmod/Entity) active Sub Models via a string of [Sub Model IDs](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) in order from the first [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) to the last.
 ---
---- is is a convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
+--- This is a convenience function for [Entity:SetBodygroup](https://wiki.facepunch.com/gmod/Entity:SetBodygroup).
 --- **NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodyGroups)
