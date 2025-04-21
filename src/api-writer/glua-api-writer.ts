@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, indentText, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { escapeSingleQuotes, indentText, wrapInComment, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -117,9 +117,9 @@ export class GluaApiWriter {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
         if (realm) {
-          api += `---${this.formatRealm(realm)} ${description ? `${putCommentBeforeEachLine(description)}\n` : ''}\n`;
+          api += `---${this.formatRealm(realm)} ${description ? `${wrapInComment(description)}\n` : ''}\n`;
         } else {
-          api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+          api += description ? `${wrapInComment(description, false)}\n` : '';
         }
 
         if (url) {
@@ -166,7 +166,7 @@ export class GluaApiWriter {
     if (!this.writtenLibraryGlobals.has(page.name)) {
       let api = '';
 
-      api += page.description ? `${putCommentBeforeEachLine(page.description.trim(), false)}\n` : '';
+      api += page.description ? `${wrapInComment(page.description, false)}\n` : '';
 
       if (page.deprecated)
         api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
@@ -244,7 +244,7 @@ export class GluaApiWriter {
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     if (isContainedInTable) {
-      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
       api += `---@enum ${_enum.name}\n`;
       api += `${_enum.name} = {\n`;
     }
@@ -265,12 +265,12 @@ export class GluaApiWriter {
         key = key.split('.')[1];
 
         if (item.description?.trim()) {
-          api += `${indentText(putCommentBeforeEachLine(item.description.trim(), false), 2)}\n`;
+          api += `${indentText(wrapInComment(item.description, false), 2)}\n`;
         }
 
         api += `  ${key} = ${item.value},\n`;
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
+        api += item.description ? `${wrapInComment(item.description, false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
@@ -287,7 +287,7 @@ export class GluaApiWriter {
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
       // will use @alias as a workaround.
       // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
-      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
       api += `\n---@alias ${_enum.name}\n`;
 
       for (const item of _enum.items) {
@@ -319,9 +319,9 @@ export class GluaApiWriter {
       if (field.deprecated)
         api += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
-      api += `---${putCommentBeforeEachLine(field.description.trim())}\n`;
+      api += `---${wrapInComment(field.description)}\n`;
 
-      const type = this.transformType(field.type, field.callback);
+      const type = GluaApiWriter.transformType(field.type, field.callback);
       api += `---@type ${type}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
@@ -376,7 +376,7 @@ export class GluaApiWriter {
     });
   }
 
-  private transformType(type: string, callback?: FunctionCallback) {
+  public static transformType(type: string, callback?: FunctionCallback) {
     if (type === 'vararg')
       return 'any';
 
@@ -384,11 +384,19 @@ export class GluaApiWriter {
     if (type === 'function' && callback) {
       let callbackString = `fun(`;
 
-      for (const arg of callback.arguments || []) {
-        if (!arg.name) arg.name = arg.type;
-        if (arg.type === 'vararg') arg.name = '...';
+      const callbackArgsLength = callback.arguments?.length || 0;
 
-        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
+      for (let i = 0; i < callbackArgsLength; i++) {
+        const arg = callback.arguments![i];
+
+        if (!arg.name) {
+          arg.name = `arg${i}`;
+        }
+
+        if (arg.type === 'vararg')
+          arg.name = '...';
+
+        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${GluaApiWriter.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
 
       // Remove trailing comma and space
@@ -401,9 +409,17 @@ export class GluaApiWriter {
         callbackString += ':(';
       }
 
-      for (const ret of callback.returns || []) {
-        if (!ret.name) ret.name = ret.type;
-        if (ret.type === 'vararg') ret.name = '...';
+      const callbackReturnsLength = callback.returns?.length || 0;
+
+      for (let i = 0; i < callbackReturnsLength; i++) {
+        const ret = callback.returns![i];
+
+        if (!ret.name) {
+          ret.name = `ret${i}`;
+        }
+
+        if (ret.type === 'vararg')
+          ret.name = '...';
 
         callbackString += `${ret.name}: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
@@ -424,8 +440,9 @@ export class GluaApiWriter {
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
 
       return `${innerType}[]`;
-    } else if (type.startsWith('table{')) {
+    } else if (type.startsWith('table{') || type.startsWith('Panel{')) {
       // Convert `table{ToScreenData}` structures to `ToScreenData` class for LuaLS
+      // Also converts `Panel{DVScrollBar}` to `DVScrollBar` class for LuaLS
       let innerType = type.match(/{([^}]+)}/)?.[1];
 
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
@@ -464,7 +481,7 @@ export class GluaApiWriter {
   }
 
   private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
-    let luaDocComment = `---${this.formatRealm(realm)} ${putCommentBeforeEachLine(func.description!.trim())}\n`;
+    let luaDocComment = `---${this.formatRealm(realm)} ${wrapInComment(func.description!)}\n`;
     luaDocComment += `---\n---[View wiki](${func.url})\n`;
 
     if (args) {
@@ -485,23 +502,23 @@ export class GluaApiWriter {
           types.push(arg.altType);
         }
 
-        let typesString = types.map(type => this.transformType(type, arg.callback))
+        let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))
           .join('|');
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trim())}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${wrapInComment(arg.description!)}\n`;
       });
     }
 
     if (func.returns) {
       func.returns.forEach(ret => {
-        const description = putCommentBeforeEachLine(ret.description!.trim());
+        const description = wrapInComment(ret.description!);
 
         luaDocComment += `---@return `;
 
         if (ret.type === 'vararg')
           luaDocComment += 'any ...';
         else
-          luaDocComment += `${this.transformType(ret.type, ret.callback)}`;
+          luaDocComment += `${GluaApiWriter.transformType(ret.type, ret.callback)}`;
 
         luaDocComment += ` # ${description}\n`;
       });

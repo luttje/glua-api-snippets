@@ -6,7 +6,7 @@ import { apiDefinition as structApiDefinition, markup as structMarkup, json as s
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
-import { Enum, LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { Enum, LibraryFunction, PanelFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -107,12 +107,12 @@ describe('GLua API Writer', () => {
       url: 'na',
       arguments: [
         {
-          args: [ {
+          args: [{
             name: 'intensity',
             type: 'number',
             description: 'The intensity of the explosion.',
             default: '1000',
-          } ]
+          }]
         }
       ],
       returns: [
@@ -395,6 +395,28 @@ describe('GLua API Writer', () => {
     });
 
     expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear.\n---\n---[View wiki](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
+  });
+
+  it('should support Panel type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<PanelFunction>{
+      name: 'GetVBar',
+      address: 'DScrollPanel.GetVBar',
+      parent: 'DScrollPanel',
+      isPanelFunction: 'yes',
+      description: 'Returns the vertical scroll bar of the panel.',
+      realm: 'client',
+      type: 'panelfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'Panel{DVScrollBar}',
+          description: 'The DVScrollBar.',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the vertical scroll bar of the panel.\n---\n---[View wiki](na)\n---@return DVScrollBar # The DVScrollBar.\nfunction DScrollPanel:GetVBar() end\n\n`);
   });
 
   // number{ENUM_NAME} -> ENUM_NAME
