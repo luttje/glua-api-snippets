@@ -4,7 +4,6 @@ import path from 'path';
 import fs from 'fs';
 
 export default function plugin(writer: GluaApiWriter, func: Function) {
-  // let hookAnnotations = '---@overload fun(eventName: "Move", identifier: any, func: fun(ply: Player, mv: CMoveData): boolean?)\n';
   let hookAnnotations = '';
 
   // Iterate writer.outputDirectory to find all hooks in gm/ that have type "hook"
@@ -45,7 +44,7 @@ export default function plugin(writer: GluaApiWriter, func: Function) {
     if (fileJson.returns) {
       for (const ret of fileJson.returns) {
         const retType = GluaApiWriter.transformType(ret.type);
-        returns += `${retType}, `;
+        returns += `${retType}?, `;
       }
 
       // Remove the last comma and space
@@ -53,7 +52,7 @@ export default function plugin(writer: GluaApiWriter, func: Function) {
 
       if (returns !== '') {
         // We force the return type to be optional, since hooks should only return a value if they want to
-        returns = `:(${returns}?)`;
+        returns = `:(${returns})`;
       }
     }
 
