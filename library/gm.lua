@@ -1019,6 +1019,9 @@ function GM:OnPermissionsChanged() end
 ---@param physobj PhysObj Physics object of the entity.
 ---@param ent Entity The target entity.
 ---@param ply Player The player who tried to freeze the entity.
+---@return boolean # Return `false` to block the unfreeze.
+---
+--- The unfreezing is handled by the base gamemode hook. This hook has no return value, returning any value will prevent the gamemode hook from running, which is true for every hook.
 function GM:OnPhysgunFreeze(weapon, physobj, ent, ply) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to when a player has successfully picked up an entity with their Physics Gun.

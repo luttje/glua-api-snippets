@@ -3,7 +3,7 @@
 --- GWEN is a system that allows you to load a spritesheet and generate a skin out of it.
 GWEN = {}
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in derma skins to create a bordered rectangle drawing function from an image.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) This is a utility function that generates a specialized drawing function to render scalable textured borders. This is done with [9-slice scaling](https://en.wikipedia.org/wiki/9-slice_scaling). This is used in derma skins to create a bordered rectangle drawing function from an image.
 ---
 --- The texture is taken from `SKIN.GwenTexture` when the `material` argument is not supplied.
 ---
@@ -27,7 +27,7 @@ GWEN = {}
 --- * table `clr` - Optional color, default is white. Uses the Color.
 function GWEN.CreateTextureBorder(x, y, w, h, left, top, right, bottom, material) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in derma skins to create a rectangle drawing function from an image. The rectangle will not be scaled, but instead it will be drawn in the center of the box.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in derma skins to create a fixed scale rectangle drawing function from an image. it will be drawn in the center of the box.
 ---
 --- The texture is taken from `SKIN.GwenTexture` when the `material` is not supplied.
 ---
@@ -47,7 +47,7 @@ function GWEN.CreateTextureBorder(x, y, w, h, left, top, right, bottom, material
 --- * table `clr` - Optional color, default is white. Uses the Color.
 function GWEN.CreateTextureCentered(x, y, w, h, material) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in derma skins to create a rectangle drawing function from an image. The texture of the rectangle will be scaled.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Helper function that returns a specialized drawing function for rendering a texture that scales freely to fit the given area.
 ---
 --- The texture is taken from `SKIN.GwenTexture` when the `material` is not supplied.
 ---
@@ -67,7 +67,7 @@ function GWEN.CreateTextureCentered(x, y, w, h, material) end
 --- * table `clr` - Optional color, default is white. Uses the Color.
 function GWEN.CreateTextureNormal(x, y, w, h, material) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) When used in a material skin, it returns a color value from a point in the skin image.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves the color from a materials texture at the provided UV coordinates
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GWEN.TextureColor)
 ---@param x number X position of the pixel to get the color from.

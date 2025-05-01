@@ -195,7 +195,7 @@ function CTakeDamageInfo:SetDamageCustom(DamageType) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the directional force of the damage.
 --- **NOTE**: This function only affects entities using the VPHYSICS movetype. This means players and most NPCs won't receive the force vector you provide as knockback.
 ---
---- If the entity taking damage is using the WALK or STEP holdtypes, the damage force is instead automatically calculated. It will push the entity away from the inflictor's [Entity:WorldSpaceCenter](https://wiki.facepunch.com/gmod/Entity:WorldSpaceCenter), scaling the push by a calculated value involving the total amount of damage and the size of the entity. [Source](https://github.com/ValveSoftware/source-sdk-2013/blob/0565403b153dfcde602f6f58d8f4d13483696a13/src/game/server/baseentity.cpp#L1525)
+--- If the entity taking damage is using the WALK or STEP movetypes, the damage force is instead automatically calculated. It will push the entity away from the inflictor's [Entity:WorldSpaceCenter](https://wiki.facepunch.com/gmod/Entity:WorldSpaceCenter), scaling the push by a calculated value involving the total amount of damage and the size of the entity. [Source](https://github.com/ValveSoftware/source-sdk-2013/blob/0565403b153dfcde602f6f58d8f4d13483696a13/src/game/server/baseentity.cpp#L1525)
 ---
 --- To disable knockback entirely, see [EFL_NO_DAMAGE_FORCES](https://wiki.facepunch.com/gmod/Enums/EFL#EFL_NO_DAMAGE_FORCES) or use the workaround example below.
 ---

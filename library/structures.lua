@@ -212,6 +212,23 @@ BodyGroupData.num = nil
 ---@type table
 BodyGroupData.submodels = nil
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing a single bone's orientation when its mesh is in its baseline (or "bind") pose before any animation is played.
+---
+--- This structure does not contain the bone ID for the bone it represents and instead relies on the structure's index within the [table](https://wiki.facepunch.com/gmod/table) returned by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) to identify the bone it corresponds to.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneBindPose)
+---@class BoneBindPose
+local BoneBindPose = {}
+
+---The bone ID of this bone's parent bone.
+---@type number
+BoneBindPose.parent = nil
+
+---A VMatrix containing this bone's position and rotation in local space relative to the model's origin.
+---@type VMatrix
+BoneBindPose.matrix = nil
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Structure used for storing/restoring bone manipulations.
 --- Data is stored from [Entity:GetManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneScale), [Entity:GetManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:GetManipulateBoneAngles), and [Entity:GetManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:GetManipulateBonePosition).
 --- Data is restored using [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale), [Entity:ManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles), and [Entity:ManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:ManipulateBonePosition).
@@ -237,6 +254,27 @@ BoneManipulationData.a = nil
 ---The entity's position manipulation of the given bone
 ---@type Vector
 BoneManipulationData.p = Vectornil
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing the amount that a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) should affect its vertex.
+---
+--- A single vertex may have multiple BoneWeight structures affecting it, but each BoneWeight structure belongs to only one vertex.
+---
+--- Added to the [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex) by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
+---
+--- To find a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix), see [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix)
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneWeight)
+---@class BoneWeight
+local BoneWeight = {}
+
+---The ID of the bone affecting the vertex.
+---@type number
+BoneWeight.bone = nil
+
+---A percentage between `0` and `1` indicating how much influence this bone's VMatrix should have on the the vertex.
+---@type number
+BoneWeight.weight = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Tables used for bullets see [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets) and [GM:EntityFireBullets](https://wiki.facepunch.com/gmod/GM:EntityFireBullets).
 
@@ -1354,52 +1392,90 @@ MatProxyData.init = nil
 ---@type fun(self: table, name: string, ent: Entity)
 MatProxyData.bind = nil
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure representing a mesh vertex used by various functions, such as [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles) and [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh) and returned by functions such as [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) and  [PhysObj:GetMesh](https://wiki.facepunch.com/gmod/PhysObj:GetMesh).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing the data stored by a single vertex of a mesh.
+---
+--- MeshVertex structures are usually grouped together in sets of 3 to define the corners of a triangle.
+---
+--- **NOTE**: Not all MeshVertex will contain all fields and not all fields are used by all shaders
+---
+--- Information on the fields used by most Source Engine shaders (Like `VertexLitGeneric`, `UnlitGeneric`, etc.) can be found [on the Valve Developer Wiki here.](https://developer.valvesoftware.com/wiki/Category:Shaders)
+---
+--- Returned by:
+--- * [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
+--- * [PhysObj:GetMesh](https://wiki.facepunch.com/gmod/PhysObj:GetMesh)
+---
+--- Used by:
+--- * [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles)
+--- * [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh)
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/MeshVertex)
 ---@class MeshVertex
 local MeshVertex = {}
 
----The vertex color. Uses the Color.
----@type table
+---The Color that the area around this corner of a triangle should be tinted.
+---@type Color
 MeshVertex.color = nil
 
----The triangles normal required to calculate lighting (Optional).
+---A normalized Vector representing a direction facing away from (perpendicular to) the surface of the triangle that this vertex is a part of.
+---
+--- Many shaders use this to calculate lighting.
 ---@type Vector
 MeshVertex.normal = nil
 
----The triangles tangent. Not used by the `VertexLitGeneric` shader.
+---A normalized Vector representing a direction facing along (parallel with) the surface of the triangle that this vertex is a part of.
 ---@type Vector
 MeshVertex.tangent = nil
 
----The triangles binormal. Not used by the `VertexLitGeneric` shader.
+---A normalized Vector representing a direction facing away from (perpendicular to) both the vertex's normal and tangent directions.
+---
+--- This is the result of a Vector:Cross between the vertex's normal and tangent directions.
 ---@type Vector
 MeshVertex.binormal = nil
 
----The vertex position.
+---The position of the vertex in local space.
 ---@type Vector
 MeshVertex.pos = nil
 
----The U texture coordinate.
+---The horizontal coordinate of a position on the texture of the triangle that this vertex is a part of.
+--- This controls which part of the texture is drawn at this vertex.
+---
+--- In the range `0` (the texture's left edge) to `1` (the texture's right edge)
 ---@type number
 MeshVertex.u = nil
 
----The V texture coordinate.
+---The vertical coordinate of a position on the texture of the triangle that this vertex is a part of.
+--- This controls which part of the texture is drawn at this vertex.
+---
+--- In the range `0` (the texture's top edge) to `1` (the texture's bottom edge)
 ---@type number
 MeshVertex.v = nil
 
----The secondary U texture coordinate. Only works when passed to IMesh:BuildFromTriangles, Useful for `LightmappedGeneric` shader.
+---A secondary U texture coordinate used by some shaders like `LightmappedGeneric`.
+---
+--- Currently used exclusively by IMesh:BuildFromTriangles.
 ---@type number
 MeshVertex.u1 = nil
 
----The secondary V texture coordinate. Only works when passed to IMesh:BuildFromTriangles.
+---A secondary V texture coordinate used by some shaders like `LightmappedGeneric`.
+---
+--- Currently used exclusively by IMesh:BuildFromTriangles.
 ---@type number
 MeshVertex.v1 = nil
 
----A table of four numbers. This is used by most shaders in Source to hold tangent information of the vertex ( tangentX, tangentY, tangentZ, tangentHandedness ).
+---A sequential table of four numbers whose purpose and expected values are determined by the shader.
+---
+--- Many Source Engine shaders to hold tangent information of the vertex in the order `tangentX`, `tangentY`, `tangentZ`, `tangentHandedness`.
 ---@type table
 MeshVertex.userdata = nil
+
+---A sequential table of all the Structures/BoneWeight that affect this vertex.
+---
+--- The total sum of their `weight` values should be `1`
+---
+--- Current added exclusively by util.GetModelMeshes
+---@type table
+MeshVertex.weights = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table returned by [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
 
@@ -1521,6 +1597,34 @@ ModelInfo.Materials = nil
 ---A list of folders the game will look in for the **Materials**.
 ---@type string[]
 ModelInfo.MaterialDirectories = nil
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure containing the information required to create a mesh.
+---
+--- Returned by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/ModelMeshData)
+---@class ModelMeshData
+local ModelMeshData = {}
+
+---The name or path of this mesh's material.
+---@type string
+ModelMeshData.material = nil
+
+---A sequential table of Structures/MeshVertex that represents the triangles of this mesh.
+---
+--- These triangles are created from the contents of the `verticies` field.
+---
+--- This can be used as an input to IMesh:BuildFromTriangles
+---@type table
+ModelMeshData.triangles = nil
+
+---A sequential table of Structures/MeshVertex that represents each vertex of the mesh.
+---
+---
+--- This field has a typo in its name and should be named "vertices"
+---@type table
+ModelMeshData.verticies = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Information about the NPC data structure, used to define spawnable NPCs for the Sandbox gamemode.
 ---

@@ -257,26 +257,24 @@ function util.GetAnimEventNameByID(id) end
 ---@return ModelInfo # The model info. See Structures/ModelInfo for details.
 function util.GetModelInfo(mdl) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of visual meshes of given model.
---- **NOTE**: This does not work on brush models (`*number` models)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves vertex, triangle, and bone data for the visual meshes of a given model.
 ---
---- See also [ENTITY:GetRenderMesh](https://wiki.facepunch.com/gmod/ENTITY:GetRenderMesh).
+--- **NOTE**: This does not work on brush models (Models with names in the format `*number`)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
----@param model string The full path to a model to get the visual meshes of.
----@param lod? number Which LOD to retrieve. 0 is the best quality, increasing the number lowers the model quaility.
----@param bodygroupMask? number Bodygroup combination for the model. This can be in format of `"000000"` where each number represents a bodygroup option.
----@return table # A table of tables with the following format:
---- * string material - The material of the specific mesh
---- * table triangles - A table of Structures/MeshVertexes ready to be fed into IMesh:BuildFromTriangles
---- * table verticies - A table of Structures/MeshVertexes representing all the vertices of the mesh. This table is used internally to generate the "triangles" table.
+---@param model string The full path to the model to get the visual meshes of.
+---@param lod? number Which of the model's Level of Detail (LOD) models to retrieve.
 ---
---- Each Structures/MeshVertex returned also has an extra table of tables field called "weights" with the following data:
---- * number bone - The bone this vertex is attached to
---- * number weight - How "strong" this vertex is attached to the bone. A vertex can be attached to multiple bones at once.
----@return table # A table of tables containing the model bind pose (where the keys are the bone ID) with the following contents:
---- * number parent - The ID of the parent bone.
---- * VMatrix matrix - The bone's bind transform in model (not bone) space.
+--- `0` is the best quality with higher numbers progressively lowering the quality.
+---@param bodygroupMask? number The combination of bodygroups to retrieve meshes for.
+---
+--- For more information, see Entity:SetBodyGroups
+---@return table # A sequential table of Structures/ModelMeshData
+---
+--- Each index in this table corresponds to a mesh within the model passed as an argument to this function.
+---@return table # A sequential table of Structures/BoneBindPose
+---
+--- This tables indices are bone IDs for the Structures/BoneBindPose stored at each index.
 function util.GetModelMeshes(model, lod, bodygroupMask) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets persistent data of an offline player using their SteamID.

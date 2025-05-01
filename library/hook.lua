@@ -128,7 +128,7 @@ hook = {}
 ---@overload fun(eventName: "OnPauseMenuBlockedTooManyTimes", identifier: any, func: fun())
 ---@overload fun(eventName: "OnPauseMenuShow", identifier: any, func: fun():(boolean?))
 ---@overload fun(eventName: "OnPermissionsChanged", identifier: any, func: fun())
----@overload fun(eventName: "OnPhysgunFreeze", identifier: any, func: fun(weapon: Entity, physobj: PhysObj, ent: Entity, ply: Player))
+---@overload fun(eventName: "OnPhysgunFreeze", identifier: any, func: fun(weapon: Entity, physobj: PhysObj, ent: Entity, ply: Player):(boolean?))
 ---@overload fun(eventName: "OnPhysgunPickup", identifier: any, func: fun(ply: Player, ent: Entity))
 ---@overload fun(eventName: "OnPhysgunReload", identifier: any, func: fun(physgun: Weapon, ply: Player):(boolean?))
 ---@overload fun(eventName: "OnPlayerChangedTeam", identifier: any, func: fun(ply: Player, oldTeam: number, newTeam: number))

@@ -71,18 +71,18 @@ function derma.RefreshSkins() end
 ---@return number # Amount of times derma.RefreshSkins has been called.
 function derma.SkinChangeIndex() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Calls the specified hook for the given panel
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Checks if a matching hook function exists in the skin _(based on the concatenation of type and name args)_, Then calls it.
+---
+--- This function is used dynamically inside [Global.Derma_Hook](https://wiki.facepunch.com/gmod/Global.Derma_Hook)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/derma.SkinHook)
----@param type string The type of hook to run
----@param name string The name of the hook to run
+---@param type string The type of hook to run, usually `Paint`.
+---@param name string The name of the hook/panel to run. Example: `Button`.
 ---@param panel Panel The panel to call the hook for
 ---@param vararg1? any First parameter for the panel hook. i.e. width of the panel for PANEL:Paint hooks.
 ---@param vararg2? any Second parameter for the panel hook. i.e. height of the panel for PANEL:Paint hooks.
----@param vararg3? any Third parameter for the panel hook.
----@param vararg4? any Fourth parameter for the panel hook.
 ---@return any # The returned variable from the skin hook
-function derma.SkinHook(type, name, panel, vararg1, vararg2, vararg3, vararg4) end
+function derma.SkinHook(type, name, panel, vararg1, vararg2) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns a function to draw a specified texture of panels skin.
 ---

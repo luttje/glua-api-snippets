@@ -206,6 +206,7 @@ function game.GetMapVersion() end
 function game.GetSkillLevel() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the time scale set with [game.SetTimeScale](https://wiki.facepunch.com/gmod/game.SetTimeScale).
+---
 --- If you want to get the value of `host_timescale` use
 --- ```lua
 --- local timescale = GetConVar( "host_timescale" ):GetFloat()

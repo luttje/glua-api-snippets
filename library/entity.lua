@@ -278,6 +278,8 @@ function Entity:CallDTVarProxies(type, slot, newValue) end
 ---
 --- **WARNING**: This hook is called clientside during full updates. See [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) for more information.
 ---
+--- **WARNING**: An error being thrown inside `removeFunc` is likely break [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator) and [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) functions.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:CallOnRemove)
 ---@param identifier string Identifier that can be optionally used with Entity:RemoveCallOnRemove to undo this call on remove.
 ---@param removeFunc fun(ent: Entity, ...: any) Function to be called on remove.
@@ -865,7 +867,7 @@ function Entity:GetBaseVelocity() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the blood color of this entity. This can be set with [Entity:SetBloodColor](https://wiki.facepunch.com/gmod/Entity:SetBloodColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBloodColor)
----@return BLOOD_COLOR # Color from Enums/BLOOD_COLOR
+---@return BLOOD_COLOR # Color from Enums/BLOOD_COLOR or nil
 function Entity:GetBloodColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the currently active [Sub Model](https://wiki.facepunch.com/gmod/Entity:GetSubModels) of the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id).
@@ -3073,7 +3075,7 @@ function Entity:ManipulateBoneAngles(boneID, ang, networking) end
 ---@param type number The jiggle bone type. There are currently the following options:
 --- * `0` = No jiggle override, use model default
 --- * `1` = Force jiggle, with hardcoded settings
---- * `2` = Force disable jiggle bone (currently also broken, but will be fixed in the next update)
+--- * `2` = Force disable jiggle bone
 function Entity:ManipulateBoneJiggle(boneID, type) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets custom bone offsets.
@@ -3151,7 +3153,10 @@ function Entity:NearestPoint(position) end
 ---@param extended? table A table of extended information.
 ---
 --- `KeyName`
---- * Allows the NetworkVar to be set using Entity:SetKeyValue. This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
+--- * Allows the NetworkVar to be set using Entity:SetKeyValue.
+--- * This is **required** for the entity editing to work.
+---
+--- This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
 ---
 --- `Edit`
 --- * The edit key lets you mark this variable as editable. See Editable Entities for more information.
@@ -3182,7 +3187,10 @@ function Entity:NetworkVar(type, slot, name, extended) end
 ---@param extended? table A table of extended information.
 ---
 --- `KeyName`
---- * Allows the NetworkVar to be set using Entity:SetKeyValue. This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
+--- * Allows the NetworkVar to be set using Entity:SetKeyValue.
+--- * This is **required** for the entity editing to work.
+---
+--- This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
 ---
 --- `Edit`
 --- * The edit key lets you mark this variable as editable. See Editable Entities for more information.
@@ -5025,7 +5033,7 @@ function Entity:SetNW2Int(key, value) end
 --- the value will only be networked once and not every 10 seconds.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetNW2String)
----@param key string The key to associate the value with
+---@param key string The key to associate the value with, up to 1023 characters
 ---@param value string The value to set, up to 511 characters.
 function Entity:SetNW2String(key, value) end
 

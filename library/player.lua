@@ -1203,7 +1203,7 @@ function Player:IsFullyAuthenticated() end
 --- This will always be `true` in single player, and `false` on a dedicated server.
 function Player:IsListenServerHost() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether or not the player is muted locally.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether or not the player is voice muted locally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:IsMuted)
 ---@return boolean # whether or not the player is muted locally.
@@ -1838,7 +1838,7 @@ function Player:SetMaxSpeed(walkSpeed) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER:SetModel)
 function PLAYER:SetModel() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets if the player should be muted locally.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets if the player should be voicechat muted locally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetMuted)
 ---@param mute boolean Mute or unmute.

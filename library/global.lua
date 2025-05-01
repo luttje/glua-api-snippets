@@ -937,7 +937,7 @@ function _G.Error(...) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Throws a Lua error and breaks out of the current call stack.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.error(lowercase))
----@param message string The error message to throw
+---@param message string The error message to throw.
 ---@param errorLevel? number The level to throw the error at.
 function _G.error(message, errorLevel) end
 

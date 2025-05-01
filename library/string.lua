@@ -155,7 +155,7 @@ function string.FormattedTime(float, format) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a string from a Color variable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.FromColor)
----@param color table The color to put in the string.
+---@param color table The Color to put in the string.
 ---@return string # Output
 function string.FromColor(color) end
 
