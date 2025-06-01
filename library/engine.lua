@@ -74,7 +74,7 @@ function engine.GetGamemodes() end
 ---@return table # A table of tables containing all mountable games
 function engine.GetGames() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the UGC (demos, saves and dupes) the player have subscribed to on the workshop.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the UGC (demos, saves and dupes) the player have subscribed to on the workshop.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/engine.GetUserContent)
 ---@return table # Returns a table with 5 keys (title, type, tags, wsid, timeadded)

@@ -1152,11 +1152,14 @@ function render.SetStencilWriteMask(bitMask) end
 ---@param zFailOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
 function render.SetStencilZFailOperation(zFailOperation) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the tone mapping scale for upcoming rendering operations.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetToneMappingScaleLinear)
----@param vec Vector
-function render.SetToneMappingScaleLinear(vec) end
+---@param scales Vector The tonemapping scales.
+--- * X - Output scale
+--- * Y - Lightmap scale
+--- * Z - Reflection map scale
+function render.SetToneMappingScaleLinear(scales) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Changes the view port position and size. The values will be clamped to the game's screen resolution.
 ---

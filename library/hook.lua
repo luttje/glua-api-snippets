@@ -114,6 +114,7 @@ hook = {}
 ---@overload fun(eventName: "OnAchievementAchieved", identifier: any, func: fun(ply: Player, achievement: number))
 ---@overload fun(eventName: "OnChatTab", identifier: any, func: fun(text: string):(string?))
 ---@overload fun(eventName: "OnCleanup", identifier: any, func: fun(name: string):(boolean?))
+---@overload fun(eventName: "OnClientLuaError", identifier: any, func: fun(error: string, ply: Player, stack: table, name: string))
 ---@overload fun(eventName: "OnCloseCaptionEmit", identifier: any, func: fun(soundScript: string, duration: number, fromPlayer: boolean, fullText: string):(boolean?))
 ---@overload fun(eventName: "OnContextMenuClose", identifier: any, func: fun())
 ---@overload fun(eventName: "OnContextMenuOpen", identifier: any, func: fun())

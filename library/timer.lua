@@ -69,7 +69,6 @@ function timer.Pause(identifier) end
 function timer.Remove(identifier) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns amount of repetitions/executions left before the timer destroys itself.
---- **NOTE**: The last execution of the timer returns 1, not 0.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.RepsLeft)
 ---@param identifier any Identifier of the timer.

@@ -55,7 +55,7 @@ function serverlist.PlayerList(ip, callback) end
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Queries the master server for server list.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/serverlist.Query)
----@param data table The information about what kind of servers we want. See Structures/ServerQueryData.
+---@param data table The information about what kind of servers we want. See Structures/ServerQueryData
 function serverlist.Query(data) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Removes the given server address from their favorites.

@@ -111,7 +111,7 @@ function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlin
 ---@return number # Height of drawn text
 function draw.Text(textdata) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Works like [draw.Text](https://wiki.facepunch.com/gmod/draw.Text), but draws the text as a shadow.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Works like [draw.Text](https://wiki.facepunch.com/gmod/draw.Text), but draws the text with a shadow.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/draw.TextShadow)
 ---@param textdata table The text properties. See Structures/TextData

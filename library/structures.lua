@@ -3389,6 +3389,17 @@ UGCFileInfo.total = nil
 ---@type number
 UGCFileInfo.score = nil
 
+---A list of Steam content descriptiors for this Steam Workshop item.
+---
+--- Possible values are:
+--- * `general_mature`
+--- * `gore`
+--- * `suggestive`
+--- * `nudity`
+--- * `adult_only`
+---@type string[]
+UGCFileInfo.content_descriptors = nil
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table structure used by [undo.Do_Undo](https://wiki.facepunch.com/gmod/undo.Do_Undo) and [GM:CanUndo](https://wiki.facepunch.com/gmod/GM:CanUndo).
 
 ---

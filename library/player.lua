@@ -1381,8 +1381,10 @@ function PLAYER:Loadout() end
 ---
 --- Unlike [Entity:EyeAngles](https://wiki.facepunch.com/gmod/Entity:EyeAngles), this function does not include angles of the Player's [Entity:GetParent](https://wiki.facepunch.com/gmod/Entity:GetParent).
 ---
+--- Does not work correctly clientside for non local players when in a vehicle. (validate: when parented in general?)
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:LocalEyeAngles)
----@return Angle # local eye angles
+---@return Angle # The local eye angles.
 function Player:LocalEyeAngles() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stops a player from using any inputs, such as moving, turning, or attacking. Key binds are still called. Similar to [Player:Freeze](https://wiki.facepunch.com/gmod/Player:Freeze) but the player takes no damage.
@@ -1446,11 +1448,11 @@ function Player:PacketLoss() end
 ---@return number # Number of props unfrozen.
 function Player:PhysgunUnfreeze() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) This makes the player hold ( same as pressing E on a small prop ) the provided entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) This makes the player hold (same as pressing E on a small prop) given entity.
 ---
---- **NOTE**: Don't get this confused with picking up items like ammo or health kits
+--- Not to be confused with picking up items like ammo or health kits.
 ---
---- **NOTE**: This picks up the passed entity regardless of its mass or distance from the player
+--- This picks up the passed entity regardless of its mass or distance from the player.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:PickupObject)
 ---@param entity Entity Entity to pick up.
@@ -2318,7 +2320,7 @@ function Player:ViewPunch(punchAngle) end
 ---@param tolerance? number Reset all ViewPunch below this threshold.
 function Player:ViewPunchReset(tolerance) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the players voice volume, how loud the player's voice communication currently is, as a normal number.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the players voice volume, how loud the player's voice communication currently is, as a number in range of [0,1].
 ---
 --- Doesn't work on local player unless the `voice_loopback` convar is set to `1`.
 ---

@@ -157,7 +157,7 @@ function math.CHSpline(frac, point0, tan0, point1, tan1) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.Clamp)
 ---@param input number The number to clamp.
----@param min number The minimum value, this function will **never** return a number less than this.
+---@param min number The minimum value.
 ---@param max number The maximum value, this function will **never** return a number greater than this.
 ---@return number # The clamped value.
 function math.Clamp(input, min, max) end

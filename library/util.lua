@@ -210,7 +210,7 @@ function util.FullPathToRelative_Menu(fullPath, fsPath) end
 ---@return number # The ID of the activity. See also Enums/ACT.
 function util.GetActivityIDByName(string) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a name for given activity ID. This is useful for models that define custom animation events.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a name for given activity ID. This is useful for models that define custom activities.
 ---
 --- See [util.GetActivityIDByName](https://wiki.facepunch.com/gmod/util.GetActivityIDByName) for a function that does the opposite.
 ---

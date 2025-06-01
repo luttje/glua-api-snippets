@@ -60,7 +60,7 @@ function sql.LastError() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sql.Query)
 ---@param query string The query to execute.
----@return table # false is returned if there is an error, nil if the query returned no data.
+---@return table|boolean|nil # `false` is returned if there is an error, `nil` if the query returned no data.
 function sql.Query(query) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs the [sql.Query](https://wiki.facepunch.com/gmod/sql.Query) and returns the n'th row.

@@ -44,6 +44,8 @@ function table.concat(tbl, concatenator, startPos, endPos) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a deep copy and returns that copy.
 ---
+--- **WARNING**: This function is very slow! If you know the table structure, it is better to write your own copying mechanism
+---
 --- **WARNING**: This function does NOT copy userdata, such as [Vector](https://wiki.facepunch.com/gmod/Vector)s and [Angle](https://wiki.facepunch.com/gmod/Angle)s!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.Copy)

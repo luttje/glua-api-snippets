@@ -890,6 +890,16 @@ function GM:OnChatTab(text) end
 ---@return boolean # Return false to suppress the cleanup notification.
 function GM:OnCleanup(name) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a Lua error occurs on a client.
+--- This hook allows server-side code to detect and respond to client-side errors.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/GM:OnClientLuaError)
+---@param error string The error that occurred.
+---@param ply Player The player whose client caused the error.
+---@param stack table The Lua error stack trace
+---@param name string Title of the addon that is creating the Lua errors, or "ERROR" if addon is not found.
+function GM:OnClientLuaError(error, ply, stack, name) end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when a caption/subtitle has been emitted to the closed caption box.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnCloseCaptionEmit)
@@ -932,7 +942,7 @@ function GM:OnDamagedByExplosion(ply, dmginfo) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called as soon as the entity is created. Very little of the entity's properties will be initialized at this stage. (keyvalues, classname, flags, anything), especially on the serverside.
 ---
---- **NOTE**: Some entities on initial map spawn are passed through this hook, and then removed in the same frame. This is used by the engine to precache things like models and sounds, so always check their validity with [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid).
+--- **NOTE**: Some entities on initial map spawn are passed through this hook, and then removed in the same frame. This is used by the engine to precache things like models and sounds, so always check their validity with [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid). Will not require [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) check if you create your hook after [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity).
 ---
 --- **WARNING**: Removing the created entity during this event can lead to unexpected problems. Use [timer.Simple](https://wiki.facepunch.com/gmod/timer.Simple)( 0, .... ) to safely remove the entity.
 ---

@@ -835,17 +835,17 @@ function Entity:GetAnimTimeInterval() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetAttachment)
 ---@param attachmentId number The internal ID of the attachment.
----@return table # The angle and position of the attachment. See the Structures/AngPos. Most notably, the table contains the keys `Ang` and `Pos` as well as `Bone`.
+---@return AngPos # The table with angle and position of the attachment or `nil` if does not exist. See the Structures/AngPos. Most notably, the table contains the keys `Ang` and `Pos` as well as `Bone`.
 function Entity:GetAttachment(attachmentId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table containing all attachments of the given entity's model.
----
---- Returns an empty table or **nil** in case its model has no attachments.
 ---
 --- This can have inconsistent results in single-player.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetAttachments)
 ---@return table # Attachment data. See Structures/AttachmentData.
+---
+--- Returns an empty table in case its model has no attachments or there's a some kind of other issue.
 function Entity:GetAttachments() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to determine how good an NPC is at using a particular weapon.
@@ -953,8 +953,7 @@ function Entity:GetBoneMatrix(boneID) end
 ---@param index number ID of bone to lookup name of, starting at index 0.
 ---@return string # The name of given bone.
 ---
---- * `nil` in case we failed or entity doesn't have a model.
---- * `__INVALIDBONE__` in case the name cannot be read or the index is out of range.
+--- * `"__INVALIDBONE__"` in case the name cannot be read or the index is out of range, or we failed or entity doesn't have a model.
 function Entity:GetBoneName(index) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns parent bone of given bone.
@@ -2138,7 +2137,7 @@ function Entity:GetPhysicsObjectCount() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObjectNum)
 ---@param physNum number The number corresponding to the PhysObj to grab. Starts at 0.
----@return PhysObj # The physics object
+---@return PhysObj # The physics object or nil if not found
 function Entity:GetPhysicsObjectNum(physNum) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the playback rate of the main sequence on this entity, with 1.0 being the default speed.
@@ -2631,12 +2630,12 @@ function ENTITY:GravGunPunt(ply) end
 --- **NOTE**: This hook only works on "anim", "ai" and "nextbot" type entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:HandleAnimEvent)
----@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
+---@param event number The ID of the event. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events) for a list of default events, and see util.GetAnimEventNameByID for a helper function in handing custom events.
 ---@param eventTime number The absolute time this event occurred using Global.CurTime.
 ---@param cycle number The frame this event occurred as a number between 0 and 1.
 ---@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/shared/eventlist.h#L14-L23).
 ---@param options string Name or options of this event.
----@return boolean # Return true to mark the event as handled
+---@return boolean # Return true to mark the event as handled.
 function ENTITY:HandleAnimEvent(event, eventTime, cycle, type, options) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether or not the bone manipulation functions have ever been called on given  entity.
@@ -2751,7 +2750,7 @@ function Entity:IsConstrained() end
 ---
 --- This also means that [Entity:GetConstrainedPhysObjects](https://wiki.facepunch.com/gmod/Entity:GetConstrainedPhysObjects). [Entity:GetConstrainedEntities](https://wiki.facepunch.com/gmod/Entity:GetConstrainedEntities) and  [Entity:SetPhysConstraintObjects](https://wiki.facepunch.com/gmod/Entity:SetPhysConstraintObjects) can be used on this entity.
 ---
---- **WARNING**: Some constraint entities, such as `phys_spring`, will return false!
+--- **WARNING**: For some constraint entities, such as `phys_spring`, `phys_slideconstraint`, `phys_torque` and `logic_collision_pair`, this function will return `false`!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsConstraint)
 ---@return boolean # Is the entity a constraint or not
@@ -3023,7 +3022,7 @@ function Entity:LookupAttachment(attachmentName) end
 --- * ValveBiped.Bip01_R_Calf
 --- * ValveBiped.Bip01_R_Shoulder
 --- * ValveBiped.Bip01_R_Elbow
----@return number # Index of the given bone name, or `nil` if the bone doesn't exist on the Entity
+---@return number|nil # Index of the given bone name, or `nil` if the bone doesn't exist on the Entity
 function Entity:LookupBone(boneName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns pose parameter ID from its name.
@@ -3668,8 +3667,8 @@ function Entity:PhysicsInitStatic(solidType) end
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:PhysicsSimulate)
 ---@param phys PhysObj The physics object of the entity.
 ---@param deltaTime number Time since the last call.
----@return Vector # Angular force
----@return Vector # Linear force
+---@return Vector # Angular force. The 3rd argument must be above SIM_NOTHING.
+---@return Vector # Linear force. The 3rd argument must be above SIM_NOTHING.
 ---@return number # One of the Enums/SIM.
 function ENTITY:PhysicsSimulate(phys, deltaTime) end
 
@@ -4074,7 +4073,7 @@ function Entity:SetBodyGroups(subModelIds) end
 ---@param value number The value to set on the specified bone controller.
 function Entity:SetBoneController(boneControllerID, value) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the bone matrix of given bone to given matrix. See also [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the bone matrix of given bone to given matrix. See also [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix). Will cause a uncatchable error when used on `__INVALIDBONE__` bones. Can be caught with `if ent:GetBoneName(boneid) == "__INVALIDBONE__" then`
 ---
 --- **NOTE**: Despite existing serverside, it does nothing.
 ---
@@ -4143,7 +4142,7 @@ function Entity:SetColor4Part(r, g, b, a) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the creator of this entity. This is set automatically in Sandbox gamemode when spawning SENTs, but is never used/read by default.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetCreator)
----@param ply Player The creator
+---@param ply? Player The creator
 function Entity:SetCreator(ply) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Marks the entity to call [GM:ShouldCollide](https://wiki.facepunch.com/gmod/GM:ShouldCollide). Not to be confused with [Entity:EnableCustomCollisions](https://wiki.facepunch.com/gmod/Entity:EnableCustomCollisions).
@@ -6044,18 +6043,13 @@ function Entity:Visible(target) end
 function Entity:VisibleVec(pos) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns an integer that represents how deep in water the entity is.
---- 		**NOTE**: This function will currently work on players only due to the way it is implemented in the engine. If you need to check interaction with water for regular entities you better use [util.PointContents](https://wiki.facepunch.com/gmod/util.PointContents).
----
---- * **0** - The entity isn't in water.
----
---- * **1** - Slightly submerged (at least to the feet).
----
---- * **2** - The majority of the entity is submerged (at least to the waist).
----
---- * **3** - Completely submerged.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:WaterLevel)
 ---@return number # The water level.
+--- * **0** - The entity isn't in water.
+--- * **1** - Slightly submerged (at least to the feet).
+--- * **2** - The majority of the entity is submerged (at least to the waist).
+--- * **3** - Completely submerged.
 function Entity:WaterLevel() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the activity of the entity's active weapon.

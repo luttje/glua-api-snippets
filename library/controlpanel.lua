@@ -131,7 +131,7 @@ function ControlPanel:ClearControls() end
 ---@param convarR string Name of the convar that will store the R component of the selected color.
 ---@param convarG string Name of the convar that will store the G component of the selected color.
 ---@param convarB string Name of the convar that will store the B component of the selected color.
----@param convarA string Name of the convar that will store the A component of the selected color.
+---@param convarA? string Name of the convar that will store the A component of the selected color.
 ---@return Panel # The created CtrlColor panel.
 function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
 

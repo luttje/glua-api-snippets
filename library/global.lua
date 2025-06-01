@@ -1503,9 +1503,9 @@ function _G.GMOD_OpenURLNoOverlay(url) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HSLToColor)
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
----@param value number The lightness from 0-1.
+---@param lightness number The lightness from 0-1.
 ---@return table # The Color created from the HSL color space.
-function _G.HSLToColor(hue, saturation, value) end
+function _G.HSLToColor(hue, saturation, lightness) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
@@ -1678,6 +1678,12 @@ function _G.IsEnemyEntityName(className) end
 ---@return boolean # True if the variable is an Entity.
 function _G.isentity(variable) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.isentity](https://wiki.facepunch.com/gmod/Global.isentity).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Global.IsEntity(legacy))
+---@deprecated Use the function Global.isentity instead.
+function _G.IsEntity() end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if this is the first time this hook was predicted.
 ---
 --- This is useful for one-time logic in your SWEPs PrimaryAttack, SecondaryAttack and Reload and other  (to prevent those hooks from being called rapidly in succession). It's also useful in a Move hook for when the client predicts movement.
@@ -1820,6 +1826,8 @@ function _G.IsUselessModel(modelName) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether an object is valid or not. (Such as [entities](https://wiki.facepunch.com/gmod/Entity), [Panel](https://wiki.facepunch.com/gmod/Panel)s, custom [table](https://wiki.facepunch.com/gmod/table) objects and more).
 ---
 --- Checks that an object is not [nil](https://wiki.facepunch.com/gmod/nil), has an `IsValid` method and if this method returns `true`. If the object has no `IsValid` method, it will return `false`.
+---
+--- **NOTE**: If you are sure that the object you are about to check is not `nil` and has the `IsValid` method, it would be more faster to call it directly rather than using `IsValid`.
 ---
 --- **NOTE**: Due to vehicles being technically valid the moment they're spawned, also use [Vehicle:IsValidVehicle](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle) to make sure they're fully initialized.
 ---
@@ -3239,6 +3247,7 @@ function _G.VectorRand(min, max) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.VGUIFrameTime)
+---@deprecated Use the function Global.SysTime instead.
 function _G.VGUIFrameTime() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates and returns a [DShape](https://wiki.facepunch.com/gmod/DShape) rectangle GUI element with the given dimensions.

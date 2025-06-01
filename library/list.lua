@@ -1,6 +1,10 @@
 ---@meta
 
---- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. See [Default Lists](https://wiki.facepunch.com/gmod/Default_Lists) for a page of default Sandbox lists.
+--- The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality.
+---
+--- It is used extensively in the built-in Sandbox gamemode for addon-extensible lists of things (list of wheel models, list of thruster effects, etc) , without using global tables for this task.
+---
+--- See [Default Lists](https://wiki.facepunch.com/gmod/Default_Lists) for a page of default Sandbox lists.
 list = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Adds an item to a named list
@@ -22,11 +26,27 @@ function list.Add(identifier, item) end
 function list.Contains(list, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a copy of the list stored at identifier
+--- 	**WARNING**: This function uses [table.Copy](https://wiki.facepunch.com/gmod/table.Copy) which can be very slow for larger lists. You should avoid calling it repeatedly or in performance sensitive hooks such as [GM:Think](https://wiki.facepunch.com/gmod/GM:Think).
+---
+--- 	Where possible you should use the much faster helper functions:
+--- 	  [list.Contains](https://wiki.facepunch.com/gmod/list.Contains),
+--- 	  [list.HasEntry](https://wiki.facepunch.com/gmod/list.HasEntry), or
+--- 	  [list.GetEntry](https://wiki.facepunch.com/gmod/list.GetEntry)
+---
+--- 	There is also the more dangerous option of calling [list.GetForEdit](https://wiki.facepunch.com/gmod/list.GetForEdit) to get the unprotected list if you absolutely must iterate through it in a think hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/list.Get)
 ---@param identifier string The list identifier
 ---@return table # The copy of the list
 function list.Get(identifier) end
+
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a copy of the entry in the list `list` with key `key`.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/list.GetEntry)
+---@param list string List to search through
+---@param key string The key to search for
+---@return any|nil # Returns the  value if the list contains the key, nil otherwise
+function list.GetEntry(list, key) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the actual table of the list stored at identifier. Modifying this will affect the stored list
 ---

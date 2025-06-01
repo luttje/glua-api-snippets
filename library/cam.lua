@@ -116,11 +116,13 @@ function cam.Start3D(pos, angles, fov, x, y, w, h, zNear, zFar) end
 --- Matrix formula:
 --- ```
 --- local m = Matrix()
---- m:SetAngles(angles)
---- m:SetTranslation(pos)
---- m:SetScale(Vector(scale, -scale, 1))
+--- m:SetAngles( angles )
+--- m:SetTranslation( pos )
+--- m:SetScale( Vector( scale, -scale, 1 ) )
 --- ```
 --- **WARNING**: This must be closed by [cam.End3D2D](https://wiki.facepunch.com/gmod/cam.End3D2D). If not done so, unexpected issues might arise.
+---
+--- [render.SetToneMappingScaleLinear](https://wiki.facepunch.com/gmod/render.SetToneMappingScaleLinear) may of use when dealing with bloom.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cam.Start3D2D)
 ---@param pos Vector Origin of the 3D2D context, ie. the top left corner, (0, 0).

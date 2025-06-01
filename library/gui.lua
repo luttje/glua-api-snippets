@@ -9,15 +9,17 @@ gui = {}
 function gui.ActivateGameUI() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Pushes text to the closed caption box.
---- **NOTE**: The function will not work, if the console command variable "closecaption" is set to 0.
+--- **NOTE**: The function will not work, if the console command variable `closecaption` is set to 0.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gui.AddCaption)
----@param text string The caption to emit. See [Closed Captions](https://developer.valvesoftware.com/wiki/Closed_Captions) for more info
+---@param captionStream string The caption to emit. See [Closed Captions](https://developer.valvesoftware.com/wiki/Closed_Captions) for more info.
+---
+--- Note the ability to add special commands to captions, such as `` to mark the caption as a sound effect caption, which would be hidden if `cc_subtitles` is set to 1. (To only show dialogue subtitles)
 ---@param duration number How long the caption should stay for
 ---@param fromPlayer? boolean Is this caption coming from the player?
 ---
---- This is used to give different colors to the caption to differentiate, for example, whether the SMG is fired by the player or NPC.
-function gui.AddCaption(text, duration, fromPlayer) end
+--- This is used to give different colors to the caption to differentiate, for example, whether the SMG is fired by the player or an NPC.
+function gui.AddCaption(captionStream, duration, fromPlayer) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enables the mouse cursor without restricting player movement, like using Sandbox's context menu. See [vgui.CursorVisible](https://wiki.facepunch.com/gmod/vgui.CursorVisible) for a function to see if the cursor is visible or not.
 ---

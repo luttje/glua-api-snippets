@@ -107,7 +107,7 @@ function CNavArea:Draw() end
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:DrawSpots)
 function CNavArea:DrawSpots() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a list of all the [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s that have a one-way connection **to** this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) and their pre-computed distances.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a list of all the [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)s that have a (one and two way) connection **from** this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) and their pre-computed distances.
 ---
 --- If an area has a one-way incoming connection to this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea), then it will **not** be returned from this function, use [CNavArea:GetIncomingConnectionDistances](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionDistances) to get all one-way incoming connections.
 ---
