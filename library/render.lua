@@ -852,6 +852,7 @@ function render.RenderHUD(x, y, w, h) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Renders the scene with the specified viewData to the current active render target.
 ---
 --- Static props and LODs are rendered improperly due to incorrectly perceived distance.
+--- Using render.RenderView on a RenderTarget texture in a 3d context like SWEP:PostDrawViewModel() while drawing the RenderTarget texture causes screen flickers
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.RenderView)
 ---@param view? table The view data to be used in the rendering. See Structures/ViewData. Any missing value is assumed to be that of the current view. Similarly, you can make a normal render by simply not passing this table at all.

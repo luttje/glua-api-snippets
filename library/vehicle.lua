@@ -202,10 +202,14 @@ function Vehicle:IsEngineEnabled() end
 ---@return boolean # Whether the engine is started or not.
 function Vehicle:IsEngineStarted() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns true if the vehicle object is a valid or not. This will return `false` when [Vehicle](https://wiki.facepunch.com/gmod/Vehicle) functions are not usable on the vehicle.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Determines whether a given [Vehicle](https://wiki.facepunch.com/gmod/Vehicle) is fully initialized.
+---
+--- It is possible, in uncommon circumstances, for a [valid](https://wiki.facepunch.com/gmod/Global.IsValid) [vehicle](https://wiki.facepunch.com/gmod/Entity:IsVehicle) entity to be in an invalid state, such as before [Entity:Spawn](https://wiki.facepunch.com/gmod/Entity:Spawn) is called on the vehicle after creation.
+---
+--- If this function returns `false`, then the [Vehicle](https://wiki.facepunch.com/gmod/Vehicle) functions are not usable on this vehicle, while [Entity](https://wiki.facepunch.com/gmod/Entity) functions are.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle)
----@return boolean # Is the vehicle a valid vehicle or not
+---@return boolean # `true` if the Vehicle is in a valid state, or `false` if the Vehicle is in an invalid state.
 function Vehicle:IsValidVehicle() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether this vehicle's engine is underwater or not. ( Internally the attachment point "engine" or "vehicle_engine" is checked )

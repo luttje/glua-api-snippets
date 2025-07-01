@@ -9,7 +9,7 @@ gui = {}
 function gui.ActivateGameUI() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Pushes text to the closed caption box.
---- **NOTE**: The function will not work, if the console command variable `closecaption` is set to 0.
+--- **WARNING**: The function will not work, if the console command variable `closecaption` is set to 0.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gui.AddCaption)
 ---@param captionStream string The caption to emit. See [Closed Captions](https://developer.valvesoftware.com/wiki/Closed_Captions) for more info.

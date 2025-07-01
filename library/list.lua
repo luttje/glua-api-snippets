@@ -72,6 +72,15 @@ function list.GetTable() end
 ---@return boolean # Returns true if the list contains the key, false otherwise
 function list.HasEntry(list, key) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes a single entry from the list `list` with key `key`.
+---
+--- This is equivalent to `list.Set( myList, myKey, nil )`.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/list.RemoveEntry)
+---@param list string List to remove an entry in.
+---@param key string The key for the entry to remove.
+function list.RemoveEntry(list, key) end
+
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets a specific position in the named list to a value.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/list.Set)

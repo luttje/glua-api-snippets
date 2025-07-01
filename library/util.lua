@@ -173,7 +173,7 @@ function util.DistanceToLine(lineStart, lineEnd, pointPos) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.Effect)
 ---@param effectName string The name of the effect to create.
 ---
---- You can find a list of Default_Effects. You can create your own, [example effects can be found here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/garrynewman/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
+--- You can find a list of Default_Effects. You can create your own, [example effects can be found here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
 ---@param effectData CEffectData The effect data describing the effect.
 ---@param allowOverride? boolean Whether Lua-defined effects should override engine-defined effects with the same name for this/single function call.
 ---@param ignorePredictionOrRecipientFilter? boolean|CRecipientFilter Can either be a boolean to ignore the prediction filter or a CRecipientFilter.

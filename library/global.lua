@@ -276,6 +276,16 @@ function _G.collectgarbage(action, arg) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a [Color](https://wiki.facepunch.com/gmod/Color).
 --- 	**WARNING**: This function is relatively expensive when used in rendering hooks or in operations requiring very frequent calls (like loops for example) due to object creation and garbage collection. It is better to store the color in a variable or to use the [default colors](https://wiki.facepunch.com/gmod/Global_Variables#misc) available.
 ---
+--- Here is a list of colors already cached by the game
+---
+--- Variable | Color (RGBA) |
+--- -----|------------|
+--- | color_white | Color(255, 255, 255, 255) |
+--- | color_black | Color(0, 0, 255, 255) |
+--- | color_transparent | Color(255, 255, 255, 0) |
+---
+--- 	**WARNING**: Under no circumstances should these variables be modified (by a Lerp or value modification). Some addons that use these values (e.g. color_white) will be affected by this change.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Color)
 ---@param r number An integer from `0-255` describing the red value of the color.
 ---@param g number An integer from `0-255` describing the green value of the color.
@@ -517,7 +527,9 @@ function _G.DamageInfo() end
 ---@param info string The debugging information to be written to the screen
 function _G.DebugInfo(slot, info) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) A preprocessor keyword that is directly replaced with the following text:
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Generates and provides a local variable `BaseClass` that can be used to call the original version of a class functions after modifying it.
+---
+--- This is a preprocessor keyword that is directly replaced with the following text:
 --- ```lua
 --- local BaseClass = baseclass.Get
 --- ```
@@ -1077,6 +1089,7 @@ function _G.gcinfo() end
 ---@param name string The Spawnmenu Category name
 ---@param icon? string The Spawnmenu Category Icon to use
 ---@param appid number The AppID which is needed for the Content
+---@deprecated This function is only available locally and cannot be used outside the gameprops.lua file.
 function _G.GenerateSpawnlistFromPath(folder, path, name, icon, appid) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns if the game was started with either -noaddons or -noworkshop
@@ -1347,6 +1360,8 @@ function _G.GetGlobalVector(Index, Default) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the name of the current server.
 ---
+--- **NOTE**: GetHostName returns information from [ConVar](https://wiki.facepunch.com/gmod/ConVars_In_Garrysmod#cvarlistdump) hostname
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetHostName)
 ---@return string # The name of the server.
 function _G.GetHostName() end
@@ -1598,8 +1613,6 @@ function _G.isangle(variable) end
 function _G.isbool(variable) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether the given object does or doesn't have a `metatable` of a color.
----
---- Engine functions (i.e. those not written in plain Lua) that return color objects do not currently set the color metatable and this function will return false if you use it on them.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.IsColor)
 ---@param Object any The object to be tested
@@ -2227,11 +2240,14 @@ function _G.ParticleEffectAttach(particleName, attachType, entity, attachmentID)
 ---@return CLuaEmitter # The new particle emitter.
 function _G.ParticleEmitter(position, use3D) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a path for the bot to follow
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a path for the bot to follow using one of two types (`Follow` or `Chase`)
+---
+--- `Follow` is a general purpose path. Best used for static or infrequently updated locations. The path will only be updated once [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) is called. This needs to be done manually (typically inside the bots `BehaveThread` coroutine.
+---
+--- `Chase` is a specifically optimized for chasing a moving entity. Paths of this type will use [PathFollower:Chase](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Path)
----@param type string The name of the path to create.
---- This is going to be `"Follow"` or `"Chase"` right now.
+---@param type string The type of the path to create, must be `"Follow"` or `"Chase"`
 ---@return PathFollower # The path
 function _G.Path(type) end
 
@@ -2970,11 +2986,11 @@ function _G.SoundDuration(soundName) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr)
 ---
---- **NOTE**: This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
+--- **WARNING**: Do not use this function with external database engines such as `MySQL`. `MySQL` and `SQLite` use different escape sequences that are incompatible with each other! Escaping strings with inadequate functions is dangerous and will lead to SQL injection vulnerabilities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SQLStr)
 ---@param input string String to be escaped
----@param noQuotes? boolean Whether the returned value should be surrounded in quotes or not
+---@param noQuotes? boolean Set this as `true`, and the function will not wrap the input string in apostrophes.
 ---@return string # Escaped input
 function _G.SQLStr(input, noQuotes) end
 

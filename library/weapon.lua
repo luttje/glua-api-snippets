@@ -605,7 +605,7 @@ function Weapon:SetLastShootTime(time) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets when the weapon can fire again. Time should be based on [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime).
 ---
---- **NOTE**: The standard HL2 Pistol (`weapon_pistol`) bypasses this function due to an [internal implementation](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/server/hl2/weapon_pistol.cpp#L313-L317).
+--- **NOTE**: The standard HL2 Pistol (`weapon_pistol`) bypasses this function due to an [internal implementation](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/hl2/weapon_pistol.cpp#L313-L317).
 ---
 --- This will fire extra bullets if the time is set to less than [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime).
 ---

@@ -156,7 +156,7 @@ function net.ReadNormal() end
 --- **WARNING**: You **must** read information in same order as you write it.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.ReadPlayer)
----@return Player # The player, or `nil` if no entity could be read.
+---@return Player # The player, or `Entity(0)` if no entity could be read.
 function net.ReadPlayer() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Reads a [null-terminated string](https://en.wikipedia.org/wiki/Null-terminated_string) from the net stream. The size of the string is 8 bits plus 8 bits for every ASCII character in the string.

@@ -4927,14 +4927,26 @@ IMAGE_FORMAT_BGR888 = 3
 IMAGE_FORMAT_RGB565 = 4
 --- Undeclared variable.
 IMAGE_FORMAT_I8 = 5
+--- Undeclared variable.
+IMAGE_FORMAT_IA88 = 6
+--- Undeclared variable.
+IMAGE_FORMAT_A8 = 8
 IMAGE_FORMAT_ARGB8888 = 11
 IMAGE_FORMAT_BGRA8888 = 12
 --- Undeclared variable.
+IMAGE_FORMAT_BGRX8888 = 16
+--- Undeclared variable.
 IMAGE_FORMAT_BGR565 = 17
+--- Undeclared variable.
+IMAGE_FORMAT_BGRX5551 = 18
+--- Undeclared variable.
+IMAGE_FORMAT_BGRA4444 = 19
+--- Undeclared variable.
+IMAGE_FORMAT_BGRA5551 = 21
 IMAGE_FORMAT_RGBA16161616 = 25
 IMAGE_FORMAT_RGBA16161616F = 24
---- Undeclared variable. Works only with mat_disable_d3d9ex 0
-IMAGE_FORMAT_RGBA32F = 27
+--- Undeclared variable. Works only with mat_disable_d3d9ex 0. Not working on dx 92.
+IMAGE_FORMAT_R32F = 27
 --- Undeclared variable. Works only with mat_disable_d3d9ex 0
 IMAGE_FORMAT_RGBA32323232F = 29
 
@@ -4946,12 +4958,18 @@ IMAGE_FORMAT_RGBA32323232F = 29
 ---| `IMAGE_FORMAT_BGR888`
 ---| `IMAGE_FORMAT_RGB565`
 ---| `IMAGE_FORMAT_I8`
+---| `IMAGE_FORMAT_IA88`
+---| `IMAGE_FORMAT_A8`
 ---| `IMAGE_FORMAT_ARGB8888`
 ---| `IMAGE_FORMAT_BGRA8888`
+---| `IMAGE_FORMAT_BGRX8888`
 ---| `IMAGE_FORMAT_BGR565`
+---| `IMAGE_FORMAT_BGRX5551`
+---| `IMAGE_FORMAT_BGRA4444`
+---| `IMAGE_FORMAT_BGRA5551`
 ---| `IMAGE_FORMAT_RGBA16161616`
 ---| `IMAGE_FORMAT_RGBA16161616F`
----| `IMAGE_FORMAT_RGBA32F`
+---| `IMAGE_FORMAT_R32F`
 ---| `IMAGE_FORMAT_RGBA32323232F`
 
 --- +attack bound key ( Default: Left Mouse Button )

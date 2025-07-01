@@ -779,7 +779,7 @@ server_removeban.ip = nil
 ---@type string
 server_removeban.by = nil
 
----![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called when [joining](https://github.com/OthmanAba/TeamFortress2/blob/master/tf2_src/engine/baseclientstate.cpp#L1224) a Server or when a Server [spawned](https://github.com/OthmanAba/TeamFortress2/blob/master/tf2_src/engine/sv_main.cpp#L2697)
+---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called when joining a Server or when a Server spawned.
 ---
 --- **NOTE**: This is only available in the Menu state because this is called before the Client or Server State has even started.
 

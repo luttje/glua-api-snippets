@@ -55,6 +55,8 @@ function player.GetBots() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Tried to get the player with the specified [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID).
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
+--- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByAccountID)
 ---@param accountID number The Player:AccountID to find the player by.
 ---@return Player|boolean # Player if one is found, `false` otherwise.
@@ -76,6 +78,8 @@ function player.GetByID(connectionID) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID.
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
+--- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
 ---@return Player|boolean # Player if one is found, `false` otherwise.
@@ -83,6 +87,8 @@ function player.GetBySteamID(steamID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID64.
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
+---
+--- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID64)
 ---@param steamID64 string The Player:SteamID64 to find the player by.
@@ -95,19 +101,31 @@ function player.GetBySteamID64(steamID64) end
 ---
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
+--- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
 ---@return Player|boolean # Player if one is found, `false` otherwise.
 ---@deprecated Use player.GetBySteamID64, player.GetBySteamID or player.GetByAccountID to get a player by a unique identifier instead.
 function player.GetByUniqueID(uniqueID) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gives you the player count.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the active player count.
 ---
 --- **NOTE**: Similar to **#**[player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll)() but with better performance since the player table doesn't have to be generated. If [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll) is already being called for iteration, then using the **#** operator on the table will be faster than calling this function since it is JITted.
+---
+--- **NOTE**: Players who are currently connecting to the server will not be counted. See function: [player.GetCountConnecting](https://wiki.facepunch.com/gmod/player.GetCountConnecting)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetCount)
 ---@return number # Number of players
 function player.GetCount() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of players connecting to the server, but not yet spawned in.
+---
+--- `player.GetCountConnecting() + player.GetCount()` would result in the total player count on this server.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/player.GetCountConnecting)
+---@return number # Number of players still connecting.
+function player.GetCountConnecting() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table containing all human players (non-bot/AI).
 ---
@@ -125,6 +143,8 @@ function player.GetHumans() end
 --- Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
 --- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
 --- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
+---
+--- **NOTE**: If you want to reset the cache of the [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator), please have a look at the function [InvalidateInternalEntityCache](https://wiki.facepunch.com/gmod/InvalidateInternalEntityCache)
 ---
 --- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
@@ -387,7 +407,7 @@ function PLAYER:Death() end
 ---@return number # The number of deaths the player has had.
 function Player:Deaths() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Prints the players' name and position to the console.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Prints the players' name and position to the console.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:DebugInfo)
 function Player:DebugInfo() end
@@ -1090,6 +1110,8 @@ function Player:GetWeaponColor() end
 function Player:GetWeapons() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Gives the player a weapon.
+---
+--- This function will call [GM:PlayerCanPickupWeapon](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon). If that hook returns false, this function will do nothing.
 ---
 --- **NOTE**: While this function is meant for weapons/pickupables only, it is **not** restricted to weapons. Any entity can be spawned using this function, including NPCs and SENTs.
 ---
@@ -2108,15 +2130,15 @@ function Player:SprintDisable() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SprintEnable)
 function Player:SprintEnable() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called from [GM:CreateMove](https://wiki.facepunch.com/gmod/GM:CreateMove).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called from [GM:CreateMove](https://wiki.facepunch.com/gmod/GM:CreateMove).
 ---
 --- **WARNING**: This hook will not work if the current gamemode overrides [GM:SetupMove](https://wiki.facepunch.com/gmod/GM:SetupMove) and does not call this hook.
 ---
 --- **NOTE**: This hook is run after the [drive.StartMove](https://wiki.facepunch.com/gmod/drive.StartMove) has been called.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER:StartMove)
----@param mv CMoveData
----@param cmd CUserCmd
+---@param mv CMoveData The move data to override/use
+---@param cmd CUserCmd The command data
 ---@return boolean # Return true to prevent default action
 function PLAYER:StartMove(mv, cmd) end
 
@@ -2138,7 +2160,7 @@ function Player:StartWalking() end
 ---
 --- It is recommended to use [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) over the other SteamID formats whenever possible.
 ---
---- **NOTE**: In a `-multirun` environment, this will return `STEAM_0:0:0` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
+--- **NOTE**: In a `-multirun` environment, this will return `STEAM_ID_LAN` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For Bots this will return `BOT`.
 ---
@@ -2264,9 +2286,11 @@ function Player:UnfreezePhysicsObjects() end
 ---
 --- **NOTE**: In Singleplayer, this function will always return 1.
 ---
+--- In a `-multirun` environment, the value returned is different on the serverside and clientside.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UniqueID)
 ---@return number # The player's Unique ID
----@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64 or Player:SteamID instead, which are guaranteed to be unique to each player.
+---@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64, Player:SteamID or Player:AccountID instead, which are guaranteed to be unique to each player.
 function Player:UniqueID() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table that will stay allocated for the specific player serverside between connects until the server shuts down. On client it has no such special behavior.

@@ -9,6 +9,8 @@ physenv = {}
 ---
 --- The game has a limit of 128 surface properties - this includes properties loaded automatically from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt). Due to this, there's only a small amount of open slots that can be registered with GMod's provided surfaceproperties.txt.
 ---
+--- Does nothing on `x86-64` beta.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData)
 ---@param properties string The properties to add. Each one should include `"base"` or the game will crash due to some values being missing.
 function physenv.AddSurfaceData(properties) end
@@ -35,7 +37,7 @@ function physenv.GetLastSimulationTime() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the current performance settings in table form.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/physenv.GetPerformanceSettings)
----@return table # Performance settings. See Structures/PhysEnvPerformanceSettings
+---@return table # Performance settings or nil if called too early. See Structures/PhysEnvPerformanceSettings
 function physenv.GetPerformanceSettings() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the pause status of global physics simulation. See [physenv.SetPhysicsPaused](https://wiki.facepunch.com/gmod/physenv.SetPhysicsPaused) for the setter.

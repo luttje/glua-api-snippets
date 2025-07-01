@@ -127,7 +127,7 @@ function spawnmenu.AddToolTab(name, label, icon) end
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.ClearToolMenus)
 function spawnmenu.ClearToolMenus() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new content icon, previously defined via [spawnmenu.AddContentType](https://wiki.facepunch.com/gmod/spawnmenu.AddContentType).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new [ContentIcon](https://wiki.facepunch.com/gmod/ContentIcon) previously defined via [spawnmenu.AddContentType](https://wiki.facepunch.com/gmod/spawnmenu.AddContentType).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.CreateContentIcon)
 ---@param type string The type of the content icon.
@@ -143,9 +143,9 @@ function spawnmenu.ClearToolMenus() end
 --- * npc
 --- * weapon
 --- * postprocess
----@param parent? Panel The parent to add the content icon to.
+---@param parent? Panel The parent to add the ContentIcon to.
 ---@param data table The data to send to the content icon in spawnmenu.AddContentType. Data required will depend on the content type.
----@return Panel # The created content icon, if it was returned by spawnmenu.AddContentType.
+---@return Panel # The created ContentIcon, if it was returned by spawnmenu.AddContentType.
 function spawnmenu.CreateContentIcon(type, parent, data) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

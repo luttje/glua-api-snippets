@@ -240,9 +240,8 @@ function table.insert(tbl, position, value) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether or not the given table is empty.
 ---
 --- This works on both sequential and non-sequential tables, and is a lot faster for non-sequential tables than `table.Count(tbl) == 0`.
---- If you want to check if a table is not empty, use `next(tbl) ~= nil`, as it is slightly faster.
 ---
---- For sequential tables it is better to use `tab[1] ~= nil`.
+--- For sequential tables it is better to use `tab[1] == nil`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.IsEmpty)
 ---@param tab table Table to check.

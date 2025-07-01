@@ -105,7 +105,7 @@ function input.LookupBinding(binding, exact) end
 ---@return string # The bind string of the given key.
 function input.LookupKeyBinding(key) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Switches to the provided weapon on the next CUserCmd generation/CreateMove call. Direct binding to [CInput::MakeWeaponSelection](https://github.com/LestaD/SourceEngine2007/blob/43a5c90a5ada1e69ca044595383be67f40b33c61/se2007/game/client/in_main.cpp#L929-L932).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Switches to the provided weapon on the next CUserCmd generation/CreateMove call. Direct binding to [CInput::MakeWeaponSelection](https://github.com/ValveSoftware/source-sdk-2013/blob/39f6dde8fbc238727c020d13b05ecadd31bda4c0/src/game/client/in_main.cpp#L989-L992).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.SelectWeapon)
 ---@param weapon Weapon The weapon entity to switch to.

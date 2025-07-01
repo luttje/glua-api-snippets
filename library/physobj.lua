@@ -2,7 +2,9 @@
 
 --- This is the object returned by [Entity:GetPhysicsObject](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObject), [Entity:GetPhysicsObjectNum](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObjectNum) and [Vehicle:GetWheel](https://wiki.facepunch.com/gmod/Vehicle:GetWheel).
 ---
---- It represents a physics object.
+--- It represents a physics object. An entity can have multiple physics objects (ragdolls), one physics objects (props), or none. (NPCs, non physics entities, etc.)
+---
+--- Physics objects are usually simulated by the physics engine and usually dictate the position of the entity, and not the other way around.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj)
 ---@class PhysObj

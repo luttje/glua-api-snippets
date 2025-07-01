@@ -1552,7 +1552,7 @@ function PANEL:OnHScroll(offset) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodePressed)
 ---@param keyCode number The key code of the pressed key, see Enums/KEY.
----@return boolean # Return true to suppress default action.
+---@return boolean # Return `true` to suppress default action.
 function PANEL:OnKeyCodePressed(keyCode) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called whenever a keyboard key was released while the panel is focused.

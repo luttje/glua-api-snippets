@@ -63,6 +63,13 @@ function Color:AddSaturation(saturation) end
 ---@param whiteness number The "whiteness" value to add in range [0, 1]
 function Color:AddWhiteness(whiteness) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a copy of this color, usually so it can be safely modified later without affecting the original color.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Color:Copy)
+---@param target Color The target color to copy.
+---@return Color # The copy of the given color, safe to modify.
+function Color:Copy(target) end
+
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a [Color](https://wiki.facepunch.com/gmod/Color) into [HWB color space](https://en.wikipedia.org/wiki/HWB_color_model) and returns the "blackness" of the color.
 ---
 --- See [COLOR:ToHWB](https://wiki.facepunch.com/gmod/COLOR:ToHWB) if you want to get all 3 components.

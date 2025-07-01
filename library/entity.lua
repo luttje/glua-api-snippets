@@ -179,7 +179,7 @@ function Entity:AlignAngles(from, to) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is considered alive.
 ---
---- Checks entity's internal life state variable. Does not check health, but it is generally expected the health to be 0 or below at the point of an entity being considered dead.
+--- Checks entity's internal life state variable. Does not check health, but it is generally expected the health to be 0 or below at the point of an entity being considered dead. This internally looks up the save value `m_lifeState`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Alive)
 ---@return boolean # Whether the entity is considered alive.
@@ -194,7 +194,7 @@ function Entity:Alive() end
 --- To make the entity re-appear, run [Entity:SetNoDraw](https://wiki.facepunch.com/gmod/Entity:SetNoDraw)( false )
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:BecomeRagdollOnClient)
----@return Entity # The created ragdoll. (class C_ClientRagdoll])
+---@return Entity # The created ragdoll. (`class C_ClientRagdoll`)
 function Entity:BecomeRagdollOnClient() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns true if the entity is being looked at by the local player and is within 256 units of distance.
@@ -344,7 +344,8 @@ function Entity:CollisionRulesChanged() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates bone followers based on the current entity model.
 ---
---- Bone followers are physics objects that follow the visual mesh. This is what is used by `prop_dynamic` for things like big combine doors for vehicles with multiple physics objects which follow the visual mesh of the door when it animates.
+--- Bone followers are [Entities](https://wiki.facepunch.com/gmod/Entity) whose [Physics Object](https://wiki.facepunch.com/gmod/PhysObj) follows a specific bone on another Entity's model.
+--- This is what is used by `prop_dynamic` for things like big combine doors for vehicles with multiple physics objects which follow the visual mesh of the door when it animates.
 ---
 --- Be mindful that bone followers create a separate entity (`phys_bone_follower`) for each physics object.
 ---
@@ -624,10 +625,12 @@ function Entity:EnableMatrix(matrixType, matrix) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the entity stops touching another entity.
 ---
+--- See [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch) and [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) for related hooks.
+---
 --- **WARNING**: This only works for **brush** entities and for entities that have [Entity:SetTrigger](https://wiki.facepunch.com/gmod/Entity:SetTrigger) set to true.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:EndTouch)
----@param entity Entity The entity which was touched.
+---@param entity Entity The entity that we no longer touch.
 function ENTITY:EndTouch(entity) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever an engine schedule is finished; either the last task within the engine schedule has been finished or the schedule has been interrupted by an interrupt condition.
@@ -2633,7 +2636,7 @@ function ENTITY:GravGunPunt(ply) end
 ---@param event number The ID of the event. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events) for a list of default events, and see util.GetAnimEventNameByID for a helper function in handing custom events.
 ---@param eventTime number The absolute time this event occurred using Global.CurTime.
 ---@param cycle number The frame this event occurred as a number between 0 and 1.
----@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/shared/eventlist.h#L14-L23).
+---@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/shared/eventlist.h#L14-L23).
 ---@param options string Name or options of this event.
 ---@return boolean # Return true to mark the event as handled.
 function ENTITY:HandleAnimEvent(event, eventTime, cycle, type, options) end
@@ -2803,7 +2806,7 @@ function Entity:IsInWorld() end
 ---@param endPos Vector The landing position
 ---@return boolean # Return true if this jump should be allowed to be performed, false otherwise.
 ---
---- Not returning anything, or returning a non boolean will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc_movement.cpp#L319).
+--- Not returning anything, or returning a non boolean will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc_movement.cpp#L319).
 function ENTITY:IsJumpLegal(startPos, apex, endPos) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether the entity is lag compensated or not.
@@ -3095,10 +3098,13 @@ function Entity:ManipulateBoneScale(boneID, scale) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns entity's map creation ID. Unlike [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) or [Entity:GetCreationID](https://wiki.facepunch.com/gmod/Entity:GetCreationID), it will always be the same on same map, no matter how much you clean up or restart it.
 ---
+--- It may change if the map is recompiled, even if no edits were made. It will definitely change if entities are added or removed from the map file.
+---
 --- To be used in conjunction with [ents.GetMapCreatedEntity](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity). See also [Entity:CreatedByMap](https://wiki.facepunch.com/gmod/Entity:CreatedByMap).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:MapCreationID)
 ---@return number # The map creation ID or -1 if the entity is not compiled into the map.
+--- 			If the ID exists, it is identical to the entity's order number as it appears in Lump 1 of the BSP file. It is believed to start at 1234 for some reason.
 function Entity:MapCreationID() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Refreshes the shadow of the entity.
@@ -3493,9 +3499,12 @@ function Entity:PassesFilter(caller, ent) end
 ---@return boolean # Should trigger or not.
 function ENTITY:PassesTriggerFilters(ent) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the entity collides with anything. The move type and solid type must be VPHYSICS for the hook to be called.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the entity collides with anything via [physics objects](https://wiki.facepunch.com/gmod/PhysObj). The [move type](https://wiki.facepunch.com/gmod/Enums/MOVETYPE) and [solid mode](https://wiki.facepunch.com/gmod/Enums/SOLID) must be `VPHYSICS` for the hook to be called.
+--- This hook only works for `anim` type entities.
 ---
---- **NOTE**: If you want to use this hook on default/engine/non-Lua entites ( like prop_physics ), use [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback) instead! This page describes a hook for Lua entities
+--- This is different from [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch).
+---
+--- **NOTE**: If you want to use this hook on default/engine/non-Lua entities (like `prop_physics`), use [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback) instead! This page describes a hook for Lua scripted entities
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide)
 ---@param colData table Information regarding the collision. See Structures/CollisionData.
@@ -5253,7 +5262,7 @@ function Entity:SetPhysConstraintObjects(Phys1, Phys2) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the player who gets credit if this entity kills something with physics damage within the time limit.
 ---
---- **NOTE**: This can only be called on props, "anim" type SENTs and vehicles.
+--- **NOTE**: Only functional on props, "anim" type SENTs, vehicles and a few other select entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetPhysicsAttacker)
 ---@param ent Player Player who gets the kills. Setting this to a non-player entity will not work.
@@ -5717,10 +5726,12 @@ function ENTITY:StartTask(task) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the entity starts touching another entity.
 ---
+--- See [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) and [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch) for related hooks.
+---
 --- **WARNING**: This only works for **brush** entities and for entities that have [Entity:SetTrigger](https://wiki.facepunch.com/gmod/Entity:SetTrigger) set to true.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:StartTouch)
----@param entity Entity The entity which is being touched.
+---@param entity Entity The entity that we started touching for the first time.
 function ENTITY:StartTouch(entity) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Stops all particle effects parented to the entity and immediately destroys them.
@@ -5875,7 +5886,11 @@ function Entity:TestPVS(testPoint) end
 ---@return boolean # Return `true` if you used Entity:NextThink to override the next execution time.
 function ENTITY:Think() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called every tick for every entity being "touched".
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called every tick for every entity being "touched". Touching is usually detected via AABB intersection checks using entity's [collision bounds](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds).
+---
+--- Entities like triggers would be using the touch hooks for their function.
+---
+--- See [Entity:PhysicsCollide](https://wiki.facepunch.com/gmod/Entity:PhysicsCollide) for physics based collision events.
 ---
 --- See also [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch) and [ENTITY:EndTouch](https://wiki.facepunch.com/gmod/ENTITY:EndTouch).
 ---
@@ -5893,7 +5908,7 @@ function ENTITY:Touch(entity) end
 ---@param oldAct ACT The activity to translate.
 ---@return ACT # The activity that should override the incoming activity.
 ---
---- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_basenpc.cpp#L5976).
+--- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc.cpp#L5976).
 function ENTITY:TranslateActivity(oldAct) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the ID of a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) attached to the given bone.
@@ -5934,7 +5949,7 @@ function Entity:TranslatePhysBoneToBone(physNum) end
 ---@param schedule SCHED The schedule to translate. See Enums/SCHED.
 ---@return SCHED # The schedule that should override the incoming schedule.
 ---
---- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/sp/src/game/server/ai_default.cpp#L253).
+--- Not returning anything, or returning a non value will perform the [default action](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_default.cpp#L253).
 function ENTITY:TranslateSchedule(schedule) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Triggers all outputs stored using [ENTITY:StoreOutput](https://wiki.facepunch.com/gmod/ENTITY:StoreOutput).

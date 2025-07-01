@@ -167,8 +167,6 @@ function surface.GetAlphaMultiplier() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting draw operations.
 ---
---- The returned color will not have the color metatable.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetDrawColor)
 ---@return table # The color that drawing operations will use as a Color.
 function surface.GetDrawColor() end
@@ -193,8 +191,6 @@ function surface.GetHUDTexture(name) end
 function surface.GetPanelPaintState() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting text draw operations.
----
---- The returned color will not have the color metatable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetTextColor)
 ---@return table # The color that text drawing operations will use as a Color.

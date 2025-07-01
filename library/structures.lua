@@ -1598,6 +1598,26 @@ ModelInfo.Materials = nil
 ---@type string[]
 ModelInfo.MaterialDirectories = nil
 
+---Number of other models this model includes for their animations.
+---@type number
+ModelInfo.IncludeModelCount = nil
+
+---The list of models this model includes for their animations.
+---@type string[]
+ModelInfo.IncludeModels = nil
+
+---A list of hitbox sets this model has. Each hitbox set has the following structure:
+--- * Name
+--- * Count
+--- * HitBoxes - a table of hitboxes within this set
+---
+--- Each hitbox has the following format:
+--- * Mins
+--- * Maxs
+--- * Bone
+---@type table
+ModelInfo.HitBoxSets = nil
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure containing the information required to create a mesh.
 ---
 --- Returned by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
@@ -3235,7 +3255,7 @@ TraceResult.HitWorld = false
 
 ---Enums/MAT of the material hit by the trace.
 ---@type number
-TraceResult.MatType = 0
+TraceResult.MatType = nil
 
 ---The direction of the trace as a normal vector (vector with Vector:Length of 1).
 ---
@@ -3278,7 +3298,11 @@ TraceResult.DispFlags = 0
 
 ---The contents of the hit surface. See Enums/CONTENTS.
 ---@type number
-TraceResult.Contents = nil
+TraceResult.Contents = 0
+
+---BoneID on the model that the hit hitbox is attached to, if available.
+---@type number
+TraceResult.HitBoxBone = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Table structure used by [steamworks.FileInfo](https://wiki.facepunch.com/gmod/steamworks.FileInfo).
 

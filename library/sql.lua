@@ -76,6 +76,22 @@ function sql.Query(query) end
 ---@return table # The returned row.
 function sql.QueryRow(query, row) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs a query on the local SQLite database with proper type handling and parameter binding, returns a table as result set, empty table if no results, and false on error. Unlike [sql.Query](https://wiki.facepunch.com/gmod/sql.Query), this function properly handles SQLite data types and allows safe parameter binding to prevent SQL injection attacks.
+--- **WARNING**: * This function only executes a single SQL statement, unlike [sql.Query](https://wiki.facepunch.com/gmod/sql.Query) which can execute multiple statements separated by semicolons.
+---
+--- * Large INTEGER values (beyond ±9,007,199,254,740,991) are returned as strings to preserve exact values. This is because Lua represents all numbers as doubles, which lose precision for integers larger than 2⁵³-1. Returning them as strings prevents data corruption from rounding errors.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/sql.QueryTyped)
+---@param query string The query to execute with optional `?` parameter placeholders.
+---
+---
+--- * Always use parameter binding with `?` placeholders instead of string concatenation to prevent SQL injection vulnerabilities.
+---@param ... any Parameters to bind to the query placeholders. Supports nil, boolean, number, and string types.
+---
+--- The number of query parameters must match the number of `?` placeholders, or the query will fail. See examples.
+---@return table|boolean # `false` is returned if there is an error (See sql.LastError), otherwise a table with properly typed column values (empty table if no results).
+function sql.QueryTyped(query, ...) end
+
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs the query like [sql.QueryRow](https://wiki.facepunch.com/gmod/sql.QueryRow), but returns the first value found.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sql.QueryValue)
@@ -85,7 +101,7 @@ function sql.QueryValue(query) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Escapes dangerous characters and symbols from user input used in an SQLite SQL Query.
 ---
---- **NOTE**: This function is not meant to be used with external database engines such as `MySQL`. Escaping strings with inadequate functions is dangerous!
+--- **WARNING**: Do not use this function with external database engines such as `MySQL`. `MySQL` and `SQLite` use different escape sequences that are incompatible with each other! Escaping strings with inadequate functions is dangerous and will lead to SQL injection vulnerabilities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sql.SQLStr)
 ---@param string string The string to be escaped.

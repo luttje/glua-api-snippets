@@ -23,6 +23,22 @@ function ents.Create(class) end
 ---@return Entity # Created entity (`C_PhysPropClientside`).
 function ents.CreateClientProp(model) end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a clientside only rope, similar to those used by the DOG model from Half-Life 2.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ents.CreateClientRope)
+---@param ent1 Entity The first entity to attach the rope to.
+---@param ent1attach number The attachment ID on the first entity to attach the rope to.
+---@param ent2 Entity The second entity to attach the rope to.
+---@param ent2attach Entity The attachment ID on the second entity to attach the rope to.
+---@param extra? table Extra optional settings for the rope. Possible values are:
+--- * slack - How much extra rope to add to the length (default: 0)
+--- * width - Width of the rope (default: 2)
+--- * segments - How many segments the rope should have (default: 8)
+--- * material - Which material should the rope have (default: `"cable/cable"`)
+--- * nogravity - If set, the rope should have no gravity. (default: 0)
+---@return Entity # Created entity (`C_RopeKeyframe`).
+function ents.CreateClientRope(ent1, ent1attach, ent2, ent2attach, extra) end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a clientside only scripted entity. The scripted entity must be of "anim" type.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.CreateClientside)
@@ -188,6 +204,8 @@ function ents.GetMapCreatedEntity(id) end
 --- Internally, this function uses cached values that exist entirely within lua, as opposed to [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll), which is a C++ function.
 --- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
 --- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
+---
+--- **NOTE**: If you want to reset the cache of the [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator), please have a look at the function [InvalidateInternalEntityCache](https://wiki.facepunch.com/gmod/InvalidateInternalEntityCache)
 ---
 --- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---

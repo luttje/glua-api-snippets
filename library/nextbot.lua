@@ -34,6 +34,8 @@ function NEXTBOT:BehaveStart() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to update the bot's behaviour.
 ---
+--- If you override this hook you must call `coroutine.resume(self.BehaveThread)` to resume the [NEXTBOT:RunBehaviour](https://wiki.facepunch.com/gmod/NEXTBOT:RunBehaviour) Behavior
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/NEXTBOT:BehaveUpdate)
 ---@param interval number How long since the last update
 function NEXTBOT:BehaveUpdate(interval) end

@@ -148,11 +148,11 @@ function GM:CanExitVehicle(veh, ply) end
 ---@return boolean # `false` if the player is not allowed to enter the vehicle.
 function GM:CanPlayerEnterVehicle(player, vehicle, role) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the player can kill themselves using the concommands `kill` or `explode`.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the player can kill themselves using the `kill` or `explode` console commands.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:CanPlayerSuicide)
 ---@param player Player The player
----@return boolean # True if they can suicide.
+---@return boolean # `true` if the player should be allowed to suicide, `false` if not.
 function GM:CanPlayerSuicide(player) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the player can unfreeze the entity.
@@ -321,7 +321,7 @@ function GM:DrawMonitors() end
 ---
 --- Unlike [GM:HUDPaint](https://wiki.facepunch.com/gmod/GM:HUDPaint), this hook is called with the game paused and while the Camera SWEP is equipped.
 ---
---- **NOTE**: Only gets called when `r_drawvgui` is enabled.
+--- Does not get called when `r_drawvgui` is disabled.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:DrawOverlay)
 function GM:DrawOverlay() end
@@ -770,6 +770,7 @@ function GM:IsSpawnpointSuitable(ply, spawnpoint, makeSuitable) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever a player pressed a key included within the IN keys.
 ---
 --- For a more general purpose function that handles all kinds of input, see [GM:PlayerButtonDown](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown).
+--- See [GM:KeyRelease](https://wiki.facepunch.com/gmod/GM:KeyRelease) for the key release event.
 ---
 --- Despite being a predicted hook, it will still be called in singleplayer for your convenience.
 ---
@@ -783,6 +784,7 @@ function GM:KeyPress(ply, key) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Runs when a IN key was released by a player.
 ---
 --- For a more general purpose function that handles all kinds of input, see [GM:PlayerButtonUp](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp).
+--- See [GM:KeyPress](https://wiki.facepunch.com/gmod/GM:KeyPress) for the key press event.
 ---
 --- Despite being a predicted hook, it will still be called in singleplayer for your convenience.
 ---
@@ -878,6 +880,8 @@ function GM:OnAchievementAchieved(ply, achievement) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the local player presses TAB while having their chatbox opened.
 ---
+--- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnChatTab)
 ---@param text string The currently typed into chatbox text
 ---@return string # What should be placed into the chatbox instead of what currently is when player presses tab
@@ -890,11 +894,19 @@ function GM:OnChatTab(text) end
 ---@return boolean # Return false to suppress the cleanup notification.
 function GM:OnCleanup(name) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a Lua error occurs on a client.
---- This hook allows server-side code to detect and respond to client-side errors.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called on the server when a Lua error occurs on a client and is sent to the server.
+---
+--- This hook allows server-side code to detect and log client-side errors.
+---
+--- See [GM:OnLuaError](https://wiki.facepunch.com/gmod/GM:OnLuaError) for a hook that captures Lua errors directly within its [realm](https://wiki.facepunch.com/gmod/States).
+---
+--- **WARNING**: Note that the stack argument can contain a table with 0 values.
+---
+--- **NOTE**: Warning: the hook "protects" against lua error spam. If it has 5 errors in less than 1 second, the hook will not receive any of these 4 errors.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnClientLuaError)
----@param error string The error that occurred.
+---@param error string The error that occurred. As well as the path and line of the error. Example:
+--- `addons/test/lua/autorun/client/test_error.lua:4: 'then' expected near ''`
 ---@param ply Player The player whose client caused the error.
 ---@param stack table The Lua error stack trace
 ---@param name string Title of the addon that is creating the Lua errors, or "ERROR" if addon is not found.
@@ -976,6 +988,7 @@ function GM:OnEntityWaterLevelChanged(entity, old, new) end
 function GM:OnGamemodeLoaded() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when a Lua error occurs.
+--- If you want to retrieve client errors on the server side, you can use this hook: [GM:OnClientLuaError](https://wiki.facepunch.com/gmod/GM:OnClientLuaError)
 --- **NOTE**: On the [server realm](https://wiki.facepunch.com/gmod/States), this hook will only account for server-side errors, not client-side ones.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnLuaError)
@@ -1236,6 +1249,9 @@ function GM:PlayerBindPress(ply, bind, pressed, code) end
 ---
 --- This will not be called if player has a panel opened with keyboard input enabled, use [PANEL:OnKeyCodePressed](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodePressed) instead.
 ---
+--- See [GM:KeyPress](https://wiki.facepunch.com/gmod/GM:KeyPress) for an alternative that uses [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
+--- See [GM:PlayerButtonUp](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp) for the "key release" event.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown)
 ---@param ply Player Player who pressed the button
 ---@param button BUTTON_CODE The button, see Enums/BUTTON_CODE
@@ -1244,6 +1260,9 @@ function GM:PlayerButtonDown(ply, button) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player releases a button.
 ---
 --- This will not be called if player has a panel opened with keyboard input enabled, use [PANEL:OnKeyCodeReleased](https://wiki.facepunch.com/gmod/PANEL:OnKeyCodeReleased) instead.
+---
+--- See [GM:KeyRelease](https://wiki.facepunch.com/gmod/GM:KeyRelease) for an alternative that uses [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
+--- See [GM:PlayerButtonDown](https://wiki.facepunch.com/gmod/GM:PlayerButtonDown) for the "key press" event.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerButtonUp)
 ---@param ply Player Player who released the button
@@ -1272,6 +1291,10 @@ function GM:PlayerCanJoinTeam(ply, team) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not a player is allowed to pick an item up. (ammo, health, armor)
 ---
+--- This will typically only work for base game entities, unless mod authors that implement similar entities also manually call this hook.
+---
+--- See [GM:PlayerCanPickupWeapon](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon) for a hook that controls weapon pickups.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupItem)
 ---@param ply Player Player attempting to pick up
 ---@param item Entity The item the player is attempting to pick up
@@ -1280,12 +1303,14 @@ function GM:PlayerCanPickupItem(ply, item) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not a player is allowed to pick up a weapon.
 ---
---- 	If this returns false, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
+--- 	If this returns `false`, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
+---
+--- See [GM:PlayerCanPickupItem](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupItem) for a hook that affects things like health kits, armor batteries and ammo entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon)
 ---@param ply Player The player attempting to pick up the weapon.
 ---@param weapon Weapon The weapon entity in question.
----@return boolean # Allowed pick up or not.
+---@return boolean # `false` to disallow pickup.
 function GM:PlayerCanPickupWeapon(ply, weapon) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not the player can see the other player's chat.
@@ -1474,7 +1499,7 @@ function GM:PlayerFrozeObject(ply, ent, physobj) end
 ---@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
 ---@param eventTime number The absolute time this event occurred using Global.CurTime.
 ---@param cycle number The frame this event occurred as a number between 0 and 1.
----@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/mp/src/game/shared/eventlist.h#L14-L23).
+---@param type number Event type. See [the Source SDK](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/shared/eventlist.h#L14-L23).
 ---@param options string Name or options of this event.
 function GM:PlayerHandleAnimEvent(ply, event, eventTime, cycle, type, options) end
 
@@ -1820,6 +1845,9 @@ function GM:PostDrawOpaqueRenderables(bDrawingDepth, bDrawingSkybox, isDraw3DSky
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after the player hands are drawn.
 ---
+--- See [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel) for the view model alternative.
+--- See [GM:PreDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PreDrawPlayerHands) for a hook that is called just before view model hands are drawn.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostDrawPlayerHands)
 ---@param hands Entity This is the gmod_hands entity.
 ---@param vm Entity This is the view model entity.
@@ -1851,7 +1879,11 @@ function GM:PostDrawTranslucentRenderables(bDrawingDepth, bDrawingSkybox, isDraw
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after view model is drawn.
 ---
---- **NOTE**: The 3D rendering context in this event is different from the main view. Every render operation will only be accurate with the view model entity.
+--- The render FOV in this hook is different from the main view, as view models are usually rendered with a different FOV. Every render operation will only be accurate with the view model entity.
+---
+--- See [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) for a hook that is called just before a view model is drawn.
+---
+--- For view model hands alternative, see [GM:PostDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PostDrawPlayerHands).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel)
 ---@param viewmodel Entity Players view model
@@ -1968,6 +2000,9 @@ function GM:PreDrawOpaqueRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybo
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the player hands are drawn.
 ---
+--- See [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) for the view model alternative.
+--- See [GM:POstDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:POstDrawPlayerHands) for a hook that is called just before view model hands are drawn.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawPlayerHands)
 ---@param hands Entity This is the gmod_hands entity before it is drawn.
 ---@param vm Entity This is the view model entity before it is drawn.
@@ -2000,9 +2035,14 @@ function GM:PreDrawSkyBox() end
 ---@return boolean # Return true to prevent translucent renderables from drawing.
 function GM:PreDrawTranslucentRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybox) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the view model has been drawn. This hook by default also calls this on weapons, so you can use [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the view model has been drawn.
 ---
---- You can use [GM:PreDrawEffects](https://wiki.facepunch.com/gmod/GM:PreDrawEffects) as a "PostDrawViewModel" hook as it is called just after the view model(s) are drawn.
+--- By default this hook also calls [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel), so you can use that if developing a scripted weapon.
+---
+--- See [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel) for a hook that runs immediately after rendering a view model.
+--- See [GM:PreDrawViewModels](https://wiki.facepunch.com/gmod/GM:PreDrawViewModels) for a hook that runs before **all** view models are drawn within a frame.
+---
+--- For view model hands, see [GM:PreDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PreDrawPlayerHands).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel)
 ---@param vm Entity This is the view model entity before it is drawn. On server-side, this entity is the predicted view model.
@@ -2011,9 +2051,11 @@ function GM:PreDrawTranslucentRenderables(isDrawingDepth, isDrawSkybox, isDraw3D
 ---@return boolean # Return true to prevent the default view model rendering. This also affects GM:PostDrawViewModel.
 function GM:PreDrawViewModel(vm, ply, weapon) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before view models and entities with `RENDERGROUP_VIEWMODEL` are drawn.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just before all view models (there are 3 per player, see [Player:GetViewModel](https://wiki.facepunch.com/gmod/Player:GetViewModel)) and entities with `RENDERGROUP_VIEWMODEL` are drawn.
 ---
---- You can use [GM:PreDrawEffects](https://wiki.facepunch.com/gmod/GM:PreDrawEffects) as a `PostDrawViewModel` hook as it is called just after the view model(s) are drawn.
+--- See [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) and [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel) for hooks that run for specific view models.
+---
+--- You can use [GM:PreDrawEffects](https://wiki.facepunch.com/gmod/GM:PreDrawEffects) as a "`PostDrawViewModels`" hook as it is called just after the all the view model(s) are drawn.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawViewModels)
 function GM:PreDrawViewModels() end
@@ -2289,7 +2331,10 @@ function GM:StartEntityDriving(ent, ply) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:StartGame)
 function GM:StartGame() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called every frame. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called every rendered frame on client, except when the game is paused.
+---
+--- Called every  game tick on the server. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
+--- [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) is guaranteed to be different with each call to this hook on the server.
 ---
 --- See [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) for a hook that runs every tick on both the client and server.
 ---
@@ -2298,7 +2343,12 @@ function GM:StartGame() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:Think)
 function GM:Think() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called every server tick. Serverside, this is similar to [GM:Think](https://wiki.facepunch.com/gmod/GM:Think).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called every game tick. [engine.TickCount](https://wiki.facepunch.com/gmod/engine.TickCount) is guaranteed to be different between each call.
+---
+--- Server side, this is similar to [GM:Think](https://wiki.facepunch.com/gmod/GM:Think) (See that page for details).
+---
+--- The default tickrate is `66.6666` (16 millisecond intervals). It can be changed via the `-tickrate` [command line option](https://wiki.facepunch.com/gmod/Command_Line_Parameters).
+--- See [engine.TickInterval](https://wiki.facepunch.com/gmod/engine.TickInterval) for a function to retrieve this data at runtime.
 ---
 --- **NOTE**: This hook **WILL NOT** run if the server is empty, unless you set the [ConVar](https://wiki.facepunch.com/gmod/ConVar) `sv_hibernate_think` to 1
 ---

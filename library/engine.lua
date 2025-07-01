@@ -132,7 +132,14 @@ function engine.SetMounted(depotID, doMount) end
 ---@return number # Number of ticks since the game server started.
 function engine.TickCount() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the number of seconds between each gametick.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the time interval between each game tick in seconds.
+---
+--- This function is useful for making animations (usually serverside, such as doors rotating) and similar things to be independent of the tickrate in hooks that run at the tick rate, such as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick).
+---
+--- Clientside you'd want to use [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) for this purpose in hooks that run every frame.
+---
+--- The default tickrate is `66.6666`, aka `16` milliseconds interval between each game tick.
+--- The tickrate can be adjusted via the `-tickrate` [command line option](https://wiki.facepunch.com/gmod/Command_Line_Parameters).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/engine.TickInterval)
 ---@return number # Number of seconds between each gametick.

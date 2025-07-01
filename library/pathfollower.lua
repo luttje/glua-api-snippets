@@ -6,7 +6,9 @@
 ---@class PathFollower
 local PathFollower = {}
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) If you created your path with type `"Chase"` this functions should be used in place of [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update) to cause the bot to chase the specified entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Computes the shortest path to the provided entity arg. PathFollower Object must have `Chase` type.
+---
+--- For PathFollower objects of the `Follow` type use [PathFollower:Compute](https://wiki.facepunch.com/gmod/PathFollower:Compute)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
@@ -24,7 +26,9 @@ local PathFollower = {}
 --- * number `cost` - The cost of movement between `area` and `fromArea`.
 function PathFollower:Chase(bot, ent, generator) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Compute shortest path from bot to 'goal' via A* algorithm.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Compute shortest path from bot to 'goal' via A* algorithm. This only works if the PathFollower is the `Follow` Type.
+---
+--- For PathFollowers of the `Chase` Type see [PathFollower:Chase](https://wiki.facepunch.com/gmod/PathFollower:Chase)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Compute)
 ---@param bot NextBot The nextbot we're generating for.  This can also be a nextbot player (player.CreateNextbot).
@@ -227,6 +231,7 @@ function PathFollower:SetGoalTolerance(distance) end
 function PathFollower:SetMinLookAheadDistance(mindist) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Move the bot along the path.
+---     **NOTE**: player nextbots require [CUserCmd:SetForwardMove](https://wiki.facepunch.com/gmod/CUserCmd:SetForwardMove) to move forward along the path
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PathFollower:Update)
 ---@param bot NextBot The bot to update along the path. This can also be a nextbot player (player.CreateNextbot)
