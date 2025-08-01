@@ -408,7 +408,7 @@ function GM:EntityNetworkedVarChanged(ent, name, oldval, newval) end
 --- The entity may or **may not** be recreated immediately after, depending on whether it is in the local player's [PVS](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community"). (See Entity:IsDormant)
 function GM:EntityRemoved(ent, fullUpdate) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when an entity takes damage. You can modify all parts of the damage info in this hook.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when an entity is about to take damage. You can modify all parts of the damage info in this hook or completely block the damage event.
 ---
 --- See [GM:PostEntityTakeDamage](https://wiki.facepunch.com/gmod/GM:PostEntityTakeDamage) if you wish to hook the final damage event.
 ---
@@ -956,7 +956,7 @@ function GM:OnDamagedByExplosion(ply, dmginfo) end
 ---
 --- **NOTE**: Some entities on initial map spawn are passed through this hook, and then removed in the same frame. This is used by the engine to precache things like models and sounds, so always check their validity with [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid). Will not require [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) check if you create your hook after [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity).
 ---
---- **WARNING**: Removing the created entity during this event can lead to unexpected problems. Use [timer.Simple](https://wiki.facepunch.com/gmod/timer.Simple)( 0, .... ) to safely remove the entity.
+--- **WARNING**: Removing the created entity during this event can lead to unexpected problems. Use [Global.SafeRemoveEntityDelayed](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntityDelayed)( entity, 0 ) to safely remove the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnEntityCreated)
 ---@param entity Entity The entity
@@ -1007,6 +1007,17 @@ function GM:OnLuaError(error, realm, stack, name, id) end
 ---@param fileName string The File the Conflict occurred in.
 function GM:OnNotifyAddonConflict(addon1, addon2, fileName) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever an NPC drops an item upon it's death.
+--- 	**NOTE**: It will be called only for entities the NPC creates.
+---
+--- It will NOT be called for dropped weapons (with exception of Half-Life: Source NPCs, since they don't use actual weapon entities, they create the weapons on death).
+--- [GM:PlayerDroppedWeapon](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon) works for NPC weapon drops already. (Yes, I know it says PLAYERDroppedWeapon, it works because the hook is called from the weapon itself, not from the dropping entity)
+---
+---[View wiki](https://wiki.facepunch.com/gmod/GM:OnNPCDropItem)
+---@param npc NPC The killed NPC
+---@param item Entity The item that got dropped by the NPC.
+function GM:OnNPCDropItem(npc, item) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever an NPC is killed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnNPCKilled)
@@ -1034,8 +1045,6 @@ function GM:OnPauseMenuShow() end
 function GM:OnPermissionsChanged() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player freezes an entity with the physgun.
----
---- This is not called for players or NPCs being held with the physgun.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnPhysgunFreeze)
 ---@param weapon Entity The weapon that was used to freeze the entity.
@@ -1271,7 +1280,7 @@ function GM:PlayerButtonUp(ply, button) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Decides whether a player can hear another player using voice chat.
 ---
---- **WARNING**: This hook is called **several** times a tick, so ensure your code is efficient.
+--- **WARNING**: This hook is called [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) * [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) times a tick, so ensure your code is efficient.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice)
 ---@param listener Player The listening player.
@@ -1306,6 +1315,8 @@ function GM:PlayerCanPickupItem(ply, item) end
 --- 	If this returns `false`, [Player:Give](https://wiki.facepunch.com/gmod/Player:Give) won't work.
 ---
 --- See [GM:PlayerCanPickupItem](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupItem) for a hook that affects things like health kits, armor batteries and ammo entities.
+---
+--- See [GM:WeaponEquip](https://wiki.facepunch.com/gmod/GM:WeaponEquip) for a hook that is called when a player successfully picks up a weapon after passing this hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon)
 ---@param ply Player The player attempting to pick up the weapon.
@@ -1421,7 +1432,7 @@ function GM:PlayerDisconnected(ply) end
 ---@param ply Player The driving player
 function GM:PlayerDriveAnimate(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a weapon is dropped by a player via [Player:DropWeapon](https://wiki.facepunch.com/gmod/Player:DropWeapon).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a weapon is dropped by a player via [Player:DropWeapon](https://wiki.facepunch.com/gmod/Player:DropWeapon). Despite its name, this hook is also called for NPC weapon drops.
 ---
 --- Also called when a weapon is removed from a player via [Player:StripWeapon](https://wiki.facepunch.com/gmod/Player:StripWeapon).
 ---
@@ -1432,8 +1443,8 @@ function GM:PlayerDriveAnimate(ply) end
 --- [WEAPON:OnDrop](https://wiki.facepunch.com/gmod/WEAPON:OnDrop) will be called before this hook is.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon)
----@param owner Player The player who owned this weapon before it was dropped
----@param wep Weapon The weapon that was dropped
+---@param owner Player|NPC The player or NPC who owned this weapon before it was dropped.
+---@param wep Weapon The weapon that was dropped.
 function GM:PlayerDroppedWeapon(owner, wep) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when player stops using voice chat.
@@ -2001,7 +2012,7 @@ function GM:PreDrawOpaqueRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybo
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the player hands are drawn.
 ---
 --- See [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) for the view model alternative.
---- See [GM:POstDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:POstDrawPlayerHands) for a hook that is called just before view model hands are drawn.
+--- See [GM:PostDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PostDrawPlayerHands) for a hook that is called just before view model hands are drawn.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawPlayerHands)
 ---@param hands Entity This is the gmod_hands entity before it is drawn.
@@ -2190,7 +2201,7 @@ function GM:ScoreboardShow() end
 function GM:SendDeathNotice(attacker, inflictor, victim, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets player run and sprint speeds.
----
+--- Using a speed of `0` can lead to prediction errors, and can cause players to move at `sv_maxvelocity`
 --- **WARNING**: This is not a hook. Treat this as a utility function to set the player's speed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:SetPlayerSpeed)
@@ -2257,25 +2268,25 @@ function GM:ShouldCollide(ent1, ent2) end
 ---@return boolean # `true` to draw the player, `false` to hide.
 function GM:ShouldDrawLocalPlayer(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showhelp` console command. (Default bind is F1)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showhelp` console command. (Default bind is F1)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowHelp)
 ---@param ply Player Player who executed the command
 function GM:ShowHelp(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowSpare1)
 ---@param ply Player Player who executed the command.
 function GM:ShowSpare1(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowSpare2)
 ---@param ply Player Player who executed the command.
 function GM:ShowSpare2(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showteam` console command. ( Default bind is F2 )
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showteam` console command. ( Default bind is F2 )
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowTeam)
 ---@param ply Player Player who executed the command
@@ -2347,7 +2358,7 @@ function GM:Think() end
 ---
 --- Server side, this is similar to [GM:Think](https://wiki.facepunch.com/gmod/GM:Think) (See that page for details).
 ---
---- The default tickrate is `66.6666` (16 millisecond intervals). It can be changed via the `-tickrate` [command line option](https://wiki.facepunch.com/gmod/Command_Line_Parameters).
+--- The default tickrate is `66.6666` (15 millisecond intervals). It can be changed via the `-tickrate` [command line option](https://wiki.facepunch.com/gmod/Command_Line_Parameters).
 --- See [engine.TickInterval](https://wiki.facepunch.com/gmod/engine.TickInterval) for a function to retrieve this data at runtime.
 ---
 --- **NOTE**: This hook **WILL NOT** run if the server is empty, unless you set the [ConVar](https://wiki.facepunch.com/gmod/ConVar) `sv_hibernate_think` to 1
@@ -2409,9 +2420,11 @@ function GM:VGUIMousePressAllowed(button) end
 ---@param mouseCode number The key that the player pressed using Enums/MOUSE.
 function GM:VGUIMousePressed(pnl, mouseCode) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called as a weapon entity is picked up by a player.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called as a weapon entity is picked up by a player. (Including [Player:Give](https://wiki.facepunch.com/gmod/Player:Give))
 ---
---- See also [GM:PlayerDroppedWeapon](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon).
+--- Contrary to the name of the hook, it is **not called** when the player switches their active weapon to another.
+---
+--- See also [GM:PlayerDroppedWeapon](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon) and [GM:PlayerCanPickupWeapon](https://wiki.facepunch.com/gmod/GM:PlayerCanPickupWeapon).
 ---
 --- **NOTE**: At the time when this hook is called [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner) will return `NULL`. The owner is set on the next frame.
 ---

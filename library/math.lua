@@ -137,6 +137,8 @@ function math.calcBSplineN(i, k, t, tinc) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Ceils or rounds a number up.
 ---
+--- 	See [math.floor](https://wiki.facepunch.com/gmod/math.floor) for the inverse of this function.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.ceil)
 ---@param number number The number to be rounded up.
 ---@return number # ceiled numbers
@@ -470,6 +472,8 @@ function math.exp(exponent) end
 function math.Factorial(val_in) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Floors or rounds a number down.
+---
+--- 	See [math.ceil](https://wiki.facepunch.com/gmod/math.ceil) for the inverse of this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.floor)
 ---@param number number The number to be rounded down.

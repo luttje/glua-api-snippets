@@ -3,6 +3,14 @@
 --- The ai library.
 ai = {}
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the number of AI nodes on the map, used by the base game NPCs.
+---
+--- For nextbots, see [navmesh](https://wiki.facepunch.com/gmod/navmesh).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ai.GetNodeCount)
+---@return number # The node count.
+function ai.GetNodeCount() end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Translates a schedule name to its corresponding ID.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ai.GetScheduleID)

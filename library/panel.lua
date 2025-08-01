@@ -2133,6 +2133,8 @@ function Panel:SetFGColorEx(r, g, b, a) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the panel that owns this FocusNavGroup to be the root in the focus traversal hierarchy. This function will only work on EditablePanel class panels and its derivatives.
 ---
+---     **NOTE**: Child panels that should be part of the tab navigation need [Panel:SetTabPosition](https://wiki.facepunch.com/gmod/Panel:SetTabPosition) called on them.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetFocusTopLevel)
 ---@param state boolean
 function Panel:SetFocusTopLevel(state) end
@@ -2347,6 +2349,8 @@ function Panel:SetSpawnIcon(icon) end
 function Panel:SetSteamID(steamid, size) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) When TAB is pressed, the next selectable panel in the number sequence is selected.
+---
+--- **NOTE**: This function requires [Panel:SetFocusTopLevel](https://wiki.facepunch.com/gmod/Panel:SetFocusTopLevel) to be called on the parent panel for tab navigation to work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetTabPosition)
 ---@param position number

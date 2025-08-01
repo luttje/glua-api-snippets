@@ -19,7 +19,7 @@ local VMatrix = {}
 ---@param input VMatrix The input matrix to add.
 function VMatrix:Add(input) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the absolute rotation of the matrix.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the absolute rotation of the matrix. Scaled matrix might produce unexpected results!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/VMatrix:GetAngles)
 ---@return Angle # Absolute rotation of the matrix
@@ -112,11 +112,11 @@ function VMatrix:Identity() end
 ---@return boolean # Whether the matrix was inverted or not
 function VMatrix:Invert() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Quickly inverts the matrix. This function will not fail, but only works correctly on matrices that contain only translation and/or rotation.
 ---
 --- Using this function on a matrix with modified scale may return an incorrect inverted matrix.
 ---
---- To invert a matrix that contains other modifications, see [VMatrix:Invert](https://wiki.facepunch.com/gmod/VMatrix:Invert).
+--- To invert a matrix that contains other modifications, see [VMatrix:Invert](https://wiki.facepunch.com/gmod/VMatrix:Invert). This function is faster.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/VMatrix:InvertTR)
 function VMatrix:InvertTR() end

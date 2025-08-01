@@ -231,10 +231,10 @@ function game.IsDedicated() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Kicks a player from the server. This can be ran before the player has spawned.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.KickID)
----@param id string UserID or SteamID of the player to kick. Uses SteamID32 eg STEAM_0:0:00000000
+---@param id string Player:UserID, Player:SteamID or Player:SteamID64 of the player to kick. Uses SteamID32 eg STEAM_0:0:00000000
 ---@param reason? string Reason to display to the player. This can span across multiple lines.
 ---
---- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~498. It is recommended to avoid going near the limit to avoid truncation.
+--- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~483. It is recommended to avoid going near the limit to avoid truncation.
 function game.KickID(id, reason) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Loads the next map according to the `nextlevel` convar, or from the current `mapcyclefile` set by the respective convar.

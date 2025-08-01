@@ -279,7 +279,9 @@ function NextBot:SetMaxVisionRange(range) end
 ---@param mask number The new mask, see Enums/CONTENTS and Enums/MASK
 function NextBot:SetSolidMask(mask) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Start doing an activity (animation)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Start doing an activity (animation).
+---
+--- This function may not produce the desired result if [Entity:SetModel](https://wiki.facepunch.com/gmod/Entity:SetModel) has not yet been called on the nextbot entity
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NextBot:StartActivity)
 ---@param activity number One of the Enums/ACT

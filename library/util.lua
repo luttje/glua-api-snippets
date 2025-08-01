@@ -644,15 +644,17 @@ function util.ParticleTracer(name, startPos, endPos, doWhiz) end
 ---@param attachmentIndex number Attachment index to be used as origin.
 function util.ParticleTracerEx(name, startPos, endPos, doWhiz, entityIndex, attachmentIndex) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the visibility of a sphere in the world.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the visibility of a square that is always pointed at the camera in the world-space.
+---
+--- This is typically used for in-game sprites or "billboards". ([render.DrawSprite](https://wiki.facepunch.com/gmod/render.DrawSprite))
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.PixelVisible)
 ---@param position Vector The center of the visibility test.
----@param radius number The radius of the sphere to check for visibility.
+---@param size number The size of the square to check for visibility.
 ---@param PixVis pixelvis_handle_t The PixVis handle created with util.GetPixelVisibleHandle.
 --- 		Don't use the same handle twice per tick or it will give unpredictable results.
----@return number # Visibility, ranges from `0-1`. `0` when none of the area is visible, `1` when all of it is visible.
-function util.PixelVisible(position, radius, PixVis) end
+---@return number # Visibility percentage, in range of `[0-1]`. `0` when none of the area is visible, `0.5` when half the area is visible, `1` when all of it is visible, etc.
+function util.PixelVisible(position, size, PixVis) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the contents of the position specified.
 --- **NOTE**: This function will sample only the world environments. It can be used to check if [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) is underwater for example unlike [Entity:WaterLevel](https://wiki.facepunch.com/gmod/Entity:WaterLevel) which works for players only.

@@ -50,13 +50,13 @@ function bit.bswap(value) end
 ---@return number # bitwiseXOr
 function bit.bxor(value, otherValues) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the left shifted value.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the result of shifting given value left bitwise by given number of bits. See [this wiki article](https://en.wikipedia.org/wiki/Bitwise_operation#Bit_shifts) for more details.
 --- **NOTE**: The returned value will be clamped to a signed 32-bit integer, even on 64-bit builds.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.lshift)
 ---@param value number The value to be manipulated.
 ---@param shiftCount number Amounts of bits to shift left by.
----@return number # shiftedValue
+---@return number # The resulting value. Input of `0b1001` will become `0b10010` for one left shift, etc.
 function bit.lshift(value, shiftCount) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the left rotated value.

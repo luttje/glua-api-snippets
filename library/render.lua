@@ -218,7 +218,7 @@ function render.DrawLine(startPos, endPos, color, writeZ) end
 ---@param color? table The color of the quad. See Global.Color
 function render.DrawQuad(vert1, vert2, vert3, vert4, color) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a quad.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a quad. Expects material to be set by [render.SetMaterial](https://wiki.facepunch.com/gmod/render.SetMaterial).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawQuadEasy)
 ---@param position Vector Origin of the sprite.

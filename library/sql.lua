@@ -58,6 +58,8 @@ function sql.LastError() end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs a query on the local SQLite database, returns a table as result set, nil if result is empty and false on error.
 --- 	**WARNING**: To run SQL queries with this function safely, it is crucial to ensure that the concatenated variables in the query string are safe to avoid vulnerabilities like SQL injections. For this, it is recommended to use the [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr), which allows arguments to be escaped correctly.
 ---
+--- It's best to just use [sql.QueryTyped](https://wiki.facepunch.com/gmod/sql.QueryTyped) instead if possible.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/sql.Query)
 ---@param query string The query to execute.
 ---@return table|boolean|nil # `false` is returned if there is an error, `nil` if the query returned no data.
@@ -100,6 +102,8 @@ function sql.QueryTyped(query, ...) end
 function sql.QueryValue(query) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Escapes dangerous characters and symbols from user input used in an SQLite SQL Query.
+---
+--- If possible, it is recommended to use [sql.QueryTyped](https://wiki.facepunch.com/gmod/sql.QueryTyped) instead.
 ---
 --- **WARNING**: Do not use this function with external database engines such as `MySQL`. `MySQL` and `SQLite` use different escape sequences that are incompatible with each other! Escaping strings with inadequate functions is dangerous and will lead to SQL injection vulnerabilities.
 ---

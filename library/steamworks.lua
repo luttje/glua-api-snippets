@@ -8,7 +8,7 @@ steamworks = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/steamworks.ApplyAddons)
 function steamworks.ApplyAddons() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **NOTE**: You really should be using [steamworks.DownloadUGC](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC). This is a legacy function.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **NOTE**: You really should be using [steamworks.DownloadUGC](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC) when downloading Steam Workshop items. This is a legacy function for preview images.
 ---
 --- Downloads a file from the supplied addon and saves it as a `.cache` file in `garrysmod/cache/` folder.
 ---

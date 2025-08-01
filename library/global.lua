@@ -219,16 +219,16 @@ function _G.ClearProblem(id) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a non physical entity that only exists on the client. See also [ents.CreateClientProp](https://wiki.facepunch.com/gmod/ents.CreateClientProp).
 ---
---- Parented clientside models will become detached if the parent entity leaves the PVS. **A workaround is available on its github page.**
+--- Parented clientside models will become detached if the parent entity leaves the PVS. A workaround is available on the issue tracker page linked below.
 ---
---- Clientside entities are not garbage-collected, thus you must store a reference to the object and call [CSEnt:Remove](https://wiki.facepunch.com/gmod/CSEnt:Remove) manually. **To workaround this bug, you need to hold a reference (in a variable) to the entity and remove it when necessary.**
+--- Clientside entities are not garbage-collected, thus you must store a reference to the object (in a variable) and call [CSEnt:Remove](https://wiki.facepunch.com/gmod/CSEnt:Remove) manually when necessary.
 ---
 --- Clientside models will occasionally delete themselves during high server lag.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ClientsideModel)
 ---@param model string The file path to the model.
 ---@param renderGroup? number The render group of the entity for the clientside leaf system, see Enums/RENDERGROUP.
----@return CSEnt # Created client-side model (`C_BaseFlex`).
+---@return CSEnt|nil # Created client-side model (`C_BaseFlex`) or `nil` if creation of the entity failed for any reason.
 function _G.ClientsideModel(model, renderGroup) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a fully clientside ragdoll.
@@ -1513,6 +1513,19 @@ function _G.GetViewEntity() end
 ---@param url string The url to open.
 function _G.GMOD_OpenURLNoOverlay(url) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a hexadecimal representation of a color to [Color](https://wiki.facepunch.com/gmod/Color) object.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Global.HexToColor)
+---@param hue string A hex formatted color. Accepted formats are:
+--- * `#RRGGBB`
+--- * `#RRGGBBAA` (Web color standard variation)
+--- * `#RGB`
+--- * `#RGBA`
+---
+--- `#` can be omitted.
+---@return Color # The Color created from the hexadecimal color code.
+function _G.HexToColor(hue) end
+
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HSL color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.HSLToColor)
@@ -2065,7 +2078,7 @@ function _G.Model(model) end
 ---@param ... any Calls each function passed with the new table as an argument.
 function _G.module(name, ...) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes every given argument to the console.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes every given argument to the console. Limitations of [Global.print](https://wiki.facepunch.com/gmod/Global.print) apply.
 ---
 --- Automatically attempts to convert each argument to a string. (See [Global.tostring](https://wiki.facepunch.com/gmod/Global.tostring))
 ---
@@ -2079,7 +2092,7 @@ function _G.module(name, ...) end
 ---@param ... any List of values to print.
 function _G.Msg(...) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Works exactly like [Global.Msg](https://wiki.facepunch.com/gmod/Global.Msg) except that, if called on the server, will print to all players consoles plus the server console.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Works exactly like [Global.Msg](https://wiki.facepunch.com/gmod/Global.Msg) except that, if called on the server, will print to all players consoles plus the server console. Limitations of [Global.print](https://wiki.facepunch.com/gmod/Global.print) apply.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.MsgAll)
 ---@param ... any List of values to print.
@@ -2320,6 +2333,8 @@ function _G.PrecacheSentenceGroup(group) end
 --- Separates lines with a line break (`"\n"`)
 ---
 --- Separates arguments with a tab character (`"\t"`).
+---
+--- Can only print up to `4096` characters at a time, and will stop at NULL character. (`"\0"`)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.print)
 ---@param ... any List of values to print.
@@ -2984,7 +2999,7 @@ function _G.Sound(soundPath) end
 ---@return number # Sound duration in seconds.
 function _G.SoundDuration(soundName) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr)
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless `noQuotes` is true. Alias of [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr).
 ---
 --- **WARNING**: Do not use this function with external database engines such as `MySQL`. `MySQL` and `SQLite` use different escape sequences that are incompatible with each other! Escaping strings with inadequate functions is dangerous and will lead to SQL injection vulnerabilities.
 ---

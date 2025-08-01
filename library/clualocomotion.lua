@@ -6,16 +6,19 @@
 ---@class CLuaLocomotion
 local CLuaLocomotion = {}
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the location we want to get to.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Moves the [NextBot](https://wiki.facepunch.com/gmod/NextBot) incrementally closer to the provided goal location.
 ---
---- Each call of [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach) moves the [NextBot](https://wiki.facepunch.com/gmod/NextBot) 1 unit towards the specified goal. The size of this unit is determined by [SetDesiredSpeed](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDesiredSpeed); the default is `0` (each call of [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach) moves the [NextBot](https://wiki.facepunch.com/gmod/NextBot) 0).
+--- Each time this function is called, the NextBot moves towards the goal position passed as an argument by the amount previously set by [CLuaLocomotion:SetDesiredSpeed](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDesiredSpeed).
 ---
---- To achieve smooth movement with [Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach), it should be called in a hook like [Think](https://wiki.facepunch.com/gmod/ENTITY:Think), as shown in the example.
+--- To achieve smooth movement, this function must be called frequently.
+--- This is commonly accomplished by calling it in the [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach)
 ---@param goal Vector The vector we want to get to.
----@param goalweight number If unsure then set this to `1`.
-function CLuaLocomotion:Approach(goal, goalweight) end
+---@param goalWeight number How influential the movement should be, in case of this function being called multiple times in between physical movements of the entity.
+---
+--- If unsure then set this to `1`.
+function CLuaLocomotion:Approach(goal, goalWeight) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes the stuck status from the bot
 ---
@@ -183,7 +186,7 @@ function CLuaLocomotion:JumpAcrossGap(landingGoal, landingForward) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the acceleration speed
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetAcceleration)
----@param speed number Speed acceleration (default is 400)
+---@param speed? number Speed acceleration
 function CLuaLocomotion:SetAcceleration(speed) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets whether the Nextbot is allowed try to to avoid obstacles or not. This is used during path generation. Works similarly to `nb_allow_avoiding` convar. By default bots are allowed to try to avoid obstacles.
@@ -201,19 +204,21 @@ function CLuaLocomotion:SetClimbAllowed(allowed) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the height the bot is scared to fall from.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDeathDropHeight)
----@param height number Height (default is 200)
+---@param height? number Height
 function CLuaLocomotion:SetDeathDropHeight(height) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the deceleration speed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDeceleration)
----@param deceleration number New deceleration speed (default is 400)
+---@param deceleration? number New deceleration speed.
 function CLuaLocomotion:SetDeceleration(deceleration) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets movement speed.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets how far the NextBot will need to move each time [CLuaLocomotion:Approach](https://wiki.facepunch.com/gmod/CLuaLocomotion:Approach) is called to move at given speed.
+---
+--- The default amount is 0. This means the bot will not move if this value has not been set.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetDesiredSpeed)
----@param speed number The new desired speed
+---@param speed? number The new desired speed
 function CLuaLocomotion:SetDesiredSpeed(speed) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the locomotion's gravity.
@@ -221,7 +226,7 @@ function CLuaLocomotion:SetDesiredSpeed(speed) end
 --- **NOTE**: With values 0 or below, or even lower positive values, the nextbot will start to drift sideways, use [CLuaLocomotion:SetVelocity](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetVelocity) to counteract this.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetGravity)
----@param gravity number New gravity to set. Default is 1000.
+---@param gravity? number New gravity to set.
 function CLuaLocomotion:SetGravity(gravity) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets whether the Nextbot is allowed to jump gaps or not. This is used during path generation. Works similarly to `nb_allow_gap_jumping` convar. By default bots are allowed to jump gaps.
@@ -233,19 +238,19 @@ function CLuaLocomotion:SetJumpGapsAllowed(allowed) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the height of the bot's jump
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetJumpHeight)
----@param height number Height (default is 58)
+---@param height? number Height
 function CLuaLocomotion:SetJumpHeight(height) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the max rate at which the NextBot can visually rotate. This will not affect moving or pathing.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetMaxYawRate)
----@param yawRate number Desired new maximum yaw rate
+---@param yawRate? number Desired new maximum yaw rate
 function CLuaLocomotion:SetMaxYawRate(yawRate) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the max height the bot can step up
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaLocomotion:SetStepHeight)
----@param height number Height (default is 18)
+---@param height? number Height
 function CLuaLocomotion:SetStepHeight(height) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the current movement velocity

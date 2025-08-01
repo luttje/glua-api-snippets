@@ -18,6 +18,7 @@ function markup.Color(col) end
 function markup.Escape(text) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Parses markup into a [MarkupObject](https://wiki.facepunch.com/gmod/MarkupObject). Currently, this only supports fonts and colors as demonstrated in the example.
+--- 	**WARNING**: This function is very slow! Always cache its result
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/markup.Parse)
 ---@param markup string The markup to be parsed.

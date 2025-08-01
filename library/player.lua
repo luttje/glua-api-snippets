@@ -55,8 +55,6 @@ function player.GetBots() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Tried to get the player with the specified [Player:AccountID](https://wiki.facepunch.com/gmod/Player:AccountID).
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
 ---
---- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByAccountID)
 ---@param accountID number The Player:AccountID to find the player by.
 ---@return Player|boolean # Player if one is found, `false` otherwise.
@@ -72,13 +70,11 @@ function player.GetByAccountID(accountID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByID)
 ---@param connectionID number The connection ID to find the player by.
----@return Player|nil # Player if one is found, `nil` otherwise.
+---@return Player|NULL # Player if one is found, `NULL` otherwise.
 function player.GetByID(connectionID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID.
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
----
---- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID)
 ---@param steamID string The Player:SteamID to find the player by.
@@ -87,8 +83,6 @@ function player.GetBySteamID(steamID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the player with the specified SteamID64.
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
----
---- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetBySteamID64)
 ---@param steamID64 string The Player:SteamID64 to find the player by.
@@ -100,8 +94,6 @@ function player.GetBySteamID64(steamID64) end
 --- **WARNING**: It is highly recommended to use [player.GetByAccountID](https://wiki.facepunch.com/gmod/player.GetByAccountID), [player.GetBySteamID](https://wiki.facepunch.com/gmod/player.GetBySteamID) or [player.GetBySteamID64](https://wiki.facepunch.com/gmod/player.GetBySteamID64) instead as this function can have collisions ( be same for different people ) while SteamID is guaranteed to unique to each player.
 ---
 --- 	**WARNING**: Internally this function iterates over all players in the server, meaning it can be quite expensive in a performance-critical context.
----
---- 	**WARNING**: This function now uses [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator). This means it can't run all the time, as an error in the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to interrupt it. Make sure that no addon causes an error in these hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetByUniqueID)
 ---@param uniqueID string The Player:UniqueID to find the player by.
@@ -142,11 +134,6 @@ function player.GetHumans() end
 ---
 --- Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
 --- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
---- **NOTE**: The [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks are used internally to invalidate this function's cache. Using this function inside those hooks is not guaranteed to use an up-to-date cache because hooks are currently executed in an arbitrary order.
----
---- **NOTE**: If you want to reset the cache of the [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator), please have a look at the function [InvalidateInternalEntityCache](https://wiki.facepunch.com/gmod/InvalidateInternalEntityCache)
----
---- **WARNING**: An error being thrown inside the [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) or [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) hooks is likely to break this function. Make it certain that no addons are causing any errors in those hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.Iterator)
 ---@return function # The Iterator Function from Global.ipairs
@@ -526,7 +513,7 @@ function Player:ExitLadder() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ExitVehicle)
 function Player:ExitVehicle() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called from [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called from [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove).
 ---
 --- **WARNING**: This hook will not work if the current gamemode overrides [GM:FinishMove](https://wiki.facepunch.com/gmod/GM:FinishMove) and does not call this hook.
 ---
@@ -560,8 +547,6 @@ function Player:Frags() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Freeze the player. Frozen players cannot move, look around, or attack. Key bindings are still called. Similar to [Player:Lock](https://wiki.facepunch.com/gmod/Player:Lock) but the player can still take damage.
 ---
 --- Adds or removes the [FL_FROZEN](https://wiki.facepunch.com/gmod/Enums/FL) flag from the player.
----
---- Frozen bots will still be able to look around.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Freeze)
 ---@param frozen? boolean Whether the player should be frozen.
@@ -1413,8 +1398,6 @@ function Player:LocalEyeAngles() end
 ---
 --- Adds the [FL_FROZEN](https://wiki.facepunch.com/gmod/Enums/FL) and [FL_GODMODE](https://wiki.facepunch.com/gmod/Enums/FL) flags to the player.
 ---
---- Frozen bots will still be able to look around.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Lock)
 function Player:Lock() end
 
@@ -1425,7 +1408,7 @@ function Player:Lock() end
 ---@return Vector # Position of the bone.
 function Player:MotionSensorPos(bone) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called from [GM:Move](https://wiki.facepunch.com/gmod/GM:Move).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called from [GM:Move](https://wiki.facepunch.com/gmod/GM:Move).
 ---
 --- **WARNING**: This hook will not work if the current gamemode overrides [GM:Move](https://wiki.facepunch.com/gmod/GM:Move) and does not call this hook.
 ---
@@ -1465,6 +1448,8 @@ function Player:OwnerSteamID64() end
 function Player:PacketLoss() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Unfreezes the props player is looking at. This is essentially the same as pressing reload with the physics gun, including double press for unfreeze all.
+---
+--- For freezing props, use [PhysObj:EnableMotion](https://wiki.facepunch.com/gmod/PhysObj:EnableMotion).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:PhysgunUnfreeze)
 ---@return number # Number of props unfrozen.
@@ -1761,7 +1746,7 @@ function Player:SetEyeAngles(angle) end
 --- This is meant to be called on the server or shared (for prediction), it will have no effect if called clientside only. You may want to use [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) for that instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetFOV)
----@param fov number the angle of perception (FOV). Set to 0 to return to default user FOV. ( Which is ranging from 75 to 90, depending on user settings )
+---@param fov number the angle of perception (FOV). Set to 0 to return to default user FOV. ( Which is ranging from 75 to 100, depending on user settings )
 ---@param time? number the time it takes to transition to the FOV expressed in a floating point.
 ---@param requester? Entity The requester or "owner" of the zoom event. Only this entity will be able to change the player's FOV until it is set back to 0.
 function Player:SetFOV(fov, time, requester) end
@@ -2036,7 +2021,7 @@ function Player:SetViewPunchVelocity(punchVel) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the voice volume scale for given player on client. This value will persist from server to server, but will be reset when the game is shut down.
 ---
---- **NOTE**: This doesn't work on bots, their scale will always be `1`.
+--- **NOTE**: This doesn't work on bots, their scale will always be `1`. Does not work with multiruns.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetVoiceVolumeScale)
 ---@param number number The voice volume scale, where `0` is 0% and `1` is 100%.
@@ -2046,7 +2031,7 @@ function Player:SetVoiceVolumeScale(number) end
 ---
 --- See also [Player:SetSlowWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetSlowWalkSpeed), [Player:GetWalkSpeed](https://wiki.facepunch.com/gmod/Player:GetWalkSpeed), [Player:SetCrouchedWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetCrouchedWalkSpeed), [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed) and [Player:SetRunSpeed](https://wiki.facepunch.com/gmod/Player:SetRunSpeed).
 ---
---- Using a speed of `0` can lead to prediction errors.
+--- Using a speed of `0` can lead to prediction errors, and can cause players to move at sv_maxvelocity
 ---
 --- **NOTE**: `player_default` class walk speed is: `200`.
 ---
@@ -2160,7 +2145,7 @@ function Player:StartWalking() end
 ---
 --- It is recommended to use [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64) over the other SteamID formats whenever possible.
 ---
---- **NOTE**: In a `-multirun` environment, this will return `STEAM_ID_LAN` (serverside) or `NULL` (clientside) for all "copies" of a player because they are not authenticated with Steam.
+--- **NOTE**: In a `-multirun` environment, this will return `STEAM_ID_LAN` for all "copies" of a player because they are not authenticated with Steam.
 ---
 --- For Bots this will return `BOT`.
 ---

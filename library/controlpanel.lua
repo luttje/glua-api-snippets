@@ -159,7 +159,7 @@ function ControlPanel:FillViaFunction(func) end
 ---@return ControlPanel # The same control panel the function is being called on.
 function ControlPanel:GetEmbeddedPanel() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a [CtrlNumPad](https://wiki.facepunch.com/gmod/CtrlNumPad) (a Sandbox key binder) panel and adds it as an [item](https://wiki.facepunch.com/gmod/ControlPanel:AddPanel).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a CtrlNumPad (a Sandbox key binder) panel and adds it as an [item](https://wiki.facepunch.com/gmod/ControlPanel:AddPanel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ControlPanel:KeyBinder)
 ---@param label1 string The label for the left key binder.

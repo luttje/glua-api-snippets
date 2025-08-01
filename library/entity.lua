@@ -85,8 +85,9 @@ function Entity:AddFlags(flag) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:AddGesture)
 ---@param activity number The activity to play as the gesture. See Enums/ACT.
----@param autokill? boolean
+---@param autokill? boolean Automatically remove the gesture when it fully plays (Entity:GetLayerCycle reaches 1).
 ---@return number # Layer ID of the started gesture, used to manipulate the played gesture by other functions.
+--- If a layer has already been allocated for supplied [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT), it will return existing layer ID instead of allocating a new layer.
 function Entity:AddGesture(activity, autokill) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a gesture animation to the entity and plays it.
@@ -99,7 +100,7 @@ function Entity:AddGesture(activity, autokill) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:AddGestureSequence)
 ---@param sequence number The sequence ID to play as the gesture. See Entity:LookupSequence.
----@param autokill? boolean
+---@param autokill? boolean Automatically remove the gesture when it fully plays (Entity:GetLayerCycle reaches 1).
 ---@return number # Layer ID of the started gesture, used to manipulate the played gesture by other functions.
 function Entity:AddGestureSequence(sequence, autokill) end
 
@@ -278,7 +279,7 @@ function Entity:CallDTVarProxies(type, slot, newValue) end
 ---
 --- **WARNING**: This hook is called clientside during full updates. See [GM:EntityRemoved](https://wiki.facepunch.com/gmod/GM:EntityRemoved) for more information.
 ---
---- **WARNING**: An error being thrown inside `removeFunc` is likely break [player.Iterator](https://wiki.facepunch.com/gmod/player.Iterator) and [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) functions.
+--- **WARNING**: An error being thrown inside `removeFunc` will stop other `EntityRemoved` hooks from executing.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:CallOnRemove)
 ---@param identifier string Identifier that can be optionally used with Entity:RemoveCallOnRemove to undo this call on remove.
@@ -2239,12 +2240,13 @@ function Entity:GetRenderFX() end
 function Entity:GetRenderGroup() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Specify a mesh that should be rendered instead of this SENT's model.
+--- **NOTE**: You should not be creating or modifying an [IMesh](https://wiki.facepunch.com/gmod/IMesh) in this hook. [Reference](https://github.com/Facepunch/garrysmod-issues/issues/6411#issuecomment-3070608549)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:GetRenderMesh)
 ---@return table # A table containing the following keys:
---- * IMesh Mesh - Required
---- * IMaterial Material - Required
---- * VMatrix Matrix - Optional
+--- * IMesh Mesh - (Required) The mesh to render instead of the default model
+--- * IMaterial Material - (Required) The material to render the mesh with.
+--- * VMatrix Matrix - (Optional) - Render matrix override (mesh position, angles, etc)
 function ENTITY:GetRenderMesh() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the render mode of the entity.
@@ -2407,7 +2409,7 @@ function Entity:GetSequenceMoveYaw(seq) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetSequenceName)
 ---@param index number The index of the sequence to look up.
----@return string # Name of the sequence, or `"Unknown"` if it was out of bounds.
+---@return string # Name of the sequence, `"Unknown"` if it was out of bounds or `"Not Found!"` if -1 is provided.
 function Entity:GetSequenceName(index) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns an entity's sequence velocity at given animation frame.
@@ -3777,6 +3779,8 @@ function Entity:RemoveAllDecals() end
 ---
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
 ---
+--- **NOTE**: Layer removal procedures aren't immediate. Layer removal functions actually manipulate [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight) down to 0, then remove the layer in next intervals. If the targeted layer's weight keeps changing, your layer will not be removed.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveAllGestures)
 function Entity:RemoveAllGestures() end
 
@@ -3824,6 +3828,8 @@ function Entity:RemoveFromMotionController(physObj) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes and stops the gesture with given activity.
 ---
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+--- **NOTE**: Layer removal procedures aren't immediate. Layer removal functions actually manipulate [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight) down to 0, then remove the layer in next intervals. If the targeted layer's weight keeps changing, your layer will not be removed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveGesture)
 ---@param activity number The activity remove. See Enums/ACT.
@@ -4082,7 +4088,7 @@ function Entity:SetBodyGroups(subModelIds) end
 ---@param value number The value to set on the specified bone controller.
 function Entity:SetBoneController(boneControllerID, value) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the bone matrix of given bone to given matrix. See also [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix). Will cause a uncatchable error when used on `__INVALIDBONE__` bones. Can be caught with `if ent:GetBoneName(boneid) == "__INVALIDBONE__" then`
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the bone matrix of given bone to given matrix. See also [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix). Will cause a uncatchable error when used on `__INVALIDBONE__` bones, see the examples on a way to prevent this.
 ---
 --- **NOTE**: Despite existing serverside, it does nothing.
 ---
@@ -4363,18 +4369,28 @@ function Entity:SetKeyValue(key, value) end
 ---@param enable boolean Whether the entity should be lag compensated or not.
 function Entity:SetLagCompensated(enable) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the interval the layer will fully blend in since startup, based on [Entity:GetLayerCycle](https://wiki.facepunch.com/gmod/Entity:GetLayerCycle). Setting this above 0 will enable internal blending of [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight).
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+--- Enabling this will prevent looping gestures with autokill disabled to be removed with [Entity:RemoveGesture](https://wiki.facepunch.com/gmod/Entity:RemoveGesture) or [Entity:RemoveAllGestures](https://wiki.facepunch.com/gmod/Entity:RemoveAllGestures) because layer removal functions mark the layer to decrement [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight) and unallocate layer ID in next frames if the layer weight is `0`, but blending functions will still keep manipulating layer weight.
+---
+--- Therefore; before calling layer cleanup functions, make sure both [Entity:SetLayerBlendIn](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendIn) and [Entity:SetLayerBlendOut](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendOut) are set to `0`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendIn)
 ---@param layerID number The Layer ID
----@param blendIn number
+---@param blendIn number Blend range from 0 to 1.
 function Entity:SetLayerBlendIn(layerID, blendIn) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the interval the layer will fully blend out, based on [Entity:GetLayerCycle](https://wiki.facepunch.com/gmod/Entity:GetLayerCycle). Setting this above 0 will enable internal blending of [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight).
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+--- Enabling this will prevent looping gestures with autokill disabled to be removed with [Entity:RemoveGesture](https://wiki.facepunch.com/gmod/Entity:RemoveGesture) or [Entity:RemoveAllGestures](https://wiki.facepunch.com/gmod/Entity:RemoveAllGestures) because layer removal functions mark the layer to decrement [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight) and unallocate layer ID in next frames if the layer weight is `0`, but blending functions will still keep manipulating layer weight.
+---
+--- Therefore; before calling layer cleanup functions, make sure both [Entity:SetLayerBlendIn](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendIn) and [Entity:SetLayerBlendOut](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendOut) are set to `0`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendOut)
 ---@param layerID number The Layer ID
----@param blendOut number
+---@param blendOut number Blend range from 0 to 1.
 function Entity:SetLayerBlendOut(layerID, blendOut) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the animation cycle/frame of given layer.
@@ -4389,6 +4405,8 @@ function Entity:SetLayerCycle(layerID, cycle) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the duration of given layer. This internally overrides the [Entity:SetLayerPlaybackRate](https://wiki.facepunch.com/gmod/Entity:SetLayerPlaybackRate).
 ---
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entities.
+---
+--- This stops layer playback if layer sequence conists of 1 frame. Use `Entity:SetLayerPlaybackRate(layerID,1/duration)` instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLayerDuration)
 ---@param layerID number The Layer ID
@@ -4434,6 +4452,8 @@ function Entity:SetLayerSequence(layerID, seq) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the layer weight. This influences how strongly the animation should be overriding the normal animations of the entity.
 ---
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entities.
+---
+--- **NOTE**: Setting either [Entity:SetLayerBlendIn](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendIn) or [Entity:SetLayerBlendOut](https://wiki.facepunch.com/gmod/Entity:SetLayerBlendOut) above 0 will turn on automatic weight blending, so you shouldn't be using this if you use any of above.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLayerWeight)
 ---@param layerID number The Layer ID
@@ -5630,7 +5650,7 @@ function Entity:SetVelocity(velocity) end
 ---@param weapon? Weapon The weapon entity to associate this viewmodel to.
 function Entity:SetWeaponModel(viewModel, weapon) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of skins the entity has.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of skins the entity has. To retrieve the total number of skins on a model, please look at this function [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SkinCount)
 ---@return number # The amount of skins the entity's model has.

@@ -221,14 +221,14 @@ function WEAPON:Equip(NewOwner) end
 ---@param ply Player The player who picked up the weapon
 function WEAPON:EquipAmmo(ply) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called before firing animation events, such as muzzle flashes or shell ejections.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called before executing an animation event, such as a muzzle flash appearing or a shell ejecting.
 ---
---- This will only be called serverside for 3000-range events, and clientside for 5000-range  and other events.
+--- This will only be called serverside for 3000-range events, and clientside for 5000-range and other events.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:FireAnimationEvent)
 ---@param pos Vector Position of the effect.
 ---@param ang Angle Angle of the effect.
----@param event number The event ID of happened even. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
+---@param event number The event ID of the happened event. See [this page](http://developer.valvesoftware.com/wiki/Animation_Events).
 ---@param options string Name or options of the event.
 ---@param source Entity The source entity. This will be a viewmodel on the client and the weapon itself on the server
 ---@return boolean # Return true to disable the effect.
@@ -313,7 +313,7 @@ function WEAPON:GetNPCBurstSettings() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:GetNPCRestTimes)
 ---@return number # Minimum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.3` seconds.
----@return number # Maximum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.66` seconds.
+---@return number # Maximum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is `0.6` seconds.
 function WEAPON:GetNPCRestTimes() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the primary ammo type of the given weapon.
@@ -695,9 +695,11 @@ function WEAPON:Think() end
 ---@deprecated Use Weapon:Think instead.
 function WEAPON:Tick() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translate a player's Activity into a weapon's activity, depending on how you want the player to be holding the weapon.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translate a generic activity into a more specific activity, such as holdtype-specific activities.
 ---
---- For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL.
+--- The translated activity is then used to request animations from the owner's model via [Entity:SelectWeightedSequence](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence) and similar functions.
+---
+--- For example, `ACT_MP_RUN` becomes `ACT_HL2MP_RUN_PISTOL`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity)
 ---@param act ACT The activity to translate

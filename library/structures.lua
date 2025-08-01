@@ -187,6 +187,27 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) TTable structure used as balloon spawn data. Default values are applied when the trace hits nothing. This data is required for correctly spawning the balloon.
+---
+--- See [MakeBalloon](https://wiki.facepunch.com/gmod/MakeBalloon)
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/BalloonData)
+---@class BalloonData
+local BalloonData = {}
+
+---Where the balloon will spawn
+---@type Vector
+BalloonData.Pos = VectorVector(0, 0, 0)
+
+---The balloon’s model
+---@type string
+BalloonData.Model = "models/error.mdl"
+
+---The balloon’s skin
+---@type number
+BalloonData.Skin = 0
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
 
 ---
@@ -2755,7 +2776,7 @@ SWEP.ClassNameOverride = nil
 ---The spawn menu category that this weapon
 ---             resides in.
 ---@type string
-SWEP.Category = "Other"
+SWEP.Category = "#spawnmenu.category.other"
 
 ---Whether or not this weapon can be obtained through the
 ---             spawn menu.
@@ -2778,7 +2799,7 @@ SWEP.Base = "weapon_base"
 ---The deploy speed multiplier. This does not change the
 ---             internal deployment speed.
 ---@type number
-SWEP.m_WeaponDeploySpeed = 1
+SWEP.m_WeaponDeploySpeed = GetConVar("sv_defaultdeployspeed"):GetFloat()
 
 ---@deprecated Use Entity:GetOwner() instead.
 ---Use [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner)() instead.
@@ -3165,7 +3186,7 @@ Trace.endpos = VectorVector(0, 0, 0)
 --- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
----@type Entity
+---@type Entity|table<Entity>|table<string>|function
 Trace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
