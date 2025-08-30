@@ -1,6 +1,6 @@
 import { WikiPageMarkupScraper, isLibrary, isClass } from './scrapers/wiki-page-markup-scraper.js';
 import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
-import packageJson from '../package.json' assert { type: "json" };
+import packageJson from '../package.json' with { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
 import { scrapeAndCollect } from './scrapers/collector.js';
 import { writeMetadata } from './utils/metadata.js';

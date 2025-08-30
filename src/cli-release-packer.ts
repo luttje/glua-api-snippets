@@ -1,5 +1,5 @@
 import { convertWindowsToUnixPath, dateToFilename, walk, zipFiles } from './utils/filesystem.js';
-import packageJson from '../package.json' assert { type: "json" };
+import packageJson from '../package.json' with { type: "json" };
 import { readMetadata } from './utils/metadata.js';
 import { Command } from 'commander';
 import path from 'path';
@@ -31,7 +31,7 @@ async function main() {
 
   console.log(`Building release for ${metadata.lastUpdate}...`);
 
-  let releaseFiles : string[] = [];
+  let releaseFiles: string[] = [];
   const targets = [
     'json',
     'lua',

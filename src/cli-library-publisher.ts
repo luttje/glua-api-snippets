@@ -1,4 +1,4 @@
-import packageJson from '../package.json' assert { type: "json" };
+import packageJson from '../package.json' with { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
 import { makeConfigJson } from './utils/lua-language-server.js';
 import { readMetadata } from './utils/metadata.js';

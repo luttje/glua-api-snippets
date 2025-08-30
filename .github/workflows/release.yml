@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: "0 0 1 * *"
 jobs:
   release:
     permissions: write-all
@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "22"
       - name: Install dependencies
         run: npm ci
       - name: Check if there have been changes to the wiki
@@ -116,4 +116,3 @@ jobs:
           git push origin $newTag
 
         # NOTE: From here on the workflow repo no longer contains the dist files, nor node_modules (removed when publishing branch)
-        
