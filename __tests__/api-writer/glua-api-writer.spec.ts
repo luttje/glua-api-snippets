@@ -3,6 +3,7 @@ import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-da
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
 import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
+import { apiDefinition as enumNavCornerApiDefinition, markup as enumNavCornerMarkup } from '../test-data/offline-sites/gmod-wiki/enums-navcorner';
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
@@ -40,6 +41,23 @@ describe('GLua API Writer', () => {
     writer.writePages(structs, mockFilePath);
     const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(structApiDefinition);
+  });
+
+  it('should be able to write Lua API definitions directly from wiki json data for a fake enum', async () => {
+    const writer = new GluaApiWriter();
+
+    fetchMock.mockResponseOnce(enumNavCornerMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/Enums/NavCorner?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const enums = await scrapeCallback(responseMock, enumNavCornerMarkup);
+    expect(enums).toHaveLength(1);
+    writer.writePages(enums, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
+    expect(api).toEqual(enumNavCornerApiDefinition);
   });
 
   it('should handle deprecated in description', async () => {

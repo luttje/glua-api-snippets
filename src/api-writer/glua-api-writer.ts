@@ -78,6 +78,11 @@ export class GluaApiWriter {
     this.pageOverrides.set(safeFileName(pageAddress, '.'), override);
   }
 
+  private isFakeEnum(_enum: Enum) {
+    // TODO: Kindly ask Rubat to add a <isFake> marker of sorts to the wiki
+    return _enum.description.includes('**WARNING**: These enumerations do not exist in game and are listed here only for reference');
+  }
+
   public writePage(page: WikiPage) {
     const fileSafeAddress = safeFileName(page.address, '.');
     if (this.pageOverrides.has(fileSafeAddress)) {
@@ -280,8 +285,10 @@ export class GluaApiWriter {
       }
     };
 
-    for (const item of _enum.items)
-      writeItem(item.key, item);
+    if (!this.isFakeEnum(_enum)) {
+      for (const item of _enum.items)
+        writeItem(item.key, item);
+    }
 
     if (isContainedInTable) {
       api += '}';
@@ -289,13 +296,35 @@ export class GluaApiWriter {
       // TODO: Clean up this workaround when LuaLS supports global enumerations.
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
       // will use @alias as a workaround.
-      // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
-      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
-      api += `\n---@alias ${_enum.name}\n`;
 
-      for (const item of _enum.items) {
-        if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
-          api += `---| \`${item.key}\`\n`;
+      // Some enums like SNDLVL are fake in the wiki and only listed for reference, so we render those such that the enums
+      // are explained in the annotation
+      if (this.isFakeEnum(_enum)) {
+        // First output the description
+        api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
+        let enumValues = '';
+
+        for (const item of _enum.items) {
+          if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
+            api += `--- * \`${item.key}\` = \`${item.value}\`\n`;
+            enumValues += `${item.value} | `;
+          }
+        }
+
+        enumValues = enumValues.slice(0, -3); // Remove trailing " | "
+
+        // Add wikilink
+        api += `---\n--- [View wiki](${_enum.url})\n`;
+        api += `--- @alias ${_enum.name} ${enumValues}\n`;
+      } else {
+        // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
+        //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
+        api += `\n---@alias ${_enum.name}\n`;
+
+        for (const item of _enum.items) {
+          if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
+            api += `---| \`${item.key}\`\n`;
+          }
         }
       }
     }

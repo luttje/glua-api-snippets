@@ -12,7 +12,7 @@ export type Metadata = {
 }
 
 export async function writeMetadata(url: string, outputDirectory: string): Promise<Metadata> {
-  const results = await scrapeAndCollect(new WikiHistoryPageScraper(path.join(url, '~recentchanges')));
+  const results = await scrapeAndCollect(new WikiHistoryPageScraper(url + '/~recentchanges'));
   const exists = promisify(fs.exists);
   const lastUpdate = results[0].history[0].dateTime;
 
@@ -29,7 +29,7 @@ export async function writeMetadata(url: string, outputDirectory: string): Promi
   return metadata;
 }
 
-export async function readMetadata(outputDirectory: string) : Promise<Metadata | undefined> {
+export async function readMetadata(outputDirectory: string): Promise<Metadata | undefined> {
   const metadataPath = path.join(outputDirectory, metadataFilename);
   const exists = promisify(fs.exists);
 
