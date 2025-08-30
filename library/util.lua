@@ -536,7 +536,7 @@ function util.IsValidModel(modelName) end
 ---@return boolean # true is valid, false otherwise
 function util.IsValidPhysicsObject(ent, physobj) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the specified prop is valid.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the specified prop is valid (has valid physics object).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.IsValidProp)
 ---@param modelName string Name/Path of the model to check.
@@ -842,7 +842,7 @@ function util.SteamIDTo64(id) end
 ---@return any # The result of the conversion, or nil if a bad type is specified.
 function util.StringToType(str, typename) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a table to a JSON string.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a table to a JSON string. Keep in mind that not every data type can be stored in the JSON format, notably any entity will not be written, as if it wasn't in the table. Same goes for materials and textures, etc.
 ---
 --- See [util.JSONToTable](https://wiki.facepunch.com/gmod/util.JSONToTable) for the opposite function.
 ---

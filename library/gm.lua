@@ -113,18 +113,20 @@ function GM:CalcViewModelView(wep, vm, oldPos, oldAng, pos, ang) end
 ---@return boolean # Return false to disallow creation of the undo.
 function GM:CanCreateUndo(ply, undo) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a variable is edited on an Entity (called by `Edit Properties...` menu), to determine if the edit should be permitted.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a variable is about to be edited on an Entity (called by `Edit Properties...` menu), to determine if the edit should be permitted.
 ---
 --- See [Editable entities](https://wiki.facepunch.com/gmod/Editable_Entities) for more details about the system.
+---
+--- By default, Sandbox will also call [ENTITY:CanEditVariables](https://wiki.facepunch.com/gmod/ENTITY:CanEditVariables) if no hook returns a value.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:CanEditVariable)
 ---@param ent Entity The entity being edited.
 ---@param ply Player The player doing the editing.
 ---@param key string The name of the variable.
----@param val string The new value, as a string which will later be converted to its appropriate type.
+---@param value string The new value, as a string which will later be converted to its appropriate type.
 ---@param editor table The edit table defined in Entity:NetworkVar.
----@return boolean # Return true to allow editing.
-function GM:CanEditVariable(ent, ply, key, val, editor) end
+---@return boolean # Return `false` to disallow editing.
+function GM:CanEditVariable(ent, ply, key, value, editor) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Determines if the player can exit the vehicle on their own. [Player:ExitVehicle](https://wiki.facepunch.com/gmod/Player:ExitVehicle) will bypass this hook.
 ---
@@ -938,7 +940,7 @@ function GM:OnContextMenuClose() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnContextMenuOpen)
 function GM:OnContextMenuOpen() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the crazy physics detection detects an entity with Crazy Physics.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the crazy physics detection detects an entity with crazy physics, i.e. position being far outside of the map, velocities being near or at infinity, etc. The primary reason for this system is to prevent program crashes in physics engine.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnCrazyPhysics)
 ---@param ent Entity The entity that was detected as crazy
@@ -1529,9 +1531,7 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 ---
 --- **NOTE**: This hook is called before the player has fully loaded, when the player is still in seeing the `Starting Lua` screen. For example, trying to use the [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) function will return the default model (`models/player.mdl`).
 ---
---- **NOTE**: You can send [net](https://wiki.facepunch.com/gmod/net) messages starting from the [player_activate](https://wiki.facepunch.com/gmod/gameevent/player_activate) game event.
----
---- **WARNING**: Due to the above note, sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook are highly unreliable, and they most likely won't be received (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
+--- **WARNING**: Due to the above note, sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook may cause them to be received before the player finishes loading, for example [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer) might return NULL since [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity) may have not been called yet clientside though the net message **won't** be lost and the client still should receive it (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
 ---
 --- Workaround without networking:
 --- ```
@@ -1545,7 +1545,7 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 --- 	if load_queue[ ply ] and not cmd:IsForced() then
 --- 		load_queue[ ply ] = nil
 ---
---- 		-- Send what you need here!
+--- 		-- Send what you need here if it requires the client to be fully loaded!
 --- 	end
 --- end )
 --- ```
@@ -2366,7 +2366,7 @@ function GM:Think() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:Tick)
 function GM:Tick() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: Isn't call when CalcMainActivity return a valid override sequence id
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **NOTE**: Isn't called when CalcMainActivity returns a valid override sequence id
 ---
 --- Allows you to translate player activities.
 ---

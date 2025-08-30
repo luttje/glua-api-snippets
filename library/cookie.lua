@@ -8,13 +8,9 @@ corresponding to the realm the library was used in.
 
 | Realm | Database File | 
 |:-----:|:-----|
-| [Server] | `garrysmod/sv.db`
-| [Client] | `garrysmod/cl.db`
-|  [Menu]  | `garrysmod/mn.db`
-
-[Server]: /gmod/States#server
-[Client]: /gmod/States#client
-[Menu]: /gmod/States#menu
+| [Server](https://wiki.facepunch.com/gmod//gmod/States#server) | `garrysmod/sv.db`
+| [Client](https://wiki.facepunch.com/gmod//gmod/States#client) | `garrysmod/cl.db`
+| [Menu](https://wiki.facepunch.com/gmod//gmod/States#menu) | `garrysmod/mn.db`
 --]]
 cookie = {}
 

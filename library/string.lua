@@ -143,13 +143,9 @@ function string.format(format, ...) end
 ---[View wiki](https://wiki.facepunch.com/gmod/string.FormattedTime)
 ---@param float number The time in seconds to format.
 ---@param format? string An optional formatting to use. If no format it specified, a table will be returned instead.
----@return string # Returns the time as a formatted string only if a format was specified.
+---@return string|table{FormattedTime} # Returns the time as a formatted string only if a format was specified.
 ---
---- Returns a table only if no format was specified. The table will contain these fields:
---- * number ms - milliseconds
---- * number s - seconds
---- * number m - minutes
---- * number h - hours
+--- Returns a table if no format was specified.
 function string.FormattedTime(float, format) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a string from a Color variable.
@@ -169,6 +165,7 @@ function string.FromColor(color) end
 function string.GetChar(str, index) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns extension of the file.
+--- 	**NOTE**: Make sure there are no trailing whitespaces in your `path` argument
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename)
 ---@param path string The string eg. file-path to get the file extension from.

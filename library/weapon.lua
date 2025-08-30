@@ -459,6 +459,26 @@ function WEAPON:KeyValue(key, value) end
 ---@return number # The time in seconds when the last bullet was fired.
 function Weapon:LastShootTime() end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called internally during `TASK_RANGE_ATTACK1 --> OnRangeAttack1`. This allows you to separate your SWEPs primary firing function from players and NPCs.
+---
+--- To get the delay the NPC will fire again, you can call `self:GetOwner():GetInternalVariable("m_flNextAttack")`
+---
+--- **NOTE**: This hook is called internally only for NPCs that has `CAP_USE_SHOT_REGULATOR` set.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:NPCShoot_Primary)
+---@param shootPos? Vector The world position the NPC will use as attack starting position. You can create your projectiles here.
+---@param shootDir? Vector The direction the NPC wants to shoot at.
+function WEAPON:NPCShoot_Primary(shootPos, shootDir) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) A utility function to seperate your SWEPs secondary firing from players.
+---
+--- Unlike [WEAPON:NPCShoot_Primary](https://wiki.facepunch.com/gmod/WEAPON:NPCShoot_Primary), this won't be called by the engine for `TASK_RANGE_ATTACK2`.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:NPCShoot_Secondary)
+---@param shootPos? Vector The world position the NPC will use as attack starting position. You can create your projectiles here.
+---@param shootDir? Vector The direction the NPC wants to shoot at.
+function WEAPON:NPCShoot_Secondary(shootPos, shootDir) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when weapon is dropped by [Player:DropWeapon](https://wiki.facepunch.com/gmod/Player:DropWeapon).
 ---
 --- See also [WEAPON:OwnerChanged](https://wiki.facepunch.com/gmod/WEAPON:OwnerChanged).

@@ -107,7 +107,7 @@ function file.Open(fileName, fileMode, gamePath) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Read)
 ---@param fileName string The name of the file.
----@param gamePath? string The path to look for the files and directories in. If this argument is set to `true` then the path will be `GAME`, otherwise if the argument is `false` or `nil` then the path will be `DATA`. See File_Search_Paths for a list of valid paths.
+---@param gamePath? string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@return string # The data from the file as a string, or `nil` if the file isn't found.
 function file.Read(fileName, gamePath) end
 

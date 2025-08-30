@@ -26,6 +26,7 @@ function NPC:AddEntityRelationship(target, disposition, priority) end
 function NPC:AddRelationship(relationstring) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Advances the NPC on its path to the next waypoint.
+--- **WARNING**: Calling this on an NPC without any route will result in an instant crash.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:AdvancePath)
 function NPC:AdvancePath() end
@@ -159,8 +160,10 @@ function NPC:GetActivity() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the aim vector of the NPC. NPC alternative of [Player:GetAimVector](https://wiki.facepunch.com/gmod/Player:GetAimVector).
 ---
+--- **NOTE**: If the NPC has both [NPC:GetEnemy](https://wiki.facepunch.com/gmod/NPC:GetEnemy) and [NPC:GetActiveWeapon](https://wiki.facepunch.com/gmod/NPC:GetActiveWeapon), engine will automatically call [ENTITY:GetAttackSpread](https://wiki.facepunch.com/gmod/ENTITY:GetAttackSpread) to add random spread degrees to the return value.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetAimVector)
----@return Vector # The aim direction of the NPC.
+---@return Vector # The aim direction of the NPC, usually a noisy direction to it's NPC:GetEnemy. This will default to Entity:GetForward when there's no enemy. Thus, NPC:GetCurrentWeaponProficiency will be used.
 function NPC:GetAimVector() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the activity to be played when the NPC arrives at its goal
@@ -851,8 +854,8 @@ function NPC:RunEngineTask(taskID, taskData) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the NPC to switch to a specific weapon the NPC owns. See [NPC:GetWeapons](https://wiki.facepunch.com/gmod/NPC:GetWeapons).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:SelectWeapon)
----@param class string A classname of the weapon or a Weapon entity to switch to.
-function NPC:SelectWeapon(class) end
+---@param weapon string|Weapon A classname of the weapon or a Weapon entity to switch to.
+function NPC:SelectWeapon(weapon) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stops any sounds (speech) the NPC is currently palying.
 ---
@@ -1159,7 +1162,8 @@ function NPC:UpdateYaw(speed) end
 ---@return boolean # If we succeeded setting the behavior.
 function NPC:UseActBusyBehavior() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enables the AI's [Assault Behavior](https://developer.valvesoftware.com/wiki/Assault "Assault Behavior") when an `ai_goal_assault` is set for this SENT.
+--- **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:UseAssaultBehavior)
 ---@return boolean # Whether the action succeeded.
@@ -1171,13 +1175,15 @@ function NPC:UseAssaultBehavior() end
 ---@return boolean # If we succeeded setting the behavior.
 function NPC:UseFollowBehavior() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Orders the SNPC to control any nearby `func_tank`s looking for an NPC to operate itself, if available.
+--- **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:UseFuncTankBehavior)
 ---@return boolean # Whether the action succeeded.
 function NPC:UseFuncTankBehavior() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enables the AI's [Lead Behavior](https://developer.valvesoftware.com/wiki/ai_goal_lead "Lead Behavior") when an `ai_goal_lead` is set for this SENT.
+--- **NOTE**: This function only works on `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:UseLeadBehavior)
 ---@return boolean # Whether the action succeeded.

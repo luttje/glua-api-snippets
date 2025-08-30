@@ -291,6 +291,13 @@ function Entity:CallDTVarProxies(type, slot, newValue) end
 ---@param ... any Optional arguments to pass to removeFunc. Do note that the first argument passed to the function will always be the entity being removed, and the arguments passed on here start after that.
 function Entity:CallOnRemove(identifier, removeFunc, ...) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called by the Sandbox gamemode from the default implementation of [GM:CanEditVariable](https://wiki.facepunch.com/gmod/GM:CanEditVariable).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:CanEditVariables)
+---@param ply Player The player is trying to edit a variable on this entity.
+---@return boolean # `true` to allow the edit, `false` to disallow.
+function ENTITY:CanEditVariables(ply) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Controls if a property can be used on this entity or not.
 ---
 --- This hook will only work in Sandbox derived gamemodes that do not have [GM:CanProperty](https://wiki.facepunch.com/gmod/GM:CanProperty) overridden.
@@ -463,6 +470,7 @@ function ENTITY:DoImpactEffect(tr, damageType) end
 --- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:DoingEngineSchedule)
+---@return boolean #
 function ENTITY:DoingEngineSchedule() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) This removes the argument entity from an ent's list of entities to 'delete on remove'
@@ -473,6 +481,7 @@ function ENTITY:DoingEngineSchedule() end
 function Entity:DontDeleteOnRemove(entityToUnremove) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Runs a Lua schedule. Runs tasks inside the schedule.
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:DoSchedule)
 ---@param sched table The schedule to run.
@@ -2893,7 +2902,7 @@ function Entity:IsPlayingGesture(activity) end
 ---@return boolean # Whether the point is within the entity's bounds.
 function Entity:IsPointInBounds(point) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is a ragdoll.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is a ragdoll, or became a ragdoll. Internally checks whether [kRenderFXRagdoll](https://wiki.facepunch.com/gmod/kRenderFX) is set.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsRagdoll)
 ---@return boolean # Is ragdoll or not
@@ -3259,8 +3268,8 @@ function Entity:NetworkVarElement(type, element, name, extended) end
 --- * any `new` - New variable value that it was set to.
 function Entity:NetworkVarNotify(name, callback) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Start the next task in specific schedule.
---- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Start the next task in specific Lua schedule.
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:NextTask)
 ---@param sched table The schedule to start next task in.
@@ -3924,11 +3933,12 @@ function Entity:RestartGesture(activity, addIfMissing, autokill) end
 ---@param data table The data from Entity:GetNetworkVars.
 function Entity:RestoreNetworkVars(data) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called from the engine every 0.1 seconds. Returning `true` inside this hook will allow `CAI_BaseNPC::MaintainSchedule` to also be called.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called from the engine every [m_flNextDecisionTime](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc.cpp#L3943C10-L3943C30) in seconds. This interval changes depending on NPC's [Efficiency](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc.cpp#L3093). Returning `true` inside this hook will allow [CAI_BaseNPC::MaintainSchedule](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_basenpc_schedule.cpp#L562) to also be called.
 ---
 --- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:RunAI)
+---@return boolean # `true` to run engine schedules
 function ENTITY:RunAI() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when an engine task is ran on the entity.
@@ -3943,7 +3953,7 @@ function ENTITY:RunEngineTask(taskID, taskData) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called every think on running task.
 --- The actual task function should tell us when the task is finished.
---- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:RunTask)
 ---@param task table The task to run
@@ -3987,6 +3997,8 @@ function Entity:SelectWeightedSequenceSeeded(act, seed) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sends sequence animation to the view model. It is recommended to use this for view model animations, instead of [Entity:ResetSequence](https://wiki.facepunch.com/gmod/Entity:ResetSequence).
 ---
 --- This function is only usable on view models.
+---
+--- **NOTE**: Does nothing when used alone on the client for predicted viewmodels, which is generally always going to be the case.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SendViewModelMatchingSequence)
 ---@param seq number The sequence ID returned by Entity:LookupSequence or  Entity:SelectWeightedSequence.
@@ -5558,8 +5570,8 @@ function Entity:SetSurroundingBoundsType(bounds) end
 ---@param tab table Table for the entity to use
 function Entity:SetTable(tab) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the current task.
---- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the current task, to be used in a Lua schedule.
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:SetTask)
 ---@param task table The task to set.
@@ -5731,14 +5743,14 @@ function Entity:StartMotionController() end
 ---
 --- Not to be confused with [ENTITY:StartEngineSchedule](https://wiki.facepunch.com/gmod/ENTITY:StartEngineSchedule) or [NPC:SetSchedule](https://wiki.facepunch.com/gmod/NPC:SetSchedule) which start an Engine-based schedule.
 ---
---- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:StartSchedule)
 ---@param sched Schedule Schedule to start.
 function ENTITY:StartSchedule(sched) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called once on starting task.
---- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called once when a LUA schedule has started a task.
+--- **NOTE**: This is a helper function only available if your SENT is based on `base_ai`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:StartTask)
 ---@param task Task The task to start, created by ai_task.New.

@@ -621,7 +621,7 @@ function render.ModelMaterialOverride(material) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideAlphaWriteEnable)
 ---@param enable boolean Enable or disable the override.
----@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the alpha channel or not. Has no effect if the previous argument is false.
+---@param shouldWrite? boolean If the previous argument is true, sets whether the next rendering operations should write to the alpha channel or not. Has no effect if the previous argument is false.
 function render.OverrideAlphaWriteEnable(enable, shouldWrite) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the way that the final color and alpha is calculated for each pixel affected by upcoming draw operations.

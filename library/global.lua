@@ -217,7 +217,7 @@ function _G.ClearLuaErrorGroup(group_id) end
 ---@param id string The Problem ID to remove
 function _G.ClearProblem(id) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a non physical entity that only exists on the client. See also [ents.CreateClientProp](https://wiki.facepunch.com/gmod/ents.CreateClientProp).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a non physical entity that only exists on the client. See also [ents.CreateClientProp](https://wiki.facepunch.com/gmod/ents.CreateClientProp) if physics is wanted.
 ---
 --- Parented clientside models will become detached if the parent entity leaves the PVS. A workaround is available on the issue tracker page linked below.
 ---

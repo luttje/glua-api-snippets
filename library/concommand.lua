@@ -5,6 +5,8 @@ concommand = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a console command that runs a function in lua with optional autocompletion function and help text.
 ---
+--- **WARNING**: Clients can still run commands created only on the server. Always check permissions in the callback
+---
 --- This will fail if the concommand was previously removed with [concommand.Remove](https://wiki.facepunch.com/gmod/concommand.Remove) in a different realm (creating a command on the client that was removed from the server and vice-versa).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/concommand.Add)

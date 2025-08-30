@@ -29,11 +29,11 @@ function ents.CreateClientProp(model) end
 ---@param ent1 Entity The first entity to attach the rope to.
 ---@param ent1attach number The attachment ID on the first entity to attach the rope to.
 ---@param ent2 Entity The second entity to attach the rope to.
----@param ent2attach Entity The attachment ID on the second entity to attach the rope to.
+---@param ent2attach number The attachment ID on the second entity to attach the rope to.
 ---@param extra? table Extra optional settings for the rope. Possible values are:
 --- * slack - How much extra rope to add to the length (default: 0)
 --- * width - Width of the rope (default: 2)
---- * segments - How many segments the rope should have (default: 8)
+--- * segments - How many segments the rope should have (default: 8, valid range is [2,10])
 --- * material - Which material should the rope have (default: `"cable/cable"`)
 --- * nogravity - If set, the rope should have no gravity. (default: 0)
 ---@return Entity # Created entity (`C_RopeKeyframe`).

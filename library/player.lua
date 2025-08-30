@@ -1556,6 +1556,8 @@ function Player:ResetHull() end
 ---
 --- **NOTE**: This function ignores the default chat message cooldown
 ---
+--- **WARNING**: The argument can only contain 126 characters. [Source SDK 2013](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/game/server/client.cpp#L84-L86)
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Say)
 ---@param text string The text to force the player to say.
 ---@param teamOnly? boolean Whether to send this message to our own team only.
@@ -1713,7 +1715,7 @@ function Player:SetDeaths(deathCount) end
 ---@param drivingMode number The driving mode index.
 function Player:SetDrivingEntity(drivingEntity, drivingMode) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Activates a given DSP (Digital Signal Processor) effect on all sounds that the player hears.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Activates a given DSP (Digital Signal Processor) effect on all sounds that the player hears. This is equivalent to setting `dsp_player` convar on the player.
 ---
 --- To apply a DSP effect to individual sounds, see [CSoundPatch:SetDSP](https://wiki.facepunch.com/gmod/CSoundPatch:SetDSP)
 ---
@@ -2330,8 +2332,6 @@ function Player:ViewPunch(punchAngle) end
 function Player:ViewPunchReset(tolerance) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the players voice volume, how loud the player's voice communication currently is, as a number in range of [0,1].
----
---- Doesn't work on local player unless the `voice_loopback` convar is set to `1`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:VoiceVolume)
 ---@return number # The voice volume.

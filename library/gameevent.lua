@@ -444,6 +444,9 @@ local host_quit = {}
 ---
 --- **NOTE**: When this event is called the first time for a client, [net](https://wiki.facepunch.com/gmod/net) messages will be reliably received by the client.
 --- 	This gameevent is called twice for the player, because it is first called serverside and networked, but then also called clientside.
+---
+---
+--- 	If `sv_parallel_sendsnapshot` is enabled, then this gameevent **won't** be called reliably since currently gmod discards of gameevents from other threads.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/OnRequestFullUpdate)
@@ -469,9 +472,9 @@ OnRequestFullUpdate.index = nil
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when a player has entered the game (connected and loaded).
 --- From this point you can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player)(userid) (serverside or in singleplayer)
 ---
---- **NOTE**: This is called after [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn) so you could just use that hook serverside.
+--- **NOTE**: This is called almost directly after [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn) in the same tick, so you could just use that hook serverside.
 ---
---- **NOTE**: Sending net messages to the player in this hook is reliable, unlike [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn)
+--- **WARNING**: Just like [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn), players may not have finished loading when its called. See the warning in [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn) for more details about possible issues
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/player_activate)

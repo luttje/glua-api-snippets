@@ -28,7 +28,7 @@ hook = {}
 ---@overload fun(eventName: "CalcView", identifier: any, func: fun(ply: Player, origin: Vector, angles: Angle, fov: number, znear: number, zfar: number):(table?))
 ---@overload fun(eventName: "CalcViewModelView", identifier: any, func: fun(wep: Weapon, vm: Entity, oldPos: Vector, oldAng: Angle, pos: Vector, ang: Angle):(Vector?, Angle?))
 ---@overload fun(eventName: "CanCreateUndo", identifier: any, func: fun(ply: Player, undo: table):(boolean?))
----@overload fun(eventName: "CanEditVariable", identifier: any, func: fun(ent: Entity, ply: Player, key: string, val: string, editor: table):(boolean?))
+---@overload fun(eventName: "CanEditVariable", identifier: any, func: fun(ent: Entity, ply: Player, key: string, value: string, editor: table):(boolean?))
 ---@overload fun(eventName: "CanExitVehicle", identifier: any, func: fun(veh: Vehicle, ply: Player):(boolean?))
 ---@overload fun(eventName: "CanPlayerEnterVehicle", identifier: any, func: fun(player: Player, vehicle: Vehicle, role: number):(boolean?))
 ---@overload fun(eventName: "CanPlayerSuicide", identifier: any, func: fun(player: Player):(boolean?))

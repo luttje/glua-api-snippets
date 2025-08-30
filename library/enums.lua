@@ -4115,6 +4115,15 @@ D_NU = 4
 ---| `D_LI`
 ---| `D_NU`
 
+--- Was the victim friendly?
+DEATH_NOTICE_FRIENDLY_VICTIM = 1
+--- Was the attacker friendly?
+DEATH_NOTICE_FRIENDLY_ATTACKER = 2
+
+---@alias DEATH_NOTICE
+---| `DEATH_NOTICE_FRIENDLY_VICTIM`
+---| `DEATH_NOTICE_FRIENDLY_ATTACKER`
+
 DISPSURF_SURFACE = 1
 DISPSURF_WALKABLE = 2
 DISPSURF_BUILDABLE = 4
@@ -5435,6 +5444,7 @@ kRenderFxClampMinScale = 19
 kRenderFxEnvRain = 20
 kRenderFxEnvSnow = 21
 kRenderFxSpotlight = 22
+--- Is ragdoll, can be set to force an entity to create a clientside ragdoll.
 kRenderFxRagdoll = 23
 --- Quickly pulses the entitys transparency, from 0 to 255.
 kRenderFxPulseFastWider = 24
@@ -6574,7 +6584,7 @@ SF_FLOOR_TURRET_CITIZEN = 512
 SF_NPC_ALTCOLLISION = 4096
 --- [Think outside PVS](https://developer.valvesoftware.com/wiki/NPC_Sensing)
 SF_NPC_ALWAYSTHINK = 1024
---- NPC Drops health kit when it dies
+--- NPC Drops health kit when it dies. Also works on player.
 SF_NPC_DROP_HEALTHKIT = 8
 --- Fade Corpse
 SF_NPC_FADE_CORPSE = 512

@@ -1159,6 +1159,29 @@ FontData.additive = false
 ---@type boolean
 FontData.outline = false
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table created by the [string.FormattedTime](https://wiki.facepunch.com/gmod/string.FormattedTime) function if no format is given to it.
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/FormattedTime)
+---@class FormattedTime
+local FormattedTime = {}
+
+---milliseconds
+---@type number
+FormattedTime.ms = nil
+
+---seconds
+---@type number
+FormattedTime.s = nil
+
+---minutes
+---@type number
+FormattedTime.m = nil
+
+---hours
+---@type number
+FormattedTime.h = nil
+
 ---The fancy name of your gamemode.
 ---@type string
 GM.Name = nil
