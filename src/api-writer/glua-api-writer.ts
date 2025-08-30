@@ -325,7 +325,8 @@ export class GluaApiWriter {
       api += `---${wrapInComment(field.description)}\n`;
 
       const type = GluaApiWriter.transformType(field.type, field.callback);
-      api += `---@type ${type}\n`;
+      const optional = field.default ? '?' : '';
+      api += `---@type ${type}${optional}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
 

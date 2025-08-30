@@ -34,6 +34,8 @@ This can also be set from map, see <page>Sandbox Specific Mapping</page></item>
 <item name="CanProperty" type="function">Documented at <page>ENTITY:CanProperty</page>.</item>
 <item name="CanTool" type="function">Documented at <page>ENTITY:CanTool</page>.</item>
 
+<item name="DoNotDuplicate" type="boolean" default="false" realm="server">If set, the entity will not be duplicated via the built-in duplicator system.</item>
+
 <item name="CalcAbsolutePosition" type="function">Documented at <page>ENTITY:CalcAbsolutePosition</page>.</item>
 <item name="RenderOverride" type="function">Documented at <page>ENTITY:RenderOverride</page>.</item>
 
@@ -116,6 +118,10 @@ Custom_Entity_Fields.CanProperty = nil
 ---Documented at ENTITY:CanTool.
 ---@type function
 Custom_Entity_Fields.CanTool = nil
+
+---If set, the entity will not be duplicated via the built-in duplicator system.
+---@type boolean?
+Custom_Entity_Fields.DoNotDuplicate = false
 
 ---Documented at ENTITY:CalcAbsolutePosition.
 ---@type function
