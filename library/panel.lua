@@ -1962,6 +1962,8 @@ function Panel:SetCaretPos(offset) end
 ---
 --- **NOTE**: This function only works on [Label](https://wiki.facepunch.com/gmod/Label) panels and its derivatives.
 ---
+--- **NOTE**: This function doesnt work, if [Panel:SetWrap](https://wiki.facepunch.com/gmod/Panel:SetWrap) is true.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetContentAlignment)
 ---@param alignment number The direction of the content, based on the number pad.
 ---

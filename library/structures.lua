@@ -12,21 +12,21 @@ local AmmoData = {}
 ---Damage type using Enums/DMG.
 ---
 --- Related function is game.GetAmmoDamageType.
----@type number
+---@type number?
 AmmoData.dmgtype = DMG_BULLET
 
 ---The force of the ammo.
 ---
 --- Related function is game.GetAmmoForce.
----@type number
+---@type number?
 AmmoData.force = 1000
 
 ---The maximum water splash size.
----@type number
+---@type number?
 AmmoData.maxsplash = 0
 
 ---The minimum water splash size.
----@type number
+---@type number?
 AmmoData.minsplash = 0
 
 ---Name of the ammo.
@@ -40,7 +40,7 @@ AmmoData.name = nil
 --- Related function is game.GetAmmoNPCDamage.
 ---
 --- Can also be a string with the name of a convar. The value will automatically update with the convar's.
----@type number
+---@type number?
 AmmoData.npcdmg = 10
 
 ---The damage dealt to players.
@@ -48,11 +48,11 @@ AmmoData.npcdmg = 10
 --- Related function is game.GetAmmoPlayerDamage.
 ---
 --- Can also be a string with the name of a convar. The value will automatically update with the convar's.
----@type number
+---@type number?
 AmmoData.plydmg = 10
 
 ---Tracer type using Enums/TRACER.
----@type number
+---@type number?
 AmmoData.tracer = TRACER_NONE
 
 ---Maximum amount of ammo of this type the player should be able to carry in reserve. `-2` makes this ammo type infinite.
@@ -61,11 +61,11 @@ AmmoData.tracer = TRACER_NONE
 ---
 --- Can also be a string with the name of a convar. The value will automatically update with the convar's.
 --- `gmod_maxammo` convar will override this value if set to above 0, **which it is by default**.
----@type number
+---@type number?
 AmmoData.maxcarry = 9999
 
 ---Flags for the ammo type using Enums/AMMO.
----@type number
+---@type number?
 AmmoData.flags = 0
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).
@@ -103,7 +103,7 @@ AnimationData.StartTime = nil
 AnimationData.EndTime = nil
 
 ---The ease in/out level of the animation.
----@type number
+---@type number?
 AnimationData.Ease = -1
 
 ---The callback function that will be called upon completion of the animation.
@@ -141,7 +141,7 @@ AnimationData.SizeX = nil
 AnimationData.SizeY = nil
 
 ---The target size of the panel object. Only used by Panel:SizeTo.
----@type Vector
+---@type Vector?
 AnimationData.Size = Vector(0, 0, 0)
 
 ---The size of the panel object when the animation started. Only used by Panel:SizeTo.
@@ -197,15 +197,15 @@ AttachmentData.name = nil
 local BalloonData = {}
 
 ---Where the balloon will spawn
----@type Vector
+---@type Vector?
 BalloonData.Pos = VectorVector(0, 0, 0)
 
 ---The balloon’s model
----@type string
+---@type string?
 BalloonData.Model = "models/error.mdl"
 
 ---The balloon’s skin
----@type number
+---@type number?
 BalloonData.Skin = 0
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The tables that make up the values of the table returned by [Entity:GetBodyGroups](https://wiki.facepunch.com/gmod/Entity:GetBodyGroups).
@@ -265,15 +265,15 @@ BoneBindPose.matrix = nil
 local BoneManipulationData = {}
 
 ---The entity's scale manipulation of the bone
----@type Vector
+---@type Vector?
 BoneManipulationData.s = Vectornil
 
 ---The entity's angle manipulation of the bone
----@type Angle
+---@type Angle?
 BoneManipulationData.a = nil
 
 ---The entity's position manipulation of the given bone
----@type Vector
+---@type Vector?
 BoneManipulationData.p = Vectornil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing the amount that a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) should affect its vertex.
@@ -307,13 +307,13 @@ local Bullet = {}
 ---The entity that should be reported as attacker eg. a player
 ---
 --- By default this would be set to the entity Entity:FireBullets is called on.
----@type Entity
+---@type Entity?
 Bullet.Attacker = self
 
 ---The entity that should be reported as inflictor eg. a weapon or something similar
 ---
 --- Also defines CTakeDamageInfo:GetWeapon for Weapon.
----@type Entity
+---@type Entity?
 Bullet.Inflictor = NULL
 
 ---Function to be called **after** the bullet was fired but **before** the damage is applied (the callback is called even if no damage is applied).
@@ -328,58 +328,58 @@ Bullet.Inflictor = NULL
 --- The return value can be a table with following keys:
 --- * boolean effects - `false` to not do any of the effects.
 --- * boolean damage - `false` to not do any damage.
----@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo):(ret0: table)
+---@type fun(attacker: Entity, tr: table, dmgInfo: CTakeDamageInfo):(ret0: table)?
 Bullet.Callback = nil
 
 ---The damage dealt by the bullet.
 ---
 --- If set to `0`, it means the damage should be calculated from the ammo type's ConVars if  the ammo type has `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` flag set.
 --- See Structures/AmmoData.
----@type number
+---@type number?
 Bullet.Damage = 1
 
 ---The force of the bullets
----@type number
+---@type number?
 Bullet.Force = 1
 
 ---Maximum distance the bullet can travel
----@type number
+---@type number?
 Bullet.Distance = 56756
 
 ---The hull size of the bullet
----@type number
+---@type number?
 Bullet.HullSize = 0
 
 ---The amount of bullets to fire
----@type number
+---@type number?
 Bullet.Num = 1
 
 ---Show tracer for every x bullets
----@type number
+---@type number?
 Bullet.Tracer = 1
 
 ---The ammunition name
----@type string
+---@type string?
 Bullet.AmmoType = "<empty string>"
 
 ---The tracer name. You can find a list of default effects Default_Effects.
----@type string
+---@type string?
 Bullet.TracerName = "nil"
 
 ---The fire direction
----@type Vector
+---@type Vector?
 Bullet.Dir = VectorVector(0, 0, 0)
 
 ---The spread, only x and y are needed
----@type Vector
+---@type Vector?
 Bullet.Spread = VectorVector(0, 0, 0)
 
 ---The position to fire the bullets from
----@type Vector
+---@type Vector?
 Bullet.Src = VectorVector(0, 0, 0)
 
 ---The entity that the bullet will ignore when it will be shot.
----@type Entity
+---@type Entity?
 Bullet.IgnoreEntity = NULL
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) and [GM:CalcVehicleView](https://wiki.facepunch.com/gmod/GM:CalcVehicleView) hook.
@@ -410,7 +410,7 @@ CamData.znear = nil
 CamData.zfar = nil
 
 ---Set true to draw local players player model.
----@type boolean
+---@type boolean?
 CamData.drawviewer = false
 
 ---If set, enables orthographic mode. The table has following arguments:
@@ -420,7 +420,7 @@ CamData.drawviewer = false
 --- * number bottom
 ---
 --- Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
----@type table
+---@type table?
 CamData.ortho = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Passed as argument of [ENTITY:PhysicsCollide](https://wiki.facepunch.com/gmod/ENTITY:PhysicsCollide), [EFFECT:PhysicsCollide](https://wiki.facepunch.com/gmod/EFFECT:PhysicsCollide) and used with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
@@ -721,15 +721,15 @@ DynamicLight.decay = nil
 DynamicLight.dietime = nil
 
 ---The light direction. Used with **InnerAngle** and **OuterAngle**.
----@type Vector
+---@type Vector?
 DynamicLight.dir = VectorVector(0, 0, 0)
 
 ---The closer this is to zero, the smoother the light will be. Requires **Dir** and **OuterAngle** to be set.
----@type number
+---@type number?
 DynamicLight.innerangle = 0
 
 ---The angle of the Dynamic Light. Requires **Dir** to be set.
----@type number
+---@type number?
 DynamicLight.outerangle = 0
 
 ---Makes the light brighter and flicker? Changing the value does not seem to affect anything.
@@ -737,15 +737,15 @@ DynamicLight.outerangle = 0
 DynamicLight.key = nil
 
 ---Minimum light
----@type number
+---@type number?
 DynamicLight.minlight = 0
 
 ---Don't light the world. Has no effect for elights since they never light the world.
----@type boolean
+---@type boolean?
 DynamicLight.noworld = false
 
 ---Don't light models
----@type boolean
+---@type boolean?
 DynamicLight.nomodel = false
 
 ---Position of the light
@@ -798,7 +798,7 @@ EmitSoundInfo.OriginalSoundName = nil
 ---The time at which the sound should be played.
 ---
 --- If equal to 0 or CurTime(), the sound is played immediately. If greater than CurTime(), the sound is played with a delay. If less than CurTime(), part of the sound is skipped.
----@type number
+---@type number?
 EmitSoundInfo.SoundTime = 0
 
 ---The DSP (digital signal processing) preset applied to the sound.
@@ -806,7 +806,7 @@ EmitSoundInfo.SoundTime = 0
 --- There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments.
 ---
 --- [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
----@type number
+---@type number?
 EmitSoundInfo.DSP = 0
 
 ---The sound's attenuation, a number between 0 (low) and 511 (high)
@@ -814,15 +814,15 @@ EmitSoundInfo.DSP = 0
 --- This determines how fast the sound drops away. A higher value means the sound can be heard farther away.
 ---
 --- See Enums/SNDLVL.
----@type number
+---@type number?
 EmitSoundInfo.SoundLevel = 75
 
 ---The pitch of the played sound, a number between 0 (low) and 255 (high), where 100 is the sound's original pitch.
----@type number
+---@type number?
 EmitSoundInfo.Pitch = 100
 
 ---The bit flags of the played sound. See Enums/SND for available options.
----@type number
+---@type number?
 EmitSoundInfo.Flags = 0
 
 ---The sound's channel. See Enums/CHAN for available options.
@@ -874,23 +874,23 @@ ENT.ClassNameOverride = nil
 ENT.Folder = nil
 
 ---Set this to true if your entity has animations. You should also apply changes to the ENTITY:Think function from the example on that page.
----@type boolean
+---@type boolean?
 ENT.AutomaticFrameAdvance = false
 
 ---Spawnmenu category to put the entity into
----@type string
+---@type string?
 ENT.Category = "Other"
 
 ---Whether this entity should be displayed and is spawnable in the spawn menu
----@type boolean
+---@type boolean?
 ENT.Spawnable = false
 
 ---Whether the entity supports Editing. See Editable Entities for more info.
----@type boolean
+---@type boolean?
 ENT.Editable = false
 
 ---Whether or not only admins can spawn the entity from their spawn menu
----@type boolean
+---@type boolean?
 ENT.AdminOnly = false
 
 ---Nice name of the entity to appear in the spawn menu
@@ -918,11 +918,11 @@ ENT.Instructions = nil
 ENT.RenderGroup = nil
 
 ---If set and RenderGroup is not, will switch the render group to Enums/RENDERGROUP#RENDERGROUP_BOTH when appropriate.
----@type boolean
+---@type boolean?
 ENT.WantsTranslucency = false
 
 ---Disable the ability for players to duplicate this entity.
----@type boolean
+---@type boolean?
 ENT.DisableDuplicator = false
 
 ---Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes.
@@ -933,7 +933,7 @@ ENT.ScriptedEntityType = nil
 ---If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
 ---
 --- Like many functions, this expects a path relative to the `materials/` folder, do not include `materials/` in the provided string.
----@type string
+---@type string?
 ENT.IconOverride = "entities/<ClassName>.png"
 
 ---If set, a bitflag for the physics solidity of the entity. See Enums/CONTENTS.
@@ -941,11 +941,11 @@ ENT.IconOverride = "entities/<ClassName>.png"
 --- Can be used to make the entity pass though certain otherwise solid meshes, such as grates, or special clip brushes.
 ---
 --- This only works for `nextbot`, `anim` and `ai` type SENTs.
----@type number
+---@type number?
 ENT.PhysicsSolidMask = nil
 
 ---For `anim` type entities, if set, enables physics collision sounds.
----@type boolean
+---@type boolean?
 ENT.PhysicsSounds = false
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Data structure used by the [duplicator](https://wiki.facepunch.com/gmod/duplicator) to store and load entity data.
@@ -1048,7 +1048,7 @@ local FiredBullet = {}
 ---The type of ammo that was fired.
 ---
 --- Should be one of the values from the game.GetAmmoTypes table.
----@type string
+---@type string?
 FiredBullet.AmmoType = "<Empty String>"
 
 ---The Entity that fired the bullet.
@@ -1093,70 +1093,70 @@ local FontData = {}
 --- This must be the actual 'nice' font, not a file name. Unless the client is running Linux or macOS. ([Finding the Font Name](https://wiki.facepunch.com/gmod/Finding_the_Font_Name))
 ---
 --- This also cannot be an already registered font, i.e. you cannot base your font from any of the [Default Fonts](https://wiki.facepunch.com/gmod/Default_Fonts)
----@type string
+---@type string?
 FontData.font = "Arial"
 
 ---Allow the font to display glyphs that are outside of the Latin-1 range. Unicode code points above 0xFFFF are not supported.
----@type boolean
+---@type boolean?
 FontData.extended = false
 
 ---The font height in pixels
 ---
 --- `Range:` 4 - 255
----@type number
+---@type number?
 FontData.size = 13
 
 ---The font boldness
----@type number
+---@type number?
 FontData.weight = 500
 
 ---The strength of the font blurring
 ---
 --- `Range:` 0 - 80
----@type number
+---@type number?
 FontData.blursize = 0
 
 ---The "scanline" interval
 --- Must be > 1 to work. This setting is per blursize per font - so if you create a font using "Arial" without scanlines, you cannot create an Arial font using scanlines with the same blursize
----@type number
+---@type number?
 FontData.scanlines = 0
 
 ---Smooth the font
----@type boolean
+---@type boolean?
 FontData.antialias = true
 
 ---Add an underline to the font
----@type boolean
+---@type boolean?
 FontData.underline = false
 
 ---Make the font italic
----@type boolean
+---@type boolean?
 FontData.italic = false
 
 ---Add a strike through
----@type boolean
+---@type boolean?
 FontData.strikeout = false
 
 ---Enables the use of symbolic fonts such as Webdings
----@type boolean
+---@type boolean?
 FontData.symbol = false
 
 ---Seems to add a line in the middle of each letter
----@type boolean
+---@type boolean?
 FontData.rotary = false
 
 ---Add shadow casting to the font
----@type boolean
+---@type boolean?
 FontData.shadow = false
 
 ---Additive rendering
----@type boolean
+---@type boolean?
 FontData.additive = false
 
 ---Add a black outline to the font.
 ---
 --- This does not work well with antialias, and only allows black 1-pixel outlines. It may be preferable to not use this parameter, and instead use draw.SimpleTextOutlined when drawing text that you want outlined.
----@type boolean
+---@type boolean?
 FontData.outline = false
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table created by the [string.FormattedTime](https://wiki.facepunch.com/gmod/string.FormattedTime) function if no format is given to it.
@@ -1280,11 +1280,11 @@ HTTPRequest.headers = nil
 HTTPRequest.body = nil
 
 ---Content type for body.
----@type string
+---@type string?
 HTTPRequest.type = "text/plain; charset=utf-8"
 
 ---The timeout for the connection.
----@type number
+---@type number?
 HTTPRequest.timeout = 60
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull).
@@ -1321,31 +1321,31 @@ HullTrace.mins = nil
 --- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
----@type Entity
+---@type Entity?
 HullTrace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit.
----@type number
+---@type number?
 HullTrace.mask = MASK_SOLID
 
 ---The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
----@type number
+---@type number?
 HullTrace.collisiongroup = COLLISION_GROUP_NONE
 
 ---Should the trace ignore world or not.
----@type boolean
+---@type boolean?
 HullTrace.ignoreworld = false
 
 ---If set, the trace result will be written to the supplied table instead of returning a new table
----@type table
+---@type table?
 HullTrace.output = nil
 
 ---Turns the `filter` field into a whitelist, if it is a table.
----@type boolean
+---@type boolean?
 HullTrace.whitelist = false
 
 ---Enables traces to hit clientside only entities. Keep in mind that most naturally spawned entities are classified as debris, so extra `mask` values might be required.
----@type boolean
+---@type boolean?
 HullTrace.hitclientonly = false
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used for [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
@@ -1356,35 +1356,35 @@ HullTrace.hitclientonly = false
 local LocalLight = {}
 
 ---The type of the light source, see Enums/MATERIAL_LIGHT.
----@type number
+---@type number?
 LocalLight.type = MATERIAL_LIGHT_POINT
 
 ---The color of the light source (x is red, y is green, z is blue). Values are not restricted to a specific range, higher values will result in a brighter light.
----@type Vector
+---@type Vector?
 LocalLight.color = Vectorvector_origin
 
 ---The origin of the light in world coordinates.
----@type Vector
+---@type Vector?
 LocalLight.pos = Vectorvector_origin
 
 ---The direction of the light. Only required for directional and spot lights.
----@type Vector
+---@type Vector?
 LocalLight.dir = Vectorvector_origin
 
 ---The maximum range of the light source. Does not actually control light attenuation. Usually left at 0 for infinite range.
----@type number
+---@type number?
 LocalLight.range = 0
 
 ---Angular falloff exponent for spot lights. Higher values result in a sharper transition between the inner cone and the outer cone.
----@type number
+---@type number?
 LocalLight.angularFalloff = 5
 
 ---The inner cone angle for spot lights, in degrees. No angular falloff will occur inside that cone.
----@type number
+---@type number?
 LocalLight.innerAngle = 45
 
 ---The outer cone angle for spot lights, in degrees.
----@type number
+---@type number?
 LocalLight.outerAngle = 45
 
 ---The distance at which the light will fade to 50% of its brightness.
@@ -1396,15 +1396,15 @@ LocalLight.fiftyPercentDistance = nil
 LocalLight.zeroPercentDistance = nil
 
 ---The quadratic term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
+---@type number?
 LocalLight.quadraticFalloff = 0
 
 ---The linear term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
+---@type number?
 LocalLight.linearFalloff = 0
 
 ---The constant term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
----@type number
+---@type number?
 LocalLight.constantFalloff = 1
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used by [matproxy.Add](https://wiki.facepunch.com/gmod/matproxy.Add).
@@ -1715,41 +1715,41 @@ NPCData.Name = nil
 NPCData.Class = nil
 
 ---Spawnmenu category to put the NPCinto.
----@type string
+---@type string?
 NPCData.Category = "Other"
 
 ---A list of weapons this NPC is typically meant to use. One will be picked on spawn at random, unless overwritten by the player.
----@type table
+---@type table?
 NPCData.Weapons = {}
 
 ---Key-value pairs to apply to the NPC on spawn. See Entity:SetKeyValue.
----@type table
+---@type table?
 NPCData.KeyValues = {}
 
 ---Model override for this NPC.
----@type string
+---@type string?
 NPCData.Model = "nil"
 
 ---Additional spawnflags for this NPC. See Entity:GetSpawnFlags.
 ---
 --- Ignored if `TotalSpawnFlags` key is present.
----@type number
+---@type number?
 NPCData.SpawnFlags = 0
 
 ---Total spawnflags override for this NPC.
----@type number
+---@type number?
 NPCData.TotalSpawnFlags = nil
 
 ---If set to `true`, this NPC can only be spawned on the ceiling. Stacks with `OnFloor`.
----@type boolean
+---@type boolean?
 NPCData.OnCeiling = false
 
 ---If set to `true`, this NPC can only be spawned on the floor. Stacks with `OnCeiling`.
----@type boolean
+---@type boolean?
 NPCData.OnFloor = false
 
 ---Offset, in Hammer units, away from the surface where the player is looking at for the NPC spawn position.
----@type number
+---@type number?
 NPCData.Offset = 0
 
 ---Material override for this NPC. See Entity:SetMaterial.
@@ -1757,23 +1757,23 @@ NPCData.Offset = 0
 NPCData.Material = nil
 
 ---Skin override for the NPC. See Entity:SetSkin.
----@type number
+---@type number?
 NPCData.Skin = nil
 
 ---If set to `true`, do not try to teleport the NPC to the ground.
----@type boolean
+---@type boolean?
 NPCData.NoDrop = false
 
 ---Used to add additional rotation the NPC post spawn. Usually all NPCs would be facing the player on spawn. Value of `Angle( 0, 180, 0 )` would make the NPC face away from the player.
----@type Angle
+---@type Angle?
 NPCData.Rotate = Angle(0, 0, 0)
 
 ---Health override for this NPC. Also sets Entity:SetMaxHealth.
----@type number
+---@type number?
 NPCData.Health = nil
 
 ---If set, a function to be called when the NPC is pasted using the duplicator library.
----@type function
+---@type function?
 NPCData.OnDuplicated = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Vehicle:GetOperatingParams](https://wiki.facepunch.com/gmod/Vehicle:GetOperatingParams).
@@ -1911,13 +1911,13 @@ local PhysEnvPerformanceSettings = {}
 ---Maximum amount of seconds to precalculate collisions with objects.
 ---
 --- Default value for this setting is `0.5`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.LookAheadTimeObjectsVsObject = nil
 
 ---Maximum amount of seconds to precalculate collisions with world.
 ---
 --- Default value for this setting is `1`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.LookAheadTimeObjectsVsWorld = nil
 
 ---Maximum collision checks per tick.
@@ -1925,7 +1925,7 @@ PhysEnvPerformanceSettings.LookAheadTimeObjectsVsWorld = nil
 --- Objects may penetrate after this many collision checks
 ---
 --- Default value for this setting is `50000`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MaxCollisionChecksPerTimestep = nil
 
 ---Maximum collision per object per tick.
@@ -1933,31 +1933,31 @@ PhysEnvPerformanceSettings.MaxCollisionChecksPerTimestep = nil
 --- Object will be frozen after this many collisions (visual hitching vs. CPU cost)
 ---
 --- Default value for this setting is `10`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MaxCollisionsPerObjectPerTimestep = nil
 
 ---Maximum world-space speed of an object in inches per second.
 ---
 --- Default value for this setting is `4000`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MaxVelocity = nil
 
 ---Maximum world-space rotational velocity in degrees per second.
 ---
 --- Default value for this setting is `7200`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MaxAngularVelocity = nil
 
 ---Minimum mass of an object to be affected by friction.
 ---
 --- Default value for this setting is `10`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MinFrictionMass = nil
 
 ---Maximum mass of an object to be affected by friction.
 ---
 --- Default value for this setting is `2500`.
----@type number
+---@type number?
 PhysEnvPerformanceSettings.MaxFrictionMass = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Structure used in storing/restoring physics object attributes.
@@ -2002,11 +2002,11 @@ PhysicsObjectSave.Sleep = nil
 local PhysProperties = {}
 
 ---Enables or disables gravity for the entity
----@type boolean
+---@type boolean?
 PhysProperties.GravityToggle = nil
 
 ---Sets the physics material for the entity
----@type string
+---@type string?
 PhysProperties.Material = "nil"
 
 ---The 'nice' name of the player class for display in User Interface and such.
@@ -2014,67 +2014,67 @@ PhysProperties.Material = "nil"
 PLAYER.DisplayName = nil
 
 ---How fast to move when not running
----@type number
+---@type number?
 PLAYER.WalkSpeed = 400
 
 ---How fast to move when running/sprinting
----@type number
+---@type number?
 PLAYER.RunSpeed = 600
 
 ---How fast to move when slow walking, which is activated via the +WALK keybind.
----@type number
+---@type number?
 PLAYER.SlowWalkSpeed = 200
 
 ---Multiply walk speed by this when crouching
----@type number
+---@type number?
 PLAYER.CrouchedWalkSpeed = 0.3
 
 ---How fast to go from not ducking, to ducking
----@type number
+---@type number?
 PLAYER.DuckSpeed = 0.3
 
 ---How fast to go from ducking, to not ducking
----@type number
+---@type number?
 PLAYER.UnDuckSpeed = 0.3
 
 ---How powerful a jump should be
----@type number
+---@type number?
 PLAYER.JumpPower = 200
 
 ---Can the player use the flashlight
----@type boolean
+---@type boolean?
 PLAYER.CanUseFlashlight = true
 
 ---Max health we can have
----@type number
+---@type number?
 PLAYER.MaxHealth = 100
 
 ---Max armor the player can have
----@type number
+---@type number?
 PLAYER.MaxArmor = 0
 
 ---How much health we start with
----@type number
+---@type number?
 PLAYER.StartHealth = 100
 
 ---How much armour we start with
----@type number
+---@type number?
 PLAYER.StartArmor = 0
 
 ---Do we drop our weapon when we die
----@type boolean
+---@type boolean?
 PLAYER.DropWeaponOnDie = false
 
 ---Do we collide with teammates or run straight through them
----@type boolean
+---@type boolean?
 PLAYER.TeammateNoCollide = true
 
 ---Automatically swerves around other players
----@type boolean
+---@type boolean?
 PLAYER.AvoidPlayers = true
 
 ---Uses viewmodel hands
----@type boolean
+---@type boolean?
 PLAYER.UseVMHands = true
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) A structure containing vertex information for use with [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
@@ -2167,7 +2167,7 @@ Problem.fix = nil
 local PropertyAdd = {}
 
 ---Can be set to "toggle" to make this property a toggle property.
----@type string
+---@type string?
 PropertyAdd.Type = "simple"
 
 ---Label to show on opened menu
@@ -2201,7 +2201,7 @@ PropertyAdd.MenuIcon = nil
 PropertyAdd.Order = nil
 
 ---Whether to add a spacer before this property. This should generally be true for the first property in a group of properties.
----@type boolean
+---@type boolean?
 PropertyAdd.PrependSpacer = false
 
 ---Used **clientside** to decide whether this property should be shown for an entity.
@@ -2281,57 +2281,57 @@ PropertyAdd.OnCreate = nil
 local RenderCamData = {}
 
 ---The x position of the view port
----@type number
+---@type number?
 RenderCamData.x = nil
 
 ---The y position of the view port
----@type number
+---@type number?
 RenderCamData.y = nil
 
 ---The width of the view port
----@type number
+---@type number?
 RenderCamData.w = nil
 
 ---The height of the view port
----@type number
+---@type number?
 RenderCamData.h = nil
 
 ---The type of cam. Valid types are:
 --- * "2D" - No additional arguments are required
 --- * "3D" - Only origin and angles are needed, all other parameters are optional.
----@type string
+---@type string?
 RenderCamData.type = "3D"
 
 ---The position to render from
----@type Vector
+---@type Vector?
 RenderCamData.origin = Vectornil
 
 ---The angles to render from
----@type Angle
+---@type Angle?
 RenderCamData.angles = nil
 
 ---The field of view
----@type number
+---@type number?
 RenderCamData.fov = nil
 
 ---The aspect ratio of the view port (Note that this is NOT set to w/h by default)
----@type number
+---@type number?
 RenderCamData.aspect = nil
 
 ---The distance to the far clipping plane
----@type number
+---@type number?
 RenderCamData.zfar = nil
 
 ---The distance to the near clipping plane
----@type number
+---@type number?
 RenderCamData.znear = nil
 
 ---Set to true if this is to draw into a subrect of the larger screen.
----@type boolean
+---@type boolean?
 RenderCamData.subrect = nil
 
 ---m_bDoBloomAndToneMapping
----@type boolean
+---@type boolean?
 RenderCamData.bloomtone = false
 
 ---A table having these keys: ( all floats )
@@ -2339,7 +2339,7 @@ RenderCamData.bloomtone = false
 --- * right
 --- * bottom
 --- * top
----@type table
+---@type table?
 RenderCamData.offcenter = nil
 
 ---If set, makes the view/camera orthogonal. A table having these keys: ( all floats )
@@ -2347,7 +2347,7 @@ RenderCamData.offcenter = nil
 --- * right
 --- * bottom
 --- * top
----@type table
+---@type table?
 RenderCamData.ortho = nil
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used for [render.Capture](https://wiki.facepunch.com/gmod/render.Capture).
@@ -2384,7 +2384,7 @@ RenderCaptureData.h = nil
 RenderCaptureData.quality = nil
 
 ---Set to false to capture an image with alpha channel set to fully opaque. Affects png only.
----@type boolean
+---@type boolean?
 RenderCaptureData.alpha = true
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [Entity:GetSequenceInfo](https://wiki.facepunch.com/gmod/Entity:GetSequenceInfo).
@@ -2478,7 +2478,7 @@ SequenceInfo.anims = nil
 local ServerQueryData = {}
 
 ---The game directory to get the servers for
----@type string
+---@type string?
 ServerQueryData.GameDir = "garrysmod"
 
 ---Type of servers to retrieve. Valid values are `internet`, `favorite`, `history` and `lan`
@@ -2486,7 +2486,7 @@ ServerQueryData.GameDir = "garrysmod"
 ServerQueryData.Type = nil
 
 ---Steam application ID to get the servers for
----@type number
+---@type number?
 ServerQueryData.AppID = 4000
 
 ---Called when a new server is found and queried.
@@ -2531,43 +2531,43 @@ local ShadowControlParams = {}
 
 ---How long it takes to move to the set pos and angle. Limited by max speed/damping.
 --- Cannot be 0! Will give errors if you do.
----@type number
+---@type number?
 ShadowControlParams.secondstoarrive = TICK_INTERVAL * 2
 
 ---The time it should use - just use the one from ENTITY:PhysicsSimulate.
----@type number
+---@type number?
 ShadowControlParams.delta = 0.1
 
 ---Where you want to move to.
----@type Vector
+---@type Vector?
 ShadowControlParams.pos = Vectorvector_origin
 
 ---Angle you want to move to.
----@type Angle
+---@type Angle?
 ShadowControlParams.angle = angle_zero
 
 ---What should be the maximal angular force applied.
----@type number
+---@type number?
 ShadowControlParams.maxangular = 1
 
 ---At which force/speed should it start damping the rotation.
----@type number
+---@type number?
 ShadowControlParams.maxangulardamp = 1
 
 ---Maximum linear force applied
----@type number
+---@type number?
 ShadowControlParams.maxspeed = 1
 
 ---Maximum linear force/speed before damping.
----@type number
+---@type number?
 ShadowControlParams.maxspeeddamp = 1
 
 ---The percentage it should damp the linear/angular force if it reaches it's max amount
----@type number
+---@type number?
 ShadowControlParams.dampfactor = 1
 
 ---If it's further away than this it'll teleport (Set to 0 to not teleport)
----@type number
+---@type number?
 ShadowControlParams.teleportdistance = 0
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used in [sound.Add](https://wiki.facepunch.com/gmod/sound.Add) and [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
@@ -2600,23 +2600,23 @@ SoundData.level = nil
 ---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.
 ---
 --- **Warning:** Volume of `0` will act as volume of `1`
----@type number
+---@type number?
 SoundData.volume = 1.0
 
 ---The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.
----@type number
+---@type number?
 SoundData.pitch = 100
 
 ---@deprecated Use pitch instead.
 ---The initial pitch.
 --- 	Use pitch instead.
----@type number
+---@type number?
 SoundData.pitchstart = 100
 
 ---@deprecated Use pitch instead.
 ---The pitch end.
 --- Use pitch instead.
----@type number
+---@type number?
 SoundData.pitchend = 100
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table describing a sound hint, used by [NPC:GetBestSoundHint](https://wiki.facepunch.com/gmod/NPC:GetBestSoundHint) and [sound.GetLoudestSoundHint](https://wiki.facepunch.com/gmod/sound.GetLoudestSoundHint).
@@ -2798,30 +2798,30 @@ SWEP.ClassNameOverride = nil
 
 ---The spawn menu category that this weapon
 ---             resides in.
----@type string
+---@type string?
 SWEP.Category = "#spawnmenu.category.other"
 
 ---Whether or not this weapon can be obtained through the
 ---             spawn menu.
----@type boolean
+---@type boolean?
 SWEP.Spawnable = false
 
 ---If spawnable, this variable determines whether only
 ---             administrators can use the button in the spawn menu.
----@type boolean
+---@type boolean?
 SWEP.AdminOnly = false
 
 ---The name of the SWEP displayed in the spawn menu.
----@type string
+---@type string?
 SWEP.PrintName = "Scripted Weapon"
 
 ---The weapon's base script, relative to `lua/weapons`.
----@type string
+---@type string?
 SWEP.Base = "weapon_base"
 
 ---The deploy speed multiplier. This does not change the
 ---             internal deployment speed.
----@type number
+---@type number?
 SWEP.m_WeaponDeploySpeed = GetConVar("sv_defaultdeployspeed"):GetFloat()
 
 ---@deprecated Use Entity:GetOwner() instead.
@@ -2851,71 +2851,71 @@ SWEP.Purpose = nil
 SWEP.Instructions = nil
 
 ---Relative path to the SWEP's view model.
----@type string
+---@type string?
 SWEP.ViewModel = "models/weapons/v_pistol.mdl"
 
 ---Used primarily for Counter Strike: Source view models, this variable is used to flip them back to normal.
----@type boolean
+---@type boolean?
 SWEP.ViewModelFlip = false
 
 ---Behaves similarly to `ViewModelFlip`, but for the second view model.
----@type boolean
+---@type boolean?
 SWEP.ViewModelFlip1 = false
 
 ---Behaves similarly to `ViewModelFlip`, but for the third view model.
----@type boolean
+---@type boolean?
 SWEP.ViewModelFlip2 = false
 
 ---The field of view percieved whilst wielding this `SWEP`.
----@type number
+---@type number?
 SWEP.ViewModelFOV = 62
 
 ---Relative path to the SWEP's world model.
----@type string
+---@type string?
 SWEP.WorldModel = "models/weapons/w_357.mdl"
 
 ---Whether this weapon can be autoswitched
 ---             away from when the player runs out of ammo in this weapon or picks up another weapon or ammo
----@type boolean
+---@type boolean?
 SWEP.AutoSwitchFrom = true
 
 ---Whether this weapon can be autoswitched to
 ---             when the player runs out of ammo in their current weapon or they pick this weapon up
----@type boolean
+---@type boolean?
 SWEP.AutoSwitchTo = true
 
 ---Determines the priority of the weapon when
 ---             autoswitching. The weapon being autoswitched from will attempt to switch to a weapon with the same weight
 ---             that has ammo, but if none exists, it will prioritise higher weight weapons.
----@type number
+---@type number?
 SWEP.Weight = 5
 
 ---The scale of the viewmodel bob (viewmodel movement
 ---             from left to right when walking around)
----@type number
+---@type number?
 SWEP.BobScale = 1
 
 ---The scale of the viewmodel sway (viewmodel
 ---             position lerp when looking around).
----@type number
+---@type number?
 SWEP.SwayScale = 1
 
 ---Should the weapon icon bounce in weapon
 ---             selection?
----@type boolean
+---@type boolean?
 SWEP.BounceWeaponIcon = true
 
 ---Should draw the weapon selection info
 ---             box, containing SWEP.Instructions, etc.
----@type boolean
+---@type boolean?
 SWEP.DrawWeaponInfoBox = true
 
 ---Should we draw the default HL2 ammo counter?
----@type boolean
+---@type boolean?
 SWEP.DrawAmmo = true
 
 ---Should we draw the default crosshair?
----@type boolean
+---@type boolean?
 SWEP.DrawCrosshair = true
 
 ---The SWEP render group, see Enums/RENDERGROUP. If unset, the engine will decide the render group based on the SWEPs world model.
@@ -2923,31 +2923,31 @@ SWEP.DrawCrosshair = true
 SWEP.RenderGroup = nil
 
 ---Slot in the weapon selection menu, starts with `0`
----@type number
+---@type number?
 SWEP.Slot = 0
 
 ---Position in the slot, should be in the range `0-128`
----@type number
+---@type number?
 SWEP.SlotPos = 10
 
 ---Internal variable for drawing the info box in weapon selection
----@type number
+---@type number?
 SWEP.SpeechBubbleLid = surface.GetTextureID("gui/speech_lid")
 
 ---Path to
 ---             an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,
 ---             see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
----@type number
+---@type number?
 SWEP.WepSelectIcon = surface.GetTextureID("weapons/swep")
 
 ---Should we use Counter-Strike muzzle
 ---             flashes upon firing? This is required for DoD:S or CS:S view models to fix their muzzle flashes.
----@type boolean
+---@type boolean?
 SWEP.CSMuzzleFlashes = false
 
 ---Use the X shape muzzle flash instead of the
 ---             default Counter-Strike muzzle flash. Requires Structures/SWEP#CSMuzzleFlashes to be set to true.
----@type boolean
+---@type boolean?
 SWEP.CSMuzzleX = false
 
 ---Primary attack settings. The table contains these fields:
@@ -2968,7 +2968,7 @@ SWEP.Secondary = nil
 ---
 ---             The gamemode and view models **must** support this feature for it to work!
 ---                 You can find more information here: [Using Viewmodel Hands](https://wiki.facepunch.com/gmod/Using_Viewmodel_Hands)
----@type boolean
+---@type boolean?
 SWEP.UseHands = false
 
 ---The folder from where the weapon was loaded. This should always be
@@ -2980,28 +2980,28 @@ SWEP.Folder = nil
 ---Makes the default SWEP crosshair be
 ---             positioned in 3D space where your aim actually is (like on Jeep), instead of simply sitting in the middle of
 ---             the screen at all times
----@type boolean
+---@type boolean?
 SWEP.AccurateCrosshair = false
 
 ---Disable the ability for players to duplicate this
 ---             SWEP
----@type boolean
+---@type boolean?
 SWEP.DisableDuplicator = false
 
 ---Sets the spawnmenu content icon type
 ---             for the entity, used by spawnmenu in the Sandbox-derived gamemodes.
 ---             See spawnmenu.AddContentType for more information.
----@type string
+---@type string?
 SWEP.ScriptedEntityType = "weapon"
 
 ---If set to false, the weapon will not play the
 ---             weapon pick up sound when picked up.
----@type boolean
+---@type boolean?
 SWEP.m_bPlayPickupSound = true
 
 ---If set,
 ---             overrides the icon path to be displayed in the Spawnmenu for this entity. The path is relative to the `materials/` folder.
----@type string
+---@type string?
 SWEP.IconOverride = "entities/<ClassName>.png"
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table is one element from [team.GetAllTeams](https://wiki.facepunch.com/gmod/team.GetAllTeams).
@@ -3039,7 +3039,7 @@ local TextData = {}
 TextData.text = nil
 
 ---The font to draw with. List of default fonts can be found Default_Fonts.
----@type string
+---@type string?
 TextData.font = "DermaDefault"
 
 ---This holds the X and Y coordinates. Key value 1 is x, key value 2 is y.
@@ -3047,15 +3047,15 @@ TextData.font = "DermaDefault"
 TextData.pos = nil
 
 ---The alignment of the X position. See Enums/TEXT_ALIGN
----@type number
+---@type number?
 TextData.xalign = TEXT_ALIGN_LEFT
 
 ---The alignment of the Y position. See Enums/TEXT_ALIGN
----@type number
+---@type number?
 TextData.yalign = TEXT_ALIGN_TOP
 
 ---The text color
----@type table
+---@type table?
 TextData.color = color_white
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [draw.TexturedQuad](https://wiki.facepunch.com/gmod/draw.TexturedQuad).
@@ -3086,7 +3086,7 @@ TextureData.w = nil
 TextureData.h = nil
 
 ---The texture color. See Color.
----@type table
+---@type table?
 TextureData.color = color_white
 
 ---
@@ -3102,20 +3102,20 @@ TextureData.color = color_white
 TOOL = {}
 
 ---If set to false, the tool won't be added to the tool menu and players will have to access it by other means.
----@type boolean
+---@type boolean?
 TOOL.AddToMenu = true
 
 ---The tool menu category under which the tool should be listed.
----@type string
+---@type string?
 TOOL.Category = "New Category"
 
 ---The console command to execute upon being selected in the Q menu.
----@type string
+---@type string?
 TOOL.Command = "gmod_toolmode [tool]"
 
 ---The name of the tool in the Q menu.
 --- Common practice is to set this to "#tool.[lua filename].name" to match the name displayed in the tool information box.
----@type string
+---@type string?
 TOOL.Name = "#[tool mode]"
 
 ---A key-value ( convar name-default value ) table containing the client-side convars to create. All convars will be prefixed with the filename of the tool.
@@ -3157,11 +3157,11 @@ TOOL.Mode = nil
 TOOL.Tab = nil
 
 ---When enabled the game tries to run the left mouse click as soon as possible
----@type boolean
+---@type boolean?
 TOOL.LeftClickAutomatic = false
 
 ---When enabled the game tries to run the right mouse click as soon as possible
----@type boolean
+---@type boolean?
 TOOL.RightClickAutomatic = false
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table returned by [Vector:ToScreen](https://wiki.facepunch.com/gmod/Vector:ToScreen).
@@ -3191,11 +3191,11 @@ ToScreenData.visible = nil
 local Trace = {}
 
 ---The start position of the trace
----@type Vector
+---@type Vector?
 Trace.start = VectorVector(0, 0, 0)
 
 ---The end position of the trace
----@type Vector
+---@type Vector?
 Trace.endpos = VectorVector(0, 0, 0)
 
 ---Things the trace should not hit. Can be an entity, a table of entities, a table of entity classes or a function:
@@ -3209,31 +3209,31 @@ Trace.endpos = VectorVector(0, 0, 0)
 --- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
----@type Entity|table<Entity>|table<string>|function
+---@type Entity|table<Entity>|table<string>|function?
 Trace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
----@type number
+---@type number?
 Trace.mask = MASK_SOLID
 
 ---The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
----@type number
+---@type number?
 Trace.collisiongroup = COLLISION_GROUP_NONE
 
 ---Should the trace ignore world or not
----@type boolean
+---@type boolean?
 Trace.ignoreworld = false
 
 ---If set, the trace result will be written to the supplied table instead of returning a new table
----@type table
+---@type table?
 Trace.output = nil
 
 ---Turns the `filter` field into a whitelist, if it is a table.
----@type boolean
+---@type boolean?
 Trace.whitelist = false
 
 ---Enables traces to hit clientside only entities. Keep in mind that most naturally spawned entities are classified as debris, so extra `mask` values might be required.
----@type boolean
+---@type boolean?
 Trace.hitclientonly = false
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table structure used as trace result. Default values are when the trace hits nothing.
@@ -3246,39 +3246,39 @@ Trace.hitclientonly = false
 local TraceResult = {}
 
 ---The entity hit by the trace.
----@type Entity
+---@type Entity?
 TraceResult.Entity = NULL
 
 ---This indicates the how much of your trace length was used from 0-1 (resultLength/originalLength).
----@type number
+---@type number?
 TraceResult.Fraction = 1
 
 ---Given the trace started in a solid enviroment, this will return at what distance the trace left the solid from 0-1. Doesn't work if the trace hit a non-worldspawn entity.
----@type number
+---@type number?
 TraceResult.FractionLeftSolid = 0
 
 ---Indicates whether the trace hit something.
----@type boolean
+---@type boolean?
 TraceResult.Hit = false
 
 ---The ID of the hitbox hit by the trace.
----@type number
+---@type number?
 TraceResult.HitBox = 0
 
 ---Enums/HITGROUP describing what hitgroup the trace hit (not the same as HitBox).
----@type number
+---@type number?
 TraceResult.HitGroup = 0
 
 ---Indicates whenever the trace hit a no-draw brush.
----@type boolean
+---@type boolean?
 TraceResult.HitNoDraw = false
 
 ---Indicates whenever the trace did not hit the world.
----@type boolean
+---@type boolean?
 TraceResult.HitNonWorld = false
 
 ---The direction of the surface that was hit as a normal vector (vector with Vector:Length of 1).
----@type Vector
+---@type Vector?
 TraceResult.HitNormal = VectorGlobal.Vector(0, 0, 0)
 
 ---The position the trace stopped. This will be the provided endpos if the trace hit nothing.
@@ -3286,19 +3286,19 @@ TraceResult.HitNormal = VectorGlobal.Vector(0, 0, 0)
 TraceResult.HitPos = nil
 
 ---Indicates whenever the trace hit the sky.
----@type boolean
+---@type boolean?
 TraceResult.HitSky = false
 
 ---The surface material (not texture) of whatever the trace hit. Will be `**displacement**` if the trace hit a displacement, and `**studio**` if it hit a prop.
----@type string
+---@type string?
 TraceResult.HitTexture = "** empty **"
 
 ---Indicates whenever the trace hit the world.
----@type boolean
+---@type boolean?
 TraceResult.HitWorld = false
 
 ---Enums/MAT of the material hit by the trace.
----@type number
+---@type number?
 TraceResult.MatType = nil
 
 ---The direction of the trace as a normal vector (vector with Vector:Length of 1).
@@ -3310,7 +3310,7 @@ TraceResult.Normal = nil
 ---The PhysObj ID that was hit.
 ---
 --- Used for Entity:GetPhysicsObjectNum.
----@type number
+---@type number?
 TraceResult.PhysicsBone = 0
 
 ---The origin of the trace. Will match the provided startpos.
@@ -3321,31 +3321,31 @@ TraceResult.StartPos = nil
 --- You can get the name using util.GetSurfacePropName.
 ---
 --- Used for CEffectData:SetSurfaceProp.
----@type number
+---@type number?
 TraceResult.SurfaceProps = 0
 
 ---Indicates whenever the trace started in a solid enviroment.
----@type boolean
+---@type boolean?
 TraceResult.StartSolid = false
 
 ---True if the entire trace is inside a solid.
----@type boolean
+---@type boolean?
 TraceResult.AllSolid = false
 
 ---The surface flags of the hit surface. See Enums/SURF.
----@type number
+---@type number?
 TraceResult.SurfaceFlags = 0
 
 ---The displacement flags of the hit surface. See Enums/DISPSURF.
----@type number
+---@type number?
 TraceResult.DispFlags = 0
 
 ---The contents of the hit surface. See Enums/CONTENTS.
----@type number
+---@type number?
 TraceResult.Contents = 0
 
 ---BoneID on the model that the hit hitbox is attached to, if available.
----@type number
+---@type number?
 TraceResult.HitBoxBone = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Table structure used by [steamworks.FileInfo](https://wiki.facepunch.com/gmod/steamworks.FileInfo).
@@ -3893,11 +3893,11 @@ VehicleTable.Model = nil
 VehicleTable.KeyValues = nil
 
 ---Offset away the surface player is looking at to spawn at.
----@type number
+---@type number?
 VehicleTable.Offset = nil
 
 ---Set these members on the spawned vehicle's table (Entity:GetTable) to given values.
----@type table
+---@type table?
 VehicleTable.Members = nil
 
 ---Author of the vehicle, for UI purposes.
@@ -3905,7 +3905,7 @@ VehicleTable.Members = nil
 VehicleTable.Author = nil
 
 ---Category of this vehicle, for UI purposes.
----@type string
+---@type string?
 VehicleTable.Category = "Other"
 
 ---A small description of the vehicle, for UI purposes.
@@ -4003,19 +4003,19 @@ ViewData.w = nil
 ViewData.h = nil
 
 ---Draw the HUD and call the hud painting related hooks
----@type boolean
+---@type boolean?
 ViewData.drawhud = false
 
 ---Draw monitors
----@type boolean
+---@type boolean?
 ViewData.drawmonitors = false
 
 ---The weapon's viewmodel
----@type boolean
+---@type boolean?
 ViewData.drawviewmodel = true
 
 ---Whether to force draw the local player or not.
----@type boolean
+---@type boolean?
 ViewData.drawviewer = false
 
 ---The viewmodel's FOV
@@ -4075,15 +4075,15 @@ ViewData.znearviewmodel = nil
 ViewData.zfarviewmodel = nil
 
 ---Currently works identically to the "bloomtone" option (it also overrides it if you set this to false).
----@type boolean
+---@type boolean?
 ViewData.dopostprocess = false
 
 ---Disables default engine bloom and pauses the "brightness changes" on HDR maps.
----@type boolean
+---@type boolean?
 ViewData.bloomtone = true
 
 ---This is identifying which logical part of the scene an entity is being redered in, see Enums/VIEW.
----@type number
+---@type number?
 ViewData.viewid = 0
 
 ---This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders.

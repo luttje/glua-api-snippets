@@ -3238,14 +3238,14 @@ AIMR_CHANGE_TYPE = 1
 ---| `AIMR_OK`
 ---| `AIMR_CHANGE_TYPE`
 
---- Forces player to drop the object they are carrying if the object was hit by this ammo type.
-AMMO_FORCE_DROP_IF_CARRIED = 1
---- Uses [AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).plydmg of the ammo type as the damage to deal to shot players instead of [Bullet](https://wiki.facepunch.com/gmod/Structures/Bullet).Damage.
-AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER = 2
-
----@alias AMMO
----| `AMMO_FORCE_DROP_IF_CARRIED`
----| `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER`
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Used by [game.AddAmmoType](https://wiki.facepunch.com/gmod/game.AddAmmoType)'s input structure - the [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `AMMO_FORCE_DROP_IF_CARRIED` = `1`
+--- * `AMMO_INTERPRET_PLRDAMAGE_AS_DAMAGE_TO_PLAYER` = `2`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/AMMO)
+--- @alias AMMO 1 | 2
 
 ANALOG_MOUSE_X = 0
 ANALOG_MOUSE_Y = 1
@@ -4822,35 +4822,21 @@ GMOD_CHANNEL_STALLED = 3
 ---| `GMOD_CHANNEL_PAUSED`
 ---| `GMOD_CHANNEL_STALLED`
 
---- No goal type.
-GOALTYPE_NONE = 0
---- The goal type is an entity.
-GOALTYPE_TARGETENT = 1
---- The goal type is the enemy entity.
-GOALTYPE_ENEMY = 2
---- The goal type is a path corner.
-GOALTYPE_PATHCORNER = 3
---- The goal type is a position.
-GOALTYPE_LOCATION = 4
---- The goal type is a node nearest to a certain position.
-GOALTYPE_LOCATION_NEAREST_NODE = 5
---- Goal type is a flank location.
-GOALTYPE_FLANK = 6
---- Goal type is a cover spot.
-GOALTYPE_COVER = 7
---- Invalid goal type.
-GOALTYPE_INVALID = 8
-
----@alias GOALTYPE
----| `GOALTYPE_NONE`
----| `GOALTYPE_TARGETENT`
----| `GOALTYPE_ENEMY`
----| `GOALTYPE_PATHCORNER`
----| `GOALTYPE_LOCATION`
----| `GOALTYPE_LOCATION_NEAREST_NODE`
----| `GOALTYPE_FLANK`
----| `GOALTYPE_COVER`
----| `GOALTYPE_INVALID`
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Used by [NPC:GetCurGoalType](https://wiki.facepunch.com/gmod/NPC:GetCurGoalType).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `GOALTYPE_NONE` = `0`
+--- * `GOALTYPE_TARGETENT` = `1`
+--- * `GOALTYPE_ENEMY` = `2`
+--- * `GOALTYPE_PATHCORNER` = `3`
+--- * `GOALTYPE_LOCATION` = `4`
+--- * `GOALTYPE_LOCATION_NEAREST_NODE` = `5`
+--- * `GOALTYPE_FLANK` = `6`
+--- * `GOALTYPE_COVER` = `7`
+--- * `GOALTYPE_INVALID` = `8`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/GOALTYPE)
+--- @alias GOALTYPE 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 --- 1:1 damage. Melee weapons and fall damage typically hit this hitgroup.
 --- This hitgroup is not present on default player models.
@@ -5916,59 +5902,46 @@ NAV_MESH_NAV_BLOCKER = -2147483648
 ---| `NAV_MESH_HAS_ELEVATOR`
 ---| `NAV_MESH_NAV_BLOCKER`
 
---- North West Corner
-NORTH_WEST = 0
---- North East Corner
-NORTH_EAST = 1
---- South East Corner
-SOUTH_EAST = 2
---- South West Corner
-SOUTH_WEST = 3
---- Represents all corners, only applicable to certain functions, such as [CNavArea:PlaceOnGround](https://wiki.facepunch.com/gmod/CNavArea:PlaceOnGround).
-NUM_CORNERS = 4
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) methods.
+--- These Enums correspond to each corner of a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `NORTH_WEST` = `0`
+--- * `NORTH_EAST` = `1`
+--- * `SOUTH_EAST` = `2`
+--- * `SOUTH_WEST` = `3`
+--- * `NUM_CORNERS` = `4`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/NavCorner)
+--- @alias NavCorner 0 | 1 | 2 | 3 | 4
 
----@alias NavCorner
----| `NORTH_WEST`
----| `NORTH_EAST`
----| `SOUTH_EAST`
----| `SOUTH_WEST`
----| `NUM_CORNERS`
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) methods.
+--- These Enums correspond to each side of a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `NORTH` = `0`
+--- * `EAST` = `1`
+--- * `SOUTH` = `2`
+--- * `WEST` = `3`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/NavDir)
+--- @alias NavDir 0 | 1 | 2 | 3
 
---- North from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
-NORTH = 0
---- East from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
-EAST = 1
---- South from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
-SOUTH = 2
---- West from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea)
-WEST = 3
-
----@alias NavDir
----| `NORTH`
----| `EAST`
----| `SOUTH`
----| `WEST`
-
-GO_NORTH = 0
-GO_EAST = 1
-GO_SOUTH = 2
-GO_WEST = 3
-GO_LADDER_UP = 4
-GO_LADDER_DOWN = 5
-GO_JUMP = 6
-GO_ELEVATOR_UP = 7
-GO_ELEVATOR_DOWN = 8
-
----@alias NavTraverseType
----| `GO_NORTH`
----| `GO_EAST`
----| `GO_SOUTH`
----| `GO_WEST`
----| `GO_LADDER_UP`
----| `GO_LADDER_DOWN`
----| `GO_JUMP`
----| `GO_ELEVATOR_UP`
----| `GO_ELEVATOR_DOWN`
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations used by [CNavArea:GetParentHow](https://wiki.facepunch.com/gmod/CNavArea:GetParentHow).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `GO_NORTH` = `0`
+--- * `GO_EAST` = `1`
+--- * `GO_SOUTH` = `2`
+--- * `GO_WEST` = `3`
+--- * `GO_LADDER_UP` = `4`
+--- * `GO_LADDER_DOWN` = `5`
+--- * `GO_JUMP` = `6`
+--- * `GO_ELEVATOR_UP` = `7`
+--- * `GO_ELEVATOR_DOWN` = `8`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/NavTraverseType)
+--- @alias NavTraverseType 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 --- Generic notification
 NOTIFY_GENERIC = 0
@@ -6738,92 +6711,44 @@ SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 ---| `SND_IGNORE_NAME`
 ---| `SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL`
 
---- Sound plays everywhere
-SNDLVL_NONE = 0
---- Rustling leaves
-SNDLVL_20dB = 20
---- Whispering
-SNDLVL_25dB = 25
---- Library
-SNDLVL_30dB = 30
-SNDLVL_35dB = 35
-SNDLVL_40dB = 40
---- Refrigerator
-SNDLVL_45dB = 45
---- Average home
-SNDLVL_50dB = 50
-SNDLVL_55dB = 55
---- Normal conversation, clothes dryer
-SNDLVL_60dB = 60
---- *The same as SNDLVL_60dB*
-SNDLVL_IDLE = 60
---- Washing machine, dishwasher
-SNDLVL_65dB = 65
-SNDLVL_STATIC = 66
---- Car, vacuum cleaner, mixer, electric sewing machine
-SNDLVL_70dB = 70
---- Busy traffic
-SNDLVL_75dB = 75
---- *The same as SNDLVL_75dB*
-SNDLVL_NORM = 75
---- Mini-bike, alarm clock, noisy restaurant, office tabulator, outboard motor, passing snowmobile
-SNDLVL_80dB = 80
---- *The same as SNDLVL_80dB*
-SNDLVL_TALKING = 80
---- Average factory, electric shaver
-SNDLVL_85dB = 85
---- Screaming child, passing motorcycle, convertible ride on freeway
-SNDLVL_90dB = 90
-SNDLVL_95dB = 95
---- Subway train, diesel truck, woodworking shop, pneumatic drill, boiler shop, jackhammer
-SNDLVL_100dB = 100
---- Helicopter, power mower
-SNDLVL_105dB = 105
---- Snowmobile (drivers seat), inboard motorboat, sandblasting
-SNDLVL_110dB = 110
---- Car horn, propeller aircraft
-SNDLVL_120dB = 120
---- Air raid siren
-SNDLVL_130dB = 130
---- Threshold of pain, gunshot, jet engine
-SNDLVL_140dB = 140
---- *The same as SNDLVL_140dB*
-SNDLVL_GUNFIRE = 140
-SNDLVL_150dB = 150
---- Rocket launching
-SNDLVL_180dB = 180
-
----@alias SNDLVL
----| `SNDLVL_NONE`
----| `SNDLVL_20dB`
----| `SNDLVL_25dB`
----| `SNDLVL_30dB`
----| `SNDLVL_35dB`
----| `SNDLVL_40dB`
----| `SNDLVL_45dB`
----| `SNDLVL_50dB`
----| `SNDLVL_55dB`
----| `SNDLVL_60dB`
----| `SNDLVL_IDLE`
----| `SNDLVL_65dB`
----| `SNDLVL_STATIC`
----| `SNDLVL_70dB`
----| `SNDLVL_75dB`
----| `SNDLVL_NORM`
----| `SNDLVL_80dB`
----| `SNDLVL_TALKING`
----| `SNDLVL_85dB`
----| `SNDLVL_90dB`
----| `SNDLVL_95dB`
----| `SNDLVL_100dB`
----| `SNDLVL_105dB`
----| `SNDLVL_110dB`
----| `SNDLVL_120dB`
----| `SNDLVL_130dB`
----| `SNDLVL_140dB`
----| `SNDLVL_GUNFIRE`
----| `SNDLVL_150dB`
----| `SNDLVL_180dB`
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The sound's attenuation; how fast it drops away, enumerations used by [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) and [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound). Information taken from [soundflags.h in Source SDK 2013](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/soundflags.h#L53)
+---
+--- The engine starts running into trouble below 60dB.
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `SNDLVL_NONE` = `0`
+--- * `SNDLVL_20dB` = `20`
+--- * `SNDLVL_25dB` = `25`
+--- * `SNDLVL_30dB` = `30`
+--- * `SNDLVL_35dB` = `35`
+--- * `SNDLVL_40dB` = `40`
+--- * `SNDLVL_45dB` = `45`
+--- * `SNDLVL_50dB` = `50`
+--- * `SNDLVL_55dB` = `55`
+--- * `SNDLVL_60dB` = `60`
+--- * `SNDLVL_IDLE` = `60`
+--- * `SNDLVL_65dB` = `65`
+--- * `SNDLVL_STATIC` = `66`
+--- * `SNDLVL_70dB` = `70`
+--- * `SNDLVL_75dB` = `75`
+--- * `SNDLVL_NORM` = `75`
+--- * `SNDLVL_80dB` = `80`
+--- * `SNDLVL_TALKING` = `80`
+--- * `SNDLVL_85dB` = `85`
+--- * `SNDLVL_90dB` = `90`
+--- * `SNDLVL_95dB` = `95`
+--- * `SNDLVL_100dB` = `100`
+--- * `SNDLVL_105dB` = `105`
+--- * `SNDLVL_110dB` = `110`
+--- * `SNDLVL_120dB` = `120`
+--- * `SNDLVL_130dB` = `130`
+--- * `SNDLVL_140dB` = `140`
+--- * `SNDLVL_GUNFIRE` = `140`
+--- * `SNDLVL_150dB` = `150`
+--- * `SNDLVL_180dB` = `180`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/SNDLVL)
+--- @alias SNDLVL 0 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 60 | 65 | 66 | 70 | 75 | 75 | 80 | 80 | 85 | 90 | 95 | 100 | 105 | 110 | 120 | 130 | 140 | 140 | 150 | 180
 
 --- Does not collide with anything.
 --- **NOTE**: No physics object will be created when using this with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit).
@@ -7208,101 +7133,44 @@ TEXT_FILTER_NAME = 3
 ---| `TEXT_FILTER_CHAT`
 ---| `TEXT_FILTER_NAME`
 
---- Low quality, "pixel art" texture filtering.
-TEXTUREFLAGS_POINTSAMPLE = 1
---- Medium quality texture filtering.
-TEXTUREFLAGS_TRILINEAR = 2
---- Clamp S coordinates.
-TEXTUREFLAGS_CLAMPS = 4
---- Clamp T coordinates.
-TEXTUREFLAGS_CLAMPT = 8
---- High quality texture filtering.
-TEXTUREFLAGS_ANISOTROPIC = 16
---- Used in skyboxes. Makes sure edges are seamless.
-TEXTUREFLAGS_HINT_DXT5 = 32
---- Purpose unknown.
-TEXTUREFLAGS_PWL_CORRECTED = 64
---- Texture is a normal map.
-TEXTUREFLAGS_NORMAL = 128
---- Render largest mipmap only. (Does not delete existing mipmaps, just disables them.)
-TEXTUREFLAGS_NOMIP = 256
---- Not affected by texture resolution settings.
-TEXTUREFLAGS_NOLOD = 512
---- No Minimum Mipmap
-TEXTUREFLAGS_ALL_MIPS = 1024
---- Texture is an procedural texture (code can modify it).
-TEXTUREFLAGS_PROCEDURAL = 2048
---- One bit alpha channel used.
-TEXTUREFLAGS_ONEBITALPHA = 4096
---- Eight bit alpha channel used.
-TEXTUREFLAGS_EIGHTBITALPHA = 8192
---- Texture is an environment map.
-TEXTUREFLAGS_ENVMAP = 16384
---- Texture is a render target.
-TEXTUREFLAGS_RENDERTARGET = 32768
---- Texture is a depth render target.
-TEXTUREFLAGS_DEPTHRENDERTARGET = 65536
-TEXTUREFLAGS_NODEBUGOVERRIDE = 131072
-TEXTUREFLAGS_SINGLECOPY = 262144
---- Aka TEXTUREFLAGS_UNUSED_00080000
-TEXTUREFLAGS_STAGING_MEMORY = 524288
---- Immediately destroy this texture when its reference count hits zero.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Bit flags used by [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx). Information taken from [VTF (Valve Texture Format) - Texture flags](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#Texture_flags)
 ---
---- Aka TEXTUREFLAGS_UNUSED_00100000
-TEXTUREFLAGS_IMMEDIATE_CLEANUP = 1048576
---- Aka TEXTUREFLAGS_UNUSED_00200000
-TEXTUREFLAGS_IGNORE_PICMIP = 2097152
-TEXTUREFLAGS_UNUSED_00400000 = 4194304
---- Do not buffer for Video Processing, generally render distance.
-TEXTUREFLAGS_NODEPTHBUFFER = 8388608
-TEXTUREFLAGS_UNUSED_01000000 = 16777216
---- Clamp U coordinates (for volumetric textures).
-TEXTUREFLAGS_CLAMPU = 33554432
---- Usable as a vertex texture
-TEXTUREFLAGS_VERTEXTEXTURE = 67108864
---- Texture is a SSBump. (SSB)
-TEXTUREFLAGS_SSBUMP = 134217728
-TEXTUREFLAGS_UNUSED_10000000 = 268435456
---- Clamp to border colour on all texture coordinates
-TEXTUREFLAGS_BORDER = 536870912
---- Aka TEXTUREFLAGS_UNUSED_40000000
-TEXTUREFLAGS_STREAMABLE_COARSE = 1073741824
---- Aka TEXTUREFLAGS_UNUSED_80000000
-TEXTUREFLAGS_STREAMABLE_FINE = 2147483648
-
----@alias TEXTUREFLAGS
----| `TEXTUREFLAGS_POINTSAMPLE`
----| `TEXTUREFLAGS_TRILINEAR`
----| `TEXTUREFLAGS_CLAMPS`
----| `TEXTUREFLAGS_CLAMPT`
----| `TEXTUREFLAGS_ANISOTROPIC`
----| `TEXTUREFLAGS_HINT_DXT5`
----| `TEXTUREFLAGS_PWL_CORRECTED`
----| `TEXTUREFLAGS_NORMAL`
----| `TEXTUREFLAGS_NOMIP`
----| `TEXTUREFLAGS_NOLOD`
----| `TEXTUREFLAGS_ALL_MIPS`
----| `TEXTUREFLAGS_PROCEDURAL`
----| `TEXTUREFLAGS_ONEBITALPHA`
----| `TEXTUREFLAGS_EIGHTBITALPHA`
----| `TEXTUREFLAGS_ENVMAP`
----| `TEXTUREFLAGS_RENDERTARGET`
----| `TEXTUREFLAGS_DEPTHRENDERTARGET`
----| `TEXTUREFLAGS_NODEBUGOVERRIDE`
----| `TEXTUREFLAGS_SINGLECOPY`
----| `TEXTUREFLAGS_STAGING_MEMORY`
----| `TEXTUREFLAGS_IMMEDIATE_CLEANUP`
----| `TEXTUREFLAGS_IGNORE_PICMIP`
----| `TEXTUREFLAGS_UNUSED_00400000`
----| `TEXTUREFLAGS_NODEPTHBUFFER`
----| `TEXTUREFLAGS_UNUSED_01000000`
----| `TEXTUREFLAGS_CLAMPU`
----| `TEXTUREFLAGS_VERTEXTEXTURE`
----| `TEXTUREFLAGS_SSBUMP`
----| `TEXTUREFLAGS_UNUSED_10000000`
----| `TEXTUREFLAGS_BORDER`
----| `TEXTUREFLAGS_STREAMABLE_COARSE`
----| `TEXTUREFLAGS_STREAMABLE_FINE`
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `TEXTUREFLAGS_POINTSAMPLE` = `1`
+--- * `TEXTUREFLAGS_TRILINEAR` = `2`
+--- * `TEXTUREFLAGS_CLAMPS` = `4`
+--- * `TEXTUREFLAGS_CLAMPT` = `8`
+--- * `TEXTUREFLAGS_ANISOTROPIC` = `16`
+--- * `TEXTUREFLAGS_HINT_DXT5` = `32`
+--- * `TEXTUREFLAGS_PWL_CORRECTED` = `64`
+--- * `TEXTUREFLAGS_NORMAL` = `128`
+--- * `TEXTUREFLAGS_NOMIP` = `256`
+--- * `TEXTUREFLAGS_NOLOD` = `512`
+--- * `TEXTUREFLAGS_ALL_MIPS` = `1024`
+--- * `TEXTUREFLAGS_PROCEDURAL` = `2048`
+--- * `TEXTUREFLAGS_ONEBITALPHA` = `4096`
+--- * `TEXTUREFLAGS_EIGHTBITALPHA` = `8192`
+--- * `TEXTUREFLAGS_ENVMAP` = `16384`
+--- * `TEXTUREFLAGS_RENDERTARGET` = `32768`
+--- * `TEXTUREFLAGS_DEPTHRENDERTARGET` = `65536`
+--- * `TEXTUREFLAGS_NODEBUGOVERRIDE` = `131072`
+--- * `TEXTUREFLAGS_SINGLECOPY` = `262144`
+--- * `TEXTUREFLAGS_STAGING_MEMORY` = `524288`
+--- * `TEXTUREFLAGS_IMMEDIATE_CLEANUP` = `1048576`
+--- * `TEXTUREFLAGS_IGNORE_PICMIP` = `2097152`
+--- * `TEXTUREFLAGS_UNUSED_00400000` = `4194304`
+--- * `TEXTUREFLAGS_NODEPTHBUFFER` = `8388608`
+--- * `TEXTUREFLAGS_UNUSED_01000000` = `16777216`
+--- * `TEXTUREFLAGS_CLAMPU` = `33554432`
+--- * `TEXTUREFLAGS_VERTEXTEXTURE` = `67108864`
+--- * `TEXTUREFLAGS_SSBUMP` = `134217728`
+--- * `TEXTUREFLAGS_UNUSED_10000000` = `268435456`
+--- * `TEXTUREFLAGS_BORDER` = `536870912`
+--- * `TEXTUREFLAGS_STREAMABLE_COARSE` = `1073741824`
+--- * `TEXTUREFLAGS_STREAMABLE_FINE` = `2147483648`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/TEXTUREFLAGS)
+--- @alias TEXTUREFLAGS 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384 | 32768 | 65536 | 131072 | 262144 | 524288 | 1048576 | 2097152 | 4194304 | 8388608 | 16777216 | 33554432 | 67108864 | 134217728 | 268435456 | 536870912 | 1073741824 | 2147483648
 
 --- Generates no tracer effects
 TRACER_NONE = 0

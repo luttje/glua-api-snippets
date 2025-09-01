@@ -168,9 +168,11 @@ function mesh.TangentT(x, y, z) end
 ---@param set number The texture coordinate set, 0 to 7.
 ---
 --- Non-zero values require the currently bound material to support it. For example, any `LightmappedGeneric` material supports sets 1 and 2 (lightmap texture coordinates and bump map texture coords?).
----@param u number U coordinate.
----@param v number V coordinate.
-function mesh.TexCoord(set, u, v) end
+---@param s number S coordinate.
+---@param t number T coordinate.
+---@param u? number U coordinate.
+---@param v? number V coordinate.
+function mesh.TexCoord(set, s, t, u, v) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) A set of four numbers that can be used for arbitrary purposes by [Material](https://wiki.facepunch.com/gmod/Material) shaders.
 --- This is most commonly used to provide tangent information about each vertex to the Material's shader.

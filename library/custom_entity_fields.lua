@@ -37,7 +37,7 @@ Custom_Entity_Fields.OnDuplicated = nil
 ---Sandbox or Sandbox derived only.
 ---
 --- If set to `true`, physgun will not be able to pick this entity up. This can also be set from map, see Sandbox Specific Mapping
----@type boolean
+---@type boolean?
 Custom_Entity_Fields.PhysgunDisabled = false
 
 ---Sandbox or Sandbox derived only.
@@ -71,7 +71,7 @@ Custom_Entity_Fields.CanProperty = nil
 Custom_Entity_Fields.CanTool = nil
 
 ---If set, the entity will not be duplicated via the built-in duplicator system.
----@type boolean
+---@type boolean?
 Custom_Entity_Fields.DoNotDuplicate = false
 
 ---Documented at ENTITY:CalcAbsolutePosition.

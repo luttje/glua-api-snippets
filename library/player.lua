@@ -744,7 +744,7 @@ function Player:GetFriendStatus() end
 ---@return Entity # The hands entity if players has one
 function Player:GetHands() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called on player spawn to determine which hand model to use
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called on player spawn to determine which hand model to use
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER:GetHandsModel)
 ---@return table # A table containing info about view model hands model to be set. See examples.
