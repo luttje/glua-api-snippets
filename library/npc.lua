@@ -44,6 +44,13 @@ function NPC:AlertSound() end
 ---@return boolean # `true` if any movement was performed.
 function NPC:AutoMovement(interval, target) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Become a ragdoll and remove the entity. Internally handles serverside/clientside ragdoll creation, momentum calculation, triggering ragdoll creation hooks / events and cloning entity's bone transforms to the created ragdoll.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:BecomeRagdoll)
+---@param info CTakeDamageInfo Damage info passed from an onkilled event
+---@return Entity # The created serverside ragdoll, nil if failed or a clientside ragdoll created.
+function NPC:BecomeRagdoll(info) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds a capability to the NPC.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:CapabilitiesAdd)
@@ -61,6 +68,12 @@ function NPC:CapabilitiesClear() end
 ---@return CAP # The capabilities as a bitflag.
 --- See Enums/CAP
 function NPC:CapabilitiesGet() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Checks whether the NPC has the specified capabilities.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:CapabilitiesHas)
+---@param capabilities CAP Capabilities to check, see Enums/CAP.
+function NPC:CapabilitiesHas(capabilities) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Remove a certain capability.
 ---
@@ -106,7 +119,16 @@ function NPC:ClearGoal() end
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:ClearSchedule)
 function NPC:ClearSchedule() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Translates condition ID to a string.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the ID of a given condition by name. Opposite of [NPC:ConditionName](https://wiki.facepunch.com/gmod/NPC:ConditionName).
+---
+--- This is useful for custom conditions defined by engine NPCs, such as `COND_ZOMBIE_RELEASECRAB` for zombies, and `COND_COMBINE_ON_FIRE` for Combine Soldiers.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:ConditionID)
+---@param conditionName string The condition name.
+---@return number # The condition ID, see Enums/COND. Custom conditions will have a "randomly" assigned IDs, which will change with each game session.
+function NPC:ConditionID(conditionName) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Translates condition ID to a string. For the opposite process, see [NPC:ConditionID](https://wiki.facepunch.com/gmod/NPC:ConditionID).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:ConditionName)
 ---@param cond number The NPCs condition ID, see Enums/COND
@@ -316,6 +338,7 @@ function NPC:GetHeadDirection() end
 function NPC:GetHullType() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the ideal activity the NPC currently wants to achieve.
+--- 	**NOTE**: By default, base NPCs will automatically attempt to play a sequence bound to the ideal activity. To prevent ideal activity from overriding NPC's active sequence, set this to `ACT_DO_NOT_DISTURB`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:GetIdealActivity)
 ---@return number # The ideal activity. Enums/ACT.
@@ -569,6 +592,12 @@ function NPC:IdleSound() end
 ---@param _until number How long to ignore the enemy for. This will be compared to Global.CurTime, so your value should be based on it.
 function NPC:IgnoreEnemyUntil(enemy, _until) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether the NPC is currently crouching or not. Citizens and Combine Soldiers are capable of this behavior by default.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:IsCrouching)
+---@return boolean # Whether the NPC is currently crouching.
+function NPC:IsCrouching() end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether or not the NPC is performing the given schedule.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:IsCurrentSchedule)
@@ -631,6 +660,13 @@ function NPC:IsRunningBehavior() end
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:IsSquadLeader)
 ---@return boolean # Whether the NPC is the leader of the squad or not.
 function NPC:IsSquadLeader() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the "forgettable" status for a given enemy, as set by [NPC:SetUnforgettable](https://wiki.facepunch.com/gmod/NPC:SetUnforgettable), or by internal logic of engine NPCs.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:IsUnforgettable)
+---@param enemy Entity Enemy entity to check.
+---@return boolean # Whether the given enemy is unforgettable (`true`) or not.
+function NPC:IsUnforgettable(enemy) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns true if the entity was remembered as unreachable. The memory is updated automatically from following engine tasks if they failed:
 --- * TASK_GET_CHASE_PATH_TO_ENEMY
@@ -698,6 +734,26 @@ function NPC:MoveClimbStart(destination, dir, distance, yaw) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:MoveClimbStop)
 function NPC:MoveClimbStop() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Similar to other `NPC:Move*` functions, invokes internal code to move the NPC to a given location.
+---
+--- Meant to be used within [ENTITY:OverrideMove](https://wiki.facepunch.com/gmod/ENTITY:OverrideMove).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:MoveGroundStep)
+---@param pos Vector The position we want to reach.
+---@param targetEntity? Entity Used to test whether we hit the move target when deciding success.
+---@param yaw? number Target Yaw angle at the end of the move. -1 to keep original yaw.
+---@param asFarAsCan? boolean Whether to move as far as possible.
+---@param testZ? boolean Also test the Z axis of the target position and NPC position to decide success.
+---@return number # Whether the movement succeeded or not.
+---
+--- `AIMotorMoveResult_t` enum:
+--- * AIM_FAILED = 0
+--- * AIM_SUCCESS = 1
+--- * AIM_PARTIAL_HIT_NPC = 2
+--- * AIM_PARTIAL_HIT_WORLD = 3
+--- * AIM_PARTIAL_HIT_TARGET = 4
+function NPC:MoveGroundStep(pos, targetEntity, yaw, asFarAsCan, testZ) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Executes a jump move.
 ---
@@ -922,9 +978,15 @@ function NPC:SetEnemy(enemy, newenemy) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the NPC's .vcd expression. Similar to [Entity:PlayScene](https://wiki.facepunch.com/gmod/Entity:PlayScene) except the scene is looped until it's interrupted by default NPC behavior or [NPC:ClearExpression](https://wiki.facepunch.com/gmod/NPC:ClearExpression).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:SetExpression)
----@param expression string The expression filepath.
----@return number #
-function NPC:SetExpression(expression) end
+---@param m_iszExpressionScene string The expression filepath.
+---@return number # Default duration of assigned expression, in seconds.
+function NPC:SetExpression(m_iszExpressionScene) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces given NPC to crouch, if it is able to do so. Only Citizens and Combine Soldiers can by default.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/NPC:SetForceCrouch)
+---@param force boolean Whether to force the NPC to crouch or not. `false` clears the "force crouch" flag, but does not guarantee to force the NPC to stand back up.
+function NPC:SetForceCrouch(force) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the Field Of View of the NPC, for use with such functions as [NPC:IsInViewCone](https://wiki.facepunch.com/gmod/NPC:IsInViewCone). it is also used internally by the NPC for enemy detection, etc.
 ---
@@ -1083,7 +1145,7 @@ function NPC:SetTarget(entity) end
 ---@param status number The status. See Enums/TASKSTATUS.
 function NPC:SetTaskStatus(status) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets given entity as an unforgettable enemy.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets given entity as an unforgettable enemy. The state can be retrieved via [NPC:IsUnforgettable](https://wiki.facepunch.com/gmod/NPC:IsUnforgettable).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:SetUnforgettable)
 ---@param enemy Entity The enemy entity to set.

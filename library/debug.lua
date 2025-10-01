@@ -100,8 +100,12 @@ function debug.getupvalue(func, index) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets the environment of the passed object.
 ---
+--- Unlike [Global.setfenv](https://wiki.facepunch.com/gmod/Global.setfenv), this also works on **any** userdata, allowing you to save data stored to it which can be accessed using [debug.getfenv](https://wiki.facepunch.com/gmod/debug.getfenv).
+--- Userdata seem to intentionally support this & setting/changing it does not affect anything (though unused by gmod / Entities and such don't this)
+--- This can be useful when trying to store data on a [IGModAudioChannel](https://wiki.facepunch.com/gmod/IGModAudioChannel), [Vector](https://wiki.facepunch.com/gmod/Vector), [Angle](https://wiki.facepunch.com/gmod/Angle) or any other that doesn't already allow you to store data on it.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/debug.setfenv)
----@param object table Object to set environment of
+---@param object any Object to set environment of. Valid types: userdata, thread, function.
 ---@param env table Environment to set
 ---@return table # The object
 function debug.setfenv(object, env) end

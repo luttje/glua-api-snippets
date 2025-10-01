@@ -1629,8 +1629,16 @@ ModelInfo.Bones = nil
 ---A list of sequences the model has, including the ones from `$includemodel`s.
 ---
 --- Each sequence is a table with the following info:
---- * Name
---- * Activity
+--- * string Name
+--- * string Activity
+--- * table Events
+---
+--- `Events` table is a list of tables with following memebers:
+--- * number Cycle
+--- * number Event
+--- * string Name
+--- * number Type
+--- * string Options
 ---@type table
 ModelInfo.Sequences = nil
 
@@ -2935,8 +2943,10 @@ SWEP.SlotPos = 10
 SWEP.SpeechBubbleLid = surface.GetTextureID("gui/speech_lid")
 
 ---Path to
----             an texture. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,
----             see surface.GetTextureID. Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
+---             a material. Override this in your SWEP to set the icon in the weapon selection. This must be the texture ID,
+---             see surface.GetTextureID. Keep in mind that the path must be to a `.vmt` file, NOT `.vtf`.
+---
+--- Alternatively you can render custom weapon selection via WEAPON:DrawWeaponSelection.
 ---@type number?
 SWEP.WepSelectIcon = surface.GetTextureID("weapons/swep")
 

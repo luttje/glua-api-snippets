@@ -701,6 +701,24 @@ function Entity:EyePos() end
 ---@return number # The Structures/BodyGroupData#id or `-1` if no Body Group has the provided name.
 function Entity:FindBodygroupByName(name) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Searches the currently active layers for a layer playing animation with given activity.
+---
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:FindGestureLayer)
+---@param activity ACT The activity to search for.
+---@return number # A layer ID for given activity, or `-1` if not found.
+function Entity:FindGestureLayer(activity) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Searches the currently active layers for a layer playing animation with given sequence.
+---
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:FindGestureSequenceLayer)
+---@param sequenceID number The sequence ID to search for. See Entity:LookupSequence.
+---@return number # A layer ID for given activity, or `-1` if not found.
+function Entity:FindGestureLayer(sequenceID) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a transition from the given start and end sequence.
 ---
 --- This function was only used by HL1 entities and NPCs, before the advent of sequence blending and gestures.
@@ -939,7 +957,7 @@ function Entity:GetBoneController(boneID) end
 --- **NOTE**: Will return `0` for [Global.ClientsideModel](https://wiki.facepunch.com/gmod/Global.ClientsideModel) or undrawn entities until [Entity:SetupBones](https://wiki.facepunch.com/gmod/Entity:SetupBones) is called on the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBoneCount)
----@return number # The amount of bones in given entity.
+---@return number # The amount of bones in given entity, starting at index 0.
 function Entity:GetBoneCount() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the transformation matrix of a given bone on the entity's model. The matrix contains the transformation used to position the bone in the world. It is not relative to the parent bone.
@@ -1079,13 +1097,15 @@ function Entity:GetChildren() end
 ---@return string # The entity's classname
 function Entity:GetClass() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns an entity's collision bounding box. In most cases, this will return the same bounding box as [Entity:GetModelBounds](https://wiki.facepunch.com/gmod/Entity:GetModelBounds) unless the entity does not have a physics mesh or it has a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) different from the default.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns an entity's collision bounding box.
 ---
---- This can be out-of-sync between the client and server for weapons.
+--- In most cases, this will return the same bounding box as [Entity:GetModelBounds](https://wiki.facepunch.com/gmod/Entity:GetModelBounds) unless the entity does not have a physics mesh or it has a [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) different from the default.
+---
+--- Collision bounds can be previewed in singleplayer via `ent_bbox` console command, while looking at a desired entity and with `developer 1`. (Will appear as an orange wireframe box)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds)
----@return Vector # The minimum vector of the collision bounds
----@return Vector # The maximum vector of the collision bounds
+---@return Vector # The minimum vector of the collision bounds, basically Entity:OBBMins.
+---@return Vector # The maximum vector of the collision bounds, basically Entity:OBBMaxs.
 function Entity:GetCollisionBounds() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's collision group
@@ -3046,13 +3066,15 @@ function Entity:LookupBone(boneName) end
 ---@return number # The ID of the given pose parameter name, if it exists, -1 otherwise
 function Entity:LookupPoseParameter(name) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns sequence ID from its name. See [Entity:GetSequenceName](https://wiki.facepunch.com/gmod/Entity:GetSequenceName) for a function that does the opposite.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns sequence ID from either sequence name or activity name. See [Entity:GetSequenceName](https://wiki.facepunch.com/gmod/Entity:GetSequenceName) for a function that does the opposite.
+---
+--- **Sequences** are animations tied to a specific model. Different models can have sequences with same names, but have different IDs.
+--- Sequences can also be tied to certain activities ([Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT)), see [Entity:SelectWeightedSequence](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LookupSequence)
----@param name string Sequence name
----@return number # Sequence ID for that name. This **will** differ for models with same sequence names. Will be -1 when the sequence is invalid.
----@return number # The sequence duration
---- * 0 if the sequence is invalid
+---@param name string Sequence name. Input string can alternatively be an activity name, to lookup an activity from its name and get a sequence as result.
+---@return number # Sequence ID for that name. This **will** differ for models with same sequence names. Will be `-1` when the sequence is invalid or not found.
+---@return number # The sequence duration, or `0` if the sequence is invalid or there's no sequence with given name on entity's current model.
 function Entity:LookupSequence(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Turns the [Entity:GetPhysicsObject](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObject) into a physics shadow.
@@ -3101,6 +3123,7 @@ function Entity:ManipulateBonePosition(boneID, pos, networking) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets custom bone scale.
 --- This does not scale procedural bones.
+--- **NOTE**: This silently fails when given a Vector with nan values, hiding the vertices associated with the bone. See example below.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale)
 ---@param boneID number Index of the bone you want to manipulate
@@ -3288,19 +3311,25 @@ function ENTITY:NextTask(sched) end
 ---@param timestamp number The timestamp, relative to Global.CurTime, when the next think should occur.
 function Entity:NextThink(timestamp) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the center of an entity's bounding box in local space.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the center of an entity's collision bounding box as a local vector.
+---
+--- See also [Entity:GetCollisionBounds](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds), [Entity:OBBMins](https://wiki.facepunch.com/gmod/Entity:OBBMins) and [Entity:OBBMaxs](https://wiki.facepunch.com/gmod/Entity:OBBMaxs).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:OBBCenter)
 ---@return Vector # The center of an entity's bounding box relative to its Entity:GetPos.
 function Entity:OBBCenter() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the highest corner of an entity's bounding box as a local vector.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the highest corner of an entity's collision bounding box as a local vector.
+---
+--- See also [Entity:GetCollisionBounds](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds), [Entity:OBBMins](https://wiki.facepunch.com/gmod/Entity:OBBMins) and [Entity:OBBCenter](https://wiki.facepunch.com/gmod/Entity:OBBCenter).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:OBBMaxs)
 ---@return Vector # The local position of the highest corner of the entity's oriented bounding box.
 function Entity:OBBMaxs() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the lowest corner of an entity's bounding box as a local vector.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the lowest corner of an entity's collision bounding box as a local vector.
+---
+--- See also [Entity:GetCollisionBounds](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds), [Entity:OBBMaxs](https://wiki.facepunch.com/gmod/Entity:OBBMaxs) and [Entity:OBBCenter](https://wiki.facepunch.com/gmod/Entity:OBBCenter).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:OBBMins)
 ---@return Vector # The local position of the lowest corner of the entity's oriented bounding box.
@@ -3462,19 +3491,19 @@ function ENTITY:OverrideMove(interval) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:OverrideMoveFacing)
 ---@param interval number Time interval for the movement, in seconds. Usually time since last movement.
----@param data table Extra data for the movement. A table containing the following data:
+---@param AILMG table Extra data for the movement. A table containing the following data:
 --- * boolean hasTraced - The result if a forward probing trace has been done
---- * number expectedDist - The distance expected to move this think
---- * number flags - AILMG flags
---- * number maxDist - The distance maximum distance intended to travel in path length
+--- * number expectedDist = `speed*interval` - The distance expected to move this think
+--- * number flags - [AILMG flags](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_movetypes.h#L113)
+--- * number maxDist = NPC:GetPathDistanceToGoal - The distance maximum distance intended to travel in path length
 --- * number navType - Enums/NAV
---- * number speed - The sequence ground speed. Note these need not always agree with `target`
---- * Entity moveTarget - Target entity
---- * Vector dir - The actual move. Note these need not always agree with `target`
---- * Vector facing - The actual move. Note these need not always agree with `target`
---- * Vector target - Object of the goal
+--- * number speed - Entity:GetSequenceGroundSpeed Note these need not always agree with `target`
+--- * Entity moveTarget = `m_hGoalEnt` - Target entity as goal.
+--- * Vector dir - The step direction, towards `target`
+--- * Vector facing - The direction NPC's body will turn during movement.
+--- * Vector target = NPC:GetCurWaypointPos - Current waypoint in world coordinates.
 ---@return boolean # Return `true` to disable the default movement facing code.
-function ENTITY:OverrideMoveFacing(interval, data) end
+function ENTITY:OverrideMoveFacing(interval, AILMG) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Tests whether the damage passes the entity filter.
 ---
@@ -3550,7 +3579,7 @@ function Entity:PhysicsFromMesh(vertices, surfaceprop, massCenterOveride) end
 ---
 --- If successful, this function will automatically call [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid)( solidType ) and [Entity:SetSolidFlags](https://wiki.facepunch.com/gmod/Entity:SetSolidFlags)( 0 ).
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3571,7 +3600,7 @@ function Entity:PhysicsInit(solidType, massCenterOverride) end
 ---
 --- **NOTE**: If the volume of the resulting box is 0 (the mins and maxs are the same), the mins and maxs will be changed to [Global.Vector](https://wiki.facepunch.com/gmod/Global.Vector)( -1, -1, -1 ) and [Global.Vector](https://wiki.facepunch.com/gmod/Global.Vector)( 1, 1, 1 ), respectively.
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3587,9 +3616,9 @@ function Entity:PhysicsInitBox(mins, maxs, surfaceprop, massCenterOverride) end
 ---
 --- This is the standard way of creating moving physics objects with a custom convex shape. For more complex, concave shapes, see [Entity:PhysicsInitMultiConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitMultiConvex).
 ---
---- This will crash if given all [Global.Vector](https://wiki.facepunch.com/gmod/Global.Vector)(0,0,0)s.
+--- You may be expected to call [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid) with desired solid type **before** calling this function.
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- You can use the following workaround for movement, though clientside collisions will still be broken.
 --- ```
@@ -3616,7 +3645,9 @@ function Entity:PhysicsInitConvex(points, surfaceprop, massCenterOverride) end
 ---
 --- If successful, the previous physics object will be removed.
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- You may be expected to call [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid) with desired solid type **before** calling this function.
+---
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3633,7 +3664,7 @@ function Entity:PhysicsInitMultiConvex(vertices, surfaceprop, massCenterOverride
 ---
 --- The created physics object will depend on the entity's solidity `SOLID_NONE` will not create a physics object, `SOLID_BBOX` will create a Axis-Aligned BBox one, `SOLID_OBB` will create Orientated Bounding Box one, and anything else will use the models' physics mesh.
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3649,7 +3680,7 @@ function Entity:PhysicsInitShadow(allowPhysicsMovement, allowPhysicsRotation) en
 --- * [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid)( `SOLID_BBOX` )
 --- * [Entity:SetMoveType](https://wiki.facepunch.com/gmod/Entity:SetMoveType)( `MOVETYPE_VPHYSICS` )
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3667,7 +3698,7 @@ function Entity:PhysicsInitSphere(radius, physmat) end
 ---
 --- **NOTE**: This function will automatically call [Entity:SetSolid](https://wiki.facepunch.com/gmod/Entity:SetSolid)( `solidType` ).
 ---
---- Clientside physics objects are broken and do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
+--- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
 --- A workaround is available on the [Entity:PhysicsInitConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex) page.
 ---
@@ -3834,7 +3865,7 @@ function Entity:RemoveFlags(flag) end
 ---@param physObj PhysObj The PhysObj to remove from the motion controller.
 function Entity:RemoveFromMotionController(physObj) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes and stops the gesture with given activity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes and stops the gesture with given activity. Same as [Entity:RemoveLayer](https://wiki.facepunch.com/gmod/Entity:RemoveLayer) with [Entity:FindGestureLayer](https://wiki.facepunch.com/gmod/Entity:FindGestureLayer).
 ---
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
 ---
@@ -3851,6 +3882,16 @@ function Entity:RemoveGesture(activity) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveInternalConstraint)
 ---@param num? number Which constraint to break, values below 0 mean break them all
 function Entity:RemoveInternalConstraint(num) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes the given layer by ID. See also [Entity:RemoveGesture](https://wiki.facepunch.com/gmod/Entity:RemoveGesture).
+---
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+--- **NOTE**: Layer removal procedures aren't immediate. Layer removal functions actually manipulate [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight) down to 0, then remove the layer in next intervals. If the targeted layer's weight keeps changing, your layer will not be removed.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveLayer)
+---@param layerID number The layer ID to remove.
+function Entity:RemoveLayer(layerID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes solid flag(s) from the entity.
 ---
@@ -3973,14 +4014,15 @@ function ENTITY:SelectSchedule() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns sequence ID corresponding to given activity ID.
 ---
+--- Multiple sequences can be assigned to a single [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT), in which case a random one will be selected. This can be used for example to randomize idle animations (and is used for that by built-in weapons) without the need to code logic for this.
+--- See also [Entity:SelectWeightedSequenceSeeded](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequenceSeeded).
+---
 --- Opposite of [Entity:GetSequenceActivity](https://wiki.facepunch.com/gmod/Entity:GetSequenceActivity).
 ---
 --- Similar to [Entity:LookupSequence](https://wiki.facepunch.com/gmod/Entity:LookupSequence).
 ---
---- See also [Entity:SelectWeightedSequenceSeeded](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequenceSeeded).
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence)
----@param act number The activity ID, see Enums/ACT.
+---@param act ACT The activity ID, see Enums/ACT.
 ---@return number # The sequence ID
 function Entity:SelectWeightedSequence(act) end
 
@@ -3998,7 +4040,7 @@ function Entity:SelectWeightedSequenceSeeded(act, seed) end
 ---
 --- This function is only usable on view models.
 ---
---- **NOTE**: Does nothing when used alone on the client for predicted viewmodels, which is generally always going to be the case.
+--- **NOTE**: Predicted viewmodels will have their sequence and cycle reset during prediction checks, making this function appear to do nothing unless also called on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SendViewModelMatchingSequence)
 ---@param seq number The sequence ID returned by Entity:LookupSequence or  Entity:SelectWeightedSequence.
@@ -4068,6 +4110,8 @@ function ENTITY:SetAutomaticFrameAdvance(enable) end
 function Entity:SetBloodColor(bloodColor) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the currently active [Sub Model ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#submodels) for the Body Group corresponding to the given [Body Group ID](https://wiki.facepunch.com/gmod/Structures/BodyGroupData#id) of the [Entity's](https://wiki.facepunch.com/gmod/Entity) model.
+---
+--- Bodygroups, for which [Entity:GetBodygroupCount](https://wiki.facepunch.com/gmod/Entity:GetBodygroupCount) returns `1` or less are considered invalid, and will have no effect in-game.
 --- **NOTE**: When used on a Weapon, this will modify its viewmodel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetBodygroup)
@@ -4348,7 +4392,7 @@ function Entity:SetHealth(newHealth) end
 --- If the operation failed, the function will silently fail.
 function Entity:SetHitboxSet(id) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enables or disable the inverse kinematic usage of this entity.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Enables or disable the inverse kinematic usage of this entity.
 --- 		**WARNING**: Calling this with false outside of [ENTITY:Initialize](https://wiki.facepunch.com/gmod/ENTITY:Initialize) requires a model change to take effect.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetIK)
@@ -4380,6 +4424,15 @@ function Entity:SetKeyValue(key, value) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLagCompensated)
 ---@param enable boolean Whether the entity should be lag compensated or not.
 function Entity:SetLagCompensated(enable) end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the autokill flag on the layer, making the layer be automatically removed once the animation playback finishes.
+---
+--- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLayerAutokill)
+---@param layerID number The layer ID to change.
+---@param autoKill boolean Whether to set or unset the autokill flag.
+function Entity:SetLayerAutokill(layerID, autoKill) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the interval the layer will fully blend in since startup, based on [Entity:GetLayerCycle](https://wiki.facepunch.com/gmod/Entity:GetLayerCycle). Setting this above 0 will enable internal blending of [Entity:GetLayerWeight](https://wiki.facepunch.com/gmod/Entity:GetLayerWeight).
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!

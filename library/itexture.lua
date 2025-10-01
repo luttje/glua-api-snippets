@@ -1,6 +1,10 @@
 ---@meta
 
---- An object representing game texture, like a .vtf file. Do not confuse with [IMaterial](https://wiki.facepunch.com/gmod/IMaterial). Returned by [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)
+--- An object representing game texture, such as those loaded from a `.vtf` file.
+---
+--- Do not confuse with [IMaterial](https://wiki.facepunch.com/gmod/IMaterial). Materials use textures. Game uses materials.
+---
+--- Returned by [IMaterial:GetTexture](https://wiki.facepunch.com/gmod/IMaterial:GetTexture)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ITexture)
 ---@class ITexture

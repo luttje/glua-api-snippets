@@ -524,7 +524,9 @@ function Player:ExitVehicle() end
 ---@return boolean # Return true to prevent default action
 function PLAYER:FinishMove(mv) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enables/Disables the player's flashlight.[Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight) must be true in order for the player's flashlight to be changed.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enables/Disables the player's flashlight.
+---
+--- [Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight) must be true in order for the player's flashlight to be changed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Flashlight)
 ---@param isOn boolean Turns the flashlight on/off
@@ -1739,6 +1741,8 @@ function Player:SetDuckSpeed(duckSpeed) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the local angle of the player's view (may rotate body too if angular difference is large)
 ---
+--- **NOTE**: This function works differently when the player is in a vehicle. In that case passing `Angle(0, 90, 0)` will have the player look forward (out the windshield) and `Angle(0, 0, 0)` will have them look to the right.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetEyeAngles)
 ---@param angle Angle Angle to set the view to
 function Player:SetEyeAngles(angle) end
@@ -1916,7 +1920,7 @@ function Player:SetRenderAngles(ang) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the player's sprint speed.
 ---
 --- See also [Player:GetRunSpeed](https://wiki.facepunch.com/gmod/Player:GetRunSpeed), [Player:SetWalkSpeed](https://wiki.facepunch.com/gmod/Player:SetWalkSpeed) and [Player:SetMaxSpeed](https://wiki.facepunch.com/gmod/Player:SetMaxSpeed).
---- **NOTE**: player_default class run speed is: `240`
+--- **NOTE**: player_default class run speed is: `400`
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetRunSpeed)
 ---@param runSpeed number The new sprint speed when `sv_friction` is below `10`. Higher `sv_friction` values will result in slower speed.
@@ -2086,13 +2090,17 @@ function Player:SimulateGravGunPickup(ent, lightning) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER:Spawn)
 function PLAYER:Spawn() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Starts spectate mode for given player. This will also affect the players movetype in some cases.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
+---
+--- Starts spectate mode for given player. This will also affect the players movetype in some cases.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Spectate)
 ---@param mode number Spectate mode, see Enums/OBS_MODE.
 function Player:Spectate(mode) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the player spectate the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
+---
+--- Makes the player spectate the entity.
 ---
 --- To get the applied spectated entity, use [Player:GetObserverTarget](https://wiki.facepunch.com/gmod/Player:GetObserverTarget).
 ---
@@ -2296,7 +2304,9 @@ function Player:UniqueIDTable(key) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UnLock)
 function Player:UnLock() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stops the player from spectating another entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
+---
+--- Stops the player from spectating another entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UnSpectate)
 function Player:UnSpectate() end

@@ -7094,9 +7094,13 @@ TEAM_SPECTATOR = 1002
 --- See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/bb172615(v=vs.85).aspx) and [this page](https://en.wikipedia.org/wiki/Texture_filtering) for more information on texture filtering.
 ---@enum TEXFILTER
 TEXFILTER = {
+	--- Disables any filter override.
 	NONE = 0,
+	--- Point sampling, no interpolation.
 	POINT = 1,
+	--- Basic interpolation between 2 samples.
 	LINEAR = 2,
+	--- Highest quality filter. Most useful for textures on 3D geometry.
 	ANISOTROPIC = 3,
 }
 

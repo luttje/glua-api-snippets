@@ -23,13 +23,15 @@ function ents.Create(class) end
 ---@return Entity # Created entity (`C_PhysPropClientside`).
 function ents.CreateClientProp(model) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a clientside only rope, similar to those used by the DOG model from Half-Life 2.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a clientside only rope, similar to those used by the Dog and Fast Zombie models from Half-Life 2.
+---
+--- Created ropes will be automatically cleaned up when one of the attached entities is removed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.CreateClientRope)
 ---@param ent1 Entity The first entity to attach the rope to.
----@param ent1attach number The attachment ID on the first entity to attach the rope to.
+---@param ent1attach number|Vector The attachment ID on the first entity to attach the rope to, or a local Vector relative to the first entity.
 ---@param ent2 Entity The second entity to attach the rope to.
----@param ent2attach number The attachment ID on the second entity to attach the rope to.
+---@param ent2attach number|Vector The attachment ID on the second entity to attach the rope to, or a local Vector relative to the second entity.
 ---@param extra? table Extra optional settings for the rope. Possible values are:
 --- * slack - How much extra rope to add to the length (default: 0)
 --- * width - Width of the rope (default: 2)

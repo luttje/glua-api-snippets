@@ -220,7 +220,7 @@ function surface.GetTextSize(text) end
 --- **NOTE**: This function will not work with .png or .jpg images. For that, see [Global.Material](https://wiki.facepunch.com/gmod/Global.Material). You will probably want to use it regardless.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetTextureID)
----@param nameOrPath string Name or path of the texture.
+---@param nameOrPath string Name or path of the texture. The path must be to a `.vmt` file (a material), not to `.vtf` (a texture)!
 ---@return number # The texture ID
 function surface.GetTextureID(nameOrPath) end
 

@@ -91,12 +91,12 @@ function DForm:NumberWang(label, convar, min, max, decimals) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds a [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider) onto the [DForm](https://wiki.facepunch.com/gmod/DForm)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DForm:NumSlider)
----@param label string The label of the DNumSlider
----@param convar string The console variable to change when the slider is changed
+---@param label string A short label for the slider.
+---@param convar string The [console variable](https://wiki.facepunch.com/gmod/ConVars) to change when the slider is changed
 ---@param min number The minimum value of the slider
 ---@param max number The maximum value of the slider
----@param decimals? number The number of decimals to allow on the slider.
----@return Panel # The created DNumSlider
+---@param decimals? number The number of decimals to allow for the slider value.
+---@return Panel # The created DNumSlider.
 function DForm:NumSlider(label, convar, min, max, decimals) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Creates a [DPanelSelect](https://wiki.facepunch.com/gmod/DPanelSelect) and docks it to the top of the DForm.

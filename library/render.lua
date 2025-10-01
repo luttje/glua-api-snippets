@@ -610,7 +610,7 @@ function render.Model(settings, ent) end
 --- Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride)
----@param material IMaterial The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
+---@param material IMaterial|nil The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
 function render.ModelMaterialOverride(material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target.
@@ -768,11 +768,13 @@ function render.PushCustomClipPlane(normal, distance) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pushes (Adds) a texture filter onto the magnification texture filter stack.
 --- This will modify how textures are stretched to sizes larger than their native resolution for upcoming rendering and drawing operations.
---- For a version of this same function that modifies filtering for texture sizes smaller than their native resolution, see [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
+--- For a version of this same function that modifies filtering for texture sizes smaller than their native resolution, see [render.PushFilterMin](https://wiki.facepunch.com/gmod/render.PushFilterMin)
 ---
---- Always be sure to call [render.PopFilterMag()](https://wiki.facepunch.com/gmod/render.PopFilterMag) afterwards to avoid texture filtering problems.
+--- Always be sure to call [render.PopFilterMag](https://wiki.facepunch.com/gmod/render.PopFilterMag) afterwards to avoid texture filtering problems.
 ---
 --- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
+---
+--- If current texture has more than 1 mipmap, this also sets the mipmap filter.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushFilterMag)
 ---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
@@ -1059,11 +1061,15 @@ function render.SetShadowDirection(shadowDirections) end
 ---@param shadowDistance number The new maximum shadow distance.
 function render.SetShadowDistance(shadowDistance) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether any future render operations will ignore shadow drawing.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether all shadow rendering should be disabled.
+---
+--- Internally sets `r_shadows_gamecontrol` convar, exactly like `shadow_control` does via its `SetShadowsDisabled` input.
+---
+--- Currently broken due to internal bug. Will be fixed in the next update, as of 15 Sept 2025.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetShadowsDisabled)
----@param newState boolean
-function render.SetShadowsDisabled(newState) end
+---@param disable boolean `true` to disable shadows, `false` to enable.
+function render.SetShadowsDisabled(disable) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Compare Function that all pixels affected by a draw operation will have their Stencil Buffer value tested against.
 ---

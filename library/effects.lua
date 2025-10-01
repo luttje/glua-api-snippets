@@ -66,3 +66,20 @@ function effects.GetList() end
 ---@param effect_table table Effect table.
 ---@param name string Effect name.
 function effects.Register(effect_table, name) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Imitates the "near miss" tracer sound, with the ability to override the sound played.
+---
+--- The frequency of the sound is limited internally, as to not overwhelm the player. (same as normal tracers)
+---
+---[View wiki](https://wiki.facepunch.com/gmod/effects.TracerSound)
+---@param start Vector Start position of the tracer.
+---@param endpos Vector End position of the tracer
+---@param tracerType? number Tracer type. Acceptable values are:
+--- * 1 - Normal bullet
+--- * 2 - Gunship bullet
+--- * 4 - Strider bullet
+--- * 8 - Underwater bullet
+---
+--- This affects the default sound, as well as the distance from which the sound can be heard compared to the closest point on the tracer line to the Player:GetShootPos.
+---@param soundOverride? string If set, this sound will be played instead of the default sound.
+function effects.TracerSound(start, endpos, tracerType, soundOverride) end

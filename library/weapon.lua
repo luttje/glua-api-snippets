@@ -529,6 +529,7 @@ function WEAPON:PostDrawViewModel(vm, weapon, ply) end
 ---@param vm Entity This is the view model entity before it is drawn.
 ---@param weapon Weapon This is the weapon that is from the view model.
 ---@param ply Player The the owner of the view model.
+---@return boolean # Return `true` to prevent the default action of rendering the view model. `PostDrawViewModel` will NOT be called in this scenario.
 function WEAPON:PreDrawViewModel(vm, weapon, ply) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when primary attack button ( +attack ) is pressed.

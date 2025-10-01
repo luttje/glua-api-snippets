@@ -161,12 +161,12 @@ function CEffectData:SetEntity(entity) end
 ---@param flags number The flags of the effect. Each effect has their own flags.
 function CEffectData:SetFlags(flags) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the hit box index of the effect.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the hit box index of the effect. Used by various effects for various purposes.
 ---
 --- **NOTE**: Internally stored as an integer, but only first 11 bits are networked, effectively limiting this function to 0-2047 range.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CEffectData:SetHitBox)
----@param hitBoxIndex number The hit box index of the effect.
+---@param hitBoxIndex number The hit box index of the effect, for example from Structures/TraceResult#HitBox
 function CEffectData:SetHitBox(hitBoxIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the magnitude of the effect.

@@ -396,6 +396,16 @@ function util.IntersectRayWithSphere(rayOrigin, rayDelta, spherePosition, sphere
 ---@return boolean # Whether the binary module is installed and Global.require can resolve it.
 function util.IsBinaryModuleInstalled(name) end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs a box-box intersection and returns whether there was an intersection or not.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingBox)
+---@param boxMin Vector The minimum extents of the Axis-Aligned box.
+---@param boxMax Vector The maximum extents of the Axis-Aligned box.
+---@param box2Min Vector The minimum extents of the second Axis-Aligned box.
+---@param box2Max Vector The maximum extents of the second Axis-Aligned box.
+---@return boolean # `true` if there is an intersection, `false` otherwise.
+function util.IsBoxIntersectingBox(boxMin, boxMax, box2Min, box2Max) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs a box-sphere intersection and returns whether there was an intersection or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.IsBoxIntersectingSphere)
@@ -666,6 +676,8 @@ function util.PointContents(position) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Precaches a model for later use. Model is cached after being loaded once.
 --- 	**WARNING**: Modelprecache is limited to 8192 unique models. When it reaches the limit the game will crash.
+---
+--- 	**NOTE**: Does nothing on the client.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.PrecacheModel)
 ---@param modelName string The model to precache.

@@ -31,7 +31,7 @@ function undo.Create(name) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Processes an undo block (in table form). This is used internally by the undo manager when a player presses Z.
 ---
---- You should use `gm_undo` or `gm_undonum *num*` console commands instead of calling this function directly.
+--- You should use `gmod_undo` or `gmod_undonum *num*` console commands instead of calling this function directly.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.Do_Undo)
 ---@param tab Undo The undo block to process as an Structures/Undo

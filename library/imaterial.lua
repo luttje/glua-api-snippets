@@ -1,8 +1,11 @@
 ---@meta
 
---- A Material object. It represents a game material, similarly to how a .vmt file does.
+--- A Material object. It represents a game material, similarly to how a `.vmt` file does, which are in fact loaded into an **IMaterial** object.
 ---
---- It can be created with [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) or [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial).
+--- In most cases the game works with materials as far as file paths go. Materials then point to different [ITexture](https://wiki.facepunch.com/gmod/ITexture)s (`.vtf` files) they might be using.
+--- They are not the same and cannot be interchanged.
+---
+--- A material object can be created with [Global.Material](https://wiki.facepunch.com/gmod/Global.Material) or [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial)
 ---@class IMaterial

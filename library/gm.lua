@@ -1009,11 +1009,12 @@ function GM:OnLuaError(error, realm, stack, name, id) end
 ---@param fileName string The File the Conflict occurred in.
 function GM:OnNotifyAddonConflict(addon1, addon2, fileName) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever an NPC drops an item upon it's death.
---- 	**NOTE**: It will be called only for entities the NPC creates.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called whenever an NPC drops an item upon its death, such as health kits, armor batteries, etc.
 ---
---- It will NOT be called for dropped weapons (with exception of Half-Life: Source NPCs, since they don't use actual weapon entities, they create the weapons on death).
---- [GM:PlayerDroppedWeapon](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon) works for NPC weapon drops already. (Yes, I know it says PLAYERDroppedWeapon, it works because the hook is called from the weapon itself, not from the dropping entity)
+--- It will NOT be called for dropped weapons, with exception of Half-Life: Source NPCs, since they don't use actual weapon entities and create a weapon entity on death.
+--- [GM:PlayerDroppedWeapon](https://wiki.facepunch.com/gmod/GM:PlayerDroppedWeapon) works for NPC weapon drops already. (Yes, it's not a typo)
+---
+--- It will also not be called for live grenades spawned by Zombine.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnNPCDropItem)
 ---@param npc NPC The killed NPC
@@ -1282,7 +1283,8 @@ function GM:PlayerButtonUp(ply, button) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Decides whether a player can hear another player using voice chat.
 ---
---- **WARNING**: This hook is called [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) * [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) times a tick, so ensure your code is efficient.
+--- **WARNING**: This hook is called [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) * [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) times every 0.3 seconds if at least 1 player is talking, if no one is talking its called every 5 seconds.
+--- 	You should ensure that your code is efficient, or this will definitely influence performance.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice)
 ---@param listener Player The listening player.
@@ -1530,42 +1532,6 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 --- See [GM:PlayerSpawn](https://wiki.facepunch.com/gmod/GM:PlayerSpawn) for a hook called every player spawn.
 ---
 --- **NOTE**: This hook is called before the player has fully loaded, when the player is still in seeing the `Starting Lua` screen. For example, trying to use the [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) function will return the default model (`models/player.mdl`).
----
---- **WARNING**: Due to the above note, sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook may cause them to be received before the player finishes loading, for example [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer) might return NULL since [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity) may have not been called yet clientside though the net message **won't** be lost and the client still should receive it (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
----
---- Workaround without networking:
---- ```
---- local load_queue = {}
----
---- hook.Add( "PlayerInitialSpawn", "myAddonName/Load", function( ply )
---- 	load_queue[ ply ] = true
---- end )
----
---- hook.Add( "StartCommand", "myAddonName/Load", function( ply, cmd )
---- 	if load_queue[ ply ] and not cmd:IsForced() then
---- 		load_queue[ ply ] = nil
----
---- 		-- Send what you need here if it requires the client to be fully loaded!
---- 	end
---- end )
---- ```
----
---- With networking:
---- ```
---- -- CLIENT
---- hook.Add( "InitPostEntity", "Ready", function()
---- 	net.Start( "cool_addon_client_ready" )
---- 	net.SendToServer()
---- end )
---- ```
---- ```
---- -- SERVER
---- util.AddNetworkString( "cool_addon_client_ready" )
----
---- net.Receive( "cool_addon_client_ready", function( len, ply )
---- 	-- Send what you need here!
---- end )
---- ```
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn)
 ---@param player Player The player who spawned.

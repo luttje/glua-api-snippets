@@ -19,6 +19,12 @@ function DPanelList:AddItem(pnl, state) end
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:CleanList)
 function DPanelList:CleanList() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Hides all child panels, and optionally deletes them.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:Clear)
+---@param remove boolean Whether to actually delete the panels, not just hide them.
+function DPanelList:Clear(remove) end
+
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enables/creates the vertical scroll bar so that the panel list can be scrolled through.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelList:EnableVerticalScrollbar)
