@@ -649,7 +649,9 @@ function math.random(m, n) end
 ---
 --- For shared random values across predicted realms, use [util.SharedRandom](https://wiki.facepunch.com/gmod/util.SharedRandom).
 ---
---- **WARNING**: Incorrect usage of this function will affect `all` random numbers in the game.
+--- **WARNING**: Usage of this function affects **ALL** random numbers in the game. This means that improper use (such as setting the seed to a static value that doesn't change with time) can negatively affect other addons or the base game.
+---
+--- It is a good idea to set the seed back to at least something like [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime) in those cases.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.randomseed)
 ---@param seed number The new seed

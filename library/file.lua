@@ -171,7 +171,7 @@ function file.Time(path, gamePath) end
 --- * .wav
 --- * .ogg
 ---
---- Restricted symbols are: `":`, and multiple consecutive spaces
+--- Restricted symbols are: `":`, and multiple consecutive spaces, as well as pretty much every other non Latin (a-Z) character
 ---@param content string The content that will be written into the file.
 ---@return boolean # If the operation was successful
 function file.Write(fileName, content) end

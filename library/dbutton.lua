@@ -46,7 +46,7 @@ function DButton:SetIcon(img) end
 --- Also see: [DImageButton](https://wiki.facepunch.com/gmod/DImageButton)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DButton:SetImage)
----@param img? string The image file to use, relative to `/materials`. If this is nil, the image background is removed.
+---@param img? string The image file to use, relative to the `materials/` folder. Can be set to `nil` to remove the image background.
 function DButton:SetImage(img) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets an image to be displayed as the button's background.

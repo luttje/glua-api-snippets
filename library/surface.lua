@@ -36,11 +36,20 @@ function surface.DisableClipping(disable) end
 ---@param originX number The center x integer coordinate.
 ---@param originY number The center y integer coordinate.
 ---@param radius number The radius of the circle.
----@param r number The red value of the color to draw the circle with, or a Color.
----@param g number The green value of the color to draw the circle with. Unused if a Color was given.
----@param b number The blue value of the color to draw the circle with. Unused if a Color was given.
----@param a? number The alpha value of the color to draw the circle with. Unused if a Color was given.
+---@param r number The red value of the color to draw the circle with.
+---@param g number The green value of the color to draw the circle with.
+---@param b number The blue value of the color to draw the circle with.
+---@param a? number The alpha value of the color to draw the circle with.
 function surface.DrawCircle(originX, originY, radius, r, g, b, a) end
+
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Draws a hollow circle, made of lines. For a filled circle, see examples for [surface.DrawPoly](https://wiki.facepunch.com/gmod/surface.DrawPoly).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/surface.DrawCircle)
+---@param originX number The center x integer coordinate.
+---@param originY number The center y integer coordinate.
+---@param radius number The radius of the circle.
+---@param color table A Color object/table to read the color from.
+function surface.DrawCircle(originX, originY, radius, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Draws a line from one point to another.
 ---

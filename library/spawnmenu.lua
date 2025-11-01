@@ -80,44 +80,53 @@ New content types can be added via spawnmenu.AddContentType.
 ---@param needsApp? string The needed game for this prop category, if one is needed. If the specified game is not mounted, the category isn't shown. This uses the shortcut name, e.g. `cstrike`, and not the Steam AppID.
 function spawnmenu.AddPropCategory(classname, name, contents, icon, id, parentID, needsApp) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used to create a new category in the list inside of a spawnmenu ToolTab.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Used to create a new category in the list inside of a spawnmenu Tool Tab.
 ---
 --- You must call this function from [SANDBOX:AddToolMenuCategories](https://wiki.facepunch.com/gmod/SANDBOX:AddToolMenuCategories) for it to work properly.
 ---
----[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.AddToolCategory)
----@param tab string The ToolTab name, as created with spawnmenu.AddToolTab.
+--- See [spawnmenu.AddToolTab](https://wiki.facepunch.com/gmod/spawnmenu.AddToolTab) to add new tool tabs.
+--- See [spawnmenu.AddToolMenuOption](https://wiki.facepunch.com/gmod/spawnmenu.AddToolMenuOption) to add new sub options to a newly created tool category.
 ---
---- You can also use the default ToolTab names "Main" and "Utilities".
----@param RealName string The identifier name
----@param PrintName string The displayed name
-function spawnmenu.AddToolCategory(tab, RealName, PrintName) end
+---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.AddToolCategory)
+---@param tabName string The internal tool tab name, as created with spawnmenu.AddToolTab.
+---
+--- You can also use the default Tool Tab names `"Main"` and `"Utilities"`.
+---@param className string The unique identifier name, which will be used to add tool option to this category.
+---@param printName string The nice name to be displayed to the player. See Addon Localization.
+function spawnmenu.AddToolCategory(tabName, className, printName) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds an option to the right side of the spawnmenu
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds an option to the right side of the spawnmenu.
+---
+--- See [spawnmenu.AddToolTab](https://wiki.facepunch.com/gmod/spawnmenu.AddToolTab) to add new right-side tabs. See [spawnmenu.AddToolCategory](https://wiki.facepunch.com/gmod/spawnmenu.AddToolCategory) to add new categories.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.AddToolMenuOption)
----@param tab string The spawnmenu tab to add into (for example "Utilities")
----@param category string The category to add into (for example "Admin")
----@param class string Unique identifier of option to add
----@param name string The nice name of item
----@param cmd string Command to execute when the item is selected
----@param config string Config name, used in older versions to load tool settings UI from a file. No longer works.
----
---- We advise against using this. It may be changed or removed in a future update.
+---@param tab string The internal name of the spawnmenu tab to add into (for example "Utilities")
+---@param category string The internal name of the category within the tab to add into (for example "Admin")
+---@param class string Unique internal identifier of the new option. This is used to reference this option by other code.
+---@param name string The nice name of item to show to the player. See Addon Localization.
+---@param cmd? string Console command to execute when the item is selected.
+---@param config? string Config name, used in older versions to load tool settings UI from a file.
 ---@param cpanel fun(pnl: Panel) A function to build the context panel.
 ---
 --- Function argument(s):
 --- * Panel `pnl` - A DForm that will be shown in the context menu
 ---@param table? table Allows to override the table that will be added to the tool list. Some of the fields will be overwritten by this function.
+---@deprecated Legacy argument, no longer works.
 function spawnmenu.AddToolMenuOption(tab, category, class, name, cmd, config, cpanel, table) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a new tool tab to the right side of the spawnmenu via the [SANDBOX:AddToolMenuTabs](https://wiki.facepunch.com/gmod/SANDBOX:AddToolMenuTabs) hook.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a new tool tab to the right side of the spawnmenu. (usually via the [SANDBOX:AddToolMenuTabs](https://wiki.facepunch.com/gmod/SANDBOX:AddToolMenuTabs) hook)
 ---
---- This function is a inferior duplicate of [spawnmenu.GetToolMenu](https://wiki.facepunch.com/gmod/spawnmenu.GetToolMenu), just without its return value.
+--- See [spawnmenu.GetToolMenu](https://wiki.facepunch.com/gmod/spawnmenu.GetToolMenu) for a function to retrieve existing tool tabs.
+---
+--- See [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab) for tabs on the left side of the spawnmenu.
+---
+--- See [spawnmenu.AddToolCategory](https://wiki.facepunch.com/gmod/spawnmenu.AddToolCategory) to add new categories to the newly created tool tab.
+--- See [spawnmenu.AddToolMenuOption](https://wiki.facepunch.com/gmod/spawnmenu.AddToolMenuOption) to add new options to the categories within a tool tab.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.AddToolTab)
----@param name string The internal name of the tab. This is used for sorting.
----@param label? string The 'nice' name of the tab (Tip: language.Add)
----@param icon? string The filepath to the icon of the tab. Should be a .png
+---@param name string The internal name of the tab. This is used for sorting, as well as adding categories, so it should be unique.
+---@param label? string The 'nice' name of the tab that is displayed to the player. See Addon Localization.
+---@param icon? string The file path to the icon of the tab. Should be a `.png` file. See Silkicons.
 function spawnmenu.AddToolTab(name, label, icon) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Clears all the tools from the different tool categories and the categories itself, if ran at the correct place.
@@ -218,12 +227,14 @@ function spawnmenu.GetCustomPropTable() end
 --- ```
 function spawnmenu.GetPropTable() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a new tool tab (or returns an existing one by name) to the right side of the spawnmenu via the [SANDBOX:AddToolMenuTabs](https://wiki.facepunch.com/gmod/SANDBOX:AddToolMenuTabs) hook.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns an existing tool tab by name from the right side of the spawnmenu (usually during the [SANDBOX:AddToolMenuTabs](https://wiki.facepunch.com/gmod/SANDBOX:AddToolMenuTabs) hook)
+---
+--- If the requested tooltab does not exist, it will be added. See also [spawnmenu.AddToolTab](https://wiki.facepunch.com/gmod/spawnmenu.AddToolTab).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/spawnmenu.GetToolMenu)
 ---@param name string The internal name of the tab. This is used for sorting.
 ---@param label? string The 'nice' name of the tab
----@param icon? string The filepath to the icon of the tab. Should be a .png
+---@param icon? string The file path to the icon of the tab. Should be a `.png` file. See Silkicons.
 ---@return table # A table of tables representing categories and items in the left part of the tab. See example below to example structure.
 function spawnmenu.GetToolMenu(name, label, icon) end
 

@@ -420,12 +420,12 @@ function Entity:DestroyBoneFollowers() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DestroyShadow)
 function Entity:DestroyShadow() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Disables an active matrix.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Disables an active matrix. See [Entity:EnableMatrix](https://wiki.facepunch.com/gmod/Entity:EnableMatrix) for more info about active matrixes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DisableMatrix)
 ---@param matrixType string The name of the matrix type to disable.
 ---
---- The only known matrix type is "RenderMultiply".
+--- Currently the only matrix type is `"RenderMultiply"`.
 function Entity:DisableMatrix(matrixType) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs a trace attack towards the entity this function is called on, as if an invisible bullet is shot towards it. Visually identical to [Entity:TakeDamageInfo](https://wiki.facepunch.com/gmod/Entity:TakeDamageInfo).
@@ -441,7 +441,7 @@ function Entity:DispatchTraceAttack(damageInfo, traceRes, dir) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Dissolves the entity.
 ---
---- This function creates `env_entity_dissolver` entity internally.
+--- This function creates an `env_entity_dissolver` entity internally, which seems to be deleted in the same frame. Calling this function on an entity that is already dissolving will not create another `env_entity_dissolver` entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Dissolve)
 ---@param type? number Dissolve type. Should be one of the following values:
@@ -511,6 +511,8 @@ function ENTITY:Draw(flags) end
 ---
 --- Using this with a map model ([game.GetWorld](https://wiki.facepunch.com/gmod/game.GetWorld)():[GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel)()) crashes the game.
 ---
+--- Calling this in [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw) will cause infinite recursion and crash the game.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DrawModel)
 ---@param flags? number The optional Enums/STUDIO flags, usually taken from ENTITY:Draw and similar hooks.
 function Entity:DrawModel(flags) end
@@ -533,7 +535,10 @@ function ENTITY:DrawTranslucent(flags) end
 --- **WARNING**: The entity needs to already have something below it within 256 units.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DropToFloor)
-function Entity:DropToFloor() end
+---@param mask? number Trace mask.
+---@param ignoreEnt? Entity Trace ignore entity.
+---@param maxDist? number Max trace dist.
+function Entity:DropToFloor(mask, ignoreEnt, maxDist) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: You should use [Entity:NetworkVar](https://wiki.facepunch.com/gmod/Entity:NetworkVar) instead
 ---
@@ -629,7 +634,7 @@ function Entity:EnableCustomCollisions() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:EnableMatrix)
 ---@param matrixType string The name of the matrix type.
---- The only implemented matrix type is "RenderMultiply".
+--- Currently the only matrix type is `"RenderMultiply"`.
 ---@param matrix VMatrix The matrix to apply before drawing the entity.
 function Entity:EnableMatrix(matrixType, matrix) end
 
@@ -1058,7 +1063,7 @@ function Entity:GetBrushPlaneCount() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of brushes surfaces for brush model entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetBrushSurfaces)
----@return table # Table of SurfaceInfos if the entity has a brush model, or no value otherwise.
+---@return SurfaceInfo[] # A list of SurfaceInfo elements if the entity has a brush model, or `nil` otherwise.
 function Entity:GetBrushSurfaces() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the specified hook callbacks for this entity added with [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback)
@@ -1688,7 +1693,9 @@ function Entity:GetMoveParent() end
 ---@return number # Move type. See Enums/MOVETYPE
 function Entity:GetMoveType() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the map/hammer targetname of this entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the "targetname" of this entity, typically used in map making and scripting to uniquely identify and target (hence 'targetname') an entity or a group of entities.
+---
+--- **WARNING**: For players, this function is overwritten by [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName), which returns the player's nick name, not the target name.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetName)
 ---@return string # The name of the Entity
@@ -2473,10 +2480,10 @@ function Entity:GetShouldPlayPickupSound() end
 ---@return boolean # Returns true if ragdoll will be created on server, false if on client
 function Entity:GetShouldServerRagdoll() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the skin index of the current skin.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the skin index of the current skin. Can be manipulated via [Entity:SetSkin](https://wiki.facepunch.com/gmod/Entity:SetSkin).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetSkin)
----@return number # skinIndex
+---@return number # Current skin index.
 function Entity:GetSkin() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns solid type of an entity.
@@ -3015,18 +3022,18 @@ function Entity:IsWorld() end
 ---@return boolean # Return true to suppress this KeyValue or return false or nothing to apply this key value.
 function ENTITY:KeyValue(key, value) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Converts a vector local to an entity into a worldspace vector
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a vector relative to the entity's coordinate system into a worldspace vector.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LocalToWorld)
----@param lpos Vector The local vector
----@return Vector # The translated to world coordinates vector
+---@param lpos Vector A local space vector.
+---@return Vector # The correspondent worldspace vector.
 function Entity:LocalToWorld(lpos) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Converts a local angle (local to the entity) to a world angle.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates an angle relative to the entity's coordinate system to a worldspace angle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles)
----@param ang Angle The local angle
----@return Angle # The world angle
+---@param ang Angle A local space angle.
+---@return Angle # The correspondent worldspace angle.
 function Entity:LocalToWorldAngles(ang) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the attachment index of the given attachment name.
@@ -3723,9 +3730,9 @@ function Entity:PhysicsInitStatic(solidType) end
 ---@return number # One of the Enums/SIM.
 function ENTITY:PhysicsSimulate(phys, deltaTime) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever the physics of the entity are updated.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever a physics object of this entity is updated.
 ---
---- **WARNING**: This hook won't be called if the Entity's [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) goes asleep
+--- This hook won't be called if the Entity's [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) goes asleep, or doesn't exist.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:PhysicsUpdate)
 ---@param phys PhysObj The physics object of the entity.
@@ -4552,6 +4559,8 @@ function Entity:SetLocalAngles(ang) end
 function Entity:SetLocalAngularVelocity(angVel) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets local position relative to the parented position. This is for use with [Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent) to offset position.
+---
+--- This is also used by NPCs for interpolated movement. If you use [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) for step movement, your NPC will snap to position instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetLocalPos)
 ---@param pos Vector The local position
@@ -5543,6 +5552,8 @@ function Entity:SetShouldServerRagdoll(serverragdoll) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the skin of the entity.
 ---
+--- [Entity:GetSkin](https://wiki.facepunch.com/gmod/Entity:GetSkin) returns current skin and [Entity:SkinCount](https://wiki.facepunch.com/gmod/Entity:SkinCount) returns amount of skins.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSkin)
 ---@param skinIndex number 0-based index of the skin to use.
 function Entity:SetSkin(skinIndex) end
@@ -5715,7 +5726,10 @@ function Entity:SetVelocity(velocity) end
 ---@param weapon? Weapon The weapon entity to associate this viewmodel to.
 function Entity:SetWeaponModel(viewModel, weapon) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of skins the entity has. To retrieve the total number of skins on a model, please look at this function [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of skins the entity has.
+---
+--- To set the entity's skin, use [Entity:SetSkin](https://wiki.facepunch.com/gmod/Entity:SetSkin).
+--- To retrieve the total number of skins without an entity, see [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SkinCount)
 ---@return number # The amount of skins the entity's model has.
@@ -6185,16 +6199,16 @@ function Entity:WorldSpaceAABB() end
 ---@return Vector # The center of the entity
 function Entity:WorldSpaceCenter() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Converts a worldspace vector into a vector local to an entity
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace vector into a vector relative to the entity's coordinate system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:WorldToLocal)
----@param wpos Vector The world vector
----@return Vector # The local vector
+---@param wpos Vector A worldspace vector.
+---@return Vector # The correspondent local space vector.
 function Entity:WorldToLocal(wpos) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Converts world angles to local angles ( local to the entity )
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace angle into an angle relative to the entity's coordinate system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:WorldToLocalAngles)
----@param ang Angle The world angles
----@return Angle # The local angles
+---@param ang Angle A worldspace angle.
+---@return Angle # The correspondent local space angle.
 function Entity:WorldToLocalAngles(ang) end

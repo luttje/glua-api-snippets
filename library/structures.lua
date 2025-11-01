@@ -12,7 +12,7 @@ local AmmoData = {}
 ---Damage type using Enums/DMG.
 ---
 --- Related function is game.GetAmmoDamageType.
----@type number?
+---@type DMG?
 AmmoData.dmgtype = DMG_BULLET
 
 ---The force of the ammo.
@@ -52,7 +52,7 @@ AmmoData.npcdmg = 10
 AmmoData.plydmg = 10
 
 ---Tracer type using Enums/TRACER.
----@type number?
+---@type TRACER?
 AmmoData.tracer = TRACER_NONE
 
 ---Maximum amount of ammo of this type the player should be able to carry in reserve. `-2` makes this ammo type infinite.
@@ -65,7 +65,7 @@ AmmoData.tracer = TRACER_NONE
 AmmoData.maxcarry = 9999
 
 ---Flags for the ammo type using Enums/AMMO.
----@type number?
+---@type AMMO?
 AmmoData.flags = 0
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used by various functions, such as [Entity:GetAttachment](https://wiki.facepunch.com/gmod/Entity:GetAttachment).
@@ -149,11 +149,11 @@ AnimationData.Size = Vector(0, 0, 0)
 AnimationData.StartSize = nil
 
 ---The target colour of the panel object. Only used by Panel:ColorTo.
----@type table
+---@type Color
 AnimationData.Color = nil
 
 ---The colour of the panel object when the animation started. Only used by Panel:ColorTo.
----@type table
+---@type Color
 AnimationData.StartColor = nil
 
 ---The target alpha (0-255) of the panel object. Only used by Panel:AlphaTo.
@@ -187,7 +187,7 @@ AttachmentData.id = nil
 ---@type string
 AttachmentData.name = nil
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) TTable structure used as balloon spawn data. Default values are applied when the trace hits nothing. This data is required for correctly spawning the balloon.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table structure used as balloon spawn data. Default values are applied when the trace hits nothing. This data is required for correctly spawning the balloon.
 ---
 --- See [MakeBalloon](https://wiki.facepunch.com/gmod/MakeBalloon)
 
@@ -230,7 +230,7 @@ BodyGroupData.num = nil
 
 ---A table of the names of the Sub Models within this Body Group.
 --- Sub Model IDs start at `0`.
----@type table
+---@type string[]
 BodyGroupData.submodels = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing a single bone's orientation when its mesh is in its baseline (or "bind") pose before any animation is played.
@@ -814,7 +814,7 @@ EmitSoundInfo.DSP = 0
 --- This determines how fast the sound drops away. A higher value means the sound can be heard farther away.
 ---
 --- See Enums/SNDLVL.
----@type number?
+---@type SNDLVL?
 EmitSoundInfo.SoundLevel = 75
 
 ---The pitch of the played sound, a number between 0 (low) and 255 (high), where 100 is the sound's original pitch.
@@ -822,11 +822,11 @@ EmitSoundInfo.SoundLevel = 75
 EmitSoundInfo.Pitch = 100
 
 ---The bit flags of the played sound. See Enums/SND for available options.
----@type number?
+---@type SND?
 EmitSoundInfo.Flags = 0
 
 ---The sound's channel. See Enums/CHAN for available options.
----@type number
+---@type CHAN
 EmitSoundInfo.Channel = nil
 
 ---The volume of the played sound, return as a decimal number between 0 (low) and 1 (high).
@@ -917,7 +917,9 @@ ENT.Instructions = nil
 ---@type number
 ENT.RenderGroup = nil
 
----If set and RenderGroup is not, will switch the render group to Enums/RENDERGROUP#RENDERGROUP_BOTH when appropriate.
+---If set and `RenderGroup` is not, will switch the render group to Enums/RENDERGROUP#RENDERGROUP_BOTH when appropriate.
+---
+--- Basically, when the default render group of the entity's model is opaque, ENTITY:DrawTranslucent will still be called, for example to render effects and such. This is preferable to forcing translucent models to render in the opaque pass by setting `RenderGroup` to `RENDERGROUP_BOTH` at all times, causing graphical issues.
 ---@type boolean?
 ENT.WantsTranslucency = false
 
@@ -1076,7 +1078,7 @@ FiredBullet.Force = nil
 FiredBullet.Tracer = nil
 
 ---The Structures/TraceResult from the util.TraceLine that determined where and what the bullet hit.
----@type table
+---@type TraceResult
 FiredBullet.Trace = nil
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [surface.CreateFont](https://wiki.facepunch.com/gmod/surface.CreateFont).
@@ -1257,8 +1259,8 @@ HTTPRequest.success = nil
 --- * DELETE
 --- * PATCH
 --- * OPTIONS
----@type string
-HTTPRequest.method = nil
+---@type string?
+HTTPRequest.method = "GET"
 
 ---The target url
 ---@type string
@@ -1321,15 +1323,15 @@ HullTrace.mins = nil
 --- * boolean `undefined` - Return `true` to hit the entity, `false` to skip it.
 ---
 --- Using a function here is super slow. Try to avoid it.
----@type Entity?
+---@type Entity|table<Entity>|table<string>|function?
 HullTrace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit.
----@type number?
+---@type MASK?
 HullTrace.mask = MASK_SOLID
 
 ---The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
----@type number?
+---@type COLLISION_GROUP?
 HullTrace.collisiongroup = COLLISION_GROUP_NONE
 
 ---Should the trace ignore world or not.
@@ -1337,7 +1339,7 @@ HullTrace.collisiongroup = COLLISION_GROUP_NONE
 HullTrace.ignoreworld = false
 
 ---If set, the trace result will be written to the supplied table instead of returning a new table
----@type table?
+---@type TraceResult?
 HullTrace.output = nil
 
 ---Turns the `filter` field into a whitelist, if it is a table.
@@ -1356,7 +1358,7 @@ HullTrace.hitclientonly = false
 local LocalLight = {}
 
 ---The type of the light source, see Enums/MATERIAL_LIGHT.
----@type number?
+---@type MATERIAL_LIGHT?
 LocalLight.type = MATERIAL_LIGHT_POINT
 
 ---The color of the light source (x is red, y is green, z is blue). Values are not restricted to a specific range, higher values will result in a brighter light.
@@ -1510,7 +1512,7 @@ MeshVertex.v1 = nil
 ---A sequential table of four numbers whose purpose and expected values are determined by the shader.
 ---
 --- Many Source Engine shaders to hold tangent information of the vertex in the order `tangentX`, `tangentY`, `tangentZ`, `tangentHandedness`.
----@type table
+---@type number[]
 MeshVertex.userdata = nil
 
 ---A sequential table of all the Structures/BoneWeight that affect this vertex.
@@ -1518,10 +1520,10 @@ MeshVertex.userdata = nil
 --- The total sum of their `weight` values should be `1`
 ---
 --- Current added exclusively by util.GetModelMeshes
----@type table
+---@type table[]
 MeshVertex.weights = nil
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table returned by [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table returned by [util.GetModelInfo](https://wiki.facepunch.com/gmod/util.GetModelInfo).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/ModelInfo)
@@ -1610,7 +1612,7 @@ ModelInfo.HullMax = nil
 --- * Name
 --- * Bone
 --- * Offset
----@type table
+---@type table[]
 ModelInfo.Attachments = nil
 
 ---A list of bones the model has. Please node that the keys of this table are **not** bone IDs, it's just a list, but it might be safe to assume the keys are (BoneID-1) due to Lua table indexes starting at 1..
@@ -1623,7 +1625,7 @@ ModelInfo.Attachments = nil
 --- * SurfacePropName
 --- * Position
 --- * Angle
----@type table
+---@type table[]
 ModelInfo.Bones = nil
 
 ---A list of sequences the model has, including the ones from `$includemodel`s.
@@ -1639,7 +1641,7 @@ ModelInfo.Bones = nil
 --- * string Name
 --- * number Type
 --- * string Options
----@type table
+---@type table[]
 ModelInfo.Sequences = nil
 
 ---A list of materials the model uses, across all its meshes.
@@ -1667,7 +1669,7 @@ ModelInfo.IncludeModels = nil
 --- * Mins
 --- * Maxs
 --- * Bone
----@type table
+---@type table[]
 ModelInfo.HitBoxSets = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure containing the information required to create a mesh.
@@ -1688,14 +1690,14 @@ ModelMeshData.material = nil
 --- These triangles are created from the contents of the `verticies` field.
 ---
 --- This can be used as an input to IMesh:BuildFromTriangles
----@type table
+---@type table[]
 ModelMeshData.triangles = nil
 
 ---A sequential table of Structures/MeshVertex that represents each vertex of the mesh.
 ---
 ---
 --- This field has a typo in its name and should be named "vertices"
----@type table
+---@type table[]
 ModelMeshData.verticies = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Information about the NPC data structure, used to define spawnable NPCs for the Sandbox gamemode.
@@ -2411,14 +2413,14 @@ SequenceInfo.label = nil
 SequenceInfo.activityname = nil
 
 ---The activity ID associated with this sequence. See Enums/ACT.
----@type number
+---@type ACT
 SequenceInfo.activity = nil
 
 ---How likely this sequence is to be picked when playing an activity its attached to. -1 means this is the only sequence for that activity. (needs validation)
 ---@type number
 SequenceInfo.actweight = nil
 
----The looping and other flags of this sequence.
+---The looping and other flags of this sequence, see [flags here](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/public/studio.h#L3078).
 ---@type number
 SequenceInfo.flags = nil
 
@@ -2475,7 +2477,7 @@ SequenceInfo.pose = nil
 SequenceInfo.cycleposeindex = nil
 
 ---A 1-based array of all animationIDs associated with this sequence. For use with Entity:GetAnimInfo.
----@type table
+---@type number[]
 SequenceInfo.anims = nil
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Used for [serverlist.Query](https://wiki.facepunch.com/gmod/serverlist.Query).
@@ -2598,11 +2600,11 @@ SoundData.sound = nil
 SoundData.name = nil
 
 ---The sound channel to play in. See Enums/CHAN
----@type number
+---@type CHAN
 SoundData.channel = nil
 
 ---The soundlevel of the sound in dB. See Enums/SNDLVL. This will affect how far the sound can be heard.
----@type number
+---@type SNDLVL
 SoundData.level = nil
 
 ---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.
@@ -2612,7 +2614,7 @@ SoundData.level = nil
 SoundData.volume = 1.0
 
 ---The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.
----@type number?
+---@type number|table<number>?
 SoundData.pitch = 100
 
 ---@deprecated Use pitch instead.
@@ -2651,7 +2653,7 @@ SoundHintData.target = nil
 SoundHintData.volume = nil
 
 ---Enums/SOUND
----@type number
+---@type SOUND
 SoundHintData.type = nil
 
 ---Global.CurTime based expiration date
@@ -2663,7 +2665,7 @@ SoundHintData.expiration = nil
 SoundHintData.expires = nil
 
 ---Enums/CHAN
----@type number
+---@type CHAN
 SoundHintData.channel = nil
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returned by [util.GetSunInfo](https://wiki.facepunch.com/gmod/util.GetSunInfo).
@@ -2725,7 +2727,7 @@ SurfacePropertyData.climbable = nil
 SurfacePropertyData.jumpFactor = nil
 
 ---The surface material. See Enums/MAT.
----@type number
+---@type MAT
 SurfacePropertyData.material = nil
 
 ---Scalar multiplier for player speed. Achieves this by multiplying CMoveData:SetMaxSpeed in GM:Move.
@@ -2927,7 +2929,7 @@ SWEP.DrawAmmo = true
 SWEP.DrawCrosshair = true
 
 ---The SWEP render group, see Enums/RENDERGROUP. If unset, the engine will decide the render group based on the SWEPs world model.
----@type number
+---@type RENDERGROUP
 SWEP.RenderGroup = nil
 
 ---Slot in the weapon selection menu, starts with `0`
@@ -3022,7 +3024,7 @@ SWEP.IconOverride = "entities/<ClassName>.png"
 local TeamData = {}
 
 ---Color of the team
----@type table
+---@type Color
 TeamData.Color = nil
 
 ---Whether the team is joinable or not.
@@ -3057,15 +3059,15 @@ TextData.font = "DermaDefault"
 TextData.pos = nil
 
 ---The alignment of the X position. See Enums/TEXT_ALIGN
----@type number?
+---@type TEXT_ALIGN?
 TextData.xalign = TEXT_ALIGN_LEFT
 
 ---The alignment of the Y position. See Enums/TEXT_ALIGN
----@type number?
+---@type TEXT_ALIGN?
 TextData.yalign = TEXT_ALIGN_TOP
 
 ---The text color
----@type table?
+---@type Color?
 TextData.color = color_white
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used for [draw.TexturedQuad](https://wiki.facepunch.com/gmod/draw.TexturedQuad).
@@ -3096,7 +3098,7 @@ TextureData.w = nil
 TextureData.h = nil
 
 ---The texture color. See Color.
----@type table?
+---@type Color?
 TextureData.color = color_white
 
 ---
@@ -3223,11 +3225,11 @@ Trace.endpos = VectorVector(0, 0, 0)
 Trace.filter = nil
 
 ---The trace mask Enums/MASK. This determines what the trace should hit and what it shouldn't hit. A mask is a combination of Enums/CONTENTS - you can use these for more advanced masks.
----@type number?
+---@type MASK?
 Trace.mask = MASK_SOLID
 
 ---The collision group Enums/COLLISION_GROUP. This determines what the trace should hit in regards to the entity's collision group.
----@type number?
+---@type COLLISION_GROUP?
 Trace.collisiongroup = COLLISION_GROUP_NONE
 
 ---Should the trace ignore world or not
@@ -3235,7 +3237,7 @@ Trace.collisiongroup = COLLISION_GROUP_NONE
 Trace.ignoreworld = false
 
 ---If set, the trace result will be written to the supplied table instead of returning a new table
----@type table?
+---@type TraceResult?
 Trace.output = nil
 
 ---Turns the `filter` field into a whitelist, if it is a table.
@@ -3276,7 +3278,7 @@ TraceResult.Hit = false
 TraceResult.HitBox = 0
 
 ---Enums/HITGROUP describing what hitgroup the trace hit (not the same as HitBox).
----@type number?
+---@type HITGROUP?
 TraceResult.HitGroup = 0
 
 ---Indicates whenever the trace hit a no-draw brush.
@@ -3308,7 +3310,7 @@ TraceResult.HitTexture = "** empty **"
 TraceResult.HitWorld = false
 
 ---Enums/MAT of the material hit by the trace.
----@type number?
+---@type MAT?
 TraceResult.MatType = nil
 
 ---The direction of the trace as a normal vector (vector with Vector:Length of 1).
@@ -3343,15 +3345,15 @@ TraceResult.StartSolid = false
 TraceResult.AllSolid = false
 
 ---The surface flags of the hit surface. See Enums/SURF.
----@type number?
+---@type SURF?
 TraceResult.SurfaceFlags = 0
 
 ---The displacement flags of the hit surface. See Enums/DISPSURF.
----@type number?
+---@type DISPSURF?
 TraceResult.DispFlags = 0
 
 ---The contents of the hit surface. See Enums/CONTENTS.
----@type number?
+---@type CONTENTS?
 TraceResult.Contents = 0
 
 ---BoneID on the model that the hit hitbox is attached to, if available.
@@ -3494,11 +3496,11 @@ Undo.Owner = nil
 Undo.Name = nil
 
 ---A table of entities to be removed by the undo
----@type table
+---@type Entity[]
 Undo.Entities = nil
 
 ---A table of {function_to_call, func_arg2, func_arg3}
----@type table
+---@type table[]
 Undo.Functions = nil
 
 ---A custom undo text to show the client
@@ -3525,19 +3527,19 @@ VehicleParams.wheelsPerAxle = nil
 VehicleParams.axleCount = nil
 
 ---A table of Structures/VehicleParamsAxle tables.
----@type table
+---@type table{VehicleParamsAxle}[]
 VehicleParams.axles = nil
 
 ---See Structures/VehicleParamsBody
----@type table
+---@type VehicleParamsBody
 VehicleParams.body = nil
 
 ---See Structures/VehicleParamsEngine
----@type table
+---@type VehicleParamsEngine
 VehicleParams.engine = nil
 
 ---See Structures/VehicleParamsSteering
----@type table
+---@type VehicleParamsSteering
 VehicleParams.steering = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) The structure used by [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
@@ -4093,7 +4095,7 @@ ViewData.dopostprocess = false
 ViewData.bloomtone = true
 
 ---This is identifying which logical part of the scene an entity is being redered in, see Enums/VIEW.
----@type number?
+---@type VIEW?
 ViewData.viewid = 0
 
 ---This allows you to "zoom in" on a part of the screen - for example, the top-left quarter of the screen. This is similar to how [poster splits the screen](https://garry.blog/poster-screenshots/) into separate renders.
@@ -4118,7 +4120,7 @@ ViewData.offcenter = nil
 local ViewSetup = {}
 
 ---The current view id. See Enums/VIEW.
----@type number
+---@type VIEW
 ViewSetup.viewid = nil
 
 ---The view's origin/position

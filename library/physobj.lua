@@ -378,23 +378,33 @@ function PhysObj:IsPenetrating() end
 ---@return boolean # Whether the physics object is valid or not.
 function PhysObj:IsValid() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Mapping a vector in local frame of the physics object to world frame.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a vector in the local space of the physics object into worldspace coordinates.
 ---
---- **NOTE**: this function does translation and rotation, with translation done first.
+--- **NOTE**: Internally transforms the vector by the `PhysObj:GetPositionMatrix()`'s rotation & translation.
+---
+--- So in GLua it approximates to:
+--- ```
+--- local matrixWorldTransform = PhysObj:GetPositionMatrix()
+--- local vecWorldspaced = Vector()
+--- vecWorldspaced:Set( vecLocal )
+--- vecWorldspaced:Mul( matrixWorldTransform )
+---
+--- return vecWorldspaced
+--- ```
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld)
----@param LocalVec Vector A vector in the physics object's local frame
----@return Vector # The corresponding vector in world frame
-function PhysObj:LocalToWorld(LocalVec) end
+---@param vecLocal Vector A vector in the physics object's local space.
+---@return Vector # The correspondent worldspace vector.
+function PhysObj:LocalToWorld(vecLocal) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Rotate a vector from the local frame of the physics object to world frame.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Transforms a vector in the local space of the physics object merely by the rotation of the `PhysObj:GetPositionMatrix()`.
 ---
---- **NOTE**: This function only rotates the vector, without any translation operation.
+--- In contrast to [PhysObj:LocalToWorld](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld), this function doesn't translate the vector.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)
----@param LocalVec Vector A vector in the physics object's local frame
----@return Vector # The corresponding vector in world frame
-function PhysObj:LocalToWorldVector(LocalVec) end
+---@param vecLocal Vector A vector in the physics object's local space.
+---@return Vector # The result vector of the transformation by rotation.
+function PhysObj:LocalToWorldVector(vecLocal) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Prints debug info about the state of the physics object to the console.
 ---
@@ -536,18 +546,18 @@ function PhysObj:UpdateShadow(targetPosition, targetAngles, frameTime) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:Wake)
 function PhysObj:Wake() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Converts a vector to a relative to the physics object coordinate system.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace vector into the local space of the physics object.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal)
----@param vec Vector The vector in world space coordinates.
----@return Vector # The vector local to PhysObj:GetPos.
+---@param vec Vector A worldspace vector.
+---@return Vector # The correspondent local space vector.
 function PhysObj:WorldToLocal(vec) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Rotate a vector from the world frame to the local frame of the physics object.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Transforms a worldspace vector into the local space of the physics object merely by the rotation of the **inverted** `PhysObj:GetPositionMatrix()`.
 ---
---- **NOTE**: This function only rotates the vector, without any translation operation.
+--- In contrast to [PhysObj:WorldToLocal](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal), this function doesn't translate the vector.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocalVector)
----@param WorldVec Vector A vector in the world frame
----@return Vector # The corresponding vector relative to the PhysObj
-function PhysObj:WorldToLocalVector(WorldVec) end
+---@param vec Vector A worldspace vector.
+---@return Vector # The result vector of the transformation by rotation.
+function PhysObj:WorldToLocalVector(vec) end

@@ -214,8 +214,9 @@ function SANDBOX:PlayerSpawnedRagdoll(ply, model, ent) end
 ---@param ent Entity The spawned SENT
 function SANDBOX:PlayerSpawnedSENT(ply, ent) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called after the player has spawned a scripted weapon from the spawnmenu with a middle mouse click.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called after the player has spawned a weapon from the spawnmenu with a middle mouse click (mouse wheel click).
 ---
+--- For a hook capable of preventing such spawns, see [SANDBOX:PlayerSpawnSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnSWEP).
 --- For left mouse click spawns, see [SANDBOX:PlayerGiveSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerGiveSWEP).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnedSWEP)
@@ -280,9 +281,11 @@ function SANDBOX:PlayerSpawnRagdoll(ply, model) end
 ---@return boolean # Should the player be able to spawn the entity or not.
 function SANDBOX:PlayerSpawnSENT(ply, class) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player attempts to spawn a weapon from the Q menu as an entity on the ground. (Mouse wheel clicks on an icon)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player attempts to spawn a weapon from the spawnmenu as an entity on the ground, by middle mouse clicking (mouse wheel clicking) on a weapon icon.
 ---
 --- Not to be confused with [SANDBOX:PlayerGiveSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerGiveSWEP), which is called only when the weapon is given to the player directly, if they don't already have it.
+---
+--- See [SANDBOX:PlayerSpawnedSWEP](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnedSWEP) for post entity creation event.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:PlayerSpawnSWEP)
 ---@param ply Player The player who attempted to spawn a weapon.

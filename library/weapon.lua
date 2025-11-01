@@ -492,7 +492,9 @@ function WEAPON:OnDrop(owner) end
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:OnReloaded)
 function WEAPON:OnReloaded() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the swep is about to be removed.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the [Scripted Weapon](https://wiki.facepunch.com/gmod/Scripted_Entities) is about to be removed.
+---
+--- [Entity:GetOwner](https://wiki.facepunch.com/gmod/Entity:GetOwner) may be unset at this point, see [WEAPON:OnDrop](https://wiki.facepunch.com/gmod/WEAPON:OnDrop) and [WEAPON:OwnerChanged](https://wiki.facepunch.com/gmod/WEAPON:OwnerChanged).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:OnRemove)
 function WEAPON:OnRemove() end

@@ -20,7 +20,7 @@ hook = {}
 ---
 --- 	It WILL break other addons.
 ---@overload fun(eventName: "AcceptInput", identifier: any, func: fun(ent: Entity, input: string, activator: Entity, caller: Entity, value: any):(boolean?))
----@overload fun(eventName: "AddDeathNotice", identifier: any, func: fun(attacker: string, attackerTeam: number, inflictor: string, victim: string, victimTeam: number))
+---@overload fun(eventName: "AddDeathNotice", identifier: any, func: fun(attacker: string, attackerTeam: number, inflictor: string, victim: string, victimTeam: number):(any?))
 ---@overload fun(eventName: "AdjustMouseSensitivity", identifier: any, func: fun(defaultSensitivity: number, localFOV: number, defaultFOV: number):(number?))
 ---@overload fun(eventName: "AllowPlayerPickup", identifier: any, func: fun(ply: Player, ent: Entity):(boolean?))
 ---@overload fun(eventName: "CalcMainActivity", identifier: any, func: fun(ply: Player, vel: Vector):(number?, number?))
@@ -312,7 +312,7 @@ function hook.GetTable() end
 ---@param identifier any The unique identifier of the hook to remove, usually a string.
 function hook.Remove(eventName, identifier) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:`; alternative, if one exists.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Calls all hooks associated with the given event **until** one returns something other than `nil` and then returns that data. If no hook returns any data, it will try to call the `GAMEMODE:` alternative, if one exists.
 ---
 --- This function internally calls [hook.Call](https://wiki.facepunch.com/gmod/hook.Call).
 ---

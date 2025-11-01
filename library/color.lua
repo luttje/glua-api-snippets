@@ -218,7 +218,7 @@ function Color:ToHWB() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the color as a table (an array or a list) with four elements.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Color:ToTable)
----@return table # The table with elements 1 = r, 2 = g, 3 = b, 4 = a,( `{ r, g, b, a }` )
+---@return number[] # The table with elements 1 = r, 2 = g, 3 = b, 4 = a,( `{ r, g, b, a }` )
 function Color:ToTable() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates the [Color](https://wiki.facepunch.com/gmod/Color) into a [Vector](https://wiki.facepunch.com/gmod/Vector), losing the alpha channel.

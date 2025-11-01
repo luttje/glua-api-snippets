@@ -1079,7 +1079,9 @@ function NPC:SetMoveInterval(time) end
 ---@param activity number The movement activity, see Enums/ACT.
 function NPC:SetMovementActivity(activity) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the sequence the NPC navigation path uses for speed calculation. Doesn't seem to have any visible effect on NPC movement.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the sequence the NPC navigation path uses for speed calculation. Doesn't seem to have any visible effect on NPC movement or actively playing sequence.
+---
+--- To be able to use this, first set [NPC:SetIdealActivity](https://wiki.facepunch.com/gmod/NPC:SetIdealActivity) to `ACT_DO_NOT_DISTURB`, set this to any sequence with root motion data and call [Entity:SetSequence](https://wiki.facepunch.com/gmod/Entity:SetSequence) on your desired sequence. As long as your NPC's [NPC:GetMovementSequence](https://wiki.facepunch.com/gmod/NPC:GetMovementSequence) has root motion data, your NPC will move to navigation point even though your NPC's [Entity:GetSequence](https://wiki.facepunch.com/gmod/Entity:GetSequence) doesn't have any motion.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:SetMovementSequence)
 ---@param sequenceId number The movement sequence index

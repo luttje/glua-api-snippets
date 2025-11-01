@@ -43,7 +43,8 @@ function mesh.Begin(mesh, primitiveType, primitiveCount) end
 --- For a full list of the primitive counts expected by each primitive type, see Enums/MATERIAL.
 function mesh.Begin(primitiveType, primitiveCount) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color to be used for the next vertex. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color to be used for the next vertex. This is `COLOR0` semantic of
+--- Vertex Shader. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Color)
 ---@param r number Red component.
@@ -107,9 +108,8 @@ function mesh.Quad(vertex1, vertex2, vertex3, vertex4, color) end
 ---@param color table The color for the vertices.
 function mesh.QuadEasy(position, normal, sizeX, sizeY, color) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the specular map values.
----
---- There is no known use case for this function.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the specular map values. This is `COLOR1` semantic of Vertex Shader.
+--- **NOTE**: This doesn't currently work, even though `COLOR0` can be successfully passed to the Vertex Shader using [mesh.Color](https://wiki.facepunch.com/gmod/mesh.Color), unlike `COLOR1`, ​​using this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Specular)
 ---@param r number The red channel multiplier of the specular map.
@@ -162,14 +162,14 @@ function mesh.TangentT(tangentT) end
 ---@param z number The Z part of the vertex' tangent T.
 function mesh.TangentT(x, y, z) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the texture coordinates for the next vertex.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the texture coordinates for the next vertex for the current mesh. (See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin))
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.TexCoord)
 ---@param set number The texture coordinate set, 0 to 7.
 ---
 --- Non-zero values require the currently bound material to support it. For example, any `LightmappedGeneric` material supports sets 1 and 2 (lightmap texture coordinates and bump map texture coords?).
 ---@param s number S coordinate.
----@param t number T coordinate.
+---@param t number T coordinate. Will be optional in the next update.
 ---@param u? number U coordinate.
 ---@param v? number V coordinate.
 function mesh.TexCoord(set, s, t, u, v) end

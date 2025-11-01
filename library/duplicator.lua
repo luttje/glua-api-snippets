@@ -5,6 +5,14 @@ duplicator = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allow entities with given class name to be duplicated. See [duplicator.Disallow](https://wiki.facepunch.com/gmod/duplicator.Disallow) for the opposite effect.
 ---
+--- [duplicator.IsAllowed](https://wiki.facepunch.com/gmod/duplicator.IsAllowed) can be used to poll the status of a particular entity class.
+---
+--- `duplicator.Allow` is automatically called by [scripted_ents.Register](https://wiki.facepunch.com/gmod/scripted_ents.Register) and [weapons.Register](https://wiki.facepunch.com/gmod/weapons.Register), unless the associated entity table has `ENT.DisableDuplicator` set to `true`.
+---
+--- This is also automatically called by [duplicator.RegisterEntityClass](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass).
+---
+--- In addition to that most spawnmenu content, such as engine weapons and pickup-ables, as well as most engine NPCs in Sandbox-derived gamemodes are also allowed by default.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.Allow)
 ---@param classname string An entity's classname to allow duplicating.
 function duplicator.Allow(classname) end
@@ -88,7 +96,7 @@ function duplicator.CreateEntityFromTable(ply, entTable) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Disallow this entity to be duplicated. Opposite of [duplicator.Allow](https://wiki.facepunch.com/gmod/duplicator.Allow).
 ---
---- By default, all classes are disallowed to be duplicated. This function is useful for temporarily disabling duplication of certain entity classes that may have been previously allowed.
+--- This function is useful for temporarily disabling duplication of certain entity classes that may have been previously allowed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.Disallow)
 ---@param classname string An entity's classname to disallow duplicating.

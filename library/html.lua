@@ -1,10 +1,12 @@
 ---@meta
 
---- The HTML control can be used to display HTML code just like an internet browser. Unlike [DHTML](https://wiki.facepunch.com/gmod/DHTML), this control cannot accept user input or complex interaction, such as retrieving image data.
+--- The HTML control can be used to display web pages just like an internet browser.
 ---
---- **Blocked URL Extentions**
+--- [DHTML](https://wiki.facepunch.com/gmod/DHTML) has additional functionality for interfacing with the page, such as sending and receiving data.
 ---
---- `This means your url cannot end in any of these extensions, e.g.: (http://yourdomain.com/garry.exe)`
+--- ## Blocked URL Extentions
+---
+--- This means your url cannot end in any of these extensions, e.g.: (http://yourdomain.com/garry.exe)
 --- * .exe
 --- * .bat
 --- * .dll

@@ -95,7 +95,7 @@ function DImage:SetFailsafeMatName(backupMat) end
 --- This eventually calls [DImage:SetMaterial](https://wiki.facepunch.com/gmod/DImage:SetMaterial).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImage:SetImage)
----@param strImage string The path of the image to load. When no file extension is supplied the VMT file extension is used.
+---@param strImage string The path of the image to load, relative to the `materials/` folder. When no file extension is supplied the `.vmt` file extension is assumed.
 ---@param strBackup? string The path of the backup image.
 function DImage:SetImage(strImage, strBackup) end
 

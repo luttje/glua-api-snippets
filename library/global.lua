@@ -1993,20 +1993,38 @@ function _G.Localize(localisationToken, default) end
 ---@return Player # The player object representing the client.
 function _G.LocalPlayer() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates the specified position and angle from the specified local coordinate system into worldspace coordinates.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a vector and angle from a local coordinate system into a global coordinate system.
 ---
---- If you're working with an entity's local vectors, use [Entity:LocalToWorld](https://wiki.facepunch.com/gmod/Entity:LocalToWorld) and/or [Entity:LocalToWorldAngles](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles) instead.
+--- For the reverse of this function see [Global.WorldToLocal](https://wiki.facepunch.com/gmod/Global.WorldToLocal).
 ---
---- See also: [Global.WorldToLocal](https://wiki.facepunch.com/gmod/Global.WorldToLocal), the reverse of this function.
+--- For working with an entity's local space vectors/angles you might want to use [Entity:LocalToWorld](https://wiki.facepunch.com/gmod/Entity:LocalToWorld)/[Entity:LocalToWorldAngles](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.LocalToWorld)
----@param localPos Vector The position vector in the source coordinate system, that should be translated to world coordinates
----@param localAng Angle The angle in the source coordinate system, that should be converted to a world angle. If you don't need to convert an angle, you can supply an arbitrary valid angle (e.g. Global.Angle()).
----@param originPos Vector The origin point of the source coordinate system, in world coordinates
----@param originAngle Angle The angles of the source coordinate system, as a world angle
----@return Vector # The world position of the supplied local position.
----@return Angle # The world angles of the supplied local angle.
+---@param localPos Vector A vector from a local coordinate system.
+---@param localAng Angle An angle from a local coordinate system.
+---
+--- Pass a zero angle if you don't need to translate an angle.
+---@param originPos Vector The origin of a global coordinate system, in worldspace coordinates.
+---@param originAngle Angle The angles of a global coordinate system, as a worldspace angle.
+---@return Vector # The correspondent worldspace vector of `localPos`.
+---@return Angle # The correspondent worldspace angle of `localAng`.
 function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the main view angles, as they were at the start of the latest main view render.
+---
+--- This is a good alternative to [Global.EyeAngles](https://wiki.facepunch.com/gmod/Global.EyeAngles) which is affected by other rendering operations, including [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Global.MainEyeAngles)
+---@return Angle # The angles of the main view.
+function _G.MainEyeAngles() end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the origin of the main view, as it was at the start of the latest main view render.
+---
+--- This is a good alternative to [Global.EyePos](https://wiki.facepunch.com/gmod/Global.EyePos) which is affected by other rendering operations, including [render.RenderView](https://wiki.facepunch.com/gmod/render.RenderView).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Global.MainEyePos)
+---@return Vector # Main camera position.
+function _G.MainEyePos() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Either returns the material with the given name, or loads the material interpreting the first argument as the path.
 ---
@@ -2474,7 +2492,9 @@ function _G.RememberCursorPosition() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.RemoveTooltip)
 function _G.RemoveTooltip() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the angle that the clients view is being rendered at
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the angle that the clients view is being rendered at. Returns `angles` from the return value of [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).
+---
+--- See also [Global.EyeAngles](https://wiki.facepunch.com/gmod/Global.EyeAngles).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.RenderAngles)
 ---@return Angle # Render Angles
@@ -3308,15 +3328,15 @@ function _G.VisualizeLayout(panel) end
 ---@return table # WorkshopFileBase element
 function _G.WorkshopFileBase(namespace, requiredTags) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates the specified position and angle into the specified coordinate system.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace vector and angle into a specific coordinate system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.WorldToLocal)
----@param position Vector The position that should be translated from the current to the new system.
----@param angle Angle The angles that should be translated from the current to the new system.
----@param newSystemOrigin Vector The origin of the system to translate to.
----@param newSystemAngles Angle The angles of the system to translate to.
----@return Vector # Local position
----@return Angle # Local angles
+---@param position Vector A worldspace vector.
+---@param angle Angle A worldspace angle.
+---@param newSystemOrigin Vector The origin of the new coordinate system.
+---@param newSystemAngles Angle The angles of the new coordinate system.
+---@return Vector # The correspondent local space `position`
+---@return Angle # The correspondent local space `angle`
 function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to call the first function. If the execution succeeds, this returns `true` followed by the returns of the function. If execution fails, this returns `false` and the second function is called with the error message.

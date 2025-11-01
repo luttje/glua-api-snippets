@@ -1,8 +1,8 @@
 ---@meta
 
---- The DHTML control wraps the internal Awesomium framework, supports calling Javascript functions from Lua,
+--- The DHTML control wraps the internal web engine, supports calling Javascript functions from Lua,
 --- as well as running Lua from within the HTML. Running Lua code is disabled by default.
----@class DHTML : Awesomium
+---@class DHTML : HTML
 DHTML = {}
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Defines a Javascript function that when called will call a Lua callback.
@@ -22,14 +22,6 @@ function DHTML:AddFunction(library, name, callback) end
 ---[View wiki](https://wiki.facepunch.com/gmod/DHTML:Call)
 ---@param js string Specify JavaScript code to be executed.
 function DHTML:Call(js) end
-
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the page inside the [DHTML](https://wiki.facepunch.com/gmod/DHTML) window runs the `console.log` javascript function. On the x86-64 beta, it's called for all built-in `console.*` javascript functions.
----
---- If [DHTML:SetAllowLua](https://wiki.facepunch.com/gmod/DHTML:SetAllowLua) is set to `true` and the message begins with `RUNLUA:`, the text following `RUNLUA:` will be executed as code within the Lua environment (this is how Lua is called from DHTML windows).
----
----[View wiki](https://wiki.facepunch.com/gmod/DHTML:ConsoleMessage)
----@param msg string The message to be logged (or Lua code to be executed; see above).
-function DHTML:ConsoleMessage(msg) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns if the loaded page can run Lua code, set by [DHTML:SetAllowLua](https://wiki.facepunch.com/gmod/DHTML:SetAllowLua)
 ---

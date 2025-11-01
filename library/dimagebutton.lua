@@ -53,7 +53,7 @@ function DImageButton:SetIcon() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the "image" of the [DImageButton](https://wiki.facepunch.com/gmod/DImageButton). Equivalent of [DImage:SetImage](https://wiki.facepunch.com/gmod/DImage:SetImage).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImageButton:SetImage)
----@param strImage string The path of the image to load. When no file extension is supplied the VMT file extension is used.
+---@param strImage string The path of the image to load, relative to the `materials/` folder. When no file extension is supplied the `.vmt` file extension is assumed.
 ---@param strBackup? string The path of the backup image.
 function DImageButton:SetImage(strImage, strBackup) end
 

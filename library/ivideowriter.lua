@@ -10,7 +10,7 @@ local IVideoWriter = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IVideoWriter:AddFrame)
 ---@param frameTime number Usually set to what Global.FrameTime is, or simply 1/fps.
----@param downsample boolean If true it will downsample the whole screenspace to the videos width and height, otherwise it will just record from the top left corner to the given width and height and therefor not the whole screen.
+---@param downsample boolean If true it will downsample the whole screenspace to the videos width and height, otherwise it will just record from the top left corner to the given width and height and therefore not the whole screen.
 function IVideoWriter:AddFrame(frameTime, downsample) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Ends the video recording and dumps it to disk.

@@ -3,6 +3,8 @@
 --- The debugoverlay library is mainly useful for 3D debugging, it can be used to draw shapes on the screen for debug purposes.
 ---
 --- **NOTE**: These functions will not do anything unless the **developer** console variable is set to non 0.
+---
+--- There's some code that prevents debugoverlay from being added if the game is paused, i.e. when console is open in singleplayer.
 debugoverlay = {}
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays an axis indicator at the specified position.

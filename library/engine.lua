@@ -138,7 +138,7 @@ function engine.TickCount() end
 ---
 --- Clientside you'd want to use [Global.FrameTime](https://wiki.facepunch.com/gmod/Global.FrameTime) for this purpose in hooks that run every frame.
 ---
---- The default tickrate is `66.6666`, aka `16` milliseconds interval between each game tick.
+--- The default tickrate is `66.6666`, aka `15` milliseconds interval between each game tick.
 --- The tickrate can be adjusted via the `-tickrate` [command line option](https://wiki.facepunch.com/gmod/Command_Line_Parameters).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/engine.TickInterval)

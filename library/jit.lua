@@ -10,11 +10,10 @@ jit = {}
 --- * as a trace is being recorded (`"record"`);
 --- * or when a trace exits through a side exit (`"texit"`).
 ---
---- Set a callback with `jit.attach(callback, "event")` and clear the same callback with `jit.attach(callback)`
+--- Set a callback with `jit.attach(callback, "event")` and clear the same callback with `jit.attach(callback)`.
+--- Only one callback can be active per event.
 ---
 --- **WARNING**: This function isn't officially documented on LuaJIT wiki, use it at your own risk.
----
---- **WARNING**: Using these constantly (especially bytecode) can be very performance heavy due to the constant stream of data being compiled at a time.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/jit.attach)
 ---@param callback function The callback function.
@@ -143,7 +142,7 @@ function jit.util.funcuvname(func, index) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Previously got the address of a function from a set list of functions, but now always returns `0` as it is deprecated.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/jit.util.ircalladdr)
----@param index number This arugment is ignored.
+---@param index number This argument is ignored.
 ---@return number # Always returns `0`
 ---@deprecated This function was disabled due to security concerns.
 function jit.util.ircalladdr(index) end

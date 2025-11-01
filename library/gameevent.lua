@@ -658,7 +658,7 @@ player_info.name = nil
 ---@type string
 player_info.networkid = nil
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when the player say a message.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when the player says a message.
 ---
 --- 		**NOTE**: This is called after [GM:PlayerSay](https://wiki.facepunch.com/gmod/GM:PlayerSay) so you could just use that hook serverside.
 

@@ -239,6 +239,8 @@ function util.GetAnimEventNameByID(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table containing the info about the model. The model will be loaded and cached if it was not previously.
 ---
+--- See also [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
+---
 --- **NOTE**: This function will silently fail if used on models with following strings in them:
 --- * _shared
 --- * _anims
@@ -266,16 +268,17 @@ function util.GetModelInfo(mdl) end
 ---@param lod? number Which of the model's Level of Detail (LOD) models to retrieve.
 ---
 --- `0` is the best quality with higher numbers progressively lowering the quality.
----@param bodygroupMask? number The combination of bodygroups to retrieve meshes for.
+---@param bodygroupMask? string|number The combination of bodygroups to retrieve meshes for. This can also be a specially formatted bitflag.
 ---
---- For more information, see Entity:SetBodyGroups
----@return table # A sequential table of Structures/ModelMeshData
+--- For more information, see Entity:SetBodyGroups.
+---@param skin? number Skin index. Affects the `.material` of Structures/ModelMeshData.
 ---
---- Each index in this table corresponds to a mesh within the model passed as an argument to this function.
----@return table # A sequential table of Structures/BoneBindPose
+--- For more information, see Entity:GetSkin.
+---@return Structures/ModelMeshData[] # Each index in this table corresponds to a mesh within the model passed as an argument to this function.
 ---
---- This tables indices are bone IDs for the Structures/BoneBindPose stored at each index.
-function util.GetModelMeshes(model, lod, bodygroupMask) end
+--- The mesh data is raw, and is not transformed via bone transformations. That's what the second return value is for.
+---@return Structures/BoneBindPose[] # This tables indices are bone IDs for the Structures/BoneBindPose stored at each index.
+function util.GetModelMeshes(model, lod, bodygroupMask, skin) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets persistent data of an offline player using their SteamID.
 ---
@@ -287,7 +290,7 @@ function util.GetModelMeshes(model, lod, bodygroupMask) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.GetPData)
 ---@param steamID string SteamID of the player, in the `STEAM_0:0:0` format. See Player:SteamID.
 ---@param name string Variable name to get the value of
----@param default string The default value, in case there's nothing stored
+---@param default any The default value, in case there's nothing stored
 ---@return string # The stored value
 function util.GetPData(steamID, name, default) end
 
@@ -538,12 +541,12 @@ function util.IsSphereIntersectingSphere(sphere1Position, sphere1Radius, sphere2
 ---@return boolean # Whether the model is valid or not. Returns false clientside if the model is not precached by the server.
 function util.IsValidModel(modelName) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Checks if given numbered physics object of given entity is valid or not. Most useful for ragdolls.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks whether the given numbered physics object of the given entity is valid or not. Most useful for ragdolls.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.IsValidPhysicsObject)
----@param ent Entity The entity
----@param physobj number Number of the physics object to test
----@return boolean # true is valid, false otherwise
+---@param ent Entity The entity to take.
+---@param physobj number Number of the physics object to test.
+---@return boolean # `true` that's valid, `false` otherwise.
 function util.IsValidPhysicsObject(ent, physobj) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the specified prop is valid (has valid physics object).
@@ -596,14 +599,20 @@ function util.KeyValuesToTable(keyValues, usesEscapeSequences, preserveKeyCase) 
 ---@return table # The output table
 function util.KeyValuesToTablePreserveOrder(keyvals, usesEscapeSequences, preserveKeyCase) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a vector in world coordinates based on an entity and local coordinates
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A convenience function around LocalToWorld-related functions.
+---
+--- **NOTE**: If [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) returns `0`, the function will return the passed `lpos`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.LocalToWorld)
----@param ent Entity The entity lpos is local to
----@param lpos Vector Coordinates local to the ent
----@param bonenum number The bonenumber of the ent lpos is local to
----@return Vector # wpos
-function util.LocalToWorld(ent, lpos, bonenum) end
+---@param ent Entity The entity to take.
+---@param lpos Vector A local space vector.
+---@param bone? number Actually to be treated as the number corresponding to a specific PhysObj of the entity.
+---
+--- If that specific physics object is valid, then PhysObj:LocalToWorld is used.
+---
+--- Otherwise, Entity:LocalToWorld.
+---@return Vector # The correspondent worldspace vector.
+function util.LocalToWorld(ent, lpos, bone) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the specified string.
 --- **WARNING**: MD5 is considered cryptographically broken and is known to be vulnerable to a variety of attacks including duplicate return values. If security or duplicate returns is a concern, use [util.SHA256](https://wiki.facepunch.com/gmod/util.SHA256).

@@ -124,8 +124,19 @@ function IGModAudioChannel:GetState() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves HTTP headers from a bass stream channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
 ---
+--- Of special interest here are headers such as `icy-name`, `icy-br`, `ice-audio-info`, `icy-genre`.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsHTTP)
----@return table # Returns a table of HTTP headers.Returns nil if no information is available.
+---@return string[] # A list of HTTP headers or `nil` if no information is available.
+---
+--- Example output:
+--- ```
+--- ... other headers
+--- [7]	=	ice-audio-info: channels=2;samplerate=44100;bitrate=128
+--- [8]	=	icy-genre: lounge
+--- [9]	=	icy-name: RTFM Lounge
+--- ... other headers
+--- ```
 function IGModAudioChannel:GetTagsHTTP() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves the ID3 version 1 info from a bass channel created by [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile) or [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
@@ -133,30 +144,50 @@ function IGModAudioChannel:GetTagsHTTP() end
 --- ID3v2 is not supported.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsID3)
----@return table # Returns a table containing the information.
---- Returns nil if no information is available.
+---@return table # A table containing the information, or `nil` if no information is available.
+---
+--- The table will always have the following keys, filled out based on what is available:
+--- `album`, `artist`, `comment`, `genre`, `id`, `title`, `year`
 function IGModAudioChannel:GetTagsID3() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves meta stream info from a bass stream channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves ICY metadata from a bass stream channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL), if available.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsMeta)
----@return string # Returns a string containing the information.
---- Returns nil if no information is available.
+---@return string # The meta information, or `nil` if no information is available.
+---
+--- Example output: `StreamTitle='MUSIC NAME HERE';`
 function IGModAudioChannel:GetTagsMeta() end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves `.m4a` media info, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsMP4)
+---@return string[] # A list of available information in no particular order, or `nil` if no information is available.
+function IGModAudioChannel:GetTagsMP4() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves OGG media info tag, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsOGG)
----@return table # Returns a table containing the information.
---- Returns nil if no information is available.
+---@return string[] # A list of available information in no particular order, or `nil` if no information is available.
+---
+--- Example output:
+--- ```
+--- [0]	=	Author=MY AUTHIOR
+--- [1]	=	Title=MY TITLE
+--- ... other data if available
+--- ```
 function IGModAudioChannel:GetTagsOGG() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves OGG Vendor tag, usually containing the application that created the file, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsVendor)
----@return string # Returns a string containing the information.
---- Returns nil if no information is available.
+---@return string # The OGG vendor tag, or `nil` if no information is available.
 function IGModAudioChannel:GetTagsVendor() end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves `.WMA` media info, from a bass channel created by [sound.PlayURL](https://wiki.facepunch.com/gmod/sound.PlayURL) or [sound.PlayFile](https://wiki.facepunch.com/gmod/sound.PlayFile), if available.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:GetTagsWMA)
+---@return string[] # A list of available information in no particular order, or `nil` if no information is available.
+function IGModAudioChannel:GetTagsWMA() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current time of the sound channel in seconds
 ---

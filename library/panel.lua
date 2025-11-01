@@ -208,13 +208,13 @@ function Panel:Clear() end
 ---        **NOTE**: The panel must have `GetColor` and `SetColor` functions for `ColorTo` to work.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:ColorTo)
----@param color table The color to fade to
+---@param color Color The color to fade to
 ---@param length number Length of the animation
 ---@param delay? number Delay before start fading
----@param callback? fun(animData: table, targetPanel: Panel) Function to execute when finished
+---@param callback? fun(animData: AnimationData, targetPanel: Panel) Function to execute when finished
 ---
 --- Function argument(s):
---- * table `animData` - The Structures/AnimationData that was used.
+--- * table{AnimationData} `animData` - The Structures/AnimationData that was used.
 --- * Panel `targetPanel` - The panel object that was animated.
 function Panel:ColorTo(color, length, delay, callback) end
 
@@ -800,7 +800,7 @@ function Panel:GetTall() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the panel's text (where applicable).
 ---
---- This method returns a maximum of 1023 bytes, except for [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry).
+--- This method returns a maximum of 1023 bytes, except for [TextEntry](https://wiki.facepunch.com/gmod/TextEntry).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetText)
 ---@return string # The panel's text.
@@ -2381,6 +2381,12 @@ function Panel:SetTerm(delay) end
 ---@param text string The text value to set.
 function Panel:SetText(text) end
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Makes [TextEntry](https://wiki.facepunch.com/gmod/TextEntry)'s text be replaced by `*` characters, just like a password-entry text field would.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetTextHidden)
+---@param boolean boolean Whether to have the text be hidden.
+function Panel:SetTextHidden(boolean) end
+
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the left and top text margins of a text-based panel object, such as a [DButton](https://wiki.facepunch.com/gmod/DButton) or [DLabel](https://wiki.facepunch.com/gmod/DLabel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetTextInset)
@@ -2403,6 +2409,8 @@ function Panel:SetTextSelectionColors(textColor, backgroundColor) end
 function Panel:SetToFullHeight() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the tooltip to be displayed when a player hovers over the panel object with their cursor.
+---
+--- By default, [DTooltip](https://wiki.facepunch.com/gmod/DTooltip) will be used. [Panel:SetTooltipPanelOverride](https://wiki.facepunch.com/gmod/Panel:SetTooltipPanelOverride) can be used to override the tooltip panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetTooltip)
 ---@param str? string The text to be displayed in the tooltip. Set `nil` to disable it.

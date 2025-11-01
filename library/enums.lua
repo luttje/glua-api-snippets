@@ -3842,9 +3842,11 @@ COLLISION_GROUP_DEBRIS_TRIGGER = 2
 COLLISION_GROUP_INTERACTIVE_DEBRIS = 3
 --- Collides with everything except interactive debris or debris
 COLLISION_GROUP_INTERACTIVE = 4
+--- Used by players, but NOT for movement collision. Does not collide with COLLISION_GROUP_PASSABLE_DOOR and COLLISION_GROUP_PUSHAWAY
 COLLISION_GROUP_PLAYER = 5
 --- NPCs can see straight through an Entity with this applied.
 COLLISION_GROUP_BREAKABLE_GLASS = 6
+--- Used by driveable vehicles. Always collides against COLLISION_GROUP_VEHICLE_CLIP
 COLLISION_GROUP_VEHICLE = 7
 --- For HL2, same as Collision_Group_Player, for TF2, this filters out other players and CBaseObjects
 COLLISION_GROUP_PLAYER_MOVEMENT = 8
@@ -3856,6 +3858,7 @@ COLLISION_GROUP_IN_VEHICLE = 10
 COLLISION_GROUP_WEAPON = 11
 --- Only collides with vehicles
 COLLISION_GROUP_VEHICLE_CLIP = 12
+--- Set on projectiles. Does not collide with other projectiles.
 COLLISION_GROUP_PROJECTILE = 13
 --- Blocks entities not permitted to get near moving doors
 COLLISION_GROUP_DOOR_BLOCKER = 14
@@ -4933,9 +4936,9 @@ IMAGE_FORMAT_BGRA8888 = 12
 IMAGE_FORMAT_RGBA16161616 = 25
 --- RGBA, but floating point 16 bits per pixel. Is used for "Float mode" HDR.
 IMAGE_FORMAT_RGBA16161616F = 24
---- Grayscale format (black and white), 8 bits per pixel.
+--- Grayscale format (black and white), 8 bits per pixel. Not working on Proton.
 IMAGE_FORMAT_I8 = 5
---- Grayscale format (black and white) with alpha support, 8 bits per pixel/channel.
+--- Grayscale format (black and white) with alpha support, 8 bits per pixel/channel. Not working on Proton.
 IMAGE_FORMAT_IA88 = 6
 --- Unknown legacy format. 8 bit alpha? Same as `I8` besides assigned meaning/name to the channel?
 IMAGE_FORMAT_A8 = 8
@@ -5659,10 +5662,13 @@ MATERIAL_QUADS = 7
 MATERIAL_CULLMODE_CCW = 0
 --- Cull back faces with clockwise vertices.
 MATERIAL_CULLMODE_CW = 1
+--- Do not cull back faces at all.
+MATERIAL_CULLMODE_NONE = 2
 
 ---@alias MATERIAL_CULLMODE
 ---| `MATERIAL_CULLMODE_CCW`
 ---| `MATERIAL_CULLMODE_CW`
+---| `MATERIAL_CULLMODE_NONE`
 
 --- No fog
 MATERIAL_FOG_NONE = 0

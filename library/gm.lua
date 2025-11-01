@@ -29,6 +29,7 @@ function GM:AcceptInput(ent, input, activator, caller, value) end
 ---@param inflictor string Class name of the entity inflicting the damage
 ---@param victim string Name of the victim
 ---@param victimTeam number Team of the victim
+---@return any # `true/false` to prevent the notice from being shown. Do not return otherwise.
 function GM:AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to adjust the mouse sensitivity.
@@ -1848,10 +1849,10 @@ function GM:PostDrawSkyBox() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostDrawTranslucentRenderables)
 ---@param bDrawingDepth boolean Whether the current call is writing depth.
----@param bDrawingSkybox boolean Whether the current draw is drawing the 3D or 2D skybox.
+---@param bDrawingSkybox boolean Whether the current call is drawing the 3D or 2D skybox.
 ---
 --- In case of 2D skyboxes it is possible for this hook to always be called with this parameter set to `true`.
----@param isDraw3DSkybox boolean Whether the current draw is drawing the 3D.
+---@param isDraw3DSkybox boolean Whether the current call is drawing the 3D skybox.
 function GM:PostDrawTranslucentRenderables(bDrawingDepth, bDrawingSkybox, isDraw3DSkybox) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after view model is drawn.
@@ -1909,7 +1910,9 @@ function GM:PostGamemodeLoaded() end
 ---@param ply Player The player
 function GM:PostPlayerDeath(ply) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after a player in your [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") was drawn.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after a given player in your [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") was drawn.
+---
+--- This hook will not be called if player was prevented from being drawn via [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostPlayerDraw)
 ---@param ply Player The player that was drawn.
@@ -2044,10 +2047,12 @@ function GM:PreGamemodeLoaded() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the player is drawn.
 ---
+--- See also [GM:PostPlayerDraw](https://wiki.facepunch.com/gmod/GM:PostPlayerDraw).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw)
 ---@param player Player The player that is about to be drawn.
 ---@param flags number The Enums/STUDIO flags for this render operation.
----@return boolean # Prevent default player rendering. Return `true` to hide the player.
+---@return boolean # Return `true` to prevent default player rendering, which hides the player.
 function GM:PrePlayerDraw(player, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called by [scripted_ents.Register](https://wiki.facepunch.com/gmod/scripted_ents.Register).

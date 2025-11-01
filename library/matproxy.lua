@@ -3,6 +3,8 @@
 --- A library that allows implementing custom [material proxies](https://developer.valvesoftware.com/wiki/Material_proxies) for materials.
 ---
 --- Material proxies allow programmatically setting specific `.vmt` shader parameters on a per-entity basis, rather being global across all instances of a material.
+---
+--- You can find a tutorial for making colourable textures over at this [GitHub wiki](https://github.com/fgrg2801/gmod-colorable-playermodels/wiki)
 matproxy = {}
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Register a material proxy. See [matproxy](https://wiki.facepunch.com/gmod/matproxy) for more general explanation of what they are.

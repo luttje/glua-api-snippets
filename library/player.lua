@@ -129,29 +129,31 @@ function player.GetCountConnecting() end
 function player.GetHumans() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a [Stateless Iterator](https://www.lua.org/pil/7.3.html) for all players on the server.
---- Intended for use in [Generic For Loops](https://www.lua.org/pil/4.3.5.html).
+--- Intended for use in [Generic For-Loops](https://www.lua.org/pil/4.3.5.html).
 --- See [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) for a similar function for all entities.
 ---
---- Internally, this function uses cached values that exist entirely within lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
---- Because switching from lua to C++ (and vice versa) incurs a performance cost, this function will be somewhat more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
+--- **NOTE**: Internally, this function uses cached values that are stored in Lua, as opposed to [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll), which is a C++ function.
+--- Because a call operation from Lua to C++ *and* with a return back to Lua is quite costly, this function will be more efficient than [player.GetAll](https://wiki.facepunch.com/gmod/player.GetAll).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.Iterator)
----@return function # The Iterator Function from Global.ipairs
----@return Player[] # Table of all existing Player.  This is a cached copy of player.GetAll
+---@return function # The Iterator Function from Global.ipairs.
+---@return Player[] # Table of all existing Player.  This is a cached copy of player.GetAll.
 --- This table is intended to be read-only.
 ---
 --- Modifying the return table will affect all subsequent calls to this function until the cache is refreshed, replacing all of your player.GetAll usages may come with unintended side effects because of this.
 ---
---- Example of bad code:
+--- An example:
 --- ```
---- -- NEVER DO THIS!!!
+--- -- Bad code.
+--- local scan_ents = select( 2, player.Iterator() )
+--- table.Add( scan_ents, ents.FindByClass( "ttt_decoy" ) )
 ---
---- local scan_ents = select(2, player.Iterator())
----
---- table.Add(scan_ents, ents.FindByClass("ttt_decoy"))
+--- -- Fine code. A copy of the table is being made and used.
+--- local scan_ents = table.Copy( select( 2, player.Iterator() ) )
+--- table.Add( scan_ents, ents.FindByClass( "ttt_decoy" ) )
 --- ```
 ---@return number # The starting index for the table of players.
---- This is always `0` and is returned for the benefit of [Generic For Loops](https://www.lua.org/pil/4.3.5.html)
+--- This is always `0` and is returned for the benefit of [Generic For-Loops](https://www.lua.org/pil/4.3.5.html).
 function player.Iterator() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's AccountID part of their full SteamID.
@@ -240,6 +242,8 @@ function Player:Alive() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets if the player can toggle their flashlight. Function exists on both the server and client but has no effect when ran on the client.
 ---
+--- This is a Lua method that internally uses [GM:PlayerSwitchFlashlight](https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight). If current gamemode overwrites that hook and doesn't respect [Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight), this function will not have any effect.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:AllowFlashlight)
 ---@param canFlashlight boolean True allows flashlight toggling
 function Player:AllowFlashlight(canFlashlight) end
@@ -322,6 +326,7 @@ function Player:ChatPrint(message) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:CheckLimit)
 ---@param str string The entity type to check the limit for. Default types:
+--- * "constraints"
 --- * "props"
 --- * "ragdolls"
 --- * "vehicles"
@@ -527,6 +532,7 @@ function PLAYER:FinishMove(mv) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enables/Disables the player's flashlight.
 ---
 --- [Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight) must be true in order for the player's flashlight to be changed.
+--- [GM:PlayerSwitchFlashlight](https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight) can block this function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Flashlight)
 ---@param isOn boolean Turns the flashlight on/off
@@ -837,6 +843,7 @@ function Player:GetMaxSpeed() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetName)
 ---@return string # The player's name.
+---@deprecated Use Player:Nick.
 function Player:GetName() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whenever the player is set not to collide with their teammates.
@@ -873,8 +880,13 @@ function Player:GetObserverTarget() end
 ---@return string # The data in the SQL database or the default value given.
 function Player:GetPData(key, default) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model.
---- **NOTE**: Overide this function clientside on a Entity(not a player) with playermodel and return color will apply color on it
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a player's character model color.
+---
+--- The part of the model that is colored is determined by the model's materials, and is therefore different for each model.
+---
+--- See [Player:GetWeaponColor](https://wiki.facepunch.com/gmod/Player:GetWeaponColor) for the accompanying function for the weapon color.
+---
+--- **NOTE**: Override this function clientside on any Entity (including a player) with a supported model set (such as default player models) and returned color will apply to the model. This is done via the `PlayerColor` [matproxy](https://wiki.facepunch.com/gmod/matproxy).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetPlayerColor)
 ---@return Vector # The format is `Vector(r,g,b)`, and each color component should be between 0 and 1.
@@ -1083,10 +1095,14 @@ function Player:GetWalkSpeed() end
 ---@return Weapon # The weapon for the specified class, or NULL ENTITY if the player does not have this weapon.
 function Player:GetWeapon(className) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is `Vector(r,g,b)`, and each color should be between 0 and 1.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a player's weapon color.
+---
+--- The part of the model that is colored is determined by the model itself, and is different for each model.
+---
+--- See [Player:GetPlayerColor](https://wiki.facepunch.com/gmod/Player:GetPlayerColor) for the accompanying function for the player character model color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetWeaponColor)
----@return Vector # color
+---@return Vector # The format is `Vector(r,g,b)`, and each color should be between 0 and 1.
 function Player:GetWeaponColor() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table of the player's weapons.
@@ -1421,16 +1437,17 @@ function Player:MotionSensorPos(bone) end
 ---@return boolean # Return true to prevent default action
 function PLAYER:Move(mv) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's name. Identical to [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's nick name. Identical to [Player:Nick](https://wiki.facepunch.com/gmod/Player:Nick) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Name)
 ---@return string # Player's name.
+---@deprecated Use Player:Nick.
 function Player:Name() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's name. Identical to [Player:Name](https://wiki.facepunch.com/gmod/Player:Name) and [Player:GetName](https://wiki.facepunch.com/gmod/Player:GetName).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the player's nick name also known as display name, as it appears in Steam.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Nick)
----@return string # Player's name
+---@return string # Player's nick name
 function Player:Nick() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the 64-bit SteamID aka CommunityID of the Steam Account that owns the Garry's Mod license this player is using. This is useful for detecting players using Steam Family Sharing.
