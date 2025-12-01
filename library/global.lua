@@ -434,19 +434,19 @@ function _G.CreateNewAddonPreset(data) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
 ---@param ent Entity The entity to attach the control point to.
----@param effect string The name of the effect to create. It must be precached.
----@param partAttachment number See Enums/PATTACH.
----@param entAttachment? number The attachment ID on the entity to attach the particle system to
+---@param effect string The name of the effect to create. It must be precached via Global.PrecacheParticleSystem beforehand.
+---@param partAtt number See Enums/PATTACH.
+---@param entAtt? number The attachment ID on the entity to attach the particle system to
 ---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
 ---@return CNewParticleEffect # The created particle system.
-function _G.CreateParticleSystem(ent, effect, partAttachment, entAttachment, offset) end
+function _G.CreateParticleSystem(ent, effect, partAtt, entAtt, offset) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles. See also [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
 ---
 --- **NOTE**: The particle effect must be precached with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity)
----@param effect string The name of the effect to create. It must be precached.
+---@param effect string The name of the effect to create. It must be precached via Global.PrecacheParticleSystem beforehand.
 ---@param pos Vector The position for the particle system.
 ---@param ang? Angle The orientation of the particle system.
 ---@return CNewParticleEffect # The created particle system.
@@ -1997,7 +1997,7 @@ function _G.LocalPlayer() end
 ---
 --- For the reverse of this function see [Global.WorldToLocal](https://wiki.facepunch.com/gmod/Global.WorldToLocal).
 ---
---- For working with an entity's local space vectors/angles you might want to use [Entity:LocalToWorld](https://wiki.facepunch.com/gmod/Entity:LocalToWorld)/[Entity:LocalToWorldAngles](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles) instead.
+--- For working with an entity's local space vectors/angles you might consider using [Entity:LocalToWorld](https://wiki.facepunch.com/gmod/Entity:LocalToWorld)/[Entity:LocalToWorldAngles](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.LocalToWorld)
 ---@param localPos Vector A vector from a local coordinate system.
@@ -2006,8 +2006,8 @@ function _G.LocalPlayer() end
 --- Pass a zero angle if you don't need to translate an angle.
 ---@param originPos Vector The origin of a global coordinate system, in worldspace coordinates.
 ---@param originAngle Angle The angles of a global coordinate system, as a worldspace angle.
----@return Vector # The correspondent worldspace vector of `localPos`.
----@return Angle # The correspondent worldspace angle of `localAng`.
+---@return Vector # The corresponding worldspace vector to `localPos`.
+---@return Angle # The corresponding worldspace angle to `localAng`.
 function _G.LocalToWorld(localPos, localAng, originPos, originAngle) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the main view angles, as they were at the start of the latest main view render.
@@ -3106,12 +3106,19 @@ function _G.tobool(input) end
 ---@param map string Map to toggle favorite.
 function _G.ToggleFavourite(map) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to convert the value to a number.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts strings containing numbers into actual [number](https://wiki.facepunch.com/gmod/number)s.
+---
+--- Can also convert numbers from other [numerical bases](https://www.mathsisfun.com/numbers/bases.html) to base 10.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.tonumber)
----@param value any The value to convert. Can be a number or string.
----@param base? number The base used in the string. Can be any integer between 2 and 36, inclusive.
----@return number # The numeric representation of the value with the given base, or nil if the conversion failed.
+---@param value string The value to be converted.
+---
+--- This string can contain digits from `0` to `9` (inclusive) for numerical bases from `2` to `10` (inclusive), and from `0` to `z` for bases greater than `10`.
+---
+--- The maximum value depends on the specific base value provided, for example for base 3 `0, 1, 2` are permitted. For base 11, `0-9` and `a` are permitted.
+---@param base? number The numerical base of the digits in the input value.
+--- Must be an integer between `2` and `36` (inclusive)
+---@return number|nil # The base `10` number representation of the input value, or `nil` if the conversion failed.
 function _G.tonumber(value, base) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to convert the value to a string. If the value is an object and its metatable has defined the __tostring metamethod, this will call that function.
@@ -3335,8 +3342,8 @@ function _G.WorkshopFileBase(namespace, requiredTags) end
 ---@param angle Angle A worldspace angle.
 ---@param newSystemOrigin Vector The origin of the new coordinate system.
 ---@param newSystemAngles Angle The angles of the new coordinate system.
----@return Vector # The correspondent local space `position`
----@return Angle # The correspondent local space `angle`
+---@return Vector # The corresponding local space `position`
+---@return Angle # The corresponding local space `angle`
 function _G.WorldToLocal(position, angle, newSystemOrigin, newSystemAngles) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to call the first function. If the execution succeeds, this returns `true` followed by the returns of the function. If execution fails, this returns `false` and the second function is called with the error message.

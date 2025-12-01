@@ -378,9 +378,9 @@ function PhysObj:IsPenetrating() end
 ---@return boolean # Whether the physics object is valid or not.
 function PhysObj:IsValid() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a vector in the local space of the physics object into worldspace coordinates.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a vector in the physics object's local space into worldspace coordinates.
 ---
---- **NOTE**: Internally transforms the vector by the `PhysObj:GetPositionMatrix()`'s rotation & translation.
+--- **NOTE**: Internally transforms the vector by the [PhysObj:GetPositionMatrix](https://wiki.facepunch.com/gmod/PhysObj:GetPositionMatrix).
 ---
 --- So in GLua it approximates to:
 --- ```
@@ -394,16 +394,16 @@ function PhysObj:IsValid() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld)
 ---@param vecLocal Vector A vector in the physics object's local space.
----@return Vector # The correspondent worldspace vector.
+---@return Vector # The corresponding worldspace vector.
 function PhysObj:LocalToWorld(vecLocal) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Transforms a vector in the local space of the physics object merely by the rotation of the `PhysObj:GetPositionMatrix()`.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Rotationally transforms a vector in the physics object's local space by the [PhysObj:GetPositionMatrix](https://wiki.facepunch.com/gmod/PhysObj:GetPositionMatrix).
 ---
---- In contrast to [PhysObj:LocalToWorld](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld), this function doesn't translate the vector.
+--- **NOTE**: In contrast to [PhysObj:LocalToWorld](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorld), this function doesn't translate the vector.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:LocalToWorldVector)
 ---@param vecLocal Vector A vector in the physics object's local space.
----@return Vector # The result vector of the transformation by rotation.
+---@return Vector # The resulting vector from the rotational transformation.
 function PhysObj:LocalToWorldVector(vecLocal) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Prints debug info about the state of the physics object to the console.
@@ -485,7 +485,9 @@ function PhysObj:SetInertia(angularInertia) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the mass of the physics object.
 ---
---- **WARNING**: This resets [PhysObj:SetBuoyancyRatio](https://wiki.facepunch.com/gmod/PhysObj:SetBuoyancyRatio) (Recalculated based materials' and the physics objects' densities, latter of which is dependent on mass). This is a physics engine limitation.
+--- **WARNING**: This resets [PhysObj:SetBuoyancyRatio](https://wiki.facepunch.com/gmod/PhysObj:SetBuoyancyRatio) (Recalculated based materials' and the physics objects' densities, latter of which is dependent on mass).
+---
+--- If you used a custom ratio, you will have to re-set it again after `SetMass`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:SetMass)
 ---@param mass number The mass in kilograms, in range `[0, 50000]`
@@ -546,18 +548,20 @@ function PhysObj:UpdateShadow(targetPosition, targetAngles, frameTime) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:Wake)
 function PhysObj:Wake() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace vector into the local space of the physics object.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace vector into the physics object's local space.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal)
 ---@param vec Vector A worldspace vector.
----@return Vector # The correspondent local space vector.
+---@return Vector # The corresponding local space vector.
 function PhysObj:WorldToLocal(vec) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Transforms a worldspace vector into the local space of the physics object merely by the rotation of the **inverted** `PhysObj:GetPositionMatrix()`.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Rotationally transforms a worldspace vector into the physics object's local space by the inverted [PhysObj:GetPositionMatrix](https://wiki.facepunch.com/gmod/PhysObj:GetPositionMatrix).
 ---
---- In contrast to [PhysObj:WorldToLocal](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal), this function doesn't translate the vector.
+--- For example, in GMod this is used in thrusters, for working out linear force for local acceleration.
+---
+--- **NOTE**: In contrast to [PhysObj:WorldToLocal](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocal), this function doesn't translate the vector.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:WorldToLocalVector)
 ---@param vec Vector A worldspace vector.
----@return Vector # The result vector of the transformation by rotation.
+---@return Vector # The resulting vector from the rotational transformation.
 function PhysObj:WorldToLocalVector(vec) end

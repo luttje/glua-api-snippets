@@ -282,7 +282,7 @@ function Entity:CallDTVarProxies(type, slot, newValue) end
 --- **WARNING**: An error being thrown inside `removeFunc` will stop other `EntityRemoved` hooks from executing.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:CallOnRemove)
----@param identifier string Identifier that can be optionally used with Entity:RemoveCallOnRemove to undo this call on remove.
+---@param identifier any Identifier that can be optionally used with Entity:RemoveCallOnRemove to undo this call on remove.
 ---@param removeFunc fun(ent: Entity, ...: any) Function to be called on remove.
 ---
 --- Function argument(s):
@@ -663,7 +663,7 @@ function ENTITY:EngineScheduleFinish() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:EntIndex)
 ---@return number # The index of the entity.
 ---
---- `-1` for clientside-only or `0` for serverside-only entities.
+--- `-1` for clientside-only or `0` for serverside-only and NULL entities.
 function Entity:EntIndex() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when an NPC's expression has finished.
@@ -740,7 +740,7 @@ function Entity:FindTransitionSequence(currentSequence, goalSequence) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Fire)
 ---@param input string The name of the input to fire
----@param param? string The value to give to the input, can also be a number or a boolean.
+---@param param? string|number|boolean The value to give to the input, can also be a number or a boolean.
 ---@param delay? number Delay in seconds before firing
 ---@param activator? Entity The entity that caused this input (i.e. the player who pushed a button)
 ---@param caller? Entity The entity that is triggering this input (i.e. the button that was pushed)
@@ -1617,6 +1617,8 @@ function Entity:GetMaxHealth() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetModel)
 ---@return string|nil # The entity's model. Will be a filesystem path for most models.
 ---
+--- This is guaranteed to be lower case.
+---
 --- This will be nil for entities which cannot have models, such as point entities.
 function Entity:GetModel() end
 
@@ -2157,7 +2159,7 @@ function Entity:GetPersistent() end
 ---@return Player # The player. If entity that was set is not a player, it will return NULL entity.
 function Entity:GetPhysicsAttacker(timeLimit) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's physics object, if the entity has physics.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity's physics object, if the entity has physics. Same as `ent:GetPhysicsObjectNum( 0 )`
 ---
 --- **NOTE**: Entities don't have clientside physics objects by default, so this will return `[NULL PHYSOBJ]` on the client in most cases.
 ---
@@ -2761,7 +2763,7 @@ function Entity:InitializeAsClientEntity() end
 ---@param input string The name of the input to fire
 ---@param activator? Entity The entity that caused this input (i.e. the player who pushed a button)
 ---@param caller? Entity The entity that is triggering this input (i.e. the button that was pushed)
----@param param? any The value to give to the input. Can be either a string, a number or a boolean.
+---@param param? string|number|boolean The value to give to the input. Can be either a string, a number or a boolean.
 function Entity:Input(input, activator, caller, param) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -2861,10 +2863,12 @@ function Entity:IsLagCompensated() end
 ---@return boolean # Returns true if the line of sight is clear
 function Entity:IsLineOfSightClear(target) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if the entity is going to be deleted in the next frame. Entities marked for deletion should not be accessed.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Determines if a given Entity is going to be removed at the start of the next tick.
+---
+--- This will return `true` for an [Entity](https://wiki.facepunch.com/gmod/Entity) after [Entity:Remove](https://wiki.facepunch.com/gmod/Entity:Remove) is called on it.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsMarkedForDeletion)
----@return boolean # If the entity is going to be deleted.
+---@return boolean # `true` if the Entity is going to be removed, `false` otherwise.
 function Entity:IsMarkedForDeletion() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is a [NextBot](https://wiki.facepunch.com/gmod/NextBot) or not.
@@ -3026,14 +3030,14 @@ function ENTITY:KeyValue(key, value) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LocalToWorld)
 ---@param lpos Vector A local space vector.
----@return Vector # The correspondent worldspace vector.
+---@return Vector # The corresponding worldspace vector.
 function Entity:LocalToWorld(lpos) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates an angle relative to the entity's coordinate system to a worldspace angle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:LocalToWorldAngles)
 ---@param ang Angle A local space angle.
----@return Angle # The correspondent worldspace angle.
+---@return Angle # The corresponding worldspace angle.
 function Entity:LocalToWorldAngles(ang) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the attachment index of the given attachment name.
@@ -3812,7 +3816,11 @@ function Entity:RagdollStopControlling() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RagdollUpdatePhysics)
 function Entity:RagdollUpdatePhysics() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes the entity it is used on. The entity will be removed at the start of next tick.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes (or deletes) a given [Entity](https://wiki.facepunch.com/gmod/Entity).
+---
+--- The Entity will continue to exist until the start of the next tick.
+---
+--- To check if an Entity will be removed in the next tick, see [Entity:IsMarkedForDeletion](https://wiki.facepunch.com/gmod/Entity:IsMarkedForDeletion)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Remove)
 function Entity:Remove() end
@@ -3841,7 +3849,7 @@ function Entity:RemoveCallback(hook, callbackid) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes a function previously added via [Entity:CallOnRemove](https://wiki.facepunch.com/gmod/Entity:CallOnRemove).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveCallOnRemove)
----@param identifier string Identifier of the function given to Entity:CallOnRemove.
+---@param identifier any Identifier of the function given to Entity:CallOnRemove.
 function Entity:RemoveCallOnRemove(identifier) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes an engine effect applied to an entity.
@@ -4349,6 +4357,8 @@ function Entity:SetFlexScale(scale) end
 --- Setting flex weights spawns an internal networked entity (one per entity face posed) to accommodate networking to clients.
 ---
 --- **NOTE**: Only `96` flex controllers can be set! Flex controllers on models with higher amounts will not be accessible.
+---
+--- **WARNING**: This function must be called at every tick, otherwise you will not see any changes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight)
 ---@param flex number The ID of the flex to modify weight of.  The range is between `0` and Entity:GetFlexNum - 1.
@@ -5314,6 +5324,8 @@ function Entity:SetOwner(owner) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the parent of this entity, making it move with its parent. This will make the child entity non solid, nothing can interact with them, including traces.
 ---
+--- All children of the parent get removed whenever it gets removed.
+---
 --- **NOTE**: This does not work on [the world](https://wiki.facepunch.com/gmod/game.GetWorld).
 ---
 --- **WARNING**: This can cause undefined physics behavior when used on entities that don't support parenting. See the [Valve developer wiki](https://developer.valvesoftware.com/wiki/Entity_Hierarchy_(parenting)) for more information.
@@ -5505,7 +5517,7 @@ function Entity:SetRenderMode(renderMode) end
 ---@param newOrigin? Vector The new origin in world coordinates where the Entity's model will now be rendered at. To disable the override, set to nil.
 function Entity:SetRenderOrigin(newOrigin) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a save value for an entity. You can see a full list of an entity's save values by creating it and printing [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)().
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a save value for an entity. You can see a full list of an entity's save values by creating it and printing [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable).
 ---
 --- See [Entity:GetInternalVariable](https://wiki.facepunch.com/gmod/Entity:GetInternalVariable) for the opposite of this function.
 ---
@@ -5970,8 +5982,8 @@ function ENTITY:TestCollision(startpos, delta, isbox, extents, mask) end
 --- **NOTE**: The function won't take in to account [Global.AddOriginToPVS](https://wiki.facepunch.com/gmod/Global.AddOriginToPVS) and the like.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:TestPVS)
----@param testPoint any Entity or Vector to test against. If an entity is given, this function will test using its bounding box.
----@return boolean # True if the testPoint is within our PVS.
+---@param testPoint Vector|Entity Entity or Vector to test against. If an entity is given, this function will test using its bounding box.
+---@return boolean # `true` if the testPoint is within our PVS.
 function Entity:TestPVS(testPoint) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called every frame on the client.
@@ -6203,12 +6215,12 @@ function Entity:WorldSpaceCenter() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:WorldToLocal)
 ---@param wpos Vector A worldspace vector.
----@return Vector # The correspondent local space vector.
+---@return Vector # The corresponding local space vector.
 function Entity:WorldToLocal(wpos) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Translates a worldspace angle into an angle relative to the entity's coordinate system.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:WorldToLocalAngles)
 ---@param ang Angle A worldspace angle.
----@return Angle # The correspondent local space angle.
+---@return Angle # The corresponding local space angle.
 function Entity:WorldToLocalAngles(ang) end

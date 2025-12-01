@@ -20,7 +20,7 @@ concommand = {}
 --- * Player `ply` - The player that ran the concommand. NULL entity if command was entered with the dedicated server console.
 --- * string `cmd` - The concommand string (if one callback is used for several concommands).
 --- * table `args` - A table of all string arguments.
---- * string `argStr` - The arguments as a string.
+--- * string `argStr` - The arguments as a string (including double quotes if there were any).
 ---@param autoComplete? fun(cmd: string, argStr: string, args: table):(tbl: table) The function to call which should return a table of options for autocompletion. (Console_Command_Auto-completion)
 ---
 --- This only properly works on the client since it is **not** networked.

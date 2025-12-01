@@ -40,6 +40,7 @@ jit = {}
 ---   * number **ngpr** - The number of general-purpose and floating point registers that are active at the exit.
 ---   * number **nfpr** - The number of general-purpose and floating point registers that are active at the exit.
 ---@param event string The event to hook into.
+---@deprecated This function was disabled due to security concerns.
 function jit.attach(callback, event) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Flushes the whole cache of compiled code.

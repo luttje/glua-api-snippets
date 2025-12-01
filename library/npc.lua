@@ -810,7 +810,7 @@ function NPC:MoveStart() end
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:MoveStop)
 function NPC:MoveStop() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Works similarly to [NPC:NavSetRandomGoal](https://wiki.facepunch.com/gmod/NPC:NavSetRandomGoal).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Picks random node around given vector, around specified length, using dir as search direction start. Works similarly to [NPC:NavSetRandomGoal](https://wiki.facepunch.com/gmod/NPC:NavSetRandomGoal), but you can decide any position you want as a search starting point rather than your NPC.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:NavSetGoal)
 ---@param pos Vector The origin to calculate a path from.
@@ -1197,8 +1197,8 @@ function NPC:TaskComplete() end
 --- This is meant to be used alongside [NPC:TaskComplete](https://wiki.facepunch.com/gmod/NPC:TaskComplete) to complete or fail custom Lua defined tasks. ([Schedule:AddTask](https://wiki.facepunch.com/gmod/Schedule:AddTask))
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:TaskFail)
----@param task string A string most likely defined as a Source Task, for more information on Tasks go to https://developer.valvesoftware.com/wiki/Task
-function NPC:TaskFail(task) end
+---@param failReason string Fail reason to be passed onto ENTITY:OnTaskFailed. The fail reason can also be seen when the NPC's `ent_text` is active.
+function NPC:TaskFail(failReason) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Force the NPC to update information on the supplied enemy, as if it had line of sight to it.
 ---

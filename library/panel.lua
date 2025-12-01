@@ -2155,6 +2155,7 @@ function Panel:SetFontInternal(fontName) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the height of the panel.
 ---
 --- Calls [PANEL:OnSizeChanged](https://wiki.facepunch.com/gmod/PANEL:OnSizeChanged) and marks this panel for layout ([Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout)).
+--- Automatically rounds the height down
 ---
 --- See also [Panel:SetSize](https://wiki.facepunch.com/gmod/Panel:SetSize).
 ---
@@ -2319,6 +2320,7 @@ function Panel:SetSelectionCanvas(set) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the size of the panel.
 ---
 --- Calls [PANEL:OnSizeChanged](https://wiki.facepunch.com/gmod/PANEL:OnSizeChanged) and marks this panel for layout ([Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout)).
+--- Automatically rounds the width and height down
 ---
 --- See also [Panel:SetWidth](https://wiki.facepunch.com/gmod/Panel:SetWidth) and [Panel:SetHeight](https://wiki.facepunch.com/gmod/Panel:SetHeight).
 ---
@@ -2485,6 +2487,7 @@ function Panel:SetWide(width) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the width of the panel.
 ---
 --- Calls [PANEL:OnSizeChanged](https://wiki.facepunch.com/gmod/PANEL:OnSizeChanged) and marks this panel for layout ([Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout)).
+--- Automatically rounds the width down
 ---
 --- See also [Panel:SetSize](https://wiki.facepunch.com/gmod/Panel:SetSize).
 ---

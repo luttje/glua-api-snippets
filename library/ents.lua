@@ -15,7 +15,7 @@ function ents.Create(class) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a clientside only prop with optional physics. See also [Global.ClientsideModel](https://wiki.facepunch.com/gmod/Global.ClientsideModel) if physics is not needed.
 ---
---- For physics to work you **must** use the _model_ argument, a simple `SetModel` call will not be enough.
+--- For physics to work you're expected to use the `model` argument. A simple [Entity:SetModel](https://wiki.facepunch.com/gmod/Entity:SetModel) will not be enough — the [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit)* function will be needed.
 --- Parented clientside prop will become detached if the parent entity leaves the PVS. **A workaround is available on its github page.**
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.CreateClientProp)
@@ -187,6 +187,8 @@ function ents.GetByIndex(entIdx) end
 function ents.GetCount(IncludeKillMe) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of networked entities, which is limited to 8192. [ents.Create](https://wiki.facepunch.com/gmod/ents.Create) will fail somewhere between 8064 and 8176 - this can vary based on the amount of existing temp ents.
+---
+--- See also [MAX_EDICT_BITS](https://wiki.facepunch.com/gmod/Global_Variables#maxedictbits) global variable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.GetEdictCount)
 ---@return number # Number of networked entities

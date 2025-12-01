@@ -21,11 +21,11 @@ function scripted_ents.Get(classname) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the list of all ENT tables registered
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.GetList)
----@return table # A table of all entities in the following format: (table keys are the classnames)
---- * table t - The Structures/ENT table associated with the entity
---- * boolean isBaseType - Always true
---- * string Base - The entity base (note capital B in the key name)
---- * string type - The entity type
+---@return table<string, table> # A table of all SENTs where the key is the classname and the value is a table where:
+--- * table **t** — The Structures/ENT table associated with the entity
+--- * boolean **isBaseType** — Unused. Always `true`
+--- * string **Base** — The entity base
+--- * string **type** — The entity type
 function scripted_ents.GetList() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves a member of entity's table.

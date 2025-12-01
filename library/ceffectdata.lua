@@ -146,14 +146,7 @@ function CEffectData:SetEntIndex(entIndex) end
 ---@param entity Entity Entity of the effect, mostly used for parenting.
 function CEffectData:SetEntity(entity) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the flags of the effect. Can be used to change the appearance of a MuzzleFlash effect.
----
---- ## Example values for MuzzleFlash effect
---- Flags |  Description |
---- ------|--------------|
---- 1 | Regular muzzleflash|
---- 5 | Combine muzzleflash|
---- 7 | Regular muzzle but bigger|
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the flags for the effect. What flags do depends entirely on the effect. See [Default Effects](https://wiki.facepunch.com/gmod/Default_Effects).
 ---
 --- **NOTE**: Internally stored as an integer, but only first 8 bits are networked, effectively limiting this function to `0-255` range.
 ---

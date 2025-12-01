@@ -8,9 +8,11 @@
 ---@class CSoundPatch
 local CSoundPatch = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adjust the pitch, alias the speed at which the sound is being played.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adjust the pitch, also known as the speed at which the sound is being played.
 ---
---- This invokes the [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
+--- Appears to only work while the sound is being played. See also [CSoundPatch:PlayEx](https://wiki.facepunch.com/gmod/CSoundPatch:PlayEx).
+---
+--- This invokes [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CSoundPatch:ChangePitch)
 ---@param pitch number The pitch can range from 0-255. Where 100 is the original pitch.
@@ -18,7 +20,8 @@ local CSoundPatch = {}
 function CSoundPatch:ChangePitch(pitch, deltaTime) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adjusts the volume of the sound played.
---- Appears to only work while the sound is being played.
+---
+--- Appears to only work while the sound is being played. See also [CSoundPatch:PlayEx](https://wiki.facepunch.com/gmod/CSoundPatch:PlayEx).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CSoundPatch:ChangeVolume)
 ---@param volume number The volume ranges from 0 to 1.

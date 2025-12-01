@@ -237,7 +237,7 @@ hook = {}
 ---@overload fun(eventName: "PreRegisterSENT", identifier: any, func: fun(ent: table, class: string):(boolean?))
 ---@overload fun(eventName: "PreRegisterSWEP", identifier: any, func: fun(swep: table, class: string):(boolean?))
 ---@overload fun(eventName: "PreRender", identifier: any, func: fun():(boolean?))
----@overload fun(eventName: "PreUndo", identifier: any, func: fun(undo: table))
+---@overload fun(eventName: "PreUndo", identifier: any, func: fun(undo: table):(boolean?))
 ---@overload fun(eventName: "PreventScreenClicks", identifier: any, func: fun():(boolean?))
 ---@overload fun(eventName: "PropBreak", identifier: any, func: fun(attacker: Player, prop: Entity))
 ---@overload fun(eventName: "RenderScene", identifier: any, func: fun(origin: Vector, angles: Angle, fov: number):(boolean?))

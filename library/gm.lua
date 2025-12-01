@@ -217,9 +217,9 @@ function GM:ChatText(index, name, text, type) end
 ---@param text string The new contents of the input box
 function GM:ChatTextChanged(text) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a non local player connects to allow the Lua system to check the password.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a **non local player** connects to allow the Lua system to check the password.
 ---
---- The default behaviour in the base gamemodes emulates what would normally happen. If sv_password is set and its value matches the password passed in by the client - then they are allowed to join. If it isn't set it lets them in too.
+--- The default behaviour in the base gamemodes emulates what would normally happen. If `sv_password` is set and its value matches the password passed in by the client (via `password` concommand) - then they are allowed to join. If `sv_password` isn't set it lets them in too.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:CheckPassword)
 ---@param steamID64 string The 64bit Steam ID of the joining player, use util.SteamIDFrom64 to convert it to a `STEAM_0:` one.
@@ -227,7 +227,7 @@ function GM:ChatTextChanged(text) end
 ---@param svPassword string The current value of sv_password (the password set by the server)
 ---@param clPassword string The password provided by the client
 ---@param name string The name of the joining player
----@return boolean # If the hook returns false then the player is disconnected
+---@return boolean # If the hook returns `false` then the player is disconnected
 ---@return string # If returning false in the first argument, then this should be the disconnect message. This will default to `#GameUI_ServerRejectBadPassword`, which is `Bad Password.` translated to the client's language.
 function GM:CheckPassword(steamID64, ipAddress, svPassword, clPassword, name) end
 
@@ -957,8 +957,6 @@ function GM:OnDamagedByExplosion(ply, dmginfo) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called as soon as the entity is created. Very little of the entity's properties will be initialized at this stage. (keyvalues, classname, flags, anything), especially on the serverside.
 ---
---- **NOTE**: Some entities on initial map spawn are passed through this hook, and then removed in the same frame. This is used by the engine to precache things like models and sounds, so always check their validity with [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid). Will not require [Global.IsValid](https://wiki.facepunch.com/gmod/Global.IsValid) check if you create your hook after [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity).
----
 --- **WARNING**: Removing the created entity during this event can lead to unexpected problems. Use [Global.SafeRemoveEntityDelayed](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntityDelayed)( entity, 0 ) to safely remove the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnEntityCreated)
@@ -1062,7 +1060,7 @@ function GM:OnPhysgunFreeze(weapon, physobj, ent, ply) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to when a player has successfully picked up an entity with their Physics Gun.
 ---
---- Not to be confused with [GM:PhysgunPickup](https://wiki.facepunch.com/gmod/GM:PhysgunPickup) which is called multiple times to ask if the player should be able to pick up an entity.
+--- Not to be confused with [GM:PhysgunPickup](https://wiki.facepunch.com/gmod/GM:PhysgunPickup) which is called to ask if the player should be able to pick up an entity.
 ---
 --- See [GM:GravGunOnPickedUp](https://wiki.facepunch.com/gmod/GM:GravGunOnPickedUp) for the Gravity Gun pickup variant.
 --- See [GM:OnPlayerPhysicsPickup](https://wiki.facepunch.com/gmod/GM:OnPlayerPhysicsPickup) for the player `+use` pickup variant.
@@ -1211,7 +1209,7 @@ function GM:PhysgunDrop(player, entity) end
 --- See [GM:OnPhysgunPickup](https://wiki.facepunch.com/gmod/GM:OnPhysgunPickup) for a hook which is called when a player has successfully picked up an entity.
 ---
 --- See [GM:GravGunPickupAllowed](https://wiki.facepunch.com/gmod/GM:GravGunPickupAllowed) for the Gravity Gun pickup variant.
---- See [GM:AllowPlayerPickup](https://wiki.facepunch.com/gmod/GM:AllowPlayerPickup) for the +USE pickup variant.
+--- See [GM:AllowPlayerPickup](https://wiki.facepunch.com/gmod/GM:AllowPlayerPickup) for the `+USE` pickup variant.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PhysgunPickup)
 ---@param player Player The player that is picking up using the Physics Gun.
@@ -1536,7 +1534,7 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn)
 ---@param player Player The player who spawned.
----@param transition boolean If `true`, the player just spawned from a map transition.
+---@param transition boolean If `true`, the player just spawned from a [map transition](https://developer.valvesoftware.com/wiki/Level_Transitions). (Specifically via `trigger_changelevel` or `point_changelevel` entities)
 function GM:PlayerInitialSpawn(player, transition) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the player join a specified team. This is a convenience function that calls [Player:SetTeam](https://wiki.facepunch.com/gmod/Player:SetTeam) and runs the [GM:OnPlayerChangedTeam](https://wiki.facepunch.com/gmod/GM:OnPlayerChangedTeam) hook.
@@ -2081,6 +2079,7 @@ function GM:PreRender() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreUndo)
 ---@param undo table The undo table. See Structures/Undo struct.
+---@return boolean # Return `false` to disallow the undo.
 function GM:PreUndo(undo) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This will prevent IN_ATTACK from sending to server when player tries to shoot from C menu.
