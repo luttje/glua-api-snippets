@@ -35,7 +35,7 @@ function chat.GetChatBoxSize() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Opens the chat window.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/chat.Open)
----@param mode number If equals 1, opens public chat, otherwise opens team chat
+---@param mode number If equals 1, opens public chat, otherwise opens team chat.
 function chat.Open(mode) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Plays the chat "tick" sound.

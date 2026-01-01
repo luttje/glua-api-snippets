@@ -48,7 +48,9 @@ function DImageButton:SetDepressImage(enable) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Alias of [DImageButton:SetImage](https://wiki.facepunch.com/gmod/DImageButton:SetImage).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImageButton:SetIcon)
-function DImageButton:SetIcon() end
+---@param strImage string
+---@param strBackup? string
+function DImageButton:SetIcon(strImage, strBackup) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the "image" of the [DImageButton](https://wiki.facepunch.com/gmod/DImageButton). Equivalent of [DImage:SetImage](https://wiki.facepunch.com/gmod/DImage:SetImage).
 ---

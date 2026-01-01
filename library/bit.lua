@@ -9,7 +9,7 @@ bit = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.arshift)
 ---@param value number The value to be manipulated.
 ---@param shiftCount number Amounts of bits to shift.
----@return number # shiftedValue
+---@return number # The shifted value.
 function bit.arshift(value, shiftCount) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs the bitwise `and` for all values specified.
@@ -39,7 +39,7 @@ function bit.bor(value1, ...) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.bswap)
 ---@param value number The value to be byte swapped.
----@return number # swapped
+---@return number # The resulting swapped value.
 function bit.bswap(value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the bitwise xor of all values specified.
@@ -47,7 +47,7 @@ function bit.bswap(value) end
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.bxor)
 ---@param value number The value to be manipulated.
 ---@param otherValues? number Values bit xor with. Optional.
----@return number # bitwiseXOr
+---@return number # The XORed value.
 function bit.bxor(value, otherValues) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the result of shifting given value left bitwise by given number of bits. See [this wiki article](https://en.wikipedia.org/wiki/Bitwise_operation#Bit_shifts) for more details.
@@ -64,7 +64,7 @@ function bit.lshift(value, shiftCount) end
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.rol)
 ---@param value number The value to be manipulated.
 ---@param shiftCount number Amounts of bits to rotate left by.
----@return number # shiftedValue
+---@return number # The shifted value.
 function bit.rol(value, shiftCount) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the right rotated value.
@@ -72,7 +72,7 @@ function bit.rol(value, shiftCount) end
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.ror)
 ---@param value number The value to be manipulated.
 ---@param shiftCount number Amounts of bits to rotate right by.
----@return number # shiftedValue
+---@return number # The shifted value.
 function bit.ror(value, shiftCount) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the right shifted value.
@@ -81,7 +81,7 @@ function bit.ror(value, shiftCount) end
 ---[View wiki](https://wiki.facepunch.com/gmod/bit.rshift)
 ---@param value number The value to be manipulated.
 ---@param shiftCount number Amounts of bits to shift right by.
----@return number # shiftedValue
+---@return number # The shifted value.
 function bit.rshift(value, shiftCount) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Normalizes the specified value and clamps it in the range of a signed 32bit integer.

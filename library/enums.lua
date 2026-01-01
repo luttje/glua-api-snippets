@@ -3876,6 +3876,8 @@ COLLISION_GROUP_NPC_SCRIPTED = 19
 COLLISION_GROUP_WORLD = 20
 --- Amount of COLLISION_GROUP_ enumerations
 LAST_SHARED_COLLISION_GROUP = 21
+--- Half-Life 2 exclusive collision group, acts similarly to `COLLISION_GROUP_PROJECTILE` but is also ignored by player movement.
+COLLISION_GROUP_HL2_SPIT = 22
 
 ---@alias COLLISION_GROUP
 ---| `COLLISION_GROUP_NONE`
@@ -3900,6 +3902,7 @@ LAST_SHARED_COLLISION_GROUP = 21
 ---| `COLLISION_GROUP_NPC_SCRIPTED`
 ---| `COLLISION_GROUP_WORLD`
 ---| `LAST_SHARED_COLLISION_GROUP`
+---| `COLLISION_GROUP_HL2_SPIT`
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Enumerations for NPC conditions, used by [NPC:SetCondition](https://wiki.facepunch.com/gmod/NPC:SetCondition). Serverside only.
 ---

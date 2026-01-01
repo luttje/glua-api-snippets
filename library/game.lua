@@ -183,6 +183,14 @@ function game.GetIPAddress() end
 ---@return string # The name of the current map, without a file extension.
 function game.GetMap() end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the current map change count for the server.
+---
+--- This is useful to determine whether the current map is the initial map, or whether a `changelevel` (using `map` command is also detected) has occurred at any point in the server's session.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/game.GetMapChangeCount)
+---@return number # The current map change count. Will start at `1`.
+function game.GetMapChangeCount() end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the next map that would be loaded according to the file that is set by the mapcyclefile convar.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetMapNext)

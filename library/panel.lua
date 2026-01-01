@@ -1249,6 +1249,7 @@ function Panel:LerpPositions(speed, easeOut) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:LoadControlsFromFile)
 ---@param path string The path to load the controls from.
+---@deprecated No longer does anything.
 function Panel:LoadControlsFromFile(path) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -1257,6 +1258,7 @@ function Panel:LoadControlsFromFile(path) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:LoadControlsFromString)
 ---@param data string The data to load controls from. Format unknown.
+---@deprecated No longer does anything.
 function Panel:LoadControlsFromString(data) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after [Panel:SetCookieName](https://wiki.facepunch.com/gmod/Panel:SetCookieName) is called on this panel to apply the just loaded cookie values for this panel.
@@ -2085,7 +2087,9 @@ function Panel:SetDrawOnTop(drawOnTop) end
 ---@param height number The height of the drop area.
 function Panel:SetDropTarget(x, y, width, height) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the enabled state of a disable-able panel object, such as a [DButton](https://wiki.facepunch.com/gmod/DButton) or [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the enabled state of a panel object that supports being disabled, such as a [DButton](https://wiki.facepunch.com/gmod/DButton) or [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry).
+---
+--- Disabled panels cannot be interacted with, and have a different appearance to indicate this.
 ---
 --- See [Panel:IsEnabled](https://wiki.facepunch.com/gmod/Panel:IsEnabled) for a function that retrieves the "enabled" state of a panel.
 ---
@@ -2293,7 +2297,7 @@ function Panel:SetPopupStayAtBack(stayAtBack) end
 ---@param posY number The y coordinate of the position.
 function Panel:SetPos(posX, posY) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whenever the panel should be rendered in the next screenshot.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whenever the panel should be rendered in a screenshot. (`jpeg` or `screenshot` commands, Camera SWEP)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetRenderInScreenshots)
 ---@param renderInScreenshot boolean Whether to render in the screenshot or not.

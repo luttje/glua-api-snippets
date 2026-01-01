@@ -190,6 +190,8 @@ function util.Effect(effectName, effectData, allowOverride, ignorePredictionOrRe
 ---@param context? number Filtering context. See Enums/TEXT_FILTER.
 ---@param player? Player Used to determine if the text should be filtered according to local user's Steam chat filtering settings.
 ---@return string # The filtered text based on given settings.
+---
+--- The maximum length of the string is 4095 bytes.
 function util.FilterText(str, context, player) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Converts the full path of the given file to a relative path.

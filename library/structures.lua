@@ -732,7 +732,7 @@ DynamicLight.innerangle = 0
 ---@type number?
 DynamicLight.outerangle = 0
 
----Makes the light brighter and flicker? Changing the value does not seem to affect anything.
+---The entity index the light belongs to. Set automatically by Global.DynamicLight. Probably don't touch it.
 ---@type number
 DynamicLight.key = nil
 
@@ -1266,9 +1266,9 @@ HTTPRequest.method = "GET"
 ---@type string
 HTTPRequest.url = nil
 
----KeyValue table for parameters. This is only applicable to the following request methods:
+---KeyValue table for [URL parameters](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams). This is only applicable to the following request methods:
 --- * GET
---- * POST
+--- * POST (sent in body, so if `body` is set, parameters are ignored)
 --- * HEAD
 ---@type table
 HTTPRequest.parameters = nil
@@ -2433,11 +2433,11 @@ SequenceInfo.numevents = nil
 SequenceInfo.numblends = nil
 
 ---Mins part of the bounding box for this sequence
----@type number
+---@type vector
 SequenceInfo.bbmin = nil
 
 ---Maxs part of the bounding box for this sequence
----@type number
+---@type vector
 SequenceInfo.bbmax = nil
 
 ---ideal cross fade in time (0.2 default)

@@ -7,7 +7,7 @@ coroutine = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/coroutine.create)
 ---@param func function The function for the coroutine to use.
----@return thread # coroutine
+---@return thread # The created coroutine.
 function coroutine.create(func) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether the running coroutine can yield.
@@ -30,14 +30,14 @@ function coroutine.resume(coroutine, ...) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the active coroutine or nil if we are not within a coroutine.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/coroutine.running)
----@return thread # coroutine
+---@return thread # The active coroutine.
 function coroutine.running() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead".
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/coroutine.status)
 ---@param coroutine thread Coroutine to check the status of.
----@return string # status
+---@return string # The coroutine's status.
 function coroutine.status(coroutine) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Repeatedly yields the coroutine for the given duration before continuing.
@@ -47,7 +47,7 @@ function coroutine.status(coroutine) end
 --- This function uses [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) instead of [Global.RealTime](https://wiki.facepunch.com/gmod/Global.RealTime).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/coroutine.wait)
----@param duration number The number of seconds to wait
+---@param duration number The number of seconds to wait.
 function coroutine.wait(duration) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a function which calling is equivalent with calling [coroutine.resume](https://wiki.facepunch.com/gmod/coroutine.resume) with the coroutine and all extra parameters.

@@ -1282,7 +1282,7 @@ function GM:PlayerButtonUp(ply, button) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Decides whether a player can hear another player using voice chat.
 ---
---- **WARNING**: This hook is called [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) * [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) times every 0.3 seconds if at least 1 player is talking, if no one is talking its called every 5 seconds.
+--- **WARNING**: This hook is called **players count * speaking players count** times every 0.3 seconds if at least 1 player is talking or every 5 seconds if no one is talking.
 --- 	You should ensure that your code is efficient, or this will definitely influence performance.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice)
@@ -1829,7 +1829,8 @@ function GM:PostDrawOpaqueRenderables(bDrawingDepth, bDrawingSkybox, isDraw3DSky
 ---@param vm Entity This is the view model entity.
 ---@param ply Player The the owner of the view model.
 ---@param weapon Weapon This is the weapon that is from the view model.
-function GM:PostDrawPlayerHands(hands, vm, ply, weapon) end
+---@param flags number The Enums/STUDIO flags for this render operation.
+function GM:PostDrawPlayerHands(hands, vm, ply, weapon, flags) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after drawing the 3D skybox. This will not be called if skybox rendering was prevented via the [GM:PreDrawSkyBox](https://wiki.facepunch.com/gmod/GM:PreDrawSkyBox) hook.
 ---
@@ -1865,7 +1866,8 @@ function GM:PostDrawTranslucentRenderables(bDrawingDepth, bDrawingSkybox, isDraw
 ---@param viewmodel Entity Players view model
 ---@param player Player The owner of the weapon/view model
 ---@param weapon Weapon The weapon the player is currently holding
-function GM:PostDrawViewModel(viewmodel, player, weapon) end
+---@param flags number The Enums/STUDIO flags for this render operation.
+function GM:PostDrawViewModel(viewmodel, player, weapon, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called every time a bullet pellet (i.e. this hook is called multiple times for a shotgun shot) is fired from an entity. Notably this hook will have the final damage and aim direction for the bullet pellet.
 ---
@@ -1986,8 +1988,9 @@ function GM:PreDrawOpaqueRenderables(isDrawingDepth, isDrawSkybox, isDraw3DSkybo
 ---@param vm Entity This is the view model entity before it is drawn.
 ---@param ply Player The the owner of the view model.
 ---@param weapon Weapon This is the weapon that is from the view model.
+---@param flags number The Enums/STUDIO flags for this render operation.
 ---@return boolean # Return true to prevent the viewmodel hands from rendering
-function GM:PreDrawPlayerHands(hands, vm, ply, weapon) end
+function GM:PreDrawPlayerHands(hands, vm, ply, weapon, flags) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called before the 3D sky box is drawn. This will not be called for maps with no 3D skybox, or when the 3d skybox is disabled. (`r_3dsky 0`)
 ---
@@ -2026,8 +2029,9 @@ function GM:PreDrawTranslucentRenderables(isDrawingDepth, isDrawSkybox, isDraw3D
 ---@param vm Entity This is the view model entity before it is drawn. On server-side, this entity is the predicted view model.
 ---@param ply Player The owner of the view model.
 ---@param weapon Weapon This is the weapon that is from the view model.
+---@param flags number The Enums/STUDIO flags for this render operation.
 ---@return boolean # Return true to prevent the default view model rendering. This also affects GM:PostDrawViewModel.
-function GM:PreDrawViewModel(vm, ply, weapon) end
+function GM:PreDrawViewModel(vm, ply, weapon, flags) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just before all view models (there are 3 per player, see [Player:GetViewModel](https://wiki.facepunch.com/gmod/Player:GetViewModel)) and entities with `RENDERGROUP_VIEWMODEL` are drawn.
 ---

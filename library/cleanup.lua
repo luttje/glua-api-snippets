@@ -51,12 +51,12 @@ function cleanup.Register(type) end
 --- You very likely want to call [undo.ReplaceEntity](https://wiki.facepunch.com/gmod/undo.ReplaceEntity) with the same entities as well.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.ReplaceEntity)
----@param from Entity Old entity
----@param to Entity New entity. Can be a `NULL` entity to remove the old entity from the cleanup system.
+---@param from Entity The old entity.
+---@param to Entity The new entity. Can be a `NULL` entity to remove the old entity from the cleanup system.
 ---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Repopulates the clients cleanup menu
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Repopulates the clients cleanup menu.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.UpdateUI)
 function cleanup.UpdateUI() end

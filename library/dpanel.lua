@@ -15,7 +15,8 @@ function DPanel:GetBackgroundColor() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether or not the panel is disabled.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanel:GetDisabled)
----@return boolean # True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
+---@return boolean # `true` if the panel is disabled (mouse input disabled and background alpha set to 75), `false` if its enabled (mouse input enabled and background alpha set to 255).
+---@deprecated Use Panel:IsEnabled.
 function DPanel:GetDisabled() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether or not the panel background is being drawn. Alias of [DPanel:GetPaintBackground](https://wiki.facepunch.com/gmod/DPanel:GetPaintBackground).
@@ -57,6 +58,7 @@ function DPanel:SetBackgroundColor(color) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanel:SetDisabled)
 ---@param disabled boolean True to disable the panel (mouse input disabled and background alpha set to 75), false to enable it (mouse input enabled and background alpha set to 255).
+---@deprecated Use Panel:SetEnabled instead.
 function DPanel:SetDisabled(disabled) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether or not to draw the panel background. Alias of [DPanel:SetPaintBackground](https://wiki.facepunch.com/gmod/DPanel:SetPaintBackground).

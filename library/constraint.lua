@@ -5,7 +5,10 @@ constraint = {}
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
---- Stores information about constraints in an entity's table.
+--- Stores the constraint entity in the constrained entity's `Constraints` table.
+---
+--- This will make the `constrt` entity be removed if any of the other entities `ent1`, `ent2`, `ent3` or `ent4` are removed by any means.
+--- To prevent this, [constraint.AddConstraintTableNoDelete](https://wiki.facepunch.com/gmod/constraint.AddConstraintTableNoDelete) can be used instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable)
 ---@param ent1 Entity The entity to store the information on.
@@ -19,7 +22,7 @@ function constraint.AddConstraintTable(ent1, constrt, ent2, ent3, ent4) end
 ---
 --- Stores info about the constraints on the entity's table.
 ---
---- The only difference between this and [constraint.AddConstraintTable](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable) is that the constraint does not get deleted when the entity is removed.
+--- The only difference between this and [constraint.AddConstraintTable](https://wiki.facepunch.com/gmod/constraint.AddConstraintTable) is that the constraint does not get deleted when any of the constrained entities are removed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.AddConstraintTableNoDelete)
 ---@param ent1 Entity The entity to store the information on.
@@ -43,8 +46,8 @@ function constraint.AddConstraintTableNoDelete(ent1, constrt, ent2, ent3, ent4) 
 ---@param localPos1 Vector Position relative to the the first physics object to constrain to.
 ---@param localPos2? Vector Position relative to the the second physics object to constrain to.
 --- 			Does nothing!
----@param forceLimit? number Amount of force until it breaks (0 = unbreakable)
----@param torqueLimit? number Amount of torque (rotation speed) until it breaks (0 = unbreakable)
+---@param forceLimit? number Amount of force until it breaks (0 = unbreakable).
+---@param torqueLimit? number Amount of torque (rotation speed) until it breaks (0 = unbreakable).
 ---@param xMin number Minimum angle in rotations around the X axis local to the constraint.
 ---@param yMin number Minimum angle in rotations around the Y axis local to the constraint.
 ---@param zMin number Minimum angle in rotations around the Z axis local to the constraint.
@@ -93,8 +96,8 @@ end
 --- See Entity:TranslateBoneToPhysBone.
 ---@param localPos1 Vector Position relative to the the first physics object to constrain to.
 ---@param localPos2 Vector Position relative to the the second physics object to constrain to.
----@param forceLimit? number Amount of force until it breaks (0 = unbreakable)
----@param torqueLimit? number Amount of torque (rotational force) until it breaks (0 = unbreakable)
+---@param forceLimit? number Amount of force until it breaks (0 = unbreakable).
+---@param torqueLimit? number Amount of torque (rotational force) until it breaks (0 = unbreakable).
 ---@param friction? number Constraint friction.
 ---@param noCollide? number Whether the entities should be no-collided.
 ---@param localAxis? Vector If you include the LocalAxis then LPos2 will not be used in the final constraint. However, LPos2 is still a required argument.
@@ -128,17 +131,17 @@ end
 ---
 --- See Entity:TranslateBoneToPhysBone.
 ---@param localPos Vector Center position of the joint, relative to the **second** entity's physics object.
----@param forcelimit? number Amount of force until it breaks (0 = unbreakable)
----@param torquelimit? number Amount of torque (rotation speed) until it breaks (0 = unbreakable)
+---@param forceLimit? number Amount of force until it breaks (0 = unbreakable).
+---@param torqueLimit? number Amount of torque (rotational force) until it breaks (0 = unbreakable).
 ---@param nocollide? number Whether the constrained entities should collided with each other or not.
 ---@return Entity # The created constraint. ([phys_ballsocket](https://developer.valvesoftware.com/wiki/Phys_ballsocket)) Will return `false` if the constraint could not be created.
-function constraint.Ballsocket(ent1, ent2, bone1, bone2, localPos, forcelimit, torquelimit, nocollide) end
+function constraint.Ballsocket(ent1, ent2, bone1, bone2, localPos, forceLimit, torqueLimit, nocollide) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Basic checks to make sure that the specified entity and bone are valid. Returns false if we should not be constraining the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.CanConstrain)
----@param ent Entity The entity to check
----@param bone number The bone of the entity to check (use 0 for mono boned ents)
+---@param ent Entity The entity to check.
+---@param bone number The bone of the entity to check (use 0 for mono boned ents).
 ---@return boolean # Whether a constraint can or should be created.
 function constraint.CanConstrain(ent, bone) end
 
@@ -231,8 +234,8 @@ end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the constraint of a specified type between two entities, if it exists
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.Find)
----@param ent1 Entity The first entity to check
----@param ent2 Entity The second entity to check
+---@param ent1 Entity The first entity to check.
+---@param ent2 Entity The second entity to check.
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
 --- * `Axis`
@@ -248,15 +251,15 @@ end
 --- * `Muscle`
 --- * `Keepupright`
 --- * `Slider`
----@param bone1 number The bone number for the first entity (0 for monoboned entities)
----@param bone2 number The bone number for the second entity
----@return Entity # constraint
+---@param bone1 number The bone number for the first entity (0 for monoboned entities).
+---@param bone2 number The bone number for the second entity.
+---@return Entity # The constraint found.
 function constraint.Find(ent1, ent2, type, bone1, bone2) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the first constraint of a specific type directly connected to the entity found
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the first constraint of a specific type directly connected to the entity found.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraint)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
 --- * `Axis`
@@ -275,10 +278,10 @@ function constraint.Find(ent1, ent2, type, bone1, bone2) end
 ---@return table # The constraint table, set with constraint.AddConstraintTable
 function constraint.FindConstraint(ent, type) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the other entity involved in the first constraint of a specific type directly connected to the entity
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the other entity involved in the first constraint of a specific type directly connected to the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraintEntity)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
 --- * `Axis`
@@ -302,7 +305,7 @@ function constraint.FindConstraintEntity(ent, type) end
 --- If you are looking for a list of all constraints, use [constraint.GetTable](https://wiki.facepunch.com/gmod/constraint.GetTable).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.FindConstraints)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@param type string The type of constraint, case sensitive. List of default constrains is as follows:
 --- * `Weld`
 --- * `Axis`
@@ -327,10 +330,10 @@ function constraint.FindConstraints(ent, type) end
 ---@param ent Entity The entity that will forget its constraints.
 function constraint.ForgetConstraints(ent) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all entities recursively constrained to an entitiy.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table of all entities recursively constrained to an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.GetAllConstrainedEntities)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@param resultTable? table Table used to return result. Optional.
 ---@return table # A table containing all of the constrained entities. This includes all entities constrained to entities constrained to the supplied entity, etc.
 function constraint.GetAllConstrainedEntities(ent, resultTable) end
@@ -340,14 +343,14 @@ function constraint.GetAllConstrainedEntities(ent, resultTable) end
 --- If you are looking for a list of specific constraint(s), use [constraint.FindConstraints](https://wiki.facepunch.com/gmod/constraint.FindConstraints).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.GetTable)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@return table # A list of all constraints connected to the entity.
 function constraint.GetTable(ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns true if the entity has constraints attached to it
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.HasConstraints)
----@param ent Entity The entity to check
+---@param ent Entity The entity to check.
 ---@return boolean # Whether the entity has any constraints or not.
 function constraint.HasConstraints(ent) end
 
@@ -368,7 +371,7 @@ function constraint.HasConstraints(ent) end
 ---@param length1 number Minimum length of the constraint.
 ---@param length2 number Maximum length of the constraint.
 ---@param width number The width of the rope.
----@param key number The key binding, corresponding to an Enums/KEY
+---@param key number The key binding, corresponding to an Enums/KEY.
 ---@param slider number Whether the hydraulic is fixed, i.e. cannot bend. Must be `1` to act as `true`.
 ---@param speed number How fast it changes the length from `length1` to `length2` and backwards.
 ---@param material? string The material of the rope. If unset, will be solid black.
@@ -401,11 +404,11 @@ end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a keep upright constraint.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.Keepupright)
----@param ent Entity The entity to keep upright
----@param ang Angle The angle defined as "upright"
----@param bone number The bone of the entity to constrain (0 for boneless)
+---@param ent Entity The entity to keep upright.
+---@param ang Angle The angle defined as "upright".
+---@param bone number The bone of the entity to constrain (0 for boneless).
 ---@param angularLimit number Basically, the strength of the constraint. Must be above 0.
----@return Entity # The created constraint, if any or false if the constraint failed to set
+---@return Entity # The created constraint, if any or false if the constraint failed to set.
 function constraint.Keepupright(ent, ang, bone, angularLimit) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a motor constraint, a player controllable [constraint.Axis](https://wiki.facepunch.com/gmod/constraint.Axis).
@@ -427,9 +430,9 @@ function constraint.Keepupright(ent, ang, bone, angularLimit) end
 ---@param nocollide? number Whether the entities should be no-collided.
 ---@param toggle? number Whether the constraint is on toggle.
 ---@param player? Player The player that will control the motor. Used to to call numpad.OnDown and numpad.OnUp.
----@param forcelimit? number Amount of force until it breaks (0 = unbreakable)
----@param key_fwd? number The key binding for "forward", corresponding to an Enums/KEY
----@param key_bwd? number The key binding for "backwards", corresponding to an Enums/KEY
+---@param forcelimit? number Amount of force until it breaks (0 = unbreakable).
+---@param key_fwd? number The key binding for "forward", corresponding to an Enums/KEY.
+---@param key_bwd? number The key binding for "backwards", corresponding to an Enums/KEY.
 ---@param direction? number Either `1` or `-1` signifying which direction the motor should spin.
 ---@param localAxis? Vector Overrides axis of rotation?
 ---@return Entity # The created constraint. ([phys_torque](https://developer.valvesoftware.com/wiki/Phys_torque)) Will return `false` if the constraint could not be created.
@@ -478,7 +481,7 @@ end
 ---@param fixed number Whether the constraint is fixed, i.e. cannot bend. Must be `1` to act as `true`.
 ---@param period number How often the "contractions" should happen.
 ---@param amplitude number Amplification of the "contractions"?
----@param startOn? boolean Whether the constraint should start activated. (i.e. spazzing)
+---@param startOn? boolean Whether the constraint should start activated. (i.e. spazzing).
 ---@param material? string Material of the rope. If left unset, will be solid black.
 ---@param color? table The color of the rope. See Global.Color.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Will return `false` if the constraint could not be created.
@@ -526,7 +529,7 @@ function constraint.NoCollide(ent1, ent2, bone1, bone2, disableOnRemove) end
 ---
 --- It consists of 3 rope segments, 2 of which have variable length, visually connected by a 3rd. Reducing length of one end will increase the length of the other end.
 ---
---- You can visualize the pulley like so
+--- You can visualize the pulley like so:
 --- ```
 --- WPos2 --- WPos3
 ---   |			|
@@ -547,7 +550,7 @@ function constraint.NoCollide(ent1, ent2, bone1, bone2, disableOnRemove) end
 ---@param localPos4 Vector Position relative to the the second physics object to constrain to.
 ---@param worldPos2 Vector World position constrain the first entity to. This point will be static.
 ---@param worldPos3 Vector World position constrain the second entity to. This point will be static.
----@param forceLimit number Amount of force until it breaks (0 = unbreakable)
+---@param forceLimit number Amount of force until it breaks (0 = unbreakable).
 ---@param rigid? boolean Whether the constraint is rigid, i.e. cannot bend.
 ---@param width number Width of the rope. If below or at `0`, visual rope segments will not be created.
 ---@param material? string Material of the rope. If unset, will be solid black.
@@ -573,28 +576,28 @@ function constraint.Pulley(
 )
 end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attempts to remove all constraints associated with an entity
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attempts to remove all constraints associated with an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.RemoveAll)
----@param ent Entity The entity to remove constraints from
----@return boolean # Whether any constraints were removed
----@return number # Number of constraints removed
+---@param ent Entity The entity to remove constraints from.
+---@return boolean # Whether any constraints were removed.
+---@return number # Number of constraints removed.
 function constraint.RemoveAll(ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attempts to remove all constraints of a specified type associated with an entity
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.RemoveConstraints)
----@param ent Entity The entity to check
----@param type string The constraint type to remove (eg. `"Weld"`, `"Elastic"`, `"NoCollide"`)
----@return boolean # Whether we removed any constraints or not
----@return number # The amount of constraints removed
+---@param ent Entity The entity to check.
+---@param type string The constraint type to remove (eg. `"Weld"`, `"Elastic"`, `"NoCollide"`).
+---@return boolean # Whether we removed any constraints or not.
+---@return number # The amount of constraints removed.
 function constraint.RemoveConstraints(ent, type) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a simple rope (length) based constraint.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.Rope)
----@param ent1 Entity First entity
----@param ent2 Entity Second entity
+---@param ent1 Entity First entity.
+---@param ent2 Entity Second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
 ---
 --- See Entity:TranslateBoneToPhysBone.
@@ -654,17 +657,17 @@ function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a weld constraint.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/constraint.Weld)
----@param ent1 Entity The first entity
----@param ent2 Entity The second entity
+---@param ent1 Entity The first entity.
+---@param ent2 Entity The second entity.
 ---@param bone1 number PhysObj number of first entity to constrain to. (0 for non-ragdolls).
 ---
 --- See Entity:TranslateBoneToPhysBone.
 ---@param bone2 number PhysObj number of second entity to constrain to. (0 for non-ragdolls).
 ---
 --- See Entity:TranslateBoneToPhysBone.
----@param forceLimit? number The amount of force appliable to the constraint before it will break (0 is never)
----@param noCollide? boolean Should `ent1` be nocollided to `ent2` via this constraint
----@param deleteEnt1OnBreak? boolean If true, when `ent2` is removed, `ent1` will also be removed
+---@param forceLimit? number The amount of force appliable to the constraint before it will break (0 is never).
+---@param noCollide? boolean Should `ent1` be nocollided to `ent2` via this constraint.
+---@param deleteEnt1OnBreak? boolean If true, when `ent2` is removed, `ent1` will also be removed.
 ---@return Entity # The created constraint entity. ([phys_constraint](https://developer.valvesoftware.com/wiki/Phys_constraint))
 function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, deleteEnt1OnBreak) end
 
@@ -683,8 +686,8 @@ function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, delete
 ---@param localPos1 Vector Position relative to the the first physics object to constrain to.
 ---@param localPos2 Vector Position relative to the the second physics object to constrain to.
 ---@param width number The width of the rope.
----@param fwdBind number The key binding for "forward", corresponding to an Enums/KEY
----@param bwdBind number The key binding for "backwards", corresponding to an Enums/KEY
+---@param fwdBind number The key binding for "forward", corresponding to an Enums/KEY.
+---@param bwdBind number The key binding for "backwards", corresponding to an Enums/KEY.
 ---@param fwdSpeed number Forward speed.
 ---@param bwdSpeed number Backwards speed.
 ---@param material? string The material of the rope. If unset, will be solid black.

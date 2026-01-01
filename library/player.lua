@@ -108,7 +108,7 @@ function player.GetByUniqueID(uniqueID) end
 --- **NOTE**: Players who are currently connecting to the server will not be counted. See function: [player.GetCountConnecting](https://wiki.facepunch.com/gmod/player.GetCountConnecting)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player.GetCount)
----@return number # Number of players
+---@return number # Number of players.
 function player.GetCount() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of players connecting to the server, but not yet spawned in.
@@ -744,7 +744,7 @@ function Player:GetFOV() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the steam "relationship" towards the player.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetFriendStatus)
----@return string # Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none" or "requested".
+---@return string # Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none", "requested" or "error_nofriendid" for bots.
 function Player:GetFriendStatus() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the hands entity of a player

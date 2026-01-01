@@ -350,6 +350,15 @@ function Entity:ClearPoseParameters() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:CollisionRulesChanged)
 function Entity:CollisionRulesChanged() end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Same as [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix), but instead of returning a new matrix object, it copies the data to a given matrix.
+---
+--- This is measurably faster when accessing bone matrices a lot.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:CopyBoneMatrix)
+---@param boneID number The bone ID to retrieve matrix of, starting at index 0.
+---@param data VMatrix The matrix to copy the bone matrix to.
+function Entity:CopyBoneMatrix(boneID, data) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates bone followers based on the current entity model.
 ---
 --- Bone followers are [Entities](https://wiki.facepunch.com/gmod/Entity) whose [Physics Object](https://wiki.facepunch.com/gmod/PhysObj) follows a specific bone on another Entity's model.
@@ -968,6 +977,8 @@ function Entity:GetBoneCount() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the transformation matrix of a given bone on the entity's model. The matrix contains the transformation used to position the bone in the world. It is not relative to the parent bone.
 ---
 --- This is equivalent to constructing a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) using [Entity:GetBonePosition](https://wiki.facepunch.com/gmod/Entity:GetBonePosition).
+---
+--- See [Entity:CopyBoneMatrix](https://wiki.facepunch.com/gmod/Entity:CopyBoneMatrix) for a more performant version.
 ---
 --- This can return the server's matrix during server lag.
 ---
@@ -3566,6 +3577,8 @@ function ENTITY:PhysicsCollide(colData, collider) end
 ---
 --- **NOTE**: Cannot be used on a ragdoll or the world entity.
 ---
+--- **WARNING**: This function cannot be used when called from a physics callback.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysicsDestroy)
 function Entity:PhysicsDestroy() end
 
@@ -4038,7 +4051,7 @@ function ENTITY:SelectSchedule() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence)
 ---@param act ACT The activity ID, see Enums/ACT.
----@return number # The sequence ID
+---@return number # The sequence ID, or `-1` if not found.
 function Entity:SelectWeightedSequence(act) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the sequence ID corresponding to given activity ID, and uses the provided seed for random selection. The seed should be the same server-side and client-side if used in a predicted environment.
@@ -4048,7 +4061,7 @@ function Entity:SelectWeightedSequence(act) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequenceSeeded)
 ---@param act number The activity ID, see Enums/ACT.
 ---@param seed number The seed to use for randomly selecting a sequence in the case the activity ID has multiple sequences bound to it. Entity:SelectWeightedSequence uses the same seed as util.SharedRandom internally for this.
----@return number # The sequence ID
+---@return number # The sequence ID, or `-1` if not found.
 function Entity:SelectWeightedSequenceSeeded(act, seed) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sends sequence animation to the view model. It is recommended to use this for view model animations, instead of [Entity:ResetSequence](https://wiki.facepunch.com/gmod/Entity:ResetSequence).

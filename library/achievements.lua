@@ -21,31 +21,31 @@ function achievements.Count() end
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.EatBall)
 function achievements.EatBall() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves progress of given achievement
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves progress of given achievement.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.GetCount)
 ---@param achievementID number The ID of achievement to retrieve progress of. Note: IDs start from 0, not 1.
 function achievements.GetCount(achievementID) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves description of given achievement
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves description of given achievement.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.GetDesc)
 ---@param achievementID number The ID of achievement to retrieve description of. Note: IDs start from 0, not 1.
----@return string # Description of an achievement
+---@return string # Description of an achievement.
 function achievements.GetDesc(achievementID) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves progress goal of given achievement
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves progress goal of given achievement.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.GetGoal)
 ---@param achievementID number The ID of achievement to retrieve goal of. Note: IDs start from 0, not 1.
----@return number # Progress goal of an achievement
+---@return number # Progress goal of an achievement.
 function achievements.GetGoal(achievementID) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves name of given achievement
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves name of given achievement.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.GetName)
 ---@param achievementID number The ID of achievement to retrieve name of. Note: IDs start from 0, not 1.
----@return string # Name of an achievement
+---@return string # Name of an achievement.
 function achievements.GetName(achievementID) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -69,7 +69,7 @@ function achievements.IncGoodies() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in GMod 12 in the achievements menu to show the user if they have unlocked certain achievements.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/achievements.IsAchieved)
----@param AchievementID number Internal Achievement ID number
+---@param AchievementID number Internal Achievement ID number.
 ---@return boolean # Returns true if the given achievementID is achieved.
 function achievements.IsAchieved(AchievementID) end
 

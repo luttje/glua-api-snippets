@@ -18,7 +18,7 @@ saverestore = {}
 --- * saverestore.LoadEntity
 function saverestore.AddRestoreHook(identifier, callback) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds a save hook for the Half-Life 2 save system. You can this to carry data through level transitions in Half-Life 2.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Adds a save hook for the Half-Life 2 save system. You can use this to carry data through level transitions in Half-Life 2.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/saverestore.AddSaveHook)
 ---@param identifier string The unique identifier for this hook.

@@ -81,8 +81,18 @@ function timer.RepsLeft(identifier) end
 ---
 --- **WARNING**: Timers use [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1`).
 ---
+--- **WARNING**: A previous message on this page stated that a delay of 0 would run the function on the next tick. This was partially an invalid assumption, and the true behavior is dependent on where `timer.Simple(0, func)` is called relative to `GarrysMod::Lua::Libraries::Timer::DoSimpleTimers`.
+---
+--- - If called *before* `DoSimpleTimers`, the callback will be executed on the same frame.
+---
+--- - If called *during* `DoSimpleTimers`, the callback will be executed on the same frame. **Note that calling timer.Simple(0, func) recursively (ie. a function that calls **`timer.simple(0, itself)`**) can lead to a hang!**
+---
+--- - If called *after* `DoSimpleTimers`, the callback will be executed on the next frame.
+---
+--- For more information on hook execution order, see [Lua Hooks Order](https://wiki.facepunch.com/gmod/Lua_Hooks_Order).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.Simple)
----@param delay number How long until the function should be ran (in seconds). Use `0` to have the function run in the next GM:Tick.
+---@param delay number How long until the function should be ran (in seconds). A value of `0` differs in behavior, depending on where you're calling this function.
 ---@param func function The function to run after the specified delay.
 function timer.Simple(delay, func) end
 

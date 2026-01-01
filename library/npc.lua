@@ -81,7 +81,9 @@ function NPC:CapabilitiesHas(capabilities) end
 ---@param capabilities number Capabilities to remove, see Enums/CAP
 function NPC:CapabilitiesRemove(capabilities) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the NPC class. Do not confuse with [Entity:GetClass](https://wiki.facepunch.com/gmod/Entity:GetClass)!
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the NPC relationship class. This is mostly used to tell NPCs who should be attacking who.
+---
+--- Do not confuse with [Entity:GetClass](https://wiki.facepunch.com/gmod/Entity:GetClass)!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/NPC:Classify)
 ---@return CLASS # See Enums/CLASS

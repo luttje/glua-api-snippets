@@ -76,7 +76,7 @@ function cam.PushModelMatrix(matrix, multiply) end
 --- This will not update current view properties for 3D contexts.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cam.Start)
----@param dataTbl table Render context config. See Structures/RenderCamData
+---@param dataTbl table Render context config. See Structures/RenderCamData.
 function cam.Start(dataTbl) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets up a new 2D rendering context. Must be finished by [cam.End2D](https://wiki.facepunch.com/gmod/cam.End2D).
@@ -91,6 +91,8 @@ function cam.Start2D() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets up a new 3D rendering context. Must be finished by [cam.End3D](https://wiki.facepunch.com/gmod/cam.End3D).
 ---
 --- For more advanced settings such as an orthographic view, use [cam.Start](https://wiki.facepunch.com/gmod/cam.Start) instead, which this is an alias of basically.
+---
+--- All parameters are optional, and fall back parameters that of the "current" or "last" render operation.
 ---
 --- Negative x/y values won't work.
 ---

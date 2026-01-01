@@ -49,6 +49,12 @@ function CNewParticleEffect:GetOwner() end
 ---@return Vector # Maxs of the bounding box.
 function CNewParticleEffect:GetRenderBounds() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether the particle system simulation was paused by [CNewParticleEffect:SetShouldSimulate](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetShouldSimulate).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/CNewParticleEffect:GetShouldSimulate)
+---@return boolean # Whether the simulation is running (`true`) or not (`false`).
+function CNewParticleEffect:GetShouldSimulate() end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether the particle system has finished emitting particles or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNewParticleEffect:IsFinished)
@@ -147,6 +153,12 @@ function CNewParticleEffect:SetIsViewModelEffect(isViewModel) end
 ---[View wiki](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetShouldDraw)
 ---@param should boolean Whether to automatically draw the particle effect or not.
 function CNewParticleEffect:SetShouldDraw(should) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether the particle system should continue simulation or not. If simulation is paused, all currently active particles will be frozen in place.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/CNewParticleEffect:SetShouldSimulate)
+---@param simulate boolean Whether the simulation should run (`true`) or not (`false`).
+function CNewParticleEffect:SetShouldSimulate(simulate) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the sort origin for given particle system. This is used as a helper to determine which particles are in front of which.
 ---

@@ -77,7 +77,18 @@ function duplicator.CopyEntTable(ent) end
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.CreateConstraintFromTable)
 ---@param constraint table Saved/copied constraint table
 ---@param entityList table The list of entities that are to be constrained
----@return Entity # The newly created constraint entity
+---@return Entity # The newly created constraint entity, if any.
+---
+--- For example, an entity of class `phys_pulleyconstraint` or `phys_spring`, etc., the functional entity of the constraint.
+---@return Entity # The second constraint related entity, if any.
+---
+--- For a most constraints, this would be a `keyframe_rope` for the visual part of a constraint.
+---@return Entity # The third constraint related entity, if any.
+---
+--- For example, a Hydraulic constraint would return the `gmod_winch_controller` entity here. A pulley would have another `keyframe_rope`.
+---@return Entity # The fourth constraint related entity, if any.
+---
+--- For example, a Hydraulic constraint would return the `phys_slideconstraint` entity here. A pulley would have yet another `keyframe_rope`.
 function duplicator.CreateConstraintFromTable(constraint, entityList) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) "Create an entity from a table."
@@ -168,7 +179,7 @@ function duplicator.FindEntityClass(name) end
 function duplicator.GenericDuplicatorFunction(ply, data) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Fills entStorageTable with all of the entities in a group connected with constraints. Fills constraintStorageTable with all of the constrains constraining the group.
+---  Fills entStorageTable with all of the entities in a group connected with constraints. Fills constraintStorageTable with all of the constraints constraining the group.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.GetAllConstrainedEntitiesAndConstraints)
 ---@param ent Entity The entity to start from
@@ -215,12 +226,25 @@ function duplicator.Paste(Player, EntityList, ConstraintList) end
 --- * table `data` - What you pass to duplicator.StoreBoneModifier.
 function duplicator.RegisterBoneModifier(key, boneModifier) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Register a function used for creating a duplicated constraint.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Register a function used for creating a duplicator-supported constraint.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.RegisterConstraint)
----@param name string The unique name of new constraint
----@param callback function Function to be called when this constraint is created
----@param ... any Arguments passed to the callback function
+---@param name string The unique name of the new constraint. It will be used to identify which constraint to apply on duplicator load.
+---@param callback function Function to be called when this constraint is created.
+---
+--- It is a good idea to check constraint.CanConstrain before doing anything else.
+---
+--- You must also call constraint.AddConstraintTable if creating custom constraint entities.
+---   * This is what stores the constraint for duplicator to save and load, as well as for constraint.GetTable.
+---   * The constraint entity must have `Type` key on it. This means that a single entity can only represent one constraint.
+---
+--- Optionally, the callback can return up to 4 entities, which are considered the "constraint" entities.
+--- * Each of those is added to `"ropeconstraints"` or `"constraints"` cleanup list based on entity's classname (Player:AddCleanup)
+--- * The first entity is added to the player's entity count (Player:AddCount) in Sandbox.
+--- * None of these entities **should** be the 2 entities being constraint (i.e. a `prop_physics`), but it can be one one of them if you know what you are doing.
+---@param ... any Arguments to be passed to the callback function when the constraint is created via duplicator.CreateConstraintFromTable.
+---
+--- The data would be taken the constraint entity table added via constraint.AddConstraintTable. All constraint library constraints call it on the appropriate entity for you. (Typically its the first entity returned by the callback)
 function duplicator.RegisterConstraint(name, callback, ...) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) This allows you to specify a specific function to be run when your SENT is pasted with the duplicator, instead of relying on the generic automatic functions.

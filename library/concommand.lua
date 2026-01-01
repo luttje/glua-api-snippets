@@ -5,7 +5,7 @@ concommand = {}
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a console command that runs a function in lua with optional autocompletion function and help text.
 ---
---- **WARNING**: Clients can still run commands created only on the server. Always check permissions in the callback
+--- **WARNING**: Clients can still run commands created only on the server. Always check permissions in the callback.
 ---
 --- This will fail if the concommand was previously removed with [concommand.Remove](https://wiki.facepunch.com/gmod/concommand.Remove) in a different realm (creating a command on the client that was removed from the server and vice-versa).
 ---
@@ -40,8 +40,8 @@ function concommand.Add(name, callback, autoComplete, helpText, flags) end
 ---  Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
----@param command string Name of command
----@param arguments string Arguments given to the command
+---@param command string Name of command.
+---@param arguments string Arguments given to the command.
 ---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
 function concommand.AutoComplete(command, arguments) end
 
@@ -67,10 +67,10 @@ function concommand.Remove(name) end
 --- This will still be called for concommands removed with [concommand.Remove](https://wiki.facepunch.com/gmod/concommand.Remove) but will return false. This will not be called for concommands added by the engine, only those made from Lua.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/concommand.Run)
----@param ply Player Player to run concommand on
----@param cmd string Command name
+---@param ply Player Player to run concommand on.
+---@param cmd string Command name.
 ---@param args any Command arguments.
---- Can be table or string
----@param argumentString string string of all arguments sent to the command
+--- Can be table or string.
+---@param argumentString string string of all arguments sent to the command.
 ---@return boolean # `true` if the console command with the given name exists, and `false` if it doesn't.
 function concommand.Run(ply, cmd, args, argumentString) end

@@ -5,7 +5,7 @@ render = {}
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a Beam Segment to the Beam started by [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
 ---
---- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.AddBeam)
 ---@param startPos Vector Beam start position.
@@ -14,15 +14,15 @@ render = {}
 ---@param color table The color to be used. Uses the Color.
 function render.AddBeam(startPos, width, textureEnd, color) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Blurs the render target ( or a given texture )
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Blurs the render target ( or a given texture ).
 ---
 --- **WARNING**: Calling this on a RenderTarget created with TEXTUREFLAGS_POINTSAMPLE will result in strange visual glitching.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.BlurRenderTarget)
----@param rendertarget ITexture The texture to blur
----@param blurx number Horizontal amount of blur
----@param blury number Vertical amount of blur
----@param passes number Amount of passes to go through
+---@param rendertarget ITexture The texture to blur.
+---@param blurx number Horizontal amount of blur.
+---@param blury number Vertical amount of blur.
+---@param passes number Amount of passes to go through.
 function render.BlurRenderTarget(rendertarget, blurx, blury, passes) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This function overrides the brush material for next render operations. It can be used with [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel).
@@ -42,12 +42,12 @@ function render.BrushMaterialOverride(mat) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.Capture)
 ---@param captureData table Parameters of the capture. See Structures/RenderCaptureData.
----@return string # binaryData
+---@return string # The binary data.
 function render.Capture(captureData) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Dumps the current render target and allows the pixels to be accessed by [render.ReadPixel](https://wiki.facepunch.com/gmod/render.ReadPixel).
 ---
---- Capturing outside a render hook will return 0 0 0 255
+--- Capturing outside a render hook will return 0 0 0 255.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CapturePixels)
 function render.CapturePixels() end
@@ -74,13 +74,13 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
 ---@param red number The red Color Channel value for each pixel that is cleared.
---- Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`).
 ---@param green number The green Color Channel value for each pixel that is cleared.
---- Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`).
 ---@param blue number The blue Color Channel value for each pixel that is cleared.
---- Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`).
 ---@param alpha number The alpha (translucency) Color Channel value for each pixel that is cleared.
---- Must be an integer value in the range 0-255 (`byte`)
+--- Must be an integer value in the range 0-255 (`byte`).
 ---@param clearDepth boolean If true, reset the Depth Buffer values.
 function render.ClearBuffersObeyStencil(red, green, blue, alpha, clearDepth) end
 
@@ -90,27 +90,27 @@ function render.ClearBuffersObeyStencil(red, green, blue, alpha, clearDepth) end
 ---@param clearStencil? boolean Whether to also clear the stencil buffer.
 function render.ClearDepth(clearStencil) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Clears a render target
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Clears a render target.
 ---
 --- It uses [render.Clear](https://wiki.facepunch.com/gmod/render.Clear) then [render.SetRenderTarget](https://wiki.facepunch.com/gmod/render.SetRenderTarget) on the modified render target.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearRenderTarget)
 ---@param texture ITexture
----@param color table The color, see Color
+---@param color table The color, see Color.
 function render.ClearRenderTarget(texture, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil Buffer value to `0` for all pixels in the currently active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets).
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearStencil)
 function render.ClearStencil() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil Buffer value for every pixel in a given rectangle to a given value.
 ---
---- This is **not** affected by [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
+--- This is **not** affected by [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask).
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearStencilBufferRectangle)
 ---@param startX number The X coordinate of the top left corner of the rectangle to be cleared.
@@ -150,21 +150,21 @@ function render.ComputePixelDiameterOfSphere(point, radius) end
 --- 		**WARNING**: This does not copy the Depth buffer, no method for that is known at this moment so a common workaround is to store the source texture somewhere else, perform your drawing operations, save the result somewhere else and reapply the source texture.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CopyRenderTargetToTexture)
----@param Target ITexture The texture to copy to
+---@param Target ITexture The texture to copy to.
 function render.CopyRenderTargetToTexture(Target) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Copies the contents of one texture to another. Only works with rendertargets.
 --- 		**WARNING**: This does not copy the Depth buffer, no method for that is known at this moment so a common workaround is to store the source texture somewhere else, perform your drawing operations, save the result somewhere else and reapply the source texture.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CopyTexture)
----@param texture_from ITexture
----@param texture_to ITexture
+---@param texture_from ITexture The texture to copy from.
+---@param texture_to ITexture The texture being copied to.
 function render.CopyTexture(texture_from, texture_to) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the cull mode. The culling mode defines how back faces are culled when rendering geometry.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CullMode)
----@param cullMode number Cullmode, see Enums/MATERIAL_CULLMODE
+---@param cullMode number Cullmode, see Enums/MATERIAL_CULLMODE.
 function render.CullMode(cullMode) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Set's the depth range of the upcoming render.
@@ -176,7 +176,7 @@ function render.DepthRange(depthmin, depthmax) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a single-segment Beam made out of a textured, billboarded quad stretching between two points.
 ---
---- For more detailed information, including usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information, including usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawBeam)
 ---@param startPos Vector The Beam's start position.
@@ -272,13 +272,13 @@ function render.DrawSprite(position, width, height, color) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a texture over the whole screen.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawTextureToScreen)
----@param tex ITexture The texture to draw
+---@param tex ITexture The texture to draw.
 function render.DrawTextureToScreen(tex) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a textured rectangle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawTextureToScreenRect)
----@param tex ITexture The texture to draw
+---@param tex ITexture The texture to draw.
 ---@param x number The x coordinate of the rectangle to draw.
 ---@param y number The y coordinate of the rectangle to draw.
 ---@param width number The width of the rectangle to draw.
@@ -320,7 +320,7 @@ function render.EnableClipping(state) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Ends the beam mesh of a beam started with [render.StartBeam](https://wiki.facepunch.com/gmod/render.StartBeam).
 ---
---- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.EndBeam)
 function render.EndBeam() end
@@ -363,7 +363,7 @@ function render.FogStart(fogStart) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the ambient color of the map.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetAmbientLightColor)
----@return Vector # color
+---@return Vector # The ambient color of the map.
 function render.GetAmbientLightColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current alpha blending.
@@ -393,15 +393,15 @@ function render.GetBloomTex1() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current color modulation values as normals.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetColorModulation)
----@return number # r
----@return number # g
----@return number # b
+---@return number # Red part of the color.
+---@return number # Green part of the color.
+---@return number # Blue part of the color.
 function render.GetColorModulation() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the maximum available directX version.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetDXLevel)
----@return number # dxLevel
+---@return number # The directX version.
 function render.GetDXLevel() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current fog color.
@@ -415,9 +415,9 @@ function render.GetFogColor() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the fog start and end distance.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetFogDistances)
----@return number # Fog start distance set by render.FogStart
----@return number # For end distance set by render.FogEnd
----@return number # Fog Z distance set by render.SetFogZ
+---@return number # Fog start distance set by render.FogStart.
+---@return number # For end distance set by render.FogEnd.
+---@return number # Fog Z distance set by render.SetFogZ.
 function render.GetFogDistances() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Get the maximum density of the fog.
@@ -429,7 +429,7 @@ function render.GetFogMaxDensity() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the fog mode.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetFogMode)
----@return number # Fog mode, see Enums/MATERIAL_FOG
+---@return number # Fog mode, see Enums/MATERIAL_FOG.
 function render.GetFogMode() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the full screen depth texture.
@@ -448,7 +448,7 @@ function render.GetHDREnabled() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetLightColor)
 ---@param position Vector The position of the surface to get the light from.
----@return Vector # lightColor
+---@return Vector # The light color.
 function render.GetLightColor(position) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: You probably want to just use a custom render target. See [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx).
@@ -505,7 +505,7 @@ function render.GetRefractTexture() end
 --- Instead of saving the current render target using this function and restoring to it later, it is generally better practice to use [render.PushRenderTarget](https://wiki.facepunch.com/gmod/render.PushRenderTarget) and [render.PopRenderTarget](https://wiki.facepunch.com/gmod/render.PopRenderTarget).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetRenderTarget)
----@return ITexture # The currently active Render Target
+---@return ITexture # The currently active Render Target.
 function render.GetRenderTarget() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the `_rt_ResolvedFullFrameDepth` texture for SSAO depth. It will only be updated if [GM:NeedsDepthPass](https://wiki.facepunch.com/gmod/GM:NeedsDepthPass) returns true. Depth is written using the [Shaders/DepthWrite](https://wiki.facepunch.com/gmod/Shaders/DepthWrite).
@@ -516,7 +516,7 @@ function render.GetResolvedFullFrameDepth() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Obtain an [ITexture](https://wiki.facepunch.com/gmod/ITexture) of the screen. You must call [render.UpdateScreenEffectTexture](https://wiki.facepunch.com/gmod/render.UpdateScreenEffectTexture) in order to update this texture with the currently rendered scene.
 ---
---- This texture is mainly used within [GM:RenderScreenspaceEffects](https://wiki.facepunch.com/gmod/GM:RenderScreenspaceEffects)
+--- This texture is mainly used within [GM:RenderScreenspaceEffects](https://wiki.facepunch.com/gmod/GM:RenderScreenspaceEffects).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture)
 ---@param textureIndex? number Max index is 3, but engine only creates the first two for you.
@@ -537,13 +537,13 @@ function render.GetSmallTex1() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns a floating point texture (RGBA16161616F format) the same resolution as the screen.
 ---
---- **NOTE**: The [gmodscreenspace](https://wiki.facepunch.com/gmod/gmodscreenspace) doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
+--- **NOTE**: The [gmodscreenspace](https://wiki.facepunch.com/gmod/Shaders/gmodscreenspace) doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetSuperFPTex)
----@return ITexture # Render target named `__rt_SuperTexture1`
+---@return ITexture # Render target named `__rt_SuperTexture1`.
 function render.GetSuperFPTex() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) See [render.GetSuperFPTex](https://wiki.facepunch.com/gmod/render.GetSuperFPTex)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) See [render.GetSuperFPTex](https://wiki.facepunch.com/gmod/render.GetSuperFPTex).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetSuperFPTex2)
 ---@return ITexture # Render target named `__rt_SuperTexture2`.
@@ -554,7 +554,7 @@ function render.GetSuperFPTex2() end
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetSurfaceColor)
 ---@param startPos Vector The start position to trace from.
 ---@param endPos Vector The end position of the trace.
----@return Vector # color
+---@return Vector # The surface color.
 function render.GetSurfaceColor(startPos, endPos) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns a vector representing linear tone mapping scale.
@@ -566,17 +566,29 @@ function render.GetToneMappingScaleLinear() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current view setup.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetViewSetup)
----@param noPlayer? boolean If `true`, returns the `view->GetViewSetup`, if `false` - returns `view->GetPlayerViewSetup`
----@return table # Current current view setup. See Structures/ViewSetup
+---@param noPlayer? boolean If `true`, returns the `view->GetViewSetup`, if `false` - returns `view->GetPlayerViewSetup`.
+---@return table # Current current view setup. See Structures/ViewSetup.
 function render.GetViewSetup(noPlayer) end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Lets you know when a screenshot is being taken during rendering hooks.
+---
+--- This is useful to hide certain visual elements from screenshots, such as debug overlays, helper objects, etc.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/render.IsTakingScreenshot)
+---@return boolean # Returns `true` when a screenshot is being taken.
+function render.IsTakingScreenshot() end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render material override for all next calls of [Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel). Also overrides [render.MaterialOverrideByIndex](https://wiki.facepunch.com/gmod/render.MaterialOverrideByIndex).
+---
+--- See [render.WorldMaterialOverride](https://wiki.facepunch.com/gmod/render.WorldMaterialOverride), [render.BrushMaterialOverride](https://wiki.facepunch.com/gmod/render.BrushMaterialOverride) and [render.ModelMaterialOverride](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride) for similar functions.
+---
+--- **WARNING**: In certain scenarios such as during entity's shadow pass, using this function can cause unexpected side effects. See example below on how to deal with this.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.MaterialOverride)
 ---@param material? IMaterial|nil The material to use as override, use `nil` to disable.
 function render.MaterialOverride(material) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Similar to [render.MaterialOverride](https://wiki.facepunch.com/gmod/render.MaterialOverride), but overrides the materials per index. Similar to [Entity:SetSubMaterial](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Similar to [render.MaterialOverride](https://wiki.facepunch.com/gmod/render.MaterialOverride), but overrides the materials per index. For simple entities you may want to just use [Entity:SetSubMaterial](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial).
 ---
 --- [render.MaterialOverride](https://wiki.facepunch.com/gmod/render.MaterialOverride) overrides effects of this function.
 ---
@@ -588,13 +600,13 @@ function render.MaterialOverrideByIndex(index, material) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the maximum texture height the renderer can handle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.MaxTextureHeight)
----@return number # maxTextureHeight
+---@return number # The max height.
 function render.MaxTextureHeight() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the maximum texture width the renderer can handle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.MaxTextureWidth)
----@return number # maxTextureWidth
+---@return number # The max width.
 function render.MaxTextureWidth() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new [Global.ClientsideModel](https://wiki.facepunch.com/gmod/Global.ClientsideModel), renders it at the specified pos/ang, and removes it. Can also be given an existing [CSEnt](https://wiki.facepunch.com/gmod/CSEnt) to reuse instead.
@@ -605,9 +617,9 @@ function render.MaxTextureWidth() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.Model)
 ---@param settings table Requires:
---- * string model - The model to draw
---- * Vector pos - The position to draw the model at
---- * Angle angle - The angles to draw the model at
+--- * string model - The model to draw.
+--- * Vector pos - The position to draw the model at.
+--- * Angle angle - The angles to draw the model at.
 ---@param ent? CSEnt If provided, this entity will be reused instead of creating a new one with Global.ClientsideModel. Note that the ent's model, position and angles will be changed, and Entity:SetNoDraw will be set to true.
 function render.Model(settings, ent) end
 
@@ -615,8 +627,10 @@ function render.Model(settings, ent) end
 ---
 --- Because this is independent of a specific [Entity](https://wiki.facepunch.com/gmod/Entity), it can be used to change materials on static models that are part of maps.
 ---
+--- **WARNING**: In certain scenarios such as during entity's shadow pass, using this function can cause unexpected side effects. See example on [render.MaterialOverride](https://wiki.facepunch.com/gmod/render.MaterialOverride) about dealing with this.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ModelMaterialOverride)
----@param material IMaterial|nil The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
+---@param material? IMaterial The IMaterial that will be used for all upcoming draw operations, or `nil` to stop overriding.
 function render.ModelMaterialOverride(material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target.
@@ -723,7 +737,7 @@ function render.OverrideDepthEnable(enable, shouldWrite) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Performs a Stencil operation on every pixel in the active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets) without performing a draw operation.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PerformFullScreenStencilOperation)
 function render.PerformFullScreenStencilOperation() end
@@ -735,7 +749,7 @@ function render.PopCustomClipPlane() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pops (Removes) the texture filter most recently pushed (Added) onto the magnification texture filter stack.
 ---
---- This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag)
+--- This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag).
 ---
 --- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
@@ -744,7 +758,7 @@ function render.PopFilterMag() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pops (Removes) the texture filter most recently pushed (Added) onto the minification texture filter stack.
 ---
---- This function should only be called *after* a minification filter has been pushed via [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin)
+--- This function should only be called *after* a minification filter has been pushed via [render.PushFilterMin()](https://wiki.facepunch.com/gmod/render.PushFilterMin).
 ---
 --- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
@@ -783,7 +797,7 @@ function render.PushCustomClipPlane(normal, distance) end
 --- If current texture has more than 1 mipmap, this also sets the mipmap filter.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushFilterMag)
----@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
+---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER.
 function render.PushFilterMag(texFilterType) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pushes (Adds) a texture filter onto the minification texture filter stack.
@@ -795,7 +809,7 @@ function render.PushFilterMag(texFilterType) end
 --- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.PushFilterMin)
----@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER
+---@param texFilterType number The texture filter to use. For available options, see Enums/TEXFILTER.
 function render.PushFilterMin(texFilterType) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Enables the flashlight projection for the upcoming rendering.
@@ -821,7 +835,7 @@ function render.PushFlashlightMode(enable) end
 ---@param x? number X origin of the viewport.
 ---@param y? number Y origin of the viewport.
 ---@param w? number Width of the viewport.
----@param h? number Height of the viewport
+---@param h? number Height of the viewport.
 function render.PushRenderTarget(texture, x, y, w, h) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Reads the color of the specified pixel from the RenderTarget sent by [render.CapturePixels](https://wiki.facepunch.com/gmod/render.CapturePixels)
@@ -860,7 +874,7 @@ function render.RenderHUD(x, y, w, h) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Renders the scene with the specified viewData to the current active render target.
 ---
 --- Static props and LODs are rendered improperly due to incorrectly perceived distance.
---- Using render.RenderView on a RenderTarget texture in a 3d context like SWEP:PostDrawViewModel() while drawing the RenderTarget texture causes screen flickers
+--- Using render.RenderView on a RenderTarget texture in a 3d context like SWEP:PostDrawViewModel() while drawing the RenderTarget texture causes screen flickers.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.RenderView)
 ---@param view? table The view data to be used in the rendering. See Structures/ViewData. Any missing value is assumed to be that of the current view. Similarly, you can make a normal render by simply not passing this table at all.
@@ -871,9 +885,9 @@ function render.RenderView(view) end
 --- Calls [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting) for every direction with given color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ResetModelLighting)
----@param r number The red part of the color, 0-1
----@param g number The green part of the color, 0-1
----@param b number The blue part of the color, 0-1
+---@param r number The red part of the color, 0-1.
+---@param g number The green part of the color, 0-1.
+---@param b number The blue part of the color, 0-1.
 function render.ResetModelLighting(r, g, b) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Resets the HDR tone multiplier to the specified value.
@@ -972,20 +986,18 @@ function render.SetGoalToneMappingScale(scale) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets lighting mode when rendering something.
 ---
---- **NOTE**: **Do not forget to restore the default value** to avoid unexpected behavior, like the world and the HUD/UI being affected
+--- **NOTE**: **Do not forget to restore the default value** to avoid unexpected behavior, like the world and the HUD/UI being affected.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetLightingMode)
----@param Mode number Lighting render mode
+---@param Mode number Lighting render mode.
 ---
 --- Possible values are:
---- * 0 - Default
---- * 1 - Total fullbright, similar to `mat_fullbright 1` but excluding some weapon view models
---- * 2 - Increased brightness(?), models look fullbright
+--- * 0 - Default.
+--- * 1 - Total fullbright, similar to `mat_fullbright 1` but excluding some weapon view models.
+--- * 2 - Increased brightness(?), models look fullbright.
 function render.SetLightingMode(Mode) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets lighting origin for the current model.
----
---- This does not work for prop_physics.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetLightingOrigin)
 ---@param lightingOrigin Vector The position which will be used to calculate lighting for the current model.
@@ -1093,7 +1105,7 @@ function render.SetShadowsDisabled(disable) end
 ---
 --- Pixels that **Fail** the Compare Function check have the [Fail Operation](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation) performed on their Stencil Buffer value and do **not** have any of their Render Target layers modified by the draw operation.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction)
 ---@param compareFunction STENCILCOMPARISONFUNCTION The Compare Function that each affected pixel's Stencil Buffer value will be evaluated against during a draw operation.
@@ -1105,7 +1117,7 @@ function render.SetStencilCompareFunction(compareFunction) end
 --- Depending on the outcomes of these comparisons, one of either the [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [Fail](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation), or [Z-Fail](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation) operations is performed on the pixel's Stencil Buffer value.
 --- A pixel will only be updated in the active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets) if the [Pass Operation](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) is performed.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 --- **NOTE**: The Stencil system's configuration does **not** reset automatically.
 --- To prevent unexpected behavior, always manually ensure that the Stencil system is configured appropriately for your use-case after enabling it.
@@ -1116,7 +1128,7 @@ function render.SetStencilEnable(newState) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) did **not** [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation) the pixel.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation)
 ---@param failOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function does not Pass a pixel.
@@ -1124,7 +1136,7 @@ function render.SetStencilFailOperation(failOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passes the pixel.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation)
 ---@param passOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel.
@@ -1132,11 +1144,11 @@ function render.SetStencilPassOperation(passOperation) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil system's Reference Value which is compared against each pixel's corresponding Stencil Buffer value in the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) and can be used to modify the Stencil Buffer value of those same pixels in the [Pass](https://wiki.facepunch.com/gmod/render.SetStencilPassOperation), [Fail](https://wiki.facepunch.com/gmod/render.SetStencilFailOperation), and [Z Fail](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation) operations.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilReferenceValue)
 ---@param referenceValue number The value that the Compare function and the pass, fail, and z-fail operations will use.
---- This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`]
+--- This is an 8-bit (`byte`) unsigned integer value in the range [`0-255`].
 function render.SetStencilReferenceValue(referenceValue) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the unsigned 8-bit (`byte`) bitflag mask that will be bitwise ANDed with all values as they are read (tested) from the Stencil Buffer
@@ -1145,10 +1157,10 @@ function render.SetStencilReferenceValue(referenceValue) end
 ---
 --- This is a companion function to [render.SetStencilWriteMask](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask) which modifies Stencil Buffer values as they are written.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilTestMask)
----@param bitMask number The 8-bit (`byte`) mask
+---@param bitMask number The 8-bit (`byte`) mask.
 --- Set to `255` to make no change to read Stencil Buffer values.
 function render.SetStencilTestMask(bitMask) end
 
@@ -1158,16 +1170,16 @@ function render.SetStencilTestMask(bitMask) end
 ---
 --- This is a companion function to [render.SetStencilTestMask](https://wiki.facepunch.com/gmod/render.SetStencilTestMask) which modifies Stencil Buffer values as they are read.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilWriteMask)
----@param bitMask number The 8-bit (`byte`) mask
+---@param bitMask number The 8-bit (`byte`) mask.
 --- Set to `255` to make no change to written Stencil Buffer values.
 function render.SetStencilWriteMask(bitMask) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [Stencil Operation](https://wiki.facepunch.com/gmod/Enums/STENCILOPERATION) that will be performed on the Stencil Buffer values of pixels affected by draw operations if the [Compare Function](https://wiki.facepunch.com/gmod/render.SetStencilCompareFunction) Passed a given pixel, but it did **not** Pass the Depth Test.
 ---
---- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
+--- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetStencilZFailOperation)
 ---@param zFailOperation STENCILOPERATION The Stencil Operation to be performed if the Compare Function Passes a pixel, but the pixel fails the Depth Test.
@@ -1177,9 +1189,9 @@ function render.SetStencilZFailOperation(zFailOperation) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetToneMappingScaleLinear)
 ---@param scales Vector The tonemapping scales.
---- * X - Output scale
---- * Y - Lightmap scale
---- * Z - Reflection map scale
+--- * X - Output scale.
+--- * Y - Lightmap scale.
+--- * Z - Reflection map scale.
 function render.SetToneMappingScaleLinear(scales) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Changes the view port position and size. The values will be clamped to the game's screen resolution.
@@ -1195,7 +1207,7 @@ function render.SetToneMappingScaleLinear(scales) end
 ---@param h number Height of the view port.
 function render.SetViewPort(x, y, w, h) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the internal parameter **INT_RENDERPARM_WRITE_DEPTH_TO_DESTALPHA**
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the internal parameter **INT_RENDERPARM_WRITE_DEPTH_TO_DESTALPHA**.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha)
 ---@param enable boolean
@@ -1210,10 +1222,10 @@ function render.Spin() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Begin drawing a multi-segment Beam.
 ---
---- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams)
+--- 		For more detailed information on Beams, as well as usage examples, see the [Beams Render Reference](https://wiki.facepunch.com/gmod/render_beams).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.StartBeam)
----@param segmentCount number The number of Beam Segments that this multi-segment Beam will contain
+---@param segmentCount number The number of Beam Segments that this multi-segment Beam will contain.
 function render.StartBeam(segmentCount) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the player's hardware supports HDR. (High Dynamic Range) HDR can still be disabled by the `mat_hdr_level` console variable or just not be supported by the map.
@@ -1271,7 +1283,7 @@ function render.UpdatePowerOfTwoTexture() end
 ---[View wiki](https://wiki.facepunch.com/gmod/render.UpdateRefractTexture)
 function render.UpdateRefractTexture() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Copies the entire screen to the screen effect texture, which can be acquired via [render.GetScreenEffectTexture](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture). This function is mainly intended to be used in [GM:RenderScreenspaceEffects](https://wiki.facepunch.com/gmod/GM:RenderScreenspaceEffects)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Copies the entire screen to the screen effect texture, which can be acquired via [render.GetScreenEffectTexture](https://wiki.facepunch.com/gmod/render.GetScreenEffectTexture). This function is mainly intended to be used in [GM:RenderScreenspaceEffects](https://wiki.facepunch.com/gmod/GM:RenderScreenspaceEffects).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.UpdateScreenEffectTexture)
 ---@param textureIndex? number Texture index to update. Max index is 3, but engine only creates the first two for you.

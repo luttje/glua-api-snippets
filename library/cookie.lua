@@ -27,7 +27,7 @@ function cookie.Delete(key) end
 ---[View wiki](https://wiki.facepunch.com/gmod/cookie.GetNumber)
 ---@param name string The name of the cookie that you want to get.
 ---@param default? any Value to return if the cookie does not exist.
----@return number # The cookie value
+---@return number # The cookie value.
 function cookie.GetNumber(name, default) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the value of a cookie on the client as a string.
@@ -35,7 +35,7 @@ function cookie.GetNumber(name, default) end
 ---[View wiki](https://wiki.facepunch.com/gmod/cookie.GetString)
 ---@param name string The name of the cookie that you want to get.
 ---@param default? any Value to return if the cookie does not exist.
----@return string # The cookie value
+---@return string # The cookie value.
 function cookie.GetString(name, default) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates / updates a cookie in the [Database](https://wiki.facepunch.com/gmod/cookie).

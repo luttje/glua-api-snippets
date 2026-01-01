@@ -7,7 +7,7 @@ local ControlPanel = {}
 --- The controlpanel library.
 controlpanel = {}
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Clears ALL the control panels ( for tools )
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Clears ALL the control panels ( for tools ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/controlpanel.Clear)
 function controlpanel.Clear() end

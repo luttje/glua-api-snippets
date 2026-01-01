@@ -842,6 +842,8 @@ function _G.DynamicMaterial(materialPath, flags) end
 ---
 --- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
 ---
+--- This also means that any values previously set will carry over to all future calls of this functions, and may unexpectedly affect effects created via [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.EffectData)
 ---@return CEffectData # The CEffectData object.
 function _G.EffectData() end
