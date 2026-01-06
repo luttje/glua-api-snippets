@@ -42,11 +42,11 @@ local achievement_event = {}
 ---@type string
 achievement_event.achievement_name = nil
 
----amount of steps toward achievement
+---amount of steps toward achievement.
 ---@type number
 achievement_event.cur_val = nil
 
----total amount of steps in achievement
+---total amount of steps in achievement.
 ---@type number
 achievement_event.max_val = nil
 
@@ -143,7 +143,7 @@ client_connected.port = nil
 ---@class client_disconnect
 local client_disconnect = {}
 
----The disconnecting reason. Can be an empty String
+---The disconnecting reason. Can be an empty String.
 ---@type string
 client_disconnect.message = nil
 
@@ -156,7 +156,7 @@ client_disconnect.message = nil
 ---@class entity_killed
 local entity_killed = {}
 
----The Entity:EntIndex of the inflictor..
+---The Entity:EntIndex of the inflictor.
 ---@type number
 entity_killed.entindex_inflictor = nil
 
@@ -206,7 +206,7 @@ local freezecam_started = {}
 ---@class game_newmap
 local game_newmap = {}
 
----The Map name
+---The Map name.
 ---@type string
 game_newmap.mapname = nil
 
@@ -226,7 +226,7 @@ game_newmap.mapname = nil
 ---@class hide_freezepanel
 local hide_freezepanel = {}
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when a Client becomes the Cameraman
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when a Client becomes the Cameraman.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_cameraman)
@@ -275,7 +275,7 @@ hltv_changed_target.obs_target = nil
 ---@type number
 hltv_changed_target.old_target = nil
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the view changes
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the view changes.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_chase)
@@ -290,7 +290,7 @@ hltv_chase.distance = nil
 ---@type number
 hltv_chase.inertia = nil
 
----`1` if we should use Enums/OBS_MODE. else, we use Enums/OBS_MODE
+---`1` if we should use Enums/OBS_MODE. else, we use Enums/OBS_MODE.
 ---@type number
 hltv_chase.ineye = nil
 
@@ -310,7 +310,7 @@ hltv_chase.target2 = nil
 ---@type number
 hltv_chase.theta = nil
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the fixed view changes
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the fixed view changes.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_fixed)
@@ -345,7 +345,7 @@ hltv_fixed.theta = nil
 ---@type number
 hltv_fixed.fov = nil
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when a message is sent with `tv_msg`
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when a message is sent with `tv_msg`.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_message)
@@ -356,7 +356,7 @@ local hltv_message = {}
 ---@type string
 hltv_message.text = nil
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the HLTV ranks all cameras
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the HLTV ranks all cameras.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_rank_camera)
@@ -375,7 +375,7 @@ hltv_rank_camera.rank = nil
 ---@type number
 hltv_rank_camera.target = nil
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the HLTV ranks all players
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the HLTV ranks all players.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_rank_entity)
@@ -419,7 +419,7 @@ hltv_status.slots = nil
 ---@type number
 hltv_status.proxies = nil
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the SourceTV client is spawned
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the SourceTV client is spawned.
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/gameevent/hltv_title)
@@ -470,7 +470,7 @@ OnRequestFullUpdate.userid = nil
 OnRequestFullUpdate.index = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called when a player has entered the game (connected and loaded).
---- From this point you can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player)(userid) (serverside or in singleplayer)
+--- From this point you can use [Global.Player](https://wiki.facepunch.com/gmod/Global.Player)(userid) (serverside or in singleplayer).
 ---
 --- **NOTE**: This is called almost directly after [GM:PlayerInitialSpawn](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn) in the same tick, so you could just use that hook serverside.
 ---
@@ -667,7 +667,7 @@ player_info.networkid = nil
 ---@class player_say
 local player_say = {}
 
----Event priority number used by HLTV. Hardcoded to be 1
+---Event priority number used by HLTV. Hardcoded to be 1.
 ---@type number
 player_say.priority = nil
 
@@ -807,7 +807,7 @@ server_spawn.ip = nil
 ---@type number
 server_spawn.port = nil
 
----The Game the Server is hosting. Will be **garrysmod**
+---The Game the Server is hosting. Will be **garrysmod**.
 ---@type string
 server_spawn.game = nil
 
@@ -819,7 +819,7 @@ server_spawn.mapname = nil
 ---@type number
 server_spawn.maxplayers = nil
 
----The OS of the Server. **W**(WIN32), **L**(LINUX) or **O**(OSX)
+---The OS of the Server. **W**(WIN32), **L**(LINUX) or **O**(OSX).
 ---@type string
 server_spawn.os = nil
 
@@ -842,12 +842,12 @@ server_spawn.password = nil
 ---@class show_freezepanel
 local show_freezepanel = {}
 
----The Index of the Entity that is being spectated or `0`
+---The Index of the Entity that is being spectated or `0`.
 ---@type number
 show_freezepanel.killer = nil
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called when the Achievement Manager received the steam user stat data.
---- As soon as this is called, all achievement data should be valid
+--- As soon as this is called, all achievement data should be valid.
 --- Trying to access any achievement data before this may return in inaccurate data.
 
 ---

@@ -78,21 +78,21 @@ function game.ConsoleCommand(stringCommand) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoDamageType)
 ---@param id number Ammo ID to retrieve the damage type of. Starts from 1.
----@return number # See Enums/DMG
+---@return number # See Enums/DMG.
 function game.GetAmmoDamageType(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData) for given ID.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoData)
----@param id number ID of the ammo type to look up the data for
----@return AmmoData # The Structures/AmmoData containing all ammo data
+---@param id number ID of the ammo type to look up the data for.
+---@return AmmoData # The Structures/AmmoData containing all ammo data.
 function game.GetAmmoData(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the ammo bullet force that is applied when an entity is hit by a bullet of given ammo type.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoForce)
 ---@param id number Ammo ID to retrieve the force of. Starts from 1.
----@return number #
+---@return number # The ammo force.
 function game.GetAmmoForce(id) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the ammo type ID for given ammo type name.
@@ -100,14 +100,14 @@ function game.GetAmmoForce(id) end
 --- See [game.GetAmmoName](https://wiki.facepunch.com/gmod/game.GetAmmoName) for reverse.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoID)
----@param name string Name of the ammo type to look up ID of
----@return number # The ammo type ID of given ammo type name, or -1 if not found
+---@param name string Name of the ammo type to look up ID of.
+---@return number # The ammo type ID of given ammo type name, or -1 if not found.
 function game.GetAmmoID(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the real maximum amount of ammo of given ammo ID, regardless of the setting of `gmod_maxammo` convar.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetAmmoMax)
----@param id number Ammo type ID
+---@param id number Ammo type ID.
 ---@return number # The maximum amount of reserve ammo a player can hold of this ammo type.
 function game.GetAmmoMax(id) end
 
@@ -153,7 +153,7 @@ function game.GetAmmoTypes() end
 ---@return number # The value of the given Global State, 0 if the global state doesn't exist.
 function game.GetGlobalCounter(name) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether a Global State is off, active or dead ( inactive )
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns whether a Global State is off, active or dead ( inactive ).
 ---
 --- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
@@ -163,7 +163,7 @@ function game.GetGlobalCounter(name) end
 --- If the Global State by that name does not exist, **GLOBAL_DEAD** will be returned.
 ---
 --- See Global States for a list of default global states.
----@return number # The state of the Global State. See Enums/GLOBAL
+---@return number # The state of the Global State. See Enums/GLOBAL.
 function game.GetGlobalState(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the public IP address and port of the current server. This will return the IP/port that you are connecting through when ran clientside.
@@ -172,7 +172,7 @@ function game.GetGlobalState(name) end
 --- Returns "0.0.0.0:`port`" on the server when called too early, including in [GM:Initialize](https://wiki.facepunch.com/gmod/GM:Initialize) and [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity). This bug seems to only happen the first time a server is launched, and will return the correct value after switching maps.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetIPAddress)
----@return string # The IP address and port in the format "x.x.x.x:x"
+---@return string # The IP address and port in the format "x.x.x.x:x".
 function game.GetIPAddress() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the name of the current map, without a file extension.
@@ -194,7 +194,7 @@ function game.GetMapChangeCount() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the next map that would be loaded according to the file that is set by the mapcyclefile convar.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetMapNext)
----@return string # nextMap or nil if called too early
+---@return string # nextMap or nil if called too early.
 function game.GetMapNext() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the revision (Not to be confused with [VBSP Version](https://developer.valvesoftware.com/wiki/Source_BSP_File_Format#Versions)) of the current map.
@@ -207,7 +207,7 @@ function game.GetMapVersion() end
 ---
 --- **TIP:** You can use this function in your scripted NPCs or Nextbots to make them stronger, however, it is a good idea to lock powerful attacks behind the highest difficulty instead of just increasing the health.
 ---
---- **NOTE**: Internally this is tied to the gamerules entity, so you'll have to wait until [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity) is called to return the skill level
+--- **NOTE**: Internally this is tied to the gamerules entity, so you'll have to wait until [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity) is called to return the skill level.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetSkillLevel)
 ---@return number # The difficulty level, Easy (1), Normal (2), Hard (3).
@@ -215,19 +215,19 @@ function game.GetSkillLevel() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the time scale set with [game.SetTimeScale](https://wiki.facepunch.com/gmod/game.SetTimeScale).
 ---
---- If you want to get the value of `host_timescale` use
+--- If you want to get the value of `host_timescale`, use:
 --- ```lua
 --- local timescale = GetConVar( "host_timescale" ):GetFloat()
 --- ```
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetTimeScale)
----@return number # The time scale
+---@return number # The time scale.
 function game.GetTimeScale() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the worldspawn entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetWorld)
----@return Entity # The world
+---@return Entity # The world.
 function game.GetWorld() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns true if the server is a dedicated server, false if it is a listen server or a singleplayer game.
@@ -239,7 +239,7 @@ function game.IsDedicated() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Kicks a player from the server. This can be ran before the player has spawned.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.KickID)
----@param id string Player:UserID, Player:SteamID or Player:SteamID64 of the player to kick. Uses SteamID32 eg STEAM_0:0:00000000
+---@param id string Player:UserID, Player:SteamID or Player:SteamID64 of the player to kick. Uses SteamID32 eg STEAM_0:0:00000000.
 ---@param reason? string Reason to display to the player. This can span across multiple lines.
 ---
 --- This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~483. It is recommended to avoid going near the limit to avoid truncation.
@@ -261,11 +261,11 @@ function game.MapLoadType() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the maximum amount of players (including bots) that the server can have.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.MaxPlayers)
----@return number # The maximum amount of players
+---@return number # The maximum amount of players.
 function game.MaxPlayers() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Mounts a GMA addon from the disk.
---- Can be used with [steamworks.DownloadUGC](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC)
+--- Can be used with [steamworks.DownloadUGC](https://wiki.facepunch.com/gmod/steamworks.DownloadUGC).
 ---
 --- **NOTE**: Any error models currently loaded that the mounted addon provides will be reloaded.
 ---
@@ -273,8 +273,8 @@ function game.MaxPlayers() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.MountGMA)
 ---@param path string Location of the GMA file to mount, retrieved from steamworks.DownloadUGC or relative to the `garrysmod/` directory (ignores mounting). This file does not have to end with the .gma extension, but will be interpreted as a GMA.
----@return boolean # success
----@return table # If successful, a table of files that have been mounted
+---@return boolean # success.
+---@return table # If successful, a table of files that have been mounted.
 function game.MountGMA(path) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes all the clientside ragdolls. On server, it will remove all `prop_ragdolls` that have the `SF_RAGDOLLPROP_USE_LRU_RETIREMENT` (4096) spawnflag.
@@ -295,7 +295,7 @@ function game.RemoveRagdolls() end
 ---@param count number The value to set for that Global State.
 function game.SetGlobalCounter(name, count) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets whether a Global State is off, active or dead ( inactive )
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets whether a Global State is off, active or dead ( inactive ).
 ---
 --- See [Global States](https://wiki.facepunch.com/gmod/Global_States) for more information.
 ---
@@ -305,7 +305,7 @@ function game.SetGlobalCounter(name, count) end
 --- If the Global State by that name does not exist, it will be created.
 ---
 --- See Global States for a list of default global states.
----@param state number The state of the Global State. See Enums/GLOBAL
+---@param state number The state of the Global State. See Enums/GLOBAL.
 function game.SetGlobalState(name, state) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the difficulty level of the game, can be retrieved with [game.GetSkillLevel](https://wiki.facepunch.com/gmod/game.GetSkillLevel).
@@ -324,7 +324,7 @@ function game.SetSkillLevel(level) end
 ---
 --- **NOTE**: Like host_timescale, this method does not affect sounds, if you wish to change that, look into [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
 ---
---- **NOTE**: The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale)
+--- **NOTE**: The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SetTimeScale)
 ---@param timeScale number The new timescale, minimum value is 0.001 and maximum is 5.
@@ -333,7 +333,7 @@ function game.SetTimeScale(timeScale) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the current session is a single player game.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SinglePlayer)
----@return boolean # isSinglePlayer
+---@return boolean # isSinglePlayer.
 function game.SinglePlayer() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the name of the entity that should be used as player start position.

@@ -32,10 +32,10 @@ function GWEN.CreateTextureBorder(x, y, w, h, left, top, right, bottom, material
 --- The texture is taken from `SKIN.GwenTexture` when the `material` is not supplied.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GWEN.CreateTextureCentered)
----@param x number The X coordinate on the texture
----@param y number The Y coordinate on the texture
----@param w number Width of the area on texture
----@param h number Height of the area on texture
+---@param x number The X coordinate on the texture.
+---@param y number The Y coordinate on the texture.
+---@param w number Width of the area on texture.
+---@param h number Height of the area on texture.
 ---@param material? IMaterial If set, given material will be used over the SKIN's default material, which is `SKIN.GwenTexture`.
 ---@return fun(x: number, y: number, w: number, h: number, clr: table?) # The drawing function.
 ---
@@ -52,10 +52,10 @@ function GWEN.CreateTextureCentered(x, y, w, h, material) end
 --- The texture is taken from `SKIN.GwenTexture` when the `material` is not supplied.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GWEN.CreateTextureNormal)
----@param x number The X coordinate on the texture
----@param y number The Y coordinate on the texture
----@param w number Width of the area on texture
----@param h number Height of the area on texture
+---@param x number The X coordinate on the texture.
+---@param y number The Y coordinate on the texture.
+---@param w number Width of the area on texture.
+---@param h number Height of the area on texture.
 ---@param material? IMaterial If set, given material will be used over the SKIN's default material, which is `SKIN.GwenTexture`.
 ---@return fun(x: number, y: number, w: number, h: number, clr: table?) # The drawing function.
 ---

@@ -9,7 +9,7 @@ dragndrop = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/dragndrop.CallReceiverFunction)
 ---@param bDoDrop boolean true if the mouse was released, false if we right clicked.
----@param command number The command value. This should be the ID of the clicked dropdown menu ( if right clicked, or nil )
+---@param command number The command value. This should be the ID of the clicked dropdown menu ( if right clicked, or nil ).
 ---@param mx number The local to the panel mouse cursor X position when the click happened.
 ---@param my number The local to the panel  mouse cursor Y position when the click happened.
 function dragndrop.CallReceiverFunction(bDoDrop, command, mx, my) end

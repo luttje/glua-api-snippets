@@ -33,10 +33,10 @@ function ents.CreateClientProp(model) end
 ---@param ent2 Entity The second entity to attach the rope to.
 ---@param ent2attach number|Vector The attachment ID on the second entity to attach the rope to, or a local Vector relative to the second entity.
 ---@param extra? table Extra optional settings for the rope. Possible values are:
---- * slack - How much extra rope to add to the length (default: 0)
---- * width - Width of the rope (default: 2)
+--- * slack - How much extra rope to add to the length. (default: 0)
+--- * width - Width of the rope. (default: 2)
 --- * segments - How many segments the rope should have (default: 8, valid range is [2,10])
---- * material - Which material should the rope have (default: `"cable/cable"`)
+--- * material - Which material should the rope have. (default: `"cable/cable"`)
 --- * nogravity - If set, the rope should have no gravity. (default: 0)
 ---@return Entity # Created entity (`C_RopeKeyframe`).
 function ents.CreateClientRope(ent1, ent1attach, ent2, ent2attach, extra) end
@@ -55,10 +55,10 @@ function ents.CreateClientside(class) end
 --- This internally uses [spatial partitioning](https://en.wikipedia.org/wiki/Space_partitioning) to avoid looping through all entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindAlongRay)
----@param start Vector The start position of the ray
----@param _end Vector The end position of the ray
----@param mins? Vector The mins corner of the ray
----@param maxs? Vector The maxs corner of the ray
+---@param start Vector The start position of the ray.
+---@param _end Vector The end position of the ray.
+---@param mins? Vector The mins corner of the ray.
+---@param maxs? Vector The maxs corner of the ray.
 ---@return Entity[] # Table of the found entities. There's a limit of 1024 entities.
 function ents.FindAlongRay(start, _end, mins, maxs) end
 
@@ -72,15 +72,15 @@ function ents.FindAlongRay(start, _end, mins, maxs) end
 ---@param class string The class of the entities to find, supports wildcards.
 ---
 --- Asterisks (`*`) are the only wildcard supported.
----@return Entity[] # A table containing all found entities
+---@return Entity[] # A table containing all found entities.
 function ents.FindByClass(class) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Finds all entities that are of given class and are children of given entity. This works internally by iterating over [ents.FindByClass](https://wiki.facepunch.com/gmod/ents.FindByClass).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindByClassAndParent)
----@param class string The class of entities to search for
----@param parent Entity Parent of entities that are being searched for
----@return Entity[] # A table of found entities or nil if none are found
+---@param class string The class of entities to search for.
+---@param parent Entity Parent of entities that are being searched for.
+---@return Entity[] # A table of found entities or nil if none are found.
 function ents.FindByClassAndParent(class, parent) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets all entities with the given model, supports wildcards.
@@ -97,8 +97,8 @@ function ents.FindByModel(model) end
 --- Doesn't do anything on client.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindByName)
----@param name string The targetname to look for
----@return Entity[] # A table of all found entities
+---@param name string The targetname to look for.
+---@return Entity[] # A table of all found entities.
 function ents.FindByName(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns all entities within the specified box.
@@ -183,7 +183,7 @@ function ents.GetByIndex(entIdx) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.GetCount)
 ---@param IncludeKillMe? boolean Include entities with the FL_KILLME flag. This will skip an internal loop, and the function will be more efficient as a byproduct.
----@return number # Number of entities
+---@return number # Number of entities.
 function ents.GetCount(IncludeKillMe) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of networked entities, which is limited to 8192. [ents.Create](https://wiki.facepunch.com/gmod/ents.Create) will fail somewhere between 8064 and 8176 - this can vary based on the amount of existing temp ents.
@@ -191,7 +191,7 @@ function ents.GetCount(IncludeKillMe) end
 --- See also [MAX_EDICT_BITS](https://wiki.facepunch.com/gmod/Global_Variables#maxedictbits) global variable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.GetEdictCount)
----@return number # Number of networked entities
+---@return number # Number of networked entities.
 function ents.GetEdictCount() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns entity that has given [Entity:MapCreationID](https://wiki.facepunch.com/gmod/Entity:MapCreationID).

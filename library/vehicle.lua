@@ -40,7 +40,7 @@ function Vehicle:GetAmmo() end
 ---@return number # Camera distance
 function Vehicle:GetCameraDistance() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the driver of the vehicle, returns `NULL` if no driver is present.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the driver of the vehicle, returns [NULL](https://wiki.facepunch.com/gmod/NULL) if no driver is present.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetDriver)
 ---@return Entity # The driver of the vehicle.
@@ -64,10 +64,10 @@ function Vehicle:GetMaxSpeed() end
 ---@return OperatingParams # The operating parameters.
 function Vehicle:GetOperatingParams() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the passenger of the vehicle, returns NULL if no drivers is present.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the passenger of the vehicle, returns [NULL](https://wiki.facepunch.com/gmod/NULL) if no drivers is present.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetPassenger)
----@param passenger number The index of the passenger
+---@param passenger number The index of the passenger ( 0 is the driver )
 ---@return Entity # The passenger
 function Vehicle:GetPassenger(passenger) end
 
@@ -75,8 +75,8 @@ function Vehicle:GetPassenger(passenger) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetPassengerSeatPoint)
 ---@param role number The passenger role. ( 0 is the driver )
----@return Vector # The seat position
----@return Angle # The seat angle
+---@return Vector # The seat position in worldspace coordinates.
+---@return Angle # The seat angle in worldspace coordinates.
 function Vehicle:GetPassengerSeatPoint(role) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the current RPM of the vehicle. This value is fake and doesn't actually affect the vehicle movement.
@@ -106,7 +106,7 @@ function Vehicle:GetSteeringDegrees() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if vehicle has thirdperson mode enabled or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vehicle:GetThirdPersonMode)
----@return boolean # Returns true if third person mode enabled, false otherwise
+---@return boolean # Returns `true` if third person mode enabled, `false` otherwise
 function Vehicle:GetThirdPersonMode() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the current throttle of the vehicle.

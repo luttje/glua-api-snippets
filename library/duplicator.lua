@@ -20,22 +20,22 @@ function duplicator.Allow(classname) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Calls every function registered with [duplicator.RegisterBoneModifier](https://wiki.facepunch.com/gmod/duplicator.RegisterBoneModifier) on each bone the ent has.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.ApplyBoneModifiers)
----@param ply Player The player whose entity this is
----@param ent Entity The entity in question
+---@param ply Player The player whose entity this is.
+---@param ent Entity The entity in question.
 function duplicator.ApplyBoneModifiers(ply, ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Calls every function registered with [duplicator.RegisterEntityModifier](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityModifier) on the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.ApplyEntityModifiers)
----@param ply Player The player whose entity this is
----@param ent Entity The entity in question
+---@param ply Player The player whose entity this is.
+---@param ent Entity The entity in question.
 function duplicator.ApplyEntityModifiers(ply, ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Clears/removes the chosen entity modifier from the entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.ClearEntityModifier)
----@param ent Entity The entity the modification is stored on
----@param key any The key of the stored entity modifier
+---@param ent Entity The entity the modification is stored on.
+---@param key any The key of the stored entity modifier.
 function duplicator.ClearEntityModifier(ent, key) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Copies the entity, and all of its constraints and entities, then returns them in a table.
@@ -50,7 +50,7 @@ function duplicator.ClearEntityModifier(ent, key) end
 --- * Vector Mins
 --- * Vector Maxs
 ---
---- The values of Mins & Maxs from the table are returned from duplicator.WorkoutSize
+--- The values of Mins & Maxs from the table are returned from duplicator.WorkoutSize.
 function duplicator.Copy(ent, tableToAdd) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Copies the passed table of entities to save for later.
@@ -64,19 +64,19 @@ function duplicator.Copy(ent, tableToAdd) end
 --- * Vector Maxs
 function duplicator.CopyEnts(ents) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table with some entity data that can be used to create a new entity with [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns a table with some entity data that can be used to create a new entity with [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.CopyEntTable)
----@param ent Entity The entity table to save
----@return table # See Structures/EntityCopyData
+---@param ent Entity The entity table to save.
+---@return table # See Structures/EntityCopyData.
 function duplicator.CopyEntTable(ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Creates a constraint from a saved/copied constraint table.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.CreateConstraintFromTable)
----@param constraint table Saved/copied constraint table
----@param entityList table The list of entities that are to be constrained
+---@param constraint table Saved/copied constraint table.
+---@param entityList table The list of entities that are to be constrained.
 ---@return Entity # The newly created constraint entity, if any.
 ---
 --- For example, an entity of class `phys_pulleyconstraint` or `phys_spring`, etc., the functional entity of the constraint.
@@ -100,9 +100,9 @@ function duplicator.CreateConstraintFromTable(constraint, entityList) end
 --- Otherwise, [duplicator.GenericDuplicatorFunction](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction) will be called instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable)
----@param ply Player The player who wants to create something
----@param entTable table The duplication data to build the entity with. See Structures/EntityCopyData
----@return Entity # The newly created entity
+---@param ply Player The player who wants to create something.
+---@param entTable table The duplication data to build the entity with. See Structures/EntityCopyData.
+---@return Entity # The newly created entity.
 function duplicator.CreateEntityFromTable(ply, entTable) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Disallow this entity to be duplicated. Opposite of [duplicator.Allow](https://wiki.facepunch.com/gmod/duplicator.Allow).
@@ -118,15 +118,15 @@ function duplicator.Disallow(classname) end
 --- Loops through Bones and calls [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale), [Entity:ManipulateBoneAngles](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneAngles) and [Entity:ManipulateBonePosition](https://wiki.facepunch.com/gmod/Entity:ManipulateBonePosition) on ent with the table keys and the subtable values s, a and p respectively.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.DoBoneManipulator)
----@param ent Entity The entity to be bone manipulated
+---@param ent Entity The entity to be bone manipulated.
 ---@param bones table Table with a Structures/BoneManipulationData for every bone (that has manipulations applied) using the bone ID as the table index.
 function duplicator.DoBoneManipulator(ent, bones) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Restores the flex data using [Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight) and [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Restores the flex data using [Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight) and [Entity:SetFlexScale](https://wiki.facepunch.com/gmod/Entity:SetFlexScale).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.DoFlex)
----@param ent Entity The entity to restore the flexes on
----@param flex table The flexes to restore
+---@param ent Entity The entity to restore the flexes on.
+---@param flex table The flexes to restore.
 ---@param scale? number The flex scale to apply. (Flex scale is unchanged if omitted)
 function duplicator.DoFlex(ent, flex, scale) end
 
@@ -137,8 +137,8 @@ function duplicator.DoFlex(ent, flex, scale) end
 --- If ent has a RestoreNetworkVars function, it is called with data.DT.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.DoGeneric)
----@param ent Entity The entity to be applied upon
----@param data table The data to be applied onto the entity
+---@param ent Entity The entity to be applied upon.
+---@param data table The data to be applied onto the entity.
 function duplicator.DoGeneric(ent, data) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) "Applies bone data, generically."
@@ -146,9 +146,9 @@ function duplicator.DoGeneric(ent, data) end
 --- If data contains a PhysicsObjects table, it moves, re-angles and if relevent freezes all specified bones, first converting from local coordinates to world coordinates.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics)
----@param ent Entity The entity to be applied upon
----@param ply? Player The player who owns the entity. Unused in function as of early 2013
----@param data table The data to be applied onto the entity
+---@param ent Entity The entity to be applied upon.
+---@param ply? Player The player who owns the entity. Unused in function as of early 2013.
+---@param data table The data to be applied onto the entity.
 function duplicator.DoGenericPhysics(ent, ply, data) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks the given duplication table and tries to figure out any addons that might be required to correctly spawn the duplication. Currently this is limited to models and material overrides saved in the duplication.
@@ -162,10 +162,10 @@ function duplicator.FigureOutRequiredAddons(dupe) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity class factory registered with [duplicator.RegisterEntityClass](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.FindEntityClass)
----@param name string The name of the entity class factory
+---@param name string The name of the entity class factory.
 ---@return table # Is compromised of the following members:
---- * function Func - The function that creates the entity
---- * table Args - Arguments to pass to the function
+--- * function Func - The function that creates the entity.
+--- * table Args - Arguments to pass to the function.
 function duplicator.FindEntityClass(name) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) "Generic function for duplicating stuff"
@@ -173,9 +173,9 @@ function duplicator.FindEntityClass(name) end
 --- This is called when [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable) can't find an entity factory to build with. It calls [duplicator.DoGeneric](https://wiki.facepunch.com/gmod/duplicator.DoGeneric) and [duplicator.DoGenericPhysics](https://wiki.facepunch.com/gmod/duplicator.DoGenericPhysics) to apply standard duplicator stored things such as the model and position.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.GenericDuplicatorFunction)
----@param ply Player The player who wants to create something
----@param data table The duplication data to build the entity with
----@return Entity # The newly created entity
+---@param ply Player The player who wants to create something.
+---@param data table The duplication data to build the entity with.
+---@return Entity # The newly created entity.
 function duplicator.GenericDuplicatorFunction(ply, data) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -183,17 +183,17 @@ function duplicator.GenericDuplicatorFunction(ply, data) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.GetAllConstrainedEntitiesAndConstraints)
 ---@param ent Entity The entity to start from
----@param entStorageTable table The table the entities will be inserted into
----@param constraintStorageTable table The table the constraints will be inserted into
+---@param entStorageTable table The table the entities will be inserted into.
+---@param constraintStorageTable table The table the constraints will be inserted into.
 ---@return table # entStorageTable
 ---@return table # constraintStorageTable
 function duplicator.GetAllConstrainedEntitiesAndConstraints(ent, entStorageTable, constraintStorageTable) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the entity can be duplicated or not
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the entity can be duplicated or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.IsAllowed)
----@param classname string An entity's classname
----@return boolean # Returns true if the entity can be duplicated (nil otherwise)
+---@param classname string An entity's classname.
+---@return boolean # Returns true if the entity can be duplicated (nil otherwise).
 function duplicator.IsAllowed(classname) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) "Given entity list and constraint list, create all entities and return their tables"
@@ -203,11 +203,11 @@ function duplicator.IsAllowed(classname) end
 --- The constraints are then created with [duplicator.CreateConstraintFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateConstraintFromTable).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.Paste)
----@param Player Player The player who wants to create something
----@param EntityList table A table of duplicator data to create the entities from
----@param ConstraintList table A table of duplicator data to create the constraints from
----@return table # List of created entities
----@return table # List of created constraints
+---@param Player Player The player who wants to create something.
+---@param EntityList table A table of duplicator data to create the entities from.
+---@param ConstraintList table A table of duplicator data to create the constraints from.
+---@return table # List of created entities.
+---@return table # List of created constraints.
 function duplicator.Paste(Player, EntityList, ConstraintList) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Registers a function to be called on each of an entity's bones when [duplicator.ApplyBoneModifiers](https://wiki.facepunch.com/gmod/duplicator.ApplyBoneModifiers) is called.
@@ -252,7 +252,7 @@ function duplicator.RegisterConstraint(name, callback, ...) end
 --- **NOTE**: Automatically calls [duplicator.Allow](https://wiki.facepunch.com/gmod/duplicator.Allow) for the entity class.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityClass)
----@param name string The ClassName of the entity you wish to register a factory for
+---@param name string The ClassName of the entity you wish to register a factory for.
 ---@param _function fun(ply: Player, ...: any):(ent: Entity) The factory function you want to have called.
 ---
 --- Function argument(s):
@@ -271,7 +271,7 @@ function duplicator.RegisterEntityClass(name, _function, ...) end
 --- This function does nothing when run clientside.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.RegisterEntityModifier)
----@param name string An identifier for your modification. This is not limited, so be verbose. `Person's 'Unbreakable' mod` is far less likely to cause conflicts than `unbreakable`
+---@param name string An identifier for your modification. This is not limited, so be verbose. `Person's 'Unbreakable' mod` is far less likely to cause conflicts than `unbreakable`.
 ---@param func fun(ply: Player, ent: Entity, data: table) The function to be called for your modification.
 ---
 --- Function argument(s):
@@ -291,38 +291,38 @@ function duplicator.RemoveMapCreatedEntities() end
 --- If you set them - make sure to set them back to 0 0 0!"
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.SetLocalAng)
----@param v Angle The angle to offset all pastes from
+---@param v Angle The angle to offset all pastes from.
 function duplicator.SetLocalAng(v) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) "When a copy is copied it will be translated according to these.
 --- If you set them - make sure to set them back to 0 0 0!"
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.SetLocalPos)
----@param v Vector The position to offset all pastes from
+---@param v Vector The position to offset all pastes from.
 function duplicator.SetLocalPos(v) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stores bone mod data for a registered bone modification function
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stores bone mod data for a registered bone modification function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.StoreBoneModifier)
----@param ent Entity The entity to add bone mod data to
+---@param ent Entity The entity to add bone mod data to.
 ---@param boneID number The bone ID.
---- See Entity:GetPhysicsObjectNum
----@param key any The key for the bone modification
----@param data table The bone modification data that is passed to the bone modification function
+--- See Entity:GetPhysicsObjectNum.
+---@param key any The key for the bone modification.
+---@param data table The bone modification data that is passed to the bone modification function.
 function duplicator.StoreBoneModifier(ent, boneID, key, data) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stores an entity modifier into an entity for saving
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stores an entity modifier into an entity for saving.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.StoreEntityModifier)
----@param entity Entity The entity to store modifier in
----@param name string Unique modifier name as defined in duplicator.RegisterEntityModifier
----@param data table Modifier data
+---@param entity Entity The entity to store modifier in.
+---@param name string Unique modifier name as defined in duplicator.RegisterEntityModifier.
+---@param data table Modifier data.
 function duplicator.StoreEntityModifier(entity, name, data) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Works out the AABB size of the duplication
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Works out the AABB size of the duplication.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.WorkoutSize)
 ---@param Ents table A table of entity duplication datums.
----@return Vector # AABB mins vector
----@return Vector # AABB maxs vector
+---@return Vector # AABB mins vector.
+---@return Vector # AABB maxs vector.
 function duplicator.WorkoutSize(Ents) end

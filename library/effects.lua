@@ -49,7 +49,7 @@ function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/effects.Create)
 ---@param name string Effect name.
----@return table # Effect table.
+---@return table # The effect table.
 function effects.Create(name) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -73,12 +73,12 @@ function effects.Register(effect_table, name) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/effects.TracerSound)
 ---@param start Vector Start position of the tracer.
----@param endpos Vector End position of the tracer
+---@param endpos Vector End position of the tracer.
 ---@param tracerType? number Tracer type. Acceptable values are:
---- * 1 - Normal bullet
---- * 2 - Gunship bullet
---- * 4 - Strider bullet
---- * 8 - Underwater bullet
+--- * 1 - Normal bullet.
+--- * 2 - Gunship bullet.
+--- * 4 - Strider bullet.
+--- * 8 - Underwater bullet.
 ---
 --- This affects the default sound, as well as the distance from which the sound can be heard compared to the closest point on the tracer line to the Player:GetShootPos.
 ---@param soundOverride? string If set, this sound will be played instead of the default sound.

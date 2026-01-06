@@ -20,7 +20,7 @@ function draw.DrawText(text, font, x, y, color, xAlign) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/draw.GetFontHeight)
 ---@param font string Name of the font to get the height of.
----@return number # The font height
+---@return number # The font height.
 function draw.GetFontHeight(font) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets drawing texture to a default white texture (vgui/white) via [surface.SetMaterial](https://wiki.facepunch.com/gmod/surface.SetMaterial). Useful for resetting the drawing texture.
@@ -107,14 +107,14 @@ function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlin
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/draw.Text)
 ---@param textdata table The text properties. See the Structures/TextData
----@return number # Width of drawn text
----@return number # Height of drawn text
+---@return number # Width of drawn text.
+---@return number # Height of drawn text.
 function draw.Text(textdata) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Works like [draw.Text](https://wiki.facepunch.com/gmod/draw.Text), but draws the text with a shadow.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/draw.TextShadow)
----@param textdata table The text properties. See Structures/TextData
+---@param textdata table The text properties. See Structures/TextData.
 ---@param distance number How far away the shadow appears.
 ---@param alpha? number How visible the shadow is (0-255).
 ---@return number # The width of drawn text.

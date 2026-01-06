@@ -34,7 +34,7 @@ function frame_blend.DrawPreview() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether frame blend post processing effect is enabled or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/frame_blend.IsActive)
----@return boolean # Is frame blend enabled or not
+---@return boolean # Is frame blend enabled or not.
 function frame_blend.IsActive() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -53,8 +53,8 @@ function frame_blend.IsLastFrame() end
 ---@return number # Amount of frames needed to render?
 function frame_blend.RenderableFrames() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether we should skip frame or not
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether we should skip frame or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/frame_blend.ShouldSkipFrame)
----@return boolean # Should the frame be skipped or not
+---@return boolean # Should the frame be skipped or not.
 function frame_blend.ShouldSkipFrame() end

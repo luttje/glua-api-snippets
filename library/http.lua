@@ -10,10 +10,10 @@ http = {}
 --- The [onFailure](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist).
 ---
 --- A rough overview of possible [onFailure](https://wiki.facepunch.com/gmod/Structures/HTTPRequest) messages:
---- * `invalid url` - Invalid/empty url ( no request was attempted )
---- * `invalid request` - Steam HTTP lib failed to create a HTTP request
---- * `error` - OnComplete callback's second argument, `bError`, is `true`
---- * `unsuccessful` - OnComplete's first argument, `pResult->m_bRequestSuccessful`, returned `false`
+--- * `invalid url` - Invalid/empty url. ( no request was attempted )
+--- * `invalid request` - Steam HTTP lib failed to create a HTTP request.
+--- * `error` - OnComplete callback's second argument, `bError`, is `true`.
+--- * `unsuccessful` - OnComplete's first argument, `pResult->m_bRequestSuccessful`, returned `false`.
 ---
 --- This cannot send or receive multiple headers with the same name.
 --- **NOTE**: HTTP-requests that respond with a large body may return an `unsuccessful` error. Try using the [Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) header to download the file in chunks.

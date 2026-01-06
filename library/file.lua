@@ -16,7 +16,7 @@ file = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Append)
 ---@param name string The file's name.
 ---@param content string The content which should be appended to the file.
----@return boolean # If the operation was successful
+---@return boolean # If the operation was successful.
 function file.Append(name, content) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the content of a file asynchronously.
@@ -74,8 +74,8 @@ function file.Exists(name, gamePath) end
 --- * `namedesc` sort the files descending by name.
 --- * `dateasc` sort the files ascending by date.
 --- * `datedesc` sort the files descending by date.
----@return table # A table of found files, or `nil` if the path is invalid
----@return table # A table of found directories, or `nil` if the path is invalid
+---@return table # A table of found files, or `nil` if the path is invalid.
+---@return table # A table of found directories, or `nil` if the path is invalid.
 function file.Find(name, path, sorting) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether the given file is a directory or not.
@@ -91,12 +91,12 @@ function file.IsDir(fileName, gamePath) end
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Open)
 ---@param fileName string The files name. See file.Write for details on filename restrictions when writing to files.
 ---@param fileMode string The mode to open the file in. Possible values are:
---- * **r** - read mode
---- * **w** - write mode
---- * **a** - append mode
---- * **rb** - binary read mode
---- * **wb** - binary write mode
---- * **ab** - binary append mode
+--- * **r** - read mode.
+--- * **w** - write mode.
+--- * **a** - append mode.
+--- * **rb** - binary read mode.
+--- * **wb** - binary write mode.
+--- * **ab** - binary append mode.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@return file_class # The opened file object, or `nil` if it failed to open due to it not existing or being used by another process.
 function file.Open(fileName, fileMode, gamePath) end
@@ -173,7 +173,7 @@ function file.Time(path, gamePath) end
 ---
 --- Restricted symbols are: `":`, and multiple consecutive spaces, as well as pretty much every other non Latin (a-Z) character
 ---@param content string The content that will be written into the file.
----@return boolean # If the operation was successful
+---@return boolean # If the operation was successful.
 function file.Write(fileName, content) end
 
 ---@class File

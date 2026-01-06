@@ -5400,7 +5400,7 @@ kRenderFxPulseFast = 2
 kRenderFxPulseSlowWide = 3
 --- Quickly pulses the entitys transparency, +-60 to the current alpha.
 kRenderFxPulseFastWide = 4
---- Slowly fades away the entity, making it completely invisible.
+--- Slowly fades away the entity, making it completely invisible over 3 seconds.
 ---
 --- Starts from whatever alpha the entity currently has set.
 kRenderFxFadeSlow = 5

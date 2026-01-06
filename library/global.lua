@@ -28,7 +28,7 @@ function _G.AddBackgroundImage(path) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddConsoleCommand)
 ---@param name string The name of the console command to add.
 ---@param helpText string The help text.
----@param flags FCVAR Concommand flags using Enums/FCVAR
+---@param flags FCVAR Concommand flags using Enums/FCVAR.
 function _G.AddConsoleCommand(name, helpText, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems.
@@ -3304,7 +3304,7 @@ function _G.Vector(vectorString) end
 ---@return Vector # The random direction vector.
 function _G.VectorRand(min, max) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime). On Windows, will be the previous value of [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.VGUIFrameTime)
 ---@deprecated Use the function Global.SysTime instead.

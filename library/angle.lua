@@ -62,7 +62,7 @@ function Angle:IsZero() end
 ---@param scalar number The number to multiply.
 function Angle:Mul(scalar) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Normalizes the angles by applying a module with 360 to pitch, yaw and roll.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Normalizes the angles by applying a modulo with 360 to pitch, yaw and roll.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Angle:Normalize)
 function Angle:Normalize() end
