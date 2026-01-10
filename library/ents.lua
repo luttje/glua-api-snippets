@@ -27,6 +27,8 @@ function ents.CreateClientProp(model) end
 ---
 --- Created ropes will be automatically cleaned up when one of the attached entities is removed.
 ---
+--- **WARNING**: It doesn’t work exactly the same way as [constraint.CreateKeyframeRope](https://wiki.facepunch.com/gmod/constraint.CreateKeyframeRope) or [constraint.Rope](https://wiki.facepunch.com/gmod/constraint.Rope), you can see it when you try to use Slack with [constraint.CreateKeyframeRope](https://wiki.facepunch.com/gmod/constraint.CreateKeyframeRope) or addlength on [constraint.Rope](https://wiki.facepunch.com/gmod/constraint.Rope).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.CreateClientRope)
 ---@param ent1 Entity The first entity to attach the rope to.
 ---@param ent1attach number|Vector The attachment ID on the first entity to attach the rope to, or a local Vector relative to the first entity.

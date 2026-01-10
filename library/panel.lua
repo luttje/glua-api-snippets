@@ -1843,7 +1843,7 @@ function Panel:ResetAllFades(hold, expiredOnly, newSustain) end
 ---
 --- **NOTE**: The Awesomium web renderer automatically delays the code execution if the document is not ready, but the Chromium web renderer does not!
 ---
---- This means that with Chromium, you cannot JavaScript run code immediatly after calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [Panel:OpenURL](https://wiki.facepunch.com/gmod/Panel:OpenURL). You should wait for the events [PANEL:OnDocumentReady](https://wiki.facepunch.com/gmod/PANEL:OnDocumentReady) or [PANEL:OnFinishLoadingDocument](https://wiki.facepunch.com/gmod/PANEL:OnFinishLoadingDocument) to be triggered before proceeding, otherwise you may manipulate an empty / incomplete document.
+--- This means that with Chromium, you cannot JavaScript run code immediatly after calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [Panel:OpenURL](https://wiki.facepunch.com/gmod/Panel:OpenURL). You should wait for the events [HTML:OnDocumentReady](https://wiki.facepunch.com/gmod/HTML:OnDocumentReady) or [HTML:OnFinishLoadingDocument](https://wiki.facepunch.com/gmod/HTML:OnFinishLoadingDocument) to be triggered before proceeding, otherwise you may manipulate an empty / incomplete document.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:RunJavascript)
 ---@param js string Specify JavaScript code to be executed.

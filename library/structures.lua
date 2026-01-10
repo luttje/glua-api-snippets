@@ -75,11 +75,11 @@ AmmoData.flags = 0
 ---@class AngPos
 local AngPos = {}
 
----Angle object
+---An Angle object.
 ---@type Angle
 AngPos.Ang = nil
 
----Vector object
+---An Vector object.
 ---@type Vector
 AngPos.Pos = nil
 
@@ -189,22 +189,22 @@ AttachmentData.name = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table structure used as balloon spawn data. Default values are applied when the trace hits nothing. This data is required for correctly spawning the balloon.
 ---
---- See [MakeBalloon](https://wiki.facepunch.com/gmod/MakeBalloon)
+--- See [MakeBalloon](https://wiki.facepunch.com/gmod/MakeBalloon).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/BalloonData)
 ---@class BalloonData
 local BalloonData = {}
 
----Where the balloon will spawn
+---Where the balloon will spawn.
 ---@type Vector?
 BalloonData.Pos = VectorVector(0, 0, 0)
 
----The balloon’s model
+---The balloon’s model.
 ---@type string?
 BalloonData.Model = "models/error.mdl"
 
----The balloon’s skin
+---The balloon’s skin.
 ---@type number?
 BalloonData.Skin = 0
 
@@ -264,15 +264,15 @@ BoneBindPose.matrix = nil
 ---@class BoneManipulationData
 local BoneManipulationData = {}
 
----The entity's scale manipulation of the bone
+---The entity's scale manipulation of the bone.
 ---@type Vector?
 BoneManipulationData.s = Vectornil
 
----The entity's angle manipulation of the bone
+---The entity's angle manipulation of the bone.
 ---@type Angle?
 BoneManipulationData.a = nil
 
----The entity's position manipulation of the given bone
+---The entity's position manipulation of the given bone.
 ---@type Vector?
 BoneManipulationData.p = Vectornil
 
@@ -280,9 +280,9 @@ BoneManipulationData.p = Vectornil
 ---
 --- A single vertex may have multiple BoneWeight structures affecting it, but each BoneWeight structure belongs to only one vertex.
 ---
---- Added to the [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex) by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes)
+--- Added to the [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex) by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes).
 ---
---- To find a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix), see [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix)
+--- To find a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix), see [Entity:GetBoneMatrix](https://wiki.facepunch.com/gmod/Entity:GetBoneMatrix).
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneWeight)
@@ -304,13 +304,13 @@ BoneWeight.weight = nil
 ---@class Bullet
 local Bullet = {}
 
----The entity that should be reported as attacker eg. a player
+---The entity that should be reported as attacker. (eg. a player)
 ---
 --- By default this would be set to the entity Entity:FireBullets is called on.
 ---@type Entity?
 Bullet.Attacker = self
 
----The entity that should be reported as inflictor eg. a weapon or something similar
+---The entity that should be reported as inflictor eg. a weapon or something similar.
 ---
 --- Also defines CTakeDamageInfo:GetWeapon for Weapon.
 ---@type Entity?
@@ -338,11 +338,11 @@ Bullet.Callback = nil
 ---@type number?
 Bullet.Damage = 1
 
----The force of the bullets
+---The force of the bullets.
 ---@type number?
 Bullet.Force = 1
 
----Maximum distance the bullet can travel
+---Maximum distance the bullet can travel.
 ---@type number?
 Bullet.Distance = 56756
 
@@ -350,15 +350,15 @@ Bullet.Distance = 56756
 ---@type number?
 Bullet.HullSize = 0
 
----The amount of bullets to fire
+---The amount of bullets to fire.
 ---@type number?
 Bullet.Num = 1
 
----Show tracer for every x bullets
+---Show tracer for every x bullets.
 ---@type number?
 Bullet.Tracer = 1
 
----The ammunition name
+---The ammunition name.
 ---@type string?
 Bullet.AmmoType = "<empty string>"
 
@@ -366,15 +366,15 @@ Bullet.AmmoType = "<empty string>"
 ---@type string?
 Bullet.TracerName = "nil"
 
----The fire direction
+---The fire direction.
 ---@type Vector?
 Bullet.Dir = VectorVector(0, 0, 0)
 
----The spread, only x and y are needed
+---The spread, only x and y are needed.
 ---@type Vector?
 Bullet.Spread = VectorVector(0, 0, 0)
 
----The position to fire the bullets from
+---The position to fire the bullets from.
 ---@type Vector?
 Bullet.Src = VectorVector(0, 0, 0)
 
@@ -389,23 +389,23 @@ Bullet.IgnoreEntity = NULL
 ---@class CamData
 local CamData = {}
 
----The camera's position
+---The camera's position.
 ---@type Vector
 CamData.origin = nil
 
----The camera's angles
+---The camera's angles.
 ---@type Angle
 CamData.angles = nil
 
----The camera's FOV
+---The camera's FOV.
 ---@type number
 CamData.fov = nil
 
----Distance to near clipping plane
+---Distance to near clipping plane.
 ---@type number
 CamData.znear = nil
 
----Distance to far clipping plane
+---Distance to far clipping plane.
 ---@type number
 CamData.zfar = nil
 
@@ -414,10 +414,10 @@ CamData.zfar = nil
 CamData.drawviewer = false
 
 ---If set, enables orthographic mode. The table has following arguments:
---- * number left
---- * number right
---- * number top
---- * number bottom
+--- * number left.
+--- * number right.
+--- * number top.
+--- * number bottom.
 ---
 --- Each describes where their border starts, (`left`+`right`) and (`top`+`bottom`) should equal `0` to center on the view position.
 ---@type table?
@@ -440,83 +440,83 @@ CamData.ortho = nil
 ---@class CollisionData
 local CollisionData = {}
 
----The collision position
+---The collision position.
 ---@type Vector
 CollisionData.HitPos = nil
 
----The other collision entity
+---The other collision entity.
 ---@type Entity
 CollisionData.HitEntity = nil
 
----The entity's velocity before the collision
+---The entity's velocity before the collision.
 ---@type Vector
 CollisionData.OurOldVelocity = nil
 
----Other entity's physics object
+---Other entity's physics object.
 ---@type PhysObj
 CollisionData.HitObject = nil
 
----Time since the last collision with the `HitEntity`
+---Time since the last collision with the `HitEntity`.
 ---@type number
 CollisionData.DeltaTime = nil
 
----Speed of the other entity before the collision
+---Speed of the other entity before the collision.
 ---@type Vector
 CollisionData.TheirOldVelocity = nil
 
----The speed of the entity before the collision
+---The speed of the entity before the collision.
 ---@type number
 CollisionData.Speed = nil
 
----Normal of the surface that hit the other entity
+---Normal of the surface that hit the other entity.
 ---@type Vector
 CollisionData.HitNormal = nil
 
----Entity's physics object
+---Entity's physics object.
 ---@type PhysObj
 CollisionData.PhysObject = nil
 
----Surface Property ID of `this` entity
+---Surface Property ID of `this` entity.
 ---@type number
 CollisionData.OurSurfaceProps = nil
 
----Surface Property ID of the entity we collided with
+---Surface Property ID of the entity we collided with.
 ---@type number
 CollisionData.TheirSurfaceProps = nil
 
----The speed at which the impact happened
+---The speed at which the impact happened.
 ---@type Vector
 CollisionData.HitSpeed = nil
 
----Our new velocity after the impact
+---Our new velocity after the impact.
 ---@type Vector
 CollisionData.OurNewVelocity = nil
 
----The new velocity after the impact of the entity we collided with
+---The new velocity after the impact of the entity we collided with.
 ---@type Vector
 CollisionData.TheirNewVelocity = nil
 
----Old angular velocity of this entity
+---Old angular velocity of this entity.
 ---@type Vector
 CollisionData.OurOldAngularVelocity = nil
 
----Old angular velocity of the entity we collided with
+---Old angular velocity of the entity we collided with.
 ---@type Vector
 CollisionData.TheirOldAngularVelocity = nil
 
----The red channel
+---The red channel.
 ---@type number
 Color.r = nil
 
----The green channel
+---The green channel.
 ---@type number
 Color.g = nil
 
----The blue channel
+---The blue channel.
 ---@type number
 Color.b = nil
 
----The alpha channel
+---The alpha channel.
 ---@type number
 Color.a = nil
 
@@ -2675,13 +2675,37 @@ SoundHintData.channel = nil
 ---@class SunInfo
 local SunInfo = {}
 
----The suns direction relative to 0,0,0
+---The sun's direction relative to 0,0,0.
 ---@type Vector
 SunInfo.direction = nil
 
----Indicates how obstructed the sun is, 1 not visible, 0 fully visible
+---Indicates how obstructed the sun is, 1 not visible, 0 fully visible.
 ---@type number
 SunInfo.obstruction = nil
+
+---Color of sun's overlay in `0`-`255` range as Color structure.
+---@type Color
+SunInfo.overlayColor = nil
+
+---The sun's overlay name of material. For example: `sprites/light_glow02_add_noz.vmt`.
+---@type string
+SunInfo.overlayMaterial = nil
+
+---Size of sun's overlay.
+---@type number
+SunInfo.overlaySize = nil
+
+---Color of sun in `0`-`255` range as Color structure.
+---@type Color
+SunInfo.sunColor = nil
+
+---The sun's name of material.
+---@type string
+SunInfo.sunMaterial = nil
+
+---Size of sun.
+---@type number
+SunInfo.sunSize = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table returned by [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
 

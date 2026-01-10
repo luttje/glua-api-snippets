@@ -1052,6 +1052,7 @@ function _G.Format(format, ...) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the number of frames rendered since the game was launched.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.FrameNumber)
+---@return number # frame count
 function _G.FrameNumber() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime)-based time in seconds it took to render the last frame.
@@ -2623,20 +2624,24 @@ function _G.RunString(code, identifier, handleError) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Alias of [Global.RunString](https://wiki.facepunch.com/gmod/Global.RunString).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.RunStringEx)
+---@param code string The code to execute.
+---@param identifier? string The name that should appear in any error messages caused by this code.
+---@param handleError? boolean If false, this function will return a string containing any error messages instead of throwing an error.
+---@return string # If handleError is false, the error message (if any).
 ---@deprecated Use Global.RunString instead.
-function _G.RunStringEx() end
+function _G.RunStringEx(code, identifier, handleError) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the given entity unless it is a player or the world entity
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the given entity unless it is a player or the world entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity)
 ---@param ent Entity Entity to safely remove.
 function _G.SafeRemoveEntity(ent) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes entity after delay using [Global.SafeRemoveEntity](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity)
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes entity after delay using [Global.SafeRemoveEntity](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntityDelayed)
----@param entity Entity Entity to be removed
----@param delay number Delay for entity removal in seconds
+---@param entity Entity Entity to be removed.
+---@param delay number Delay for entity removal in seconds.
 function _G.SafeRemoveEntityDelayed(entity, delay) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Sets the content of `addonpresets.txt` located in the `garrysmod/settings` folder. By default, this file stores your addon presets as JSON.
