@@ -91,6 +91,8 @@ function timer.RepsLeft(identifier) end
 ---
 --- For more information on hook execution order, see [Lua Hooks Order](https://wiki.facepunch.com/gmod/Lua_Hooks_Order).
 ---
+--- As of a commit on [2026.1.5](https://commits.facepunch.com/574654), simple timers are queued to the next frame, but as it is a recent change, it might only be available on the [Dev Branch](https://wiki.facepunch.com/gmod/Dev_Branch) right now.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.Simple)
 ---@param delay number How long until the function should be ran (in seconds). A value of `0` differs in behavior, depending on where you're calling this function.
 ---@param func function The function to run after the specified delay.

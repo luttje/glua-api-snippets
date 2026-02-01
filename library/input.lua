@@ -6,7 +6,7 @@ input = {}
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the last key captured by key trapping.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.CheckKeyTrapping)
----@return number # The key, see Enums/KEY
+---@return number # The key, see Enums/KEY.
 function input.CheckKeyTrapping() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the digital value of an analog stick on the current (set up via convars) controller.
@@ -49,37 +49,37 @@ function input.GetKeyName(button) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets whether the specified button code is down.
 ---
---- Unlike [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown) this can also detect joystick presses from [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK)
+--- Unlike [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown) this can also detect joystick presses from [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsButtonDown)
 ---@param button BUTTON_CODE The button, valid values are in the range of Enums/BUTTON_CODE.
----@return boolean # Is the button down
+---@return boolean # Is the button down?
 function input.IsButtonDown(button) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether a control key is being pressed
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether a control key is being pressed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsControlDown)
----@return boolean # Is Ctrl key down or not
+---@return boolean # Is Ctrl key down or not?
 function input.IsControlDown() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets whether a key is down.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsKeyDown)
 ---@param key number The key, see Enums/KEY.
----@return boolean # Is the key down
+---@return boolean # Is the key down?
 function input.IsKeyDown(key) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether key trapping is activate and the next key press will be captured.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsKeyTrapping)
----@return boolean # Whether key trapping active or not
+---@return boolean # Whether key trapping active or not.
 function input.IsKeyTrapping() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets whether a mouse button is down
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets whether a mouse button is down.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/input.IsMouseDown)
----@param mouseKey number The key, see Enums/MOUSE
----@return boolean # Is the key down
+---@param mouseKey number The key, see Enums/MOUSE.
+---@return boolean # Is the key down?
 function input.IsMouseDown(mouseKey) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets whether a shift key is being pressed

@@ -103,10 +103,12 @@ function CTakeDamageInfo:GetDamageType() end
 ---@return Entity # The inflictor entity.
 function CTakeDamageInfo:GetInflictor() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the maximum damage. See [CTakeDamageInfo:SetMaxDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the maximum damage. See [CTakeDamageInfo:SetMaxDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage).
+---
+--- This is only set by "multi damage" instances in the engine, and is only checked by the strider NPC when receiving explosive damage.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetMaxDamage)
----@return number # maxDmg
+---@return number # The maximum amount of damage in the "multi damage" instance.
 function CTakeDamageInfo:GetMaxDamage() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the initial, unmodified position where the damage occured.
@@ -225,7 +227,7 @@ function CTakeDamageInfo:SetDamageType(type) end
 ---@param inflictor Entity The new inflictor.
 function CTakeDamageInfo:SetInflictor(inflictor) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the maximum damage this damage event can cause.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the "maximum damage" for this damage event. See [CTakeDamageInfo:GetMaxDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetMaxDamage) for details.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetMaxDamage)
 ---@param maxDamage number Maximum damage value.

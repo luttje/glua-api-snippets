@@ -2306,7 +2306,7 @@ function Player:UnfreezePhysicsObjects() end
 ---@deprecated **This function has collisions,** where more than one player can have the same UniqueID. It is **highly** recommended to use Player:SteamID64, Player:SteamID or Player:AccountID instead, which are guaranteed to be unique to each player.
 function Player:UniqueID() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table that will stay allocated for the specific player serverside between connects until the server shuts down. On client it has no such special behavior.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a table that will stay allocated for the specific player serverside between connects until the server shuts down or change map. On client it has no such special behavior.
 ---
 --- **NOTE**: This table is not synchronized (networked) between client and server.
 ---

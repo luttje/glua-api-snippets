@@ -2707,6 +2707,10 @@ SunInfo.sunMaterial = nil
 ---@type number
 SunInfo.sunSize = nil
 
+---State of sun.
+---@type boolean
+SunInfo.enabled = nil
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table returned by [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData).
 
 ---
@@ -3551,7 +3555,7 @@ VehicleParams.wheelsPerAxle = nil
 VehicleParams.axleCount = nil
 
 ---A table of Structures/VehicleParamsAxle tables.
----@type table{VehicleParamsAxle}[]
+---@type VehicleParamsAxle
 VehicleParams.axles = nil
 
 ---See Structures/VehicleParamsBody
@@ -3919,12 +3923,18 @@ VehicleTable.Name = nil
 VehicleTable.Model = nil
 
 ---A list of key-value pairs to apply to the vehicle entity.
---- Possible valid keys that can be set are:
---- * `vehiclescript`
---- * `limitview`
---- * `vehiclelocked`
---- * `cargovisible`
---- * `enablegun`
+--[[
+Possible valid keys that can be set are:
+
+| Key | Description |
+|:-------:|:------------|
+| `vehiclescript` | The vehicle script files contained in scripts\vehicles\ define the behaviour and handling of a vehicle.
+| `limitview` | Limit vertical view of the vehicles to +/-70 degrees (90 for unlimited)
+| `vehiclelocked` | Players cannot enter vehicle until it is unlocked.
+| `cargovisible` | Is the Magnusson cargo hopper visible?
+| `EnableGun` | Whether the Tau Cannon is enabled or disabled. Doesn't work correctly with the Episode Two jalopy model.
+| `NoHazardLights`| Stops the jalopy's hazard lights from turning on and flashing when the player exits the vehicle.
+--]]
 ---@type table
 VehicleTable.KeyValues = nil
 

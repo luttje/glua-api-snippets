@@ -224,6 +224,20 @@ function game.GetSkillLevel() end
 ---@return number # The time scale.
 function game.GetTimeScale() end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the wind's velocity at a given position, as influenced by current map's [env_wind](https://developer.valvesoftware.com/wiki/Env_wind) entities.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/game.GetWindSpeed)
+---@param pos? Vector The point to get wind speed at.
+---
+--- If specified, wind controllers with `windradius` other than `-1` will be taken into account, if the point is within their radius.
+--- If omitted, only the global wind controller will be used (if one exists).
+---
+--- 			This argument will be ignored on the `CLIENT` [realm](https://wiki.facepunch.com/gmod/States) and will be treated as `nil` because the position of `env_wind` is not currently networked to clients.
+---@return Vector # `windDir * windSpeed` — the current wind direction multiplied by the current total wind speed.
+---
+--- See [env_wind_shared.cpp#L255-L258](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/shared/env_wind_shared.cpp#L255-L258) for how it's calculated.
+function game.GetWindSpeed(pos) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the worldspawn entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetWorld)

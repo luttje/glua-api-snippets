@@ -26,7 +26,7 @@ function system.BatteryPower() end
 ---[View wiki](https://wiki.facepunch.com/gmod/system.FlashWindow)
 function system.FlashWindow() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the country code of this computer, determined by the localisation settings of the OS.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the country code of this computer, determined by the IP of the client. Uses the steamworks API function `SteamUtils()->GetIPCountry()`.
 ---
 --- **NOTE**: This function does not work on Dedicated Servers and will instead return no value.
 ---

@@ -457,7 +457,7 @@ function math.ease.OutSine(fraction) end
 ---@return number # "Eased" Value, from 0 to 1
 function math.EaseInOut(progress, easeIn, easeOut) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the x power of the Euler constant.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns e to the power of the input.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.exp)
 ---@param exponent number The exponent for the function.

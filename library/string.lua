@@ -165,6 +165,10 @@ function string.FromColor(color) end
 function string.GetChar(str, index) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns extension of the file.
+---
+--- See [string.StripExtension](https://wiki.facepunch.com/gmod/string.StripExtension) for a function to remove the extension.
+--- See [string.GetFileFromFilename](https://wiki.facepunch.com/gmod/string.GetFileFromFilename) and [string.GetPathFromFilename](https://wiki.facepunch.com/gmod/string.GetPathFromFilename) for related functions.
+---
 --- 	**NOTE**: Make sure there are no trailing whitespaces in your `path` argument
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename)
@@ -174,12 +178,18 @@ function string.GetExtensionFromFilename(path) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns file name and extension.
 ---
+--- See [string.GetPathFromFilename](https://wiki.facepunch.com/gmod/string.GetPathFromFilename) for the opposite function.
+--- See [string.GetExtensionFromFilename](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename) for thefile extension version.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.GetFileFromFilename)
 ---@param path string The string eg. file-path to get the file-name from.
 ---@return string # File name or unmodified string.
 function string.GetFileFromFilename(path) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the path only from a file's path.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the path part of a full file path.
+---
+--- See [string.GetFileFromFilename](https://wiki.facepunch.com/gmod/string.GetFileFromFilename) for the opposite function.
+--- See [string.GetExtensionFromFilename](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename) for thefile extension version.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.GetPathFromFilename)
 ---@param path string The string eg. file-path to get the path from.
@@ -376,6 +386,8 @@ function string.StartsWith(inputStr, start) end
 function string.StartWith(inputStr, start) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the extension of a path.
+---
+--- See [string.GetExtensionFromFilename](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename) for a function to retrieve the extension instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.StripExtension)
 ---@param path string The string eg. file-path to strip the extension.

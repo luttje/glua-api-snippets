@@ -11,7 +11,7 @@
 --- For the full list of path values, type `path` in the console.
 file = {}
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Appends a file relative to the `data` folder.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Appends data to a file in the `data/` folder.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Append)
 ---@param name string The file's name.

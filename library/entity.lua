@@ -2,7 +2,7 @@
 
 --- This is a list of all available methods for all entities, which includes [Players](https://wiki.facepunch.com/gmod/Player), [Weapons](https://wiki.facepunch.com/gmod/Weapon), [NPCs](https://wiki.facepunch.com/gmod/NPC) and [Vehicles](https://wiki.facepunch.com/gmod/Vehicle).
 ---
---- For a list of possible members of [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities) see [ENT Structure](https://wiki.facepunch.com/gmod/Structures/ENT)
+--- For a list of possible members of [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities) see [ENT Structure](https://wiki.facepunch.com/gmod/Structures/ENT).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity)
 ---@class Entity
@@ -1164,12 +1164,14 @@ function Entity:GetConstrainedPhysObjects() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns entity's creation ID. Unlike [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) or [Entity:MapCreationID](https://wiki.facepunch.com/gmod/Entity:MapCreationID).
 ---
 --- It will increase up until value of `10 000 000`, at which point it will reset back to `0`.
+--- This returns `0` for clientside only entities, such as `class CLuaEffect`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetCreationID)
 ---@return number # The creation ID
 function Entity:GetCreationID() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the time the entity was created on, relative to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime).
+--- This returns `0` for clientside only entities, such as `class CLuaEffect`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetCreationTime)
 ---@return number # The time the entity was created on.
@@ -3943,8 +3945,6 @@ function Entity:RemoveSpawnFlags(flag) end
 ---
 --- This does not work on "physgun_beam", use [GM:DrawPhysgunBeam](https://wiki.facepunch.com/gmod/GM:DrawPhysgunBeam) instead.
 ---
---- **NOTE**: As a downside of this implementation, only one RenderOverride may be applied at a time.
----
 --- Drawing a viewmodel in this function will cause [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel), [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel), [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn), [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel), and [WEAPON:PostDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel) to be called twice.
 ---
 --- This is called before PrePlayerDraw for players. If this function exists at all on a player, their worldmodel will always be rendered regardless of PrePlayerDraw's return.
@@ -4356,7 +4356,9 @@ function Entity:SetEntity(name, entity) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the position an entity's eyes look toward. This works as an override for default behavior. Set to `0,0,0` to disable the override.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetEyeTarget)
----@param pos Vector If NPC, the **world position** for the entity to look towards, for Ragdolls, a **local position** in front of their `eyes` attachment.
+---@param pos Vector For NPCs and all other entities except ragdolls - the **world position** for the entity to look towards
+---
+--- For ragdolls specifically - a **local position** in front of their `eyes` attachment.
 function Entity:SetEyeTarget(pos) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the scale of all the flexes of this entity. See [Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight).
@@ -4371,11 +4373,13 @@ function Entity:SetFlexScale(scale) end
 ---
 --- **NOTE**: Only `96` flex controllers can be set! Flex controllers on models with higher amounts will not be accessible.
 ---
---- **WARNING**: This function must be called at every tick, otherwise you will not see any changes.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight)
 ---@param flex number The ID of the flex to modify weight of.  The range is between `0` and Entity:GetFlexNum - 1.
----@param weight number The new weight to set. See Entity:GetFlexBounds for the model-defined input range.
+---@param weight number The new weight to set.
+---
+--- The range is [0,1] for entities with Entity:HasFlexManipulatior, and the model-defined input range otherwise (Entity:GetFlexBounds)
+---
+--- Exceeding the range is allowed, and will amplify the effect (to possibly bad results), exactly like Entity:SetFlexScale does.
 function Entity:SetFlexWeight(flex, weight) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets friction multiplier for this entity when sliding against a surface. Entities default to 1 (100%) and can be higher.
@@ -4391,8 +4395,6 @@ function Entity:SetFriction(friction) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the gravity multiplier of the entity.
 ---
 --- This may not affect affect all entities, but does affect players, and entities with [MOVETYPE_FLYGRAVITY](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_FLYGRAVITY), such as projectiles.
----
---- This function is not predicted or networked.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetGravity)
 ---@param multiplier number By how much to multiply the gravity. `1` is normal gravity, `0.5` is half-gravity, etc.
@@ -4431,11 +4433,9 @@ function Entity:SetIK(useIK) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets Hammer key values on an entity.
 ---
---- You can look up which entities have what key values on the [Valve Developer Community](https://developer.valvesoftware.com/wiki/) on entity pages.
+--- You can look up which entities have what key values on the [Valve Developer Community](https://developer.valvesoftware.com/wiki/) on entity pages. A  list of basic entities can be found [here](https://developer.valvesoftware.com/wiki/List_of_entities).
 ---
---- A  list of basic entities can be found [here](https://developer.valvesoftware.com/wiki/List_of_entities).
----
---- Alternatively you can look at the .fgd files shipped with Garry's Mod in the bin/ folder with a text editor to see the key values as they appear in Hammer.
+--- Alternatively you can look at the `.fgd` files shipped with Garry's Mod in the `bin/` folder with a text editor to see the key values as they appear in Hammer.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetKeyValue)
 ---@param key string The internal key name
@@ -5333,7 +5333,7 @@ function Entity:SetNWVector(key, value) end
 ---@param owner? Entity The entity to be set as owner.
 function Entity:SetOwner(owner) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the parent of this entity, making it move with its parent. This will make the child entity non solid, nothing can interact with them, including traces.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the parent of this entity, making it move with its parent. This will make the child entity non solid, nothing can interact with them, including traces (but [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) will work).
 ---
 --- All children of the parent get removed whenever it gets removed.
 ---
@@ -5386,7 +5386,11 @@ function Entity:SetPhysConstraintObjects(Phys1, Phys2) end
 ---@param timeLimit? number Time in seconds until the entity forgets its physics attacker and prevents it from getting the kill credit.
 function Entity:SetPhysicsAttacker(ent, timeLimit) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to set how fast an entity's animation will play, with 1.0 being the default speed.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to set how fast an entity's animation will play,
+--- with 1.0 being the default speed.
+---
+--- **NOTE**: This function does not affect gestures.
+--- 	Use [Entity:SetLayerPlaybackRate](https://wiki.facepunch.com/gmod/Entity:SetLayerPlaybackRate) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetPlaybackRate)
 ---@param fSpeed number How fast the animation will play.
@@ -5620,6 +5624,8 @@ function Entity:SetSpawnFlags(flags) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Overrides a single material on the model of this entity.
 ---
 --- To set a Lua material created with [Global.CreateMaterial](https://wiki.facepunch.com/gmod/Global.CreateMaterial), just prepend a `!` to the material name.
+---
+--- 	The index argument limit seems to be larger than 0 to 31.
 ---
 --- The server's value takes priority on the client.
 ---
@@ -6005,7 +6011,7 @@ function Entity:TestPVS(testPoint) end
 --- You can force it to run at servers tickrate using the example below.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:Think)
----@return boolean # Return `true` if you used Entity:NextThink to override the next execution time.
+---@return boolean # Return `true` if you used Entity:NextThink to override the next execution time. Otherwise it will be reset to `CurTime() + 0.2`.
 function ENTITY:Think() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called every tick for every entity being "touched". Touching is usually detected via AABB intersection checks using entity's [collision bounds](https://wiki.facepunch.com/gmod/Entity:GetCollisionBounds).

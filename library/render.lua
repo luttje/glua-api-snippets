@@ -435,7 +435,8 @@ function render.GetFogMode() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the full screen depth texture.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetFullScreenDepthTexture)
----@return ITexture # The `_rt_FullFrameDepth` texture.
+---@return ITexture # The `_rt_FullFrameDepth` texture, which is an alias of `_rt_PowerOfTwoFB` on PC.
+---@deprecated Alias of render.GetPowerOfTwoTexture in practice.
 function render.GetFullScreenDepthTexture() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether HDR is currently enabled or not. This takes into account hardware support, current map and current client settings.
@@ -508,7 +509,7 @@ function render.GetRefractTexture() end
 ---@return ITexture # The currently active Render Target.
 function render.GetRenderTarget() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the `_rt_ResolvedFullFrameDepth` texture for SSAO depth. It will only be updated if [GM:NeedsDepthPass](https://wiki.facepunch.com/gmod/GM:NeedsDepthPass) returns true. Depth is written using the [Shaders/DepthWrite](https://wiki.facepunch.com/gmod/Shaders/DepthWrite).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the `_rt_ResolvedFullFrameDepth` texture for SSAO depth. It will only be updated if [GM:NeedsDepthPass](https://wiki.facepunch.com/gmod/GM:NeedsDepthPass) returns true. Depth is written using the [Shaders/DepthWrite](https://wiki.facepunch.com/gmod/Shaders/DepthWrite) by rendering scene a second time, using [SSAO_DepthPass function](https://github.com/ValveSoftware/source-sdk-2013/blob/11a677c349b149b2f77184dc903e6bb17f8df69b/src/game/client/viewrender.cpp#L5576).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetResolvedFullFrameDepth)
 ---@return ITexture # The depth texture.
@@ -725,7 +726,7 @@ function render.OverrideBlendFunc(enabled, srcBlend, destBlend, srcBlendAlpha, d
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.OverrideColorWriteEnable)
 ---@param enable boolean Enable or disable the override.
----@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the color channel or not. Has no effect if the previous argument is false.
+---@param shouldWrite boolean If the previous argument is true, sets whether the next rendering operations should write to the color channel or not. Anything drawn after will still write to depth if enabled and shouldWrite is false.
 function render.OverrideColorWriteEnable(enable, shouldWrite) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Overrides the write behaviour of all next rendering operations towards the depth buffer.

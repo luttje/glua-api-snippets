@@ -774,8 +774,8 @@ function Panel:GetSelectionCanvas() end
 --- If you require both the panel's position and size, consider using [Panel:GetBounds](https://wiki.facepunch.com/gmod/Panel:GetBounds) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetSize)
----@return number # width
----@return number # height
+---@return number # The panel's width. (Panel:GetWide)
+---@return number # The panel's height (Panel:GetTall)
 function Panel:GetSize() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the table for the derma skin currently being used by this panel object.

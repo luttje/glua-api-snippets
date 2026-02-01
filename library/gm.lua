@@ -393,8 +393,8 @@ function GM:EntityKeyValue(ent, key, value) end
 --- 	If this hook seems to be called for no apparent reason, check if it's caused by a full update.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityNetworkedVarChanged)
----@param ent Entity The owner entity of changed NW2Var
----@param name string The name if changed NW2Var
+---@param ent Entity The owner entity of the changed NW2Var
+---@param name string The name of the changed NW2Var
 ---@param oldval any The old value of the NW2Var
 ---@param newval any The new value of the NW2Var
 function GM:EntityNetworkedVarChanged(ent, name, oldval, newval) end

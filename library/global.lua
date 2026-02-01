@@ -33,11 +33,11 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems.
 ---
---- **WARNING**: If the file trying to be added is empty, an error will occur, and the file will not be sent to the client
+--- **WARNING**: If the file trying to be added is empty, an error will occur, and the file will not be sent to the client.
 ---
 --- The string cannot have whitespace.
 ---
---- **NOTE**: This function is not needed for scripts located in these paths because they are automatically sent to clients.
+--- **NOTE**: This function is not needed for scripts located in these paths because they are automatically sent to clients:
 --- 	**lua/matproxy/**
 --- 	**lua/postprocess/**
 --- 	**lua/vgui/**
@@ -45,7 +45,7 @@ function _G.AddConsoleCommand(name, helpText, flags) end
 --- 	**lua/autorun/**
 --- 	**lua/autorun/client/**
 ---
---- 	You can add up to **8192** files. Each file can be up to **64KB** compressed (LZMA)
+--- 	You can add up to **8192** files. Each file can be up to **64KB** compressed (LZMA).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddCSLuaFile)
 ---@param file? string The name/path to the Lua file that should be sent, **relative to the garrysmod/lua folder**. If no parameter is specified, it sends the current file.
@@ -71,13 +71,13 @@ function _G.AddonMaterial(name) end
 function _G.AddOriginToPVS(position) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This function creates a Custom Category in the Spawnlist. Use [Global.GenerateSpawnlistFromPath](https://wiki.facepunch.com/gmod/Global.GenerateSpawnlistFromPath) if you want to create a category with the contents of a folder.
---- 	**WARNING**: Using this function before [SANDBOX:PopulateContent](https://wiki.facepunch.com/gmod/SANDBOX:PopulateContent) has been called will result in an error
+--- 	**WARNING**: Using this function before [SANDBOX:PopulateContent](https://wiki.facepunch.com/gmod/SANDBOX:PopulateContent) has been called will result in an error.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddPropsOfParent)
----@param pnlContent Panel The SMContentPanel of the Node
----@param node Panel The Node
----@param parentid number The ParentID to use
----@param customProps table The Table with the Contents of the new Category
+---@param pnlContent Panel The SMContentPanel of the Node.
+---@param node Panel The Node.
+---@param parentid number The ParentID to use.
+---@param customProps table The Table with the Contents of the new Category.
 function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This function creates a World Tip, similar to the one shown when aiming at a Thruster where it shows you its force.
@@ -88,7 +88,7 @@ function _G.AddPropsOfParent(pnlContent, node, parentid, customProps) end
 ---
 --- See [SANDBOX:PaintWorldTips](https://wiki.facepunch.com/gmod/SANDBOX:PaintWorldTips) for more information.
 ---
---- **NOTE**: This function is only available in Sandbox and its derivatives
+--- **NOTE**: This function is only available in Sandbox and its derivatives.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddWorldTip)
 ---@param entindex? number **This argument is no longer used**; it has no effect on anything. You can use nil in this argument.
@@ -108,7 +108,7 @@ function _G.AddWorldTip(entindex, text, dieTime, pos, ent) end
 ---@param pitch? number The pitch value of the angle, in degrees.
 ---@param yaw? number The yaw value of the angle, in degrees.
 ---@param roll? number The roll value of the angle, in degrees.
----@return Angle # The newly created Angle
+---@return Angle # The newly created Angle.
 function _G.Angle(pitch, yaw, roll) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates an [Angle](https://wiki.facepunch.com/gmod/Angle) object, representing a [Euler Angle](https://en.wikipedia.org/wiki/Euler_angles) made up of pitch, yaw, and roll components.
@@ -119,7 +119,7 @@ function _G.Angle(pitch, yaw, roll) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Angle)
 ---@param angle Angle Creates a new Angle that is a copy of the Angle passed in.
----@return Angle # The newly created Angle
+---@return Angle # The newly created Angle.
 function _G.Angle(angle) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates an [Angle](https://wiki.facepunch.com/gmod/Angle) object, representing a [Euler Angle](https://en.wikipedia.org/wiki/Euler_angles) made up of pitch, yaw, and roll components.
@@ -132,7 +132,7 @@ function _G.Angle(angle) end
 ---@param angleString string Attempts to parse the input string from the Global.print format of an Angle.
 ---
 --- Returns an Angle with its pitch, yaw, and roll set to `0` if the string cannot be parsed.
----@return Angle # The newly created Angle
+---@return Angle # The newly created Angle.
 function _G.Angle(angleString) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
@@ -169,10 +169,10 @@ function _G.BroadcastLua(code) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.BuildNetworkedVarsTable)
 ---@return table # Format:
---- * key = Entity for NWVars or number (always 0) for global vars
+--- * key = Entity for NWVars or number (always 0) for global vars.
 --- * value = table formatted as:
----   * key = string var name
----   * value = any type var value
+---   * key = string var name.
+---   * value = any type var value.
 function _G.BuildNetworkedVarsTable() end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -180,7 +180,7 @@ function _G.BuildNetworkedVarsTable() end
 --- Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CanAddServerToFavorites)
----@return boolean # Can add to favorites
+---@return boolean # Can add to favorites?
 function _G.CanAddServerToFavorites() end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Aborts joining of the server you are currently joining.
@@ -281,7 +281,7 @@ function _G.collectgarbage(action, arg) end
 --- Variable | Color (RGBA) |
 --- -----|------------|
 --- | color_white | Color(255, 255, 255, 255) |
---- | color_black | Color(0, 0, 255, 255) |
+--- | color_black | Color(0, 0, 0, 255) |
 --- | color_transparent | Color(255, 255, 255, 0) |
 ---
 --- 	**WARNING**: Under no circumstances should these variables be modified (by a Lerp or value modification). Some addons that use these values (e.g. color_white) will be affected by this change.
@@ -842,7 +842,7 @@ function _G.DynamicMaterial(materialPath, flags) end
 ---
 --- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
 ---
---- This also means that any values previously set will carry over to all future calls of this functions, and may unexpectedly affect effects created via [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
+--- **WARNING**: Any values previously set (Origin, Magnitude, Scale etc) will carry over to all future calls of this function, and may unexpectedly affect effects created via [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.EffectData)
 ---@return CEffectData # The CEffectData object.
@@ -1192,7 +1192,7 @@ function _G.GetConVar_Internal(name) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
 ---@param name string Name of the ConVar to get.
 ---@return number # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetInt or ConVar:GetFloat on it.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar or use cvars.Number
 function _G.GetConVarNumber(name) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the string value ConVar with the specified name.
@@ -1200,7 +1200,7 @@ function _G.GetConVarNumber(name) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarString)
 ---@param name string Name of the ConVar to get.
 ---@return string # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar and call ConVar:GetString on it.
+---@deprecated Store the ConVar object retrieved with Global.GetConVar or use cvars.String.
 function _G.GetConVarString(name) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns the default loading screen URL (asset://garrysmod/html/loading.html)
@@ -2356,6 +2356,8 @@ function _G.PrecacheSentenceGroup(group) end
 --- Separates arguments with a tab character (`"\t"`).
 ---
 --- Can only print up to `4096` characters at a time, and will stop at NULL character. (`"\0"`)
+---
+--- See [Global.Msg](https://wiki.facepunch.com/gmod/Global.Msg) for alternative that doesn't force add a new line, and [Global.MsgC](https://wiki.facepunch.com/gmod/Global.MsgC) for adding colored text to the console.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.print)
 ---@param ... any List of values to print.

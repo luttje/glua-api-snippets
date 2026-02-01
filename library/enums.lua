@@ -4419,11 +4419,11 @@ EFL_NO_DAMAGE_FORCES = -2147483648
 FCVAR_ARCHIVE = 128
 --- Save the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value into config.vdf on XBox
 FCVAR_ARCHIVE_XBOX = 16777216
---- Requires sv_cheats to be enabled to change the [ConVar](https://wiki.facepunch.com/gmod/ConVar) or run the command
+--- Requires `sv_cheats` to be enabled to change the [ConVar](https://wiki.facepunch.com/gmod/ConVar) or run the command
 ---
 --- Reported as "cheat" by `cvarlist`
 FCVAR_CHEAT = 16384
---- IVEngineClient::ClientCmd is allowed to execute this command
+--- `IVEngineClient::ClientCmd` is allowed to execute this command
 ---
 --- Reported as "clientcmd_can_execute" by `cvarlist`
 FCVAR_CLIENTCMD_CAN_EXECUTE = 1073741824
@@ -4437,7 +4437,7 @@ FCVAR_CLIENTDLL = 8
 ---
 --- Reported as "demo" by `cvarlist`
 FCVAR_DEMO = 65536
---- Opposite of FCVAR_DEMO, ensures the [ConVar](https://wiki.facepunch.com/gmod/ConVar) is not recorded in demos
+--- Opposite of [FCVAR_DEMO](https://wiki.facepunch.com/gmod/#FCVAR_DEMO), ensures the [ConVar](https://wiki.facepunch.com/gmod/ConVar) is not recorded in demos
 ---
 --- Reported as "norecord" by `cvarlist`
 FCVAR_DONTRECORD = 131072
@@ -4467,15 +4467,15 @@ FCVAR_NONE = 0
 FCVAR_NOTIFY = 256
 --- Makes the [ConVar](https://wiki.facepunch.com/gmod/ConVar) not changeable while connected to a server or in singleplayer
 FCVAR_NOT_CONNECTED = 4194304
---- Forces the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to only have printable characters ( No control characters )
+--- Forces the [ConVar](https://wiki.facepunch.com/gmod/ConVar) to only have printable characters (No control characters)
 ---
 --- Reported as "print" by `cvarlist`
 FCVAR_PRINTABLEONLY = 1024
---- Makes the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value hidden from all clients ( For example sv_password )
+--- Makes the [ConVar](https://wiki.facepunch.com/gmod/ConVar) value hidden from all clients (For example `sv_password`)
 ---
 --- Reported as "prot" by `cvarlist`
 FCVAR_PROTECTED = 32
---- For serverside [ConVar](https://wiki.facepunch.com/gmod/ConVar)s, it will send its value to all clients. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the same name must also exist on the client!
+--- For serverside [ConVar](https://wiki.facepunch.com/gmod/ConVar)s, it will enforce its value on all clients. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the same name must also exist on the client!
 ---
 --- Reported as "rep" by `cvarlist`
 FCVAR_REPLICATED = 8192
@@ -4493,7 +4493,7 @@ FCVAR_SPONLY = 64
 ---
 --- Reported as "log" by `cvarlist`
 FCVAR_UNLOGGED = 2048
---- If this is set, the convar will become anonymous and won't show up in the 'find' results.
+--- If this is set, the convar will become anonymous and won't show up in the `find` results.
 FCVAR_UNREGISTERED = 1
 --- For clientside commands, sends the value to the server
 ---
@@ -4921,6 +4921,7 @@ HULL_MEDIUM_TALL = 9
 ---| `HULL_LARGE_CENTERED`
 ---| `HULL_MEDIUM_TALL`
 
+---
 IMAGE_FORMAT_DEFAULT = -1
 --- Red, Green, Blue, Alpha, 8 bit per pixel.
 IMAGE_FORMAT_RGBA8888 = 0
@@ -4940,32 +4941,6 @@ IMAGE_FORMAT_BGRA8888 = 12
 IMAGE_FORMAT_RGBA16161616 = 25
 --- RGBA, but floating point 16 bits per pixel. Is used for "Float mode" HDR.
 IMAGE_FORMAT_RGBA16161616F = 24
---- Grayscale format (black and white), 8 bits per pixel. Not working on Proton.
-IMAGE_FORMAT_I8 = 5
---- Grayscale format (black and white) with alpha support, 8 bits per pixel/channel. Not working on Proton.
-IMAGE_FORMAT_IA88 = 6
---- Unknown legacy format. 8 bit alpha? Same as `I8` besides assigned meaning/name to the channel?
-IMAGE_FORMAT_A8 = 8
---- Unknown legacy format. Same as `BGRA8888`, but without defining meaning to the 4th channel?
-IMAGE_FORMAT_BGRX8888 = 16
---- `RGB565`, but reverse color order. Legacy format.
-IMAGE_FORMAT_BGR565 = 17
---- Unknown legacy format.
-IMAGE_FORMAT_BGRX5551 = 18
---- Unknown legacy format.
-IMAGE_FORMAT_BGRA4444 = 19
---- Unknown legacy format.
-IMAGE_FORMAT_BGRA5551 = 21
---- Single color channel, 32bit float per pixel. Works only with `mat_disable_d3d9ex 0`. Not working on dx 92.
-IMAGE_FORMAT_R32F = 27
---- 32bit floating point RGBA. Works only with `mat_disable_d3d9ex 0`
-IMAGE_FORMAT_RGBA32323232F = 29
---- Compressed texture format. See https://en.wikipedia.org/wiki/S3_Texture_Compression.
-IMAGE_FORMAT_DXT1 = 13
---- Compressed texture format. Do not use. See https://en.wikipedia.org/wiki/S3_Texture_Compression.
-IMAGE_FORMAT_DXT3 = 14
---- Compressed texture format. Better quality than DXT1, supports alpha. See https://en.wikipedia.org/wiki/S3_Texture_Compression.
-IMAGE_FORMAT_DXT5 = 15
 
 ---@alias IMAGE_FORMAT
 ---| `IMAGE_FORMAT_DEFAULT`
@@ -4978,19 +4953,6 @@ IMAGE_FORMAT_DXT5 = 15
 ---| `IMAGE_FORMAT_BGRA8888`
 ---| `IMAGE_FORMAT_RGBA16161616`
 ---| `IMAGE_FORMAT_RGBA16161616F`
----| `IMAGE_FORMAT_I8`
----| `IMAGE_FORMAT_IA88`
----| `IMAGE_FORMAT_A8`
----| `IMAGE_FORMAT_BGRX8888`
----| `IMAGE_FORMAT_BGR565`
----| `IMAGE_FORMAT_BGRX5551`
----| `IMAGE_FORMAT_BGRA4444`
----| `IMAGE_FORMAT_BGRA5551`
----| `IMAGE_FORMAT_R32F`
----| `IMAGE_FORMAT_RGBA32323232F`
----| `IMAGE_FORMAT_DXT1`
----| `IMAGE_FORMAT_DXT3`
----| `IMAGE_FORMAT_DXT5`
 
 --- +attack bound key ( Default: Left Mouse Button )
 IN_ATTACK = 1

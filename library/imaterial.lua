@@ -58,10 +58,14 @@ function IMaterial:GetName() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the name of the materials shader.
 ---
---- This function does not work serverside on Linux SRCDS.
+--- This function does not work serverside on Linux SRCDS and always returns `shader_error`.
+---
+--- This bug is fixed on `dev` beta and in the next update.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:GetShader)
----@return string # shaderName
+---@return string # Name of the currently loaded shader for this material, or `shader_error` if the material has no loaded shader.
+---
+--- It is not guaranteed to be in any specific capitalization, so case insensitive checks are advised.
 function IMaterial:GetShader() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the specified material string, or nil if the value is not set or if the value can not be converted to a string.
