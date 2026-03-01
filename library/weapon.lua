@@ -622,7 +622,9 @@ function Weapon:SetDeploySpeed(speed) end
 ---@param name string Name of the hold type. You can find all default hold types Hold_Types
 function Weapon:SetHoldType(name) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the time since this weapon last fired in seconds. Used in conjunction with [Weapon:LastShootTime](https://wiki.facepunch.com/gmod/Weapon:LastShootTime)
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the time since this weapon last fired in seconds. Used in conjunction with [Weapon:LastShootTime](https://wiki.facepunch.com/gmod/Weapon:LastShootTime).
+---
+--- This value is **not** networked to the client if set from server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Weapon:SetLastShootTime)
 ---@param time? number The time in seconds when the last time the weapon was fired.
@@ -702,6 +704,8 @@ function WEAPON:TakeSecondaryAmmo(amount) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the weapon thinks.
 ---
 --- This hook won't be called during the deploy animation and when using [Weapon:DefaultReload](https://wiki.facepunch.com/gmod/Weapon:DefaultReload).
+---
+--- **NOTE**: If you wish for this hook to be called during the deploy animation, add the following to the model's **ACT_VM_DRAW** sequence: `node "Ready"`
 ---
 --- Despite being a predicted hook, this hook is called clientside in single player (for your convenience), however it will not be recognized as a predicted hook via [Player:GetCurrentCommand](https://wiki.facepunch.com/gmod/Player:GetCurrentCommand), and will run more often in this case.
 ---

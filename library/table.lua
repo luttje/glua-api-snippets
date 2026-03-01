@@ -428,7 +428,7 @@ function table.SortDesc(tbl) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.ToString)
 ---@param tbl table The table to iterate over.
----@param displayName string Optional. A name for the table.
----@param niceFormatting boolean Adds new lines and tabs to the string.
+---@param displayName? string A name for the table.
+---@param niceFormatting? boolean Adds new lines and tabs to the string.
 ---@return string # The table formatted as a string.
 function table.ToString(tbl, displayName, niceFormatting) end

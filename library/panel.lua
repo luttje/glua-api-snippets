@@ -169,18 +169,29 @@ function Panel:ApplyGWEN(GWENTable) end
 function PANEL:ApplySchemeSettings() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Centers the panel on its parent.
---- 	**NOTE**: This will center the panel using the current size of the panel so should be called AFTER setting or adjusting the size of the 	panel
+---
+--- See [Panel:CenterHorizontal](https://wiki.facepunch.com/gmod/Panel:CenterHorizontal) and [Panel:CenterVertical](https://wiki.facepunch.com/gmod/Panel:CenterVertical) for more specialized functions.
+---
+--- 	**NOTE**: This will center the panel using the current size of the panel, so it should be called **AFTER** setting or adjusting the size of the panel.
+---
+--- Take special care when using [Panel:Dock](https://wiki.facepunch.com/gmod/Panel:Dock) as it will not update the size immediately.
+---
+--- You may want to use [Panel:PerformLayout](https://wiki.facepunch.com/gmod/Panel:PerformLayout) to set positions of child panels.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:Center)
 function Panel:Center() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Centers the panel horizontally with specified fraction.
 ---
+--- See [Panel:CenterVertical](https://wiki.facepunch.com/gmod/Panel:CenterVertical) for vertical only centering, and  [Panel:Center](https://wiki.facepunch.com/gmod/Panel:Center) for a function that does both axes.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:CenterHorizontal)
 ---@param fraction? number The center fraction.
 function Panel:CenterHorizontal(fraction) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Centers the panel vertically with specified fraction.
+---
+--- See [Panel:CenterHorizontal](https://wiki.facepunch.com/gmod/Panel:CenterHorizontal) for horizontal only centering, and  [Panel:Center](https://wiki.facepunch.com/gmod/Panel:Center) for a function that does both axes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:CenterVertical)
 ---@param fraction? number The center fraction.
@@ -517,7 +528,7 @@ function Panel:GetAlpha() end
 --- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetBGColor)
----@return number # The Color structure
+---@return Color # The Color structure
 function Panel:GetBGColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the position and size of the panel.
@@ -673,7 +684,7 @@ function Panel:GetDockPadding() end
 --- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetFGColor)
----@return table # A color structure. See Color
+---@return Color # A color structure. See Color
 function Panel:GetFGColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the name of the font that the panel renders its text with.
@@ -1293,6 +1304,7 @@ function Panel:LoadGWENString(str) end
 ---@param strPath string The PATH to search in. See File Search Paths.
 ---
 --- This isn't used internally.
+---@deprecated DImage should be used instead (with `.png` or `.jpg` images). `TGAImage` panel has no advantages.
 function Panel:LoadTGAImage(imageName, strPath) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the cursor position local to the position of the panel (usually the upper-left corner).
@@ -1722,7 +1734,7 @@ function Panel:Paste() end
 ---
 --- You should not call this function directly. Use [Panel:InvalidateLayout](https://wiki.facepunch.com/gmod/Panel:InvalidateLayout) instead.
 ---
---- You can use `vgui_visualizelayout 1` to visualize panel layouts as they happen for debugging purposes. Panels should not be doing this every frame.
+--- You should also be careful to not cause layout loops. You can use `vgui_visualizelayout 1` to visualize panel layouts as they happen for debugging purposes. Panels should not be doing this every frame for performance reasons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL:PerformLayout)
 ---@param width number The panels current width.
@@ -1938,11 +1950,25 @@ function Panel:SetAutoDelete(autoDelete) end
 --- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetBGColor)
----@param rOrColor number The red channel of the color, or a Color. If you pass the latter, the following three arguments are ignored.
+---@param r number The red channel of the color.
 ---@param g number The green channel of the color.
 ---@param b number The blue channel of the color.
 ---@param a number The alpha channel of the color.
-function Panel:SetBGColor(rOrColor, g, b, a) end
+function Panel:SetBGColor(r, g, b, a) end
+
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the background color of a panel such as a [RichText](https://wiki.facepunch.com/gmod/RichText), [Label](https://wiki.facepunch.com/gmod/Label), [DColorCube](https://wiki.facepunch.com/gmod/DColorCube) or the base [Panel](https://wiki.facepunch.com/gmod/Panel).
+---
+--- For many panels, such as [DLabel](https://wiki.facepunch.com/gmod/DLabel) and [Panel](https://wiki.facepunch.com/gmod/Panel), you must use [Panel:SetPaintBackgroundEnabled](https://wiki.facepunch.com/gmod/Panel:SetPaintBackgroundEnabled)( true ) for the background to appear.
+---
+--- Please note that for most panels the engine will overwrite the foreground and background colors a frame after panel creation via the [PANEL:ApplySchemeSettings](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings) hook, so you may want to set the color in that hook instead.
+---
+--- See [Panel:SetFGColor](https://wiki.facepunch.com/gmod/Panel:SetFGColor) for the foreground color.
+---
+--- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetBGColor)
+---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+function Panel:SetBGColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Sets the background color of the panel.

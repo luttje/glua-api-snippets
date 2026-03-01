@@ -896,7 +896,8 @@ function _G.Either(condition, truevar, falsevar) end
 ---@param soundLevel? number The sound level of the sound, see Enums/SNDLVL
 ---@param soundFlags? number The flags of the sound, see Enums/SND
 ---@param pitch? number The pitch of the sound, 0-255
-function _G.EmitSentence(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch) end
+---@param DSP? number Digital Sound Processor for this sound. DSP_Presets
+function _G.EmitSentence(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch, DSP) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Emits the specified sound at the specified position. See also [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound) if you wish to play sounds on a specific entity.
 ---
@@ -911,7 +912,7 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 --- This should either be a sound script name (sound.Add) or a file path relative to the `sound/` folder. (Make note that it's not sound**s**)
 ---@param position Vector The position where the sound is meant to play, which is also used for a network filter (`CPASAttenuationFilter`) to decide which players will hear the sound.
 ---@param entity? number The entity to emit the sound from. Can be an Entity:EntIndex or one of the following:
---- * `0` - Plays sound on the world (position set to `0,0,0`)
+--- * `0` - Plays sound on the world
 --- * `-1` - Plays sound on the local player (on server acts as `0`)
 --- * `-2` - Plays UI sound (position set to `0,0,0`, no spatial sound, on server acts as `0`)
 ---@param channel? CHAN The sound channel, see Enums/CHAN.
@@ -919,7 +920,7 @@ function _G.EmitSentence(soundName, position, entity, channel, volume, soundLeve
 ---@param soundLevel? SNDLVL The sound level of the sound, see Enums/SNDLVL
 ---@param soundFlags? SND The flags of the sound, see Enums/SND
 ---@param pitch? number The pitch of the sound, 0-255
----@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---@param dsp? number The DSP preset for this sound. DSP_Presets
 ---@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
 function _G.EmitSound(soundName, position, entity, channel, volume, soundLevel, soundFlags, pitch, dsp, filter) end
 
@@ -1860,6 +1861,8 @@ function _G.IsUselessModel(modelName) end
 ---
 --- **NOTE**: Due to vehicles being technically valid the moment they're spawned, also use [Vehicle:IsValidVehicle](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle) to make sure they're fully initialized.
 ---
+--- **WARNING**: Putting a number in the argument will cause an error.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.IsValid)
 ---@param toBeValidated any The table or object to be validated.
 ---@return boolean # True if the object is valid.
@@ -2080,8 +2083,9 @@ function _G.MenuGetAddonData(workshopItemID) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Mesh)
 ---@param mat? IMaterial The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
+---@param boneWeights? number Number of bone weights per vertex. This value can be set to 2 to enable skinning and rendering via IMesh:DrawSkinned. This was recently added and is only available on the Dev Branch right now.
 ---@return IMesh # The created object.
-function _G.Mesh(mat) end
+function _G.Mesh(mat, boneWeights) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Runs [util.PrecacheModel](https://wiki.facepunch.com/gmod/util.PrecacheModel) and returns the string.
 ---
@@ -3022,6 +3026,7 @@ function _G.Sound(soundPath) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the approximate duration of the specified sound in seconds, for `.wav` and `.mp3` sounds.
 --- 	This function only works on mp3 files if the file is encoded with constant bitrate.
+--- 	**NOTE**: This function will not work with sound files prepended with a [sound character](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SoundDuration)
 ---@param soundName string The sound file path.

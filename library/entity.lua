@@ -520,7 +520,7 @@ function ENTITY:Draw(flags) end
 ---
 --- Using this with a map model ([game.GetWorld](https://wiki.facepunch.com/gmod/game.GetWorld)():[GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel)()) crashes the game.
 ---
---- Calling this in [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw) will cause infinite recursion and crash the game.
+--- Calling this on a player during that player's [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw) hook call will cause infinite recursion and crash the game.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DrawModel)
 ---@param flags? number The optional Enums/STUDIO flags, usually taken from ENTITY:Draw and similar hooks.
@@ -586,12 +586,19 @@ function Entity:DTVar(type, slot, name) end
 ---@param name string Name by which you will refer to DTVar. It must be a valid variable name. (No spaces!)
 function Entity:DTVar(type, name) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound on an entity.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound on an entity. See also [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) if you wish to play sounds without an entity.
 ---
 --- If run clientside, the sound will only be heard locally.
 --- If used on a player or NPC character with the mouth rigged, the character will "lip-sync" if the sound file contains lipsync data. See [this page](https://developer.valvesoftware.com/wiki/Choreography_creation/Lip_syncing) for more information.
 ---
 --- **NOTE**: When using this function with weapons, use the [Weapon](https://wiki.facepunch.com/gmod/Weapon) itself as the entity, not its owner!
+---
+--- **WARNING**: Due to engine quirks, [sound scripts](https://developer.valvesoftware.com/wiki/Soundscripts) can't have their soundlevel, pitch, volume, or channel changed when played from an entity—the sound script parameters will override whatever you pass to this function.
+---
+--- You can do one of these instead:
+--- * Use [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties) to select a sound from the script, and play the sound file directly.
+--- * For single-use sounds, you can pass the [SND_CHANGE_VOL](https://wiki.facepunch.com/gmod/Enums/SND) or [SND_CHANGE_PITCH](https://wiki.facepunch.com/gmod/Enums/SND) sound flags. However, this will change the volume or pitch of the sound if it's already playing, instead of starting the sound over or playing another instance.
+--- * Use [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) with the entity parameter set to the [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex) of the entity you want to play the sound on.
 ---
 --- This does not respond to [Global.SuppressHostEvents](https://wiki.facepunch.com/gmod/Global.SuppressHostEvents).
 ---
@@ -602,15 +609,11 @@ function Entity:DTVar(type, name) end
 ---
 --- The string cannot have whitespace at the start or end. You can remove this with [string.Trim](https://wiki.facepunch.com/gmod/string.Trim).
 ---@param soundLevel? number A modifier for the distance this sound will reach, acceptable range is 0 to 511. 100 means no adjustment to the level. See Enums/SNDLVL
----
---- Will not work if a [sound script](https://developer.valvesoftware.com/wiki/Soundscripts) is used.
 ---@param pitchPercent? number The pitch applied to the sound. The acceptable range is from 0 to 255. 100 means the pitch is not changed.
 ---@param volume? number The volume, from 0 to 1.
 ---@param channel? number The sound channel, see Enums/CHAN.
----
---- Will not work if a [sound script](https://developer.valvesoftware.com/wiki/Soundscripts) is used.
 ---@param soundFlags? number The flags of the sound, see Enums/SND
----@param dsp? number The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
+---@param dsp? number The DSP preset for this sound. DSP_Presets
 ---@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
 function Entity:EmitSound(soundName, soundLevel, pitchPercent, volume, channel, soundFlags, dsp, filter) end
 
@@ -619,7 +622,7 @@ function Entity:EmitSound(soundName, soundLevel, pitchPercent, volume, channel, 
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:EnableConstraints)
 ---@param toggleConstraints boolean Set to true to enable the constraints and false to disable them.
 ---
---- Disabling constraints will delete the constraint entities.
+--- Disabling constraints will delete the constraints.
 function Entity:EnableConstraints(toggleConstraints) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Flags an entity as using custom lua defined collisions. Fixes entities having spongy player collisions or not hitting traces, such as after [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh)
@@ -775,7 +778,7 @@ function ENTITY:FireAnimationEvent(pos, ang, event, name) end
 ---
 --- Lag compensation will not work if this function is called in a timer, regardless if the timer was made in a predicted hook.
 ---
---- Due to how `Entity:FireBullets` is set up internally, bullet tracers will always originate from attachment 1. This can be avoided by supplying your own tracer effect.
+--- Due to how `Entity:FireBullets` is set up internally, bullet tracers will always originate from the first attachment/index 1. This can be avoided by supplying your own tracer effect.
 ---
 --- When firing bullets from a [Weapon](https://wiki.facepunch.com/gmod/Weapon), it is recommended to fire bullets from the weapon owner entity ([Player](https://wiki.facepunch.com/gmod/Player) or [NPC](https://wiki.facepunch.com/gmod/NPC)), not the [Weapon](https://wiki.facepunch.com/gmod/Weapon) itself.
 ---
@@ -1602,7 +1605,7 @@ function Entity:GetMaterial() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetMaterials)
 ---@return table # A table containing full paths to the materials of the model.
 ---
---- For models, it's limited to 128 materials.
+--- For models, it's limited to `128` materials.
 function Entity:GetMaterials() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the [surface material type](https://developer.valvesoftware.com/wiki/Material_Types) of this entity.
@@ -3061,6 +3064,7 @@ function Entity:LocalToWorldAngles(ang) end
 function Entity:LookupAttachment(attachmentName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the bone index of the given bone name, returns `nil` if the bone does not exist.
+--- **NOTE**: When called on [Weapon](https://wiki.facepunch.com/gmod/Weapon)s equipped by any Player, this will return their viewmodel's bone index instead of worldmodel.
 ---
 --- See [Entity:GetBoneName](https://wiki.facepunch.com/gmod/Entity:GetBoneName) for the inverse of this function.
 ---
@@ -3080,7 +3084,7 @@ function Entity:LookupAttachment(attachmentName) end
 --- * ValveBiped.Bip01_R_Calf
 --- * ValveBiped.Bip01_R_Shoulder
 --- * ValveBiped.Bip01_R_Elbow
----@return number|nil # Index of the given bone name, or `nil` if the bone doesn't exist on the Entity
+---@return number|nil # Index of the given bone name, or `nil` if the bone doesn't exist on the Entity.
 function Entity:LookupBone(boneName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns pose parameter ID from its name.
@@ -5348,6 +5352,7 @@ function Entity:SetOwner(owner) end
 --- Use Entity:AddEffects( EF_FOLLOWBONE ) to treat this argument as a Bone ID instead of an Attachment ID. Similar to Entity:FollowBone.
 ---
 --- You must call [Entity:SetMoveType](https://wiki.facepunch.com/gmod/Entity:SetMoveType)( MOVETYPE_NONE ) on the child for this argument to have any effect!
+--- Parenting to attachment IDs more than `255` is unsupported and will output a LUA error.
 function Entity:SetParent(parent, attachmentOrBoneId) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the parent of an entity to another entity with the given physics bone number. Similar to [Entity:SetParent](https://wiki.facepunch.com/gmod/Entity:SetParent), except it is parented to a physbone. This function is useful mainly for ragdolls.
@@ -5386,8 +5391,9 @@ function Entity:SetPhysConstraintObjects(Phys1, Phys2) end
 ---@param timeLimit? number Time in seconds until the entity forgets its physics attacker and prevents it from getting the kill credit.
 function Entity:SetPhysicsAttacker(ent, timeLimit) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to set how fast an entity's animation will play,
---- with 1.0 being the default speed.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to set how fast an entity's animation will play, with 1.0 being the default speed.
+---
+--- It is networked to clients, but limited to [-4,12] range when networking.
 ---
 --- **NOTE**: This function does not affect gestures.
 --- 	Use [Entity:SetLayerPlaybackRate](https://wiki.facepunch.com/gmod/Entity:SetLayerPlaybackRate) instead.
@@ -5630,9 +5636,9 @@ function Entity:SetSpawnFlags(flags) end
 --- The server's value takes priority on the client.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial)
----@param index? number Index of the material to override, acceptable values are from 0 to 31.
+---@param index? number Index of the material to override, acceptable values are from `0` to `31`.
 ---
---- Indexes are by Entity:GetMaterials, but you have to subtract 1 from them.
+--- Indexes are by Entity:GetMaterials, but you have to subtract `1` from them.
 ---
 --- If called with no arguments, all sub materials will be reset.
 ---@param material? string The material to override the default one with. Set to nil to revert to default material.
@@ -5908,6 +5914,8 @@ function Entity:StopParticlesNamed(name) end
 function Entity:StopParticlesWithNameAndAttachment(name, attachment) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Stops emitting the given sound from the entity, especially useful for looping sounds.
+---
+--- Internally plays the sound with the [SND_STOP](https://wiki.facepunch.com/gmod/Enums/SND#SND_STOP) flag to stop the sound.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:StopSound)
 ---@param sound string The name of the sound script or the filepath to stop playback of.

@@ -34,6 +34,12 @@ function IMesh:Destroy() end
 ---[View wiki](https://wiki.facepunch.com/gmod/IMesh:Draw)
 function IMesh:Draw() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Renders the mesh with the active matrix and given bone matrices.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/IMesh:DrawSkinned)
+---@param bones VMatrix[] A list of matrices to use as bones. Up to 52 of them.
+function IMesh:DrawSkinned(bones) end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether this [IMesh](https://wiki.facepunch.com/gmod/IMesh) is valid or not.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMesh:IsValid)

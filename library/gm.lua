@@ -452,6 +452,8 @@ function GM:FinishMove(ply, mv) end
 ---
 --- **NOTE**: This hook is only called on Lua start up, changing its value (or adding new hooks) after it has been already called will not have any effect.
 ---
+--- **NOTE**: You can [Panel:SetSkin](https://wiki.facepunch.com/gmod/Panel:SetSkin) "Default" (or other skins) on the frame/base panel and they will still take priority
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ForceDermaSkin)
 ---@return string # A **case sensitive** Derma skin name to be used as default, registered previously via derma.DefineSkin.
 ---
@@ -466,7 +468,7 @@ function GM:GameContentChanged() end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) An internal function used to get an untranslated string to show in the kill feed as the entity's name. See [GM:SendDeathNotice](https://wiki.facepunch.com/gmod/GM:SendDeathNotice)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:GetDeathNoticeEntityName)
----@param name String The name of the entity.
+---@param name string|Entity The name of the entity.
 ---@return string # The untranslated name for given NPC. The translation/localization would happen on the client.
 function GM:GetDeathNoticeEntityName(name) end
 
@@ -724,7 +726,7 @@ function GM:HUDPaintBackground() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the Gamemode is about to draw a given element on the client's HUD (heads-up display).
 ---
---- **WARNING**: This hook is called HUNDREDS of times per second (more than 5 times per frame on average). You shouldn't be performing any computationally intensive operations.
+--- **WARNING**: This hook is called HUNDREDS of times per second (more than 5 times per frame on average). You shouldn't be performing any computationally intensive operations. For Weapons you SHOULD use [WEAPON:HUDShouldDraw](https://wiki.facepunch.com/gmod/WEAPON:HUDShouldDraw) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:HUDShouldDraw)
 ---@param name string The name of the HUD element. You can find a full list of HUD elements for this hook HUD_Element_List.
@@ -808,9 +810,9 @@ function GM:LoadGModSave(data, map, timestamp) end
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called while an addon from the Steam workshop is downloading. Used by default to update details on the fancy workshop download panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:LoadGModSaveFailed)
----@return string # Failure Reason.
----@return string # the workshop ID of the missing map (if found). Can be an empty string
-function GM:LoadGModSaveFailed() end
+---@param reason string Failure Reason.
+---@param workshopid string the workshop ID of the missing map (if found). Can be an empty string
+function GM:LoadGModSaveFailed(reason, workshopid) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Called when `menu.lua` has finished loading.
 ---
@@ -1142,7 +1144,7 @@ function GM:OnPlayerPhysicsPickup(ply, ent) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnReloaded)
 function GM:OnReloaded() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the player's screen resolution of the game changes.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the player's screen resolution of the game changes. This also called when changing MSAA settings.
 ---
 --- [Global.ScrW](https://wiki.facepunch.com/gmod/Global.ScrW) and [Global.ScrH](https://wiki.facepunch.com/gmod/Global.ScrH) will return the new values when this hook is called.
 ---
@@ -1532,9 +1534,45 @@ function GM:PlayerHurt(victim, attacker, healthRemaining, damageTaken) end
 ---
 --- **NOTE**: This hook is called before the player has fully loaded, when the player is still in seeing the `Starting Lua` screen. For example, trying to use the [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) function will return the default model (`models/player.mdl`).
 ---
+--- **WARNING**: Sending [net](https://wiki.facepunch.com/gmod/net) messages to the spawned player in this hook may cause them to be received before the player finishes loading, for example [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer) might return NULL since [GM:InitPostEntity](https://wiki.facepunch.com/gmod/GM:InitPostEntity) may have not been called yet clientside though the net message **won't** be lost and the client still should receive it (more information here: https://github.com/Facepunch/garrysmod-requests/issues/718).
+---
+--- Workaround without networking:
+--- ```
+--- local load_queue = {}
+---
+--- hook.Add( "PlayerInitialSpawn", "myAddonName/Load", function( ply )
+--- 	load_queue[ ply ] = true
+--- end )
+---
+--- hook.Add( "StartCommand", "myAddonName/Load", function( ply, cmd )
+--- 	if load_queue[ ply ] and not cmd:IsForced() then
+--- 		load_queue[ ply ] = nil
+---
+--- 		-- Send what you need here if it requires the client to be fully loaded!
+--- 	end
+--- end )
+--- ```
+---
+--- With networking:
+--- ```
+--- -- CLIENT
+--- hook.Add( "InitPostEntity", "Ready", function()
+--- 	net.Start( "cool_addon_client_ready" )
+--- 	net.SendToServer()
+--- end )
+--- ```
+--- ```
+--- -- SERVER
+--- util.AddNetworkString( "cool_addon_client_ready" )
+---
+--- net.Receive( "cool_addon_client_ready", function( len, ply )
+--- 	-- Send what you need here!
+--- end )
+--- ```
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerInitialSpawn)
 ---@param player Player The player who spawned.
----@param transition boolean If `true`, the player just spawned from a [map transition](https://developer.valvesoftware.com/wiki/Level_Transitions). (Specifically via `trigger_changelevel` or `point_changelevel` entities)
+---@param transition boolean If `true`, the player just spawned from a map transition.
 function GM:PlayerInitialSpawn(player, transition) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the player join a specified team. This is a convenience function that calls [Player:SetTeam](https://wiki.facepunch.com/gmod/Player:SetTeam) and runs the [GM:OnPlayerChangedTeam](https://wiki.facepunch.com/gmod/GM:OnPlayerChangedTeam) hook.
@@ -1564,6 +1602,8 @@ function GM:PlayerLeaveVehicle(ply, veh) end
 function GM:PlayerLoadout(ply) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player tries to switch noclip mode.
+---
+--- [MOVETYPE_NOCLIP](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_NOCLIP) can be used to determine if a player is currently in noclip mode.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerNoClip)
 ---@param ply Player The person who entered/exited noclip
@@ -1795,7 +1835,9 @@ function GM:PostCleanupMap() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostDraw2DSkyBox)
 function GM:PostDraw2DSkyBox() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after rendering effects. This is where halos are drawn. Called just before [GM:PreDrawHUD](https://wiki.facepunch.com/gmod/GM:PreDrawHUD).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after rendering effects. This is where halos are drawn. Called just before [GM:PreDrawHUD](https://wiki.facepunch.com/gmod/GM:PreDrawHUD) (The two hooks are basically identical).
+---
+--- See [GM:PreDrawEffects](https://wiki.facepunch.com/gmod/GM:PreDrawEffects) for the associated hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostDrawEffects)
 function GM:PostDrawEffects() end
@@ -1950,7 +1992,9 @@ function GM:PostUndo(undo, count) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreCleanupMap)
 function GM:PreCleanupMap() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just after [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) and can technically be considered "PostDrawAllViewModels".
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just after [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel) and can technically be considered as a "PostDrawAllViewModels".
+---
+--- See [GM:PostDrawEffects](https://wiki.facepunch.com/gmod/GM:PostDrawEffects) for the associated hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawEffects)
 function GM:PreDrawEffects() end
@@ -1960,7 +2004,9 @@ function GM:PreDrawEffects() end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawHalos)
 function GM:PreDrawHalos() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just after [GM:PostDrawEffects](https://wiki.facepunch.com/gmod/GM:PostDrawEffects). Drawing anything in it seems to work incorrectly.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called just after [GM:PostDrawEffects](https://wiki.facepunch.com/gmod/GM:PostDrawEffects) (duplicate of it). Drawing anything in it seems to work incorrectly.
+---
+--- See [GM:PostDrawHUD](https://wiki.facepunch.com/gmod/GM:PostDrawHUD) for the associated hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PreDrawHUD)
 function GM:PreDrawHUD() end

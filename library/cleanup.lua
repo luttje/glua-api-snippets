@@ -52,7 +52,7 @@ function cleanup.Register(type) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.ReplaceEntity)
 ---@param from Entity The old entity.
----@param to Entity The new entity. Can be a `NULL` entity to remove the old entity from the cleanup system.
+---@param to Entity|nil The new entity. Can be a `NULL` entity to remove the old entity from the cleanup system.
 ---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
 

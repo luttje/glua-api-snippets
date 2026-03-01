@@ -3,9 +3,7 @@
 --- The halo library is used to draw glowing outlines around entities, an example of this can be seen by picking up props with the physgun in Garry's Mod 13.
 halo = {}
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Applies a [halo](https://wiki.facepunch.com/gmod/halo) glow effect to one or multiple entities.
---- **WARNING**: Using this function outside of the [GM:PreDrawHalos](https://wiki.facepunch.com/gmod/GM:PreDrawHalos) hook can cause instability or crashes.
----
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Applies a [halo](https://wiki.facepunch.com/gmod/halo) glow effect to one or multiple entities. It is preferable to add them in [GM:PreDrawHalos](https://wiki.facepunch.com/gmod/GM:PreDrawHalos), but they can be added at any time.
 --- **NOTE**: The ignoreZ parameter will cause the halos to draw over the player's viewmodel. You can work around this using [render.DepthRange](https://wiki.facepunch.com/gmod/render.DepthRange) in the [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel), [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel), [GM:PreDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PreDrawPlayerHands) and [GM:PostDrawPlayerHands](https://wiki.facepunch.com/gmod/GM:PostDrawPlayerHands) hooks.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/halo.Add)

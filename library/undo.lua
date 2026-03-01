@@ -64,7 +64,7 @@ function undo.MakeUIDirty() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/undo.ReplaceEntity)
 ---@param from Entity The old entity
----@param to Entity The new entity to replace the old one. Can also be a `NULL` to remove the entity from the undo system.
+---@param to Entity|nil The new entity to replace the old one. Can also be a `NULL` to remove the entity from the undo system.
 ---@return boolean # Whether the entity was replaced
 function undo.ReplaceEntity(from, to) end
 

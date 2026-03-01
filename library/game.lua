@@ -52,7 +52,6 @@ function game.BuildAmmoTypes() end
 --- Beware of calling this function in hooks that may be called on map clean up (such as [ENTITY:StartTouch](https://wiki.facepunch.com/gmod/ENTITY:StartTouch)) to avoid infinite loops.
 ---
 --- Calling this destroys all BASS streams.
---- This can crash when removing `_firesmoke` entities. **You can use the example below to workaround this issue.**
 --- The EFL_KEEP_ON_RECREATE_ENTITIES flag doesn't prevent an entity from being recreated, which means flagged entities will be duplicated since they are both kept and recreated.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.CleanUpMap)
@@ -73,6 +72,12 @@ function game.CleanUpMap(dontSendToClients, extraFilters, callback) end
 ---[View wiki](https://wiki.facepunch.com/gmod/game.ConsoleCommand)
 ---@param stringCommand string String containing the command and arguments to be ran.
 function game.ConsoleCommand(stringCommand) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns information about the currently active 3D skybox.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/game.Get3DSkyboxInfo)
+---@return Structures/Sky3DParams[] # The 3D skybox info, or `nil` if the map has no 3d skybox or the function is called too soon during server start up.
+function game.Get3DSkyboxInfo() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the damage type of given ammo type.
 ---
@@ -197,10 +202,13 @@ function game.GetMapChangeCount() end
 ---@return string # nextMap or nil if called too early.
 function game.GetMapNext() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the revision (Not to be confused with [VBSP Version](https://developer.valvesoftware.com/wiki/Source_BSP_File_Format#Versions)) of the current map.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the revision (Not to be confused with [VBSP Version](https://developer.valvesoftware.com/wiki/Source_BSP_File_Format#Versions)) and BSP version of the current map.
+---
+--- Map revision is the amount of times the map file was saved in Hammer at the time of the map being compiled. This is useful to detect when a map has changed.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.GetMapVersion)
 ---@return number # Revision of the currently loaded map.
+---@return number # BSP version.
 function game.GetMapVersion() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the difficulty level of the game.

@@ -6649,23 +6649,23 @@ SIM_GLOBAL_FORCE = 4
 
 --- To keep the compiler happy
 SND_NOFLAGS = 0
---- Change sound volume
+--- Change sound volume. If the sound is already being emitted by the entity, its volume will be changed, instead of playing another sound.
 SND_CHANGE_VOL = 1
---- Change sound pitch
+--- Change sound pitch. If the sound is already being emitted by the entity, its pitch will be changed, instead of playing another sound.
 SND_CHANGE_PITCH = 2
---- Stop the sound
+--- Stop the sound. Used internally for [Entity:StopSound](https://wiki.facepunch.com/gmod/Entity:StopSound).
 SND_STOP = 4
 --- We're spawning, used in some cases for ambients. Not sent over net, only a param between dll and server.
 SND_SPAWNING = 8
---- Sound has an initial delay
+--- Sound has an initial delay.
 SND_DELAY = 16
 --- Stop all looping sounds on the entity.
 SND_STOP_LOOPING = 32
---- This sound should be paused if the game is paused
+--- This sound should be paused if the game is paused.
 SND_SHOULDPAUSE = 128
 --- If the sound has any associated phoneme (character lip-sync) data, ignore it.
 SND_IGNORE_PHONEMES = 256
---- Used to change all sounds emitted by an entity, regardless of scriptname
+--- Used to change all sounds (e.g. with SND_CHANGE_VOL) emitted by an entity, regardless of scriptname.
 SND_IGNORE_NAME = 512
 --- Unused/legacy; does nothing.
 SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024

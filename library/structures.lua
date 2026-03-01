@@ -805,7 +805,7 @@ EmitSoundInfo.SoundTime = 0
 ---
 --- There are approximately 134 different presets defined by the Source engine between 0 and 133. These presets represent different types of 'rooms' or environments.
 ---
---- [List of DSP's](https://developer.valvesoftware.com/wiki/Dsp_presets)
+--- DSP_Presets
 ---@type number?
 EmitSoundInfo.DSP = 0
 
@@ -1633,9 +1633,11 @@ ModelInfo.Bones = nil
 --- Each sequence is a table with the following info:
 --- * string Name
 --- * string Activity
+--- * number ActivityID
+--- * number ActivityWeight
 --- * table Events
 ---
---- `Events` table is a list of tables with following memebers:
+--- `Events` table is a list of tables with following members:
 --- * number Cycle
 --- * number Event
 --- * string Name
@@ -2579,6 +2581,23 @@ ShadowControlParams.dampfactor = 1
 ---If it's further away than this it'll teleport (Set to 0 to not teleport)
 ---@type number?
 ShadowControlParams.teleportdistance = 0
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure containing the information of 3D skybox.
+---
+--- Returned by [game.Get3DSkyboxInfo](https://wiki.facepunch.com/gmod/game.Get3DSkyboxInfo).
+
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Structures/Sky3DParams)
+---@class Sky3DParams
+local Sky3DParams = {}
+
+---Position of the [sky_camera](https://developer.valvesoftware.com/wiki/Sky_camera) entity.
+---@type Vector
+Sky3DParams.origin = nil
+
+---Scale of the 3D skybox.
+---@type number
+Sky3DParams.scale = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Table used in [sound.Add](https://wiki.facepunch.com/gmod/sound.Add) and [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 
