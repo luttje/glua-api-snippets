@@ -558,10 +558,13 @@ function render.GetSuperFPTex2() end
 ---@return Vector # The surface color.
 function render.GetSurfaceColor(startPos, endPos) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns a vector representing linear tone mapping scale.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns a vector representing linear tone mapping scale. See [render.SetToneMappingScaleLinear](https://wiki.facepunch.com/gmod/render.SetToneMappingScaleLinear) for details.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetToneMappingScaleLinear)
----@return Vector # The vector representing linear tone mapping scale.
+---@return Vector # The tonemapping scales.
+--- * X - Output scale.
+--- * Y - Lightmap scale.
+--- * Z - Reflection map scale.
 function render.GetToneMappingScaleLinear() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current view setup.

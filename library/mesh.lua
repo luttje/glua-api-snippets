@@ -116,8 +116,7 @@ function mesh.Quad(vertex1, vertex2, vertex3, vertex4, color) end
 ---@param color table The color for the vertices.
 function mesh.QuadEasy(position, normal, sizeX, sizeY, color) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the specular map values. This is `COLOR1` semantic of Vertex Shader.
---- **NOTE**: This doesn't currently work, even though `COLOR0` can be successfully passed to the Vertex Shader using [mesh.Color](https://wiki.facepunch.com/gmod/mesh.Color), unlike `COLOR1`, ​​using this function.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the specular map values. This is `COLOR1` semantic of Vertex Shader. Allows to blend textures of [Lightmapped_4WayBlend](https://developer.valvesoftware.com/wiki/Lightmapped_4WayBlend). Requires the `VERTEX_SPECULAR` flag to be set in the C++ code of a shader.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Specular)
 ---@param r number The red channel multiplier of the specular map.

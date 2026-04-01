@@ -550,7 +550,7 @@ function net.WriteUInt(unsignedInteger, bitCount) end
 function net.WriteUInt64(uint64) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Appends a vector to the current net message.
---- Vectors sent by this function are compressed, which may result in precision loss. XYZ components greater than `16384` or less than `-16384` are irrecoverably altered (most significant bits are trimmed) and precision after the decimal point is low.
+--- Vectors sent by this function are compressed, which may result in precision loss. XYZ components greater than `16384` or less than `-16384` are irrecoverably altered (most significant bits are trimmed) and precision after the decimal point is 1 digit (5 bits).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteVector)
 ---@param vector Vector The vector to be sent.

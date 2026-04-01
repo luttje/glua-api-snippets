@@ -3,9 +3,9 @@
 --- The ai library.
 ai = {}
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the number of AI nodes on the map, used by the base game NPCs.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the number of AI nodes on the map, used by the base game [NPC](https://wiki.facepunch.com/gmod/NPC)s.
 ---
---- For nextbots, see [navmesh](https://wiki.facepunch.com/gmod/navmesh).
+--- For [NextBot](https://wiki.facepunch.com/gmod/NextBot)s, see [navmesh](https://wiki.facepunch.com/gmod/navmesh).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ai.GetNodeCount)
 ---@return number # The node count.

@@ -7,7 +7,7 @@
 --- There's some code that prevents debugoverlay from being added if the game is paused, i.e. when console is open in singleplayer.
 debugoverlay = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays an axis indicator at the specified position.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays an axis indicator at the specified position, with 3 lines pointing in the positive direction (i.e. direction in which the values increase) of each axis.
 ---
 --- **NOTE**: This function will silently fail if the `developer` [ConVar](https://wiki.facepunch.com/gmod/ConVar) is set to `0`.
 --- It is not networked to clients, except for the [listen server host](https://wiki.facepunch.com/gmod/Player:IsListenServerHost).

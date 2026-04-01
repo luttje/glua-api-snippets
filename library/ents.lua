@@ -119,8 +119,6 @@ function ents.FindInBox(boxMins, boxMaxs) end
 ---
 --- The "cone" is actually a conical "slice" of an axis-aligned box (see: [ents.FindInBox](https://wiki.facepunch.com/gmod/ents.FindInBox)). The image to the right shows approximately how this function would look in 2D. Due to this, the entity may be farther than the specified range!
 ---
---- **NOTE**: Clientside entities will not be returned by this function.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindInCone)
 ---@param origin Vector The tip of the cone.
 ---@param normal Vector Direction of the cone.
@@ -188,7 +186,9 @@ function ents.GetByIndex(entIdx) end
 ---@return number # Number of entities.
 function ents.GetCount(IncludeKillMe) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of networked entities, which is limited to 8192. [ents.Create](https://wiki.facepunch.com/gmod/ents.Create) will fail somewhere between 8064 and 8176 - this can vary based on the amount of existing temp ents.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the amount of networked entities, which is limited to 8192.
+---
+--- [ents.Create](https://wiki.facepunch.com/gmod/ents.Create) will fail somewhere between 8064 and 8176 - this can vary based on the amount of player slots on the server and other entities.
 ---
 --- See also [MAX_EDICT_BITS](https://wiki.facepunch.com/gmod/Global_Variables#maxedictbits) global variable.
 ---

@@ -1190,6 +1190,8 @@ function _G.GetConVar_Internal(name) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the numeric value ConVar with the specified name.
 ---
+--- Returns the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) if `maxplayers` is specified as the convar name, even though `maxplayers` is not a convar. (it is a console **command**) You should be using aforementioned Lua function instead.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
 ---@param name string Name of the ConVar to get.
 ---@return number # The ConVar's value.
@@ -1197,6 +1199,8 @@ function _G.GetConVar_Internal(name) end
 function _G.GetConVarNumber(name) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the string value ConVar with the specified name.
+---
+--- Returns the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) if `maxplayers` is specified as the convar name, even though `maxplayers` is not a convar. (it is a console **command**) You should be using aforementioned Lua function instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarString)
 ---@param name string Name of the ConVar to get.
@@ -1857,7 +1861,7 @@ function _G.IsUselessModel(modelName) end
 ---
 --- Checks that an object is not [nil](https://wiki.facepunch.com/gmod/nil), has an `IsValid` method and if this method returns `true`. If the object has no `IsValid` method, it will return `false`.
 ---
---- **NOTE**: If you are sure that the object you are about to check is not `nil` and has the `IsValid` method, it would be more faster to call it directly rather than using `IsValid`.
+--- **NOTE**: If you are sure that the object you are about to check is not `nil` and has the `IsValid` method, it would be faster to call it directly rather than using `IsValid`.
 ---
 --- **NOTE**: Due to vehicles being technically valid the moment they're spawned, also use [Vehicle:IsValidVehicle](https://wiki.facepunch.com/gmod/Vehicle:IsValidVehicle) to make sure they're fully initialized.
 ---
@@ -1976,7 +1980,9 @@ function _G.LoadLastMap() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.LoadNewsList)
 function _G.LoadNewsList() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Loads all preset settings for the [presets](https://wiki.facepunch.com/gmod/presets) and returns them in a table
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Loads all preset settings for the [presets](https://wiki.facepunch.com/gmod/presets) and returns them in a table
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.LoadPresets)
 ---@return table # Preset data
@@ -2676,7 +2682,9 @@ function _G.SaveHideNews(hide) end
 ---@param category string The name of the category to which this map belongs.
 function _G.SaveLastMap(map, category) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Overwrites all presets with the supplied table. Used by the [presets](https://wiki.facepunch.com/gmod/presets) for preset saving
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Overwrites all presets with the supplied table. Used by the [presets](https://wiki.facepunch.com/gmod/presets) for preset saving
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SavePresets)
 ---@param presets table Presets to be saved

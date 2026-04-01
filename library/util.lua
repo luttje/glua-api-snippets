@@ -565,7 +565,7 @@ function util.IsValidProp(modelName) end
 ---@return boolean # Returns true if the specified model name points to a valid ragdoll; otherwise false.
 function util.IsValidRagdoll(ragdollName) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a JSON string to a Lua table.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a JSON string to a Lua table. It supports comments and trailing commas.
 ---
 --- See [util.TableToJSON](https://wiki.facepunch.com/gmod/util.TableToJSON) for the opposite function.
 ---
@@ -808,7 +808,9 @@ function util.SHA256(stringToHash) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates a random float value that should be the same on client and server.
 ---
---- **NOTE**: This function is best used in a [predicted hook](https://wiki.facepunch.com/gmod/prediction)
+--- **NOTE**: This function is best used in a [predicted hook](https://wiki.facepunch.com/gmod/prediction).
+---
+--- This uses a different method of obtaining random numbers and is unaffected by [math.randomseed](https://wiki.facepunch.com/gmod/math.randomseed). Instead it uses an internal seed that is based on the player's current predicted command and is fixed to a value of -1 outside of prediction.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.SharedRandom)
 ---@param uniqueName string The seed for the random value

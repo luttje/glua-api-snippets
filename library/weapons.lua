@@ -3,7 +3,7 @@
 --- The weapons library allows you to access information about any scripted weapons loaded into the game, as well as register your own weapons.
 weapons = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Get a `copy` of weapon table by name. This function also inherits fields from the weapon's base class, unlike [weapons.GetStored](https://wiki.facepunch.com/gmod/weapons.GetStored).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Get a `copy` of weapon table by name. This function also inherits fields from the weapon's base class, unlike [weapons.GetStored](https://wiki.facepunch.com/gmod/weapons.GetStored) or [weapons.GetList](https://wiki.facepunch.com/gmod/weapons.GetList).
 --- 	**NOTE**: This will only work on SWEP's, this means that this will not return anything for HL2/HL:S weapons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/weapons.Get)
@@ -12,6 +12,7 @@ weapons = {}
 function weapons.Get(classname) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Get a list of all the registered SWEPs. This does not include weapons added to spawnmenu manually.
+--- 	**NOTE**: This function does not inherit fields from the weapon's base class, unlike [weapons.Get](https://wiki.facepunch.com/gmod/weapons.Get)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/weapons.GetList)
 ---@return table # List of all the registered SWEPs

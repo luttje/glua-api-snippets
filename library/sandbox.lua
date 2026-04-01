@@ -65,10 +65,16 @@ function SANDBOX:CanDrive(ply, ent) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:CanTool)
 ---@param ply Player The player who attempted to use their toolgun.
----@param tr table A trace from the players eye to where in the world their crosshair/cursor is pointing. See Structures/TraceResult
+---@param tr TraceResult A trace from the players eye to where in the world their crosshair/cursor is pointing.
+--- Returns only [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) when the 5th argument returns `4`
 ---@param toolname string The tool mode the player currently has selected.
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
+--- * 1 - left click
+--- * 2 - right click
+--- * 3 - reload
+--- * 4 - Menu (No interaction with the toolgun)
+--- The number `4` is a test that Rubat is conducting to implement the CanTool in the SpawnMenu. It may disappear.
 ---@return boolean # Can use toolgun or not.
 function SANDBOX:CanTool(ply, tr, toolname, tool, button) end
 
@@ -383,7 +389,7 @@ function SANDBOX:PreReloadToolsMenu() end
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:SpawnlistContentChanged)
 function SANDBOX:SpawnlistContentChanged() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: Use [SANDBOX:SpawnmenuIconMenuOpen](https://wiki.facepunch.com/gmod/SANDBOX:SpawnmenuIconMenuOpen) if you wish to add new options to spawnmenu icon right click menus.
 ---
 --- Called when there's one or more items selected in the spawnmenu by the player, to open the multi selection right click menu ([DMenu](https://wiki.facepunch.com/gmod/DMenu))
 ---

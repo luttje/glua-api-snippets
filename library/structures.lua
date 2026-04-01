@@ -1452,7 +1452,7 @@ MatProxyData.bind = nil
 ---
 --- Used by:
 --- * [IMesh:BuildFromTriangles](https://wiki.facepunch.com/gmod/IMesh:BuildFromTriangles)
---- * [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh)
+--- * [Entity:PhysicsFromMesh](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh) (only uses `pos` field)
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/MeshVertex)
@@ -1519,7 +1519,7 @@ MeshVertex.userdata = nil
 ---
 --- The total sum of their `weight` values should be `1`
 ---
---- Current added exclusively by util.GetModelMeshes
+--- Currently added exclusively by util.GetModelMeshes
 ---@type table[]
 MeshVertex.weights = nil
 

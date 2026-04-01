@@ -140,12 +140,16 @@ function IMaterial:SetDynamicImage(path) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets the specified material float to the specified float, does nothing on a type mismatch.
 ---
+--- Unlike [IMaterial:SetInt](https://wiki.facepunch.com/gmod/IMaterial:SetInt), this function **does not** call [IMaterial:Recompute](https://wiki.facepunch.com/gmod/IMaterial:Recompute) internally.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:SetFloat)
 ---@param materialFloat string The name of the material float.
 ---@param float number The new float value.
 function IMaterial:SetFloat(materialFloat, float) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets the specified material value to the specified int, does nothing on a type mismatch.
+---
+--- Calls [IMaterial:Recompute](https://wiki.facepunch.com/gmod/IMaterial:Recompute) internally.
 ---
 --- **NOTE**: Please note that certain material flags such as `$model` are stored in the `$flags` variable and cannot be directly set with this function. See the full list here: [Material Flags](https://wiki.facepunch.com/gmod/Material_Flags)
 ---
@@ -176,6 +180,8 @@ function IMaterial:SetShader(shaderName) end
 function IMaterial:SetString(materialString, string) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Sets the specified material texture to the specified texture, does nothing on a type mismatch.
+---
+--- Calls [IMaterial:Recompute](https://wiki.facepunch.com/gmod/IMaterial:Recompute) internally.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:SetTexture)
 ---@param materialTexture string The name of the keyvalue on the material to store the texture on.

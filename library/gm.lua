@@ -983,7 +983,7 @@ function GM:OnEntityCreated(entity) end
 ---@param new number The new water level.
 function GM:OnEntityWaterLevelChanged(entity, old, new) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the gamemode is loaded.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the gamemode is loaded. [gmod.GetGamemode](https://wiki.facepunch.com/gmod/gmod.GetGamemode) will be functional at this point.
 ---
 --- [Global.LocalPlayer](https://wiki.facepunch.com/gmod/Global.LocalPlayer)() returns NULL at the time this is run.
 ---

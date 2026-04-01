@@ -302,7 +302,7 @@ function CLuaParticle:SetThinkFunction(thinkFunc) end
 ---@param vel Vector The new velocity of the particle.
 function CLuaParticle:SetVelocity(vel) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Scales the velocity based on the particle speed.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Automatically scales the length of the particle based on the particle speed, multiplied with [CLuaParticle:SetStartLength](https://wiki.facepunch.com/gmod/CLuaParticle:SetStartLength) and [CLuaParticle:SetEndLength](https://wiki.facepunch.com/gmod/CLuaParticle:SetEndLength). Width remains the same as [CLuaParticle:SetStartSize](https://wiki.facepunch.com/gmod/CLuaParticle:SetStartSize) and [CLuaParticle:SetEndSize](https://wiki.facepunch.com/gmod/CLuaParticle:SetEndSize).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CLuaParticle:SetVelocityScale)
 ---@param doScale? boolean Use velocity scaling.

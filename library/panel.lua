@@ -2145,11 +2145,27 @@ function Panel:SetExpensiveShadow(distance, Color) end
 --- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetFGColor)
----@param rOrColor number The red channel of the color, or a Color. If you pass the latter, the following three arguments are ignored.
+---@param r number The red channel of the color.
 ---@param g number The green channel of the color.
 ---@param b number The blue channel of the color.
 ---@param a number The alpha channel of the color.
-function Panel:SetFGColor(rOrColor, g, b, a) end
+function Panel:SetFGColor(r, g, b, a) end
+
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the foreground color of a panel.
+---
+--- For a [Label](https://wiki.facepunch.com/gmod/Label) or [RichText](https://wiki.facepunch.com/gmod/RichText), this is the color of its text.
+---
+--- This function calls [Panel:SetFGColorEx](https://wiki.facepunch.com/gmod/Panel:SetFGColorEx) internally.
+---
+--- Please note that for most panels the engine will overwrite the foreground and background colors a frame after panel creation via the [PANEL:ApplySchemeSettings](https://wiki.facepunch.com/gmod/PANEL:ApplySchemeSettings) hook, so you may want to set the color in that hook instead.
+---
+--- See [Panel:SetBGColor](https://wiki.facepunch.com/gmod/Panel:SetBGColor) for the background color.
+---
+--- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetFGColor)
+---@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+function Panel:SetFGColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Sets the foreground color of the panel.

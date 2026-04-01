@@ -26,11 +26,16 @@ WEAPON = {}
 ---@return boolean # Should we suppress the default action for this input?
 function WEAPON:AcceptInput(inputName, activator, called, data) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to adjust the mouse sensitivity. This hook only works if you haven't overridden [GM:AdjustMouseSensitivity](https://wiki.facepunch.com/gmod/GM:AdjustMouseSensitivity).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to adjust the weapon's mouse sensitivity. This hook only works if you haven't overridden [GM:AdjustMouseSensitivity](https://wiki.facepunch.com/gmod/GM:AdjustMouseSensitivity).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:AdjustMouseSensitivity)
----@return number # Sensitivity scale
-function WEAPON:AdjustMouseSensitivity() end
+---@param defaultSensitivity number The old sensitivity
+---
+--- In general this will be 0, which is equivalent to a sensitivity of 1.
+---@param localFOV number The player's current FOV.
+---@param defaultFOV number The player's default FOV.
+---@return number # A multiplier of the player's normal sensitivity (0.5 would be half as sensitive, 2 would be twice as sensitive).
+function WEAPON:AdjustMouseSensitivity(defaultSensitivity, localFOV, defaultFOV) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the weapon allows to being switched from when a better ( [Weapon:GetWeight](https://wiki.facepunch.com/gmod/Weapon:GetWeight) ) weapon is being picked up.
 ---

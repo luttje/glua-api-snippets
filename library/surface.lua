@@ -214,7 +214,7 @@ function surface.GetTextPos() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the width and height (in pixels) of the given text with the font that has been set with [surface.SetFont](https://wiki.facepunch.com/gmod/surface.SetFont).
 ---
---- Does not take into account new lines, the returned height is for the entire font (as specified by the font), not maximum of individual characters.
+--- **NOTE**: Takes into account new lines, the returned height is for the entire text, but [surface.DrawText](https://wiki.facepunch.com/gmod/surface.DrawText) does not!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetTextSize)
 ---@param text string The string to check the size of.

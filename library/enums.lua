@@ -4927,7 +4927,7 @@ IMAGE_FORMAT_DEFAULT = -1
 IMAGE_FORMAT_RGBA8888 = 0
 --- Probably legacy format. Alpha, Red, Green, Blue, 8 bit per pixel.
 IMAGE_FORMAT_ABGR8888 = 1
---- Red, Green, Blue, 8 bit per pixel.
+--- Legacy format. Red, Green, Blue, 8 bit per pixel. `D3DFMT_R8G8B8` is invalid for most modern video cards. Thats why `IMAGE_FORMAT_RGB888` and `IMAGE_FORMAT_BGR888` is legacy formats. It have fallback to `IMAGE_FORMAT_BGRX8888`. `X` means «any».
 IMAGE_FORMAT_RGB888 = 2
 --- Legacy format. Blue, Green, Red order, 8 bit per pixel.
 IMAGE_FORMAT_BGR888 = 3
@@ -4937,7 +4937,7 @@ IMAGE_FORMAT_RGB565 = 4
 IMAGE_FORMAT_ARGB8888 = 11
 --- `IMAGE_FORMAT_RGBA8888` with different byte order. Legacy format.
 IMAGE_FORMAT_BGRA8888 = 12
---- RGBA, but 16 bits per pixel. Was meant to be used for "Integer mode" for HDR. Probably legacy format.
+--- RGBA, but 16 bits per pixel. Was meant to be used for "Integer mode" for HDR.
 IMAGE_FORMAT_RGBA16161616 = 25
 --- RGBA, but floating point 16 bits per pixel. Is used for "Float mode" HDR.
 IMAGE_FORMAT_RGBA16161616F = 24

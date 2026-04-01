@@ -320,13 +320,16 @@ function ENTITY:CanProperty(ply, property) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:CanTool)
 ---@param ply Player Player, that tried to use the tool
----@param tr table The trace of the tool. See Structures/TraceResult.
+---@param tr TraceResult The trace of the tool.
+--- Returns only [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) when the 5th argument returns `4`
 ---@param toolname string Class of the tool that is tried to use, for example - `weld`
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
 --- * 1 - left click
 --- * 2 - right click
 --- * 3 - reload
+--- * 4 - Menu (No interaction with the toolgun)
+--- The number `4` is a test that Rubat is conducting to implement the CanTool in the SpawnMenu. It may disappear.
 ---@return boolean # Return `false` to disallow using that tool on this entity, return `true` to allow.
 function ENTITY:CanTool(ply, tr, toolname, tool, button) end
 
@@ -541,7 +544,6 @@ function Entity:DrawShadow(shouldDraw) end
 function ENTITY:DrawTranslucent(flags) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Move an entity down until it collides with something.
---- **WARNING**: The entity needs to already have something below it within 256 units.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DropToFloor)
 ---@param mask? number Trace mask.
@@ -728,13 +730,12 @@ function Entity:FindBodygroupByName(name) end
 function Entity:FindGestureLayer(activity) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Searches the currently active layers for a layer playing animation with given sequence.
----
 --- **NOTE**: This function only works on [BaseAnimatingOverlay](https://wiki.facepunch.com/gmod/BaseAnimatingOverlay) entites!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:FindGestureSequenceLayer)
 ---@param sequenceID number The sequence ID to search for. See Entity:LookupSequence.
----@return number # A layer ID for given activity, or `-1` if not found.
-function Entity:FindGestureLayer(sequenceID) end
+---@return number # A layer ID for given sequence, or `-1` if not found.
+function Entity:FindGestureSequenceLayer(sequenceID) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a transition from the given start and end sequence.
 ---
@@ -2893,7 +2894,7 @@ function Entity:IsMarkedForDeletion() end
 ---@return boolean # Whether the entity is an NextBot entity or not.
 function Entity:IsNextBot() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is an NPC or not.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Checks if the entity is an [NPC](https://wiki.facepunch.com/gmod/NPC) or not.
 ---
 --- This will return false for [NextBot](https://wiki.facepunch.com/gmod/NextBot)s, see [Entity:IsNextBot](https://wiki.facepunch.com/gmod/Entity:IsNextBot) for that.
 ---
@@ -4667,6 +4668,8 @@ function Entity:SetModelName(modelname) end
 ---
 --- **NOTE**: If you do not want the physics to be affected by [Entity:Activate](https://wiki.facepunch.com/gmod/Entity:Activate), you can use [Entity:ManipulateBoneScale](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale)`( 0, Vector( scale, scale, scale ) )` instead.
 ---
+---  On the client, `anim` types' collision testing prediction fails for changed model scales: you can use `cl_showerror 2` to see by how much. Essentially, the client will freak out when you stand/run past on a Scripted Entity or prop that has been modified using this method.
+---
 --- This disables IK.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetModelScale)
@@ -5483,10 +5486,12 @@ function Entity:SetRagdollBuildFunction(builder) end
 ---@param pos Vector Position to set
 function Entity:SetRagdollPos(boneid, pos) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render angle override for the Entity.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render angles override for the entity. [Entity:GetAngles](https://wiki.facepunch.com/gmod/Entity:GetAngles) will return the value set by this function until the override is disabled. (This is all this does internally)
+---
+--- See [Entity:SetRenderOrigin](https://wiki.facepunch.com/gmod/Entity:SetRenderOrigin) for the function to manipulate origin.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles)
----@param newAngles? Angle The new render angles to be set to. To disable the override, set to nil.
+---@param newAngles? Angle|nil The new render angles to be set to. To disable the override, set to nil.
 function Entity:SetRenderAngles(newAngles) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render bounds for the entity.
@@ -5532,10 +5537,12 @@ function Entity:SetRenderFX(renderFX) end
 ---@param renderMode number New render mode to set, see Enums/RENDERMODE.
 function Entity:SetRenderMode(renderMode) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Set the render origin override, a position where the Entity will be rendered at.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render origin override, a position where the entity will be rendered at. [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) will return the value set by this function until the override is disabled. (This is all this does internally)
+---
+--- See [Entity:SetRenderAngles](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles) for the function to manipulate angles.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetRenderOrigin)
----@param newOrigin? Vector The new origin in world coordinates where the Entity's model will now be rendered at. To disable the override, set to nil.
+---@param newOrigin? Vector|nil The new origin in world coordinates where the entity's model will now be rendered at. To disable the override, set to nil.
 function Entity:SetRenderOrigin(newOrigin) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a save value for an entity. You can see a full list of an entity's save values by creating it and printing [Entity:GetSaveTable](https://wiki.facepunch.com/gmod/Entity:GetSaveTable).

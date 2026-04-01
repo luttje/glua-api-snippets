@@ -145,7 +145,6 @@ function PhysObj:GetAngles() end
 function PhysObj:GetAngleVelocity() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the buoyancy ratio of the physics object. (How well it floats in water).
---- 	**WARNING**: Currently only works on Windows
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:GetBuoyancyRatio)
 ---@return number # Buoyancy ratio, where 0 is not buoyant at all (like a rock), and 1 is very buoyant (like wood)

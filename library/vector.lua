@@ -187,8 +187,20 @@ function Vector:LengthSqr() end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Scales the vector by the given [number](https://wiki.facepunch.com/gmod/number) (that means x, y and z are multiplied by that value), a [Vector](https://wiki.facepunch.com/gmod/Vector) (X, Y, and Z of each vector are multiplied) or a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) (Transforms the vector by the matrix's rotation/translation).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vector:Mul)
----@param multiplier number The value to scale the vector with.
+---@param multiplier number The value to multiply the vector with.
 function Vector:Mul(multiplier) end
+
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Scales the vector by the given [number](https://wiki.facepunch.com/gmod/number) (that means x, y and z are multiplied by that value), a [Vector](https://wiki.facepunch.com/gmod/Vector) (X, Y, and Z of each vector are multiplied) or a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) (Transforms the vector by the matrix's rotation/translation).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Vector:Mul)
+---@param multiplier Vector The vector to multiply the vector with.
+function Vector:Mul(multiplier) end
+
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Scales the vector by the given [number](https://wiki.facepunch.com/gmod/number) (that means x, y and z are multiplied by that value), a [Vector](https://wiki.facepunch.com/gmod/Vector) (X, Y, and Z of each vector are multiplied) or a [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) (Transforms the vector by the matrix's rotation/translation).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Vector:Mul)
+---@param matrix VMatrix The matrix to transform the vector by.
+function Vector:Mul(matrix) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Negates this vector, i.e. sets every component to the negative value of itself. Same as `Vector( -vec.x, -vec.y, -vec.z )`
 ---
