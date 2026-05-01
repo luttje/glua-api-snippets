@@ -1620,10 +1620,8 @@ function Player:SendHint(name, delay) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Executes a simple Lua string on the player.
 --- **NOTE**: If you need to use this function more than once consider using [net](https://wiki.facepunch.com/gmod/net) library. Send net message and make the entire code you want to execute in [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on client.
 ---
---- **NOTE**: The string is limited to 254 bytes. Consider using the [net library](https://wiki.facepunch.com/gmod/Net_Library_Usage) for more advanced server-client interaction.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SendLua)
----@param script string The script to execute.
+---@param script string The script to execute, limited to 6000 bytes.
 function Player:SendLua(script) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the player's active weapon. You should use [CUserCmd:SelectWeapon](https://wiki.facepunch.com/gmod/CUserCmd:SelectWeapon) or [Player:SelectWeapon](https://wiki.facepunch.com/gmod/Player:SelectWeapon), instead in most cases.

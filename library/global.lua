@@ -159,10 +159,11 @@ function _G.assert(expression, errorMessage, ...) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sends the specified Lua code to all connected clients and executes it.
 --- **NOTE**: If you need to use this function more than once, consider using [net](https://wiki.facepunch.com/gmod/net) library.
 --- 	Send net message and make the entire code you want to execute in [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on client.
---- 	If executed **clientside** it won't do anything.
+---
+--- 	If executed **clientside**, this function won't do anything.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.BroadcastLua)
----@param code string The code to be executed. Capped at length of 254 characters.
+---@param code string The code to be executed. Capped at length of 6000 characters.
 function _G.BroadcastLua(code) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Dumps the networked variables of all entities into one table and returns it.
@@ -506,7 +507,7 @@ function _G.CreateSprite(material) end
 ---
 --- **NOTE**: This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary).
 ---
---- This is **NOT** easy as it sounds to fix in the engine, so please refrain from posting issues about this
+--- This is **NOT** easy as it sounds to fix in the engine. Currently there is work going on to fix this in the **nextwork_test** branch.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CurTime)
 ---@return number # Time synced with the game server.
@@ -833,8 +834,7 @@ function _G.DynamicLight(index, elight) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.DynamicMaterial)
 ---@param materialPath string The material with path. The path is relative to the `materials/` folder.
----@param flags? string Some bind of bits / byte.
---- 		What does this argument do / use. Currently working value: "0100010" --nocull smooth
+---@param flags? string Flags, same as Global.Material.
 ---@return IMaterial # Generated material.
 function _G.DynamicMaterial(materialPath, flags) end
 
@@ -842,7 +842,7 @@ function _G.DynamicMaterial(materialPath, flags) end
 ---
 --- This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once.
 ---
---- **WARNING**: Any values previously set (Origin, Magnitude, Scale etc) will carry over to all future calls of this function, and may unexpectedly affect effects created via [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
+--- As a result any values previously set (Origin, Magnitude, Scale etc) will carry over to all future calls of this function, and may unexpectedly affect effects created via [util.Effect](https://wiki.facepunch.com/gmod/util.Effect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.EffectData)
 ---@return CEffectData # The CEffectData object.
@@ -1885,22 +1885,22 @@ function _G.isvector(variable) end
 ---@param IP string The IP of the server to join
 function _G.JoinServer(IP) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds javascript function 'language.Update' to an HTML panel as a method to call Lua's [language.GetPhrase](https://wiki.facepunch.com/gmod/language.GetPhrase) function.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds JavaScript function 'language.Update' to an HTML panel as a method to call Lua's [language.GetPhrase](https://wiki.facepunch.com/gmod/language.GetPhrase) function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.JS_Language)
----@param htmlPanel Panel Panel to add javascript function 'language.Update' to.
+---@param htmlPanel Panel Panel to add JavaScript function 'language.Update' to.
 function _G.JS_Language(htmlPanel) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds javascript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's [motionsensor.IsAvailable](https://wiki.facepunch.com/gmod/motionsensor.IsAvailable) function.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds JavaScript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's [motionsensor.IsAvailable](https://wiki.facepunch.com/gmod/motionsensor.IsAvailable) function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.JS_Utility)
----@param htmlPanel Panel Panel to add javascript function 'util.MotionSensorAvailable' to.
+---@param htmlPanel Panel Panel to add JavaScript function 'util.MotionSensorAvailable' to.
 function _G.JS_Utility(htmlPanel) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds workshop related javascript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds workshop related JavaScript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.JS_Workshop)
----@param htmlPanel Panel Panel to add javascript functions to.
+---@param htmlPanel Panel Panel to add JavaScript functions to.
 function _G.JS_Workshop(htmlPanel) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Convenience function that creates a [DLabel](https://wiki.facepunch.com/gmod/DLabel), sets the text, and returns it
@@ -1988,14 +1988,14 @@ function _G.LoadNewsList() end
 ---@return table # Preset data
 function _G.LoadPresets() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns a localisation for the given token, if none is found it will return the default (second) parameter.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns a localization for the given token, if none is found it will return the default (second) parameter.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Localize)
----@param localisationToken string The token to find a translation for.
+---@param localizationToken string The token to find a translation for.
 ---@param default string The default value to be returned if no translation was found.
 ---@return string # The localized string, 128 char limit.
 ---@deprecated Use language.GetPhrase instead.
-function _G.Localize(localisationToken, default) end
+function _G.Localize(localizationToken, default) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the player object of the current client.
 ---
@@ -3065,7 +3065,9 @@ function _G.SScale(Size) end
 ---@return string # suffix
 function _G.STNDRD(number) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Suppress any networking from the server to the specified player. Set this to [NULL](https://wiki.facepunch.com/gmod/NULL) to stop suppressing network events.
+---
+--- This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SuppressHostEvents)
 ---@param suppressPlayer Player The player to suppress any networking to.

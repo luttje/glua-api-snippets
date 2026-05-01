@@ -5718,7 +5718,7 @@ MOUSE_COUNT = 7
 MOVECOLLIDE_DEFAULT = 0
 --- Entity bounces, reflects, based on elasticity of surface and object - applies friction (adjust velocity)
 MOVECOLLIDE_FLY_BOUNCE = 1
---- [ENTITY:Touch](https://wiki.facepunch.com/gmod/ENTITY:Touch) will modify the velocity however it likes
+--- [ENTITY:ResolveCustomFlyCollision](https://wiki.facepunch.com/gmod/ENTITY:ResolveCustomFlyCollision) will modify the velocity however it likes
 MOVECOLLIDE_FLY_CUSTOM = 2
 --- Entity slides along surfaces (no bounce) - applies friciton (adjusts velocity)
 MOVECOLLIDE_FLY_SLIDE = 3

@@ -6,11 +6,15 @@ chat = {}
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds text to the local player's chat box (which only they can read).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/chat.AddText)
----@param ... any The arguments. Arguments can be:
+---@param ... any The message to be added to the chat box.
+---
+--- Arguments can be:
 --- * table - Color. Will set the color for all following strings until the next Color argument.
 --- * string - Text to be added to the chat box.
 --- * Player - Adds the name of the player in the player's team color to the chat box.
 --- * any - Any other type, such as Entity will be converted to string and added as text.
+---
+--- These argument types can be combined to create formatted messages.
 function chat.AddText(...) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Closes the chat window.

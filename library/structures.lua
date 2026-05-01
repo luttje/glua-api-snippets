@@ -1099,6 +1099,7 @@ local FontData = {}
 FontData.font = "Arial"
 
 ---Allow the font to display glyphs that are outside of the Latin-1 range. Unicode code points above 0xFFFF are not supported.
+---     This currently has no effect on Linux, the value is capped at just 0xFF on the Linux client
 ---@type boolean?
 FontData.extended = false
 

@@ -915,7 +915,7 @@ function NPC:RunEngineTask(taskID, taskData) end
 ---@param weapon string|Weapon A classname of the weapon or a Weapon entity to switch to.
 function NPC:SelectWeapon(weapon) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stops any sounds (speech) the NPC is currently palying.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Stops any sounds (speech) the NPC is currently playing.
 ---
 --- Equivalent to `Entity:EmitSound( "AI_BaseNPC.SentenceStop" )`
 ---

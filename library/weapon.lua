@@ -201,13 +201,19 @@ function WEAPON:DrawHUDBackground() end
 ---@param alpha number Alpha value of the selection panel
 function WEAPON:DrawWeaponSelection(x, y, width, height, alpha) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when we are about to draw the world model.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when we are about to draw the opaque parts of the weapon's world model.
+---
+--- See [WEAPON:DrawWorldModelTranslucent](https://wiki.facepunch.com/gmod/WEAPON:DrawWorldModelTranslucent) for translucent pass callback.
+--- See [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn) for view model rendering.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:DrawWorldModel)
 ---@param flags number The Enums/STUDIO flags for this render operation.
 function WEAPON:DrawWorldModel(flags) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when we are about to draw the translucent world model.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when we are about to draw the translucent parts of the weapon's world model.
+---
+--- See [WEAPON:DrawWorldModel](https://wiki.facepunch.com/gmod/WEAPON:DrawWorldModel) for opaque pass callback.
+--- See [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn) for view model rendering.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:DrawWorldModelTranslucent)
 ---@param flags number The Enums/STUDIO flags for this render operation.
@@ -520,9 +526,13 @@ function WEAPON:OnRestore() end
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:OwnerChanged)
 function WEAPON:OwnerChanged() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after the view model has been drawn while the weapon in use. This hook is called from the default implementation of [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel), and as such, will not occur if it has been overridden.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after the view model has been drawn while the weapon in use.
+---
+--- This hook relies on default implementation of [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel). If it appears to not work, it may have been overwritten/broken by the currently active gamemode or other addons.
 ---
 --- [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn) is an alternative hook which is always called before [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel).
+---
+--- See also [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel)
 ---@param vm Entity This is the view model entity after it is drawn
@@ -531,7 +541,11 @@ function WEAPON:OwnerChanged() end
 ---@param flags number The Enums/STUDIO flags for this render operation.
 function WEAPON:PostDrawViewModel(vm, weapon, ply, flags) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to modify viewmodel while the weapon in use before it is drawn. This hook only works if you haven't overridden [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel).
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to modify viewmodel while the weapon in use before it is drawn.
+---
+--- This hook relies on default implementation of [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel). If it appears to not work, it may have been overwritten/broken by the currently active gamemode or other addons.
+---
+--- See also [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn) and [WEAPON:PostDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel)
 ---@param vm Entity This is the view model entity before it is drawn.
@@ -658,7 +672,7 @@ function WEAPON:SetupDataTables() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the hold type of the weapon. This must be called on **both** the server and the client to work properly.
 ---
---- **NOTE:** You should avoid calling this function and call [Weapon:SetHoldType](https://wiki.facepunch.com/gmod/Weapon:SetHoldType) now.
+--- **NOTE**: You should avoid calling this function and call [Weapon:SetHoldType](https://wiki.facepunch.com/gmod/Weapon:SetHoldType) now.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:SetWeaponHoldType)
 ---@param name string Name of the hold type. You can find all default hold types Hold_Types
@@ -750,6 +764,10 @@ function WEAPON:TranslateActivity(act) end
 function WEAPON:TranslateFOV(fov) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called straight after the view model has been drawn. This is called before [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel) and [WEAPON:PostDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel).
+---
+--- See [WEAPON:DrawWorldModel](https://wiki.facepunch.com/gmod/WEAPON:DrawWorldModel) for world model rendering.
+---
+--- See also [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel) and [WEAPON:PostDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn)
 ---@param ViewModel Entity Players view model

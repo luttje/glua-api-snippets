@@ -199,7 +199,7 @@ function File:Flush() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:Read)
 ---@param length? number Reads the specified amount of chars. If not set, will read the entire file.
----@return string #
+---@return string # The read data.
 function File:Read(length) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Reads one byte of the file and returns whether that byte was not 0.

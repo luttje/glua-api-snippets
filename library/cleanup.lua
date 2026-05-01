@@ -56,7 +56,9 @@ function cleanup.Register(type) end
 ---@return boolean # Whether any action was taken.
 function cleanup.ReplaceEntity(from, to) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Repopulates the clients cleanup menu.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Repopulates the clients cleanup menu.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.UpdateUI)
 function cleanup.UpdateUI() end

@@ -55,16 +55,16 @@ function cam.GetModelMatrix() end
 ---@param ignoreZ boolean Determines whenever to ignore the depth buffer or not.
 function cam.IgnoreZ(ignoreZ) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Pops the current active rendering matrix from the stack and reinstates the previous one.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Removes the currently active model matrix (pushed previously with [cam.PushModelMatrix](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)) from the stack and reinstates the previous one.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cam.PopModelMatrix)
 function cam.PopModelMatrix() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Pushes the specified matrix onto the render matrix stack. Unlike opengl, this will replace the current model matrix.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Pushes the specified matrix onto the render matrix stack. Each pushed matrix must be popped via [cam.PopModelMatrix](https://wiki.facepunch.com/gmod/cam.PopModelMatrix).
 ---
---- **NOTE**: This does not work with [cam.Start3D2D](https://wiki.facepunch.com/gmod/cam.Start3D2D) if `multiply` is false.
+--- When used in [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint), if you want to rely on the top-left position of the panel, you must use [VMatrix:Translate](https://wiki.facepunch.com/gmod/VMatrix:Translate) with the (0, 0) position of the panel relative to the screen.
 ---
---- **WARNING**: When used in the Paint function of a panel, if you want to rely on the top-left position of the panel, you must use [VMatrix:Translate](https://wiki.facepunch.com/gmod/VMatrix:Translate) with the (0, 0) position of the panel relative to the screen.
+--- If trying to use it with with [cam.Start3D2D](https://wiki.facepunch.com/gmod/cam.Start3D2D), set `multiply` to `true`, since **cam.Start3D2D** pushes its own model matrix.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cam.PushModelMatrix)
 ---@param matrix VMatrix The matrix to push.

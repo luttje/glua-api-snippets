@@ -199,6 +199,20 @@ function surface.GetHUDTexture(name) end
 --- For the table's format and available options see the Structures/PanelPaintState page.
 function surface.GetPanelPaintState() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Retrieves the currently active scissor rect for the surface library. A faster, narrower version of [surface.GetPanelPaintState](https://wiki.facepunch.com/gmod/surface.GetPanelPaintState).
+---
+--- Useful for panel retrieving current panel's culling from [PANEL:Paint](https://wiki.facepunch.com/gmod/PANEL:Paint).
+---
+--- This does **NOT** return values set by [render.SetScissorRect](https://wiki.facepunch.com/gmod/render.SetScissorRect).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/surface.GetScissorRect)
+---@return boolean # Whether the scissor rect is active or not. If `false`, the following values should be ignored.
+---@return number # Left edge of the scissor rect.
+---@return number # Top edge of the scissor rect.
+---@return number # Right edge of the scissor rect.
+---@return number # Bottom edge of the scissor rect.
+function surface.GetScissorRect() end
+
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting text draw operations.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetTextColor)

@@ -645,16 +645,21 @@ function util.NetworkStringToID(networkString) end
 ---@return string # Formatted float.
 function util.NiceFloat(float) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a tracer effect with the given parameters.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates an orange box (.pcf) tracer effect with the given parameters. See [util.ParticleTracerEx](https://wiki.facepunch.com/gmod/util.ParticleTracerEx) for version with additional arguments.
+---
+--- Internally uses `ParticleTracer` engine effect. ([util.Effect](https://wiki.facepunch.com/gmod/util.Effect)) which then spawns in `ParticleEffect` effect.
+--- **NOTE**: The default bullet effect is not in .pcf format, therefore it is not used with util.ParticleTracer.  Consider utilizing [util.Effect](https://wiki.facepunch.com/gmod/util.Effect) instead
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.ParticleTracer)
----@param name string The name of the tracer effect.
+---@param name string The name of the .pcf particle effect to use for the tracer.
+---
+--- Control Point 0 is the start location. Control Point 1 is the end pos.
 ---@param startPos Vector The start position of the tracer.
 ---@param endPos Vector The end position of the tracer.
----@param doWhiz boolean Play the hit miss(whiz) sound.
+---@param doWhiz boolean Whether to play the hit near-miss (whiz) sound.
 function util.ParticleTracer(name, startPos, endPos, doWhiz) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a tracer effect with the given parameters.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a tracer effect with the given parameters. Expanded version of [util.ParticleTracer](https://wiki.facepunch.com/gmod/util.ParticleTracer).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.ParticleTracerEx)
 ---@param name string The name of the tracer effect.
@@ -799,7 +804,7 @@ function util.SetPData(steamID, name, value) end
 ---@return string # The SHA-1 hash of the string in hexadecimal form.
 function util.SHA1(stringToHash) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [SHA-256 hash](https://en.wikipedia.org/wiki/SHA-2) of the specified string. This is unique and will never return the same hash for a different string unlike [util.CRC](https://wiki.facepunch.com/gmod/util.CRC) or [util.MD5](https://wiki.facepunch.com/gmod/util.MD5) which are both vulnerable to duplicate returns.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Generates the [SHA-256 hash](https://en.wikipedia.org/wiki/SHA-2) of the specified string. This is mostly unique and is astronomically unlikely to return the same hash for a different string unlike [util.CRC](https://wiki.facepunch.com/gmod/util.CRC) or [util.MD5](https://wiki.facepunch.com/gmod/util.MD5) which are both much more vulnerable to duplicate returns.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.SHA256)
 ---@param stringToHash string The string to calculate the SHA-256 hash of.

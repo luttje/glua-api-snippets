@@ -119,5 +119,5 @@ function drive.StartMove(ply, mv, cmd) end
 --- This hook is called from the default implementation of [GM:CalcView](https://wiki.facepunch.com/gmod/GM:CalcView) which is [here](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/gamemodes/base/gamemode/cl_init.lua#L387-L395). Therefore, it will not be called if any other hook added to `CalcView` returns any value, or if the current gamemode overrides the default hook and does not call [drive.CalcView](https://wiki.facepunch.com/gmod/drive.CalcView).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DRIVE:CalcView)
----@param view_in ViewData The view, see Structures/ViewData. Modify this table.
+---@param view_in CamData The view, see Structures/CamData. Modify this table.
 function DRIVE:CalcView(view_in) end

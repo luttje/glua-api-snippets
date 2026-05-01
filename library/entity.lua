@@ -1604,7 +1604,7 @@ function Entity:GetMaterial() end
 --- The table returned by this function will not contain materials if they are missing from the disk/repository. This means that if you are attempting to find the ID of a material to replace with [Entity:SetSubMaterial](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial) and there are missing materials on the model, all subsequent materials will be offset in the table, meaning that the ID you are trying to get will be incorrect.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetMaterials)
----@return table # A table containing full paths to the materials of the model.
+---@return string[] # A table containing full paths to the materials of the model.
 ---
 --- For models, it's limited to `128` materials.
 function Entity:GetMaterials() end
@@ -2378,7 +2378,7 @@ function Entity:GetRotatedAABB(min, max) end
 --- * For each **DEFINE_KEYFIELD**, the save table will have a key with name of the **third** argument.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetSaveTable)
----@param showAll boolean If set, shows all variables, not just the ones marked for save/load system.
+---@param showAll? boolean If set, shows all variables, not just the ones marked for save/load system.
 ---@return table # A table containing all save values in key/value format.
 ---
 --- The value may be a sequential table (starting with **1**) if the field in question is an array in engine.
@@ -3978,6 +3978,17 @@ function Entity:ResetSequence(sequence) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:ResetSequenceInfo)
 function Entity:ResetSequenceInfo() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called during a non-VPhysics collision event for flying entities.
+---
+--- This is best used to make projectiles bounce off from surfaces in their own way. For this to be triggered, this entity must be the one that's colliding, have some velocity, [Entity:GetMoveType](https://wiki.facepunch.com/gmod/Entity:GetMoveType) must be either [MOVETYPE_FLY](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_FLY) or [MOVETYPE_FLYGRAVITY](https://wiki.facepunch.com/gmod/Enums/MOVETYPE#MOVETYPE_FLYGRAVITY), and [Entity:GetMoveCollide](https://wiki.facepunch.com/gmod/Entity:GetMoveCollide) must be [MOVECOLLIDE_FLY_CUSTOM](https://wiki.facepunch.com/gmod/Enums/MOVECOLLIDE#MOVECOLLIDE_FLY_CUSTOM).
+--- 	**NOTE**: This works only on `anim` type entities.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:ResolveCustomFlyCollision)
+---@param traceResult TraceResult The Structures/TraceResult where the collision occured.
+---@param vel vector The calculated velocity after calculations such as bounciness, elasticity, ground sliding etc...
+---@return boolean # Return `true` to prevent default action.
+function ENTITY:ResolveCustomFlyCollision(traceResult, vel) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the entity/weapon respawn.
 ---

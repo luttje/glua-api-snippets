@@ -90,7 +90,7 @@ function GM:CalcVehicleView(veh, ply, view) end
 ---@param fov number Field of view.
 ---@param znear number Distance to near clipping plane.
 ---@param zfar number Distance to far clipping plane.
----@return table # View data table. See Structures/CamData
+---@return CamData # View data table. See Structures/CamData
 function GM:CalcView(ply, origin, angles, fov, znear, zfar) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows overriding the position and angle of the viewmodel.
@@ -1742,7 +1742,7 @@ function GM:PlayerStartTaunt(ply, act, length) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice)
 ---@param ply Player Player who started using voice chat.
----@param plyIndex number The player index. Only appears when non-local player speaks for the first time.
+---@param plyIndex? number The player index. Only appears when non-local player speaks for the first time.
 ---@return boolean # Set true to hide player's `CHudVoiceStatus`.
 function GM:PlayerStartVoice(ply, plyIndex) end
 

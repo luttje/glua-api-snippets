@@ -25,7 +25,7 @@ hook = {}
 ---@overload fun(eventName: "AllowPlayerPickup", identifier: any, func: fun(ply: Player, ent: Entity):(boolean?))
 ---@overload fun(eventName: "CalcMainActivity", identifier: any, func: fun(ply: Player, vel: Vector):(number?, number?))
 ---@overload fun(eventName: "CalcVehicleView", identifier: any, func: fun(veh: Vehicle, ply: Player, view: table):(table?))
----@overload fun(eventName: "CalcView", identifier: any, func: fun(ply: Player, origin: Vector, angles: Angle, fov: number, znear: number, zfar: number):(table?))
+---@overload fun(eventName: "CalcView", identifier: any, func: fun(ply: Player, origin: Vector, angles: Angle, fov: number, znear: number, zfar: number):(CamData?))
 ---@overload fun(eventName: "CalcViewModelView", identifier: any, func: fun(wep: Weapon, vm: Entity, oldPos: Vector, oldAng: Angle, pos: Vector, ang: Angle):(Vector?, Angle?))
 ---@overload fun(eventName: "CanCreateUndo", identifier: any, func: fun(ply: Player, undo: table):(boolean?))
 ---@overload fun(eventName: "CanEditVariable", identifier: any, func: fun(ent: Entity, ply: Player, key: string, value: string, editor: table):(boolean?))

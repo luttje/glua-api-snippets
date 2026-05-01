@@ -426,10 +426,12 @@ function render.GetFogDistances() end
 ---@return number # The maximum density of the fog, 0-1.
 function render.GetFogMaxDensity() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the fog mode.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current fog mode.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetFogMode)
 ---@return number # Fog mode, see Enums/MATERIAL_FOG.
+---
+--- In 2D post-processing hooks, starting with GM:PreDrawEffects, this will always return Enums/MATERIAL_FOG#MATERIAL_FOG_NONE
 function render.GetFogMode() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the full screen depth texture.
@@ -753,7 +755,7 @@ function render.PopCustomClipPlane() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Pops (Removes) the texture filter most recently pushed (Added) onto the magnification texture filter stack.
 ---
---- This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag()](https://wiki.facepunch.com/gmod/render.PushFilterMag).
+--- This function should only be called *after* a magnification filter has been pushed via [render.PushFilterMag](https://wiki.facepunch.com/gmod/render.PushFilterMag).
 ---
 --- For more detailed information and a usage example, see [the texture minification and magnification render reference.](https://wiki.facepunch.com/gmod/render_min_mag_filters)
 ---

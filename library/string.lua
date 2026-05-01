@@ -179,7 +179,7 @@ function string.GetExtensionFromFilename(path) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns file name and extension.
 ---
 --- See [string.GetPathFromFilename](https://wiki.facepunch.com/gmod/string.GetPathFromFilename) for the opposite function.
---- See [string.GetExtensionFromFilename](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename) for thefile extension version.
+--- See [string.GetExtensionFromFilename](https://wiki.facepunch.com/gmod/string.GetExtensionFromFilename) for the file extension version.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.GetFileFromFilename)
 ---@param path string The string eg. file-path to get the file-name from.
@@ -407,7 +407,7 @@ function string.sub(string, StartPos, EndPos) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.ToColor)
 ---@param Inputstring string The string to convert from.
----@return table # The output Color
+---@return Color # The output Color
 function string.ToColor(Inputstring) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns given time in "MM:SS" format.

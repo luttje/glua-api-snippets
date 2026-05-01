@@ -120,6 +120,12 @@ function ProjectedTexture:GetShadowFilter() end
 ---@return number # The current shadow depth slope scale bias.
 function ProjectedTexture:GetShadowSlopeScaleDepthBias() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether shadow updates are disabled for this ProjectedTexture, which was previously set by [ProjectedTexture:SetSkipShadowUpdates](https://wiki.facepunch.com/gmod/ProjectedTexture:SetSkipShadowUpdates).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:GetSkipShadowUpdates)
+---@return boolean # Whether shadow updates are disabled.
+function ProjectedTexture:GetSkipShadowUpdates() end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the target entity of this projected texture.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:GetTargetEntity)
@@ -265,6 +271,8 @@ function ProjectedTexture:SetNearZ(nearZ) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows disabling of projected texture view-frustum culling for cases where said culling creates unwanted side effects. Disabling culling will have a negative effect on performance.
 ---
+--- Culling makes projected textures off screen to stop rendering/updating.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:SetNoCull)
 ---@param enable boolean `false` to enable culling (default), `true` to disable.
 function ProjectedTexture:SetNoCull(enable) end
@@ -328,6 +336,12 @@ function ProjectedTexture:SetShadowFilter(filter) end
 ---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:SetShadowSlopeScaleDepthBias)
 ---@param bias number The shadow depth slope scale bias to set.
 function ProjectedTexture:SetShadowSlopeScaleDepthBias(bias) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether shadow updates are disabled for this ProjectedTexture. This can be useful to save up on performance, but it will inevitably cause graphical glitches if left not updating for long.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:SetSkipShadowUpdates)
+---@param enable boolean Whether future shadow updates should be skipped.
+function ProjectedTexture:SetSkipShadowUpdates(enable) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the target entity for this projected texture, meaning it will only be lighting the given entity and the world.
 ---

@@ -33,7 +33,7 @@ function umsg.Char(char) end
 ---@deprecated You should be using the net instead
 function umsg.End() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Writes an entity object to the usermessage.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Writes an entity object to the usermessage. (As an entity handle, which means the entity index + its serial number)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/umsg.Entity)
 ---@param entity Entity The entity to be sent.

@@ -61,8 +61,8 @@ function player_manager.GetPlayerClassTable(ply) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.OnPlayerSpawn)
 ---@param ply Player Player to setup.
----@param transiton boolean If true, the player just spawned from a map transition. You probably want to not touch player's weapons or position if this is set to `true`.
-function player_manager.OnPlayerSpawn(ply, transiton) end
+---@param transition boolean If true, the player just spawned from a map transition. You probably want to not touch player's weapons or position if this is set to `true`.
+function player_manager.OnPlayerSpawn(ply, transition) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Register a class metatable to be assigned to players later.
 ---

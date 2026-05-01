@@ -38,7 +38,7 @@ function IMesh:Draw() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMesh:DrawSkinned)
 ---@param bones VMatrix[] A list of matrices to use as bones. Up to 52 of them.
----@param multiply? boolean If set, multiplies given matrices with currently active matrix (cam.GetModelMatrix).
+---@param multiply? boolean If set, multiplies given matrices with currently active model matrix (cam.GetModelMatrix). This incurs a performance hit.
 function IMesh:DrawSkinned(bones, multiply) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether this [IMesh](https://wiki.facepunch.com/gmod/IMesh) is valid or not.
