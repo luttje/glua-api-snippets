@@ -9,7 +9,7 @@ chat = {}
 ---@param ... any The message to be added to the chat box.
 ---
 --- Arguments can be:
---- * table - Color. Will set the color for all following strings until the next Color argument.
+--- * Color - Will set the color for all following strings until the next Color argument.
 --- * string - Text to be added to the chat box.
 --- * Player - Adds the name of the player in the player's team color to the chat box.
 --- * any - Any other type, such as Entity will be converted to string and added as text.

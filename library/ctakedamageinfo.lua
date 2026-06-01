@@ -170,10 +170,14 @@ function CTakeDamageInfo:SetAmmoType(ammoType) end
 ---@param ent Entity The entity to be set as the attacker.
 function CTakeDamageInfo:SetAttacker(ent) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the initial unmodified by skill level ( [game.GetSkillLevel](https://wiki.facepunch.com/gmod/game.GetSkillLevel) ) damage. This function will not update or touch [CTakeDamageInfo:GetDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamage).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the initial damage, unmodified by the current skill level ([game.GetSkillLevel](https://wiki.facepunch.com/gmod/game.GetSkillLevel)). This is usually set automatically by the game when dealing damage.
+---
+--- This function will not modify the real damage that will be dealt ([CTakeDamageInfo:GetDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:GetDamage)).
+---
+--- Use this only if you know what you are doing. Otherwise use [CTakeDamageInfo:SetDamage](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetDamage).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CTakeDamageInfo:SetBaseDamage)
----@param number number baseDamage
+---@param number number The base damage.
 function CTakeDamageInfo:SetBaseDamage(number) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the amount of damage.

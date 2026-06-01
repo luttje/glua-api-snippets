@@ -39,7 +39,7 @@ function DImage:GetImage() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the color override of the image panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImage:GetImageColor)
----@return table # The color override of the image. Uses the Color.
+---@return Color # The color override of the image. Uses Color.
 function DImage:GetImageColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the [DImage](https://wiki.facepunch.com/gmod/DImage) should keep the aspect ratio of its image when being resized.
@@ -102,7 +102,7 @@ function DImage:SetImage(strImage, strBackup) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the image's color override.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImage:SetImageColor)
----@param col table The color override of the image. Uses the Color.
+---@param col Color The color override of the image. Uses Color.
 function DImage:SetImageColor(col) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether the [DImage](https://wiki.facepunch.com/gmod/DImage) should keep the aspect ratio of its image when being resized.

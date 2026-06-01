@@ -7,7 +7,7 @@ local DPanelOverlay = {}
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the border color of the [DPanelOverlay](https://wiki.facepunch.com/gmod/DPanelOverlay) set by [DPanelOverlay:SetColor](https://wiki.facepunch.com/gmod/DPanelOverlay:SetColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelOverlay:GetColor)
----@return table # The set color. Uses the Color.
+---@return Color # The set color. Uses Color.
 function DPanelOverlay:GetColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the type of the [DPanelOverlay](https://wiki.facepunch.com/gmod/DPanelOverlay) set by [DPanelOverlay:SetType](https://wiki.facepunch.com/gmod/DPanelOverlay:SetType).
@@ -37,7 +37,7 @@ function DPanelOverlay:PaintInnerCorners(size) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the border color of the [DPanelOverlay](https://wiki.facepunch.com/gmod/DPanelOverlay).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanelOverlay:SetColor)
----@param color table The color to set. Uses the Color.
+---@param color Color The color to set. Uses Color.
 function DPanelOverlay:SetColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the type of the [DPanelOverlay](https://wiki.facepunch.com/gmod/DPanelOverlay).

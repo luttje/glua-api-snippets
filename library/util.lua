@@ -121,7 +121,7 @@ function util.Decal(name, start, _end, filter) end
 ---@param ent Entity The entity to apply the decal to
 ---@param position Vector The position of the decal.
 ---@param normal Vector The direction of the decal.
----@param color table The color of the decal. Uses the Color.
+---@param color Color The color of the decal. Uses Color.
 ---
 --- This only works when used on a brush model and only if the decal material has set `$vertexcolor` to `1`.
 ---@param w number The width scale of the decal.
@@ -138,6 +138,8 @@ function util.DecalEx(material, ent, position, normal, color, w, h) end
 function util.DecalMaterial(decalName) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Decompresses the given string using [LZMA](https://en.wikipedia.org/wiki/LZMA) algorithm. Used to decompress strings previously compressed with [util.Compress](https://wiki.facepunch.com/gmod/util.Compress).
+---
+--- **WARNING**: When reading user data, always try to specify `maxSize` argument, otherwise the server can be [decompression bombed](https://en.wikipedia.org/wiki/Zip_bomb) with bad data that will fill up all Lua memory
 ---
 --- **NOTE**: This function expects the compressed input data to have the uncompressed size of the data prepended to it as an 8-byte little-endian integer. [Source](https://github.com/garrynewman/bootil/blob/beb4cec8ad29533965491b767b177dc549e62d23/src/Bootil/Utility/CompressionLZMA.cpp#L101)
 ---
@@ -173,7 +175,12 @@ function util.DistanceToLine(lineStart, lineEnd, pointPos) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.Effect)
 ---@param effectName string The name of the effect to create.
 ---
---- You can find a list of Default_Effects. You can create your own, [example effects can be found here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
+--- You can find a list of Default_Effects. You can create your own in LUA, [example effects can be found here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/sandbox/entities/effects) and [here](https://github.com/Facepunch/garrysmod/tree/master/garrysmod/gamemodes/base/entities/effects).
+---
+---
+--- If you use this function with Lua effects more than 2048 times in a single frame,
+---
+--- you will get errors: `Broke possible Lua Effect creation infinite loop` and `Too many Lua Effects (2049)! Are you killing them properly?`.
 ---@param effectData CEffectData The effect data describing the effect.
 ---@param allowOverride? boolean Whether Lua-defined effects should override engine-defined effects with the same name for this/single function call.
 ---@param ignorePredictionOrRecipientFilter? boolean|CRecipientFilter Can either be a boolean to ignore the prediction filter or a CRecipientFilter.
@@ -830,7 +837,7 @@ function util.SharedRandom(uniqueName, min, max, additionalSeed) end
 ---[View wiki](https://wiki.facepunch.com/gmod/util.SpriteTrail)
 ---@param ent Entity Entity to attach trail to
 ---@param attachmentID number Attachment ID of the entities model to attach trail to. If you are not sure, set this to 0
----@param color table Color of the trail, use Global.Color
+---@param color Color Color of the trail
 ---@param additive boolean Should the trail be additive or not
 ---@param startWidth number Start width of the trail
 ---@param endWidth number End width of the trail

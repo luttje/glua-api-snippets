@@ -2630,7 +2630,7 @@ SoundData.level = nil
 ---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.
 ---
 --- **Warning:** Volume of `0` will act as volume of `1`
----@type number?
+---@type number|table<number>?
 SoundData.volume = 1.0
 
 ---The pitch of the sound. Can be a table of two numbers, a minimum and a maximum value.

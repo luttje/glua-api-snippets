@@ -211,7 +211,7 @@ function constraint.CreateStaticAnchorPoint(pos) end
 ---@param material? string The material of the rope. If unset, will be solid black.
 ---@param width number Width of rope.
 ---@param stretchOnly? boolean Apply physics forces only on stretch.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope. See Color.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Will return `false` if the constraint could not be created.
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint could not be created.
 function constraint.Elastic(
@@ -376,7 +376,7 @@ function constraint.HasConstraints(ent) end
 ---@param speed number How fast it changes the length from `length1` to `length2` and backwards.
 ---@param material? string The material of the rope. If unset, will be solid black.
 ---@param toggle? boolean Whether the hydraulic should be a toggle, not a "hold key to extend" action.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Will return `false` if the constraint could not be created.
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint could not be created.
 ---@return Entity # The muscle controller. (`gmod_winch_controller`) Will return `nil` if the constraint could not be created.
@@ -483,7 +483,7 @@ end
 ---@param amplitude number Amplification of the "contractions"?
 ---@param startOn? boolean Whether the constraint should start activated. (i.e. spazzing).
 ---@param material? string Material of the rope. If left unset, will be solid black.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Will return `false` if the constraint could not be created.
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint could not be created.
 ---@return Entity # The muscle controller. (`gmod_winch_controller`) Will return `nil` if the constraint could not be created.
@@ -554,7 +554,7 @@ function constraint.NoCollide(ent1, ent2, bone1, bone2, disableOnRemove) end
 ---@param rigid? boolean Whether the constraint is rigid, i.e. cannot bend.
 ---@param width number Width of the rope. If below or at `0`, visual rope segments will not be created.
 ---@param material? string Material of the rope. If unset, will be solid black.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope.
 ---@return Entity # The created constraint. ([phys_pulleyconstraint](https://developer.valvesoftware.com/wiki/Phys_pulleyconstraint)) Will return `false` if the constraint could not be created.
 ---@return Entity # The first rope segment. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint or this rope segment could not be created.
 ---@return Entity # The second rope segment. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint or this rope segment could not be created.
@@ -612,7 +612,7 @@ function constraint.RemoveConstraints(ent, type) end
 ---@param width number Width of the rope.
 ---@param material? string Material of the rope. If unset, will be solid black.
 ---@param rigid? boolean Whether the constraint is rigid.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope.
 ---@return Entity # The constraint entity ([phys_lengthconstraint](https://developer.valvesoftware.com/wiki/Phys_lengthconstraint)).
 ---
 --- Will be a `keyframe_rope` if you are roping to the same bone on the same entity. Will return `false` if the constraint could not be created.
@@ -649,7 +649,7 @@ end
 ---@param localPos2 Vector Position relative to the the second physics object to constrain to.
 ---@param width number The width of the rope.
 ---@param material? string The material of the rope. If unset, will be solid black.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope. See Color.
 ---@return Entity # The created constraint entity. ([phys_slideconstraint](https://developer.valvesoftware.com/wiki/Phys_slideconstraint)) Will return `false` if the constraint could not be created.
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint or the rope could not be created.
 function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width, material, color) end
@@ -668,7 +668,7 @@ function constraint.Slider(ent1, ent2, bone1, bone2, localPos1, localPos2, width
 ---@param forceLimit? number The amount of force appliable to the constraint before it will break (0 is never).
 ---@param noCollide? boolean Should `ent1` be nocollided to `ent2` via this constraint.
 ---@param deleteEnt1OnBreak? boolean If true, when `ent2` is removed, `ent1` will also be removed.
----@return Entity # The created constraint entity. ([phys_constraint](https://developer.valvesoftware.com/wiki/Phys_constraint))
+---@return Entity # The created constraint entity, or false if the constraint failed. ([phys_constraint](https://developer.valvesoftware.com/wiki/Phys_constraint))
 function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, deleteEnt1OnBreak) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates a winch constraint, a player controllable [constraint.Elastic](https://wiki.facepunch.com/gmod/constraint.Elastic), allowing gradually increasing or decreasing the length.
@@ -692,7 +692,7 @@ function constraint.Weld(ent1, ent2, bone1, bone2, forceLimit, noCollide, delete
 ---@param bwdSpeed number Backwards speed.
 ---@param material? string The material of the rope. If unset, will be solid black.
 ---@param toggle? boolean Whether the winch should be on toggle.
----@param color? table The color of the rope. See Global.Color.
+---@param color? Color The color of the rope.
 ---@return Entity # The created constraint. ([phys_spring](https://developer.valvesoftware.com/wiki/Phys_spring)) Can return `nil`. Will return `false` if the constraint could not be created.
 ---@return Entity # The created rope. ([keyframe_rope](https://developer.valvesoftware.com/wiki/Keyframe_rope)) Will return `nil` if the constraint could not be created.
 ---@return Entity # The winch controller. (`gmod_winch_controller`) Can return `nil`.

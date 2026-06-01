@@ -56,7 +56,7 @@ function DCheckBoxLabel:SetIndent(ident) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text color for the [DCheckBoxLabel](https://wiki.facepunch.com/gmod/DCheckBoxLabel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DCheckBoxLabel:SetTextColor)
----@param color table The text color. Uses the Color.
+---@param color Color The text color. Uses the Color.
 function DCheckBoxLabel:SetTextColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the checked state of the checkbox, and calls [DCheckBoxLabel:OnChange](https://wiki.facepunch.com/gmod/DCheckBoxLabel:OnChange) and the checkbox's [Panel:ConVarChanged](https://wiki.facepunch.com/gmod/Panel:ConVarChanged) methods.

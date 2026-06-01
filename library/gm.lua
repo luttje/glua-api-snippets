@@ -519,14 +519,14 @@ function GM:GetPreferredCarryAngles(ent, ply) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:GetTeamColor)
 ---@param ent Entity Entity
----@return table # Team Global.Color
+---@return Color # Team Color
 function GM:GetTeamColor(ent) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the team color for the given team index.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:GetTeamNumColor)
 ---@param team number Team index
----@return table # Team Global.Color
+---@return Color # Team Color
 function GM:GetTeamNumColor(team) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Override this hook to disable/change ear-grabbing in your gamemode. By default, it is not called anywhere on the server.
@@ -2364,7 +2364,7 @@ function GM:StartGame() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called every rendered frame on client, except when the game is paused.
 ---
---- Called every  game tick on the server. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
+--- Called every game tick on the server, including when the game is paused. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
 --- [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) is guaranteed to be different with each call to this hook on the server.
 ---
 --- See [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) for a hook that runs every tick on both the client and server.

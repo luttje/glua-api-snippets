@@ -676,6 +676,13 @@ function math.Remap(value, inMin, inMax, outMin, outMax) end
 ---@return number # The rounded value.
 function math.Round(value, decimals) end
 
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the mathematical negative/positive sign of the input number.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/math.Sign)
+---@param value number The input number.
+---@return number # `-1` for inputs of less than 0, `0` if given a 0, `1` for inputs above 0.
+function math.Sign(value) end
+
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the [sine](https://en.wikipedia.org/wiki/Trigonometric_functions) of given angle.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/math.sin)

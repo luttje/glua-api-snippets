@@ -8,7 +8,7 @@ derma = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/derma.Color)
 ---@param name string
 ---@param pnl Panel
----@param default table The default color in case of failure.
+---@param default Color The default Color in case of failure.
 function derma.Color(name, pnl, default) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Defines a new Derma control with an optional base.
@@ -92,12 +92,12 @@ function derma.SkinHook(type, name, panel, vararg1, vararg2) end
 ---@param name string The identifier of the texture.
 ---@param pnl Panel Panel to get the skin of.
 ---@param fallback? function|any What to return if we failed to retrieve the texture.
----@return fun(x: number, y: number, w: number, h: number, clr: table?) # A function that is created with the GWEN library to draw a texture.
+---@return fun(x: number, y: number, w: number, h: number, clr: Color?) # A function that is created with the GWEN library to draw a texture.
 ---
 --- Function argument(s):
 --- * number `x` - X coordinate for the box.
 --- * number `y` - Y coordinate for the box.
 --- * number `w` - Width of the box.
 --- * number `h` - Height of the box.
---- * table `clr` - Optional color, default is white. Uses the Color.
+--- * Color `clr` - Optional color, default is white.
 function derma.SkinTexture(name, pnl, fallback) end

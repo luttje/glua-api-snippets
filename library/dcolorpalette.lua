@@ -11,7 +11,7 @@ local DColorPalette = {}
 --- For Override
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorPalette:DoClick)
----@param clr table The new color via the Color
+---@param clr Color The new color via the Color
 ---@param btn Panel The DColorButton that was pressed.
 function DColorPalette:DoClick(clr, btn) end
 
@@ -104,7 +104,7 @@ function DColorPalette:ResetSavedColors() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorPalette:SaveColor)
 ---@param btn Panel The button to save the color of. Used to get the ID of the button.
----@param clr table The color to save to this button's index
+---@param clr Color The color to save to this button's index
 function DColorPalette:SaveColor(btn, clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the size of each palette button.
@@ -121,7 +121,7 @@ function DColorPalette:SetButtonSize(size) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Currently does nothing. Intended to "select" the color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorPalette:SetColor)
----@param clr table
+---@param clr Color
 function DColorPalette:SetColor(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Clears the palette and adds new buttons with given colors.
@@ -189,7 +189,7 @@ function DColorPalette:SetNumRows(rows) end
 ---@param name string The name of the console variable to set
 ---@param key string The key of the 3rd argument to set the convar to
 --- Possible values: "r", "g", "b", "a"
----@param clr table The Color to retrieve the info from.
+---@param clr Color The Color to retrieve the info from.
 function DColorPalette:UpdateConVar(name, key, clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -199,5 +199,5 @@ function DColorPalette:UpdateConVar(name, key, clr) end
 --- Called internally when a palette color is clicked.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorPalette:UpdateConVars)
----@param clr table A Color
+---@param clr Color A Color
 function DColorPalette:UpdateConVars(clr) end

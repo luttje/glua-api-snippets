@@ -15,12 +15,12 @@ function mesh.AdvanceVertex() end
 ---[View wiki](https://wiki.facepunch.com/gmod/mesh.Begin)
 ---@param mesh IMesh The IMesh that the created mesh will be stored in.
 ---
---- If the mesh has already been built, it will instead have its existing verticies modified but cannot have the quantity of vertices changed.
+--- If the mesh has already been built, it will instead have its existing vertices modified but cannot have the quantity of vertices changed.
 ---@param primitiveType number An enum that indicates what the format of the mesh's primitives will be.
 --- For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
---- The total number of vertices must not exceed the limit of `32768`.
+--- The total number of vertices must not exceed the limit of `65535`.
 --- The number of vertices created by each primitive will depend on the type of primitive used to construct the mesh.
 ---
 --- The expected value of this argument is dependent on the primitive type used.
@@ -36,7 +36,7 @@ function mesh.Begin(mesh, primitiveType, primitiveCount) end
 --- For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
---- The total number of vertices must not exceed the limit of `32768`.
+--- The total number of vertices must not exceed the limit of `65535`.
 --- The number of vertices created by each primitive will depend on the type of primitive used to construct the mesh.
 ---
 --- The expected value of this argument is dependent on the primitive type used.
@@ -101,7 +101,7 @@ function mesh.Position(x, y, z) end
 ---@param vertex2 Vector The second vertex.
 ---@param vertex3 Vector The third vertex.
 ---@param vertex4 Vector The fourth vertex.
----@param color table The color for the vertices.
+---@param color Color The Color for the vertices.
 function mesh.Quad(vertex1, vertex2, vertex3, vertex4, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Adds a quad (4 vertices) to the currently built mesh, by using position, normal and sizes. See [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin).
@@ -113,7 +113,7 @@ function mesh.Quad(vertex1, vertex2, vertex3, vertex4, color) end
 ---@param normal Vector The normal of the quad.
 ---@param sizeX number X size in pixels.
 ---@param sizeY number Y size in pixels.
----@param color table The color for the vertices.
+---@param color Color The Color for the vertices.
 function mesh.QuadEasy(position, normal, sizeX, sizeY, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the specular map values. This is `COLOR1` semantic of Vertex Shader. Allows to blend textures of [Lightmapped_4WayBlend](https://developer.valvesoftware.com/wiki/Lightmapped_4WayBlend). Requires the `VERTEX_SPECULAR` flag to be set in the C++ code of a shader.

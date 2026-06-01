@@ -8,7 +8,7 @@ killicon = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/killicon.Add)
 ---@param class string Weapon or entity class.
 ---@param texture string Path to the texture.
----@param color table Color of the kill icon.
+---@param color Color Color of the kill icon.
 function killicon.Add(class, texture, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates kill icon from existing one.
@@ -24,7 +24,7 @@ function killicon.AddAlias(new_class, existing_class) end
 ---@param class string Weapon or entity class.
 ---@param font string Font to be used.
 ---@param symbol string The symbol to be used.
----@param color table Color of the killicon.
+---@param color Color Color of the killicon.
 ---@param heightScale? number Used internally to correct certain killicons to more closely match their visual size.
 function killicon.AddFont(class, font, symbol, color, heightScale) end
 
@@ -33,7 +33,7 @@ function killicon.AddFont(class, font, symbol, color, heightScale) end
 ---[View wiki](https://wiki.facepunch.com/gmod/killicon.AddTexCoord)
 ---@param class string Weapon or entity class this killicon is for.
 ---@param texture string Path to the texture.
----@param color table Color of the kill icon.
+---@param color Color Color of the kill icon.
 ---@param x number The start position (X axis) of the rectangle on the given texture. This is in texture coordinates.
 ---@param y number The start position (Y axis) of the rectangle on the given texture. This is in texture coordinates.
 ---@param w number The width of the rectangle on the given texture. This is in texture coordinates.

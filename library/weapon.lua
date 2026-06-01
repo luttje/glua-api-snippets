@@ -133,13 +133,12 @@ function Weapon:Clip2() end
 --- Can be useful for weapons that don't use standard ammo.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/WEAPON:CustomAmmoDisplay)
----@return table # The new ammo display settings. A table with 4 possible keys:
+---@return table # The new ammo display settings. A table with 4 possible keys: (All default to -1)
 --- * boolean Draw - Whether to draw the ammo display or not
 --- * number PrimaryClip - Amount of primary ammo in the clip
 --- * number PrimaryAmmo - Amount of primary ammo in the reserves
 --- * number SecondaryAmmo - Amount of secondary ammo. It is shown like alt-fire for SMG1 and AR2 are shown.
----
---- There is **no** SecondaryClip!
+--- * number SecondaryClip - Amount of secondary ammo in the clip. If set, the secondary ammo display will have clips and reserve ammo dispalyed.
 function WEAPON:CustomAmmoDisplay() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Forces the weapon to reload while playing given animation.

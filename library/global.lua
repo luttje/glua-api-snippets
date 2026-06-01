@@ -298,7 +298,7 @@ function _G.Color(r, g, b, a) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a new [Color](https://wiki.facepunch.com/gmod/Color) with the RGB components of the given [Color](https://wiki.facepunch.com/gmod/Color) and the alpha value specified.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ColorAlpha)
----@param color table The Color from which to take RGB values. This color will not be modified.
+---@param color Color The Color from which to take RGB values. This color will not be modified.
 ---@param alpha number The new alpha value, a number between 0 and 255. Values above 255 will be clamped.
 ---@return table # The new Color with the modified alpha value
 function _G.ColorAlpha(color, alpha) end
@@ -307,13 +307,13 @@ function _G.ColorAlpha(color, alpha) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ColorRand)
 ---@param a? boolean Should alpha be randomized.
----@return table # The created Color.
+---@return Color # The created Color.
 function _G.ColorRand(a) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a [Color](https://wiki.facepunch.com/gmod/Color) into HSL color space.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ColorToHSL)
----@param color table The Color.
+---@param color Color The Color.
 ---@return number # The hue in degrees `[0, 360]`.
 ---@return number # The saturation in the range `[0, 1]`.
 ---@return number # The lightness in the range `[0, 1]`.
@@ -322,7 +322,7 @@ function _G.ColorToHSL(color) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a [Color](https://wiki.facepunch.com/gmod/Color) into HSV color space.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ColorToHSV)
----@param color table The Color.
+---@param color Color The Color.
 ---@return number # The hue in degrees `[0, 360]`.
 ---@return number # The saturation in the range `[0, 1]`.
 ---@return number # The value in the range `[0, 1]`.
@@ -504,10 +504,6 @@ function _G.CreateSprite(material) end
 --- You should use this function for timing in-game events but not for real-world events.
 ---
 --- See also: [Global.RealTime](https://wiki.facepunch.com/gmod/Global.RealTime), [Global.SysTime](https://wiki.facepunch.com/gmod/Global.SysTime)
----
---- **NOTE**: This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary).
----
---- This is **NOT** easy as it sounds to fix in the engine. Currently there is work going on to fix this in the **nextwork_test** branch.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CurTime)
 ---@return number # Time synced with the game server.
@@ -1540,7 +1536,7 @@ function _G.HexToColor(hue) end
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
 ---@param lightness number The lightness from 0-1.
----@return table # The Color created from the HSL color space.
+---@return Color # The Color created from the HSL color space.
 function _G.HSLToColor(hue, saturation, lightness) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Converts a color from [HSV color space](https://en.wikipedia.org/wiki/HSL_and_HSV) into RGB color space and returns a [Color](https://wiki.facepunch.com/gmod/Color).
@@ -1549,7 +1545,7 @@ function _G.HSLToColor(hue, saturation, lightness) end
 ---@param hue number The hue in degrees from 0-360.
 ---@param saturation number The saturation from 0-1.
 ---@param value number The value from 0-1.
----@return table # The Color created from the HSV color space.
+---@return Color # The Color created from the HSV color space.
 function _G.HSVToColor(hue, saturation, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Launches an asynchronous http request with the given parameters.
@@ -1818,7 +1814,7 @@ function _G.IsServerBlacklisted(address, hostname, description, gm, map) end
 function _G.isstring(variable) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns if the passed object is a [table](https://wiki.facepunch.com/gmod/table).
---- 	**NOTE**: Will return TRUE for variables of type [Color](https://wiki.facepunch.com/gmod/Color)
+--- 	**NOTE**: Will return `true` if the argument has a metatable. It will return `true` for variables of type [Color](https://wiki.facepunch.com/gmod/Color) as well.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.istable)
 ---@param variable any The variable to perform the type check for.
@@ -2147,7 +2143,7 @@ function _G.MsgN(...) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.NamedColor)
 ---@param name string Name of color
----@return table # A Color or nil
+---@return Color # A Color or nil
 function _G.NamedColor(name) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Fails under certain conditions when called in coroutines
@@ -2692,7 +2688,7 @@ function _G.SavePresets(presets) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns a number based on the `size` argument and the players' screen width. This is used to scale user interface (UI) elements to be consistently sized and positioned across all screen resolutions.
 ---
---- The width is scaled in relation to `640x480` resolution, and does **not** take into account non the aspect ratio. See example below for how to adjust or that.
+--- The width is scaled in relation to `640x480` resolution, and does **not** take into account non the aspect ratio. See example below for how to adjust for that.
 ---
 --- This function can also be used for scaling font sizes.
 ---

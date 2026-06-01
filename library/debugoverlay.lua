@@ -2,7 +2,7 @@
 
 --- The debugoverlay library is mainly useful for 3D debugging, it can be used to draw shapes on the screen for debug purposes.
 ---
---- **NOTE**: These functions will not do anything unless the **developer** console variable is set to non 0.
+--- **NOTE**: These functions will not do anything unless the `developer` console variable is set to non 0.
 ---
 --- There's some code that prevents debugoverlay from being added if the game is paused, i.e. when console is open in singleplayer.
 debugoverlay = {}
@@ -32,7 +32,7 @@ function debugoverlay.Axis(origin, ang, size, lifetime, ignoreZ) end
 ---@param mins Vector Minimum bounds of the box.
 ---@param maxs Vector Maximum bounds of the box.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays a solid colored rotated box at the specified position.
@@ -47,7 +47,7 @@ function debugoverlay.Box(origin, mins, maxs, lifetime, color) end
 ---@param maxs Vector The maxs of the box (highest corner).
 ---@param ang Angle The angle to draw the box at.
 ---@param lifetime? number Amount of seconds to show the box.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a coloured cross at the specified position for the specified time.
@@ -60,7 +60,7 @@ function debugoverlay.BoxAngles(pos, mins, maxs, ang, lifetime, color) end
 ---@param position Vector Position origin.
 ---@param size number Size of the cross.
 ---@param lifetime? number Number of seconds the cross will appear for.
----@param color? table The color of the cross. Uses the Color.
+---@param color? Color The color of the cross.
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer.
 function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
 
@@ -75,7 +75,7 @@ function debugoverlay.Cross(position, size, lifetime, color, ignoreZ) end
 ---@param line number Line of text, will offset text on the to display the new line unobstructed.
 ---@param text string The text to display.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function debugoverlay.EntityTextAtPosition(pos, line, text, lifetime, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Draws a 3D grid of limited size in given position.
@@ -98,7 +98,7 @@ function debugoverlay.Grid(position) end
 ---@param pos1 Vector First position of the line.
 ---@param pos2 Vector Second position of the line.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the line. Uses the Color.
+---@param color? Color The color of the line.
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer.
 function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 
@@ -113,7 +113,7 @@ function debugoverlay.Line(pos1, pos2, lifetime, color, ignoreZ) end
 ---@param y number The position of the text, from 0 ( top ) to 1 ( bottom ).
 ---@param text string The text to display.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays a coloured sphere at the specified position.
@@ -126,7 +126,7 @@ function debugoverlay.ScreenText(x, y, text, lifetime, color) end
 ---@param origin Vector Position origin.
 ---@param size number Size of the sphere.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the sphere. Uses the Color.
+---@param color? Color The color of the sphere.
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer.
 function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 
@@ -143,7 +143,7 @@ function debugoverlay.Sphere(origin, size, lifetime, color, ignoreZ) end
 ---@param vMaxs Vector The "maximum" edge of the box.
 ---@param ang Angle The angle to draw the box at.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function debugoverlay.SweptBox(vStart, vEnd, vMins, vMaxs, ang, lifetime, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Displays text at the specified position.
@@ -170,6 +170,6 @@ function debugoverlay.Text(origin, text, lifetime, viewCheck) end
 ---@param pos2 Vector Second point of the triangle.
 ---@param pos3 Vector Third point of the triangle.
 ---@param lifetime? number Number of seconds to appear.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 ---@param ignoreZ? boolean If true, will draw on top of everything; ignoring the Z buffer.
 function debugoverlay.Triangle(pos1, pos2, pos3, lifetime, color, ignoreZ) end

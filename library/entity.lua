@@ -453,7 +453,7 @@ function Entity:DispatchTraceAttack(damageInfo, traceRes, dir) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Dissolves the entity.
 ---
---- This function creates an `env_entity_dissolver` entity internally, which seems to be deleted in the same frame. Calling this function on an entity that is already dissolving will not create another `env_entity_dissolver` entity.
+--- This function creates an `env_entity_dissolver` entity internally, which is parented to the target entity and remains until the entity is fully dissolved. Calling this function on an entity that is already dissolving will not create another `env_entity_dissolver` entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Dissolve)
 ---@param type? number Dissolve type. Should be one of the following values:
@@ -466,7 +466,8 @@ function Entity:DispatchTraceAttack(damageInfo, traceRes, dir) end
 --- | 3 | ENTITY_DISSOLVE_CORE |
 ---@param magnitude? number Magnitude of the dissolve effect, its effect depends on the dissolve type.
 ---@param origin? Vector The origin for the dissolve effect, its effect depends on the dissolve type. Defaults to entity's origin.
-function Entity:Dissolve(type, magnitude, origin) end
+---@param delay? number Delay until starting the dissolve, in seconds. There will be some particles produced during this time.
+function Entity:Dissolve(type, magnitude, origin, delay) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called so the entity can override the bullet impact effects it makes. This is called when the entity itself fires bullets via [Entity:FireBullets](https://wiki.facepunch.com/gmod/Entity:FireBullets), not when it gets hit.
 ---
@@ -2261,6 +2262,7 @@ function Entity:GetPreferredCarryAngles(ply) end
 function Entity:GetRagdollOwner() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when scripted NPC needs to check how he "feels" against another entity, such as when [NPC:Disposition](https://wiki.facepunch.com/gmod/NPC:Disposition) is called.
+--- **NOTE**: Scripted NPCs will not select other entities using same [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) as this Scripted NPC's [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) as enemy, unless [NPC:AddEntityRelationship](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship) is cast.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:GetRelationship)
 ---@param ent Entity The entity in question
@@ -2644,7 +2646,7 @@ function Entity:GetWorldTransformMatrix() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GibBreakClient)
 ---@param force Vector The force to apply to the created gibs.
----@param clr? table If set, this will be color of the broken gibs instead of the entity's color.
+---@param clr? Color If set, this will be color of the broken gibs instead of the entity's color.
 function Entity:GibBreakClient(force, clr) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Causes the entity to break into its current models gibs, if it has any.
@@ -3596,7 +3598,9 @@ function Entity:PhysicsDestroy() end
 --- [Entity:EnableCustomCollisions](https://wiki.facepunch.com/gmod/Entity:EnableCustomCollisions) needs to be called if you want players to collide with the entity correctly.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysicsFromMesh)
----@param vertices table A table consisting of Structures/MeshVertex (only the `pos` element is taken into account). Every 3 vertices define a triangle in the physics mesh.
+---@param vertices table A table of Vectors. Every 3 vertices define a triangle in the physics mesh
+---
+--- Alternatively, you can input a table consisting of Structures/MeshVertex (only the `pos` element is taken into account).
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
 ---@param massCenterOveride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `nil` otherwise.
@@ -6232,9 +6236,9 @@ function Entity:WaterLevel() end
 ---@param duration number How long the animation should take in seconds.
 function Entity:Weapon_SetActivity(act, duration) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Calls and returns [WEAPON:TranslateActivity](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity) on the weapon the entity ( player or NPC ) carries.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Calls and returns [WEAPON:TranslateActivity](https://wiki.facepunch.com/gmod/WEAPON:TranslateActivity) on the weapon the entity (player or NPC) carries.
 ---
---- Despite existing on client, it doesn't actually do anything on client.
+--- **NOTE**: Doesn't return anything on client, despite existing there.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Weapon_TranslateActivity)
 ---@param act number The NPC activity to translate

@@ -97,7 +97,7 @@ function CNavArea:Contains(pos) end
 ---@param area CNavArea The CNavArea or CNavLadder this to disconnect from.
 function CNavArea:Disconnect(area) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Draws this navarea on debug overlay.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Draws this navarea on debug overlay. (So limitations of [debugoverlay](https://wiki.facepunch.com/gmod/debugoverlay) library apply)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CNavArea:Draw)
 function CNavArea:Draw() end

@@ -15,7 +15,7 @@ local DRGBPicker = {}
 ---[View wiki](https://wiki.facepunch.com/gmod/DRGBPicker:GetPosColor)
 ---@param x number The X coordinate on the texture to get the color from
 ---@param y number The Y coordinate on the texture to get the color from
----@return table # Color
+---@return Color # The Color
 ---@return number # The X-coordinate clamped to the texture's width.
 ---@return number # The Y-coordinate clamped to the texture's height.
 function DRGBPicker:GetPosColor(x, y) end
@@ -23,7 +23,7 @@ function DRGBPicker:GetPosColor(x, y) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the color currently set on the color picker.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DRGBPicker:GetRGB)
----@return table # The color set on the color picker, see Color.
+---@return Color # The color set on the color picker, see Color.
 function DRGBPicker:GetRGB() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color stored in the color picker.
@@ -31,5 +31,5 @@ function DRGBPicker:GetRGB() end
 --- **NOTE**: This function is meant to be called internally and will not update the position of the color picker line or call [DRGBPicker:OnChange](https://wiki.facepunch.com/gmod/DRGBPicker:OnChange)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DRGBPicker:SetRGB)
----@param color table The color to set, see Color.
+---@param color Color The color to set, see Color.
 function DRGBPicker:SetRGB(color) end

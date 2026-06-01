@@ -9,7 +9,7 @@ local DSprite = {}
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Gets the color the sprite is using as a modifier.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DSprite:GetColor)
----@return table # The Global.Color being used.
+---@return Color # The Color being used.
 function DSprite:GetColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the value set by [DSprite:SetHandle](https://wiki.facepunch.com/gmod/DSprite:SetHandle)
@@ -33,7 +33,7 @@ function DSprite:GetRotation() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color modifier for the sprite.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DSprite:SetColor)
----@param color table The Global.Color to use.
+---@param color Color The Color to use.
 function DSprite:SetColor(color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Seems to be an unused feature. Does nothing.

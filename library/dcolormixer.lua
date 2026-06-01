@@ -24,7 +24,7 @@ function DColorMixer:GetAlphaBar() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the current selected color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
----@return table # The current selected color as a Color.
+---@return Color # The current selected color as a Color.
 function DColorMixer:GetColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
@@ -100,13 +100,13 @@ function DColorMixer:SetAlphaBar(show) end
 --- See also [DColorCube:SetBaseRGB](https://wiki.facepunch.com/gmod/DColorCube:SetBaseRGB)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:SetBaseColor)
----@param clr table Color
+---@param clr Color Color
 function DColorMixer:SetBaseColor(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the color of the [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer). See also [DColorMixer:GetColor](https://wiki.facepunch.com/gmod/DColorMixer:GetColor)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:SetColor)
----@param color table The color to set. See Global.Color
+---@param color Color The color to set. See Global.Color
 function DColorMixer:SetColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the [ConVar](https://wiki.facepunch.com/gmod/ConVar) name for the alpha channel of the color.
@@ -184,7 +184,7 @@ function DColorMixer:SetWangs(show) end
 --- Use [DColorMixer:SetColor](https://wiki.facepunch.com/gmod/DColorMixer:SetColor) instead!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:UpdateColor)
----@param clr table
+---@param clr Color
 function DColorMixer:UpdateColor(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -192,13 +192,13 @@ function DColorMixer:UpdateColor(clr) end
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVar)
 ---@param cvar string The ConVar name
 ---@param part string The color part to set the cvar to. "r", "g", "b" or "a".
----@param clr table The Color
+---@param clr Color The Color
 function DColorMixer:UpdateConVar(cvar, part, clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:UpdateConVars)
----@param clr table The Color
+---@param clr Color The Color
 function DColorMixer:UpdateConVars(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) sets the default color of the element to the currently selected color

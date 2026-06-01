@@ -48,7 +48,7 @@ function surface.DrawCircle(originX, originY, radius, r, g, b, a) end
 ---@param originX number The center x integer coordinate.
 ---@param originY number The center y integer coordinate.
 ---@param radius number The radius of the circle.
----@param color table A Color object/table to read the color from.
+---@param color Color A Color object/table to read the color from.
 function surface.DrawCircle(originX, originY, radius, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Draws a line from one point to another.
@@ -177,7 +177,7 @@ function surface.GetAlphaMultiplier() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting draw operations.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetDrawColor)
----@return table # The color that drawing operations will use as a Color.
+---@return Color # The color that drawing operations will use.
 function surface.GetDrawColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the [HUD icon](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/hud_textures.txt) TextureID of a texture with the specified name.
@@ -216,7 +216,7 @@ function surface.GetScissorRect() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current color affecting text draw operations.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.GetTextColor)
----@return table # The color that text drawing operations will use as a Color.
+---@return Color # The color that text drawing operations will use.
 function surface.GetTextColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the X and Y co-ordinate that has been set with [surface.SetTextPos](https://wiki.facepunch.com/gmod/surface.SetTextPos) or changed by [surface.DrawText](https://wiki.facepunch.com/gmod/surface.DrawText).
@@ -318,7 +318,7 @@ function surface.SetDrawColor(r, g, b, a) end
 --- **NOTE**: Due to post processing and gamma correction the color you set with this function may appear differently when rendered. This problem does not occur on materials drawn with [surface.DrawTexturedRect](https://wiki.facepunch.com/gmod/surface.DrawTexturedRect).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetDrawColor)
----@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+---@param color Color A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
 function surface.SetDrawColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the current font to be used for text operations later.
@@ -360,7 +360,7 @@ function surface.SetTextColor(r, g, b, a) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the color of any future text to be drawn, can be set by either using R, G, B, A as separate numbers or by providing a [Color](https://wiki.facepunch.com/gmod/Color).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/surface.SetTextColor)
----@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+---@param color Color A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
 function surface.SetTextColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set the top-left position to draw any future text at.

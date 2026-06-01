@@ -7,7 +7,7 @@ local DColorButton = {}
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color of the button
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorButton:GetColor)
----@return table # The Color of the button
+---@return Color # The Color of the button
 function DColorButton:GetColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns value set by [DColorButton:SetDrawBorder](https://wiki.facepunch.com/gmod/DColorButton:SetDrawBorder). See that page for more info.
@@ -39,7 +39,7 @@ function DColorButton:IsDown() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color of the [DColorButton](https://wiki.facepunch.com/gmod/DColorButton).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorButton:SetColor)
----@param color table A Color to set the color as
+---@param color Color A Color to set the color as
 ---@param noTooltip? boolean If true, the tooltip will not be reset to display the selected color.
 function DColorButton:SetColor(color, noTooltip) end
 

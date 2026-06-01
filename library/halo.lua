@@ -8,7 +8,7 @@ halo = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/halo.Add)
 ---@param entities table A table of entities to add the halo effect to.
----@param color table The desired color of the halo. See Color.
+---@param color Color The desired color of the halo.
 ---@param blurX? number The strength of the halo's blur on the x axis.
 ---@param blurY? number The strength of the halo's blur on the y axis.
 ---@param passes? number The number of times the halo should be drawn per frame. **Increasing this may hinder player FPS**.

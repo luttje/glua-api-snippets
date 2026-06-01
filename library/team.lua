@@ -33,7 +33,7 @@ function team.GetClass(index) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/team.GetColor)
 ---@param teamIndex number The team index.
----@return table # The team's color as a Color.
+---@return Color # The team's color as a Color.
 function team.GetColor(teamIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the name of the team.
@@ -97,7 +97,7 @@ function team.SetClass(index, classes) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/team.SetColor)
 ---@param teamIndex number The team index.
----@param color table The team's new color as a Color.
+---@param color Color The team's new color as a Color.
 function team.SetColor(teamIndex, color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the score of the given team
@@ -121,7 +121,7 @@ function team.SetSpawnPoint(index, classes) end
 ---[View wiki](https://wiki.facepunch.com/gmod/team.SetUp)
 ---@param teamIndex number The team index.
 ---@param teamName string The team name.
----@param teamColor table The team color. Uses the Color.
+---@param teamColor Color The team color. Uses the Color.
 ---@param isJoinable? boolean Whether the team is joinable or not.
 function team.SetUp(teamIndex, teamName, teamColor, isJoinable) end
 

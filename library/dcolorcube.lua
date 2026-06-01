@@ -7,13 +7,13 @@ local DColorCube = {}
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the base Color set by [DColorCube:SetBaseRGB](https://wiki.facepunch.com/gmod/DColorCube:SetBaseRGB).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:GetBaseRGB)
----@return table # A Color
+---@return Color # A Color
 function DColorCube:GetBaseRGB() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color cube's default color. By default, it is set to white. (255 255 255 RGB)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:GetDefaultColor)
----@return table # The default Color.
+---@return Color # The default Color.
 function DColorCube:GetDefaultColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the value set by [DColorCube:SetHue](https://wiki.facepunch.com/gmod/DColorCube:SetHue).
@@ -25,7 +25,7 @@ function DColorCube:GetHue() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color cube's current set color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:GetRGB)
----@return table # The set color, uses Color.
+---@return Color # The set color, uses Color.
 function DColorCube:GetRGB() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color to whatever [DColorCube:GetDefaultColor](https://wiki.facepunch.com/gmod/DColorCube:GetDefaultColor) returns
@@ -38,20 +38,20 @@ function DColorCube:ResetToDefaultValue() end
 --- **NOTE**: Calling this when using a color that isn't 100% saturated and valued ([Global.HSVToColor](https://wiki.facepunch.com/gmod/Global.HSVToColor) with saturation and value set to 1) causes the color cube to look inaccurate compared to the color that's returned by methods like [DColorCube:GetRGB](https://wiki.facepunch.com/gmod/DColorCube:GetRGB) and [DColorCube:OnUserChanged](https://wiki.facepunch.com/gmod/DColorCube:OnUserChanged). You should use [DColorCube:SetColor](https://wiki.facepunch.com/gmod/DColorCube:SetColor) instead
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:SetBaseRGB)
----@param color table The base color to set, uses Color.
+---@param color Color The base color to set, uses Color.
 function DColorCube:SetBaseRGB(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the base color of the color cube and updates the slider position.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:SetColor)
----@param color table The color to set, uses Color.
+---@param color Color The color to set, uses Color.
 function DColorCube:SetColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the color cube's default color. This value will be used to reset to on middle mouse click of the color cube's draggable slider.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:SetDefaultColor)
----@param table table The new default Color.
-function DColorCube:SetDefaultColor(table) end
+---@param Color Color The new default Color.
+function DColorCube:SetDefaultColor(Color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that appears to do nothing and unused.
 ---
@@ -64,7 +64,7 @@ function DColorCube:SetHue(hue) end
 --- 	An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that used internally to set the real "output" color of the panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorCube:SetRGB)
----@param clr table A Color
+---@param clr Color A Color
 function DColorCube:SetRGB(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

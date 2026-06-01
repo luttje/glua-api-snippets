@@ -6683,44 +6683,92 @@ SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL = 1024
 ---| `SND_IGNORE_NAME`
 ---| `SND_DO_NOT_OVERWRITE_EXISTING_ON_CHANNEL`
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) The sound's attenuation; how fast it drops away, enumerations used by [Global.EmitSound](https://wiki.facepunch.com/gmod/Global.EmitSound) and [Entity:EmitSound](https://wiki.facepunch.com/gmod/Entity:EmitSound). Information taken from [soundflags.h in Source SDK 2013](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/soundflags.h#L53)
----
---- The engine starts running into trouble below 60dB.
----
---- **WARNING**: These enumerations do not exist in game and are listed here only for reference
---- * `SNDLVL_NONE` = `0`
---- * `SNDLVL_20dB` = `20`
---- * `SNDLVL_25dB` = `25`
---- * `SNDLVL_30dB` = `30`
---- * `SNDLVL_35dB` = `35`
---- * `SNDLVL_40dB` = `40`
---- * `SNDLVL_45dB` = `45`
---- * `SNDLVL_50dB` = `50`
---- * `SNDLVL_55dB` = `55`
---- * `SNDLVL_60dB` = `60`
---- * `SNDLVL_IDLE` = `60`
---- * `SNDLVL_65dB` = `65`
---- * `SNDLVL_STATIC` = `66`
---- * `SNDLVL_70dB` = `70`
---- * `SNDLVL_75dB` = `75`
---- * `SNDLVL_NORM` = `75`
---- * `SNDLVL_80dB` = `80`
---- * `SNDLVL_TALKING` = `80`
---- * `SNDLVL_85dB` = `85`
---- * `SNDLVL_90dB` = `90`
---- * `SNDLVL_95dB` = `95`
---- * `SNDLVL_100dB` = `100`
---- * `SNDLVL_105dB` = `105`
---- * `SNDLVL_110dB` = `110`
---- * `SNDLVL_120dB` = `120`
---- * `SNDLVL_130dB` = `130`
---- * `SNDLVL_140dB` = `140`
---- * `SNDLVL_GUNFIRE` = `140`
---- * `SNDLVL_150dB` = `150`
---- * `SNDLVL_180dB` = `180`
----
---- [View wiki](https://wiki.facepunch.com/gmod/Enums/SNDLVL)
---- @alias SNDLVL 0 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 60 | 65 | 66 | 70 | 75 | 75 | 80 | 80 | 85 | 90 | 95 | 100 | 105 | 110 | 120 | 130 | 140 | 140 | 150 | 180
+--- Sound plays everywhere
+SNDLVL_NONE = 0
+--- Rustling leaves
+SNDLVL_20dB = 20
+--- Whispering
+SNDLVL_25dB = 25
+--- Library
+SNDLVL_30dB = 30
+SNDLVL_35dB = 35
+SNDLVL_40dB = 40
+--- Refrigerator
+SNDLVL_45dB = 45
+--- Average home
+SNDLVL_50dB = 50
+SNDLVL_55dB = 55
+--- Normal conversation, clothes dryer
+SNDLVL_60dB = 60
+--- *The same as SNDLVL_60dB*
+SNDLVL_IDLE = 60
+--- Washing machine, dishwasher
+SNDLVL_65dB = 65
+SNDLVL_STATIC = 66
+--- Car, vacuum cleaner, mixer, electric sewing machine
+SNDLVL_70dB = 70
+--- Busy traffic
+SNDLVL_75dB = 75
+--- *The same as SNDLVL_75dB*
+SNDLVL_NORM = 75
+--- Mini-bike, alarm clock, noisy restaurant, office tabulator, outboard motor, passing snowmobile
+SNDLVL_80dB = 80
+--- *The same as SNDLVL_80dB*
+SNDLVL_TALKING = 80
+--- Average factory, electric shaver
+SNDLVL_85dB = 85
+--- Screaming child, passing motorcycle, convertible ride on freeway
+SNDLVL_90dB = 90
+SNDLVL_95dB = 95
+--- Subway train, diesel truck, woodworking shop, pneumatic drill, boiler shop, jackhammer
+SNDLVL_100dB = 100
+--- Helicopter, power mower
+SNDLVL_105dB = 105
+--- Snowmobile (drivers seat), inboard motorboat, sandblasting
+SNDLVL_110dB = 110
+--- Car horn, propeller aircraft
+SNDLVL_120dB = 120
+--- Air raid siren
+SNDLVL_130dB = 130
+--- Threshold of pain, gunshot, jet engine
+SNDLVL_140dB = 140
+--- *The same as SNDLVL_140dB*
+SNDLVL_GUNFIRE = 140
+SNDLVL_150dB = 150
+--- Rocket launching
+SNDLVL_180dB = 180
+
+---@alias SNDLVL
+---| `SNDLVL_NONE`
+---| `SNDLVL_20dB`
+---| `SNDLVL_25dB`
+---| `SNDLVL_30dB`
+---| `SNDLVL_35dB`
+---| `SNDLVL_40dB`
+---| `SNDLVL_45dB`
+---| `SNDLVL_50dB`
+---| `SNDLVL_55dB`
+---| `SNDLVL_60dB`
+---| `SNDLVL_IDLE`
+---| `SNDLVL_65dB`
+---| `SNDLVL_STATIC`
+---| `SNDLVL_70dB`
+---| `SNDLVL_75dB`
+---| `SNDLVL_NORM`
+---| `SNDLVL_80dB`
+---| `SNDLVL_TALKING`
+---| `SNDLVL_85dB`
+---| `SNDLVL_90dB`
+---| `SNDLVL_95dB`
+---| `SNDLVL_100dB`
+---| `SNDLVL_105dB`
+---| `SNDLVL_110dB`
+---| `SNDLVL_120dB`
+---| `SNDLVL_130dB`
+---| `SNDLVL_140dB`
+---| `SNDLVL_GUNFIRE`
+---| `SNDLVL_150dB`
+---| `SNDLVL_180dB`
 
 --- Does not collide with anything.
 --- **NOTE**: No physics object will be created when using this with [Entity:PhysicsInit](https://wiki.facepunch.com/gmod/Entity:PhysicsInit).
@@ -6964,6 +7012,10 @@ STUDIO_SSAODEPTHTEXTURE = 134217728
 STUDIO_SHADOWDEPTHTEXTURE = 1073741824
 --- Not a studio flag, but used to flag model as a non-sorting brush model
 STUDIO_TRANSPARENCY = 2147483648
+--- Do not update/apply flexes. ([Entity:SetFlexWeight](https://wiki.facepunch.com/gmod/Entity:SetFlexWeight))
+STUDIO_SKIP_FLEXES = 1024
+--- Do not render decals.
+STUDIO_SKIP_DECALS = 268435456
 
 ---@alias STUDIO
 ---| `STUDIO_RENDER`
@@ -6979,6 +7031,8 @@ STUDIO_TRANSPARENCY = 2147483648
 ---| `STUDIO_SSAODEPTHTEXTURE`
 ---| `STUDIO_SHADOWDEPTHTEXTURE`
 ---| `STUDIO_TRANSPARENCY`
+---| `STUDIO_SKIP_FLEXES`
+---| `STUDIO_SKIP_DECALS`
 
 --- Value will hold the light strength
 SURF_LIGHT = 1

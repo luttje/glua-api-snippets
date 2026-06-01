@@ -36,7 +36,7 @@ function DImageButton:GetStretchToFit() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color of the image. Equivalent of [DImage:SetImageColor](https://wiki.facepunch.com/gmod/DImage:SetImageColor)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DImageButton:SetColor)
----@param color table The Global.Color to set
+---@param color Color The Color to set
 function DImageButton:SetColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Controls whether [DImageButton:DepressImage](https://wiki.facepunch.com/gmod/DImageButton:DepressImage) is functional or not.

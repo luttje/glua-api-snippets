@@ -109,7 +109,7 @@ function DFrame:SetDraggable(draggable) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Adds or removes an icon on the left of the [DFrame](https://wiki.facepunch.com/gmod/DFrame)'s title.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DFrame:SetIcon)
----@param path string Set to nil to remove the icon.
+---@param path string Set to empty string ("") to remove the icon.
 ---
 --- Otherwise, set to file path to create the icon.
 function DFrame:SetIcon(path) end

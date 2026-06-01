@@ -49,7 +49,7 @@ function DTextEntry:GetAutoComplete(inputText) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the cursor color of a DTextEntry.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetCursorColor)
----@return table # The color of the cursor as a Color.
+---@return Color # The color of the cursor as a Color.
 function DTextEntry:GetCursorColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the textbox is disabled. Use [Panel:IsEnabled](https://wiki.facepunch.com/gmod/Panel:IsEnabled) instead.
@@ -88,7 +88,7 @@ function DTextEntry:GetFloat() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the highlight/text selection color of the text entry. If it was not overwritten, it will return the derma skin value. (`colTextEntryTextHighlight`)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetHighlightColor)
----@return table # The highlight Global.Color.
+---@return Color # The highlight Global.Color.
 function DTextEntry:GetHighlightColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the history functionality of  [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) is enabled. See [DTextEntry:AddHistory](https://wiki.facepunch.com/gmod/DTextEntry:AddHistory).
@@ -118,7 +118,7 @@ function DTextEntry:GetPaintBackground() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Return current color of panel placeholder
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetPlaceholderColor)
----@return table # Current placeholder color
+---@return Color # Current placeholder color
 function DTextEntry:GetPlaceholderColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the placeholder text set with [DTextEntry:SetPlaceholderText](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderText).
@@ -136,7 +136,7 @@ function DTextEntry:GetTabbingDisabled() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the text color of a DTextEntry.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:GetTextColor)
----@return table # The color of the text as a Color.
+---@return Color # The color of the text as a Color.
 function DTextEntry:GetTextColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) is set to run [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange) every time a character is typed or deleted or only when Enter is pressed.
@@ -172,7 +172,7 @@ function DTextEntry:OpenAutoComplete(tab) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the cursor's color in  DTextEntry (the blinking line).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:SetCursorColor)
----@param color table The color to set the cursor to.
+---@param color Color The color to set the cursor to.
 function DTextEntry:SetCursorColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Disables input on a DTextEntry and greys it out visually. This differs from [DTextEntry:SetEditable](https://wiki.facepunch.com/gmod/DTextEntry:SetEditable) which doesn't visually change the textbox.
@@ -215,7 +215,7 @@ function DTextEntry:SetFont(font) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets/overrides the default highlight/text selection color of the text entry.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:SetHighlightColor)
----@param color table The new highlight Global.Color.
+---@param color Color The new highlight Color.
 function DTextEntry:SetHighlightColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Enables or disables the history functionality of  [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry). This allows the player to scroll through history elements using up and down arrow keys.
@@ -243,7 +243,7 @@ function DTextEntry:SetPaintBackground(show) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Allow you to set placeholder color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:SetPlaceholderColor)
----@param color? table The color of the placeholder.
+---@param color? Color The color of the placeholder.
 function DTextEntry:SetPlaceholderColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the placeholder text that will be shown while the text entry has no user text. The player will not need to delete the placeholder text if they decide to start typing.
@@ -262,7 +262,7 @@ function DTextEntry:SetTabbingDisabled(enabled) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text color of the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTextEntry:SetTextColor)
----@param color table The text color. Uses the Color.
+---@param color Color The text color. Uses the Color.
 function DTextEntry:SetTextColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether we should fire [DTextEntry:OnValueChange](https://wiki.facepunch.com/gmod/DTextEntry:OnValueChange) every time we type or delete a character or only when Enter is pressed.

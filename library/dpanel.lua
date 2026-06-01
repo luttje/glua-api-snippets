@@ -9,7 +9,7 @@ local DPanel = {}
 --- **NOTE**: By default this returns **nil** even though the default background color is white
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanel:GetBackgroundColor)
----@return table # Color of the panel's background.
+---@return Color # Color of the panel's background.
 function DPanel:GetBackgroundColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether or not the panel is disabled.
@@ -51,7 +51,7 @@ function DPanel:GetTabbingDisabled() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the background color of the panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPanel:SetBackgroundColor)
----@param color table The background color.
+---@param color Color The background Color.
 function DPanel:SetBackgroundColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets whether or not to disable the panel.

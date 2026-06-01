@@ -37,7 +37,7 @@ function DLabel:GetBright() end
 --- See also [DLabel:GetTextColor](https://wiki.facepunch.com/gmod/DLabel:GetTextColor) and [DLabel:GetTextStyleColor](https://wiki.facepunch.com/gmod/DLabel:GetTextStyleColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:GetColor)
----@return table # The the actual color of the text.
+---@return Color # The the actual Color of the text.
 function DLabel:GetColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether the [DLabel](https://wiki.facepunch.com/gmod/DLabel) should set its text color to the current skin's dark text color.
@@ -109,7 +109,7 @@ function DLabel:GetPaintBackground() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the "override" text color, set by [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:GetTextColor)
----@return table # The color of the text, or nil.
+---@return Color # The Color of the text, or nil.
 function DLabel:GetTextColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -119,7 +119,7 @@ function DLabel:GetTextColor() end
 --- See also [DLabel:GetTextColor](https://wiki.facepunch.com/gmod/DLabel:GetTextColor) and [DLabel:SetTextStyleColor](https://wiki.facepunch.com/gmod/DLabel:SetTextStyleColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:GetTextStyleColor)
----@return table # The "internal" color of the text
+---@return Color # The "internal" Color of the text
 function DLabel:GetTextStyleColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the current toggle state of the label. This can be set with [DLabel:SetToggle](https://wiki.facepunch.com/gmod/DLabel:SetToggle) and toggled with [DLabel:Toggle](https://wiki.facepunch.com/gmod/DLabel:Toggle).
@@ -149,7 +149,7 @@ function DLabel:SetBright(bright) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Changes color of label. Alias of [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:SetColor)
----@param color table The color to set. Uses the Color structure.
+---@param color Color The color to set. Uses Color.
 function DLabel:SetColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color of the text to the dark text color defined in the skin.
@@ -234,7 +234,7 @@ function DLabel:SetPaintBackground(paint) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text color of the [DLabel](https://wiki.facepunch.com/gmod/DLabel). This will take precedence over [DLabel:SetTextStyleColor](https://wiki.facepunch.com/gmod/DLabel:SetTextStyleColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:SetTextColor)
----@param color table The text color. Uses the Color.
+---@param color Color The text color. Uses Color.
 function DLabel:SetTextColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: Use [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor) instead!
@@ -242,7 +242,7 @@ function DLabel:SetTextColor(color) end
 --- Used by [DLabel:SetDark](https://wiki.facepunch.com/gmod/DLabel:SetDark), [DLabel:SetBright](https://wiki.facepunch.com/gmod/DLabel:SetBright) and [DLabel:SetHighlight](https://wiki.facepunch.com/gmod/DLabel:SetHighlight) to set the text color without affecting [DLabel:SetTextColor](https://wiki.facepunch.com/gmod/DLabel:SetTextColor) calls.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DLabel:SetTextStyleColor)
----@param color table The text color. Uses the Color.
+---@param color Color The text color. Uses the Color.
 function DLabel:SetTextStyleColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the toggle state of the label. This can be retrieved with [DLabel:GetToggle](https://wiki.facepunch.com/gmod/DLabel:GetToggle) and toggled with [DLabel:Toggle](https://wiki.facepunch.com/gmod/DLabel:Toggle).

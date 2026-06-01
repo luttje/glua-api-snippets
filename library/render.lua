@@ -11,7 +11,7 @@ render = {}
 ---@param startPos Vector Beam start position.
 ---@param width number The width of the beam.
 ---@param textureEnd number The end coordinate of the texture used.
----@param color table The color to be used. Uses the Color.
+---@param color Color The color to be used.
 function render.AddBeam(startPos, width, textureEnd, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Blurs the render target ( or a given texture ).
@@ -96,7 +96,7 @@ function render.ClearDepth(clearStencil) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearRenderTarget)
 ---@param texture ITexture
----@param color table The color, see Color.
+---@param color color The color.
 function render.ClearRenderTarget(texture, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil Buffer value to `0` for all pixels in the currently active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets).
@@ -194,7 +194,7 @@ function render.DrawBeam(startPos, endPos, width, textureStart, textureEnd, colo
 ---@param angles Angle Orientation of the box.
 ---@param mins Vector Start position of the box, relative to origin.
 ---@param maxs Vector End position of the box, relative to origin.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 function render.DrawBox(position, angles, mins, maxs, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a line in 3D space.
@@ -202,7 +202,7 @@ function render.DrawBox(position, angles, mins, maxs, color) end
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DrawLine)
 ---@param startPos Vector Line start position in world coordinates.
 ---@param endPos Vector Line end position in world coordinates.
----@param color? table The color to be used. Uses the Color.
+---@param color? Color The color to be used. Uses Color.
 ---@param writeZ? boolean Whether or not to consider the Z buffer. If false, the line will be drawn over everything currently drawn, if true, the line will be drawn with depth considered, as if it were a regular object in 3D space.
 ---
 --- Enabling this option will cause the line to ignore the color's alpha.
@@ -215,7 +215,7 @@ function render.DrawLine(startPos, endPos, color, writeZ) end
 ---@param vert2 Vector The second vertex.
 ---@param vert3 Vector The third vertex.
 ---@param vert4 Vector The fourth vertex.
----@param color? table The color of the quad. See Global.Color
+---@param color? Color The color of the quad.
 function render.DrawQuad(vert1, vert2, vert3, vert4, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a quad. Expects material to be set by [render.SetMaterial](https://wiki.facepunch.com/gmod/render.SetMaterial).
@@ -225,7 +225,7 @@ function render.DrawQuad(vert1, vert2, vert3, vert4, color) end
 ---@param normal Vector The face direction of the quad.
 ---@param width number The width of the quad.
 ---@param height number The height of the quad.
----@param color table The color of the quad. Uses the Color.
+---@param color Color The color of the quad.
 ---@param rotation? number The rotation of the quad counter-clockwise in degrees around the normal axis. In other words, the quad will always face the same way but this will rotate its corners.
 function render.DrawQuadEasy(position, normal, width, height, color, rotation) end
 
@@ -257,7 +257,7 @@ function render.DrawScreenQuadEx(startX, startY, width, height) end
 ---@param radius number Radius of the sphere. Negative radius will make the sphere render inwards rather than outwards.
 ---@param longitudeSteps number The number of longitude steps. This controls the quality of the sphere. Higher quality will lower performance significantly. 50 is a good number to start with.
 ---@param latitudeSteps number The number of latitude steps. This controls the quality of the sphere. Higher quality will lower performance significantly. 50 is a good number to start with.
----@param color? table The color of the sphere. Uses the Color.
+---@param color? Color The color of the sphere.
 function render.DrawSphere(position, radius, longitudeSteps, latitudeSteps, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a sprite in 3D space.
@@ -266,7 +266,7 @@ function render.DrawSphere(position, radius, longitudeSteps, latitudeSteps, colo
 ---@param position Vector Position of the sprite.
 ---@param width number Width of the sprite.
 ---@param height number Height of the sprite.
----@param color? table Color of the sprite. Uses the Color.
+---@param color? Color Color of the sprite.
 function render.DrawSprite(position, width, height, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Draws a texture over the whole screen.
@@ -292,7 +292,7 @@ function render.DrawTextureToScreenRect(tex, x, y, width, height) end
 ---@param angle Angle Angles of the box.
 ---@param mins Vector The lowest corner of the box.
 ---@param maxs Vector The highest corner of the box.
----@param color? table The color of the box. Uses the Color.
+---@param color? Color The color of the box.
 ---@param writeZ? boolean Sets whenever to write to the zBuffer.
 function render.DrawWireframeBox(position, angle, mins, maxs, color, writeZ) end
 
@@ -305,7 +305,7 @@ function render.DrawWireframeBox(position, angle, mins, maxs, color, writeZ) end
 --- The larger this number is, the smoother the sphere is.
 ---@param latitudeSteps number The amount of latitude steps.
 --- The larger this number is, the smoother the sphere is.
----@param color? table The color of the wireframe. Uses the Color.
+---@param color? Color The color of the wireframe.
 ---@param writeZ? boolean Whether or not to consider the Z buffer. If false, the wireframe will be drawn over everything currently drawn. If true, it will be drawn with depth considered, as if it were a regular object in 3D space.
 function render.DrawWireframeSphere(position, radius, longitudeSteps, latitudeSteps, color, writeZ) end
 

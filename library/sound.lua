@@ -3,7 +3,7 @@
 --- Used primarily for adding new soundscript entries.
 sound = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a sound script. It can also override sounds, which seems to only work when set on the server.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a [sound scripts](https://developer.valvesoftware.com/wiki/Soundscripts). It can also override sounds, which seems to only work when set on the server.
 ---
 --- You can find a list of common sound scripts that are shipped with the game by default here: [Common Sounds](https://wiki.facepunch.com/gmod/Common_Sounds).
 ---
@@ -13,7 +13,7 @@ sound = {}
 ---@param soundData SoundData The sounds properties. See Structures/SoundData
 function sound.Add(soundData) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Overrides [sound scripts](https://developer.valvesoftware.com/wiki/Soundscripts) defined inside of a `.txt` file; typically used for adding map-specific sounds.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.AddSoundOverrides)
 ---@param filepath string Path to the script file to load.
@@ -62,14 +62,14 @@ function sound.Generate(identifier, samplerate, length, callbackOrData, loopStar
 ---@return table # A table with Structures/SoundHintData structure or `nil` if no sound hints are nearby.
 function sound.GetLoudestSoundHint(types, pos) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns properties of the soundscript.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns properties of a [sound script](https://developer.valvesoftware.com/wiki/Soundscripts).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.GetProperties)
 ---@param name string The name of the sound script
 ---@return SoundData # The properties of the soundscript. See Structures/SoundData
 function sound.GetProperties(name) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all registered sound scripts.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all registered [sound scripts](https://developer.valvesoftware.com/wiki/Soundscripts).
 ---
 --- New ones can be registered using [sound.Add](https://wiki.facepunch.com/gmod/sound.Add), and detailed information about each one can be retrieved via [sound.GetProperties](https://wiki.facepunch.com/gmod/sound.GetProperties).
 ---

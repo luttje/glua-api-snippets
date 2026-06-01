@@ -9,13 +9,13 @@ local DShape = {}
 --- See [DShape:SetBorderColor](https://wiki.facepunch.com/gmod/DShape:SetBorderColor).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DShape:GetBorderColor)
----@return table # The border Color
+---@return Color # The border Color
 function DShape:GetBorderColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the color set to display the shape with.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DShape:GetColor)
----@return table # The shape Color
+---@return Color # The shape Color
 function DShape:GetColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current type of shape this panel is set to display.
@@ -31,15 +31,13 @@ function DShape:GetType() end
 --- Currently does nothing.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DShape:SetBorderColor)
----@param clr table The desired border color.
----
---- See Color
+---@param clr Color The desired border color. See Color
 function DShape:SetBorderColor(clr) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color to display the shape with.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DShape:SetColor)
----@param clr table The Color
+---@param clr Color The Color
 function DShape:SetColor(clr) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the shape to be drawn.

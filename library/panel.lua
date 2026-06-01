@@ -528,7 +528,7 @@ function Panel:GetAlpha() end
 --- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetBGColor)
----@return Color # The Color structure
+---@return Color # The Color.
 function Panel:GetBGColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the position and size of the panel.
@@ -684,7 +684,7 @@ function Panel:GetDockPadding() end
 --- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetFGColor)
----@return Color # A color structure. See Color
+---@return Color # The Color.
 function Panel:GetFGColor() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the name of the font that the panel renders its text with.
@@ -1604,7 +1604,7 @@ function PANEL:OnMouseWheeled(scrollDelta) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL:OnRemove)
 function PANEL:OnRemove() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the player's screen resolution of the game changes.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the player's screen resolution of the game changes.
 ---
 --- [Global.ScrW](https://wiki.facepunch.com/gmod/Global.ScrW) and [Global.ScrH](https://wiki.facepunch.com/gmod/Global.ScrH) will return the new values when this hook is called.
 ---
@@ -1967,7 +1967,7 @@ function Panel:SetBGColor(r, g, b, a) end
 --- **NOTE**: This doesn't apply to all VGUI elements and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetBGColor)
----@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+---@param color Color A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
 function Panel:SetBGColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -2129,7 +2129,7 @@ function Panel:SetEnabled(enable) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetExpensiveShadow)
 ---@param distance number The distance of the shadow from the panel.
----@param Color table The color of the shadow. Uses the Color.
+---@param Color Color The color of the shadow. Uses Color.
 function Panel:SetExpensiveShadow(distance, Color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the foreground color of a panel.
@@ -2164,7 +2164,7 @@ function Panel:SetFGColor(r, g, b, a) end
 --- **NOTE**: This doesn't apply to all VGUI elements (such as [DLabel](https://wiki.facepunch.com/gmod/DLabel)) and its function varies between them
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetFGColor)
----@param color table A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
+---@param color Color A Color object/table to read the color from. This is slower than providing four numbers. You could use Color:Unpack to address this. You should also cache your color objects if you wish to use them, for performance reasons.
 function Panel:SetFGColor(color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -2445,8 +2445,8 @@ function Panel:SetTextInset(insetX, insetY) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets text selection colors of a [RichText](https://wiki.facepunch.com/gmod/RichText) element.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetTextSelectionColors)
----@param textColor table The Global.Color to set for selected text.
----@param backgroundColor table The Global.Color to set for selected text background.
+---@param textColor Color The Color to set for selected text.
+---@param backgroundColor Color The Color to set for selected text background.
 function Panel:SetTextSelectionColors(textColor, backgroundColor) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the height of a [RichText](https://wiki.facepunch.com/gmod/RichText) element to accommodate the text inside.
@@ -2700,7 +2700,7 @@ function Panel:StretchToParent(offsetLeft, offsetTop, offsetRight, offsetBottom)
 ---@return boolean # Return false when the cursor is not considered on the panel, true if it is considered on the panel. Do not return anything for default behavior.
 function PANEL:TestHover(x, y) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called every frame while [Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible) is true.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called every frame while [Panel:IsVisible](https://wiki.facepunch.com/gmod/Panel:IsVisible) is true.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL:Think)
 function PANEL:Think() end

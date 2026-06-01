@@ -12,7 +12,7 @@ effects = {}
 ---@param endRad number Final radius of the effect, at the end of the effect's lifetime.
 ---@param width number How thick the beam should be.
 ---@param amplitude number How noisy the beam should be.
----@param color table Beam's Global.Color.
+---@param color Color Beam's Color.
 ---@param extra table Extra info, all optional. A table with the following keys: (any combination)
 --- * number speed - ?
 --- * number spread - ?

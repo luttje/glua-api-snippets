@@ -735,6 +735,12 @@ function Player:GetEyeTrace() end
 ---@return TraceResult # Trace result. See Structures/TraceResult.
 function Player:GetEyeTraceNoCursor() end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the color of a player's flashlight.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Player:GetFlashlightColor)
+---@return Color # Flashlight color
+function Player:GetFlashlightColor() end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the FOV of the player.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetFOV)
@@ -793,7 +799,7 @@ function Player:GetHullDuck() end
 ---@param cVarName string The name of the client-side ConVar.
 ---@return string # The value of the ConVar. Or an empty string if the convar doesn't exist.
 ---
---- The returned value is truncated to 31 bytes.
+--- The returned value is truncated to 259 bytes.
 function Player:GetInfo(cVarName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
@@ -1762,6 +1768,13 @@ function Player:SetDuckSpeed(duckSpeed) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetEyeAngles)
 ---@param angle Angle Angle to set the view to
 function Player:SetEyeAngles(angle) end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the color of a player's flashlight.
+--- Can be used on other players.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Player:SetFlashlightColor)
+---@param color? Color Flashlight color
+function Player:SetFlashlightColor(color) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Set a player's FOV (Field Of View) over a certain amount of time.
 ---

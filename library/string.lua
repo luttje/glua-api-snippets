@@ -97,7 +97,7 @@ function string.EndsWith(str, _end) end
 ---@param separator string The string will be separated wherever this sequence is found.
 ---@param str string The string to split up.
 ---@param withpattern? boolean Set this to true if your separator is a Patterns.
----@return table # Exploded string as a numerical sequential table.
+---@return string[] # Exploded string as a numerical sequential table.
 function string.Explode(separator, str, withpattern) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to find the specified substring in a string.
@@ -151,7 +151,7 @@ function string.FormattedTime(float, format) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a string from a Color variable.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.FromColor)
----@param color table The Color to put in the string.
+---@param color Color The Color to put in the string.
 ---@return string # Output
 function string.FromColor(color) end
 
@@ -365,7 +365,7 @@ function string.SetChar(InputString, Index, ReplacementChar) end
 ---[View wiki](https://wiki.facepunch.com/gmod/string.Split)
 ---@param Inputstring string String to split
 ---@param Separator string Character(s) to split with.
----@return table # Split table
+---@return string[] # Split table
 function string.Split(Inputstring, Separator) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether or not the first string starts with the second.

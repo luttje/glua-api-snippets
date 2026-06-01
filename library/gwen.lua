@@ -17,14 +17,14 @@ GWEN = {}
 ---@param right number Right width of border.
 ---@param bottom number Bottom width of border.
 ---@param material? IMaterial If set, given material will be used over the SKIN's default material, which is `SKIN.GwenTexture`.
----@return fun(x: number, y: number, w: number, h: number, clr: table?) # The drawing function.
+---@return fun(x: number, y: number, w: number, h: number, clr: Color?) # The drawing function.
 ---
 --- Function argument(s):
 --- * number `x` - X coordinate for the box.
 --- * number `y` - Y coordinate for the box.
 --- * number `w` - Width of the box.
 --- * number `h` - Height of the box.
---- * table `clr` - Optional color, default is white. Uses the Color.
+--- * Color `clr` - Optional color, default is color_white.
 function GWEN.CreateTextureBorder(x, y, w, h, left, top, right, bottom, material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Used in derma skins to create a fixed scale rectangle drawing function from an image. it will be drawn in the center of the box.
@@ -37,14 +37,14 @@ function GWEN.CreateTextureBorder(x, y, w, h, left, top, right, bottom, material
 ---@param w number Width of the area on texture.
 ---@param h number Height of the area on texture.
 ---@param material? IMaterial If set, given material will be used over the SKIN's default material, which is `SKIN.GwenTexture`.
----@return fun(x: number, y: number, w: number, h: number, clr: table?) # The drawing function.
+---@return fun(x: number, y: number, w: number, h: number, clr: Color?) # The drawing function.
 ---
 --- Function argument(s):
 --- * number `x` - X coordinate for the box.
 --- * number `y` - Y coordinate for the box.
 --- * number `w` - Width of the box.
 --- * number `h` - Height of the box.
---- * table `clr` - Optional color, default is white. Uses the Color.
+--- * Color `clr` - Optional color, default is white.
 function GWEN.CreateTextureCentered(x, y, w, h, material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Helper function that returns a specialized drawing function for rendering a texture that scales freely to fit the given area.
@@ -57,14 +57,14 @@ function GWEN.CreateTextureCentered(x, y, w, h, material) end
 ---@param w number Width of the area on texture.
 ---@param h number Height of the area on texture.
 ---@param material? IMaterial If set, given material will be used over the SKIN's default material, which is `SKIN.GwenTexture`.
----@return fun(x: number, y: number, w: number, h: number, clr: table?) # The drawing function.
+---@return fun(x: number, y: number, w: number, h: number, clr: Color?) # The drawing function.
 ---
 --- Function argument(s):
 --- * number `x` - X coordinate for the box.
 --- * number `y` - Y coordinate for the box.
 --- * number `w` - Width of the box.
 --- * number `h` - Height of the box.
---- * table `clr` - Optional color, default is white. Uses the Color.
+--- * Color `clr` - Optional color, default is white.
 function GWEN.CreateTextureNormal(x, y, w, h, material) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves the color from a materials texture at the provided UV coordinates
@@ -72,5 +72,5 @@ function GWEN.CreateTextureNormal(x, y, w, h, material) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GWEN.TextureColor)
 ---@param x number X position of the pixel to get the color from.
 ---@param y number Y position of the pixel to get the color from.
----@return table # The color of the point on the skin as a Color.
+---@return Color # The color of the point on the skin.
 function GWEN.TextureColor(x, y) end

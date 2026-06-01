@@ -13,7 +13,7 @@ function DModelPanel:DrawModel() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the ambient lighting used on the rendered entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DModelPanel:GetAmbientLight)
----@return table # The color of the ambient lighting.
+---@return Color # The color of the ambient lighting.
 function DModelPanel:GetAmbientLight() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether or not the panel entity should be animated when the default [DModelPanel:LayoutEntity](https://wiki.facepunch.com/gmod/DModelPanel:LayoutEntity) function is called.
@@ -37,7 +37,7 @@ function DModelPanel:GetCamPos() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the color of the rendered entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DModelPanel:GetColor)
----@return table # The color of the entity, see Color.
+---@return Color # The color of the entity.
 function DModelPanel:GetColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the entity being rendered by the model panel.
@@ -78,7 +78,7 @@ function DModelPanel:RunAnimation() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the ambient lighting used on the rendered entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DModelPanel:SetAmbientLight)
----@param color table The color of the ambient lighting.
+---@param color Color The color of the ambient lighting.
 function DModelPanel:SetAmbientLight(color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether or not to animate the entity when the default [DModelPanel:LayoutEntity](https://wiki.facepunch.com/gmod/DModelPanel:LayoutEntity) is called.
@@ -106,14 +106,14 @@ function DModelPanel:SetCamPos(pos) end
 --- **NOTE**: This does not work on Garry's Mod player models since they use a different color system. To modify a player model color, see Example 2 on the [DModelPanel](https://wiki.facepunch.com/gmod/DModelPanel) page
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DModelPanel:SetColor)
----@param color table The render color of the entity.
+---@param color Color The render color of the entity.
 function DModelPanel:SetColor(color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the directional lighting used on the rendered entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DModelPanel:SetDirectionalLight)
 ---@param direction number The light direction, see Enums/BOX.
----@param color table The color of the directional lighting.
+---@param color Color The Color of the directional lighting.
 function DModelPanel:SetDirectionalLight(direction, color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the entity to be rendered by the model panel.

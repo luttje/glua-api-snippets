@@ -79,7 +79,7 @@ function net.ReadBool() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.ReadColor)
 ---@param hasAlpha? boolean If the color has alpha written or not. **Must match what was given to net.WriteColor.**
----@return table # The Color read from the current net message, or `Color( 0, 0, 0, 0 )` if the color could not be read.
+---@return Color # The Color read from the current net message, or `Color( 0, 0, 0, 0 )` if the color could not be read.
 function net.ReadColor(hasAlpha) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Reads pure binary data from the message.
@@ -341,7 +341,7 @@ function net.WriteBool(boolean) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Appends a [Color](https://wiki.facepunch.com/gmod/Color) to the current net message.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteColor)
----@param Color table The Color you want to append to the net message.
+---@param Color Color The Color you want to append to the net message.
 ---@param writeAlpha? boolean If we should write the alpha of the color or not.
 function net.WriteColor(Color, writeAlpha) end
 

@@ -20,10 +20,8 @@ function ProjectedTexture:GetBrightness() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the color of the ProjectedTexture, which was previously set by [ProjectedTexture:SetColor](https://wiki.facepunch.com/gmod/ProjectedTexture:SetColor).
 ---
---- The returned color will not have the color metatable.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:GetColor)
----@return table # Color, the color of the ProjectedTexture.
+---@return Color # The Color of the ProjectedTexture.
 function ProjectedTexture:GetColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the constant attenuation of the projected texture, which can also be set by [ProjectedTexture:SetConstantAttenuation](https://wiki.facepunch.com/gmod/ProjectedTexture:SetConstantAttenuation).
@@ -190,9 +188,7 @@ function ProjectedTexture:SetBrightness(brightness) end
 --- You must call [ProjectedTexture:Update](https://wiki.facepunch.com/gmod/ProjectedTexture:Update) after using this function for it to take effect.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ProjectedTexture:SetColor)
----@param color table Must be a Color.
----
---- Unlike other projected textures, this color can only go up to 255.
+---@param color Color Unlike other projected textures, this color can only go up to 255.
 function ProjectedTexture:SetColor(color) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the constant attenuation of the projected texture.

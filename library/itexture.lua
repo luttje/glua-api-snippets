@@ -17,8 +17,6 @@ function ITexture:Download() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the color of the specified pixel, only works for textures created from PNG files.
 ---
---- The returned color will not have the color metatable.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/ITexture:GetColor)
 ---@param x number The X coordinate.
 ---@param y number The Y coordinate.

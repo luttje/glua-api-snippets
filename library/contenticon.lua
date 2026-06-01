@@ -11,7 +11,7 @@ local ContentIcon = {}
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the color set by [ContentIcon:SetColor](https://wiki.facepunch.com/gmod/ContentIcon:SetColor)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ContentIcon:GetColor)
----@return table # See Color
+---@return Color # See Color
 function ContentIcon:GetColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that returns the content type used to save and restore the content icon in a spawnlist.
@@ -46,7 +46,7 @@ function ContentIcon:SetAdminOnly(adminOnly) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the color for the content icon. Currently is not used by the content icon panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ContentIcon:SetColor)
----@param clr table The color to set. See Color
+---@param clr Color The color to set. See Color
 function ContentIcon:SetColor(clr) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc) that sets the content type used to save and restore the content icon in a spawnlist.

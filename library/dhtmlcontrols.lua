@@ -12,7 +12,7 @@ function DHTMLControls:FinishedLoading() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color of the navigation buttons.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DHTMLControls:SetButtonColor)
----@param clr table A Color
+---@param clr Color A Color
 function DHTMLControls:SetButtonColor(clr) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the [DHTML](https://wiki.facepunch.com/gmod/DHTML) element to control with these [DHTMLControls](https://wiki.facepunch.com/gmod/DHTMLControls).

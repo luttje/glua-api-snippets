@@ -87,6 +87,10 @@ function file.Find(name, path, sorting) end
 function file.IsDir(fileName, gamePath) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to open a file with the given mode.
+--- 		**WARNING**: When trying to open files with the following characteristics, it returns nil:
+---
+--- the file extension is ".db; .mdmp; .dmp" or
+--- the file is "server.cfg; autoexec.cfg; config.cfg; listenserver.cfg; mount.cfg"
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/file.Open)
 ---@param fileName string The files name. See file.Write for details on filename restrictions when writing to files.

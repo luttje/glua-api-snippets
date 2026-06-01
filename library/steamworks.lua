@@ -62,12 +62,13 @@ function steamworks.FileInfo(workshopItemID, resultCallback) end
 ---@param offset number How much of results to skip from first one. This is useful for pagination. Negative values are invalid.
 ---@param numRetrieve number How many items to retrieve, up to `50` at a time. Negative values are invalid.
 ---@param days number When getting `popular` or `trending` content from Steam, this determines a time period, in range of days from `0` to `365`. ( `7` = most popular addons in last 7 days, `30` = most popular addons in the last month, etc ). If given a zero, will automatically choose a value, which is `7` for `trending`.
----@param userID string `"0"` to retrieve all addons, `"1"` to retrieve addons only published by you, or a valid SteamID64 of a user to get workshop items of.
+---@param userID? string `"0"` to retrieve all addons, `"1"` to retrieve addons only published by you, or a valid SteamID64 of a user to get workshop items of.
 ---@param resultCallback fun(data: table) The function to process retrieved data.
 ---
 --- Function argument(s):
 --- * table `data` - The list of items, or nil in case of error.
-function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback) end
+---@param searchText? string If given, will use the text to filter results.
+function steamworks.GetList(type, tags, offset, numRetrieve, days, userID, resultCallback, searchText) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves players name by their 64bit SteamID.
 ---
