@@ -32,7 +32,7 @@ function debug.gethook(thread) end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns debug information about a function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/debug.getinfo)
----@param funcOrStackLevel function Takes either a function or a number representing the stack level as an argument. Stack level 0 always corresponds to the debug.getinfo call, 1 would be the function calling debug.getinfo in most cases, and so on.
+---@param funcOrStackLevel function|number Takes either a function or a number representing the stack level as an argument. Stack level 0 always corresponds to the debug.getinfo call, 1 would be the function calling debug.getinfo in most cases, and so on.
 ---
 --- Returns useful information about that function in a table.
 ---@param fields? string A string whose characters specify the information to be retrieved.

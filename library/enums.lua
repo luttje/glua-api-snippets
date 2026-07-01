@@ -4750,7 +4750,7 @@ FVPHYSICS_HEAVY_OBJECT = 32
 FVPHYSICS_MULTIOBJECT_ENTITY = 16
 --- Colliding with entities won't cause physics damage.
 FVPHYSICS_NO_IMPACT_DMG = 1024
---- Like FVPHYSICS_NO_NPC_IMPACT_DMG, but only checks for NPCs. Usually set on Combine Balls fired by Combine Soldiers.
+--- Like FVPHYSICS_NO_IMPACT_DMG, but only checks for NPCs. Usually set on Combine Balls fired by Combine Soldiers.
 FVPHYSICS_NO_NPC_IMPACT_DMG = 2048
 --- Doesn't allow the player to pick this [PhysObj](https://wiki.facepunch.com/gmod/PhysObj) with the Gravity Gun or +use pickup.
 FVPHYSICS_NO_PLAYER_PICKUP = 128
@@ -5976,11 +5976,11 @@ NUM_HULLS = 10
 OBS_MODE_NONE = 0
 --- Camera doesn't move, but adjusts camera angles to follow the spectated target
 OBS_MODE_DEATHCAM = 1
---- TF2-like freezecam
+--- TF2-like freeze-cam, then acts like `OBS_MODE_FIXED`.
 OBS_MODE_FREEZECAM = 2
 --- Same as OBS_MODE_CHASE, but you can't rotate the view
 OBS_MODE_FIXED = 3
---- First person cam
+--- Spectate a specific player from first person view.
 OBS_MODE_IN_EYE = 4
 --- Chase cam, 3rd person cam, free rotation around the spectated target
 OBS_MODE_CHASE = 5

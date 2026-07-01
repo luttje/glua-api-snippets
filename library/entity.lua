@@ -364,8 +364,8 @@ function Entity:CopyBoneMatrix(boneID, data) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Creates bone followers based on the current entity model.
 ---
---- Bone followers are [Entities](https://wiki.facepunch.com/gmod/Entity) whose [Physics Object](https://wiki.facepunch.com/gmod/PhysObj) follows a specific bone on another Entity's model.
---- This is what is used by `prop_dynamic` for things like big combine doors for vehicles with multiple physics objects which follow the visual mesh of the door when it animates.
+--- Bone followers are [Entities](https://wiki.facepunch.com/gmod/Entity) whose [Physics Objects](https://wiki.facepunch.com/gmod/PhysObj) follow a specific bone on another Entity's model.
+--- This is what is used by `prop_dynamic` for things like big combine doors with multiple physics objects which follow the visual mesh of the door when it animates.
 ---
 --- Be mindful that bone followers create a separate entity (`phys_bone_follower`) for each physics object.
 ---
@@ -3693,11 +3693,15 @@ function Entity:PhysicsInitConvex(points, surfaceprop, massCenterOverride) end
 ---@return boolean # Returns `true` on success, `nil` otherwise.
 function Entity:PhysicsInitMultiConvex(vertices, surfaceprop, massCenterOverride) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Initializes the entity's physics object as a physics shadow. Removes the previous physics object if successful. This is used internally for the Player's and NPC's physics object, and certain HL2 entities such as the crane.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Initializes the entity's [physics object](https://wiki.facepunch.com/gmod/PhysObj) as a *physics shadow*. Physics shadows can react to the environment physically (see the arguments to the function), and can push other physics objects around, but are ultimately constrained to the entity's position and angles: the physics object will attempt to return to the entity's coordinates every simulation tick.
 ---
---- A physics shadow can be used to have static entities that never move by setting both arguments to false.
+--- Internally, this creates a new physics object, copies the properties of the current physics object to it if one exists, and replaces the entity's physics object with the shadow. This is used internally for Player and NPC physics objects, certain HL2 entities such as the crane and barnacle tongue, parented physics entities, etc.
+---
+--- A physics shadow can be used to have static physics entities that never move by setting both arguments to false.
 ---
 --- The created physics object will depend on the entity's solidity `SOLID_NONE` will not create a physics object, `SOLID_BBOX` will create a Axis-Aligned BBox one, `SOLID_OBB` will create Orientated Bounding Box one, and anything else will use the models' physics mesh.
+---
+--- See also [Structures/ShadowControlParams](https://wiki.facepunch.com/gmod/Structures/ShadowControlParams).
 ---
 --- Clientside physics objects on serverside entities do not move properly in some cases. Physics objects should only created on the server or you will experience incorrect physgun beam position, prediction issues, and other unexpected behavior.
 ---
@@ -3706,7 +3710,7 @@ function Entity:PhysicsInitMultiConvex(vertices, surfaceprop, massCenterOverride
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysicsInitShadow)
 ---@param allowPhysicsMovement? boolean Whether to allow the physics shadow to move under stress.
 ---@param allowPhysicsRotation? boolean Whether to allow the physics shadow to rotate under stress.
----@return boolean # Return `true` on success, `nil` otherwise.
+---@return boolean # Return `true` on success, `false` otherwise.
 function Entity:PhysicsInitShadow(allowPhysicsMovement, allowPhysicsRotation) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Makes the physics object of the entity a sphere.
@@ -5504,6 +5508,8 @@ function Entity:SetRagdollPos(boneid, pos) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render angles override for the entity. [Entity:GetAngles](https://wiki.facepunch.com/gmod/Entity:GetAngles) will return the value set by this function until the override is disabled. (This is all this does internally)
 ---
 --- See [Entity:SetRenderOrigin](https://wiki.facepunch.com/gmod/Entity:SetRenderOrigin) for the function to manipulate origin.
+---
+--- Not to be confused with [Player:SetRenderAngles](https://wiki.facepunch.com/gmod/Player:SetRenderAngles).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles)
 ---@param newAngles? Angle|nil The new render angles to be set to. To disable the override, set to nil.

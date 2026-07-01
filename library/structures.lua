@@ -1957,7 +1957,7 @@ PhysEnvPerformanceSettings.MaxVelocity = nil
 
 ---Maximum world-space rotational velocity in degrees per second.
 ---
---- Default value for this setting is `7200`.
+--- Default value for this setting is `7272.7280273438`.
 ---@type number?
 PhysEnvPerformanceSettings.MaxAngularVelocity = nil
 
@@ -2373,6 +2373,11 @@ local RenderCaptureData = {}
 ---Format of the capture. Valid formats are:
 --- * `jpeg` or `jpg`
 --- * `png`
+---
+--- As of version 2026.06.19:
+--- * `rgba`, `rgb` and `bgra` - Raw image data in given byte order.
+--- Expected data size is `ImgWidth * ImgHeight * 4` (`ImgWidth * ImgHeight * 3` for `rgb`)
+--- Each 4 (or 3 for `rgb`) bytes  is one pixel, top to bottom left to right.
 ---@type string
 RenderCaptureData.format = nil
 
@@ -2396,7 +2401,7 @@ RenderCaptureData.h = nil
 ---@type number
 RenderCaptureData.quality = nil
 
----Set to false to capture an image with alpha channel set to fully opaque. Affects png only.
+---Set to false to capture an image with alpha channel set to fully opaque. Affects any format with alpha channel support, so not `jpg`.
 ---@type boolean?
 RenderCaptureData.alpha = true
 
@@ -3321,7 +3326,7 @@ TraceResult.FractionLeftSolid = 0
 ---@type boolean?
 TraceResult.Hit = false
 
----The ID of the hitbox hit by the trace.
+---The ID of the hitbox hit by the trace, or ID of the static prop hit in case of hitting the world.
 ---@type number?
 TraceResult.HitBox = 0
 
@@ -3423,7 +3428,7 @@ UGCFileInfo.id = nil
 ---@type string
 UGCFileInfo.title = nil
 
----The description of the Workshop item
+---The description of the Workshop item. It will be limited to 255 characters (by Steam) unless steamworks.FileInfo is called with the `extraInfo` parameter set.
 ---@type string
 UGCFileInfo.description = nil
 
@@ -3527,6 +3532,16 @@ UGCFileInfo.score = nil
 --- * `adult_only`
 ---@type string[]
 UGCFileInfo.content_descriptors = nil
+
+---If present, a list of additional previews for this Workshop item.
+---
+--- steamworks.FileInfo must be called with `extraInfo` parameter.
+---
+--- It will be a table of tables with the following keys:
+--- * number `type` - type of additional preview. 0 = is normal image, 1=YouTube video ID
+--- * string `url` - URL to the additional preview. Format depends on the type.
+---@type table[]
+UGCFileInfo.extra_previews = nil
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Table structure used by [undo.Do_Undo](https://wiki.facepunch.com/gmod/undo.Do_Undo) and [GM:CanUndo](https://wiki.facepunch.com/gmod/GM:CanUndo).
 

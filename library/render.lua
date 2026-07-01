@@ -35,7 +35,7 @@ function render.BrushMaterialOverride(mat) end
 ---
 --- Since the pixel buffer clears itself every frame, this will return a black screen outside of render hooks. To capture the user's final view, use [GM:PostRender](https://wiki.facepunch.com/gmod/GM:PostRender). This will not capture the Steam overlay or third-party injections (such as the Discord overlay, Overwolf, and advanced cheats) on the user's screen.
 ---
---- In PNG mode, this function can produce unexpected result where foreground is rendered as transparent.
+--- **WARNING**: In PNG mode, this function can produce unexpected result where foreground is rendered as transparent.
 --- This is caused by [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true` when doing most of render operations, including rendering in `_rt_fullframefb`. If you want to capture render target's content as PNG image only for output quality, set [Structures/RenderCaptureData](https://wiki.facepunch.com/gmod/Structures/RenderCaptureData)'s `alpha` to `false` when capturing render targets with [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true`.
 ---
 --- **WARNING**: This function will return nil if escape menu is open
@@ -47,7 +47,9 @@ function render.Capture(captureData) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Dumps the current render target and allows the pixels to be accessed by [render.ReadPixel](https://wiki.facepunch.com/gmod/render.ReadPixel).
 ---
---- Capturing outside a render hook will return 0 0 0 255.
+--- Capturing outside a render hook will return an image filled with `0 0 0 255`.
+---
+--- See also [render.Capture](https://wiki.facepunch.com/gmod/render.Capture).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.CapturePixels)
 function render.CapturePixels() end

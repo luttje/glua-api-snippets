@@ -338,15 +338,16 @@ function game.SetGlobalState(name, state) end
 ---@param level number The difficulty level, Easy( 1 ), Normal( 2 ), Hard( 3 ).
 function game.SetSkillLevel(level) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the time scale of the game.
----
---- This function is supposed to remove the need of using the host_timescale convar, which is cheat protected.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sets the time scale of the game logic.
 ---
 --- To slow down or speed up the movement of a specific player, use [Player:SetLaggedMovementValue](https://wiki.facepunch.com/gmod/Player:SetLaggedMovementValue) instead.
 ---
---- **NOTE**: Like host_timescale, this method does not affect sounds, if you wish to change that, look into [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
+--- See [physenv.SetTimeScale](https://wiki.facepunch.com/gmod/physenv.SetTimeScale) if you wish to only scale the physics timescale.
 ---
---- **NOTE**: The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale).
+--- This function is meant to remove the need of using the `host_timescale` convar, which is cheat protected.
+--- The true timescale will be `host_timescale` multiplied by [game.GetTimeScale](https://wiki.facepunch.com/gmod/game.GetTimeScale).
+---
+--- Like `host_timescale`, this method does not affect sounds, if you wish to change that, look into [GM:EntityEmitSound](https://wiki.facepunch.com/gmod/GM:EntityEmitSound).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/game.SetTimeScale)
 ---@param timeScale number The new timescale, minimum value is 0.001 and maximum is 5.

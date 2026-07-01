@@ -198,6 +198,8 @@ function ents.GetEdictCount() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns entity that has given [Entity:MapCreationID](https://wiki.facepunch.com/gmod/Entity:MapCreationID).
 ---
+--- 	This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll).
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.GetMapCreatedEntity)
 ---@param id number Entity's creation id.
 ---@return Entity|nil # Found entity, `nil` otherwise.

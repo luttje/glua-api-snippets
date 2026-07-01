@@ -202,8 +202,8 @@ function VMatrix:SetForward(forward) end
 --- ie. The second column of the matrix, negated, excluding the w coordinate.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/VMatrix:SetRight)
----@param forward Vector The right direction of the matrix.
-function VMatrix:SetRight(forward) end
+---@param right Vector The right direction of the matrix.
+function VMatrix:SetRight(right) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Modifies the scale of the matrix while preserving the rotation and translation.
 ---
@@ -243,8 +243,8 @@ function VMatrix:SetUnpacked(e11, e12, e13, e14, e21, e22, e23, e24, e31, e32, e
 --- ie. The third column of the matrix, excluding the w coordinate.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/VMatrix:SetUp)
----@param forward Vector The up direction of the matrix.
-function VMatrix:SetUp(forward) end
+---@param up Vector The up direction of the matrix.
+function VMatrix:SetUp(up) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Subtracts given matrix from this matrix.
 ---

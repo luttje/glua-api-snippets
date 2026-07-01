@@ -366,7 +366,7 @@ function _G.ConVarExists(name) end
 ---@param name string Name of the ConVar to be created and able to be accessed.
 ---
 --- This cannot be a name of existing console command or console variable. It will silently fail if it is.
----@param default string Default value of the ConVar.
+---@param default string|number Default value of the ConVar.
 ---@param shouldsave? boolean Should the ConVar be saved across sessions in the cfg/client.vdf file.
 ---@param userinfo? boolean Should the ConVar and its containing data be sent to the server when it has changed. This makes the convar accessible from server using Player:GetInfoNum and similar functions.
 ---@param helptext? string Help text to display in the console.
@@ -817,7 +817,7 @@ function _G.DTVar_ReceiveProxyGL(entity, Type, index, newValue) end
 ---
 --- **WARNING**: It is not safe to hold a reference to this object after creation since its data can be replaced by another dlight at any time.
 ---
---- The minlight parameter affects the world and entities differently.
+--- Dynamic lights affect the world (brushwork, static props) and entities (dynamic props, etc.) differently.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.DynamicLight)
 ---@param index number An unsigned Integer. Usually an Entity:EntIndex is used here.
@@ -1184,24 +1184,30 @@ function _G.GetConVar(name) end
 ---@return ConVar # The ConVar object
 function _G.GetConVar_Internal(name) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the numeric value ConVar with the specified name.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the numeric value [ConVar](https://wiki.facepunch.com/gmod/ConVar) (converted from the ConVar's string value) with the specified name.
 ---
---- Returns the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) if `maxplayers` is specified as the convar name, even though `maxplayers` is not a convar. (it is a console **command**) You should be using aforementioned Lua function instead.
+--- This function will return `0` if the ConVar does not exist. Use [cvars.Number](https://wiki.facepunch.com/gmod/cvars.Number) to specify your own default.
+---
+--- Will return the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) if `maxplayers` is specified as the ConVar name, even though `maxplayers` is not a ConVar. (it is a console **command**) You should be using aforementioned Lua function instead for that case.
+---
+--- In performance intensive places such as think and rendering callbacks/hooks, it is advised to use [ConVar:GetFloat](https://wiki.facepunch.com/gmod/ConVar:GetFloat) on a [ConVar](https://wiki.facepunch.com/gmod/ConVar) object directly, which be retrieved via [Global.GetConVar](https://wiki.facepunch.com/gmod/Global.GetConVar), or from existing [Global.CreateConVar](https://wiki.facepunch.com/gmod/Global.CreateConVar) call.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarNumber)
----@param name string Name of the ConVar to get.
+---@param name string Name of the ConVar to get the value of.
 ---@return number # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar or use cvars.Number
 function _G.GetConVarNumber(name) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Gets the string value ConVar with the specified name.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the string value [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the specified name.
 ---
---- Returns the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) if `maxplayers` is specified as the convar name, even though `maxplayers` is not a convar. (it is a console **command**) You should be using aforementioned Lua function instead.
+--- This function will return an empty string if the ConVar does not exist. Use [cvars.String](https://wiki.facepunch.com/gmod/cvars.String) to specify your own default.
+---
+--- Will return the value of [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers) (as a string) if `maxplayers` is specified as the ConVar name, even though `maxplayers` is not a ConVar. (it is a console **command**) You should be using aforementioned Lua function instead for that case.
+---
+--- In performance intensive places such as think and rendering callbacks/hooks, it is advised to use [ConVar:GetString](https://wiki.facepunch.com/gmod/ConVar:GetString) on a [ConVar](https://wiki.facepunch.com/gmod/ConVar) object directly, which be retrieved via [Global.GetConVar](https://wiki.facepunch.com/gmod/Global.GetConVar), or from existing [Global.CreateConVar](https://wiki.facepunch.com/gmod/Global.CreateConVar) call.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.GetConVarString)
----@param name string Name of the ConVar to get.
+---@param name string Name of the ConVar to get the value of.
 ---@return string # The ConVar's value.
----@deprecated Store the ConVar object retrieved with Global.GetConVar or use cvars.String.
 function _G.GetConVarString(name) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns the default loading screen URL (asset://garrysmod/html/loading.html)
@@ -1226,7 +1232,7 @@ function _G.GetDownloadables() end
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the environment table of either the stack level or the function specified.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.getfenv)
----@param location? function The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv. Level 0 is the base Garry's Mod environment (_G).
+---@param location? function|number The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv. Level 0 is the base Garry's Mod environment (_G).
 ---@return table # The environment.
 function _G.getfenv(location) end
 
@@ -2443,7 +2449,7 @@ function _G.rawset(table, index, value) end
 ---@return number # Real frame time
 function _G.RealFrameTime() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the uptime of the game/server in seconds (to at least **4** decimal places). This value updates itself once every time the realm thinks. For servers, this is the server tickrate. For clients, its their current FPS.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the uptime of the game/server in seconds (to at least **4** decimal places). This value updates itself once every time the realm thinks. For servers, this is the server tickrate. For clients, this is once per frame.
 ---
 --- **NOTE**: This is **not** synchronised or affected by the game.
 ---

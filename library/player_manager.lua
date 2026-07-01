@@ -98,6 +98,7 @@ function player_manager.SetPlayerClass(ply, className) end
 --- * string model - Model of hands.
 --- * number skin - Skin of hands.
 --- * string body - Bodygroups of hands.
+--- * boolean matchBodySkin - Use player skinIndex.
 function player_manager.TranslatePlayerHands(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the valid model path for a simplified name.

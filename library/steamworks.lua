@@ -45,7 +45,8 @@ function steamworks.DownloadUGC(workshopID, resultCallback) end
 ---
 --- Function argument(s):
 --- * table `data` - The data about the item, if the request succeeded, `nil` otherwise. See Structures/UGCFileInfo.
-function steamworks.FileInfo(workshopItemID, resultCallback) end
+---@param extraInfo? boolean If set, the function will retrieve more info about the workshop item, such as longer description and additional preview images. Only use this if absolutely necessary.
+function steamworks.FileInfo(workshopItemID, resultCallback, extraInfo) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Retrieves a customized list of Steam Workshop addons.
 ---

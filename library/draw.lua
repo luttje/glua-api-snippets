@@ -98,7 +98,7 @@ function draw.SimpleText(text, font, x, y, color, xAlign, yAlign) end
 ---@param xAlign? number The alignment of the X Coordinate using Enums/TEXT_ALIGN.
 ---@param yAlign? number The alignment of the Y Coordinate using Enums/TEXT_ALIGN.
 ---@param outlinewidth number Width of the outline.
----@param outlinecolor? table Color of the outline. Uses the Color.
+---@param outlinecolor? Color Color of the outline. Uses the Color.
 ---@return number # The width of the text. Same value as if you were calling surface.GetTextSize.
 ---@return number # The height of the text. Same value as if you were calling surface.GetTextSize.
 function draw.SimpleTextOutlined(Text, font, x, y, color, xAlign, yAlign, outlinewidth, outlinecolor) end

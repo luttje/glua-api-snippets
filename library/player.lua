@@ -535,6 +535,10 @@ function PLAYER:FinishMove(mv) end
 --- [Player:CanUseFlashlight](https://wiki.facepunch.com/gmod/Player:CanUseFlashlight) must be true in order for the player's flashlight to be changed.
 --- [GM:PlayerSwitchFlashlight](https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight) can block this function.
 ---
+--- **NOTE**: Added in [2025.11.12](https://gmod.facepunch.com/changelist/4026), the `gmod_flashlight` attachment is used as a source for the player's flashlight. In thirdperson, the playermodel and weapon worldmodel are checked; in firstperson, the viewmodel is checked. If the attachment isn't found, default engine functionality is used.
+---
+--- The light sprite attached to the playermodel when the flashlight is on will also follow the playermodel's `gmod_flashlight` attachment if it exists.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Flashlight)
 ---@param isOn boolean Turns the flashlight on/off
 function Player:Flashlight(isOn) end
@@ -2119,17 +2123,17 @@ function Player:SimulateGravGunPickup(ent, lightning) end
 ---[View wiki](https://wiki.facepunch.com/gmod/PLAYER:Spawn)
 function PLAYER:Spawn() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Starts spectate mode for given player. This will also affect the players movetype in some cases.
 ---
---- Starts spectate mode for given player. This will also affect the players movetype in some cases.
+--- [Player:UnSpectate](https://wiki.facepunch.com/gmod/Player:UnSpectate) should be used to remove the player from spectate mode, or call this with `OBS_MODE_NONE`.
+---
+--- The player must be respawned, otherwise they will be able to walk through doors and become invincible. This will be fixed in a future update.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:Spectate)
----@param mode number Spectate mode, see Enums/OBS_MODE.
+---@param mode OBS_MODE Spectate mode, see Enums/OBS_MODE.
 function Player:Spectate(mode) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
----
---- Makes the player spectate the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the player spectate the entity.
 ---
 --- To get the applied spectated entity, use [Player:GetObserverTarget](https://wiki.facepunch.com/gmod/Player:GetObserverTarget).
 ---
@@ -2333,9 +2337,9 @@ function Player:UniqueIDTable(key) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UnLock)
 function Player:UnLock() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) **WARNING**: The player must be respawned, otherwise they will be able to walk through doors and become invincible.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Removes the player from the spectate mode entirely.
 ---
---- Stops the player from spectating another entity.
+--- The player must be respawned, otherwise they will be able to walk through doors and become invincible. This will be fixed in a future update.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:UnSpectate)
 function Player:UnSpectate() end
