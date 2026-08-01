@@ -16,7 +16,7 @@ local DTree_Node = {}
 ---@param showFiles? boolean Should files be added as nodes (true) or folders only (false)
 ---@param wildcard? string The wildcard to use when searching for files.
 ---@param bDontForceExpandable? boolean
----@return Panel # The created DTree_Node
+---@return DTree_Node # The created DTree_Node
 function DTree_Node:AddFolder(name, folder, path, showFiles, wildcard, bDontForceExpandable) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Add a child node to the DTree_Node
@@ -63,7 +63,7 @@ function DTree_Node:CleanList() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Create and returns a copy of this node, including all the sub-nodes.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTree_Node:Copy)
----@return Panel # The copied DTree_Node.
+---@return DTree_Node # The copied DTree_Node.
 function DTree_Node:Copy() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

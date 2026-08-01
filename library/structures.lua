@@ -1391,11 +1391,11 @@ LocalLight.innerAngle = 45
 LocalLight.outerAngle = 45
 
 ---The distance at which the light will fade to 50% of its brightness.
----@type number
+---@type number?
 LocalLight.fiftyPercentDistance = nil
 
 ---The distance at which the light will completely fade out.
----@type number
+---@type number?
 LocalLight.zeroPercentDistance = nil
 
 ---The quadratic term of the light falloff. This will only be used if fiftyPercentDistance and zeroPercentDistance are not supplied, and allows finer control over light attenuation.
@@ -1425,18 +1425,18 @@ MatProxyData.name = nil
 ---
 --- Function argument(s):
 --- * table `self` - The table structure itself
---- * string `name` - The material name
+--- * IMaterial `mat` - The material.
 --- * table `values` - The material key values
----@type fun(self: table, name: string, values: table)
+---@type fun(self: table, mat: IMaterial, values: table)
 MatProxyData.init = nil
 
 ---The function used to apply the proxy. This is called every frame while any materials with this proxy are used in world.
 ---
 --- Function argument(s):
 --- * table `self` - The table structure itself.
---- * string `name` - The material name.
+--- * IMaterial `mat` - The material.
 --- * Entity `ent` - The entity the material instance is applied to, if any.
----@type fun(self: table, name: string, ent: Entity)
+---@type fun(self: table, mat: IMaterial, ent: Entity)
 MatProxyData.bind = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing the data stored by a single vertex of a mesh.
@@ -2617,7 +2617,7 @@ local SoundData = {}
 --- Can be a table of sound files, in which case the sound will be chosen randomly every time from the provided list.
 ---
 --- Each sound path can be prepended with a special character for special effects. You can learn more about this [here](https://developer.valvesoftware.com/wiki/Soundscripts#Sound_Characters).
----@type string
+---@type string|table<string>
 SoundData.sound = nil
 
 ---The name of the soundscript, to be referenced by in functions such as Entity:EmitSound.
@@ -2625,12 +2625,12 @@ SoundData.sound = nil
 SoundData.name = nil
 
 ---The sound channel to play in. See Enums/CHAN
----@type CHAN
-SoundData.channel = nil
+---@type CHAN?
+SoundData.channel = CHAN_AUTO
 
 ---The soundlevel of the sound in dB. See Enums/SNDLVL. This will affect how far the sound can be heard.
----@type SNDLVL
-SoundData.level = nil
+---@type SNDLVL?
+SoundData.level = SNDLVL_NORM
 
 ---The volume of the sound as a decimal between `0` and `1`. Can be a table of two numbers, a minimum and a maximum value.
 ---
@@ -4055,31 +4055,37 @@ VideoData.height = nil
 ---@class ViewData
 local ViewData = {}
 
----The view's original position
+---The view's original position. Defaults to the current view's origin
 ---@type Vector
 ViewData.origin = nil
 
----The view's angles
+---The view's angles. Defaults to the current view's angles
 ---@type Angle
 ViewData.angles = nil
 
----Default width divided by height. Has a deprecated alias `aspectratio`.
+---Defaults to width divided by height. Has a deprecated alias `aspectratio`.
 ---@type number
 ViewData.aspect = nil
 
----The x position of the viewport to render in
+---The deprecated alias of `aspect`. Defaults to width divided by height.
+---
+--- **Deprecated**: Use `aspect` instead!
 ---@type number
-ViewData.x = nil
+ViewData.aspectratio = nil
+
+---The x position of the viewport to render in
+---@type number?
+ViewData.x = 0
 
 ---The y position of the viewport to render in
----@type number
-ViewData.y = nil
+---@type number?
+ViewData.y = 0
 
----The width of the viewport to render in
+---The width of the viewport to render in. Defaults to the current viewport's width
 ---@type number
 ViewData.w = nil
 
----The height of the viewport to render in
+---The height of the viewport to render in. Defaults to the current viewport's height
 ---@type number
 ViewData.h = nil
 
@@ -4099,11 +4105,11 @@ ViewData.drawviewmodel = true
 ---@type boolean?
 ViewData.drawviewer = false
 
----The viewmodel's FOV
+---The viewmodel's FOV. Defaults to the current viewmodel FOV
 ---@type number
 ViewData.viewmodelfov = nil
 
----The main view's FOV
+---The main view's FOV. Defaults to the current view's FOV
 ---@type number
 ViewData.fov = nil
 
@@ -4112,46 +4118,46 @@ ViewData.fov = nil
 --- * right
 --- * top
 --- * bottom
----@type table
+---@type table?
 ViewData.ortho = nil
 
 ---Coordinate for the left clipping plane. Requires `ortho` to be set to `true`.
 ---
 --- **Deprecated**: Use `ortho` table instead!
----@type number
+---@type number?
 ViewData.ortholeft = nil
 
 ---Coordinate for the right clipping plane. Requires `ortho` to be set to `true`.
 ---
 --- **Deprecated**: Use `ortho` table instead!
----@type number
+---@type number?
 ViewData.orthoright = nil
 
 ---Coordinate for the top clipping plane. Requires `ortho` to be set to `true`.
 ---
 --- **Deprecated**: Use `ortho` table instead!
----@type number
+---@type number?
 ViewData.orthotop = nil
 
 ---Coordinate for the bottom clipping plane. Requires `ortho` to be set to `true`.
 ---
 --- **Deprecated**: Use `ortho` table instead!
----@type number
+---@type number?
 ViewData.orthobottom = nil
 
----The distance of the view's origin to the near clipping plane
+---The distance of the view's origin to the near clipping plane. Defaults to the current view's near clipping distance
 ---@type number
 ViewData.znear = nil
 
----The distance of the view's origin to the far clipping plane
+---The distance of the view's origin to the far clipping plane. Defaults to the current view's far clipping distance
 ---@type number
 ViewData.zfar = nil
 
----The distance of the view's origin to the near clipping plane for the viewmodel
+---The distance of the view's origin to the near clipping plane for the viewmodel. Defaults to the viewmodel's current near clipping distance
 ---@type number
 ViewData.znearviewmodel = nil
 
----The distance of the view's origin to the far clipping plane for the viewmodel
+---The distance of the view's origin to the far clipping plane for the viewmodel. Defaults to the viewmodel's current far clipping distance
 ---@type number
 ViewData.zfarviewmodel = nil
 
@@ -4178,7 +4184,7 @@ ViewData.viewid = 0
 --- Note that top and bottom are reversed.
 ---
 --- Values outside the viewport are allowed, but not recommended - instead you should increase the view FOV.
----@type table
+---@type table?
 ViewData.offcenter = nil
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Table structure used for [render.GetViewSetup](https://wiki.facepunch.com/gmod/render.GetViewSetup).

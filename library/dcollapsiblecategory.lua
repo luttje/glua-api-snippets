@@ -10,7 +10,7 @@ local DCollapsibleCategory = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DCollapsibleCategory:Add)
 ---@param name string The name of the button
----@return Panel # The DButton
+---@return DButton # The DButton
 function DCollapsibleCategory:Add(name) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
@@ -61,7 +61,7 @@ function DCollapsibleCategory:GetHeaderHeight() end
 --- See also [DCollapsibleCategory:SetList](https://wiki.facepunch.com/gmod/DCollapsibleCategory:SetList).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DCollapsibleCategory:GetList)
----@return Panel # The DCategoryList that created us.
+---@return DCategoryList # The DCategoryList that created us.
 function DCollapsibleCategory:GetList() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Doesn't actually do anything.

@@ -1039,7 +1039,8 @@ function Player:GetUserGroup() end
 function Player:GetVehicle() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entity the player is using to see from (such as the player itself, the camera, or another entity).
---- 	**NOTE**: This function will return a [NULL Entity] until [Player:SetViewEntity](https://wiki.facepunch.com/gmod/Player:SetViewEntity) has been used
+---
+--- 	**NOTE**: This function will not return the currently spectated entity. See [Player:GetObserverTarget](https://wiki.facepunch.com/gmod/Player:GetObserverTarget).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetViewEntity)
 ---@return Entity # The entity the player is using to see from
@@ -2086,7 +2087,9 @@ function Player:SetWalkSpeed(walkSpeed) end
 ---@param Color Vector This is the color to be set. The format is Vector(r,g,b), and each color should be between 0 and 1.
 function Player:SetWeaponColor(Color) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether the player's player model will be drawn at the time the function is called.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns whether the **local player's** player model will be drawn at the time the function is called.
+---
+--- Despite this being a method on a player object, this will always represent the state of the [local player](https://wiki.facepunch.com/gmod/Global.LocalPlayer), not of the player entity this method is used on.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ShouldDrawLocalPlayer)
 ---@return boolean # `true` if the player's playermodel is visible

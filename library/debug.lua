@@ -86,7 +86,7 @@ function debug.getmetatable(object) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/debug.getregistry)
 ---@return table # The Lua registry.
----@deprecated This function now returns a table that serves as a proxy to Global.FindMetaTable and Global.RegisterMetaTable. If you previously used the registry to get/add metatables, you should use those functions directly instead.
+---@deprecated This function now returns a table that serves as a proxy to Global.FindMetaTable and Global.RegisterMetaTable. If you previously used the registry to get/add metatables, you should use those functions directly instead. ```lua -- -- Hack for debug.getregistry -- local meta = {} function meta.__index( self, key ) 	return FindMetaTable( key ) end function meta.__newindex( self, key, value ) 	rawset( self, key, value )  	if ( isstring( key ) and istable( value ) ) then 		RegisterMetaTable( key, value ) 	end end  local tbl = {} setmetatable( tbl, meta ) function debug.getregistry() return tbl end ```
 function debug.getregistry() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Used for getting variable values in an index from the passed function. This does nothing for C functions.

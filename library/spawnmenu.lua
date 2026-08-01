@@ -106,10 +106,10 @@ function spawnmenu.AddToolCategory(tabName, className, printName) end
 ---@param name string The nice name of item to show to the player. See Addon Localization.
 ---@param cmd? string Console command to execute when the item is selected.
 ---@param config? string Config name, used in older versions to load tool settings UI from a file.
----@param cpanel fun(pnl: Panel) A function to build the context panel.
+---@param cpanel fun(pnl: ControlPanel) A function to build the context panel.
 ---
 --- Function argument(s):
---- * Panel `pnl` - A DForm that will be shown in the context menu
+--- * ControlPanel `pnl` - A ControlPanel that will be shown in the context menu
 ---@param table? table Allows to override the table that will be added to the tool list. Some of the fields will be overwritten by this function.
 ---@deprecated Legacy argument, no longer works.
 function spawnmenu.AddToolMenuOption(tab, category, class, name, cmd, config, cpanel, table) end
@@ -154,7 +154,7 @@ function spawnmenu.ClearToolMenus() end
 --- * postprocess
 ---@param parent? Panel The parent to add the ContentIcon to.
 ---@param data table The data to send to the content icon in spawnmenu.AddContentType. Data required will depend on the content type.
----@return Panel # The created ContentIcon, if it was returned by spawnmenu.AddContentType.
+---@return ContentIcon # The created ContentIcon, if it was returned by spawnmenu.AddContentType.
 function spawnmenu.CreateContentIcon(type, parent, data) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

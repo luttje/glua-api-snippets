@@ -124,7 +124,9 @@ function render.ClearStencil() end
 ---@param stencilBufferValue number The Stencil Buffer value that all pixels within the rectangle will be set to.
 function render.ClearStencilBufferRectangle(startX, startY, endX, endY, stencilBufferValue) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Calculates the lighting caused by dynamic lights for the specified surface.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Calculates the lighting caused by dynamic lights (such as [Global.DynamicLight](https://wiki.facepunch.com/gmod/Global.DynamicLight) and the Light Sandbox tool) for the specified surface. This will not include map ambient light.
+---
+--- See also [render.ComputeLighting](https://wiki.facepunch.com/gmod/render.ComputeLighting) for a function that also includes map's ambient lighting.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ComputeDynamicLighting)
 ---@param position Vector The position to sample from.
@@ -132,11 +134,19 @@ function render.ClearStencilBufferRectangle(startX, startY, endX, endY, stencilB
 ---@return Vector # A vector representing the light at that point.
 function render.ComputeDynamicLighting(position, normal) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Calculates the light color of a certain surface.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Calculates the light color at a certain position.
+---
+--- This includes both ambient light and dynamic light.
+---
+--- See [render.ComputeDynamicLighting](https://wiki.facepunch.com/gmod/render.ComputeDynamicLighting) for dynamic light only.
+---
+--- See [render.GetAmbientLightColor](https://wiki.facepunch.com/gmod/render.GetAmbientLightColor) for map-wide ambient color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ComputeLighting)
----@param position Vector The position of the surface to get the light from.
----@param normal Vector The normal of the surface to get the light from.
+---@param position Vector The position to get the light at.
+---@param normal Vector The direction of an imaginary surface to get the light at.
+---
+--- Pointing away from walls will get the lighting the wall receives. Pointing towards walls will not.
 ---@return Vector # A vector representing the light at that point.
 function render.ComputeLighting(position, normal) end
 
@@ -170,6 +180,7 @@ function render.CopyTexture(texture_from, texture_to) end
 function render.CullMode(cullMode) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Set's the depth range of the upcoming render.
+--- **NOTE**: Viewmodels get drawn with a depth range of `0` to `0.1` instead of the normal `0` to `1`. Incorrectly resetting the value can cause rendering issues.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.DepthRange)
 ---@param depthmin number The minimum depth of the upcoming render. `0.0` = render normally; `1.0` = render nothing.
@@ -362,10 +373,16 @@ function render.FogMode(fogMode) end
 --- If used in [GM:SetupSkyboxFog](https://wiki.facepunch.com/gmod/GM:SetupSkyboxFog), this value **must** be scaled by the first argument of the hook
 function render.FogStart(fogStart) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the ambient color of the map.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the ambient color intensity of the map, basically the color the sky emits.
+---
+--- This is used by the engine to calculate shadow color using the following formula: `ambientLight * 3 + Vector( 0.3, 0.3, 0.3 )`
+---
+--- See also [render.ComputeLighting](https://wiki.facepunch.com/gmod/render.ComputeLighting).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetAmbientLightColor)
----@return Vector # The ambient color of the map.
+---@return Vector # The ambient color intensity of the map.
+---
+--- This is computed at map compile time and is stored in "linear color space".
 function render.GetAmbientLightColor() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current alpha blending.
@@ -451,9 +468,12 @@ function render.GetHDREnabled() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Gets the light exposure on the specified position.
 ---
+--- This is effectively the same as [render.ComputeLighting](https://wiki.facepunch.com/gmod/render.ComputeLighting) without the `normal` argument provided.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.GetLightColor)
 ---@param position Vector The position of the surface to get the light from.
 ---@return Vector # The light color.
+---@deprecated Same as render.ComputeLighting without the `normal` argument provided, so just use that
 function render.GetLightColor(position) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: You probably want to just use a custom render target. See [Global.GetRenderTargetEx](https://wiki.facepunch.com/gmod/Global.GetRenderTargetEx).
@@ -1011,7 +1031,7 @@ function render.SetLightingMode(Mode) end
 ---@param lightingOrigin Vector The position which will be used to calculate lighting for the current model.
 function render.SetLightingOrigin(lightingOrigin) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the texture to be used as the lightmap in upcoming rendering operations. This is required when rendering meshes using a material with a lightmapped shader such as LightmappedGeneric.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the texture to be used as the lightmap in upcoming rendering operations. This is required when rendering meshes using a material with a lightmapped shader such as `LightmappedGeneric`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetLightmapTexture)
 ---@param tex ITexture The texture to be used as the lightmap.
@@ -1022,7 +1042,7 @@ function render.SetLightmapTexture(tex) end
 --- Disables all local lights if called with no arguments.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetLocalModelLights)
----@param lights? table A table containing up to 4 tables for each light source that should be set up. Each of these tables should contain the properties of its associated light source, see Structures/LocalLight.
+---@param lights? Structures/LocalLight[] A table containing up to 4 tables for each light source that should be set up. Each of these tables should contain the properties of its associated light source, see Structures/LocalLight.
 function render.SetLocalModelLights(lights) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the material to be used in any upcoming render operation using the [render](https://wiki.facepunch.com/gmod/render).

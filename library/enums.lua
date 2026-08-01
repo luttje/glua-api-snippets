@@ -5573,13 +5573,16 @@ MAT_WARPSHIELD = 90
 ---
 --- For more information, see [Point Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#points)
 MATERIAL_POINTS = 0
---- **WARNING**: The primitive type `MATERIAL_LINES` does not currently work and will not produce any visual effect if used.
+--- Creates line using 2 vertices.
+---
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of line multiply by 2 that the Mesh will contain.
+--- E.g. `(vertexCount * 2)`
 ---
 --- For more information, see [Line Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lines)
 MATERIAL_LINES = 1
 --- Creates triangles from groupings of 3 vertices.
 ---
---- TThe `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of triangles that the Mesh will contain.
 --- E.g. `(vertexCount / 3)`
 ---
 --- For more information, see [Triangle Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#triangles)
@@ -5591,11 +5594,14 @@ MATERIAL_TRIANGLES = 2
 ---
 --- For more information, see [Triangle Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#trianglestrips)
 MATERIAL_TRIANGLE_STRIP = 3
---- **WARNING**: The primitive type `MATERIAL_LINE_STRIP` does not currently work and will not produce any visual effect if used.
+--- Creates a set of lines that all share a single vertex and each share a vertex with the previous lines.
+---
+--- The `primitiveCount` argument of [mesh.Begin](https://wiki.facepunch.com/gmod/mesh.Begin) should be the total number of line connection that the Mesh will contain.
+--- E.g. `(vertexCount)`
 ---
 --- For more information, see [Line Strip Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#linestrips)
 MATERIAL_LINE_STRIP = 4
---- **WARNING**: The primitive type `MATERIAL_LINE_LOOP` does not currently work and will not produce any visual effect if used.
+--- Exactly like MATERIAL_LINE_STRIP do, but the first and the last vertex will always be connected together.
 ---
 --- For more information, see [Line Loop Primitives](https://wiki.facepunch.com/gmod/mesh_primitives#lineloops)
 MATERIAL_LINE_LOOP = 5

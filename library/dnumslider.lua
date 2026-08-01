@@ -37,7 +37,7 @@ function DNumSlider:GetRange() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry) component of the slider.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DNumSlider:GetTextArea)
----@return Panel # The DTextEntry.
+---@return DTextEntry # The DTextEntry.
 function DNumSlider:GetTextArea() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the value of the [DNumSlider](https://wiki.facepunch.com/gmod/DNumSlider)

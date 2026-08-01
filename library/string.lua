@@ -363,10 +363,10 @@ function string.SetChar(InputString, Index, ReplacementChar) end
 --- This is an alias of [string.Explode](https://wiki.facepunch.com/gmod/string.Explode), but with flipped arguments.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.Split)
----@param Inputstring string String to split
----@param Separator string Character(s) to split with.
+---@param input string String to split
+---@param separator string Character(s) to split with.
 ---@return string[] # Split table
-function string.Split(Inputstring, Separator) end
+function string.Split(input, separator) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether or not the first string starts with the second.
 ---
@@ -403,12 +403,20 @@ function string.StripExtension(path) end
 ---@return string # The substring.
 function string.sub(string, StartPos, EndPos) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Fetches a Color type from a string.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to create a Color from a string.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.ToColor)
----@param Inputstring string The string to convert from.
+---@param colorString string The string to convert from.
+---
+--- The expected format is 3 or 4 integer numbers in the range `0`-`255` with a single space separating them.
+--- These numbers are in the order: `red green blue alpha` where `alpha` is optional.
+---
+---
+--- If the input string is malformed but contains a correctly formatted substring within it, that valid substring will be used which may produce unexpected results.
 ---@return Color # The output Color
-function string.ToColor(Inputstring) end
+---
+--- If the input string is improperly formatted, this will be `Color( 255, 255, 255, 255 )`
+function string.ToColor(colorString) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns given time in "MM:SS" format.
 ---

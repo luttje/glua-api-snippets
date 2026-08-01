@@ -442,7 +442,9 @@ function _G.CreateNewAddonPreset(data) end
 ---@return CNewParticleEffect # The created particle system.
 function _G.CreateParticleSystem(ent, effect, partAtt, entAtt, offset) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles. See also [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new particle system, and sets control points 0 and 1 to given position, as well as optionally orientation of CP0 to the given angles.
+---
+--- See also [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem)
 ---
 --- **NOTE**: The particle effect must be precached with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
 ---
@@ -494,7 +496,7 @@ function _G.CreateSound(targetEnt, soundName, filter) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CreateSprite)
 ---@param material IMaterial Material the sprite should draw.
----@return Panel # The new DSprite element.
+---@return DSprite # The new DSprite element.
 function _G.CreateSprite(material) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the uptime of the server in seconds (to at least 4 decimal places)
@@ -615,7 +617,7 @@ function _G.Derma_Install_Convar_Functions(target) end
 ---@param Text string The text within the created panel.
 ---@param Title string The title of the created panel.
 ---@param Button string The text of the button to close the panel.
----@return Panel # The created DFrame
+---@return DFrame # The created DFrame
 function _G.Derma_Message(Text, Title, Button) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Shows a message box in the middle of the screen, with up to 4 buttons they can press.
@@ -650,7 +652,7 @@ function _G.Derma_Query(text, title, btn1text, btn1func, btn2text, btn2func, btn
 --- * string `text` - The text the player entered.
 ---@param confirmText? string Allows you to override text of the "OK" button
 ---@param cancelText? string Allows you to override text of the "Cancel" button
----@return Panel # The created DFrame
+---@return DFrame # The created DFrame
 function _G.Derma_StringRequest(title, subtitle, default, confirm, cancel, confirmText, cancelText) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Creates a DMenu and closes any current menus.
@@ -1079,18 +1081,6 @@ function _G.GameDetails(servername, serverurl, mapname, maxplayers, steamid, gam
 ---@return number # The current floored dynamic memory usage of Lua, in kilobytes.
 ---@deprecated This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use Global.collectgarbage( "count" ) instead.
 function _G.gcinfo() end
-
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) This function adds all models from a specified folder to a custom Spawnlist category. Internally uses [Global.AddPropsOfParent](https://wiki.facepunch.com/gmod/Global.AddPropsOfParent)
---- 	**WARNING**: Using this function before [SANDBOX:PopulateContent](https://wiki.facepunch.com/gmod/SANDBOX:PopulateContent) has been called will result in an error
----
----[View wiki](https://wiki.facepunch.com/gmod/Global.GenerateSpawnlistFromPath)
----@param folder string the folder to search for models
----@param path string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
----@param name string The Spawnmenu Category name
----@param icon? string The Spawnmenu Category Icon to use
----@param appid number The AppID which is needed for the Content
----@deprecated This function is only available locally and cannot be used outside the gameprops.lua file.
-function _G.GenerateSpawnlistFromPath(folder, path, name, icon, appid) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Returns if the game was started with either -noaddons or -noworkshop
 ---
@@ -1714,11 +1704,13 @@ function _G.IsEnemyEntityName(className) end
 ---@return boolean # True if the variable is an Entity.
 function _G.isentity(variable) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.isentity](https://wiki.facepunch.com/gmod/Global.isentity).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Identical to [Global.isentity](https://wiki.facepunch.com/gmod/Global.isentity). Returns if the passed object is an [Entity](https://wiki.facepunch.com/gmod/Entity).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.IsEntity(legacy))
+---@param variable any The variable to check.
+---@return boolean # True if the variable is an Entity.
 ---@deprecated Use the function Global.isentity instead.
-function _G.IsEntity() end
+function _G.IsEntity(variable) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns if this is the first time this hook was predicted.
 ---
@@ -1910,7 +1902,7 @@ function _G.JS_Workshop(htmlPanel) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Label)
 ---@param text string The string to set the label's text to
 ---@param parent? Panel Optional. The panel to parent the DLabel to
----@return Panel # The created DLabel
+---@return DLabel # The created DLabel
 function _G.Label(text, parent) end
 
 ---![(Menu)](https://github.com/user-attachments/assets/62703d98-767e-4cf2-89b3-390b1c2c5cd9) Callback function for when the client's language changes. Called by the engine.
@@ -2185,7 +2177,7 @@ function _G.next(tab, prevKey) end
 ---@return number # The number of downloadables
 function _G.NumDownloadables() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the amount of skins the specified model has.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the amount of skins the specified model has if the model has ever been loaded before, without loading the model directly.
 ---
 --- See also [Entity:SkinCount](https://wiki.facepunch.com/gmod/Entity:SkinCount) if you have an entity.
 ---
@@ -2220,13 +2212,13 @@ function _G.OpenFolder(folder) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.OpenProblemsPanel)
 function _G.OpenProblemsPanel() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Modifies the given vectors so that all of vector2's axis are larger than vector1's by switching them around. Also known as ordering vectors.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Modifies the given vectors so that values of `vector2` on each axis (X Y Z) are larger than those of `vector1` by switching them around. Also known as ordering vectors.
 ---
---- **NOTE**: This function will irreversibly modify the given vectors
+--- This is useful to convert (or guarantee) 2 position vectors to a bounding box "mins" and "maxs" vectors.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.OrderVectors)
----@param vector1 Vector Bounding box min resultant
----@param vector2 Vector Bounding box max resultant
+---@param vector1 Vector Vector 1. This will become a "mins" vector of the resulting bounding box.
+---@param vector2 Vector Vector 2. This will become a "maxs" vector of the resulting bounding box.
 function _G.OrderVectors(vector1, vector2) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns an iterator function([Global.next](https://wiki.facepunch.com/gmod/Global.next)) for a for loop that will return the values of the specified table in an arbitrary order.
@@ -2250,7 +2242,9 @@ function _G.Particle(file) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a particle effect. See also [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem).
 ---
---- **NOTE**: The particle effect must be precached **serverside** with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
+--- **NOTE**: The particle effect must be precached **serverside** with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used! This is due to the function using networked IDs for particle names, not directly networking particle system name.
+---
+--- Clientside, you can use [Global.CreateParticleSystemNoEntity](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity) (and similar) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ParticleEffect)
 ---@param particleName string The name of the particle effect.
@@ -2263,7 +2257,9 @@ function _G.ParticleEffect(particleName, position, angles, parent) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Creates a particle effect with specialized parameters. See also [Entity:CreateParticleEffect](https://wiki.facepunch.com/gmod/Entity:CreateParticleEffect) and [Global.CreateParticleSystem](https://wiki.facepunch.com/gmod/Global.CreateParticleSystem).
 ---
---- **NOTE**: The particle effect must be precached **serverside** with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used!
+--- **NOTE**: The particle effect must be precached **serverside** with [Global.PrecacheParticleSystem](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem) and the file its from must be added via [game.AddParticles](https://wiki.facepunch.com/gmod/game.AddParticles) before it can be used! This is due to the function using networked IDs for particle names, not directly networking particle system name.
+---
+--- Clientside, you can use [Global.CreateParticleSystemNoEntity](https://wiki.facepunch.com/gmod/Global.CreateParticleSystemNoEntity) (and similar) instead.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.ParticleEffectAttach)
 ---@param particleName string The name of the particle effect.
@@ -2337,6 +2333,8 @@ function _G.PositionSpawnIcon(model, position, noAngles) end
 --- When used on the server, it automatically precaches the particle on client.
 ---
 --- **WARNING**: There is a limit of 4096 precached particles on the server. So only precache particles that are actually going to be used.
+---
+--- There is no limit clientside.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.PrecacheParticleSystem)
 ---@param particleSystemName string The name of the particle system.
@@ -2416,6 +2414,7 @@ function _G.ProtectedCall(func, ...) end
 ---@param table table Table to create iterator for
 ---@param descending? boolean Whether the iterator should iterate descending or not
 ---@return function # Iterator function
+---@return table # Internal iterator state, not the source table. It must be passed straight through to the generic for loop; capturing only the first return value and iterating over that will error.
 function _G.RandomPairs(table, descending) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Compares the two values without calling their __eq operator.
@@ -2995,7 +2994,6 @@ function _G.SetPhysConstraintSystem(constraintSystem) end
 ---@param table table The table to sort
 ---@param desc? boolean Reverse the sorting order
 ---@return function # Iterator function
----@return table # The table being iterated over
 function _G.SortedPairs(table, desc) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns an iterator function that can be used to loop through a table in order of member values, when the values of the table are also tables and contain that member.
@@ -3009,7 +3007,7 @@ function _G.SortedPairs(table, desc) end
 ---@param memberKey any Key of the value member to sort by.
 ---@param descending? boolean Whether the iterator should iterate in descending order or not.
 ---@return function # Iterator function
----@return table # The table the iterator was created for.
+---@return table # Internal iterator state, not the source table. It must be passed straight through to the generic for loop; capturing only the first return value and iterating over that will error.
 function _G.SortedPairsByMemberValue(table, memberKey, descending) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns an iterator function that can be used to loop through a table in order of its **values**.
@@ -3022,7 +3020,7 @@ function _G.SortedPairsByMemberValue(table, memberKey, descending) end
 ---@param table table Table to create iterator for
 ---@param descending? boolean Whether the iterator should iterate in descending order or not
 ---@return function # Iterator function
----@return table # The table which will be iterated over
+---@return table # Internal iterator state, not the source table. It must be passed straight through to the generic for loop; capturing only the first return value and iterating over that will error.
 function _G.SortedPairsByValue(table, descending) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Runs [util.PrecacheSound](https://wiki.facepunch.com/gmod/util.PrecacheSound) and returns the string.
@@ -3341,7 +3339,7 @@ function _G.VGUIFrameTime() end
 ---@param y number Y position of the created element
 ---@param w number Width of the created element
 ---@param h number Height of the created element
----@return Panel # DShape element
+---@return DShape # DShape element
 function _G.VGUIRect(x, y, w, h) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: Used by the **vgui_visualizelayout** convar

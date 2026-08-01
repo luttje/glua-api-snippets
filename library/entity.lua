@@ -2820,8 +2820,9 @@ function Entity:IsConstraint() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether the entity is dormant or not.
 ---
---- Client/server entities become dormant when they leave the PVS on the server. Client side entities can decide for themselves whether to become dormant.
---- This mainly applies to [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community").
+--- Networked entities become dormant clientside when they leave the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community"). This typically means they are no longer visible by the local player, and will not receive updates from the server.
+---
+--- Server side, entities can only be dormant during level transitions by default.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:IsDormant)
 ---@return boolean # Whether the entity is dormant or not.
@@ -3505,6 +3506,17 @@ function ENTITY:OnTaskComplete() end
 ---@param failReason string If set, a custom reason for the failure.
 function ENTITY:OnTaskFailed(failCode, failReason) end
 
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a trace attack is done against the entity, allowing override of the damage being dealt by altering the [CTakeDamageInfo](https://wiki.facepunch.com/gmod/CTakeDamageInfo).
+---
+--- This is called before [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage).
+--- **NOTE**: This hook is only called for `ai`, `nextbot` and `anim` type entities.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:OnTraceAttack)
+---@param info CTakeDamageInfo The damage info
+---@param dir Vector The direction the damage goes in
+---@param trace table The Structures/TraceResult of the attack, containing the hitgroup.
+function ENTITY:OnTraceAttack(info, dir, trace) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called to completely override NPC movement. This can be used for example for flying NPCs.
 ---
 --- **NOTE**: This hook only exists for `ai` type SENTs.
@@ -3775,6 +3787,17 @@ function ENTITY:PhysicsUpdate(phys) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysWake)
 function Entity:PhysWake() end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound of a step depending on the surface below the entity's foot.
+---
+--- It will use attachments `"RightFoot"` or `"LeftFoot"` to decide where to check the surface at. If the attachments do not exist, it will use regular Valve Biped skeleton bones. If they don't exist, it will fallback to the entity's origin.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:PlayFootstepSound)
+---@param isLeftFoot boolean Determines whether the step is a right foot or a left foot.
+---
+--- This is used for certain NPCs such as Eli to determine what sound should be played. This also determines the position of the sound.
+---@param volume? number The volume, from 0 to 1.
+function Entity:EmitStepSound(isLeftFoot, volume) end
+
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the entity play a .vcd scene. [All scenes from Half-Life 2](https://developer.valvesoftware.com/wiki/Half-Life_2_Scenes_List).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PlayScene)
@@ -3790,9 +3813,11 @@ function Entity:PlayScene(scene, delay) end
 ---@param target Entity The entity to face.
 function Entity:PointAtEntity(target) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called after the duplicator finished copying the entity.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called after the duplicator finished copying the entity, after [ENTITY:PreEntityCopy](https://wiki.facepunch.com/gmod/ENTITY:PreEntityCopy).
 ---
---- See also [ENTITY:PreEntityCopy](https://wiki.facepunch.com/gmod/ENTITY:PreEntityCopy), [ENTITY:PostEntityPaste](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste) and [ENTITY:OnEntityCopyTableFinish](https://wiki.facepunch.com/gmod/ENTITY:OnEntityCopyTableFinish).
+--- Use [ENTITY:OnEntityCopyTableFinish](https://wiki.facepunch.com/gmod/ENTITY:OnEntityCopyTableFinish) to modify the dupe table for this entity.
+---
+--- See also [ENTITY:PostEntityPaste](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste) for the restore hook.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:PostEntityCopy)
 function ENTITY:PostEntityCopy() end
@@ -5593,6 +5618,7 @@ function Entity:SetSaveValue(name, value) end
 ---
 --- If set to a number, the input is treated as the sequence ID.
 --- If set to a string, the function will automatically call Entity:LookupSequence to retrieve the sequence ID.
+---@return number # The length of the sequence.
 function Entity:SetSequence(sequence) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets whether or not the entity should make a physics contact sound when it's been picked up by a player.

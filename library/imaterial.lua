@@ -185,7 +185,7 @@ function IMaterial:SetString(materialString, string) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IMaterial:SetTexture)
 ---@param materialTexture string The name of the keyvalue on the material to store the texture on.
----@param texture ITexture The new texture. This can also be a string, the name of the new texture.
+---@param texture ITexture|string The new texture. This can also be a string, the name of the new texture.
 function IMaterial:SetTexture(materialTexture, texture) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Unsets the value for the specified material value.

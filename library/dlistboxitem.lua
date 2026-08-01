@@ -8,7 +8,7 @@ local DListBoxItem = {}
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the parent "mother" of this **DListBoxItem** set by [DListBoxItem:SetMother](https://wiki.facepunch.com/gmod/DListBoxItem:SetMother).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListBoxItem:GetMother)
----@return Panel # The "mother" DListBox.
+---@return DListBox # The "mother" DListBox.
 function DListBoxItem:GetMother() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Selects this item.

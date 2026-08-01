@@ -132,7 +132,7 @@ function ControlPanel:ClearControls() end
 ---@param convarG string Name of the convar that will store the G component of the selected color.
 ---@param convarB string Name of the convar that will store the B component of the selected color.
 ---@param convarA? string Name of the convar that will store the A component of the selected color.
----@return Panel # The created CtrlColor panel.
+---@return CtrlColor # The created CtrlColor panel.
 function ControlPanel:ColorPicker(label, convarR, convarG, convarB, convarA) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets control values of the control panel.
@@ -166,7 +166,7 @@ function ControlPanel:GetEmbeddedPanel() end
 ---@param convar1 string The name of the convar that will store the key code for player selected key of the left key binder.
 ---@param label2? string If set and `convar2` is set, the label for the right key binder.
 ---@param convar2? string If set and `label2` is set, the name of the convar that will store the key code for player selected key of the right key binder.
----@return Panel # The created CtrlNumPad panel.
+---@return CtrlNumPad # The created CtrlNumPad panel.
 function ControlPanel:KeyBinder(label1, convar1, label2, convar2) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a [MatSelect](https://wiki.facepunch.com/gmod/MatSelect) panel and adds it as an [item](https://wiki.facepunch.com/gmod/ControlPanel:AddPanel).
@@ -185,5 +185,5 @@ function ControlPanel:MatSelect(convar, options, autostretch, width, height) end
 ---[View wiki](https://wiki.facepunch.com/gmod/ControlPanel:ToolPresets)
 ---@param group string The presets group. Must be unique.
 ---@param cvarList table A table of convar names as keys and their defaults as the values. Typically the output of Tool:BuildConVarList.
----@return Panel # The created ControlPresets panel.
+---@return ControlPresets # The created ControlPresets panel.
 function ControlPanel:ToolPresets(group, cvarList) end

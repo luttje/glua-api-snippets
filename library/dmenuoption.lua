@@ -9,7 +9,7 @@ local DMenuOption = {}
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Creates a sub [DMenu](https://wiki.facepunch.com/gmod/DMenu) and returns it. Has no duplicate call protection.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenuOption:AddSubMenu)
----@return Panel # The created DMenu to add options to.
+---@return DMenu # The created DMenu to add options to.
 function DMenuOption:AddSubMenu() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the checked state of [DMenuOption](https://wiki.facepunch.com/gmod/DMenuOption).
@@ -27,7 +27,7 @@ function DMenuOption:GetIsCheckable() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns which [DMenu](https://wiki.facepunch.com/gmod/DMenu) this option belongs.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenuOption:GetMenu)
----@return Panel # A DMenu to which this panel belongs.
+---@return DMenu # A DMenu to which this panel belongs.
 function DMenuOption:GetMenu() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns whether this [DMenuOption](https://wiki.facepunch.com/gmod/DMenuOption) should act like a radio button, set by [DMenuOption:SetRadio](https://wiki.facepunch.com/gmod/DMenuOption:SetRadio).

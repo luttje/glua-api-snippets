@@ -1423,7 +1423,7 @@ function GM:PlayerDeathSound(ply) end
 --- Return a non-nil value to prevent the current gamemode from handling this event. In the `base` gamemode, the gamemode handles player respawning in this hook. So blocking the gamemode hook will prevent player from respawning, in this specific case.
 function GM:PlayerDeathThink(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player leaves the server. See the [player_disconnect gameevent](https://wiki.facepunch.com/gmod/gameevent/player_disconnect) for a shared version of this hook.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player leaves the server. See the [player_disconnect gameevent](https://wiki.facepunch.com/gmod/gameevent/player_disconnect) for a shared version of this hook that includes the disconnect reason too.
 ---
 --- This is not called in single-player or listen servers for the host.
 ---
@@ -2364,7 +2364,7 @@ function GM:StartGame() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Called every rendered frame on client, except when the game is paused.
 ---
---- Called every game tick on the server, including when the game is paused. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
+--- Called every game tick on the server. This will be the same as [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) on the server when there is no lag, but will only be called once every processed server frame during lag.
 --- [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) is guaranteed to be different with each call to this hook on the server.
 ---
 --- See [GM:Tick](https://wiki.facepunch.com/gmod/GM:Tick) for a hook that runs every tick on both the client and server.

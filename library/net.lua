@@ -20,8 +20,6 @@ function net.Broadcast() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the amount of data left to read in the current message. Does nothing when sending data.
 ---
---- **NOTE**: This will include 6 extra bits (or 1 byte rounded-up) used by the engine internally.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/net.BytesLeft)
 ---@return number # The amount of data left to read in the current net message in **bytes**.
 --- Returns `nil` if no net message has been started.

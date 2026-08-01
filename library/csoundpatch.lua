@@ -102,7 +102,5 @@ function CSoundPatch:SetSoundLevel(level) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Stops the sound from being played.
 ---
---- This will not work if the entity attached to this sound patch (specified by [Global.CreateSound](https://wiki.facepunch.com/gmod/Global.CreateSound)) is invalid.
----
 ---[View wiki](https://wiki.facepunch.com/gmod/CSoundPatch:Stop)
 function CSoundPatch:Stop() end

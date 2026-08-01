@@ -202,7 +202,7 @@ function Vector:Mul(multiplier) end
 ---@param matrix VMatrix The matrix to transform the vector by.
 function Vector:Mul(matrix) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Negates this vector, i.e. sets every component to the negative value of itself. Same as `Vector( -vec.x, -vec.y, -vec.z )`
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Negates this vector, i.e. sets every component to the negative value of itself. Same as `Vector( -vec.x, -vec.y, -vec.z )` but without creating new vector object
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Vector:Negate)
 function Vector:Negate() end
