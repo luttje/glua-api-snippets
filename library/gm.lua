@@ -82,6 +82,7 @@ function GM:CalcMainActivity(ply, vel) end
 function GM:CalcVehicleView(veh, ply, view) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows override of the default view.
+--- 		**NOTE**: To avoid breaking compatibility with other addons, it is recommended to add onto the origin and angle values using [Vector:Add](https://wiki.facepunch.com/gmod/Vector:Add) or [Angle:Add](https://wiki.facepunch.com/gmod/Angle:Add) instead of overriding them completely.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:CalcView)
 ---@param ply Player The local player.
@@ -90,7 +91,7 @@ function GM:CalcVehicleView(veh, ply, view) end
 ---@param fov number Field of view.
 ---@param znear number Distance to near clipping plane.
 ---@param zfar number Distance to far clipping plane.
----@return CamData # View data table. See Structures/CamData
+---@return CamData # View data table. See Structures/CamData.
 function GM:CalcView(ply, origin, angles, fov, znear, zfar) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows overriding the position and angle of the viewmodel.
@@ -420,6 +421,7 @@ function GM:EntityRemoved(ent, fullUpdate) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:EntityTakeDamage)
 ---@param target Entity The entity taking damage
 ---@param dmg CTakeDamageInfo Detailed information about the damage event.
+--- 		When you retrieve "the attacker" the player's angle and position will be incorrect.
 ---@return boolean # Return true to completely block the damage event
 function GM:EntityTakeDamage(target, dmg) end
 
@@ -480,7 +482,7 @@ function GM:GetDeathNoticeEntityName(name) end
 ---@return number # New fall damage
 function GM:GetFallDamage(ply, speed) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the game(server) needs to update the text shown in the server browser as the gamemode. Runs at a ~2s interval, runs even when the server is hibernating.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when the game(server) needs to update the text shown in the server browser as the gamemode. Runs at a ~2s interval, runs even when the server is hibernating. This hook doesn't run when `hide_server 1` is set.
 ---
 --- **NOTE**: This hook (and the `sv_gamename_override` command) may not work on some popular gamemodes like DarkRP or Trouble Terrorist Town. This is not a bug, it's just how it works. See [here](https://github.com/Facepunch/garrysmod-issues/issues/4637#issuecomment-677884989) for more information.
 ---
@@ -1074,10 +1076,12 @@ function GM:OnPhysgunPickup(ply, ent) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player reloads with the physgun. Override this to disable default unfreezing behavior.
 ---
+--- 	Regardless of whether or not you return true or false, it will disable reloading. Only returning nil/nothing will allow reloading. The intended behavior should be that returning false disables reloading.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:OnPhysgunReload)
----@param physgun Weapon The physgun in question
----@param ply Player The player wielding the physgun
----@return boolean # Whether the player can reload with the physgun or not
+---@param physgun Weapon The physgun in question.
+---@param ply Player The player wielding the physgun.
+---@return boolean # Whether the player can reload with the physgun or not/
 function GM:OnPhysgunReload(physgun, ply) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player has changed team using [GM:PlayerJoinTeam](https://wiki.facepunch.com/gmod/GM:PlayerJoinTeam).
@@ -1454,9 +1458,12 @@ function GM:PlayerDroppedWeapon(owner, wep) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when player stops using voice chat.
 ---
+--- See [GM:PlayerStartVoice](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice) for the opposite hook.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerEndVoice)
----@param ply Player Player who stopped talking
-function GM:PlayerEndVoice(ply) end
+---@param ply Player Player who stopped talking. Can be NULL when player entity is outside of the PVS. Use the player index.
+---@param plyIndex number The Entity:EntIndex of the talking player.
+function GM:PlayerEndVoice(ply, plyIndex) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player enters a vehicle.
 ---
@@ -1738,12 +1745,16 @@ function GM:PlayerSpray(sprayer) end
 function GM:PlayerStartTaunt(ply, act, length) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when a player starts using voice chat.
---- **NOTE**: Set mp_show_voice_icons to 0, if you want disable icons above player.
+---
+--- See [GM:PlayerEndVoice](https://wiki.facepunch.com/gmod/GM:PlayerEndVoice) for the hook when the player stops talking.
+---
+--- **NOTE**: Set `mp_show_voice_icons` to 0, if you want disable voice chat icons above player heads.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PlayerStartVoice)
----@param ply Player Player who started using voice chat.
----@param plyIndex? number The player index. Only appears when non-local player speaks for the first time.
----@return boolean # Set true to hide player's `CHudVoiceStatus`.
+---@param ply Player Player who started using voice chat. Can be NULL when player entity is outside of the PVS. Use the player index.
+---@param plyIndex? number The Entity:EntIndex. Only appears when non-local player speaks for the first time.
+---
+--- After August 2026 - always provided.
 function GM:PlayerStartVoice(ply, plyIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Allows you to override the time between footsteps.
@@ -1934,6 +1945,7 @@ function GM:PostEntityFireBullets(entity, data) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostEntityTakeDamage)
 ---@param ent Entity The entity that took the damage.
 ---@param dmginfo CTakeDamageInfo Detailed information about the damage event.
+--- 		When you retrieve "the attacker" the player's angle and position will be incorrect.
 ---@param wasDamageTaken boolean Whether the entity actually took the damage. (For example, shooting a Strider will generate this event, but it won't take bullet damage).
 function GM:PostEntityTakeDamage(ent, dmginfo, wasDamageTaken) end
 
@@ -1968,7 +1980,7 @@ function GM:PostPlayerDraw(ply, flags) end
 ---@return boolean # Return true/false depending on whether this post process should be allowed
 function GM:PostProcessPermitted(effect_name) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after the frame has been rendered.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called after the frame has been rendered. Will not be called if [GM:PreRender](https://wiki.facepunch.com/gmod/GM:PreRender) returned `true`, disabling all further rendering operations for the current frame.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:PostRender)
 function GM:PostRender() end
@@ -2288,25 +2300,25 @@ function GM:ShouldCollide(ent1, ent2) end
 ---@return boolean # `true` to draw the player, `false` to hide.
 function GM:ShouldDrawLocalPlayer(ply) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showhelp` console command. (Default bind is F1)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showhelp` console command. (Default bind is F1)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowHelp)
 ---@param ply Player Player who executed the command
 function GM:ShowHelp(ply) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showspare1` console command ( Default bind is F3 ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowSpare1)
 ---@param ply Player Player who executed the command.
 function GM:ShowSpare1(ply) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showspare2` console command ( Default bind is F4 ).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowSpare2)
 ---@param ply Player Player who executed the command.
 function GM:ShowSpare2(ply) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called when a player executes `gm_showteam` console command. ( Default bind is F2 )
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a player executes `gm_showteam` console command. ( Default bind is F2 )
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:ShowTeam)
 ---@param ply Player Player who executed the command

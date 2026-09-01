@@ -2441,11 +2441,11 @@ SequenceInfo.numevents = nil
 SequenceInfo.numblends = nil
 
 ---Mins part of the bounding box for this sequence
----@type vector
+---@type Vector
 SequenceInfo.bbmin = nil
 
 ---Maxs part of the bounding box for this sequence
----@type vector
+---@type Vector
 SequenceInfo.bbmax = nil
 
 ---ideal cross fade in time (0.2 default)
@@ -2984,6 +2984,12 @@ SWEP.DrawCrosshair = true
 ---The SWEP render group, see Enums/RENDERGROUP. If unset, the engine will decide the render group based on the SWEPs world model.
 ---@type RENDERGROUP
 SWEP.RenderGroup = nil
+
+---If set and `RenderGroup` is not, will switch the render group to Enums/RENDERGROUP#RENDERGROUP_BOTH when appropriate.
+---
+--- See Structures/ENT for details.
+---@type boolean?
+SWEP.WantsTranslucency = false
 
 ---Slot in the weapon selection menu, starts with `0`
 ---@type number?

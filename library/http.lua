@@ -22,7 +22,7 @@ http = {}
 ---
 --- 	To enable HTTP-requests to destinations on private networks use [Command Line Parameters](https://wiki.facepunch.com/gmod/Command_Line_Parameters) `-allowlocalhttp`. (Dedicated servers only)
 ---
---- **Not all headers are allowed in the client realm, here is a list of known blacklisted headers inside the client realm:**
+--- Not all headers are allowed to be set, here is a list of known blacklisted headers:
 --- ```
 --- host
 --- expect

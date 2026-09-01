@@ -3988,6 +3988,23 @@ COND = {
 	WEAPON_SIGHT_OCCLUDED = 45,
 }
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Alignment of a panel's contents, laid out like the keys of a number pad.
+--- Used by [Panel:SetContentAlignment](https://wiki.facepunch.com/gmod/Panel:SetContentAlignment), [DListView_Column:SetTextAlign](https://wiki.facepunch.com/gmod/DListView_Column:SetTextAlign) and [DNotify:SetAlignment](https://wiki.facepunch.com/gmod/DNotify:SetAlignment).
+---
+--- **WARNING**: These enumerations do not exist in game and are listed here only for reference
+--- * `BOTTOM_LEFT` = `1`
+--- * `BOTTOM_CENTER` = `2`
+--- * `BOTTOM_RIGHT` = `3`
+--- * `MIDDLE_LEFT` = `4`
+--- * `CENTER` = `5`
+--- * `MIDDLE_RIGHT` = `6`
+--- * `TOP_LEFT` = `7`
+--- * `TOP_CENTER` = `8`
+--- * `TOP_RIGHT` = `9`
+---
+--- [View wiki](https://wiki.facepunch.com/gmod/Enums/ContentAlignment)
+--- @alias ContentAlignment 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
 --- Things that are not solid
 CONTENTS_EMPTY = 0
 --- Things that are solid

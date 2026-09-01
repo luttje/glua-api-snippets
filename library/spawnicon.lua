@@ -11,7 +11,7 @@ local SpawnIcon = {}
 --- This is set by [SpawnIcon:SetBodyGroup](https://wiki.facepunch.com/gmod/SpawnIcon:SetBodyGroup).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SpawnIcon:GetBodyGroup)
----@return string # The Body Groups of the spawnicon
+---@return string # The Body Groups of the spawnicon, in format `"00010100"` where each position indicates a bodygroup ID, and each value indicates the bodygroup value for that ID/position, 0-9a-z
 function SpawnIcon:GetBodyGroup() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the currently set model name. This is set by [SpawnIcon:SetModelName](https://wiki.facepunch.com/gmod/SpawnIcon:SetModelName).

@@ -14,7 +14,7 @@ function DNotify:AddItem(pnl, lifeLength) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the current alignment of this notification panel. Set by [DNotify:SetAlignment](https://wiki.facepunch.com/gmod/DNotify:SetAlignment).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DNotify:GetAlignment)
----@return number # The numpad alignment
+---@return ContentAlignment # The direction of the content, based on the number pad. See Enums/ContentAlignment.
 function DNotify:GetAlignment() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns all the items added with [DNotify:AddItem](https://wiki.facepunch.com/gmod/DNotify:AddItem).
@@ -39,7 +39,7 @@ function DNotify:GetSpacing() end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the alignment of the child panels in the notification
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DNotify:SetAlignment)
----@param alignment number It's the Numpad alignment, 6 is right, 9 is top left, etc.
+---@param alignment ContentAlignment The direction of the content, based on the number pad. See Enums/ContentAlignment.
 function DNotify:SetAlignment(alignment) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the display time in seconds for the DNotify.

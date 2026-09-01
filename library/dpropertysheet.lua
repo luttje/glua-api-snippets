@@ -20,6 +20,7 @@ local DPropertySheet = {}
 function DPropertySheet:AddSheet(name, pnl, icon, noStretchX, noStretchY, tooltip) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Removes tab and/or panel from the parent DPropertySheet.
+--- **NOTE**: In case you close the active tab, it will be reset to the last item available in the list.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DPropertySheet:CloseTab)
 ---@param tab Panel The DTab of the sheet from DPropertySheet.

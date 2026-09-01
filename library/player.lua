@@ -505,7 +505,8 @@ function Player:EnterVehicle(vehicle) end
 --- The player is automatically equipped with the suit on spawn, if you wish to stop that, use [Player:RemoveSuit](https://wiki.facepunch.com/gmod/Player:RemoveSuit).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:EquipSuit)
-function Player:EquipSuit() end
+---@param playEffects? boolean If set to `true`, play the suit glove admire animation if player is holding no weapons.
+function Player:EquipSuit(playEffects) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player off the current ladder if they are on one.
 ---
@@ -1121,7 +1122,7 @@ function Player:GetWeaponColor() end
 --- **NOTE**: This function returns a sequential table. Prefer to loop it with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of the [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) function.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetWeapons)
----@return table # All the weapons the player currently has.
+---@return Weapon[] # All the weapons the player currently has.
 function Player:GetWeapons() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Gives the player a weapon.

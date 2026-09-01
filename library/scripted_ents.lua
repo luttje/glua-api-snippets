@@ -3,29 +3,29 @@
 --- The scripted_ents library allows you to access information about any scripted entities loaded into the game, as well as register your own entities.
 scripted_ents = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Defines an alias string that can be used to refer to another classname
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Defines an alias string that can be used to refer to another classname.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Alias)
----@param alias string A new string which can be used to refer to another classname
----@param classname string The classname the alias should refer to
+---@param alias string A new string which can be used to refer to another classname.
+---@param classname string The classname the alias should refer to.
 function scripted_ents.Alias(alias, classname) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the ENT table for a class, including functions defined by the base class
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the ENT table for a class, including functions defined by the base class.
 --- **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Get)
----@param classname string The classname of the ENT table to return, can be an alias
----@return table # entTable
+---@param classname string The classname of the ENT table to return, can be an alias.
+---@return table # The ENT table.
 function scripted_ents.Get(classname) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the list of all ENT tables registered
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the list of all ENT tables registered.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.GetList)
 ---@return table<string, table> # A table of all SENTs where the key is the classname and the value is a table where:
---- * table **t** — The Structures/ENT table associated with the entity
---- * boolean **isBaseType** — Unused. Always `true`
---- * string **Base** — The entity base
---- * string **type** — The entity type
+--- * table **t** — The Structures/ENT table associated with the entity.
+--- * boolean **isBaseType** — Unused. Always `true`.
+--- * string **Base** — The entity base.
+--- * string **type** — The entity type.
 function scripted_ents.GetList() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves a member of entity's table.

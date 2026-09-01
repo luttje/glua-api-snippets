@@ -3,10 +3,10 @@
 --- The player_manager library lets you manage players, such as setting their models or creating player classes.
 player_manager = {}
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Assigns view model hands to player model.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Assigns view model hands model to a specific player model.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.AddValidHands)
----@param name string Player model name.
+---@param name string The internal player model name, as set in the first argument of player_manager.AddValidModel.
 ---@param model string Hands model.
 ---@param skin? number Skin to apply to the hands.
 ---@param bodygroups? string Bodygroups to apply to the hands. See Entity:SetBodyGroups for help with the format.
@@ -16,17 +16,26 @@ function player_manager.AddValidHands(name, model, skin, bodygroups, matchBodySk
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Associates a simplified name with a path to a valid player model.
 ---
---- Only used internally.
+--- This is used to list all available player model in the Player Model Selector (via [player_manager.AllValidModels](https://wiki.facepunch.com/gmod/player_manager.AllValidModels)), and to prevent players from being able to set any model as the player model.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.AddValidModel)
----@param name string Simplified name.
----@param model string Valid PlayerModel path.
-function player_manager.AddValidModel(name, model) end
+---@param name string Short, simplified, unique player model name. (something like `"combine"` for the Combine Soldier player model)
+---@param model string The model path for this player model entry.
+---@param niceName? string A user-friendly name of this model, such as `"Combine Soldier"`.
+---
+--- Can be a localization string starting with `"#"`.
+---@param category? string A user-friendly category name for this model, such as `"Half-Life 2"`.
+---
+--- If not set, the model will appear in the "Other" category (localized to the player's language).
+--- Can be a localization string starting with `"#"`.
+function player_manager.AddValidModel(name, model, niceName, category) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the entire list of valid player models.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the entire list of valid player models.
+---
+--- You will likely want to use [player_manager.GetAllPlayerModels](https://wiki.facepunch.com/gmod/player_manager.GetAllPlayerModels) to also get categories and nice names of each of the player models.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.AllValidModels)
----@return table # List of all valid player models.
+---@return table<string,string> # List of all valid player models.
 function player_manager.AllValidModels() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Clears a player's class association by setting their ClassID to 0.
@@ -34,6 +43,14 @@ function player_manager.AllValidModels() end
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.ClearPlayerClass)
 ---@param ply Player Player to clear class from.
 function player_manager.ClearPlayerClass(ply) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the entire list of valid player models, including their categories and player-friendly names.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/player_manager.GetAllPlayerModels)
+---@return table<string,table> # List of all valid player models.
+---
+--- Sub keys include `model`, `title` and `category`, last one is optional and may not be defined.
+function player_manager.GetAllPlayerModels() end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets a players class.
 ---
@@ -72,6 +89,12 @@ function player_manager.OnPlayerSpawn(ply, transition) end
 ---@param base? string Base class name.
 function player_manager.RegisterClass(name, table, base) end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes a valid player model from the list, including associated hands model.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/player_manager.RemoveValidModel)
+---@param name string The internal name of the player model to remove from the list. (The first argument from player_manager.AddValidModel or the key from the player model list.)
+function player_manager.RemoveValidModel(name) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Execute a named function within the player's set class.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.RunClass)
@@ -103,6 +126,8 @@ function player_manager.TranslatePlayerHands(name) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the valid model path for a simplified name.
 ---
+--- Will default to `"models/player/kleiner.mdl"` if given player model does not exist.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel)
 ---@param shortName string The short name of the model.
 ---@return string # The valid model path for the short name.
@@ -111,6 +136,8 @@ function player_manager.TranslatePlayerModel(shortName) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns the simplified name for a valid model path of a player model.
 ---
 --- Opposite of [player_manager.TranslatePlayerModel](https://wiki.facepunch.com/gmod/player_manager.TranslatePlayerModel).
+---
+--- Will default to `"kleiner"` if there is no registered player model with given model path.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/player_manager.TranslateToPlayerModelName)
 ---@param model string The model path to a player model.

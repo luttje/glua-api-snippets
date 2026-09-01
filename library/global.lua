@@ -2644,10 +2644,10 @@ function _G.RunString(code, identifier, handleError) end
 ---@deprecated Use Global.RunString instead.
 function _G.RunStringEx(code, identifier, handleError) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the given entity unless it is a player or the world entity.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the given entity unless it is a player or the world entity. It will check if the input is a valid entity before removal.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity)
----@param ent Entity Entity to safely remove.
+---@param ent Entity Entity to remove.
 function _G.SafeRemoveEntity(ent) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes entity after delay using [Global.SafeRemoveEntity](https://wiki.facepunch.com/gmod/Global.SafeRemoveEntity).

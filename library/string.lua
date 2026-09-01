@@ -213,17 +213,17 @@ function string.gfind(data, pattern) end
 ---@return function # The iterator function that can be used in a for-in loop
 function string.gmatch(data, pattern) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) This functions main purpose is to replace certain character sequences in a string using [Patterns](https://wiki.facepunch.com/gmod/Patterns).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) This function's main purpose is to replace certain character sequences in a string using [Patterns](https://wiki.facepunch.com/gmod/Patterns).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.gsub)
 ---@param string string String which should be modified.
 ---@param pattern string The pattern that defines what should be matched and eventually be replaced.
----@param replacement string In case of a string the matched sequence will be replaced with it.
+---@param replacement string In case of a string, the matched sequence will be replaced with it.
 ---
---- In case of a table, the matched sequence will be used as key and the table will tested for the key, if a value exists it will be used as replacement.
+--- In case of a table, the matched sequence will be used as a key, and the table will be tested for the key. If a value exists, it will be used as the replacement.
 ---
---- In case of a function all matches will be passed as parameters to the function, the return value(s) of the function will then be used as replacement.
----@param maxReplaces? number Maximum number of replacements to be made.
+--- In case of a function, all matches will be passed as parameters to the function. The return value(s) of the function will then be used as the replacement.
+---@param maxReplaces? number Maximum number of replacements to be made. Leave it empty to replace all matches.
 ---@return string # replaceResult
 ---@return number # replaceCount
 function string.gsub(string, pattern, replacement, maxReplaces) end

@@ -39,7 +39,7 @@ function DListView_Column:GetMinWidth() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the text alignment for the column
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:GetTextAlign)
----@return number # The direction of the content, based on the number pad. See DListView_Column:SetTextAlign.
+---@return ContentAlignment # The direction of the content, based on the number pad. See Enums/ContentAlignment.
 function DListView_Column:GetTextAlign() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Resizes the column, additionally adjusting the size of the column to the right, if any.
@@ -91,7 +91,7 @@ function DListView_Column:SetName(name) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the text alignment for the column
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DListView_Column:SetTextAlign)
----@param alignment number The direction of the content, based on the number pad.
+---@param alignment ContentAlignment The direction of the content, based on the number pad. See Enums/ContentAlignment.
 --[[
 
 |   |   |   |

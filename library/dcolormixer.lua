@@ -167,6 +167,14 @@ function DColorMixer:SetLabel(text) end
 ---@param enabled boolean Show or hide the palette panel?
 function DColorMixer:SetPalette(enabled) end
 
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the palette name for this color mixer, making changes to the palette by the player after this function call be saved separately from other palettes.
+---
+--- Naturally palettes with the same name will share the changes.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:SetPaletteName)
+---@param name string The new internal palette name.
+function DColorMixer:SetPaletteName(name) end
+
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the color of [DColorMixer](https://wiki.facepunch.com/gmod/DColorMixer) from a [Vector](https://wiki.facepunch.com/gmod/Vector). Alpha is not included.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DColorMixer:SetVector)

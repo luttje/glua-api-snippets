@@ -498,7 +498,7 @@ function PhysObj:SetInertia(angularInertia) end
 --- If you used a custom ratio, you will have to re-set it again after `SetMass`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PhysObj:SetMass)
----@param mass number The mass in kilograms, in range `[0, 50000]`
+---@param mass number The mass in kilograms, in range `[0.1, 50000]`
 function PhysObj:SetMass(mass) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the material of the physobject.

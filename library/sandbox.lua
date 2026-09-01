@@ -66,15 +66,14 @@ function SANDBOX:CanDrive(ply, ent) end
 ---[View wiki](https://wiki.facepunch.com/gmod/SANDBOX:CanTool)
 ---@param ply Player The player who attempted to use their toolgun.
 ---@param tr TraceResult A trace from the players eye to where in the world their crosshair/cursor is pointing.
---- Returns only [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) when the 5th argument returns `4`
+--- Returns only the [world](https://wiki.facepunch.com/gmod/game.GetWorld) in the [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) key and returns false in the [Hit](https://wiki.facepunch.com/gmod/Structures/TraceResult#Hit) key when the 5th argument returns `4`.
 ---@param toolname string The tool mode the player currently has selected.
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
---- * 1 - left click
---- * 2 - right click
---- * 3 - reload
---- * 4 - Menu (No interaction with the toolgun)
---- The number `4` is a test that Rubat is conducting to implement the CanTool in the SpawnMenu. It may disappear.
+--- * `1` - left click
+--- * `2` - right click
+--- * `3` - reload
+--- * `4` - spawn menu (No interaction with the toolgun). **Client-side only**
 ---@return boolean # Can use toolgun or not.
 function SANDBOX:CanTool(ply, tr, toolname, tool, button) end
 

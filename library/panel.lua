@@ -508,7 +508,7 @@ function Panel:FocusNext() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:FocusPrevious)
 function Panel:FocusPrevious() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Called when the panel should generate example use case / example code to use for this panel. Used in the panel opened by **derma_controls** console command.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Called when the panel should generate example use case / example code to use for this panel. Used in the panel opened by ``derma_controls`` or ``derma_controls_menu``(To go directly to the main menu) console command.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/PANEL:GenerateExample)
 ---@param class string The classname of the panel to generate example for. This will be the class name of your panel.
@@ -600,7 +600,7 @@ function Panel:GetClosestChild(x, y) end
 --- **NOTE**: This function only works on [Label](https://wiki.facepunch.com/gmod/Label) panels and its derivatives.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetContentAlignment)
----@return number # The direction of the content, based on the number pad.
+---@return ContentAlignment # The direction of the content, based on the number pad. See Enums/ContentAlignment.
 ---
 --- 1: **bottom-left**
 --- 2: **bottom-center**
@@ -760,7 +760,7 @@ function Panel:GetScrollStartIndexes() end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns a table of all children of the panel object that are selected. This is recursive, and the returned table will include tables for any child objects that also have children. This means that not all first-level members in the returned table will be of type [Panel](https://wiki.facepunch.com/gmod/Panel).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetSelectedChildren)
----@return table # A table of any child objects that are selected, including tables for children of the child objects (These tables may also contain table members, as the method is recursive).
+---@return Panel[] # A table of any child objects that are selected, including tables for children of the child objects (These tables may also contain table members, as the method is recursive).
 function Panel:GetSelectedChildren() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the currently selected range of text.
@@ -1993,7 +1993,7 @@ function Panel:SetCaretPos(offset) end
 --- **NOTE**: This function doesnt work, if [Panel:SetWrap](https://wiki.facepunch.com/gmod/Panel:SetWrap) is true.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetContentAlignment)
----@param alignment number The direction of the content, based on the number pad.
+---@param alignment ContentAlignment The direction of the content, based on the number pad. See Enums/ContentAlignment.
 ---
 --- 1: **bottom-left**
 --- 2: **bottom-center**
@@ -2231,8 +2231,8 @@ function Panel:SetKeyboardInputEnabled(enable) end
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the height of a single line of a [RichText](https://wiki.facepunch.com/gmod/RichText) panel.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:SetLineHeight)
----@return number # The new line height. Values below zero mean no override.
-function Panel:SetLineHeight() end
+---@param height number The new line height. Values below zero mean no override.
+function Panel:SetLineHeight(height) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the maximum character count this panel should have.
 ---

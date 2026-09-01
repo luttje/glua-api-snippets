@@ -321,15 +321,14 @@ function ENTITY:CanProperty(ply, property) end
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:CanTool)
 ---@param ply Player Player, that tried to use the tool
 ---@param tr TraceResult The trace of the tool.
---- Returns only [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) when the 5th argument returns `4`
+--- Returns only the [world](https://wiki.facepunch.com/gmod/game.GetWorld) in the [Entity](https://wiki.facepunch.com/gmod/Structures/TraceResult#Entity) key and returns false in the [Hit](https://wiki.facepunch.com/gmod/Structures/TraceResult#Hit) key when the 5th argument returns `4`.
 ---@param toolname string Class of the tool that is tried to use, for example - `weld`
 ---@param tool table The tool mode table the player currently has selected.
 ---@param button number The tool button pressed.
---- * 1 - left click
---- * 2 - right click
---- * 3 - reload
---- * 4 - Menu (No interaction with the toolgun)
---- The number `4` is a test that Rubat is conducting to implement the CanTool in the SpawnMenu. It may disappear.
+--- * `1` - left click
+--- * `2` - right click
+--- * `3` - reload
+--- * `4` - spawn menu (No interaction with the toolgun). **Client-side only**
 ---@return boolean # Return `false` to disallow using that tool on this entity, return `true` to allow.
 function ENTITY:CanTool(ply, tr, toolname, tool, button) end
 
@@ -520,11 +519,7 @@ function ENTITY:Draw(flags) end
 ---
 --- When drawing an entity more than once per frame in different positions, you should call [Entity:SetupBones](https://wiki.facepunch.com/gmod/Entity:SetupBones) before each draw; Otherwise, the entity will retain its first drawn position.
 ---
---- Calling this on entities with [EF_BONEMERGE](https://wiki.facepunch.com/gmod/Enums/EF) and [EF_NODRAW](https://wiki.facepunch.com/gmod/Enums/EF) applied causes a crash.
----
 --- Using this with a map model ([game.GetWorld](https://wiki.facepunch.com/gmod/game.GetWorld)():[GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel)()) crashes the game.
----
---- Calling this on a player during that player's [GM:PrePlayerDraw](https://wiki.facepunch.com/gmod/GM:PrePlayerDraw) hook call will cause infinite recursion and crash the game.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:DrawModel)
 ---@param flags? number The optional Enums/STUDIO flags, usually taken from ENTITY:Draw and similar hooks.
@@ -619,6 +614,17 @@ function Entity:DTVar(type, name) end
 ---@param dsp? number The DSP preset for this sound. DSP_Presets
 ---@param filter? CRecipientFilter If set serverside, the sound will only be networked to the clients in the filter.
 function Entity:EmitSound(soundName, soundLevel, pitchPercent, volume, channel, soundFlags, dsp, filter) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound of a step depending on the surface below the entity's foot.
+---
+--- It will use attachments `"RightFoot"` or `"LeftFoot"` to decide where to check the surface at. If the attachments do not exist, it will use regular Valve Biped skeleton bones. If they don't exist, it will fallback to the entity's origin.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Entity:EmitStepSound)
+---@param isLeftFoot boolean Determines whether the step is a right foot or a left foot.
+---
+--- This is used for certain NPCs such as Eli to determine what sound should be played. This also determines the position of the sound.
+---@param volume? number The volume, from 0 to 1.
+function Entity:EmitStepSound(isLeftFoot, volume) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Toggles the constraints of this ragdoll entity on and off.
 ---
@@ -3509,7 +3515,7 @@ function ENTITY:OnTaskFailed(failCode, failReason) end
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when a trace attack is done against the entity, allowing override of the damage being dealt by altering the [CTakeDamageInfo](https://wiki.facepunch.com/gmod/CTakeDamageInfo).
 ---
 --- This is called before [ENTITY:OnTakeDamage](https://wiki.facepunch.com/gmod/ENTITY:OnTakeDamage).
---- **NOTE**: This hook is only called for `ai`, `nextbot` and `anim` type entities.
+--- **NOTE**: This hook is only called for `ai`, `anim` (as of version `2026.07.03`) and `nextbot` type entities.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:OnTraceAttack)
 ---@param info CTakeDamageInfo The damage info
@@ -3787,17 +3793,6 @@ function ENTITY:PhysicsUpdate(phys) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysWake)
 function Entity:PhysWake() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Plays a sound of a step depending on the surface below the entity's foot.
----
---- It will use attachments `"RightFoot"` or `"LeftFoot"` to decide where to check the surface at. If the attachments do not exist, it will use regular Valve Biped skeleton bones. If they don't exist, it will fallback to the entity's origin.
----
----[View wiki](https://wiki.facepunch.com/gmod/Entity:PlayFootstepSound)
----@param isLeftFoot boolean Determines whether the step is a right foot or a left foot.
----
---- This is used for certain NPCs such as Eli to determine what sound should be played. This also determines the position of the sound.
----@param volume? number The volume, from 0 to 1.
-function Entity:EmitStepSound(isLeftFoot, volume) end
-
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Makes the entity play a .vcd scene. [All scenes from Half-Life 2](https://developer.valvesoftware.com/wiki/Half-Life_2_Scenes_List).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PlayScene)
@@ -3983,6 +3978,8 @@ function Entity:RemoveSpawnFlags(flag) end
 ---
 --- This does not work on "physgun_beam", use [GM:DrawPhysgunBeam](https://wiki.facepunch.com/gmod/GM:DrawPhysgunBeam) instead.
 ---
+--- **WARNING**: Defining or clearing this function in the entity table will not do anything, you must define this method in the entity itself
+---
 --- Drawing a viewmodel in this function will cause [GM:PreDrawViewModel](https://wiki.facepunch.com/gmod/GM:PreDrawViewModel), [WEAPON:PreDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PreDrawViewModel), [WEAPON:ViewModelDrawn](https://wiki.facepunch.com/gmod/WEAPON:ViewModelDrawn), [GM:PostDrawViewModel](https://wiki.facepunch.com/gmod/GM:PostDrawViewModel), and [WEAPON:PostDrawViewModel](https://wiki.facepunch.com/gmod/WEAPON:PostDrawViewModel) to be called twice.
 ---
 --- This is called before PrePlayerDraw for players. If this function exists at all on a player, their worldmodel will always be rendered regardless of PrePlayerDraw's return.
@@ -4019,7 +4016,7 @@ function Entity:ResetSequenceInfo() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:ResolveCustomFlyCollision)
 ---@param traceResult TraceResult The Structures/TraceResult where the collision occured.
----@param vel vector The calculated velocity after calculations such as bounciness, elasticity, ground sliding etc...
+---@param vel Vector The calculated velocity after calculations such as bounciness, elasticity, ground sliding etc...
 ---@return boolean # Return `true` to prevent default action.
 function ENTITY:ResolveCustomFlyCollision(traceResult, vel) end
 
@@ -5849,8 +5846,9 @@ function Entity:Spawn() end
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:SpawnFunction)
 ---@param ply Player The player that is spawning this SENT
 ---@param tr table A Structures/TraceResult from player eyes to their aim position
----@param ClassName string The classname of your entity
-function ENTITY:SpawnFunction(ply, tr, ClassName) end
+---@param className string The classname of your entity
+---@return Entity # The created scripted entity.
+function ENTITY:SpawnFunction(ply, tr, className) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called by the engine only whenever [NPC:SetSchedule](https://wiki.facepunch.com/gmod/NPC:SetSchedule) is called.
 --- **NOTE**: This hook only exists for `ai` type [SENTs](https://wiki.facepunch.com/gmod/Scripted_Entities).

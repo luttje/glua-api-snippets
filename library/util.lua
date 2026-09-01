@@ -57,7 +57,7 @@ function util.Base64Decode(str) end
 ---@return string # Base 64 encoded string.
 function util.Base64Encode(str, inline) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Applies explosion damage to all entities in the specified radius. Performs block checking.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Applies explosion damage to all entities in the specified radius. Performs line-of-sight checking.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.BlastDamage)
 ---@param inflictor Entity The entity that caused the damage.
@@ -387,7 +387,8 @@ function util.IntersectRayWithOBB(rayStart, rayDelta, boxOrigin, boxAngles, boxM
 ---@param rayDirection Vector The direction of the ray.
 ---@param planePosition Vector Any position of the plane.
 ---@param planeNormal Vector The normal vector of the plane.
----@return Vector # The position of intersection, nil if not hit.
+---@return Vector # The position of intersection, `nil` if not hit.
+---@return number # The distance from start position to the hit point, if there was a hit.
 function util.IntersectRayWithPlane(rayOrigin, rayDirection, planePosition, planeNormal) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs a ray-sphere intersection and returns the intersection positions or nil.
@@ -400,6 +401,20 @@ function util.IntersectRayWithPlane(rayOrigin, rayDirection, planePosition, plan
 ---@return number # The first intersection position along the ray, or `nil` if there is no intersection.
 ---@return number # The second intersection position along the ray, or `nil` if there is no intersection.
 function util.IntersectRayWithSphere(rayOrigin, rayDelta, spherePosition, sphereRadius) end
+
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs a ray-triangle intersection and returns the hit position or nil.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/util.IntersectRayWithTriangle)
+---@param rayOrigin Vector Origin/start position of the ray.
+---@param rayEnd Vector The end position of the ray.
+---@param triA Vector The first vertex of the triangle.
+---@param triB Vector The second vertex of the triangle.
+---@param triC Vector The third vertex of the triangle.
+---@param oneSided? boolean Whether the triangle can be hit from only one side (`true`) or from both sides (`false`).
+--- This assumes clockwise vertex arrangement to determine the "hittable" side.
+---@return Vector # The position of intersection, `nil` if not hit.
+---@return number # The fraction of start position to end position in range of [0,1] to the hit point, if there was a hit. i.e. 0.5 would be a hit in the exact middle of start and end positions.
+function util.IntersectRayWithTriangle(rayOrigin, rayEnd, triA, triB, triC, oneSided) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether a binary module is installed and is resolvable by [Global.require](https://wiki.facepunch.com/gmod/Global.require).
 ---
@@ -467,6 +482,18 @@ function util.IsOBBIntersectingOBB(
 	tolerance
 )
 end
+
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
+---
+--- Returns whether the player at given index is speaking or not.
+---
+--- This is used internally by the voice chat HUD for players outside of the PVS.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/util.IsPlayerSpeaking)
+---@param entIndex number The Entity:EntIndex of the player to check.
+---@return boolean # Whether the player at given index is currently speaking.
+---@return number # The current voice volume (Player:VoiceVolume) of the player if they are speaking.
+function util.IsPlayerSpeaking(entIndex) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns whether a point is within a cone or not.
 ---

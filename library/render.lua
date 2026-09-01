@@ -38,7 +38,7 @@ function render.BrushMaterialOverride(mat) end
 --- **WARNING**: In PNG mode, this function can produce unexpected result where foreground is rendered as transparent.
 --- This is caused by [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true` when doing most of render operations, including rendering in `_rt_fullframefb`. If you want to capture render target's content as PNG image only for output quality, set [Structures/RenderCaptureData](https://wiki.facepunch.com/gmod/Structures/RenderCaptureData)'s `alpha` to `false` when capturing render targets with [render.SetWriteDepthToDestAlpha](https://wiki.facepunch.com/gmod/render.SetWriteDepthToDestAlpha) set to `true`.
 ---
---- **WARNING**: This function will return nil if escape menu is open
+--- **WARNING**: This function will return nil if escape menu is open.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.Capture)
 ---@param captureData table Parameters of the capture. See Structures/RenderCaptureData.
@@ -72,7 +72,7 @@ function render.Clear(r, g, b, a, clearDepth, clearStencil) end
 --- For more detailed information on the Stencil system, including usage examples, see the [Stencils Render Reference](https://wiki.facepunch.com/gmod/render_stencils) page
 ---
 --- **NOTE**: This function does **not** clear the Stencil Buffer on its own.
---- 	If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil)
+--- 	If you would like to clear the Stencil Buffer, you can use [render.ClearStencil](https://wiki.facepunch.com/gmod/render.ClearStencil).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearBuffersObeyStencil)
 ---@param red number The red Color Channel value for each pixel that is cleared.
@@ -98,7 +98,7 @@ function render.ClearDepth(clearStencil) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ClearRenderTarget)
 ---@param texture ITexture
----@param color color The color.
+---@param color Color The color.
 function render.ClearRenderTarget(texture, color) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Sets the Stencil Buffer value to `0` for all pixels in the currently active [Render Target](https://wiki.facepunch.com/gmod/render_rendertargets).
@@ -144,7 +144,7 @@ function render.ComputeDynamicLighting(position, normal) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ComputeLighting)
 ---@param position Vector The position to get the light at.
----@param normal Vector The direction of an imaginary surface to get the light at.
+---@param normal? Vector The direction of an imaginary surface to get the light at.
 ---
 --- Pointing away from walls will get the lighting the wall receives. Pointing towards walls will not.
 ---@return Vector # A vector representing the light at that point.
@@ -910,7 +910,7 @@ function render.RenderView(view) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Resets the model lighting to the specified color.
 ---
---- Calls [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting) for every direction with given color.
+--- It has the same effect as calling [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting) for every direction with given color.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.ResetModelLighting)
 ---@param r number The red part of the color, 0-1.
@@ -1055,13 +1055,16 @@ function render.SetMaterial(mat) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets up the ambient lighting for any upcoming render operation. Ambient lighting can be seen as a cube enclosing the object to be drawn, each of its faces representing a directional light source that shines towards the object. Thus, there is a total of six different light sources that can be configured separately.
 ---
---- Light color components are not restricted to a specific range (i.e. 0-255), instead, higher values will result in a brighter light.
+--- Light color components are not restricted to a specific range (i.e. 0-1), instead, higher values will result in a brighter light.
+---
+--- [render.ResetModelLighting](https://wiki.facepunch.com/gmod/render.ResetModelLighting) will set all 6 directions at once.
+--- See also [render.SetLocalModelLights](https://wiki.facepunch.com/gmod/render.SetLocalModelLights).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetModelLighting)
 ---@param lightDirection BOX The light source to edit, see Enums/BOX.
----@param red number The red component of the light color.
----@param green number The green component of the light color.
----@param blue number The blue component of the light color.
+---@param red number The red component of the light color. In range of [0,1]
+---@param green number The green component of the light color. In range of [0,1]
+---@param blue number The blue component of the light color. In range of [0,1]
 function render.SetModelLighting(lightDirection, red, green, blue) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the render target to the specified rt.
@@ -1118,8 +1121,6 @@ function render.SetShadowDistance(shadowDistance) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets whether all shadow rendering should be disabled.
 ---
 --- Internally sets `r_shadows_gamecontrol` convar, exactly like `shadow_control` does via its `SetShadowsDisabled` input.
----
---- Currently broken due to internal bug. Will be fixed in the next update, as of 15 Sept 2025.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetShadowsDisabled)
 ---@param disable boolean `true` to disable shadows, `false` to enable.
@@ -1280,7 +1281,8 @@ function render.SupportsPixelShaders_2_0() end
 ---@return boolean # Whether Vertex Shaders 2.0 are supported or not.
 function render.SupportsVertexShaders_2_0() end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Suppresses or enables any engine lighting for any upcoming render operation.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows suppressing model lighting for any upcoming model render operation.
+--- Lighting then can be manually set up via various functions such as [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting).
 ---
 --- This does not affect [IMesh](https://wiki.facepunch.com/gmod/IMesh)es.
 ---
