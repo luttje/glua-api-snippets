@@ -1,38 +1,60 @@
-// import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
-// import { LibraryFunction } from '../../src/scrapers/wiki-page-markup-scraper';
+import { jest } from '@jest/globals';
+import fs from 'fs';
+
+import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
+import plugin from '../../custom/plugins/hook-add';
 
 describe('plugins', () => {
-  it('should write plugin annotations', async () => {
-    expect(true).toBe(true);
-    // TODO: This test is commented since it requires the wiki to have been scraped so ./output/gm is filled, which isn't the case for the CI
-    // const writer = new GluaApiWriter();
-    // const api = writer.writePage(<LibraryFunction>{
-    //   name: 'Add',
-    //   address: 'hook.Add',
-    //   parent: 'hook',
-    //   dontDefineParent: true,
-    //   description: '',
-    //   realm: 'shared',
-    //   type: 'libraryfunc',
-    //   url: 'na',
-    //   arguments: [
-    //     {
-    //       args: [{
-    //         name: 'intensity',
-    //         type: 'number',
-    //         description: 'The intensity of the explosion.',
-    //         default: '1000',
-    //       }]
-    //     }
-    //   ],
-    //   returns: [
-    //     {
-    //       type: 'number',
-    //       description: 'The amount of damage done.',
-    //     },
-    //   ],
-    // });
+  describe('hook-add', () => {
+    const outputDirectory = './fake-output';
 
-    // expect(api).toContain('---@overload fun(eventName: "Move", identifier: any, func: fun(ply: Player, mv: CMoveData):(boolean?))');
+    beforeEach(() => {
+      jest.spyOn(fs, 'readdirSync').mockReturnValue([
+        { name: 'Move.json', isFile: () => true } as fs.Dirent,
+        { name: 'PlayerLoadout.json', isFile: () => true } as fs.Dirent,
+      ]);
+
+      jest.spyOn(fs, 'readFileSync').mockImplementation((filePath: any) => {
+        if (String(filePath).includes('Move.json')) {
+          return JSON.stringify([{
+            name: 'Move',
+            type: 'hook',
+            arguments: [{
+              args: [
+                { name: 'ply', type: 'Player' },
+                { name: 'mv', type: 'CMoveData' },
+              ]
+            }],
+            returns: [{ type: 'boolean' }],
+          }]);
+        }
+
+        return JSON.stringify([{
+          name: 'PlayerLoadout',
+          type: 'hook',
+          arguments: [{ args: [{ name: 'ply', type: 'Player' }] }],
+        }]);
+      });
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('keeps documented return type', () => {
+      const result = plugin({ outputDirectory } as GluaApiWriter, {} as any);
+
+      expect(result).toContain(
+        '---@overload fun(eventName: "Move", identifier: any, func: fun(ply: Player, mv: CMoveData):(boolean?))'
+      );
+    });
+
+    it('defaults missing return to any', () => {
+      const result = plugin({ outputDirectory } as GluaApiWriter, {} as any);
+
+      expect(result).toContain(
+        '---@overload fun(eventName: "PlayerLoadout", identifier: any, func: fun(ply: Player): any)'
+      );
+    });
   });
 });
