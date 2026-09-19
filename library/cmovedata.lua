@@ -172,6 +172,12 @@ function CMoveData:KeyReleased(key) end
 ---@return boolean # Was the key down or not
 function CMoveData:KeyWasDown(key) end
 
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes keys from the move data.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/CMoveData:RemoveKey)
+---@param keys number Keys to remove, see Enums/IN
+function CMoveData:RemoveKey(keys) end
+
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets absolute move angles.( ? ) Doesn't seem to do anything.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/CMoveData:SetAbsMoveAngles)

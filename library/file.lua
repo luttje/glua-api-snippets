@@ -143,6 +143,7 @@ function file.Size(fileName, gamePath) end
 ---@param path string The **file** or **folder** path.
 ---@param gamePath string The path to look for the files and directories in. See File_Search_Paths for a list of valid paths.
 ---@return number # Seconds passed since Unix epoch, or `0` if the file is not found.
+--- For workshop content `1` is returned.
 function file.Time(path, gamePath) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes the given string to a file. Erases all previous data in the file. To add data without deleting previous data, use [file.Append](https://wiki.facepunch.com/gmod/file.Append).

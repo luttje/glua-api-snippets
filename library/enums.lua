@@ -4298,8 +4298,9 @@ EF_BONEMERGE_FASTCULL = 128
 EF_BRIGHTLIGHT = 2
 --- Player flashlight.
 EF_DIMLIGHT = 4
---- Seems to have no effect. Has been replaced with [C_BaseEntity::IsNoInterpolationFrame()](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/c_baseentity.h#L1331-L1332).Don't interpolate the next frame.
----@deprecated Seems to have no effect. Has been replaced with [C_BaseEntity::IsNoInterpolationFrame()](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/c_baseentity.h#L1331-L1332).
+--- Seems to have no effect. Has been replaced with [C_BaseEntity::IsNoInterpolationFrame()](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/c_baseentity.h#L1331-L1332).
+---
+--- Don't interpolate the next frame.
 EF_NOINTERP = 8
 --- Disables shadow.
 EF_NOSHADOW = 16
@@ -4983,40 +4984,43 @@ IN_FORWARD = 8
 IN_BACK = 16
 --- +use bound key ( Default: E )
 IN_USE = 32
+--- Unused by default.
 IN_CANCEL = 64
---- +left bound key ( Look left )
+--- `+left` bound key ( Look left )
 IN_LEFT = 128
---- +right bound key ( Look right )
+--- `+right` bound key ( Look right )
 IN_RIGHT = 256
---- +moveleft bound key ( Default: A )
+--- `+moveleft` bound key ( Default: A )
 IN_MOVELEFT = 512
---- +moveright bound key ( Default: D )
+--- `+moveright` bound key ( Default: D )
 IN_MOVERIGHT = 1024
---- +attack2 bound key ( Default: Right Mouse Button )
+--- `+attack2` bound key ( Default: Right Mouse Button )
 IN_ATTACK2 = 2048
+--- Unused by default.
 IN_RUN = 4096
---- +reload bound key ( Default: R )
+--- `+reload` bound key ( Default: R )
 IN_RELOAD = 8192
---- +alt1 bound key
+--- `+alt1` bound key, effectively unused by default.
 IN_ALT1 = 16384
---- +alt2 bound key
+--- `+alt2` bound key, effectively unused by default.
 IN_ALT2 = 32768
---- +showscores bound key ( Default: Tab )
+--- `+showscores` bound key ( Default: Tab )
 IN_SCORE = 65536
---- +speed bound key ( Default: Shift )
+--- `+speed` bound key ( Default: Shift )
 IN_SPEED = 131072
---- +walk bound key ( Slow walk )
+--- `+walk` bound key ( Slow walk )
 IN_WALK = 262144
---- +zoom bound key ( Suit Zoom )
+--- `+zoom` bound key ( Suit Zoom )
 IN_ZOOM = 524288
 --- For use in weapons. Set in the physgun when scrolling an object away from you.
 IN_WEAPON1 = 1048576
 --- For use in weapons. Set in the physgun when scrolling an object towards you.
 IN_WEAPON2 = 2097152
+--- Unused by default.
 IN_BULLRUSH = 4194304
---- +grenade1 bound key
+--- `+grenade1` bound key, effectively unused by default.
 IN_GRENADE1 = 8388608
---- +grenade2 bound key
+--- `+grenade2` bound key, effectively unused by default.
 IN_GRENADE2 = 16777216
 
 ---@alias IN

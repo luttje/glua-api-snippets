@@ -801,11 +801,11 @@ function Player:GetHullDuck() end
 --- See [Player:GetInfoNum](https://wiki.facepunch.com/gmod/Player:GetInfoNum) for the same function that automatically converts the string to a number.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:GetInfo)
----@param cVarName string The name of the client-side ConVar.
----@return string # The value of the ConVar. Or an empty string if the convar doesn't exist.
+---@param convarName string The name of the client-side ConVar.
+---@return string # The value of the ConVar. Will return empty string if the convar doesn't exist (when called on the server), or `nil` when called on client, or the convar is blacklisted, such as password convars (both realms).
 ---
 --- The returned value is truncated to 259 bytes.
-function Player:GetInfo(cVarName) end
+function Player:GetInfo(convarName) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The [ConVar](https://wiki.facepunch.com/gmod/ConVar) must have a [FCVAR_USERINFO](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag for this to work.
 ---
@@ -2023,6 +2023,7 @@ function Player:SetupHands(ent) end
 function Player:SetUserGroup(groupName) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Attaches the players view to the position and angles of the specified entity.
+--- 	**NOTE**: By default, the view is in first person and its model will not be rendered. [Player:SetObserverMode](https://wiki.facepunch.com/gmod/Player:SetObserverMode) can be used to enable drawing of view entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:SetViewEntity)
 ---@param viewEntity Entity The entity to attach the player view to.

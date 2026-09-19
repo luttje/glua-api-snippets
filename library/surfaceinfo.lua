@@ -4,7 +4,7 @@
 ---
 --- Brush surfaces are a part of what makes up the map geometry aside from displacements. Any primitive brush model, including most breakable windows, can be represented by this object.
 ---
---- **NOTE**: This object internally uses the `SurfaceHandle_t` class, which is an alias for `msurface2_t*`.
+--- This object internally uses the `SurfaceHandle_t` class, which is an alias for `msurface2_t*`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/SurfaceInfo)
 ---@class SurfaceInfo

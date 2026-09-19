@@ -14,6 +14,7 @@ function net.Abort() end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the currently built net message (see [net.Start](https://wiki.facepunch.com/gmod/net.Start)) to all connected players.
 --- More information can be found in [Net Library Usage](https://wiki.facepunch.com/gmod/Net_Library_Usage).
+--- **NOTE**: This is equivalent to: net.Send(player.GetAll())
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Broadcast)
 function net.Broadcast() end
@@ -241,19 +242,19 @@ function net.ReadVector() end
 --- * Player `ply` - The player that sent the message, works **only** server-side.
 function net.Receive(messageName, callback) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s). It is then received via [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on the client realm of each of those players.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Send)
 ---@param ply Player The player to send the message to.
 function net.Send(ply) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s). It is then received via [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on the client realm of each of those players.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Send)
 ---@param plys Player[] A table of players to send the message to.
 function net.Send(plys) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s)
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Sends the current net message to the specified player(s). It is then received via [net.Receive](https://wiki.facepunch.com/gmod/net.Receive) on the client realm of each of those players.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.Send)
 ---@param filter CRecipientFilter A recipient filter specifying message targets.

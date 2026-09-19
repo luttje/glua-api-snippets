@@ -200,7 +200,7 @@ function Entity:BecomeRagdollOnClient() end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns true if the entity is being looked at by the local player and is within 256 units of distance.
 ---
---- **NOTE**: This function is only available in entities that are based off of sandbox's base_gmodentity.
+--- **NOTE**: This function is only available in entities that are based off of sandbox's `base_gmodentity` as well as `prop_effect`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:BeingLookedAtByLocalPlayer)
 ---@return boolean # Is the entity being looked at by the local player and within 256 units.
@@ -247,6 +247,8 @@ function Entity:BoundingRadius() end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Called whenever the entity's position changes. A callback for when an entity's angle changes is available via [Entity:AddCallback](https://wiki.facepunch.com/gmod/Entity:AddCallback).
 ---
 --- Like [ENTITY:RenderOverride](https://wiki.facepunch.com/gmod/ENTITY:RenderOverride), this hook works on any entity (scripted or not) it is applied on.
+---
+--- **WARNING**: Defining or clearing this function in the entity table will not do anything, you must define this method in the entity itself
 ---
 --- **NOTE**: If EFL_DIRTY_ABSTRANSFORM is set on the entity, this will be called serverside only; otherwise, this will be called clientside only. This means serverside calls of [Entity:SetPos](https://wiki.facepunch.com/gmod/Entity:SetPos) without the EFL_DIRTY_ABSTRANSFORM flag enabled (most cases) will be called clientside only.
 ---
@@ -5645,8 +5647,8 @@ function Entity:SetSkin(skinIndex) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the solidity of an entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetSolid)
----@param solid_type number The solid type. See the Enums/SOLID.
-function Entity:SetSolid(solid_type) end
+---@param solidType number The solid type. See the Enums/SOLID.
+function Entity:SetSolid(solidType) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets solid flag(s) for the entity.
 ---

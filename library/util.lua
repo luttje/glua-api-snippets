@@ -985,9 +985,9 @@ function util.TraceEntityHull(tracedata, ent) end
 ---@return TraceResult # Trace result. See Structures/TraceResult
 function util.TraceHull(TraceData) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs an infinitely thin, invisible ray trace (or "trace") in a line based on the input and returns a table that contains information about what, if anything, the trace line hit or intersected.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Performs an infinitely thin, invisible ray trace (or "trace") in a line from a starting point to an ending point and returns a table of information about what, if anything, the trace line hit or intersected.
 ---
---- Traces intersect with the physics meshes of [solid](https://wiki.facepunch.com/gmod/enums/SOLID), [server-side](https://wiki.facepunch.com/gmod/States), [entities](https://wiki.facepunch.com/gmod/Entity) (including the [game world](https://wiki.facepunch.com/gmod/game.GetWorld)) but cannot detect client-side only entities unless [hitclientonly](https://wiki.facepunch.com/gmod/Structures/Trace#hitclientonly) is set to true.
+--- Traces intersect with the physics meshes of [solid](https://wiki.facepunch.com/gmod/enums/SOLID), [server-side](https://wiki.facepunch.com/gmod/States), [entities](https://wiki.facepunch.com/gmod/Entity) (including the [game world](https://wiki.facepunch.com/gmod/game.GetWorld)) but cannot detect client-side only entities unless [hitclientonly](https://wiki.facepunch.com/gmod/Structures/Trace#hitclientonly) is set to `true`.
 ---
 --- See [ents.FindAlongRay](https://wiki.facepunch.com/gmod/ents.FindAlongRay) if you wish for the trace to not stop on first intersection.
 --- See [util.TraceHull](https://wiki.facepunch.com/gmod/util.TraceHull) for a "box" type trace.

@@ -881,6 +881,10 @@ ENT.AutomaticFrameAdvance = false
 ---@type string?
 ENT.Category = "Other"
 
+---Optional spawnmenu sub-category to put the entity into.
+---@type string?
+ENT.SubCategory = "nil"
+
 ---Whether this entity should be displayed and is spawnable in the spawn menu
 ---@type boolean?
 ENT.Spawnable = false
@@ -1228,6 +1232,11 @@ GM.BaseClass = nil
 ---Whether the gamemode is Sandbox, or derived from Sandbox. This is not really part of the `GM` structure, and listed here only for convenience.
 ---@type boolean
 GM.IsSandboxDerived = nil
+
+---Set by GMod - The folder name of the derived gamemode (always `GM.BaseClass.FolderName` unless the `BaseClass` is the `base` gamemode)
+--- Will be `nil` if it's not derived from any gamemode / uses the `base` gamemode
+---@type string
+GM.DerivedFrom = nil
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Table used by [Global.HTTP](https://wiki.facepunch.com/gmod/Global.HTTP) function.
 
@@ -1730,6 +1739,10 @@ NPCData.Class = nil
 ---Spawnmenu category to put the NPCinto.
 ---@type string?
 NPCData.Category = "Other"
+
+---Optional spawnmenu sub-category to put this NPC into.
+---@type string?
+NPCData.SubCategory = "nil"
 
 ---A list of weapons this NPC is typically meant to use. One will be picked on spawn at random, unless overwritten by the player.
 ---@type table?
@@ -2863,6 +2876,10 @@ SWEP.ClassNameOverride = nil
 ---             resides in.
 ---@type string?
 SWEP.Category = "#spawnmenu.category.other"
+
+---Optional spawnmenu sub-category to put this weapon into.
+---@type string?
+SWEP.SubCategory = "nil"
 
 ---Whether or not this weapon can be obtained through the
 ---             spawn menu.

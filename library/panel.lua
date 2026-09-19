@@ -1794,11 +1794,16 @@ function Panel:RebuildSpawnIcon() end
 --- **NOTE**: This function does **not** accept the standard [Structures/CamData](https://wiki.facepunch.com/gmod/Structures/CamData).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:RebuildSpawnIconEx)
----@param data table A four-membered table containing the information needed to re-render:
+---@param data table A table containing the information needed to re-render the icon:
 --- * Vector cam_pos - The relative camera position the model is viewed from.
 --- * Angle cam_ang - The camera angle the model is viewed from.
 --- * number cam_fov - The camera's field of view (FOV).
 --- * Entity ent - The entity object of the model.
+---
+--- Optional keys:
+--- * table lightbox - (As of 2026.08.26) Sets the "lightbox" for the model render. Wants 6 vectors (start index = 1). See render.SetModelLighting.
+--- * table lights - (As of 2026.08.26) Sets the "dynamic lights" for the model render. Same format as render.SetLocalModelLights.
+---
 --- See the example below for how to retrieve these values.
 function Panel:RebuildSpawnIconEx(data) end
 

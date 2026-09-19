@@ -9,9 +9,9 @@ hammer = {}
 ---@param cmd string Command to send including arguments.
 --[[
 
-All commands are in the format "command var1 var2 etc".
+All commands are in the format `"command var1 var2 etc"`.
 
-All commands that pick an entity with x y z , must use the exact position including decimals (i.e. -354.4523 123.4). 
+All commands that pick an entity with `x y z`, must use the exact position including decimals (i.e. `-354.4523 123.4 213.33`). 
 
 # List of commands
 | Command       | Description   |
@@ -28,7 +28,7 @@ All commands that pick an entity with x y z , must use the exact position includ
 | "nodelink_create startNodeID endNodeID" | Creates a link between AI nodes startNodeID and endNodeID. |
 | "nodelink_delete startNodeID endNodeID" | Removes a link between AI nodes startNodeID and endNodeID. | 
 --]]
----@return string # Returns "ok" if command succeeded otherwise returns "badcommand"
+---@return string # Returns `"ok"` if command succeeded, otherwise returns `"badcommand"` or `"notrunning"` if Hammer is not running.
 ---
---- **All changes only happen in hammer, there is *NO* in game representation/feedback**
+--- **All changes only happen in Hammer, there is *NO* in game representation/feedback**
 function hammer.SendCommand(cmd) end

@@ -14,6 +14,18 @@ render = {}
 ---@param color Color The color to be used.
 function render.AddBeam(startPos, width, textureEnd, color) end
 
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Binds a given texture as a cubemap. The texture given must be a cubemap texture.
+---
+--- This is useful in context of drawing models manually ([Entity:DrawModel](https://wiki.facepunch.com/gmod/Entity:DrawModel)), especially in GUI applications.
+---
+---[View wiki](https://wiki.facepunch.com/gmod/render.BindLocalCubemap)
+---@param texName string|nil The path to the texture (`.vtf`) to use, e.g. `editor/cubemap`.
+---
+--- The function will automatically select the `.hdr` version of the texture based on player's current settings.
+---
+--- Set to `nil` to unbind a cubemap, which will result in pitch black cubemap.
+function render.BindLocalCubemap(texName) end
+
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Blurs the render target ( or a given texture ).
 ---
 --- **WARNING**: Calling this on a RenderTarget created with TEXTUREFLAGS_POINTSAMPLE will result in strange visual glitching.
@@ -1040,6 +1052,8 @@ function render.SetLightmapTexture(tex) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets up the local lighting for any upcoming render operation. Up to 4 local lights can be defined, with one of three different types (point, directional, spot).
 ---
 --- Disables all local lights if called with no arguments.
+---
+--- See also [render.SetModelLighting](https://wiki.facepunch.com/gmod/render.SetModelLighting) for "lightbox" lighting. They are not mutually exclusive.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/render.SetLocalModelLights)
 ---@param lights? Structures/LocalLight[] A table containing up to 4 tables for each light source that should be set up. Each of these tables should contain the properties of its associated light source, see Structures/LocalLight.
