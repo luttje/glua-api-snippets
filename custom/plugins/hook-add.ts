@@ -56,6 +56,10 @@ export default function plugin(writer: GluaApiWriter, func: Function) {
       }
     }
 
+    if (returns === '') {
+      returns = ': any';
+    }
+
     // Create the overload
     hookAnnotations += `---@overload fun(eventName: "${fileJson.name}", identifier: any, func: fun(${args})${returns})\n`;
   }
