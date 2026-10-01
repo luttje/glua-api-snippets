@@ -163,7 +163,7 @@ function _G.assert(expression, errorMessage, ...) end
 --- 	If executed **clientside**, this function won't do anything.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.BroadcastLua)
----@param code string The code to be executed. Capped at length of 6000 characters.
+---@param code string The code to be executed. Capped at length of 6000 bytes.
 function _G.BroadcastLua(code) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Dumps the networked variables of all entities into one table and returns it.

@@ -29,30 +29,38 @@ function sound.AddSoundOverrides(filepath) end
 ---@param owner? Entity If set, the sound hint will be ignored/deleted when the given entity is destroyed.
 function sound.EmitHint(hint, pos, volume, duration, owner) end
 
----![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a sound from a function.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a sound from raw audio sample data.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sound.Generate)
 ---@param identifier string A unique identifier for the sound.
 ---
---- 			You cannot override already existing ones.
----@param samplerate number The sample rate of the sound. Must be `11025`, `22050` or `44100`.
----@param length number The length in seconds of the sound to generate.
----@param callbackOrData fun(sampleIndex: number):(sampleValue: number)|table A function which will be called to generate every sample on the sound.
+--- 			You cannot override existing identifiers.
+---@param samplerate number The sample rate of the sound.
 ---
+--- Must be `11025`, `22050` or `44100`.
+---@param duration number The length in seconds of the sound to generate.
+---@param sampleData fun(sampleIndex: number):(sampleValue: number)|table|string The raw sample data which will be turned into audio.
+---
+--- Can be a **function** which will be called to generate every sample on the sound.
 ---
 ---
 --- Function argument(s):
---- * number `sampleIndex` - The current sample number.
+--- * number `sampleIndex` -
+--- 		The current sample number.
+---
 ---
 --- Function return value(s):
---- * number `sampleValue` - The return value must be between `-1.0` and `1.0`.
---- Other values will wrap back to the -1 to 1 range and basically clip.
---- There are **65535** possible quantifiable values between `-1` and `1`.
+--- * number `sampleValue` -
+--- 		The return value must be between `-1.0` and `1.0`.
+--- 		Other values will wrap back to the -1 to 1 range and basically clip.
+--- 		There are **65535** possible quantifiable values between `-1` and `1`.
 ---
---- 		This argument can also be given a table of samples, where values must range from `-1` to `1`.
---- 		This argument can also be a string of raw 16bit binary data, (each sample is unsigned short).
+---
+--- Can be a **table** of number in the range `-1` to `1`
+---
+--- Can be a **string** of unsigned 16 bit (a "short") binary data.
 ---@param loopStart? number Sample ID of the loop start. If given, the sound will be looping and will restart playing at given position after reaching its end.
-function sound.Generate(identifier, samplerate, length, callbackOrData, loopStart) end
+function sound.Generate(identifier, samplerate, duration, sampleData, loopStart) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the most dangerous/closest sound hint based on given location and types of sounds to sense.
 ---

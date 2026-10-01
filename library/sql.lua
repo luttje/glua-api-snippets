@@ -56,13 +56,15 @@ function sql.IndexExists(indexName) end
 function sql.LastError() end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs a query on the local SQLite database, returns a table as result set, nil if result is empty and false on error.
---- 	**WARNING**: To run SQL queries with this function safely, it is crucial to ensure that the concatenated variables in the query string are safe to avoid vulnerabilities like SQL injections. For this, it is recommended to use the [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr), which allows arguments to be escaped correctly.
+--- 	**NOTE**: Every column value in the result set is returned as a string, including numbers, and a SQL NULL is returned as the string `"NULL"`. Use [sql.QueryTyped](https://wiki.facepunch.com/gmod/sql.QueryTyped) to receive typed values.
 ---
---- It's best to just use [sql.QueryTyped](https://wiki.facepunch.com/gmod/sql.QueryTyped) instead if possible.
+--- 	**WARNING**: To run SQL queries with this function safely, it is crucial to ensure that the concatenated variables in the query string are safe to avoid vulnerabilities like SQL injections.
+--- 		For this, it is recommended to use the [sql.SQLStr](https://wiki.facepunch.com/gmod/sql.SQLStr), which allows arguments to be escaped correctly.
+--- 		It's best to just use [sql.QueryTyped](https://wiki.facepunch.com/gmod/sql.QueryTyped) instead if possible.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/sql.Query)
 ---@param query string The query to execute.
----@return table|boolean|nil # `false` is returned if there is an error, `nil` if the query returned no data.
+---@return table[] # `false` is returned if there is an error, `nil` if the query returned no data.
 function sql.Query(query) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs the [sql.Query](https://wiki.facepunch.com/gmod/sql.Query) and returns the n'th row.
@@ -91,7 +93,7 @@ function sql.QueryRow(query, row) end
 ---@param ... any Parameters to bind to the query placeholders. Supports nil, boolean, number, and string types.
 ---
 --- The number of query parameters must match the number of `?` placeholders, or the query will fail. See examples.
----@return table|boolean # `false` is returned if there is an error (See sql.LastError), otherwise a table with properly typed column values (empty table if no results).
+---@return table[] # `false` is returned if there is an error (See sql.LastError), otherwise a table with properly typed column values (empty table if no results). A SQL NULL column is absent from its row rather than present as a value, and a bound boolean is stored and returned as the number 1 or 0, SQLite has no boolean type.
 function sql.QueryTyped(query, ...) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Performs the query like [sql.QueryRow](https://wiki.facepunch.com/gmod/sql.QueryRow), but returns the first value found.

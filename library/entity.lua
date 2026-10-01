@@ -2269,12 +2269,13 @@ function Entity:GetPreferredCarryAngles(ply) end
 ---@return Entity # The entity who owns the ragdoll.
 function Entity:GetRagdollOwner() end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when scripted NPC needs to check how he "feels" against another entity, such as when [NPC:Disposition](https://wiki.facepunch.com/gmod/NPC:Disposition) is called.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when scripted NPC needs to check how it "feels" against another entity, such as when [NPC:Disposition](https://wiki.facepunch.com/gmod/NPC:Disposition) is called.
+---
 --- **NOTE**: Scripted NPCs will not select other entities using same [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) as this Scripted NPC's [Entity:GetModel](https://wiki.facepunch.com/gmod/Entity:GetModel) as enemy, unless [NPC:AddEntityRelationship](https://wiki.facepunch.com/gmod/NPC:AddEntityRelationship) is cast.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:GetRelationship)
 ---@param ent Entity The entity in question
----@return D # How our scripter NPC "feels" towards the entity in question. See Enums/D. Not returning any value will make NPC:Disposition return the default disposition for this SNPC's given `m_iClass` by the engine.
+---@return D # How our scripted NPC "feels" towards the entity in question. See Enums/D. Not returning any value will make NPC:Disposition return the default disposition for this SNPC's given `m_iClass` by the engine.
 function ENTITY:GetRelationship(ent) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the entity's render angles, set by [Entity:SetRenderAngles](https://wiki.facepunch.com/gmod/Entity:SetRenderAngles) in a drawing hook.
@@ -3415,7 +3416,7 @@ function ENTITY:OnCondition(conditionID) end
 --- This hook is called after [ENTITY:Initialize](https://wiki.facepunch.com/gmod/ENTITY:Initialize) and before [ENTITY:PostEntityPaste](https://wiki.facepunch.com/gmod/ENTITY:PostEntityPaste).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:OnDuplicated)
----@param entTable table The stored data about the original entity that was duplicated. This would typically contain the Entity:GetTable fields that are serializalble. See Structures/EntityCopyData.
+---@param entTable table The stored data about the original entity that was duplicated. This would typically contain the Entity:GetTable fields that are serializable. See Structures/EntityCopyData.
 function ENTITY:OnDuplicated(entTable) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called after duplicator finishes saving the entity, allowing you to modify the save data.

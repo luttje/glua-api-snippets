@@ -3250,10 +3250,22 @@ AIMR_CHANGE_TYPE = 1
 ANALOG_MOUSE_X = 0
 ANALOG_MOUSE_Y = 1
 ANALOG_MOUSE_WHEEL = 3
+--- Joystick X axis, usually bound to movement strafing.
+---
+--- Left thumbstick sideways movement, negative values is left, positive right.
 ANALOG_JOY_X = 4
+--- Joystick Y axis, usually bound to movement forward/backward.
+---
+--- Left thumbstick up/down movement, negative values is forwards, positive backwards.
 ANALOG_JOY_Y = 5
 ANALOG_JOY_Z = 6
+--- Joystick R axis, usually bound to looking up and down.
+---
+--- Right thumbstick up/down movement, negative values is upwards, positive downwards.
 ANALOG_JOY_R = 7
+--- Joystick U axis, usually bound to looking left and right.
+---
+--- Right thumbstick sideways  movement, negative values is left, positive right.
 ANALOG_JOY_U = 8
 ANALOG_JOY_V = 9
 
@@ -3416,9 +3428,15 @@ BLOOD_COLOR_ANTLION_WORKER = 6
 ---| `BLOOD_COLOR_ZOMBIE`
 ---| `BLOOD_COLOR_ANTLION_WORKER`
 
+--- Does nothing/not implemented.
+---
 --- Bone is physically simulated when physics are active
+---@deprecated Does nothing/not implemented.
 BONE_PHYSICALLY_SIMULATED = 1
+--- Does nothing/not implemented.
+---
 --- Procedural when physics is active
+---@deprecated Does nothing/not implemented.
 BONE_PHYSICS_PROCEDURAL = 2
 --- Bone is always procedurally animated
 BONE_ALWAYS_PROCEDURAL = 4
@@ -3426,6 +3444,8 @@ BONE_ALWAYS_PROCEDURAL = 4
 BONE_SCREEN_ALIGN_SPHERE = 8
 --- Bone aligns to the screen, constrained by it's own axis.
 BONE_SCREEN_ALIGN_CYLINDER = 16
+--- Does nothing/not implemented.
+---@deprecated Does nothing/not implemented.
 BONE_CALCULATE_MASK = 31
 --- A hitbox is attached to this bone
 BONE_USED_BY_HITBOX = 256
