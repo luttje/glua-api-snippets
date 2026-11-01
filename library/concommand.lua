@@ -3,7 +3,7 @@
 --- The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server.
 concommand = {}
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a console command that runs a function in lua with optional autocompletion function and help text.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a [console command](https://wiki.facepunch.com/gmod/console_commands) that runs a function in lua with optional autocompletion function and help text.
 ---
 --- **WARNING**: Clients can still run commands created only on the server. Always check permissions in the callback.
 ---
@@ -37,13 +37,17 @@ concommand = {}
 function concommand.Add(name, callback, autoComplete, helpText, flags) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
+---
+--- Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
+---
+--- See [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add) autocomplete callback argument if you wish to add an autocomplete feature to your console command.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/concommand.AutoComplete)
 ---@param command string Name of command.
----@param arguments string Arguments given to the command.
+---@param argumentStr string Arguments given to the command as a whole string.
+---@param arguments string[] A list of arguments.
 ---@return table # Possibilities for auto-completion. This is the return value of the auto-complete callback.
-function concommand.AutoComplete(command, arguments) end
+function concommand.AutoComplete(command, argumentStr, arguments) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with [concommand.Add](https://wiki.facepunch.com/gmod/concommand.Add).
 ---

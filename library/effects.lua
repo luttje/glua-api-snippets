@@ -49,8 +49,9 @@ function effects.BubbleTrail(startPos, endPos, count, height, speed, delay) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/effects.Create)
 ---@param name string Effect name.
----@return table # The effect table.
-function effects.Create(name) end
+---@param tableIn? table If set, will fill this given table with info, instead of creating a new one.
+---@return table # The effect data table.
+function effects.Create(name, tableIn) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 --- Returns a list of all Lua-defined effects.

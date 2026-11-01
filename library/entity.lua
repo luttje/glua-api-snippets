@@ -2204,7 +2204,7 @@ function Entity:GetPhysicsObjectCount() end
 --- See also [Entity:TranslateBoneToPhysBone](https://wiki.facepunch.com/gmod/Entity:TranslateBoneToPhysBone).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:GetPhysicsObjectNum)
----@param physNum number The number corresponding to the PhysObj to grab. Starts at 0.
+---@param physNum number The number corresponding to the PhysObj to grab. Starts at 0 with the max being 31.
 ---@return PhysObj # The physics object or nil if not found
 function Entity:GetPhysicsObjectNum(physNum) end
 
@@ -3341,10 +3341,10 @@ function ENTITY:NextTask(sched) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Controls when, relative to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime), the [Entity](https://wiki.facepunch.com/gmod/Entity) will next run its Think function.
 ---
---- For Scripted Entities, this is the [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) function.
---- For engine Entities, this is an internal function whose behavior will depend on the specific Entity type.
+--- For [Scripted Entities](https://wiki.facepunch.com/gmod/Scripted_Entities), this is the [ENTITY:Think](https://wiki.facepunch.com/gmod/ENTITY:Think) function.
+--- For engine entities, this is an internal function whose behavior will depend on the specific Entity type.
 ---
---- For a Client-side equivalent, see [Entity:SetNextClientThink](https://wiki.facepunch.com/gmod/Entity:SetNextClientThink).
+--- For a client-side equivalent, see [Entity:SetNextClientThink](https://wiki.facepunch.com/gmod/Entity:SetNextClientThink).
 ---
 --- This does not work with SWEPs or Nextbots.
 ---
@@ -3691,7 +3691,7 @@ function Entity:PhysicsInitBox(mins, maxs, surfaceprop, massCenterOverride) end
 --- ```
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:PhysicsInitConvex)
----@param points table A table of eight Vectors, in local coordinates, to be used in the computation of the convex mesh. Order does not matter.
+---@param points table A table of Vectors, in local coordinates, to be used in the computation of the convex mesh. Order does not matter.
 ---@param surfaceprop? string Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with physenv.AddSurfaceData.
 ---@param massCenterOverride? Vector If set, overwrites the center of mass for the created physics object.
 ---@return boolean # Returns `true` on success, `false` otherwise.
@@ -3876,7 +3876,9 @@ function Entity:RagdollUpdatePhysics() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Remove)
 function Entity:Remove() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes all decals from the entities surface.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes all decals from all surfaces of the given entity.
+---
+--- If you are looking to remove specific map decals, see [util.RemoveDecalsAt](https://wiki.facepunch.com/gmod/util.RemoveDecalsAt).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RemoveAllDecals)
 function Entity:RemoveAllDecals() end
@@ -4148,10 +4150,11 @@ function Entity:SetAbsVelocity(velocity) end
 ---@param angles Angle The new angles.
 function Entity:SetAngles(angles) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a player's third-person animation. Mainly used by [Weapon](https://wiki.facepunch.com/gmod/Weapon)s to start the player's weapon attack and reload animations.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets a player's third-person animation. Despite the function existing for all entities, it will work only on players.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetAnimation)
----@param playerAnim number Player animation, see Enums/PLAYER.
+---@param playerAnim number Player animation, see Enums/PLAYER. Only types Enums/PLAYER and Enums/PLAYER play holdtype specific gestures, other enums don't do anything.
+---@deprecated Leftover function from Goldsrc transition to set player's main sequence. It is never used after 9-way walk sequence blending since Team Fortress 2. You should be using GM:CalcMainActivity or Player:DoCustomAnimEvent instead.
 function Entity:SetAnimation(playerAnim) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the start time (relative to [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime)) of the current animation, which is used to determine [Entity:GetCycle](https://wiki.facepunch.com/gmod/Entity:GetCycle). Should be less than CurTime to play an animation from the middle.
@@ -5764,6 +5767,8 @@ function Entity:SetupBones() end
 --- This is a much better option than using Set/Get Networked Values.
 ---
 --- This hook is called after [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) and [GM:NetworkEntityCreated](https://wiki.facepunch.com/gmod/GM:NetworkEntityCreated).
+---
+--- This hook is called before [GM:OnEntityCreated](https://wiki.facepunch.com/gmod/GM:OnEntityCreated) on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ENTITY:SetupDataTables)
 function ENTITY:SetupDataTables() end

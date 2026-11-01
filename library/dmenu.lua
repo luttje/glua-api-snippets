@@ -72,10 +72,13 @@ function DMenu:CloseSubMenu(menu) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets a child by its index.
 ---
+--- This is an override/reimplementation of [Panel:GetChild](https://wiki.facepunch.com/gmod/Panel:GetChild) for [DMenu](https://wiki.facepunch.com/gmod/DMenu), documented here only to list its differences from the base panel method.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenu:GetChild)
 ---@param childIndex number The index of the child to get.
 ---
 --- Unlike [Panel:GetChild](https://wiki.facepunch.com/gmod/Panel:GetChild), this index starts at 1.
+---@return Panel # The child panel, or a `nil`
 function DMenu:GetChild(childIndex) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Set by [DMenu:SetDeleteSelf](https://wiki.facepunch.com/gmod/DMenu:SetDeleteSelf)
@@ -169,7 +172,7 @@ function DMenu:OptionSelectedInternal(option) end
 --- This is used by [DMenuBar](https://wiki.facepunch.com/gmod/DMenuBar)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenu:SetDeleteSelf)
----@param newState boolean true to delete menu on close, false to simply hide.
+---@param newState? boolean True to delete menu on close, false to simply hide.
 function DMenu:SetDeleteSelf(newState) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Does nothing.

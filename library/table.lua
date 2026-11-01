@@ -42,16 +42,17 @@ function table.CollapseKeyValue(input) end
 ---@return string # Concatenated values
 function table.concat(tbl, concatenator, startPos, endPos) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a deep copy and returns that copy.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Creates a deep copy and returns that copy. Preserves metatables using [debug.getmetatable](https://wiki.facepunch.com/gmod/debug.getmetatable).
 ---
---- **WARNING**: This function is very slow! If you know the table structure, it is better to write your own copying mechanism
+--- **WARNING**: This function is very slow! If you know the table structure, it is better to write your own copying mechanism.
 ---
 --- **WARNING**: This function does NOT copy userdata, such as [Vector](https://wiki.facepunch.com/gmod/Vector)s and [Angle](https://wiki.facepunch.com/gmod/Angle)s!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.Copy)
 ---@param originalTable table The table to be copied.
----@return table # A deep copy of the original table
-function table.Copy(originalTable) end
+---@param lookupTable? table Internal table used to track already copied tables to handle circular references.
+---@return table # A deep copy of the original table, or nil if the input table was nil.
+function table.Copy(originalTable, lookupTable) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Empties the target table, and merges all values from the source table into it.
 ---

@@ -8,8 +8,9 @@ weapons = {}
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/weapons.Get)
 ---@param classname string Class name of weapon to retrieve
+---@param tableIn? table If set, will fill this given table with info, instead of creating a new one.
 ---@return table # The retrieved table or nil
-function weapons.Get(classname) end
+function weapons.Get(classname, tableIn) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Get a list of all the registered SWEPs. This does not include weapons added to spawnmenu manually.
 --- 	**NOTE**: This function does not inherit fields from the weapon's base class, unlike [weapons.Get](https://wiki.facepunch.com/gmod/weapons.Get)

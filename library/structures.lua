@@ -236,6 +236,30 @@ BodyGroupData.submodels = nil
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing a single bone's orientation when its mesh is in its baseline (or "bind") pose before any animation is played.
 ---
 --- This structure does not contain the bone ID for the bone it represents and instead relies on the structure's index within the [table](https://wiki.facepunch.com/gmod/table) returned by [util.GetModelMeshes](https://wiki.facepunch.com/gmod/util.GetModelMeshes) to identify the bone it corresponds to.
+---
+--- 	**Example:** Gets every bone's bind pose in model space, and relative to its parent bone (the form an animation sets a bone in).
+--- 	```lua
+--- local _, bindPoses = util.GetModelMeshes( "models/player/kleiner.mdl" )
+---
+--- for boneId = 0, #bindPoses do
+--- 	local bindPose = bindPoses[ boneId ]
+---
+--- 	-- The bone's position and rotation in model space
+--- 	local boneToModel = bindPose.matrix:GetInverseTR()
+---
+--- 	-- The same relative to its parent: the parent's matrix already goes from model space into the parent's space
+--- 	local parentBindPose = bindPoses[ bindPose.parent ]
+--- 	local boneToParent = parentBindPose and parentBindPose.matrix * boneToModel or boneToModel
+---
+--- 	print( boneId, boneToModel:GetTranslation(), boneToParent:GetTranslation() )
+--- end
+--- 	```
+--- 	```
+--- 0	-0.000005 -0.533615 38.566917	 -0.000005 -0.533615 38.566917
+--- 1	-0.000000 2.448287 41.912045	 0.000005 3.345128 -2.981901
+--- 2	0.000001 2.794612 45.915421	     4.018327 -0.000001 -0.000000
+--- 3   ...
+--- 	```
 
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Structures/BoneBindPose)
@@ -246,7 +270,7 @@ local BoneBindPose = {}
 ---@type number
 BoneBindPose.parent = nil
 
----A VMatrix containing this bone's position and rotation in local space relative to the model's origin.
+---The inverse of this bone's bind pose transform: it converts a position from model space into this bone's local space (Source's `poseToBone`). Use `matrix:GetInverseTR()` to get the bone's position and rotation in model space.
 ---@type VMatrix
 BoneBindPose.matrix = nil
 
@@ -359,10 +383,11 @@ Bullet.Num = 1
 Bullet.Tracer = 1
 
 ---The ammunition name.
+--- See Default Ammo Types.
 ---@type string?
 Bullet.AmmoType = "<empty string>"
 
----The tracer name. You can find a list of default effects Default_Effects.
+---The tracer name. See Default Effects.
 ---@type string?
 Bullet.TracerName = "nil"
 

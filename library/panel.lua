@@ -382,11 +382,13 @@ function Panel:DockPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
 function Panel:DoModal() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
----  Called by [Panel:DragMouseRelease](https://wiki.facepunch.com/gmod/Panel:DragMouseRelease) when a user clicks one mouse button whilst dragging with another.
+---
+--- Called by [Panel:DragMouseRelease](https://wiki.facepunch.com/gmod/Panel:DragMouseRelease) when a user clicks one mouse button whilst dragging with another.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:DragClick)
+---@param mcode number The button that was clicked.
 ---@return boolean # Always returns `true`.
-function Panel:DragClick() end
+function Panel:DragClick(mcode) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---  Called by [dragndrop.HoverThink](https://wiki.facepunch.com/gmod/dragndrop.HoverThink) to perform actions on an object that is dragged and hovered over another.
@@ -548,12 +550,13 @@ function Panel:GetBounds() end
 ---@return number # The caret position/offset from the start of the text. A value of `0` means the caret sits before the first character.
 function Panel:GetCaretPos() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets a child by its index. For use with [Panel:ChildCount](https://wiki.facepunch.com/gmod/Panel:ChildCount).
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets a child by its index. Typically used with [Panel:ChildCount](https://wiki.facepunch.com/gmod/Panel:ChildCount).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Panel:GetChild)
 ---@param childIndex number The index of the child to get.
 ---
 --- This index starts at 0, except when you use this on a [DMenu](https://wiki.facepunch.com/gmod/DMenu).
+---@return Panel # The child panel, or a `nil`
 function Panel:GetChild(childIndex) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Gets a child object's position relative to this panel object. The number of levels is not relevant; the child may have many parents between itself and the object on which the method is called.
@@ -1155,7 +1158,7 @@ function Panel:IsKeyboardInputEnabled() end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Determines whether or not a [HTML](https://wiki.facepunch.com/gmod/HTML) or [DHTML](https://wiki.facepunch.com/gmod/DHTML) element is currently loading a page.
 ---
---- **NOTE**: Before calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [DHTML:OpenURL](https://wiki.facepunch.com/gmod/DHTML:OpenURL), the result seems to be `false` with the Awesomium web renderer and `true` for the Chromium web renderer. This difference can be used to determine the available HTML5 capabilities.
+--- **NOTE**: Before calling [Panel:SetHTML](https://wiki.facepunch.com/gmod/Panel:SetHTML) or [Panel:OpenURL](https://wiki.facepunch.com/gmod/Panel:OpenURL), the result seems to be `false` with the Awesomium web renderer and `true` for the Chromium web renderer. This difference can be used to determine the available HTML5 capabilities.
 ---
 --- **NOTE**: On Awesomium, the result remains `true` until the root document is loaded and when in-page content is loading (when adding pictures, frames, etc.). During this state, the HTML texture is not refreshed and the panel is not painted (it becomes invisible).
 ---
@@ -1455,7 +1458,7 @@ function Panel:MoveToFront() end
 --- Function argument(s):
 --- * table `animData` - The Structures/AnimationData that was used.
 --- * Panel `targetPanel` - The panel object that was animated.
----@return table # Partially filled Structures/AnimationData with the following members:
+---@return AnimationData # Partially filled Structures/AnimationData with the following members:
 --- * number **EndTime** - Equal to `length` and `delay` arguments added together, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue.
 --- * number **StartTime** - Equal to the `delay` argument, plus either the Global.SysTime if there is no other animation queued or the end time of the last animation in the queue.
 --- * number **Ease** - Equal to the `ease` argument.
@@ -2605,6 +2608,7 @@ function Panel:Show() end
 --- Function argument(s):
 --- * table `animData` - The Structures/AnimationData that was used.
 --- * Panel `targetPanel` - The panel object that was animated.
+---@return AnimationData # The animation data.
 function Panel:SizeTo(sizeW, sizeH, time, delay, ease, callback) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Resizes the panel to fit the bounds of its children.

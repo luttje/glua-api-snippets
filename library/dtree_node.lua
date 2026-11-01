@@ -518,10 +518,13 @@ function DTree_Node:SetSelected(selected) end
 ---@param showFiles boolean
 function DTree_Node:SetShowFiles(showFiles) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Currently does nothing, not implemented.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: Called internally from [DTree_Node:Copy](https://wiki.facepunch.com/gmod/DTree_Node:Copy).
+---
+--- Currently does nothing, not implemented.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DTree_Node:SetupCopy)
-function DTree_Node:SetupCopy() end
+---@param Panel Panel
+function DTree_Node:SetupCopy(Panel) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.
 ---

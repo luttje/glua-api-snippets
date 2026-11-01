@@ -20,7 +20,7 @@ hook = {}
 ---
 --- 	It WILL break other addons.
 ---@overload fun(eventName: "AcceptInput", identifier: any, func: fun(ent: Entity, input: string, activator: Entity, caller: Entity, value: any):(boolean?))
----@overload fun(eventName: "AddDeathNotice", identifier: any, func: fun(attacker: string, attackerTeam: number, inflictor: string, victim: string, victimTeam: number):(any?))
+---@overload fun(eventName: "AddDeathNotice", identifier: any, func: fun(attacker: string, attackerTeam: number, inflictor: string, victim: string, victimTeam: number, flags: number):(any?))
 ---@overload fun(eventName: "AdjustMouseSensitivity", identifier: any, func: fun(defaultSensitivity: number, localFOV: number, defaultFOV: number):(number?))
 ---@overload fun(eventName: "AllowPlayerPickup", identifier: any, func: fun(ply: Player, ent: Entity):(boolean?))
 ---@overload fun(eventName: "CalcMainActivity", identifier: any, func: fun(ply: Player, vel: Vector):(number?, number?))

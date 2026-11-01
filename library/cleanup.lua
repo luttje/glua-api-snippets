@@ -29,12 +29,13 @@ function cleanup.CC_AdminCleanup(pl, command, args) end
 ---@param args table First and only argument is the cleanup type.
 function cleanup.CC_Cleanup(pl, command, args) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Gets the cleanup list.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Returns the entire cleanup list for all players on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.GetList)
+---@return table # The entire cleanup list.
 function cleanup.GetList() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets the table of cleanup types.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a list of all cleanup types.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/cleanup.GetTable)
 ---@return table # A list of cleanup types.

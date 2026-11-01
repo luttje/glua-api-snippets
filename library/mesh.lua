@@ -36,7 +36,7 @@ function mesh.Begin(mesh, primitiveType, primitiveCount) end
 --- For a full list of the available options, see the Enums/MATERIAL.
 ---@param primitiveCount number The quantity of primitives this mesh will contain as a whole integer number.
 ---
---- The total number of vertices must not exceed the limit of `65535`.
+--- The total number of vertices must not exceed the limit of `32768`.
 --- The number of vertices created by each primitive will depend on the type of primitive used to construct the mesh.
 ---
 --- The expected value of this argument is dependent on the primitive type used.

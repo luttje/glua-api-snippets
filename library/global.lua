@@ -401,7 +401,7 @@ function _G.CreateContextMenu() end
 --- If a ConVar already exists (including engine ones), it will simply return the already existing ConVar without modifying it in any way.
 function _G.CreateConVar(name, value, flags, helptext, min, max) end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Creates a new material with the specified name and shader.
+---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Creates a new material with the specified name and shader.
 ---
 --- Materials created with this function can be used in [Entity:SetMaterial](https://wiki.facepunch.com/gmod/Entity:SetMaterial) and [Entity:SetSubMaterial](https://wiki.facepunch.com/gmod/Entity:SetSubMaterial) by prepending a `!` to their material name argument.
 ---
@@ -932,7 +932,7 @@ function _G.EndTooltip(panel) end
 ---
 --- Indices `1` through [game.MaxPlayers](https://wiki.facepunch.com/gmod/game.MaxPlayers)() are always reserved for players.
 ---
---- **NOTE**: In examples on this wiki, `Entity( 1 )` is used when a player entity is needed (see ). In singleplayer and listen servers, `Entity( 1 )` will always be the first player. In dedicated servers, however, `Entity( 1 )` won't always be a valid player if there is no one currently on the server.
+--- **NOTE**: In examples on this wiki, `Entity( 1 )` is used when a player entity is needed (see [Entity:SetPos#example](https://wiki.facepunch.com/gmod/Entity:SetPos#example)). In singleplayer and listen servers, `Entity( 1 )` will always be the first player. In dedicated servers, however, `Entity( 1 )` won't always be a valid player if there is no one currently on the server.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Entity)
 ---@param entityIndex number The entity index.
@@ -1920,11 +1920,13 @@ function _G.LanguageChanged(lang) end
 --- **NOTE**: This function is not meant to be used with constant value in the first argument if you're dealing with animation! Use a value that changes over time. See example for **proper** usage of Lerp for animations.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.Lerp)
----@param t number The fraction for finding the result. This number is clamped between 0 and 1. Shouldn't be a constant.
----@param from number The starting number. The result will be equal to this if delta is 0.
----@param to number The ending number. The result will be equal to this if delta is 1.
----@return number # The result of the linear interpolation, `from + (to - from) * t`.
-function _G.Lerp(t, from, to) end
+---@param fraction number The fraction for finding the result, in range of 0 to 1, which will be math.Clamp.
+---
+--- This is usually derived from time passage, it shouldn't be a constant. See examples.
+---@param from number The starting number. The result will be equal to this if fraction is 0.
+---@param to number The ending number. The result will be equal to this if fraction is 1.
+---@return number # The result of the linear interpolation, `from + (to - from) * fraction`.
+function _G.Lerp(fraction, from, to) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns point between first and second angle using given fraction and linear interpolation
 --- **NOTE**: This function is not meant to be used with constant value in the first argument, if you're dealing with animation! Use a value that changes over time
@@ -2587,7 +2589,9 @@ function _G.require(name) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.RestoreCursorPosition)
 function _G.RestoreCursorPosition() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Executes the given console command with the parameters.
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Executes the given [console command](https://wiki.facepunch.com/gmod/Console_commands) with the parameters.
+---
+--- Will be ran on the local client if used clientside, will run on the server if ran serverside. Keep in mind that the server and client are one and the same in singleplayer and for listen server hosts.
 ---
 --- **NOTE**: Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked_ConCommands).
 ---
@@ -3055,6 +3059,7 @@ function _G.SQLStr(input, noQuotes) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.SScale)
 ---@param Size number The number you want to scale.
+---@return number # The scaled number based on the player's screen width.
 ---@deprecated You should be using Global.ScreenScale instead.
 function _G.SScale(Size) end
 
@@ -3085,10 +3090,14 @@ function _G.SysTime() end
 ---@return table # TauntCamera
 function _G.TauntCamera() end
 
----![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Clears focus from any text entries player may have focused.
+---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) **INTERNAL**: Called automatically from [GM:VGUIMousePressed](https://wiki.facepunch.com/gmod/GM:VGUIMousePressed).
+---
+--- Clears focus from any text entries player may have focused.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.TextEntryLoseFocus)
-function _G.TextEntryLoseFocus() end
+---@param Panel Panel
+---@param number number
+function _G.TextEntryLoseFocus(Panel, number) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a cosine value that fluctuates based on the current time
 ---

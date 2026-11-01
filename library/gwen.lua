@@ -72,5 +72,6 @@ function GWEN.CreateTextureNormal(x, y, w, h, material) end
 ---[View wiki](https://wiki.facepunch.com/gmod/GWEN.TextureColor)
 ---@param x number X position of the pixel to get the color from.
 ---@param y number Y position of the pixel to get the color from.
+---@param matOverride? Material If given, use this specific material instead of the current derma skin's material.
 ---@return Color # The color of the point on the skin.
-function GWEN.TextureColor(x, y) end
+function GWEN.TextureColor(x, y, matOverride) end

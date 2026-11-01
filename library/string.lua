@@ -58,7 +58,7 @@ function string.CardinalToOrdinal(input) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.char)
 ---@param ... any The bytes to create the string from.
----@return string # String built from given bytes
+---@return string # String built from given bytes, see binary_string.
 function string.char(...) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Inserts commas for every third digit of a given number.
@@ -76,7 +76,7 @@ function string.Comma(value, separator) end
 ---[View wiki](https://wiki.facepunch.com/gmod/string.dump)
 ---@param func function The function to get the bytecode of
 ---@param stripDebugInfo? boolean True to strip the debug data, false to keep it
----@return string # Bytecode
+---@return string # Bytecode, a binary_string.
 function string.dump(func, stripDebugInfo) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether or not the second passed string matches the end of the first.
@@ -89,16 +89,16 @@ function string.EndsWith(str, _end) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Splits a string up wherever it finds the given separator.
 ---
---- The function [string.Split](https://wiki.facepunch.com/gmod/string.Split) is an alias of this function, except that function doesn't support using patterns.
----
 --- See [string.Implode](https://wiki.facepunch.com/gmod/string.Implode) for the reverse operation of this function.
+---
+--- You should use [string.Split](https://wiki.facepunch.com/gmod/string.Split) instead, which is an alias of this function with flipped arguments, except that function doesn't support using patterns.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.Explode)
 ---@param separator string The string will be separated wherever this sequence is found.
 ---@param str string The string to split up.
----@param withpattern? boolean Set this to true if your separator is a Patterns.
+---@param withPattern? boolean Set this to true if your separator is a Patterns.
 ---@return string[] # Exploded string as a numerical sequential table.
-function string.Explode(separator, str, withpattern) end
+function string.Explode(separator, str, withPattern) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Attempts to find the specified substring in a string.
 ---
@@ -360,7 +360,7 @@ function string.SetChar(InputString, Index, ReplacementChar) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Splits the string into a table of strings, separated by the second argument.
 ---
---- This is an alias of [string.Explode](https://wiki.facepunch.com/gmod/string.Explode), but with flipped arguments.
+--- This is an alias of [string.Explode](https://wiki.facepunch.com/gmod/string.Explode), but with flipped arguments, for consistency with all other string library funcions.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/string.Split)
 ---@param input string String to split

@@ -87,7 +87,7 @@ function net.ReadColor(hasAlpha) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.ReadData)
 ---@param length number The length of the data to be read, in **bytes**.
----@return string # The binary data read, or a string containing one character with a byte of `0` if no data could be read.
+---@return string # The binary_string read, or a string containing one character with a byte of `0` if no data could be read.
 function net.ReadData(length) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Reads a double-precision number from the received net message.
@@ -347,7 +347,7 @@ function net.WriteColor(Color, writeAlpha) end
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes a chunk of binary data to the message.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/net.WriteData)
----@param binaryData string The binary data to be sent.
+---@param binaryData string The binary_string to be sent.
 ---@param length? number The length of the binary data to be sent, in bytes.
 function net.WriteData(binaryData, length) end
 

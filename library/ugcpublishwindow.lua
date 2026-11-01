@@ -1,5 +1,7 @@
 ---@meta
 
+--- **INTERNAL**: Do not use.
+---
 --- A window that is used to publish dupes and saves
 ---@class UGCPublishWindow : DFrame
 local UGCPublishWindow = {}

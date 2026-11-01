@@ -29,8 +29,9 @@ function GM:AcceptInput(ent, input, activator, caller, value) end
 ---@param inflictor string Class name of the entity inflicting the damage
 ---@param victim string Name of the victim
 ---@param victimTeam number Team of the victim
+---@param flags number Used to tell additional info about the death notice, such as if the victim or attacker are friendly to players.
 ---@return any # `true/false` to prevent the notice from being shown. Do not return otherwise.
-function GM:AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam) end
+function GM:AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam, flags) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Allows you to adjust the mouse sensitivity.
 ---
@@ -427,7 +428,9 @@ function GM:EntityTakeDamage(target, dmg) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) This hook polls the entity the player use action should be applied to.
 ---
---- **NOTE**: The default behavior of this hook is in [CBasePlayer::FindUseEntity](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/shared/baseplayer_shared.cpp#L1068-L1270). Despite CBasePlayer::FindUseEntity being defined shared, it is only called serverside in practice, so this hook will be only called serverside, as well. It is possible for modules to call it clientside, so the Lua code should still be treated as shared.
+--- Use [Player:GetUseEntity](https://wiki.facepunch.com/gmod/Player:GetUseEntity) to get the final result of this hook.
+---
+--- **NOTE**: The default behavior of this hook is in [CBasePlayer::FindUseEntity](https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/mp/src/game/shared/baseplayer_shared.cpp#L1068-L1270). Despite `CBasePlayer::FindUseEntity` being defined shared, it is only called serverside in practice, so this hook will be only called serverside, as well. It is possible for modules to call it clientside, so the Lua code should still be treated as shared.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:FindUseEntity)
 ---@param ply Player The player who initiated the use action.
@@ -804,7 +807,7 @@ function GM:KeyRelease(ply, key) end
 --- Called from `gm_load` when the game should load a map.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:LoadGModSave)
----@param data string Compressed save data
+---@param data string Compressed save data, a binary_string
 ---@param map string The name of the map the save was created on
 ---@param timestamp number The time the save was created on. Will always be 0.
 function GM:LoadGModSave(data, map, timestamp) end

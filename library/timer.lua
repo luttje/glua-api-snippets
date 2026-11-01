@@ -26,6 +26,8 @@ function timer.Check() end
 ---
 --- **WARNING**: Timers use [Global.CurTime](https://wiki.facepunch.com/gmod/Global.CurTime) internally. Due to this, they won't advance while the client is timing out from the server or on an empty dedicated server due to hibernation. (unless `sv_hibernate_think` is set to `1` or `delay` is set to `0` ).
 ---
+--- **NOTE**: Once the timer reaches the set number of repetitions, it is removed.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/timer.Create)
 ---@param identifier string Identifier of the timer to create. Must be unique. If a timer already exists with the same identifier, that timer will be updated to the new settings and reset.
 ---@param delay number The delay interval in seconds. If the delay is too small, the timer will fire on the next GM:Tick.

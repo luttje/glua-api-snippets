@@ -77,6 +77,7 @@ function duplicator.CopyEntTable(ent) end
 ---[View wiki](https://wiki.facepunch.com/gmod/duplicator.CreateConstraintFromTable)
 ---@param constraint table Saved/copied constraint table.
 ---@param entityList table The list of entities that are to be constrained.
+---@param owner Player Which player the constraint should be attributed to, for the purposes of the cleanup library, etc.
 ---@return Entity # The newly created constraint entity, if any.
 ---
 --- For example, an entity of class `phys_pulleyconstraint` or `phys_spring`, etc., the functional entity of the constraint.
@@ -89,7 +90,7 @@ function duplicator.CopyEntTable(ent) end
 ---@return Entity # The fourth constraint related entity, if any.
 ---
 --- For example, a Hydraulic constraint would return the `phys_slideconstraint` entity here. A pulley would have yet another `keyframe_rope`.
-function duplicator.CreateConstraintFromTable(constraint, entityList) end
+function duplicator.CreateConstraintFromTable(constraint, entityList, owner) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) "Create an entity from a table."
 ---

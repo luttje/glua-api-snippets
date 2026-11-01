@@ -15,8 +15,9 @@ function scripted_ents.Alias(alias, classname) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/scripted_ents.Get)
 ---@param classname string The classname of the ENT table to return, can be an alias.
+---@param tableIn? table If set, will fill this given table with info, instead of creating a new one.
 ---@return table # The ENT table.
-function scripted_ents.Get(classname) end
+function scripted_ents.Get(classname, tableIn) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Returns a copy of the list of all ENT tables registered.
 ---
