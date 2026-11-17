@@ -11,6 +11,7 @@ import {
   isEnum,
 } from '../scrapers/wiki-page-markup-scraper.js';
 import customPluginHookAdd from '../../custom/plugins/hook-add.js';
+import customPluginFindMetaTable from '../../custom/plugins/find-meta-table.js';
 import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -564,6 +565,10 @@ export class GluaApiWriter {
     // See https://github.com/luttje/glua-api-snippets/issues/65
     if (func.address === 'hook.Add') {
       luaDocComment += customPluginHookAdd(this, func);
+    }
+
+    if (func.address === 'Global.FindMetaTable') {
+      luaDocComment += customPluginFindMetaTable();
     }
 
     return luaDocComment;

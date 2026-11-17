@@ -1,0 +1,48 @@
+const META_TABLE_NAMES = [
+  'Entity',
+  'Player',
+  'Weapon',
+  'NPC',
+  'Vehicle',
+  'CSEnt',
+  'NextBot',
+  'Vector',
+  'Angle',
+  'PhysObj',
+  'ISave',
+  'IRestore',
+  'CTakeDamageInfo',
+  'CEffectData',
+  'CMoveData',
+  'CRecipientFilter',
+  'CUserCmd',
+  'IMaterial',
+  'Panel',
+  'CLuaParticle',
+  'CLuaEmitter',
+  'ITexture',
+  'bf_read',
+  'ConVar',
+  'IMesh',
+  'VMatrix',
+  'CSoundPatch',
+  'pixelvis_handle_t',
+  'IVideoWriter',
+  'File',
+  'CLuaLocomotion',
+  'PathFollower',
+  'CNavArea',
+  'IGModAudioChannel',
+  'CNavLadder',
+  'CNewParticleEffect',
+  'ProjectedTexture',
+  'PhysCollide',
+  'SurfaceInfo',
+  'Color',
+];
+
+export default function plugin() {
+  return META_TABLE_NAMES
+    .map(name => `---@overload fun(metaName: "${name}"): ${name}|table\n`)
+    .join('');
+}
