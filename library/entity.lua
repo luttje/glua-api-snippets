@@ -3163,7 +3163,6 @@ function Entity:ManipulateBoneJiggle(boneID, type) end
 function Entity:ManipulateBonePosition(boneID, pos, networking) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets custom bone scale.
---- This does not scale procedural bones.
 --- **NOTE**: This silently fails when given a Vector with nan values, hiding the vertices associated with the bone. See example below.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:ManipulateBoneScale)
@@ -3668,7 +3667,7 @@ function Entity:PhysicsInit(solidType, massCenterOverride) end
 ---@return boolean # Returns `true` on success, `nil` otherwise. This fails when the game cannot create any more PhysCollides.
 function Entity:PhysicsInitBox(mins, maxs, surfaceprop, massCenterOverride) end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Initializes the physics mesh of the entity with a convex mesh defined by a table of points. The resulting mesh is the  of all the input points. If successful, the previous physics object will be removed.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Initializes the physics mesh of the entity with a convex mesh defined by a table of points. If successful, the previous physics object will be removed.
 ---
 --- This is the standard way of creating moving physics objects with a custom convex shape. For more complex, concave shapes, see [Entity:PhysicsInitMultiConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitMultiConvex).
 ---
@@ -5464,7 +5463,10 @@ function Entity:SetPlaybackRate(fSpeed) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:SetPos)
 ---@param position Vector The position to move the entity to.
-function Entity:SetPos(position) end
+---@param touch_triggers? boolean If set, will also try to activate any triggers in the new position.
+---
+--- This can lead to infinite loops if using from touch hooks, so be careful.
+function Entity:SetPos(position, touch_triggers) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Sets the specified pose parameter to the specified value.
 ---

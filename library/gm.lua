@@ -54,6 +54,8 @@ function GM:AdjustMouseSensitivity(defaultSensitivity, localFOV, defaultFOV) end
 --- See [GM:GravGunPickupAllowed](https://wiki.facepunch.com/gmod/GM:GravGunPickupAllowed) for the Gravity Gun pickup variant.
 --- See [GM:PhysgunPickup](https://wiki.facepunch.com/gmod/GM:PhysgunPickup) for the Physics Gun pickup variant.
 ---
+--- **NOTE**: If this function passes while the Player is holding a Weapon, its [Weapon:Holster](https://wiki.facepunch.com/gmod/Weapon:Holster) function will be called next, if such exists.
+---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:AllowPlayerPickup)
 ---@param ply Player The player trying to pick up something.
 ---@param ent Entity The Entity the player attempted to pick up.
@@ -2256,6 +2258,7 @@ function GM:SetPlayerSpeed(ply, walkSpeed, runSpeed) end
 function GM:SetupMove(ply, mv, cmd) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Allows you to add extra positions to the player's [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community"). This is the place to call [Global.AddOriginToPVS](https://wiki.facepunch.com/gmod/Global.AddOriginToPVS).
+--- **WARNING**: This hook is called every tick for each player! Ensure that your code is performant!
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/GM:SetupPlayerVisibility)
 ---@param ply Player The player

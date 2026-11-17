@@ -68,7 +68,7 @@ function ents.FindAlongRay(start, _end, mins, maxs) end
 ---
 --- This function returns a sequential table, meaning it should be looped with [Global.ipairs](https://wiki.facepunch.com/gmod/Global.ipairs) instead of [Global.pairs](https://wiki.facepunch.com/gmod/Global.pairs) for efficiency reasons.
 ---
---- This works internally by iterating over [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll). `ents.FindByClass` is always faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) or [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator).
+--- This works by iterating over all entities internally. Using this function is faster than [ents.GetAll](https://wiki.facepunch.com/gmod/ents.GetAll) or [ents.Iterator](https://wiki.facepunch.com/gmod/ents.Iterator) when you need to iterate over a specific class.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/ents.FindByClass)
 ---@param class string The class of the entities to find, supports wildcards.

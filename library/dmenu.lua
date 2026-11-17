@@ -137,6 +137,9 @@ function DMenu:Hide() end
 function DMenu:HighlightItem(item) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Opens the [DMenu](https://wiki.facepunch.com/gmod/DMenu) at given position.
+--- 	**NOTE**: Sometimes when you are requesting the focus in [Panel:OnMousePressed](https://wiki.facepunch.com/gmod/Panel:OnMousePressed), the menu may become unresponsive,
+--- 		and right-click has to be triggered a second time. In this case, you can use [Panel:MakePopup](https://wiki.facepunch.com/gmod/Panel:MakePopup) to force it
+--- 		active in the foreground, so it can become active again and items can be selected.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/DMenu:Open)
 ---@param x? number Position (X coordinate) to open the menu at.

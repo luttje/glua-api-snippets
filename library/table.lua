@@ -353,9 +353,7 @@ function table.Random(haystack) end
 ---@return any # The value that was removed.
 function table.remove(tbl, index) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes the first instance of a given value from the specified table with [table.remove](https://wiki.facepunch.com/gmod/table.remove), then returns the key that the value was found at.
----
---- **WARNING**: Avoid usage of this function. It does not remove all instances of given value in the table, only the first found, and it does not work with non sequential tables!
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes only the first instance of the given value from the specified table. If the key of the value is a number, the value is removed using [table.remove](https://wiki.facepunch.com/gmod/table.remove).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.RemoveByValue)
 ---@param tbl table The table that will be searched.

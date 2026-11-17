@@ -411,6 +411,8 @@ function Weapon:HasAmmo() end
 ---
 --- **NOTE**: This will only be called serverside when using [Player:SelectWeapon](https://wiki.facepunch.com/gmod/Player:SelectWeapon) as that function immediately switches the weapon out of prediction.
 ---
+--- **NOTE**: This function affects player's ability to pick up entities with +use: if it returns false, a pickup will be aborted.
+---
 --- This is called twice for every holster clientside, one in [Prediction](https://wiki.facepunch.com/gmod/Prediction) and one not.
 ---
 --- Before [WEAPON:OnRemove](https://wiki.facepunch.com/gmod/WEAPON:OnRemove) is called, this function is only called serverside.

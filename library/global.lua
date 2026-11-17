@@ -64,7 +64,7 @@ function _G.AddCSLuaFile(file) end
 ---@return IMaterial # The material, returns `nil` if the cached file is not an image.
 function _G.AddonMaterial(name) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Adds the specified vector to the [PVS (Potential Visibility Set)](https://developer.valvesoftware.com/wiki/PVS "PVS - Valve Developer Community") which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.AddOriginToPVS)
 ---@param position Vector The origin to add.
@@ -438,7 +438,7 @@ function _G.CreateNewAddonPreset(data) end
 ---@param effect string The name of the effect to create. It must be precached via Global.PrecacheParticleSystem beforehand.
 ---@param partAtt number See Enums/PATTACH.
 ---@param entAtt? number The attachment ID on the entity to attach the particle system to
----@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this CP to.
+---@param offset? Vector The offset from the Entity:GetPos of the entity we are attaching this particle effect to.
 ---@return CNewParticleEffect # The created particle system.
 function _G.CreateParticleSystem(ent, effect, partAtt, entAtt, offset) end
 
@@ -1005,6 +1005,46 @@ function _G.EyeVector() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.FindMetaTable)
 ---@param metaName string The object type to retrieve the meta table of.
 ---@return table|nil # The corresponding meta table or `nil` if it doesn't exist.
+---@overload fun(metaName: "Entity"): Entity|table
+---@overload fun(metaName: "Player"): Player|table
+---@overload fun(metaName: "Weapon"): Weapon|table
+---@overload fun(metaName: "NPC"): NPC|table
+---@overload fun(metaName: "Vehicle"): Vehicle|table
+---@overload fun(metaName: "CSEnt"): CSEnt|table
+---@overload fun(metaName: "NextBot"): NextBot|table
+---@overload fun(metaName: "Vector"): Vector|table
+---@overload fun(metaName: "Angle"): Angle|table
+---@overload fun(metaName: "PhysObj"): PhysObj|table
+---@overload fun(metaName: "ISave"): ISave|table
+---@overload fun(metaName: "IRestore"): IRestore|table
+---@overload fun(metaName: "CTakeDamageInfo"): CTakeDamageInfo|table
+---@overload fun(metaName: "CEffectData"): CEffectData|table
+---@overload fun(metaName: "CMoveData"): CMoveData|table
+---@overload fun(metaName: "CRecipientFilter"): CRecipientFilter|table
+---@overload fun(metaName: "CUserCmd"): CUserCmd|table
+---@overload fun(metaName: "IMaterial"): IMaterial|table
+---@overload fun(metaName: "Panel"): Panel|table
+---@overload fun(metaName: "CLuaParticle"): CLuaParticle|table
+---@overload fun(metaName: "CLuaEmitter"): CLuaEmitter|table
+---@overload fun(metaName: "ITexture"): ITexture|table
+---@overload fun(metaName: "bf_read"): bf_read|table
+---@overload fun(metaName: "ConVar"): ConVar|table
+---@overload fun(metaName: "IMesh"): IMesh|table
+---@overload fun(metaName: "VMatrix"): VMatrix|table
+---@overload fun(metaName: "CSoundPatch"): CSoundPatch|table
+---@overload fun(metaName: "pixelvis_handle_t"): pixelvis_handle_t|table
+---@overload fun(metaName: "IVideoWriter"): IVideoWriter|table
+---@overload fun(metaName: "File"): File|table
+---@overload fun(metaName: "CLuaLocomotion"): CLuaLocomotion|table
+---@overload fun(metaName: "PathFollower"): PathFollower|table
+---@overload fun(metaName: "CNavArea"): CNavArea|table
+---@overload fun(metaName: "IGModAudioChannel"): IGModAudioChannel|table
+---@overload fun(metaName: "CNavLadder"): CNavLadder|table
+---@overload fun(metaName: "CNewParticleEffect"): CNewParticleEffect|table
+---@overload fun(metaName: "ProjectedTexture"): ProjectedTexture|table
+---@overload fun(metaName: "PhysCollide"): PhysCollide|table
+---@overload fun(metaName: "SurfaceInfo"): SurfaceInfo|table
+---@overload fun(metaName: "Color"): Color|table
 function _G.FindMetaTable(metaName) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself

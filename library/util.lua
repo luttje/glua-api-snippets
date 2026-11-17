@@ -57,7 +57,9 @@ function util.Base64Decode(str) end
 ---@return string # Base 64 encoded string.
 function util.Base64Encode(str, inline) end
 
----![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Applies explosion damage to all entities in the specified radius. Performs line-of-sight checking.
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Applies explosion damage to all entities in the specified radius. Performs line-of-sight checking. This a simpler version of [util.BlastDamageInfo](https://wiki.facepunch.com/gmod/util.BlastDamageInfo)
+---
+--- **NOTE**: This function will not deal damage to the ``Hunter-Chopper`` type NPC. To deal damage, use the [util.BlastDamageInfo](https://wiki.facepunch.com/gmod/util.BlastDamageInfo) function and add [DMG_AIRBOAT](https://wiki.facepunch.com/gmod/Enums/DMG#DMG_AIRBOAT) to the damage type.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.BlastDamage)
 ---@param inflictor Entity The entity that caused the damage.
@@ -65,7 +67,8 @@ function util.Base64Encode(str, inline) end
 ---@param damageOrigin Vector The center of the explosion
 ---@param damageRadius number The radius in which entities will be damaged.
 ---@param damage number The amount of damage to be applied.
-function util.BlastDamage(inflictor, attacker, damageOrigin, damageRadius, damage) end
+---@param damageType? DMG Override the damage type
+function util.BlastDamage(inflictor, attacker, damageOrigin, damageRadius, damage, damageType) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Applies spherical damage based on damage info to all entities in the specified radius.
 ---
@@ -781,6 +784,8 @@ function util.RelativePathToFull_Menu(filePath, mountPath) end
 function util.RelativePathToGMA_Menu(filePath) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Removes world decals at given position, in given radius. Does not remove decals on models!
+---
+--- If you are looking to remove decals from a model, see [Entity:RemoveAllDecals](https://wiki.facepunch.com/gmod/Entity:RemoveAllDecals).
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/util.RemoveDecalsAt)
 ---@param pos Vector The position at which to remove decals.

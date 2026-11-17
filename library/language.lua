@@ -16,8 +16,9 @@ function language.Add(placeholder, fulltext) end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/language.FormatPhrase)
 ---@param phrase string The phrase to translate.
+---@param ... any Values to be formatted into the phrase.
 ---@return string # The formatted, translated phrase, or the input string if no translation was found.
-function language.FormatPhrase(phrase) end
+function language.FormatPhrase(phrase, ...) end
 
 ---![(Client and menu)](https://github.com/user-attachments/assets/25d1a1c8-4288-4a51-9867-5e3bb51b9981) Retrieves the translated version of inputted string. Useful for joining multiple translated strings into one.
 ---

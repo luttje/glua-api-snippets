@@ -299,49 +299,49 @@ function File:Skip(amount) end
 ---@return number # pos
 function File:Tell() end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes the given string into the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes the given string into the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:Write)
 ---@param data string Binary data to write to the file.
 function File:Write(data) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes a boolean value to the file as one **byte**.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes a boolean value to the file as one **byte**.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteBool)
 ---@param bool boolean The bool to be written to the file.
 function File:WriteBool(bool) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Write an 8-bit unsigned integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Write an 8-bit unsigned integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteByte)
 ---@param uint8 number The 8-bit unsigned integer to be written to the file.
 function File:WriteByte(uint8) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes an 8-byte little-endian IEEE-754 floating point double to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes an 8-byte little-endian IEEE-754 floating point double to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteDouble)
 ---@param double number The double to be written to the file.
 function File:WriteDouble(double) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes an IEEE 754 little-endian 4-byte float to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes an IEEE 754 little-endian 4-byte float to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteFloat)
 ---@param float number The float to be written to the file.
 function File:WriteFloat(float) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes a signed little-endian 32-bit integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes a signed little-endian 32-bit integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteLong)
 ---@param int32 number The 32-bit signed integer to be written to the file.
 function File:WriteLong(int32) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes a signed little-endian 16-bit integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes a signed little-endian 16-bit integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteShort)
 ---@param int16 number The 16-bit signed integer to be written to the file.
 function File:WriteShort(int16) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes an unsigned 64-bit integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes an unsigned 64-bit integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteUInt64)
 ---@param uint64 string The unsigned 64-bit integer to be written to the file.
@@ -349,13 +349,13 @@ function File:WriteShort(int16) end
 --- Since Lua cannot store full 64-bit integers, this function takes a string. It is mainly aimed at usage with [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64).
 function File:WriteUInt64(uint64) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes an unsigned little-endian 32-bit integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes an unsigned little-endian 32-bit integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteULong)
 ---@param uint32 number The unsigned 32-bit integer to be written to the file.
 function File:WriteULong(uint32) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Writes an unsigned little-endian 16-bit integer to the file.
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Writes an unsigned little-endian 16-bit integer to the file.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/File:WriteUShort)
 ---@param uint16 number The unsigned 16-bit integer to the file.

@@ -1354,6 +1354,7 @@ function Player:KeyDown(key) end
 function Player:KeyDownLast(key) end
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Gets whether a key was just pressed this tick.
+--- 		**NOTE**: This function will return false if a key press (such as +use) was consumed by an Entity.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:KeyPressed)
 ---@param key number Corresponds to an Enums/IN. You can use bit.bor here (see example 2)
@@ -1592,6 +1593,17 @@ function Player:RemoveSuit() end
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Player:ResetHull)
 function Player:ResetHull() end
+
+---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Runs given [console command](https://wiki.facepunch.com/gmod/Console_commands) on the player. This does not work on bots.
+---
+--- See [Global.RunConsoleCommand](https://wiki.facepunch.com/gmod/Global.RunConsoleCommand) for running console commands in the client realm instead.
+---
+--- **NOTE**: Some commands/convars are blocked from being run/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see [Blocked ConCommands](https://wiki.facepunch.com/gmod/Blocked_ConCommands).
+---
+---[View wiki](https://wiki.facepunch.com/gmod/Player:RunConsoleCommand)
+---@param command string The console command to run on the player.
+---@param ... any The arguments. You must pass each argument as a separate string argument.
+function Player:RunConsoleCommand(command, ...) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Forces the player to say whatever the first argument is. Works on bots too.
 ---

@@ -307,7 +307,13 @@ function IGModAudioChannel:SetTime(secs, dont_decode) end
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the volume of a sound channel
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/IGModAudioChannel:SetVolume)
----@param volume number Volume to set. 1 meaning 100% volume, 0.5 is 50% and 3 is 300%, etc.
+---@param volume number Volume to set.
+--- For example:
+--- - ``1`` = ``100%``
+--- - ``0.5`` = ``50%``
+--- - ``3`` = ``300%``
+---
+--- etc.
 function IGModAudioChannel:SetVolume(volume) end
 
 ---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Stop the stream. It can be started again using [IGModAudioChannel:Play](https://wiki.facepunch.com/gmod/IGModAudioChannel:Play).
