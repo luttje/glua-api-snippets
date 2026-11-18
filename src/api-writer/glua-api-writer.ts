@@ -540,7 +540,7 @@ export class GluaApiWriter {
         const hasNumberTable = types.includes('table<number>');
 
         if (hasEnum && hasNumberTable) {
-          types.push('integer');
+          types.push('number');
         }
 
         let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))

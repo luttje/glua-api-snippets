@@ -463,7 +463,7 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[View wiki](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
   });
 
-  it('should accept plain integers for enum or table parameters', () => {
+  it('should accept plain numbers for enum or table parameters', () => {
     const writer = new GluaApiWriter();
     const api = writer.writePage(<LibraryFunction>{
       name: 'Add',
@@ -489,7 +489,7 @@ describe('GLua API Writer', () => {
     const paramLine = api!.split('\n').find(line => line.startsWith('---@param flags?'))!;
     const types = paramLine.split(' ')[2].split('|');
 
-    expect(types).toEqual(expect.arrayContaining(['FCVAR', 'number[]', 'integer']));
+    expect(types).toEqual(expect.arrayContaining(['FCVAR', 'number[]', 'number']));
   });
 
   it('should parse functions with callbacks correctly', () => {
