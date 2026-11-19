@@ -150,6 +150,47 @@ local function FindAnnotatedClass(text, position)
 end
 
 
+-- Inserted after `AccessorFunc(tab, key, "Name", force)`, in the same scope as the call.
+local accessorFunc = [[
+
+---@return {type}
+---@diagnostic disable-next-line: missing-return
+function {tab}:Get{name}() end
+
+---@param value {type}
+function {tab}:Set{name}(value) end]]
+
+local forcedTypes = {
+	FORCE_STRING = "string",
+	FORCE_NUMBER = "number",
+	FORCE_BOOL = "boolean",
+	FORCE_ANGLE = "Angle",
+	FORCE_COLOR = "Color",
+	FORCE_VECTOR = "Vector",
+}
+
+---@param text string
+---@return diff[]
+local function GetAccessorFuncDiffs(text)
+	local diffs = {}
+
+	for tab, _, name, argsEnd in text:gmatch("AccessorFunc%s*%(%s*([%a_][%w_%.]*)%s*,[^,]-,%s*([\"'])([%w_]+)%2%s*()") do
+		local force, finish = text:match("^,%s*([%w_]*)%s*%)()", argsEnd)
+		finish = finish or text:match("^%)()", argsEnd)
+
+		if finish then
+			diffs[#diffs+1] = {
+				start = finish,
+				finish = finish - 1,
+				text = FillTemplate(accessorFunc, { tab = tab, name = name, type = forcedTypes[force] or "any" }),
+			}
+		end
+	end
+
+	return diffs
+end
+
+
 ---@class diff
 ---@field start integer # The number of bytes at the beginning of the replacement
 ---@field finish integer # The number of bytes at the end of the replacement
@@ -182,6 +223,10 @@ function OnSetText(uri, text)
 			finish = finish - 1,
 			text = "local BaseClass = baseclass.Get",
 		}
+	end
+
+	for _, diff in ipairs(GetAccessorFuncDiffs(text)) do
+		diffs[#diffs+1] = diff
 	end
 
 	-- Typed creator functions, appended to the end of the file
