@@ -99,6 +99,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "sarahsturgeon",
+      "name": "Sarah Sturgeon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7936439?v=4",
+      "profile": "https://github.com/sarahsturgeon",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
