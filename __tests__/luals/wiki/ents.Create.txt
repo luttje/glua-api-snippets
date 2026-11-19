@@ -1,0 +1,51 @@
+<function name="Create" parent="ents" type="libraryfunc">
+	<description>
+Creates an entity. This function will fail and return `NULL` if the networked-edict limit is hit (around **8176**), or the provided entity class doesn't exist.
+
+<warning>Do not use before <page>GM:InitPostEntity</page> has been called, otherwise the server will crash!
+If you need to perform entity creation when the game starts, create a hook for <page>GM:InitPostEntity</page> and do it there.</warning>
+	</description>
+	<realm>Server</realm>
+	<args>
+		<arg name="class" type="string">The classname of the entity to create.</arg>
+	</args>
+	<rets>
+		<ret name="" type="Entity">The created entity, or `NULL` if failed.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Creates a gmod_button entity at `Vector(0, 0, 0)`.</description>
+	<code>
+local button = ents.Create( "gmod_button" )
+button:SetModel( "models/dav0r/buttons/button.mdl" )
+button:SetPos( Vector( 0, 0, 0 ) )
+button:Spawn()
+	</code>
+</example>
+
+<example>
+	<description>Make the Half Life Jeep appear where the player is looking.</description>
+	<code>
+concommand.Add("spawn_vehicle_test", function(pPlayer)
+    if not IsValid(pPlayer) or not pPlayer:IsSuperAdmin() then
+        return
+    end
+
+    local sClass = "Jeep"
+    local tData = list.Get("Vehicles")[sClass] // Get the vehicle data from the list
+
+    local eVehicle = ents.Create("prop_vehicle_jeep")
+    if not IsValid(eVehicle) then return end
+
+    eVehicle:SetModel(tData.Model) // Set the vehicle model
+    eVehicle:SetPos(pPlayer:GetEyeTrace().HitPos + Vector(0, 0, 10))
+    eVehicle:SetKeyValue("vehiclescript", tData["KeyValues"]["vehiclescript"]) // Set the vehicle script
+    eVehicle:Spawn()
+    eVehicle:Activate()
+
+	hook.Run("PlayerSpawnedVehicle", pPlayer, eVehicle) // Call the hook for spawning a vehicle. This hook is used for all addons that wish to make modifications to the vehicle, such as adding a props to the vehicle.
+
+end)
+	</code>
+</example>

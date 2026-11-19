@@ -1,0 +1,11 @@
+<function name="CreateClientside" parent="ents" type="libraryfunc">
+	<description>Creates a clientside only scripted entity. The scripted entity must be of "anim" type.</description>
+	<realm>Client</realm>
+	<args>
+		<arg name="class" type="string">The class name of the entity to create.</arg>
+	</args>
+	<rets>
+		<ret name="" type="Entity">Created entity.</ret>
+	</rets>
+</function>
+

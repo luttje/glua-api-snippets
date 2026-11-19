@@ -1,0 +1,10 @@
+<type name="Weapon" category="classfunc" parent="Entity" is="class">
+	<summary>This is a list of all methods only available for all weapons. (scripted and non-scripted) It is also possible to call <page>Entity</page> functions on weapons.
+</summary>
+</type>
+
+<type name="WEAPON" category="classfunc" is="class">
+<summary>This is a list of all events only available for scripted weapons.</summary>
+</type>
+
+<title>Weapon</title>

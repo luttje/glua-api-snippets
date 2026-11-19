@@ -1,0 +1,24 @@
+<function name="Spawn" parent="Entity" type="classfunc">
+	<description>
+Initializes the entity and starts its networking. If called on a player, it will respawn them.
+
+This calls <page>ENTITY:Initialize</page> on Lua-defined entities.
+	</description>
+	<realm>Shared</realm>
+</function>
+
+<example>
+	<description>Server sided script for spawning entities</description>
+	<code>
+		local ent = ents.Create("Enter Entity Class")
+		
+		-- Sets the position of the entity
+		ent:SetPos(Vector(0.0, 100, 0.0)) 
+		-- Sets the angle of the entity
+		ent:SetAngles(Angle(0.0, 90.0, 0.0)) 
+		-- Spawns the entity on all clients
+		ent:Spawn()
+	</code>
+	<output>Spawns entity on position(0.0, 100.0, 0.0) facing (0.0, 90.0, 0.0) for all clients connects to the server</output>
+
+</example>
