@@ -339,8 +339,11 @@ export class GluaApiWriter {
     if (type === 'string')
       return `'${escapeSingleQuotes(value)}'`;
 
-    if (type === 'Vector')
-      return `Vector${value}`;
+    // The wiki has Vector defaults like `(0, 0, 0)`, `Vector(0, 0, 0)`, `Global.Vector(0, 0, 0)` and `vector_origin`
+    if (type === 'Vector') {
+      value = value.replace(/^Global\./, '');
+      return value.startsWith('(') ? `Vector${value}` : value;
+    }
 
     return value;
   }

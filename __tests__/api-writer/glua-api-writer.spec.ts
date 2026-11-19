@@ -7,7 +7,7 @@ import { apiDefinition as enumNavCornerApiDefinition, markup as enumNavCornerMar
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
-import { Enum, LibraryFunction, PanelFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { Enum, LibraryFunction, PanelFunction, Struct, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -490,6 +490,26 @@ describe('GLua API Writer', () => {
     const types = paramLine.split(' ')[2].split('|');
 
     expect(types).toEqual(expect.arrayContaining(['FCVAR', 'number[]', 'number']));
+  });
+
+  it('should write Vector defaults of structs as valid Lua', () => {
+    const writer = new GluaApiWriter();
+    const defaults = ['(0, 0, 0)', 'Vector(0, 0, 0)', 'Global.Vector(0, 0, 0)', 'vector_origin', 'nil'];
+    const api = writer.writePage(<Struct>{
+      name: 'VectorDefaults',
+      address: 'Structures/VectorDefaults',
+      type: 'struct',
+      description: '',
+      realm: 'shared',
+      url: 'na',
+      fields: defaults.map((value, index) => ({ name: `field${index}`, type: 'Vector', default: value, description: '' })),
+    })!;
+
+    const values = api.split('\n')
+      .filter(line => line.startsWith('VectorDefaults.'))
+      .map(line => line.split(' = ')[1]);
+
+    expect(values).toEqual(['Vector(0, 0, 0)', 'Vector(0, 0, 0)', 'Vector(0, 0, 0)', 'vector_origin', 'nil']);
   });
 
   it('should parse functions with callbacks correctly', () => {
