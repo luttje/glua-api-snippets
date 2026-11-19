@@ -3,10 +3,11 @@ import { apiDefinition as hookApiDefinition, json as hookJson } from '../test-da
 // import { apiDefinition as libraryFunctionApiDefinition, json as libraryFunctionJson } from '../test-data/offline-sites/gmod-wiki/library-function-ai-getscheduleid';
 import { apiDefinition as structApiDefinition, markup as structMarkup, json as structJson } from '../test-data/offline-sites/gmod-wiki/struct-custom-entity-fields';
 // import { apiDefinition as enumApiDefinition, json as enumJson } from '../test-data/offline-sites/gmod-wiki/enums-use';
+import { apiDefinition as enumNavCornerApiDefinition, markup as enumNavCornerMarkup } from '../test-data/offline-sites/gmod-wiki/enums-navcorner';
 import { markup as panelMarkup, apiDefinition as panelApiDefinition } from '../test-data/offline-sites/gmod-wiki/panel-slider';
 import { markup as multiReturnFuncMarkup, apiDefinition as multiReturnFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-concommand-gettable';
 import { markup as varargsFuncMarkup, apiDefinition as varargsFuncApiDefinition } from '../test-data/offline-sites/gmod-wiki/library-function-coroutine-resume';
-import { Enum, LibraryFunction, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
+import { Enum, LibraryFunction, PanelFunction, Struct, WikiPage, WikiPageMarkupScraper } from '../../src/scrapers/wiki-page-markup-scraper';
 import { GluaApiWriter } from '../../src/api-writer/glua-api-writer';
 import fetchMock from "jest-fetch-mock";
 
@@ -40,6 +41,23 @@ describe('GLua API Writer', () => {
     writer.writePages(structs, mockFilePath);
     const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
     expect(api).toEqual(structApiDefinition);
+  });
+
+  it('should be able to write Lua API definitions directly from wiki json data for a fake enum', async () => {
+    const writer = new GluaApiWriter();
+
+    fetchMock.mockResponseOnce(enumNavCornerMarkup);
+
+    const responseMock = <Response>{
+      url: 'https://wiki.facepunch.com/gmod/Enums/NavCorner?format=text',
+    };
+
+    const scrapeCallback = new WikiPageMarkupScraper(responseMock.url).getScrapeCallback();
+    const enums = await scrapeCallback(responseMock, enumNavCornerMarkup);
+    expect(enums).toHaveLength(1);
+    writer.writePages(enums, mockFilePath);
+    const api = writer.makeApiFromPages(writer.getPages(mockFilePath));
+    expect(api).toEqual(enumNavCornerApiDefinition);
   });
 
   it('should handle deprecated in description', async () => {
@@ -107,12 +125,12 @@ describe('GLua API Writer', () => {
       url: 'na',
       arguments: [
         {
-          args: [ {
+          args: [{
             name: 'intensity',
             type: 'number',
             description: 'The intensity of the explosion.',
             default: '1000',
-          } ]
+          }]
         }
       ],
       returns: [
@@ -397,6 +415,28 @@ describe('GLua API Writer', () => {
     expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns where on the screen the specified position vector would appear.\n---\n---[View wiki](na)\n---@return ToScreenData # The created Structures/ToScreenData.\nfunction Vector.ToScreen() end\n\n`);
   });
 
+  it('should support Panel type', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<PanelFunction>{
+      name: 'GetVBar',
+      address: 'DScrollPanel.GetVBar',
+      parent: 'DScrollPanel',
+      isPanelFunction: 'yes',
+      description: 'Returns the vertical scroll bar of the panel.',
+      realm: 'client',
+      type: 'panelfunc',
+      url: 'na',
+      returns: [
+        {
+          type: 'Panel{DVScrollBar}',
+          description: 'The DVScrollBar.',
+        },
+      ],
+    });
+
+    expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Returns the vertical scroll bar of the panel.\n---\n---[View wiki](na)\n---@return DVScrollBar # The DVScrollBar.\nfunction DScrollPanel:GetVBar() end\n\n`);
+  });
+
   // number{ENUM_NAME} -> ENUM_NAME
   it('should support enum type', () => {
     const writer = new GluaApiWriter();
@@ -421,6 +461,55 @@ describe('GLua API Writer', () => {
     });
 
     expect(api).toEqual(`---![(Client)](https://github.com/user-attachments/assets/a5f6ba64-374d-42f0-b2f4-50e5c964e808) Sets the fog mode.\n---\n---[View wiki](na)\n---@param mode MATERIAL_FOG The fog mode.\nfunction render.FogMode(mode) end\n\n`);
+  });
+
+  it('should accept plain numbers for enum or table parameters', () => {
+    const writer = new GluaApiWriter();
+    const api = writer.writePage(<LibraryFunction>{
+      name: 'Add',
+      address: 'concommand.Add',
+      parent: 'concommand',
+      dontDefineParent: true,
+      description: 'Adds a console command.',
+      realm: 'shared',
+      type: 'libraryfunc',
+      url: 'na',
+      arguments: [
+        {
+          args: [{
+            name: 'flags',
+            type: 'number{FCVAR}|table<number>',
+            default: 'FCVAR_NONE',
+            description: 'The flags.',
+          }]
+        }
+      ],
+    });
+
+    const paramLine = api!.split('\n').find(line => line.startsWith('---@param flags?'))!;
+    const types = paramLine.split(' ')[2].split('|');
+
+    expect(types).toEqual(expect.arrayContaining(['FCVAR', 'number[]', 'number']));
+  });
+
+  it('should write Vector defaults of structs as valid Lua', () => {
+    const writer = new GluaApiWriter();
+    const defaults = ['(0, 0, 0)', 'Vector(0, 0, 0)', 'Global.Vector(0, 0, 0)', 'vector_origin', 'nil'];
+    const api = writer.writePage(<Struct>{
+      name: 'VectorDefaults',
+      address: 'Structures/VectorDefaults',
+      type: 'struct',
+      description: '',
+      realm: 'shared',
+      url: 'na',
+      fields: defaults.map((value, index) => ({ name: `field${index}`, type: 'Vector', default: value, description: '' })),
+    })!;
+
+    const values = api.split('\n')
+      .filter(line => line.startsWith('VectorDefaults.'))
+      .map(line => line.split(' = ')[1]);
+
+    expect(values).toEqual(['Vector(0, 0, 0)', 'Vector(0, 0, 0)', 'Vector(0, 0, 0)', 'vector_origin', 'nil']);
   });
 
   it('should parse functions with callbacks correctly', () => {

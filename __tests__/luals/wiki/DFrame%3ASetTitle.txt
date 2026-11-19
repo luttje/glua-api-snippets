@@ -1,0 +1,9 @@
+<function name="SetTitle" parent="DFrame" type="panelfunc">
+	<description>Sets the title of the frame.</description>
+	<realm>Client and Menu</realm>
+	<file line="83-L87">lua/vgui/dframe.lua</file>
+	<args>
+		<arg name="title" type="string">New title of the frame.</arg>
+	</args>
+</function>
+

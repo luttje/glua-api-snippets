@@ -1,0 +1,20 @@
+<function name="Create" parent="vgui" type="libraryfunc">
+	<description>Creates a panel by the specified classname.
+<note>Custom VGUI elements are not loaded instantly. Use <page>GM:OnGamemodeLoaded</page> to create them on startup.</note></description>
+	<realm>Client and Menu</realm>
+    <file line="23-L52">lua/includes/extensions/client/panel/scriptedpanels.lua</file>
+	<args>
+<arg name="classname" type="string">Classname of the panel to create.
+
+Default panel classnames can be found on the <page>VGUI Element List</page>.
+
+New panels can be registered via <page>vgui.Register</page>		
+</arg>
+		<arg name="parent" type="Panel" default="nil">Panel to parent to.</arg>
+		<arg name="name" type="string" default="nil">Custom name of the created panel for scripting/debugging purposes. Can be retrieved with <page>Panel:GetName</page>.</arg>
+	</args>
+	<rets>
+		<ret name="" type="Panel">The created panel, or `nil` if creation failed for whatever reason.</ret>
+	</rets>
+</function>
+

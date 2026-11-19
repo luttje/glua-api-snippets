@@ -1,0 +1,81 @@
+<function name="Add" parent="hook" type="libraryfunc">
+	<description>
+		Registers a function (or "callback") with the <page>Hook</page> system so that it will be called automatically whenever a specific event (or "hook") occurs.
+
+	</description>
+	<realm>Shared and Menu</realm>
+	<file line="23-L42">lua/includes/modules/hook.lua</file>
+	<args>
+		<arg name="eventName" type="string">
+			The event to hook on to. This can be any <page text="GM">GM_Hooks</page> hook, gameevent after using <page>gameevent.Listen</page>, or custom hook run with <page>hook.Call</page> or <page>hook.Run</page>.
+		</arg>
+		<arg name="identifier" type="any">
+			The unique identifier, usually a string. This can be used elsewhere in the code to replace or remove the hook. The identifier **should** be unique so that you do not accidentally override some other mods hook, unless that's what you are trying to do.
+
+			The identifier can be either a <page>string</page>, or a <page>table</page>/object with an IsValid function defined such as an <page>Entity</page> or <page>Panel</page>. <page>number</page>s and <page>boolean</page>s, for example, are not allowed.
+
+			If the identifier is a table/object, it will be inserted in front of the other arguments in the callback and the hook will be called as long as it's valid. However, if IsValid( identifier ) returns false when **any** eventName hook is called, the hook will be removed.
+		</arg>
+		<arg name="func" type="function">
+			The function to be called, arguments given to it depend on the identifier used. 
+			<warning>
+				Returning any value besides nil from the hook's function will stop other hooks of the same event down the loop from being executed. Only return a value when absolutely necessary and when you know what you are doing.
+
+				It will also prevent the associated `GM:*` hook from being called on the gamemode.
+
+				It WILL break other addons.
+			</warning>
+		</arg>
+	</args>
+</function>
+
+<example>
+	<description>
+		This will hook onto the "Think" event with the function onThink, printing to the console whenever the event occurs.
+	</description>
+	<code>
+local function onThink()
+	print( "onThink has been called" )
+end
+
+hook.Add( "Think", "Some unique name", onThink )
+	</code>
+	<output>
+		"onThink has been called" repeating continuously.
+	</output>
+</example>
+
+
+<example>
+	<description>This works the same as above, but defines the function inside hook.Add rather than above it.</description>
+	<code>
+hook.Add( "Think", "Another unique name", function()
+	print( "Think has been called" )
+end )
+	</code>
+	<output>
+		"Think has been called" repeating continuously.
+	</output>
+</example>
+
+<example>
+	<description>
+		This code demonstrates how you can add a table function with a 'self' argument, without the use of a wrapper function.
+	</description>
+	<code>
+local myTable = {}
+function myTable:IsValid()
+    return true
+end
+
+function myTable:PlayerInitialSpawn(ply)
+    print( "CustomHook", self, ply )
+end
+
+hook.Add( "CustomHook" , myTable , myTable.PlayerInitialSpawn )
+hook.Run( "CustomHook" )
+	</code>
+	<output>
+		"CustomHook table: 0x00000000  Player [1][PotatoMan]"
+	</output>
+</example>

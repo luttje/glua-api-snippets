@@ -1,5 +1,5 @@
 import { WikiHistoryPageScraper } from './scrapers/wiki-history-scraper.js';
-import packageJson from '../package.json' assert { type: "json" };
+import packageJson from '../package.json' with { type: "json" };
 import { scrapeAndCollect } from './scrapers/collector.js';
 import { dateToFilename } from './utils/filesystem.js';
 import { Command } from 'commander';

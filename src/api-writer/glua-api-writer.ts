@@ -1,5 +1,5 @@
 import { ClassFunction, Enum, Function, HookFunction, LibraryFunction, TypePage, Panel, PanelFunction, Realm, Struct, WikiPage, isPanel, FunctionArgument, FunctionCallback } from '../scrapers/wiki-page-markup-scraper.js';
-import { escapeSingleQuotes, indentText, putCommentBeforeEachLine, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
+import { escapeSingleQuotes, indentText, wrapInComment, removeNewlines, safeFileName, toLowerCamelCase } from '../utils/string.js';
 import {
   isClassFunction,
   isHookFunction,
@@ -10,6 +10,9 @@ import {
   isStruct,
   isEnum,
 } from '../scrapers/wiki-page-markup-scraper.js';
+import customPluginHookAdd from '../../custom/plugins/hook-add.js';
+import customPluginFindMetaTable from '../../custom/plugins/find-meta-table.js';
+import customPluginCompileString from '../../custom/plugins/compile-string.js';
 import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -50,7 +53,9 @@ export class GluaApiWriter {
 
   private readonly files: Map<string, IndexedWikiPage[]> = new Map();
 
-  constructor() { }
+  constructor(
+    public readonly outputDirectory: string = './output',
+  ) { }
 
   public static safeName(name: string) {
     if (name.includes('/'))
@@ -73,6 +78,11 @@ export class GluaApiWriter {
 
   public addOverride(pageAddress: string, override: string) {
     this.pageOverrides.set(safeFileName(pageAddress, '.'), override);
+  }
+
+  private isFakeEnum(_enum: Enum) {
+    // TODO: Kindly ask Rubat to add a <isFake> marker of sorts to the wiki
+    return _enum.description.includes('**WARNING**: These enumerations do not exist in game and are listed here only for reference');
   }
 
   public writePage(page: WikiPage) {
@@ -117,9 +127,9 @@ export class GluaApiWriter {
         api += this.pageOverrides.get(classOverride)!.replace(/\n$/g, '') + '\n\n';
       } else {
         if (realm) {
-          api += `---${this.formatRealm(realm)} ${description ? `${putCommentBeforeEachLine(description)}\n` : ''}\n`;
+          api += `---${this.formatRealm(realm)} ${description ? `${wrapInComment(description)}\n` : ''}\n`;
         } else {
-          api += description ? `${putCommentBeforeEachLine(description, false)}\n` : '';
+          api += description ? `${wrapInComment(description, false)}\n` : '';
         }
 
         if (url) {
@@ -166,7 +176,7 @@ export class GluaApiWriter {
     if (!this.writtenLibraryGlobals.has(page.name)) {
       let api = '';
 
-      api += page.description ? `${putCommentBeforeEachLine(page.description.trim(), false)}\n` : '';
+      api += page.description ? `${wrapInComment(page.description, false)}\n` : '';
 
       if (page.deprecated)
         api += `---@deprecated ${removeNewlines(page.deprecated)}\n`;
@@ -244,7 +254,7 @@ export class GluaApiWriter {
       api += `---@deprecated ${removeNewlines(_enum.deprecated)}\n`;
 
     if (isContainedInTable) {
-      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
+      api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
       api += `---@enum ${_enum.name}\n`;
       api += `${_enum.name} = {\n`;
     }
@@ -265,20 +275,22 @@ export class GluaApiWriter {
         key = key.split('.')[1];
 
         if (item.description?.trim()) {
-          api += `${indentText(putCommentBeforeEachLine(item.description.trim(), false), 2)}\n`;
+          api += `${indentText(wrapInComment(item.description, false), 2)}\n`;
         }
 
         api += `  ${key} = ${item.value},\n`;
       } else {
-        api += item.description ? `${putCommentBeforeEachLine(item.description.trim(), false)}\n` : '';
+        api += item.description ? `${wrapInComment(item.description, false)}\n` : '';
         if (item.deprecated)
           api += `---@deprecated ${removeNewlines(item.deprecated)}\n`;
         api += `${key} = ${item.value}\n`;
       }
     };
 
-    for (const item of _enum.items)
-      writeItem(item.key, item);
+    if (!this.isFakeEnum(_enum)) {
+      for (const item of _enum.items)
+        writeItem(item.key, item);
+    }
 
     if (isContainedInTable) {
       api += '}';
@@ -286,13 +298,35 @@ export class GluaApiWriter {
       // TODO: Clean up this workaround when LuaLS supports global enumerations.
       // Until LuaLS supports global enumerations (https://github.com/LuaLS/lua-language-server/issues/2721) we
       // will use @alias as a workaround.
-      // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
-      //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${putCommentBeforeEachLine(_enum.description.trim())}` : ''}\n`;
-      api += `\n---@alias ${_enum.name}\n`;
 
-      for (const item of _enum.items) {
-        if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
-          api += `---| \`${item.key}\`\n`;
+      // Some enums like SNDLVL are fake in the wiki and only listed for reference, so we render those such that the enums
+      // are explained in the annotation
+      if (this.isFakeEnum(_enum)) {
+        // First output the description
+        api += `---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
+        let enumValues = '';
+
+        for (const item of _enum.items) {
+          if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
+            api += `--- * \`${item.key}\` = \`${item.value}\`\n`;
+            enumValues += `${item.value} | `;
+          }
+        }
+
+        enumValues = enumValues.slice(0, -3); // Remove trailing " | "
+
+        // Add wikilink
+        api += `---\n--- [View wiki](${_enum.url})\n`;
+        api += `--- @alias ${_enum.name} ${enumValues}\n`;
+      } else {
+        // LuaLS doesn't nicely display annotations for aliasses, hence this is commented
+        //api += `\n---${this.formatRealm(_enum.realm)} ${_enum.description ? `${wrapInComment(_enum.description)}` : ''}\n`;
+        api += `\n---@alias ${_enum.name}\n`;
+
+        for (const item of _enum.items) {
+          if (item.key !== '' && !isNaN(Number(item.value.trim()))) {
+            api += `---| \`${item.key}\`\n`;
+          }
         }
       }
     }
@@ -306,8 +340,11 @@ export class GluaApiWriter {
     if (type === 'string')
       return `'${escapeSingleQuotes(value)}'`;
 
-    if (type === 'Vector')
-      return `Vector${value}`;
+    // The wiki has Vector defaults like `(0, 0, 0)`, `Vector(0, 0, 0)`, `Global.Vector(0, 0, 0)` and `vector_origin`
+    if (type === 'Vector') {
+      value = value.replace(/^Global\./, '');
+      return value.startsWith('(') ? `Vector${value}` : value;
+    }
 
     return value;
   }
@@ -319,10 +356,11 @@ export class GluaApiWriter {
       if (field.deprecated)
         api += `---@deprecated ${removeNewlines(field.deprecated)}\n`;
 
-      api += `---${putCommentBeforeEachLine(field.description.trim())}\n`;
+      api += `---${wrapInComment(field.description)}\n`;
 
-      const type = this.transformType(field.type, field.callback);
-      api += `---@type ${type}\n`;
+      const type = GluaApiWriter.transformType(field.type, field.callback);
+      const optional = field.default ? '?' : '';
+      api += `---@type ${type}${optional}\n`;
       api += `${struct.name}.${GluaApiWriter.safeName(field.name)} = ${field.default ? this.writeType(type, field.default) : 'nil'}\n\n`;
     }
 
@@ -376,7 +414,7 @@ export class GluaApiWriter {
     });
   }
 
-  private transformType(type: string, callback?: FunctionCallback) {
+  public static transformType(type: string, callback?: FunctionCallback) {
     if (type === 'vararg')
       return 'any';
 
@@ -384,11 +422,19 @@ export class GluaApiWriter {
     if (type === 'function' && callback) {
       let callbackString = `fun(`;
 
-      for (const arg of callback.arguments || []) {
-        if (!arg.name) arg.name = arg.type;
-        if (arg.type === 'vararg') arg.name = '...';
+      const callbackArgsLength = callback.arguments?.length || 0;
 
-        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${this.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
+      for (let i = 0; i < callbackArgsLength; i++) {
+        const arg = callback.arguments![i];
+
+        if (!arg.name) {
+          arg.name = `arg${i}`;
+        }
+
+        if (arg.type === 'vararg')
+          arg.name = '...';
+
+        callbackString += `${GluaApiWriter.safeName(arg.name)}: ${GluaApiWriter.transformType(arg.type)}${arg.default !== undefined ? `?` : ''}, `;
       }
 
       // Remove trailing comma and space
@@ -401,9 +447,17 @@ export class GluaApiWriter {
         callbackString += ':(';
       }
 
-      for (const ret of callback.returns || []) {
-        if (!ret.name) ret.name = ret.type;
-        if (ret.type === 'vararg') ret.name = '...';
+      const callbackReturnsLength = callback.returns?.length || 0;
+
+      for (let i = 0; i < callbackReturnsLength; i++) {
+        const ret = callback.returns![i];
+
+        if (!ret.name) {
+          ret.name = `ret${i}`;
+        }
+
+        if (ret.type === 'vararg')
+          ret.name = '...';
 
         callbackString += `${ret.name}: ${this.transformType(ret.type)}${ret.default !== undefined ? `?` : ''}, `;
       }
@@ -424,8 +478,9 @@ export class GluaApiWriter {
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
 
       return `${innerType}[]`;
-    } else if (type.startsWith('table{')) {
+    } else if (type.startsWith('table{') || type.startsWith('Panel{')) {
       // Convert `table{ToScreenData}` structures to `ToScreenData` class for LuaLS
+      // Also converts `Panel{DVScrollBar}` to `DVScrollBar` class for LuaLS
       let innerType = type.match(/{([^}]+)}/)?.[1];
 
       if (!innerType) throw new Error(`Invalid table type: ${type}`);
@@ -464,8 +519,15 @@ export class GluaApiWriter {
   }
 
   private writeFunctionLuaDocComment(func: Function, args: FunctionArgument[] | undefined, realm: Realm) {
-    let luaDocComment = `---${this.formatRealm(realm)} ${putCommentBeforeEachLine(func.description!.trim())}\n`;
+    let luaDocComment = `---${this.formatRealm(realm)} ${wrapInComment(func.description!)}\n`;
     luaDocComment += `---\n---[View wiki](${func.url})\n`;
+
+    let returns = func.returns;
+    let overloads = '';
+
+    if (func.address === 'Global.CompileString') {
+      ({ args, returns, overloads } = customPluginCompileString(args, returns));
+    }
 
     if (args) {
       args.forEach((arg, index) => {
@@ -485,23 +547,30 @@ export class GluaApiWriter {
           types.push(arg.altType);
         }
 
-        let typesString = types.map(type => this.transformType(type, arg.callback))
+        const hasEnum = types.some(type => type.startsWith('number{'));
+        const hasNumberTable = types.includes('table<number>');
+
+        if (hasEnum && hasNumberTable) {
+          types.push('number');
+        }
+
+        let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))
           .join('|');
 
-        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${putCommentBeforeEachLine(arg.description!.trim())}\n`;
+        luaDocComment += `---@param ${GluaApiWriter.safeName(arg.name)}${arg.default !== undefined ? `?` : ''} ${typesString} ${wrapInComment(arg.description!)}\n`;
       });
     }
 
-    if (func.returns) {
-      func.returns.forEach(ret => {
-        const description = putCommentBeforeEachLine(ret.description!.trim());
+    if (returns) {
+      returns.forEach(ret => {
+        const description = wrapInComment(ret.description!);
 
         luaDocComment += `---@return `;
 
         if (ret.type === 'vararg')
           luaDocComment += 'any ...';
         else
-          luaDocComment += `${this.transformType(ret.type, ret.callback)}`;
+          luaDocComment += `${GluaApiWriter.transformType(ret.type, ret.callback)}`;
 
         luaDocComment += ` # ${description}\n`;
       });
@@ -509,6 +578,18 @@ export class GluaApiWriter {
 
     if (func.deprecated)
       luaDocComment += `---@deprecated ${removeNewlines(func.deprecated)}\n`;
+
+    // TODO: Write a nice API to allow customizing API output from custom/
+    // See https://github.com/luttje/glua-api-snippets/issues/65
+    if (func.address === 'hook.Add') {
+      luaDocComment += customPluginHookAdd(this, func);
+    }
+
+    if (func.address === 'Global.FindMetaTable') {
+      luaDocComment += customPluginFindMetaTable();
+    }
+
+    luaDocComment += overloads;
 
     return luaDocComment;
   }

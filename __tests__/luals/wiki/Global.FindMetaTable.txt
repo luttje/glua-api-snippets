@@ -1,0 +1,43 @@
+<function name="FindMetaTable" parent="Global" type="libraryfunc">
+	<description>
+Returns the meta table for the class with the matching name.
+
+You can learn more about meta tables on the <page>Meta Tables</page> page.
+
+You can find a list of meta tables that can be retrieved with this function on <page>Enums/TYPE</page>. The name in the description is the string to use with this function.
+
+Custom meta tables should be registered via <page>Global.RegisterMetaTable</page>.
+	</description>
+	<realm>Shared and Menu</realm>
+	<args>
+		<arg name="metaName" type="string">The object type to retrieve the meta table of.</arg>
+	</args>
+	<rets>
+		<ret name="" type="table|nil">The corresponding meta table or `nil` if it doesn't exist.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Adds a very simple function for checking if a player is sick to the player metatable.</description>
+	<code>
+local meta = FindMetaTable("Player")
+
+function meta:IsSick()
+	return true
+end
+
+-- Sometime later...
+local ply = Entity(1)
+if ( ply:IsSick() ) then
+	ply:ChatPrint( "Get well soon, " .. ply:Nick() .. "!" )
+	ply:ChatPrint( "I just don't understand how you're always sick..." )
+end
+	</code>
+	<output>
+```
+Get well soon, Player1!
+I just don't understand how you're always sick...
+```
+	</output>
+
+</example>

@@ -1,12 +1,12 @@
 import { WikiPageMarkupScraper, isLibrary, isClass } from './scrapers/wiki-page-markup-scraper.js';
 import { WikiPageListScraper } from './scrapers/wiki-page-list-scraper.js';
-import packageJson from '../package.json' assert { type: "json" };
+import packageJson from '../package.json' with { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
+import { loadCustomOverrides, writeScrapedPages } from './api-writer/scrape-output.js';
 import { scrapeAndCollect } from './scrapers/collector.js';
 import { writeMetadata } from './utils/metadata.js';
 import { RequestInitWithRetry } from 'fetch-retry';
 import { Command } from 'commander';
-import path from 'path';
 import fs from 'fs';
 
 async function startScrape() {
@@ -32,11 +32,11 @@ async function startScrape() {
   const customDirectory = options.customOverrides?.replace(/\/$/, '') ?? null;
   const baseUrl = options.url.replace(/\/$/, '');
   const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
-  const writer = new GluaApiWriter();
+  const writer = new GluaApiWriter(baseDirectory);
 
   const retryOptions: RequestInitWithRetry = {
     retries: 5,
-    retryDelay: function(attempt, error, response) {
+    retryDelay: function (attempt, error, response) {
       return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000
     }
   }
@@ -57,27 +57,7 @@ async function startScrape() {
       process.exit(1);
     }
 
-    const files = fs.readdirSync(customDirectory);
-
-    for (const file of files) {
-      const filePath = path.join(customDirectory, file);
-      const fileStat = fs.statSync(filePath);
-
-      if (fileStat.isDirectory()) {
-        console.warn(`Skipping directory ${file} in custom (not supported)`);
-        continue;
-      }
-
-      // Besides the prefix helping us discern between overrides and files to copy, it also prevents conflicts with the wiki pages (since none of them start with _)
-      if (file.startsWith('_')) {
-        fs.copyFileSync(filePath, path.join(baseDirectory, file));
-        continue;
-      }
-
-      const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
-      const pageName = file.replace(/\.lua$/, '');
-      writer.addOverride(pageName, fileContent);
-    }
+    loadCustomOverrides(writer, customDirectory);
   }
 
   console.log('Collecting all pages...');
@@ -85,7 +65,7 @@ async function startScrape() {
 
   const pageIndexes = await scrapeAndCollect(pageListScraper);
 
-  console.log(`Took ${Math.floor((performance.now()-collect_start) / 100) / 10}s!\n`);
+  console.log(`Took ${Math.floor((performance.now() - collect_start) / 100) / 10}s!\n`);
 
   console.log('Scraping all pages...');
   let scrape_start = performance.now();
@@ -100,42 +80,14 @@ async function startScrape() {
       if (pageMarkups.length === 0)
         return;
 
-      // Generate file names
-      let fileName = pageIndex.address;
-      let moduleName = fileName;
-
-      if (fileName.includes('.') || fileName.includes(':') || fileName.includes('/')) {
-        [moduleName, fileName] = fileName.split(/[:.\/]/, 2);
-      }
-
-      fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-    
-      // Make sure modules like Entity and ENTITY are placed in the same file.
-      moduleName = moduleName.toLowerCase();
-
-      // Special cases for library and hook pages
-      if (moduleName.endsWith("(library)")) moduleName = moduleName.substring(0, moduleName.length - 9);
-      if (moduleName.endsWith("_hooks")) moduleName = moduleName.substring(0, moduleName.length - 6);
-
-      const moduleFile = path.join(baseDirectory, moduleName);
-
-      // Write Lua API docs
-      writer.writePages(pageMarkups, path.join(baseDirectory, `${moduleName}.lua`), indexForThis);
-
-      // Write JSON data
-      if (!fs.existsSync(moduleFile))
-        fs.mkdirSync(moduleFile, { recursive: true });
-
-      const json = JSON.stringify(pageMarkups, null, 2);
-      fs.writeFileSync(path.join(baseDirectory, moduleName, `${fileName}.json`), json);
+      writeScrapedPages(writer, pageIndex.address, pageMarkups, indexForThis);
     });
 
     queue.push(pageMarkupScraper.scrape());
 
-    if (queue.length > 20)
-    {
+    if (queue.length > 20) {
       const results = await Promise.allSettled(queue);
-      for ( const result of results) {
+      for (const result of results) {
         if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
       }
       queue = [];
@@ -144,11 +96,11 @@ async function startScrape() {
 
   // Await any after the loop exits
   const results = await Promise.allSettled(queue);
-  for ( const result of results) {
+  for (const result of results) {
     if (result.status === "rejected") console.warn("Failed to scrape a page!", result.reason);
   }
 
-  console.log(`Took ${Math.floor((performance.now()-scrape_start) / 100) / 10}s!`);
+  console.log(`Took ${Math.floor((performance.now() - scrape_start) / 100) / 10}s!`);
 
   writer.writeToDisk();
 

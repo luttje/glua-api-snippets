@@ -1,0 +1,71 @@
+<enum>
+	<realm>Shared and Menu</realm>
+	<description>Enumerations used by <page>Global.AddConsoleCommand</page>, <page>concommand.Add</page>, <page>Global.CreateClientConVar</page> and <page>Global.CreateConVar</page>.</description>
+	<items>
+<item key="FCVAR_ARCHIVE" value="128">Save the <page>ConVar</page> value into either client.vdf or server.vdf
+
+Reported as "a" by `cvarlist`, except Lua <page>ConVar</page>s</item>
+<item key="FCVAR_ARCHIVE_XBOX" value="16777216">Save the <page>ConVar</page> value into config.vdf on XBox</item>
+<item key="FCVAR_CHEAT" value="16384">Requires `sv_cheats` to be enabled to change the <page>ConVar</page> or run the command
+
+Reported as "cheat" by `cvarlist`</item>
+<item key="FCVAR_CLIENTCMD_CAN_EXECUTE" value="1073741824">`IVEngineClient::ClientCmd` is allowed to execute this command
+
+Reported as "clientcmd_can_execute" by `cvarlist`</item>
+<item key="FCVAR_CLIENTDLL" value="8"><page>ConVar</page> is defined by the client DLL.
+
+This flag is set automatically
+
+Reported as "cl" by `cvarlist`</item>
+<item key="FCVAR_DEMO" value="65536">Force the <page>ConVar</page> to be recorded by demo recordings.
+
+Reported as "demo" by `cvarlist`</item>
+<item key="FCVAR_DONTRECORD" value="131072">Opposite of [FCVAR_DEMO](#FCVAR_DEMO), ensures the <page>ConVar</page> is not recorded in demos
+
+Reported as "norecord" by `cvarlist`</item>
+<item key="FCVAR_GAMEDLL" value="4"><page>ConVar</page> is defined by the game DLL.
+
+This flag is set automatically
+
+Reported as "sv" by `cvarlist`</item>
+<item key="FCVAR_LUA_CLIENT" value="262144">Set automatically on all ConVars and console commands created by the client Lua state.
+
+Reported as "lua_client" by `cvarlist`</item>
+<item key="FCVAR_LUA_SERVER" value="524288">Set automatically on all ConVars and console commands created by the server Lua state.
+
+Reported as "lua_server" by `cvarlist`</item>
+<item key="FCVAR_NEVER_AS_STRING" value="4096">Tells the engine to never print this variable as a string. This is used for variables which may contain control characters.
+
+Reported as "numeric" by `cvarlist`</item>
+<item key="FCVAR_NONE" value="0">No flags</item>
+<item key="FCVAR_NOTIFY" value="256">For serverside <page>ConVar</page>s, notifies all players with blue chat text when the value gets changed, also makes the convar appear in [A2S_RULES](https://developer.valvesoftware.com/wiki/Server_queries#A2S_RULES)
+
+Reported as "nf" by `cvarlist`</item>
+<item key="FCVAR_NOT_CONNECTED" value="4194304">Makes the <page>ConVar</page> not changeable while connected to a server or in singleplayer</item>
+<item key="FCVAR_PRINTABLEONLY" value="1024">Forces the <page>ConVar</page> to only have printable characters (No control characters)
+
+Reported as "print" by `cvarlist`</item>
+<item key="FCVAR_PROTECTED" value="32">Makes the <page>ConVar</page> value hidden from all clients (For example `sv_password`)
+
+Reported as "prot" by `cvarlist`</item>
+<item key="FCVAR_REPLICATED" value="8192">For serverside <page>ConVar</page>s, it will enforce its value on all clients. The <page>ConVar</page> with the same name must also exist on the client!
+
+Reported as "rep" by `cvarlist`</item>
+<item key="FCVAR_SERVER_CANNOT_QUERY" value="536870912">Prevents the server from querying value of this <page>ConVar</page></item>
+<item key="FCVAR_SERVER_CAN_EXECUTE" value="268435456">The server is allowed to execute this command on clients.
+
+Reported as "server_can_execute" by `cvarlist`</item>
+<item key="FCVAR_SPONLY" value="64">Executing the command or changing the <page>ConVar</page> is only allowed in singleplayer
+
+Reported as "sp" by `cvarlist`</item>
+<item key="FCVAR_UNLOGGED" value="2048">Don't log the <page>ConVar</page> changes to console/log files/users
+
+Reported as "log" by `cvarlist`</item>
+<item key="FCVAR_UNREGISTERED" value="1">If this is set, the convar will become anonymous and won't show up in the `find` results.</item>
+<item key="FCVAR_USERINFO" value="512">For clientside commands, sends the value to the server
+
+Reported as "user" by `cvarlist`</item>
+	</items>
+
+</enum>
+

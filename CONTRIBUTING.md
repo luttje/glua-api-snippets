@@ -77,6 +77,12 @@ You can help the project even more by fixing the error yourself. To do this, you
 
 ✨ **Thanks in advance for your contribution!**
 
+#### Testing annotations in Lua Language Server
+
+`npm run test:luals` builds a small library from the wiki markup in `__tests__/luals/wiki/` (plus `custom/`) and runs Lua Language Server's `--check` over the files in `__tests__/luals/cases/`. A line ending in `-- expect: <diagnostic-code>` must produce that diagnostic, all other lines must produce none.
+
+To add a case, save the markup of any wiki pages you need (`https://wiki.facepunch.com/gmod/<page>?format=text`) as `__tests__/luals/wiki/<URI encoded page address>.txt` and add a `.lua` file to `__tests__/luals/cases/`.
+
 ### Getting acknowledged for your contribution
 
 We use [All Contributors](https://allcontributors.org/) to acknowledge contributions. If you want to be added to the list of contributors, please comment to your pull request with:
