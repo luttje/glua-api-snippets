@@ -13,6 +13,7 @@ import {
 import customPluginHookAdd from '../../custom/plugins/hook-add.js';
 import customPluginFindMetaTable from '../../custom/plugins/find-meta-table.js';
 import customPluginCompileString from '../../custom/plugins/compile-string.js';
+import customPluginVguiCreate from '../../custom/plugins/vgui-create.js';
 import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -379,6 +380,13 @@ export class GluaApiWriter {
     return this.files.get(filePath) ?? [];
   }
 
+  public getPanels() {
+    return [...this.files.values()]
+      .flat()
+      .map(x => x.page)
+      .filter(isPanel);
+  }
+
   public makeApiFromPages(pages: IndexedWikiPage[]) {
     let api = '';
 
@@ -587,6 +595,10 @@ export class GluaApiWriter {
 
     if (func.address === 'Global.FindMetaTable') {
       luaDocComment += customPluginFindMetaTable();
+    }
+
+    if (func.address === 'vgui.Create') {
+      luaDocComment += customPluginVguiCreate(this.getPanels());
     }
 
     luaDocComment += overloads;

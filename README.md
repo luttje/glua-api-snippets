@@ -75,6 +75,7 @@ The addon includes a Lua Language Server plugin that understands some Garry's Mo
 * `DEFINE_BASECLASS("base")` declares a local `BaseClass`
 * `self:NetworkVar(...)` in `ENT:SetupDataTables` creates typed `Get...` and `Set...` methods
 * `ents.Create("ent_class_name")`, `ents.CreateClientside(...)` and `ply:Give("weapon_class_name")` return the class of that scripted entity or weapon
+* Panels registered with `vgui.Register("MyPanel", PANEL, "DFrame")` or `derma.DefineControl(...)` get a class (unless you annotated `local PANEL` with your own `---@class`), and `vgui.Create("MyPanel")` returns it
 
 The plugin is enabled through the `runtime.plugin` setting, as in the example below. Outside of Visual Studio Code, Lua Language Server will ask you to trust the plugin before loading it.
 

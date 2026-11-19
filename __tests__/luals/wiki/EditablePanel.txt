@@ -1,0 +1,9 @@
+<panel>
+	<parent>Panel</parent>
+	<name>EditablePanel</name>
+	<realm>Client</realm>
+	<description>
+		Base panel used by <page>DFrame</page>, this panel is needed so that elements such as the <page>TextEntry</page> can obtain focus.
+	</description>
+</panel>
+

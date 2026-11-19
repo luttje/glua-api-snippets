@@ -1,0 +1,50 @@
+<function name="Register" parent="vgui" type="libraryfunc">
+	<description>Registers a panel for later creation via <page>vgui.Create</page>.</description>
+	<realm>Client and Menu</realm>
+    <file line="74-L98">lua/includes/extensions/client/panel/scriptedpanels.lua</file>
+	<args>
+		<arg name="classname" type="string">Classname of the panel to register. This is what you will need to pass to <page>vgui.Create</page>'s first argument.
+
+This must be unique, including classnames of entities due to internal usage of <page>baseclass.Set</page>.</arg>
+		<arg name="panelTable" type="table">The table containing the panel information.</arg>
+		<arg name="baseName" type="string" default="Panel">Classname of a panel to inherit functionality from. Functions with same names will be overwritten preferring the panel that is being registered.</arg>
+	</args>
+	<rets>
+		<ret name="" type="table">The given panel table from second argument</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Defines a Panel named `PanelName` that derives from `DButton`</description>
+	<code>
+local PANEL = {}
+PANEL.ColorIdle = Color(255, 0, 0)
+PANEL.ColorHovered = Color(0, 255, 0)
+
+function PANEL:Paint(w, h)
+	local color = self.ColorIdle
+
+	if self:IsHovered() then
+		color = self.ColorHovered
+	end
+
+	surface.SetDrawColor(color)
+	surface.DrawRect(0, 0, w, h)
+end
+
+vgui.Register("PanelName", PANEL, "DButton")
+
+	</code>
+</example>
+
+<example>
+	<description>Defines a Panel before adding its methods</description>
+	<code>
+local PANEL = vgui.Register("PanelName", {}, "Panel")
+
+function PANEL:Paint(w, h)
+	surface.SetDrawColor(255, 0, 0)
+	surface.DrawRect(0, 0, w, h)
+end
+	</code>
+</example>

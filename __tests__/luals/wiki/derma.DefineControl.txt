@@ -1,0 +1,36 @@
+<function name="DefineControl" parent="derma" type="libraryfunc">
+	<description>
+Defines a new Derma control with an optional base.
+
+This calls <page>vgui.Register</page> internally, but also does the following:
+* Adds the control to <page>derma.GetControlList</page>
+* Adds a key "Derma" - This is returned by <page>derma.GetControlList</page>
+* Makes a global table with the name of the control (This is technically deprecated and should not be relied upon)
+* If reloading (i.e. called this function with name of an existing panel), updates all existing instances of panels with this name. (Updates functions, calls <page>PANEL:PreAutoRefresh</page> and <page>PANEL:PostAutoRefresh</page>, etc.)
+	</description>
+	<realm>Client and Menu</realm>
+	<file line="99-L127">lua/derma/derma.lua</file>
+	<args>
+		<arg name="name" type="string">Name of the newly created control.</arg>
+		<arg name="description" type="string">Description of the control.</arg>
+		<arg name="tab" type="table">Table containing control methods and properties.</arg>
+		<arg name="base" type="string">Derma control to base the new control off of.</arg>
+	</args>
+	<rets>
+		<ret name="" type="table">A table containing the new control's methods and properties.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Defines a new control based off of DTextEntry that prints to the console whenever it is changed.</description>
+	<code>
+local PANEL = {}
+
+function PANEL:OnChange()
+    print(self:GetValue())
+end
+
+derma.DefineControl("MyTextEntry", "Printing text entry control", PANEL, "DTextEntry")
+	</code>
+
+</example>

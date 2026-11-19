@@ -30,3 +30,9 @@ weapon:Clip1()
 local crowbar = ply:Give("weapon_crowbar")
 crowbar:Clip1()
 crowbar:NotAMethod() -- expect: undefined-field
+
+-- Classes annotated by the user still work
+local annotated = ents.Create("ent_annotated")
+annotated:Annotated()
+annotated:Spawn()
+annotated:NotAMethod() -- expect: undefined-field
