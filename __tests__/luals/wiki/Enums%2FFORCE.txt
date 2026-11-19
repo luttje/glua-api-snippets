@@ -1,0 +1,18 @@
+<enum>
+	<realm>Shared and Menu</realm>
+	<description>Enumerations used by <page>Global.AccessorFunc</page>.</description>
+	<items>
+<item key="FORCE_STRING" value="1">Forces the function to take <page>string</page>s only</item>
+
+<item key="FORCE_NUMBER" value="2">Forces the function to take <page>number</page>s only</item>
+
+<item key="FORCE_BOOL" value="3">Forces the function to take <page>boolean</page>s only</item>
+
+<item key="FORCE_ANGLE" value="4">Forces the function to take <page>Angle</page>s only</item>
+
+<item key="FORCE_COLOR" value="5">Forces the function to take <page>Color</page>s only</item>
+
+<item key="FORCE_VECTOR" value="6">Forces the function to take <page>Vector</page>s only</item>
+
+	</items>
+</enum>
