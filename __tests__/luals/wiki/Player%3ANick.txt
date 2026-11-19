@@ -1,0 +1,14 @@
+<function name="Nick" parent="Player" type="classfunc">
+	<description>Returns the player's nick name also known as display name, as it appears in Steam.</description>
+	<realm>Shared</realm>
+	<rets>
+		<ret name="" type="string">Player's nick name</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Prints the players name in console.</description>
+	<code>print( Entity( 1 ):Nick() )</code>
+	<output>Player1</output>
+
+</example>

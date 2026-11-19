@@ -10,6 +10,27 @@ export type Config = {
   "settings"?: ConfigSettings,
 };
 
+export const librarySettings: ConfigSettings = {
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.runtime.special": {
+    "include": "dofile",
+    "IncludeCS": "dofile",
+  },
+  "Lua.runtime.nonstandardSymbol": [
+    "!",
+    "!=",
+    "&&",
+    "||",
+    "//",
+    "/**/",
+    "continue",
+  ],
+  "Lua.diagnostics.disable": [
+    "duplicate-set-field", // Prevents complaining when a function exists twice in both the CLIENT and SERVER realm
+  ],
+  // TODO: runtime.path
+};
+
 export function makeConfigJson(name: string, words: string[], files: string[], settings: ConfigSettings) {
   let config: Config = {
     "$schema": "https://raw.githubusercontent.com/LuaLS/LLS-Addons/main/schemas/addon_config.schema.json",

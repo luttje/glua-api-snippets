@@ -25,7 +25,8 @@
     "publish-library": "tsx ./src/cli-library-publisher.ts --input ./output/ --output ./dist/libraries/garrysmod",
     "stylua-custom": "npx --yes @johnnymorganz/stylua-bin@0.17.1 ./custom",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules VERBOSE_LOGGING=1 npx jest",
-    "ci:test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --ci --coverage"
+    "ci:test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --ci --coverage",
+    "test:luals": "tsx __tests__/luals/install.ts && cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --testMatch \"**/*.e2e.ts\""
   },
   "devDependencies": {
     "@types/archiver": "^6.0.2",

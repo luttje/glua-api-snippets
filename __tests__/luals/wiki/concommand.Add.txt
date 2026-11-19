@@ -1,0 +1,102 @@
+<function name="Add" parent="concommand" type="libraryfunc">
+	<description>
+Creates a <page text="console command">console_commands</page> that runs a function in lua with optional autocompletion function and help text.
+
+<warning>Clients can still run commands created only on the server. Always check permissions in the callback.</warning>
+<bug issue="1183">This will fail if the concommand was previously removed with <page>concommand.Remove</page> in a different realm (creating a command on the client that was removed from the server and vice-versa).</bug>
+	</description>
+	<realm>Shared and Menu</realm>
+	<file line="24-L33">lua/includes/modules/concommand.lua</file>
+	<args>
+		<arg name="name" type="string">The command name to be used in console.
+
+This cannot be a name of existing console command or console variable. It will silently fail if it is.</arg>
+		<arg name="callback" type="function">The function to run when the concommand is executed.
+			<callback>
+				<arg name="ply" type="Player">The player that ran the concommand. NULL entity if command was entered with the dedicated server console.</arg>
+				<arg name="cmd" type="string">The concommand string (if one callback is used for several concommands).</arg>
+				<arg name="args" type="table">A table of all string arguments.</arg>
+				<arg name="argStr" type="string">The arguments as a string (including double quotes if there were any).</arg>
+			</callback>
+		</arg>
+
+		<arg name="autoComplete" type="function" default="nil">
+The function to call which should return a table of options for autocompletion. (<page text="Autocompletion Tutorial">Console_Command_Auto-completion</page>)
+
+This only properly works on the client since it is **not** networked.
+
+<callback>
+	<arg name="cmd" type="string">The concommand this autocompletion is for.</arg>
+	<arg name="argStr" type="string">The arguments typed so far.</arg>
+	<arg name="args" type="table">A table of all string arguments.</arg>
+	<ret name="tbl" type="table">A table containing the autocomplete options to display.</ret>
+</callback>
+		</arg>
+		<arg name="helpText" type="string" default="nil">The text to display should a user run 'help cmdName'.</arg>
+		<arg name="flags" type="number{FCVAR}|table<number>" default="0">Console command modifier flags. Either a bitflag, or a table of enums. See <page>Enums/FCVAR</page>.</arg>
+	</args>
+</function>
+
+<example>
+	<description>Adds a concommand `killyourself` which will kill the user.</description>
+	<code>
+concommand.Add( "killyourself", function( ply, cmd, args )
+    ply:Kill()
+    print( "You killed yourself!" )
+end )
+	</code>
+</example>
+
+<example>
+	<description>A concommand that prints the SteamID and nickname of every player on the server.</description>
+	<code>
+concommand.Add( "retrieveplayers", function()  
+	for _, ply in ipairs( player.GetAll() ) do
+		print( ply:Nick() .. ", " .. ply:SteamID() .. "\n" )
+	end
+end )
+	</code>
+
+</example>
+
+<example>
+	<description>A simple autocomplete example.</description>
+	<code>
+local function SimpleAutoComplete( cmd, args, ... )
+	local possibleArgs = { ... }
+	local autoCompletes = {}
+
+	--TODO: Handle "test test" "test test" type arguments
+	local arg = string.Split( args:TrimLeft(), " " )
+
+	local lastItem = nil
+	for i, str in pairs( arg ) do
+		if ( str == "" && ( lastItem && lastItem == "" ) ) then table.remove( arg, i ) end
+		lastItem = str
+	end -- Remove empty entries. Can this be done better?
+
+	local numArgs = #arg
+	local lastArg = table.remove( arg, numArgs )
+	local prevArgs = table.concat( arg, " " )
+	if ( #prevArgs > 0 ) then prevArgs = " " .. prevArgs end
+
+	local possibilities = possibleArgs[ numArgs ] or { lastArg }
+	for _, acStr in pairs( possibilities ) do
+		if ( !acStr:StartsWith( lastArg ) ) then continue end
+		table.insert( autoCompletes, cmd .. prevArgs .. " " .. acStr )
+	end
+		
+	return autoCompletes
+end
+
+concommand.Add( "cmd_with_autocomplete", function( ply, cmd, args )
+	print( "my concommand got these args:", unpack( args ) )
+end, function( cmd, args )
+	return SimpleAutoComplete( cmd, args, { "test1", "test2", "hell", "yeah" }, { "batman", "ironman", "antman", "superman", "superiorman" }  )
+end )
+
+	</code>
+<output><upload src="70c/8dc70edf195ee53.mp4" size="136796" name="May10-88-hl2.mp4" />
+</output>
+
+</example>

@@ -1,6 +1,6 @@
 import packageJson from '../package.json' with { type: "json" };
 import { GluaApiWriter } from './api-writer/glua-api-writer.js';
-import { makeConfigJson } from './utils/lua-language-server.js';
+import { librarySettings, makeConfigJson } from './utils/lua-language-server.js';
 import { readMetadata } from './utils/metadata.js';
 import { walk } from './utils/filesystem.js';
 import { Command } from 'commander';
@@ -59,26 +59,8 @@ async function main() {
     libraryName,
     libraryWordMatchers,
     libraryFileMatchers,
-    {
-      "Lua.runtime.version": "LuaJIT",
-      "Lua.runtime.special": {
-        "include": "dofile",
-        "IncludeCS": "dofile",
-      },
-      "Lua.runtime.nonstandardSymbol": [
-        "!",
-        "!=",
-        "&&",
-        "||",
-        "//",
-        "/**/",
-        "continue",
-      ],
-      "Lua.diagnostics.disable": [
-        "duplicate-set-field", // Prevents complaining when a function exists twice in both the CLIENT and SERVER realm
-      ],
-      // TODO: runtime.path
-    });
+    librarySettings,
+  );
 
   fs.writeFileSync(path.join(options.output, 'config.json'), JSON.stringify(config, null, 2));
 

@@ -1,0 +1,53 @@
+<function name="PlayerSay" parent="GM" type="hook">
+	<description>
+		Called when a player dispatched a chat message. For the clientside equivalent, see <page>GM:OnPlayerChat</page>.
+
+		<note>
+			It may be more reliable to use <page>gameevent/player_say</page> to read messages serverside because addons commonly return values in this hook to change chat messages.
+		</note>
+	</description>
+	<realm>Server</realm>
+	<args>
+		<arg name="sender" type="Player">The player which sent the message.</arg>
+		<arg name="text" type="string">The message's content.</arg>
+		<arg name="teamChat" type="boolean">Return false when the message is for everyone, true when the message is for the sender's team.</arg>
+	</args>
+	<rets>
+		<ret name="" type="string">What to show instead of original text. Set to `""` to stop the message from displaying.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Adds a coin flip command to the chat. Player should type `/flip` (case-insensitive).</description>
+	<code>
+hook.Add( "PlayerSay", "CoinFlip", function( ply, text )
+	if ( string.lower( text ) == "/flip" ) then
+		PrintMessage( HUD_PRINTTALK, ply:Nick() .. " flipped the coin and got " .. ( math.random( 2 ) == 1 and "heads" or "tails" ) )
+		return ""
+	end
+end )
+	</code>
+	<output>
+```
+Player1 flipped the coin and got heads
+```
+	</output>
+</example>
+
+<example>
+	<description>Adds a symbol counter command to the chat. Player should type `/len *text*` (case-insensitive).</description>
+	<code>
+hook.Add( "PlayerSay", "CharCount", function( ply, text )
+	if ( string.StartWith( string.lower( text ), "/len " ) ) then
+		ply:ChatPrint( "Your message has " .. utf8.len( string.sub( text, 6 ) ) .. " symbol(s)." ) -- We use 6 in string.sub because it's a length of "/len " + 1
+		return ""
+	end
+end )
+	</code>
+	<output>
+```
+Your message has 5 symbol(s). [When someone typed: "/len Hello"]
+```
+	</output>
+</example>
+

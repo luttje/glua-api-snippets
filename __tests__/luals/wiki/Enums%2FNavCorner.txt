@@ -1,0 +1,18 @@
+<enum>
+	<realm>Server</realm>
+	<description>
+Enumerations used by <page>CNavArea</page> methods.
+These Enums correspond to each corner of a <page>CNavArea</page>
+
+<warning>These enumerations do not exist in game and are listed here only for reference</warning>
+	</description>
+	<items>
+<item key="NORTH_WEST" value="0">North West Corner</item>
+<item key="NORTH_EAST" value="1">North East Corner</item>
+<item key="SOUTH_EAST" value="2">South East Corner</item>
+<item key="SOUTH_WEST" value="3">South West Corner</item>
+<item key="NUM_CORNERS" value="4">Represents all corners, only applicable to certain functions, such as <page>CNavArea:PlaceOnGround</page>.</item>
+	</items>
+
+</enum>
+

@@ -1,0 +1,69 @@
+<panel>
+	<parent>EditablePanel</parent>
+	<realm>Client and Menu</realm>
+	<file line="">lua/vgui/dframe.lua</file>
+	<description>
+		The DFrame is the moma of basically all VGUI elements. 98% of the time you will parent your element to this.
+	</description>
+
+	<overrides>
+		<page>Panel:Init</page>
+		<page>Panel:Think</page>
+		<page>Panel:Paint</page>
+		<page>Panel:OnMousePressed</page>
+		<page>Panel:OnMouseReleased</page>
+		<page>Panel:PerformLayout</page>
+		<page>Panel:GenerateExample</page>
+		<page>Panel:Center</page>
+	</overrides>
+</panel>
+
+
+<example>
+	<description>Creates a basic DFrame.</description>
+	<code>
+concommand.Add( "open_frame", function()
+	local DFrame = vgui.Create("DFrame") -- The name of the panel we don't have to parent it.
+	DFrame:SetPos(100, 100) -- Set the position to 100x by 100y. 
+	DFrame:SetSize(300, 200) -- Set the size to 300x by 200y.
+	DFrame:SetTitle("Derma Frame") -- Set the title in the top left to "Derma Frame".
+	DFrame:MakePopup() -- Makes your mouse be able to move around.
+end )
+	</code>
+</example>
+
+<upload src="227ec/8db0242b59b2857.png" size="3094045" name="dpanel_example.png" />
+
+
+<example>
+	<description>Create an advanced customized DFrame.</description>
+	<code>
+-- Then font named "Font" compacted on one line.
+surface.CreateFont("Font", {
+    font = "Arial",
+    extended = true,
+    size = 20
+})
+
+local faded_black = Color(0, 0, 0, 200) -- The color black but with 200 Alpha
+
+concommand.Add( "open_frame", function()
+	local DermaPanel = vgui.Create("DFrame") -- The name DermaPanel to store the value DFrame.
+	DermaPanel:SetSize(500, 300) -- Sets the size to 500x by 300y.
+	DermaPanel:Center() -- Centers the panel.
+	DermaPanel:SetTitle("") -- Set the title to nothing.
+	DermaPanel:SetDraggable(false) -- Makes it so you can't drag it.
+	DermaPanel:MakePopup() -- Makes it so you can move your mouse on it.
+
+	-- Paint function w, h = how wide and tall it is.
+	DermaPanel.Paint = function(self, w, h)
+	    -- Draws a rounded box with the color faded_black stored above.
+	    draw.RoundedBox(2, 0, 0, w, h, faded_black)
+	    -- Draws text in the color white.
+	    draw.SimpleText("Derma Frame", "Font", 250, 5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+	end
+end )
+	</code>
+</example>
+
+<upload src="227ec/8db0242c13e0653.png" size="3201895" name="dframe_paint.png" />
