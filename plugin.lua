@@ -280,11 +280,12 @@ local dtTypes = {
 
 ---@param ast parser.object
 ---@param classNode parser.object
+---@param class string
 ---@param source parser.object
 ---@param group table
 ---@param isElement boolean
 ---@return boolean?
-local function BindNetworkVar(ast, classNode, source, group, isElement)
+local function BindNetworkVar(ast, classNode, class, source, group, isElement)
 	local args = guide.getParams(source)
 	if not args or #args < (isElement and 4 or 3) then
 		return
@@ -330,11 +331,11 @@ local function BindNetworkVar(ast, classNode, source, group, isElement)
 		return
 	end
 
-	local ok = helper.addDoc(ast, classNode, "field", ("Set%s fun(self: Entity, value: %s)"):format(name, dtType), group)
+	local ok = helper.addDoc(ast, classNode, "field", ("Set%s fun(self: %s, value: %s)"):format(name, class, dtType), group)
 	if not ok then
 		return false
 	end
-	ok = helper.addDoc(ast, classNode, "field", ("Get%s fun(self: Entity): %s"):format(name, dtType), group)
+	ok = helper.addDoc(ast, classNode, "field", ("Get%s fun(self: %s): %s"):format(name, class, dtType), group)
 	if not ok then
 		return false
 	end
@@ -375,7 +376,7 @@ function OnTransformAst(uri, ast)
 		if not targetSelf or targetSelf.node ~= classNode then
 			return
 		end
-		return BindNetworkVar(ast, classNode, source, group, targetName == "NetworkVarElement")
+		return BindNetworkVar(ast, classNode, class, source, group, targetName == "NetworkVarElement")
 	end)
 	if ok == false then
 		return

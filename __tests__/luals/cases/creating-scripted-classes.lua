@@ -14,6 +14,9 @@ local prop = ents.Create("prop_physics")
 prop:Spawn()
 prop:NotAMethod() -- expect: undefined-field
 
+-- NetworkVar accessors belong to their own class, not to every entity
+ent.SetAmount(prop, 1) -- expect: param-type-mismatch
+
 local className = "prop_" .. "physics"
 local dynamic = ents.Create(className)
 dynamic:Spawn()
