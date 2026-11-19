@@ -1,0 +1,19 @@
+<function name="PrimaryAttack" parent="WEAPON" type="hook">
+	<description>
+Called when primary attack button ( +attack ) is pressed.
+
+When in singleplayer, this function is only called in the server realm. When in multiplayer, the hook will be called on both the server and the client in order to allow for <page>Prediction</page>.
+
+You can force the hook to always be called on client like this:
+
+```
+if ( game.SinglePlayer() ) then self:CallOnClient( "PrimaryAttack" ) end
+```
+
+
+Note that due to prediction, in multiplayer SWEP:PrimaryAttack is called multiple times per one "shot" with the gun. To work around that, use <page>Global.IsFirstTimePredicted</page>.
+	</description>
+	<realm>Shared</realm>
+	<file line="42-L60">gamemodes/base/entities/weapons/weapon_base/shared.lua</file>
+	<predicted>Yes</predicted>
+</function>

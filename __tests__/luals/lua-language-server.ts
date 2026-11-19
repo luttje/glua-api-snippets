@@ -69,6 +69,7 @@ export function checkWorkspace(workspace: string, settings: object, tempDirector
     `--configpath=${configPath}`,
     '--checklevel=Information',
     '--check_format=json',
+    '--trust_all_plugins',
     `--check_out_path=${outputPath}`,
     `--logpath=${path.join(tempDirectory, 'log')}`,
     `--metapath=${path.join(tempDirectory, 'meta')}`,

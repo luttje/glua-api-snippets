@@ -9,7 +9,10 @@ const casesDirectory = path.resolve('__tests__/luals/cases');
 const wikiDirectory = path.resolve('__tests__/luals/wiki');
 const customDirectory = path.resolve('custom');
 
-const caseFiles = fs.readdirSync(casesDirectory).filter(file => file.endsWith('.lua'));
+const pluginPath = path.resolve('plugin.lua');
+
+const caseFiles = fs.readdirSync(casesDirectory, { recursive: true, encoding: 'utf-8' })
+  .filter(file => file.endsWith('.lua'));
 
 /**
  * Lines ending in `-- expect: code[, code]` must produce exactly those diagnostics, all other lines none.
@@ -43,6 +46,7 @@ describe('LuaLS annotations', () => {
     diagnostics = checkWorkspace(casesDirectory, {
       ...librarySettings,
       'Lua.workspace.library': [libraryDirectory],
+      'Lua.runtime.plugin': pluginPath,
     }, tempDirectory);
   });
 
