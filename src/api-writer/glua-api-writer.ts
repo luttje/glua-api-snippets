@@ -536,6 +536,13 @@ export class GluaApiWriter {
           types.push(arg.altType);
         }
 
+        const hasEnum = types.some(type => type.startsWith('number{'));
+        const hasNumberTable = types.includes('table<number>');
+
+        if (hasEnum && hasNumberTable) {
+          types.push('number');
+        }
+
         let typesString = types.map(type => GluaApiWriter.transformType(type, arg.callback))
           .join('|');
 
