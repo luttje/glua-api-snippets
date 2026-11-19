@@ -33,6 +33,58 @@ local function GetScopedClass(uri)
 end
 
 
+-- Typed definitions of functions that create a scripted class by name, e.g. `ents.Create("ent_class_name")`.
+-- For matching names LuaLS picks these over the library definitions, so they return the scripted class.
+local entsCreate = [[
+---@param class "{class}"
+---@return {class}
+---@diagnostic disable-next-line: duplicate-set-field, missing-return
+function ents.Create(class) end
+]]
+
+local entsCreateClientside = [[
+---@param class "{class}"
+---@return {class}
+---@diagnostic disable-next-line: duplicate-set-field, missing-return
+function ents.CreateClientside(class) end
+]]
+
+local playerGive = [[
+do
+	---@class Player
+	local Player
+
+	---@param weaponClassName "{class}"
+	---@param bNoAmmo? boolean
+	---@return {class}
+	---@diagnostic disable-next-line: duplicate-set-field, missing-return
+	function Player:Give(weaponClassName, bNoAmmo) end
+end
+]]
+
+local scopedCreators = {
+	ENT  = { entsCreate, entsCreateClientside },
+	SWEP = { entsCreate, playerGive },
+}
+
+---@param global string
+---@param class string
+---@return string?
+local function GetCreatorDefinitions(global, class)
+	local templates = scopedCreators[global]
+	if not templates then
+		return
+	end
+
+	local definitions = {}
+	for _, template in ipairs(templates) do
+		definitions[#definitions+1] = template:gsub("{class}", function() return class end)
+	end
+
+	return "\n\n" .. table.concat(definitions, "\n")
+end
+
+
 ---@class diff
 ---@field start integer # The number of bytes at the beginning of the replacement
 ---@field finish integer # The number of bytes at the end of the replacement
@@ -48,7 +100,7 @@ function OnSetText(uri, text)
 	-- This should be the first diff, so that when the start positions match, it doesn't break the entire file.
 	-- TODO: Do real line insert if its possible, instead of text patching.
 	-- Detect "scripted" scope by folder and localize its global table to @class annotation.
-	local global = GetScopedClass(uri)
+	local global, class = GetScopedClass(uri)
 	if global then
 		diffs[#diffs+1] = {
 			start = 1,
@@ -64,6 +116,16 @@ function OnSetText(uri, text)
 			start = start,
 			finish = finish - 1,
 			text = "local BaseClass = baseclass.Get",
+		}
+	end
+
+	-- Must be the last diff, since it is appended to the end of the file
+	local creatorDefinitions = global and class and #text > 0 and GetCreatorDefinitions(global, class)
+	if creatorDefinitions then
+		diffs[#diffs+1] = {
+			start = #text + 1,
+			finish = #text,
+			text = creatorDefinitions,
 		}
 	end
 

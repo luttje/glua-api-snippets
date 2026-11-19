@@ -8,3 +8,5 @@ function ENT:Think()
 	self:SetAmount("five") -- expect: param-type-mismatch
 	self:GetNothing() -- expect: undefined-field
 end
+
+function ENT:Custom() end

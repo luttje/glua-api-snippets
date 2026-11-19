@@ -74,6 +74,7 @@ The addon includes a Lua Language Server plugin that understands some Garry's Mo
 * Every scripted weapon, entity, effect and tool (e.g. `lua/weapons/weapon_gun.lua`) gets its own class, so fields of one `SWEP` don't show up in another
 * `DEFINE_BASECLASS("base")` declares a local `BaseClass`
 * `self:NetworkVar(...)` in `ENT:SetupDataTables` creates typed `Get...` and `Set...` methods
+* `ents.Create("ent_class_name")`, `ents.CreateClientside(...)` and `ply:Give("weapon_class_name")` return the class of that scripted entity or weapon
 
 The plugin is enabled through the `runtime.plugin` setting, as in the example below. Outside of Visual Studio Code, Lua Language Server will ask you to trust the plugin before loading it.
 

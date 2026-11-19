@@ -1,0 +1,16 @@
+<function name="Clip1" parent="Weapon" type="classfunc">
+	<description>Returns how much primary ammo is in the magazine.
+	<note>This is not shared between clients and will instead return the maximum primary clip size.</note>
+	</description>
+	<realm>Shared</realm>
+	<rets>
+		<ret name="" type="number">The amount of primary ammo in the magazine.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Prints the amount of primary ammo in the magazine of the weapon the 1st player has equipped.</description>
+	<code>print( Entity( 1 ):GetActiveWeapon():Clip1() )</code>
+	<output>Will print 45 for fully loaded SMG1.</output>
+
+</example>

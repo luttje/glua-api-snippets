@@ -1,0 +1,34 @@
+<function name="Give" parent="Player" type="classfunc">
+	<description>
+Gives the player a weapon.
+
+This function will call <page>GM:PlayerCanPickupWeapon</page>. If that hook returns false, this function will do nothing.
+
+<note>While this function is meant for weapons/pickupables only, it is **not** restricted to weapons. Any entity can be spawned using this function, including NPCs and SENTs.</note>
+	</description>
+	<realm>Server</realm>
+	<args>
+		<arg name="weaponClassName" type="string">Class name of weapon to give the player</arg>
+		<arg name="bNoAmmo" type="boolean" default="false">Set to true to not give any ammo on weapon spawn. (Reserve ammo set by DefaultClip)</arg>
+	</args>
+	<rets>
+		<ret name="" type="Weapon">The weapon given to the player, if one was given. It will return NULL if the player already has the weapon, or the weapon entity (entity with given classname) doesn't exist.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Gives the player a toolgun</description>
+	<code>Entity( 1 ):Give( "gmod_tool" )</code>
+
+</example>
+
+
+<example>
+	<description>Removes all weapons and ammo from a player and gives a weapon_base SWEP with no ammo in it.</description>
+	<code>
+Entity( 1 ):StripWeapons()
+Entity( 1 ):StripAmmo()
+Entity( 1 ):Give( "weapon_base", true )
+	</code>
+
+</example>
