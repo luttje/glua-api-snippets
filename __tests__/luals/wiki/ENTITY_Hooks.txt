@@ -1,0 +1,14 @@
+<title>ENTITY</title>
+<type name="ENTITY" parent="Entity" category="hook" is="class">
+	<summary>
+A list of hooks **only** available for <page>Scripted Entities</page>.
+
+The exceptions to this rule are documented at <page>Custom Entity Fields</page>, which can be applied to all entities.
+
+Some more "hooks" are available for all entities (including engine entities) with the function <page>Entity:AddCallback</page>.
+
+See also: <page>Structures/ENT</page>
+
+<note>The hooks listed here are also dependent on the scripted entity type. For instance, a base scripted entity will not use <page>ENTITY:DoSchedule</page> at all, that is only for scripted NPCs</note>
+	</summary>
+</type>

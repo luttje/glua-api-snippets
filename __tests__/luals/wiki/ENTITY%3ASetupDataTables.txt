@@ -1,0 +1,36 @@
+<function name="SetupDataTables" parent="ENTITY" type="hook">
+	<description>
+Called when the entity should set up its <page text=" Data Tables">Networking_Entities</page>.
+
+This is a much better option than using Set/Get Networked Values.
+
+This hook is called after <page>GM:OnEntityCreated</page> and <page>GM:NetworkEntityCreated</page>.
+
+
+<bug issue="7105">This hook is called before <page>GM:OnEntityCreated</page> on the server.</bug>
+	</description>
+	<realm>Shared</realm>
+</function>
+
+<example>
+	<description>
+Sets up networked variables, adds functions SetAmount, GetAmount, GetBloodPos, SetBloodPos, GetUrinePos, SetUrinePos.
+
+This function only supports 32 data tables per type (#0-31), except for strings which only supports 4 (#0-3).
+	</description>
+	<code>
+function ENT:SetupDataTables()
+
+	self:NetworkVar( "Float", 0, "Amount" )
+	self:NetworkVar( "Vector", 0, "BloodPos" )
+	self:NetworkVar( "Vector", 1, "UrinePos" )
+
+	if SERVER then
+		self:SetAmount( 3 )
+		self:SetBloodPos( Vector( 0, -32, 0 ) )
+		self:SetUrinePos( Vector( 0, 0, -16 ) )
+	end
+
+end
+	</code>
+</example>

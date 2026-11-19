@@ -1,0 +1,95 @@
+<function name="NetworkVar" parent="Entity" type="classfunc">
+	<description>
+Creates a network variable on the entity and adds Set/Get functions for it. This function should only be called in <page>ENTITY:SetupDataTables</page>.
+
+See <page>Entity:NetworkVarNotify</page> for a function to hook NetworkVar changes.
+
+<note>
+	Entity NetworkVars are influenced by the return value of <page>ENTITY:UpdateTransmitState</page>.  
+	So if you use the **PVS**(**default**), then the NetworkVars can be different for each client.
+</note>
+
+<warning>Make sure to not call the SetDT* and your custom set methods on the client realm unless you know exactly what you are doing.</warning>
+Combining this function with <page>util.TableToJSON</page> can also provide a way to network tables as serialized strings.
+	</description>
+	<realm>Shared</realm>
+	<file line="353-L384">lua/includes/extensions/entity.lua</file>
+	<args>
+		<arg name="type" type="string">Supported choices:
+
+* `String` (up to 511 characters)
+* `Bool`
+* `Float`
+* `Int` (32-bit signed integer)
+* `Vector`
+* `Angle`
+* `Entity`</arg>
+		<arg name="slot" type="number">Each network variable has to have a unique slot. The slot is per type - so you can have an int in slot `0`, a bool in slot `0` and a float in slot `0` etc. You can't have two ints in slot `0`, instead you would do a int in slot `0` and another int in slot `1`.
+
+The max slots for strings `4` - so you should pick a number between `0` and `3`.
+
+The max slots for everything else `32` - so you should pick a number between `0` and `31`.
+
+This can be omitted entirely (arguments will shift) and it will use the next available slot.</arg>
+		<arg name="name" type="string">The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it `Pos` for example).</arg>
+		<arg name="extended" type="table" default="nil">A table of extended information.
+
+`KeyName`
+* Allows the NetworkVar to be set using <page>Entity:SetKeyValue</page>.
+* This is **required** for the entity editing to work.
+
+This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
+
+`Edit`
+* The edit key lets you mark this variable as editable. See <page>Editable Entities</page> for more information.
+</arg>
+	</args>
+	<args name="Slot argument is omitted">
+		<arg name="type" type="string">Supported choices:
+
+* `String` (up to 511 characters)
+* `Bool`
+* `Float`
+* `Int` (32-bit signed integer)
+* `Vector`
+* `Angle`
+* `Entity`</arg>
+		<arg name="name" type="string">The name will affect how you access it. If you call it `Foo` you would add two new functions on your entity - `SetFoo()` and `GetFoo()`. So be careful that what you call it won't collide with any existing functions (don't call it `Pos` for example).</arg>
+		<arg name="extended" type="table" default="nil">A table of extended information.
+
+`KeyName`
+* Allows the NetworkVar to be set using <page>Entity:SetKeyValue</page>.
+* This is **required** for the entity editing to work.
+
+This is useful if you're making an entity that you want to be loaded in a map. The sky entity uses this.
+
+`Edit`
+* The edit key lets you mark this variable as editable. See <page>Editable Entities</page> for more information.
+</arg>
+	</args>
+</function>
+
+<example>
+	<description>Setting up data tables</description>
+	<code>
+function ENT:SetupDataTables()
+
+	self:NetworkVar( "Float", 0, "Amount" )
+	self:NetworkVar( "Vector", "StartPos" ) -- note arguments shift if slot is omitted
+	self:NetworkVar( "Vector", "EndPos" )
+
+end
+
+-- Code...
+
+-- Setting values on the entity
+self:SetStartPos( Vector( 1, 0, 0 ) )
+self:SetAmount( 100 )
+
+-- Code...
+
+-- Getting values
+local startpos = self:GetStartPos()
+	</code>
+
+</example>

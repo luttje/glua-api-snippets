@@ -1,0 +1,9 @@
+<cat>Hook</cat>
+<title>WEAPON</title>
+<type name="WEAPON" category="hook" parent="Weapon" is="class">
+	<summary>
+Default weapon methods, that are available for use in SWEPs. These hooks **will not work** on non-scripted weapons, such as the Half-Life 2 weapons.
+
+You can find all available SWEP fields here: <page>Structures/SWEP</page>
+</summary>
+</type>

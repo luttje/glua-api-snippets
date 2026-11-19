@@ -28,6 +28,7 @@ async function main() {
     .description('Publishes the previously scraped Garry\'s Mod wiki API information as a LuaLS Library')
     .option('-i, --input <path>', 'The path to the directory where the output json and lua files have been saved', './output')
     .option('-o, --output <path>', 'The path to the directory where the release should be saved', './dist/libraries/garrysmod')
+    .option('-p, --plugin <path>', 'The path to the LuaLS plugin to include in the library', './plugin.lua')
     .parse(process.argv);
 
   const options = program.opts();
@@ -63,6 +64,8 @@ async function main() {
   );
 
   fs.writeFileSync(path.join(options.output, 'config.json'), JSON.stringify(config, null, 2));
+
+  fs.copyFileSync(options.plugin, path.join(options.output, 'plugin.lua'));
 
   const files = walk(options.input, (file, isDirectory) => isDirectory || (file.endsWith(`.lua`)));
 

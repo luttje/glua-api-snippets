@@ -1,0 +1,61 @@
+<structure>
+	<realm>Shared</realm>
+	<description>
+Information about the ENT structure, which represents a Scripted Entity class definition.
+
+To learn more about scripted entities, <page text="see this page">Scripted_Entities</page>.
+
+See also <page>ENTITY Hooks</page> for a list of events scripted entities can have. See <page>Custom Entity Fields</page> for a list of events and fields all entities can have.
+
+While some of the fields may be serverside or clientside only, it is recommended to provide them on both so addons could use their values.
+
+<note>Values defined in ENT table can't be changed per instance. Initialize default values in <page>ENTITY:Initialize</page> or other hook.</note>
+	</description>
+	<fields>
+<item name="Base" type="string">The base entity to derive from. This **must** be a valid Lua entity</item>
+<item name="Type" type="string">Type of the entity. This **must** be one of these:
+* **anim**
+* **brush**
+* **point**
+* **ai**
+* **nextbot**
+* **filter**
+
+See <page>Scripted Entities</page> for a more detailed explanation of what each one is.</item>
+<item name="ClassName" type="string">The class name of the entity (File or folder name of your entity).
+**This is set automatically _after_ the entity file is loaded.**</item>
+<item name="ClassNameOverride" type="string" added="2023.09.29">If set, overrides the classname of the SWEP.</item>
+<item name="Folder" type="string">The folder from where the entity was loaded. This should always be "entity/ent_myentity", regardless whether your entity is stored as a file, or multiple files in a folder. **This is set automatically _before_ the entity file is loaded.**</item>
+<item name="AutomaticFrameAdvance" type="boolean" default="false">Set this to true if your entity has animations. You should also apply changes to the <page>ENTITY:Think</page> function from the example on that page.</item>
+<item name="Category" type="string" default="Other" realm="client">Spawnmenu category to put the entity into</item>
+<item name="SubCategory" type="string" default="nil" realm="client" added="2026.07.11">Optional spawnmenu sub-category to put the entity into.</item>
+<item name="Spawnable" type="boolean" default="false">Whether this entity should be displayed and is spawnable in the spawn menu</item>
+<item name="Editable" type="boolean" default="false">Whether the entity supports Editing. See <page>Editable Entities</page> for more info.</item>
+<item name="AdminOnly" type="boolean" default="false">Whether or not only admins can spawn the entity from their spawn menu</item>
+<item name="PrintName" type="string" default="" realm="client">Nice name of the entity to appear in the spawn menu</item>
+<item name="Author" type="string" default="" realm="client">The author of the entity</item>
+<item name="Contact" type="string" default="" realm="client">The contacts of the entity creator</item>
+<item name="Purpose" type="string" default="" realm="client">The purpose of the entity creation</item>
+<item name="Instructions" type="string" default="" realm="client"> How to use your entity</item>
+<item name="RenderGroup" type="number" realm="client">The entity's render group, see <page>Enums/RENDERGROUP</page>. If unset, the engine will decide the render group based on the entity's model.</item>
+<item name="WantsTranslucency" type="boolean" realm="client" default="false">If set and `RenderGroup` is not, will switch the render group to <page text="RENDERGROUP_BOTH">Enums/RENDERGROUP#RENDERGROUP_BOTH</page> when appropriate.
+
+Basically, when the default render group of the entity's model is opaque, <page>ENTITY:DrawTranslucent</page> will still be called, for example to render effects and such. This is preferable to forcing translucent models to render in the opaque pass by setting `RenderGroup` to `RENDERGROUP_BOTH` at all times, causing graphical issues.</item>
+<item name="DisableDuplicator" type="boolean" default="false" realm="server">Disable the ability for players to duplicate this entity.</item>
+<item name="ScriptedEntityType" type="string" default="" realm="client">Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes.
+See <page>spawnmenu.AddContentType</page> for more information.</item>
+<item name="IconOverride" type="string" default="entities/<ClassName>.png" realm="client">If set, overrides the icon path to be displayed in the Spawnmenu for this entity.
+
+Like many functions, this expects a path relative to the `materials/` folder, do not include `materials/` in the provided string.
+</item>
+<item name="PhysicsSolidMask" type="number" default="nil" added="2024.07.20">If set, a bitflag for the physics solidity of the entity. See <page>Enums/CONTENTS</page>.
+
+Can be used to make the entity pass though certain otherwise solid meshes, such as grates, or special clip brushes.
+
+<note>This only works for `nextbot`, `anim` and `ai` type SENTs.</note>
+</item>
+
+<item name="PhysicsSounds" type="boolean" default="false" added="2024.07.20">For `anim` type entities, if set, enables physics collision sounds.</item>
+	</fields>
+</structure>
+

@@ -1,0 +1,50 @@
+<function name="Get" parent="baseclass" type="libraryfunc">
+	<description>
+	Gets the base class of an an object.
+
+	This is used not just by entities, but also by widgets, panels, drive modes, weapons and gamemodes (with "gamemode_" prefix).
+
+	The keyword **DEFINE_BASECLASS** translates into a call to this function. In the engine, it is replaced with:
+
+	```lua
+	local BaseClass = baseclass.Get
+	```
+
+	<note>You should prefer using this instead of `self.BaseClass` to avoid infinite recursion.</note>
+
+	For more information, including usage examples, see the <page>BaseClasses</page> reference page.
+	</description>
+	<realm>Shared and Menu</realm>
+	<file line="32-L41">lua/includes/modules/baseclass.lua</file>
+	<args>
+		<arg name="name" type="string">The child class.</arg>
+	</args>
+	<rets>
+		<ret name="" type="table">The base class's meta table.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Inherits the weapon from weapon_csbasegun and calls its base functions.</description>
+	<code>
+AddCSLuaFile()
+DEFINE_BASECLASS( "weapon_csbasegun" ) //this is equivalent to local BaseClass = baseclass.Get( "weapon_csbasegun" )
+
+//omitted generic swep definitions
+
+function SWEP:Initialize()
+	BaseClass.Initialize( self ) //calls SWEP:Initialize() from weapon_csbasegun
+	self:SetHoldType( "pistol" )
+end
+
+function SWEP:Deploy()
+	self:SetAccuracy( 0.9 )
+	return BaseClass.Deploy( self ) //calls SWEP:Deploy() from weapon_csbasegun and returns its result
+end
+
+function SWEP:SetupDataTables()
+	BaseClass.SetupDataTables( self ) //calls SWEP:SetupDataTables() from weapon_csbasegun and inits its dtvars
+end
+	</code>
+
+</example>

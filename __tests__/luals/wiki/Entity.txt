@@ -1,0 +1,6 @@
+<type name="Entity" category="classfunc" is="class">
+	<summary>This is a list of all available methods for all entities, which includes <page text="Players">Player</page>, <page text="Weapons">Weapon</page>, <page text="NPCs">NPC</page> and <page text="Vehicles">Vehicle</page>.
+
+For a list of possible members of <page>Scripted Entities</page> see <page text="ENT Structure">Structures/ENT</page>.
+</summary>
+</type>
