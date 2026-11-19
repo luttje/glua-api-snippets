@@ -1,0 +1,71 @@
+<function name="CompileString" parent="Global" type="libraryfunc">
+	<description>
+This function will compile the code argument as lua code and return a function that will execute that code. 
+
+Please note that this function will not automatically execute the given code after compiling it.
+	</description>
+	<realm>Shared</realm>
+	<args>
+		<arg name="code" type="string">The code to compile.</arg>
+		<arg name="identifier" type="string">An identifier in case an error is thrown. (The same identifier can be used multiple times)</arg>
+		<arg name="handleError" type="boolean" default="true">If false this function will return an error string instead of throwing an error.</arg>
+	</args>
+	<rets>
+		<ret name="" type="function">A function that, when called, will execute the given code.
+
+Returns the error string if there was a Lua error and third argument is false.</ret>
+	</rets>
+</function>
+
+<example>
+	<description>Code that will not compile, with ErrorHandling set to false.</description>
+	<code>
+local code = "MsgN('Hi)"
+local func = CompileString(code, "TestCode", false)
+MsgN(func)
+	</code>
+	<output>TestCode:1: unfinished string near '&lt;eof&gt;' (this is not a script error - it is a returned string)</output>
+
+</example>
+
+<example>
+	<description>Code that will compile.</description>
+	<code>
+local code = "MsgN('Hi')"
+local func = CompileString(code, "TestCode")
+
+if func then -- Compile String returns nil if 3rd argument is true and code has errors.
+   func()
+end
+	</code>
+	<output>Hi</output>
+
+</example>
+
+<example>
+	<description>Compiled code with custom arguments; captured with the varargs identifier.</description>
+	<code>
+local code = [[
+	local args = { ... } 
+	print( unpack( args ) )
+	print( args[ 2 ] + args[ 3 ])
+	print( args[ 4 ] .. args[ 5 ])
+
+	local first, second = ...
+	print( first, second )
+]]
+local func = CompileString( code, "VarargCodeTest" )
+func( 1, 2, 3, "A", "B", "C" )
+	</code>
+	<output>
+
+```
+1	2	3	A	B	C
+5
+AB
+1   2
+```
+
+	</output>
+
+</example>

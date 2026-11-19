@@ -12,6 +12,7 @@ import {
 } from '../scrapers/wiki-page-markup-scraper.js';
 import customPluginHookAdd from '../../custom/plugins/hook-add.js';
 import customPluginFindMetaTable from '../../custom/plugins/find-meta-table.js';
+import customPluginCompileString from '../../custom/plugins/compile-string.js';
 import fs from 'fs';
 
 export const RESERVERD_KEYWORDS = new Set([
@@ -521,6 +522,13 @@ export class GluaApiWriter {
     let luaDocComment = `---${this.formatRealm(realm)} ${wrapInComment(func.description!)}\n`;
     luaDocComment += `---\n---[View wiki](${func.url})\n`;
 
+    let returns = func.returns;
+    let overloads = '';
+
+    if (func.address === 'Global.CompileString') {
+      ({ args, returns, overloads } = customPluginCompileString(args, returns));
+    }
+
     if (args) {
       args.forEach((arg, index) => {
         if (!arg.name)
@@ -553,8 +561,8 @@ export class GluaApiWriter {
       });
     }
 
-    if (func.returns) {
-      func.returns.forEach(ret => {
+    if (returns) {
+      returns.forEach(ret => {
         const description = wrapInComment(ret.description!);
 
         luaDocComment += `---@return `;
@@ -580,6 +588,8 @@ export class GluaApiWriter {
     if (func.address === 'Global.FindMetaTable') {
       luaDocComment += customPluginFindMetaTable();
     }
+
+    luaDocComment += overloads;
 
     return luaDocComment;
   }
