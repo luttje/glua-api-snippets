@@ -1,0 +1,19 @@
+<function name="SetSize" parent="Panel" type="classfunc">
+	<description>
+Sets the size of the panel.
+
+Calls <page>PANEL:OnSizeChanged</page> and marks this panel for layout (<page>Panel:InvalidateLayout</page>).
+Automatically rounds the width and height down
+
+
+See also <page>Panel:SetWidth</page> and <page>Panel:SetHeight</page>.
+
+<note>If you wish to position and re-size panels without much guesswork and have them look good on different screen resolutions, you may find <page>Panel:Dock</page> useful</note>
+	</description>
+	<realm>Client and Menu</realm>
+	<args>
+		<arg name="width" type="number">The width of the panel.</arg>
+		<arg name="height" type="number">The height of the panel.</arg>
+	</args>
+</function>
+

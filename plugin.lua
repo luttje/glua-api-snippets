@@ -67,21 +67,86 @@ local scopedCreators = {
 	SWEP = { entsCreate, playerGive },
 }
 
----@param global string
----@param class string
+local vguiCreate = [[
+---@param classname "{name}"
+---@param parent? Panel
+---@param name? string
+---@return {class}
+---@diagnostic disable-next-line: duplicate-set-field, missing-return
+function vgui.Create(classname, parent, name) end
+]]
+
+---@param template string
+---@param values table<string, string>
+---@return string
+local function FillTemplate(template, values)
+	return (template:gsub("{(%w+)}", values))
+end
+
+
+---@class panelRegistration
+---@field name string
+---@field var string
+---@field base string
+---@field position integer
+
+-- Finds panels registered with a literal name, e.g. `vgui.Register("MyPanel", PANEL, "DFrame")`.
+---@param text string
+---@return panelRegistration[]
+local function FindPanelRegistrations(text)
+	local panels = {}
+
+	local function add(position, name, var, argsEnd)
+		panels[#panels+1] = {
+			name = name,
+			var = var,
+			base = text:match("^%s*,%s*[\"']([%w_%.]+)[\"']", argsEnd) or "Panel",
+			position = position,
+		}
+	end
+
+	for position, _, name, var, argsEnd in text:gmatch("()vgui%.Register%s*%(%s*([\"'])([%w_%.]+)%2%s*,%s*([%a_][%w_]*)()") do
+		add(position, name, var, argsEnd)
+	end
+
+	for position, _, name, _, var, argsEnd in text:gmatch("()derma%.DefineControl%s*%(%s*([\"'])([%w_%.]+)%2%s*,%s*([\"']).-%4%s*,%s*([%a_][%w_]*)()") do
+		add(position, name, var, argsEnd)
+	end
+
+	return panels
+end
+
+-- Finds the last `local var = ` declared before `position`, at the start of a line.
+---@param text string
+---@param var string
+---@param position integer
+---@return integer?
+local function FindLocalDeclaration(text, var, position)
+	local declaration
+	-- Prefixed with a newline to also match the first line, so offsets are one too high
+	for start in ("\n" .. text):gmatch("\n[ \t]*()local%s+" .. var .. "%s*=") do
+		if start - 1 > position then
+			break
+		end
+		declaration = start - 1
+	end
+	return declaration
+end
+
+-- Finds a `---@class` the user wrote in the doc comment directly above `position`.
+---@param text string
+---@param position integer
 ---@return string?
-local function GetCreatorDefinitions(global, class)
-	local templates = scopedCreators[global]
-	if not templates then
-		return
+local function FindAnnotatedClass(text, position)
+	local class
+	for line in text:sub(1, position - 1):gmatch("([^\n]*)\n") do
+		if line:match("^%s*%-%-%-") then
+			class = class or line:match("@class%s+([%w_%.]+)")
+		else
+			class = nil
+		end
 	end
-
-	local definitions = {}
-	for _, template in ipairs(templates) do
-		definitions[#definitions+1] = template:gsub("{class}", function() return class end)
-	end
-
-	return "\n\n" .. table.concat(definitions, "\n")
+	return class
 end
 
 
@@ -119,13 +184,34 @@ function OnSetText(uri, text)
 		}
 	end
 
-	-- Must be the last diff, since it is appended to the end of the file
-	local creatorDefinitions = global and class and #text > 0 and GetCreatorDefinitions(global, class)
-	if creatorDefinitions then
+	-- Typed creator functions, appended to the end of the file
+	local appended = {}
+
+	for _, template in ipairs(global and scopedCreators[global] or {}) do
+		appended[#appended+1] = FillTemplate(template, { class = class })
+	end
+
+	for _, panel in ipairs(FindPanelRegistrations(text)) do
+		local declaration = FindLocalDeclaration(text, panel.var, panel.position)
+		if declaration then
+			local class = FindAnnotatedClass(text, declaration)
+			if not class then
+				class = panel.name
+				diffs[#diffs+1] = {
+					start = declaration,
+					finish = declaration - 1,
+					text = ("---@class %s : %s\n"):format(panel.name, panel.base),
+				}
+			end
+			appended[#appended+1] = FillTemplate(vguiCreate, { name = panel.name, class = class })
+		end
+	end
+
+	if #appended > 0 and #text > 0 then
 		diffs[#diffs+1] = {
 			start = #text + 1,
 			finish = #text,
-			text = creatorDefinitions,
+			text = "\n\n" .. table.concat(appended, "\n"),
 		}
 	end
 

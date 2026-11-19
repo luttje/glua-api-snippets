@@ -1,0 +1,56 @@
+<type name="Panel" category="classfunc" is="class">
+	<name>Panel</name>
+	<summary>
+This is the base panel for every other [VGUI](vgui) panel.
+
+It contains all of the basic methods, some of which may only work on certain VGUI elements. See also <page>Panel Hooks</page>.
+
+As their functionality is provided at the game's C/C++ level rather than by its Lua script extension, they are unfortunately unavailable for most practical purposes, however, they can still be obtained in a way similar to that provided by the <page>baseclass</page> library:
+
+```
+-- Create a new panel type NewPanel that inherits all of its functionality from DLabel,
+-- but has a different SetText method than DLabel does - all without the hassle of that
+-- old DLabel's default text getting in the way. Fun stuff.
+
+local PANEL = {}
+
+function PANEL:Init()
+
+	self:SetText_Base( "" )
+	self:SetText( "Time for something different!" )
+
+end
+
+function PANEL:Paint( aWide, aTall )
+
+	local TextX, TextY = 0, 0
+	local TextColor = Color( 255, 0, 0, 255 )
+
+	surface.SetFont( self:GetFont() or "default" )
+	surface.SetTextColor( TextColor )
+	surface.SetTextPos( TextX, TextY )
+	surface.DrawText( self:GetText() )
+
+end
+
+-- And here we go:
+PANEL.SetText_Base = FindMetaTable( "Panel" ).SetText
+
+function PANEL:SetText( aText ) 
+
+	self.Text = tostring( aText ) 
+
+end
+
+function PANEL:GetText() 
+
+	return self.Text or "" 
+
+end
+
+vgui.Register( "NewPanel", PANEL, "DLabel" )
+```
+
+	</summary>
+
+</type>
