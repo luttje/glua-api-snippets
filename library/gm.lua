@@ -1704,10 +1704,8 @@ function GM:PlayerShouldTaunt(ply, act) end
 
 ---![(Server)](https://github.com/user-attachments/assets/d8fbe13a-6305-4e16-8698-5be874721ca1) Called when the player is killed by [Player:KillSilent](https://wiki.facepunch.com/gmod/Player:KillSilent).
 ---
---- The player is already considered dead when this hook is called.
----
---- * See [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath) for a hook which handles all other death causes.
---- * [GM:PostPlayerDeath](https://wiki.facepunch.com/gmod/GM:PostPlayerDeath) is called **after** this hook.
+--- See [GM:PlayerDeath](https://wiki.facepunch.com/gmod/GM:PlayerDeath) for a hook which handles all other death causes.
+--- [GM:PostPlayerDeath](https://wiki.facepunch.com/gmod/GM:PostPlayerDeath) is called **after** this hook.
 ---
 --- **NOTE**: [Player:Alive](https://wiki.facepunch.com/gmod/Player:Alive) will return true in this hook.
 ---

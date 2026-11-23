@@ -343,10 +343,12 @@ function _G.CompileFile(path, showError) end
 ---[View wiki](https://wiki.facepunch.com/gmod/Global.CompileString)
 ---@param code string The code to compile.
 ---@param identifier string An identifier in case an error is thrown. (The same identifier can be used multiple times)
----@param handleError? boolean If false this function will return an error string instead of throwing an error.
----@return function # A function that, when called, will execute the given code.
+---@param handleError? true If false this function will return an error string instead of throwing an error.
+---@return function? # A function that, when called, will execute the given code.
 ---
 --- Returns the error string if there was a Lua error and third argument is false.
+---@overload fun(code: string, identifier: string, handleError: false): function|string
+---@overload fun(code: string, identifier: string, handleError: boolean): function|string|nil
 function _G.CompileString(code, identifier, handleError) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns whether a [ConVar](https://wiki.facepunch.com/gmod/ConVar) with the given name exists or not
@@ -392,7 +394,7 @@ function _G.CreateContextMenu() end
 ---
 --- This cannot be a name of an engine console command or console variable. It will throw an error if it is. If it is the same name as another lua ConVar, it will return that ConVar object.
 ---@param value string Default value of the convar. Can also be a number.
----@param flags? FCVAR|number[] Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
+---@param flags? FCVAR|number[]|number Flags of the convar, see Enums/FCVAR, either as bitflag or as table.
 ---@param helptext? string The help text to show in the console.
 ---@param min? number If set, the ConVar cannot be changed to a number lower than this value.
 ---@param max? number If set, the ConVar cannot be changed to a number higher than this value.

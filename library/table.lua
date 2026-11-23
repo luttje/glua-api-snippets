@@ -353,13 +353,15 @@ function table.Random(haystack) end
 ---@return any # The value that was removed.
 function table.remove(tbl, index) end
 
----![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes only the first instance of the given value from the specified table. If the key of the value is a number, the value is removed using [table.remove](https://wiki.facepunch.com/gmod/table.remove).
+---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Removes only the first instance of the given value from the specified table.
+---
+--- If the key for the value is a number, it will be removed using [table.remove](https://wiki.facepunch.com/gmod/table.remove).  In all other cases, keys will have their values set to `nil`.
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/table.RemoveByValue)
 ---@param tbl table The table that will be searched.
----@param val any The value to find within the table.
----@return any # The key at which the value was found, or false if the value was not found.
-function table.RemoveByValue(tbl, val) end
+---@param value any The value to find within the table.
+---@return any # The key at which the value was found, or `false` if the value was not found.
+function table.RemoveByValue(tbl, value) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) Returns a reversed copy of a sequential table. Any non-sequential and non-numeric keyvalue pairs will not be copied.
 ---

@@ -33,7 +33,7 @@ concommand = {}
 --- Function return value(s):
 --- * table `tbl` - A table containing the autocomplete options to display.
 ---@param helpText? string The text to display should a user run 'help cmdName'.
----@param flags? FCVAR|number[] Console command modifier flags. Either a bitflag, or a table of enums. See Enums/FCVAR.
+---@param flags? FCVAR|number[]|number Console command modifier flags. Either a bitflag, or a table of enums. See Enums/FCVAR.
 function concommand.Add(name, callback, autoComplete, helpText, flags) end
 
 ---![(Shared and Menu)](https://github.com/user-attachments/assets/8f5230ff-38f7-493b-b9fc-cc70ffd5b3f4) **INTERNAL**: This is used internally - although you're able to use it you probably shouldn't.

@@ -3866,11 +3866,10 @@ function Entity:RagdollStopControlling() end
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:RagdollUpdatePhysics)
 function Entity:RagdollUpdatePhysics() end
 
----![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes (or deletes) a given [Entity](https://wiki.facepunch.com/gmod/Entity).
+---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) Removes (or deletes) a given [Entity](https://wiki.facepunch.com/gmod/Entity). Does nothing when called on [Player](https://wiki.facepunch.com/gmod/Player) or [game.GetWorld](https://wiki.facepunch.com/gmod/game.GetWorld) entity
 ---
---- The Entity will continue to exist until the start of the next tick.
----
---- To check if an Entity will be removed in the next tick, see [Entity:IsMarkedForDeletion](https://wiki.facepunch.com/gmod/Entity:IsMarkedForDeletion)
+--- The entity will continue to exist until the start of the next tick.
+--- To check if an entity will be removed in the next tick, see [Entity:IsMarkedForDeletion](https://wiki.facepunch.com/gmod/Entity:IsMarkedForDeletion)
 ---
 ---[View wiki](https://wiki.facepunch.com/gmod/Entity:Remove)
 function Entity:Remove() end

@@ -198,7 +198,7 @@ local BalloonData = {}
 
 ---Where the balloon will spawn.
 ---@type Vector?
-BalloonData.Pos = VectorVector(0, 0, 0)
+BalloonData.Pos = Vector(0, 0, 0)
 
 ---The balloon’s model.
 ---@type string?
@@ -290,7 +290,7 @@ local BoneManipulationData = {}
 
 ---The entity's scale manipulation of the bone.
 ---@type Vector?
-BoneManipulationData.s = Vectornil
+BoneManipulationData.s = nil
 
 ---The entity's angle manipulation of the bone.
 ---@type Angle?
@@ -298,7 +298,7 @@ BoneManipulationData.a = nil
 
 ---The entity's position manipulation of the given bone.
 ---@type Vector?
-BoneManipulationData.p = Vectornil
+BoneManipulationData.p = nil
 
 ---![(Shared)](https://github.com/user-attachments/assets/a356f942-57d7-4915-a8cc-559870a980fc) A [table](https://wiki.facepunch.com/gmod/table) structure representing the amount that a bone's transformation [VMatrix](https://wiki.facepunch.com/gmod/VMatrix) should affect its vertex.
 ---
@@ -393,15 +393,15 @@ Bullet.TracerName = "nil"
 
 ---The fire direction.
 ---@type Vector?
-Bullet.Dir = VectorVector(0, 0, 0)
+Bullet.Dir = Vector(0, 0, 0)
 
 ---The spread, only x and y are needed.
 ---@type Vector?
-Bullet.Spread = VectorVector(0, 0, 0)
+Bullet.Spread = Vector(0, 0, 0)
 
 ---The position to fire the bullets from.
 ---@type Vector?
-Bullet.Src = VectorVector(0, 0, 0)
+Bullet.Src = Vector(0, 0, 0)
 
 ---The entity that the bullet will ignore when it will be shot.
 ---@type Entity?
@@ -747,7 +747,7 @@ DynamicLight.dietime = nil
 
 ---The light direction. Used with **InnerAngle** and **OuterAngle**.
 ---@type Vector?
-DynamicLight.dir = VectorVector(0, 0, 0)
+DynamicLight.dir = Vector(0, 0, 0)
 
 ---The closer this is to zero, the smoother the light will be. Requires **Dir** and **OuterAngle** to be set.
 ---@type number?
@@ -1398,15 +1398,15 @@ LocalLight.type = MATERIAL_LIGHT_POINT
 
 ---The color of the light source (x is red, y is green, z is blue). Values are not restricted to a specific range, higher values will result in a brighter light.
 ---@type Vector?
-LocalLight.color = Vectorvector_origin
+LocalLight.color = vector_origin
 
 ---The origin of the light in world coordinates.
 ---@type Vector?
-LocalLight.pos = Vectorvector_origin
+LocalLight.pos = vector_origin
 
 ---The direction of the light. Only required for directional and spot lights.
 ---@type Vector?
-LocalLight.dir = Vectorvector_origin
+LocalLight.dir = vector_origin
 
 ---The maximum range of the light source. Does not actually control light attenuation. Usually left at 0 for infinite range.
 ---@type number?
@@ -2355,7 +2355,7 @@ RenderCamData.type = "3D"
 
 ---The position to render from
 ---@type Vector?
-RenderCamData.origin = Vectornil
+RenderCamData.origin = nil
 
 ---The angles to render from
 ---@type Angle?
@@ -2596,7 +2596,7 @@ ShadowControlParams.delta = 0.1
 
 ---Where you want to move to.
 ---@type Vector?
-ShadowControlParams.pos = Vectorvector_origin
+ShadowControlParams.pos = vector_origin
 
 ---Angle you want to move to.
 ---@type Angle?
@@ -3305,11 +3305,11 @@ local Trace = {}
 
 ---The start position of the trace
 ---@type Vector?
-Trace.start = VectorVector(0, 0, 0)
+Trace.start = Vector(0, 0, 0)
 
 ---The end position of the trace
 ---@type Vector?
-Trace.endpos = VectorVector(0, 0, 0)
+Trace.endpos = Vector(0, 0, 0)
 
 ---Things the trace should not hit. Can be an entity, a table of entities, a table of entity classes or a function:
 ---
@@ -3392,7 +3392,7 @@ TraceResult.HitNonWorld = false
 
 ---The direction of the surface that was hit as a normal vector (vector with Vector:Length of 1).
 ---@type Vector?
-TraceResult.HitNormal = VectorGlobal.Vector(0, 0, 0)
+TraceResult.HitNormal = Vector(0, 0, 0)
 
 ---The position the trace stopped. This will be the provided endpos if the trace hit nothing.
 ---@type Vector

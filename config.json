@@ -21,6 +21,9 @@
       "/**/",
       "continue"
     ],
+    "Lua.runtime.plugin": [
+      "${addons}/garrysmod/module/plugin.lua"
+    ],
     "Lua.diagnostics.disable": [
       "duplicate-set-field"
     ]
