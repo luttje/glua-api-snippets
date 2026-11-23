@@ -5,7 +5,7 @@ import { GluaApiWriter } from './api-writer/glua-api-writer.js';
 import { loadCustomOverrides, writeScrapedPages } from './api-writer/scrape-output.js';
 import { scrapeAndCollect } from './scrapers/collector.js';
 import { writeMetadata } from './utils/metadata.js';
-import { RequestInitWithRetry } from 'fetch-retry';
+import type { RetryOptions } from './scrapers/scraper.js';
 import { Command } from 'commander';
 import fs from 'fs';
 
@@ -34,7 +34,7 @@ async function startScrape() {
   const pageListScraper = new WikiPageListScraper(`${baseUrl}/~pagelist?format=json`);
   const writer = new GluaApiWriter(baseDirectory);
 
-  const retryOptions: RequestInitWithRetry = {
+  const retryOptions: RetryOptions = {
     retries: 5,
     retryDelay: function (attempt, error, response) {
       return Math.pow(2, attempt) * 500; // 500, 1000, 2000, 4000, 8000

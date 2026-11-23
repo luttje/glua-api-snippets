@@ -4,7 +4,7 @@ import * as cheerio from 'cheerio';
 describe('markdownifyDescription', () => {
   it('should handle spaces in links', async () => {
     const textWithUrl = '<test>This is a <page>link with spaces</page>.</test>';
-    const $ = cheerio.load(textWithUrl, { xmlMode: true });
+    const $ = cheerio.load(textWithUrl, { xml: true });
     const result = markdownifyDescription($, $('test'));
 
     expect(result).toBe(

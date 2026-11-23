@@ -1,7 +1,7 @@
 import { ScrapeCallback, Scraper } from './scraper.js';
 import { deserializeXml } from '../utils/xml.js';
-import { AnyNode, Cheerio, CheerioAPI } from 'cheerio';
-import { Element as DOMElement } from 'domhandler';
+import type { Cheerio, CheerioAPI } from 'cheerio';
+import { type AnyNode, Element as DOMElement } from 'domhandler';
 
 export type WikiFunctionType = 'panelfunc' | 'classfunc' | 'libraryfunc' | 'hook';
 export type Realm = 'menu' | 'client' | 'server' | 'shared' | 'client and menu' | 'shared and menu';

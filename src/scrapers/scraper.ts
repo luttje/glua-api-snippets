@@ -1,8 +1,10 @@
 import { TypedEventEmitter } from '../utils/typed-event-emitter.js';
-import { RequestInitWithRetry } from 'fetch-retry';
+import type { RequestInitWithRetry } from 'fetch-retry';
 import fetchRetry from 'fetch-retry';
 
 const fetch = fetchRetry(global.fetch);
+
+export type RetryOptions = RequestInitWithRetry<typeof global.fetch>;
 
 export type ScrapeCallback<T> = (response: Response, content: string) => T[] | Promise<T[]>;
 
@@ -14,7 +16,7 @@ export type ScraperEvents<T> = {
 }
 
 export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEvents<T>> {
-  protected retryOptions: RequestInitWithRetry = {};
+  protected retryOptions: RetryOptions = {};
 
   constructor(
     protected readonly baseUrl: string,
@@ -27,7 +29,7 @@ export class Scraper<T extends ScrapeResult> extends TypedEventEmitter<ScraperEv
     return this.scrapeCallback || ((_: Response, __: string): T[] => []);
   }
 
-  public setRetryOptions(options: RequestInitWithRetry): void {
+  public setRetryOptions(options: RetryOptions): void {
     this.retryOptions = options;
   }
 

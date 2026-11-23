@@ -1,6 +1,7 @@
 import { Scrapeable, TraverseScraper } from './traverse-scraper.js';
 import { ScrapeCallback } from './scraper.js';
 import * as cheerio from 'cheerio';
+import type { Element } from 'domhandler';
 import "reflect-metadata";
 
 const tableColumnMetadataKey = Symbol("tableColumn");
@@ -80,7 +81,7 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
     };
   }
 
-  private fromTableElement($: cheerio.CheerioAPI, tableElement: cheerio.Element): Table<T> | null {
+  private fromTableElement($: cheerio.CheerioAPI, tableElement: Element): Table<T> | null {
     const tableResult = new Table<T>(this.baseUrl);
     let headingRows = $(tableElement).find('thead > tr');
     let shouldTrimHeadings = false;
@@ -90,7 +91,7 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
       shouldTrimHeadings = true;
     }
 
-    let headings : cheerio.Element[] | undefined;
+    let headings : Element[] | undefined;
 
     if (headingRows.length > 0)
       headings = $(headingRows[0]).find('th').toArray();
@@ -124,7 +125,7 @@ export class TableScraper<T extends object> extends TraverseScraper<Table<T>> {
     return tableResult;
   }
 
-  private fromRowElement($: cheerio.CheerioAPI, rowElement: cheerio.Element, headings: cheerio.Element[]): Row<T> | null {
+  private fromRowElement($: cheerio.CheerioAPI, rowElement: Element, headings: Element[]): Row<T> | null {
     const cells = $(rowElement).find('td').toArray();
     const rowResult = this.factory();
     const allTableColumns = getTableColumns(rowResult);

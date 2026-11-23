@@ -1,4 +1,4 @@
-import archiver from 'archiver';
+import { ZipArchive, type Archiver } from 'archiver';
 import path from 'path';
 import fs from 'fs';
 
@@ -59,14 +59,14 @@ export function convertWindowsToUnixPath(windowsPath: string) {
 }
 
 export async function zipFiles(outputFile: string, filePaths: string[], trimPath?: string) {
-  return new Promise<archiver.Archiver>(async (resolve, reject) => {
+  return new Promise<Archiver>(async (resolve, reject) => {
     const outputDirectory = path.dirname(outputFile);
 
     if (!fs.existsSync(outputDirectory))
       fs.mkdirSync(outputDirectory, { recursive: true });
 
     const outputStream = fs.createWriteStream(outputFile);
-    const archive = archiver.create('zip', { zlib: { level: 9 } });
+    const archive = new ZipArchive({ zlib: { level: 9 } });
 
     outputStream.on('close', function () {
       resolve(archive);

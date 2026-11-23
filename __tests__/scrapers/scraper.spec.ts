@@ -99,7 +99,7 @@ describe('Scraper', () => {
 
     const results = await scrapeAndCollect(scraper);
 
-    expect(console.warn).toBeCalledWith(`Error fetching ${baseUrl}: ${error}`);
+    expect(console.warn).toHaveBeenCalledWith(`Error fetching ${baseUrl}: ${error}`);
 
     console.warn = disabledWarning;
 
