@@ -34,6 +34,7 @@
     "@types/node": "^24.19.2",
     "archiver": "^8.0.0",
     "cheerio": "^1.2.0",
+    "commander": "^15.1.0",
     "cross-env": "^10.1.0",
     "domhandler": "^5.0.3",
     "fetch-retry": "^6.0.0",
@@ -51,7 +52,11 @@
   },
   "gitHead": "2513190cc1de00d1049e35f9c942b779447530f9",
   "engines": {
-    "node": ">=21.0.0"
+    "node": ">=22.12.0"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "overrides": {
+    "glob": "^14.0.6",
+    "minimatch": "^11.0.9"
+  }
 }
